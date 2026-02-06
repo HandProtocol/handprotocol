@@ -1,0 +1,85 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Scorer
+    network: celo
+    source:
+      abi: Scorer
+      address: "0x517082d63bE128bAF9413C898a957d79E3A3A452"
+      startBlock: 30738364
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - User
+        - Score
+        - ScoreType
+        - Admin
+      abis:
+        - name: Scorer
+          file: ./abis/Scorer.json
+      eventHandlers:
+        - event: RoleGranted(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleGranted
+        - event: RoleRevoked(indexed bytes32,indexed address,indexed address)
+          handler: handleRoleRevoked
+        - event: ScoreTypeAdded(string)
+          handler: handleScoreTypeAdded
+        - event: ScoreTypeRemoved(string)
+          handler: handleScoreTypeRemoved
+        - event: ScoreUpdated(indexed address,string,uint256,uint256)
+          handler: handleScoreUpdated
+      file: ./src/scorer.ts
+  - kind: ethereum
+    name: sweetspot
+    network: celo
+    source:
+      abi: sweetspot
+      address: "0xeC6D8F428a1e97d0988744BDeD2AE1e4b8D97344"
+      startBlock: 30739455
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - AllowedAmountUpdated
+        - Claimed
+        - Deposit
+        - Initialized
+        - OwnershipTransferred
+        - RoundUpdated
+        - Withdraw
+      abis:
+        - name: sweetspot
+          file: ./abis/sweetspot.json
+      eventHandlers:
+        - event: AllowedAmountUpdated(indexed address,indexed address,uint256)
+          handler: handleAllowedAmountUpdated
+        - event: Claimed(indexed address,indexed address,uint256)
+          handler: handleClaimed
+        - event: Deposit(indexed address,indexed address,uint256)
+          handler: handleDeposit
+        - event: RoundUpdated(uint256,uint256,string)
+          handler: handleRoundUpdated
+        - event: Withdraw(indexed address,indexed address,uint256)
+          handler: handleWithdraw
+      file: ./src/sweetspot.ts
+templates:
+  - kind: file/ipfs
+    name: RoundMetadata
+    mapping:
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - RoundMetadata
+      file: ./src/round-metadata.ts
+      handler: handleRoundMetadata
+      abis:
+        - name: RoundMetadata
+          file: ./abis/RoundMetadata.json
+    network: celo

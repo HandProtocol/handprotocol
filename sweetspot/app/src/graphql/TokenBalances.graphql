@@ -1,0 +1,8 @@
+query TokenBalances($where: TokenBalance_filter) {
+  tokenBalances(where: $where) {
+    type
+    token
+    id
+    amount
+  }
+}

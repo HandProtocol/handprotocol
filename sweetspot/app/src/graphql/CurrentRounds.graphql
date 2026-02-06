@@ -1,0 +1,19 @@
+query CurrentRounds {
+  currentRounds {
+    id
+    updatedAt
+    round {
+      createdAt
+      end
+      id
+      start
+      metadata {
+        description
+        external_url
+        id
+        image
+        name
+      }
+    }
+  }
+}

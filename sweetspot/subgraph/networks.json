@@ -1,0 +1,32 @@
+{
+  "arbitrum-sepolia": {
+    "Scorer": {
+      "address": "0x48c128c6C7c9360898F156cE7039979768DA4134",
+      "startBlock": 102683455
+    },
+    "sweetspot": {
+      "address": "0xF47c6040536D1A1584e4BEe580d65014E2fC55fE",
+      "startBlock": 103057052
+    }
+  },
+  "celo-alfajores": {
+    "Scorer": {
+      "address": "0x9E2851e9Cb3425BeAC4A18071505BaaE77e3BdEb",
+      "startBlock": 33639850
+    },
+    "sweetspot": {
+      "address": "0xa6e35CCf2950c637AF0F06e162A3991f50CE210f",
+      "startBlock": 33640795
+    }
+  },
+  "celo": {
+    "Scorer": {
+      "address": "0x517082d63bE128bAF9413C898a957d79E3A3A452",
+      "startBlock": 30738364
+    },
+    "sweetspot": {
+      "address": "0xeC6D8F428a1e97d0988744BDeD2AE1e4b8D97344",
+      "startBlock": 30739455
+    }
+  }
+}

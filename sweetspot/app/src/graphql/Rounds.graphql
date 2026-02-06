@@ -1,0 +1,15 @@
+query Rounds($orderBy: Round_orderBy, $orderDirection: OrderDirection) {
+  rounds(orderBy: $orderBy, orderDirection: $orderDirection) {
+    createdAt
+    end
+    id
+    start
+    metadata {
+      description
+      id
+      image
+      name
+      external_url
+    }
+  }
+}

@@ -1,0 +1,22 @@
+query User($id: ID!) {
+  user(id: $id) {
+    createdAt
+    id
+    totalScore
+    allocatedTokens {
+      amount
+      claimedAmount
+      claimedTimeStamp
+      timestamp
+      id
+      token
+      round {
+        end
+      }
+    }
+    scores {
+      scoreType
+      value
+    }
+  }
+}

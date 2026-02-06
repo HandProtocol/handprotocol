@@ -1,0 +1,6 @@
+query Admin($address: ID!) {
+  admin(id: $address) {
+    appointedAt
+    id
+  }
+}

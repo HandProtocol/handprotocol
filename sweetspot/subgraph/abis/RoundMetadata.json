@@ -1,0 +1,18 @@
+[
+  {
+    "name": "name",
+    "type": "string"
+  },
+  {
+    "name": "description",
+    "type": "string"
+  },
+  {
+    "name": "image",
+    "type": "string"
+  },
+  {
+    "name": "external_url",
+    "type": "string"
+  }
+]

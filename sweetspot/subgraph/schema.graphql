@@ -1,0 +1,86 @@
+enum TokenBalanceType {
+  TOTAL
+  CLAIMED
+  ALLOCATED
+}
+
+type User @entity {
+  id: ID! # Address of the user
+  scores: [Score!] @derivedFrom(field: "user") # List of scores
+  totalScore: BigInt! # Sum of all scores
+  createdAt: BigInt! # Timestamp when the user was created
+  donations: [Donation!] @derivedFrom(field: "user") # List of donated tokens
+  allocatedTokens: [AllocatedToken!] @derivedFrom(field: "user") # List of allocated tokens
+}
+
+type Score @entity {
+  id: ID! # Combination of user address + scoreType
+  user: User! # Relationship to User
+  scoreType: String! # Type of the score
+  value: BigInt! # Score value
+}
+
+type ScoreType @entity {
+  id: ID! # The name of the score type
+}
+
+type Admin @entity {
+  id: ID! # Address of the admin
+  appointedAt: BigInt! # Timestamp when the admin was appointed
+}
+
+type Round @entity {
+  id: ID! # Unique identifier for the round
+  start: BigInt! # Start timestamp
+  end: BigInt! # End timestamp
+  metadata: RoundMetadata! # IPFS URI for round metadata
+  allocatedTokens: [AllocatedToken!] @derivedFrom(field: "round") # Allocated tokens in this round
+  createdAt: BigInt! # Timestamp when the round was created
+}
+
+type RoundMetadata @entity {
+  id: ID! # ipfs CID
+  name: String! # Name of the round
+  description: String! # Description of the round
+  image: String # Logo of the round
+  external_url: String
+}
+
+type CurrentRound @entity {
+  id: ID! # Unique identifier for the current round (can be 'current' as a static value)
+  round: Round! # Reference to the current Round
+  updatedAt: BigInt! # Timestamp when the current round was last updated
+}
+
+type Donation @entity {
+  id: ID! # Unique identifier (user + token + timestamp)
+  user: User! # The user who donated
+  token: String! # Token contract address (or "ETHER" for Ether)
+  amount: BigInt! # Amount donated
+  timestamp: BigInt! # Block timestamp of the donation
+}
+
+type AllocatedToken @entity {
+  id: ID! # Unique identifier (user + token + round)
+  user: User! # The user to whom tokens are allocated
+  token: String! # Token contract address (or "ETHER" for Ether)
+  amount: BigInt! # Amount allocated
+  round: Round! # Round associated with this allocation
+  timestamp: BigInt! # Block timestamp of the allocation
+  claimedTimeStamp: BigInt # Block timestamp at which the allocated amount is claimed
+  claimedAmount: BigInt! # Claimed Amount
+}
+
+type GlobalStats @entity {
+  id: ID! # Static ID for a singleton entity
+  timesClaimed: BigInt! # Total number of unique addresses that have claimed tokens
+  timesAlloted: BigInt!
+  totalUsers: BigInt!
+}
+
+type TokenBalance @entity {
+  id: ID! # Token address (or "ETHER" for Ether) - Type ("Total", "Claimed", "Alloted" where total is for total balance in the contract, claimed is for claimed balance)
+  token: String! # Token contract address (or "ETHER" for Ether)
+  amount: BigInt! # Total amount in the contract
+  type: TokenBalanceType!
+}

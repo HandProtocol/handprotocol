@@ -1,0 +1,10 @@
+query AllocatedTokens($where: AllocatedToken_filter) {
+  allocatedTokens(where: $where) {
+    amount
+    claimedAmount
+    claimedTimeStamp
+    id
+    timestamp
+    token
+  }
+}

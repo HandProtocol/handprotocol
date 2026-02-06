@@ -1,0 +1,30 @@
+query GetUsers(
+  $orderBy: User_orderBy
+  $orderDirection: OrderDirection
+  $first: Int
+  $skip: Int
+) {
+  users(
+    orderBy: $orderBy
+    orderDirection: $orderDirection
+    first: $first
+    skip: $skip
+  ) {
+    id
+    totalScore
+    createdAt
+    scores {
+      id
+      scoreType
+      value
+    }
+    donations {
+      token
+      amount
+    }
+    allocatedTokens {
+      token
+      amount
+    }
+  }
+}

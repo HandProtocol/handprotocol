@@ -1,0 +1,23 @@
+query CurrentRoundAllocatedTokens {
+  currentRounds {
+    id
+    updatedAt
+    round {
+      id
+      createdAt
+      end
+      start
+      allocatedTokens {
+        amount
+        claimedAmount
+        claimedTimeStamp
+        id
+        timestamp
+        token
+        user {
+          id
+        }
+      }
+    }
+  }
+}
