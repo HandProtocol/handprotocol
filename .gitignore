@@ -36,3 +36,6 @@ cache/
 
 # Misc
 .bolt/
+
+# Local Netlify folder
+.netlify

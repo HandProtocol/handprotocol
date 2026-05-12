@@ -10,8 +10,10 @@ This monorepo holds the public web presence (foundation campaign + discovery res
 
 | Path | What it is | Status |
 |---|---|---|
-| [`web/foundation-campaign/`](web/foundation-campaign/) | Primary public site. 501(c)(3) filing campaign, $55K minimum raise. | Live in source |
+| [`web/foundation-campaign/`](web/foundation-campaign/) | Primary public site. 501(c)(3) filing campaign, $77,777 first goal. | Live in source |
 | [`web/discovery/`](web/discovery/) | Three long-form discovery docs: vision of the resource pool, research on existing skill-exchange models, national landscape map. | Live in source |
+| [`web/sovereign-companions/`](web/sovereign-companions/) | Sovereign Companions: HAND's AI workstream as a public page. Reuses the discovery design system. | Live in source |
+| [`web/governance/`](web/governance/) | Governance package: Articles, Bylaws, all policies, board governance, theory of change, strategic plan, Form 1023 narrative. | Live in source |
 | [`web/legacy/`](web/legacy/) | Archive of HAND's earlier landing-page and crowdfunding designs. | Live in source |
 | [`web/landingpage/`](web/landingpage/) | Pre-pivot Next.js Web3 starter homepage. | Preserved, not deployed |
 | [`sweetspot/`](sweetspot/) | SweetSpot dApp + Solidity contracts + subgraph indexer. | Preserved, not deployed |
@@ -22,6 +24,11 @@ This monorepo holds the public web presence (foundation campaign + discovery res
 - **[`PRODUCT.md`](PRODUCT.md)** — strategic context: users, mission, brand personality, anti-references, design principles.
 - **[`DESIGN.md`](DESIGN.md)** — visual system: colors, typography, components, spacing, motion.
 - **[`AGENTS.md`](AGENTS.md)** — guide for AI coding agents working in this repo.
+- **[`AI-COMPANIONS.md`](AI-COMPANIONS.md)** — Sovereign Companions: HAND's AI workstream. Custom open-source agent systems per Companion group, owned by the group, with the eight sovereignty principles that govern the design.
+- **[`AI-EVAL-FRAMEWORK.md`](AI-EVAL-FRAMEWORK.md)** — how we measure whether the agent systems are earning their place and remaining sovereign. Six dimensions, three decision gates, public quarterly reporting.
+- **[`funding/mcgovern-letter.md`](funding/mcgovern-letter.md)** — draft LOI to the Patrick J. McGovern Foundation for the AI workstream ($111,111 over 18 months).
+- **[`governance/`](governance/)** — full governance package (36 documents): Articles, Bylaws, all policies, board governance, theory of change, strategic plan, grant-readiness, Form 1023 narrative. Each at `Draft v0.1`, pending counsel review and board adoption.
+- **[`funding/grant-readiness-research.md`](funding/grant-readiness-research.md)** — 5,300-word research report on Texas 501(c)(3) incorporation, IRS requirements, fiscal sponsorship, board governance, succession, multi-state solicitation, AI-specific governance. Underpins the governance documents.
 
 ## Local development
 
@@ -54,7 +61,7 @@ The code in this repository is released under the [MIT License](LICENSE). Conten
 
 ## Status
 
-Pre-incorporation. The foundation campaign is currently raising the $55K minimum needed to file for tax-exempt 501(c)(3) status. Watch the [foundation campaign](web/foundation-campaign/) for the current status, or [reach out](#contributing) to support.
+Pre-incorporation. The foundation campaign is currently raising toward a $77,777 first goal ($22,222 operating minimum) to file for tax-exempt 501(c)(3) status and launch the pilot cohort. Watch the [foundation campaign](web/foundation-campaign/) for the current status, or [reach out](#contributing) to support.
 
 ---
 

@@ -1,0 +1,93 @@
+/* Donate Crypto sub-page — extends foundation-campaign/style.css
+   ----------------------------------------------------------------
+   Scene: a crypto-native supporter just clicked "send crypto"
+   from the campaign and needs to find the right wallet address,
+   copy it cleanly, and feel the project is legit. Single screen,
+   minimal chrome, no re-pitching.
+*/
+
+body.donate-crypto {
+  background: var(--color-bg-warm);
+}
+
+.dc-page {
+  padding-top: calc(var(--space-3xl) + 4rem);
+  padding-bottom: var(--space-3xl);
+}
+
+.dc-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  margin-bottom: var(--space-xl);
+  transition: color 0.2s ease;
+}
+
+.dc-page__back:hover {
+  color: var(--color-accent);
+}
+
+.dc-page__back svg {
+  transition: transform 0.2s ease;
+}
+
+.dc-page__back:hover svg {
+  transform: translateX(-2px);
+}
+
+.dc-page__header {
+  max-width: 36rem;
+  margin: 0 0 var(--space-2xl);
+}
+
+.dc-page__eyebrow {
+  display: inline-block;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+
+.dc-page__title {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0 0 var(--space-md);
+}
+
+.dc-page__lede {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  margin: 0;
+  max-width: 32rem;
+}
+
+.dc-page__return {
+  margin-top: var(--space-2xl);
+  display: flex;
+  justify-content: center;
+}
+
+.dc-page__return .btn svg {
+  transition: transform 0.2s ease;
+}
+
+.dc-page__return .btn:hover svg {
+  transform: translateX(-2px);
+}
+
+@media (max-width: 768px) {
+  .dc-page {
+    padding-top: calc(var(--space-2xl) + 4rem);
+  }
+}

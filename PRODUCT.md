@@ -8,7 +8,7 @@ brand
 
 Three audiences read this site simultaneously, by design.
 
-**1. Donors and funders.** Individual supporters, foundations (especially Texas community foundations: Austin Community Foundation, St. David's Foundation, Hogg Foundation), trust-based philanthropy funders, and impact-aligned funders. Context: evaluating whether to support HAND's 501(c)(3) filing raise ($55K minimum). Reading on desktop or phone, often skimming. They want answers to: is this real? Who benefits? Where's the gap? How is HAND different from Taproot or Catchafire?
+**1. Donors and funders.** Individual supporters, foundations (especially Texas community foundations: Austin Community Foundation, St. David's Foundation, Hogg Foundation), trust-based philanthropy funders, and impact-aligned funders. Context: evaluating whether to support HAND's 501(c)(3) filing raise ($77,777 minimum). Reading on desktop or phone, often skimming. They want answers to: is this real? Who benefits? Where's the gap? How is HAND different from Taproot or Catchafire?
 
 **2. Prospective Companions.** Healers and practitioners, impact entrepreneurs, and grassroots community organizations (harm reduction, mutual aid, food access, land stewardship). Context: discovering whether HAND can help them. Reading on phones in spare moments, often. Most are not crypto-native. They want answers to: what can I ask for? What's the commitment? Will you actually stay?
 
@@ -22,13 +22,13 @@ HAND Protocol (Holistic Approach to Nurture and Develop) is a regenerative-infra
 
 The public web presence (foundation campaign, discovery docs, legacy archive) exists to:
 
-- Fund the $55K minimum filing raise
+- Fund the $77,777 minimum filing raise
 - Signal credibility to funders with cited research instead of vibes
 - Attract the first pilot cohort of Companions and Contributors
 - Establish HAND's distinctive position in a maturing capacity-building ecosystem (between Catchafire-style marketplaces and trust-based grantmakers like Kataly or Solidaire)
 - Preserve the project's evolution honestly, including the pivot away from crypto-first framing
 
-**Success looks like:** $55K raised → 501(c)(3) filed within 12 months. Three pilot Companions onboarded during incorporation. Ten Contributors and five Companions active in the first quarter post-filing. Discovery docs cited by funders as evidence of seriousness. The term "Companions" adopted by participants.
+**Success looks like:** $77,777 raised → 501(c)(3) filed within 12 months. Three pilot Companions onboarded during incorporation. Ten Contributors and five Companions active in the first quarter post-filing. Discovery docs cited by funders as evidence of seriousness. The term "Companions" adopted by participants.
 
 ## Brand Personality
 

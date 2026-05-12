@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sovereign Companions: HAND's AI workstream | HAND Protocol</title>
+  <meta name="description" content="Custom open-source agent systems for HAND's long-term accompaniment, owned by the Companions and Companion groups they serve. Eight sovereignty principles, three funding tiers, McGovern-ready.">
+  <meta property="og:title" content="Sovereign Companions: HAND's AI workstream">
+  <meta property="og:description" content="Custom open-source agent systems, owned by Companion groups. The longevity layer for HAND's accompaniment.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://handprotocol.org/sovereign-companions/">
+  <meta property="og:image" content="https://handprotocol.org/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Sovereign Companions: open-source agent systems for HAND's accompaniment layer.">
+  <meta property="og:site_name" content="HAND Protocol">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sovereign Companions: HAND's AI workstream">
+  <meta name="twitter:description" content="Custom open-source agent systems, owned by Companion groups. The longevity layer for HAND's accompaniment.">
+  <meta name="twitter:image" content="https://handprotocol.org/assets/og.png">
+  <meta name="twitter:site" content="@hand_protocol">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../discovery/style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="mask-icon" href="../assets/favicon.svg" color="#D97706">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="../foundation-campaign/index.html" class="nav__logo" aria-label="HAND Protocol home">
+        <svg class="nav__logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M16 8v5m0 6v5m-5-13v10a3 3 0 003 3h4a3 3 0 003-3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="16" cy="11" r="2" fill="currentColor"/>
+        </svg>
+        <span>HAND Protocol</span>
+      </a>
+      <div class="nav__crumbs" aria-label="Breadcrumb">
+        <a href="../foundation-campaign/index.html">Foundation</a>
+        <span class="nav__crumb-sep">/</span>
+        <span class="nav__crumb-current" aria-current="page">Sovereign Companions</span>
+      </div>
+      <div class="nav__links">
+        <a href="../foundation-campaign/index.html#about" class="nav__link">About</a>
+        <a href="../foundation-campaign/index.html#problem" class="nav__link">Problem</a>
+        <a href="../foundation-campaign/index.html#solution" class="nav__link">Solution</a>
+        <a href="../discovery/index.html" class="nav__link">Discovery</a>
+        <a href="../governance/" class="nav__link">Governance</a>
+        <a href="../foundation-campaign/index.html#funding" class="nav__link">Funding</a>
+      </div>
+      <div class="nav__actions">
+        <a href="../foundation-campaign/index.html#tiers" class="btn btn--primary btn--sm">Support the Mission</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <main id="main">
+
+    <!-- Header -->
+    <header class="doc-header">
+      <div class="doc-header__bg"></div>
+      <div class="container container--doc doc-header__inner">
+        <div class="doc-header__eyebrow">
+          <span class="doc-header__eyebrow-dot"></span>
+          AI Workstream &middot; Draft v0.2 &middot; May 2026
+        </div>
+        <h1 class="doc-header__title">
+          Sovereign Companions.<br>
+          <span class="u-accent">The longevity layer for HAND's accompaniment.</span>
+        </h1>
+        <p class="doc-header__lede">
+          Custom open-source agent systems, built per Companion or Companion group, owned by the group, and designed to be the durable artifact of HAND's long-term hand-holding. Eight sovereignty principles govern the design.
+        </p>
+        <div class="doc-header__meta">
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Status</span>
+            <span class="doc-header__meta-value">Proposal &middot; Pre-build</span>
+          </div>
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Target funders</span>
+            <span class="doc-header__meta-value">McGovern, Mozilla, Google.org</span>
+          </div>
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Ask</span>
+            <span class="doc-header__meta-value">$111,111 / 18 months</span>
+          </div>
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Posture</span>
+            <span class="doc-header__meta-value">Open source &middot; Companion-owned</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- TOC -->
+    <section class="section">
+      <div class="container container--doc">
+        <nav class="toc" aria-label="Contents">
+          <div class="toc__title">In this document</div>
+          <ol class="toc__list">
+            <li><a class="toc__item" href="#gap"><span class="toc__item-num">01</span>The gap, in one paragraph</a></li>
+            <li><a class="toc__item" href="#proposal"><span class="toc__item-num">02</span>The proposal</a></li>
+            <li><a class="toc__item" href="#principles"><span class="toc__item-num">03</span>Eight sovereignty principles</a></li>
+            <li><a class="toc__item" href="#longevity"><span class="toc__item-num">04</span>Why this is the longevity layer</a></li>
+            <li><a class="toc__item" href="#custom-agents"><span class="toc__item-num">05</span>Why custom agents, not a chat model</a></li>
+            <li><a class="toc__item" href="#stack"><span class="toc__item-num">06</span>The technical stack</a></li>
+            <li><a class="toc__item" href="#now"><span class="toc__item-num">07</span>Why now</a></li>
+            <li><a class="toc__item" href="#funders"><span class="toc__item-num">08</span>Funding shortlist</a></li>
+            <li><a class="toc__item" href="#tiers"><span class="toc__item-num">09</span>What the tiers fund</a></li>
+            <li><a class="toc__item" href="#open-questions"><span class="toc__item-num">10</span>Honest open questions</a></li>
+            <li><a class="toc__item" href="#companion-docs"><span class="toc__item-num">11</span>Companion documents</a></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 01 The gap -->
+    <section class="section" id="gap">
+      <div class="container container--doc prose">
+        <span class="section__eyebrow">01 &middot; The gap</span>
+        <h2>One unsolved problem, named directly.</h2>
+        <p class="text--lg">
+          <strong>Long-term accompaniment doesn't parallelize the way project-based pro bono does.</strong>
+        </p>
+        <p>
+          HAND's discovery work mapped 40+ organizations in the U.S. capacity-building ecosystem. Taproot, Catchafire, Bridgespan, and the new generation of trust-based funders all stop short of multi-year accompaniment with solo healers, post-accelerator impact founders, and 3-person grassroots collectives. Three structural reasons keep this gap unfilled: the economics don't parallelize, cross-audience focus is unfashionable to program officers, and the pre-501(c)(3) layer is invisible to most philanthropy.
+        </p>
+        <p>
+          We can address the second and third with positioning and patient relationship-building. <strong>The first is what this workstream addresses.</strong> The longevity of HAND's accompaniment promise depends on solving the parallelization problem without becoming the kind of impersonal scale that ruined every other model that tried.
+        </p>
+
+        <div class="callout callout--insight">
+          <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.07-7.07l-1.41 1.41M6.34 17.66l-1.41 1.41m12.73 0l-1.41-1.41M6.34 6.34L4.93 4.93"/><circle cx="12" cy="12" r="4"/></svg>
+          <div class="callout__body">
+            <h4>Source: Landscape doc, section 04</h4>
+            <p>"Taproot found a working model by going project-bounded; Catchafire by going free-and-funder-paid. The accompaniment model is the part of the field everyone agrees is missing, and that nobody has figured out how to fund sustainably." See <a href="../discovery/impact-org-landscape.html" style="color: var(--color-accent); border-bottom: 1px solid var(--color-accent-light);">the full landscape doc</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 The proposal -->
+    <section class="section" id="proposal">
+      <div class="container container--doc">
+        <span class="section__eyebrow">02 &middot; The proposal</span>
+        <h2>A sovereign agent system, per group.</h2>
+        <p class="prose">For each Companion or Companion group HAND accompanies, we build a custom agent system. The fine-tuned model is one component; the system as a whole is the durable artifact of HAND's relationship with the group.</p>
+      </div>
+
+      <div class="container container--wide">
+        <div class="card-grid card-grid--2">
+
+          <div class="card card--feature">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Per-Companion-group agent</h3>
+                <p class="card__subtitle">Built for one group, owned by them</p>
+              </div>
+              <span class="card__tag card__tag--accent">Sovereign</span>
+            </div>
+            <p class="card__desc">A custom agent with: a small fine-tuned model on an open base (Llama 3.1 8B or Mistral 7B), a per-group LoRA adapter trained on the group's own work and voice, retrieval over the group's own document library, tool access scoped to the group's workflows, memory that persists across months, and a human-review gate before any external output ships.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Workflows</span>
+              <span class="card__meta-value">Grants, scheduling, paperwork, stewardship</span>
+              <span class="card__meta-label">Ownership</span>
+              <span class="card__meta-value">The Companion group, fully</span>
+              <span class="card__meta-label">Portability</span>
+              <span class="card__meta-value">Leaves with them if HAND closes</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">HAND coordination agent</h3>
+                <p class="card__subtitle">Staff-side, cohort-wide</p>
+              </div>
+              <span class="card__tag card__tag--teal">Internal</span>
+            </div>
+            <p class="card__desc">A separate agent that runs on HAND's side only, supporting the program lead with intake-to-Contributor matching, cohort pattern surfacing, and check-in agenda drafting. Does <strong>not</strong> read individual Companion-group data without that group's explicit, scoped consent.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Used by</span>
+              <span class="card__meta-value">HAND staff (program lead)</span>
+              <span class="card__meta-label">Reads</span>
+              <span class="card__meta-value">Cohort-level metadata only</span>
+              <span class="card__meta-label">Boundary</span>
+              <span class="card__meta-value">No group data without consent</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="container container--doc prose">
+        <p style="margin-top: var(--space-xl);">
+          This is not "AI replaces accompaniment." It is AI as the parallelization layer that makes the relational accompaniment HAND has already proven viable sustainable past a 3-Companion-group cohort. The agent system is what stays. <strong>If HAND closes, the Companion group keeps it.</strong> That is the meaning of <em>sovereign</em>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 03 Eight principles -->
+    <section class="section" id="principles">
+      <div class="container container--doc">
+        <span class="section__eyebrow">03 &middot; Sovereignty principles</span>
+        <h2>Eight design constraints, all testable.</h2>
+        <p class="prose">These are not aesthetics. Each one is operationalized as a metric in the <a href="#companion-docs" style="color: var(--color-accent); border-bottom: 1px solid var(--color-accent-light);">evaluation framework</a>.</p>
+      </div>
+
+      <div class="container container--wide">
+        <div class="card-grid card-grid--2">
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">01 &middot; Open base model</h3>
+                <p class="card__subtitle">No proprietary API in the core</p>
+              </div>
+            </div>
+            <p class="card__desc">Llama 3.1 8B or Mistral 7B. Closed-source APIs (Claude, GPT) may be used for prototyping, burst capacity, or specialized sub-tasks &mdash; never as the only path between a Companion group and their own system.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">02 &middot; Group-owned adapters</h3>
+                <p class="card__subtitle">Each LoRA belongs to its group</p>
+              </div>
+            </div>
+            <p class="card__desc">On departure, HAND closure, or request, the adapter weights, training data, eval logs, and a portable inference recipe are handed over. Default ownership: the Companion or Companion group, signed and recorded.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">03 &middot; Revocable consent</h3>
+                <p class="card__subtitle">≤ 30 day retrain-or-destroy SLA</p>
+              </div>
+            </div>
+            <p class="card__desc">Every training datum is tagged with its source. A Companion group can revoke at any time; the affected adapter is retrained without that data or destroyed on a documented timeline. Drilled annually.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">04 &middot; No cross-group extraction</h3>
+                <p class="card__subtitle">Patterns stay with the group</p>
+              </div>
+            </div>
+            <p class="card__desc">HAND does not aggregate Companion-group data into a "platform model." Patterns learned working with one group stay with that group's adapter. Cross-pollination requires the contributing group's explicit, scoped, opt-in consent.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">05 &middot; Self-hostable</h3>
+                <p class="card__subtitle">Commodity hardware, end to end</p>
+              </div>
+            </div>
+            <p class="card__desc">Inference, training, eval harness, and tool integrations all run on infrastructure HAND owns or that a Companion group could run themselves on a sufficient laptop or a low-cost VPS. No vendor lock-in.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">06 &middot; Full audit trail</h3>
+                <p class="card__subtitle">Inspectable by the group, on demand</p>
+              </div>
+            </div>
+            <p class="card__desc">Every model call, retrieval, tool invocation, and reviewer disposition is logged. The Companion group can pull their own complete log at any time. Quarterly access drill tests it works.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">07 &middot; Open methodology</h3>
+                <p class="card__subtitle">The stack you could fork</p>
+              </div>
+            </div>
+            <p class="card__desc">Framework, adapter-training code, agent scaffolding, eval harness, and quarterly reports released under CC BY-SA (docs) and MIT (code). Adjacent accompaniment orgs should be able to adopt without rebuilding from scratch.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">08 &middot; Weights: case-by-case</h3>
+                <p class="card__subtitle">Default no; the group decides</p>
+              </div>
+            </div>
+            <p class="card__desc">Adapter weights can leak training patterns even without the raw data. They are <strong>not</strong> published by default. Each Companion group decides if their own adapter is published. HAND will not pressure that decision either way.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Longevity -->
+    <section class="section" id="longevity">
+      <div class="container container--doc prose">
+        <span class="section__eyebrow">04 &middot; The longevity layer</span>
+        <h2>"We don't build and bounce," made technically enforceable.</h2>
+        <p>
+          HAND's accompaniment promise reads "we don't build and bounce." Operationally, that promise is hard. People move on, funders shift, programs evolve. The sovereign agent system is what makes the promise durable in spite of HAND's own discontinuities.
+        </p>
+        <ul>
+          <li><strong>Persistent context.</strong> The agent remembers the group's three-year arc across staff turnover, funder cycles, and the relational silences between check-ins.</li>
+          <li><strong>Lower marginal cost of presence.</strong> A program lead can hold 5–7 Companion groups instead of 2–3, because the agent does the connective-tissue work between human sessions.</li>
+          <li><strong>Portable infrastructure.</strong> If HAND closes, the agent system stays. The Companion group is not stranded with deliverables-and-no-partner the way Taproot and Catchafire engagements leave their participants.</li>
+          <li><strong>An honest exit.</strong> When a Companion group graduates, they leave with their agent. That is what graduation, not abandonment, looks like in technical terms.</li>
+        </ul>
+
+        <div class="callout callout--teal">
+          <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          <div class="callout__body">
+            <h4>The no-build-and-bounce promise, technically</h4>
+            <p>Every healer who got a free website that broke six months later. Every grassroots org who lost their pro-bono designer after the launch party. The sovereign agent system makes the "someone stays" part something the Companion group owns, not something they have to wait and hope HAND can deliver year after year.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Custom agents, not chat -->
+    <section class="section" id="custom-agents">
+      <div class="container container--doc prose">
+        <span class="section__eyebrow">05 &middot; Why agents, not chat</span>
+        <h2>Each Companion group has a distinct operational shape.</h2>
+        <p>
+          A harm-reduction collective tracks naloxone distribution and contact-tracing-style outreach. A healer practice tracks consent forms, session notes, and client follow-up. A food-sovereignty group tracks land-use cycles, volunteer schedules, and grant deliverables. A single chat model cannot serve these the way a small custom agent can &mdash; wired to the group's actual tools, with memory for their specific work, with reviewers who know the group's domain.
+        </p>
+        <p>
+          The fine-tune handles voice and domain fluency. The agent scaffolding handles workflow, tool use, scheduled tasks, and integrations. Together they are what makes the system <em>theirs</em>, not <em>ours</em>.
+        </p>
+      </div>
+    </section>
+
+    <!-- 06 The technical stack -->
+    <section class="section" id="stack">
+      <div class="container container--doc">
+        <span class="section__eyebrow">06 &middot; The stack</span>
+        <h2>Small, open, owned.</h2>
+        <p class="prose">A proof of concept ships on Claude or GPT in weeks &mdash; and we will start there. But sustainable, on-brand, sovereign, and grant-fundable means owning the inference stack.</p>
+
+        <dl class="key-value" style="margin-top: var(--space-xl);">
+          <dt>Base model</dt>
+          <dd>Llama 3.1 8B or Mistral 7B. Open weights. Self-hostable.</dd>
+          <dt>Method</dt>
+          <dd>LoRA / QLoRA adapters. Full HAND-tuned base trains for ~$200–$2,000 on rented A100s. Per-Companion-group adapters cost ~$10–$50 each.</dd>
+          <dt>Retrieval layer</dt>
+          <dd>RAG over the group's own document library, plus the discovery docs and grant-landscape data where relevant.</dd>
+          <dt>Agent scaffolding</dt>
+          <dd>Tool use, memory, and scheduled tasks built on open-source frameworks. No vendor lock-in.</dd>
+          <dt>Evaluation</dt>
+          <dd>A rotating Companion + Contributor review panel. Participatory by design &mdash; on-brand for HAND, and the kind of governance trust-based funders now expect (Georgetown UP, <em>Participatory Grantmaking in Philanthropy</em>, 2024).</dd>
+          <dt>Operating cost</dt>
+          <dd>~$5,555–$22,222/year for a pilot cohort of three Companion groups, including inference, training runs, agent infrastructure, and a part-time AI lead.</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 07 Why now -->
+    <section class="section" id="now">
+      <div class="container container--doc prose">
+        <span class="section__eyebrow">07 &middot; Why now</span>
+        <h2>Three trends converge.</h2>
+        <ol>
+          <li><strong>Trust-based philanthropy is mainstream.</strong> Funders want to back relational, long-horizon work. Sovereign agent systems are the operational answer to "how do you scale relationships without breaking them."</li>
+          <li><strong>The mutual-aid funding-replacement moment is acute in 2026.</strong> Harm-reduction Companion groups losing federal support need every parallelization tool we can responsibly use &mdash; and the sovereignty posture matters most for organizations whose data has historically been weaponized against them.</li>
+          <li><strong>AI-for-social-good funding has matured faster than aligned grantee profiles.</strong> McGovern, Mozilla, Google.org, Anthropic and OpenAI nonprofit programs all explicitly fund this profile. The HAND-shaped grantee &mdash; small relational nonprofit, published gap analysis, open-source default, explicit Companion-sovereignty design &mdash; is rarer than the funding.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 08 Funding shortlist -->
+    <section class="section" id="funders">
+      <div class="container container--doc">
+        <span class="section__eyebrow">08 &middot; Funders</span>
+        <h2>Priority order, with rationale.</h2>
+      </div>
+
+      <div class="container container--wide">
+        <div class="card-grid card-grid--2">
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Patrick J. McGovern Foundation</h3>
+                <p class="card__subtitle">AI for Social Good</p>
+              </div>
+              <span class="card__tag card__tag--accent">Pursue first</span>
+            </div>
+            <p class="card__desc">Direct mission fit. Funds AI and data solutions for nonprofit, government, and social sector. <a href="../funding/mcgovern-letter.md" style="color: var(--color-accent); border-bottom: 1px solid var(--color-accent-light);">Draft LOI →</a></p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Mozilla Foundation</h3>
+                <p class="card__subtitle">Trustworthy AI</p>
+              </div>
+              <span class="card__tag card__tag--teal">On-brand</span>
+            </div>
+            <p class="card__desc">Open-weights + Companion-sovereignty posture is exactly Mozilla's brief. Responsible Computing fellowships and open-source AI grants are both potential vehicles.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Anthropic + OpenAI</h3>
+                <p class="card__subtitle">Nonprofit credit programs</p>
+              </div>
+              <span class="card__tag">Credits</span>
+            </div>
+            <p class="card__desc">API credits to fund the prototype and burst capacity while we run the sovereign open-base stack as the long-term home. Not the primary funder, but accelerates the POC.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Google.org AI for Social Good</h3>
+                <p class="card__subtitle">Capacity-building tooling</p>
+              </div>
+              <span class="card__tag">Aligned</span>
+            </div>
+            <p class="card__desc">Historically funds capacity-building tooling for grassroots organizations. The HAND coordination agent fits their pattern of supporting nonprofit operational infrastructure.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Hugging Face community grants</h3>
+                <p class="card__subtitle">Open-source legitimacy</p>
+              </div>
+              <span class="card__tag">Small + signal</span>
+            </div>
+            <p class="card__desc">Small dollar, large open-source legitimacy signal. Strong fit for the methodology release and the eval framework publication.</p>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Kataly + Hemera</h3>
+                <p class="card__subtitle">Stacked, not competing</p>
+              </div>
+              <span class="card__tag card__tag--teal">From landscape</span>
+            </div>
+            <p class="card__desc">Fund the underlying nonprofit while AI funders fund the tooling. Kataly's Mindfulness &amp; Healing Justice program is the closest mission analog; Hemera's 2028 spend-down creates the field-gap opening.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 Tiers -->
+    <section class="section" id="tiers">
+      <div class="container container--doc">
+        <span class="section__eyebrow">09 &middot; What the tiers fund</span>
+        <h2>Three phases, three angel numbers.</h2>
+        <p class="prose">The $5,555 POC tier is folded into HAND's existing $77,777 filing-raise goal and can ship immediately. The $33,333 and $111,111 tiers are dedicated AI-funder asks, parallel to the foundation campaign.</p>
+      </div>
+
+      <div class="container container--wide">
+        <div class="card-grid card-grid--3">
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <p class="card__subtitle">Phase 01 &middot; Months 1–3</p>
+                <h3 class="card__title">POC</h3>
+              </div>
+              <span class="card__tag">$5,555</span>
+            </div>
+            <p class="card__desc">Claude API + RAG over discovery docs + one Companion-group pilot, scaffolded as the prototype agent system. Closed-source APIs used for prototyping only.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Deliverable</span>
+              <span class="card__meta-value">Evaluation report; Gate 1 decision</span>
+              <span class="card__meta-label">Funding path</span>
+              <span class="card__meta-value">Folded into $77,777 filing raise</span>
+            </div>
+          </div>
+
+          <div class="card card--feature">
+            <div class="card__header">
+              <div>
+                <p class="card__subtitle">Phase 02 &middot; Months 4–15</p>
+                <h3 class="card__title">Pilot</h3>
+              </div>
+              <span class="card__tag card__tag--accent">$33,333</span>
+            </div>
+            <p class="card__desc">Open-base fine-tune, three sovereign Companion-group agent systems with per-group adapters, self-hosted inference, quarterly participatory eval including sovereignty drills.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Deliverable</span>
+              <span class="card__meta-value">3 working systems, ownership records, eval framework v1.0, case studies</span>
+              <span class="card__meta-label">Funding path</span>
+              <span class="card__meta-value">AI-funder ask (McGovern / Mozilla)</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <p class="card__subtitle">Phase 03 &middot; Months 16–18</p>
+                <h3 class="card__title">Production + release</h3>
+              </div>
+              <span class="card__tag">$111,111</span>
+            </div>
+            <p class="card__desc">Per-group adapter productionization, the HAND coordination agent, full open-source release of methodology + eval framework + agent scaffolding. Closure-simulation drill. Methodology paper.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Deliverable</span>
+              <span class="card__meta-value">Forkable stack; transition to operating-budget sustainability</span>
+              <span class="card__meta-label">Funding path</span>
+              <span class="card__meta-value">Production grant + open-source signal</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 Open questions -->
+    <section class="section" id="open-questions">
+      <div class="container container--doc prose">
+        <span class="section__eyebrow">10 &middot; Honest open questions</span>
+        <h2>What we don't have answers to yet.</h2>
+        <ul>
+          <li><strong>Hallucination in grant-writing and clinical-adjacent contexts.</strong> A wrong fact inside a 501(c)(3) application or a harm-reduction outreach script is worse than no help. Human review is non-negotiable; the eval framework enforces it before any Companion-facing or external output ships.</li>
+          <li><strong>Agent failure modes are not chat failure modes.</strong> Tool-using agents fail differently from chat models &mdash; bad scheduled actions, stale memory, infinite loops, mis-scoped tool calls. The eval framework includes agent-specific test scenarios, not just text-quality metrics.</li>
+          <li><strong>The replacement anxiety.</strong> Companions and Contributors need to trust that the agent system augments HAND's relational posture and never substitutes for it. Earned through transparency, sovereignty, and the human-review gate &mdash; not promised.</li>
+          <li><strong>Sustainability past the grant.</strong> If an AI funder steps back in year three, the agent infrastructure becomes an operating-budget line. The unit economics have to be defensible before we commit to dependent infrastructure.</li>
+          <li><strong>What happens at graduation.</strong> When a Companion group's accompaniment with HAND ends, they leave with their agent system. The practical handoff &mdash; who hosts, who maintains, what HAND's ongoing support looks like &mdash; is a real design problem that the production phase will work out alongside the first cohort.</li>
+        </ul>
+
+        <div class="callout">
+          <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <div class="callout__body">
+            <h4>This is a draft</h4>
+            <p>Version 0.2, published openly so participants, funders, and skeptics can push back. If you're a Companion candidate, an AI researcher, or a program officer who reads this and thinks "yes, but" &mdash; that conversation is the whole point. <a href="mailto:hand@handprotocol.org" style="color: var(--color-accent); border-bottom: 1px solid var(--color-accent-light);">hand@handprotocol.org →</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11 Companion docs -->
+    <section class="section" id="companion-docs">
+      <div class="container container--doc">
+        <span class="section__eyebrow">11 &middot; Companion documents</span>
+        <h2>The full proposal, evaluation, and ask.</h2>
+        <p class="prose">Three documents make up the Sovereign Companions workstream. This page is the public summary. The repository documents are the working drafts &mdash; living, updated, and open to feedback.</p>
+      </div>
+
+      <div class="container container--wide">
+        <div class="card-grid card-grid--3">
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">One-pager</h3>
+                <p class="card__subtitle">AI-COMPANIONS.md</p>
+              </div>
+              <span class="card__tag">Working draft</span>
+            </div>
+            <p class="card__desc">The full one-pager in markdown: gap, proposal, principles, longevity rationale, technical stack, tiers, funder shortlist, open questions. Designed for circulation to program officers and Companion candidates.</p>
+            <a href="https://github.com/HandProtocol/handprotocol/blob/main/AI-COMPANIONS.md" target="_blank" rel="noopener noreferrer" class="card__cta" style="display: inline-block; margin-top: var(--space-md); color: var(--color-accent); border-bottom: 1px solid var(--color-accent-light);">Read on GitHub &rarr;</a>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Evaluation framework</h3>
+                <p class="card__subtitle">AI-EVAL-FRAMEWORK.md</p>
+              </div>
+              <span class="card__tag card__tag--accent">Six dimensions</span>
+            </div>
+            <p class="card__desc">How we measure whether the agent systems are earning their place and remaining sovereign. System quality, Companion value, staff value, harm avoidance, governance, and a dedicated Sovereignty dimension with portability checks, revocation drills, and a Gate-3 closure simulation.</p>
+            <a href="https://github.com/HandProtocol/handprotocol/blob/main/AI-EVAL-FRAMEWORK.md" target="_blank" rel="noopener noreferrer" class="card__cta" style="display: inline-block; margin-top: var(--space-md); color: var(--color-accent); border-bottom: 1px solid var(--color-accent-light);">Read on GitHub &rarr;</a>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">McGovern LOI</h3>
+                <p class="card__subtitle">funding/mcgovern-letter.md</p>
+              </div>
+              <span class="card__tag card__tag--teal">Draft</span>
+            </div>
+            <p class="card__desc">Letter of inquiry to the Patrick J. McGovern Foundation, AI for Social Good program. Asks $111,111 over 18 months across the POC, Pilot, and Production phases. Leads with the open-source and sovereignty commitments.</p>
+            <a href="https://github.com/HandProtocol/handprotocol/blob/main/funding/mcgovern-letter.md" target="_blank" rel="noopener noreferrer" class="card__cta" style="display: inline-block; margin-top: var(--space-md); color: var(--color-accent); border-bottom: 1px solid var(--color-accent-light);">Read on GitHub &rarr;</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Pager -->
+    <section class="section">
+      <div class="container container--doc">
+        <div class="pager">
+          <a href="../discovery/impact-org-landscape.html" class="pager__item pager__item--prev">
+            <span class="pager__direction"><svg width="12" height="12" aria-hidden="true"><use href="../assets/icons.svg#arrow-left"/></svg> Related</span>
+            <h3 class="pager__title">The National Landscape</h3>
+            <span class="pager__subtitle">Where the gap is, mapped against 40+ peer organizations</span>
+          </a>
+          <a href="../foundation-campaign/index.html#tiers" class="pager__item pager__item--next">
+            <span class="pager__direction">Take action <svg width="12" height="12" aria-hidden="true"><use href="../assets/icons.svg#arrow-right"/></svg></span>
+            <h3 class="pager__title">Support the filing raise</h3>
+            <span class="pager__subtitle">$77,777 first goal &middot; the POC tier is folded in</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+              <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M16 8v5m0 6v5m-5-13v10a3 3 0 003 3h4a3 3 0 003-3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="16" cy="11" r="2" fill="currentColor"/>
+            </svg>
+            <span>HAND Protocol Foundation</span>
+          </div>
+          <p class="footer__tagline">Regenerative infrastructure for those who heal, build, and serve.</p>
+          <p class="footer__location">Austin, Texas</p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4>Navigate</h4>
+            <a href="../foundation-campaign/index.html#about">About</a>
+            <a href="../foundation-campaign/index.html#problem">The Problem</a>
+            <a href="../foundation-campaign/index.html#solution">Our Solution</a>
+            <a href="../foundation-campaign/index.html#track-record">Track Record</a>
+          </div>
+          <div class="footer__col">
+            <h4>Discovery</h4>
+            <a href="../discovery/index.html">Overview</a>
+            <a href="../discovery/skill-exchange-vision.html">Vision</a>
+            <a href="../discovery/skill-exchange-models.html">Models</a>
+            <a href="../discovery/impact-org-landscape.html">Landscape</a>
+          </div>
+          <div class="footer__col">
+            <h4>AI Workstream</h4>
+            <a href="index.html">Sovereign Companions</a>
+            <a href="https://github.com/HandProtocol/handprotocol/blob/main/AI-COMPANIONS.md" target="_blank" rel="noopener noreferrer">One-pager<span class="sr-only">(opens in new tab)</span></a>
+            <a href="https://github.com/HandProtocol/handprotocol/blob/main/AI-EVAL-FRAMEWORK.md" target="_blank" rel="noopener noreferrer">Eval framework<span class="sr-only">(opens in new tab)</span></a>
+          </div>
+          <div class="footer__col">
+            <h4>Connect</h4>
+            <a href="mailto:hand@handprotocol.org">hand@handprotocol.org</a>
+            <a href="https://discord.handprotocol.org" target="_blank" rel="noopener noreferrer">Discord<span class="sr-only">(opens in new tab)</span></a>
+            <a href="https://x.com/hand_protocol" target="_blank" rel="noopener noreferrer">@hand_protocol<span class="sr-only">(opens in new tab)</span></a>
+            <a href="https://github.com/HandProtocol/handprotocol" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only">(opens in new tab)</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 HAND Protocol Foundation &middot; Sovereign Companions draft v0.2, last updated <span class="text--mono">2026-05-12</span> &middot; Pre-incorporation; 501(c)(3) status pending Texas filing. <a href="../foundation-campaign/">Foundation campaign</a> &middot; <a href="../discovery/">Discovery</a> &middot; <a href="../legacy/">Archive</a>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../discovery/script.js" defer></script>
+</body>
+</html>

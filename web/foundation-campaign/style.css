@@ -2207,3 +2207,322 @@ strong {
   .crypto-address__copy { justify-content: center; }
   .backstory__legacy { padding: var(--space-md) var(--space-lg); }
 }
+
+/* --- CTA crypto note (small mention in Final CTA) --- */
+.cta__crypto-note {
+  margin-top: var(--space-md);
+  font-size: 0.9375rem;
+  color: var(--color-text-on-dark-secondary);
+  text-align: center;
+}
+
+.cta__crypto-note a {
+  color: var(--color-accent-warm);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.4);
+  transition: border-color 0.2s ease;
+}
+
+.cta__crypto-note a:hover {
+  border-bottom-color: var(--color-accent-warm);
+}
+
+/* --- Stay close — mailing-list section ---
+   Scene: a healer or supporter sitting with their phone after reading
+   the campaign on a kitchen table. The form should feel like an invitation,
+   not a marketing capture. Two-column asymmetric — copy left (smaller),
+   form right (larger) — so the form is the gravity well, not the headline. */
+.section--stay-close {
+  background: var(--color-bg);
+}
+
+.stay-close__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .stay-close__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: var(--space-3xl);
+    align-items: start;
+  }
+}
+
+.stay-close__intro {
+  max-width: 28rem;
+}
+
+.stay-close__eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+
+.stay-close__title {
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0 0 var(--space-md);
+}
+
+.stay-close__lede {
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-md);
+}
+
+.stay-close__note {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Form column — sits on a quiet card so it reads as a discrete input zone */
+.stay-close__form {
+  background: var(--color-bg-warm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .stay-close__form { padding: var(--space-2xl); }
+}
+
+.stay-close__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.stay-close__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: 0.01em;
+}
+
+.stay-close__input {
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 0.75rem 0.9375rem;
+  min-height: 44px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  -webkit-appearance: none;
+}
+
+.stay-close__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.stay-close__input:hover {
+  border-color: #D1D5DB;
+}
+
+.stay-close__input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.stay-close__input[aria-invalid="true"] {
+  border-color: #B91C1C;
+}
+
+.stay-close__input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(185, 28, 28, 0.15);
+}
+
+.stay-close__err {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: #B91C1C;
+  margin: 0;
+  min-height: 1.1em;
+}
+
+.stay-close__err:empty { display: none; }
+
+.stay-close__fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.stay-close__legend {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+  padding: 0;
+  margin-bottom: 0.125rem;
+  letter-spacing: 0.01em;
+}
+
+.stay-close__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.stay-close__pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.stay-close__pill input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  cursor: pointer;
+}
+
+.stay-close__pill span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.stay-close__pill:hover span {
+  border-color: #D1D5DB;
+  color: var(--color-text);
+}
+
+.stay-close__pill input[type="radio"]:focus-visible + span {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.stay-close__pill input[type="radio"]:checked + span {
+  background: var(--color-accent);
+  color: var(--color-text-on-dark);
+  border-color: var(--color-accent);
+}
+
+/* Honeypot — visually hidden but accessible to bots */
+.stay-close__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.stay-close__submit {
+  align-self: flex-start;
+  min-width: 12rem;
+  position: relative;
+}
+
+.stay-close__submit-spinner {
+  display: none;
+  margin-left: 0.5rem;
+}
+
+.stay-close__submit-spinner svg {
+  animation: stay-close-spin 0.8s linear infinite;
+}
+
+@keyframes stay-close-spin {
+  to { transform: rotate(360deg); }
+}
+
+.stay-close__form.is-submitting .stay-close__submit-spinner {
+  display: inline-flex;
+}
+
+.stay-close__form.is-submitting .stay-close__submit {
+  cursor: progress;
+}
+
+.stay-close__submit:disabled {
+  opacity: 0.85;
+}
+
+.stay-close__feedback {
+  min-height: 0;
+}
+
+.stay-close__feedback:empty { display: none; }
+
+.stay-close__msg {
+  margin: 0;
+  padding: 0.875rem 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.stay-close__msg--success {
+  background: #ECFDF5;
+  border-color: #A7F3D0;
+  color: #065F46;
+}
+
+.stay-close__msg--info {
+  background: var(--color-bg-warm-tint);
+  border-color: #FDE68A;
+  color: #92400E;
+}
+
+.stay-close__msg--error {
+  background: #FEF2F2;
+  border-color: #FECACA;
+  color: #991B1B;
+}
+
+.stay-close__msg--error a {
+  color: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .stay-close__pills { gap: 0.4375rem; }
+  .stay-close__form { padding: var(--space-lg); }
+  .stay-close__submit { align-self: stretch; min-width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stay-close__submit-spinner svg { animation: none; }
+}

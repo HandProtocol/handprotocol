@@ -5,6 +5,10 @@
   publish = "web"
   command = ""  # All static, no build step
 
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
 # Root redirects to foundation campaign (primary surface)
 [[redirects]]
   from = "/"
@@ -41,7 +45,12 @@
 
 [[redirects]]
   from = "/crypto"
-  to = "/foundation-campaign/#crypto"
+  to = "/donate-crypto/"
+  status = 301
+
+[[redirects]]
+  from = "/donate-crypto"
+  to = "/donate-crypto/"
   status = 301
 
 [[redirects]]
@@ -57,6 +66,51 @@
 [[redirects]]
   from = "/landscape"
   to = "/discovery/impact-org-landscape.html"
+  status = 301
+
+[[redirects]]
+  from = "/sovereign"
+  to = "/sovereign-companions/"
+  status = 301
+
+[[redirects]]
+  from = "/sovereign-companions"
+  to = "/sovereign-companions/"
+  status = 301
+
+[[redirects]]
+  from = "/ai"
+  to = "/sovereign-companions/"
+  status = 301
+
+[[redirects]]
+  from = "/ai-companions"
+  to = "/sovereign-companions/"
+  status = 301
+
+[[redirects]]
+  from = "/governance"
+  to = "/governance/"
+  status = 301
+
+[[redirects]]
+  from = "/bylaws"
+  to = "/governance/#foundational"
+  status = 301
+
+[[redirects]]
+  from = "/policies"
+  to = "/governance/#policies"
+  status = 301
+
+[[redirects]]
+  from = "/board"
+  to = "/governance/#board"
+  status = 301
+
+[[redirects]]
+  from = "/board-prospect"
+  to = "https://github.com/HandProtocol/handprotocol/blob/main/governance/board/director-prospect-brief.md"
   status = 301
 
 # 404 fallback → foundation campaign (rather than a generic error)

@@ -241,7 +241,11 @@ The same token system supports three deliberately different surfaces.
 
 ### Foundation campaign (`web/foundation-campaign/`)
 
-The primary brand surface. White background, full design system, amber as the signature accent. Hero, About, Problem, Solution, Our Companions, Track Record, Funding Goals (dark section), Timeline, Year 1 Success, Backstory (asymmetric 2:1 grid), Contribution Tiers, Donate With Crypto, Final CTA. Long single-page narrative.
+The primary brand surface. White background, full design system, amber as the signature accent. Hero, About, Problem, Solution, Our Companions, Track Record, Funding Goals (dark section), Timeline, Year 1 Success, Backstory (asymmetric 2:1 grid), Contribution Tiers, Stay Close (mailing-list signup with audience tag pills), Final CTA. Long single-page narrative. Crypto donations live on a dedicated sub-page (`web/donate-crypto/`); the campaign only references them as small inline links.
+
+### Donate crypto (`web/donate-crypto/`)
+
+Focused single-purpose sub-page. Inherits the campaign stylesheet, adds page-local chrome (back-link, page title, return CTA). Giveth primary card + three wallet-address cards (EVM / Solana / Stellar). Same nav and footer as the campaign. Linked from the campaign's tiers note, Final CTA crypto-line, and footer Support column.
 
 ### Discovery docs (`web/discovery/`)
 

@@ -49,48 +49,55 @@ const EVM_CHAINS = [
 
 const FUNDING_TIERS = [
   {
-    amount: '$600',
-    name: 'Minimum Goal',
-    label: 'Legal Registration',
+    amount: '$7,777',
+    name: 'Filing Floor',
+    label: 'Legal existence plus a real beginning',
     items: [
-      'Federal 501(c)(3) filing fee',
-      'Texas state nonprofit registration',
-      'Basic administrative costs'
+      'Federal 501(c)(3) filing fee & Texas state registration: $625',
+      'Legal counsel & bylaws (basic): $2,400',
+      'Domain, hosting & initial infrastructure: $1,500',
+      'Initial brand identity & foundation site: $1,500',
+      'Insurance setup: $500',
+      'Founding administrative cushion: $1,252'
     ]
   },
   {
-    amount: '$12,000',
-    name: 'Foundation Goal',
-    label: 'Legal + 6-Month Operations',
+    amount: '$22,222',
+    name: 'Operating Minimum',
+    label: 'Filing + websites + 6 months of work',
     featured: true,
     items: [
-      'Nonprofit formation & compliance: $2,000',
-      'Legal counsel & bylaws: $2,500',
-      'Core infrastructure & systems: $3,000',
-      '6-month operational runway: $4,500'
+      'Filing & nonprofit formation (rolls in floor tier): $7,777',
+      'Ongoing legal & compliance: $2,222',
+      '3 pilot Companion websites & branding: $3,333',
+      'Core infrastructure, tools & insurance: $1,111',
+      '6-month part-time program lead: $7,779'
     ]
   },
   {
-    amount: '$56,000',
-    name: 'Full Launch',
-    label: 'Complete Infrastructure + 12 Months',
+    amount: '$77,777',
+    name: 'First Goal',
+    label: 'Full launch, 12 months of accompaniment',
     items: [
-      'Formation & compliance: $4,000',
-      'Core infrastructure: $8,000',
-      'Pilot program development: $24,000',
-      'Operations & longevity: $20,000'
+      '501(c)(3) filing, compliance & legal: $7,777',
+      'Pilot Companion websites & ongoing support: $11,111',
+      'Core infrastructure, tools & insurance: $5,555',
+      '12-month part-time program lead & ops: $33,333',
+      'Pilot program development & matching: $11,111',
+      'AI Companion model — POC integration: $5,555',
+      'Contingency & opportunity fund: $3,335'
     ]
   }
 ]
 
 const CONTRIBUTION_TIERS = [
-  { amount: '$25', name: 'Seed Planter', perks: ['Our gratitude', 'Name on supporter wall'] },
-  { amount: '$50', name: 'Garden Tender', perks: ['Everything below', 'Quarterly impact updates'] },
-  { amount: '$100', name: 'Root Builder', perks: ['Everything below', 'Early access to healer directory'] },
-  { amount: '$250', name: 'Community Pillar', perks: ['Everything below', 'Virtual community gathering invite'] },
-  { amount: '$500', name: 'Foundation Stone', perks: ['Everything below', 'Recognized as founding supporter'], featured: true },
-  { amount: '$1,000', name: 'Architect', perks: ['Everything below', '1:1 conversation with founders'] },
-  { amount: '$2,500+', name: 'Keystone', perks: ['Everything below', 'Input on pilot program priorities'] }
+  { amount: '$77', name: 'Seed Planter', perks: ['Our gratitude', 'Name on supporter wall'] },
+  { amount: '$111', name: 'Garden Tender', perks: ['Everything below', 'Quarterly impact updates'] },
+  { amount: '$222', name: 'Root Builder', perks: ['Everything below', 'Early access to healer directory'] },
+  { amount: '$333', name: 'Community Pillar', perks: ['Everything below', 'Virtual community gathering invite'] },
+  { amount: '$555', name: 'Foundation Stone', perks: ['Everything below', 'Recognized as founding supporter'], featured: true },
+  { amount: '$1,111', name: 'Architect', perks: ['Everything below', '1:1 conversation with founders'] },
+  { amount: '$2,222+', name: 'Keystone', perks: ['Everything below', 'Input on pilot program priorities'] }
 ]
 
 const SERVE_DATA = {

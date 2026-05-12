@@ -1,0 +1,150 @@
+/* ========================================
+   HAND Protocol — Governance
+   Extends discovery/style.css with governance-specific components
+   ======================================== */
+
+/* Governance card grid — denser than doc-cards, suited for ~36 documents */
+.gov-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+.gov-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg, 16px);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 0 1px 2px var(--color-card-shadow);
+}
+
+.gov-card:hover,
+.gov-card:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  box-shadow: 0 6px 16px var(--color-card-shadow-hover);
+}
+
+.gov-card:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.gov-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.gov-card__num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+}
+
+.gov-card__icon {
+  color: var(--color-accent);
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform 0.18s ease;
+}
+
+.gov-card:hover .gov-card__icon,
+.gov-card:focus-visible .gov-card__icon {
+  transform: translateX(4px);
+}
+
+.gov-card__title {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.gov-card__desc {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Required policies — amber tint to signal "this is the IRS-mandated set" */
+.gov-card--required {
+  background: var(--color-accent-tint);
+  border-color: rgba(217, 119, 6, 0.18);
+}
+
+.gov-card--required .gov-card__num {
+  background: var(--color-accent-light);
+  color: var(--color-accent-hover);
+  border-color: rgba(217, 119, 6, 0.25);
+}
+
+.gov-card--required:hover,
+.gov-card--required:focus-visible {
+  border-color: var(--color-accent);
+}
+
+/* AI policy — teal tint to nod toward Sovereign Companions visual family */
+.gov-card--ai {
+  background: var(--color-teal-tint);
+  border-color: rgba(13, 148, 136, 0.18);
+}
+
+.gov-card--ai .gov-card__num {
+  background: var(--color-teal-light);
+  color: var(--color-teal-dark);
+  border-color: rgba(13, 148, 136, 0.25);
+}
+
+.gov-card--ai:hover,
+.gov-card--ai:focus-visible {
+  border-color: var(--color-teal);
+}
+
+/* Form 1023 filing — distinct, calls attention to the IRS submission */
+.gov-card--filing {
+  background: var(--color-bg-warm);
+  border-color: var(--color-border-strong);
+}
+
+.gov-card--filing .gov-card__num {
+  background: #FFFFFF;
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+@media (max-width: 640px) {
+  .gov-cards {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  .gov-card {
+    padding: var(--space-md);
+  }
+}
+
+/* Smooth scroll for anchor links to sections */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 112px; /* nav + subnav height */
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

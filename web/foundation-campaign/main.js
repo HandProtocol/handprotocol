@@ -137,6 +137,108 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('[data-count]').forEach((c) => counterObserver.observe(c));
 
+  const subscribeForm = document.getElementById('subscribeForm');
+  if (subscribeForm) {
+    const submitBtn = document.getElementById('subscribeSubmit');
+    const feedback = document.getElementById('subscribeFeedback');
+    const emailInput = document.getElementById('sc-email');
+    const nameInput = document.getElementById('sc-name');
+    const emailErr = document.getElementById('sc-email-err');
+    const nameErr = document.getElementById('sc-name-err');
+    const audienceErr = document.getElementById('sc-audience-err');
+    const honeypot = document.getElementById('sc-website');
+
+    function setFeedback(state, html) {
+      feedback.dataset.state = state || '';
+      feedback.innerHTML = html || '';
+    }
+
+    function clearErrors() {
+      emailErr.textContent = '';
+      nameErr.textContent = '';
+      audienceErr.textContent = '';
+      emailInput.removeAttribute('aria-invalid');
+      nameInput.removeAttribute('aria-invalid');
+    }
+
+    function setSubmitting(isSubmitting) {
+      subscribeForm.classList.toggle('is-submitting', isSubmitting);
+      submitBtn.disabled = isSubmitting;
+      submitBtn.setAttribute('aria-busy', String(isSubmitting));
+    }
+
+    subscribeForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearErrors();
+      setFeedback('', '');
+
+      const email = emailInput.value.trim();
+      const name = nameInput.value.trim();
+      const audience = subscribeForm.querySelector('input[name="audience"]:checked');
+
+      let hasError = false;
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailErr.textContent = 'Please enter a valid email.';
+        emailInput.setAttribute('aria-invalid', 'true');
+        hasError = true;
+      }
+      if (!name) {
+        nameErr.textContent = 'Please tell us what to call you.';
+        nameInput.setAttribute('aria-invalid', 'true');
+        hasError = true;
+      }
+      if (!audience) {
+        audienceErr.textContent = 'Pick the one that fits best.';
+        hasError = true;
+      }
+
+      if (hasError) {
+        const firstInvalid = subscribeForm.querySelector('[aria-invalid="true"]')
+          || (audience ? null : subscribeForm.querySelector('input[name="audience"]'));
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      setSubmitting(true);
+      setFeedback('loading', '<p class="stay-close__msg">Sending&hellip;</p>');
+
+      try {
+        const res = await fetch('/.netlify/functions/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            name,
+            audience: audience.value,
+            website: honeypot ? honeypot.value : ''
+          })
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.status === 'subscribed') {
+          subscribeForm.reset();
+          setFeedback('success', `<p class="stay-close__msg stay-close__msg--success">Almost there. Check your inbox for a confirmation link from us.</p>`);
+        } else if (res.ok && data.status === 'already_subscribed') {
+          setFeedback('info', `<p class="stay-close__msg stay-close__msg--info">You're already on the list. Thanks for staying close.</p>`);
+        } else if (res.status === 422 && data.field) {
+          if (data.field === 'email') {
+            emailErr.textContent = data.message || 'That email looks off.';
+            emailInput.setAttribute('aria-invalid', 'true');
+            emailInput.focus();
+          } else {
+            setFeedback('error', `<p class="stay-close__msg stay-close__msg--error">${data.message || 'Please check the form and try again.'}</p>`);
+          }
+        } else {
+          setFeedback('error', `<p class="stay-close__msg stay-close__msg--error">Something went sideways on our end. Email <a href="mailto:hand@handprotocol.org">hand@handprotocol.org</a> and we'll add you manually.</p>`);
+        }
+      } catch (err) {
+        setFeedback('error', `<p class="stay-close__msg stay-close__msg--error">Couldn't reach the server. Check your connection and try again, or email <a href="mailto:hand@handprotocol.org">hand@handprotocol.org</a>.</p>`);
+      } finally {
+        setSubmitting(false);
+      }
+    });
+  }
+
   document.querySelectorAll('.crypto-address__copy').forEach((btn) => {
     btn.addEventListener('click', async () => {
       const text = btn.dataset.copy;

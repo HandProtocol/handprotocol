@@ -1,23 +1,32 @@
 # Deploy walkthrough
 
-The HAND Protocol public surfaces are static HTML/CSS/JS, no build step. The site is **currently deployed on Vercel**, with a planned migration to **Netlify** later. Config for both hosts plus Cloudflare Pages lives in the repo.
+The HAND Protocol public surfaces are static HTML/CSS/JS, no build step. The site is **live on Netlify at `handprotocol.netlify.app`** as of 2026-05-12. Pushes to `main` of `HandProtocol/handprotocol` auto-deploy. Config for Vercel and Cloudflare Pages is also kept in the repo for host portability.
 
 ## Pre-flight checklist
 
-- [ ] Domain registered (`handprotocol.org` or alternative)
-- [ ] GitHub repo public at `github.com/HandProtocol/handprotocol`
-- [ ] All meta tags in HTML use the right absolute domain (currently `https://handprotocol.org` — change in HTML if domain differs)
+- [x] GitHub repo public at `github.com/HandProtocol/handprotocol`
+- [x] Netlify connected, auto-deploy on `main` enabled
+- [ ] Custom domain (`handprotocol.org` or alternative) pointed at Netlify
+- [ ] OG / sitemap meta tags reference the canonical live domain (currently `https://handprotocol.org` — change in HTML if the canonical domain differs)
 - [ ] Email `hand@handprotocol.org` exists and forwards somewhere readable
 
-## Option 1 — Vercel (current, but inaccessible)
+## Option 1 — Netlify (current, live)
 
-The site is currently running on Vercel, but **the deploy lives under an account koH does not have access to**. Pushes to `main` do not update the live site, and `vercel.json` config changes in this repo are inert until ownership is reclaimed or the deploy is moved.
+The site is deployed here. `netlify.toml` at the repo root configures everything.
 
-`vercel.json` is still maintained in the repo for parity with `netlify.toml`, so a future move back to Vercel under a controllable account would be plug-and-play.
+1. Project is connected to GitHub `HandProtocol/handprotocol`. Pushes to `main` auto-deploy.
+2. Build settings (auto-detected from `netlify.toml`):
+   - Base directory: blank (repo root)
+   - Build command: blank (no build step)
+   - Publish directory: **`web`**
+3. `netlify.toml` handles:
+   - Root path `/` → `/foundation-campaign/`
+   - Pretty URLs (`/vision`, `/models`, `/landscape`, `/campaign`, `/raise`, `/crypto`)
+   - Security headers (X-Frame-Options, Referrer-Policy, Permissions-Policy)
+   - Cache control (long for assets, short for HTML)
+4. **Custom domain:** Site Settings → Domain Management → Add custom domain → `handprotocol.org`. Let's Encrypt SSL auto-provisions within ~10 min after DNS propagation.
 
-The realistic next deploy step is **Option 2 — Netlify**.
-
-## Option 2 — Netlify (planned migration, recommended next step)
+## Option 2 — Vercel (former, ad-hoc / archived)
 
 1. Sign in at [netlify.com](https://netlify.com), connect your GitHub account.
 2. Click **Add new site → Import an existing project**.
