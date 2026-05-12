@@ -1,0 +1,4 @@
+# Generated artifacts; regenerate with `python3 build.py`
+out/*.pdf
+html/*.html
+bundles/*.md
