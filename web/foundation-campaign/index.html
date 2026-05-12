@@ -3,23 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HAND Protocol Foundation — Regenerative Infrastructure for Healers & Community Builders</title>
+  <title>HAND Protocol Foundation: Regenerative Infrastructure for Healers & Community Builders</title>
   <meta name="description" content="Building regenerative infrastructure for healers, impact entrepreneurs, and community organizations. Based in Austin, Texas.">
   <meta property="og:title" content="HAND Protocol Foundation">
-  <meta property="og:description" content="Support the people already doing the work. Branding, marketing, and development support for healers and impact organizations.">
+  <meta property="og:description" content="A nonprofit foundation supporting healers, impact entrepreneurs, and grassroots organizations with long-term branding, marketing, and development. We don't build and bounce.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://handprotocol.org/">
+  <meta property="og:image" content="https://handprotocol.org/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="HAND Protocol: regenerative infrastructure for those who heal, build, and serve. 501(c)(3) filing raise, $55,000 goal, Austin, TX.">
+  <meta property="og:site_name" content="HAND Protocol">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HAND Protocol Foundation">
+  <meta name="twitter:description" content="A nonprofit foundation supporting healers, impact entrepreneurs, and grassroots organizations. We don't build and bounce.">
+  <meta name="twitter:image" content="https://handprotocol.org/assets/og.png">
+  <meta name="twitter:site" content="@hand_protocol">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#9995;</text></svg>">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="mask-icon" href="../assets/favicon.svg" color="#D97706">
+  <meta name="theme-color" content="#D97706">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
   <!-- Navigation -->
   <nav class="nav" id="nav">
     <div class="nav__inner container">
-      <a href="#" class="nav__logo">
+      <a href="#hero" class="nav__logo">
         <svg class="nav__logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
           <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
           <path d="M16 8v5m0 6v5m-5-13v10a3 3 0 003 3h4a3 3 0 003-3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
@@ -31,18 +45,19 @@
         <a href="#about" class="nav__link">About</a>
         <a href="#problem" class="nav__link">The Problem</a>
         <a href="#solution" class="nav__link">Solution</a>
+        <a href="../discovery/" class="nav__link">Discovery</a>
         <a href="#track-record" class="nav__link">Track Record</a>
         <a href="#funding" class="nav__link">Funding</a>
         <a href="#tiers" class="nav__link">Contribute</a>
       </div>
       <a href="#tiers" class="nav__cta btn btn--sm">Support Us</a>
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <main>
+  <main id="main">
 
     <!-- Hero -->
     <section class="hero" id="hero">
@@ -61,36 +76,24 @@
           Build & Serve
         </h1>
         <p class="hero__subtitle animate-in">
-          We support healers, impact entrepreneurs, and community organizations with branding, marketing, and long-term development&mdash;without walking away once the work is done. Now we're becoming a nonprofit foundation in Austin, Texas.
+          We support healers, impact entrepreneurs, and community organizations with branding, marketing, and long-term development, without walking away once the work is done. Now we're becoming a nonprofit foundation in Austin, Texas.
         </p>
         <div class="hero__actions animate-in">
           <a href="#tiers" class="btn btn--primary btn--lg">
             Support the Mission
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg width="16" height="16" aria-hidden="true"><use href="../assets/icons.svg#arrow-right"/></svg>
           </a>
           <a href="#about" class="btn btn--ghost btn--lg">Learn More</a>
         </div>
-        <div class="hero__stats animate-in">
-          <div class="hero__stat">
-            <span class="hero__stat-value" data-count="1">1+</span>
-            <span class="hero__stat-label">Year Operating</span>
-          </div>
-          <div class="hero__stat-divider"></div>
-          <div class="hero__stat">
-            <span class="hero__stat-value">Multiple</span>
-            <span class="hero__stat-label">Impact Projects Supported</span>
-          </div>
-          <div class="hero__stat-divider"></div>
-          <div class="hero__stat">
-            <span class="hero__stat-value">QF</span>
-            <span class="hero__stat-label">Funding Rounds Participated</span>
-          </div>
-          <div class="hero__stat-divider"></div>
-          <div class="hero__stat">
-            <span class="hero__stat-value">Austin</span>
-            <span class="hero__stat-label">Texas &mdash; Our Home Base</span>
-          </div>
-        </div>
+        <p class="hero__provenance animate-in">
+          Austin, Texas
+          <span class="hero__provenance-sep" aria-hidden="true">·</span>
+          Participated in <a class="qf-link" href="https://en.wikipedia.org/wiki/Quadratic_funding" target="_blank" rel="noopener noreferrer">quadratic-funding rounds<span class="qf-link__tip" role="tooltip"><strong>Quadratic Funding</strong>: a matching-pool mechanism that amplifies many small donations to better reflect broad public-good demand.<span class="qf-link__tip-meta">Buterin, Hitzig &amp; Weyl, 2018 &middot; Wikipedia</span></span></a>
+          <span class="hero__provenance-sep" aria-hidden="true">·</span>
+          Multiple Companions supported
+          <span class="hero__provenance-sep" aria-hidden="true">·</span>
+          501(c)(3) filing in progress
+        </p>
       </div>
       <div class="hero__scroll">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 4v12m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -107,13 +110,13 @@
         <div class="about__grid">
           <div class="about__text reveal">
             <p class="text--lg">
-              HAND Protocol has been operating for over a year&mdash;supporting impact projects, participating in quadratic funding rounds, and building transparent accountability systems.
+              HAND Protocol has been operating for over a year, supporting impact projects, participating in <a class="qf-link" href="https://en.wikipedia.org/wiki/Quadratic_funding" target="_blank" rel="noopener noreferrer">quadratic funding<span class="qf-link__tip" role="tooltip"><strong>Quadratic Funding</strong>: a matching-pool mechanism that amplifies many small donations to better reflect broad public-good demand.<span class="qf-link__tip-meta">Buterin, Hitzig &amp; Weyl, 2018 &middot; Wikipedia</span></span></a> rounds, and building transparent accountability systems.
             </p>
             <p>
               Now we're raising funds to establish a <strong>tax-exempt nonprofit foundation in Austin, Texas</strong> and formalize what's already working.
             </p>
             <p>
-              We focus on healers, impact entrepreneurs, and community organizations, providing branding, marketing, and one-on-one development support&mdash;<strong>without abandoning anyone once a website or campaign is finished</strong>.
+              We focus on healers, impact entrepreneurs, and community organizations, providing branding, marketing, and one-on-one development support, <strong>without abandoning anyone once a website or campaign is finished</strong>.
             </p>
             <p>
               This campaign funds the legal formation, operational runway, and systems required to scale that commitment responsibly and sustainably.
@@ -125,14 +128,14 @@
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke="currentColor" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
               <h3>Proven, Not Theoretical</h3>
-              <p>Over a year of active support across sectors&mdash;this isn't an idea seeking validation.</p>
+              <p>Over a year of active support across sectors. This isn't an idea seeking validation.</p>
             </div>
             <div class="value-card">
               <div class="value-card__icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
               </div>
               <h3>Long-Term Commitment</h3>
-              <p>We walk alongside practitioners as they grow&mdash;not "build and bounce" delivery.</p>
+              <p>We walk alongside practitioners as they grow. Not "build and bounce" delivery.</p>
             </div>
             <div class="value-card">
               <div class="value-card__icon">
@@ -154,23 +157,29 @@
           <h2 class="section__title">Transformative work,<br>inadequate support.</h2>
           <p class="section__subtitle">Across Austin and beyond, three groups are doing vital community work with barriers that keep their impact invisible, unsupported, or unsustainable.</p>
         </div>
-        <div class="problem__grid">
-          <div class="problem-card reveal">
-            <div class="problem-card__number">01</div>
-            <h3 class="problem-card__title">Healers & Practitioners</h3>
-            <p>Hold space for community wellbeing but spend more time surviving than serving. Deep community trust, zero structural support.</p>
-          </div>
-          <div class="problem-card reveal">
-            <div class="problem-card__number">02</div>
-            <h3 class="problem-card__title">Impact Entrepreneurs</h3>
-            <p>Building healing-aligned products and communities, but traditional startup infrastructure doesn't fit their values, and nonprofit infrastructure doesn't fit their model.</p>
-          </div>
-          <div class="problem-card reveal">
-            <div class="problem-card__number">03</div>
-            <h3 class="problem-card__title">Grassroots Organizations</h3>
-            <p>Doing vital community work&mdash;harm reduction, mutual aid, food access, land stewardship&mdash;often more established but still under-resourced for sustained outreach.</p>
-          </div>
-        </div>
+        <ol class="problem__list">
+          <li class="problem__item reveal">
+            <span class="problem__num" aria-hidden="true">01</span>
+            <div class="problem__body">
+              <h3 class="problem__name">Healers & Practitioners</h3>
+              <p>Hold space for community wellbeing but spend more time surviving than serving. Deep community trust, zero structural support.</p>
+            </div>
+          </li>
+          <li class="problem__item reveal">
+            <span class="problem__num" aria-hidden="true">02</span>
+            <div class="problem__body">
+              <h3 class="problem__name">Impact Entrepreneurs</h3>
+              <p>Building healing-aligned products and communities, but traditional startup infrastructure doesn't fit their values, and nonprofit infrastructure doesn't fit their model.</p>
+            </div>
+          </li>
+          <li class="problem__item reveal">
+            <span class="problem__num" aria-hidden="true">03</span>
+            <div class="problem__body">
+              <h3 class="problem__name">Grassroots Organizations</h3>
+              <p>Doing vital community work (harm reduction, mutual aid, food access, land stewardship), often more established but still under-resourced for sustained outreach.</p>
+            </div>
+          </li>
+        </ol>
         <div class="problem__barriers reveal">
           <h3 class="problem__barriers-title">Common barriers they all face:</h3>
           <div class="barriers-list">
@@ -192,6 +201,13 @@
             </div>
           </div>
         </div>
+        <div class="research-pointer reveal">
+          <span class="research-pointer__eyebrow">Discovery</span>
+          <a href="../discovery/impact-org-landscape.html" class="research-pointer__link">
+            See the national landscape research
+            <svg width="14" height="14" aria-hidden="true"><use href="../assets/icons.svg#arrow-right"/></svg>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -210,7 +226,7 @@
               </div>
               <div>
                 <h3>Branding & Narrative Development</h3>
-                <p>Rooted in each practitioner's values and actual work&mdash;not cookie-cutter templates.</p>
+                <p>Rooted in each practitioner's values and actual work, not cookie-cutter templates.</p>
               </div>
             </div>
             <div class="solution-item">
@@ -237,7 +253,7 @@
               </div>
               <div>
                 <h3>Automated Systems</h3>
-                <p>Reduce ongoing burden and dependence. Technology serves practitioners&mdash;not the other way around.</p>
+                <p>Reduce ongoing burden and dependence. Technology serves practitioners, not the other way around.</p>
               </div>
             </div>
             <div class="solution-item">
@@ -253,7 +269,7 @@
           <div class="solution__aside reveal">
             <div class="callout-card">
               <h3 class="callout-card__title">Why Healers First?</h3>
-              <p>Healers sit at the intersection of community trust, cultural continuity, and collective wellbeing&mdash;yet they are often the <strong>least supported structurally</strong>.</p>
+              <p>Healers sit at the intersection of community trust, cultural continuity, and collective wellbeing, yet they are often the <strong>least supported structurally</strong>.</p>
               <p>They're also the connective tissue. Healers <em>are</em> practitioners, they <em>build</em> products and communities, and they <em>partner</em> with impact organizations.</p>
               <p>Austin is our proving ground. What works here becomes a model for expansion.</p>
             </div>
@@ -269,23 +285,31 @@
             </div>
           </div>
         </div>
+        <div class="research-pointer reveal">
+          <span class="research-pointer__eyebrow">Discovery</span>
+          <a href="../discovery/skill-exchange-vision.html" class="research-pointer__link">
+            Read the resource-pool vision in depth
+            <svg width="14" height="14" aria-hidden="true"><use href="../assets/icons.svg#arrow-right"/></svg>
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- Who We Serve -->
+    <!-- Our Companions -->
     <section class="section section--alt" id="serve">
       <div class="container">
         <div class="section__header reveal">
-          <span class="section__label">Who We Serve</span>
+          <span class="section__label">Our Companions</span>
           <h2 class="section__title">Three interconnected groups<br>doing regenerative work.</h2>
+          <p class="section__subtitle">We call the people and organizations we accompany <strong>Companions</strong>. Not clients, not beneficiaries. People doing work that matters, alongside whom we walk.</p>
         </div>
-        <div class="serve__tabs reveal">
-          <button class="serve__tab active" data-tab="healers">Healers & Practitioners</button>
-          <button class="serve__tab" data-tab="entrepreneurs">Impact Entrepreneurs</button>
-          <button class="serve__tab" data-tab="organizations">Impact Organizations</button>
+        <div class="serve__tabs reveal" role="tablist" aria-label="Companion groups">
+          <button class="serve__tab active" role="tab" id="tab-healers" data-tab="healers" aria-selected="true" aria-controls="panel-healers" tabindex="0">Healers & Practitioners</button>
+          <button class="serve__tab" role="tab" id="tab-entrepreneurs" data-tab="entrepreneurs" aria-selected="false" aria-controls="panel-entrepreneurs" tabindex="-1">Impact Entrepreneurs</button>
+          <button class="serve__tab" role="tab" id="tab-organizations" data-tab="organizations" aria-selected="false" aria-controls="panel-organizations" tabindex="-1">Impact Organizations</button>
         </div>
         <div class="serve__panels">
-          <div class="serve__panel active" id="panel-healers">
+          <div class="serve__panel active" id="panel-healers" role="tabpanel" aria-labelledby="tab-healers">
             <div class="serve__panel-inner reveal">
               <div class="serve__panel-text">
                 <h3>Those working directly with individuals</h3>
@@ -303,7 +327,7 @@
               </div>
             </div>
           </div>
-          <div class="serve__panel" id="panel-entrepreneurs">
+          <div class="serve__panel" id="panel-entrepreneurs" role="tabpanel" aria-labelledby="tab-entrepreneurs" hidden>
             <div class="serve__panel-inner reveal">
               <div class="serve__panel-text">
                 <h3>Builders creating healing-aligned products & communities</h3>
@@ -321,7 +345,7 @@
               </div>
             </div>
           </div>
-          <div class="serve__panel" id="panel-organizations">
+          <div class="serve__panel" id="panel-organizations" role="tabpanel" aria-labelledby="tab-organizations" hidden>
             <div class="serve__panel-inner reveal">
               <div class="serve__panel-text">
                 <h3>Nonprofits, collectives, and grassroots groups</h3>
@@ -360,8 +384,8 @@
             <div class="track-card__icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7l10 5 10-5-10-5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
             </div>
-            <h3>Quadratic Funding</h3>
-            <p>Successfully participated in ecosystem-wide matching programs and quadratic funding rounds.</p>
+            <h3><a class="qf-link" href="https://en.wikipedia.org/wiki/Quadratic_funding" target="_blank" rel="noopener noreferrer">Quadratic Funding<span class="qf-link__tip" role="tooltip"><strong>Quadratic Funding</strong>: a matching-pool mechanism that amplifies many small donations to better reflect broad public-good demand.<span class="qf-link__tip-meta">Buterin, Hitzig &amp; Weyl, 2018 &middot; Wikipedia</span></span></a></h3>
+            <p>Successfully participated in ecosystem-wide matching programs and quadratic-funding rounds.</p>
           </div>
           <div class="track-card reveal">
             <div class="track-card__icon">
@@ -375,7 +399,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             </div>
             <h3>Long-Term Stewardship</h3>
-            <p>Maintained continuity with supported projects&mdash;the exact long-term commitment this nonprofit formalizes.</p>
+            <p>Maintained continuity with supported projects. This is the exact long-term commitment the nonprofit formalizes.</p>
           </div>
           <div class="track-card reveal">
             <div class="track-card__icon">
@@ -400,50 +424,53 @@
       <div class="container">
         <div class="section__header reveal">
           <span class="section__label section__label--light">Funding Goals</span>
-          <h2 class="section__title section__title--light">A stability and accountability budget.</h2>
-          <p class="section__subtitle section__subtitle--light">Not growth-at-all-costs. This is the most affordable and responsible amount to ensure longevity for the scope of work.</p>
+          <h2 class="section__title section__title--light">Three numbers,<br>three honest commitments.</h2>
+          <p class="section__subtitle section__subtitle--light">$600 is the legal floor. $15,000 is the responsible operating minimum. $55,000 is the goal: the amount that lets us launch the pilot cohort the way our Companions actually need.</p>
         </div>
         <div class="funding__tiers">
           <div class="funding-tier reveal">
-            <div class="funding-tier__label">Minimum Goal</div>
+            <div class="funding-tier__label">Filing floor</div>
             <div class="funding-tier__amount">$600</div>
-            <div class="funding-tier__name">Legal Registration</div>
+            <div class="funding-tier__name">Just to legally exist</div>
             <div class="funding-tier__bar">
               <div class="funding-tier__fill" data-width="100"></div>
             </div>
             <ul class="funding-tier__list">
               <li>Federal 501(c)(3) filing fee</li>
-              <li>Texas state nonprofit registration</li>
+              <li>Texas state nonprofit registration ($25)</li>
               <li>Basic administrative costs</li>
+            </ul>
+          </div>
+          <div class="funding-tier reveal">
+            <div class="funding-tier__label">Operating minimum</div>
+            <div class="funding-tier__amount">$15,000</div>
+            <div class="funding-tier__name">Filing + websites + 6 months of work</div>
+            <div class="funding-tier__bar">
+              <div class="funding-tier__fill" data-width="100"></div>
+            </div>
+            <ul class="funding-tier__list">
+              <li>Filing &amp; nonprofit formation: $600</li>
+              <li>Legal counsel &amp; bylaws: $2,400</li>
+              <li>3 pilot Companion websites &amp; branding: $2,000</li>
+              <li>Core infrastructure &amp; insurance: $2,500</li>
+              <li>6-month part-time program lead: $7,500</li>
             </ul>
           </div>
           <div class="funding-tier funding-tier--featured reveal">
             <div class="funding-tier__badge">Foundation Goal</div>
-            <div class="funding-tier__label">Target</div>
-            <div class="funding-tier__amount">$12,000</div>
-            <div class="funding-tier__name">Legal + 6-Month Operations</div>
+            <div class="funding-tier__label">The real ask</div>
+            <div class="funding-tier__amount">$55,000</div>
+            <div class="funding-tier__name">Full launch, 12 months of accompaniment</div>
             <div class="funding-tier__bar">
               <div class="funding-tier__fill" data-width="100"></div>
             </div>
             <ul class="funding-tier__list">
-              <li>Nonprofit formation & compliance: $2,000</li>
-              <li>Legal counsel & bylaws: $2,500</li>
-              <li>Core infrastructure & systems: $3,000</li>
-              <li>6-month operational runway: $4,500</li>
-            </ul>
-          </div>
-          <div class="funding-tier reveal">
-            <div class="funding-tier__label">Full Launch</div>
-            <div class="funding-tier__amount">$56,000</div>
-            <div class="funding-tier__name">Complete Infrastructure + 12 Months</div>
-            <div class="funding-tier__bar">
-              <div class="funding-tier__fill" data-width="100"></div>
-            </div>
-            <ul class="funding-tier__list">
-              <li>Formation & compliance: $4,000</li>
-              <li>Core infrastructure: $8,000</li>
-              <li>Pilot program development: $24,000</li>
-              <li>Operations & longevity: $20,000</li>
+              <li>501(c)(3) filing, compliance &amp; legal: $4,000</li>
+              <li>Pilot Companion websites, branding &amp; ongoing support: $6,000</li>
+              <li>Core infrastructure, tools &amp; insurance: $5,000</li>
+              <li>12-month part-time program lead &amp; ops: $25,000</li>
+              <li>Pilot program development &amp; matching: $10,000</li>
+              <li>Contingency &amp; opportunity fund: $5,000</li>
             </ul>
           </div>
         </div>
@@ -511,25 +538,99 @@
           <span class="section__label">Year 1 Outcomes</span>
           <h2 class="section__title">What success looks like.</h2>
         </div>
-        <div class="success__grid">
-          <div class="success-card reveal">
-            <div class="success-card__number" data-count="10">10</div>
-            <p>Healers with sustained branding, marketing, and operational infrastructure</p>
-          </div>
-          <div class="success-card reveal">
-            <div class="success-card__number" data-count="5">5</div>
-            <p>Impact entrepreneurs with long-term development support</p>
-          </div>
-          <div class="success-card reveal">
-            <div class="success-card__number" data-count="3">3</div>
-            <p>Impact organizations with operational systems and outreach capacity</p>
-          </div>
-          <div class="success-card reveal">
-            <div class="success-card__icon">
-              <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4v24M4 16h24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <ol class="success__list">
+          <li class="success__milestone reveal">
+            <span class="success__milestone-count" aria-hidden="true">10</span>
+            <div class="success__milestone-body">
+              <span class="success__milestone-eyebrow">Healers, by month 12</span>
+              <p>Carrying sustained branding, marketing, and operational infrastructure. Not contracted then abandoned, accompanied.</p>
             </div>
-            <p>A replicable model ready to expand beyond Austin. Each one proof that regenerative support works.</p>
+          </li>
+          <li class="success__milestone reveal">
+            <span class="success__milestone-count" aria-hidden="true">5</span>
+            <div class="success__milestone-body">
+              <span class="success__milestone-eyebrow">Impact entrepreneurs, by month 12</span>
+              <p>Working with long-term development support that adapts as their work shifts.</p>
+            </div>
+          </li>
+          <li class="success__milestone reveal">
+            <span class="success__milestone-count" aria-hidden="true">3</span>
+            <div class="success__milestone-body">
+              <span class="success__milestone-eyebrow">Organizations, by month 12</span>
+              <p>Operating with systems and outreach capacity that outlast a single grant cycle.</p>
+            </div>
+          </li>
+          <li class="success__milestone success__milestone--capstone reveal">
+            <div class="success__milestone-body">
+              <span class="success__milestone-eyebrow">Year 1 outcome</span>
+              <p class="success__milestone-headline">A replicable model ready to expand beyond Austin.</p>
+              <p>Each one proof that regenerative support works.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Backstory -->
+    <section class="section" id="backstory">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__label">Backstory</span>
+          <h2 class="section__title">Where we're going,<br>what we believe.</h2>
+          <p class="section__subtitle">HAND has been operating for over a year. Here's where the work is headed, what guides it, and who's behind it.</p>
+        </div>
+
+        <div class="backstory__grid">
+
+          <article class="backstory-card reveal">
+            <span class="backstory-card__label">Long-term vision</span>
+            <h3 class="backstory-card__title">Scale without losing locality.</h3>
+            <p class="backstory-card__body">HAND Protocol is designed to grow while keeping what matters most: local trust and real relationships.</p>
+            <ul class="backstory-card__list">
+              <li>Additional local impact sectors beyond healing</li>
+              <li>Replication in other cities with aligned communities</li>
+              <li>Deeper integration with regenerative funding and donation tools</li>
+              <li>Network effects where supported practitioners support each other</li>
+            </ul>
+            <p class="backstory-card__quote">But none of that matters without proof. Austin is the proof.</p>
+          </article>
+
+          <article class="backstory-card reveal">
+            <span class="backstory-card__label">Transparency &amp; trust</span>
+            <h3 class="backstory-card__title">We believe</h3>
+            <ul class="backstory-card__list backstory-card__list--principles">
+              <li><strong>Trust is built through consistency,</strong> not promises.</li>
+              <li><strong>Infrastructure should serve people,</strong> not extract from them.</li>
+              <li><strong>Impact must be verifiable,</strong> not performative.</li>
+            </ul>
+            <p class="backstory-card__body">All major milestones, budgets, and outcomes are documented and shared publicly.</p>
+          </article>
+
+          <article class="backstory-card reveal">
+            <span class="backstory-card__label">The team</span>
+            <h3 class="backstory-card__title">Building from within.</h3>
+            <p class="backstory-card__body">HAND Protocol is founded by practitioners and technologists rooted in Austin's wellness community, people who have experienced firsthand the gap between transformative healing work and the infrastructure needed to sustain it.</p>
+            <p class="backstory-card__quote">We're not building from the outside. We're building from within.</p>
+          </article>
+
+        </div>
+
+        <div class="backstory__legacy reveal">
+          <div class="backstory__legacy-text">
+            <span class="backstory__legacy-eyebrow">Archive</span>
+            <p class="backstory__legacy-note">Curious where we started? Our first landing page and crowdfunding designs are preserved as history.</p>
           </div>
+          <a href="../legacy/" class="btn btn--ghost btn--sm backstory__legacy-cta">
+            View our first designs
+            <svg width="14" height="14" aria-hidden="true"><use href="../assets/icons.svg#arrow-right"/></svg>
+          </a>
+        </div>
+        <div class="research-pointer reveal">
+          <span class="research-pointer__eyebrow">Discovery</span>
+          <a href="../discovery/skill-exchange-models.html" class="research-pointer__link">
+            What's been tried before, and what we're copying
+            <svg width="14" height="14" aria-hidden="true"><use href="../assets/icons.svg#arrow-right"/></svg>
+          </a>
         </div>
       </div>
     </section>
@@ -601,11 +702,91 @@
           </div>
         </div>
         <div class="tiers__cta reveal">
-          <a href="https://www.indiegogo.com" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--lg">
-            Contribute on Indiegogo
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12l8-8m0 0H5m7 0v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <a href="https://giveth.io/project/hand-protocol" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--lg">
+            Contribute on Giveth
+            <span class="sr-only">(opens in new tab)</span>
+            <svg width="16" height="16" aria-hidden="true"><use href="../assets/icons.svg#arrow-external"/></svg>
+          </a>
+          <p class="tiers__cta-note">
+            Indiegogo crowdfund launching soon.
+            <a href="mailto:hand@handprotocol.org?subject=Notify%20me%20when%20Indiegogo%20launches">Get notified</a>
+            or scroll for <a href="#crypto">crypto wallets</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donate With Crypto -->
+    <section class="section section--alt" id="crypto">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="section__label">Donate With Crypto</span>
+          <h2 class="section__title">Crypto-native?<br>Give directly.</h2>
+          <p class="section__subtitle">HAND has been operating on transparent on-chain rails for over a year. Giveth donors get up to 78% rewards via GIVbacks. Direct wallet donations are welcome on any of the chains below.</p>
+        </div>
+
+        <div class="crypto__primary reveal">
+          <div class="crypto__primary-text">
+            <span class="crypto__primary-eyebrow">Recommended</span>
+            <h3 class="crypto__primary-title">Donate on Giveth</h3>
+            <p class="crypto__primary-desc">GIVbacks eligible &middot; up to 78% rewards on donations of $5+. Donations are public, transparent, and tracked on-chain.</p>
+          </div>
+          <a href="https://giveth.io/project/hand-protocol" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--lg crypto__primary-cta">
+            Donate on Giveth
+            <span class="sr-only">(opens in new tab)</span>
+            <svg width="16" height="16" aria-hidden="true"><use href="../assets/icons.svg#arrow-external"/></svg>
           </a>
         </div>
+
+        <div class="crypto__addresses reveal">
+          <h4 class="crypto__addresses-title">Or send directly to our wallets</h4>
+
+          <div class="crypto-address">
+            <div class="crypto-address__header">
+              <span class="crypto-address__chain">EVM</span>
+              <span class="crypto-address__networks">Ethereum &middot; Polygon &middot; Base &middot; Arbitrum &middot; Optimism &middot; Celo &middot; Gnosis &middot; Ethereum Classic</span>
+            </div>
+            <div class="crypto-address__row">
+              <code class="crypto-address__value">0x344676c01daf3de84cf4c7b53330bbbda4b474b8</code>
+              <button class="crypto-address__copy" data-copy="0x344676c01daf3de84cf4c7b53330bbbda4b474b8" aria-label="Copy EVM address" type="button">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="4.5" y="4.5" width="9" height="9" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 11.5V3a.5.5 0 01.5-.5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span class="crypto-address__copy-label">Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="crypto-address">
+            <div class="crypto-address__header">
+              <span class="crypto-address__chain">Solana</span>
+              <span class="crypto-address__networks">SOL &middot; SPL tokens</span>
+            </div>
+            <div class="crypto-address__row">
+              <code class="crypto-address__value">2xC6eZjRpq3pV6ejfXVuJAa4fus39WZhHjH54Y6xniSC</code>
+              <button class="crypto-address__copy" data-copy="2xC6eZjRpq3pV6ejfXVuJAa4fus39WZhHjH54Y6xniSC" aria-label="Copy Solana address" type="button">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="4.5" y="4.5" width="9" height="9" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 11.5V3a.5.5 0 01.5-.5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span class="crypto-address__copy-label">Copy</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="crypto-address">
+            <div class="crypto-address__header">
+              <span class="crypto-address__chain">Stellar</span>
+              <span class="crypto-address__networks">XLM</span>
+            </div>
+            <div class="crypto-address__row">
+              <code class="crypto-address__value">GD4HA7CJ5QCOMQL4NPKODQLEE2D7I3IRCEWGF4IAV2FLZQN5BLZW22HA</code>
+              <button class="crypto-address__copy" data-copy="GD4HA7CJ5QCOMQL4NPKODQLEE2D7I3IRCEWGF4IAV2FLZQN5BLZW22HA" aria-label="Copy Stellar address" type="button">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="4.5" y="4.5" width="9" height="9" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 11.5V3a.5.5 0 01.5-.5h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <span class="crypto-address__copy-label">Copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <p class="crypto__note reveal">
+          Prefer fiat? <strong>Indiegogo coming soon.</strong> Follow <a href="https://x.com/hand_protocol" target="_blank" rel="noopener noreferrer">@hand_protocol</a> or join our <a href="https://discord.handprotocol.org" target="_blank" rel="noopener noreferrer">Discord</a> for updates on new channels.
+        </p>
       </div>
     </section>
 
@@ -615,12 +796,16 @@
         <div class="cta__content reveal">
           <h2 class="cta__title">HAND Protocol is proven work<br>seeking a permanent home.</h2>
           <p class="cta__text">
-            We've already supported projects across sectors, participated in funding rounds, tracked milestones publicly, and maintained long-term relationships with the people we serve. Now we're formalizing that work as a nonprofit foundation.
+            We've already supported projects across sectors, participated in funding rounds, tracked milestones publicly, and maintained long-term relationships with our Companions. Now we're formalizing that work as a nonprofit foundation.
           </p>
           <div class="cta__actions">
-            <a href="https://www.indiegogo.com" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--lg">
-              Support on Indiegogo
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 12l8-8m0 0H5m7 0v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <a href="https://giveth.io/project/hand-protocol" target="_blank" rel="noopener noreferrer" class="btn btn--primary btn--lg">
+              Donate on Giveth
+              <span class="sr-only">(opens in new tab)</span>
+              <svg width="16" height="16" aria-hidden="true"><use href="../assets/icons.svg#arrow-external"/></svg>
+            </a>
+            <a href="mailto:hand@handprotocol.org?subject=Notify%20me%20when%20Indiegogo%20launches" class="btn btn--ghost btn--lg">
+              Notify me when Indiegogo launches
             </a>
           </div>
           <div class="cta__alt">
@@ -637,6 +822,23 @@
               <div class="cta__alt-item">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M15 7l-5 5-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <strong>Nominate a healer</strong> in Austin who could benefit
+              </div>
+            </div>
+            <div class="cta__contact">
+              <p class="cta__contact-label">Or get in touch:</p>
+              <div class="cta__contact-actions">
+                <a class="cta__contact-link" href="mailto:hand@handprotocol.org">
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M3 5h14a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 6.5 10 11l7.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  hand@handprotocol.org
+                </a>
+                <a class="cta__contact-link" href="https://discord.handprotocol.org" target="_blank" rel="noopener noreferrer">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.27 5.33A19.5 19.5 0 0 0 14.4 4l-.24.48a18 18 0 0 0-5.32 0L8.6 4a19.5 19.5 0 0 0-4.87 1.33A20 20 0 0 0 1 13.4a19.6 19.6 0 0 0 6 3l1.06-1.4a12.7 12.7 0 0 1-2-1l.49-.4a14 14 0 0 0 11 0l.49.4a12.7 12.7 0 0 1-2 1L17 16.4a19.6 19.6 0 0 0 6-3 20 20 0 0 0-3.73-8.07ZM8.5 12.8a1.84 1.84 0 0 1-1.7-1.92 1.83 1.83 0 0 1 1.7-1.92 1.82 1.82 0 0 1 1.7 1.92 1.84 1.84 0 0 1-1.7 1.92Zm7 0a1.84 1.84 0 0 1-1.7-1.92 1.83 1.83 0 0 1 1.7-1.92 1.82 1.82 0 0 1 1.7 1.92 1.84 1.84 0 0 1-1.7 1.92Z"/></svg>
+                  Join the Discord
+                </a>
+                <a class="cta__contact-link" href="https://x.com/hand_protocol" target="_blank" rel="noopener noreferrer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2H21.5l-7.36 8.41L23 22h-6.78l-5.31-6.93L4.8 22H1.54l7.87-9L1 2h6.94l4.8 6.34L18.24 2Zm-1.19 18h1.83L7.04 3.92H5.08L17.05 20Z"/></svg>
+                  @hand_protocol
+                </a>
               </div>
             </div>
           </div>
@@ -674,12 +876,20 @@
             <h4>Support</h4>
             <a href="#funding">Funding Goals</a>
             <a href="#tiers">Contribute</a>
-            <a href="https://www.indiegogo.com" target="_blank" rel="noopener noreferrer">Indiegogo Campaign</a>
+            <a href="#crypto">Donate With Crypto</a>
+            <a href="../discovery/">Discovery</a>
+          </div>
+          <div class="footer__col">
+            <h4>Connect</h4>
+            <a href="mailto:hand@handprotocol.org">hand@handprotocol.org</a>
+            <a href="https://discord.handprotocol.org" target="_blank" rel="noopener noreferrer">Discord</a>
+            <a href="https://x.com/hand_protocol" target="_blank" rel="noopener noreferrer">@hand_protocol</a>
+            <a href="https://github.com/HandProtocol/handprotocol" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </div>
       </div>
       <div class="footer__bottom">
-        <p>&copy; 2025 HAND Protocol Foundation. Built with care in Austin, TX.</p>
+        <p>&copy; 2026 HAND Protocol Foundation. Built with care in Austin, TX. <a href="../legacy/">Archive</a>.</p>
       </div>
     </div>
   </footer>

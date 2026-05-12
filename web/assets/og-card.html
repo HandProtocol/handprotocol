@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HAND Protocol OG Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@1,500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 1200px;
+      height: 630px;
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #FBF8F1;
+      color: #111827;
+      overflow: hidden;
+      antialiased: true;
+      -webkit-font-smoothing: antialiased;
+    }
+    body {
+      position: relative;
+      padding: 64px 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .grad {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 88% -10%, rgba(217, 119, 6, 0.20), transparent 55%),
+        radial-gradient(circle at -10% 95%, rgba(13, 148, 136, 0.10), transparent 50%);
+      pointer-events: none;
+    }
+    .top {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand svg {
+      width: 56px;
+      height: 56px;
+      color: #D97706;
+    }
+    .brand__name {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #111827;
+    }
+    .brand__sub {
+      font-size: 14px;
+      font-weight: 500;
+      color: #6B7280;
+      margin-top: 2px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: #FEF3C7;
+      color: #B45309;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .eyebrow__dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #D97706;
+    }
+    .center {
+      position: relative;
+      max-width: 920px;
+    }
+    h1 {
+      font-size: 72px;
+      line-height: 1.04;
+      letter-spacing: -0.035em;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 28px;
+    }
+    h1 .accent {
+      color: #D97706;
+    }
+    .lede {
+      font-size: 24px;
+      line-height: 1.45;
+      color: #4B5563;
+      font-weight: 400;
+      max-width: 880px;
+    }
+    .bottom {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0, 0, 0, 0.10);
+    }
+    .meta {
+      display: flex;
+      gap: 40px;
+    }
+    .meta__item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .meta__label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6B7280;
+      font-weight: 700;
+    }
+    .meta__value {
+      font-size: 16px;
+      color: #111827;
+      font-weight: 600;
+    }
+    .url {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 14px;
+      color: #6B7280;
+      letter-spacing: -0.01em;
+    }
+  </style>
+</head>
+<body>
+  <div class="grad"></div>
+
+  <div class="top">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M16 8v5m0 6v5m-5-13v10a3 3 0 0 0 3 3h4a3 3 0 0 0 3-3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="16" cy="11" r="2" fill="currentColor"/>
+      </svg>
+      <div>
+        <div class="brand__name">HAND Protocol</div>
+        <div class="brand__sub">Holistic Approach to Nurture and Develop</div>
+      </div>
+    </div>
+    <span class="eyebrow"><span class="eyebrow__dot"></span>Filing raise &middot; Austin, TX</span>
+  </div>
+
+  <div class="center">
+    <h1>Regenerative infrastructure<br>for those who <span class="accent">heal, build &amp; serve.</span></h1>
+    <p class="lede">A nonprofit foundation supporting healers, impact entrepreneurs, and grassroots organizations with long-term branding, marketing, and development. We don't build and bounce.</p>
+  </div>
+
+  <div class="bottom">
+    <div class="meta">
+      <div class="meta__item">
+        <span class="meta__label">Operating</span>
+        <span class="meta__value">1+ year</span>
+      </div>
+      <div class="meta__item">
+        <span class="meta__label">Status</span>
+        <span class="meta__value">501(c)(3) filing</span>
+      </div>
+      <div class="meta__item">
+        <span class="meta__label">Goal &middot; min $15K</span>
+        <span class="meta__value">$55,000</span>
+      </div>
+    </div>
+    <span class="url">handprotocol.org</span>
+  </div>
+</body>
+</html>

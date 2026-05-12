@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The HAND Resource Pool: Skill Exchange Vision | HAND Protocol</title>
+  <meta name="description" content="How HAND's resource pool works: a curated skill-exchange marketplace where healers, builders, designers, and impact orgs trade time, talent, and trust.">
+  <meta property="og:title" content="The HAND Resource Pool: Vision">
+  <meta property="og:description" content="A curated skill-exchange marketplace for healers, impact entrepreneurs, and community organizations. Donate, exchange, receive.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://handprotocol.org/discovery/skill-exchange-vision.html">
+  <meta property="og:image" content="https://handprotocol.org/assets/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="HAND Protocol Resource Pool: how the skill exchange works.">
+  <meta property="og:site_name" content="HAND Protocol">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://handprotocol.org/assets/og.png">
+  <meta name="twitter:site" content="@hand_protocol">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="mask-icon" href="../assets/favicon.svg" color="#D97706">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="../foundation-campaign/index.html" class="nav__logo" aria-label="HAND Protocol home">
+        <svg class="nav__logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M16 8v5m0 6v5m-5-13v10a3 3 0 003 3h4a3 3 0 003-3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="16" cy="11" r="2" fill="currentColor"/>
+        </svg>
+        <span>HAND Protocol</span>
+      </a>
+      <div class="nav__crumbs" aria-label="Breadcrumb">
+        <a href="index.html">Discovery</a>
+        <span class="nav__crumb-sep">/</span>
+        <span class="nav__crumb-current" aria-current="page">Resource Pool Vision</span>
+      </div>
+      <div class="nav__links">
+        <a href="../foundation-campaign/index.html#about" class="nav__link">About</a>
+        <a href="../foundation-campaign/index.html#problem" class="nav__link">Problem</a>
+        <a href="../foundation-campaign/index.html#solution" class="nav__link">Solution</a>
+        <a href="../foundation-campaign/index.html#track-record" class="nav__link">Track Record</a>
+        <a href="../foundation-campaign/index.html#funding" class="nav__link">Funding</a>
+        <a href="../foundation-campaign/index.html#tiers" class="nav__link">Contribute</a>
+      </div>
+      <div class="nav__actions">
+        <a href="../foundation-campaign/index.html#tiers" class="btn btn--primary btn--sm">Support the Mission</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sub-nav: discovery doc switcher -->
+  <nav class="subnav" aria-label="Discovery sections">
+    <div class="container subnav__inner">
+      <a href="../foundation-campaign/index.html" class="subnav__hub" aria-label="Back to foundation campaign">
+        <svg width="14" height="14" aria-hidden="true"><use href="../assets/icons.svg#arrow-left"/></svg>
+        Foundation
+      </a>
+      <div class="subnav__pills">
+        <a href="index.html" class="subnav__pill"><span class="subnav__pill-num">00</span>Overview</a>
+        <a href="skill-exchange-vision.html" class="subnav__pill subnav__pill--active" aria-current="page"><span class="subnav__pill-num">01</span>Vision</a>
+        <a href="skill-exchange-models.html" class="subnav__pill"><span class="subnav__pill-num">02</span>Models</a>
+        <a href="impact-org-landscape.html" class="subnav__pill"><span class="subnav__pill-num">03</span>Landscape</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Header -->
+    <header class="doc-header">
+      <div class="doc-header__bg"></div>
+      <div class="container container--doc doc-header__inner">
+        <div class="doc-header__eyebrow">
+          <span class="doc-header__eyebrow-dot"></span>
+          Vision Document &middot; Working draft
+        </div>
+        <h1 class="doc-header__title">
+          The HAND Resource Pool.
+        </h1>
+        <p class="doc-header__lede">
+          A curated, relationship-first skill-exchange where healers, builders, designers, tradespeople, and impact organizations contribute what they have and receive what they need. Nobody gets abandoned after the first transaction.
+        </p>
+        <div class="doc-header__meta">
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Status</span>
+            <span class="doc-header__meta-value">Pre-incorporation concept</span>
+          </div>
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Base</span>
+            <span class="doc-header__meta-value">Austin, Texas</span>
+          </div>
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Audience</span>
+            <span class="doc-header__meta-value">Healers, impact founders, grassroots orgs</span>
+          </div>
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Companion doc</span>
+            <span class="doc-header__meta-value"><a href="skill-exchange-models.html" style="color: var(--color-accent)">Existing models &rarr;</a></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- TOC -->
+    <section class="section">
+      <div class="container container--doc">
+        <nav class="toc" aria-label="Contents">
+          <div class="toc__title">In this document</div>
+          <ol class="toc__list">
+            <li><a class="toc__item" href="#one-sentence"><span class="toc__item-num">01</span>The pool, in one sentence</a></li>
+            <li><a class="toc__item" href="#three-flows"><span class="toc__item-num">02</span>The three flows</a></li>
+            <li><a class="toc__item" href="#who-participates"><span class="toc__item-num">03</span>Who participates</a></li>
+            <li><a class="toc__item" href="#hand-role"><span class="toc__item-num">04</span>HAND's role as steward</a></li>
+            <li><a class="toc__item" href="#rewards"><span class="toc__item-num">05</span>Optional rewards layer</a></li>
+            <li><a class="toc__item" href="#stories"><span class="toc__item-num">06</span>Three worked examples</a></li>
+            <li><a class="toc__item" href="#open-questions"><span class="toc__item-num">07</span>What we're still figuring out</a></li>
+            <li><a class="toc__item" href="#next"><span class="toc__item-num">08</span>What's next</a></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 01 One sentence -->
+    <section class="section" id="one-sentence">
+      <div class="container container--doc prose">
+        <span class="section__eyebrow">01 &middot; The premise</span>
+        <h2>The pool, in one sentence.</h2>
+        <p class="text--lg">
+          <strong>People doing good work already have skills. Other people doing good work already have needs. HAND is the connective tissue that turns those into a sustained exchange, not a one-time favor.</strong>
+        </p>
+        <p>
+          A roofer can repair a community garden's leaking shed in exchange for a website. A reiki practitioner can offer sessions to a harm-reduction collective in exchange for branding. An impact entrepreneur can donate strategy hours and pull back design support six months later when they need it. Nobody is doing this on a Venmo-and-vibes basis at scale. The people who would benefit most are usually the worst at asking. That's the gap.
+        </p>
+
+        <div class="callout callout--insight">
+          <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v2m0 16v2m10-10h-2M4 12H2m15.07-7.07l-1.41 1.41M6.34 17.66l-1.41 1.41m12.73 0l-1.41-1.41M6.34 6.34L4.93 4.93"/><circle cx="12" cy="12" r="4"/></svg>
+          <div class="callout__body">
+            <h4>The shift</h4>
+            <p>This isn't a marketplace where strangers transact. It's a curated network where HAND knows each contributor and each Companion (the practitioners and organizations we accompany) personally, and stays in the relationship long after the first match.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 Three flows -->
+    <section class="section" id="three-flows">
+      <div class="container container--doc">
+        <span class="section__eyebrow">02 &middot; Mechanics</span>
+        <h2>The three flows.</h2>
+        <p class="prose">Every interaction with the pool is one of three things. Keeping the shapes simple is intentional, most exchange networks die from over-engineering.</p>
+      </div>
+
+      <div class="container container--wide">
+        <div class="card-grid card-grid--3">
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Donate</h3>
+                <p class="card__subtitle">Give a skill, no return expected</p>
+              </div>
+              <span class="card__tag card__tag--accent">Pure gift</span>
+            </div>
+            <p class="card__desc">A contributor offers hours, deliverables, or ongoing service to the pool without expecting anything specific in return. Tax-deductible once HAND is a 501(c)(3). Surfaced to Companions HAND matches based on fit.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Example</span>
+              <span class="card__meta-value">Designer donates 10 hours/quarter</span>
+              <span class="card__meta-label">Companion</span>
+              <span class="card__meta-value">Vetted by HAND</span>
+              <span class="card__meta-label">Recognition</span>
+              <span class="card__meta-value">Donor wall, optional rewards</span>
+            </div>
+          </div>
+
+          <div class="card card--feature">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Exchange</h3>
+                <p class="card__subtitle">Trade skills with another contributor</p>
+              </div>
+              <span class="card__tag card__tag--accent">Reciprocal</span>
+            </div>
+            <p class="card__desc">A contributor wants something specific back, not money, but another skill from the pool. HAND matches both sides, sets a clear scope on both engagements, and stays present if friction shows up.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Example</span>
+              <span class="card__meta-value">Roofer ↔ web design</span>
+              <span class="card__meta-label">Tax note</span>
+              <span class="card__meta-value">Barter is taxable income (see legal)</span>
+              <span class="card__meta-label">Scope</span>
+              <span class="card__meta-value">Agreed in writing before start</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Receive</h3>
+                <p class="card__subtitle">Request support as a healer or org</p>
+              </div>
+              <span class="card__tag card__tag--teal">Companion</span>
+            </div>
+            <p class="card__desc">A healer, impact entrepreneur, or grassroots org applies for support. HAND vets fit, scope, and capacity, then either matches from the pool, builds the work itself, or both. Long-term: HAND stays for upkeep.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Example</span>
+              <span class="card__meta-value">Mutual-aid network needs website</span>
+              <span class="card__meta-label">Vetted by</span>
+              <span class="card__meta-value">HAND program team</span>
+              <span class="card__meta-label">After delivery</span>
+              <span class="card__meta-value">Ongoing accompaniment</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="container container--doc">
+        <div class="diagram">
+          <div class="flow">
+            <div class="flow__node">Contributor A<br><span class="text--sm text--muted">offers a skill</span></div>
+            <div class="flow__arrow">&rarr;</div>
+            <div class="flow__node flow__node--accent">HAND Pool<br><span class="text--sm" style="opacity:0.85">curates &amp; matches</span></div>
+            <div class="flow__arrow">&rarr;</div>
+            <div class="flow__node">Companion<br><span class="text--sm text--muted">receives support</span></div>
+          </div>
+          <p class="text--sm text--muted" style="margin-top: var(--space-md); text-align: center;">If Contributor A wants exchange instead of donation, the arrow loops back through the pool to find a return skill.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 Who -->
+    <section class="section" id="who-participates">
+      <div class="container container--doc">
+        <span class="section__eyebrow">03 &middot; Participants</span>
+        <h2>Who's in the pool.</h2>
+        <p class="prose">HAND deliberately keeps the participant categories simple. Specialization comes from matching, not from sub-categories.</p>
+      </div>
+
+      <div class="container container--wide">
+        <div class="card-grid card-grid--2">
+          <div class="card">
+            <h3 class="card__title">Contributors</h3>
+            <p class="card__desc">Anyone who has a skill, hour, or service to offer. Three contributor archetypes we already see:</p>
+            <ul class="prose" style="margin-top: var(--space-sm)">
+              <li><strong>Trades &amp; physical skills:</strong> roofers, electricians, carpenters, gardeners, drivers, repair</li>
+              <li><strong>Healing modalities:</strong> bodywork, reiki, somatic, acupuncture, herbalism, breathwork, therapy</li>
+              <li><strong>Knowledge work:</strong> web/dev, design, brand, marketing, accounting, legal, strategy, coaching</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3 class="card__title">Companions</h3>
+            <p class="card__desc">We call the people and organizations we accompany our <strong>Companions</strong>. Three audiences, all already doing work that matters:</p>
+            <ul class="prose" style="margin-top: var(--space-sm)">
+              <li><strong>Healers &amp; practitioners</strong>, community wellbeing workers under-resourced for branding, web, or admin</li>
+              <li><strong>Impact entrepreneurs</strong>, healing-aligned founders pre-Series A whose values don't fit traditional accelerators</li>
+              <li><strong>Grassroots organizations</strong>, mutual aid, harm reduction, food access, land stewardship</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="container container--doc prose">
+        <p style="margin-top: var(--space-xl)">
+          A single person can be <em>both</em>, and most are. The reiki practitioner who needs a website is also offering reiki to the pool. The impact founder who needs design help can mentor a younger founder in return. The pool is denser when participants flow between roles.
+        </p>
+      </div>
+    </section>
+
+    <!-- 04 HAND's role -->
+    <section class="section" id="hand-role">
+      <div class="container container--doc">
+        <span class="section__eyebrow">04 &middot; Stewardship</span>
+        <h2>HAND's role is to stay in the room.</h2>
+        <p class="prose">Most service marketplaces optimize for transaction volume. HAND optimizes for the quality and duration of the relationship. We are not Craigslist for good people.</p>
+
+        <h3>What HAND does:</h3>
+        <ul class="prose">
+          <li><strong>Vets both sides</strong>, not bureaucratically, but through real conversation. We know who's in the pool.</li>
+          <li><strong>Matches with care</strong>, skill fit matters, but so does communication style, values, and capacity.</li>
+          <li><strong>Sets scope explicitly</strong>, written agreement on what's being exchanged, when, and what "done" looks like.</li>
+          <li><strong>Holds the relationship after delivery</strong>, a website is launched, but who maintains it in 8 months? HAND does, or finds who will.</li>
+          <li><strong>Tracks the exchange</strong>, so contributors can be recognized, donations can be receipted, and barter income can be reported correctly.</li>
+          <li><strong>Tells the truth</strong>, if a match isn't working, we say so early. If a Companion isn't ready, we coach instead of cosmetically helping.</li>
+        </ul>
+
+        <div class="callout callout--teal">
+          <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          <div class="callout__body">
+            <h4>The "no build-and-bounce" promise</h4>
+            <p>This is the line that came up in every conversation that led to HAND existing. Every healer who got a free website that broke six months later. Every grassroots org who lost their pro-bono designer after the launch party. The pool only matters if someone stays.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 Rewards -->
+    <section class="section" id="rewards">
+      <div class="container container--doc">
+        <span class="section__eyebrow">05 &middot; Recognition</span>
+        <h2>Rewards, if we want them.</h2>
+        <p class="prose">Contributors aren't motivated primarily by rewards, they're motivated by the work mattering. But thoughtful recognition layers can deepen engagement without turning the pool into a points-farming game.</p>
+
+        <h3>Three layers we're considering:</h3>
+        <ol class="prose">
+          <li><strong>Visible recognition</strong>, a donor wall, contributor profile pages, named programs. Costs nothing and matters a lot.</li>
+          <li><strong>Reciprocal pull</strong>, a contributor who has donated can request services from the pool when their own needs arise. Not a strict ledger, more like "we remember who shows up."</li>
+          <li><strong>Material rewards</strong>, periodic gatherings, retreats hosted by partner healers, discounted tickets to aligned events, eventually equity-like upside in HAND-incubated projects.</li>
+        </ol>
+
+        <p>
+          The optional crypto layer we've experimented with for years (<a class="qf-link" href="https://en.wikipedia.org/wiki/Quadratic_funding" target="_blank" rel="noopener noreferrer">quadratic funding<span class="qf-link__tip" role="tooltip"><strong>Quadratic Funding</strong>: a matching-pool mechanism that amplifies many small donations to better reflect broad public-good demand.<span class="qf-link__tip-meta">Buterin, Hitzig &amp; Weyl, 2018 &middot; Wikipedia</span></span></a>, sweetspot contracts, transparent on-chain accounting) fits naturally here as <em>one</em> rewards rail, not the only one, and never required to participate.
+        </p>
+
+        <div class="callout callout--warning">
+          <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <div class="callout__body">
+            <h4>Why we won't build a point-economy first</h4>
+            <p>Every time-banking network that led with hour-credits as the core mechanic stagnated within a few years. Recognition mechanics are an add-on to a working pool, not a substitute for one. We'll layer them in once the matchmaking is real.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 Stories -->
+    <section class="section" id="stories">
+      <div class="container container--doc">
+        <span class="section__eyebrow">06 &middot; In practice</span>
+        <h2>Three worked examples.</h2>
+        <p class="prose">What this actually looks like, person by person. Names are illustrative; the situations are not.</p>
+      </div>
+
+      <div class="container container--wide">
+        <div class="card-grid card-grid--3">
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Marcus, the roofer</h3>
+                <p class="card__subtitle">Exchange</p>
+              </div>
+              <span class="card__tag">Trades</span>
+            </div>
+            <p class="card__desc">
+              Marcus has been a roofer for 14 years and runs a small crew. He's wanted a real website forever but can't justify $5K to a freelancer. He offers HAND four roof-repair jobs (~$8K of work) for community-garden sheds and a mutual-aid kitchen. In exchange, HAND builds him a proper site, books him a brand photoshoot, and stays on retainer for content.
+            </p>
+            <div class="card__meta">
+              <span class="card__meta-label">He gives</span>
+              <span class="card__meta-value">~32 hrs of roof labor</span>
+              <span class="card__meta-label">He gets</span>
+              <span class="card__meta-value">Site + brand + maintenance</span>
+              <span class="card__meta-label">Tax</span>
+              <span class="card__meta-value">Barter income, FMV reported</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Anya, the reiki practitioner</h3>
+                <p class="card__subtitle">Donate + receive</p>
+              </div>
+              <span class="card__tag card__tag--teal">Healer</span>
+            </div>
+            <p class="card__desc">
+              Anya runs a tiny practice and barely breaks even. She offers four reiki sessions a month to Companions HAND connects her with: harm-reduction workers, hospice volunteers, exhausted founders. In return, HAND builds her booking site, runs her Instagram for the first six months, and helps her price her sliding scale. She tithes 10% of her practice back to the pool when revenue grows.
+            </p>
+            <div class="card__meta">
+              <span class="card__meta-label">She gives</span>
+              <span class="card__meta-value">4 sessions/mo to pool Companions</span>
+              <span class="card__meta-label">She gets</span>
+              <span class="card__meta-value">Full digital infrastructure</span>
+              <span class="card__meta-label">Tax</span>
+              <span class="card__meta-value">In-kind donation, receipted</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">Río Verde Collective</h3>
+                <p class="card__subtitle">Receive</p>
+              </div>
+              <span class="card__tag card__tag--rose">Grassroots</span>
+            </div>
+            <p class="card__desc">
+              A pre-501(c)(3) food-sovereignty group in East Austin operating out of a community garden. They need a donation page, a printable zine, and someone to handle grant deadlines. HAND assigns a fiscal sponsorship partner, matches a designer from the pool for the zine, builds the donation flow, and assigns a HAND ops volunteer to keep grants on track for a year.
+            </p>
+            <div class="card__meta">
+              <span class="card__meta-label">They give</span>
+              <span class="card__meta-value">Transparency + storytelling</span>
+              <span class="card__meta-label">They get</span>
+              <span class="card__meta-value">Infra + 12 mo accompaniment</span>
+              <span class="card__meta-label">Path</span>
+              <span class="card__meta-value">Toward own 501(c)(3)</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 Open questions -->
+    <section class="section" id="open-questions">
+      <div class="container container--doc prose">
+        <span class="section__eyebrow">07 &middot; Honest unknowns</span>
+        <h2>What we're still figuring out.</h2>
+        <p>We've been doing one-off versions of this for over a year. Formalizing it raises questions we want to answer publicly rather than pretend we already have.</p>
+
+        <h3>1. Tax &amp; legal mechanics for the exchange leg</h3>
+        <p>Barter is taxable income in the US, both parties owe taxes on the fair market value of what they receive (IRS Pub 525). A 501(c)(3) can facilitate this, but the structure matters: are we a marketplace, an intermediary, a fiscal sponsor, or a documentation service? The legal answer shapes the product. The companion <a href="skill-exchange-models.html">existing-models doc</a> digs into precedent.</p>
+
+        <h3>2. How we prevent the pool from becoming transactional</h3>
+        <p>Every barter network drifts toward "what's my balance" over time. The mechanics that prevent that drift, relational reviews, slow onboarding, conversational matching instead of algorithmic, are what we have to design first, not last.</p>
+
+        <h3>3. Who pays for HAND itself</h3>
+        <p>The pool participants are giving and receiving services; HAND staff need to eat. Three candidate funding rails: (a) operating grants from foundations, (b) a percentage levy on exchanges above a threshold, (c) annual contributor memberships from people with capacity. Most likely: a mix, weighted toward (a) initially.</p>
+
+        <h3>4. Scale shape</h3>
+        <p>We are explicitly Austin-first. We will not try to be a national platform in year one. The question is whether the model is locally-dense (deep in one city) or franchisable (Austin → other cities running the same protocol). We lean dense first, franchisable later.</p>
+
+        <h3>5. When (if ever) crypto rails re-enter</h3>
+        <p>Our sweetspot contracts and <a class="qf-link" href="https://en.wikipedia.org/wiki/Quadratic_funding" target="_blank" rel="noopener noreferrer">QF<span class="qf-link__tip" role="tooltip"><strong>Quadratic Funding</strong>: a matching-pool mechanism that amplifies many small donations to better reflect broad public-good demand.<span class="qf-link__tip-meta">Buterin, Hitzig &amp; Weyl, 2018 &middot; Wikipedia</span></span></a> round work taught us a lot, and showed us most healers and grassroots orgs aren't crypto-native. Crypto comes back when (a) it solves a real problem for participants, (b) it's optional, (c) it doesn't change the felt experience of the pool. Until then, it stays in the toolbox.</p>
+      </div>
+    </section>
+
+    <!-- 08 Next -->
+    <section class="section" id="next">
+      <div class="container container--doc prose">
+        <span class="section__eyebrow">08 &middot; Roadmap</span>
+        <h2>What's next.</h2>
+        <p>This vision doc is the first piece of three. The other two are landing now.</p>
+
+        <ol>
+          <li><strong>Existing models</strong>, a clear-eyed scan of time-banks, mutual-aid networks, Catchafire, Taproot, LETS, and Offers &amp; Needs. What worked, what failed, what HAND should copy or avoid. <a href="skill-exchange-models.html">Read &rarr;</a></li>
+          <li><strong>Impact-org landscape</strong>, who funds and supports healers, impact entrepreneurs, and grassroots orgs nationally. Where the gap is. <a href="impact-org-landscape.html">Read &rarr;</a></li>
+          <li><strong>Operating plan</strong>, pulls vision + research into a one-page sequence for the $55K filing raise. <em>(In progress.)</em></li>
+        </ol>
+
+        <div class="callout">
+          <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <div class="callout__body">
+            <h4>This is a draft</h4>
+            <p>Version 0.1, published openly so participants and funders can push back. If you're a healer, builder, or organizer who reads this and thinks "yes, but", that conversation is the whole point. <a href="../foundation-campaign/index.html#tiers" style="color: var(--color-accent); border-bottom: 1px solid var(--color-accent-light);">Reach out &rarr;</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pager: prev / next -->
+    <section class="section">
+      <div class="container container--doc">
+        <div class="pager">
+          <a href="index.html" class="pager__item pager__item--prev">
+            <span class="pager__direction"><svg width="12" height="12" aria-hidden="true"><use href="../assets/icons.svg#arrow-left"/></svg> Previous</span>
+            <h3 class="pager__title">00 &middot; Overview</h3>
+            <span class="pager__subtitle">The discovery hub</span>
+          </a>
+          <a href="skill-exchange-models.html" class="pager__item pager__item--next">
+            <span class="pager__direction">Next <svg width="12" height="12" aria-hidden="true"><use href="../assets/icons.svg#arrow-right"/></svg></span>
+            <h3 class="pager__title">02 &middot; What's Been Tried Before</h3>
+            <span class="pager__subtitle">Time-banks, mutual aid, Catchafire, what we learned</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <div class="footer__logo">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+              <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M16 8v5m0 6v5m-5-13v10a3 3 0 003 3h4a3 3 0 003-3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="16" cy="11" r="2" fill="currentColor"/>
+            </svg>
+            <span>HAND Protocol Foundation</span>
+          </div>
+          <p class="footer__tagline">Regenerative infrastructure for those who heal, build, and serve.</p>
+          <p class="footer__location">Austin, Texas</p>
+        </div>
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4>Navigate</h4>
+            <a href="../foundation-campaign/index.html#about">About</a>
+            <a href="../foundation-campaign/index.html#problem">The Problem</a>
+            <a href="../foundation-campaign/index.html#solution">Our Solution</a>
+            <a href="../foundation-campaign/index.html#track-record">Track Record</a>
+          </div>
+          <div class="footer__col">
+            <h4>Discovery</h4>
+            <a href="index.html">Overview</a>
+            <a href="skill-exchange-vision.html">Vision</a>
+            <a href="skill-exchange-models.html">Models</a>
+            <a href="impact-org-landscape.html">Landscape</a>
+          </div>
+          <div class="footer__col">
+            <h4>Connect</h4>
+            <a href="mailto:hand@handprotocol.org">hand@handprotocol.org</a>
+            <a href="https://discord.handprotocol.org" target="_blank" rel="noopener noreferrer">Discord<span class="sr-only">(opens in new tab)</span></a>
+            <a href="https://x.com/hand_protocol" target="_blank" rel="noopener noreferrer">@hand_protocol<span class="sr-only">(opens in new tab)</span></a>
+            <a href="https://github.com/HandProtocol/handprotocol" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only">(opens in new tab)</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 HAND Protocol Foundation &middot; Living document, last updated <span class="text--mono">2026-05-12</span> &middot; Pre-incorporation; 501(c)(3) status pending Texas filing. <a href="../foundation-campaign/">Foundation campaign</a> &middot; <a href="../legacy/">Archive</a>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

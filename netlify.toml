@@ -1,0 +1,98 @@
+# Netlify deploy configuration for HAND Protocol
+# (also works as a reference for Cloudflare Pages — see _redirects + _headers)
+
+[build]
+  publish = "web"
+  command = ""  # All static, no build step
+
+# Root redirects to foundation campaign (primary surface)
+[[redirects]]
+  from = "/"
+  to = "/foundation-campaign/"
+  status = 301
+  force = true
+
+# Pretty URLs without trailing slash → with slash
+[[redirects]]
+  from = "/discovery"
+  to = "/discovery/"
+  status = 301
+
+[[redirects]]
+  from = "/legacy"
+  to = "/legacy/"
+  status = 301
+
+[[redirects]]
+  from = "/foundation-campaign"
+  to = "/foundation-campaign/"
+  status = 301
+
+# Aliases — shorter URLs for sharing
+[[redirects]]
+  from = "/campaign"
+  to = "/foundation-campaign/"
+  status = 301
+
+[[redirects]]
+  from = "/raise"
+  to = "/foundation-campaign/#tiers"
+  status = 301
+
+[[redirects]]
+  from = "/crypto"
+  to = "/foundation-campaign/#crypto"
+  status = 301
+
+[[redirects]]
+  from = "/vision"
+  to = "/discovery/skill-exchange-vision.html"
+  status = 301
+
+[[redirects]]
+  from = "/models"
+  to = "/discovery/skill-exchange-models.html"
+  status = 301
+
+[[redirects]]
+  from = "/landscape"
+  to = "/discovery/impact-org-landscape.html"
+  status = 301
+
+# 404 fallback → foundation campaign (rather than a generic error)
+[[redirects]]
+  from = "/*"
+  to = "/foundation-campaign/"
+  status = 404
+
+# Security + privacy headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+    # Allow Google Fonts; lock down everything else
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self';"
+
+# Cache static assets aggressively, HTML lightly
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "outputDirectory": "web",
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/", "destination": "/foundation-campaign/", "permanent": true },
+    { "source": "/campaign", "destination": "/foundation-campaign/", "permanent": true },
+    { "source": "/foundation-campaign", "destination": "/foundation-campaign/", "permanent": true },
+    { "source": "/discovery", "destination": "/discovery/", "permanent": true },
+    { "source": "/legacy", "destination": "/legacy/", "permanent": true },
+    { "source": "/raise", "destination": "/foundation-campaign/#tiers", "permanent": true },
+    { "source": "/crypto", "destination": "/foundation-campaign/#crypto", "permanent": true },
+    { "source": "/vision", "destination": "/discovery/skill-exchange-vision.html", "permanent": true },
+    { "source": "/models", "destination": "/discovery/skill-exchange-models.html", "permanent": true },
+    { "source": "/landscape", "destination": "/discovery/impact-org-landscape.html", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "geolocation=(), microphone=(), camera=(), payment=()" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*\\.html)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=300, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/(.*\\.(css|js))",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400" }
+      ]
+    }
+  ]
+}

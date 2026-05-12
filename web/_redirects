@@ -1,0 +1,13 @@
+# Cloudflare Pages / Netlify _redirects fallback (in case netlify.toml is not respected)
+# Format: source destination status
+
+/                       /foundation-campaign/      301
+/campaign               /foundation-campaign/      301
+/discovery              /discovery/                301
+/legacy                 /legacy/                   301
+/foundation-campaign    /foundation-campaign/      301
+/raise                  /foundation-campaign/#tiers 301
+/crypto                 /foundation-campaign/#crypto 301
+/vision                 /discovery/skill-exchange-vision.html  301
+/models                 /discovery/skill-exchange-models.html  301
+/landscape              /discovery/impact-org-landscape.html   301

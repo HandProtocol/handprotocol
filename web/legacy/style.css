@@ -1,0 +1,328 @@
+/* ========================================
+   HAND Protocol Archive
+   Page-specific styles — extends foundation-campaign tokens
+   ======================================== */
+
+/* The archive page reads as a quieter, document-like surface.
+   Background and text colors override foundation-campaign defaults
+   so this page feels deliberately archival. */
+body.legacy {
+  background: var(--color-bg-warm);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: 1.65;
+}
+
+.container--narrow {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+@media (min-width: 768px) {
+  .container--narrow { padding: 0 var(--space-2xl); }
+}
+
+/* ---- Top bar (replaces main nav) ---- */
+.legacy-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(251, 248, 241, 0.85);
+  backdrop-filter: saturate(160%) blur(14px);
+  -webkit-backdrop-filter: saturate(160%) blur(14px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.legacy-bar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  gap: var(--space-md);
+}
+.legacy-bar__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  transition: color var(--transition-fast);
+}
+.legacy-bar__back svg { transition: transform var(--transition-fast); }
+.legacy-bar__back:hover { color: var(--color-text); }
+.legacy-bar__back:hover svg { transform: translateX(-2px); }
+.legacy-bar__stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+.legacy-bar__stamp svg { opacity: 0.5; }
+
+/* ---- Hero ---- */
+.legacy-hero {
+  padding: var(--space-4xl) 0 var(--space-2xl);
+  position: relative;
+}
+.legacy-hero__eyebrow {
+  display: inline-block;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+.legacy-hero__title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--color-text);
+  margin: 0 0 var(--space-lg);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+}
+.legacy-hero__lede {
+  font-size: 1.1875rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+  margin: 0 0 var(--space-2xl);
+}
+.legacy-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 0;
+}
+.legacy-hero__meta-item dt {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.legacy-hero__meta-item dd {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* ---- Archive items ---- */
+.legacy-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.legacy-item {
+  background: var(--color-bg);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+.legacy-item:hover {
+  box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+  transform: translateY(-1px);
+}
+.legacy-item__head {
+  display: flex;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  align-items: flex-start;
+}
+.legacy-item__num {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-style: italic;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: var(--color-accent);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+  margin-top: -2px;
+}
+.legacy-item__heading { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.legacy-item__label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  font-weight: 700;
+}
+.legacy-item__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  margin: 0;
+  line-height: 1.2;
+}
+.legacy-item__title code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--color-bg-alt);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  color: var(--color-text);
+}
+.legacy-item__when {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+  font-family: var(--font-mono);
+}
+.legacy-item__body {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin: 0 0 var(--space-lg);
+}
+.legacy-item__sections {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.legacy-item__sections li {
+  font-size: 0.75rem;
+  background: var(--color-bg-alt);
+  color: var(--color-text-secondary);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+.legacy-item__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+.legacy-item__path {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-left: auto;
+}
+.legacy-item__path code {
+  background: transparent;
+  padding: 0;
+}
+
+/* ---- Note / closing ---- */
+.legacy-note {
+  background: var(--color-bg-warm-tint);
+  border: 1px solid rgba(217, 119, 6, 0.18);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+}
+.legacy-note__eyebrow {
+  display: inline-block;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+.legacy-note h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--color-text);
+  margin: 0 0 var(--space-md);
+}
+.legacy-note p {
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  margin: 0 0 var(--space-md);
+}
+.legacy-note p:last-of-type { margin-bottom: var(--space-lg); }
+.legacy-note a {
+  color: var(--color-accent);
+  font-weight: 600;
+  border-bottom: 1px solid rgba(217, 119, 6, 0.25);
+  transition: border-color var(--transition-fast);
+}
+.legacy-note a:hover { border-bottom-color: var(--color-accent); }
+.legacy-note__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* ---- Footer ---- */
+.legacy-footer {
+  margin-top: var(--space-4xl);
+  padding: var(--space-xl) 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+}
+.legacy-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.legacy-footer__row {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+.legacy-footer__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
+  font-size: 0.8125rem;
+}
+.legacy-footer__contact a {
+  color: var(--color-accent);
+  border-bottom: 1px solid rgba(217, 119, 6, 0.25);
+  transition: border-color 150ms ease;
+}
+.legacy-footer__contact a:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+/* Mobile tuning */
+@media (max-width: 640px) {
+  .legacy-hero { padding: var(--space-3xl) 0 var(--space-xl); }
+  .legacy-hero__meta { flex-direction: column; gap: var(--space-md); }
+  .legacy-item { padding: var(--space-lg); }
+  .legacy-item__head { gap: var(--space-md); }
+  .legacy-item__num { font-size: 2rem; }
+  .legacy-item__title { font-size: 1.25rem; }
+  .legacy-item__path { margin-left: 0; width: 100%; }
+  .legacy-note { padding: var(--space-lg); }
+}
+
+/* ---- Reduced-motion override (legacy surface) ---- */
+@media (prefers-reduced-motion: reduce) {
+  .legacy-item:hover,
+  .legacy-bar__back:hover {
+    transform: none !important;
+  }
+  .legacy-bar__back:hover svg {
+    transform: none !important;
+  }
+}
