@@ -14,7 +14,7 @@ The protocol reflects HAND's defining commitment: long-term relational accompani
 
 ## Section 1 — Companion definition
 
-A **Companion** is an individual practitioner or small organization HAND accompanies. HAND serves three audience segments:
+A **Companion** is an individual practitioner or small organization HAND accompanies. HAND serves three communities of regenerative impact work: **practitioners who heal, founders who build, and organizers who steward**. The lines between them are porous; many Companions live in two of these worlds at once.
 
 a. **Healers and wellness practitioners.** Solo or small-team. Bodyworkers, somatic practitioners, reiki and energy work, herbalists, indigenous and ancestral practice, harm-reduction-informed healing.
 
@@ -22,7 +22,7 @@ b. **Impact entrepreneurs.** Mission-driven small ventures, often post-accelerat
 
 c. **Grassroots community organizations.** Mutual aid networks, harm reduction collectives, food sovereignty groups, land stewardship projects, often without formal 501(c)(3) status.
 
-The three segments share an operational shape: small, under-resourced for infrastructure, serving people who need them, vulnerable to abandonment by traditional capacity-building.
+The three segments share an operational shape: small, under-resourced for infrastructure, serving people who need them, vulnerable to abandonment by traditional capacity-building. The categories are illustrative, not exhaustive. A herbalist running a community apothecary lives across (a) and (c); a harm-reduction organizer whose work is also a healing practice lives across (a) and (c); a regenerative-agriculture entrepreneur stewarding a co-op lives across (b) and (c). If the work is in this spirit, it likely fits.
 
 ## Section 2 — Selection criteria
 

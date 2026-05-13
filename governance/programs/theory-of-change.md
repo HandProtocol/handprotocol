@@ -16,9 +16,9 @@ This document is honest about the strength of the evidence behind each link in t
 
 There is a population of small organizations and individual practitioners doing socially significant work who fall through the gaps of existing capacity-building infrastructure. They are too small for institutional capacity-building (Bridgespan, McKinsey for nonprofits), too pre-revenue for many foundation cycles, too relationally specific for project-bounded pro bono (Taproot, Catchafire), and too operationally fragile to thrive on short-term volunteer help. Their work is hard to scale, easy to lose, and chronically underserved by the systems that exist. This is the gap HAND was founded to address.
 
-## Three audiences (Companions)
+## Three communities of regenerative impact work (Companions)
 
-HAND serves three audiences in parallel, on the explicit conviction that the operational shape of their need overlaps even as their work differs:
+HAND serves three communities of regenerative impact work: **practitioners who heal, founders who build, and organizers who steward**. The lines between them are porous; many Companions live in two of these worlds at once. The explicit conviction is that the operational shape of their need overlaps even as their work differs.
 
 a. **Healers and wellness practitioners.** Bodyworkers, somatic therapists, reiki practitioners, herbalists, indigenous-tradition practitioners. Often solo or 2-person LLCs. Their work serves people in pain, recovery, or transition. Their business infrastructure (web presence, scheduling, client communication, financial management) is typically a side concern, undeveloped because the practitioner's training was in healing, not in marketing.
 
@@ -26,7 +26,7 @@ b. **Impact entrepreneurs.** Founders of social-mission ventures: B-corp-aspirin
 
 c. **Grassroots community organizations.** Mutual aid networks, harm reduction collectives, food sovereignty groups, land stewardship projects. Often 2-5 people, often without formal 501(c)(3) status, often serving populations who have been systematically failed by institutions. Their need is durable infrastructure that respects their autonomy and supports their work without imposing institutional priorities.
 
-These three audiences are collectively called **Companions**. The term reflects HAND's posture: walking alongside, not directing.
+These three communities are collectively called **Companions**. The term reflects HAND's posture: walking alongside, not directing. The categories are illustrative, not exhaustive: a herbalist running a community apothecary lives across (a) and (c); a harm-reduction organizer whose work is also a healing practice lives across (a) and (c); a regenerative-agriculture entrepreneur stewarding a co-op lives across (b) and (c). If your work is in this spirit, it likely fits.
 
 ## What HAND offers
 

@@ -38,7 +38,7 @@ g. **Retire what doesn't serve.** Tools, programs, framings. The pivot away from
 
 ## One-paragraph description
 
-HAND Protocol Foundation, incorporating as a 501(c)(3) in Austin, Texas in 2026, provides long-term branding, marketing, technology, design, and operational accompaniment to healers, impact entrepreneurs, and grassroots community organizations — collectively called Companions. HAND operates a curated resource pool of skilled professionals and tradespeople (Contributors) who give time and skill to the work. The defining commitment is durability: HAND is built to walk alongside Companions for years, not to deliver a project and disappear. HAND's distinctive innovation is the Sovereign Companions program, custom open-source AI agent systems built per Companion group under eight sovereignty principles including group ownership, revocable consent, and portability. Founded in August 2024, currently raising $77,777 to file for federal exemption, and accompanying the first pilot cohort of three Companion groups.
+HAND Protocol Foundation, incorporating as a 501(c)(3) in Austin, Texas in 2026, serves three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward. Collectively, they are called **Companions**. The lines between them are porous; many Companions live in two of these worlds at once (a herbalist running a community apothecary, a harm-reduction organizer whose work is also a healing practice). HAND provides long-term branding, marketing, technology, design, and operational accompaniment, drawn from a curated resource pool of skilled professionals and tradespeople (Contributors) who give time and skill to the work. The defining commitment is durability: HAND is built to walk alongside Companions for years, not to deliver a project and disappear. HAND's distinctive innovation is the Sovereign Companions program, custom open-source AI agent systems built per Companion group under eight sovereignty principles including group ownership, revocable consent, and portability. Founded in August 2024, currently raising $77,777 to file for federal exemption, and accompanying the first pilot cohort of three Companion groups.
 
 ## One-page description
 
@@ -48,13 +48,13 @@ HAND Protocol Foundation is a regenerative-infrastructure nonprofit incorporatin
 
 ### Who HAND serves
 
-Three audience segments, collectively **Companions**:
+HAND serves three communities of regenerative impact work, collectively called **Companions**: practitioners who heal, founders who build, and organizers who steward. The lines between them are porous, and many Companions live in two of these worlds at once.
 
 - **Healers and wellness practitioners.** Solo or small-team bodyworkers, somatic practitioners, herbalists, indigenous and ancestral practice, harm-reduction-informed healing.
-- **Impact entrepreneurs.** Post-accelerator mission-driven small ventures.
-- **Grassroots community organizations.** Mutual aid, harm reduction, food sovereignty, land stewardship.
+- **Impact entrepreneurs.** Post-accelerator mission-driven small ventures: B-corp-aspiring or B-corp-certified businesses, nonprofit pilots, hybrid for-profit/nonprofit structures.
+- **Grassroots community organizations.** Mutual aid networks, harm reduction collectives, food sovereignty groups, land stewardship projects.
 
-These segments share an operational shape: small, under-resourced for infrastructure, serving people who need them, vulnerable to abandonment by traditional capacity-building.
+These segments share an operational shape: small, under-resourced for infrastructure, serving people who need them, vulnerable to abandonment by traditional capacity-building. The categories are illustrative, not exhaustive. If your work is in this spirit, it likely fits.
 
 ### What HAND does
 
@@ -66,7 +66,7 @@ HAND operates a **curated resource pool**. Skilled professionals and tradespeopl
 
 ### The Sovereign Companions program
 
-Per-Companion-group custom AI agent systems on open-source base models, with per-group LoRA adapters trained on the Companion group's own work. Eight sovereignty principles govern: open base model, Companion-group-owned adapter, revocable training consent, no cross-group data extraction, self-hostable end-to-end, full audit trail inspectable by the group, open methodology and code, case-by-case adapter weights publication. The agent system is HAND's "durable artifact" — it stays with the Companion group after the engagement ends or if HAND itself closes.
+Per-Companion-group custom AI agent systems on open-source base models, with per-group LoRA adapters trained on the Companion group's own work. Eight sovereignty principles govern: open base model, Companion-group-owned adapter, revocable training consent, no cross-group data extraction, self-hostable end-to-end, full audit trail inspectable by the group, open methodology and code, case-by-case adapter weights publication. The agent system is HAND's "durable artifact": it stays with the Companion group after the engagement ends or if HAND itself closes.
 
 ### What HAND does not do
 
@@ -86,7 +86,7 @@ Pre-incorporation, pilot pre-launch. The foundation campaign is currently raisin
 
 ### Origin
 
-HAND Protocol began in August 2024 as Web3 fundraising infrastructure for regenerative impact work. Healing is one form of that impact; building mission-aligned ventures and stewarding grassroots community work are the others. Over the next year, the founders learned that the people they were trying to support, bodyworkers and impact founders and harm reduction organizers and food sovereignty collectives, were not crypto-native, and that crypto was the wrong starting tool. In early 2026, HAND pivoted: the work shifted from a Web3 protocol to a curated resource pool, with long-term accompaniment as the core promise. The pivot demonstrated a posture HAND carries forward: retire tools that do not serve the people HAND works with. The same posture applies to AI.
+HAND Protocol began in August 2024 as Web3 fundraising infrastructure for regenerative impact work. Three communities of that impact: practitioners who heal, founders who build, and organizers who steward. Over the next year, the founders learned that the people they were trying to support, bodyworkers and impact founders and harm reduction organizers and food sovereignty collectives, were not crypto-native, and that crypto was the wrong starting tool. In early 2026, HAND pivoted: the work shifted from a Web3 protocol to a curated resource pool, with long-term accompaniment as the core promise. The pivot demonstrated a posture HAND carries forward: retire tools that do not serve the people HAND works with. The same posture applies to AI.
 
 ### The gap HAND addresses
 
