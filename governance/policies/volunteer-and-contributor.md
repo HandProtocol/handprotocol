@@ -64,6 +64,18 @@ d. Participates in an orientation conversation with HAND staff.
 
 e. Begins matching consideration based on capacity and area.
 
+## Section 4A. Reciprocal participation
+
+a. **Three flows.** Contributors participate in the resource pool through one or more of three named flows. They may **Donate** (offer time or skill without expecting anything specific in return). They may **Exchange** (offer time or skill in return for a specific skill they need from the pool). And, when their own needs arise, they may **Receive** (apply for support from the pool on the same terms as any Companion).
+
+b. **Contributors can also Receive.** A Contributor whose own needs come up may apply to receive services from the pool. The application is evaluated against the same selection criteria the Corporation applies to any Companion seeking accompaniment. There is no penalty, hierarchy, or rotation requirement; the Contributor's prior Donate or Exchange engagements are not a prerequisite.
+
+c. **Companions can also Donate and Exchange.** Once a Companion is in the pool, they may Donate hours or Exchange a skill when capacity allows. Participation is voluntary in both directions. The pool is denser when participants flow between roles.
+
+d. **Encouraged, not required.** Cross-participation is encouraged because it deepens the pool, but is never a condition of receiving accompaniment, of being matched, or of remaining in the pool. The Corporation does not track ratios or impose reciprocity quotas.
+
+e. **Graduated Companions and alumni Contributors.** See [`../programs/companion-selection-and-graduation.md`](../programs/companion-selection-and-graduation.md) for the alumni pathway: graduated Companions may return as Contributors, mentors, or cross-cohort connectors. Alumni participation is similarly voluntary in all directions.
+
 ## Section 5. Matching to Companions
 
 a. **No Companion is matched without HAND-mediated introduction.** Contributors do not solicit Companions directly through the pool.

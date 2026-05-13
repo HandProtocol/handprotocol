@@ -182,17 +182,25 @@ f. **Documentation.** Engagement file finalized and archived per Document Retent
 
 g. **Public acknowledgment.** With Companion consent, HAND may publish a case study, mention the engagement in the Annual Report, or invite the Companion to speak at a HAND convening.
 
-### Alumni protocol
+### Alumni pathway
 
-a. Alumni Companions remain part of HAND's community.
+Graduation is entry into a broader pool, not exit from a program. Graduated Companions remain part of HAND's resource pool with full optionality:
 
-b. Alumni may be invited to mentor incoming Companions.
+a. **Alumni Companions remain part of HAND's community** indefinitely. Optional quarterly check-ins for two years post-graduation, then annual; access to community spaces; option to return for renewed engagement if circumstances change.
 
-c. Alumni may return as Contributors if they have capacity to give.
+b. **Alumni may return as Contributors.** The same flywheel that supported them is now one they can feed. Returning Contributors apply per the standard Contributor process but enter with the relational trust of prior engagement; reference checks may be lighter where the Corporation already has direct working knowledge.
 
-d. Alumni have unrestricted alumni-tier access to publicly available HAND resources (open-source code, methodology, reports).
+c. **Alumni may mentor incoming Companions.** Cross-cohort connections are explicitly welcomed: a graduated Companion can pair with an incoming Companion in similar work to share what they learned, what surprised them, and what the engagement looked like up close. Mentorship pairings are voluntary on both sides and structured with light scaffolding by HAND staff.
 
-e. Sovereignty commitments do not end at graduation; HAND continues to honor the eight principles for the graduated Companion's adapter for as long as it exists.
+d. **Alumni may serve as cross-cohort connectors** for HAND staff: helping with intake conversations, evaluation discussions, or program design where their lived experience is relevant. Stipends or honoraria may apply for substantial connector work.
+
+e. **Alumni have unrestricted alumni-tier access** to publicly available HAND resources (open-source code, methodology, evaluation reports, the Annual Flywheel Health Check, the Annual AI Accountability Report).
+
+f. **Sovereignty commitments do not end at graduation.** HAND continues to honor the eight Sovereign Companions principles for the graduated Companion's adapter for as long as it exists, including continued portability and revocation rights.
+
+g. **No reciprocity quota.** Alumni participation is voluntary in every direction. A graduated Companion who chooses no continuing engagement is fully welcomed; an alumni Contributor who later needs to Receive again is fully welcomed.
+
+The alumni pathway is the resource pool's primary mechanism of self-reinforcement: each engagement, in time, contributes back to the pool that supported it.
 
 ## Section 7. Mid-engagement transition
 

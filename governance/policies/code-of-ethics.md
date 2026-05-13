@@ -18,6 +18,8 @@ a. **Mission first.** Act in the interest of the Corporation's mission, not pers
 
 b. **Companions before self.** When trade-offs arise between organizational convenience and Companion well-being, choose the Companion well-being and engage the trade-off honestly.
 
+b1. **Mutual care.** Treat the resource pool as a place where everyone involved can benefit if they choose to. Contributors are not one-way givers, and Companions are not one-way receivers. When a Contributor's own needs arise, support them in receiving from the pool. When a Companion has capacity to give, welcome that contribution. The pool is denser when participants flow between roles.
+
 c. **Honesty in all communications.** With donors, funders, Companions, Contributors, peers, regulators, and the public. No misleading statements, no selective disclosure designed to deceive, no inflation of achievements.
 
 d. **Plain English.** No institutional fog. The values, programs, finances, and challenges of the Corporation are communicated in language an informed person can understand.

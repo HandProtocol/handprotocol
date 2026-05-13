@@ -36,7 +36,8 @@ This calendar assumes HAND incorporates in Texas in 2026 and files Form 1023 wit
 | Texas Comptroller annual sales tax exemption verification | Texas Comptroller | If they ask | Reactive only |
 | Insurance renewal | Broker | Anniversary of binding | D&O, general liability, cyber if applicable |
 | Strategic plan annual review | Board | Q4 | See [`programs/strategic-plan-2026-2028.md`](programs/strategic-plan-2026-2028.md) |
-| Sovereign Companions Annual Accountability Report (public) | Public | Anniversary of first deployment | Required by [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md) |
+| **Annual Flywheel Health Check (public)** | Public | End of Q4 | Required by Bylaws §11.5. Reports three-flow volumes (Donate, Exchange, Receive), cross-participation rate, alumni return rate, and recommended program adjustments |
+| Sovereign Companions Annual Accountability Report (public) | Public | Anniversary of first deployment | Required by [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md) and Bylaws §12.5; only applies once first AI deployment is live |
 
 ## Every four years (Texas-specific)
 
@@ -89,8 +90,8 @@ JULY       board meeting #3; Q2 financials; insurance renewal review window
 AUGUST     funder pipeline review; LOI calendar plan for Q4 cycle
 SEPTEMBER  Sovereign Companions Annual Accountability Report (public release)
 OCTOBER    board meeting #4; ED compensation review; Q3 financials
-NOVEMBER   strategic-plan revision draft for next year
-DECEMBER   year-end giving push; board ratifies next-year budget and plan
+NOVEMBER   strategic-plan revision draft for next year; Flywheel Health Check drafted
+DECEMBER   year-end giving push; board ratifies next-year budget and plan; Annual Flywheel Health Check published
 ```
 
 This is a template, not a rule. Adjust to actual fiscal year and incorporation date once locked.

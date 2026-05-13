@@ -131,29 +131,29 @@ Each link below describes one step in the chain from activity to outcome, with H
 
 **Honest assessment:** This is well-argued but unproven. The first cohort's selection process and outcomes will validate or revise.
 
-### Link 2: Curated Contributor pool produces meaningful matches
+### Link 2: The resource-pool flywheel produces mutual benefit
 
-**The link:** A curated pool of Contributors, screened for skill, mission alignment, and reliability, produces matches that exceed the quality of open volunteer marketplaces.
+**The link:** A curated resource pool with three flows (Donate, Exchange, Receive) produces deeper, more durable matches than open volunteer marketplaces because every participant can be both giver and receiver. The pool is denser when participants flow between roles, and that density is what makes accompaniment sustainable. This is the foundational mechanism, not an optimization on top of something else.
 
-**Evidence:** Taproot Foundation and Catchafire both demonstrate that volunteer-skill matches can work at scale, though both report meaningful drop-off rates after initial matches. Trust-based, relational matchmaking (rather than algorithmic) is a hypothesis HAND tests, not an established conclusion.
+**Evidence:** Time-banks and skill-exchange networks (LETS, hOurworld, Time Banks USA) demonstrate that mutual-exchange produces stickier engagement than one-way volunteering. Taproot Foundation and Catchafire demonstrate volunteer-skill matches work at scale but report meaningful drop-off after initial matches, attributable in part to the one-way nature of those flows. HAND's discovery research (handprotocol.org/discovery) maps the gap and the proposal in detail with worked examples (Marcus the roofer, Anya the reiki practitioner, Río Verde Collective).
 
-**Honest assessment:** Curation is plausibly better, but expensive to operate. The unit economics of high-curation pools are an unsolved problem.
+**Honest assessment:** The mechanism is well-attested in adjacent fields. Its application to HAND's three Companion communities, with HAND-mediated curation rather than algorithmic matching, is the specific hypothesis being tested. Unit economics of high-curation pools remain an open question that the first cohort will help answer.
 
 ### Link 3: Long-term accompaniment produces better outcomes than project work
 
-**The link:** A three-year relationship produces deeper, more durable infrastructure than a six-week project, for the populations HAND serves.
+**The link:** A three-year relationship produces deeper, more durable infrastructure than a six-week project, for the populations HAND serves. Long-term presence is what enables the flywheel: trust accumulates over years, alumni return as Contributors, and the pool grows in density.
 
 **Evidence:** Anecdotal across the capacity-building field. Direct evidence is thin because few organizations operate this way at the small-org scale; Bridgespan's institutional engagements are the closest analogue but at a different scale and budget.
 
 **Honest assessment:** This is HAND's distinctive hypothesis. It must be tested with the first cohort, and the test is multi-year by definition.
 
-### Link 4: Sovereign Companions agents augment rather than substitute for the relationship
+### Link 4: Sovereign Companions augments where Companions choose it
 
-**The link:** A custom agent system supports the program lead and the Companion without replacing the human relationship; it makes the relationship sustainable at slightly larger scale.
+**The link:** For Companions who choose it, a custom agent system supports the program lead and the Companion without replacing the human relationship, making the relationship sustainable at slightly larger scale. Sovereign Companions is one tool inside the resource pool, not the pool itself. The flywheel works without it; AI deepens the work where Companions opt in.
 
-**Evidence:** Sovereign Companions is novel. AI augmentation of nonprofit operations is documented (Salesforce, Slack add-ons, etc.), but custom per-group agent systems under group ownership are new.
+**Evidence:** Sovereign Companions is novel. AI augmentation of nonprofit operations is documented (Salesforce, Slack add-ons, etc.), but custom per-group agent systems under group ownership are new. The substitution risk is real: if agent systems start replacing relationships, the whole model erodes. The evaluation framework ([`../../AI-EVAL-FRAMEWORK.md`](../../AI-EVAL-FRAMEWORK.md)) is designed to detect substitution effects and trigger pause or close.
 
-**Honest assessment:** This is the part most likely to surprise. Funders and Companions will scrutinize. The evaluation framework ([`../../AI-EVAL-FRAMEWORK.md`](../../AI-EVAL-FRAMEWORK.md)) is designed to detect surprise and substitution effects.
+**Honest assessment:** This is an optional augmentation, never required. If Link 2 (the flywheel) fails, Sovereign Companions does not save the model. If Sovereign Companions fails its own gates, HAND continues without it. The two run on different timescales and different evidence bases.
 
 ### Link 5: Open release of methodology amplifies HAND's reach
 

@@ -69,10 +69,10 @@ If you are reading this as a prospective board member or funder, the four docume
 
 | Document | Status | Purpose |
 |---|---|---|
-| [`programs/theory-of-change.md`](programs/theory-of-change.md) | Draft v0.1 | Long-form theory; inputs, activities, outputs, outcomes, impact |
-| [`programs/logic-model.md`](programs/logic-model.md) | Draft v0.1 | One-page visual logic model |
-| [`programs/strategic-plan-2026-2028.md`](programs/strategic-plan-2026-2028.md) | Draft v0.1 | Three-year strategic plan with priorities, milestones, budget envelope |
-| [`programs/companion-selection-and-graduation.md`](programs/companion-selection-and-graduation.md) | Draft v0.1 | How HAND chooses Companions; how engagements end; sovereignty handoff |
+| [`programs/companion-selection-and-graduation.md`](programs/companion-selection-and-graduation.md) | Draft v0.1 | How HAND chooses Companions; the three-flow resource pool; alumni pathway from Companion to Contributor |
+| [`programs/theory-of-change.md`](programs/theory-of-change.md) | Draft v0.1 | Long-form theory: resource pool as foundational mechanism; AI as optional augmentation |
+| [`programs/logic-model.md`](programs/logic-model.md) | Draft v0.1 | One-page logic model with explicit flywheel row and three-flow indicators |
+| [`programs/strategic-plan-2026-2028.md`](programs/strategic-plan-2026-2028.md) | Draft v0.1 | Three-year strategic plan; AI capped as a percentage of program budget |
 
 ### Grant-readiness
 

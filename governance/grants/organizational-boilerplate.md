@@ -38,7 +38,7 @@ g. **Retire what doesn't serve.** Tools, programs, framings. The pivot away from
 
 ## One-paragraph description
 
-HAND Protocol Foundation, incorporating as a 501(c)(3) in Austin, Texas in 2026, serves three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward. Collectively, they are called **Companions**. The lines between them are porous; many Companions live in two of these worlds at once (a herbalist running a community apothecary, a harm-reduction organizer whose work is also a healing practice). HAND provides long-term branding, marketing, technology, design, and operational accompaniment, drawn from a curated resource pool of skilled professionals and tradespeople (Contributors) who give time and skill to the work. The defining commitment is durability: HAND is built to walk alongside Companions for years, not to deliver a project and disappear. HAND's distinctive innovation is the Sovereign Companions program, custom open-source AI agent systems built per Companion group under eight sovereignty principles including group ownership, revocable consent, and portability. Founded in August 2024, currently raising $77,777 to file for federal exemption, and accompanying the first pilot cohort of three Companion groups.
+HAND Protocol Foundation, incorporating as a 501(c)(3) in Austin, Texas in 2026, operates a curated resource pool where skilled Contributors and three communities of Companions (practitioners who heal, founders who build, and organizers who steward) match to meet mutual needs. Three flows: **Donate** (one-way gift of skill), **Exchange** (skill for skill), **Receive** (Companion onboarding). The pool is denser when participants flow between roles; a single person can be both giver and receiver, and the lines between communities are porous. Within and through the pool, HAND provides long-term branding, marketing, technology, design, and operational accompaniment. The defining commitment is durability: HAND walks alongside Companions for years, not just months, and offers Sovereign Companions (optional open-source AI agent systems, owned by the group, available to Companion groups who choose them) as one tool inside the pool. Founded in August 2024, currently raising $77,777 to file for federal exemption, and accompanying the first pilot cohort of three Companion groups.
 
 ## One-page description
 
@@ -56,17 +56,23 @@ HAND serves three communities of regenerative impact work, collectively called *
 
 These segments share an operational shape: small, under-resourced for infrastructure, serving people who need them, vulnerable to abandonment by traditional capacity-building. The categories are illustrative, not exhaustive. If your work is in this spirit, it likely fits.
 
-### What HAND does
+### How HAND works: the resource pool flywheel
 
-HAND provides long-term branding, marketing, technology, design, and operational accompaniment, on a multi-year relational basis. The default engagement is three years. Deliverables include web presence, brand articulation, operational infrastructure, and (where appropriate) a custom Sovereign Companions AI agent system owned by the Companion group.
+HAND operates a **curated resource pool** as its primary mechanism. Skilled professionals and tradespeople (Contributors) are screened, onboarded, and matched to Companions based on skill, capacity, and mutual fit. Participation runs through three named flows:
 
-### How HAND does it
+- **Donate.** A Contributor offers hours or deliverables to the pool without expecting anything specific in return. Tax-deductible.
+- **Exchange.** A Contributor receives a specific skill from the pool in return for their own contribution. HAND scopes both sides.
+- **Receive.** A Companion applies for support; HAND vets fit, matches from the pool or builds directly, and stays for upkeep.
 
-HAND operates a **curated resource pool**. Skilled professionals and tradespeople (Contributors) are screened, onboarded, and matched to Companions based on skill, capacity, and mutual fit. The relationship is HAND-mediated, not direct, so that Contributor turnover does not destabilize the Companion's relationship with HAND.
+A single person can be both giver and receiver. Contributors may also Receive when their own needs arise; Companions may also Donate or Exchange when capacity allows. The pool is denser when participants flow between roles. The relationship is HAND-mediated, not direct, so that Contributor turnover does not destabilize the Companion's accompaniment.
 
-### The Sovereign Companions program
+### What HAND provides Companions
 
-Per-Companion-group custom AI agent systems on open-source base models, with per-group LoRA adapters trained on the Companion group's own work. Eight sovereignty principles govern: open base model, Companion-group-owned adapter, revocable training consent, no cross-group data extraction, self-hostable end-to-end, full audit trail inspectable by the group, open methodology and code, case-by-case adapter weights publication. The agent system is HAND's "durable artifact": it stays with the Companion group after the engagement ends or if HAND itself closes.
+Within and through the pool, long-term branding, marketing, technology, design, and operational accompaniment, on a multi-year relational basis. The default engagement is three years. Deliverables include web presence, brand articulation, and operational infrastructure. At graduation, infrastructure transfers fully to the Companion, and the Companion enters alumni status with the option to return as a Contributor, mentor, or cross-cohort connector.
+
+### Sovereign Companions: one optional tool inside the pool
+
+For Companion groups who opt in, HAND builds custom open-source AI agent systems with per-group LoRA adapters on open base models. Eight sovereignty principles govern (open base model, Companion-group-owned adapter, revocable training consent, no cross-group data extraction, self-hostable end-to-end, full audit trail inspectable by the group, open methodology and code, case-by-case adapter weights publication). The agent system is one tool in the pool; the accompaniment works whether or not a given Companion engages with it. The adapter stays with the Companion group after the engagement ends or if HAND itself closes.
 
 ### What HAND does not do
 
@@ -96,13 +102,13 @@ HAND's discovery work, published openly at handprotocol.org/discovery, mapped th
 
 If HAND's activities work as designed, four shifts emerge:
 
-a. **Companions develop durable infrastructure** (web, brand, operational tools, agent systems) and retain it after engagement ends.
+a. **The flywheel deepens.** Donate, Exchange, and Receive engagements compound. Cross-participation rises (Contributors who also Receive; Companions who also give back). Alumni return as Contributors. The pool gets denser, and density is what makes long-term accompaniment economically possible.
 
-b. **Companion staff time is freed** from administrative burden, increasing the time available for the work that serves their populations.
+b. **Companions develop durable infrastructure** (web, brand, operational tools) and retain it after engagement ends.
 
-c. **Sovereign Companions agents** become the durable artifact of HAND's accompaniment: portable, group-owned, surviving HAND's own discontinuities.
+c. **Companion staff time is freed** from administrative burden, increasing the time available for the work that serves their populations.
 
-d. **The methodology multiplies**: HAND publishes the methodology, code, eval framework, and quarterly reports openly so adjacent organizations can adopt and adapt.
+d. **The methodology multiplies**: HAND publishes the methodology, code, eval framework, and quarterly reports openly so adjacent organizations can adopt and adapt. For opted-in Companion groups, Sovereign Companions agents become a durable artifact of the accompaniment, portable and group-owned, surviving HAND's own discontinuities.
 
 Detailed in [`../programs/theory-of-change.md`](../programs/theory-of-change.md) and [`../programs/logic-model.md`](../programs/logic-model.md).
 
@@ -111,14 +117,14 @@ Detailed in [`../programs/theory-of-change.md`](../programs/theory-of-change.md)
 A typical Companion engagement is a three-year relationship:
 
 - **Year 1**: infrastructure delivery (web, brand, operational tools).
-- **Year 2**: optimization, learning, Sovereign Companions deployment.
-- **Year 3**: graduation, with full ownership transfer.
+- **Year 2**: optimization, learning, and Sovereign Companions deployment for Companion groups who choose it.
+- **Year 3**: graduation with full ownership transfer, and entry into the alumni pathway as Contributors, mentors, or cross-cohort connectors if the alumnus wishes.
 
-Contributors are matched on skill, capacity, and mutual fit. HAND staff mediate the matches and maintain the underlying Companion relationship.
+Contributors are matched on skill, capacity, and mutual fit. HAND staff mediate the matches and maintain the underlying Companion relationship. The pool runs on the three flows (Donate, Exchange, Receive) and on the principle that everyone involved can benefit if they choose to.
 
-### The Sovereign Companions innovation
+### Sovereign Companions: one optional tool inside the pool
 
-The most distinctive part of HAND's model. Per-Companion-group custom AI agent systems built on Llama 3.1 8B or Mistral 7B (open base), with per-group LoRA adapters trained on the Companion group's own work and voice, retrieval over the group's own document library, tool access scoped to the group's workflows, and a human-review gate before any external output ships.
+For Companion groups who opt in, HAND builds per-group custom AI agent systems on open-source base models (Llama 3.1 8B or Mistral 7B), with per-group LoRA adapters trained on the Companion group's own work and voice, retrieval over the group's own document library, tool access scoped to the group's workflows, and a human-review gate before any external output ships. The accompaniment works whether or not a given Companion engages with it; this is one rewards rail, not the only one, and never required to participate in the resource pool.
 
 Eight sovereignty principles, each operationally testable:
 

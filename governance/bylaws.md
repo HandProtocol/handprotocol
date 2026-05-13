@@ -20,7 +20,7 @@
 
 **Section 2.1 Purposes.** The Corporation is organized and shall be operated exclusively for charitable, educational, and scientific purposes within the meaning of Section 501(c)(3) of the Internal Revenue Code, as set forth in the Certificate of Formation.
 
-**Section 2.2 Mission.** HAND Protocol Foundation provides long-term branding, marketing, technology, design, and operational accompaniment to healers, impact entrepreneurs, and grassroots community organizations (collectively, **Companions**) whose work serves the public benefit. The Corporation operates a curated resource pool that pairs skilled **Contributors** with Companions for sustained engagements, and openly publishes the methodologies, evaluation frameworks, and infrastructure that make this accompaniment possible.
+**Section 2.2 Mission.** HAND Protocol Foundation operates a curated resource pool of skilled **Contributors** who donate, exchange, or receive time and skill in support of three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward (collectively, **Companions**). The pool is designed so that everyone involved can benefit if they choose to; participation is voluntary in both directions, and the lines between giver and receiver are porous. Within and through this pool, the Corporation provides long-term branding, marketing, technology, design, and operational accompaniment to Companions whose work serves the public benefit, and openly publishes the methodologies, evaluation frameworks, and infrastructure that make this accompaniment possible.
 
 **Section 2.3 Companions and Contributors as defined terms.** Throughout these Bylaws, "Companions" refers to the individuals and organizations HAND serves, and "Contributors" refers to the individuals who give time and skill into HAND's resource pool. These are governance terms, not marketing labels, and shall be used in all official Corporation documents.
 
@@ -114,7 +114,9 @@ d. **Audit Committee.** May be combined with the Finance Committee in early year
 
 e. **Compensation Committee.** Composed of independent directors with no conflict of interest in the Executive Director's compensation. Conducts the rebuttable-presumption procedure annually.
 
-f. **Sovereign Companions Oversight Committee.** Oversees the AI workstream. Composed of at least one director, one Companion representative, one Contributor representative, and one independent technical expert. Reviews algorithmic impact assessments, model cards, sovereignty drill outcomes, and the Annual AI Accountability Report.
+f. **Resource Pool and Contributor Engagement Committee.** Oversees the primary operating mechanism of the Corporation. Composed of at least one director, two Companion representatives (from different communities), and two Contributor representatives. Reviews the three-flow operations (Donate, Exchange, Receive), Contributor screening and matching practices, Companion selection and graduation, alumni pathways, and publishes the Annual Flywheel Health Check.
+
+g. **Sovereign Companions Oversight Committee.** Oversees the optional AI augmentation workstream. Composed of at least one director, one Companion representative, one Contributor representative, and one independent technical expert. Reviews algorithmic impact assessments, model cards, sovereignty drill outcomes, and the Annual AI Accountability Report.
 
 **Section 7.2 Ad hoc committees.** The Board may from time to time create ad hoc committees for limited purposes. Each ad hoc committee dissolves upon completion of its charge or by Board resolution.
 
@@ -150,51 +152,71 @@ f. **Sovereign Companions Oversight Committee.** Oversees the AI workstream. Com
 
 **Section 10.2 Effective date.** These Bylaws are effective on the date of adoption.
 
-## Article XI. Sovereign Companions: governance of the AI workstream
+## Article XI. Resource Pool Governance
 
-**Section 11.1 Recognition.** The Corporation has established a program known as **Sovereign Companions**, providing custom open-source agent systems for individual Companions and Companion groups under explicit data sovereignty commitments.
+**Section 11.1 Recognition.** The resource pool is the primary operating mechanism of the Corporation. Through it, skilled Contributors and Companions match to meet mutual needs. The pool is the connective tissue that turns existing skills and existing needs into sustained exchange, not one-time favors.
 
-**Section 11.2 The eight sovereignty principles.** The Corporation shall operate Sovereign Companions in accordance with the eight sovereignty principles published at handprotocol.org and detailed in [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md). These principles are: open base model; Companion-group-owned adapter; revocable training consent; no cross-Companion-group data extraction; self-hostable end-to-end; full audit trail inspectable by the group; open methodology, code, eval, and quarterly reports; case-by-case adapter weights publication.
+**Section 11.2 Three flows.** The Corporation organizes participation in the resource pool under three named flows:
 
-**Section 11.3 Companion group ownership.** Notwithstanding any other provision of these Bylaws, the LoRA adapters, training data, evaluation logs, and inference recipes attributable to a specific Companion or Companion group remain the property of that Companion or Companion group. The Corporation holds these artifacts in trust and shall transfer them to the rightful party on departure, request, or dissolution.
+a. **Donate.** A Contributor offers hours, deliverables, or ongoing service to the pool without expecting anything specific in return. These donations are tax-deductible under the Corporation's exempt status.
 
-**Section 11.4 Oversight.** The Sovereign Companions Oversight Committee shall review the program annually and shall publish the Annual AI Accountability Report no later than the anniversary of the first deployment each year.
+b. **Exchange.** A Contributor requests a specific skill from the pool in return for their own contribution. The Corporation matches both sides, sets clear scope on both engagements, and stays present if friction arises.
 
-## Article XII. Records and public disclosure
+c. **Receive.** A Companion applies for support. The Corporation vets fit, scope, and capacity, then matches from the pool, builds the work directly, or both, and stays for upkeep over the planned engagement.
 
-**Section 12.1 Records open to directors.** Every director has the right to inspect and copy the books, records, and documents of the Corporation at any reasonable time for any purpose reasonably related to the director's position.
+**Section 11.3 Mutual benefit principle.** Participation in the pool is voluntary in both directions. A single person can be both giver and receiver: a Contributor may also request Receive services when their own needs arise; a Companion may also Donate or Exchange when capacity allows. The pool is denser when participants flow between roles. Cross-participation is encouraged but never required.
 
-**Section 12.2 Public records.** The Corporation shall make available for public inspection, as required by IRC §6104:
+**Section 11.4 Companion alumni pathway.** Graduated Companions may return to the pool as Contributors, mentors, or cross-cohort connectors. Graduation is entry into a broader pool, not exit from a program. The Corporation maintains alumni status for all graduated Companions for the duration of the Corporation's existence.
+
+**Section 11.5 Oversight.** The Resource Pool and Contributor Engagement Committee shall review pool operations annually and shall publish the Annual Flywheel Health Check no later than the end of Q4 each year. The Health Check reports the volume of each of the three flows, the cross-participation rate, the alumni return rate, and recommended program adjustments.
+
+## Article XII. Sovereign Companions: optional AI augmentation
+
+**Section 12.1 Recognition.** The Corporation operates **Sovereign Companions** as one optional tool inside the resource pool, available to Companion groups who choose it. Sovereign Companions consists of custom open-source agent systems for individual Companions and Companion groups under explicit data sovereignty commitments. It is one parallelization tool among several; the resource pool functions whether or not a given Companion engages with it.
+
+**Section 12.2 The eight sovereignty principles.** The Corporation shall operate Sovereign Companions in accordance with the eight sovereignty principles published at handprotocol.org and detailed in [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md). These principles are: open base model; Companion-group-owned adapter; revocable training consent; no cross-Companion-group data extraction; self-hostable end-to-end; full audit trail inspectable by the group; open methodology, code, eval, and quarterly reports; case-by-case adapter weights publication.
+
+**Section 12.3 Companion group ownership.** Notwithstanding any other provision of these Bylaws, the LoRA adapters, training data, evaluation logs, and inference recipes attributable to a specific Companion or Companion group remain the property of that Companion or Companion group. The Corporation holds these artifacts in trust and shall transfer them to the rightful party on departure, request, or dissolution.
+
+**Section 12.4 Opt-in.** No Companion is required to engage with Sovereign Companions as a condition of receiving accompaniment from the Corporation. The augmentation is one rewards rail, not the only one, and never required to participate in the resource pool.
+
+**Section 12.5 Oversight.** The Sovereign Companions Oversight Committee shall review the program annually and shall publish the Annual AI Accountability Report no later than the anniversary of the first deployment each year.
+
+## Article XIII. Records and public disclosure
+
+**Section 13.1 Records open to directors.** Every director has the right to inspect and copy the books, records, and documents of the Corporation at any reasonable time for any purpose reasonably related to the director's position.
+
+**Section 13.2 Public records.** The Corporation shall make available for public inspection, as required by IRC §6104:
 
 a. The Form 1023 application and all attachments.
 b. The IRS Determination Letter.
 c. The three most recent Forms 990 (with Schedule B donor information redacted to the extent permitted).
 
-**Section 12.3 Open by default for governance documents.** The Corporation shall publish, on its public website, current versions of its Bylaws, Conflict of Interest Policy, Whistleblower Policy, Document Retention Policy, Theory of Change, Strategic Plan, and Annual Report. This commitment exceeds the legal minimum and reflects HAND's brand commitment to transparency.
+**Section 13.3 Open by default for governance documents.** The Corporation shall publish, on its public website, current versions of its Bylaws, Conflict of Interest Policy, Whistleblower Policy, Document Retention Policy, Theory of Change, Strategic Plan, and Annual Report. This commitment exceeds the legal minimum and reflects HAND's brand commitment to transparency.
 
-## Article XIII. Amendments
+## Article XIV. Amendments
 
-**Section 13.1 Authority to amend.** These Bylaws may be amended, repealed, or replaced by the affirmative vote of **two-thirds (2/3)** of the directors then in office at a meeting at which a quorum is present.
+**Section 14.1 Authority to amend.** These Bylaws may be amended, repealed, or replaced by the affirmative vote of **two-thirds (2/3)** of the directors then in office at a meeting at which a quorum is present.
 
-**Section 13.2 Notice.** Notice of any proposed amendment shall be given to each director not less than **fourteen (14) days** before the meeting at which the amendment is to be considered. The notice shall set forth the substance of the proposed amendment.
+**Section 14.2 Notice.** Notice of any proposed amendment shall be given to each director not less than **fourteen (14) days** before the meeting at which the amendment is to be considered. The notice shall set forth the substance of the proposed amendment.
 
-**Section 13.3 Limitations.** No amendment shall be effective that would cause the Corporation to fail to qualify as an organization described in IRC §501(c)(3). Amendments to the purpose or dissolution clauses require coordination with the Certificate of Formation and may require filing a Certificate of Amendment with the Texas Secretary of State.
+**Section 14.3 Limitations.** No amendment shall be effective that would cause the Corporation to fail to qualify as an organization described in IRC §501(c)(3). Amendments to the purpose or dissolution clauses require coordination with the Certificate of Formation and may require filing a Certificate of Amendment with the Texas Secretary of State.
 
-## Article XIV. Dissolution
+## Article XV. Dissolution
 
-**Section 14.1 Voluntary dissolution.** The Corporation may be dissolved by a vote of two-thirds (2/3) of the directors then in office, in accordance with Texas BOC Chapter 11.
+**Section 15.1 Voluntary dissolution.** The Corporation may be dissolved by a vote of two-thirds (2/3) of the directors then in office, in accordance with Texas BOC Chapter 11.
 
-**Section 14.2 Distribution of assets.** Upon dissolution, after payment of liabilities and provision for liabilities, the assets shall be distributed in the manner set forth in Article 8 of the Certificate of Formation.
+**Section 15.2 Distribution of assets.** Upon dissolution, after payment of liabilities and provision for liabilities, the assets shall be distributed in the manner set forth in Article 8 of the Certificate of Formation.
 
-**Section 14.3 Sovereign Companions handoff.** Notwithstanding Section 14.2, the Corporation shall transfer any Companion-group-owned adapters, training data, evaluation logs, and inference recipes to the respective Companion or Companion group at no cost as a condition precedent to general asset distribution.
+**Section 15.3 Sovereign Companions handoff.** Notwithstanding Section 15.2, the Corporation shall transfer any Companion-group-owned adapters, training data, evaluation logs, and inference recipes to the respective Companion or Companion group at no cost as a condition precedent to general asset distribution.
 
-## Article XV. Construction
+## Article XVI. Construction
 
-**Section 15.1 Severability.** If any provision of these Bylaws is held invalid, the remaining provisions remain in effect.
+**Section 16.1 Severability.** If any provision of these Bylaws is held invalid, the remaining provisions remain in effect.
 
-**Section 15.2 Texas law controls.** These Bylaws are governed by Texas law.
+**Section 16.2 Texas law controls.** These Bylaws are governed by Texas law.
 
-**Section 15.3 Conflict with Certificate of Formation.** If any provision of these Bylaws conflicts with the Certificate of Formation, the Certificate of Formation controls.
+**Section 16.3 Conflict with Certificate of Formation.** If any provision of these Bylaws conflicts with the Certificate of Formation, the Certificate of Formation controls.
 
 ---
 

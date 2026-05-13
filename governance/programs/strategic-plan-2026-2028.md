@@ -67,14 +67,14 @@ i. **Establish governance discipline.** Quarterly board meetings, monthly financ
 |---|---|
 | Personnel (founder unpaid; first part-time hire if budget allows) | $0–$45,000 |
 | Operations (insurance, software, accounting, banking) | $7,500–$12,000 |
-| Program (Companion engagement, Contributor stipends where warranted) | $5,000–$15,000 |
-| Sovereign Companions infrastructure (POC) | $2,500–$5,555 |
+| **Program: resource pool and Companion engagement** (Contributor recruiting, matching, three-flow operations, sustained accompaniment, Contributor stipends where warranted) | **$10,000–$30,000** |
+| Sovereign Companions infrastructure (optional POC, capped at ≤ 20% of program budget) | $2,500–$5,555 |
 | Brand and communications | $3,000–$7,500 |
 | Legal, accounting, professional services | $5,000–$10,000 |
 | Reserves contribution | 5–10% of unrestricted revenue |
 | **Total** | **$23,000–$95,000** |
 
-The wide range reflects the dependency on filing raise outcomes. The minimum scenario funds incorporation, basic operations, and a one-Companion pilot. The maximum scenario funds a part-time staff role and three-Companion pilot.
+The wide range reflects the dependency on filing raise outcomes. The minimum scenario funds incorporation, basic operations, and a one-Companion pilot. The maximum scenario funds a part-time staff role and three-Companion pilot. Sovereign Companions is funded as one tool inside the program budget, never as a parallel line growing faster.
 
 ### Success criteria for Year One
 
@@ -90,7 +90,7 @@ The wide range reflects the dependency on filing raise outcomes. The minimum sce
 
 ### Theme: Prove the model
 
-**Mission objective:** Demonstrate that the Companion-Contributor-pool model produces measurable outcomes, and that Sovereign Companions can be deployed under sovereignty principles.
+**Mission objective:** Demonstrate that the resource-pool flywheel produces measurable mutual benefit across Donate, Exchange, and Receive flows. Where Companion groups opt in, deploy Sovereign Companions under the eight sovereignty principles.
 
 ### Priorities
 
@@ -102,7 +102,7 @@ c. **Hire first paid Executive Director or Program Director.** Rebuttable-presum
 
 d. **Expand Companion cohort to 5-7 groups.**
 
-e. **Deploy three sovereign agent systems.** Open-base model with per-group LoRA adapters. Self-hostable. Sovereignty drills run.
+e. **Deploy sovereign agent systems for Companion groups who opt in.** Open-base model with per-group LoRA adapters. Self-hostable. Sovereignty drills run. Companion groups who decline AI augmentation continue with the same accompaniment quality.
 
 f. **Submit Patrick J. McGovern full application.** $33,333 pilot tier or $111,111 production tier.
 
@@ -129,12 +129,12 @@ j. **Publish methodology paper draft.**
 |---|---|
 | Personnel (1 FTE plus contractors) | $80,000–$140,000 |
 | Operations | $15,000–$25,000 |
-| Program | $20,000–$40,000 |
-| Sovereign Companions (pilot tier) | $33,333–$55,000 |
+| **Program: resource pool and Companion engagement** (Contributor pool growth, matching, sustained accompaniment, alumni pathway development) | **$40,000–$80,000** |
+| Sovereign Companions pilot (capped at ≤ 30% of program budget; for opted-in Companion groups only) | $12,000–$24,000 |
 | Brand, comms, publication | $10,000–$20,000 |
 | Legal, accounting, audit (compilation/review) | $15,000–$25,000 |
 | Reserves contribution | 10% of unrestricted revenue |
-| **Total** | **$175,000–$300,000** |
+| **Total** | **$175,000–$315,000** |
 
 ### Success criteria for Year Two
 
@@ -188,13 +188,13 @@ i. **Founder transition planning** if applicable. Per [`../board/succession-and-
 |---|---|
 | Personnel (2-3 FTE) | $200,000–$300,000 |
 | Operations | $25,000–$45,000 |
-| Program | $50,000–$80,000 |
-| Sovereign Companions (production tier) | $72,000–$120,000 |
+| **Program: resource pool and Companion engagement** (Contributor pool at scale, three-flow operations, alumni network, multi-cohort accompaniment) | **$110,000–$170,000** |
+| Sovereign Companions production (capped at ≤ 35% of program budget; for opted-in Companion groups only) | $38,500–$60,000 |
 | Brand, comms, publication | $20,000–$35,000 |
 | Legal, accounting, review | $25,000–$40,000 |
 | Reserves contribution | 10–15% of unrestricted revenue |
 | Field convenings, conferences | $10,000–$20,000 |
-| **Total** | **$400,000–$650,000** |
+| **Total** | **$428,500–$670,000** |
 
 ### Success criteria for Year Three
 

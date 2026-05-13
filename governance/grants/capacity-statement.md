@@ -14,15 +14,23 @@ This document tells you what HAND has now, what HAND is building, and how HAND w
 
 ## What HAND has now (as of May 2026)
 
+### The flywheel mechanism, designed and documented
+
+- **A three-flow resource pool model** (Donate, Exchange, Receive) with worked examples (Marcus the roofer, Anya the reiki practitioner, Río Verde Collective) drawn from real conversations with the populations HAND will serve. The flywheel is the primary mechanism, designed so that everyone involved can benefit if they choose to: a single person can be both giver and receiver, and cross-participation is encouraged but never required. Documented in [`../programs/companion-selection-and-graduation.md`](../programs/companion-selection-and-graduation.md), [`../policies/volunteer-and-contributor.md`](../policies/volunteer-and-contributor.md), and Bylaws Article XI.
+
+- **An alumni pathway** ensuring graduation is entry into a broader pool, not exit from a program. Graduated Companions may return as Contributors, mentors, or cross-cohort connectors. The pool grows denser over time through alumni return.
+
+- **An Annual Flywheel Health Check** required by Bylaws §11.5 and Compliance Calendar. Reports three-flow volumes, cross-participation rate, alumni return rate, and recommended program adjustments. Parallel to the Annual AI Accountability Report.
+
 ### Strategic clarity
 
 - A published gap analysis: the U.S. capacity-building landscape map at handprotocol.org/discovery, the resource-pool vision document, and the research-on-existing-skill-exchange-models document. Together, ~30,000 words of cited research, named peer organizations, and identified market gaps.
 
-- A theory of change with five named links and honest assessment of the evidence for each. Documented at [`../programs/theory-of-change.md`](../programs/theory-of-change.md).
+- A theory of change with five named links, with the resource-pool flywheel positioned as the foundational causal innovation and Sovereign Companions positioned as one optional augmentation. Documented at [`../programs/theory-of-change.md`](../programs/theory-of-change.md).
 
-- A three-year strategic plan with priorities, milestones, budget envelopes, and risk-mitigation. Documented at [`../programs/strategic-plan-2026-2028.md`](../programs/strategic-plan-2026-2028.md).
+- A three-year strategic plan with priorities, milestones, budget envelopes, and risk-mitigation. Sovereign Companions capped as a fraction of program budget (≤20% Y1, ≤30% Y2, ≤35% Y3). Documented at [`../programs/strategic-plan-2026-2028.md`](../programs/strategic-plan-2026-2028.md).
 
-- A logic model linking inputs to impact. Documented at [`../programs/logic-model.md`](../programs/logic-model.md).
+- A logic model with explicit Flywheel row and performance indicators (Donate / Exchange / Receive engagement counts, cross-participation rate, alumni return rate). Documented at [`../programs/logic-model.md`](../programs/logic-model.md).
 
 ### Brand and public presence
 
@@ -55,16 +63,17 @@ All published in this repository under [`../`](../).
 
 ### Funder pipeline
 
-- Patrick J. McGovern Foundation: Letter of Inquiry drafted, alignment with AI for Social Good program identified.
-- Texas community foundations: Hogg, St. David's, Austin Community Foundation identified as future eligibility targets.
-- Trust-based funders: Kataly, Solidaire, Headwaters identified as aligned philosophical kin.
-- AI-aligned funders: Mozilla, Ford, Google.org identified as additional prospects.
+- Texas community foundations: Hogg, St. David's, Austin Community Foundation identified as future eligibility targets for the flywheel work.
+- Trust-based funders: Kataly, Solidaire, Headwaters identified as aligned philosophical kin for the long-term accompaniment work.
+- Patrick J. McGovern Foundation: Letter of Inquiry drafted for the Sovereign Companions augmentation work.
+- AI-aligned funders: Mozilla, Ford, Google.org identified as additional prospects for the AI workstream specifically.
 
-### Sovereign Companions program design
+### Sovereign Companions program design (optional augmentation)
 
 - Eight sovereignty principles articulated and binding ([`../../AI-COMPANIONS.md`](../../AI-COMPANIONS.md)).
 - Evaluation framework drafted ([`../../AI-EVAL-FRAMEWORK.md`](../../AI-EVAL-FRAMEWORK.md)): six dimensions, three decision gates, participatory review panel.
 - Data Sovereignty and AI Policy operationalizing the principles ([`../policies/data-sovereignty-and-ai.md`](../policies/data-sovereignty-and-ai.md)).
+- Opt-in posture: no Companion is required to engage with Sovereign Companions as a condition of receiving accompaniment. The flywheel works whether or not a given Companion engages with the AI augmentation.
 
 ## What HAND is building (next 12 months)
 

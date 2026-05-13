@@ -26,13 +26,13 @@ The corporation is organized **exclusively for charitable, educational, and scie
 
 Within the scope of those purposes, the specific charitable activities of the corporation include:
 
-a. Providing long-term branding, marketing, technology, design, and operational accompaniment, free of charge or below-market, to healers, impact entrepreneurs, and grassroots community organizations (collectively, "**Companions**") whose work serves the public benefit.
+a. **Operating a curated resource pool of skilled professionals and tradespeople ("Contributors") who donate, exchange, or receive time and skill in support of three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward (collectively, "Companions"). The pool is designed so that everyone involved can benefit if they choose to; participation is voluntary in both directions and the lines between giver and receiver are porous.**
 
-b. Operating a curated resource pool that matches skilled professionals and tradespeople ("**Contributors**") with Companions, on a volunteer or below-market basis.
+b. Providing long-term branding, marketing, technology, design, and operational accompaniment, free of charge or below-market, to Companions whose work serves the public benefit.
 
 c. Researching, publishing, and openly sharing methodologies, evaluation frameworks, and case studies on capacity-building, skill-exchange, and accompaniment models for grassroots and small nonprofit organizations.
 
-d. Designing, building, and openly releasing **sovereign, open-source, community-owned artificial intelligence systems** that serve Companions as durable infrastructure under explicit data sovereignty and consent commitments, and releasing the underlying methodology, code, and evaluation framework as a public good.
+d. Operating supporting infrastructure for the resource pool, including (without limitation) optional open-source, community-owned artificial intelligence systems that serve consenting Companion groups as durable infrastructure under explicit data sovereignty and consent commitments, with methodology, code, and evaluation released as a public good.
 
 e. Engaging in any other charitable, educational, and scientific activities permitted by Section 501(c)(3) and consistent with the foregoing.
 

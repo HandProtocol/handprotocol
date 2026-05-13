@@ -12,15 +12,15 @@
 
 ### Past, present, and planned activities
 
-**HAND Protocol Foundation** (the "Organization") was incorporated as a Texas nonprofit corporation in 2026 to provide long-term branding, marketing, technology, design, and operational accompaniment to healers, impact entrepreneurs, and grassroots community organizations whose work serves the public benefit. The Organization operates primarily in Austin, Texas, and serves participants nationally through web-based engagement and selected in-person work.
+**HAND Protocol Foundation** (the "Organization") was incorporated as a Texas nonprofit corporation in 2026 to operate a curated resource pool through which skilled Contributors and three communities of regenerative impact work (practitioners who heal, founders who build, and organizers who steward, collectively "Companions") match to meet mutual needs, with long-term branding, marketing, technology, design, and operational accompaniment provided to Companions as the core service. The Organization operates primarily in Austin, Texas, and serves participants nationally through web-based engagement and selected in-person work.
 
-The Organization's activities are organized into three integrated programs.
+The Organization's activities are organized into two integrated programs.
 
-### Program 1: Companion Accompaniment Program
+### Program 1: Companion Accompaniment via Resource Pool
 
 **Purpose.** To address a documented gap in the U.S. capacity-building ecosystem: small organizations and individual practitioners doing socially significant work who fall through the gaps of existing capacity-building infrastructure. They are too small for institutional capacity-building (such as Bridgespan), too pre-revenue for many foundation funding cycles, too relationally specific for project-bounded pro bono services (such as Taproot Foundation or Catchafire), and too operationally fragile to thrive on short-term volunteer help.
 
-**Population served.** The Organization serves three audience segments, collectively referred to as **Companions**:
+**Population served.** The Organization serves three communities of regenerative impact work, collectively referred to as **Companions**:
 
 a. **Healers and wellness practitioners.** Solo or small-team bodyworkers, somatic therapists, herbalists, indigenous and ancestral practitioners, harm-reduction-informed healers.
 
@@ -28,101 +28,72 @@ b. **Impact entrepreneurs.** Founders of mission-driven small ventures, typicall
 
 c. **Grassroots community organizations.** Mutual aid networks, harm reduction collectives, food sovereignty groups, land stewardship projects, often serving populations systematically failed by institutions.
 
-**Activities.** For each Companion, the Organization provides, free of charge or at substantially below-market rates:
+The lines between these communities are porous; many Companions live in two of these worlds at once (a herbalist running a community apothecary; a harm-reduction organizer whose work is also a healing practice; a regenerative-agriculture entrepreneur stewarding a co-op).
+
+**The resource pool and the three flows.** The primary operating mechanism is a curated resource pool of volunteer skilled professionals and tradespeople ("**Contributors**"). Contributors and Companions participate through three named flows:
+
+a. **Donate.** A Contributor offers hours, deliverables, or ongoing service to the pool without expecting anything specific in return. Donations are tax-deductible under the Organization's exempt status. Example: a designer donates twelve hours per month to whichever Companion the Organization matches them with.
+
+b. **Exchange.** A Contributor requests a specific skill from the pool in return for their own contribution. The Organization matches both sides, sets clear scope on both engagements, and stays present if friction arises. Example: a roofer repairs community-garden sheds in exchange for a website and brand support.
+
+c. **Receive.** A Companion applies for support. The Organization vets fit, scope, and capacity, then matches from the pool, builds the work directly, or both, and stays for upkeep over the planned engagement (default term: three years). Example: a food-sovereignty collective receives a designer, a donation page, and twelve months of operations support; reciprocal contribution is transparency and storytelling that strengthens the pool.
+
+The pool is designed so that everyone involved can benefit if they choose to. A single person can be both giver and receiver: the reiki practitioner who needs a website is also offering reiki to the pool; an impact founder who needs design help can mentor a younger founder in return. Cross-participation is encouraged but never required.
+
+**Activities.** Within and through the resource pool, the Organization provides to Companions, free of charge or at substantially below-market rates:
 
 - Development of web presence: website design, deployment, training in maintenance.
 - Brand articulation: voice, identity, plain-language positioning.
 - Operational infrastructure: scheduling systems, financial tools, communication systems, document management.
 - Sustained accompaniment: a dedicated program lead at the Organization maintains the relationship for a planned term (default: three years), with monthly working sessions, quarterly reflection, and annual planning.
-- Curated volunteer matching: skilled professionals and tradespeople (referred to as **Contributors**) are matched to specific Companion needs based on skill fit, capacity, and mutual fit.
-- A graduation protocol: at the end of the engagement, infrastructure is fully transferred to the Companion's ownership and control, and the Companion enters alumni status with ongoing optional access.
+- Curated matching: Contributors are screened and matched to specific Companion needs based on skill fit, capacity, and mutual fit. Both parties consent before any introduction.
+- A graduation protocol: at the end of the engagement, infrastructure is fully transferred to the Companion's ownership and control, and the Companion enters alumni status. Graduated Companions may return to the pool as Contributors, mentors, or cross-cohort connectors. Graduation is entry into a broader pool, not exit from a program.
+
+**Contributor recruitment, screening, and recognition.** Contributors are recruited through public channels and apply through a documented process including skills inventory, capacity statement, references, and Code of Ethics acknowledgment. References are checked for Contributors offering services with material trust implications. Accepted Contributors receive a handbook and ongoing recognition appropriate to their preferences. Contributors are volunteers, not employees; they receive no compensation except for documented expense reimbursement under an accountable plan, modest honoraria for intensive engagements (recorded with 1099-NEC if cumulative payments exceed $600), and de minimis recognition gifts.
 
 **How the Organization selects Companions.** A documented selection process (described in [`../programs/companion-selection-and-graduation.md`](../programs/companion-selection-and-graduation.md)): inbound interest, exploratory conversation, written application, second conversation, reference checks, internal review against published criteria, and decision communicated within 14 days.
 
 **Charitable purpose.** This program furthers the Organization's exempt purposes by:
 
-a. **Education** of the Companions in the operational, marketing, technological, and brand-development competencies they need to serve their populations sustainably. The Organization develops curricula, documentation, and case studies as part of the program.
+a. **Education** of Companions in the operational, marketing, technological, and brand-development competencies they need to serve their populations sustainably; and education of Contributors in the practical work of accompaniment. The Organization develops curricula, documentation, and case studies as part of the program.
 
 b. **Charitable activity** in lessening the burdens of small organizations and practitioners serving people experiencing poverty, illness, and other forms of distress. The Companions in turn provide health, healing, food security, harm-reduction, and community-organizing services to the public.
 
-c. **Charitable activity** in combating community deterioration by strengthening the operational infrastructure of grassroots community organizations.
+c. **Charitable activity** in combating community deterioration by strengthening the operational infrastructure of grassroots community organizations through skilled-volunteer matching and mutual exchange.
 
 The Organization does **not** provide direct services to the Companions' clients or constituents. The Organization serves the Companions, who in turn serve the public.
 
-**Public benefit.** Companions are selected on documented criteria including the public-good nature of their work, identifiable beneficiaries, and operational shape consistent with the Organization's program design. No Companion is selected based on personal relationships or for the private benefit of any director, officer, or key employee. The Organization's Conflict of Interest Policy governs all selection decisions.
+**Public benefit.** Companions are selected on documented criteria including the public-good nature of their work, identifiable beneficiaries, and operational shape consistent with the Organization's program design. No Companion or Contributor is selected based on personal relationships or for the private benefit of any director, officer, or key employee. The Organization's Conflict of Interest Policy governs all selection decisions.
 
-### Program 2: The Resource Pool (Contributors)
+### Program 2: Sovereign Companions (optional AI augmentation)
 
-**Purpose.** The operational mechanism by which volunteer skilled professionals and tradespeople (Contributors) are matched to Companions.
-
-**Activities.**
-
-a. **Contributor recruitment.** The Organization recruits Contributors through public channels (website, mailing list, peer organizations, professional networks). Contributors apply through a documented process.
-
-b. **Contributor screening.** Each Contributor application includes skills inventory, capacity statement, references, and a Code of Ethics acknowledgment. References are contacted for Contributors offering services with material trust implications.
-
-c. **Contributor onboarding.** Accepted Contributors receive a handbook documenting expectations, the Companion-centered posture, confidentiality requirements, and the Organization's policies.
-
-d. **Curated matching.** The Organization's staff identify potential matches between specific Contributor skills and specific Companion needs. Both parties consent before any introduction.
-
-e. **Match facilitation.** The Organization mediates the working relationship to ensure scope clarity, boundary maintenance, and Companion-centered orientation.
-
-f. **Recognition.** Contributors receive recognition appropriate to their preferences, including in the Annual Report and on the Organization's website.
-
-**Compensation of Contributors.** Contributors are volunteers, not employees. They receive no compensation for service through the pool, except in limited cases:
-
-a. **Reimbursement** of documented out-of-pocket expenses under an accountable plan.
-
-b. **Modest honoraria** ($100–$500 typical) for intensive engagements such as workshops, recorded with 1099-NEC if cumulative payments exceed $600 in a calendar year.
-
-c. **Recognition gifts** of de minimis value.
-
-The Organization does not engage Contributors as independent contractors except through formal contractor agreements outside the pool, which apply IRS classification tests.
-
-**Charitable purpose.** This program furthers the Organization's exempt purposes by structuring volunteer activity in a manner that lessens the burdens of charitable beneficiaries (the Companion Companions) and educates Contributors in the practical work of accompaniment.
-
-### Program 3: Sovereign Companions (AI workstream)
-
-**Purpose.** Many Companions have administrative burdens that limit the time and attention they can devote to their work. The Organization develops, deploys, and openly publishes custom open-source artificial intelligence agent systems built for individual Companions and Companion groups, under explicit data sovereignty principles that ensure the Companion groups own and control their own AI systems.
+**Purpose.** Many Companions have administrative burdens that limit the time and attention they can devote to their work. For Companion groups who choose it, the Organization builds custom open-source artificial intelligence agent systems that augment the human accompaniment without replacing it. Sovereign Companions is one tool inside the resource pool, available to Companion groups who opt in. The accompaniment work in Program 1 functions whether or not a given Companion engages with Sovereign Companions.
 
 **Activities.**
 
-a. **Per-group agent systems.** For each consenting Companion group, the Organization builds a custom agent system: a small fine-tuned model on an open-source base (Llama 3.1 8B, Mistral 7B, or successor), with a per-group LoRA adapter trained on the group's own work, retrieval over the group's own document library, and tool access scoped to the group's workflows.
+a. **Per-group agent systems.** For each consenting Companion group, the Organization builds a custom agent system: a small fine-tuned model on an open-source base (Llama 3.1 8B, Mistral 7B, or successor), with a per-group LoRA adapter trained on the group's own work, retrieval over the group's own document library, and tool access scoped to the group's workflows. A human-review gate sits before any external output.
 
-b. **Coordination agent.** The Organization operates a coordination agent for staff use, supporting intake-to-Contributor matching, cohort pattern surfacing, and check-in agenda drafting. This agent does not read individual Companion group data without scoped consent.
+b. **Open-source release.** The Organization publishes the methodology, agent scaffolding code, evaluation framework, and adapter training methodology under permissive licenses (MIT for code, CC BY-SA 4.0 for documentation).
 
-c. **Open-source release.** The Organization publishes the methodology, agent scaffolding code, evaluation framework, and adapter training methodology under permissive licenses (MIT for code, CC BY-SA 4.0 for documentation).
+c. **Quarterly and annual accountability.** Quarterly evaluation reports on the program's operations, evaluation outcomes, and any incidents. Annual sovereignty drills test adapter portability and consent revocation; closure simulations are conducted at major program decision points. The Annual AI Accountability Report is published yearly.
 
-d. **Quarterly accountability reports.** The Organization publishes quarterly reports on the program's operations, evaluation, and any incidents.
+**Eight sovereignty principles.** The program operates under eight binding principles ([`../policies/data-sovereignty-and-ai.md`](../policies/data-sovereignty-and-ai.md)): open base model; Companion-group-owned adapter; revocable training consent; no cross-Companion-group data extraction; self-hostable end-to-end; full audit trail inspectable by the group; open methodology, code, evaluation, and quarterly reports; case-by-case adapter weights publication.
 
-e. **Annual sovereignty drills.** The Organization tests adapter portability and consent revocation annually, and conducts a closure simulation at major program decision points.
-
-**Sovereignty principles.** The Sovereign Companions program operates under eight binding principles ([`../policies/data-sovereignty-and-ai.md`](../policies/data-sovereignty-and-ai.md)):
-
-1. Open base model.
-2. Companion-group-owned adapter.
-3. Revocable training consent.
-4. No cross-Companion-group data extraction.
-5. Self-hostable end-to-end.
-6. Full audit trail, inspectable by the group.
-7. Open methodology, code, evaluation, and quarterly reports.
-8. Case-by-case adapter weights publication.
-
-The Organization's Bylaws (Article XI) and the Data Sovereignty and AI Policy bind the Organization to these principles. In the event of the Organization's dissolution, the Bylaws require that Companion-group-owned adapters and data are transferred to the respective Companion groups before any general asset distribution.
+**Opt-in and group ownership.** No Companion is required to engage with Sovereign Companions as a condition of receiving accompaniment. Companion groups who opt in retain ownership of the resulting adapters, training data, evaluation logs, and inference recipes. The Organization holds these artifacts in trust and transfers them to the Companion group on departure, request, or dissolution. The Organization's Bylaws (Article XII) and the Data Sovereignty and AI Policy bind the Organization to these commitments; the Bylaws further require Companion-group adapter handoff before any general asset distribution on dissolution.
 
 **Charitable purpose.** This program furthers the Organization's exempt purposes by:
 
-a. **Scientific activity.** The Organization conducts and publishes research on responsible AI development for small grassroots organizations, advancing the state of the art in community-controlled AI infrastructure.
+a. **Scientific activity.** Conducting and publishing research on responsible AI development for small grassroots organizations.
 
-b. **Educational activity.** The methodology, code, evaluation framework, and quarterly reports are educational resources for the field. Adjacent organizations can adopt and adapt the work.
+b. **Educational activity.** The methodology, code, evaluation framework, and quarterly reports are educational resources for the field.
 
-c. **Charitable activity** in providing operational infrastructure (in the form of an AI agent system owned by the Companion group) that lessens the burden on small organizations serving people experiencing poverty, illness, and other forms of distress.
+c. **Charitable activity** in providing operational infrastructure to opted-in Companion groups that lessens the burden on small organizations serving people experiencing poverty, illness, and other forms of distress.
 
-**No private benefit.** The Sovereign Companions program is structured to prevent inurement and private benefit. The Organization does not retain proprietary rights in the per-group adapters; those are owned by the respective Companion groups. The Organization does not sell access, monetize, or commercialize the systems. The Organization does not aggregate Companion-group data into any "platform model." The Organization's directors, officers, and key employees do not personally profit from the program.
+**No private benefit.** The Organization does not retain proprietary rights in the per-group adapters; those are owned by the respective Companion groups. The Organization does not sell access, monetize, or commercialize the systems. The Organization does not aggregate Companion-group data into any "platform model." Directors, officers, and key employees do not personally profit from the program.
 
 ### Cross-program activities
 
-In addition to the three programs, the Organization conducts the following activities supporting all three:
+In addition to the two programs, the Organization conducts the following activities supporting both:
 
 **Research and publication.** The Organization conducts research on capacity-building, accompaniment models, and responsible AI infrastructure, publishing the results openly. Three discovery research documents are currently published at handprotocol.org/discovery. The Organization expects to publish a methodology paper on the Sovereign Companions program once the pilot cohort completes.
 
