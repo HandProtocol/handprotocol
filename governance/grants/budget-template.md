@@ -18,7 +18,7 @@ c. The minimum / target / maximum scenarios for the first three years (drawn fro
 
 d. The project budget template used for grant applications.
 
-## Section 1 — Revenue structure
+## Section 1. Revenue structure
 
 ### Revenue categories
 
@@ -43,7 +43,7 @@ d. The project budget template used for grant applications.
 
 By Year 3, no single funder should exceed 40% of total revenue. The public support test (33⅓% from public sources over 5-year rolling) is monitored continuously by the Treasurer.
 
-## Section 2 — Expense structure
+## Section 2. Expense structure
 
 ### Functional expense classes (FASB ASC 958)
 
@@ -84,11 +84,11 @@ Each functional-class expense is also recorded by natural class:
 | **Grants and contributions made** | If HAND sub-grants (case-by-case) |
 | **Other** | Bank fees, miscellaneous |
 
-## Section 3 — Three-year budget envelopes
+## Section 3. Three-year budget envelopes
 
 Drawn from [`../programs/strategic-plan-2026-2028.md`](../programs/strategic-plan-2026-2028.md). Wide ranges reflect dependence on fundraising outcomes.
 
-### Year 1 (2026) — Minimum to maximum
+### Year 1 (2026): Minimum to maximum
 
 | Category | Min | Target | Max |
 |---|---|---|---|
@@ -112,7 +112,7 @@ Drawn from [`../programs/strategic-plan-2026-2028.md`](../programs/strategic-pla
 
 Year 1 surplus funds Year 2 operations (especially during the wait for IRS Determination).
 
-### Year 2 (2027) — Mid-scenario
+### Year 2 (2027): Mid-scenario
 
 | Category | Year 2 |
 |---|---|
@@ -136,7 +136,7 @@ Year 1 surplus funds Year 2 operations (especially during the wait for IRS Deter
 
 Year 2 net negative covers from Year 1 surplus + reserves drawdown. If revenue exceeds mid-scenario, expand reserve contribution.
 
-### Year 3 (2028) — Mid-scenario
+### Year 3 (2028): Mid-scenario
 
 | Category | Year 3 |
 |---|---|
@@ -162,7 +162,7 @@ Year 2 net negative covers from Year 1 surplus + reserves drawdown. If revenue e
 
 Year 3 should approach break-even with diversified funding.
 
-## Section 4 — Project budget template (for grant applications)
+## Section 4. Project budget template (for grant applications)
 
 When a funder requires a project-specific budget, use this structure:
 
@@ -206,7 +206,7 @@ NARRATIVE NOTES
   [Indirect cost calculation method]
 ```
 
-## Section 5 — Restricted grant tracking
+## Section 5. Restricted grant tracking
 
 For each restricted grant:
 
@@ -222,7 +222,7 @@ e. **Release from restriction** recorded as expenses match budget.
 
 f. **Closeout** at end of grant period: reconciliation, final report, return of unspent funds (per agreement).
 
-## Section 6 — Reserve targets
+## Section 6. Reserve targets
 
 | Year | Target reserve | Approximate $ |
 |---|---|---|
@@ -233,7 +233,7 @@ f. **Closeout** at end of grant period: reconciliation, final report, return of 
 
 Reserves grow at approximately 10% of unrestricted revenue per year until target is reached.
 
-## Section 7 — Sovereign Companions program separate ledger
+## Section 7. Sovereign Companions program separate ledger
 
 Sovereign Companions expenses are tracked in a separate program ledger within the accounting system, to make the program's economics legible and to support funder-specific reporting (especially for McGovern Foundation).
 
@@ -246,7 +246,7 @@ Sovereign Companions expenses are tracked in a separate program ledger within th
 | **Eval and review** | External red-team or audit costs |
 | **Publication** | Methodology paper costs, conference attendance |
 
-## Section 8 — Budget process
+## Section 8. Budget process
 
 a. **Draft.** Executive Director and Treasurer draft annual budget in October-November.
 

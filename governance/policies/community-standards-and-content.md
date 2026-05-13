@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 HAND Protocol Foundation operates several spaces where people communicate: the Discord server, the mailing list, the public website (with comments or feedback surfaces when present), and any future Companion / Contributor portals. The Sovereign Companions program also produces AI-generated content that may be shared externally. This Policy:
 
@@ -20,7 +20,7 @@ d. Establishes the acceptance, decline, and removal process for user-submitted c
 
 e. Addresses appeals, copyright claims, and abuse reports.
 
-## Section 2 — Scope
+## Section 2. Scope
 
 This Policy applies to:
 
@@ -41,7 +41,7 @@ This Policy does **not** govern:
 - Personal social-media accounts of individuals affiliated with HAND (governed by Code of Ethics §9).
 - Content on Companion groups' own platforms produced with their own resources (governed by the Companion group's own policies; HAND has no authority over them).
 
-## Section 3 — Community standards
+## Section 3. Community standards
 
 In HAND community spaces, participants commit to:
 
@@ -57,7 +57,7 @@ e. **Privacy.** Do not share another person's identifying or private information
 
 f. **Constructive disagreement.** Disagreement is welcome. Personal attacks are not.
 
-## Section 4 — Prohibited content
+## Section 4. Prohibited content
 
 The following content is prohibited in HAND community spaces and will be removed:
 
@@ -85,7 +85,7 @@ k. **Misinformation that materially harms.** Claims demonstrably false about med
 
 l. **Content that violates law.** Including copyright infringement, defamation, threats, or illegal goods/services.
 
-## Section 5 — Enforcement
+## Section 5. Enforcement
 
 a. **Removal.** Content violating Section 4 is removed by moderators. The person who posted is notified with a brief explanation.
 
@@ -99,7 +99,7 @@ e. **Appeals.** A removed member may appeal to the Executive Director by email. 
 
 f. **Documentation.** Moderation actions are logged, including the content removed (or hash/reference if removal was for severity), the moderator, the rationale, and the disposition.
 
-## Section 6 — Moderators
+## Section 6. Moderators
 
 a. **Designation.** Moderators are HAND staff or specifically designated Contributors with moderation training.
 
@@ -109,7 +109,7 @@ c. **Conflict of interest.** A moderator with a personal stake in a content disp
 
 d. **Transparency.** The list of current moderators is published in the community space.
 
-## Section 7 — Sovereign Companions content guardrails
+## Section 7. Sovereign Companions content guardrails
 
 Sovereign Companions agents produce text and other content on behalf of Companion groups. These guardrails apply before any external publication:
 
@@ -134,7 +134,7 @@ i. **Specific prohibited use cases:**
 - Generating content that misrepresents the Companion group's positions to external audiences.
 - Generating content for high-stakes external decisions (grant submissions, legal filings, public statements during crisis) without explicit human authorship and review.
 
-## Section 8 — Algorithmic Impact Assessment
+## Section 8. Algorithmic Impact Assessment
 
 Before deploying any Sovereign Companions agent in a new context, the Sovereign Companions Oversight Committee conducts an Algorithmic Impact Assessment, including:
 
@@ -152,7 +152,7 @@ f. How the Companion group can override or revoke.
 
 Template in [`data-sovereignty-and-ai.md`](data-sovereignty-and-ai.md) Section 11.
 
-## Section 9 — User-submitted content
+## Section 9. User-submitted content
 
 User-submitted content (testimonials, case studies, Contributor portfolios, public submissions of any kind) is reviewed before publication on HAND surfaces.
 
@@ -172,7 +172,7 @@ c. **Decline communication.** The submitter is notified of the decline and the r
 
 d. **Permission and license.** Submitters retain copyright. By submitting, they grant HAND a non-exclusive license to publish on HAND surfaces in connection with HAND's mission, until withdrawn. Withdrawals honored within 14 days.
 
-## Section 10 — Copyright and DMCA
+## Section 10. Copyright and DMCA
 
 a. **Designated Agent.** The Corporation has designated a DMCA agent registered with the U.S. Copyright Office. Contact information published on the website at `/dmca`.
 
@@ -182,7 +182,7 @@ c. **Counter-notices.** Counter-notices addressed per the statute; content resto
 
 d. **Repeat infringer policy.** Members with multiple validated takedowns are removed from community spaces.
 
-## Section 11 — Abuse and emergency reporting
+## Section 11. Abuse and emergency reporting
 
 a. **Reporting.** Any community member may report abuse to **abuse@handprotocol.org** or to a moderator.
 
@@ -194,7 +194,7 @@ d. **Emergencies.** Threats of imminent harm reported to local emergency service
 
 e. **Safety planning.** If a community member appears to be in a crisis (self-harm, suicide ideation, intimate-partner violence, etc.), moderators escalate to the Executive Director and follow a documented response protocol that prioritizes the person's safety and connects to professional resources. Moderators do not provide professional crisis counseling themselves.
 
-## Section 12 — Off-platform conduct
+## Section 12. Off-platform conduct
 
 a. Conduct outside HAND community spaces is generally outside HAND's authority.
 
@@ -202,7 +202,7 @@ b. Exception: where a person's off-platform conduct involves another HAND commun
 
 c. The Corporation does not investigate or adjudicate off-platform disputes.
 
-## Section 13 — Specific platform notes
+## Section 13. Specific platform notes
 
 ### Discord
 
@@ -228,7 +228,7 @@ a. Public-facing comments not currently enabled on the website.
 
 b. Should public comments be enabled, comment moderation falls under this Policy.
 
-## Section 14 — Annual review
+## Section 14. Annual review
 
 The Executive Director (or designee) reviews this Policy annually, considering:
 

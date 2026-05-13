@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 This Policy governs the acceptance, processing, acknowledgment, and stewardship of gifts to HAND Protocol Foundation. It exists to:
 
@@ -18,7 +18,7 @@ c. Provide donors with consistent, transparent treatment.
 
 d. Comply with IRS substantiation, valuation, and reporting requirements.
 
-## Section 2 — Mission alignment
+## Section 2. Mission alignment
 
 a. The Corporation accepts gifts that further its exempt purpose and align with its mission and values.
 
@@ -31,13 +31,13 @@ b. The Corporation **reserves the right to decline** any gift that, in the Board
 
 c. Declination is a decision of the Executive Director in consultation with the Board Chair, with Board ratification when a decision sets precedent. Declination is documented in writing, with the reason, in the donor file.
 
-## Section 3 — Gifts accepted without further review
+## Section 3. Gifts accepted without further review
 
 The following gifts are accepted as a matter of course:
 
-a. **Cash, check, ACH, credit/debit card** — any amount.
+a. **Cash, check, ACH, credit/debit card**, any amount.
 
-b. **Publicly traded securities** — accepted via the Corporation's brokerage account, with the standard policy of selling on receipt to avoid market exposure.
+b. **Publicly traded securities**, accepted via the Corporation's brokerage account, with the standard policy of selling on receipt to avoid market exposure.
 
 c. **Recurring giving** through any payment processor approved by the Corporation.
 
@@ -47,7 +47,7 @@ e. **Workplace giving** through Benevity, YourCause, or similar platforms.
 
 f. **Matching gifts** from employer programs.
 
-## Section 4 — Gifts requiring review
+## Section 4. Gifts requiring review
 
 The following gifts require **Executive Director and Treasurer review** before acceptance:
 
@@ -55,13 +55,13 @@ a. **In-kind goods** valued in excess of $1,000.
 
 b. **In-kind professional services** offered by anyone other than a Contributor formally enrolled in HAND's resource pool. (Contributors enrolled in the pool have already been screened; one-off offers from outside require review.)
 
-c. **Real property** (land, buildings) — likely declined as a matter of course in early years; review required if offered.
+c. **Real property** (land, buildings), likely declined as a matter of course in early years; review required if offered.
 
 d. **Tangible personal property** of significant value (art, vehicles, equipment).
 
 e. **Closely held business interests, partnership interests, or non-publicly-traded securities.**
 
-f. **Cryptocurrency** — see Section 6.
+f. **Cryptocurrency**, see Section 6.
 
 g. **Gifts with any donor-imposed restriction.** See Section 7.
 
@@ -69,7 +69,7 @@ h. **Bequests, charitable remainder trusts, charitable lead trusts, life insuran
 
 i. **Anonymous gifts above $10,000.**
 
-## Section 5 — Gifts requiring Board approval
+## Section 5. Gifts requiring Board approval
 
 The following gifts require **full Board approval** before acceptance:
 
@@ -85,7 +85,7 @@ e. Any gift from a source identified through routine screening (Section 9) as ra
 
 f. Any gift in a form not addressed above (NFTs, royalty interests, intellectual property assignments, etc.).
 
-## Section 6 — Cryptocurrency
+## Section 6. Cryptocurrency
 
 a. **Accepted forms.** Bitcoin (BTC), Ethereum (ETH), USDC stablecoin. Other forms reviewed case-by-case.
 
@@ -99,7 +99,7 @@ e. **Substantiation.** Cryptocurrency gifts over $5,000 require a qualified appr
 
 f. **Privacy.** Donor identities associated with on-chain donations are not published without explicit donor consent, regardless of the public nature of blockchain records.
 
-## Section 7 — Restricted gifts
+## Section 7. Restricted gifts
 
 a. **Acceptable restrictions** are those consistent with HAND's exempt purpose, programs, and strategic plan.
 
@@ -113,7 +113,7 @@ e. **Recording.** Restricted gifts are tracked separately. The acknowledgment le
 
 f. **Modification of restriction.** If a restriction becomes impossible or impractical to fulfill, the Corporation contacts the donor in writing to request modification. **Self-modification of restrictions is prohibited** without donor consent or court action under cy pres doctrine.
 
-## Section 8 — Acknowledgment and substantiation
+## Section 8. Acknowledgment and substantiation
 
 a. **Every gift** receives a written acknowledgment from the Corporation that meets IRS substantiation requirements:
 
@@ -131,7 +131,7 @@ e. **Non-cash gifts over $5,000** require Form 8283 Section B; HAND signs Part I
 
 f. **Acknowledgment is separate from the tax-substantiation letter.** A warm thank-you note and a formal substantiation letter may both be sent.
 
-## Section 9 — Donor screening
+## Section 9. Donor screening
 
 a. **Public-source screening** for any gift over $10,000: confirm via public sources that the donor is not subject to OFAC sanctions, is not a designated terrorist organization or affiliate, and is not actively engaged in primary activities directly counter to HAND's mission.
 
@@ -141,7 +141,7 @@ c. **Heightened review** for any donor whose primary income source is known to c
 
 d. **HAND does not commission deep investigations** of small donors. Public-source screening is the standard.
 
-## Section 10 — Recognition and naming
+## Section 10. Recognition and naming
 
 a. **Default recognition** for donors is the angel-number tier ladder, with public acknowledgment in the Annual Report and on the website (donor's option to remain anonymous).
 
@@ -151,7 +151,7 @@ c. **Naming gifts** require Board approval, written naming agreement, and a name
 
 d. **Reverse anonymity** also respected: HAND will publish a donor's name if they wish, even for a small gift, and will not pretend to anonymize.
 
-## Section 11 — Donor stewardship
+## Section 11. Donor stewardship
 
 a. **Stewardship plan.** Each Foundation tier donor and above ($7,777 and above on the contributor ladder) receives a personal touchpoint at least quarterly: an update on impact, an invitation to office hours, or a relevant publication.
 
@@ -161,11 +161,11 @@ c. **Donor file.** Maintained per the Document Retention Policy. Includes giving
 
 d. **Privacy.** Donor information is treated as confidential under the Privacy Policy. Not shared with other organizations, including peer nonprofits, except with explicit consent.
 
-## Section 12 — Schedule M trigger
+## Section 12. Schedule M trigger
 
 When non-cash contributions exceed **$25,000** in a fiscal year, the Corporation files Form 990 Schedule M, disclosing the non-cash contributions by category. The Treasurer monitors the running total and notifies the Executive Director when the threshold is approached.
 
-## Section 13 — Refunds and returns
+## Section 13. Refunds and returns
 
 a. **General policy:** gifts are non-refundable.
 
@@ -176,7 +176,7 @@ b. **Exceptions** are made for:
 
 c. **Refund decisions** are documented and tracked. Refund processed within 30 days of approval.
 
-## Section 14 — Conflicts and recusals
+## Section 14. Conflicts and recusals
 
 a. A director with a personal or family relationship to a major donor or prospect shall disclose under the Conflict of Interest Policy.
 

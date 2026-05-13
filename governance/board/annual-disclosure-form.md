@@ -14,7 +14,7 @@ Signed forms are retained by the Secretary per the Document Retention Policy. Fo
 
 ---
 
-## Part 1 — Identification
+## Part 1. Identification
 
 **Name:** _______________________________________________
 
@@ -27,7 +27,7 @@ Signed forms are retained by the Secretary per the Document Retention Policy. Fo
 
 ---
 
-## Part 2 — Acknowledgment
+## Part 2. Acknowledgment
 
 By signing below, I affirm that:
 
@@ -45,7 +45,7 @@ f. I will update my disclosure promptly if any material change occurs during the
 
 ---
 
-## Part 3 — Financial Interest disclosure
+## Part 3. Financial Interest disclosure
 
 For each of the following categories, identify any relationship that could be a Financial Interest as defined in the Policy. Use "None" where applicable.
 
@@ -122,7 +122,7 @@ c. **AI equity or token holdings.** Do you hold equity or tokens in entities ope
 
 ---
 
-## Part 4 — Other disclosures
+## Part 4. Other disclosures
 
 ### A. Other significant time commitments
 
@@ -144,7 +144,7 @@ ___________________________________________________________________
 
 ---
 
-## Part 5 — Acknowledgment of related policies
+## Part 5. Acknowledgment of related policies
 
 I also acknowledge receipt of and agreement to abide by:
 
@@ -157,7 +157,7 @@ I also acknowledge receipt of and agreement to abide by:
 
 ---
 
-## Part 6 — Signature
+## Part 6. Signature
 
 **Signed:** _______________________________________________
 

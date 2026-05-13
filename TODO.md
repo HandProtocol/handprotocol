@@ -1,4 +1,4 @@
-# HAND Protocol — Running TODO
+# HAND Protocol: Running TODO
 
 A working list of what's next for the public website. Items added at the bottom; completed items struck through or removed when no longer load-bearing.
 
@@ -18,9 +18,9 @@ A working list of what's next for the public website. Items added at the bottom;
 - [ ] Consider scroll-spy `aria-current` on the campaign's anchor-link nav so screen-reader users get the same "you are here" signal that the discovery subnav pills already provide.
 - [ ] Submit `sitemap.xml` to Google Search Console after the canonical domain is live.
 - [ ] Set up `hand@handprotocol.org` email forwarding (ImprovMX / ForwardEmail / registrar forwarding).
-- [ ] Install privacy-respecting analytics (Plausible Community Edition or Fathom) — covered in `DEPLOY.md`.
+- [ ] Install privacy-respecting analytics (Plausible Community Edition or Fathom), covered in `DEPLOY.md`.
 
-## Later (held — not for this cycle)
+## Later (held: not for this cycle)
 
 - [ ] Cross-repo / legacy folder cleanup. `web/landingpage/`, `sweetspot/`, `projects/spin/` stay where they are because they're tied to existing Vercel deployments koH doesn't have access to. Revisit when ownership of those deploys is resolved or when those projects are formally retired.
 
@@ -36,6 +36,6 @@ A working list of what's next for the public website. Items added at the bottom;
 - Reframed "v0.1" / "Discovery doc # of #" → "Working draft" / "Living document".
 - Added inline "Discovery →" cross-links from Problem, Solution, and Backstory sections to the relevant discovery doc.
 - Made `.qf-link` visibly amber at rest (was inheriting parent text color, looked like black text with a faint dotted underline).
-- Fixed `.callout-card strong`/`em` — were inheriting global dark-text strong color and rendering as near-black on the dark "Why Healers First?" callout. Now light text on dark, dark text on the outline variant.
+- Fixed `.callout-card strong`/`em`, were inheriting global dark-text strong color and rendering as near-black on the dark "Why Healers First?" callout. Now light text on dark, dark text on the outline variant.
 - Foundation campaign impeccable audit pass: dropped gradient text on hero h1, replaced hero-metric stats grid + Year 1 success grid with non-grid layouts, broke Problem section out of card-grid monoculture, added ARIA to Companions tabs, fixed Indiegogo CTAs to point at working Giveth flow, tokenized hard-coded hex values, fixed touch targets, added `.sr-only` cues to external links.
 - Corrected "First push: February 2025" → "August 2024" in legacy archive.

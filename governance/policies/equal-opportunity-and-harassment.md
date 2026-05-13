@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 HAND Protocol Foundation (the "**Corporation**") is committed to providing equal opportunity in employment, volunteering, contracting, and program participation, and to maintaining a work and program environment free of harassment. This Policy:
 
@@ -18,7 +18,7 @@ c. Establishes the procedure for reporting and addressing concerns.
 
 d. Affirms the Corporation's commitment to non-retaliation.
 
-## Section 2 — Equal opportunity commitment
+## Section 2. Equal opportunity commitment
 
 The Corporation provides equal opportunity to all individuals, regardless of:
 
@@ -51,7 +51,7 @@ f. Companion selection and program participation.
 
 g. Vendor selection (favoring small business, BIPOC- and women-owned business, and mission-aligned suppliers per the Code of Ethics).
 
-## Section 3 — Active practice, not passive posture
+## Section 3. Active practice, not passive posture
 
 The Corporation does not treat equal opportunity as a passive non-discrimination posture. The Corporation actively works to:
 
@@ -65,7 +65,7 @@ d. Translate and localize key materials when serving Companion groups whose prim
 
 e. Provide reasonable accommodation in employment and program participation for people with disabilities or religious practice needs.
 
-## Section 4 — Anti-harassment commitment
+## Section 4. Anti-harassment commitment
 
 The Corporation prohibits harassment of any kind based on the protected characteristics in Section 2. Harassment includes conduct that:
 
@@ -77,7 +77,7 @@ c. Is severe or pervasive enough to alter the conditions of employment or progra
 
 This Policy is intentionally broader than the legal definition of "actionable" harassment. The Corporation responds to disrespectful conduct before it rises to the legal threshold, because waiting until conduct is severe enough to be illegal is a failure of culture.
 
-## Section 5 — Examples of prohibited conduct
+## Section 5. Examples of prohibited conduct
 
 Without limiting Section 4, the following are prohibited:
 
@@ -97,7 +97,7 @@ g. Retaliation against any person who reports a concern, participates in an inve
 
 h. Bystander silence in the face of overt harassment by another member of the Corporation community when the bystander has authority or capacity to intervene.
 
-## Section 6 — Special protections
+## Section 6. Special protections
 
 a. **Sexual harassment** receives priority response. Complaints are investigated promptly and confidentially.
 
@@ -105,7 +105,7 @@ b. **Power dynamics** are considered in evaluating conduct. Conduct from a perso
 
 c. **Companion-facing conduct** receives heightened scrutiny. Harassment of a Companion by any person affiliated with HAND is a basis for immediate removal from any role serving Companions, pending investigation.
 
-## Section 7 — Reporting procedure
+## Section 7. Reporting procedure
 
 a. **A person who experiences or observes prohibited conduct may report** in any of the following ways:
 
@@ -121,7 +121,7 @@ c. **Anonymous reports** are accepted and investigated to the extent the informa
 
 d. **Reports can be made by anyone** affiliated with the Corporation (staff, volunteer, Contributor, Companion, donor, vendor, member of the public) regarding any person acting in the name of the Corporation.
 
-## Section 8 — Response procedure
+## Section 8. Response procedure
 
 a. **Acknowledgment.** Within **three (3) business days** of receipt.
 
@@ -135,7 +135,7 @@ e. **Findings and action.** Findings are documented. If a violation is found, th
 
 f. **Follow-up.** The complainant is informed (to the extent permitted) that the matter has been addressed. The complainant is also informed of their right to make further reports if subsequent conduct concerns them.
 
-## Section 9 — Non-retaliation
+## Section 9. Non-retaliation
 
 a. **Retaliation against any person** who reports a concern in good faith, participates in an investigation, or supports a complainant is prohibited and is itself a basis for discipline up to termination.
 
@@ -143,7 +143,7 @@ b. **Retaliation includes** termination, demotion, suspension, reduced compensat
 
 c. **Reports of retaliation** are treated as new complaints under this Policy.
 
-## Section 10 — Reasonable accommodation
+## Section 10. Reasonable accommodation
 
 a. **Disability.** The Corporation provides reasonable accommodation for qualified individuals with disabilities in employment and program participation, per the Americans with Disabilities Act and Texas law. Requests are made to the Executive Director (or designee) and addressed in a confidential interactive process.
 
@@ -153,7 +153,7 @@ c. **Pregnancy and family responsibilities.** Reasonable accommodation provided 
 
 d. **Documentation of accommodations** maintained confidentially in the affected person's file.
 
-## Section 11 — Compensation equity
+## Section 11. Compensation equity
 
 a. The Compensation Committee annually reviews compensation patterns by protected characteristic, to the extent the data sample permits, and addresses unexplained disparities.
 
@@ -161,7 +161,7 @@ b. Pay-equity audit included in the annual Compensation Committee review.
 
 c. Salary ranges are published in job postings.
 
-## Section 12 — Hiring practices
+## Section 12. Hiring practices
 
 a. Job descriptions written to attract diverse applicants. Required-vs-preferred qualifications distinguished. Unnecessary credentials (degree requirements unrelated to job performance) avoided.
 
@@ -171,7 +171,7 @@ c. Decisions documented; reasons-for-decline retained for the personnel-records 
 
 d. Reasonable steps taken to ensure outreach reaches diverse candidate pools (posting on HBCU and HSI career boards, BIPOC- and queer-affirming professional networks, disability-employment networks).
 
-## Section 13 — Companion and Contributor selection
+## Section 13. Companion and Contributor selection
 
 a. Companion selection criteria are published and aligned with HAND's mission. Companion selection does not turn on protected characteristics, except where serving a specific community (e.g., Indigenous-led organizations) is part of the program design and consistent with law.
 
@@ -179,7 +179,7 @@ b. Contributor screening focuses on skill, capacity, mutual fit, and Code of Eth
 
 c. Companion-Contributor matches consider language, cultural fit, and trust dynamics, not protected characteristics as such.
 
-## Section 14 — Training
+## Section 14. Training
 
 a. **At onboarding.** All staff, directors, Contributors, and other affiliates receive a copy of this Policy and acknowledge receipt.
 
@@ -189,7 +189,7 @@ c. **Specialized training** on harassment prevention for supervisors and for Con
 
 d. **Bystander intervention** training offered to all interested staff and Contributors.
 
-## Section 15 — Records and reporting
+## Section 15. Records and reporting
 
 a. **Investigation records** retained per the Document Retention Policy. Confidential and accessible only to the investigator, designated Board members, outside counsel, and as required by law.
 

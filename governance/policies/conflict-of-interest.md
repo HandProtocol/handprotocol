@@ -6,13 +6,13 @@
 
 ---
 
-## Article I — Purpose
+## Article I. Purpose
 
 The purpose of this Conflict of Interest Policy is to protect HAND Protocol Foundation's (the "**Corporation**") interests when it is contemplating entering into a transaction or arrangement that might benefit the private interest of an officer, director, or key employee, or might result in a possible excess benefit transaction under Internal Revenue Code §4958.
 
 This Policy is intended to supplement, not replace, applicable state and federal laws governing conflicts of interest applicable to nonprofit and charitable organizations.
 
-## Article II — Definitions
+## Article II. Definitions
 
 **Section 2.1 Interested Person.** Any director, officer, or member of a committee with Board-delegated powers, and any key employee (including the Executive Director), who has a Financial Interest as defined below, is an Interested Person.
 
@@ -32,7 +32,7 @@ A Financial Interest is **not necessarily a conflict of interest.** Under Sectio
 
 **Section 2.4 Companion or Contributor relationship.** A relationship as a Companion receiving services from HAND, or as a Contributor giving services through HAND, is **not by itself** a Financial Interest. However, a paid contract between the Corporation and an entity controlled by a Companion or Contributor is a Financial Interest and must be disclosed.
 
-## Article III — Procedures
+## Article III. Procedures
 
 **Section 3.1 Duty to disclose.** In connection with any actual or possible conflict of interest, an Interested Person must disclose the existence of the Financial Interest and be given the opportunity to disclose all material facts to the directors and members of committees with Board-delegated powers considering the proposed transaction or arrangement.
 
@@ -54,7 +54,7 @@ a. If the Board or committee has reasonable cause to believe a member has failed
 
 b. If, after hearing the member's response and after making further investigation as warranted by the circumstances, the Board or committee determines the member has failed to disclose an actual or possible conflict of interest, it shall take appropriate disciplinary and corrective action, up to and including removal under the Bylaws.
 
-## Article IV — Records of proceedings
+## Article IV. Records of proceedings
 
 The minutes of the Board and all committees with Board-delegated powers shall contain:
 
@@ -62,7 +62,7 @@ a. The names of the persons who disclosed or were found to have a Financial Inte
 
 b. The names of the persons present for discussions and votes relating to the transaction or arrangement, the content of the discussion (including any alternatives to the proposed transaction or arrangement considered), and a record of any votes taken in connection with the proceedings.
 
-## Article V — Compensation
+## Article V. Compensation
 
 a. A voting member of the Board who receives compensation, directly or indirectly, from the Corporation for services is precluded from voting on matters pertaining to that member's compensation.
 
@@ -72,7 +72,7 @@ c. No voting member of the Board or any committee whose jurisdiction includes co
 
 d. Procedures for setting compensation of the Executive Director shall follow the rebuttable-presumption procedure described in [`executive-compensation.md`](executive-compensation.md).
 
-## Article VI — Annual statements
+## Article VI. Annual statements
 
 Each director, officer, and key employee shall annually sign a statement which affirms such person:
 
@@ -86,7 +86,7 @@ d. Understands the Corporation is charitable and in order to maintain its federa
 
 The form for this annual statement is at [`../board/annual-disclosure-form.md`](../board/annual-disclosure-form.md).
 
-## Article VII — Periodic reviews
+## Article VII. Periodic reviews
 
 To ensure the Corporation operates in a manner consistent with charitable purposes and does not engage in activities that could jeopardize its tax-exempt status, periodic reviews shall be conducted. The periodic reviews shall, at a minimum, include the following subjects:
 
@@ -94,11 +94,11 @@ a. Whether compensation arrangements and benefits are reasonable, based on compe
 
 b. Whether partnerships, joint ventures, and arrangements with management organizations conform to the Corporation's written policies, are properly recorded, reflect reasonable investment or payments for goods and services, further charitable purposes, and do not result in inurement, impermissible private benefit, or in an excess benefit transaction.
 
-## Article VIII — Use of outside experts
+## Article VIII. Use of outside experts
 
 When conducting the periodic reviews provided for in Article VII, the Corporation may, but need not, use outside advisors. If outside experts are used, their use shall not relieve the Board of its responsibility for ensuring periodic reviews are conducted.
 
-## Article IX — Specific situations requiring disclosure
+## Article IX. Specific situations requiring disclosure
 
 Without limiting Article II, the following are situations that require disclosure under this Policy:
 
@@ -112,7 +112,7 @@ d. Any director, officer, or key employee who personally or whose family member 
 
 e. Any director, officer, or key employee who has been approached to serve on the board, advisory body, or staff of any organization that has a transaction or potential transaction with the Corporation.
 
-## Article X — Sovereign Companions specific provisions
+## Article X. Sovereign Companions specific provisions
 
 Given the program's open-source posture and group-ownership commitments, additional disclosure is required for:
 
@@ -124,7 +124,7 @@ c. Any equity or token holding in entities operating in the AI infrastructure sp
 
 Disclosure does not preclude participation; it requires recusal from procurement decisions involving the disclosed party.
 
-## Article XI — Open questions
+## Article XI. Open questions
 
 - **Threshold for "more than insubstantial" gifts.** Drafted as $100 cumulative annually. Some peer orgs use $250. Adjust at board adoption.
 - **Family member definition scope.** Drafted broadly to include domestic partners and household members. Texas BOC does not define; IRS uses "member of the family" loosely. Recommend keeping the broader definition.

@@ -6,13 +6,13 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 HAND Protocol Foundation (the "**Corporation**") is committed to the highest standards of ethical, moral, and legal conduct. This Policy establishes the means by which directors, officers, employees, volunteers, Contributors, and other affiliated individuals may report concerns about suspected wrongdoing and be protected from retaliation for doing so in good faith.
 
 The Sarbanes-Oxley Act §1107 prohibits retaliation against any person who provides truthful information to a law enforcement officer relating to the possible commission of any federal offense. That prohibition applies to all entities, nonprofit and for-profit. This Policy operationalizes that statutory protection and extends it to internal reporting.
 
-## Section 2 — Reportable concerns
+## Section 2. Reportable concerns
 
 This Policy applies to concerns about:
 
@@ -34,7 +34,7 @@ h. Knowing falsification of audit, regulatory, grant, or board records.
 
 This Policy is not a substitute for the Corporation's grievance, complaint, or human-resources procedures. Concerns that are properly handled through those channels (interpersonal disagreements, performance disputes, ordinary workplace concerns) should be raised there first.
 
-## Section 3 — Good faith reporting
+## Section 3. Good faith reporting
 
 A reporter is protected by this Policy if the reporter:
 
@@ -44,7 +44,7 @@ b. Reports the concern **without malice** and **not for personal gain**.
 
 A reporter need not have proof; reasonable belief based on observed facts is sufficient. Knowingly false or malicious reports are not protected and are themselves a violation of the Code of Ethics.
 
-## Section 4 — Reporting channels
+## Section 4. Reporting channels
 
 A reporter may raise a concern through any of the following channels, in any order:
 
@@ -65,11 +65,11 @@ e. **External hotline or counsel.** When all internal channels are unavailable o
 
 The Corporation shall publish current contact information for the Board Chair and Audit Committee Chair on its website and in the staff handbook.
 
-## Section 5 — Anonymous reporting
+## Section 5. Anonymous reporting
 
 A reporter may submit a concern anonymously. The Corporation maintains an anonymous submission method (currently: a dedicated email alias monitored by the Audit Committee Chair, and a postal mail option to a board P.O. box). Anonymous reports are taken seriously and investigated to the extent the available information permits, while recognizing that follow-up may be limited without the reporter's identity.
 
-## Section 6 — Protection from retaliation
+## Section 6. Protection from retaliation
 
 **No director, officer, employee, volunteer, Contributor, or affiliate of the Corporation shall retaliate against any person who, in good faith:**
 
@@ -83,7 +83,7 @@ c. Opposes any practice the reporter reasonably believes violates this Policy.
 
 **A person who engages in retaliation is subject to discipline up to and including termination of employment, removal from the Board, or termination of the affiliate relationship.**
 
-## Section 7 — Investigation procedure
+## Section 7. Investigation procedure
 
 a. The recipient of a report shall acknowledge receipt to the reporter (if identified) within **five (5) business days.**
 
@@ -99,15 +99,15 @@ f. Upon completion, the investigator shall produce a written report to the Board
 
 g. The Corporation shall take appropriate corrective action and shall communicate to the reporter (if identified) that the matter has been addressed, to the extent permitted by confidentiality and privacy requirements.
 
-## Section 8 — Confidentiality
+## Section 8. Confidentiality
 
 The Corporation shall keep the identity of the reporter and the substance of the report confidential to the maximum extent consistent with the need to investigate and to comply with law. Confidentiality cannot be guaranteed in all circumstances (for example, when law requires disclosure, or when the reporter's identity is necessary to a fair investigation), but the Corporation shall not voluntarily disclose the reporter's identity without consent.
 
-## Section 9 — Recordkeeping
+## Section 9. Recordkeeping
 
 All reports and investigation records shall be retained per the Document Retention Policy. Records of investigations are confidential and accessible only to the investigator, designated Board members, outside counsel, and as required by law.
 
-## Section 10 — Annual review
+## Section 10. Annual review
 
 The Audit Committee shall review this Policy annually and shall report to the Board on:
 
@@ -119,7 +119,7 @@ c. Any patterns suggesting systemic issues.
 
 d. Recommended amendments to this Policy.
 
-## Section 11 — Communication
+## Section 11. Communication
 
 The Corporation shall:
 

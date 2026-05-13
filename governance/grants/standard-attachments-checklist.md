@@ -25,19 +25,19 @@ The columns:
 
 | # | Item | Status | Owner | Last refreshed | Where to find | Notes |
 |---|---|---|---|---|---|---|
-| 1 | **IRS Determination Letter** (501(c)(3)) | Not yet applicable | Treasurer | — | — | Filing 1023 in 2026; Determination expected mid-2027. Until then, fiscal sponsor letter substitutes for some funders. |
-| 2 | **Most recent IRS Form 990** | Not yet applicable | Treasurer | — | — | First 990 due after first fiscal year close. Likely 990-N (postcard) in year one if gross receipts <$50K. |
-| 3 | **Audited financial statements** (most recent FY) | Not yet applicable | Treasurer | — | — | Year 1: compilation only. Year 2: review. Audit triggered by receipts >$1M or funder requirement. |
+| 1 | **IRS Determination Letter** (501(c)(3)) | Not yet applicable | Treasurer | (|) | Filing 1023 in 2026; Determination expected mid-2027. Until then, fiscal sponsor letter substitutes for some funders. |
+| 2 | **Most recent IRS Form 990** | Not yet applicable | Treasurer | (|) | First 990 due after first fiscal year close. Likely 990-N (postcard) in year one if gross receipts <$50K. |
+| 3 | **Audited financial statements** (most recent FY) | Not yet applicable | Treasurer | (|) | Year 1: compilation only. Year 2: review. Audit triggered by receipts >$1M or funder requirement. |
 | 4 | **Current operating budget** (board-approved) | In progress | Treasurer | TBD | [`budget-template.md`](budget-template.md) | Template ready; specifics adopt at first board meeting. |
 | 5 | **Year-to-date actual income and expenses** | In progress | Treasurer | TBD | Accounting system | Will produce monthly once bookkeeping is established. |
 | 6 | **Statement of Financial Position** (balance sheet) | In progress | Treasurer | TBD | Accounting system | As above. |
 | 7 | **List of board of directors** with affiliations and terms | In progress | Secretary | TBD | [`../board/composition-matrix.md`](../board/composition-matrix.md) | Roster populated once founding board seated. |
 | 8 | **List of major funders** (current and prior year) | In progress | Executive Director | TBD | [`funder-pipeline.md`](funder-pipeline.md) | Public list on website with funder permissions. |
-| 9 | **Organizational chart** | Not yet applicable | Executive Director | — | — | Trivial pre-staff; produce when first hires happen. |
+| 9 | **Organizational chart** | Not yet applicable | Executive Director | (|) | Trivial pre-staff; produce when first hires happen. |
 | 10 | **Strategic plan** | Ready (draft) | Executive Director / Board | 2026-05 | [`../programs/strategic-plan-2026-2028.md`](../programs/strategic-plan-2026-2028.md) | Adopted on board ratification. |
 | 11 | **Logic model or theory of change** | Ready (draft) | Executive Director | 2026-05 | [`../programs/theory-of-change.md`](../programs/theory-of-change.md), [`../programs/logic-model.md`](../programs/logic-model.md) | Both documents ready. |
 | 12 | **Project budget** (if requesting project support) | Per-application | Executive Director / Treasurer | Per-app | Drafted per grant | Template at [`budget-template.md`](budget-template.md). |
-| 13 | **W-9** and tax-ID verification | In progress | Treasurer | — | — | Filed after EIN issuance, which is post-incorporation. |
+| 13 | **W-9** and tax-ID verification | In progress | Treasurer | (|) | Filed after EIN issuance, which is post-incorporation. |
 | 14 | **Conflict-of-interest, whistleblower, and document retention policies** | Ready (draft) | Secretary | 2026-05 | [`../policies/conflict-of-interest.md`](../policies/conflict-of-interest.md), [`../policies/whistleblower.md`](../policies/whistleblower.md), [`../policies/document-retention.md`](../policies/document-retention.md) | All three drafted; adopted on board ratification. |
 | 15 | **Diversity / Equity / Inclusion statement** | Ready (draft) | Executive Director | 2026-05 | [`../policies/equal-opportunity-and-harassment.md`](../policies/equal-opportunity-and-harassment.md) §§2-3 | Active-practice posture, not boilerplate. |
 
@@ -71,7 +71,7 @@ Some funders require additional documents beyond the standard 15:
 ### Texas community foundations (Hogg, St. David's, Austin CF)
 
 - **Texas residency / service-area documentation.** HAND domiciled in Austin (Travis County).
-- **2 years operating history** (Austin CF eligibility) — HAND will reach this in 2028; until then, ineligible.
+- **2 years operating history** (Austin CF eligibility), HAND will reach this in 2028; until then, ineligible.
 - **Project-specific budget** with the foundation's preferred template (typically Google Sheets).
 
 ### Trust-based / MacKenzie Scott / Yield Giving

@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 HAND Protocol Foundation commits to operate as if it will outlive any single person. Succession and replacement procedures protect:
 
@@ -30,7 +30,7 @@ This document covers five scenarios:
 
 Each scenario has its own triggers, actors, timeline, and documentation requirements.
 
-## Section 2 — Emergency Executive Director succession
+## Section 2. Emergency Executive Director succession
 
 ### Trigger
 
@@ -126,7 +126,7 @@ Every step of the emergency response is documented:
 
 Documentation retained permanently in board records.
 
-## Section 3 — Planned Executive Director transition
+## Section 3. Planned Executive Director transition
 
 ### Trigger
 
@@ -167,7 +167,7 @@ c. **Companion-specific continuity plan** ensures each active Companion group ha
 - Departing ED's handoff documents.
 - Incoming ED's 90-day onboarding plan.
 
-## Section 4 — Founder departure
+## Section 4. Founder departure
 
 ### Context
 
@@ -232,7 +232,7 @@ a. **Brand.** The name "HAND Protocol Foundation," the visual identity, the meth
 
 b. **Personal brand.** The founder retains their own name, professional reputation, and personal writing or speaking.
 
-## Section 5 — Board Chair succession
+## Section 5. Board Chair succession
 
 ### Planned
 
@@ -256,7 +256,7 @@ b. **Special election** at the next regular Board meeting to elect a new Vice Ch
 - Outgoing Chair's transition memo to the incoming Chair.
 - Updated officer slate filed with the bank and on internal records.
 
-## Section 6 — Director removal
+## Section 6. Director removal
 
 ### Grounds
 
@@ -308,7 +308,7 @@ b. **Records access.** The removed director's access to Corporation records term
 
 c. **Public commentary.** The removed director's public commentary is the director's own, and HAND does not engage in public disputes. HAND may correct material factual misstatements about itself, but generally maintains a high silence.
 
-## Section 7 — Common provisions
+## Section 7. Common provisions
 
 ### Documentation retention
 
@@ -346,7 +346,7 @@ Personnel matters and removal proceedings are confidential. Communications outsi
 
 D&O liability insurance covers directors during their service and (typically) for a tail period after departure. Confirm tail coverage at policy renewal each year.
 
-## Section 8 — Specific commitments for the founding board
+## Section 8. Specific commitments for the founding board
 
 For HAND's founding Board (year zero through year three):
 

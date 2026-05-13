@@ -6,11 +6,11 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 This Code of Ethics articulates the values and conduct expected of every person acting in the name of HAND Protocol Foundation. It is a covenant, not a comprehensive rulebook. Specific policies (Conflict of Interest, Whistleblower, Privacy, Data Sovereignty) operationalize specific obligations; this Code names the underlying commitments.
 
-## Section 2 — Core commitments
+## Section 2. Core commitments
 
 Every person bound by this Code commits to:
 
@@ -30,7 +30,7 @@ g. **No reputation laundering.** Companions, Contributors, and partner organizat
 
 h. **Compliance with law and policy.** The letter and spirit of applicable law, the Bylaws, and the Corporation's policies.
 
-## Section 3 — Conflict of interest
+## Section 3. Conflict of interest
 
 a. Comply with the Conflict of Interest Policy and the annual disclosure form.
 
@@ -38,7 +38,7 @@ b. Disclose actual or potential conflicts promptly and proactively.
 
 c. Recuse from deliberations and votes on matters involving conflicts.
 
-## Section 4 — Use of Corporation resources
+## Section 4. Use of Corporation resources
 
 a. Use Corporation resources (funds, equipment, time, intellectual property, brand) for Corporation purposes, not personal benefit.
 
@@ -46,7 +46,7 @@ b. Minor personal use of resources (incidental email use, occasional personal ph
 
 c. Procurement decisions favor mission-aligned vendors (small business, BIPOC- and women-owned business, B Corps, cooperatives, mission-aligned platforms) where feasible.
 
-## Section 5 — Confidentiality
+## Section 5. Confidentiality
 
 a. Maintain confidentiality of Companion information, Contributor information, donor information, personnel matters, and internal deliberations.
 
@@ -54,7 +54,7 @@ b. Disclose only as required by law, by the Corporation's policies (for example,
 
 c. The duty of confidentiality survives the end of the affiliation with the Corporation.
 
-## Section 6 — Companion relationships
+## Section 6. Companion relationships
 
 a. Approach every Companion engagement as a long-term relationship, not a transaction or deliverable.
 
@@ -68,17 +68,17 @@ e. Honor sovereignty commitments to Companion groups (data ownership, adapter po
 
 f. Maintain boundaries: HAND's relationship with a Companion is the Corporation's, not any individual staff member's. Personal relationships with Companions outside the engagement are disclosed and managed under the Conflict of Interest Policy.
 
-## Section 7 — Contributor relationships
+## Section 7. Contributor relationships
 
 a. Treat Contributor time with the same care as donated dollars: account for it, deploy it well, acknowledge it.
 
-b. Match Contributors to Companions on a basis of skill fit, capacity, and mutual fit — not on Contributor convenience alone.
+b. Match Contributors to Companions on a basis of skill fit, capacity, and mutual fit, not on Contributor convenience alone.
 
 c. Be honest with prospective Contributors about scope, time commitment, and possible mismatches before they invest time.
 
 d. Respect Contributors' professional and personal boundaries.
 
-## Section 8 — Donor and funder relationships
+## Section 8. Donor and funder relationships
 
 a. Donor intent is honored. Restrictions are followed. Modifications are renegotiated, not self-imposed.
 
@@ -88,7 +88,7 @@ c. Marketing claims to donors are evidence-based. Where the evidence is weak, th
 
 d. The Corporation does not exaggerate impact, manufacture outcomes, or take credit for work done by others.
 
-## Section 9 — Public communications
+## Section 9. Public communications
 
 a. Public statements representing the Corporation are made only by authorized speakers (Executive Director, Board Chair, or designees).
 
@@ -98,7 +98,7 @@ c. Where the personal and institutional are unavoidably mixed (a founder posting
 
 d. No personal attacks on individuals affiliated with peer organizations, funders, or the field generally. Disagreements addressed through honest engagement.
 
-## Section 10 — Mutual respect
+## Section 10. Mutual respect
 
 a. Treat every person associated with the Corporation, every Companion, every Contributor, every donor, and every member of the public with dignity and respect, regardless of background, identity, or status.
 
@@ -106,7 +106,7 @@ b. Disagreements addressed directly and respectfully, with focus on substance.
 
 c. Power imbalances acknowledged. Where HAND is in a more powerful position relative to a Companion, the asymmetry is named and worked against, not exploited.
 
-## Section 11 — Boundaries and self-care
+## Section 11. Boundaries and self-care
 
 a. HAND staff and volunteers commit to sustainable pace. Burnout is a structural failure, not a personal one, and is treated as such.
 
@@ -114,7 +114,7 @@ b. Boundaries with Companions, donors, and the public are professional and prote
 
 c. The Corporation does not glamorize overwork.
 
-## Section 12 — Conflicts within HAND
+## Section 12. Conflicts within HAND
 
 a. Workplace conflicts are addressed first directly between the people involved, then through supervisor mediation, then through HR, then through the Executive Director, then (for matters involving the Executive Director) through the Board Chair.
 
@@ -122,7 +122,7 @@ b. The Whistleblower Policy provides protection for raising concerns that escala
 
 c. Resolution may include mediation, coaching, training, policy changes, or, in serious cases, separation. The Corporation does not retaliate against those who raise concerns in good faith.
 
-## Section 13 — Specific prohibitions
+## Section 13. Specific prohibitions
 
 a. **Misuse of position.** No personal benefit from the Corporation's relationships, vendors, or resources beyond authorized compensation and reimbursement.
 
@@ -136,15 +136,15 @@ e. **Falsification of records.** No alteration, destruction, or falsification of
 
 f. **Discrimination or harassment.** Conduct that creates a hostile environment for any person; see [`equal-opportunity-and-harassment.md`](equal-opportunity-and-harassment.md).
 
-## Section 14 — Reporting violations
+## Section 14. Reporting violations
 
 Any person who suspects a violation of this Code may report under the Whistleblower Policy ([`whistleblower.md`](whistleblower.md)). Good-faith reports are protected from retaliation regardless of whether the report turns out to be substantiated.
 
-## Section 15 — Acknowledgment
+## Section 15. Acknowledgment
 
 Each director, officer, employee, and Contributor entering a formal engagement with the Corporation shall acknowledge in writing that they have received this Code of Ethics, have read it, and agree to abide by it. Annual re-acknowledgment is required for directors, officers, and employees.
 
-## Section 16 — Living document
+## Section 16. Living document
 
 This Code is the values floor, not a ceiling. The Corporation aspires to do better than the Code requires. Where this Code conflicts with a more specific policy, the more specific policy controls.
 

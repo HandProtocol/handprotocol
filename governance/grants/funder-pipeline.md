@@ -20,7 +20,7 @@ The funder pipeline is HAND's master tracker for fundraising. Each entry include
 
 The pipeline is **not** a public document. The repository carries the structural template; specific outreach status is maintained in the Executive Director's working copy.
 
-## Section 1 — Fit tiers
+## Section 1. Fit tiers
 
 Funders are ranked by alignment with HAND's posture across three vectors:
 
@@ -32,7 +32,7 @@ c. **AI sovereignty alignment.** Open-source AI, group-owned data, responsible A
 
 A funder strong on all three is a **Tier 1** prospect. Strong on two is **Tier 2**. Strong on one is **Tier 3**.
 
-## Section 2 — Tier 1 prospects
+## Section 2. Tier 1 prospects
 
 These funders are the closest philosophical kin to HAND. Most are relationship-led; the path is sustained engagement, not application.
 
@@ -75,7 +75,7 @@ These funders are the closest philosophical kin to HAND. Most are relationship-l
 - **Notes:** Highly competitive. Strategic plan, audited financials, business plan all required. Audited financials are HAND's gap until Year 2-3.
 - **Risk:** Long shot but high upside if selected.
 
-## Section 3 — Tier 2 prospects
+## Section 3. Tier 2 prospects
 
 Strong on two of three alignment vectors. Often more accessible than Tier 1.
 
@@ -140,7 +140,7 @@ Strong on two of three alignment vectors. Often more accessible than Tier 1.
 - **Status:** Cold.
 - **Next action:** Research current portfolio; identify warm pathway.
 
-## Section 4 — Tier 3 and aligned prospects
+## Section 4. Tier 3 and aligned prospects
 
 Reasonable alignment on one vector; lower priority unless an opportunity opens.
 
@@ -181,7 +181,7 @@ Reasonable alignment on one vector; lower priority unless an opportunity opens.
 - **Access:** Various.
 - **Status:** Defer until program shape includes formal entrepreneur pipeline.
 
-## Section 5 — Individual donor pipeline
+## Section 5. Individual donor pipeline
 
 The angel-number tier ladder structures individual giving:
 
@@ -193,7 +193,7 @@ The angel-number tier ladder structures individual giving:
 
 Major-donor tracker maintained separately by the Executive Director. Per [`../policies/gift-acceptance.md`](../policies/gift-acceptance.md), individual major gifts above 2% of expected 5-year revenue are reviewed for public-support-test implications.
 
-## Section 6 — DAF and workplace giving
+## Section 6. DAF and workplace giving
 
 Worth setting up infrastructure even before any inflow:
 
@@ -205,7 +205,7 @@ Worth setting up infrastructure even before any inflow:
 | **The Giving Block** | Crypto donations infrastructure once needed. |
 | **Network for Good** | Backup donation infrastructure. |
 
-## Section 7 — Pipeline metrics
+## Section 7. Pipeline metrics
 
 Tracked quarterly:
 
@@ -215,7 +215,7 @@ Tracked quarterly:
 - **Funder diversification ratio** (top funder % of total revenue).
 - **Application time investment** (hours per application; ROI).
 
-## Section 8 — What HAND does not pursue
+## Section 8. What HAND does not pursue
 
 Honesty about what's outside the pipeline:
 
@@ -229,7 +229,7 @@ d. **AI vendor sponsorships** that compromise sovereignty principles. No "powere
 
 e. **Anything that would require modifying the eight Sovereign Companions principles.** Funder pressure to do so is itself a signal of misalignment.
 
-## Section 9 — Relationship cultivation discipline
+## Section 9. Relationship cultivation discipline
 
 For each Tier 1 and Tier 2 funder:
 

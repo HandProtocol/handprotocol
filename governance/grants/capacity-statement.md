@@ -47,7 +47,7 @@ All published in this repository under [`../`](../).
 
 ### Domain expertise
 
-- Founder with: [founder bio summary, to be filled in at adoption — typically 1-2 paragraphs covering: prior work; recognition as practitioner; relevant relationships; specific gap-identification track record]
+- Founder with: [founder bio summary, to be filled in at adoption, typically 1-2 paragraphs covering: prior work; recognition as practitioner; relevant relationships; specific gap-identification track record]
 
 - Advisory and Contributor relationships across the practitioner, technology, and capacity-building fields.
 

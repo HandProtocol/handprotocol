@@ -94,11 +94,11 @@ If you are reading this as a prospective board member or funder, the four docume
 
 These will be added as the work progresses. Items marked **before filing** must exist before submitting Form 1023.
 
-- **Insurance policies** — D&O, general liability, cyber. To be put in place before any program activity. Quote requests out to 3 brokers.
-- **Audited financials** — not required until receipts exceed thresholds; HAND is pre-revenue. **Compilation** in year one, **review** in year two, **audit** triggered by funder requirement or revenue >$500K.
-- **Form 990 history** — N/A until year one closes. The first 990 will be Form 990-N (postcard) if receipts <$50K, Form 990-EZ if <$200K and assets <$500K, full Form 990 otherwise.
-- **Texas Comptroller exemption letter** — filed via Form AP-204 **after** IRS Determination Letter arrives.
-- **Multi-state charitable solicitation registrations** — not required at HAND's current scale and Texas domicile. See [`COMPLIANCE-CALENDAR.md`](COMPLIANCE-CALENDAR.md) for triggers.
+- **Insurance policies:** D&O, general liability, cyber. To be put in place before any program activity. Quote requests out to 3 brokers.
+- **Audited financials:** not required until receipts exceed thresholds; HAND is pre-revenue. **Compilation** in year one, **review** in year two, **audit** triggered by funder requirement or revenue >$500K.
+- **Form 990 history:** N/A until year one closes. The first 990 will be Form 990-N (postcard) if receipts <$50K, Form 990-EZ if <$200K and assets <$500K, full Form 990 otherwise.
+- **Texas Comptroller exemption letter:** filed via Form AP-204 **after** IRS Determination Letter arrives.
+- **Multi-state charitable solicitation registrations:** not required at HAND's current scale and Texas domicile. See [`COMPLIANCE-CALENDAR.md`](COMPLIANCE-CALENDAR.md) for triggers.
 
 ## Voice and conventions
 

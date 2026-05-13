@@ -8,7 +8,7 @@
 
 ---
 
-## Part IV — Narrative description of your activities
+## Part IV. Narrative description of your activities
 
 ### Past, present, and planned activities
 
@@ -132,7 +132,7 @@ In addition to the three programs, the Organization conducts the following activ
 
 ---
 
-## Part V — Compensation and other financial arrangements
+## Part V. Compensation and other financial arrangements
 
 **Compensation of officers and directors.** Directors serve without compensation for board service. Officers serve without compensation for officer service. The Organization's Bylaws (§4.8) prohibit compensation for board or officer service except for reimbursement of documented expenses.
 
@@ -146,7 +146,7 @@ In addition to the three programs, the Organization conducts the following activ
 
 ---
 
-## Part VI — Members and other individuals and organizations that receive benefits
+## Part VI. Members and other individuals and organizations that receive benefits
 
 **Members.** The Organization has no voting members (Bylaws Article III). The Board of Directors manages the affairs of the Organization.
 
@@ -164,7 +164,7 @@ c. **The Sovereign Companions program** operates only with Companion groups alre
 
 ---
 
-## Part VIII — Specific activities
+## Part VIII. Specific activities
 
 ### Are you a successor to another organization?
 
@@ -214,9 +214,9 @@ The Organization is filing Form 1023 within 27 months of its date of formation, 
 
 ---
 
-## Part X — Public charity status
+## Part X. Public charity status
 
-The Organization requests classification as a **public charity** under **IRC §509(a)(1)** and **§170(b)(1)(A)(vi)** — the broadly-supported public charity category.
+The Organization requests classification as a **public charity** under **IRC §509(a)(1)** and **§170(b)(1)(A)(vi)**, the broadly-supported public charity category.
 
 ### Basis for classification
 
@@ -248,7 +248,7 @@ b. **Bylaws** as adopted at the organizational meeting.
 
 c. **Conflict of Interest Policy** adopted by the Board of Directors.
 
-d. **Form 1023 Schedule A** if applicable (church status — N/A here).
+d. **Form 1023 Schedule A** if applicable (church status, N/A here).
 
 e. **Form 1023 Schedule E** is not required because the application is within the 27-month window from formation.
 

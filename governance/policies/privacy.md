@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 This Policy governs the Corporation's collection, use, storage, and disclosure of personal information about visitors to its website, donors, Companions, Contributors, volunteers, prospective participants, staff, and other affiliated individuals. It is intended to:
 
@@ -18,7 +18,7 @@ c. Operationalize the Sovereign Companions sovereignty commitments to Companion-
 
 d. Establish staff procedures for handling personal information.
 
-## Section 2 — Information collected
+## Section 2. Information collected
 
 The Corporation collects the following categories of personal information:
 
@@ -38,17 +38,17 @@ g. **Personnel records** for staff and Contributors who work in formal relations
 
 h. **Sovereign Companions training data and audit logs.** Per the Data Sovereignty and AI Policy.
 
-## Section 3 — How information is used
+## Section 3. How information is used
 
 The Corporation uses personal information only for:
 
-a. **Operating the Corporation's programs** — matching Contributors to Companions, providing accompaniment services, building Sovereign Companions adapters, evaluating outcomes.
+a. **Operating the Corporation's programs**, matching Contributors to Companions, providing accompaniment services, building Sovereign Companions adapters, evaluating outcomes.
 
-b. **Communicating with subscribers, donors, Companions, Contributors, and the public** — newsletter, donation receipts, program updates, event invitations.
+b. **Communicating with subscribers, donors, Companions, Contributors, and the public**, newsletter, donation receipts, program updates, event invitations.
 
 c. **Processing donations** and providing tax substantiation.
 
-d. **Complying with law** — IRS reporting, audit responses, lawful requests from regulators or law enforcement.
+d. **Complying with law**, IRS reporting, audit responses, lawful requests from regulators or law enforcement.
 
 e. **Improving website and program effectiveness** based on aggregated, de-identified data.
 
@@ -60,7 +60,7 @@ The Corporation does **not** use personal information for:
 - Training general-purpose AI models on identifiable data.
 - Surveillance or behavioral tracking beyond what is needed for program operation.
 
-## Section 4 — Sharing of information
+## Section 4. Sharing of information
 
 a. **Vendors and service providers.** The Corporation shares personal information only with vendors necessary for operations (payment processor, email service, accounting software, cloud storage), under contracts that require equivalent privacy protections.
 
@@ -74,21 +74,21 @@ e. **Legal obligation.** The Corporation may disclose information when required 
 
 f. **Successor organization.** In the unlikely event of dissolution and merger with another exempt organization, personal information may transfer subject to the same protections. Companion-group-owned data does not transfer; it is returned to the Companion group.
 
-## Section 5 — Sensitive information
+## Section 5. Sensitive information
 
 Some categories of information require elevated protection:
 
-a. **Health information** related to Companions or program participants — not collected unless directly necessary, and stored separately with restricted access.
+a. **Health information** related to Companions or program participants, not collected unless directly necessary, and stored separately with restricted access.
 
-b. **Immigration status** of any person — not collected as part of intake or programming.
+b. **Immigration status** of any person, not collected as part of intake or programming.
 
-c. **Information about people experiencing or recovering from criminal-legal-system involvement** — handled with elevated care; not retained in identifiable form beyond program need.
+c. **Information about people experiencing or recovering from criminal-legal-system involvement**, handled with elevated care; not retained in identifiable form beyond program need.
 
-d. **Information about minors** — the Corporation does not knowingly collect personal information from individuals under 13 in compliance with COPPA. Programs involving minors (if any) require parental consent and additional safeguards.
+d. **Information about minors**, the Corporation does not knowingly collect personal information from individuals under 13 in compliance with COPPA. Programs involving minors (if any) require parental consent and additional safeguards.
 
-e. **Religious or political affiliation** — not collected as part of intake or programming.
+e. **Religious or political affiliation**, not collected as part of intake or programming.
 
-## Section 6 — Companion-group data sovereignty
+## Section 6. Companion-group data sovereignty
 
 For data attributable to a specific Companion group within the Sovereign Companions program:
 
@@ -104,7 +104,7 @@ e. On graduation, departure, or HAND closure, data is transferred to the Compani
 
 Detailed provisions in [`data-sovereignty-and-ai.md`](data-sovereignty-and-ai.md).
 
-## Section 7 — Storage and security
+## Section 7. Storage and security
 
 a. **Encryption in transit** for all systems that transmit personal information.
 
@@ -120,7 +120,7 @@ f. **Backup and recovery** procedures protect against data loss; backups subject
 
 g. **Incident response.** Security incidents are investigated, contained, and remediated. Affected individuals are notified per applicable law.
 
-## Section 8 — Retention
+## Section 8. Retention
 
 Personal information is retained per the Document Retention Policy. Key retention periods:
 
@@ -136,7 +136,7 @@ e. Mailing-list subscriptions: until unsubscribe.
 
 f. Sovereign Companions: per [`data-sovereignty-and-ai.md`](data-sovereignty-and-ai.md).
 
-## Section 9 — Your rights
+## Section 9. Your rights
 
 The Corporation honors the following rights for every person whose personal information it holds, regardless of jurisdiction:
 
@@ -156,15 +156,15 @@ g. **For Companion groups in the Sovereign Companions program**: the rights abov
 
 Requests addressed to **hand@handprotocol.org** with subject "Privacy Request." Response within 30 days.
 
-## Section 10 — Cookies
+## Section 10. Cookies
 
 The Corporation's website uses **no third-party tracking cookies** and **no advertising cookies**. First-party cookies are limited to functional necessities (session management, accessibility preferences). Analytics is server-side or privacy-respecting client-side without cross-site tracking.
 
-## Section 11 — Children's privacy
+## Section 11. Children's privacy
 
 The Corporation's services are not directed to children under 13. The Corporation does not knowingly collect personal information from children under 13. If the Corporation learns it has collected such information, it deletes the information promptly. COPPA applies.
 
-## Section 12 — International transfers
+## Section 12. International transfers
 
 a. Personal information may be processed by vendors with infrastructure in the United States and elsewhere.
 
@@ -172,15 +172,15 @@ b. For EU/UK residents, the Corporation relies on Standard Contractual Clauses w
 
 c. The Corporation does not currently maintain a UK or EU data protection representative; if EU/UK resident processing materially expands, a representative is appointed per GDPR Art. 27.
 
-## Section 13 — California, Texas, and other state law
+## Section 13. California, Texas, and other state law
 
 a. **California (CCPA / CPRA).** California residents have the rights described in Section 9. The Corporation does not sell personal information.
 
 b. **Texas (TDPSA).** Texas residents have similar rights under the Texas Data Privacy and Security Act effective July 2024.
 
-c. **Other states** with comprehensive privacy laws (Virginia, Colorado, Connecticut, Utah, Iowa, Indiana, Tennessee, Montana, Oregon, Texas, Delaware, New Hampshire, New Jersey, Kentucky, Minnesota, Maryland) — same rights honored.
+c. **Other states** with comprehensive privacy laws (Virginia, Colorado, Connecticut, Utah, Iowa, Indiana, Tennessee, Montana, Oregon, Texas, Delaware, New Hampshire, New Jersey, Kentucky, Minnesota, Maryland), same rights honored.
 
-## Section 14 — Changes to this Policy
+## Section 14. Changes to this Policy
 
 a. Material changes to this Policy will be announced on the website at least 30 days before they take effect.
 
@@ -190,7 +190,7 @@ c. Continued use of the Corporation's services after a Policy change constitutes
 
 d. The Policy version and effective date are at the bottom of this document.
 
-## Section 15 — Contact
+## Section 15. Contact
 
 Privacy questions, requests, or complaints:
 

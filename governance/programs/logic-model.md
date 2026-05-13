@@ -6,7 +6,7 @@
 
 ---
 
-## HAND Protocol Foundation — Logic Model
+## HAND Protocol Foundation: Logic Model
 
 | Inputs | Activities | Outputs | Outcomes (short term) | Outcomes (long term) | Impact |
 |---|---|---|---|---|---|

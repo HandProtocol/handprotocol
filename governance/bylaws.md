@@ -6,7 +6,7 @@
 
 ---
 
-## Article I — Name, offices, and fiscal year
+## Article I. Name, offices, and fiscal year
 
 **Section 1.1 Name.** The name of the corporation is **HAND Protocol Foundation** (the "**Corporation**").
 
@@ -16,7 +16,7 @@
 
 **Section 1.4 Fiscal year.** The fiscal year of the Corporation shall be the **calendar year**, January 1 through December 31, unless changed by resolution of the Board of Directors.
 
-## Article II — Purposes and mission
+## Article II. Purposes and mission
 
 **Section 2.1 Purposes.** The Corporation is organized and shall be operated exclusively for charitable, educational, and scientific purposes within the meaning of Section 501(c)(3) of the Internal Revenue Code, as set forth in the Certificate of Formation.
 
@@ -24,13 +24,13 @@
 
 **Section 2.3 Companions and Contributors as defined terms.** Throughout these Bylaws, "Companions" refers to the individuals and organizations HAND serves, and "Contributors" refers to the individuals who give time and skill into HAND's resource pool. These are governance terms, not marketing labels, and shall be used in all official Corporation documents.
 
-## Article III — No members
+## Article III. No members
 
 **Section 3.1 No members.** The Corporation shall have **no voting members.** All corporate powers shall be exercised by or under the authority of, and the business and affairs of the Corporation shall be managed by or under the direction of, the Board of Directors.
 
 **Section 3.2 Non-voting affiliates.** The Board of Directors may from time to time recognize categories of non-voting affiliates (for example, "Foundation Circle" donors, "Advisory Companions," "Contributor Council") for purposes of acknowledgment, consultation, or advisory input. No such affiliate category creates rights to vote on, control, or direct the affairs of the Corporation.
 
-## Article IV — Board of Directors
+## Article IV. Board of Directors
 
 **Section 4.1 Powers.** The Board of Directors shall have, and may exercise, all powers of the Corporation not reserved to others by law or by these Bylaws.
 
@@ -60,7 +60,7 @@ d. A director may serve **two consecutive three-year terms**, after which the di
 
 **Section 4.10 Fiduciary duties.** Each director owes the Corporation the duties of **care**, **loyalty**, and **obedience** (to mission and law) as defined under Texas BOC §22.221 and applicable case law.
 
-## Article V — Board meetings
+## Article V. Board meetings
 
 **Section 5.1 Regular meetings.** The Board shall meet at least **quarterly** in regular session, at times and locations fixed by the Board. The annual meeting shall be the regular meeting held in the first quarter of the fiscal year and shall include election of officers and review of annual financials.
 
@@ -80,7 +80,7 @@ d. A director may serve **two consecutive three-year terms**, after which the di
 
 **Section 5.9 Public observation.** Board meetings are not open to the public by default. The Board may, by majority vote, invite observers (Companions, Contributors, journalists, funders) for specific agenda items. Executive sessions on matters of personnel, legal advice, or sensitive financial detail shall be closed.
 
-## Article VI — Officers
+## Article VI. Officers
 
 **Section 6.1 Officers.** The officers of the Corporation shall be a **Board Chair**, a **Vice Chair**, a **Treasurer**, and a **Secretary**. The Board may create additional officer positions. The Board may not combine the offices of Chair and Secretary in the same person.
 
@@ -100,7 +100,7 @@ d. **Secretary.** Maintains corporate records, including minutes, bylaws, and th
 
 **Section 6.5 Executive Director.** The Board shall, when budget and operating need warrant, appoint an **Executive Director** as the chief executive officer of the Corporation. The Executive Director is **not a director** but shall attend Board meetings as a non-voting ex-officio participant, except when the Board is in executive session on matters concerning the Executive Director's evaluation, compensation, or employment. Compensation is set under [`policies/executive-compensation.md`](policies/executive-compensation.md).
 
-## Article VII — Committees
+## Article VII. Committees
 
 **Section 7.1 Standing committees.** The Board shall establish the following standing committees:
 
@@ -120,7 +120,7 @@ f. **Sovereign Companions Oversight Committee.** Oversees the AI workstream. Com
 
 **Section 7.3 Composition and authority.** Each committee shall include at least one director. Committees may include non-director members (Companions, Contributors, subject-matter experts). Committee actions that bind the Corporation must be ratified by the Board, except where the Board has expressly delegated final authority within the limits of §22.219.
 
-## Article VIII — Indemnification and insurance
+## Article VIII. Indemnification and insurance
 
 **Section 8.1 Indemnification.** To the fullest extent permitted by Texas BOC §§8.001 et seq., the Corporation shall indemnify each present and former director, officer, employee, and agent of the Corporation against expenses (including attorneys' fees), judgments, fines, and amounts paid in settlement actually and reasonably incurred in connection with any threatened, pending, or completed action, suit, or proceeding arising out of service to the Corporation.
 
@@ -130,7 +130,7 @@ f. **Sovereign Companions Oversight Committee.** Oversees the AI workstream. Com
 
 **Section 8.4 Volunteers.** Volunteers, including Contributors, are covered by the Corporation's indemnification and insurance to the extent permitted by the **Texas Charitable Immunity and Liability Act** (Tex. Civ. Prac. & Rem. Code Ch. 84) and the federal **Volunteer Protection Act** (42 U.S.C. §14501 et seq.).
 
-## Article IX — Financial administration
+## Article IX. Financial administration
 
 **Section 9.1 Books and records.** The Corporation shall keep correct and complete books and records of account.
 
@@ -144,13 +144,13 @@ f. **Sovereign Companions Oversight Committee.** Oversees the AI workstream. Com
 
 **Section 9.5 Conflict of interest in compensation.** No director shall vote on the compensation of any other officer or employee with whom that director has a family or business relationship as defined in the Conflict of Interest Policy.
 
-## Article X — Bylaws as living document
+## Article X. Bylaws as living document
 
 **Section 10.1 Adoption.** These Bylaws were adopted by the initial Board of Directors at the organizational meeting on [date], pursuant to Texas BOC §22.107.
 
 **Section 10.2 Effective date.** These Bylaws are effective on the date of adoption.
 
-## Article XI — Sovereign Companions: governance of the AI workstream
+## Article XI. Sovereign Companions: governance of the AI workstream
 
 **Section 11.1 Recognition.** The Corporation has established a program known as **Sovereign Companions**, providing custom open-source agent systems for individual Companions and Companion groups under explicit data sovereignty commitments.
 
@@ -160,7 +160,7 @@ f. **Sovereign Companions Oversight Committee.** Oversees the AI workstream. Com
 
 **Section 11.4 Oversight.** The Sovereign Companions Oversight Committee shall review the program annually and shall publish the Annual AI Accountability Report no later than the anniversary of the first deployment each year.
 
-## Article XII — Records and public disclosure
+## Article XII. Records and public disclosure
 
 **Section 12.1 Records open to directors.** Every director has the right to inspect and copy the books, records, and documents of the Corporation at any reasonable time for any purpose reasonably related to the director's position.
 
@@ -172,7 +172,7 @@ c. The three most recent Forms 990 (with Schedule B donor information redacted t
 
 **Section 12.3 Open by default for governance documents.** The Corporation shall publish, on its public website, current versions of its Bylaws, Conflict of Interest Policy, Whistleblower Policy, Document Retention Policy, Theory of Change, Strategic Plan, and Annual Report. This commitment exceeds the legal minimum and reflects HAND's brand commitment to transparency.
 
-## Article XIII — Amendments
+## Article XIII. Amendments
 
 **Section 13.1 Authority to amend.** These Bylaws may be amended, repealed, or replaced by the affirmative vote of **two-thirds (2/3)** of the directors then in office at a meeting at which a quorum is present.
 
@@ -180,7 +180,7 @@ c. The three most recent Forms 990 (with Schedule B donor information redacted t
 
 **Section 13.3 Limitations.** No amendment shall be effective that would cause the Corporation to fail to qualify as an organization described in IRC §501(c)(3). Amendments to the purpose or dissolution clauses require coordination with the Certificate of Formation and may require filing a Certificate of Amendment with the Texas Secretary of State.
 
-## Article XIV — Dissolution
+## Article XIV. Dissolution
 
 **Section 14.1 Voluntary dissolution.** The Corporation may be dissolved by a vote of two-thirds (2/3) of the directors then in office, in accordance with Texas BOC Chapter 11.
 
@@ -188,7 +188,7 @@ c. The three most recent Forms 990 (with Schedule B donor information redacted t
 
 **Section 14.3 Sovereign Companions handoff.** Notwithstanding Section 14.2, the Corporation shall transfer any Companion-group-owned adapters, training data, evaluation logs, and inference recipes to the respective Companion or Companion group at no cost as a condition precedent to general asset distribution.
 
-## Article XV — Construction
+## Article XV. Construction
 
 **Section 15.1 Severability.** If any provision of these Bylaws is held invalid, the remaining provisions remain in effect.
 

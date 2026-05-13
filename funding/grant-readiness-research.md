@@ -1,4 +1,4 @@
-# HAND Protocol Foundation — Grant-Readiness & 501(c)(3) Governance Research
+# HAND Protocol Foundation: Grant-Readiness & 501(c)(3) Governance Research
 
 **Prepared:** May 2026
 **Purpose:** Source material for governance documents, 501(c)(3) application, and grant-readiness checklist
@@ -41,7 +41,7 @@ HAND Protocol Foundation will be a domestic nonprofit corporation governed by **
 ### Texas franchise tax exemption (Form AP-204)
 
 - Filed with the **Texas Comptroller of Public Accounts** after the IRS Determination Letter is received.
-- Form AP-204: "Texas Application for Exemption — Federal and All Others."
+- Form AP-204: "Texas Application for Exemption, Federal and All Others."
 - Must attach the IRS Determination Letter; the name on the IRS letter must exactly match the name in the Articles of Incorporation.
 - Grants exemption from **franchise tax and state sales tax** on most purchases. Does **not** grant hotel occupancy tax exemption.
 - Reference: `comptroller.texas.gov/taxes/exempt/501(c)-exemptions-1.php`.
@@ -88,19 +88,19 @@ Form 1023-EZ instructions: `irs.gov/pub/irs-pdf/i1023ez.pdf` (Rev. January 2025)
 
 If Form 1023 is filed within **27 months** after the end of the month in which the organization was legally formed (date of SOS filing), and the IRS approves, the effective date of exempt status is **the date of formation**. Donations received from day one are retroactively deductible.
 
-If filed after 27 months, the effective date is generally the postmark date of the application, unless Schedule E good-cause relief is granted. **Form 1023-EZ does not support requesting an earlier effective date after 27 months** — only the long form does.
+If filed after 27 months, the effective date is generally the postmark date of the application, unless Schedule E good-cause relief is granted. **Form 1023-EZ does not support requesting an earlier effective date after 27 months**, only the long form does.
 
 Reference: `irs.gov/charities-non-profits/form-1023-purpose-of-questions-about-organization-applying-more-than-27-months-after-date-of-formation`.
 
 ### Public charity vs. private foundation
 
-A new 501(c)(3) is **classified as a private foundation by default** unless it can show it will qualify as a public charity. HAND should request public-charity status under **IRC §509(a)(1) and §170(b)(1)(A)(vi)** — the "broadly-supported" public charity category.
+A new 501(c)(3) is **classified as a private foundation by default** unless it can show it will qualify as a public charity. HAND should request public-charity status under **IRC §509(a)(1) and §170(b)(1)(A)(vi)**, the "broadly-supported" public charity category.
 
 ### The public support test
 
 Two parallel tests apply to broadly-supported public charities:
 
-- **§509(a)(1) / §170(b)(1)(A)(vi) test:** at least **one-third (33⅓%) of total support** over a rolling 5-year window must come from **public sources** (government, other public charities, and "small donors" — contributions counted only up to 2% of total support per donor over the 5 years).
+- **§509(a)(1) / §170(b)(1)(A)(vi) test:** at least **one-third (33⅓%) of total support** over a rolling 5-year window must come from **public sources** (government, other public charities, and "small donors", contributions counted only up to 2% of total support per donor over the 5 years).
 - **§509(a)(2) test:** more than one-third from contributions, membership fees, and gross receipts from exempt-function activities, with no more than one-third from investment income.
 - **10% facts-and-circumstances test:** if public support is between 10% and 33⅓%, the organization may still qualify as public if it shows broadly attractive sources, active fundraising program, representative governing body, and similar facts.
 
@@ -108,7 +108,7 @@ The advance ruling period has been eliminated; new organizations are presumed to
 
 Reference: `irs.gov/charities-non-profits/exempt-organizations-annual-reporting-requirements-form-990-schedules-a-and-b-public-charity-support-test`.
 
-**Practical implication for HAND:** angel-number tier gifts ($77,777, $22,222, $7,777 etc.) from individual donors generally count fully if each donor's cumulative gifts stay under 2% of 5-year total support. A single anchor gift larger than that 2% threshold is counted only up to the 2% cap toward the public support fraction — design the donor pyramid accordingly.
+**Practical implication for HAND:** angel-number tier gifts ($77,777, $22,222, $7,777 etc.) from individual donors generally count fully if each donor's cumulative gifts stay under 2% of 5-year total support. A single anchor gift larger than that 2% threshold is counted only up to the 2% cap toward the public support fraction, design the donor pyramid accordingly.
 
 ---
 
@@ -124,7 +124,7 @@ Form 990 Part VI is the governance disclosure section. The IRS position (per the
 | **Whistleblower policy** | Not required, but Sarbanes-Oxley §1107 anti-retaliation applies to all entities | VI-B line 13 | Must specify protection from retaliation and identify reporting parties |
 | **Document Retention & Destruction policy** | SOX §802 applies to all entities re: destroying records during an investigation | VI-B line 14 | Must include immediate suspension of destruction upon any indication of investigation or litigation |
 | **Executive Compensation review (rebuttable-presumption procedure)** | IRC §4958 + Treas. Reg. §53.4958-6 | VI-B line 15a–15b | See below |
-| **Joint Venture policy** | If applicable — only if entering joint ventures with for-profits | VI-B line 16a–16b | Protects against private inurement when partnering with for-profits |
+| **Joint Venture policy** | If applicable, only if entering joint ventures with for-profits | VI-B line 16a–16b | Protects against private inurement when partnering with for-profits |
 | **Gift Acceptance policy** | Not required, but expected for any org accepting non-cash gifts | Schedule M line 31 | Required disclosure on Schedule M when non-cash contributions exceed $25,000/year |
 
 ### Rebuttable-presumption procedure (compensation)
@@ -132,7 +132,7 @@ Form 990 Part VI is the governance disclosure section. The IRS position (per the
 Under **Treas. Reg. §53.4958-6**, an exempt organization establishes a "rebuttable presumption of reasonableness" for executive compensation if:
 
 1. The arrangement is approved in advance by an **authorized body** (typically the board or compensation committee) composed of individuals **without conflicts of interest** as to the transaction.
-2. The body **obtained and relied upon appropriate comparability data** — for orgs with annual gross receipts <$1M, three comparables are sufficient (the "small organization" safe harbor).
+2. The body **obtained and relied upon appropriate comparability data**, for orgs with annual gross receipts <$1M, three comparables are sufficient (the "small organization" safe harbor).
 3. The body **adequately and contemporaneously documented** the basis for its decision in meeting minutes.
 
 If all three are met, the IRS can rebut only by showing the comparability data itself was flawed. Failure exposes "disqualified persons" (e.g., the ED) to a **first-tier 25% excise tax** on excess benefit and the approving managers to a **10% excise tax** (capped at $20,000); second-tier penalty is **200%** if not corrected. References: `irs.gov/charities-non-profits/charitable-organizations/rebuttable-presumption-intermediate-sanctions`; IRC §4958.
@@ -171,7 +171,7 @@ Trust-based and traditional funders alike converge on a roughly standard due-dil
 12. **Project budget** if requesting project support.
 13. **W-9** and tax-ID verification.
 14. **Conflict-of-interest, whistleblower, and document retention policies** (referenced or attached).
-15. **Diversity / Equity / Inclusion statement** — increasingly standard, especially among Texas community foundations.
+15. **Diversity / Equity / Inclusion statement**, increasingly standard, especially among Texas community foundations.
 
 All financial documentation should cover the **same fiscal year period** and be **less than two years old**.
 
@@ -180,12 +180,12 @@ All financial documentation should cover the **same fiscal year period** and be 
 **MacKenzie Scott / Yield Giving** (which has given over $19 billion since 2020 across 2,700+ grants):
 - Open Call applications via Lever for Change reviewed by **peer panels of nonprofit leaders** rather than program officers.
 - Due diligence packet: strategic plan, audited financials, business plan, organization chart, grantmaking process.
-- Final round: external Evaluation Panel + final due diligence — financial health, leadership quality, programmatic depth, equity practice.
+- Final round: external Evaluation Panel + final due diligence, financial health, leadership quality, programmatic depth, equity practice.
 - No restricted use of funds, no reporting required, multi-year unrestricted grants typical.
 
 **Kataly Foundation:** Spend-down foundation; **no unsolicited applications**. Grants made through four core programs (Mindful Methods for Leaders, Restorative Economies, Environmental Justice Resourcing Collective, Solidarity & Resilience). To be considered, organizations need to be in the orbit of a current grantee or staff member. Pathway: build relationships, join Solidaire learning series.
 
-**Solidaire Network:** Member-funded donor network; grants flow from member-led funds. Pathway is similar — relationship-led, not application-led.
+**Solidaire Network:** Member-funded donor network; grants flow from member-led funds. Pathway is similar, relationship-led, not application-led.
 
 **Hogg Foundation for Mental Health (Texas):** RFP-driven only; no unsolicited proposals. Uses Fluxx grants management system; eligibility generally limited to Texas-based 501(c)(3)s (with some exceptions for universities and government). Requires structured project budget in Google Sheets template.
 
@@ -210,14 +210,14 @@ All financial documentation should cover the **same fiscal year period** and be 
 
 While waiting for IRS Determination (or as a long-term strategy), HAND could operate under fiscal sponsorship. The seminal taxonomy is Gregory Colvin's *Fiscal Sponsorship: 6 Ways To Do It Right.*
 
-### Model A — "Comprehensive" / "Direct Project"
+### Model A: "Comprehensive" / "Direct Project"
 
 - The sponsored project is **legally part of the sponsor**; staff are sponsor employees; assets are sponsor assets.
 - Sponsor has full fiduciary/legal control.
 - Typical fee: **9–15% of revenue**.
 - Best when project does not have its own 501(c)(3) and may not get one (or is testing viability).
 
-### Model C — "Pre-approved Grant Relationship"
+### Model C: "Pre-approved Grant Relationship"
 
 - The project remains a **separate legal entity** (LLC, unincorporated association, or pending nonprofit).
 - Sponsor receives tax-deductible donations earmarked for the project, then **re-grants** them under written grant agreement.
@@ -225,7 +225,7 @@ While waiting for IRS Determination (or as a long-term strategy), HAND could ope
 - Typical fee: **5–10% of revenue**.
 - Best when the project will incorporate and apply for its own 501(c)(3) on a known timeline.
 
-**Recommendation for HAND:** Model C — preserves HAND Protocol Foundation as a distinct legal entity that completes its own 1023, while allowing tax-deductible giving to flow immediately.
+**Recommendation for HAND:** Model C, preserves HAND Protocol Foundation as a distinct legal entity that completes its own 1023, while allowing tax-deductible giving to flow immediately.
 
 ### Active fiscal sponsor options (as of May 2026)
 
@@ -240,7 +240,7 @@ While waiting for IRS Determination (or as a long-term strategy), HAND could ope
 | **NEO Philanthropy** | Variable | Movement-oriented; primarily by invitation |
 | **Aspiration's Fiscal Sponsorship Program** | Variable | Tech, data, digital-rights projects |
 | **The Workers Lab** | N/A as general sponsor | Worker-power focused; primarily an incubator, not a general fiscal sponsor |
-| **Open Collective Foundation** | **CLOSED** | Dissolved **December 31, 2024** — no longer available. Open Source Collective and Open Collective Europe still operate for narrower scopes |
+| **Open Collective Foundation** | **CLOSED** | Dissolved **December 31, 2024**, no longer available. Open Source Collective and Open Collective Europe still operate for narrower scopes |
 
 ### Trade-offs for HAND specifically
 
@@ -266,18 +266,18 @@ While waiting for IRS Determination (or as a long-term strategy), HAND could ope
 
 Published in *The Source: Twelve Principles of Governance That Power Exceptional Boards* (BoardSource):
 
-1. **Constructive Partnership** — board and CEO share leadership.
-2. **Mission Driven** — every decision filtered through mission.
-3. **Strategic Thinking** — focus on strategy, not management.
-4. **Culture of Inquiry** — open, respectful, evidence-based.
-5. **Independent-Mindedness** — directors put org first, with rigorous COI procedures.
-6. **Ethos of Transparency** — accurate, accessible disclosure.
-7. **Compliance with Integrity** — exceeds legal minimums.
-8. **Sustaining Resources** — secures funding and assets.
-9. **Results-Oriented** — measures advancement against mission; evaluates programs.
-10. **Intentional Board Practices** — structures itself for effectiveness.
-11. **Continuous Learning** — self-assesses and improves.
-12. **Revitalization** — refreshes membership and practices.
+1. **Constructive Partnership**, board and CEO share leadership.
+2. **Mission Driven**, every decision filtered through mission.
+3. **Strategic Thinking**, focus on strategy, not management.
+4. **Culture of Inquiry**, open, respectful, evidence-based.
+5. **Independent-Mindedness**, directors put org first, with rigorous COI procedures.
+6. **Ethos of Transparency**, accurate, accessible disclosure.
+7. **Compliance with Integrity**, exceeds legal minimums.
+8. **Sustaining Resources**, secures funding and assets.
+9. **Results-Oriented**, measures advancement against mission; evaluates programs.
+10. **Intentional Board Practices**, structures itself for effectiveness.
+11. **Continuous Learning**, self-assesses and improves.
+12. **Revitalization**, refreshes membership and practices.
 
 Source: `boardsource.org/product/source-twelve-principles-governance-power-exceptional-boards/`.
 
@@ -292,10 +292,10 @@ Source: `boardsource.org/product/source-twelve-principles-governance-power-excep
 
 The Texas BOC requires only **President and Secretary**, but a healthy small-org structure typically has:
 
-- **Board Chair** (sometimes "President" in TX-statute parlance) — leads the board, sets agenda, runs meetings.
-- **Vice Chair** — successor in waiting; covers chair absences.
-- **Treasurer** — financial oversight, signs 990, chairs finance committee.
-- **Secretary** — meeting minutes, records custodian, certifies bylaws and resolutions.
+- **Board Chair** (sometimes "President" in TX-statute parlance), leads the board, sets agenda, runs meetings.
+- **Vice Chair**, successor in waiting; covers chair absences.
+- **Treasurer**, financial oversight, signs 990, chairs finance committee.
+- **Secretary**, meeting minutes, records custodian, certifies bylaws and resolutions.
 
 These four constitute the **officer slate** voted by the board.
 
@@ -304,7 +304,7 @@ These four constitute the **officer slate** voted by the board.
 Common patterns, in order of governance hygiene:
 
 1. **ED is not on the board at all** but attends every meeting as staff. Highest independence; most common in mature orgs.
-2. **ED is ex-officio non-voting** member of the board. Common compromise. Must be explicit in bylaws — Texas default is ex-officio members vote unless bylaws state otherwise. ED **must recuse** from any deliberation about their own compensation, evaluation, or employment terms.
+2. **ED is ex-officio non-voting** member of the board. Common compromise. Must be explicit in bylaws, Texas default is ex-officio members vote unless bylaws state otherwise. ED **must recuse** from any deliberation about their own compensation, evaluation, or employment terms.
 3. **ED is ex-officio voting.** Not recommended; creates structural conflict between the ED's accountability to the board and their vote on board matters.
 4. **Founder/ED is voting director and possibly board chair.** Common in very early stage; consensus best practice is to **sunset this within 2–3 years of incorporation.**
 
@@ -322,10 +322,10 @@ Triggered by sudden incapacity, death, or unplanned departure. Bridgespan, Prope
 
 **Standard elements:**
 
-- **Acting ED designation** — bylaws (or a board-adopted Emergency Succession Plan) name a default Acting ED (typically COO, Deputy Director, or Board Chair) effective immediately upon incapacity.
+- **Acting ED designation**, bylaws (or a board-adopted Emergency Succession Plan) name a default Acting ED (typically COO, Deputy Director, or Board Chair) effective immediately upon incapacity.
 - **Cross-trained backup** for each critical function (finance signatures, payroll, banking, fundraising, communications, legal). Documented in a "key responsibilities matrix."
-- **Authorities and limits** — Acting ED has full operational authority for up to 90 days; major decisions (hiring/firing, contracts >$X) require board approval.
-- **Communications plan** — who notifies staff, funders, partners, media; in what order; within what hours.
+- **Authorities and limits**, Acting ED has full operational authority for up to 90 days; major decisions (hiring/firing, contracts >$X) require board approval.
+- **Communications plan**, who notifies staff, funders, partners, media; in what order; within what hours.
 - **Board response committee** within 48 hours to confirm acting plan and initiate search.
 - **Annual review** of the plan; presumption that it's stale after 12 months.
 
@@ -336,7 +336,7 @@ Templates: Propel Nonprofits (`propelnonprofits.org`); Bridgespan succession pla
 Triggered by retirement, mutual decision, or a 6–18 month resignation notice.
 
 - **Transition committee** appointed by board chair, 3–5 members.
-- **Strategic review** before defining the next ED profile — what does the org need now vs. when current ED was hired?
+- **Strategic review** before defining the next ED profile, what does the org need now vs. when current ED was hired?
 - **Interim ED** strongly recommended for **3–9 months** between departure and new ED start; an interim ED with no candidacy for permanent role can stabilize and reform.
 - **Search timeline:** 4–9 months typical for a small org; longer for larger.
 - **90-day onboarding plan** for the incoming ED, with explicit board-chair partnership.
@@ -364,7 +364,7 @@ Bylaws should specify removal procedures. Texas BOC §22.211 allows removal of a
 
 - **For cause:** breach of fiduciary duty, prolonged absence, conflict of interest, conduct harmful to org.
 - **Procedure:** notice to the director, opportunity to respond, supermajority (2/3) vote of remaining directors.
-- **Document everything** — removal disputes are litigation-prone.
+- **Document everything**, removal disputes are litigation-prone.
 
 ---
 
@@ -373,12 +373,12 @@ Bylaws should specify removal procedures. Texas BOC §22.211 allows removal of a
 - **Periodic report** (Form 802): every 4 years on SOS request, $5 fee. See Section 1.
 - **No general charitable solicitation registration in Texas.** Texas is one of a small number of states that does **not require** general charitable solicitation registration. (Contrast: NY, CA, FL, and ~38 other states do require it.)
 - **Three narrow Texas solicitation registration statutes do apply, but only to specific kinds of orgs:**
-  - **Law Enforcement Telephone Solicitation Act (LETSA)** — orgs soliciting by phone on behalf of law enforcement. Filed with the **Texas Attorney General**, $50 fee; commercial solicitors must post a $50,000 surety bond with SOS.
-  - **Public Safety Solicitation Act (PSSA)** — orgs claiming to benefit public safety personnel (firefighters, EMS). Filed with SOS, $250 org fee + $500 solicitor fee + bond.
-  - **Veterans Solicitation Act (VSA)** — orgs benefiting veterans. Filed with SOS, fee + bond.
+  - **Law Enforcement Telephone Solicitation Act (LETSA)**, orgs soliciting by phone on behalf of law enforcement. Filed with the **Texas Attorney General**, $50 fee; commercial solicitors must post a $50,000 surety bond with SOS.
+  - **Public Safety Solicitation Act (PSSA)**, orgs claiming to benefit public safety personnel (firefighters, EMS). Filed with SOS, $250 org fee + $500 solicitor fee + bond.
+  - **Veterans Solicitation Act (VSA)**, orgs benefiting veterans. Filed with SOS, fee + bond.
 - **None of these apply to HAND** based on current mission.
-- **Texas property tax exemption** — handled separately via the local county appraisal district under Tex. Tax Code §11.18 ("Charitable Organizations"). Requires separate application even after IRS and Comptroller exemptions are in place.
-- **Texas Office of the Attorney General — Charitable Trusts Division** — has supervisory jurisdiction over Texas charities (Trust Code Chapter 123). The AG can investigate breaches of fiduciary duty and bring suit on behalf of charitable beneficiaries. No proactive filing required; reactive jurisdiction only.
+- **Texas property tax exemption**, handled separately via the local county appraisal district under Tex. Tax Code §11.18 ("Charitable Organizations"). Requires separate application even after IRS and Comptroller exemptions are in place.
+- **Texas Office of the Attorney General (Charitable Trusts Division**) has supervisory jurisdiction over Texas charities (Trust Code Chapter 123). The AG can investigate breaches of fiduciary duty and bring suit on behalf of charitable beneficiaries. No proactive filing required; reactive jurisdiction only.
 
 Reference: `texasattorneygeneral.gov/divisions/charitable-trusts/registration-and-filings`.
 
@@ -394,9 +394,9 @@ Reference: `texasattorneygeneral.gov/divisions/charitable-trusts/registration-an
 
 Developed by the National Association of State Charity Officials and the National Association of Attorneys General to guide states on **when internet solicitation triggers registration**:
 
-- **Domiciled-in-state:** any 501(c)(3) domiciled in a state that uses any website for solicitation must register there (if that state has registration). For HAND, this means Texas — and Texas has no general requirement, so no filing.
+- **Domiciled-in-state:** any 501(c)(3) domiciled in a state that uses any website for solicitation must register there (if that state has registration). For HAND, this means Texas, and Texas has no general requirement, so no filing.
 - **Specifically targeting another state:** if HAND's website actively targets another state (e.g., geofenced ads, state-specific campaigns), it must register there.
-- **Repeated and ongoing contributions from a state:** even passive web solicitation triggers registration if HAND **repeatedly and ongoingly** receives contributions from a particular state's residents — interpreted by some states as **>$25,000/year** or **>100 donations/year** from a state.
+- **Repeated and ongoing contributions from a state:** even passive web solicitation triggers registration if HAND **repeatedly and ongoingly** receives contributions from a particular state's residents, interpreted by some states as **>$25,000/year** or **>100 donations/year** from a state.
 
 The Charleston Principles are **non-binding guidance**, not enacted law; states interpret them inconsistently. Conservative practice: any state where HAND will receive >$25K/year or run an active campaign, register.
 
@@ -405,15 +405,15 @@ The Charleston Principles are **non-binding guidance**, not enacted law; states 
 - Standardized application accepted by **36+ states**.
 - Maintained by the Multi-State Filer Project (`multistatefiling.org`).
 - **Does not eliminate** state-specific supplements (each state typically requires a few additional forms or financial schedules).
-- States that **do not accept URS** include FL, OK, and several smaller jurisdictions — these require their own forms.
+- States that **do not accept URS** include FL, OK, and several smaller jurisdictions, these require their own forms.
 
 ### Priority registration states for a new TX nonprofit
 
 In rough order of likelihood-to-need:
 
-1. **California, New York, Florida** — large populations, active enforcement, common to need within first year of national-scale fundraising.
-2. **Illinois, Pennsylvania, Massachusetts, Washington, Michigan, North Carolina, New Jersey, Virginia, Georgia, Ohio** — common second-wave.
-3. Remaining ~25 states — register only as triggered.
+1. **California, New York, Florida**, large populations, active enforcement, common to need within first year of national-scale fundraising.
+2. **Illinois, Pennsylvania, Massachusetts, Washington, Michigan, North Carolina, New Jersey, Virginia, Georgia, Ohio**, common second-wave.
+3. Remaining ~25 states, register only as triggered.
 
 Many small orgs use a compliance service (Harbor Compliance, Labyrinth, or Charity Compliance Solutions) to manage multi-state filings; typical cost $2,500–$8,000/year for full multi-state coverage.
 
@@ -421,13 +421,13 @@ Many small orgs use a compliance service (Harbor Compliance, Labyrinth, or Chari
 
 ## 10. Data Sovereignty and AI-Specific Governance (Sovereign Companions)
 
-Because HAND has an AI workstream ("Sovereign Companions" — open-source per-group agent systems, group-owned, eight sovereignty principles), funders aligned with responsible-AI philanthropy will probe AI governance.
+Because HAND has an AI workstream ("Sovereign Companions", open-source per-group agent systems, group-owned, eight sovereignty principles), funders aligned with responsible-AI philanthropy will probe AI governance.
 
 ### Patrick J. McGovern Foundation
 
 - $73.5M+/year toward "AI for Humanity" (2024 figure).
 - Programs: AI for Climate, Health Equity, Human Rights, Digital Future.
-- **Does not accept unsolicited proposals** — invitation only.
+- **Does not accept unsolicited proposals**, invitation only.
 - **Data Practice Accelerator:** up to **$125,000/year** for orgs adopting responsible data practices; pathway: get on McGovern's radar via partner organizations (e.g., Amnesty's Algorithmic Accountability Lab is a grantee).
 - Reference: `mcgovern.org/grants/`.
 
@@ -435,25 +435,25 @@ Because HAND has an AI workstream ("Sovereign Companions" — open-source per-gr
 
 Synthesized from McGovern, Mozilla Foundation (Trustworthy AI program), Ford Foundation (Tech & Society team), and Omidyar Network:
 
-1. **AI / Data Ethics Policy** — written, board-adopted, public. Covers acceptable use, prohibited use, oversight body.
-2. **Model documentation** — published **Model Cards** (Mitchell et al., 2018) for each deployed model. Standard fields: intended use, performance metrics across subgroups, training data sources, ethical considerations, known limitations.
-3. **Data Sheets for Datasets** — Gebru et al. (2018) framework documenting motivation, composition, collection process, recommended uses.
-4. **Training data consent** — documented chain of consent for any data sourced from communities served. **Particularly important for HAND** given Companions relationship.
-5. **Algorithmic Impact Assessment (AIA)** — before deployment, document who is affected, what could go wrong, who reviews. NYC AIA, Canadian Directorate AIA, and AI Now Institute frameworks are common references.
-6. **Human-in-the-loop oversight** — documented points where humans review or can override AI decisions.
-7. **Right to opt out** — companions/users have an explicit, documented path to refuse AI participation without losing access to services.
-8. **Open weights / open source** — increasingly weighted positively. HAND's open-source posture aligns.
-9. **Group ownership / data sovereignty** — alignment with **CARE Principles for Indigenous Data Governance** (Collective Benefit, Authority to Control, Responsibility, Ethics; Carroll et al., 2020, *Data Science Journal*). HAND's "group-owned" framing maps directly onto Authority to Control.
-10. **Algorithmic accountability disclosure** — a public mechanism for complaints, audits, and correction.
+1. **AI / Data Ethics Policy**, written, board-adopted, public. Covers acceptable use, prohibited use, oversight body.
+2. **Model documentation**, published **Model Cards** (Mitchell et al., 2018) for each deployed model. Standard fields: intended use, performance metrics across subgroups, training data sources, ethical considerations, known limitations.
+3. **Data Sheets for Datasets**, Gebru et al. (2018) framework documenting motivation, composition, collection process, recommended uses.
+4. **Training data consent**, documented chain of consent for any data sourced from communities served. **Particularly important for HAND** given Companions relationship.
+5. **Algorithmic Impact Assessment (AIA)**, before deployment, document who is affected, what could go wrong, who reviews. NYC AIA, Canadian Directorate AIA, and AI Now Institute frameworks are common references.
+6. **Human-in-the-loop oversight**, documented points where humans review or can override AI decisions.
+7. **Right to opt out**, companions/users have an explicit, documented path to refuse AI participation without losing access to services.
+8. **Open weights / open source**, increasingly weighted positively. HAND's open-source posture aligns.
+9. **Group ownership / data sovereignty**, alignment with **CARE Principles for Indigenous Data Governance** (Collective Benefit, Authority to Control, Responsibility, Ethics; Carroll et al., 2020, *Data Science Journal*). HAND's "group-owned" framing maps directly onto Authority to Control.
+10. **Algorithmic accountability disclosure**, a public mechanism for complaints, audits, and correction.
 
 ### CARE Principles (Indigenous Data Sovereignty)
 
 The CARE Principles complement the FAIR data principles (Findable, Accessible, Interoperable, Reusable):
 
-- **C**ollective Benefit — data ecosystems should enable Indigenous Peoples to derive benefit.
-- **A**uthority to Control — Indigenous Peoples' rights and interests in data control are recognized.
-- **R**esponsibility — those working with data have a responsibility to share how data is used for Indigenous self-determination.
-- **E**thics — Indigenous Peoples' rights and wellbeing are the primary concern.
+- **C**ollective Benefit, data ecosystems should enable Indigenous Peoples to derive benefit.
+- **A**uthority to Control, Indigenous Peoples' rights and interests in data control are recognized.
+- **R**esponsibility, those working with data have a responsibility to share how data is used for Indigenous self-determination.
+- **E**thics, Indigenous Peoples' rights and wellbeing are the primary concern.
 
 Although developed in the Indigenous Data Sovereignty context, McGovern and Mozilla cite CARE as a baseline for any community-data work. For HAND's Companion groups (each potentially a distinct community with its own data), adopting **CARE-aligned governance language** in the Sovereign Companions charter is a strong signal.
 
@@ -463,10 +463,10 @@ Reference: `datascience.codata.org/articles/dsj-2020-043`; Global Indigenous Dat
 
 1. **AI Ethics & Data Governance Policy** (3–5 pages, board-adopted before first deployment).
 2. **Eight Sovereignty Principles charter** (already drafted; ensure it's published and dated).
-3. **Per-deployment Model Card** template — minimum viable version for first launch.
-4. **Companion Consent Framework** — written, plain-language, signed by each Companion group; covers data, AI, opt-out, ownership.
-5. **Algorithmic Impact Assessment** template — completed for each Sovereign Companions deployment.
-6. **Annual AI Accountability Report** — public, summarizing deployments, incidents, changes.
+3. **Per-deployment Model Card** template, minimum viable version for first launch.
+4. **Companion Consent Framework**, written, plain-language, signed by each Companion group; covers data, AI, opt-out, ownership.
+5. **Algorithmic Impact Assessment** template, completed for each Sovereign Companions deployment.
+6. **Annual AI Accountability Report**, public, summarizing deployments, incidents, changes.
 
 These six artifacts together constitute a "responsible-AI-ready" governance posture that maps cleanly to McGovern's, Mozilla's, and Ford's funding criteria.
 
@@ -474,40 +474,40 @@ These six artifacts together constitute a "responsible-AI-ready" governance post
 
 ## Sources
 
-- Texas Business Organizations Code, Chapter 22 — `statutes.capitol.texas.gov/Docs/BO/htm/BO.22.htm`
-- Texas Secretary of State, Form 202 instructions — `sos.state.tx.us/corp/instructions/202.shtml`
-- Texas Secretary of State, Form 802 instructions — `sos.state.tx.us/corp/instructions/802.shtml`
-- Texas Comptroller, Form AP-204 — `comptroller.texas.gov/forms/ap-204.pdf`
-- Texas Comptroller, Form AP-205 — `comptroller.texas.gov/forms/ap-205.pdf`
-- Texas Comptroller, 501(c)(3) exemption guidance — `comptroller.texas.gov/taxes/exempt/501(c)-exemptions-1.php`
-- IRS Form 1023 instructions (Rev. December 2024) — `irs.gov/pub/irs-pdf/i1023.pdf`
-- IRS Form 1023-EZ instructions (Rev. January 2025) — `irs.gov/pub/irs-pdf/i1023ez.pdf`
-- IRS Form 1023 / 1023-EZ user fee schedule — `irs.gov/charities-non-profits/form-1023-and-1023-ez-amount-of-user-fee`
-- IRS 27-month rule guidance — `irs.gov/charities-non-profits/form-1023-purpose-of-questions-about-organization-applying-more-than-27-months-after-date-of-formation`
-- IRS Public Support Test — `irs.gov/charities-non-profits/exempt-organizations-annual-reporting-requirements-form-990-schedules-a-and-b-public-charity-support-test`
-- IRS Form 990 Part VI Governance — `irs.gov/charities-non-profits/exempt-organizations-annual-reporting-requirements-governance-form-990-part-vi`
-- IRS Rebuttable Presumption — `irs.gov/charities-non-profits/charitable-organizations/rebuttable-presumption-intermediate-sanctions`
-- IRS Form 990 Schedule M instructions — `irs.gov/pub/irs-pdf/f990sm.pdf`
-- Texas Attorney General, Charitable Trusts — `texasattorneygeneral.gov/divisions/charitable-trusts/registration-and-filings`
-- BoardSource, *The Source: Twelve Principles* — `boardsource.org/product/source-twelve-principles-governance-power-exceptional-boards/`
-- BoardSource, Term Limits — `boardsource.org/resources/term-limits/`
-- National Council of Nonprofits, Gift Acceptance — `councilofnonprofits.org/running-nonprofit/fundraising-and-resource-development/gift-acceptance-policies`
-- National Council of Nonprofits, Good Governance Policies — `councilofnonprofits.org/running-nonprofit/governance-leadership/good-governance-policies-nonprofits`
-- Bridgespan, Succession Planning — `bridgespan.org/insights/succession-planning`
-- Propel Nonprofits, Emergency Succession Plan Template — `propelnonprofits.org/resources/emergency-succession-plan-template-for-executive-directors/`
-- Multi-State Filer Project (URS) — `multistatefiling.org`
-- Charleston Principles (Foundation Group summary) — `501c3.org/501c3-services/charitable-solicitations-registration-2/charleston-principles/`
-- Patrick J. McGovern Foundation Grants — `mcgovern.org/grants/`
-- Yield Giving — `yieldgiving.com`
-- Kataly Foundation — `katalyfoundation.org`
-- Hogg Foundation Funding Opportunities — `hogg.utexas.edu/funding-opportunities`
-- St. David's Foundation — `stdavidsfoundation.org/how-we-work/grantmaking/funding-opportunities/`
-- Austin Community Foundation Grants — `austincf.org/apply-for-funding/grants/`
-- Headwaters Foundation for Justice — `headwatersfoundation.org`
-- Players Philanthropy Fund — `ppf.org/fiscal-sponsorship/`
-- Hack Club Bank (HCB) — `hackclub.com/fiscal-sponsorship/`
-- Social Good Fund — `socialgoodfund.org/fiscal-sponsorship/`
-- Tides Center — `tides.org/what-we-do/fiscal-sponsorship/`
-- Open Collective Foundation dissolution announcement — `opencollective.com/foundation/updates/announcement-we-are-dissolving-open-collective-foundation-at-the-end-of-this-year`
-- CARE Principles for Indigenous Data Governance — `datascience.codata.org/articles/dsj-2020-043`
-- Global Indigenous Data Alliance — `gida-global.org`
+- Texas Business Organizations Code, Chapter 22, `statutes.capitol.texas.gov/Docs/BO/htm/BO.22.htm`
+- Texas Secretary of State, Form 202 instructions, `sos.state.tx.us/corp/instructions/202.shtml`
+- Texas Secretary of State, Form 802 instructions, `sos.state.tx.us/corp/instructions/802.shtml`
+- Texas Comptroller, Form AP-204, `comptroller.texas.gov/forms/ap-204.pdf`
+- Texas Comptroller, Form AP-205, `comptroller.texas.gov/forms/ap-205.pdf`
+- Texas Comptroller, 501(c)(3) exemption guidance, `comptroller.texas.gov/taxes/exempt/501(c)-exemptions-1.php`
+- IRS Form 1023 instructions (Rev. December 2024), `irs.gov/pub/irs-pdf/i1023.pdf`
+- IRS Form 1023-EZ instructions (Rev. January 2025), `irs.gov/pub/irs-pdf/i1023ez.pdf`
+- IRS Form 1023 / 1023-EZ user fee schedule, `irs.gov/charities-non-profits/form-1023-and-1023-ez-amount-of-user-fee`
+- IRS 27-month rule guidance, `irs.gov/charities-non-profits/form-1023-purpose-of-questions-about-organization-applying-more-than-27-months-after-date-of-formation`
+- IRS Public Support Test, `irs.gov/charities-non-profits/exempt-organizations-annual-reporting-requirements-form-990-schedules-a-and-b-public-charity-support-test`
+- IRS Form 990 Part VI Governance, `irs.gov/charities-non-profits/exempt-organizations-annual-reporting-requirements-governance-form-990-part-vi`
+- IRS Rebuttable Presumption, `irs.gov/charities-non-profits/charitable-organizations/rebuttable-presumption-intermediate-sanctions`
+- IRS Form 990 Schedule M instructions, `irs.gov/pub/irs-pdf/f990sm.pdf`
+- Texas Attorney General, Charitable Trusts, `texasattorneygeneral.gov/divisions/charitable-trusts/registration-and-filings`
+- BoardSource, *The Source: Twelve Principles*, `boardsource.org/product/source-twelve-principles-governance-power-exceptional-boards/`
+- BoardSource, Term Limits, `boardsource.org/resources/term-limits/`
+- National Council of Nonprofits, Gift Acceptance, `councilofnonprofits.org/running-nonprofit/fundraising-and-resource-development/gift-acceptance-policies`
+- National Council of Nonprofits, Good Governance Policies, `councilofnonprofits.org/running-nonprofit/governance-leadership/good-governance-policies-nonprofits`
+- Bridgespan, Succession Planning, `bridgespan.org/insights/succession-planning`
+- Propel Nonprofits, Emergency Succession Plan Template, `propelnonprofits.org/resources/emergency-succession-plan-template-for-executive-directors/`
+- Multi-State Filer Project (URS), `multistatefiling.org`
+- Charleston Principles (Foundation Group summary), `501c3.org/501c3-services/charitable-solicitations-registration-2/charleston-principles/`
+- Patrick J. McGovern Foundation Grants, `mcgovern.org/grants/`
+- Yield Giving, `yieldgiving.com`
+- Kataly Foundation, `katalyfoundation.org`
+- Hogg Foundation Funding Opportunities, `hogg.utexas.edu/funding-opportunities`
+- St. David's Foundation, `stdavidsfoundation.org/how-we-work/grantmaking/funding-opportunities/`
+- Austin Community Foundation Grants, `austincf.org/apply-for-funding/grants/`
+- Headwaters Foundation for Justice, `headwatersfoundation.org`
+- Players Philanthropy Fund, `ppf.org/fiscal-sponsorship/`
+- Hack Club Bank (HCB), `hackclub.com/fiscal-sponsorship/`
+- Social Good Fund, `socialgoodfund.org/fiscal-sponsorship/`
+- Tides Center, `tides.org/what-we-do/fiscal-sponsorship/`
+- Open Collective Foundation dissolution announcement, `opencollective.com/foundation/updates/announcement-we-are-dissolving-open-collective-foundation-at-the-end-of-this-year`
+- CARE Principles for Indigenous Data Governance, `datascience.codata.org/articles/dsj-2020-043`
+- Global Indigenous Data Alliance, `gida-global.org`

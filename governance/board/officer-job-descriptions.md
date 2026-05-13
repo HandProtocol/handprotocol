@@ -138,7 +138,7 @@ d. **Presents quarterly financial reports** to the full Board.
 
 e. **Signs the Form 990** annually (or delegates with Board approval).
 
-f. **Oversees the external CPA relationship** — compilation, review, or audit per the Financial Management Policy.
+f. **Oversees the external CPA relationship**, compilation, review, or audit per the Financial Management Policy.
 
 g. **Reviews internal controls** and reports any material weaknesses to the Board.
 

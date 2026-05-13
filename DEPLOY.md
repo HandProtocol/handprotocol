@@ -7,10 +7,10 @@ The HAND Protocol public surfaces are static HTML/CSS/JS, no build step. The sit
 - [x] GitHub repo public at `github.com/HandProtocol/handprotocol`
 - [x] Netlify connected, auto-deploy on `main` enabled
 - [ ] Custom domain (`handprotocol.org` or alternative) pointed at Netlify
-- [ ] OG / sitemap meta tags reference the canonical live domain (currently `https://handprotocol.org` — change in HTML if the canonical domain differs)
+- [ ] OG / sitemap meta tags reference the canonical live domain (currently `https://handprotocol.org`, change in HTML if the canonical domain differs)
 - [ ] Email `hand@handprotocol.org` exists and forwards somewhere readable
 
-## Option 1 — Netlify (current, live)
+## Option 1: Netlify (current, live)
 
 The site is deployed here. `netlify.toml` at the repo root configures everything.
 
@@ -26,7 +26,7 @@ The site is deployed here. `netlify.toml` at the repo root configures everything
    - Cache control (long for assets, short for HTML)
 4. **Custom domain:** Site Settings → Domain Management → Add custom domain → `handprotocol.org`. Let's Encrypt SSL auto-provisions within ~10 min after DNS propagation.
 
-## Option 2 — Vercel (former, ad-hoc / archived)
+## Option 2: Vercel (former, ad-hoc / archived)
 
 1. Sign in at [netlify.com](https://netlify.com), connect your GitHub account.
 2. Click **Add new site → Import an existing project**.
@@ -45,7 +45,7 @@ The `netlify.toml` at the repo root handles:
 - Security headers (X-Frame-Options, CSP, Referrer-Policy)
 - Cache control (long for assets, short for HTML)
 
-## Option 3 — Cloudflare Pages
+## Option 3: Cloudflare Pages
 
 1. Sign in at [pages.cloudflare.com](https://pages.cloudflare.com).
 2. **Create a project → Connect to Git → GitHub**, select `HandProtocol/handprotocol`.

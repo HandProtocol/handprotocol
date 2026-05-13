@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 This Policy governs HAND Protocol Foundation's design, deployment, evaluation, and stewardship of artificial intelligence systems, especially the Sovereign Companions program. It exists to:
 
@@ -20,7 +20,7 @@ d. Establish the artifacts (Model Cards, Algorithmic Impact Assessments, consent
 
 e. Provide content guardrails for AI output, complementing the Community Standards Policy.
 
-## Section 2 — Scope
+## Section 2. Scope
 
 This Policy applies to:
 
@@ -32,11 +32,11 @@ c. Vendor AI systems used by Corporation staff for Corporation work (e.g., Claud
 
 d. Training data, fine-tuned weights, evaluation logs, and inference artifacts produced under any of the above.
 
-## Section 3 — The eight sovereignty principles, as binding commitments
+## Section 3. The eight sovereignty principles, as binding commitments
 
 The Corporation commits, as binding policy:
 
-### Principle 1 — Open base model
+### Principle 1. Open base model
 
 a. The Sovereign Companions inference stack runs on an **open base model** (Llama 3.1 8B, Mistral 7B, or successor open-weights model selected by the Oversight Committee).
 
@@ -44,7 +44,7 @@ b. Proprietary APIs (Claude, GPT, Gemini) may be used for prototyping, evaluatio
 
 c. The Oversight Committee documents the base model and version for each deployment.
 
-### Principle 2 — Companion-group-owned adapter
+### Principle 2. Companion-group-owned adapter
 
 a. Each per-group LoRA adapter is the property of the Companion or Companion group whose work and voice trained it.
 
@@ -54,7 +54,7 @@ c. The Corporation holds the adapter in trust during the engagement.
 
 d. On departure, graduation, dissolution, or written request, the Corporation transfers to the Companion group: the adapter weights, the training data (as the group can receive it), the evaluation logs, and a portable inference recipe sufficient to run the adapter on commodity hardware.
 
-### Principle 3 — Revocable training consent
+### Principle 3. Revocable training consent
 
 a. Every datum used for training is tagged with its source and the consent under which it was contributed.
 
@@ -68,7 +68,7 @@ c. Upon revocation, the Corporation **within 30 days**:
 
 d. The 30-day SLA is a target, not a ceiling. If circumstances require more time, the Corporation negotiates an extension with the Companion group in writing.
 
-### Principle 4 — No cross-Companion-group data extraction
+### Principle 4. No cross-Companion-group data extraction
 
 a. Training data, embeddings, fine-tuning gradients, and other derivatives produced from one Companion group's work are not used for another Companion group's adapter, model, or analysis.
 
@@ -78,7 +78,7 @@ c. Cross-Companion-group analysis at a pattern or methodology level (e.g., "we l
 
 d. The HAND coordination agent, which serves HAND staff, runs on a separate model that has access to staff-side data (intake forms, cohort patterns, Contributor capacity) but not to individual Companion-group session data.
 
-### Principle 5 — Self-hostable end-to-end
+### Principle 5. Self-hostable end-to-end
 
 a. The Sovereign Companions stack (inference, training, evaluation harness, tool integrations) is documented sufficiently that a Companion group with a sufficient laptop or a low-cost VPS could run it themselves.
 
@@ -86,7 +86,7 @@ b. Self-hosting documentation is maintained alongside the code.
 
 c. Annual **self-hosting drill**: at least once per year, a Companion group exercises self-hosting (with HAND support) to validate the recipe.
 
-### Principle 6 — Full audit trail, inspectable by the group
+### Principle 6. Full audit trail, inspectable by the group
 
 a. Every model call (prompt, completion), retrieval operation, tool invocation, and reviewer disposition is logged.
 
@@ -98,7 +98,7 @@ d. Log integrity is protected against tampering (append-only storage or equivale
 
 e. The Corporation does not delete logs even on Companion-group request; the Companion group's privacy is protected through access controls, not deletion. Exception: when the underlying training data is revoked under Principle 3, the corresponding training log entries are removed in sync.
 
-### Principle 7 — Open methodology, open code, open eval, open quarterly reports
+### Principle 7. Open methodology, open code, open eval, open quarterly reports
 
 a. The agent scaffolding code, training methodology, and evaluation harness are released open-source: **MIT** for code, **CC BY-SA 4.0** for documentation.
 
@@ -110,7 +110,7 @@ d. Aggregate, de-identified outcomes are published.
 
 e. Methodology papers are submitted to relevant open-access venues.
 
-### Principle 8 — Adapter weights: case-by-case publication
+### Principle 8. Adapter weights: case-by-case publication
 
 a. **Adapter weights are not published by default.** Adapter weights can leak training patterns even without raw data, and the privacy risk is real.
 
@@ -120,7 +120,7 @@ c. If published, the publication is accompanied by a Model Card (Section 5) and 
 
 d. Even when not published, the adapter remains the Companion group's property and is portable on request (Principle 2).
 
-## Section 4 — Companion-Group Consent Framework
+## Section 4. Companion-Group Consent Framework
 
 Before training begins for any Companion or Companion group, the Corporation obtains a signed **Companion Consent Framework** document covering:
 
@@ -150,12 +150,12 @@ l. **Exit and graduation**: what happens at the end of the relationship.
 
 A copy is retained permanently per Document Retention. The Companion group keeps the original.
 
-## Section 5 — Model Card template
+## Section 5. Model Card template
 
 Every deployed Sovereign Companions agent has a published Model Card following the structure of Mitchell et al. (2018), adapted for HAND:
 
 ```
-MODEL CARD — [Companion group identifier or "Group N" if anonymized]
+MODEL CARD, [Companion group identifier or "Group N" if anonymized]
 
 Model Details
 - Base model: [Llama 3.1 8B / Mistral 7B / other]
@@ -220,12 +220,12 @@ Sovereignty Status
 
 Model Cards are public unless the Companion group requests anonymization (using "Group N" identifiers).
 
-## Section 6 — Algorithmic Impact Assessment
+## Section 6. Algorithmic Impact Assessment
 
 Before each Sovereign Companions deployment to a new context (a new Companion group, a new use case for an existing group, or a material model change), the Sovereign Companions Oversight Committee completes an Algorithmic Impact Assessment:
 
 ```
-ALGORITHMIC IMPACT ASSESSMENT — [Deployment identifier]
+ALGORITHMIC IMPACT ASSESSMENT, [Deployment identifier]
 
 1. Description
 - What system is being deployed
@@ -276,7 +276,7 @@ ALGORITHMIC IMPACT ASSESSMENT — [Deployment identifier]
 
 Each AIA is retained permanently and is publicly available unless the Companion group requests redaction or anonymization.
 
-## Section 7 — Human-review gate
+## Section 7. Human-review gate
 
 a. No external output from a Sovereign Companions agent is published or transmitted to a third party without explicit human review and approval.
 
@@ -288,7 +288,7 @@ d. Reviewer dispositions (approve, edit, reject, redirect) are logged.
 
 e. The Companion group designates who can review and approve external outputs on their behalf.
 
-## Section 8 — Content guardrails
+## Section 8. Content guardrails
 
 Agent output is subject to the same content prohibitions as Section 4 of the Community Standards Policy. Additionally:
 
@@ -302,7 +302,7 @@ d. **Source-grounded factual claims.** Output containing specific factual claims
 
 e. **No outputs that target individuals.** Output identifying specific individuals for criticism, pressure, or harassment is prohibited.
 
-## Section 9 — Sovereignty drills
+## Section 9. Sovereignty drills
 
 a. **Portability drill.** Annually, a Companion group's adapter is run on independent infrastructure (or simulated) to verify portability. Result documented in the Annual Accountability Report.
 
@@ -312,7 +312,7 @@ c. **Closure simulation.** At Gate 3 in the evaluation framework (or by year thr
 
 d. **Drill calendar** maintained by the Sovereign Companions Oversight Committee.
 
-## Section 10 — Vendor AI use by HAND staff
+## Section 10. Vendor AI use by HAND staff
 
 Separately from the Sovereign Companions program, HAND staff may use vendor AI tools (Claude, GPT, Gemini, Copilot, etc.) for staff work. The following apply:
 
@@ -326,7 +326,7 @@ d. **Vendor data-handling.** Staff configure tools to disable training-on-custom
 
 e. **Disclosure of AI involvement** when staff use AI tools for work that represents HAND externally and the AI contribution is material.
 
-## Section 11 — Annual AI Accountability Report
+## Section 11. Annual AI Accountability Report
 
 Annually, no later than the anniversary of the first Sovereign Companions deployment, the Corporation publishes an **Annual AI Accountability Report** containing:
 
@@ -344,7 +344,7 @@ f. Plans for the year ahead.
 
 The report is public and is shared with funders, peer organizations, and (for record) with the Sovereign Companions Oversight Committee.
 
-## Section 12 — Sovereign Companions Oversight Committee
+## Section 12. Sovereign Companions Oversight Committee
 
 a. **Composition.** At least one director, one Companion-group representative, one Contributor representative, and one independent technical or ethics expert.
 
@@ -356,7 +356,7 @@ d. **Recusal.** Any member with a financial interest in a specific deployment re
 
 e. **Reporting.** Reports to the full Board at each Board meeting.
 
-## Section 13 — Compliance with law
+## Section 13. Compliance with law
 
 a. **Algorithmic Accountability Act** and similar federal legislation: HAND will adopt requirements as they become law.
 
@@ -366,7 +366,7 @@ c. **State AI laws** (California's transparency requirements, Texas Responsible 
 
 d. **EU AI Act** (entry into force 2024-2026): HAND adopts applicable provisions, especially for any deployments serving EU-resident Companions.
 
-## Section 14 — Open questions
+## Section 14. Open questions
 
 - **Base model choice.** Llama 3.1 8B vs Mistral 7B vs new open-weights releases. Decision deferred to Oversight Committee at deployment time.
 - **Inference infrastructure.** Self-hosted on Corporation hardware, cloud GPU on a privacy-respecting provider, or hybrid. Likely hybrid early on (cloud GPU for training, self-hosted CPU/quantized inference for serving).

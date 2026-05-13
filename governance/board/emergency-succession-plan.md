@@ -16,7 +16,7 @@ This is an **operating plan**, not a policy. The policy is in [`succession-and-r
 
 ---
 
-## Section 1 — Notification chain
+## Section 1. Notification chain
 
 If the Executive Director is incapacitated, deceased, or has abruptly departed:
 
@@ -32,7 +32,7 @@ If the Executive Director is incapacitated, deceased, or has abruptly departed:
 | 8 | Acting ED + Board Chair → active Companion groups | 72 hours | Personal call or video |
 | 9 | Acting ED + Board Chair → public statement if warranted | 72 hours | Coordinated drafting |
 
-## Section 2 — Acting ED designation
+## Section 2. Acting ED designation
 
 **Current designated Acting ED:** [Name and contact] (designated by Board on [date])
 
@@ -52,7 +52,7 @@ Per [`succession-and-replacement.md`](succession-and-replacement.md) §2, the Ac
 - Material program changes
 - Public statements on behalf of the Corporation
 
-## Section 3 — Cross-Trained Backup Matrix
+## Section 3. Cross-Trained Backup Matrix
 
 | Function | Primary owner | Backup #1 | Backup #2 | Last cross-train |
 |---|---|---|---|---|
@@ -81,7 +81,7 @@ Per [`succession-and-replacement.md`](succession-and-replacement.md) §2, the Ac
 | Tax filings (Form 990 lead) | [Name] | [Name] | [Name] | [Date] |
 | Lease, real property, or co-working agreements | [Name] | [Name] | [Name] | [Date] |
 
-## Section 4 — Key relationships matrix
+## Section 4. Key relationships matrix
 
 | Relationship | Primary contact at HAND | Backup contact | Last touchpoint | Notes |
 |---|---|---|---|---|
@@ -100,7 +100,7 @@ Per [`succession-and-replacement.md`](succession-and-replacement.md) §2, the Ac
 | D&O insurance broker | [Name] | [Name] | [Date] | |
 | Fiscal sponsor (if applicable) | [Name] | [Name] | [Date] | |
 
-## Section 5 — Critical deadlines calendar (next 12 months)
+## Section 5. Critical deadlines calendar (next 12 months)
 
 Maintained by the Treasurer and Executive Director. In an emergency, this calendar is the first thing the Acting ED reviews.
 
@@ -116,7 +116,7 @@ Maintained by the Treasurer and Executive Director. In an emergency, this calend
 - Major fundraising campaigns: [dates]
 - Board recruitment cycle: [dates]
 
-## Section 6 — Access credentials
+## Section 6. Access credentials
 
 **Stored separately** in a secured password manager accessible to designated officers. Not in this document.
 
@@ -130,7 +130,7 @@ c. **Recovery:** Documented recovery procedure including any device or biometric
 
 d. **Audit:** Access log reviewed quarterly by the Treasurer
 
-## Section 7 — First 48 hours operating checklist
+## Section 7. First 48 hours operating checklist
 
 | ☐ | Action |
 |---|---|
@@ -149,7 +149,7 @@ d. **Audit:** Access log reviewed quarterly by the Treasurer
 | ☐ | Notify insurance broker (D&O policy may require notice) |
 | ☐ | Consult counsel if any legal or employment complications |
 
-## Section 8 — First 30 days operating checklist
+## Section 8. First 30 days operating checklist
 
 | ☐ | Action |
 |---|---|
@@ -163,7 +163,7 @@ d. **Audit:** Access log reviewed quarterly by the Treasurer
 | ☐ | Update website and public materials as appropriate |
 | ☐ | First 30-day status report to full Board |
 
-## Section 9 — First 90 days operating checklist
+## Section 9. First 90 days operating checklist
 
 | ☐ | Action |
 |---|---|
@@ -175,7 +175,7 @@ d. **Audit:** Access log reviewed quarterly by the Treasurer
 | ☐ | Lessons learned documented |
 | ☐ | This Plan updated based on real-world experience |
 
-## Section 10 — Plan maintenance
+## Section 10. Plan maintenance
 
 a. **Annual review** by Treasurer and Board Chair. Date logged at top of document.
 
@@ -185,7 +185,7 @@ c. **Update on change.** Any change in roles, contracts, account access, or rela
 
 d. **Tabletop exercise.** Annually, the Executive Committee runs a 60-minute tabletop exercise simulating an emergency, to test the Plan and surface gaps.
 
-## Section 11 — Storage and access
+## Section 11. Storage and access
 
 a. The full Plan (with names, contacts, account references) is stored:
 - In the Board's secured shared drive (access: directors and officers).

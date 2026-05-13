@@ -64,7 +64,7 @@ f. **Direct the reader to the brief.** The [Director Prospect Brief](director-pr
 >
 > 6 to 10 hours a month, three-year term. Founding-board level of engagement. We make no compensation for service.
 >
-> If a conversation feels right, my calendar is at [Calendly or similar link]. If it doesn't, no pressure — and please share if anyone else comes to mind.
+> If a conversation feels right, my calendar is at [Calendly or similar link]. If it doesn't, no pressure, and please share if anyone else comes to mind.
 >
 > [Founder name]
 
@@ -78,7 +78,7 @@ f. **Direct the reader to the brief.** The [Director Prospect Brief](director-pr
 
 ## Template 3: LinkedIn DM
 
-> Hi [Name] — I'm building a small nonprofit in Austin that's seating its founding board this year. The work is long-term operational accompaniment for grassroots community organizations and healing practitioners. Sovereign open-source AI is the distinctive layer.
+> Hi [Name], I'm building a small nonprofit in Austin that's seating its founding board this year. The work is long-term operational accompaniment for grassroots community organizations and healing practitioners. Sovereign open-source AI is the distinctive layer.
 >
 > Three reasons I'm reaching out: [specific reason]; [specific reason]; [specific reason].
 >
@@ -171,7 +171,7 @@ b. **The full brief in the email.** Send the link. Force the reader to make a sm
 
 c. **A "we need" framing.** The recipient is not your solution; they're a person being asked to consider something. Frame as "we'd value your read."
 
-d. **Multiple asks layered.** "Join the board" + "also could you connect us to X funder" + "could you donate" — pick one. Layer over time.
+d. **Multiple asks layered.** "Join the board" + "also could you connect us to X funder" + "could you donate", pick one. Layer over time.
 
 e. **Heroic narratives.** "We're changing the world" reads thin and HAND-off-brand. Plain English and specifics.
 

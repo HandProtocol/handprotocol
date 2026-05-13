@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 Grants are a core revenue source for HAND Protocol Foundation. This Policy establishes the procedures by which the Corporation identifies grant opportunities, applies, manages awarded grants, reports to funders, and closes out grants in a way that:
 
@@ -18,7 +18,7 @@ c. Maintains compliant financial tracking of restricted funds.
 
 d. Aligns grant-seeking with the strategic plan rather than chasing dollars opportunistically.
 
-## Section 2 — Grant-seeking alignment
+## Section 2. Grant-seeking alignment
 
 Before pursuing any grant opportunity, the Executive Director (or designee) shall consider:
 
@@ -34,7 +34,7 @@ e. **Total cost of pursuit.** Some grant applications take 40+ hours of senior s
 
 **Mission-aligned, capacity-honest, and not desperate.** HAND will decline grants that would distort the work, even if the dollars are real.
 
-## Section 3 — Grant pipeline management
+## Section 3. Grant pipeline management
 
 a. **Pipeline tracker.** Maintained per [`../grants/funder-pipeline.md`](../grants/funder-pipeline.md). Categories: prospects, active applications, awarded, declined, declined-to-pursue.
 
@@ -46,7 +46,7 @@ b. **Quarterly pipeline review** by Finance Committee, including:
 
 c. **Annual fundraising plan** drafted by the Executive Director with the Finance Committee; approved by the Board as part of the annual budget.
 
-## Section 4 — Application process
+## Section 4. Application process
 
 a. **Letter of Inquiry (LOI).** Where the funder accepts LOIs, an LOI is the standard first step. Reviewed by the Executive Director and one Board member before submission.
 
@@ -62,7 +62,7 @@ c. **Application file.** For each application, a file is maintained containing:
 
 d. **No double-counting.** A single project budget line is committed to one funder. HAND will not solicit overlapping funding for the same expenses from multiple funders unless explicitly allowed (some funders require this disclosure on the application).
 
-## Section 5 — Award acceptance
+## Section 5. Award acceptance
 
 a. **Award letter review.** Each grant award letter is reviewed by the Executive Director and Treasurer to confirm:
 - Award amount, restrictions, period of performance.
@@ -77,7 +77,7 @@ c. **Grant Agreement execution.** Signed by the Executive Director under the sig
 
 d. **Acknowledgment letter** sent within 14 days of receipt of funds.
 
-## Section 6 — Restricted funds accounting
+## Section 6. Restricted funds accounting
 
 a. **Setup.** Each restricted grant is set up as a separate fund / class in the accounting system at award.
 
@@ -89,7 +89,7 @@ d. **Release from restriction.** As expenses are incurred against the grant, the
 
 e. **Time restrictions.** Multi-year grants are recognized as revenue in full at award (when restriction is met by performance over time), with the time-restricted portion shown as a liability or as net-assets-with-donor-restrictions on the Statement of Financial Position.
 
-## Section 7 — Drawdown discipline
+## Section 7. Drawdown discipline
 
 a. **Match expenses to budget.** Expenses charged to a grant must reasonably match the budget category for that grant.
 
@@ -103,7 +103,7 @@ e. **Cost sharing / match.** Where the grant requires matching funds, the match 
 
 f. **Indirect / overhead allocation.** Where the funder allows an indirect-cost rate, HAND charges it. Where the funder caps indirect, HAND tracks the gap to general operations. Where the funder disallows indirect, HAND considers whether the grant is worth pursuing.
 
-## Section 8 — Reporting to funders
+## Section 8. Reporting to funders
 
 a. **Reporting calendar.** Each grant's reporting deadlines are calendared at award acceptance. Reminders 30 and 7 days before each deadline.
 
@@ -117,7 +117,7 @@ e. **Report file.** Each report submitted is filed with the grant file.
 
 f. **Late reports.** Notify funder in advance if a deadline will be missed. Late reports without notice are a fast path to grantee-watch-list status.
 
-## Section 9 — Stewardship beyond reporting
+## Section 9. Stewardship beyond reporting
 
 a. **Funder updates between deadlines.** Major milestones, public recognition opportunities, and material changes are communicated to the funder outside formal reporting.
 
@@ -127,7 +127,7 @@ c. **Convenings.** When funders host learning convenings, HAND staff and (where 
 
 d. **Long-game cultivation.** Reporting and stewardship are the relationship-building substrate for future funding cycles. Each grant is treated as the start of an ongoing relationship, not a transaction.
 
-## Section 10 — Closeout
+## Section 10. Closeout
 
 a. **Final report.** Submitted on the deadline specified in the grant agreement.
 
@@ -141,7 +141,7 @@ e. **Records.** Grant file retained per the Document Retention Policy (7 years a
 
 f. **Public acknowledgment.** Funder publicly acknowledged in the Annual Report covering the grant period, and on the website's funders page (with funder permission).
 
-## Section 11 — Special situations
+## Section 11. Special situations
 
 a. **Grant disputes.** Disagreements with funder over interpretation of grant terms are escalated to the Executive Director and (if material) to the Board Chair. Disputes are addressed in good faith and in writing.
 
@@ -151,7 +151,7 @@ c. **Funder reputational issues.** If a funder becomes the subject of reputation
 
 d. **Pass-through grants.** HAND may, at Board discretion, sub-grant to other organizations or Companion groups under terms aligned with HAND's mission. Sub-grants require written sub-grant agreements with the same reporting and closeout discipline as upstream grants.
 
-## Section 12 — Sovereign Companions program grants
+## Section 12. Sovereign Companions program grants
 
 Special provisions for grants to or for the Sovereign Companions program:
 

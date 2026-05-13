@@ -10,7 +10,7 @@
 
 ## In one paragraph
 
-HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, to operate a long-term, relational accompaniment model for solo healers, post-accelerator impact founders, and small grassroots collectives. We are writing because our hardest unsolved problem — *accompaniment does not parallelize the way project-based pro bono does* — is precisely the kind of structural bottleneck a small, **sovereign, open-source, Companion-group-owned agent system** can address. We propose to build and openly evaluate exactly that infrastructure, with the source code, methodology, and evaluation framework published openly and with each Companion group fully owning their own system. We are asking for **$111,111 over 18 months**.
+HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, to operate a long-term, relational accompaniment model for solo healers, post-accelerator impact founders, and small grassroots collectives. We are writing because our hardest unsolved problem (*accompaniment does not parallelize the way project-based pro bono does*) is precisely the kind of structural bottleneck a small, **sovereign, open-source, Companion-group-owned agent system** can address. We propose to build and openly evaluate exactly that infrastructure, with the source code, methodology, and evaluation framework published openly and with each Companion group fully owning their own system. We are asking for **$111,111 over 18 months**.
 
 ## What sovereign means here
 
@@ -41,7 +41,7 @@ Three structural reasons keep this gap open. The economics don't parallelize the
 
 ## The proposal
 
-We propose to build, for each Companion group HAND accompanies, a **custom sovereign agent system**: a small fine-tuned model on an open base, a per-group LoRA adapter trained on the group's own work and voice, retrieval over the group's own library, tool access scoped to the group's workflows (grant tracking, scheduling, fiscal-sponsorship paperwork, donor stewardship), persistent memory, and a human-review gate before any external output ships. Alongside, a single cohort-wide coordination agent supports HAND's program lead with matching, pattern surfacing, and check-in preparation — without reading individual group data.
+We propose to build, for each Companion group HAND accompanies, a **custom sovereign agent system**: a small fine-tuned model on an open base, a per-group LoRA adapter trained on the group's own work and voice, retrieval over the group's own library, tool access scoped to the group's workflows (grant tracking, scheduling, fiscal-sponsorship paperwork, donor stewardship), persistent memory, and a human-review gate before any external output ships. Alongside, a single cohort-wide coordination agent supports HAND's program lead with matching, pattern surfacing, and check-in preparation, without reading individual group data.
 
 The agent system is the **durable artifact** of HAND's accompaniment. If a group graduates, they leave with it. If HAND closes, they keep it. The "we don't build and bounce" promise becomes technically enforceable: the infrastructure that holds their three-year arc is theirs, not ours.
 
@@ -52,8 +52,8 @@ This directly attacks the parallelization bottleneck and operationalizes a sover
 Three trends from our landscape research converge here:
 
 1. **Trust-based philanthropy has moved from awareness campaign to mainstream practice.** MacKenzie Scott deployed $2B+ in unrestricted grants in 2024. The donor universe most aligned with HAND's accompaniment posture is expanding.
-2. **The mutual-aid funding-replacement moment is acute in 2026.** Harm-reduction Companion groups losing federal support need every parallelization tool we can responsibly give them — and the sovereignty posture matters most for organizations whose data has historically been weaponized against them.
-3. **AI-for-social-good funding has matured faster than aligned grantee profiles.** McGovern, Mozilla, and Google.org have built grant programs for tech-enabled nonprofit infrastructure. The HAND-shaped grantee — a small relational nonprofit with a published gap analysis, an open-source default, and an explicit Companion-sovereignty design — is rarer than the funding.
+2. **The mutual-aid funding-replacement moment is acute in 2026.** Harm-reduction Companion groups losing federal support need every parallelization tool we can responsibly give them, and the sovereignty posture matters most for organizations whose data has historically been weaponized against them.
+3. **AI-for-social-good funding has matured faster than aligned grantee profiles.** McGovern, Mozilla, and Google.org have built grant programs for tech-enabled nonprofit infrastructure. The HAND-shaped grantee, a small relational nonprofit with a published gap analysis, an open-source default, and an explicit Companion-sovereignty design, is rarer than the funding.
 
 ## Theory of change
 
@@ -95,7 +95,7 @@ We would welcome a conversation about whether this work fits the McGovern Founda
 
 Thank you for your time.
 
-— HAND Protocol Foundation
+HAND Protocol Foundation
 hand@handprotocol.org · handprotocol.org · Austin, Texas
 
 ---

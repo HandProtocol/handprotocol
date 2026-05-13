@@ -1,4 +1,4 @@
-# AGENTS.md — HAND Protocol Repo Guide
+# AGENTS.md: HAND Protocol Repo Guide
 
 Orientation file for AI coding agents working in this monorepo. Read this first.
 
@@ -73,17 +73,17 @@ These are bans, not preferences. The impeccable audit already removed all violat
 
 ## Brand vocabulary
 
-- **HAND Protocol** — full name. "HAND" alone is acceptable after first use.
+- **HAND Protocol**, full name. "HAND" alone is acceptable after first use.
 - **HAND** = Holistic Approach to Nurture and Develop.
-- **Companions** — the people and organizations HAND serves (healers, impact entrepreneurs, grassroots organizations). Capitalize as a defined role.
-- **Companion groups** — collective Companions (a 3-person harm-reduction collective, a healing practice, a food-sovereignty group). Use the plural form when the unit of accompaniment is a small org or collective rather than an individual.
-- **Contributors** — skilled professionals and tradespeople who give or exchange time into the resource pool.
-- **The pool** / **resource pool** — the curated skill-exchange marketplace HAND operates.
-- **Donate / Exchange / Receive** — the three flows of the pool.
-- **501(c)(3) filing raise** — the current fundraising effort ($77,777 first goal, $22,222 minimum).
-- **Sovereign Companions** — HAND's AI workstream: custom open-source agent systems built per Companion or Companion group, owned by the group, designed to be portable, self-hostable, and the durable artifact of HAND's accompaniment. See `AI-COMPANIONS.md`, `AI-EVAL-FRAMEWORK.md`. Eight sovereignty principles govern the design.
+- **Companions**, the people and organizations HAND serves (healers, impact entrepreneurs, grassroots organizations). Capitalize as a defined role.
+- **Companion groups**, collective Companions (a 3-person harm-reduction collective, a healing practice, a food-sovereignty group). Use the plural form when the unit of accompaniment is a small org or collective rather than an individual.
+- **Contributors**, skilled professionals and tradespeople who give or exchange time into the resource pool.
+- **The pool** / **resource pool**, the curated skill-exchange marketplace HAND operates.
+- **Donate / Exchange / Receive**, the three flows of the pool.
+- **501(c)(3) filing raise**, the current fundraising effort ($77,777 first goal, $22,222 minimum).
+- **Sovereign Companions**, HAND's AI workstream: custom open-source agent systems built per Companion or Companion group, owned by the group, designed to be portable, self-hostable, and the durable artifact of HAND's accompaniment. See `AI-COMPANIONS.md`, `AI-EVAL-FRAMEWORK.md`. Eight sovereignty principles govern the design.
 
-Avoid: "clients" (paid-services language), "beneficiaries" (cold, hierarchical), "grantees" (passive — reserve for describing peer orgs' grantmaking), "users" (too SaaS), "stakeholders" (corporate).
+Avoid: "clients" (paid-services language), "beneficiaries" (cold, hierarchical), "grantees" (passive, reserve for describing peer orgs' grantmaking), "users" (too SaaS), "stakeholders" (corporate).
 
 ## Design quick reference
 
@@ -123,6 +123,6 @@ Impeccable commands read `PRODUCT.md` + `DESIGN.md` first; keep those files curr
 
 **Live on Netlify at `handprotocol.netlify.app`** (as of 2026-05-12). `netlify.toml` at the repo root configures redirects, security headers, cache control, and `publish = "web"`. Pushes to `main` of `HandProtocol/handprotocol` auto-deploy.
 
-`vercel.json` and `web/_redirects` are kept in the repo as portable parallel configs in case the host ever changes again — when changing deploy behavior (redirects, headers, routing), **update both `netlify.toml` and `vercel.json` together** so the configs stay in sync.
+`vercel.json` and `web/_redirects` are kept in the repo as portable parallel configs in case the host ever changes again, when changing deploy behavior (redirects, headers, routing), **update both `netlify.toml` and `vercel.json` together** so the configs stay in sync.
 
 Full walkthrough: `DEPLOY.md`. Monorepo: `github.com/HandProtocol/handprotocol`.

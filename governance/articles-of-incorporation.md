@@ -8,19 +8,19 @@
 
 ---
 
-## Article 1 — Name
+## Article 1. Name
 
 The name of the corporation is **HAND Protocol Foundation**. **[Form 202 Art. 1]**
 
 The Texas Secretary of State has been queried via SOSDirect for name availability and the proposed name appears to be **distinguishable on the records.** Reservation under Form 501 is optional and may be filed to hold the name during preparation if more than a few days will elapse before Form 202 submission.
 
-## Article 2 — Nonprofit status and existence
+## Article 2. Nonprofit status and existence
 
 The corporation is a **nonprofit corporation** organized under the Texas Business Organizations Code, Chapter 22. **[Form 202 Art. 2]**
 
 The period of duration is **perpetual.**
 
-## Article 3 — Purpose
+## Article 3. Purpose
 
 The corporation is organized **exclusively for charitable, educational, and scientific purposes** within the meaning of Section 501(c)(3) of the Internal Revenue Code of 1986, as amended (or the corresponding provision of any future United States Internal Revenue law) (the "**Code**"). **[Form 202 Art. 3]**
 
@@ -36,7 +36,7 @@ d. Designing, building, and openly releasing **sovereign, open-source, community
 
 e. Engaging in any other charitable, educational, and scientific activities permitted by Section 501(c)(3) and consistent with the foregoing.
 
-## Article 4 — Restrictions on activities
+## Article 4. Restrictions on activities
 
 No part of the net earnings of the corporation shall inure to the benefit of, or be distributable to, its members, directors, officers, or other private persons, except that the corporation shall be authorized and empowered to pay reasonable compensation for services rendered and to make payments and distributions in furtherance of the purposes set forth in Article 3.
 
@@ -44,11 +44,11 @@ No substantial part of the activities of the corporation shall be the carrying o
 
 Notwithstanding any other provision of these Articles, the corporation shall not carry on any other activities not permitted to be carried on (a) by a corporation exempt from federal income tax under Section 501(c)(3) of the Code, or (b) by a corporation contributions to which are deductible under Section 170(c)(2) of the Code.
 
-## Article 5 — Members
+## Article 5. Members
 
-The corporation **shall have no voting members**. The business and affairs of the corporation shall be managed by and under the direction of the Board of Directors. **[Form 202 Art. 4 — check the "no members" box]**
+The corporation **shall have no voting members**. The business and affairs of the corporation shall be managed by and under the direction of the Board of Directors. **[Form 202 Art. 4, check the "no members" box]**
 
-## Article 6 — Initial board of directors
+## Article 6. Initial board of directors
 
 The number of directors constituting the initial Board of Directors of the corporation is **three (3)**, and the names and addresses of the persons who are to serve as the initial directors are: **[Form 202 Art. 5]**
 
@@ -60,7 +60,7 @@ The number of directors constituting the initial Board of Directors of the corpo
 
 The number of directors thereafter, and the manner of their election and removal, shall be governed by the Bylaws.
 
-## Article 7 — Registered office and registered agent
+## Article 7. Registered office and registered agent
 
 The street address of the registered office of the corporation in the State of Texas is: **[Form 202 Art. 6]**
 
@@ -72,7 +72,7 @@ The name of the corporation's registered agent at that office is:
 
 The registered agent has consented in writing to serve in that capacity. Consent is on file as Form 401-A. The registered office is a physical street address in Texas where the agent can be served during normal business hours. It is **not a post office box, commercial mailbox service, or virtual address.**
 
-## Article 8 — Distribution on dissolution
+## Article 8. Distribution on dissolution
 
 Upon the dissolution of the corporation, the Board of Directors shall, after paying or making provision for the payment of all of the liabilities of the corporation, dispose of all of the assets of the corporation **exclusively for the purposes of the corporation** in such manner, or to such organization or organizations organized and operated exclusively for charitable, educational, religious, or scientific purposes as shall at the time qualify as an exempt organization or organizations under Section 501(c)(3) of the Internal Revenue Code, as the Board of Directors shall determine.
 
@@ -80,15 +80,15 @@ Any such assets not so disposed of shall be disposed of by a court of competent 
 
 **Special provision for Sovereign Companions adapters and data.** Upon dissolution, any LoRA adapters, training data, evaluation logs, and inference recipes attributable to a specific Companion group shall be transferred to that Companion group at no cost, in accordance with HAND's published Sovereign Companions sovereignty commitments. This provision binds the corporation regardless of which successor charitable organization receives general assets under the preceding paragraph.
 
-## Article 9 — Indemnification
+## Article 9. Indemnification
 
 The corporation shall indemnify its directors, officers, employees, and agents to the fullest extent permitted by Texas law and by the Internal Revenue Code applicable to organizations exempt under Section 501(c)(3). Detailed indemnification provisions are set forth in the Bylaws.
 
-## Article 10 — Conflict of interest
+## Article 10. Conflict of interest
 
 The corporation has adopted a written Conflict of Interest Policy substantially in the form recommended by the Internal Revenue Service in Appendix A of the Form 1023 instructions. Each director, officer, and key employee shall sign an annual disclosure.
 
-## Article 11 — Organizer
+## Article 11. Organizer
 
 The name and address of the organizer is:
 
@@ -98,7 +98,7 @@ The name and address of the organizer is:
 
 The organizer has prepared and signed this Certificate of Formation for the purpose of forming a nonprofit corporation under the Texas Business Organizations Code.
 
-## Article 12 — Effective date
+## Article 12. Effective date
 
 This Certificate of Formation shall be effective **upon filing** with the Texas Secretary of State. **[Form 202 Art. 7]**
 

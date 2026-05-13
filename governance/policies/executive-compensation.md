@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 This Policy establishes the procedure by which HAND Protocol Foundation (the "**Corporation**") sets, reviews, and documents compensation for its Executive Director, other officers, and key employees, in a manner that:
 
@@ -16,7 +16,7 @@ b. Avoids excise tax exposure for "disqualified persons" (potentially the Execut
 
 c. Reflects HAND's values: compensation reasonable in light of mission, role complexity, and labor market reality, neither at the floor that risks turnover and burnout nor inflated relative to comparable positions.
 
-## Section 2 — Scope
+## Section 2. Scope
 
 This Policy applies to compensation set for:
 
@@ -28,7 +28,7 @@ c. Any other "disqualified person" under IRC §4958 (a person in a position to e
 
 d. Any key employee whose total compensation exceeds **$150,000** in a year, or any employee whose compensation is at least 25% above the median for comparable positions in the relevant market.
 
-## Section 3 — Compensation Committee
+## Section 3. Compensation Committee
 
 a. **Composition.** The Compensation Committee shall consist of at least two (2) directors, all of whom are independent under Treas. Reg. §53.4958-6(c)(1)(iii): no Financial Interest in the Executive Director's compensation, no subordinate relationship, no compensation set in turn by the person whose compensation is being set, and no family or material business relationship with the person.
 
@@ -38,7 +38,7 @@ c. **Recusal.** A committee member with any actual or potential conflict shall d
 
 d. **Where the Board has fewer than four directors,** the Compensation Committee's role may be performed by the full Board, with the affected person recused. **Recommended path: recruit a fourth director before the first paid Executive Director is hired**, so the Compensation Committee can operate as a true independent body.
 
-## Section 4 — Comparability data
+## Section 4. Comparability data
 
 Before approving any compensation arrangement subject to this Policy, the Compensation Committee shall obtain and rely upon **appropriate comparability data**.
 
@@ -60,7 +60,7 @@ c. **Small-organization safe harbor.** For an organization with **annual gross r
 
 d. **Documentation.** Comparability data, including source, date, and the comparable positions identified, shall be retained in the Compensation Committee file under the Document Retention Policy (permanent retention as part of board records).
 
-## Section 5 — Compensation review procedure
+## Section 5. Compensation review procedure
 
 The Compensation Committee shall:
 
@@ -87,7 +87,7 @@ h. **Contemporaneously document** the basis for the decision in committee minute
 
 The committee shall record the minutes **before the later of:** (i) the next meeting of the committee, or (ii) **sixty (60) days** after the action. The minutes must be approved by the committee within a reasonable time thereafter.
 
-## Section 6 — When the procedure is triggered
+## Section 6. When the procedure is triggered
 
 a. **At hire** of any covered employee.
 
@@ -95,12 +95,12 @@ b. **Annually**, in conjunction with the budget process. The Compensation Commit
 
 c. **At any material change** in compensation terms, including (without limitation):
 - Salary increase greater than the percentage approved in the annual budget for general staff.
-- Addition of new compensation components (bonus, deferred compensation, equity-like arrangements — though equity is not applicable to a nonprofit).
+- Addition of new compensation components (bonus, deferred compensation, equity-like arrangements, though equity is not applicable to a nonprofit).
 - Change in benefits structure that increases total compensation by more than 5%.
 
 d. **At role change** material enough to alter the basis for comparability (significant scope change, addition of substantially new responsibilities).
 
-## Section 7 — Compensation philosophy
+## Section 7. Compensation philosophy
 
 HAND's compensation philosophy:
 
@@ -114,7 +114,7 @@ d. **Transparency.** The Executive Director's total compensation is disclosed on
 
 e. **Equity practice.** Compensation decisions shall consider how the role fits within HAND's broader equity commitments, including race, gender, disability, and lived experience equity. Compensation studies will be reviewed for sample bias and adjusted as warranted.
 
-## Section 8 — Excess benefit transactions and intermediate sanctions
+## Section 8. Excess benefit transactions and intermediate sanctions
 
 a. The Corporation shall not enter into any transaction with a disqualified person on terms more favorable than the Corporation would offer an unrelated party.
 
@@ -129,7 +129,7 @@ c. **Penalties for an uncorrected excess benefit transaction:**
 - Tax on each approving manager who knowingly approved: **10%** of the excess benefit, capped at $20,000.
 - Second-tier tax if not corrected within the correction period: **200%** of the excess benefit on the disqualified person.
 
-## Section 9 — Founder compensation specifics
+## Section 9. Founder compensation specifics
 
 If the founder of HAND becomes the first paid Executive Director:
 
@@ -141,7 +141,7 @@ c. The Compensation Committee shall consider founder-specific dynamics (the valu
 
 d. Founder compensation shall be reviewed by an external compensation consultant at least once every three years, in addition to the annual internal review.
 
-## Section 10 — Records and public disclosure
+## Section 10. Records and public disclosure
 
 a. All Compensation Committee minutes, comparability data, and supporting documents are retained permanently as part of board records.
 

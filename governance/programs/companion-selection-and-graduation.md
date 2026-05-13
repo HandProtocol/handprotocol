@@ -8,11 +8,11 @@
 
 ## Purpose
 
-This document covers the lifecycle of HAND's relationship with Companions: how Companions are identified and selected, what HAND commits to during the engagement, what is expected of the Companion, and how the engagement ends — whether by graduation, transition, or withdrawal.
+This document covers the lifecycle of HAND's relationship with Companions: how Companions are identified and selected, what HAND commits to during the engagement, what is expected of the Companion, and how the engagement ends, whether by graduation, transition, or withdrawal.
 
 The protocol reflects HAND's defining commitment: long-term relational accompaniment, not project-bounded engagement.
 
-## Section 1 — Companion definition
+## Section 1. Companion definition
 
 A **Companion** is an individual practitioner or small organization HAND accompanies. HAND serves three communities of regenerative impact work: **practitioners who heal, founders who build, and organizers who steward**. The lines between them are porous; many Companions live in two of these worlds at once.
 
@@ -24,7 +24,7 @@ c. **Grassroots community organizations.** Mutual aid networks, harm reduction c
 
 The three segments share an operational shape: small, under-resourced for infrastructure, serving people who need them, vulnerable to abandonment by traditional capacity-building. The categories are illustrative, not exhaustive. A herbalist running a community apothecary lives across (a) and (c); a harm-reduction organizer whose work is also a healing practice lives across (a) and (c); a regenerative-agriculture entrepreneur stewarding a co-op lives across (b) and (c). If the work is in this spirit, it likely fits.
 
-## Section 2 — Selection criteria
+## Section 2. Selection criteria
 
 A Companion candidate is evaluated against these criteria. Not all must be met; the criteria are inputs to judgment, not a scorecard.
 
@@ -80,7 +80,7 @@ b. Lived-experience leadership (people leading organizations that serve their ow
 
 c. HAND does not require any specific demographic profile; selection is about fit with mission and operational shape, not quotas.
 
-## Section 3 — Selection process
+## Section 3. Selection process
 
 Companion selection follows a documented process:
 
@@ -104,7 +104,7 @@ i. **Onboarding.** Accepted Companions sign an engagement agreement (Section 4) 
 
 The process typically takes 4-8 weeks from inbound interest to acceptance.
 
-## Section 4 — Engagement agreement
+## Section 4. Engagement agreement
 
 When a Companion is accepted, a written Engagement Agreement documents:
 
@@ -132,7 +132,7 @@ k. **Cost.** Default: free to the Companion. HAND may negotiate cost-sharing in 
 
 Both parties sign and retain.
 
-## Section 5 — During engagement
+## Section 5. During engagement
 
 a. **Program lead assigned.** Each Companion has a designated program lead at HAND.
 
@@ -150,7 +150,7 @@ g. **Documentation.** HAND maintains an engagement file with session notes, deli
 
 h. **Conflicts of interest.** Either party may raise. Resolution per the Engagement Agreement.
 
-## Section 6 — Companion graduation
+## Section 6. Companion graduation
 
 Graduation is the planned, healthy end of a Companion engagement. It is **not** failure; it is the intended outcome.
 
@@ -194,7 +194,7 @@ d. Alumni have unrestricted alumni-tier access to publicly available HAND resour
 
 e. Sovereignty commitments do not end at graduation; HAND continues to honor the eight principles for the graduated Companion's adapter for as long as it exists.
 
-## Section 7 — Mid-engagement transition
+## Section 7. Mid-engagement transition
 
 Sometimes a Companion is no longer the right fit before three years. Transitions handled with respect.
 
@@ -222,7 +222,7 @@ e. **Alumni status.** Mid-engagement transitions still enter alumni status, with
 
 f. **Documentation.** Transition documented in the engagement file.
 
-## Section 8 — Companion withdrawal
+## Section 8. Companion withdrawal
 
 A Companion may withdraw from the engagement at any time. HAND honors withdrawal without prejudice.
 
@@ -236,7 +236,7 @@ d. **No penalty.** No financial obligation, no contractual penalty. The relation
 
 e. **Alumni option.** Withdrawing Companions are welcome in alumni status.
 
-## Section 9 — HAND-initiated termination
+## Section 9. HAND-initiated termination
 
 In rare cases, HAND may terminate an engagement for cause.
 
@@ -268,7 +268,7 @@ f. **Sovereignty handoff** is provided even in for-cause termination, **unless**
 
 g. **Documentation** retained per the Document Retention Policy.
 
-## Section 10 — Documentation and privacy
+## Section 10. Documentation and privacy
 
 a. Engagement files are confidential.
 
@@ -278,7 +278,7 @@ c. Aggregated, de-identified outcome data may be reported publicly; individual C
 
 d. Companion personal information protected per Privacy Policy.
 
-## Section 11 — Open questions
+## Section 11. Open questions
 
 - **Cohort vs continuous selection.** Cohort 1 onboards roughly together; later years may shift to continuous selection. Operational complexity differs. Decide before Cohort 2.
 - **Companion graduation timing.** Three years is the default; some Companions may benefit from longer or shorter. Build flexibility into the Engagement Agreement.

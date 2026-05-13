@@ -79,18 +79,18 @@ The public support test is not a single filing, it is a rolling calculation. HAN
 ## Renewal calendar template
 
 ```
-JANUARY    — fiscal year close; tax prep handoff to CPA
-FEBRUARY   — board meeting #1; adopt budget; refresh COI disclosures
-MARCH      — quarterly check-in with fiscal sponsor (if any)
-APRIL      — board meeting #2; Q1 financials
-MAY        — Form 990 filed (calendar-year filers); strategic-plan mid-year review
-JUNE       — sovereignty drill on a Companion-group adapter (revocation/portability test)
-JULY       — board meeting #3; Q2 financials; insurance renewal review window
-AUGUST     — funder pipeline review; LOI calendar plan for Q4 cycle
-SEPTEMBER  — Sovereign Companions Annual Accountability Report (public release)
-OCTOBER    — board meeting #4; ED compensation review; Q3 financials
-NOVEMBER   — strategic-plan revision draft for next year
-DECEMBER   — year-end giving push; board ratifies next-year budget and plan
+JANUARY    fiscal year close; tax prep handoff to CPA
+FEBRUARY   board meeting #1; adopt budget; refresh COI disclosures
+MARCH      quarterly check-in with fiscal sponsor (if any)
+APRIL      board meeting #2; Q1 financials
+MAY        Form 990 filed (calendar-year filers); strategic-plan mid-year review
+JUNE       sovereignty drill on a Companion-group adapter (revocation/portability test)
+JULY       board meeting #3; Q2 financials; insurance renewal review window
+AUGUST     funder pipeline review; LOI calendar plan for Q4 cycle
+SEPTEMBER  Sovereign Companions Annual Accountability Report (public release)
+OCTOBER    board meeting #4; ED compensation review; Q3 financials
+NOVEMBER   strategic-plan revision draft for next year
+DECEMBER   year-end giving push; board ratifies next-year budget and plan
 ```
 
 This is a template, not a rule. Adjust to actual fiscal year and incorporation date once locked.

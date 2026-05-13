@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 This Policy serves several purposes:
 
@@ -18,7 +18,7 @@ c. **Suspends destruction immediately** when the Corporation has notice of, or r
 
 d. Sets forth the responsibilities of the Treasurer, Secretary, Executive Director, and staff for compliance.
 
-## Section 2 — Scope
+## Section 2. Scope
 
 This Policy applies to all records the Corporation maintains, in any format:
 
@@ -30,11 +30,11 @@ c. Audio and video recordings, including meeting recordings.
 
 d. Companion-group-owned artifacts held in trust by the Corporation (LoRA adapters, training data, evaluation logs).
 
-## Section 3 — Records custodian
+## Section 3. Records custodian
 
 The **Secretary** is the official records custodian for corporate records (Bylaws, Articles, minutes, resolutions, governance policies). The **Treasurer** is the records custodian for financial records. The **Executive Director** is the records custodian for program, personnel, and operational records. The **Sovereign Companions Oversight Committee Chair** is the records custodian for AI workstream records.
 
-## Section 4 — Retention schedule
+## Section 4. Retention schedule
 
 ### Permanent retention
 
@@ -79,7 +79,7 @@ The following are retained **permanently** in original form and in backed-up ele
 
 - Routine email not falling into any of the categories above (12 months, then auto-purged)
 - Drafts of documents that have been finalized (purge after final adopted)
-- Routine operational logs (server logs, build logs) — 90 days by default
+- Routine operational logs (server logs, build logs), 90 days by default
 
 ### Sovereign Companions records (special schedule)
 
@@ -93,7 +93,7 @@ The following are retained **permanently** in original form and in backed-up ele
 | Consent records | Permanent; cannot be deleted without breaking sovereignty chain | Required for audit |
 | Algorithmic Impact Assessments | Permanent; versioned | Public artifact |
 
-## Section 5 — Email and electronic records
+## Section 5. Email and electronic records
 
 a. Email is a record when it documents a Corporation decision, transaction, policy, or program action. Routine social or scheduling email is not a record.
 
@@ -103,7 +103,7 @@ c. Personal devices used for Corporation work are subject to this Policy. The Co
 
 d. Cloud storage providers used for Corporation records (Google Workspace, Notion, GitHub) must have a documented data processing agreement and must comply with the Privacy Policy.
 
-## Section 6 — Destruction procedure
+## Section 6. Destruction procedure
 
 a. Records past their retention period and not subject to a destruction hold (Section 7) shall be destroyed annually as part of a documented destruction process supervised by the appropriate records custodian.
 
@@ -113,7 +113,7 @@ c. Electronic records shall be deleted using methods appropriate to the storage 
 
 d. A **destruction log** shall be maintained, identifying the categories of records destroyed, the dates, and the supervising custodian. The log itself is retained for 7 years.
 
-## Section 7 — Suspension of destruction (hold)
+## Section 7. Suspension of destruction (hold)
 
 **Routine destruction shall be suspended immediately upon any of the following:**
 
@@ -131,7 +131,7 @@ The Executive Director shall promptly issue a written **legal hold notice** to a
 
 **Violating a hold is a federal crime under 18 U.S.C. §1519** (penalties up to 20 years imprisonment and fines). The Corporation will report any suspected violation to counsel and law enforcement as appropriate.
 
-## Section 8 — Companion-data special protections
+## Section 8. Companion-data special protections
 
 Companion-group-owned training data is subject to additional protections:
 
@@ -141,7 +141,7 @@ b. **Revocation does not override legal hold.** If a legal hold applies, destruc
 
 c. **Cross-Companion-group data extraction is prohibited.** Records from one Companion group's engagement may not be repurposed for training adapters serving a different Companion group, even after retention period has expired.
 
-## Section 9 — Training and acknowledgment
+## Section 9. Training and acknowledgment
 
 a. All new staff, directors, and Contributors with access to Corporation records shall receive a copy of this Policy at onboarding and shall acknowledge receipt in writing.
 
@@ -149,7 +149,7 @@ b. Annual refresher training is required for staff and directors.
 
 c. The Secretary maintains the acknowledgment records.
 
-## Section 10 — Annual review
+## Section 10. Annual review
 
 The Audit Committee shall review this Policy and the retention schedule annually, considering:
 

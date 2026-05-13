@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Definitions and purpose
+## Section 1. Definitions and purpose
 
 **Contributors** are HAND Protocol Foundation's distinctive term for the skilled professionals, tradespeople, and craftspeople who give time and skill into the curated resource pool. The legal term in this Policy is **volunteer**; both terms refer to the same individuals, with "Contributor" used in program-facing communication and "volunteer" used in liability, tax, and insurance contexts.
 
@@ -22,7 +22,7 @@ d. Sets expectations and protections for the Corporation.
 
 e. Covers the legal framework: Texas Charitable Immunity and Liability Act and the federal Volunteer Protection Act.
 
-## Section 2 — Contributor categories
+## Section 2. Contributor categories
 
 a. **Pool Contributors.** Skilled volunteers enrolled in the resource pool, available for matching to Companions. The default category.
 
@@ -34,7 +34,7 @@ d. **Advisory Contributors.** Contributors providing strategic, technical, or pr
 
 e. **Event-based volunteers.** Short-term volunteers helping with specific events or campaigns; lighter onboarding.
 
-## Section 3 — Contributor application
+## Section 3. Contributor application
 
 a. **Application form.** A Contributor application is the entry point: name, skills, capacity, areas of interest, references.
 
@@ -50,7 +50,7 @@ f. **Conflict-of-interest screening** if the Contributor has employment or affil
 
 g. **Disposition.** The Executive Director or designee approves, defers, or declines applications, and communicates the decision to the applicant within 14 days. Declines are documented.
 
-## Section 4 — Onboarding
+## Section 4. Onboarding
 
 Upon acceptance to the pool, the Contributor:
 
@@ -64,7 +64,7 @@ d. Participates in an orientation conversation with HAND staff.
 
 e. Begins matching consideration based on capacity and area.
 
-## Section 5 — Matching to Companions
+## Section 5. Matching to Companions
 
 a. **No Companion is matched without HAND-mediated introduction.** Contributors do not solicit Companions directly through the pool.
 
@@ -76,7 +76,7 @@ d. **Mutual fit conversation.** Before formal engagement, Contributor and Compan
 
 e. **Scope agreement.** Once mutual fit is confirmed, a written scope agreement documents what the Contributor will do, over what period, with what review points.
 
-## Section 6 — During engagement
+## Section 6. During engagement
 
 a. **HAND-mediated relationship.** The Companion's relationship is with HAND, not the individual Contributor. If the Contributor departs, HAND continues the relationship.
 
@@ -90,7 +90,7 @@ e. **Confidentiality.** Contributors hold Companion information in confidence pe
 
 f. **No personal profit.** Contributors do not accept compensation from Companions for work done through HAND. Independent professional engagements outside the HAND relationship are permitted but disclosed.
 
-## Section 7 — What the Corporation provides Contributors
+## Section 7. What the Corporation provides Contributors
 
 a. **Curated matches** to Companions whose work and need fit the Contributor's skills.
 
@@ -108,7 +108,7 @@ g. **Honoraria, where appropriate.** Some Contributor engagements may include mo
 
 h. **Reimbursement of out-of-pocket expenses** under the accountable-plan policy, with prior approval.
 
-## Section 8 — What the Corporation expects of Contributors
+## Section 8. What the Corporation expects of Contributors
 
 a. **Code of Ethics adherence.**
 
@@ -124,7 +124,7 @@ f. **Honest feedback to HAND** about the engagement, what worked, what didn't.
 
 g. **Public conduct consistent with Code of Ethics** when speaking as a Contributor or about HAND.
 
-## Section 9 — Independent contractor vs volunteer status
+## Section 9. Independent contractor vs volunteer status
 
 a. **Volunteers are not employees.** Contributors operating in the pool are volunteers, not employees, for tax and labor-law purposes.
 
@@ -134,7 +134,7 @@ c. **Independent contractor classification.** Where a Contributor provides servi
 
 d. **No misclassification.** The Corporation does not classify employees as volunteers or independent contractors to evade tax or labor-law obligations.
 
-## Section 10 — Liability and immunity
+## Section 10. Liability and immunity
 
 a. **Texas Charitable Immunity and Liability Act** (Tex. Civ. Prac. & Rem. Code Ch. 84) provides liability protection for volunteers of qualifying nonprofits, with specified exceptions (gross negligence, intentional wrongdoing, conduct outside scope).
 
@@ -150,7 +150,7 @@ e. **Limitations.** Liability protections do not apply to:
 - Operation of a motor vehicle requiring a license.
 - Where state or federal law otherwise excludes.
 
-## Section 11 — Screening for sensitive roles
+## Section 11. Screening for sensitive roles
 
 For Contributor roles working closely with vulnerable populations:
 
@@ -162,7 +162,7 @@ c. **Heightened orientation** including trauma-informed practice basics for any 
 
 d. **Mandated reporter awareness** for Contributors working with vulnerable populations; the Corporation does not assume mandated-reporter status but reviews on a case basis.
 
-## Section 12 — Exit from the pool
+## Section 12. Exit from the pool
 
 a. **Contributor-initiated.** A Contributor may withdraw at any time by notice to HAND. Engagements with Companions are transitioned to HAND or to another Contributor.
 
@@ -178,7 +178,7 @@ d. **Companion continuity.** If a Contributor's exit affects an active Companion
 
 e. **Reapplication.** A Contributor removed for cause may reapply after one year, subject to Executive Director review.
 
-## Section 13 — Recognition
+## Section 13. Recognition
 
 a. **Annual recognition** in the Annual Report and on the website (with each Contributor's preference).
 
@@ -188,7 +188,7 @@ c. **Public recognition events** as resources permit.
 
 d. **Anonymous option.** Contributors may opt for anonymity in all public recognition.
 
-## Section 14 — Records
+## Section 14. Records
 
 a. **Contributor file.** Maintained per Document Retention Policy.
 
@@ -196,7 +196,7 @@ b. **Engagement records.** Documented for each Companion engagement: scope, date
 
 c. **Performance issues.** Documented per the Code of Ethics and Equal Opportunity and Anti-Harassment Policy procedures.
 
-## Section 15 — Special provisions for legal and professional services
+## Section 15. Special provisions for legal and professional services
 
 a. **Pro bono legal services.** Contributing attorneys provide services under attorney-client privilege with HAND or with HAND's Companions (as agreed). Engagement letters define scope, conflicts, and privilege.
 

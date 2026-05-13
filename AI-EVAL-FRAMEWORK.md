@@ -1,13 +1,13 @@
 # Sovereign Companion Evaluation Framework
 
-**How HAND will know whether the Companion-group agent systems are earning their place — and remaining sovereign.**
+**How HAND will know whether the Companion-group agent systems are earning their place, and remaining sovereign.**
 *Draft v0.2 · May 2026 · Companion to [AI-COMPANIONS.md](AI-COMPANIONS.md)*
 
 ---
 
 ## Purpose
 
-The HAND sovereign Companion agent systems exist to address one structural bottleneck named in the discovery landscape doc: *long-term accompaniment doesn't parallelize the way project-based pro bono does.* This framework is how we measure whether the systems actually do that — without quietly substituting for the relational work they were built to extend, and without compromising the Companion-group sovereignty the design depends on.
+The HAND sovereign Companion agent systems exist to address one structural bottleneck named in the discovery landscape doc: *long-term accompaniment doesn't parallelize the way project-based pro bono does.* This framework is how we measure whether the systems actually do that, without quietly substituting for the relational work they were built to extend, and without compromising the Companion-group sovereignty the design depends on.
 
 The framework is designed to be **published openly** once stable. Adjacent accompaniment organizations should be able to adopt and adapt it without rebuilding from scratch.
 
@@ -17,7 +17,7 @@ Six dimensions. None can be optimized at the expense of another.
 
 | Dimension | The question it answers |
 |---|---|
-| **System quality** | Does the agent system — model, retrieval, tool use, memory — produce coherent, accurate, on-voice work? |
+| **System quality** | Does the agent system (model, retrieval, tool use, memory) produce coherent, accurate, on-voice work? |
 | **Companion value** | Does the system make a Companion group's work materially easier and HAND feel more present, not less? |
 | **Staff value** | Does the coordination agent expand what a program lead can hold without burning them out? |
 | **Harm avoidance** | Are wrong, harmful, or off-brand outputs caught before they reach a Companion group or a funder? |
@@ -40,41 +40,41 @@ Six dimensions. None can be optimized at the expense of another.
 ### 2. Companion value (relational)
 
 - **Time-to-first-draft** on Companion-side artifacts (grant LOIs, fiscal-sponsorship intake, brand-voice copy). Baseline measured pre-agent; target: ≥ 50% reduction by month 12.
-- **"Felt continuity" rating** — quarterly Companion-group survey: *"HAND feels like it remembers us between our check-ins."* 5-point Likert. Target: median 4+ by month 9.
-- **"Felt presence" rating** — same survey: *"When the agent helps draft something for us, it feels more like HAND showed up, not less."* 5-point Likert. Target: median 4+ by month 9. **A drop below 3 on this metric triggers a pause and review, regardless of other metrics.**
-- **Companion-initiated revisions** — % of agent-drafted artifacts the group materially edits before use. Tracked as a signal, not optimized. Both very high and very low values warrant investigation.
+- **"Felt continuity" rating**, quarterly Companion-group survey: *"HAND feels like it remembers us between our check-ins."* 5-point Likert. Target: median 4+ by month 9.
+- **"Felt presence" rating**, same survey: *"When the agent helps draft something for us, it feels more like HAND showed up, not less."* 5-point Likert. Target: median 4+ by month 9. **A drop below 3 on this metric triggers a pause and review, regardless of other metrics.**
+- **Companion-initiated revisions**, % of agent-drafted artifacts the group materially edits before use. Tracked as a signal, not optimized. Both very high and very low values warrant investigation.
 
 ### 3. Staff value (operational)
 
 - **Matching time** from Companion-group intake to Contributor pairing. Baseline measured pre-agent; target: ≥ 40% reduction by month 12.
-- **Cohort capacity** — Companion groups a single part-time program lead can hold at the agreed quality bar. Baseline 2–3 pre-agent; target: 5–7 by month 15.
-- **Pattern surfacing** — count of cross-cohort patterns flagged by the coordination agent that were validated and acted on by HAND staff per month. Tracked as a leading indicator of staff value.
-- **Program-lead time-on-relational-work** — % of working hours the program lead spends in direct Companion-group contact vs. coordination overhead. Target: shift from baseline toward more direct contact.
+- **Cohort capacity**, Companion groups a single part-time program lead can hold at the agreed quality bar. Baseline 2–3 pre-agent; target: 5–7 by month 15.
+- **Pattern surfacing**, count of cross-cohort patterns flagged by the coordination agent that were validated and acted on by HAND staff per month. Tracked as a leading indicator of staff value.
+- **Program-lead time-on-relational-work**, % of working hours the program lead spends in direct Companion-group contact vs. coordination overhead. Target: shift from baseline toward more direct contact.
 
 ### 4. Harm avoidance
 
-- **Pre-delivery review coverage** — % of agent outputs intended for Companion-group, funder, or external consumption that passed through human review before delivery. Target: **100%** for the duration of the pilot. Non-negotiable.
-- **Caught-in-review incidents** — outputs that were materially wrong, harmful, off-voice, or inappropriately confident, caught before delivery. Tracked openly; the rate is expected to decline over time, but the *absolute presence of human review* does not.
-- **Post-delivery incidents** — anything that reached a Companion group or funder and required correction or apology. Target: zero. Every incident triggers a full root-cause review and is logged in the public quarterly report.
-- **Edge-case log** — running record of prompts, tool sequences, and contexts where the agent behaves unexpectedly. Reviewed at every quarterly panel.
-- **Tool-action audit** — every external tool call (sending an email draft, creating a calendar event, writing to a document) requires explicit human approval until the agent has demonstrated ≥ 100 consecutive correct invocations of that tool class on the test suite.
+- **Pre-delivery review coverage**, % of agent outputs intended for Companion-group, funder, or external consumption that passed through human review before delivery. Target: **100%** for the duration of the pilot. Non-negotiable.
+- **Caught-in-review incidents**, outputs that were materially wrong, harmful, off-voice, or inappropriately confident, caught before delivery. Tracked openly; the rate is expected to decline over time, but the *absolute presence of human review* does not.
+- **Post-delivery incidents**, anything that reached a Companion group or funder and required correction or apology. Target: zero. Every incident triggers a full root-cause review and is logged in the public quarterly report.
+- **Edge-case log**, running record of prompts, tool sequences, and contexts where the agent behaves unexpectedly. Reviewed at every quarterly panel.
+- **Tool-action audit**, every external tool call (sending an email draft, creating a calendar event, writing to a document) requires explicit human approval until the agent has demonstrated ≥ 100 consecutive correct invocations of that tool class on the test suite.
 
 ### 5. Governance
 
-- **Participatory review panel composition** — minimum two Companions (or representatives of Companion groups) and two Contributors rotating through quarterly review, in addition to HAND staff. Compensated for their time.
-- **Decision-gate vote outcomes** — at each gate (POC → Pilot → Production), the panel formally approves, requests changes, or pauses the work. Outcomes published.
-- **Public report cadence** — quarterly public summary of metrics, incidents, decisions, and what changed. Published on handprotocol.org.
+- **Participatory review panel composition**, minimum two Companions (or representatives of Companion groups) and two Contributors rotating through quarterly review, in addition to HAND staff. Compensated for their time.
+- **Decision-gate vote outcomes**, at each gate (POC → Pilot → Production), the panel formally approves, requests changes, or pauses the work. Outcomes published.
+- **Public report cadence**, quarterly public summary of metrics, incidents, decisions, and what changed. Published on handprotocol.org.
 
 ### 6. Sovereignty *(new)*
 
-- **Adapter ownership record** — % of trained adapters with a documented, signed ownership record naming the Companion or Companion group. Target: **100%.** Audited at every gate.
-- **Portability check** — at each quarterly panel, one randomly selected Companion-group's full handoff package (adapter weights, training data, eval logs, audit trail, self-host recipe) is generated and verified. Target: complete package generatable in ≤ 72 hours through the documented process.
-- **Revocation SLA** — time from a documented revocation request to verified retrain-without-or-destroy completion. Target: ≤ 30 days. Drilled at least once per year via a simulated revocation.
-- **Cross-group contamination check** — monthly automated verification that no training data tagged to group A appears in group B's adapter unless group A has documented opt-in consent. Target: zero unauthorized cross-contamination.
-- **Audit-trail accessibility** — quarterly test that a Companion group can pull their own complete log (model calls, retrievals, tool invocations, reviewer dispositions) on demand. Target: pull request fulfilled in ≤ 24 hours.
-- **Self-host readiness** — documented self-host recipe, tested on commodity hardware (specified spec) before each gate. Target: a technically literate volunteer can stand the system up from the recipe in ≤ 1 working day.
-- **Closure-simulation drill** — at Gate 3, run a HAND-closure tabletop with one Companion group: can their system continue operating within 30 days using only the handoff package and self-host recipe, with no HAND infrastructure? Target: yes, with documented gaps logged.
-- **Adapter weight publication consent** — for any adapter weight publication, a documented Companion-group consent record exists. Default for all adapters: not published.
+- **Adapter ownership record**, % of trained adapters with a documented, signed ownership record naming the Companion or Companion group. Target: **100%.** Audited at every gate.
+- **Portability check**, at each quarterly panel, one randomly selected Companion-group's full handoff package (adapter weights, training data, eval logs, audit trail, self-host recipe) is generated and verified. Target: complete package generatable in ≤ 72 hours through the documented process.
+- **Revocation SLA**, time from a documented revocation request to verified retrain-without-or-destroy completion. Target: ≤ 30 days. Drilled at least once per year via a simulated revocation.
+- **Cross-group contamination check**, monthly automated verification that no training data tagged to group A appears in group B's adapter unless group A has documented opt-in consent. Target: zero unauthorized cross-contamination.
+- **Audit-trail accessibility**, quarterly test that a Companion group can pull their own complete log (model calls, retrievals, tool invocations, reviewer dispositions) on demand. Target: pull request fulfilled in ≤ 24 hours.
+- **Self-host readiness**, documented self-host recipe, tested on commodity hardware (specified spec) before each gate. Target: a technically literate volunteer can stand the system up from the recipe in ≤ 1 working day.
+- **Closure-simulation drill**, at Gate 3, run a HAND-closure tabletop with one Companion group: can their system continue operating within 30 days using only the handoff package and self-host recipe, with no HAND infrastructure? Target: yes, with documented gaps logged.
+- **Adapter weight publication consent**, for any adapter weight publication, a documented Companion-group consent record exists. Default for all adapters: not published.
 
 ## Cadence
 
@@ -90,7 +90,7 @@ Six dimensions. None can be optimized at the expense of another.
 
 Three explicit gates. At each, the participatory review panel reviews metrics across all six dimensions and votes to *advance*, *iterate*, or *pause*. A *pause* outcome means the work stops until the named concern is addressed.
 
-### Gate 1 — POC → Pilot (end of month 3)
+### Gate 1: POC → Pilot (end of month 3)
 
 **Advance criteria**:
 - System-quality: hallucination rate ≤ 5% on the test set; tool-call accuracy ≥ 90% on the limited POC tool set.
@@ -98,7 +98,7 @@ Three explicit gates. At each, the participatory review panel reviews metrics ac
 - Harm-avoidance: no post-delivery incidents.
 - Sovereignty: adapter ownership record signed; portability check passes; audit trail accessible to the Companion group.
 
-### Gate 2 — Pilot → Production (end of month 12)
+### Gate 2: Pilot → Production (end of month 12)
 
 **Advance criteria**:
 - All four Companion-value metric targets met or trending firmly toward them.
@@ -107,7 +107,7 @@ Three explicit gates. At each, the participatory review panel reviews metrics ac
 - Sovereignty: 100% adapter ownership records, ≥ 2 successful quarterly portability checks, successful revocation drill, zero unauthorized cross-group contamination.
 - Open-source draft of the eval framework published for community comment.
 
-### Gate 3 — Production → Sustainability (end of month 18)
+### Gate 3: Production → Sustainability (end of month 18)
 
 **Advance criteria**:
 - Unit economics of the agent infrastructure (training + inference + AI lead time) defensible inside HAND's operating budget without the McGovern grant.
@@ -118,10 +118,10 @@ Three explicit gates. At each, the participatory review panel reviews metrics ac
 
 ## Roles
 
-- **AI Lead (part-time)** — owns model and agent training, deployment, evaluation infrastructure, and reports to the program lead. Funded inside the Sovereign Companions tier budget.
-- **Program Lead** — owns the human review pipeline, the Companion-group relationships, and the call on whether to ship any given output. Has veto on any agent deployment or tool enablement.
-- **Participatory Review Panel** — minimum 2 Companions (or Companion-group representatives) + 2 Contributors + 1 HAND staff member, rotating quarterly, compensated.
-- **External Reviewer (annual)** — an independent AI-safety practitioner reviews the framework, the sovereignty drills, and a sample of outputs annually. Their findings are published.
+- **AI Lead (part-time)**, owns model and agent training, deployment, evaluation infrastructure, and reports to the program lead. Funded inside the Sovereign Companions tier budget.
+- **Program Lead**, owns the human review pipeline, the Companion-group relationships, and the call on whether to ship any given output. Has veto on any agent deployment or tool enablement.
+- **Participatory Review Panel**, minimum 2 Companions (or Companion-group representatives) + 2 Contributors + 1 HAND staff member, rotating quarterly, compensated.
+- **External Reviewer (annual)**, an independent AI-safety practitioner reviews the framework, the sovereignty drills, and a sample of outputs annually. Their findings are published.
 
 ## What we are deliberately deferring
 
@@ -134,7 +134,7 @@ These questions are real and we will address them on a published timeline. They 
 
 ## Public release
 
-The framework document, the eval harness code, the adapter-training methodology, the agent scaffolding code, and the quarterly reports are released under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (documents) and MIT (code), matching HAND Protocol's existing repository licensing. The intent is for organizations doing adjacent accompaniment work — fiscal sponsors, capacity-building intermediaries, peer accompaniment cohorts — to fork and adapt without re-litigating the structural design.
+The framework document, the eval harness code, the adapter-training methodology, the agent scaffolding code, and the quarterly reports are released under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (documents) and MIT (code), matching HAND Protocol's existing repository licensing. The intent is for organizations doing adjacent accompaniment work, fiscal sponsors, capacity-building intermediaries, peer accompaniment cohorts, to fork and adapt without re-litigating the structural design.
 
 Adapter weights are governed by the Sovereignty dimension and are not published by default. The base models used (Llama, Mistral) are already open under their own licenses.
 

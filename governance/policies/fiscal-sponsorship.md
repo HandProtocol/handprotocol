@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose and decision
+## Section 1. Purpose and decision
 
 The Corporation may operate under a fiscal sponsorship arrangement during the period between organization (Texas SOS filing) and receipt of the IRS Determination Letter recognizing 501(c)(3) status, in order to accept tax-deductible donations from day one.
 
@@ -28,9 +28,9 @@ c. **Defer** the decision if:
 - Filing-raise is not yet imminent.
 - No clear donor or grant pipeline requires immediate tax-deductible status.
 
-## Section 2 — Sponsorship model
+## Section 2. Sponsorship model
 
-The Corporation will use **Model C — Pre-approved Grant Relationship** per Colvin's *Fiscal Sponsorship: 6 Ways To Do It Right* taxonomy.
+The Corporation will use **Model C, Pre-approved Grant Relationship** per Colvin's *Fiscal Sponsorship: 6 Ways To Do It Right* taxonomy.
 
 Under Model C:
 
@@ -44,7 +44,7 @@ d. The Corporation has operational autonomy and holds its own contracts, employs
 
 The Corporation will **not** use Model A (Comprehensive / Direct Project) sponsorship, because Model A would dissolve HAND into the sponsor and complicate the 1023 application as an independent entity.
 
-## Section 3 — Sponsor selection criteria
+## Section 3. Sponsor selection criteria
 
 A fiscal sponsor must:
 
@@ -66,27 +66,27 @@ h. Have a documented mission and Companion-population alignment, or at least no 
 
 i. Have responsive operations (response time on inquiries under 5 business days, and ability to issue grant payments within 10 business days of request).
 
-## Section 4 — Sponsor shortlist (May 2026)
+## Section 4. Sponsor shortlist (May 2026)
 
 Current candidate shortlist, in order of fit:
 
-a. **Players Philanthropy Fund (PPF)** — 6% fee. Mature Model C program. Founder-friendly. ppf.org/fiscal-sponsorship/
+a. **Players Philanthropy Fund (PPF)**, 6% fee. Mature Model C program. Founder-friendly. ppf.org/fiscal-sponsorship/
 
-b. **Hack Club Bank (HCB)** — 7% fee. Open-source operations culture, transparent ledger. Strong fit for HAND's open-source posture. hackclub.com/fiscal-sponsorship/
+b. **Hack Club Bank (HCB)**, 7% fee. Open-source operations culture, transparent ledger. Strong fit for HAND's open-source posture. hackclub.com/fiscal-sponsorship/
 
-c. **Social Good Fund** — 6–8% plus $29/month refundable admin. CA-based; longer queue; capacity-constrained. socialgoodfund.org/fiscal-sponsorship/
+c. **Social Good Fund**, 6–8% plus $29/month refundable admin. CA-based; longer queue; capacity-constrained. socialgoodfund.org/fiscal-sponsorship/
 
-d. **FJC** — 6–9% fee. Boutique, financially sophisticated, slower on responses. fjc.org
+d. **FJC**, 6–9% fee. Boutique, financially sophisticated, slower on responses. fjc.org
 
 **Excluded from consideration:**
 
-- **Open Collective Foundation** — closed December 31, 2024. No longer available.
+- **Open Collective Foundation**, closed December 31, 2024. No longer available.
 
-- **Tides Center** — 9% fee. Excellent service quality but at the top of HAND's fee tolerance.
+- **Tides Center**, 9% fee. Excellent service quality but at the top of HAND's fee tolerance.
 
 The Executive Director shall conduct a structured comparison and present a recommendation to the Board no later than the meeting at which the sponsorship decision is to be made.
 
-## Section 5 — Sponsor agreement key terms
+## Section 5. Sponsor agreement key terms
 
 The Corporation will negotiate for the following terms in any sponsor agreement:
 
@@ -110,7 +110,7 @@ i. **Sovereign Companions data.** Sponsor acknowledges that Companion-group-owne
 
 j. **Form 990 reporting.** Donations to and through the sponsor are reported on the sponsor's Form 990, not HAND's (until HAND has its own determination).
 
-## Section 6 — Operating under sponsorship
+## Section 6. Operating under sponsorship
 
 a. **Branding and communications.** HAND operates publicly under its own name. The relationship is disclosed in the footer of donation pages and acknowledgments ("HAND Protocol Foundation is a fiscally sponsored project of [Sponsor]").
 
@@ -126,7 +126,7 @@ f. **Insurance.** Sponsor's coverage is the floor; HAND may carry additional D&O
 
 g. **Hiring.** Sponsor's employment infrastructure may be used for early hires (sponsor as employer of record) or HAND may run payroll under its own EIN with sponsor's grant funding the payroll. Decided at sponsor agreement signing.
 
-## Section 7 — Exit from sponsorship
+## Section 7. Exit from sponsorship
 
 a. **Trigger.** Receipt of IRS Determination Letter recognizing 501(c)(3) status, plus completion of Texas Comptroller exemption (AP-204), plus opening of HAND's own bank account ready to receive donations directly.
 
@@ -140,7 +140,7 @@ e. **Records.** HAND obtains copies of all donor records, financial records, and
 
 f. **Public acknowledgment.** HAND publicly thanks the sponsor in the year-of-exit Annual Report.
 
-## Section 8 — Funder considerations
+## Section 8. Funder considerations
 
 a. **Funders that prefer or require direct 501(c)(3) recipients:** MacKenzie Scott / Yield Giving's recent rounds, some federal grants, some Texas community foundations. HAND should accelerate exit from sponsorship when these are in the pipeline.
 
@@ -148,7 +148,7 @@ b. **Funders comfortable with fiscally sponsored projects:** most foundations, i
 
 c. **Funders requiring direct fiduciary disclosure:** in any case, HAND discloses the sponsor relationship transparently in applications.
 
-## Section 9 — Public disclosure
+## Section 9. Public disclosure
 
 a. The Corporation publishes its sponsor relationship status on its website during the sponsorship period.
 

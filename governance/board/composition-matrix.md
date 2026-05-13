@@ -14,7 +14,7 @@ The Matrix is **reviewed annually** at the year-end Governance Committee meeting
 
 ---
 
-## Section 1 — Target board composition
+## Section 1. Target board composition
 
 For HAND's organizational stage:
 
@@ -27,7 +27,7 @@ The target reflects research that small-org effectiveness peaks at 5-7 active di
 
 ---
 
-## Section 2 — Skills the board needs
+## Section 2. Skills the board needs
 
 | Skill area | Why HAND needs it | Status |
 |---|---|---|
@@ -42,7 +42,7 @@ The target reflects research that small-org effectiveness peaks at 5-7 active di
 | **Operations / HR / management** | As HAND scales to first hires | Desired: 1 director with operations background |
 | **Strategy / theory of change** | Mission discipline, evaluation rigor | Target: distributed across multiple directors |
 
-## Section 3 — Lived experience and identity perspectives
+## Section 3. Lived experience and identity perspectives
 
 HAND serves a heterogeneous population. The board should reflect:
 
@@ -58,7 +58,7 @@ HAND serves a heterogeneous population. The board should reflect:
 | **National-scale perspective** | HAND's reach is not just local; funders include national |
 | **Class diversity** | First-generation, working-class, and wealth perspectives all matter |
 
-## Section 4 — Network and funder reach
+## Section 4. Network and funder reach
 
 A small founding board cannot have networks covering everything HAND needs. Recruitment over the first 3 years should fill gaps in:
 
@@ -72,7 +72,7 @@ A small founding board cannot have networks covering everything HAND needs. Recr
 | **Grassroots organizing networks** | Movement-aligned funders, mutual-aid networks |
 | **Tech-for-good** | Code for America alumni, civic tech, ethical AI community |
 
-## Section 5 — Current board composition
+## Section 5. Current board composition
 
 To be completed at first board meeting and updated annually. Template:
 
@@ -84,7 +84,7 @@ To be completed at first board meeting and updated annually. Template:
 | [Name] | [Director] | [Date] | [List] | [List] | [List] | [Date] |
 | [Name] | [Director] | [Date] | [List] | [List] | [List] | [Date] |
 
-## Section 6 — Gap analysis
+## Section 6. Gap analysis
 
 Updated annually. Identifies the top 3-5 gaps and frames the recruitment priorities for the year.
 
@@ -102,7 +102,7 @@ Example (illustrative, not actual):
 
 (To be assessed)
 
-## Section 7 — Recruitment principles
+## Section 7. Recruitment principles
 
 HAND recruits board members as follows:
 
@@ -120,7 +120,7 @@ f. **Active recruiting, not passive intake.** Targeted outreach based on the gap
 
 g. **Pipeline of interest, not just open recruitment.** Maintain an ongoing list of candidates and warm them slowly.
 
-## Section 8 — Recruitment process
+## Section 8. Recruitment process
 
 a. **Identification.** Through staff, board, Contributors, Companions, peer organizations, board placement services (BoardSource, BoardBuild, BoardLead).
 
@@ -136,7 +136,7 @@ f. **Election** by majority vote of the Board at a regular or special meeting.
 
 g. **Onboarding** within 30 days of election: orientation, materials, mentor pairing.
 
-## Section 9 — Onboarding for new directors
+## Section 9. Onboarding for new directors
 
 Every new director receives:
 
@@ -152,7 +152,7 @@ e. **Committee assignment** based on skills and interest.
 
 f. **First 90 days touchpoint** with the Vice Chair / Governance Chair to address questions.
 
-## Section 10 — Board self-assessment
+## Section 10. Board self-assessment
 
 Annually:
 
@@ -166,7 +166,7 @@ d. Improvements adopted by the Board.
 
 Assessment tools: BoardSource Board Self-Assessment, or equivalent.
 
-## Section 11 — Term rotation planning
+## Section 11. Term rotation planning
 
 Per Bylaws, directors serve 3-year terms, eligible for one re-election (6 years max). Staggered terms target one-third of seats expiring annually. The Governance Committee tracks term expirations and begins recruitment 6 months before each term end.
 

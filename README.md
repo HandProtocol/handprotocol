@@ -2,7 +2,7 @@
 
 > Regenerative infrastructure for those who heal, build, and serve.
 
-**HAND Protocol** (Holistic Approach to Nurture and Develop) is a nonprofit foundation incorporating as a 501(c)(3) in Austin, Texas in 2026. We provide long-term branding, marketing, web/dev, and one-on-one development support for **Companions** — healers, impact entrepreneurs, and grassroots community organizations doing work that matters. We don't build and bounce.
+**HAND Protocol** (Holistic Approach to Nurture and Develop) is a nonprofit foundation incorporating as a 501(c)(3) in Austin, Texas in 2026. We provide long-term branding, marketing, web/dev, and one-on-one development support for **Companions**, healers, impact entrepreneurs, and grassroots community organizations doing work that matters. We don't build and bounce.
 
 This monorepo holds the public web presence (foundation campaign + discovery research + legacy archive) and earlier Web3 tooling preserved as source history.
 
@@ -21,14 +21,14 @@ This monorepo holds the public web presence (foundation campaign + discovery res
 
 ## Documents
 
-- **[`PRODUCT.md`](PRODUCT.md)** — strategic context: users, mission, brand personality, anti-references, design principles.
-- **[`DESIGN.md`](DESIGN.md)** — visual system: colors, typography, components, spacing, motion.
-- **[`AGENTS.md`](AGENTS.md)** — guide for AI coding agents working in this repo.
-- **[`AI-COMPANIONS.md`](AI-COMPANIONS.md)** — Sovereign Companions: HAND's AI workstream. Custom open-source agent systems per Companion group, owned by the group, with the eight sovereignty principles that govern the design.
-- **[`AI-EVAL-FRAMEWORK.md`](AI-EVAL-FRAMEWORK.md)** — how we measure whether the agent systems are earning their place and remaining sovereign. Six dimensions, three decision gates, public quarterly reporting.
-- **[`funding/mcgovern-letter.md`](funding/mcgovern-letter.md)** — draft LOI to the Patrick J. McGovern Foundation for the AI workstream ($111,111 over 18 months).
-- **[`governance/`](governance/)** — full governance package (36 documents): Articles, Bylaws, all policies, board governance, theory of change, strategic plan, grant-readiness, Form 1023 narrative. Each at `Draft v0.1`, pending counsel review and board adoption.
-- **[`funding/grant-readiness-research.md`](funding/grant-readiness-research.md)** — 5,300-word research report on Texas 501(c)(3) incorporation, IRS requirements, fiscal sponsorship, board governance, succession, multi-state solicitation, AI-specific governance. Underpins the governance documents.
+- **[`PRODUCT.md`](PRODUCT.md):** strategic context: users, mission, brand personality, anti-references, design principles.
+- **[`DESIGN.md`](DESIGN.md):** visual system: colors, typography, components, spacing, motion.
+- **[`AGENTS.md`](AGENTS.md):** guide for AI coding agents working in this repo.
+- **[`AI-COMPANIONS.md`](AI-COMPANIONS.md):** Sovereign Companions: HAND's AI workstream. Custom open-source agent systems per Companion group, owned by the group, with the eight sovereignty principles that govern the design.
+- **[`AI-EVAL-FRAMEWORK.md`](AI-EVAL-FRAMEWORK.md):** how we measure whether the agent systems are earning their place and remaining sovereign. Six dimensions, three decision gates, public quarterly reporting.
+- **[`funding/mcgovern-letter.md`](funding/mcgovern-letter.md):** draft LOI to the Patrick J. McGovern Foundation for the AI workstream ($111,111 over 18 months).
+- **[`governance/`](governance/):** full governance package (36 documents). Articles, Bylaws, all policies, board governance, theory of change, strategic plan, grant-readiness, Form 1023 narrative. Each at `Draft v0.1`, pending counsel review and board adoption.
+- **[`funding/grant-readiness-research.md`](funding/grant-readiness-research.md):** 5,300-word research report on Texas 501(c)(3) incorporation, IRS requirements, fiscal sponsorship, board governance, succession, multi-state solicitation, AI-specific governance. Underpins the governance documents.
 
 ## Local development
 
@@ -39,9 +39,9 @@ cd web && python3 -m http.server 8000
 ```
 
 Then open:
-- http://localhost:8000/foundation-campaign/ — campaign
-- http://localhost:8000/discovery/ — discovery hub
-- http://localhost:8000/legacy/ — archive
+- http://localhost:8000/foundation-campaign/ (campaign)
+- http://localhost:8000/discovery/ (discovery hub)
+- http://localhost:8000/legacy/ (archive)
 
 The Next.js landingpage and Vite spin project have their own build flows; see their `package.json` for scripts.
 

@@ -6,7 +6,7 @@
 
 ---
 
-## Section 1 — Purpose
+## Section 1. Purpose
 
 This Policy establishes the financial management framework of the Corporation to ensure:
 
@@ -20,7 +20,7 @@ d. Adequate internal control to prevent and detect errors and misappropriation.
 
 e. Sound stewardship that meets the expectations of funders and the public.
 
-## Section 2 — Authority and roles
+## Section 2. Authority and roles
 
 a. **Board of Directors.** Approves the annual budget; approves capital expenditures above $25,000; approves any new credit line, loan, or material contract above $50,000; receives and reviews quarterly financial reports.
 
@@ -36,7 +36,7 @@ f. **Bookkeeper / Accountant** (initially likely a contractor). Maintains the bo
 
 g. **CPA firm.** Performs annual compilation, review, or audit per Section 8. Prepares Form 990. Provides tax advice.
 
-## Section 3 — Segregation of duties
+## Section 3. Segregation of duties
 
 Where staff size permits, the following functions shall be separated:
 
@@ -50,7 +50,7 @@ d. **Reconciliation** (who reconciles the books against external evidence).
 
 In the early stage where staff is one or two people, **the Treasurer assumes the reconciliation role** to provide independent oversight. As soon as a third staff person is added, the Treasurer's reconciliation responsibility can be delegated to that staff person, with the Treasurer reviewing.
 
-## Section 4 — Signing authorities
+## Section 4. Signing authorities
 
 a. **Single signature** is authorized for transactions up to **$5,000**. Single-signature checks may be signed by the Executive Director or the Treasurer.
 
@@ -64,7 +64,7 @@ e. **Credit and debit cards.** Each cardholder is responsible for documenting al
 
 f. **Signing authority list** is maintained by the Secretary and provided to the bank. Changes require board resolution.
 
-## Section 5 — Banking
+## Section 5. Banking
 
 a. **Bank selection.** Banking relationship with a regulated U.S. financial institution. Preference for community development financial institutions (CDFIs) where service levels permit.
 
@@ -74,7 +74,7 @@ c. **Reconciliation.** All bank accounts reconciled monthly by the bookkeeper, w
 
 d. **Online banking.** Two-factor authentication required for all accounts. Authorized users limited to the Executive Director and Treasurer.
 
-## Section 6 — Budgeting
+## Section 6. Budgeting
 
 a. **Annual budget.** Drafted by the Executive Director and Treasurer; reviewed by the Finance Committee; approved by the Board no later than the December meeting for the following fiscal year.
 
@@ -84,7 +84,7 @@ c. **Variance review.** Quarterly variance reports comparing actuals to budget. 
 
 d. **Mid-year revision.** A mid-year budget revision is performed if material conditions change (new grant won or lost, founding ED hired, major program scope change).
 
-## Section 7 — Reserves
+## Section 7. Reserves
 
 a. **Target reserve.** Three to six months of operating expenses, accumulated over the first five years.
 
@@ -94,7 +94,7 @@ c. **Emergency withdrawal.** The Executive Director may direct withdrawal from r
 
 d. **Investment.** Reserves above a 30-day operating cushion may be invested per a Board-adopted Investment Policy (not yet drafted; pending growth of reserves beyond $50,000).
 
-## Section 8 — External financial review
+## Section 8. External financial review
 
 External CPA engagement scales with revenue and funder expectation:
 
@@ -110,7 +110,7 @@ A **compilation** is the lightest CPA engagement (no assurance). A **review** pr
 
 The CPA firm may not be replaced more than once in any five-year period without explicit Audit Committee deliberation, to avoid the appearance of audit shopping.
 
-## Section 9 — Restricted, temporarily restricted, and unrestricted funds
+## Section 9. Restricted, temporarily restricted, and unrestricted funds
 
 a. **Unrestricted.** Donations and grants without donor-imposed use restrictions. May be used for any purpose consistent with HAND's exempt purpose.
 
@@ -122,7 +122,7 @@ d. **Recording.** Restrictions documented at time of receipt, in the acknowledgm
 
 e. **Pivots.** If a restricted grant cannot be used as originally restricted, the Executive Director shall consult the donor before reallocating, in writing. **Self-modifying restrictions** is a fast path to a public-charity status problem.
 
-## Section 10 — Fundraising costs and ratios
+## Section 10. Fundraising costs and ratios
 
 a. **Fundraising efficiency.** HAND aspires to a fundraising-cost-to-funds-raised ratio of no more than **20%** (i.e., $0.20 of every $1.00 raised goes to fundraising) at organizational maturity, and reports this ratio in the Annual Report.
 
@@ -130,7 +130,7 @@ b. **Program-vs-overhead ratio.** HAND rejects the "overhead myth" framing pushe
 
 c. **Joint costs.** Costs that are partly fundraising and partly program (e.g., a publication that solicits donations and also serves educational purposes) are allocated per AICPA Statement of Position 98-2. Documented allocation method.
 
-## Section 11 — In-kind and non-cash contributions
+## Section 11. In-kind and non-cash contributions
 
 a. **Recording.** In-kind goods and services with a fair market value over $1,000 are recorded as both revenue and expense in the books, at fair market value.
 
@@ -140,7 +140,7 @@ c. **Donor acknowledgment.** In-kind donors receive an acknowledgment that thank
 
 d. **Schedule M and Form 8283.** Triggered when non-cash contributions exceed $25,000/year and for individual gifts over $5,000. See [`gift-acceptance.md`](gift-acceptance.md).
 
-## Section 12 — Payroll and contractors
+## Section 12. Payroll and contractors
 
 a. **Worker classification.** Each engagement is reviewed for employee vs independent contractor classification under IRS 20-factor test and Department of Labor economic-realities test. Misclassification is a material risk.
 
@@ -150,7 +150,7 @@ c. **Contractors.** Receive 1099-NEC if cumulative payments exceed $600 in a cal
 
 d. **Time tracking.** Salaried staff exempt from FLSA time tracking, except for grant-allocation purposes if any grant requires effort certification.
 
-## Section 13 — Travel and expense reimbursement
+## Section 13. Travel and expense reimbursement
 
 a. **Accountable plan** under IRS Pub. 463. Reimbursements made under this plan are not taxable to the recipient.
 
@@ -158,7 +158,7 @@ b. **Submission.** Expense reports with receipts within 60 days of incurring the
 
 c. **Per diem (optional).** May use federal per diem rates for meals and incidentals on overnight travel, in lieu of itemized receipts.
 
-## Section 14 — Insurance
+## Section 14. Insurance
 
 a. **Directors and Officers (D&O) liability** before any board service begins.
 
@@ -172,7 +172,7 @@ e. **Crime / fidelity bond** within the first year, sized to one month's average
 
 f. **Renewal review.** The Finance Committee reviews policies and quotes annually.
 
-## Section 15 — Investments
+## Section 15. Investments
 
 Pending a separate Investment Policy adoption when reserves exceed $50,000. Until then:
 
@@ -182,7 +182,7 @@ b. **Reserves** in high-yield savings, money market, or short-duration U.S. Trea
 
 c. **No speculative investments.** No cryptocurrency holdings other than donations received and converted to USD per the Gift Acceptance Policy. No equity, derivatives, or alternative assets.
 
-## Section 16 — Internal control failures and corrections
+## Section 16. Internal control failures and corrections
 
 a. Any internal control failure observed (single-signature on an over-threshold check, missing receipt, etc.) is logged by the bookkeeper.
 
