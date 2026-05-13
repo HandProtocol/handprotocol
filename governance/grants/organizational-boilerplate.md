@@ -86,7 +86,7 @@ Pre-incorporation, pilot pre-launch. The foundation campaign is currently raisin
 
 ### Origin
 
-HAND Protocol began in August 2024 as Web3 fundraising infrastructure for healing-aligned work. Over the next year, the founders learned that the people they were trying to support, bodyworkers and harm reduction organizers and food sovereignty collectives, were not crypto-native, and that crypto was the wrong starting tool. In early 2026, HAND pivoted: the work shifted from a Web3 protocol to a curated resource pool, with long-term accompaniment as the core promise. The pivot demonstrated a posture HAND carries forward: retire tools that do not serve the people HAND works with. The same posture applies to AI.
+HAND Protocol began in August 2024 as Web3 fundraising infrastructure for regenerative impact work. Healing is one form of that impact; building mission-aligned ventures and stewarding grassroots community work are the others. Over the next year, the founders learned that the people they were trying to support, bodyworkers and impact founders and harm reduction organizers and food sovereignty collectives, were not crypto-native, and that crypto was the wrong starting tool. In early 2026, HAND pivoted: the work shifted from a Web3 protocol to a curated resource pool, with long-term accompaniment as the core promise. The pivot demonstrated a posture HAND carries forward: retire tools that do not serve the people HAND works with. The same posture applies to AI.
 
 ### The gap HAND addresses
 
