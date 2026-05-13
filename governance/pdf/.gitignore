@@ -2,3 +2,4 @@
 out/*.pdf
 html/*.html
 bundles/*.md
+__pycache__/
