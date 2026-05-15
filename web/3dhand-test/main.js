@@ -104,6 +104,9 @@ underLight.position.set(0, -3, 2);
 scene.add(underLight);
 
 const pivot = new THREE.Group();
+// 90° clockwise rotation around the view axis (screen-space CW).
+// This is the orientation correction; the render loop adds idle Y-sway on top.
+pivot.rotation.z = -Math.PI / 2;
 scene.add(pivot);
 
 let boneRefs = null;
