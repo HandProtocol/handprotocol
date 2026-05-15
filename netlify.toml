@@ -70,22 +70,37 @@
 
 [[redirects]]
   from = "/sovereign"
-  to = "/sovereign-companions/"
+  to = "/sovereign-reciprocates/"
+  status = 301
+
+[[redirects]]
+  from = "/sovereign-reciprocates"
+  to = "/sovereign-reciprocates/"
   status = 301
 
 [[redirects]]
   from = "/sovereign-companions"
-  to = "/sovereign-companions/"
+  to = "/sovereign-reciprocates/"
+  status = 301
+
+[[redirects]]
+  from = "/sovereign-companions/"
+  to = "/sovereign-reciprocates/"
   status = 301
 
 [[redirects]]
   from = "/ai"
-  to = "/sovereign-companions/"
+  to = "/sovereign-reciprocates/"
   status = 301
 
 [[redirects]]
   from = "/ai-companions"
-  to = "/sovereign-companions/"
+  to = "/sovereign-reciprocates/"
+  status = 301
+
+[[redirects]]
+  from = "/ai-reciprocates"
+  to = "/sovereign-reciprocates/"
   status = 301
 
 [[redirects]]
@@ -129,6 +144,18 @@
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
     # Allow Google Fonts; lock down everything else
     Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self';"
+
+# 3D test pages need cdn.jsdelivr.net for three.js + anime.js modules.
+# Override the global CSP for these paths only — the rest of the site stays tight.
+[[headers]]
+  for = "/3d-test/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net;"
+
+[[headers]]
+  for = "/3dhand-test/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net;"
 
 # Cache static assets aggressively, HTML lightly
 [[headers]]

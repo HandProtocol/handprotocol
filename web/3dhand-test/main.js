@@ -8,9 +8,10 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const HAND_GLB = 'models/jtoastie-rigged-hand.glb';
-// Start from neutral — user dials in orientation via on-screen controls.
-// Bake the final picked values back here once they're chosen.
-const HAND_BASE_ROTATION = [0, 0, 0];
+// +90° around X = counter-clockwise looking from +X side (standard right-hand
+// rule). Tips the hand from palm-up flat to palm-toward-camera fingers-up.
+// Fine-tune from here with the on-screen rotation controls.
+const HAND_BASE_ROTATION = [Math.PI / 2, 0, 0];
 
 const COLOR_EDGE = 0xfbbf24;
 const COLOR_FILL = 0xd97706;
