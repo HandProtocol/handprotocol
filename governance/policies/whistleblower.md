@@ -22,13 +22,13 @@ b. Violations of laws or regulations, including tax laws affecting the Corporati
 
 c. Violations of the Corporation's policies, including the Conflict of Interest Policy, Code of Ethics, and Privacy Policy.
 
-d. Misuse of Corporation assets, including funds, equipment, intellectual property, or Companion-group-owned adapters and data.
+d. Misuse of Corporation assets, including funds, equipment, intellectual property, or Reciprocate-group-owned adapters and data.
 
-e. Endangering health or safety of staff, Companions, Contributors, or the public.
+e. Endangering health or safety of staff, Reciprocates, Contributors, or the public.
 
-f. Mistreatment of staff, volunteers, Contributors, or Companions, including harassment or discrimination.
+f. Mistreatment of staff, volunteers, Contributors, or Reciprocates, including harassment or discrimination.
 
-g. Acts that undermine the Corporation's sovereignty commitments to Companion groups, including unauthorized use of Companion data or violation of consent agreements.
+g. Acts that undermine the Corporation's sovereignty commitments to Reciprocate groups, including unauthorized use of Reciprocate data or violation of consent agreements.
 
 h. Knowing falsification of audit, regulatory, grant, or board records.
 
@@ -135,7 +135,7 @@ d. Require annual acknowledgment by each director, officer, and employee that th
 
 - **External hotline service.** Some larger nonprofits use a third-party hotline service (EthicsPoint, NAVEX). Useful at scale; overkill for HAND's first 18 months. Revisit when staff size exceeds 5 or annual revenue exceeds $500K.
 - **Anonymous email mechanism.** Drafted as a board-monitored alias. Consider a more robust anonymous channel (encrypted form via GlobaLeaks or similar) once volume warrants.
-- **Coverage of Companions.** Drafted to extend protection to Companions reporting on HAND. Strong fit with the trust-based posture; verify with counsel that no contractual or grant-flow complications arise.
+- **Coverage of Reciprocates.** Drafted to extend protection to Reciprocates reporting on HAND. Strong fit with the trust-based posture; verify with counsel that no contractual or grant-flow complications arise.
 - **Coordination with state-level protections.** Texas has whistleblower protections for public employees; private nonprofit workers rely on SOX §1107 and state common law. Counsel review will tighten this.
 
 ---

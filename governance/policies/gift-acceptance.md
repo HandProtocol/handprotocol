@@ -25,7 +25,7 @@ a. The Corporation accepts gifts that further its exempt purpose and align with 
 b. The Corporation **reserves the right to decline** any gift that, in the Board's determination:
 
 - Imposes restrictions inconsistent with HAND's mission or values.
-- Comes from a source whose activities are materially incompatible with HAND's mission (e.g., entities whose primary activities cause the harms HAND's Companions work to alleviate).
+- Comes from a source whose activities are materially incompatible with HAND's mission (e.g., entities whose primary activities cause the harms HAND's Reciprocates work to alleviate).
 - Would expose the Corporation to legal, financial, or reputational risk disproportionate to the gift's value.
 - Compromises HAND's independence or implies an endorsement HAND would not otherwise give.
 
@@ -105,9 +105,9 @@ a. **Acceptable restrictions** are those consistent with HAND's exempt purpose, 
 
 b. **Time restrictions** (e.g., to be spent within a year, or over three years) are generally accepted.
 
-c. **Purpose restrictions** (e.g., for the Sovereign Companions program, for the Companion stipend fund, for general operations) are generally accepted when the purpose is within HAND's program structure.
+c. **Purpose restrictions** (e.g., for the Sovereign Reciprocates program, for the Reciprocate stipend fund, for general operations) are generally accepted when the purpose is within HAND's program structure.
 
-d. **Restrictions that conflict with HAND's policies** (e.g., restricting funds to a Contributor-side program HAND has not established, or restricting Companion selection to a category HAND does not serve) are renegotiated with the donor or declined.
+d. **Restrictions that conflict with HAND's policies** (e.g., restricting funds to a Contributor-side program HAND has not established, or restricting Reciprocate selection to a category HAND does not serve) are renegotiated with the donor or declined.
 
 e. **Recording.** Restricted gifts are tracked separately. The acknowledgment letter documents the restriction in writing.
 
@@ -137,7 +137,7 @@ a. **Public-source screening** for any gift over $10,000: confirm via public sou
 
 b. **Routine source check** by the Executive Director before acknowledgment.
 
-c. **Heightened review** for any donor whose primary income source is known to come from industries causing the harms HAND's Companions work to alleviate. Review escalates to Board approval if material concern exists.
+c. **Heightened review** for any donor whose primary income source is known to come from industries causing the harms HAND's Reciprocates work to alleviate. Review escalates to Board approval if material concern exists.
 
 d. **HAND does not commission deep investigations** of small donors. Public-source screening is the standard.
 

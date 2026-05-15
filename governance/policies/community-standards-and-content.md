@@ -1,6 +1,6 @@
 # Community Standards and Content Moderation Policy
 
-> Covers what HAND Protocol Foundation does and does not allow in its community spaces (Discord, mailing list, public comment surfaces), what content guardrails apply to the Sovereign Companions AI output, and how user-submitted content is accepted, declined, or removed.
+> Covers what HAND Protocol Foundation does and does not allow in its community spaces (Discord, mailing list, public comment surfaces), what content guardrails apply to the Sovereign Reciprocates AI output, and how user-submitted content is accepted, declined, or removed.
 
 **Status:** Draft v0.1 · May 2026 · Pre-adoption
 
@@ -8,13 +8,13 @@
 
 ## Section 1. Purpose
 
-HAND Protocol Foundation operates several spaces where people communicate: the Discord server, the mailing list, the public website (with comments or feedback surfaces when present), and any future Companion / Contributor portals. The Sovereign Companions program also produces AI-generated content that may be shared externally. This Policy:
+HAND Protocol Foundation operates several spaces where people communicate: the Discord server, the mailing list, the public website (with comments or feedback surfaces when present), and any future Reciprocate / Contributor portals. The Sovereign Reciprocates program also produces AI-generated content that may be shared externally. This Policy:
 
 a. Sets expectations for behavior in HAND community spaces.
 
 b. Defines content that is not allowed.
 
-c. Establishes guardrails on AI output produced by Sovereign Companions agents.
+c. Establishes guardrails on AI output produced by Sovereign Reciprocates agents.
 
 d. Establishes the acceptance, decline, and removal process for user-submitted content.
 
@@ -30,7 +30,7 @@ b. **Mailing list** and any direct reply channels.
 
 c. **Public website** (handprotocol.org) and any sub-surfaces hosting user comments, public forums, or submissions.
 
-d. **Sovereign Companions agent output** shared externally on behalf of Companion groups.
+d. **Sovereign Reciprocates agent output** shared externally on behalf of Reciprocate groups.
 
 e. **Social media accounts** operated by HAND (X / Twitter, future surfaces).
 
@@ -39,7 +39,7 @@ f. **Conduct at HAND-hosted events** (online or in person), to the extent the co
 This Policy does **not** govern:
 
 - Personal social-media accounts of individuals affiliated with HAND (governed by Code of Ethics §9).
-- Content on Companion groups' own platforms produced with their own resources (governed by the Companion group's own policies; HAND has no authority over them).
+- Content on Reciprocate groups' own platforms produced with their own resources (governed by the Reciprocate group's own policies; HAND has no authority over them).
 
 ## Section 3. Community standards
 
@@ -77,7 +77,7 @@ g. **Spam, scams, phishing, and malware.** Including unsolicited commercial prom
 
 h. **Impersonation.** Pretending to be HAND staff, another community member, or a public figure.
 
-i. **Commercial solicitation** beyond what HAND has explicitly authorized for the channel (e.g., a Contributor advertising their unrelated business in a Companion-support channel).
+i. **Commercial solicitation** beyond what HAND has explicitly authorized for the channel (e.g., a Contributor advertising their unrelated business in a Reciprocate-support channel).
 
 j. **Crisis exploitation.** Using a community member's expressed distress or vulnerability for commercial gain, attention, or political leverage.
 
@@ -109,34 +109,34 @@ c. **Conflict of interest.** A moderator with a personal stake in a content disp
 
 d. **Transparency.** The list of current moderators is published in the community space.
 
-## Section 7. Sovereign Companions content guardrails
+## Section 7. Sovereign Reciprocates content guardrails
 
-Sovereign Companions agents produce text and other content on behalf of Companion groups. These guardrails apply before any external publication:
+Sovereign Reciprocates agents produce text and other content on behalf of Reciprocate groups. These guardrails apply before any external publication:
 
-a. **Human-review gate.** No external output ships without explicit human review by either the Companion group or, in initial stages, HAND staff with Companion-group consent. This is a sovereignty principle (principle 6 audit trail; implicit in the program's design) operationalized at the publishing layer.
+a. **Human-review gate.** No external output ships without explicit human review by either the Reciprocate group or, in initial stages, HAND staff with Reciprocate-group consent. This is a sovereignty principle (principle 6 audit trail; implicit in the program's design) operationalized at the publishing layer.
 
-b. **No clinical, legal, or financial advice in agent voice.** Agent output may help draft documents, summarize, brainstorm, or research. Output framed as professional advice (medical diagnosis, legal opinion, financial recommendation) is prohibited. Where output relates to such domains, it is clearly framed as draft material for the Companion group to review with appropriate professionals.
+b. **No clinical, legal, or financial advice in agent voice.** Agent output may help draft documents, summarize, brainstorm, or research. Output framed as professional advice (medical diagnosis, legal opinion, financial recommendation) is prohibited. Where output relates to such domains, it is clearly framed as draft material for the Reciprocate group to review with appropriate professionals.
 
-c. **Source citation.** Output incorporating retrieved sources cites them so the Companion group can verify.
+c. **Source citation.** Output incorporating retrieved sources cites them so the Reciprocate group can verify.
 
 d. **Hallucination check.** Output containing specific factual claims (dates, numbers, names, statistics, regulations) is flagged for source verification before publication.
 
 e. **Content that is prohibited under Section 4.** Same prohibitions apply to agent output. Output that would violate Section 4 is filtered and logged for review.
 
-f. **Companion-group voice preservation.** Output preserves and respects the Companion group's voice. The agent serves the group, not the other way around.
+f. **Reciprocate-group voice preservation.** Output preserves and respects the Reciprocate group's voice. The agent serves the group, not the other way around.
 
-g. **Transparency about AI involvement.** Where agent output is shared with parties outside the Companion group (funders, peer organizations, the public), the AI involvement is disclosed in a manner appropriate to context.
+g. **Transparency about AI involvement.** Where agent output is shared with parties outside the Reciprocate group (funders, peer organizations, the public), the AI involvement is disclosed in a manner appropriate to context.
 
-h. **No external use without consent.** Agent output about a Companion group is not used for HAND's marketing, fundraising, or peer-org communication without explicit Companion-group consent.
+h. **No external use without consent.** Agent output about a Reciprocate group is not used for HAND's marketing, fundraising, or peer-org communication without explicit Reciprocate-group consent.
 
 i. **Specific prohibited use cases:**
 - Generating content that targets identifiable individuals for harassment or pressure.
-- Generating content that misrepresents the Companion group's positions to external audiences.
+- Generating content that misrepresents the Reciprocate group's positions to external audiences.
 - Generating content for high-stakes external decisions (grant submissions, legal filings, public statements during crisis) without explicit human authorship and review.
 
 ## Section 8. Algorithmic Impact Assessment
 
-Before deploying any Sovereign Companions agent in a new context, the Sovereign Companions Oversight Committee conducts an Algorithmic Impact Assessment, including:
+Before deploying any Sovereign Reciprocates agent in a new context, the Sovereign Reciprocates Oversight Committee conducts an Algorithmic Impact Assessment, including:
 
 a. Intended use and intended users.
 
@@ -148,7 +148,7 @@ d. What review processes apply.
 
 e. How errors are surfaced and corrected.
 
-f. How the Companion group can override or revoke.
+f. How the Reciprocate group can override or revoke.
 
 Template in [`data-sovereignty-and-ai.md`](data-sovereignty-and-ai.md) Section 11.
 
@@ -210,7 +210,7 @@ a. Moderation tools used per Discord's terms of service.
 
 b. Channel structure documented in the server's pinned welcome message.
 
-c. Roles assigned based on relationship (Companion, Contributor, donor, public).
+c. Roles assigned based on relationship (Reciprocate, Contributor, donor, public).
 
 d. Server logs retained per Document Retention Policy.
 
@@ -240,14 +240,14 @@ c. New platform or content categories.
 
 d. Changes in law or platform terms.
 
-e. Recommendations from moderators and from the Sovereign Companions Oversight Committee.
+e. Recommendations from moderators and from the Sovereign Reciprocates Oversight Committee.
 
 ## Open questions
 
 - **AI content disclosure norms.** The field is evolving. Default position: disclose AI involvement when the output represents an organization's voice externally. Adjust as norms harden.
 - **Moderator compensation.** Volunteer moderators or paid? Pre-revenue, almost certainly volunteer. Reassess at staff scale.
 - **Public-comment surfaces.** Not currently enabled. If enabled (e.g., a public discussion thread on the discovery docs), pre-define moderation cadence before launch.
-- **Discord vs. Matrix vs. Slack.** Discord chosen for current reach. Some Companion groups may prefer Signal-based communication for safety reasons. Tactical, not policy.
+- **Discord vs. Matrix vs. Slack.** Discord chosen for current reach. Some Reciprocate groups may prefer Signal-based communication for safety reasons. Tactical, not policy.
 - **Hash-based archives.** For removed severe content, hash-based archives may be necessary for accountability and pattern detection. Logistics deferred.
 
 ---

@@ -78,7 +78,7 @@ d. **Online banking.** Two-factor authentication required for all accounts. Auth
 
 a. **Annual budget.** Drafted by the Executive Director and Treasurer; reviewed by the Finance Committee; approved by the Board no later than the December meeting for the following fiscal year.
 
-b. **Budget structure.** Reflects HAND's program structure: foundation operations, Companion program, Sovereign Companions program, fundraising, and management & general.
+b. **Budget structure.** Reflects HAND's program structure: foundation operations, Reciprocate program, Sovereign Reciprocates program, fundraising, and management & general.
 
 c. **Variance review.** Quarterly variance reports comparing actuals to budget. Variances >10% on any line item require explanation to the Finance Committee.
 
@@ -162,9 +162,9 @@ c. **Per diem (optional).** May use federal per diem rates for meals and inciden
 
 a. **Directors and Officers (D&O) liability** before any board service begins.
 
-b. **General liability** before any in-person program activity, public event, or in-person Companion or Contributor engagement.
+b. **General liability** before any in-person program activity, public event, or in-person Reciprocate or Contributor engagement.
 
-c. **Cyber liability** within the first year of operations or before holding any Companion-group data, whichever is sooner.
+c. **Cyber liability** within the first year of operations or before holding any Reciprocate-group data, whichever is sooner.
 
 d. **Workers' compensation** if and when the first paid employee is hired (Texas allows opt-out for nonprofits, but coverage is strongly recommended).
 

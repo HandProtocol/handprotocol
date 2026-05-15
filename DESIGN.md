@@ -241,7 +241,7 @@ The same token system supports three deliberately different surfaces.
 
 ### Foundation campaign (`web/foundation-campaign/`)
 
-The primary brand surface. White background, full design system, amber as the signature accent. Hero, About, Problem, Solution, Our Companions, Track Record, Funding Goals (dark section), Timeline, Year 1 Success, Backstory (asymmetric 2:1 grid), Contribution Tiers, Stay Close (mailing-list signup with audience tag pills), Final CTA. Long single-page narrative. Crypto donations live on a dedicated sub-page (`web/donate-crypto/`); the campaign only references them as small inline links.
+The primary brand surface. White background, full design system, amber as the signature accent. Hero, About, Problem, Solution, Our Reciprocates, Track Record, Funding Goals (dark section), Timeline, Year 1 Success, Backstory (asymmetric 2:1 grid), Contribution Tiers, Stay Close (mailing-list signup with audience tag pills), Final CTA. Long single-page narrative. Crypto donations live on a dedicated sub-page (`web/donate-crypto/`); the campaign only references them as small inline links.
 
 ### Donate crypto (`web/donate-crypto/`)
 

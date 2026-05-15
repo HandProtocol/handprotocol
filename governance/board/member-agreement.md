@@ -42,11 +42,11 @@ I commit to:
 
 a. Understand HAND's mission, theory of change, and strategic plan, and refresh my understanding as those documents evolve.
 
-b. Use the term **Companions** for the population HAND serves, and **Contributors** for the skill-givers, in all formal communications about the Corporation.
+b. Use the term **Reciprocates** for the population HAND serves, and **Contributors** for the skill-givers, in all formal communications about the Corporation.
 
 c. Honor HAND's brand voice: earnest, evidence-based, relational. Plain English over institutional language.
 
-d. Honor the Sovereign Companions sovereignty commitments.
+d. Honor the Sovereign Reciprocates sovereignty commitments.
 
 ## 4. Governance documents
 
@@ -76,7 +76,7 @@ I have completed the annual Conflict of Interest Disclosure Form ([`annual-discl
 
 ## 6. Confidentiality
 
-I will hold in confidence all Board deliberations, personnel matters, Companion or Contributor information, and other matters that are not part of the public record of the Corporation. The duty of confidentiality survives my service as a director.
+I will hold in confidence all Board deliberations, personnel matters, Reciprocate or Contributor information, and other matters that are not part of the public record of the Corporation. The duty of confidentiality survives my service as a director.
 
 ## 7. Public representation
 
@@ -88,7 +88,7 @@ b. Frame personal opinions as personal, not as the position of the Corporation.
 
 c. Refer media inquiries to the Executive Director or Board Chair unless I have been authorized to speak on a specific matter.
 
-d. Refrain from public criticism of fellow directors, staff, Companions, Contributors, donors, or peer organizations. Disagreements I address through Board channels.
+d. Refrain from public criticism of fellow directors, staff, Reciprocates, Contributors, donors, or peer organizations. Disagreements I address through Board channels.
 
 ## 8. Fundraising
 

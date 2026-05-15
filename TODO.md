@@ -4,9 +4,9 @@ A working list of what's next for the public website. Items added at the bottom;
 
 ## Now
 
-- [ ] **Create the Resend audience** at resend.com/audiences (HAND Protocol mailing list), copy the audience UUID, and set `netlify env:set RESEND_AUDIENCE_ID <uuid>` in production scope. Then enable double opt-in on the audience.
+- [ ] **Create the Resend audience** (via `POST /audiences` or dashboard), copy the UUID, and `netlify env:set RESEND_AUDIENCE_ID <uuid>` in production scope. Single opt-in: contacts join immediately, no confirmation email. Resend still adds the unsubscribe link to every audience send.
 - [ ] **Rotate the Resend API key.** The key was sent through chat (twice) and is now in conversation logs + this session's bash command history. The current key works and is set in Netlify env vars (`RESEND_API_KEY`, production scope). After rotating at resend.com/api-keys, update the Netlify env var via `netlify env:set RESEND_API_KEY <new-key>` from this directory (already linked), then trigger a redeploy.
-- [ ] **Smoke-test the live subscribe flow** after redeploy: submit on `/foundation-campaign/#stay-close`, confirm the Resend double-opt-in email lands, confirm the contact appears in the audience after clicking the link.
+- [ ] **Smoke-test the live subscribe flow** after redeploy: submit on `/foundation-campaign/#stay-close`, confirm the contact appears in the Resend audience with `unsubscribed: false`.
 - [ ] **Update GitHub `Website` field** on the repo About panel to the live URL once domain is final.
 - [ ] **More discovery iteration.** Audit each doc for v0.1-sounding language; fold resolved questions into prose; mark genuinely-open ones with a consistent "Open question →" pattern so they read as deliberately-public unknowns rather than "we don't know what we're doing."
 - [ ] **Final impeccable audit pass against the live site.** Cohesion work (nav unification, footer, cross-links, qf-link visibility) + new `/donate-crypto/` page + `#stay-close` form verified at desktop, tablet, mobile.
@@ -27,7 +27,7 @@ A working list of what's next for the public website. Items added at the bottom;
 ## Done (recent)
 
 - **Demoted crypto donation from full campaign section to dedicated `/donate-crypto/` page** (2026-05-12). Campaign no longer reads as crypto-focused. Two small inline references remain: a one-line "send crypto directly" link in the tiers note, and a one-line "Crypto-native? Send directly to our wallets" line below the Final CTA buttons. Footer Support col + `/crypto` redirect point at the new page.
-- **Built `#stay-close` mailing-list section + `netlify/functions/subscribe.js`** (2026-05-12). Asymmetric 2-col at ≥768px, email + name + audience radio pills, honeypot, all five states (default / submitting / success / error / already-subscribed). Server-side validation + Resend Audiences API integration with double opt-in expected at the audience level. Needs `RESEND_AUDIENCE_ID` env var + audience double-opt-in toggle before live use.
+- **Built `#stay-close` mailing-list section + `netlify/functions/subscribe.js`** (2026-05-12). Asymmetric 2-col at ≥768px, email + name + audience radio pills, honeypot, all five states (default / submitting / success / error / already-subscribed). Server-side validation + Resend Audiences API integration. Single opt-in. Needs `RESEND_AUDIENCE_ID` env var set before live use.
 - **Custom domain `handprotocol.org` live on Netlify** (2026-05-12). Nameservers on Netlify DNS, A records `98.84.224.111` / `18.208.88.157`, all 17 routes 200, OG image and sitemap resolving at the canonical domain. The OG meta tags now work everywhere.
 - **`RESEND_API_KEY` set in Netlify production env vars** (2026-05-12). Available to future Netlify Functions via `process.env.RESEND_API_KEY`. Initial key needs rotation; see Now list.
 - **Deployed to Netlify** (2026-05-12). Auto-deploy on `main`. Security headers + cache control applied. Site is officially live.
@@ -37,5 +37,5 @@ A working list of what's next for the public website. Items added at the bottom;
 - Added inline "Discovery →" cross-links from Problem, Solution, and Backstory sections to the relevant discovery doc.
 - Made `.qf-link` visibly amber at rest (was inheriting parent text color, looked like black text with a faint dotted underline).
 - Fixed `.callout-card strong`/`em`, were inheriting global dark-text strong color and rendering as near-black on the dark "Why Healers First?" callout. Now light text on dark, dark text on the outline variant.
-- Foundation campaign impeccable audit pass: dropped gradient text on hero h1, replaced hero-metric stats grid + Year 1 success grid with non-grid layouts, broke Problem section out of card-grid monoculture, added ARIA to Companions tabs, fixed Indiegogo CTAs to point at working Giveth flow, tokenized hard-coded hex values, fixed touch targets, added `.sr-only` cues to external links.
+- Foundation campaign impeccable audit pass: dropped gradient text on hero h1, replaced hero-metric stats grid + Year 1 success grid with non-grid layouts, broke Problem section out of card-grid monoculture, added ARIA to Reciprocates tabs, fixed Indiegogo CTAs to point at working Giveth flow, tokenized hard-coded hex values, fixed touch targets, added `.sr-only` cues to external links.
 - Corrected "First push: February 2025" → "August 2024" in legacy archive.

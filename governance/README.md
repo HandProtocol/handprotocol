@@ -48,10 +48,10 @@ If you are reading this as a prospective board member or funder, the four docume
 | [`policies/gift-acceptance.md`](policies/gift-acceptance.md) | Draft v0.1 | Cash, securities, non-cash, crypto, in-kind; Form 8283 / Schedule M handling |
 | [`policies/fiscal-sponsorship.md`](policies/fiscal-sponsorship.md) | Draft v0.1 | Model C interim posture; selection criteria; exit terms |
 | [`policies/grant-management.md`](policies/grant-management.md) | Draft v0.1 | Restricted vs unrestricted funds, reporting, drawdown discipline |
-| [`policies/code-of-ethics.md`](policies/code-of-ethics.md) | Draft v0.1 | Conduct standards for staff, board, Contributors, Companions |
+| [`policies/code-of-ethics.md`](policies/code-of-ethics.md) | Draft v0.1 | Conduct standards for staff, board, Contributors, Reciprocates |
 | [`policies/equal-opportunity-and-harassment.md`](policies/equal-opportunity-and-harassment.md) | Draft v0.1 | EEO commitment, anti-harassment, complaint process |
 | [`policies/privacy.md`](policies/privacy.md) | Draft v0.1 | Public-facing privacy policy and internal data-handling rules |
-| [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md) | Draft v0.1 | Sovereign Companions governance: eight principles operationalized |
+| [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md) | Draft v0.1 | Sovereign Reciprocates governance: eight principles operationalized |
 | [`policies/volunteer-and-contributor.md`](policies/volunteer-and-contributor.md) | Draft v0.1 | Contributor onboarding, scope, screening, liability, recognition |
 
 ### Board governance
@@ -63,13 +63,13 @@ If you are reading this as a prospective board member or funder, the four docume
 | [`board/emergency-succession-plan.md`](board/emergency-succession-plan.md) | Draft v0.1 | Detailed 90-day operating plan for sudden ED absence |
 | [`board/officer-job-descriptions.md`](board/officer-job-descriptions.md) | Draft v0.1 | Chair, Vice Chair, Treasurer, Secretary |
 | [`board/composition-matrix.md`](board/composition-matrix.md) | Draft v0.1 | Skills, lived experience, demographics; gap analysis for recruitment |
-| [`board/annual-disclosure-form.md`](board/annual-disclosure-form.md) | Draft v0.1 | Companion form for COI policy; signed yearly |
+| [`board/annual-disclosure-form.md`](board/annual-disclosure-form.md) | Draft v0.1 | Reciprocate form for COI policy; signed yearly |
 
 ### Programs and strategy
 
 | Document | Status | Purpose |
 |---|---|---|
-| [`programs/companion-selection-and-graduation.md`](programs/companion-selection-and-graduation.md) | Draft v0.1 | How HAND chooses Companions; the three-flow resource pool; alumni pathway from Companion to Contributor |
+| [`programs/reciprocate-selection-and-graduation.md`](programs/reciprocate-selection-and-graduation.md) | Draft v0.1 | How HAND chooses Reciprocates; the three-flow resource pool; alumni pathway from Reciprocate to Contributor |
 | [`programs/theory-of-change.md`](programs/theory-of-change.md) | Draft v0.1 | Long-form theory: resource pool as foundational mechanism; AI as optional augmentation |
 | [`programs/logic-model.md`](programs/logic-model.md) | Draft v0.1 | One-page logic model with explicit flywheel row and three-flow indicators |
 | [`programs/strategic-plan-2026-2028.md`](programs/strategic-plan-2026-2028.md) | Draft v0.1 | Three-year strategic plan; AI capped as a percentage of program budget |
@@ -105,7 +105,7 @@ These will be added as the work progresses. Items marked **before filing** must 
 These documents follow the same brand conventions as the rest of the repo (see [`../AGENTS.md`](../AGENTS.md)):
 
 - No em dashes.
-- "Companions" (not clients, beneficiaries, recipients) and "Contributors" (not volunteers in marketing copy; volunteer remains the legal term internally for liability and tax purposes).
+- "Reciprocates" (not clients, beneficiaries, recipients) and "Contributors" (not volunteers in marketing copy; volunteer remains the legal term internally for liability and tax purposes).
 - Plain English over institutional speak. Where IRS or Texas statute requires specific language verbatim, that language is set apart and clearly labeled as required wording.
 - Every long-form document has an **Open questions** section at the bottom listing what HAND has not yet decided.
 

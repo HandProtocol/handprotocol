@@ -1,6 +1,6 @@
 # Annual Conflict of Interest Disclosure Form
 
-> Companion form to the Conflict of Interest Policy ([`../policies/conflict-of-interest.md`](../policies/conflict-of-interest.md)). Signed annually by each director, officer, and key employee.
+> Reciprocate form to the Conflict of Interest Policy ([`../policies/conflict-of-interest.md`](../policies/conflict-of-interest.md)). Signed annually by each director, officer, and key employee.
 
 **Status:** Draft v0.1 · May 2026
 
@@ -80,11 +80,11 @@ List any donor or funder to HAND (other than HAND itself) in which you, your spo
 |---|---|
 |  |  |
 
-### D. Companion or Contributor relationships
+### D. Reciprocate or Contributor relationships
 
-A simple relationship as a Companion served by HAND, or as a Contributor giving services through HAND, is **not** a Financial Interest. However, a paid contract between HAND and any entity controlled by a Companion or Contributor is. Also disclose any close personal relationship with a Companion or Contributor.
+A simple relationship as a Reciprocate served by HAND, or as a Contributor giving services through HAND, is **not** a Financial Interest. However, a paid contract between HAND and any entity controlled by a Reciprocate or Contributor is. Also disclose any close personal relationship with a Reciprocate or Contributor.
 
-| Companion or Contributor | Nature of disclosed relationship |
+| Reciprocate or Contributor | Nature of disclosed relationship |
 |---|---|
 |  |  |
 
@@ -106,7 +106,7 @@ List any organization that has approached you about board service, staff role, o
 
 ### G. AI / technology specific disclosures
 
-(For Sovereign Companions context.)
+(For Sovereign Reciprocates context.)
 
 a. **AI vendor financial interest.** Do you, your spouse / domestic partner, or any immediate family member have a financial interest (employment, equity, advisory) in any AI vendor, model host, training-data provider, or AI infrastructure company being considered or used by HAND?
 

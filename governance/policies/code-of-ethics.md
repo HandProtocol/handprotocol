@@ -16,11 +16,11 @@ Every person bound by this Code commits to:
 
 a. **Mission first.** Act in the interest of the Corporation's mission, not personal interest, when those interests diverge.
 
-b. **Companions before self.** When trade-offs arise between organizational convenience and Companion well-being, choose the Companion well-being and engage the trade-off honestly.
+b. **Reciprocates before self.** When trade-offs arise between organizational convenience and Reciprocate well-being, choose the Reciprocate well-being and engage the trade-off honestly.
 
-b1. **Mutual care.** Treat the resource pool as a place where everyone involved can benefit if they choose to. Contributors are not one-way givers, and Companions are not one-way receivers. When a Contributor's own needs arise, support them in receiving from the pool. When a Companion has capacity to give, welcome that contribution. The pool is denser when participants flow between roles.
+b1. **Mutual care.** Treat the resource pool as a place where everyone involved can benefit if they choose to. Contributors are not one-way givers, and Reciprocates are not one-way receivers. When a Contributor's own needs arise, support them in receiving from the pool. When a Reciprocate has capacity to give, welcome that contribution. The pool is denser when participants flow between roles.
 
-c. **Honesty in all communications.** With donors, funders, Companions, Contributors, peers, regulators, and the public. No misleading statements, no selective disclosure designed to deceive, no inflation of achievements.
+c. **Honesty in all communications.** With donors, funders, Reciprocates, Contributors, peers, regulators, and the public. No misleading statements, no selective disclosure designed to deceive, no inflation of achievements.
 
 d. **Plain English.** No institutional fog. The values, programs, finances, and challenges of the Corporation are communicated in language an informed person can understand.
 
@@ -28,7 +28,7 @@ e. **Acknowledgment of unknowns.** What HAND does not know, HAND says it does no
 
 f. **Stewardship of trust.** Trust is the most valuable asset the Corporation holds. Decisions are tested against whether they would, if disclosed, reduce trust with any stakeholder group.
 
-g. **No reputation laundering.** Companions, Contributors, and partner organizations are not used as decoration for HAND's reputation. Their stories, with consent, may be shared. Their presence is not a marketing prop.
+g. **No reputation laundering.** Reciprocates, Contributors, and partner organizations are not used as decoration for HAND's reputation. Their stories, with consent, may be shared. Their presence is not a marketing prop.
 
 h. **Compliance with law and policy.** The letter and spirit of applicable law, the Bylaws, and the Corporation's policies.
 
@@ -50,31 +50,31 @@ c. Procurement decisions favor mission-aligned vendors (small business, BIPOC- a
 
 ## Section 5. Confidentiality
 
-a. Maintain confidentiality of Companion information, Contributor information, donor information, personnel matters, and internal deliberations.
+a. Maintain confidentiality of Reciprocate information, Contributor information, donor information, personnel matters, and internal deliberations.
 
 b. Disclose only as required by law, by the Corporation's policies (for example, the Whistleblower Policy), or with explicit consent.
 
 c. The duty of confidentiality survives the end of the affiliation with the Corporation.
 
-## Section 6. Companion relationships
+## Section 6. Reciprocate relationships
 
-a. Approach every Companion engagement as a long-term relationship, not a transaction or deliverable.
+a. Approach every Reciprocate engagement as a long-term relationship, not a transaction or deliverable.
 
-b. Center Companion self-determination. Do not impose HAND's priorities or methodologies where the Companion's own approach is working.
+b. Center Reciprocate self-determination. Do not impose HAND's priorities or methodologies where the Reciprocate's own approach is working.
 
-c. Respect Companion autonomy in decisions about scope, pace, and direction.
+c. Respect Reciprocate autonomy in decisions about scope, pace, and direction.
 
 d. Disclose limitations honestly: what HAND can and cannot do; how long HAND can stay; what happens when funding shifts.
 
-e. Honor sovereignty commitments to Companion groups (data ownership, adapter portability, revocability).
+e. Honor sovereignty commitments to Reciprocate groups (data ownership, adapter portability, revocability).
 
-f. Maintain boundaries: HAND's relationship with a Companion is the Corporation's, not any individual staff member's. Personal relationships with Companions outside the engagement are disclosed and managed under the Conflict of Interest Policy.
+f. Maintain boundaries: HAND's relationship with a Reciprocate is the Corporation's, not any individual staff member's. Personal relationships with Reciprocates outside the engagement are disclosed and managed under the Conflict of Interest Policy.
 
 ## Section 7. Contributor relationships
 
 a. Treat Contributor time with the same care as donated dollars: account for it, deploy it well, acknowledge it.
 
-b. Match Contributors to Companions on a basis of skill fit, capacity, and mutual fit, not on Contributor convenience alone.
+b. Match Contributors to Reciprocates on a basis of skill fit, capacity, and mutual fit, not on Contributor convenience alone.
 
 c. Be honest with prospective Contributors about scope, time commitment, and possible mismatches before they invest time.
 
@@ -102,17 +102,17 @@ d. No personal attacks on individuals affiliated with peer organizations, funder
 
 ## Section 10. Mutual respect
 
-a. Treat every person associated with the Corporation, every Companion, every Contributor, every donor, and every member of the public with dignity and respect, regardless of background, identity, or status.
+a. Treat every person associated with the Corporation, every Reciprocate, every Contributor, every donor, and every member of the public with dignity and respect, regardless of background, identity, or status.
 
 b. Disagreements addressed directly and respectfully, with focus on substance.
 
-c. Power imbalances acknowledged. Where HAND is in a more powerful position relative to a Companion, the asymmetry is named and worked against, not exploited.
+c. Power imbalances acknowledged. Where HAND is in a more powerful position relative to a Reciprocate, the asymmetry is named and worked against, not exploited.
 
 ## Section 11. Boundaries and self-care
 
 a. HAND staff and volunteers commit to sustainable pace. Burnout is a structural failure, not a personal one, and is treated as such.
 
-b. Boundaries with Companions, donors, and the public are professional and protective: of staff well-being, of Companion well-being, and of the Corporation's continuity.
+b. Boundaries with Reciprocates, donors, and the public are professional and protective: of staff well-being, of Reciprocate well-being, and of the Corporation's continuity.
 
 c. The Corporation does not glamorize overwork.
 

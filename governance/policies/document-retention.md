@@ -28,11 +28,11 @@ b. Electronic records, including email, cloud storage, code repositories, databa
 
 c. Audio and video recordings, including meeting recordings.
 
-d. Companion-group-owned artifacts held in trust by the Corporation (LoRA adapters, training data, evaluation logs).
+d. Reciprocate-group-owned artifacts held in trust by the Corporation (LoRA adapters, training data, evaluation logs).
 
 ## Section 3. Records custodian
 
-The **Secretary** is the official records custodian for corporate records (Bylaws, Articles, minutes, resolutions, governance policies). The **Treasurer** is the records custodian for financial records. The **Executive Director** is the records custodian for program, personnel, and operational records. The **Sovereign Companions Oversight Committee Chair** is the records custodian for AI workstream records.
+The **Secretary** is the official records custodian for corporate records (Bylaws, Articles, minutes, resolutions, governance policies). The **Treasurer** is the records custodian for financial records. The **Executive Director** is the records custodian for program, personnel, and operational records. The **Sovereign Reciprocates Oversight Committee Chair** is the records custodian for AI workstream records.
 
 ## Section 4. Retention schedule
 
@@ -81,13 +81,13 @@ The following are retained **permanently** in original form and in backed-up ele
 - Drafts of documents that have been finalized (purge after final adopted)
 - Routine operational logs (server logs, build logs), 90 days by default
 
-### Sovereign Companions records (special schedule)
+### Sovereign Reciprocates records (special schedule)
 
 | Record type | Retention | Notes |
 |---|---|---|
-| Companion-group adapter weights | Held until handoff, then transferred; not retained by HAND afterward | Companion group owns; sovereignty principle 2 |
-| Training data (per Companion group) | Held in trust during engagement, deleted on revocation or graduation within 30 days | Sovereignty principle 3 |
-| Audit logs of model calls, retrievals, tool calls | 5 years, accessible to Companion group throughout | Sovereignty principle 6 |
+| Reciprocate-group adapter weights | Held until handoff, then transferred; not retained by HAND afterward | Reciprocate group owns; sovereignty principle 2 |
+| Training data (per Reciprocate group) | Held in trust during engagement, deleted on revocation or graduation within 30 days | Sovereignty principle 3 |
+| Audit logs of model calls, retrievals, tool calls | 5 years, accessible to Reciprocate group throughout | Sovereignty principle 6 |
 | Evaluation reports (de-identified) | Permanent in aggregate, individual evaluations 3 years | For longitudinal study |
 | Model cards | Permanent; versioned | Public artifact |
 | Consent records | Permanent; cannot be deleted without breaking sovereignty chain | Required for audit |
@@ -131,15 +131,15 @@ The Executive Director shall promptly issue a written **legal hold notice** to a
 
 **Violating a hold is a federal crime under 18 U.S.C. §1519** (penalties up to 20 years imprisonment and fines). The Corporation will report any suspected violation to counsel and law enforcement as appropriate.
 
-## Section 8. Companion-data special protections
+## Section 8. Reciprocate-data special protections
 
-Companion-group-owned training data is subject to additional protections:
+Reciprocate-group-owned training data is subject to additional protections:
 
-a. **Revocable consent** is the default. A Companion group may revoke training consent at any time. Within 30 days of revocation, the affected training data and any adapter trained on that data must be destroyed or retrained without the revoked data, per the Data Sovereignty and AI Policy.
+a. **Revocable consent** is the default. A Reciprocate group may revoke training consent at any time. Within 30 days of revocation, the affected training data and any adapter trained on that data must be destroyed or retrained without the revoked data, per the Data Sovereignty and AI Policy.
 
-b. **Revocation does not override legal hold.** If a legal hold applies, destruction is suspended until the hold releases. The Companion group will be informed of the hold to the extent permitted.
+b. **Revocation does not override legal hold.** If a legal hold applies, destruction is suspended until the hold releases. The Reciprocate group will be informed of the hold to the extent permitted.
 
-c. **Cross-Companion-group data extraction is prohibited.** Records from one Companion group's engagement may not be repurposed for training adapters serving a different Companion group, even after retention period has expired.
+c. **Cross-Reciprocate-group data extraction is prohibited.** Records from one Reciprocate group's engagement may not be repurposed for training adapters serving a different Reciprocate group, even after retention period has expired.
 
 ## Section 9. Training and acknowledgment
 
@@ -155,7 +155,7 @@ The Audit Committee shall review this Policy and the retention schedule annually
 
 a. Changes in law, IRS guidance, or grantor requirements.
 
-b. New record types created during the year (especially in the Sovereign Companions program).
+b. New record types created during the year (especially in the Sovereign Reciprocates program).
 
 c. Patterns of legal holds or destruction issues from the prior year.
 

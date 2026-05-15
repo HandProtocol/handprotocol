@@ -26,7 +26,7 @@ b. **Evidence over rhetoric.** Cited research, named peers, real dollar amounts.
 
 c. **Relationships, not transactions.** We walk alongside, for years.
 
-d. **Companion sovereignty.** Our work belongs to the people we serve. Their data, their adapters, their direction.
+d. **Reciprocate sovereignty.** Our work belongs to the people we serve. Their data, their adapters, their direction.
 
 e. **Open by default.** Methodology, code, evaluation, and reports public.
 
@@ -38,7 +38,7 @@ g. **Retire what doesn't serve.** Tools, programs, framings. The pivot away from
 
 ## One-paragraph description
 
-HAND Protocol Foundation, incorporating as a 501(c)(3) in Austin, Texas in 2026, operates a curated resource pool where skilled Contributors and three communities of Companions (practitioners who heal, founders who build, and organizers who steward) match to meet mutual needs. Three flows: **Donate** (one-way gift of skill), **Exchange** (skill for skill), **Receive** (Companion onboarding). The pool is denser when participants flow between roles; a single person can be both giver and receiver, and the lines between communities are porous. Within and through the pool, HAND provides long-term branding, marketing, technology, design, and operational accompaniment. The defining commitment is durability: HAND walks alongside Companions for years, not just months, and offers Sovereign Companions (optional open-source AI agent systems, owned by the group, available to Companion groups who choose them) as one tool inside the pool. Founded in August 2024, currently raising $77,777 to file for federal exemption, and accompanying the first pilot cohort of three Companion groups.
+HAND Protocol Foundation, incorporating as a 501(c)(3) in Austin, Texas in 2026, operates a curated resource pool where skilled Contributors and three communities of Reciprocates (practitioners who heal, founders who build, and organizers who steward) match to meet mutual needs. Three flows: **Donate** (one-way gift of skill), **Exchange** (skill for skill), **Receive** (Reciprocate onboarding). The pool is denser when participants flow between roles; a single person can be both giver and receiver, and the lines between communities are porous. Within and through the pool, HAND provides long-term branding, marketing, technology, design, and operational accompaniment. The defining commitment is durability: HAND walks alongside Reciprocates for years, not just months, and offers Sovereign Reciprocates (optional open-source AI agent systems, owned by the group, available to Reciprocate groups who choose them) as one tool inside the pool. Founded in August 2024, currently raising $77,777 to file for federal exemption, and accompanying the first pilot cohort of three Reciprocate groups.
 
 ## One-page description
 
@@ -48,7 +48,7 @@ HAND Protocol Foundation is a regenerative-infrastructure nonprofit incorporatin
 
 ### Who HAND serves
 
-HAND serves three communities of regenerative impact work, collectively called **Companions**: practitioners who heal, founders who build, and organizers who steward. The lines between them are porous, and many Companions live in two of these worlds at once.
+HAND serves three communities of regenerative impact work, collectively called **Reciprocates**: practitioners who heal, founders who build, and organizers who steward. The lines between them are porous, and many Reciprocates live in two of these worlds at once.
 
 - **Healers and wellness practitioners.** Solo or small-team bodyworkers, somatic practitioners, herbalists, indigenous and ancestral practice, harm-reduction-informed healing.
 - **Impact entrepreneurs.** Post-accelerator mission-driven small ventures: B-corp-aspiring or B-corp-certified businesses, nonprofit pilots, hybrid for-profit/nonprofit structures.
@@ -58,25 +58,25 @@ These segments share an operational shape: small, under-resourced for infrastruc
 
 ### How HAND works: the resource pool flywheel
 
-HAND operates a **curated resource pool** as its primary mechanism. Skilled professionals and tradespeople (Contributors) are screened, onboarded, and matched to Companions based on skill, capacity, and mutual fit. Participation runs through three named flows:
+HAND operates a **curated resource pool** as its primary mechanism. Skilled professionals and tradespeople (Contributors) are screened, onboarded, and matched to Reciprocates based on skill, capacity, and mutual fit. Participation runs through three named flows:
 
 - **Donate.** A Contributor offers hours or deliverables to the pool without expecting anything specific in return. Tax-deductible.
 - **Exchange.** A Contributor receives a specific skill from the pool in return for their own contribution. HAND scopes both sides.
-- **Receive.** A Companion applies for support; HAND vets fit, matches from the pool or builds directly, and stays for upkeep.
+- **Receive.** A Reciprocate applies for support; HAND vets fit, matches from the pool or builds directly, and stays for upkeep.
 
-A single person can be both giver and receiver. Contributors may also Receive when their own needs arise; Companions may also Donate or Exchange when capacity allows. The pool is denser when participants flow between roles. The relationship is HAND-mediated, not direct, so that Contributor turnover does not destabilize the Companion's accompaniment.
+A single person can be both giver and receiver. Contributors may also Receive when their own needs arise; Reciprocates may also Donate or Exchange when capacity allows. The pool is denser when participants flow between roles. The relationship is HAND-mediated, not direct, so that Contributor turnover does not destabilize the Reciprocate's accompaniment.
 
-### What HAND provides Companions
+### What HAND provides Reciprocates
 
-Within and through the pool, long-term branding, marketing, technology, design, and operational accompaniment, on a multi-year relational basis. The default engagement is three years. Deliverables include web presence, brand articulation, and operational infrastructure. At graduation, infrastructure transfers fully to the Companion, and the Companion enters alumni status with the option to return as a Contributor, mentor, or cross-cohort connector.
+Within and through the pool, long-term branding, marketing, technology, design, and operational accompaniment, on a multi-year relational basis. The default engagement is three years. Deliverables include web presence, brand articulation, and operational infrastructure. At graduation, infrastructure transfers fully to the Reciprocate, and the Reciprocate enters alumni status with the option to return as a Contributor, mentor, or cross-cohort connector.
 
-### Sovereign Companions: one optional tool inside the pool
+### Sovereign Reciprocates: one optional tool inside the pool
 
-For Companion groups who opt in, HAND builds custom open-source AI agent systems with per-group LoRA adapters on open base models. Eight sovereignty principles govern (open base model, Companion-group-owned adapter, revocable training consent, no cross-group data extraction, self-hostable end-to-end, full audit trail inspectable by the group, open methodology and code, case-by-case adapter weights publication). The agent system is one tool in the pool; the accompaniment works whether or not a given Companion engages with it. The adapter stays with the Companion group after the engagement ends or if HAND itself closes.
+For Reciprocate groups who opt in, HAND builds custom open-source AI agent systems with per-group LoRA adapters on open base models. Eight sovereignty principles govern (open base model, Reciprocate-group-owned adapter, revocable training consent, no cross-group data extraction, self-hostable end-to-end, full audit trail inspectable by the group, open methodology and code, case-by-case adapter weights publication). The agent system is one tool in the pool; the accompaniment works whether or not a given Reciprocate engages with it. The adapter stays with the Reciprocate group after the engagement ends or if HAND itself closes.
 
 ### What HAND does not do
 
-Founder coaching (the accelerators already do that). Strategy consulting beyond the long relationship. Direct service to the Companion's clients or community. Money distribution at scale (HAND is not a grantmaker). One-time project work. "Build-and-bounce."
+Founder coaching (the accelerators already do that). Strategy consulting beyond the long relationship. Direct service to the Reciprocate's clients or community. Money distribution at scale (HAND is not a grantmaker). One-time project work. "Build-and-bounce."
 
 ### Where HAND is
 
@@ -84,7 +84,7 @@ Based in Austin, Texas. National reach as the work justifies it.
 
 ### Status
 
-Pre-incorporation, pilot pre-launch. The foundation campaign is currently raising $77,777 to file Form 1023 and onboard the first pilot cohort of three Companion groups. Documents at handprotocol.org/discovery articulate the gap, the model, and the landscape.
+Pre-incorporation, pilot pre-launch. The foundation campaign is currently raising $77,777 to file Form 1023 and onboard the first pilot cohort of three Reciprocate groups. Documents at handprotocol.org/discovery articulate the gap, the model, and the landscape.
 
 ---
 
@@ -102,46 +102,46 @@ HAND's discovery work, published openly at handprotocol.org/discovery, mapped th
 
 If HAND's activities work as designed, four shifts emerge:
 
-a. **The flywheel deepens.** Donate, Exchange, and Receive engagements compound. Cross-participation rises (Contributors who also Receive; Companions who also give back). Alumni return as Contributors. The pool gets denser, and density is what makes long-term accompaniment economically possible.
+a. **The flywheel deepens.** Donate, Exchange, and Receive engagements compound. Cross-participation rises (Contributors who also Receive; Reciprocates who also give back). Alumni return as Contributors. The pool gets denser, and density is what makes long-term accompaniment economically possible.
 
-b. **Companions develop durable infrastructure** (web, brand, operational tools) and retain it after engagement ends.
+b. **Reciprocates develop durable infrastructure** (web, brand, operational tools) and retain it after engagement ends.
 
-c. **Companion staff time is freed** from administrative burden, increasing the time available for the work that serves their populations.
+c. **Reciprocate staff time is freed** from administrative burden, increasing the time available for the work that serves their populations.
 
-d. **The methodology multiplies**: HAND publishes the methodology, code, eval framework, and quarterly reports openly so adjacent organizations can adopt and adapt. For opted-in Companion groups, Sovereign Companions agents become a durable artifact of the accompaniment, portable and group-owned, surviving HAND's own discontinuities.
+d. **The methodology multiplies**: HAND publishes the methodology, code, eval framework, and quarterly reports openly so adjacent organizations can adopt and adapt. For opted-in Reciprocate groups, Sovereign Reciprocates agents become a durable artifact of the accompaniment, portable and group-owned, surviving HAND's own discontinuities.
 
 Detailed in [`../programs/theory-of-change.md`](../programs/theory-of-change.md) and [`../programs/logic-model.md`](../programs/logic-model.md).
 
 ### Operating model
 
-A typical Companion engagement is a three-year relationship:
+A typical Reciprocate engagement is a three-year relationship:
 
 - **Year 1**: infrastructure delivery (web, brand, operational tools).
-- **Year 2**: optimization, learning, and Sovereign Companions deployment for Companion groups who choose it.
+- **Year 2**: optimization, learning, and Sovereign Reciprocates deployment for Reciprocate groups who choose it.
 - **Year 3**: graduation with full ownership transfer, and entry into the alumni pathway as Contributors, mentors, or cross-cohort connectors if the alumnus wishes.
 
-Contributors are matched on skill, capacity, and mutual fit. HAND staff mediate the matches and maintain the underlying Companion relationship. The pool runs on the three flows (Donate, Exchange, Receive) and on the principle that everyone involved can benefit if they choose to.
+Contributors are matched on skill, capacity, and mutual fit. HAND staff mediate the matches and maintain the underlying Reciprocate relationship. The pool runs on the three flows (Donate, Exchange, Receive) and on the principle that everyone involved can benefit if they choose to.
 
-### Sovereign Companions: one optional tool inside the pool
+### Sovereign Reciprocates: one optional tool inside the pool
 
-For Companion groups who opt in, HAND builds per-group custom AI agent systems on open-source base models (Llama 3.1 8B or Mistral 7B), with per-group LoRA adapters trained on the Companion group's own work and voice, retrieval over the group's own document library, tool access scoped to the group's workflows, and a human-review gate before any external output ships. The accompaniment works whether or not a given Companion engages with it; this is one rewards rail, not the only one, and never required to participate in the resource pool.
+For Reciprocate groups who opt in, HAND builds per-group custom AI agent systems on open-source base models (Llama 3.1 8B or Mistral 7B), with per-group LoRA adapters trained on the Reciprocate group's own work and voice, retrieval over the group's own document library, tool access scoped to the group's workflows, and a human-review gate before any external output ships. The accompaniment works whether or not a given Reciprocate engages with it; this is one rewards rail, not the only one, and never required to participate in the resource pool.
 
 Eight sovereignty principles, each operationally testable:
 
 1. Open base model.
-2. Companion-group-owned adapter.
+2. Reciprocate-group-owned adapter.
 3. Revocable training consent with ≤ 30-day SLA.
-4. No cross-Companion-group data extraction.
+4. No cross-Reciprocate-group data extraction.
 5. Self-hostable end-to-end.
 6. Full audit trail, inspectable by the group.
 7. Open methodology, code, eval, quarterly reports.
 8. Adapter weights: case-by-case publication.
 
-The agent system is the durable artifact. If HAND closes, the Companion group keeps it. The closure scenario is tested with a formal closure simulation at Gate 3 of the evaluation framework.
+The agent system is the durable artifact. If HAND closes, the Reciprocate group keeps it. The closure scenario is tested with a formal closure simulation at Gate 3 of the evaluation framework.
 
 ### Governance and transparency
 
-Documents at handprotocol.org/governance: Articles, Bylaws, Conflict of Interest, Whistleblower, Document Retention, Executive Compensation, Financial Management, Gift Acceptance, Code of Ethics, Equal Opportunity and Anti-Harassment, Privacy, Data Sovereignty and AI, Community Standards, Theory of Change, Logic Model, Strategic Plan 2026-2028. The transparency is mission-aligned: HAND asks Companion groups to trust HAND with their data and their work; HAND reciprocates by making its own operations inspectable.
+Documents at handprotocol.org/governance: Articles, Bylaws, Conflict of Interest, Whistleblower, Document Retention, Executive Compensation, Financial Management, Gift Acceptance, Code of Ethics, Equal Opportunity and Anti-Harassment, Privacy, Data Sovereignty and AI, Community Standards, Theory of Change, Logic Model, Strategic Plan 2026-2028. The transparency is mission-aligned: HAND asks Reciprocate groups to trust HAND with their data and their work; HAND reciprocates by making its own operations inspectable.
 
 ### Funder strategy
 
@@ -152,7 +152,7 @@ HAND seeks funders aligned with three postures: trust-based philanthropy, long-t
 - **Founded:** August 2024.
 - **Pivot:** Early 2026 (Web3 protocol → resource pool + AI accompaniment).
 - **Filing raise:** Underway in 2026, $77,777 minimum.
-- **Pilot cohort:** Three Companion groups, onboarding 2026-2027.
+- **Pilot cohort:** Three Reciprocate groups, onboarding 2026-2027.
 - **Website:** handprotocol.org.
 - **Contact:** hand@handprotocol.org.
 
@@ -177,7 +177,7 @@ For publicly named funder lists, see the website's funders page (with each funde
 - **Update cadence.** Boilerplate should be updated quarterly or whenever organizational status materially changes.
 - **Team descriptions.** Add as founding board and staff form.
 - **Visual identity for use in proposals.** Logo and brand assets at the brand kit; reference in PR documents.
-- **One-pager PDF.** Designed companion piece useful for funder meetings; produce as a separate artifact.
+- **One-pager PDF.** Designed reciprocate piece useful for funder meetings; produce as a separate artifact.
 
 ---
 

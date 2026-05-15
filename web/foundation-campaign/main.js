@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (res.ok && data.status === 'subscribed') {
           subscribeForm.reset();
-          setFeedback('success', `<p class="stay-close__msg stay-close__msg--success">Almost there. Check your inbox for a confirmation link from us.</p>`);
+          setFeedback('success', `<p class="stay-close__msg stay-close__msg--success">You're on the list. We'll be in touch when there's something worth saying.</p>`);
         } else if (res.ok && data.status === 'already_subscribed') {
           setFeedback('info', `<p class="stay-close__msg stay-close__msg--info">You're already on the list. Thanks for staying close.</p>`);
         } else if (res.status === 422 && data.field) {

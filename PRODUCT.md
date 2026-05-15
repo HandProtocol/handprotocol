@@ -10,25 +10,25 @@ Three audiences read this site simultaneously, by design.
 
 **1. Donors and funders.** Individual supporters, foundations (especially Texas community foundations: Austin Community Foundation, St. David's Foundation, Hogg Foundation), trust-based philanthropy funders, and impact-aligned funders. Context: evaluating whether to support HAND's 501(c)(3) filing raise ($77,777 minimum). Reading on desktop or phone, often skimming. They want answers to: is this real? Who benefits? Where's the gap? How is HAND different from Taproot or Catchafire?
 
-**2. Prospective Companions.** Healers and practitioners, impact entrepreneurs, and grassroots community organizations (harm reduction, mutual aid, food access, land stewardship). Context: discovering whether HAND can help them. Reading on phones in spare moments, often. Most are not crypto-native. They want answers to: what can I ask for? What's the commitment? Will you actually stay?
+**2. Prospective Reciprocates.** Healers and practitioners, impact entrepreneurs, and grassroots community organizations (harm reduction, mutual aid, food access, land stewardship). Context: discovering whether HAND can help them. Reading on phones in spare moments, often. Most are not crypto-native. They want answers to: what can I ask for? What's the commitment? Will you actually stay?
 
 **3. Prospective Contributors.** Skilled professionals (web/dev, design, brand, marketing, legal, accounting) and tradespeople (roofers, electricians, bodyworkers, reiki practitioners) who might donate or exchange their time. Context: deciding whether to join the resource pool. They want answers to: how does this work? Will I be matched well? Is my time wasted?
 
-**Job to be done:** convince a stranger in 18 minutes of reading or less that HAND has done real work, has a defensible thesis, knows the existing landscape, and is worth either funding, joining as a Companion, or contributing skills to.
+**Job to be done:** convince a stranger in 18 minutes of reading or less that HAND has done real work, has a defensible thesis, knows the existing landscape, and is worth either funding, joining as a Reciprocate, or contributing skills to.
 
 ## Product Purpose
 
-HAND Protocol (Holistic Approach to Nurture and Develop) is a regenerative-infrastructure nonprofit foundation, based in Austin, Texas, incorporating as a 501(c)(3) in 2026. Its core promise: long-term branding, marketing, web/dev, and one-on-one development support for Companions (healers, impact entrepreneurs, grassroots community organizations), without abandoning anyone after the first delivery.
+HAND Protocol (Holistic Approach to Nurture and Develop) is a regenerative-infrastructure nonprofit foundation, based in Austin, Texas, incorporating as a 501(c)(3) in 2026. Its core promise: long-term branding, marketing, web/dev, and one-on-one development support for Reciprocates (healers, impact entrepreneurs, grassroots community organizations), without abandoning anyone after the first delivery.
 
 The public web presence (foundation campaign, discovery docs, legacy archive) exists to:
 
 - Fund the $77,777 minimum filing raise
 - Signal credibility to funders with cited research instead of vibes
-- Attract the first pilot cohort of Companions and Contributors
+- Attract the first pilot cohort of Reciprocates and Contributors
 - Establish HAND's distinctive position in a maturing capacity-building ecosystem (between Catchafire-style marketplaces and trust-based grantmakers like Kataly or Solidaire)
 - Preserve the project's evolution honestly, including the pivot away from crypto-first framing
 
-**Success looks like:** $77,777 raised → 501(c)(3) filed within 12 months. Three pilot Companions onboarded during incorporation. Ten Contributors and five Companions active in the first quarter post-filing. Discovery docs cited by funders as evidence of seriousness. The term "Companions" adopted by participants.
+**Success looks like:** $77,777 raised → 501(c)(3) filed within 12 months. Three pilot Reciprocates onboarded during incorporation. Ten Contributors and five Reciprocates active in the first quarter post-filing. Discovery docs cited by funders as evidence of seriousness. The term "Reciprocates" adopted by participants.
 
 ## Brand Personality
 
@@ -40,13 +40,13 @@ Three words: **earnest, evidence-based, relational**.
 - Honest about unknowns. Every long-form doc has an open-questions section that names what HAND hasn't figured out yet (tax mechanics for the exchange layer, scope-creep prevention, who pays for HAND itself).
 - Specific over abstract. Names actual people in the worked examples (Marcus the roofer, Anya the reiki practitioner, Río Verde Collective), actual peer organizations (Catchafire, Taproot, Bridgespan, Solidaire, Kataly, Hemera, NDN Collective), actual dollar amounts and dates.
 - Skeptical of itself. The discovery docs include skepticism checks ("Is HAND reinventing Taproot? No, but be precise about why"). Bridgespan-style aspirational rhetoric is rejected.
-- Relational and warm, but not soft. "We walk alongside Companions" coexists with "the unit economics of a team that walks with a healer for three years need to be defensible."
-- Crypto-adjacent without being crypto-first. Web3 work is acknowledged as one of several tools, never as the identity. The crypto layer is opt-in for Contributors and Companions, never required.
+- Relational and warm, but not soft. "We walk alongside Reciprocates" coexists with "the unit economics of a team that walks with a healer for three years need to be defensible."
+- Crypto-adjacent without being crypto-first. Web3 work is acknowledged as one of several tools, never as the identity. The crypto layer is opt-in for Contributors and Reciprocates, never required.
 
 **Emotional goals:**
 
 - A funder should feel: this is real, this person has done the work, they understand the landscape, they see the gap, they're not faking it.
-- A Companion should feel: they actually see me, they're not going to disappear, this isn't transactional.
+- A Reciprocate should feel: they actually see me, they're not going to disappear, this isn't transactional.
 - A Contributor should feel: this is curated, my time will land well, this is more than a marketplace.
 
 ## Anti-references
@@ -80,11 +80,11 @@ Things HAND explicitly should NOT look or sound like.
 
 **Mobile-first responsive.** Every component has a mobile breakpoint. Sticky chrome on discovery docs collapses from two stacked bars (112px) to one (44px) under 640px. Touch targets are ≥44px on interactive elements.
 
-**Reading-time first.** Long-form documents include reading-time estimates so visitors can budget their attention. The discovery hub offers three reading routes by reader role (funder, Contributor, Companion) so each audience can choose the shortest path to what matters to them.
+**Reading-time first.** Long-form documents include reading-time estimates so visitors can budget their attention. The discovery hub offers three reading routes by reader role (funder, Contributor, Reciprocate) so each audience can choose the shortest path to what matters to them.
 
 **Known user constraints baked into design decisions:**
 
-- Many prospective Companions read on phones in spare moments. Layouts must be readable at 360px wide with one thumb.
-- Many Companions and Contributors are not crypto-native. The site cannot assume Web3 wallets, deep technical literacy, or desktop browsing.
+- Many prospective Reciprocates read on phones in spare moments. Layouts must be readable at 360px wide with one thumb.
+- Many Reciprocates and Contributors are not crypto-native. The site cannot assume Web3 wallets, deep technical literacy, or desktop browsing.
 - Funders read fast and skim. Hero, lede, and section labels carry most of the weight; section subtitles do the rest.
 - Accessibility is mission-aligned, not just compliance. Healers and grassroots organizations serve disability communities; HAND's tooling should reflect that respect.

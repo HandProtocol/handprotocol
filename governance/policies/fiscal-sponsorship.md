@@ -62,7 +62,7 @@ f. Have a transition-friendly posture: explicit support for sponsored projects s
 
 g. Have a fee at or below 8% of donations received.
 
-h. Have a documented mission and Companion-population alignment, or at least no documented conflict with HAND's values.
+h. Have a documented mission and Reciprocate-population alignment, or at least no documented conflict with HAND's values.
 
 i. Have responsive operations (response time on inquiries under 5 business days, and ability to issue grant payments within 10 business days of request).
 
@@ -106,7 +106,7 @@ g. **Insurance.** Sponsor covers Corporation activities under sponsor's general 
 
 h. **Branding.** Sponsor permits HAND's branding, public communications, and fundraising under HAND's name.
 
-i. **Sovereign Companions data.** Sponsor acknowledges that Companion-group-owned adapters and data are property of the respective Companion groups, not assets of the sponsor or the Corporation.
+i. **Sovereign Reciprocates data.** Sponsor acknowledges that Reciprocate-group-owned adapters and data are property of the respective Reciprocate groups, not assets of the sponsor or the Corporation.
 
 j. **Form 990 reporting.** Donations to and through the sponsor are reported on the sponsor's Form 990, not HAND's (until HAND has its own determination).
 
@@ -161,7 +161,7 @@ c. The sponsor agreement is not published (typically contains commercial-confide
 - **Direct file without sponsorship.** Strong argument exists for skipping fiscal sponsorship entirely, filing 1023 immediately after incorporation, and relying on the 27-month retroactive window for donations during the determination wait. This avoids 6–8% leakage and the donor-confusion of a sponsor relationship. **Recommend deciding before incorporation, not after.**
 - **Sponsor selection if needed.** PPF is the leading candidate. Verify current fee structure and any new project capacity constraints in May 2026.
 - **Crypto donations through sponsor.** Sponsors handle crypto differently. PPF accepts crypto via The Giving Block. HCB has native crypto support. Material if HAND expects crypto inflows.
-- **Sovereign Companions IP under sponsorship.** If HAND develops Sovereign Companions during the sponsorship period, who owns the methodology and code? Address in sponsor agreement: HAND retains all IP, sponsor has no claim. Critical.
+- **Sovereign Reciprocates IP under sponsorship.** If HAND develops Sovereign Reciprocates during the sponsorship period, who owns the methodology and code? Address in sponsor agreement: HAND retains all IP, sponsor has no claim. Critical.
 
 ---
 

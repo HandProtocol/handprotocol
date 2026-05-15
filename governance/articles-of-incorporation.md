@@ -26,13 +26,13 @@ The corporation is organized **exclusively for charitable, educational, and scie
 
 Within the scope of those purposes, the specific charitable activities of the corporation include:
 
-a. **Operating a curated resource pool of skilled professionals and tradespeople ("Contributors") who donate, exchange, or receive time and skill in support of three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward (collectively, "Companions"). The pool is designed so that everyone involved can benefit if they choose to; participation is voluntary in both directions and the lines between giver and receiver are porous.**
+a. **Operating a curated resource pool of skilled professionals and tradespeople ("Contributors") who donate, exchange, or receive time and skill in support of three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward (collectively, "Reciprocates"). The pool is designed so that everyone involved can benefit if they choose to; participation is voluntary in both directions and the lines between giver and receiver are porous.**
 
-b. Providing long-term branding, marketing, technology, design, and operational accompaniment, free of charge or below-market, to Companions whose work serves the public benefit.
+b. Providing long-term branding, marketing, technology, design, and operational accompaniment, free of charge or below-market, to Reciprocates whose work serves the public benefit.
 
 c. Researching, publishing, and openly sharing methodologies, evaluation frameworks, and case studies on capacity-building, skill-exchange, and accompaniment models for grassroots and small nonprofit organizations.
 
-d. Operating supporting infrastructure for the resource pool, including (without limitation) optional open-source, community-owned artificial intelligence systems that serve consenting Companion groups as durable infrastructure under explicit data sovereignty and consent commitments, with methodology, code, and evaluation released as a public good.
+d. Operating supporting infrastructure for the resource pool, including (without limitation) optional open-source, community-owned artificial intelligence systems that serve consenting Reciprocate groups as durable infrastructure under explicit data sovereignty and consent commitments, with methodology, code, and evaluation released as a public good.
 
 e. Engaging in any other charitable, educational, and scientific activities permitted by Section 501(c)(3) and consistent with the foregoing.
 
@@ -78,7 +78,7 @@ Upon the dissolution of the corporation, the Board of Directors shall, after pay
 
 Any such assets not so disposed of shall be disposed of by a court of competent jurisdiction in the county in which the principal office of the corporation is then located, exclusively for such purposes or to such organization or organizations, as said court shall determine, which are organized and operated exclusively for such purposes.
 
-**Special provision for Sovereign Companions adapters and data.** Upon dissolution, any LoRA adapters, training data, evaluation logs, and inference recipes attributable to a specific Companion group shall be transferred to that Companion group at no cost, in accordance with HAND's published Sovereign Companions sovereignty commitments. This provision binds the corporation regardless of which successor charitable organization receives general assets under the preceding paragraph.
+**Special provision for Sovereign Reciprocates adapters and data.** Upon dissolution, any LoRA adapters, training data, evaluation logs, and inference recipes attributable to a specific Reciprocate group shall be transferred to that Reciprocate group at no cost, in accordance with HAND's published Sovereign Reciprocates sovereignty commitments. This provision binds the corporation regardless of which successor charitable organization receives general assets under the preceding paragraph.
 
 ## Article 9. Indemnification
 

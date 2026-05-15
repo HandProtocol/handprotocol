@@ -28,7 +28,7 @@ d. The project budget template used for grant applications.
 | **Foundation grants** | Restricted or unrestricted per grant agreement |
 | **Corporate giving / sponsorships** | Generally rare; with mission-alignment screen |
 | **In-kind contributions** | Recorded per [`../policies/financial-management.md`](../policies/financial-management.md) §11 |
-| **Earned revenue (future)** | E.g., cost-sharing from capacity Companions; not the default mode |
+| **Earned revenue (future)** | E.g., cost-sharing from capacity Reciprocates; not the default mode |
 | **Investment / interest income** | From reserves account |
 | **Other** | E.g., honoraria received by HAND for speaking |
 
@@ -51,7 +51,7 @@ All expenses are categorized by **functional class** for Form 990 reporting:
 
 | Class | What it includes |
 |---|---|
-| **Program** | Direct costs of mission-related activities (Companion engagement, Sovereign Companions, discovery and research) |
+| **Program** | Direct costs of mission-related activities (Reciprocate engagement, Sovereign Reciprocates, discovery and research) |
 | **Management & General** | Executive Director time on org management, board governance, finance, HR, IT (not program-specific) |
 | **Fundraising** | Development staff time, grant writing, donor stewardship, fundraising events, donor management software |
 
@@ -75,12 +75,12 @@ Each functional-class expense is also recorded by natural class:
 | **Contractors and professional services** | 1099 contractors, legal, accounting, consulting |
 | **Occupancy** | Rent, utilities, internet (pre-revenue: none; later: co-working or office) |
 | **Technology and software** | SaaS subscriptions, hosting, domain, accounting software, donor management |
-| **Sovereign Companions infrastructure** | Inference compute, training compute, model hosting, vector database |
+| **Sovereign Reciprocates infrastructure** | Inference compute, training compute, model hosting, vector database |
 | **Communications and marketing** | Website hosting, design, copywriting, printing |
-| **Travel and meetings** | Travel to convenings, Companion visits, conferences |
+| **Travel and meetings** | Travel to convenings, Reciprocate visits, conferences |
 | **Insurance** | D&O, general liability, cyber, workers' comp |
 | **Supplies and equipment** | Office supplies, equipment depreciation |
-| **Convenings and events** | Funder convenings hosted, Companion gatherings, community events |
+| **Convenings and events** | Funder convenings hosted, Reciprocate gatherings, community events |
 | **Grants and contributions made** | If HAND sub-grants (case-by-case) |
 | **Other** | Bank fees, miscellaneous |
 
@@ -100,8 +100,8 @@ Drawn from [`../programs/strategic-plan-2026-2028.md`](../programs/strategic-pla
 | **Expenses** | | | |
 | Personnel (founder unpaid; possible part-time) | $0 | $25,000 | $45,000 |
 | Operations | $7,500 | $9,000 | $12,000 |
-| Program (Companion engagement, Contributor support) | $5,000 | $10,000 | $15,000 |
-| Sovereign Companions POC | $2,500 | $5,555 | $5,555 |
+| Program (Reciprocate engagement, Contributor support) | $5,000 | $10,000 | $15,000 |
+| Sovereign Reciprocates POC | $2,500 | $5,555 | $5,555 |
 | Brand and communications | $3,000 | $5,000 | $7,500 |
 | Legal, accounting, professional | $5,000 | $7,500 | $10,000 |
 | Insurance | $1,500 | $2,500 | $3,500 |
@@ -125,7 +125,7 @@ Year 1 surplus funds Year 2 operations (especially during the wait for IRS Deter
 | Personnel (1 FTE Executive Director or Program Director) | $90,000 |
 | Operations | $20,000 |
 | Program | $30,000 |
-| Sovereign Companions pilot tier | $30,000 |
+| Sovereign Reciprocates pilot tier | $30,000 |
 | Brand and communications | $15,000 |
 | Legal, accounting, compilation/review | $15,000 |
 | Insurance | $4,500 |
@@ -150,7 +150,7 @@ Year 2 net negative covers from Year 1 surplus + reserves drawdown. If revenue e
 | Personnel (2-3 FTE) | $240,000 |
 | Operations | $35,000 |
 | Program | $65,000 |
-| Sovereign Companions production tier | $90,000 |
+| Sovereign Reciprocates production tier | $90,000 |
 | Brand and communications | $25,000 |
 | Legal, accounting, review | $30,000 |
 | Insurance | $7,500 |
@@ -189,7 +189,7 @@ CONTRACTORS
   Subtotal contractors            $          $               $
 
 OPERATIONS
-  Sovereign Companions infrastructure $       $              $
+  Sovereign Reciprocates infrastructure $       $              $
   Software and subscriptions       $          $              $
   Travel                           $          $              $
   Supplies                         $          $              $
@@ -233,13 +233,13 @@ f. **Closeout** at end of grant period: reconciliation, final report, return of 
 
 Reserves grow at approximately 10% of unrestricted revenue per year until target is reached.
 
-## Section 7. Sovereign Companions program separate ledger
+## Section 7. Sovereign Reciprocates program separate ledger
 
-Sovereign Companions expenses are tracked in a separate program ledger within the accounting system, to make the program's economics legible and to support funder-specific reporting (especially for McGovern Foundation).
+Sovereign Reciprocates expenses are tracked in a separate program ledger within the accounting system, to make the program's economics legible and to support funder-specific reporting (especially for McGovern Foundation).
 
 | Sub-category | Notes |
 |---|---|
-| **Compute (training)** | LoRA fine-tuning runs; allocated per Companion group |
+| **Compute (training)** | LoRA fine-tuning runs; allocated per Reciprocate group |
 | **Compute (inference)** | Ongoing inference costs; allocated to active deployments |
 | **Model hosting** | Vector database, retrieval infrastructure |
 | **Personnel allocated** | Portion of program lead time on AI work |
@@ -265,7 +265,7 @@ f. **Year-end close.** January-February of following year, with year-over-year a
 - **Specific compensation amounts.** Drafted in ranges. Pin down at Year 1 board meeting once the rebuttable-presumption procedure is run for any compensated role.
 - **In-kind valuation methodology.** Conservative posture: only record in-kind when services would otherwise be purchased AND Contributor has the credential. Reconfirm with auditor.
 - **Indirect cost rate.** No negotiated rate; not needed for foundation funders. Federal grants would require NICRA negotiation.
-- **Sovereign Companions cost allocation.** Drafted as separate ledger. Methodology for allocating shared personnel time to the program needs to be tightened; revisit when first paid program lead is hired.
+- **Sovereign Reciprocates cost allocation.** Drafted as separate ledger. Methodology for allocating shared personnel time to the program needs to be tightened; revisit when first paid program lead is hired.
 - **Fiscal sponsor pass-through accounting.** If using a fiscal sponsor in Year 1, donations flow through the sponsor's books with HAND drawing down. Accounting captures HAND's program activity but not the gross-up of donations. Important for funder reporting clarity.
 
 ---

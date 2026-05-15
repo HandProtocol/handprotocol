@@ -12,10 +12,13 @@
 /vision                 /discovery/skill-exchange-vision.html  301
 /models                 /discovery/skill-exchange-models.html  301
 /landscape              /discovery/impact-org-landscape.html   301
-/sovereign              /sovereign-companions/                 301
-/sovereign-companions   /sovereign-companions/                 301
-/ai                     /sovereign-companions/                 301
-/ai-companions          /sovereign-companions/                 301
+/sovereign              /sovereign-reciprocates/               301
+/sovereign-reciprocates /sovereign-reciprocates/               301
+/sovereign-companions   /sovereign-reciprocates/               301
+/sovereign-companions/  /sovereign-reciprocates/               301
+/ai                     /sovereign-reciprocates/               301
+/ai-companions          /sovereign-reciprocates/               301
+/ai-reciprocates        /sovereign-reciprocates/               301
 /governance             /governance/                           301
 /bylaws                 /governance/#foundational              301
 /policies               /governance/#policies                  301

@@ -69,7 +69,7 @@ const FUNDING_TIERS = [
     items: [
       'Filing & nonprofit formation (rolls in floor tier): $7,777',
       'Ongoing legal & compliance: $2,222',
-      '3 pilot Companion websites & branding: $3,333',
+      '3 pilot Reciprocate websites & branding: $3,333',
       'Core infrastructure, tools & insurance: $1,111',
       '6-month part-time program lead: $7,779'
     ]
@@ -80,11 +80,11 @@ const FUNDING_TIERS = [
     label: 'Full launch, 12 months of accompaniment',
     items: [
       '501(c)(3) filing, compliance & legal: $7,777',
-      'Pilot Companion websites & ongoing support: $11,111',
+      'Pilot Reciprocate websites & ongoing support: $11,111',
       'Core infrastructure, tools & insurance: $5,555',
       '12-month part-time program lead & ops: $33,333',
       'Pilot program development & matching: $11,111',
-      'AI Companion model — POC integration: $5,555',
+      'AI Reciprocate model — POC integration: $5,555',
       'Contingency & opportunity fund: $3,335'
     ]
   }

@@ -118,13 +118,13 @@ f. **Direct the reader to the brief.** The [Director Prospect Brief](director-pr
 
 ---
 
-## Template 5: Companion or Contributor as prospective director
+## Template 5: Reciprocate or Contributor as prospective director
 
 > [Name],
 >
 > Different kind of ask this time. Our governance work is producing a board, and I'd like to know if you'd consider a seat.
 >
-> The thinking: your relationship with HAND so far has been [Companion / Contributor]. You know the work from the inside. You'd bring [specific lived experience or perspective] that the board needs. Companion or Contributor representation on the founding board would change the quality of the deliberations.
+> The thinking: your relationship with HAND so far has been [Reciprocate / Contributor]. You know the work from the inside. You'd bring [specific lived experience or perspective] that the board needs. Reciprocate or Contributor representation on the founding board would change the quality of the deliberations.
 >
 > There are some real things to think through: the conflict-of-interest implications, the workload alongside your own work, the way it would change our current relationship.
 >
@@ -134,8 +134,8 @@ f. **Direct the reader to the brief.** The [Director Prospect Brief](director-pr
 
 **Sender notes:**
 
-- Companion or Contributor on the board is a major fit and a real complication. Conflict-of-interest analysis required.
-- This conversation should happen later in HAND's life (Year 2-3), not at founding, unless the Companion or Contributor pre-dates the founding.
+- Reciprocate or Contributor on the board is a major fit and a real complication. Conflict-of-interest analysis required.
+- This conversation should happen later in HAND's life (Year 2-3), not at founding, unless the Reciprocate or Contributor pre-dates the founding.
 
 ---
 

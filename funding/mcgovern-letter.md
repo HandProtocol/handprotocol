@@ -1,4 +1,4 @@
-# Letter of Inquiry: Sovereign Companions
+# Letter of Inquiry: Sovereign Reciprocates
 
 **To:** Patrick J. McGovern Foundation · AI for Social Good
 **From:** HAND Protocol Foundation · Austin, Texas
@@ -10,26 +10,26 @@
 
 ## In one paragraph
 
-HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, to operate a long-term, relational accompaniment model for solo healers, post-accelerator impact founders, and small grassroots collectives. We are writing because our hardest unsolved problem (*accompaniment does not parallelize the way project-based pro bono does*) is precisely the kind of structural bottleneck a small, **sovereign, open-source, Companion-group-owned agent system** can address. We propose to build and openly evaluate exactly that infrastructure, with the source code, methodology, and evaluation framework published openly and with each Companion group fully owning their own system. We are asking for **$111,111 over 18 months**.
+HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, to operate a long-term, relational accompaniment model for solo healers, post-accelerator impact founders, and small grassroots collectives. We are writing because our hardest unsolved problem (*accompaniment does not parallelize the way project-based pro bono does*) is precisely the kind of structural bottleneck a small, **sovereign, open-source, Reciprocate-group-owned agent system** can address. We propose to build and openly evaluate exactly that infrastructure, with the source code, methodology, and evaluation framework published openly and with each Reciprocate group fully owning their own system. We are asking for **$111,111 over 18 months**.
 
 ## What sovereign means here
 
-The design is open by default and Companion-owned by design. Eight commitments govern the work:
+The design is open by default and Reciprocate-owned by design. Eight commitments govern the work:
 
 1. **Open base model.** Llama 3.1 8B or Mistral 7B. No proprietary API dependency for the core inference loop.
-2. **Companion-group-owned adapters.** Each LoRA adapter belongs to the group it was trained for. On departure or HAND closure, the adapter weights, training data, eval logs, and a portable inference recipe are handed over.
+2. **Reciprocate-group-owned adapters.** Each LoRA adapter belongs to the group it was trained for. On departure or HAND closure, the adapter weights, training data, eval logs, and a portable inference recipe are handed over.
 3. **Revocable training consent** with a ≤ 30-day retrain-or-destroy SLA.
-4. **No cross-Companion-group data aggregation.** No platform model. Patterns learned with one group stay with that group's adapter.
-5. **Self-hostable end-to-end.** Inference, training, eval, tool integrations all runnable on commodity hardware that a Companion group could maintain themselves.
+4. **No cross-Reciprocate-group data aggregation.** No platform model. Patterns learned with one group stay with that group's adapter.
+5. **Self-hostable end-to-end.** Inference, training, eval, tool integrations all runnable on commodity hardware that a Reciprocate group could maintain themselves.
 6. **Full audit trail, inspectable by the group.** Every model call, retrieval, tool invocation, reviewer disposition is logged and accessible.
 7. **Open methodology, open code, open eval, open quarterly reports.** Released CC BY-SA (docs) and MIT (code).
-8. **Adapter weights: not published by default.** Each Companion group makes the call for their own adapter; HAND will not pressure that decision.
+8. **Adapter weights: not published by default.** Each Reciprocate group makes the call for their own adapter; HAND will not pressure that decision.
 
 These principles are operationalized as tested metrics in the accompanying evaluation framework (`AI-EVAL-FRAMEWORK.md`), with a dedicated **Sovereignty** dimension that includes portability checks, revocation drills, audit-trail accessibility tests, and a Gate-3 HAND-closure simulation.
 
 ## Who we are
 
-HAND Protocol began in August 2024 as Web3 fundraising infrastructure for regenerative impact work. Over the next year we learned that the people we were trying to support (bodyworkers, harm-reduction organizers, food-sovereignty collectives, post-accelerator impact founders) were not crypto-native, and that crypto was the wrong starting tool. In early 2026 we pivoted. HAND now serves three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward. The lines between them are porous, and many of our Companions live in two of these worlds at once. We operate a curated resource pool, with long-term web, brand, and operational accompaniment as the core promise. We are filing for 501(c)(3) status in 2026 and have published three discovery documents (vision, models, landscape) at handprotocol.org/discovery as the evidence base for the work.
+HAND Protocol began in August 2024 as Web3 fundraising infrastructure for regenerative impact work. Over the next year we learned that the people we were trying to support (bodyworkers, harm-reduction organizers, food-sovereignty collectives, post-accelerator impact founders) were not crypto-native, and that crypto was the wrong starting tool. In early 2026 we pivoted. HAND now serves three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward. The lines between them are porous, and many of our Reciprocates live in two of these worlds at once. We operate a curated resource pool, with long-term web, brand, and operational accompaniment as the core promise. We are filing for 501(c)(3) status in 2026 and have published three discovery documents (vision, models, landscape) at handprotocol.org/discovery as the evidence base for the work.
 
 The pivot demonstrates a posture: we retire tools that do not serve the people we work with. The same posture governs our approach to AI.
 
@@ -41,7 +41,7 @@ Three structural reasons keep this gap open. The economics don't parallelize the
 
 ## The proposal
 
-We propose to build, for each Companion group HAND accompanies, a **custom sovereign agent system**: a small fine-tuned model on an open base, a per-group LoRA adapter trained on the group's own work and voice, retrieval over the group's own library, tool access scoped to the group's workflows (grant tracking, scheduling, fiscal-sponsorship paperwork, donor stewardship), persistent memory, and a human-review gate before any external output ships. Alongside, a single cohort-wide coordination agent supports HAND's program lead with matching, pattern surfacing, and check-in preparation, without reading individual group data.
+We propose to build, for each Reciprocate group HAND accompanies, a **custom sovereign agent system**: a small fine-tuned model on an open base, a per-group LoRA adapter trained on the group's own work and voice, retrieval over the group's own library, tool access scoped to the group's workflows (grant tracking, scheduling, fiscal-sponsorship paperwork, donor stewardship), persistent memory, and a human-review gate before any external output ships. Alongside, a single cohort-wide coordination agent supports HAND's program lead with matching, pattern surfacing, and check-in preparation, without reading individual group data.
 
 The agent system is the **durable artifact** of HAND's accompaniment. If a group graduates, they leave with it. If HAND closes, they keep it. The "we don't build and bounce" promise becomes technically enforceable: the infrastructure that holds their three-year arc is theirs, not ours.
 
@@ -52,16 +52,16 @@ This directly attacks the parallelization bottleneck and operationalizes a sover
 Three trends from our landscape research converge here:
 
 1. **Trust-based philanthropy has moved from awareness campaign to mainstream practice.** MacKenzie Scott deployed $2B+ in unrestricted grants in 2024. The donor universe most aligned with HAND's accompaniment posture is expanding.
-2. **The mutual-aid funding-replacement moment is acute in 2026.** Harm-reduction Companion groups losing federal support need every parallelization tool we can responsibly give them, and the sovereignty posture matters most for organizations whose data has historically been weaponized against them.
-3. **AI-for-social-good funding has matured faster than aligned grantee profiles.** McGovern, Mozilla, and Google.org have built grant programs for tech-enabled nonprofit infrastructure. The HAND-shaped grantee, a small relational nonprofit with a published gap analysis, an open-source default, and an explicit Companion-sovereignty design, is rarer than the funding.
+2. **The mutual-aid funding-replacement moment is acute in 2026.** Harm-reduction Reciprocate groups losing federal support need every parallelization tool we can responsibly give them, and the sovereignty posture matters most for organizations whose data has historically been weaponized against them.
+3. **AI-for-social-good funding has matured faster than aligned grantee profiles.** McGovern, Mozilla, and Google.org have built grant programs for tech-enabled nonprofit infrastructure. The HAND-shaped grantee, a small relational nonprofit with a published gap analysis, an open-source default, and an explicit Reciprocate-sovereignty design, is rarer than the funding.
 
 ## Theory of change
 
 If the sovereign agent systems work as designed, we will observe four measurable shifts inside an 18-month pilot:
 
-- **Companion-group side**: time-to-first-draft on grant applications and fiscal-sponsorship paperwork drops by ≥ 50%; felt-continuity and felt-presence both rise into the 4–5 range on a 5-point Likert scale. Each group can produce a documented "self-host" recipe and exercise their own system if needed.
+- **Reciprocate-group side**: time-to-first-draft on grant applications and fiscal-sponsorship paperwork drops by ≥ 50%; felt-continuity and felt-presence both rise into the 4–5 range on a 5-point Likert scale. Each group can produce a documented "self-host" recipe and exercise their own system if needed.
 - **Staff side**: matching time between intake and Contributor pairing drops by ≥ 40%; the program lead sustains a cohort of 5–7 groups instead of 2–3 at the same staffing level.
-- **Sovereignty side**: 100% of adapters have ownership records; portability check passes quarterly; a tested revocation SLA of ≤ 30 days; a successful HAND-closure simulation at Gate 3 demonstrating that the Companion groups can continue independently.
+- **Sovereignty side**: 100% of adapters have ownership records; portability check passes quarterly; a tested revocation SLA of ≤ 30 days; a successful HAND-closure simulation at Gate 3 demonstrating that the Reciprocate groups can continue independently.
 - **Field side**: HAND publishes the evaluation framework, the adapter-training methodology, the agent scaffolding code, and the quarterly reports as open source. Adjacent accompaniment organizations (CompassPoint cohorts, Headwaters Giving Project alumni, fiscal-sponsorship hosts) can adopt and adapt without rebuilding from scratch.
 
 Full metrics, six evaluation dimensions, three decision gates, and the participatory review panel structure are detailed in `AI-EVAL-FRAMEWORK.md`.
@@ -70,8 +70,8 @@ Full metrics, six evaluation dimensions, three decision gates, and the participa
 
 | Phase | Months | Allocation | What it produces |
 |---|---|---|---|
-| **POC** | 1–3 | $5,555 | Open-base model + RAG over discovery docs + one Companion-group pilot, scaffolded as the prototype agent system. Closed-source APIs used for prototyping only. | Evaluation report; Gate 1 decision. |
-| **Pilot** | 4–15 | $33,333 | Open-base fine-tune, three sovereign Companion-group agent systems with per-group adapters, self-hosted inference, quarterly participatory eval including sovereignty drills. | Three working sovereign systems, signed ownership records, eval framework v1.0, case studies. |
+| **POC** | 1–3 | $5,555 | Open-base model + RAG over discovery docs + one Reciprocate-group pilot, scaffolded as the prototype agent system. Closed-source APIs used for prototyping only. | Evaluation report; Gate 1 decision. |
+| **Pilot** | 4–15 | $33,333 | Open-base fine-tune, three sovereign Reciprocate-group agent systems with per-group adapters, self-hosted inference, quarterly participatory eval including sovereignty drills. | Three working sovereign systems, signed ownership records, eval framework v1.0, case studies. |
 | **Production & open-source release** | 16–18 | $72,223 | Per-group adapter productionization, the HAND coordination agent, full open-source release of methodology, eval framework, and agent scaffolding. Closure-simulation drill. Methodology paper. | A forkable stack adjacent orgs can adopt; transition to operating-budget sustainability. |
 
 The $5,555 POC tier is also folded into HAND's existing $77,777 filing-raise goal as a backup ignition path; the McGovern grant accelerates and de-risks the full arc.
@@ -81,9 +81,9 @@ The $5,555 POC tier is also folded into HAND's existing $77,777 filing-raise goa
 To make this defensible:
 
 - We are **not** asking McGovern to fund HAND's underlying 501(c)(3) operations. Those costs are addressed by the foundation campaign and aligned trust-based funders (Kataly, Hemera transition, Headwaters peer model).
-- We are **not** building a customer-facing chatbot or a commercial product. Each agent system serves one Companion group inside a curated, low-volume, high-trust relational context.
+- We are **not** building a customer-facing chatbot or a commercial product. Each agent system serves one Reciprocate group inside a curated, low-volume, high-trust relational context.
 - We are **not** building a centralized "AI platform for nonprofits." The architecture is explicitly per-group and self-hostable. No vendor lock-in is the design.
-- We are **not** publishing Companion-group-derived training data, ever. Adapter weights publication is the Companion group's decision, not HAND's.
+- We are **not** publishing Reciprocate-group-derived training data, ever. Adapter weights publication is the Reciprocate group's decision, not HAND's.
 
 ## Why HAND specifically
 
@@ -91,7 +91,7 @@ We are a small organization with a published gap analysis, a track record of bei
 
 ## Closing
 
-We would welcome a conversation about whether this work fits the McGovern Foundation's current priorities and what additional materials would be useful for a full application. The discovery documents at handprotocol.org/discovery are the most complete public record of our thinking. The Sovereign Companions one-pager and evaluation framework are available on request and in our public repository.
+We would welcome a conversation about whether this work fits the McGovern Foundation's current priorities and what additional materials would be useful for a full application. The discovery documents at handprotocol.org/discovery are the most complete public record of our thinking. The Sovereign Reciprocates one-pager and evaluation framework are available on request and in our public repository.
 
 Thank you for your time.
 

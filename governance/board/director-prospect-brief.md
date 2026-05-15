@@ -8,9 +8,9 @@
 
 ## What HAND is
 
-**HAND Protocol Foundation** is a regenerative-infrastructure nonprofit incorporating as a 501(c)(3) in Austin, Texas in 2026. We serve three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward. We call them **Companions**. The lines between them are porous; many Companions live in two of these worlds at once. We provide long-term branding, marketing, technology, design, and operational accompaniment. We don't build and bounce.
+**HAND Protocol Foundation** is a regenerative-infrastructure nonprofit incorporating as a 501(c)(3) in Austin, Texas in 2026. We serve three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward. We call them **Reciprocates**. The lines between them are porous; many Reciprocates live in two of these worlds at once. We provide long-term branding, marketing, technology, design, and operational accompaniment. We don't build and bounce.
 
-Our distinctive innovation is **Sovereign Companions**: custom open-source AI agent systems built for each Companion group under eight sovereignty principles, owned by the group, portable, self-hostable, and the durable artifact of HAND's accompaniment.
+Our distinctive innovation is **Sovereign Reciprocates**: custom open-source AI agent systems built for each Reciprocate group under eight sovereignty principles, owned by the group, portable, self-hostable, and the durable artifact of HAND's accompaniment.
 
 Founded August 2024. Pivoted from Web3 framing in early 2026. Pre-incorporation. Raising $77,777 to file Form 1023 and onboard the first pilot cohort.
 
@@ -30,7 +30,7 @@ A seat on HAND's founding board. The founding board will be three to five direct
 
 **Meetings:** Quarterly board meetings, mix of in-person (Austin when feasible) and video. One annual all-hands meeting.
 
-**Committee work:** Each director serves on at least one standing committee (Executive, Finance, Governance, Audit, Compensation, Sovereign Companions Oversight).
+**Committee work:** Each director serves on at least one standing committee (Executive, Finance, Governance, Audit, Compensation, Sovereign Reciprocates Oversight).
 
 **Give-or-get:** Each director makes a personally meaningful annual gift, helps open doors to other prospects, or both. The dollar amount is the director's own determination; meaningfulness is the criterion. 100% board giving is a measurable signal to funders.
 
@@ -52,7 +52,7 @@ d. **Disclosure of conflicts of interest** with annual disclosure form and recus
 
 e. **Public representation aligned with HAND's voice** when speaking as a director.
 
-f. **Honor sovereignty commitments** to Companion groups (data ownership, adapter portability).
+f. **Honor sovereignty commitments** to Reciprocate groups (data ownership, adapter portability).
 
 The full Bylaws are at [`../bylaws.md`](../bylaws.md). The Code of Ethics is at [`../policies/code-of-ethics.md`](../policies/code-of-ethics.md). Every governance document is published openly at handprotocol.org/governance.
 
@@ -66,7 +66,7 @@ c. **A serious team.** Founder-led, with discovery research that funders are sta
 
 d. **A board that governs.** Not a rubber stamp. Real strategic engagement. Honest assessment of what's working and what isn't.
 
-e. **Field influence.** Sovereign Companions is a contribution to the responsible-AI-for-nonprofits field. Adjacent organizations are watching.
+e. **Field influence.** Sovereign Reciprocates is a contribution to the responsible-AI-for-nonprofits field. Adjacent organizations are watching.
 
 f. **A graceful tenure.** Three-year terms with one re-election. No founder-syndrome dynamics. Mandatory founder off-board sabbatical built into succession.
 
@@ -74,13 +74,13 @@ f. **A graceful tenure.** Three-year terms with one re-election. No founder-synd
 
 a. **Mission alignment.** Deep care for the populations HAND serves.
 
-b. **Specific expertise.** We use a Composition Matrix ([`composition-matrix.md`](composition-matrix.md)) to identify what skills, lived experience, and networks the board needs. Common needs: nonprofit finance (Treasurer), legal, fundraising, AI ethics, lived experience as a Companion, Texas community foundation networks.
+b. **Specific expertise.** We use a Composition Matrix ([`composition-matrix.md`](composition-matrix.md)) to identify what skills, lived experience, and networks the board needs. Common needs: nonprofit finance (Treasurer), legal, fundraising, AI ethics, lived experience as a Reciprocate, Texas community foundation networks.
 
 c. **Time and presence.** Available for the 6-10 hours per month, present in meetings, responsive between.
 
 d. **Voice fit.** Plain English. Honest about unknowns. Tolerance for uncertainty in pre-incorporation territory.
 
-e. **Diversity of perspective.** Race, gender, class, geography, professional background, lived experience. We actively recruit Companions and Contributors, BIPOC-led, queer-led, disability-led, and Texas-rooted perspectives.
+e. **Diversity of perspective.** Race, gender, class, geography, professional background, lived experience. We actively recruit Reciprocates and Contributors, BIPOC-led, queer-led, disability-led, and Texas-rooted perspectives.
 
 ## What HAND does not offer
 
@@ -114,9 +114,9 @@ a. We have not yet filed Form 1023. Target Q3 2026.
 
 b. We have not yet received the IRS Determination Letter. Expected mid-2027.
 
-c. We have not yet onboarded the first Companion cohort. Target late 2026.
+c. We have not yet onboarded the first Reciprocate cohort. Target late 2026.
 
-d. We have not yet deployed a Sovereign Companions agent. POC by end of Year 1.
+d. We have not yet deployed a Sovereign Reciprocates agent. POC by end of Year 1.
 
 e. We do not have audited financials. First year is compilation; review begins Year 2.
 
@@ -133,7 +133,7 @@ This is the founding work. You'd be helping build the institution.
 | [Theory of Change](../programs/theory-of-change.md) | Why we think this works |
 | [Strategic Plan 2026-2028](../programs/strategic-plan-2026-2028.md) | What we're committing to |
 | [Compliance Calendar](../COMPLIANCE-CALENDAR.md) | What's due when |
-| [AI-COMPANIONS.md](../../AI-COMPANIONS.md) | Sovereign Companions program |
+| [AI-RECIPROCATES.md](../../AI-RECIPROCATES.md) | Sovereign Reciprocates program |
 
 Public site: **handprotocol.org**
 

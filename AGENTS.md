@@ -69,19 +69,19 @@ These are bans, not preferences. The impeccable audit already removed all violat
 4. **No glassmorphism as decoration.** Backdrop blur is OK for sticky nav. Not OK as a generic card surface.
 5. **No hero-metric template.** The big-number / small-label four-up grid. Use a `<dl class="key-value">` or prose for factual data.
 6. **No identical card grids on repeat.** If three 3-up grids in a row, break one of them into a list, table, or asymmetric layout.
-7. **No "client / beneficiary / recipient" for HAND's served population.** Use **Companions** (capitalized when used as a defined role). The donor-side parallel is **Contributors**.
+7. **No "client / beneficiary / recipient" for HAND's served population.** Use **Reciprocates** (capitalized when used as a defined role). The donor-side parallel is **Contributors**.
 
 ## Brand vocabulary
 
 - **HAND Protocol**, full name. "HAND" alone is acceptable after first use.
 - **HAND** = Holistic Approach to Nurture and Develop.
-- **Companions**, the people and organizations HAND serves (healers, impact entrepreneurs, grassroots organizations). Capitalize as a defined role.
-- **Companion groups**, collective Companions (a 3-person harm-reduction collective, a healing practice, a food-sovereignty group). Use the plural form when the unit of accompaniment is a small org or collective rather than an individual.
+- **Reciprocates**, the people and organizations HAND serves (healers, impact entrepreneurs, grassroots organizations). Capitalize as a defined role.
+- **Reciprocate groups**, collective Reciprocates (a 3-person harm-reduction collective, a healing practice, a food-sovereignty group). Use the plural form when the unit of accompaniment is a small org or collective rather than an individual.
 - **Contributors**, skilled professionals and tradespeople who give or exchange time into the resource pool.
 - **The pool** / **resource pool**, the curated skill-exchange marketplace HAND operates.
 - **Donate / Exchange / Receive**, the three flows of the pool.
 - **501(c)(3) filing raise**, the current fundraising effort ($77,777 first goal, $22,222 minimum).
-- **Sovereign Companions**, HAND's AI workstream: custom open-source agent systems built per Companion or Companion group, owned by the group, designed to be portable, self-hostable, and the durable artifact of HAND's accompaniment. See `AI-COMPANIONS.md`, `AI-EVAL-FRAMEWORK.md`. Eight sovereignty principles govern the design.
+- **Sovereign Reciprocates**, HAND's AI workstream: custom open-source agent systems built per Reciprocate or Reciprocate group, owned by the group, designed to be portable, self-hostable, and the durable artifact of HAND's accompaniment. See `AI-RECIPROCATES.md`, `AI-EVAL-FRAMEWORK.md`. Eight sovereignty principles govern the design.
 
 Avoid: "clients" (paid-services language), "beneficiaries" (cold, hierarchical), "grantees" (passive, reserve for describing peer orgs' grantmaking), "users" (too SaaS), "stakeholders" (corporate).
 

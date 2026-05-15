@@ -20,15 +20,15 @@
 
 **Section 2.1 Purposes.** The Corporation is organized and shall be operated exclusively for charitable, educational, and scientific purposes within the meaning of Section 501(c)(3) of the Internal Revenue Code, as set forth in the Certificate of Formation.
 
-**Section 2.2 Mission.** HAND Protocol Foundation operates a curated resource pool of skilled **Contributors** who donate, exchange, or receive time and skill in support of three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward (collectively, **Companions**). The pool is designed so that everyone involved can benefit if they choose to; participation is voluntary in both directions, and the lines between giver and receiver are porous. Within and through this pool, the Corporation provides long-term branding, marketing, technology, design, and operational accompaniment to Companions whose work serves the public benefit, and openly publishes the methodologies, evaluation frameworks, and infrastructure that make this accompaniment possible.
+**Section 2.2 Mission.** HAND Protocol Foundation operates a curated resource pool of skilled **Contributors** who donate, exchange, or receive time and skill in support of three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward (collectively, **Reciprocates**). The pool is designed so that everyone involved can benefit if they choose to; participation is voluntary in both directions, and the lines between giver and receiver are porous. Within and through this pool, the Corporation provides long-term branding, marketing, technology, design, and operational accompaniment to Reciprocates whose work serves the public benefit, and openly publishes the methodologies, evaluation frameworks, and infrastructure that make this accompaniment possible.
 
-**Section 2.3 Companions and Contributors as defined terms.** Throughout these Bylaws, "Companions" refers to the individuals and organizations HAND serves, and "Contributors" refers to the individuals who give time and skill into HAND's resource pool. These are governance terms, not marketing labels, and shall be used in all official Corporation documents.
+**Section 2.3 Reciprocates and Contributors as defined terms.** Throughout these Bylaws, "Reciprocates" refers to the individuals and organizations HAND serves, and "Contributors" refers to the individuals who give time and skill into HAND's resource pool. These are governance terms, not marketing labels, and shall be used in all official Corporation documents.
 
 ## Article III. No members
 
 **Section 3.1 No members.** The Corporation shall have **no voting members.** All corporate powers shall be exercised by or under the authority of, and the business and affairs of the Corporation shall be managed by or under the direction of, the Board of Directors.
 
-**Section 3.2 Non-voting affiliates.** The Board of Directors may from time to time recognize categories of non-voting affiliates (for example, "Foundation Circle" donors, "Advisory Companions," "Contributor Council") for purposes of acknowledgment, consultation, or advisory input. No such affiliate category creates rights to vote on, control, or direct the affairs of the Corporation.
+**Section 3.2 Non-voting affiliates.** The Board of Directors may from time to time recognize categories of non-voting affiliates (for example, "Foundation Circle" donors, "Advisory Reciprocates," "Contributor Council") for purposes of acknowledgment, consultation, or advisory input. No such affiliate category creates rights to vote on, control, or direct the affairs of the Corporation.
 
 ## Article IV. Board of Directors
 
@@ -36,7 +36,7 @@
 
 **Section 4.2 Number.** The Board shall consist of not fewer than **three (3)** and not more than **fifteen (15)** directors. The exact number within that range shall be fixed by resolution of the Board from time to time. The initial number of directors is three (3).
 
-**Section 4.3 Qualifications.** Directors must be at least eighteen (18) years of age. There is no residency requirement. The Board shall use the Composition Matrix maintained under [`board/composition-matrix.md`](board/composition-matrix.md) to guide recruitment toward a mix of skills, lived experience, and Companion-population representation.
+**Section 4.3 Qualifications.** Directors must be at least eighteen (18) years of age. There is no residency requirement. The Board shall use the Composition Matrix maintained under [`board/composition-matrix.md`](board/composition-matrix.md) to guide recruitment toward a mix of skills, lived experience, and Reciprocate-population representation.
 
 **Section 4.4 Election and term.**
 
@@ -78,7 +78,7 @@ d. A director may serve **two consecutive three-year terms**, after which the di
 
 **Section 5.8 Minutes.** The Secretary or designee shall prepare written minutes of every meeting. Minutes shall be circulated for approval at the next regular meeting and, once approved, retained per the Document Retention Policy ([`policies/document-retention.md`](policies/document-retention.md)).
 
-**Section 5.9 Public observation.** Board meetings are not open to the public by default. The Board may, by majority vote, invite observers (Companions, Contributors, journalists, funders) for specific agenda items. Executive sessions on matters of personnel, legal advice, or sensitive financial detail shall be closed.
+**Section 5.9 Public observation.** Board meetings are not open to the public by default. The Board may, by majority vote, invite observers (Reciprocates, Contributors, journalists, funders) for specific agenda items. Executive sessions on matters of personnel, legal advice, or sensitive financial detail shall be closed.
 
 ## Article VI. Officers
 
@@ -114,13 +114,13 @@ d. **Audit Committee.** May be combined with the Finance Committee in early year
 
 e. **Compensation Committee.** Composed of independent directors with no conflict of interest in the Executive Director's compensation. Conducts the rebuttable-presumption procedure annually.
 
-f. **Resource Pool and Contributor Engagement Committee.** Oversees the primary operating mechanism of the Corporation. Composed of at least one director, two Companion representatives (from different communities), and two Contributor representatives. Reviews the three-flow operations (Donate, Exchange, Receive), Contributor screening and matching practices, Companion selection and graduation, alumni pathways, and publishes the Annual Flywheel Health Check.
+f. **Resource Pool and Contributor Engagement Committee.** Oversees the primary operating mechanism of the Corporation. Composed of at least one director, two Reciprocate representatives (from different communities), and two Contributor representatives. Reviews the three-flow operations (Donate, Exchange, Receive), Contributor screening and matching practices, Reciprocate selection and graduation, alumni pathways, and publishes the Annual Flywheel Health Check.
 
-g. **Sovereign Companions Oversight Committee.** Oversees the optional AI augmentation workstream. Composed of at least one director, one Companion representative, one Contributor representative, and one independent technical expert. Reviews algorithmic impact assessments, model cards, sovereignty drill outcomes, and the Annual AI Accountability Report.
+g. **Sovereign Reciprocates Oversight Committee.** Oversees the optional AI augmentation workstream. Composed of at least one director, one Reciprocate representative, one Contributor representative, and one independent technical expert. Reviews algorithmic impact assessments, model cards, sovereignty drill outcomes, and the Annual AI Accountability Report.
 
 **Section 7.2 Ad hoc committees.** The Board may from time to time create ad hoc committees for limited purposes. Each ad hoc committee dissolves upon completion of its charge or by Board resolution.
 
-**Section 7.3 Composition and authority.** Each committee shall include at least one director. Committees may include non-director members (Companions, Contributors, subject-matter experts). Committee actions that bind the Corporation must be ratified by the Board, except where the Board has expressly delegated final authority within the limits of §22.219.
+**Section 7.3 Composition and authority.** Each committee shall include at least one director. Committees may include non-director members (Reciprocates, Contributors, subject-matter experts). Committee actions that bind the Corporation must be ratified by the Board, except where the Board has expressly delegated final authority within the limits of §22.219.
 
 ## Article VIII. Indemnification and insurance
 
@@ -154,7 +154,7 @@ g. **Sovereign Companions Oversight Committee.** Oversees the optional AI augmen
 
 ## Article XI. Resource Pool Governance
 
-**Section 11.1 Recognition.** The resource pool is the primary operating mechanism of the Corporation. Through it, skilled Contributors and Companions match to meet mutual needs. The pool is the connective tissue that turns existing skills and existing needs into sustained exchange, not one-time favors.
+**Section 11.1 Recognition.** The resource pool is the primary operating mechanism of the Corporation. Through it, skilled Contributors and Reciprocates match to meet mutual needs. The pool is the connective tissue that turns existing skills and existing needs into sustained exchange, not one-time favors.
 
 **Section 11.2 Three flows.** The Corporation organizes participation in the resource pool under three named flows:
 
@@ -162,25 +162,25 @@ a. **Donate.** A Contributor offers hours, deliverables, or ongoing service to t
 
 b. **Exchange.** A Contributor requests a specific skill from the pool in return for their own contribution. The Corporation matches both sides, sets clear scope on both engagements, and stays present if friction arises.
 
-c. **Receive.** A Companion applies for support. The Corporation vets fit, scope, and capacity, then matches from the pool, builds the work directly, or both, and stays for upkeep over the planned engagement.
+c. **Receive.** A Reciprocate applies for support. The Corporation vets fit, scope, and capacity, then matches from the pool, builds the work directly, or both, and stays for upkeep over the planned engagement.
 
-**Section 11.3 Mutual benefit principle.** Participation in the pool is voluntary in both directions. A single person can be both giver and receiver: a Contributor may also request Receive services when their own needs arise; a Companion may also Donate or Exchange when capacity allows. The pool is denser when participants flow between roles. Cross-participation is encouraged but never required.
+**Section 11.3 Mutual benefit principle.** Participation in the pool is voluntary in both directions. A single person can be both giver and receiver: a Contributor may also request Receive services when their own needs arise; a Reciprocate may also Donate or Exchange when capacity allows. The pool is denser when participants flow between roles. Cross-participation is encouraged but never required.
 
-**Section 11.4 Companion alumni pathway.** Graduated Companions may return to the pool as Contributors, mentors, or cross-cohort connectors. Graduation is entry into a broader pool, not exit from a program. The Corporation maintains alumni status for all graduated Companions for the duration of the Corporation's existence.
+**Section 11.4 Reciprocate alumni pathway.** Graduated Reciprocates may return to the pool as Contributors, mentors, or cross-cohort connectors. Graduation is entry into a broader pool, not exit from a program. The Corporation maintains alumni status for all graduated Reciprocates for the duration of the Corporation's existence.
 
 **Section 11.5 Oversight.** The Resource Pool and Contributor Engagement Committee shall review pool operations annually and shall publish the Annual Flywheel Health Check no later than the end of Q4 each year. The Health Check reports the volume of each of the three flows, the cross-participation rate, the alumni return rate, and recommended program adjustments.
 
-## Article XII. Sovereign Companions: optional AI augmentation
+## Article XII. Sovereign Reciprocates: optional AI augmentation
 
-**Section 12.1 Recognition.** The Corporation operates **Sovereign Companions** as one optional tool inside the resource pool, available to Companion groups who choose it. Sovereign Companions consists of custom open-source agent systems for individual Companions and Companion groups under explicit data sovereignty commitments. It is one parallelization tool among several; the resource pool functions whether or not a given Companion engages with it.
+**Section 12.1 Recognition.** The Corporation operates **Sovereign Reciprocates** as one optional tool inside the resource pool, available to Reciprocate groups who choose it. Sovereign Reciprocates consists of custom open-source agent systems for individual Reciprocates and Reciprocate groups under explicit data sovereignty commitments. It is one parallelization tool among several; the resource pool functions whether or not a given Reciprocate engages with it.
 
-**Section 12.2 The eight sovereignty principles.** The Corporation shall operate Sovereign Companions in accordance with the eight sovereignty principles published at handprotocol.org and detailed in [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md). These principles are: open base model; Companion-group-owned adapter; revocable training consent; no cross-Companion-group data extraction; self-hostable end-to-end; full audit trail inspectable by the group; open methodology, code, eval, and quarterly reports; case-by-case adapter weights publication.
+**Section 12.2 The eight sovereignty principles.** The Corporation shall operate Sovereign Reciprocates in accordance with the eight sovereignty principles published at handprotocol.org and detailed in [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md). These principles are: open base model; Reciprocate-group-owned adapter; revocable training consent; no cross-Reciprocate-group data extraction; self-hostable end-to-end; full audit trail inspectable by the group; open methodology, code, eval, and quarterly reports; case-by-case adapter weights publication.
 
-**Section 12.3 Companion group ownership.** Notwithstanding any other provision of these Bylaws, the LoRA adapters, training data, evaluation logs, and inference recipes attributable to a specific Companion or Companion group remain the property of that Companion or Companion group. The Corporation holds these artifacts in trust and shall transfer them to the rightful party on departure, request, or dissolution.
+**Section 12.3 Reciprocate group ownership.** Notwithstanding any other provision of these Bylaws, the LoRA adapters, training data, evaluation logs, and inference recipes attributable to a specific Reciprocate or Reciprocate group remain the property of that Reciprocate or Reciprocate group. The Corporation holds these artifacts in trust and shall transfer them to the rightful party on departure, request, or dissolution.
 
-**Section 12.4 Opt-in.** No Companion is required to engage with Sovereign Companions as a condition of receiving accompaniment from the Corporation. The augmentation is one rewards rail, not the only one, and never required to participate in the resource pool.
+**Section 12.4 Opt-in.** No Reciprocate is required to engage with Sovereign Reciprocates as a condition of receiving accompaniment from the Corporation. The augmentation is one rewards rail, not the only one, and never required to participate in the resource pool.
 
-**Section 12.5 Oversight.** The Sovereign Companions Oversight Committee shall review the program annually and shall publish the Annual AI Accountability Report no later than the anniversary of the first deployment each year.
+**Section 12.5 Oversight.** The Sovereign Reciprocates Oversight Committee shall review the program annually and shall publish the Annual AI Accountability Report no later than the anniversary of the first deployment each year.
 
 ## Article XIII. Records and public disclosure
 
@@ -208,7 +208,7 @@ c. The three most recent Forms 990 (with Schedule B donor information redacted t
 
 **Section 15.2 Distribution of assets.** Upon dissolution, after payment of liabilities and provision for liabilities, the assets shall be distributed in the manner set forth in Article 8 of the Certificate of Formation.
 
-**Section 15.3 Sovereign Companions handoff.** Notwithstanding Section 15.2, the Corporation shall transfer any Companion-group-owned adapters, training data, evaluation logs, and inference recipes to the respective Companion or Companion group at no cost as a condition precedent to general asset distribution.
+**Section 15.3 Sovereign Reciprocates handoff.** Notwithstanding Section 15.2, the Corporation shall transfer any Reciprocate-group-owned adapters, training data, evaluation logs, and inference recipes to the respective Reciprocate or Reciprocate group at no cost as a condition precedent to general asset distribution.
 
 ## Article XVI. Construction
 
@@ -236,7 +236,7 @@ I, the undersigned, certify that the foregoing Bylaws were adopted as the Bylaws
 - **Founder on board.** Common pattern: founder serves as initial Board Chair for first 12–24 months, then steps down to Vice Chair or rotates off. Bylaws above do not name founder. Decide alongside the succession plan in [`board/succession-and-replacement.md`](board/succession-and-replacement.md).
 - **Compensation Committee size.** With a three-person initial board, the comp committee can be only two non-conflicted directors. This is awkward; recommend recruiting director #4 before HAND hires its first paid ED.
 - **Executive sessions.** Should the bylaws require an executive session at every meeting (BoardSource recommendation) or only when called? Drafted above as only-when-called for early simplicity. Revisit when board grows past five.
-- **Companion / Contributor representation on board.** Strong philosophical argument for it. Logistical complication: lived-experience selection criteria, term overlap. Recommended path: add Companion representative seat and Contributor representative seat in year two amendment, after first cohort exists.
+- **Reciprocate / Contributor representation on board.** Strong philosophical argument for it. Logistical complication: lived-experience selection criteria, term overlap. Recommended path: add Reciprocate representative seat and Contributor representative seat in year two amendment, after first cohort exists.
 - **Indemnification of Contributors.** Drafted broadly under §8.4. May tighten once volunteer/Contributor policy is finalized.
 
 ---

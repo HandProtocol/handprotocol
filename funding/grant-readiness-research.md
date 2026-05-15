@@ -2,7 +2,7 @@
 
 **Prepared:** May 2026
 **Purpose:** Source material for governance documents, 501(c)(3) application, and grant-readiness checklist
-**Scope:** Texas incorporation through federal exemption, foundation grant standards, and AI-specific governance for the Sovereign Companions workstream
+**Scope:** Texas incorporation through federal exemption, foundation grant standards, and AI-specific governance for the Sovereign Reciprocates workstream
 
 ---
 
@@ -419,9 +419,9 @@ Many small orgs use a compliance service (Harbor Compliance, Labyrinth, or Chari
 
 ---
 
-## 10. Data Sovereignty and AI-Specific Governance (Sovereign Companions)
+## 10. Data Sovereignty and AI-Specific Governance (Sovereign Reciprocates)
 
-Because HAND has an AI workstream ("Sovereign Companions", open-source per-group agent systems, group-owned, eight sovereignty principles), funders aligned with responsible-AI philanthropy will probe AI governance.
+Because HAND has an AI workstream ("Sovereign Reciprocates", open-source per-group agent systems, group-owned, eight sovereignty principles), funders aligned with responsible-AI philanthropy will probe AI governance.
 
 ### Patrick J. McGovern Foundation
 
@@ -438,10 +438,10 @@ Synthesized from McGovern, Mozilla Foundation (Trustworthy AI program), Ford Fou
 1. **AI / Data Ethics Policy**, written, board-adopted, public. Covers acceptable use, prohibited use, oversight body.
 2. **Model documentation**, published **Model Cards** (Mitchell et al., 2018) for each deployed model. Standard fields: intended use, performance metrics across subgroups, training data sources, ethical considerations, known limitations.
 3. **Data Sheets for Datasets**, Gebru et al. (2018) framework documenting motivation, composition, collection process, recommended uses.
-4. **Training data consent**, documented chain of consent for any data sourced from communities served. **Particularly important for HAND** given Companions relationship.
+4. **Training data consent**, documented chain of consent for any data sourced from communities served. **Particularly important for HAND** given Reciprocates relationship.
 5. **Algorithmic Impact Assessment (AIA)**, before deployment, document who is affected, what could go wrong, who reviews. NYC AIA, Canadian Directorate AIA, and AI Now Institute frameworks are common references.
 6. **Human-in-the-loop oversight**, documented points where humans review or can override AI decisions.
-7. **Right to opt out**, companions/users have an explicit, documented path to refuse AI participation without losing access to services.
+7. **Right to opt out**, reciprocates/users have an explicit, documented path to refuse AI participation without losing access to services.
 8. **Open weights / open source**, increasingly weighted positively. HAND's open-source posture aligns.
 9. **Group ownership / data sovereignty**, alignment with **CARE Principles for Indigenous Data Governance** (Collective Benefit, Authority to Control, Responsibility, Ethics; Carroll et al., 2020, *Data Science Journal*). HAND's "group-owned" framing maps directly onto Authority to Control.
 10. **Algorithmic accountability disclosure**, a public mechanism for complaints, audits, and correction.
@@ -455,7 +455,7 @@ The CARE Principles complement the FAIR data principles (Findable, Accessible, I
 - **R**esponsibility, those working with data have a responsibility to share how data is used for Indigenous self-determination.
 - **E**thics, Indigenous Peoples' rights and wellbeing are the primary concern.
 
-Although developed in the Indigenous Data Sovereignty context, McGovern and Mozilla cite CARE as a baseline for any community-data work. For HAND's Companion groups (each potentially a distinct community with its own data), adopting **CARE-aligned governance language** in the Sovereign Companions charter is a strong signal.
+Although developed in the Indigenous Data Sovereignty context, McGovern and Mozilla cite CARE as a baseline for any community-data work. For HAND's Reciprocate groups (each potentially a distinct community with its own data), adopting **CARE-aligned governance language** in the Sovereign Reciprocates charter is a strong signal.
 
 Reference: `datascience.codata.org/articles/dsj-2020-043`; Global Indigenous Data Alliance (`gida-global.org`).
 
@@ -464,8 +464,8 @@ Reference: `datascience.codata.org/articles/dsj-2020-043`; Global Indigenous Dat
 1. **AI Ethics & Data Governance Policy** (3–5 pages, board-adopted before first deployment).
 2. **Eight Sovereignty Principles charter** (already drafted; ensure it's published and dated).
 3. **Per-deployment Model Card** template, minimum viable version for first launch.
-4. **Companion Consent Framework**, written, plain-language, signed by each Companion group; covers data, AI, opt-out, ownership.
-5. **Algorithmic Impact Assessment** template, completed for each Sovereign Companions deployment.
+4. **Reciprocate Consent Framework**, written, plain-language, signed by each Reciprocate group; covers data, AI, opt-out, ownership.
+5. **Algorithmic Impact Assessment** template, completed for each Sovereign Reciprocates deployment.
 6. **Annual AI Accountability Report**, public, summarizing deployments, incidents, changes.
 
 These six artifacts together constitute a "responsible-AI-ready" governance posture that maps cleanly to McGovern's, Mozilla's, and Ford's funding criteria.

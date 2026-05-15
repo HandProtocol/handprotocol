@@ -101,7 +101,7 @@
   border-color: var(--color-accent);
 }
 
-/* AI policy — teal tint to nod toward Sovereign Companions visual family */
+/* AI policy — teal tint to nod toward Sovereign Reciprocates visual family */
 .gov-card--ai {
   background: var(--color-teal-tint);
   border-color: rgba(13, 148, 136, 0.18);

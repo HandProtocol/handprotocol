@@ -18,9 +18,9 @@ The plan is reviewed annually by the Board at the year-end meeting. Revisions ar
 
 1. **Build HAND as a 501(c)(3) capable of operating sustainably.** Incorporate, achieve federal exemption, build the governance and finance infrastructure, recruit the founding team.
 
-2. **Prove the Companion-Contributor model with a pilot cohort.** Three Companion groups, sustained over the full plan horizon, with rigorous documentation of outcomes.
+2. **Prove the Reciprocate-Contributor model with a pilot cohort.** Three Reciprocate groups, sustained over the full plan horizon, with rigorous documentation of outcomes.
 
-3. **Establish Sovereign Companions as a working program.** Build, deploy, and evaluate the per-group sovereign agent systems with at least one funder partnership (target: McGovern Foundation).
+3. **Establish Sovereign Reciprocates as a working program.** Build, deploy, and evaluate the per-group sovereign agent systems with at least one funder partnership (target: McGovern Foundation).
 
 4. **Diversify funding across community foundations, trust-based funders, and AI-for-good funders.** No single funder > 40% by end of Year 3.
 
@@ -42,11 +42,11 @@ c. **Close the filing raise.** $77,777 minimum to fund incorporation, initial op
 
 d. **Recruit the founding Board.** Three directors at incorporation; expand to five by year-end.
 
-e. **Onboard cohort 1 Companions.** Three Companion groups, spanning the three audience segments.
+e. **Onboard cohort 1 Reciprocates.** Three Reciprocate groups, spanning the three audience segments.
 
 f. **Build initial Contributor pool.** 10 active Contributors by year-end.
 
-g. **POC the Sovereign Companions agent.** RAG over discovery docs and one Companion group's data; closed-API prototype permitted at this stage.
+g. **POC the Sovereign Reciprocates agent.** RAG over discovery docs and one Reciprocate group's data; closed-API prototype permitted at this stage.
 
 h. **Submit Patrick J. McGovern Letter of Inquiry.** Outline in [`funding/mcgovern-letter.md`](../../funding/mcgovern-letter.md).
 
@@ -58,8 +58,8 @@ i. **Establish governance discipline.** Quarterly board meetings, monthly financ
 |---|---|
 | Q1 2026 | Filing raise underway; discovery published; brand and web mature |
 | Q2 2026 | Founding Board recruited; Articles filed; Bylaws adopted |
-| Q3 2026 | Form 1023 submitted; first cohort Companion onboarding begins |
-| Q4 2026 | First Sovereign Companions POC operational; Year One evaluation; McGovern LOI submitted |
+| Q3 2026 | Form 1023 submitted; first cohort Reciprocate onboarding begins |
+| Q4 2026 | First Sovereign Reciprocates POC operational; Year One evaluation; McGovern LOI submitted |
 
 ### Budget envelope
 
@@ -67,20 +67,20 @@ i. **Establish governance discipline.** Quarterly board meetings, monthly financ
 |---|---|
 | Personnel (founder unpaid; first part-time hire if budget allows) | $0–$45,000 |
 | Operations (insurance, software, accounting, banking) | $7,500–$12,000 |
-| **Program: resource pool and Companion engagement** (Contributor recruiting, matching, three-flow operations, sustained accompaniment, Contributor stipends where warranted) | **$10,000–$30,000** |
-| Sovereign Companions infrastructure (optional POC, capped at ≤ 20% of program budget) | $2,500–$5,555 |
+| **Program: resource pool and Reciprocate engagement** (Contributor recruiting, matching, three-flow operations, sustained accompaniment, Contributor stipends where warranted) | **$10,000–$30,000** |
+| Sovereign Reciprocates infrastructure (optional POC, capped at ≤ 20% of program budget) | $2,500–$5,555 |
 | Brand and communications | $3,000–$7,500 |
 | Legal, accounting, professional services | $5,000–$10,000 |
 | Reserves contribution | 5–10% of unrestricted revenue |
 | **Total** | **$23,000–$95,000** |
 
-The wide range reflects the dependency on filing raise outcomes. The minimum scenario funds incorporation, basic operations, and a one-Companion pilot. The maximum scenario funds a part-time staff role and three-Companion pilot. Sovereign Companions is funded as one tool inside the program budget, never as a parallel line growing faster.
+The wide range reflects the dependency on filing raise outcomes. The minimum scenario funds incorporation, basic operations, and a one-Reciprocate pilot. The maximum scenario funds a part-time staff role and three-Reciprocate pilot. Sovereign Reciprocates is funded as one tool inside the program budget, never as a parallel line growing faster.
 
 ### Success criteria for Year One
 
 - 501(c)(3) status filed (Determination expected in Year 2).
-- Three Companion groups onboarded.
-- One Sovereign Companions POC operational.
+- Three Reciprocate groups onboarded.
+- One Sovereign Reciprocates POC operational.
 - Founding Board of 3–5 directors in place and functioning.
 - Compliance Calendar current.
 - McGovern LOI submitted.
@@ -90,7 +90,7 @@ The wide range reflects the dependency on filing raise outcomes. The minimum sce
 
 ### Theme: Prove the model
 
-**Mission objective:** Demonstrate that the resource-pool flywheel produces measurable mutual benefit across Donate, Exchange, and Receive flows. Where Companion groups opt in, deploy Sovereign Companions under the eight sovereignty principles.
+**Mission objective:** Demonstrate that the resource-pool flywheel produces measurable mutual benefit across Donate, Exchange, and Receive flows. Where Reciprocate groups opt in, deploy Sovereign Reciprocates under the eight sovereignty principles.
 
 ### Priorities
 
@@ -100,9 +100,9 @@ b. **Texas Comptroller exemption.** File AP-204 after Determination Letter.
 
 c. **Hire first paid Executive Director or Program Director.** Rebuttable-presumption procedure run. (May be founder transitioning to paid role.)
 
-d. **Expand Companion cohort to 5-7 groups.**
+d. **Expand Reciprocate cohort to 5-7 groups.**
 
-e. **Deploy sovereign agent systems for Companion groups who opt in.** Open-base model with per-group LoRA adapters. Self-hostable. Sovereignty drills run. Companion groups who decline AI augmentation continue with the same accompaniment quality.
+e. **Deploy sovereign agent systems for Reciprocate groups who opt in.** Open-base model with per-group LoRA adapters. Self-hostable. Sovereignty drills run. Reciprocate groups who decline AI augmentation continue with the same accompaniment quality.
 
 f. **Submit Patrick J. McGovern full application.** $33,333 pilot tier or $111,111 production tier.
 
@@ -119,7 +119,7 @@ j. **Publish methodology paper draft.**
 | When | Milestone |
 |---|---|
 | Q1 2027 | First annual financial review/compilation; IRS Determination expected |
-| Q2 2027 | TX Comptroller exemption; first paid hire; cohort 2 Companions onboarded |
+| Q2 2027 | TX Comptroller exemption; first paid hire; cohort 2 Reciprocates onboarded |
 | Q3 2027 | Three sovereign agent systems live; first sovereignty drills run; first formal evaluation completed |
 | Q4 2027 | Year Two evaluation; methodology paper drafted; funder diversification report |
 
@@ -129,8 +129,8 @@ j. **Publish methodology paper draft.**
 |---|---|
 | Personnel (1 FTE plus contractors) | $80,000–$140,000 |
 | Operations | $15,000–$25,000 |
-| **Program: resource pool and Companion engagement** (Contributor pool growth, matching, sustained accompaniment, alumni pathway development) | **$40,000–$80,000** |
-| Sovereign Companions pilot (capped at ≤ 30% of program budget; for opted-in Companion groups only) | $12,000–$24,000 |
+| **Program: resource pool and Reciprocate engagement** (Contributor pool growth, matching, sustained accompaniment, alumni pathway development) | **$40,000–$80,000** |
+| Sovereign Reciprocates pilot (capped at ≤ 30% of program budget; for opted-in Reciprocate groups only) | $12,000–$24,000 |
 | Brand, comms, publication | $10,000–$20,000 |
 | Legal, accounting, audit (compilation/review) | $15,000–$25,000 |
 | Reserves contribution | 10% of unrestricted revenue |
@@ -139,9 +139,9 @@ j. **Publish methodology paper draft.**
 ### Success criteria for Year Two
 
 - IRS Determination Letter received.
-- 5-7 active Companion groups, each in or past the first year of engagement.
+- 5-7 active Reciprocate groups, each in or past the first year of engagement.
 - Three sovereign agent systems live, with passing sovereignty drills.
-- One Companion graduating with their agent (early graduation if appropriate).
+- One Reciprocate graduating with their agent (early graduation if appropriate).
 - McGovern grant awarded OR equivalent AI-for-good funding ($33K+).
 - Funder mix diversified (no single funder > 50%).
 - Compensation Committee operational and rebuttable-presumption procedure complete.
@@ -155,13 +155,13 @@ j. **Publish methodology paper draft.**
 
 ### Priorities
 
-a. **Companion cohort 3.** Total active: 8-12 Companion groups, including Year 1 graduates' alumni status.
+a. **Reciprocate cohort 3.** Total active: 8-12 Reciprocate groups, including Year 1 graduates' alumni status.
 
-b. **Sovereign Companions production tier.** Per-group adapters productionized. HAND coordination agent operational. Methodology paper published.
+b. **Sovereign Reciprocates production tier.** Per-group adapters productionized. HAND coordination agent operational. Methodology paper published.
 
 c. **Full open-source release.** Methodology, code, eval framework, agent scaffolding all published.
 
-d. **First closure simulation.** Demonstrate that if HAND closed, Companion groups can continue independently.
+d. **First closure simulation.** Demonstrate that if HAND closed, Reciprocate groups can continue independently.
 
 e. **First financial review** (CPA review, not full audit, unless funder requires).
 
@@ -188,8 +188,8 @@ i. **Founder transition planning** if applicable. Per [`../board/succession-and-
 |---|---|
 | Personnel (2-3 FTE) | $200,000–$300,000 |
 | Operations | $25,000–$45,000 |
-| **Program: resource pool and Companion engagement** (Contributor pool at scale, three-flow operations, alumni network, multi-cohort accompaniment) | **$110,000–$170,000** |
-| Sovereign Companions production (capped at ≤ 35% of program budget; for opted-in Companion groups only) | $38,500–$60,000 |
+| **Program: resource pool and Reciprocate engagement** (Contributor pool at scale, three-flow operations, alumni network, multi-cohort accompaniment) | **$110,000–$170,000** |
+| Sovereign Reciprocates production (capped at ≤ 35% of program budget; for opted-in Reciprocate groups only) | $38,500–$60,000 |
 | Brand, comms, publication | $20,000–$35,000 |
 | Legal, accounting, review | $25,000–$40,000 |
 | Reserves contribution | 10–15% of unrestricted revenue |
@@ -198,24 +198,24 @@ i. **Founder transition planning** if applicable. Per [`../board/succession-and-
 
 ### Success criteria for Year Three
 
-- 8-12 active Companion groups, including alumni.
-- Sovereign Companions fully operational, with all eight sovereignty principles passing drills.
+- 8-12 active Reciprocate groups, including alumni.
+- Sovereign Reciprocates fully operational, with all eight sovereignty principles passing drills.
 - Methodology paper published.
 - Open-source release complete.
 - Closure simulation successfully executed.
 - No single funder > 40%.
-- 3-year retention of Companions at 80%+.
+- 3-year retention of Reciprocates at 80%+.
 - Adjacent organization adoption begins (at least one organization piloting HAND-derived methodology).
 
 ## Cross-cutting commitments
 
-a. **Sovereignty.** The eight Sovereign Companions principles govern all AI work without exception, throughout the plan horizon.
+a. **Sovereignty.** The eight Sovereign Reciprocates principles govern all AI work without exception, throughout the plan horizon.
 
 b. **Honesty.** HAND publishes quarterly reports including what didn't work. The Annual Report includes the compensation ratio, fundraising efficiency, and any material setbacks.
 
 c. **Voice.** Earnest, evidence-based, relational. No drift to institutional-speak even as the organization grows.
 
-d. **Companions, not clients.** The vocabulary is non-negotiable.
+d. **Reciprocates, not clients.** The vocabulary is non-negotiable.
 
 e. **No build-and-bounce.** Even if a particular engagement ends, HAND honors the graduation protocol.
 
@@ -227,8 +227,8 @@ e. **No build-and-bounce.** Even if a particular engagement ends, HAND honors th
 | IRS Determination delayed | Moderate | High | 27-month window; fiscal sponsorship if needed |
 | Founder unavailable | Low | High | Emergency Succession Plan |
 | Cohort 1 fit issues | Moderate | Moderate | Three audiences in parallel reduces single-point risk |
-| Sovereign Companions program fails Gate 1 | Moderate | Moderate | Eval framework designed to detect; close the program if it fails |
-| AI funding correction | Moderate | Moderate | Diversified funding; HAND operations separable from Sovereign Companions program |
+| Sovereign Reciprocates program fails Gate 1 | Moderate | Moderate | Eval framework designed to detect; close the program if it fails |
+| AI funding correction | Moderate | Moderate | Diversified funding; HAND operations separable from Sovereign Reciprocates program |
 | Compliance failure | Low | Severe | Compliance Calendar; quarterly Treasurer review; counsel relationship |
 | Reputational issue | Low | Moderate | Code of Ethics; Community Standards; transparent communications |
 
@@ -250,8 +250,8 @@ The Strategic Plan is a **living document.** It is reviewed annually but may be 
 
 - **Founder paid role.** Will the founder become the first paid ED or hire an outside ED? Decision shapes hiring path and rebuttable-presumption process.
 - **Geographic scope.** Texas-focused or national from the start? Drafted as Texas-rooted, national-reach. Funder pipeline may push one direction.
-- **AI vs non-AI Companion engagement.** Should every Companion engagement include Sovereign Companions, or is opt-in the default? Drafted as opt-in; reality will show.
-- **Number of Companions per program lead.** Drafted as 5-7 with agent support. Real number depends on the work; may be lower in Year 2.
+- **AI vs non-AI Reciprocate engagement.** Should every Reciprocate engagement include Sovereign Reciprocates, or is opt-in the default? Drafted as opt-in; reality will show.
+- **Number of Reciprocates per program lead.** Drafted as 5-7 with agent support. Real number depends on the work; may be lower in Year 2.
 - **Path to revenue beyond grants.** Some peer orgs add fee-for-service revenue once mature. Should HAND? Defer to Year 3 review.
 - **Endowment.** Premature. Revisit at Year 5.
 

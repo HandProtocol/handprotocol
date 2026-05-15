@@ -54,7 +54,7 @@ The columns:
 | **Compliance calendar** | Ready (draft) | [`../COMPLIANCE-CALENDAR.md`](../COMPLIANCE-CALENDAR.md) |
 | **Data Sovereignty and AI Policy** (for AI-funder applications) | Ready (draft) | [`../policies/data-sovereignty-and-ai.md`](../policies/data-sovereignty-and-ai.md) |
 | **AI Evaluation Framework** (for AI-funder applications) | Ready | [`../../AI-EVAL-FRAMEWORK.md`](../../AI-EVAL-FRAMEWORK.md) |
-| **Sovereign Companions program description** | Ready | [`../../AI-COMPANIONS.md`](../../AI-COMPANIONS.md) |
+| **Sovereign Reciprocates program description** | Ready | [`../../AI-RECIPROCATES.md`](../../AI-RECIPROCATES.md) |
 | **Discovery research package** | Ready (live) | handprotocol.org/discovery |
 
 ## Funder-specific addenda
@@ -65,7 +65,7 @@ Some funders require additional documents beyond the standard 15:
 
 - **AI Ethics statement.** Ready: [`../policies/data-sovereignty-and-ai.md`](../policies/data-sovereignty-and-ai.md)
 - **Algorithmic Impact Assessment template.** Ready: [`../policies/data-sovereignty-and-ai.md`](../policies/data-sovereignty-and-ai.md) §6
-- **Open-source release commitments.** Ready: [`../../AI-COMPANIONS.md`](../../AI-COMPANIONS.md) Principle 7
+- **Open-source release commitments.** Ready: [`../../AI-RECIPROCATES.md`](../../AI-RECIPROCATES.md) Principle 7
 - **Letter of Inquiry.** Drafted: [`../../funding/mcgovern-letter.md`](../../funding/mcgovern-letter.md)
 
 ### Texas community foundations (Hogg, St. David's, Austin CF)

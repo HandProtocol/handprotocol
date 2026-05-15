@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parent.parent
 REPO_ROOT = ROOT.parent
 TARGET_DIRS = [ROOT, REPO_ROOT / "funding"]
 # Optional sweep of top-level project docs
-TOP_LEVEL_MD = ["AGENTS.md", "README.md", "DESIGN.md", "TODO.md", "PRODUCT.md", "DEPLOY.md", "AI-COMPANIONS.md", "AI-EVAL-FRAMEWORK.md"]
+TOP_LEVEL_MD = ["AGENTS.md", "README.md", "DESIGN.md", "TODO.md", "PRODUCT.md", "DEPLOY.md", "AI-RECIPROCATES.md", "AI-EVAL-FRAMEWORK.md"]
 EXCLUDE = {"pdf"}  # don't touch generated/build artifacts
 
 # Headings: `## Section 1 — Title`, `## Article I — Title`, etc.

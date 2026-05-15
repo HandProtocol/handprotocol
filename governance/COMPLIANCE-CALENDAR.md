@@ -37,7 +37,7 @@ This calendar assumes HAND incorporates in Texas in 2026 and files Form 1023 wit
 | Insurance renewal | Broker | Anniversary of binding | D&O, general liability, cyber if applicable |
 | Strategic plan annual review | Board | Q4 | See [`programs/strategic-plan-2026-2028.md`](programs/strategic-plan-2026-2028.md) |
 | **Annual Flywheel Health Check (public)** | Public | End of Q4 | Required by Bylaws §11.5. Reports three-flow volumes (Donate, Exchange, Receive), cross-participation rate, alumni return rate, and recommended program adjustments |
-| Sovereign Companions Annual Accountability Report (public) | Public | Anniversary of first deployment | Required by [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md) and Bylaws §12.5; only applies once first AI deployment is live |
+| Sovereign Reciprocates Annual Accountability Report (public) | Public | Anniversary of first deployment | Required by [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md) and Bylaws §12.5; only applies once first AI deployment is live |
 
 ## Every four years (Texas-specific)
 
@@ -54,7 +54,7 @@ This calendar assumes HAND incorporates in Texas in 2026 and files Form 1023 wit
 | Cumulative donations >$25K/year or >100 donations/year from a single state outside TX | Consider charitable solicitation registration in that state | Charleston Principles |
 | Hiring first paid staff | Texas Workforce Commission registration (TWC); workers' comp decision; new-hire reporting | TWC |
 | Hiring an Executive Director | Run rebuttable-presumption procedure (comp comm, comparability data, contemporaneous minutes) | [`policies/executive-compensation.md`](policies/executive-compensation.md) |
-| Any deployed AI system | Publish Model Card; complete Algorithmic Impact Assessment; obtain Companion-group consent | [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md) |
+| Any deployed AI system | Publish Model Card; complete Algorithmic Impact Assessment; obtain Reciprocate-group consent | [`policies/data-sovereignty-and-ai.md`](policies/data-sovereignty-and-ai.md) |
 | Director removal | Notice to director, 2/3 vote of remaining directors, documented minutes | [`board/succession-and-replacement.md`](board/succession-and-replacement.md) |
 | ED departure | Trigger emergency or planned succession protocol within 48 hours | [`board/emergency-succession-plan.md`](board/emergency-succession-plan.md) |
 | Annual receipts cross $500K | Engage CPA for **financial review** (not full audit); some funders may require | [`policies/financial-management.md`](policies/financial-management.md) |
@@ -85,10 +85,10 @@ FEBRUARY   board meeting #1; adopt budget; refresh COI disclosures
 MARCH      quarterly check-in with fiscal sponsor (if any)
 APRIL      board meeting #2; Q1 financials
 MAY        Form 990 filed (calendar-year filers); strategic-plan mid-year review
-JUNE       sovereignty drill on a Companion-group adapter (revocation/portability test)
+JUNE       sovereignty drill on a Reciprocate-group adapter (revocation/portability test)
 JULY       board meeting #3; Q2 financials; insurance renewal review window
 AUGUST     funder pipeline review; LOI calendar plan for Q4 cycle
-SEPTEMBER  Sovereign Companions Annual Accountability Report (public release)
+SEPTEMBER  Sovereign Reciprocates Annual Accountability Report (public release)
 OCTOBER    board meeting #4; ED compensation review; Q3 financials
 NOVEMBER   strategic-plan revision draft for next year; Flywheel Health Check drafted
 DECEMBER   year-end giving push; board ratifies next-year budget and plan; Annual Flywheel Health Check published

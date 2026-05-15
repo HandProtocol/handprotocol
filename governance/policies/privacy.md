@@ -8,13 +8,13 @@
 
 ## Section 1. Purpose
 
-This Policy governs the Corporation's collection, use, storage, and disclosure of personal information about visitors to its website, donors, Companions, Contributors, volunteers, prospective participants, staff, and other affiliated individuals. It is intended to:
+This Policy governs the Corporation's collection, use, storage, and disclosure of personal information about visitors to its website, donors, Reciprocates, Contributors, volunteers, prospective participants, staff, and other affiliated individuals. It is intended to:
 
 a. Respect the privacy of each person who interacts with the Corporation.
 
 b. Comply with applicable privacy law (the Texas Data Privacy and Security Act, where applicable; CalOPPA, CCPA / CPRA where California residents' data is processed; GDPR where EU residents' data is processed; and federal law where applicable).
 
-c. Operationalize the Sovereign Companions sovereignty commitments to Companion-group data.
+c. Operationalize the Sovereign Reciprocates sovereignty commitments to Reciprocate-group data.
 
 d. Establish staff procedures for handling personal information.
 
@@ -24,27 +24,27 @@ The Corporation collects the following categories of personal information:
 
 a. **Website analytics.** Aggregated traffic data via privacy-respecting analytics (Plausible Community Edition, Fathom, or equivalent). No third-party tracking cookies. No advertising trackers.
 
-b. **Mailing-list subscriptions.** Name (optional) and email address, plus self-identified audience category (donor, Companion, Contributor, observer), via the Corporation's `#stay-close` form. Stored by Resend.com under their data-processing terms. Double opt-in.
+b. **Mailing-list subscriptions.** Name (optional) and email address, plus self-identified audience category (donor, Reciprocate, Contributor, observer), via the Corporation's `#stay-close` form. Stored by Resend.com under their data-processing terms. Double opt-in.
 
 c. **Contact form / email communications.** Name, email, and the content of inquiry.
 
 d. **Donations.** Donor name (unless anonymous), contact info, donation amount and date, payment method (cryptographic wallet address for crypto; processor transaction ID for fiat). Donor information also includes any restrictions, recognition preferences, and giving history.
 
-e. **Companion intake.** Name of organization, principal contacts, mission, services, location, prior funding, current capacity, requested support. Sensitive information specifically about populations served (especially where those populations include people in harm reduction, mental-health crisis, undocumented status, or other vulnerable contexts) is handled with elevated care per Sections 5 and 6.
+e. **Reciprocate intake.** Name of organization, principal contacts, mission, services, location, prior funding, current capacity, requested support. Sensitive information specifically about populations served (especially where those populations include people in harm reduction, mental-health crisis, undocumented status, or other vulnerable contexts) is handled with elevated care per Sections 5 and 6.
 
 f. **Contributor intake.** Name, professional credentials, areas of contribution, capacity, references.
 
 g. **Personnel records** for staff and Contributors who work in formal relationships with the Corporation.
 
-h. **Sovereign Companions training data and audit logs.** Per the Data Sovereignty and AI Policy.
+h. **Sovereign Reciprocates training data and audit logs.** Per the Data Sovereignty and AI Policy.
 
 ## Section 3. How information is used
 
 The Corporation uses personal information only for:
 
-a. **Operating the Corporation's programs**, matching Contributors to Companions, providing accompaniment services, building Sovereign Companions adapters, evaluating outcomes.
+a. **Operating the Corporation's programs**, matching Contributors to Reciprocates, providing accompaniment services, building Sovereign Reciprocates adapters, evaluating outcomes.
 
-b. **Communicating with subscribers, donors, Companions, Contributors, and the public**, newsletter, donation receipts, program updates, event invitations.
+b. **Communicating with subscribers, donors, Reciprocates, Contributors, and the public**, newsletter, donation receipts, program updates, event invitations.
 
 c. **Processing donations** and providing tax substantiation.
 
@@ -64,21 +64,21 @@ The Corporation does **not** use personal information for:
 
 a. **Vendors and service providers.** The Corporation shares personal information only with vendors necessary for operations (payment processor, email service, accounting software, cloud storage), under contracts that require equivalent privacy protections.
 
-b. **Funders.** Aggregated and de-identified information is shared in grant reports. Identifiable information about Companions, Contributors, or beneficiaries is shared only with explicit consent of the individuals or groups involved.
+b. **Funders.** Aggregated and de-identified information is shared in grant reports. Identifiable information about Reciprocates, Contributors, or beneficiaries is shared only with explicit consent of the individuals or groups involved.
 
-c. **Companions or Contributors.** Personal information about Companions is not shared with Contributors, or vice versa, beyond what is necessary for the engagement and consented to in writing.
+c. **Reciprocates or Contributors.** Personal information about Reciprocates is not shared with Contributors, or vice versa, beyond what is necessary for the engagement and consented to in writing.
 
 d. **Public.** Donor names (above a recognition threshold), staff and board names, public-facing program participation (case studies with consent), and aggregated impact data are public.
 
 e. **Legal obligation.** The Corporation may disclose information when required by law, subpoena, or to protect the rights, property, or safety of the Corporation or others.
 
-f. **Successor organization.** In the unlikely event of dissolution and merger with another exempt organization, personal information may transfer subject to the same protections. Companion-group-owned data does not transfer; it is returned to the Companion group.
+f. **Successor organization.** In the unlikely event of dissolution and merger with another exempt organization, personal information may transfer subject to the same protections. Reciprocate-group-owned data does not transfer; it is returned to the Reciprocate group.
 
 ## Section 5. Sensitive information
 
 Some categories of information require elevated protection:
 
-a. **Health information** related to Companions or program participants, not collected unless directly necessary, and stored separately with restricted access.
+a. **Health information** related to Reciprocates or program participants, not collected unless directly necessary, and stored separately with restricted access.
 
 b. **Immigration status** of any person, not collected as part of intake or programming.
 
@@ -88,19 +88,19 @@ d. **Information about minors**, the Corporation does not knowingly collect pers
 
 e. **Religious or political affiliation**, not collected as part of intake or programming.
 
-## Section 6. Companion-group data sovereignty
+## Section 6. Reciprocate-group data sovereignty
 
-For data attributable to a specific Companion group within the Sovereign Companions program:
+For data attributable to a specific Reciprocate group within the Sovereign Reciprocates program:
 
-a. The Companion group owns its data.
+a. The Reciprocate group owns its data.
 
 b. Consent is revocable. The Corporation deletes affected data within 30 days of revocation, unless a legal hold applies.
 
-c. The Corporation does not aggregate Companion-group data across groups without each contributing group's explicit, scoped, opt-in consent.
+c. The Corporation does not aggregate Reciprocate-group data across groups without each contributing group's explicit, scoped, opt-in consent.
 
-d. Companion groups have full access to their own audit logs and training data.
+d. Reciprocate groups have full access to their own audit logs and training data.
 
-e. On graduation, departure, or HAND closure, data is transferred to the Companion group.
+e. On graduation, departure, or HAND closure, data is transferred to the Reciprocate group.
 
 Detailed provisions in [`data-sovereignty-and-ai.md`](data-sovereignty-and-ai.md).
 
@@ -126,7 +126,7 @@ Personal information is retained per the Document Retention Policy. Key retentio
 
 a. Donor records: 5 years (with permanent retention of giving summaries needed for public-charity status calculations).
 
-b. Companion records: held during engagement plus 3 years (operational records); permanent for de-identified outcome data.
+b. Reciprocate records: held during engagement plus 3 years (operational records); permanent for de-identified outcome data.
 
 c. Contributor records: held during active relationship plus 3 years.
 
@@ -134,7 +134,7 @@ d. Personnel records: 5 years post-separation.
 
 e. Mailing-list subscriptions: until unsubscribe.
 
-f. Sovereign Companions: per [`data-sovereignty-and-ai.md`](data-sovereignty-and-ai.md).
+f. Sovereign Reciprocates: per [`data-sovereignty-and-ai.md`](data-sovereignty-and-ai.md).
 
 ## Section 9. Your rights
 
@@ -152,7 +152,7 @@ e. **Right to opt out** of communications at any time.
 
 f. **Right to portability** of data in a structured, machine-readable format where feasible.
 
-g. **For Companion groups in the Sovereign Companions program**: the rights above plus the sovereignty rights in [`data-sovereignty-and-ai.md`](data-sovereignty-and-ai.md).
+g. **For Reciprocate groups in the Sovereign Reciprocates program**: the rights above plus the sovereignty rights in [`data-sovereignty-and-ai.md`](data-sovereignty-and-ai.md).
 
 Requests addressed to **hand@handprotocol.org** with subject "Privacy Request." Response within 30 days.
 
@@ -184,7 +184,7 @@ c. **Other states** with comprehensive privacy laws (Virginia, Colorado, Connect
 
 a. Material changes to this Policy will be announced on the website at least 30 days before they take effect.
 
-b. Existing subscribers and Companions will be notified of material changes directly.
+b. Existing subscribers and Reciprocates will be notified of material changes directly.
 
 c. Continued use of the Corporation's services after a Policy change constitutes acceptance.
 
@@ -208,4 +208,4 @@ Privacy questions, requests, or complaints:
 
 ---
 
-*Template references: National Council of Nonprofits privacy guidance; EFF Online Privacy guidelines; NTEN Data Ethics framework; CARE Principles (for Companion-group data).*
+*Template references: National Council of Nonprofits privacy guidance; EFF Online Privacy guidelines; NTEN Data Ethics framework; CARE Principles (for Reciprocate-group data).*

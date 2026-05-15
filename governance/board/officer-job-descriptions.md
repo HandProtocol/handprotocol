@@ -239,9 +239,9 @@ b. **Manages staff and contractors**, including hiring, performance management, 
 
 c. **Leads fundraising** in partnership with the Board, including grant applications, donor stewardship, and campaigns.
 
-d. **Manages Companion program** delivery in partnership with program staff.
+d. **Manages Reciprocate program** delivery in partnership with program staff.
 
-e. **Oversees Sovereign Companions program** in coordination with the Oversight Committee.
+e. **Oversees Sovereign Reciprocates program** in coordination with the Oversight Committee.
 
 f. **Represents** the Corporation publicly.
 
@@ -263,7 +263,7 @@ Full-time when role is funded and filled. Part-time or unpaid (founder) until th
 
 ### Qualifications
 
-a. **Mission alignment.** Deep commitment to HAND's mission and the Companion-Contributor model.
+a. **Mission alignment.** Deep commitment to HAND's mission and the Reciprocate-Contributor model.
 
 b. **Operational excellence.** Track record managing nonprofit operations.
 

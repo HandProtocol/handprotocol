@@ -24,13 +24,13 @@ e. Covers the legal framework: Texas Charitable Immunity and Liability Act and t
 
 ## Section 2. Contributor categories
 
-a. **Pool Contributors.** Skilled volunteers enrolled in the resource pool, available for matching to Companions. The default category.
+a. **Pool Contributors.** Skilled volunteers enrolled in the resource pool, available for matching to Reciprocates. The default category.
 
 b. **Pro bono Contributors.** Contributors providing services normally billed at professional rates (legal, accounting, brand design, etc.), under arrangements that may include formal pro bono engagement letters.
 
-c. **Anchor Contributors.** Long-term core Contributors who have completed at least one Companion engagement and remain in the pool. Recognized publicly with consent.
+c. **Anchor Contributors.** Long-term core Contributors who have completed at least one Reciprocate engagement and remain in the pool. Recognized publicly with consent.
 
-d. **Advisory Contributors.** Contributors providing strategic, technical, or program advice to HAND rather than direct service to a Companion.
+d. **Advisory Contributors.** Contributors providing strategic, technical, or program advice to HAND rather than direct service to a Reciprocate.
 
 e. **Event-based volunteers.** Short-term volunteers helping with specific events or campaigns; lighter onboarding.
 
@@ -54,7 +54,7 @@ g. **Disposition.** The Executive Director or designee approves, defers, or decl
 
 Upon acceptance to the pool, the Contributor:
 
-a. Receives the Contributor Handbook (a plain-language summary of this Policy plus the Code of Ethics, Privacy Policy, and Companion-respect commitments).
+a. Receives the Contributor Handbook (a plain-language summary of this Policy plus the Code of Ethics, Privacy Policy, and Reciprocate-respect commitments).
 
 b. Signs an acknowledgment of receipt and agreement to the Code of Ethics.
 
@@ -66,45 +66,45 @@ e. Begins matching consideration based on capacity and area.
 
 ## Section 4A. Reciprocal participation
 
-a. **Three flows.** Contributors participate in the resource pool through one or more of three named flows. They may **Donate** (offer time or skill without expecting anything specific in return). They may **Exchange** (offer time or skill in return for a specific skill they need from the pool). And, when their own needs arise, they may **Receive** (apply for support from the pool on the same terms as any Companion).
+a. **Three flows.** Contributors participate in the resource pool through one or more of three named flows. They may **Donate** (offer time or skill without expecting anything specific in return). They may **Exchange** (offer time or skill in return for a specific skill they need from the pool). And, when their own needs arise, they may **Receive** (apply for support from the pool on the same terms as any Reciprocate).
 
-b. **Contributors can also Receive.** A Contributor whose own needs come up may apply to receive services from the pool. The application is evaluated against the same selection criteria the Corporation applies to any Companion seeking accompaniment. There is no penalty, hierarchy, or rotation requirement; the Contributor's prior Donate or Exchange engagements are not a prerequisite.
+b. **Contributors can also Receive.** A Contributor whose own needs come up may apply to receive services from the pool. The application is evaluated against the same selection criteria the Corporation applies to any Reciprocate seeking accompaniment. There is no penalty, hierarchy, or rotation requirement; the Contributor's prior Donate or Exchange engagements are not a prerequisite.
 
-c. **Companions can also Donate and Exchange.** Once a Companion is in the pool, they may Donate hours or Exchange a skill when capacity allows. Participation is voluntary in both directions. The pool is denser when participants flow between roles.
+c. **Reciprocates can also Donate and Exchange.** Once a Reciprocate is in the pool, they may Donate hours or Exchange a skill when capacity allows. Participation is voluntary in both directions. The pool is denser when participants flow between roles.
 
 d. **Encouraged, not required.** Cross-participation is encouraged because it deepens the pool, but is never a condition of receiving accompaniment, of being matched, or of remaining in the pool. The Corporation does not track ratios or impose reciprocity quotas.
 
-e. **Graduated Companions and alumni Contributors.** See [`../programs/companion-selection-and-graduation.md`](../programs/companion-selection-and-graduation.md) for the alumni pathway: graduated Companions may return as Contributors, mentors, or cross-cohort connectors. Alumni participation is similarly voluntary in all directions.
+e. **Graduated Reciprocates and alumni Contributors.** See [`../programs/reciprocate-selection-and-graduation.md`](../programs/reciprocate-selection-and-graduation.md) for the alumni pathway: graduated Reciprocates may return as Contributors, mentors, or cross-cohort connectors. Alumni participation is similarly voluntary in all directions.
 
-## Section 5. Matching to Companions
+## Section 5. Matching to Reciprocates
 
-a. **No Companion is matched without HAND-mediated introduction.** Contributors do not solicit Companions directly through the pool.
+a. **No Reciprocate is matched without HAND-mediated introduction.** Contributors do not solicit Reciprocates directly through the pool.
 
 b. **Matching criteria.** Skill fit, capacity fit, mutual fit (language, working style, cultural fit), and Code of Ethics alignment.
 
-c. **Companion consent to match.** Every match is shared with the Companion before introduction; the Companion has unconditional right to decline.
+c. **Reciprocate consent to match.** Every match is shared with the Reciprocate before introduction; the Reciprocate has unconditional right to decline.
 
-d. **Mutual fit conversation.** Before formal engagement, Contributor and Companion have an introductory conversation, mediated or attended by HAND staff. Either party may decline.
+d. **Mutual fit conversation.** Before formal engagement, Contributor and Reciprocate have an introductory conversation, mediated or attended by HAND staff. Either party may decline.
 
 e. **Scope agreement.** Once mutual fit is confirmed, a written scope agreement documents what the Contributor will do, over what period, with what review points.
 
 ## Section 6. During engagement
 
-a. **HAND-mediated relationship.** The Companion's relationship is with HAND, not the individual Contributor. If the Contributor departs, HAND continues the relationship.
+a. **HAND-mediated relationship.** The Reciprocate's relationship is with HAND, not the individual Contributor. If the Contributor departs, HAND continues the relationship.
 
 b. **Boundaries.** Contributors maintain professional boundaries. Personal relationships outside the engagement scope are disclosed to HAND.
 
 c. **Pace and capacity.** Contributors honor their stated capacity. If capacity changes, the Contributor notifies HAND promptly so the engagement can be adjusted.
 
-d. **Issues and concerns.** Contributors raise issues with HAND staff, not directly with the Companion in ways that could destabilize the relationship. HAND mediates.
+d. **Issues and concerns.** Contributors raise issues with HAND staff, not directly with the Reciprocate in ways that could destabilize the relationship. HAND mediates.
 
-e. **Confidentiality.** Contributors hold Companion information in confidence per the Privacy Policy.
+e. **Confidentiality.** Contributors hold Reciprocate information in confidence per the Privacy Policy.
 
-f. **No personal profit.** Contributors do not accept compensation from Companions for work done through HAND. Independent professional engagements outside the HAND relationship are permitted but disclosed.
+f. **No personal profit.** Contributors do not accept compensation from Reciprocates for work done through HAND. Independent professional engagements outside the HAND relationship are permitted but disclosed.
 
 ## Section 7. What the Corporation provides Contributors
 
-a. **Curated matches** to Companions whose work and need fit the Contributor's skills.
+a. **Curated matches** to Reciprocates whose work and need fit the Contributor's skills.
 
 b. **Project context and support** sufficient to do the work well.
 
@@ -128,9 +128,9 @@ b. **Reliability.** Show up to commitments, communicate when constraints arise.
 
 c. **Quality.** Apply professional standards to the work.
 
-d. **Companion-centered posture.** Center the Companion's needs and self-determination over the Contributor's preferred approach.
+d. **Reciprocate-centered posture.** Center the Reciprocate's needs and self-determination over the Contributor's preferred approach.
 
-e. **Sovereignty alignment.** For Contributors working with the Sovereign Companions program, alignment with the eight sovereignty principles.
+e. **Sovereignty alignment.** For Contributors working with the Sovereign Reciprocates program, alignment with the eight sovereignty principles.
 
 f. **Honest feedback to HAND** about the engagement, what worked, what didn't.
 
@@ -170,23 +170,23 @@ a. **Background check** required for direct unsupervised work with minors or oth
 
 b. **Reference check** required as in Section 3.
 
-c. **Heightened orientation** including trauma-informed practice basics for any Contributor working with harm-reduction or recovery-aligned Companions.
+c. **Heightened orientation** including trauma-informed practice basics for any Contributor working with harm-reduction or recovery-aligned Reciprocates.
 
 d. **Mandated reporter awareness** for Contributors working with vulnerable populations; the Corporation does not assume mandated-reporter status but reviews on a case basis.
 
 ## Section 12. Exit from the pool
 
-a. **Contributor-initiated.** A Contributor may withdraw at any time by notice to HAND. Engagements with Companions are transitioned to HAND or to another Contributor.
+a. **Contributor-initiated.** A Contributor may withdraw at any time by notice to HAND. Engagements with Reciprocates are transitioned to HAND or to another Contributor.
 
 b. **HAND-initiated.** The Corporation may suspend or remove a Contributor from the pool for:
 - Code of Ethics violations.
-- Conduct harmful to a Companion.
+- Conduct harmful to a Reciprocate.
 - Repeated failure to fulfill commitments.
 - Other conduct inconsistent with this Policy.
 
 c. **Process.** Removal for cause includes written notice to the Contributor, opportunity to respond, and (if warranted) appeal to the Board Chair.
 
-d. **Companion continuity.** If a Contributor's exit affects an active Companion engagement, HAND assumes continuity and transitions or replaces the Contributor.
+d. **Reciprocate continuity.** If a Contributor's exit affects an active Reciprocate engagement, HAND assumes continuity and transitions or replaces the Contributor.
 
 e. **Reapplication.** A Contributor removed for cause may reapply after one year, subject to Executive Director review.
 
@@ -204,13 +204,13 @@ d. **Anonymous option.** Contributors may opt for anonymity in all public recogn
 
 a. **Contributor file.** Maintained per Document Retention Policy.
 
-b. **Engagement records.** Documented for each Companion engagement: scope, dates, outcomes, Companion and Contributor feedback.
+b. **Engagement records.** Documented for each Reciprocate engagement: scope, dates, outcomes, Reciprocate and Contributor feedback.
 
 c. **Performance issues.** Documented per the Code of Ethics and Equal Opportunity and Anti-Harassment Policy procedures.
 
 ## Section 15. Special provisions for legal and professional services
 
-a. **Pro bono legal services.** Contributing attorneys provide services under attorney-client privilege with HAND or with HAND's Companions (as agreed). Engagement letters define scope, conflicts, and privilege.
+a. **Pro bono legal services.** Contributing attorneys provide services under attorney-client privilege with HAND or with HAND's Reciprocates (as agreed). Engagement letters define scope, conflicts, and privilege.
 
 b. **Pro bono accounting and tax services.** Contributing CPAs operate under professional standards; engagement letters define scope and limitations.
 

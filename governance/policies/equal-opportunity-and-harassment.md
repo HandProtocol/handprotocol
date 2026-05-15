@@ -47,7 +47,7 @@ d. Discipline, termination, and reductions in force.
 
 e. Volunteer and Contributor selection, deployment, and recognition.
 
-f. Companion selection and program participation.
+f. Reciprocate selection and program participation.
 
 g. Vendor selection (favoring small business, BIPOC- and women-owned business, and mission-aligned suppliers per the Code of Ethics).
 
@@ -55,13 +55,13 @@ g. Vendor selection (favoring small business, BIPOC- and women-owned business, a
 
 The Corporation does not treat equal opportunity as a passive non-discrimination posture. The Corporation actively works to:
 
-a. Recruit board members, staff, Contributors, and Companions whose lived experience reflects the populations HAND serves.
+a. Recruit board members, staff, Contributors, and Reciprocates whose lived experience reflects the populations HAND serves.
 
 b. Audit compensation, hiring, and program-participation data annually for unexplained disparities, and address them.
 
 c. Make program access, communications, and digital presence usable by people with disabilities, consistent with WCAG 2.1 AA as the floor.
 
-d. Translate and localize key materials when serving Companion groups whose primary language is not English (case-by-case).
+d. Translate and localize key materials when serving Reciprocate groups whose primary language is not English (case-by-case).
 
 e. Provide reasonable accommodation in employment and program participation for people with disabilities or religious practice needs.
 
@@ -103,7 +103,7 @@ a. **Sexual harassment** receives priority response. Complaints are investigated
 
 b. **Power dynamics** are considered in evaluating conduct. Conduct from a person with authority over another (supervisor / subordinate; founder / staff; established Contributor / new Contributor) is held to a higher standard.
 
-c. **Companion-facing conduct** receives heightened scrutiny. Harassment of a Companion by any person affiliated with HAND is a basis for immediate removal from any role serving Companions, pending investigation.
+c. **Reciprocate-facing conduct** receives heightened scrutiny. Harassment of a Reciprocate by any person affiliated with HAND is a basis for immediate removal from any role serving Reciprocates, pending investigation.
 
 ## Section 7. Reporting procedure
 
@@ -119,7 +119,7 @@ b. **No specific form is required.** A verbal report, an email, or a letter is s
 
 c. **Anonymous reports** are accepted and investigated to the extent the information allows; follow-up is harder without identification.
 
-d. **Reports can be made by anyone** affiliated with the Corporation (staff, volunteer, Contributor, Companion, donor, vendor, member of the public) regarding any person acting in the name of the Corporation.
+d. **Reports can be made by anyone** affiliated with the Corporation (staff, volunteer, Contributor, Reciprocate, donor, vendor, member of the public) regarding any person acting in the name of the Corporation.
 
 ## Section 8. Response procedure
 
@@ -171,13 +171,13 @@ c. Decisions documented; reasons-for-decline retained for the personnel-records 
 
 d. Reasonable steps taken to ensure outreach reaches diverse candidate pools (posting on HBCU and HSI career boards, BIPOC- and queer-affirming professional networks, disability-employment networks).
 
-## Section 13. Companion and Contributor selection
+## Section 13. Reciprocate and Contributor selection
 
-a. Companion selection criteria are published and aligned with HAND's mission. Companion selection does not turn on protected characteristics, except where serving a specific community (e.g., Indigenous-led organizations) is part of the program design and consistent with law.
+a. Reciprocate selection criteria are published and aligned with HAND's mission. Reciprocate selection does not turn on protected characteristics, except where serving a specific community (e.g., Indigenous-led organizations) is part of the program design and consistent with law.
 
 b. Contributor screening focuses on skill, capacity, mutual fit, and Code of Ethics alignment. Protected characteristics are not screening criteria.
 
-c. Companion-Contributor matches consider language, cultural fit, and trust dynamics, not protected characteristics as such.
+c. Reciprocate-Contributor matches consider language, cultural fit, and trust dynamics, not protected characteristics as such.
 
 ## Section 14. Training
 
@@ -185,7 +185,7 @@ a. **At onboarding.** All staff, directors, Contributors, and other affiliates r
 
 b. **Annual refresher** for staff and directors.
 
-c. **Specialized training** on harassment prevention for supervisors and for Contributors working closely with Companions.
+c. **Specialized training** on harassment prevention for supervisors and for Contributors working closely with Reciprocates.
 
 d. **Bystander intervention** training offered to all interested staff and Contributors.
 
@@ -201,7 +201,7 @@ c. **Form 990 disclosure.** No specific Form 990 disclosure of complaints, but g
 
 - **External investigator.** Use of external investigator for serious complaints is good practice. Maintain a relationship with an HR / employment-law firm before the first incident.
 - **Title VII applicability.** Title VII applies at 15 employees. HAND's first year well below this. Most protections drafted above apply regardless under Texas Commission on Human Rights Act (applies at 15 also; some Texas cities apply at smaller). Counsel review needed.
-- **Companion-as-complainant procedures.** Need to think through: how does a Companion report HAND staff misconduct? Process drafted as same as everyone else, but the trust/power asymmetry argues for an external ombuds channel. Revisit when first Companion cohort is active.
+- **Reciprocate-as-complainant procedures.** Need to think through: how does a Reciprocate report HAND staff misconduct? Process drafted as same as everyone else, but the trust/power asymmetry argues for an external ombuds channel. Revisit when first Reciprocate cohort is active.
 - **Restorative-justice options.** Some peer orgs offer restorative options alongside disciplinary processes for less severe matters. Worth exploring for HAND's posture; defer to a later policy revision.
 
 ---

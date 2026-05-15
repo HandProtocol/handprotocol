@@ -1,6 +1,6 @@
 # Theory of Change
 
-> The long-form articulation of how HAND Protocol Foundation believes its activities lead to its mission outcomes. Companion to [`logic-model.md`](logic-model.md), which presents the same content in compact visual form.
+> The long-form articulation of how HAND Protocol Foundation believes its activities lead to its mission outcomes. Reciprocate to [`logic-model.md`](logic-model.md), which presents the same content in compact visual form.
 
 **Status:** Draft v0.1 · May 2026 · Living document
 
@@ -16,9 +16,9 @@ This document is honest about the strength of the evidence behind each link in t
 
 There is a population of small organizations and individual practitioners doing socially significant work who fall through the gaps of existing capacity-building infrastructure. They are too small for institutional capacity-building (Bridgespan, McKinsey for nonprofits), too pre-revenue for many foundation cycles, too relationally specific for project-bounded pro bono (Taproot, Catchafire), and too operationally fragile to thrive on short-term volunteer help. Their work is hard to scale, easy to lose, and chronically underserved by the systems that exist. This is the gap HAND was founded to address.
 
-## Three communities of regenerative impact work (Companions)
+## Three communities of regenerative impact work (Reciprocates)
 
-HAND serves three communities of regenerative impact work: **practitioners who heal, founders who build, and organizers who steward**. The lines between them are porous; many Companions live in two of these worlds at once. The explicit conviction is that the operational shape of their need overlaps even as their work differs.
+HAND serves three communities of regenerative impact work: **practitioners who heal, founders who build, and organizers who steward**. The lines between them are porous; many Reciprocates live in two of these worlds at once. The explicit conviction is that the operational shape of their need overlaps even as their work differs.
 
 a. **Healers and wellness practitioners.** Bodyworkers, somatic therapists, reiki practitioners, herbalists, indigenous-tradition practitioners. Often solo or 2-person LLCs. Their work serves people in pain, recovery, or transition. Their business infrastructure (web presence, scheduling, client communication, financial management) is typically a side concern, undeveloped because the practitioner's training was in healing, not in marketing.
 
@@ -26,25 +26,25 @@ b. **Impact entrepreneurs.** Founders of social-mission ventures: B-corp-aspirin
 
 c. **Grassroots community organizations.** Mutual aid networks, harm reduction collectives, food sovereignty groups, land stewardship projects. Often 2-5 people, often without formal 501(c)(3) status, often serving populations who have been systematically failed by institutions. Their need is durable infrastructure that respects their autonomy and supports their work without imposing institutional priorities.
 
-These three communities are collectively called **Companions**. The term reflects HAND's posture: walking alongside, not directing. The categories are illustrative, not exhaustive: a herbalist running a community apothecary lives across (a) and (c); a harm-reduction organizer whose work is also a healing practice lives across (a) and (c); a regenerative-agriculture entrepreneur stewarding a co-op lives across (b) and (c). If your work is in this spirit, it likely fits.
+These three communities are collectively called **Reciprocates**. The term reflects HAND's posture: walking alongside, not directing. The categories are illustrative, not exhaustive: a herbalist running a community apothecary lives across (a) and (c); a harm-reduction organizer whose work is also a healing practice lives across (a) and (c); a regenerative-agriculture entrepreneur stewarding a co-op lives across (b) and (c). If your work is in this spirit, it likely fits.
 
 ## What HAND offers
 
-HAND provides long-term branding, marketing, technology, design, and operational accompaniment to Companions. The core deliverables of a typical Companion engagement:
+HAND provides long-term branding, marketing, technology, design, and operational accompaniment to Reciprocates. The core deliverables of a typical Reciprocate engagement:
 
-a. **Web presence.** A website that represents the Companion's work well and that the Companion can update independently.
+a. **Web presence.** A website that represents the Reciprocate's work well and that the Reciprocate can update independently.
 
-b. **Brand articulation.** A clear, plain-language identity and voice that the Companion can use across surfaces.
+b. **Brand articulation.** A clear, plain-language identity and voice that the Reciprocate can use across surfaces.
 
 c. **Operational infrastructure.** Scheduling, donor or client management, financial tools, communication systems.
 
-d. **Sovereign agent system.** When appropriate and consented to, a per-group Sovereign Companions agent that supports the group's specific workflows.
+d. **Sovereign agent system.** When appropriate and consented to, a per-group Sovereign Reciprocates agent that supports the group's specific workflows.
 
 e. **Ongoing accompaniment.** A staff person who maintains the relationship over years, not weeks.
 
-f. **Curated Contributor matches.** Skilled volunteer time matched specifically to the Companion's needs.
+f. **Curated Contributor matches.** Skilled volunteer time matched specifically to the Reciprocate's needs.
 
-g. **Honest partnership.** Real talk about what's working, what isn't, what the Companion wants more or less of.
+g. **Honest partnership.** Real talk about what's working, what isn't, what the Reciprocate wants more or less of.
 
 What HAND explicitly does **not** do:
 
@@ -52,7 +52,7 @@ a. **Founder coaching.** Other organizations (CompassPoint, accelerators) do thi
 
 b. **Strategy consulting.** Beyond what falls naturally inside the long relationship.
 
-c. **Direct service to the Companion's population.** HAND serves the Companion, not the Companion's clients or constituents.
+c. **Direct service to the Reciprocate's population.** HAND serves the Reciprocate, not the Reciprocate's clients or constituents.
 
 d. **Money distribution at scale.** HAND is not a grant-maker. Sub-grants are possible (Policy [`../policies/grant-management.md`](../policies/grant-management.md) §11) but not the default mode.
 
@@ -62,42 +62,42 @@ e. **One-time project work.** The "build and bounce" model is what HAND was buil
 
 The defining structural choice: **long-term, relational accompaniment** rather than project-bounded engagement.
 
-A typical Companion engagement is conceived as a **three-year relationship**. The first year focuses on infrastructure delivery (web, brand, operational tools). The second year focuses on optimization, learning, and Sovereign Companions deployment. The third year focuses on graduation: the Companion takes full ownership of their infrastructure, with the Sovereign Companions adapter and the documentation handed over.
+A typical Reciprocate engagement is conceived as a **three-year relationship**. The first year focuses on infrastructure delivery (web, brand, operational tools). The second year focuses on optimization, learning, and Sovereign Reciprocates deployment. The third year focuses on graduation: the Reciprocate takes full ownership of their infrastructure, with the Sovereign Reciprocates adapter and the documentation handed over.
 
-HAND's resource pool is the operational mechanism. Skilled professionals (Contributors) are matched to Companions based on skill fit, capacity, and mutual fit. The match is mediated by HAND staff. When a Contributor's engagement ends, HAND maintains continuity with the Companion through another Contributor or staff member.
+HAND's resource pool is the operational mechanism. Skilled professionals (Contributors) are matched to Reciprocates based on skill fit, capacity, and mutual fit. The match is mediated by HAND staff. When a Contributor's engagement ends, HAND maintains continuity with the Reciprocate through another Contributor or staff member.
 
-## The Sovereign Companions layer
+## The Sovereign Reciprocates layer
 
-The most innovative part of HAND's model is the Sovereign Companions program: per-Companion-group custom AI agent systems, built on open-source models, owned by the Companion group, designed to be portable and self-hostable. The eight sovereignty principles ([`../../AI-COMPANIONS.md`](../../AI-COMPANIONS.md)) define the technical and ethical commitments.
+The most innovative part of HAND's model is the Sovereign Reciprocates program: per-Reciprocate-group custom AI agent systems, built on open-source models, owned by the Reciprocate group, designed to be portable and self-hostable. The eight sovereignty principles ([`../../AI-RECIPROCATES.md`](../../AI-RECIPROCATES.md)) define the technical and ethical commitments.
 
-The agent system is the **durable artifact** of HAND's accompaniment. It captures the operational knowledge accumulated across the multi-year engagement. When the Companion graduates from the program, they leave with the system. If HAND closes, they keep the system.
+The agent system is the **durable artifact** of HAND's accompaniment. It captures the operational knowledge accumulated across the multi-year engagement. When the Reciprocate graduates from the program, they leave with the system. If HAND closes, they keep the system.
 
-This addresses the hardest unsolved problem in HAND's landscape analysis: **accompaniment doesn't parallelize**. A program lead can hold 5-7 Companion groups instead of 2-3 because the agent does the connective-tissue work between human sessions.
+This addresses the hardest unsolved problem in HAND's landscape analysis: **accompaniment doesn't parallelize**. A program lead can hold 5-7 Reciprocate groups instead of 2-3 because the agent does the connective-tissue work between human sessions.
 
 ## The change we expect
 
 If HAND's activities work as designed, we expect to observe these outcomes:
 
-### For Companions (the population served)
+### For Reciprocates (the population served)
 
 **Year 1 outcomes:**
 
-- Companion has a web presence that represents their work well.
-- Companion has clear brand articulation in their own voice.
-- Companion has operational infrastructure that reduces administrative burden.
-- Companion reports felt-continuity and felt-presence at 4+ on a 5-point Likert scale.
+- Reciprocate has a web presence that represents their work well.
+- Reciprocate has clear brand articulation in their own voice.
+- Reciprocate has operational infrastructure that reduces administrative burden.
+- Reciprocate reports felt-continuity and felt-presence at 4+ on a 5-point Likert scale.
 
 **Year 2 outcomes:**
 
-- Companion's revenue, reach, or service capacity has measurably grown (specifics depend on the Companion).
-- Companion has a Sovereign Companions agent (where applicable) supporting their workflows.
-- Companion has retained the infrastructure (low rate of regression to prior state).
+- Reciprocate's revenue, reach, or service capacity has measurably grown (specifics depend on the Reciprocate).
+- Reciprocate has a Sovereign Reciprocates agent (where applicable) supporting their workflows.
+- Reciprocate has retained the infrastructure (low rate of regression to prior state).
 
 **Year 3 outcomes:**
 
-- Companion can independently maintain their infrastructure.
-- Companion owns and operates the sovereign agent system, or has chosen to retire it.
-- Companion graduates with a documented transition plan.
+- Reciprocate can independently maintain their infrastructure.
+- Reciprocate owns and operates the sovereign agent system, or has chosen to retire it.
+- Reciprocate graduates with a documented transition plan.
 
 ### For Contributors (the skill-givers)
 
@@ -109,7 +109,7 @@ If HAND's activities work as designed, we expect to observe these outcomes:
 
 - HAND publishes the methodology, evaluation framework, code, and case studies as open source.
 - At least one adjacent accompaniment organization adopts and adapts HAND's approach within three years.
-- The Companion-Contributor-pool model is added to the menu of capacity-building approaches taken seriously by funders.
+- The Reciprocate-Contributor-pool model is added to the menu of capacity-building approaches taken seriously by funders.
 
 ### For HAND itself
 
@@ -123,11 +123,11 @@ If HAND's activities work as designed, we expect to observe these outcomes:
 
 Each link below describes one step in the chain from activity to outcome, with HAND's honest assessment of the evidence for that link.
 
-### Link 1: Companion selection produces Companions whose work matters
+### Link 1: Reciprocate selection produces Reciprocates whose work matters
 
-**The link:** HAND's Companion selection process picks Companions whose work serves the public good, who lack the infrastructure HAND can provide, and who are receptive to the multi-year relational model.
+**The link:** HAND's Reciprocate selection process picks Reciprocates whose work serves the public good, who lack the infrastructure HAND can provide, and who are receptive to the multi-year relational model.
 
-**Evidence:** Discovery research at handprotocol.org/discovery articulates the gap and the population. No track record yet of Companion selection at scale; the first cohort will be the first evidence.
+**Evidence:** Discovery research at handprotocol.org/discovery articulates the gap and the population. No track record yet of Reciprocate selection at scale; the first cohort will be the first evidence.
 
 **Honest assessment:** This is well-argued but unproven. The first cohort's selection process and outcomes will validate or revise.
 
@@ -137,7 +137,7 @@ Each link below describes one step in the chain from activity to outcome, with H
 
 **Evidence:** Time-banks and skill-exchange networks (LETS, hOurworld, Time Banks USA) demonstrate that mutual-exchange produces stickier engagement than one-way volunteering. Taproot Foundation and Catchafire demonstrate volunteer-skill matches work at scale but report meaningful drop-off after initial matches, attributable in part to the one-way nature of those flows. HAND's discovery research (handprotocol.org/discovery) maps the gap and the proposal in detail with worked examples (Marcus the roofer, Anya the reiki practitioner, Río Verde Collective).
 
-**Honest assessment:** The mechanism is well-attested in adjacent fields. Its application to HAND's three Companion communities, with HAND-mediated curation rather than algorithmic matching, is the specific hypothesis being tested. Unit economics of high-curation pools remain an open question that the first cohort will help answer.
+**Honest assessment:** The mechanism is well-attested in adjacent fields. Its application to HAND's three Reciprocate communities, with HAND-mediated curation rather than algorithmic matching, is the specific hypothesis being tested. Unit economics of high-curation pools remain an open question that the first cohort will help answer.
 
 ### Link 3: Long-term accompaniment produces better outcomes than project work
 
@@ -147,13 +147,13 @@ Each link below describes one step in the chain from activity to outcome, with H
 
 **Honest assessment:** This is HAND's distinctive hypothesis. It must be tested with the first cohort, and the test is multi-year by definition.
 
-### Link 4: Sovereign Companions augments where Companions choose it
+### Link 4: Sovereign Reciprocates augments where Reciprocates choose it
 
-**The link:** For Companions who choose it, a custom agent system supports the program lead and the Companion without replacing the human relationship, making the relationship sustainable at slightly larger scale. Sovereign Companions is one tool inside the resource pool, not the pool itself. The flywheel works without it; AI deepens the work where Companions opt in.
+**The link:** For Reciprocates who choose it, a custom agent system supports the program lead and the Reciprocate without replacing the human relationship, making the relationship sustainable at slightly larger scale. Sovereign Reciprocates is one tool inside the resource pool, not the pool itself. The flywheel works without it; AI deepens the work where Reciprocates opt in.
 
-**Evidence:** Sovereign Companions is novel. AI augmentation of nonprofit operations is documented (Salesforce, Slack add-ons, etc.), but custom per-group agent systems under group ownership are new. The substitution risk is real: if agent systems start replacing relationships, the whole model erodes. The evaluation framework ([`../../AI-EVAL-FRAMEWORK.md`](../../AI-EVAL-FRAMEWORK.md)) is designed to detect substitution effects and trigger pause or close.
+**Evidence:** Sovereign Reciprocates is novel. AI augmentation of nonprofit operations is documented (Salesforce, Slack add-ons, etc.), but custom per-group agent systems under group ownership are new. The substitution risk is real: if agent systems start replacing relationships, the whole model erodes. The evaluation framework ([`../../AI-EVAL-FRAMEWORK.md`](../../AI-EVAL-FRAMEWORK.md)) is designed to detect substitution effects and trigger pause or close.
 
-**Honest assessment:** This is an optional augmentation, never required. If Link 2 (the flywheel) fails, Sovereign Companions does not save the model. If Sovereign Companions fails its own gates, HAND continues without it. The two run on different timescales and different evidence bases.
+**Honest assessment:** This is an optional augmentation, never required. If Link 2 (the flywheel) fails, Sovereign Reciprocates does not save the model. If Sovereign Reciprocates fails its own gates, HAND continues without it. The two run on different timescales and different evidence bases.
 
 ### Link 5: Open release of methodology amplifies HAND's reach
 
@@ -167,11 +167,11 @@ Each link below describes one step in the chain from activity to outcome, with H
 
 HAND is pre-incorporation and pre-cohort. The theory of change above is an argument, not a track record. Specifically:
 
-a. HAND has not yet served a Companion group through a full three-year engagement.
+a. HAND has not yet served a Reciprocate group through a full three-year engagement.
 
-b. HAND has not yet deployed a Sovereign Companions agent.
+b. HAND has not yet deployed a Sovereign Reciprocates agent.
 
-c. HAND has not yet documented Companion outcomes at the scale needed for statistical confidence.
+c. HAND has not yet documented Reciprocate outcomes at the scale needed for statistical confidence.
 
 d. HAND has not yet replicated the model elsewhere.
 
@@ -183,29 +183,29 @@ The 501(c)(3) filing raise, the McGovern letter, and the strategic plan ([`strat
 
 If the theory proves wrong on any link, HAND adjusts:
 
-- **Link 1 fails** (Companion selection produces poor matches): revise selection criteria, possibly narrow audience focus to one Companion segment.
+- **Link 1 fails** (Reciprocate selection produces poor matches): revise selection criteria, possibly narrow audience focus to one Reciprocate segment.
 
 - **Link 2 fails** (Contributor matches under-deliver): increase HAND staff time on each match, reduce concurrent matches, or rethink the pool structure.
 
 - **Link 3 fails** (long-term accompaniment isn't measurably better than project work): pivot to project-with-option-to-renew structure; preserve the relational ethos within a different operational shape.
 
-- **Link 4 fails** (Sovereign Companions doesn't augment or worse, substitutes): pause the program, conduct the closure simulation in the eval framework, transfer agents to Companion groups or retire them.
+- **Link 4 fails** (Sovereign Reciprocates doesn't augment or worse, substitutes): pause the program, conduct the closure simulation in the eval framework, transfer agents to Reciprocate groups or retire them.
 
 - **Link 5 fails** (open release doesn't multiply impact): adjust the contribution to the field; document what didn't work so others learn.
 
 The Corporation's posture is: **retire tools that don't serve the people we work with.** This applies to the model itself, not only to specific technologies.
 
-## Sovereign Companions specifically
+## Sovereign Reciprocates specifically
 
-The Sovereign Companions program has its own evaluation framework ([`../../AI-EVAL-FRAMEWORK.md`](../../AI-EVAL-FRAMEWORK.md)) with six dimensions and three decision gates. If the program fails its own gates, it is paused or closed regardless of the larger theory of change.
+The Sovereign Reciprocates program has its own evaluation framework ([`../../AI-EVAL-FRAMEWORK.md`](../../AI-EVAL-FRAMEWORK.md)) with six dimensions and three decision gates. If the program fails its own gates, it is paused or closed regardless of the larger theory of change.
 
 ## Open questions
 
-- **Unit economics.** A three-year accompaniment costs HAND roughly $X per Companion group (X to be modeled in the strategic plan). The math has to work or the model isn't scalable.
-- **Companion-population definition.** Three audiences in parallel is a deliberate choice and a risk. Funders trained to single-population focus may find this confusing. HAND's bet is that the operational similarities outweigh the audience differences; the data will tell.
-- **Selection bias in evidence.** Companions who agree to a three-year engagement may differ from the broader population in ways that affect outcomes. The evaluation framework needs to address this.
-- **Sovereign Companions adoption rate.** Not every Companion group will want an agent. HAND's model needs to work whether or not the Sovereign Companions layer is opted into.
+- **Unit economics.** A three-year accompaniment costs HAND roughly $X per Reciprocate group (X to be modeled in the strategic plan). The math has to work or the model isn't scalable.
+- **Reciprocate-population definition.** Three audiences in parallel is a deliberate choice and a risk. Funders trained to single-population focus may find this confusing. HAND's bet is that the operational similarities outweigh the audience differences; the data will tell.
+- **Selection bias in evidence.** Reciprocates who agree to a three-year engagement may differ from the broader population in ways that affect outcomes. The evaluation framework needs to address this.
+- **Sovereign Reciprocates adoption rate.** Not every Reciprocate group will want an agent. HAND's model needs to work whether or not the Sovereign Reciprocates layer is opted into.
 
 ---
 
-*References: HAND discovery documents (handprotocol.org/discovery); AI-COMPANIONS.md; AI-EVAL-FRAMEWORK.md; W.K. Kellogg Foundation Logic Model Development Guide; Center for Theory of Change.*
+*References: HAND discovery documents (handprotocol.org/discovery); AI-RECIPROCATES.md; AI-EVAL-FRAMEWORK.md; W.K. Kellogg Foundation Logic Model Development Guide; Center for Theory of Change.*

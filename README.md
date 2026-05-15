@@ -2,7 +2,7 @@
 
 > Regenerative infrastructure for those who heal, build, and serve.
 
-**HAND Protocol** (Holistic Approach to Nurture and Develop) is a nonprofit foundation incorporating as a 501(c)(3) in Austin, Texas in 2026. We provide long-term branding, marketing, web/dev, and one-on-one development support for **Companions**, healers, impact entrepreneurs, and grassroots community organizations doing work that matters. We don't build and bounce.
+**HAND Protocol** (Holistic Approach to Nurture and Develop) is a nonprofit foundation incorporating as a 501(c)(3) in Austin, Texas in 2026. We provide long-term branding, marketing, web/dev, and one-on-one development support for **Reciprocates**, healers, impact entrepreneurs, and grassroots community organizations doing work that matters. We don't build and bounce.
 
 This monorepo holds the public web presence (foundation campaign + discovery research + legacy archive) and earlier Web3 tooling preserved as source history.
 
@@ -12,7 +12,7 @@ This monorepo holds the public web presence (foundation campaign + discovery res
 |---|---|---|
 | [`web/foundation-campaign/`](web/foundation-campaign/) | Primary public site. 501(c)(3) filing campaign, $77,777 first goal. | Live in source |
 | [`web/discovery/`](web/discovery/) | Three long-form discovery docs: vision of the resource pool, research on existing skill-exchange models, national landscape map. | Live in source |
-| [`web/sovereign-companions/`](web/sovereign-companions/) | Sovereign Companions: HAND's AI workstream as a public page. Reuses the discovery design system. | Live in source |
+| [`web/sovereign-reciprocates/`](web/sovereign-reciprocates/) | Sovereign Reciprocates: HAND's AI workstream as a public page. Reuses the discovery design system. | Live in source |
 | [`web/governance/`](web/governance/) | Governance package: Articles, Bylaws, all policies, board governance, theory of change, strategic plan, Form 1023 narrative. | Live in source |
 | [`web/legacy/`](web/legacy/) | Archive of HAND's earlier landing-page and crowdfunding designs. | Live in source |
 | [`web/landingpage/`](web/landingpage/) | Pre-pivot Next.js Web3 starter homepage. | Preserved, not deployed |
@@ -24,7 +24,7 @@ This monorepo holds the public web presence (foundation campaign + discovery res
 - **[`PRODUCT.md`](PRODUCT.md):** strategic context: users, mission, brand personality, anti-references, design principles.
 - **[`DESIGN.md`](DESIGN.md):** visual system: colors, typography, components, spacing, motion.
 - **[`AGENTS.md`](AGENTS.md):** guide for AI coding agents working in this repo.
-- **[`AI-COMPANIONS.md`](AI-COMPANIONS.md):** Sovereign Companions: HAND's AI workstream. Custom open-source agent systems per Companion group, owned by the group, with the eight sovereignty principles that govern the design.
+- **[`AI-RECIPROCATES.md`](AI-RECIPROCATES.md):** Sovereign Reciprocates: HAND's AI workstream. Custom open-source agent systems per Reciprocate group, owned by the group, with the eight sovereignty principles that govern the design.
 - **[`AI-EVAL-FRAMEWORK.md`](AI-EVAL-FRAMEWORK.md):** how we measure whether the agent systems are earning their place and remaining sovereign. Six dimensions, three decision gates, public quarterly reporting.
 - **[`funding/mcgovern-letter.md`](funding/mcgovern-letter.md):** draft LOI to the Patrick J. McGovern Foundation for the AI workstream ($111,111 over 18 months).
 - **[`governance/`](governance/):** full governance package (36 documents). Articles, Bylaws, all policies, board governance, theory of change, strategic plan, grant-readiness, Form 1023 narrative. Each at `Draft v0.1`, pending counsel review and board adoption.
@@ -47,13 +47,13 @@ The Next.js landingpage and Vite spin project have their own build flows; see th
 
 ## Contributing
 
-HAND Protocol welcomes contributors. If you'd like to donate skills, partner as a Companion, or support the filing raise, reach out:
+HAND Protocol welcomes contributors. If you'd like to donate skills, partner as a Reciprocate, or support the filing raise, reach out:
 
 - **Email:** hand@handprotocol.org
 - **Discord:** [discord.handprotocol.org](https://discord.handprotocol.org)
 - **X / Twitter:** [@hand_protocol](https://x.com/hand_protocol)
 
-For technical contributions to the website, read [`AGENTS.md`](AGENTS.md) for working conventions (no em dashes, no side-stripe borders, accessibility requirements, brand vocabulary including the term **Companions**).
+For technical contributions to the website, read [`AGENTS.md`](AGENTS.md) for working conventions (no em dashes, no side-stripe borders, accessibility requirements, brand vocabulary including the term **Reciprocates**).
 
 ## License
 

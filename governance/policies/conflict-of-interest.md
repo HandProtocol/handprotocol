@@ -1,6 +1,6 @@
 # Conflict of Interest Policy
 
-> Adapted from the IRS sample policy in Appendix A of the Form 1023 instructions, with HAND-specific provisions for Companions, Contributors, and the Sovereign Companions program.
+> Adapted from the IRS sample policy in Appendix A of the Form 1023 instructions, with HAND-specific provisions for Reciprocates, Contributors, and the Sovereign Reciprocates program.
 
 **Status:** Draft v0.1 · May 2026 · Pre-adoption · Pending counsel review
 
@@ -30,7 +30,7 @@ A Financial Interest is **not necessarily a conflict of interest.** Under Sectio
 
 **Section 2.3 Family member.** Includes spouse, domestic partner, parents, siblings, children, in-laws, and any other person residing in the household of the Interested Person.
 
-**Section 2.4 Companion or Contributor relationship.** A relationship as a Companion receiving services from HAND, or as a Contributor giving services through HAND, is **not by itself** a Financial Interest. However, a paid contract between the Corporation and an entity controlled by a Companion or Contributor is a Financial Interest and must be disclosed.
+**Section 2.4 Reciprocate or Contributor relationship.** A relationship as a Reciprocate receiving services from HAND, or as a Contributor giving services through HAND, is **not by itself** a Financial Interest. However, a paid contract between the Corporation and an entity controlled by a Reciprocate or Contributor is a Financial Interest and must be disclosed.
 
 ## Article III. Procedures
 
@@ -106,13 +106,13 @@ a. Any director, officer, or key employee who is also an employee, officer, dire
 
 b. Any director, officer, or key employee who has a family member in such a position.
 
-c. Any director, officer, or key employee whose family member is a Companion or Contributor for whom HAND is considering a paid contract (as opposed to volunteer participation in the resource pool).
+c. Any director, officer, or key employee whose family member is a Reciprocate or Contributor for whom HAND is considering a paid contract (as opposed to volunteer participation in the resource pool).
 
 d. Any director, officer, or key employee who personally or whose family member receives any gift, gratuity, or favor of more than nominal value ($100 cumulative annually) from any vendor, contractor, donor (other than HAND itself), or grantee organization.
 
 e. Any director, officer, or key employee who has been approached to serve on the board, advisory body, or staff of any organization that has a transaction or potential transaction with the Corporation.
 
-## Article X. Sovereign Companions specific provisions
+## Article X. Sovereign Reciprocates specific provisions
 
 Given the program's open-source posture and group-ownership commitments, additional disclosure is required for:
 
@@ -128,7 +128,7 @@ Disclosure does not preclude participation; it requires recusal from procurement
 
 - **Threshold for "more than insubstantial" gifts.** Drafted as $100 cumulative annually. Some peer orgs use $250. Adjust at board adoption.
 - **Family member definition scope.** Drafted broadly to include domestic partners and household members. Texas BOC does not define; IRS uses "member of the family" loosely. Recommend keeping the broader definition.
-- **Companion / Contributor relationship.** Drafted to clarify these are not by themselves Financial Interests. Important for HAND's mission and to keep recusals manageable.
+- **Reciprocate / Contributor relationship.** Drafted to clarify these are not by themselves Financial Interests. Important for HAND's mission and to keep recusals manageable.
 - **Look-back period for prior relationships.** A new director who closed a paid relationship with the Corporation six months ago: still conflicted on related matters? Drafted to leave to case-by-case Board determination; tighten if a pattern emerges.
 
 ---

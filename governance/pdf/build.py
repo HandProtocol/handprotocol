@@ -75,12 +75,12 @@ BUNDLES_DEFS = [
     (
         "04-program-kit",
         "Program Kit",
-        "Theory of Change, Logic Model, Strategic Plan, Companion Selection",
+        "Theory of Change, Logic Model, Strategic Plan, Reciprocate Selection",
         [
             "programs/theory-of-change.md",
             "programs/logic-model.md",
             "programs/strategic-plan-2026-2028.md",
-            "programs/companion-selection-and-graduation.md",
+            "programs/reciprocate-selection-and-graduation.md",
         ],
     ),
     (
@@ -129,7 +129,7 @@ BUNDLES_DEFS = [
             "programs/theory-of-change.md",
             "programs/logic-model.md",
             "programs/strategic-plan-2026-2028.md",
-            "programs/companion-selection-and-graduation.md",
+            "programs/reciprocate-selection-and-graduation.md",
             "grants/organizational-boilerplate.md",
             "grants/capacity-statement.md",
             "grants/standard-attachments-checklist.md",
@@ -461,7 +461,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <div class="cover__meta-value">handprotocol.org/governance</div>
       </div>
     </div>
-    <p class="cover__footer">Pre-incorporation. Companion to the foundation campaign at handprotocol.org. All documents in this kit are working drafts; adoption follows board ratification.</p>
+    <p class="cover__footer">Pre-incorporation. Reciprocate to the foundation campaign at handprotocol.org. All documents in this kit are working drafts; adoption follows board ratification.</p>
   </div>
 </div>
 

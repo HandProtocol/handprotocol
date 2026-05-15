@@ -12,9 +12,9 @@ HAND Protocol Foundation commits to operate as if it will outlive any single per
 
 a. The Corporation's continuity through transitions.
 
-b. Companion-group relationships, especially the long-term accompaniment promise.
+b. Reciprocate-group relationships, especially the long-term accompaniment promise.
 
-c. Sovereign Companions adapters and the data sovereignty commitments embedded in them.
+c. Sovereign Reciprocates adapters and the data sovereignty commitments embedded in them.
 
 d. Donor trust and funder confidence.
 
@@ -71,7 +71,7 @@ b. **Board** notified within 24 hours by the Board Chair.
 
 c. **Funders and major donors** notified within 48 hours by the Board Chair and the Acting ED. The message: who is in charge, what is continuing, what to expect.
 
-d. **Companions and Companion groups** notified within 72 hours by the Acting ED with personal touch, especially for active engagements. The message: HAND is continuing the engagement; here is the new point of contact.
+d. **Reciprocates and Reciprocate groups** notified within 72 hours by the Acting ED with personal touch, especially for active engagements. The message: HAND is continuing the engagement; here is the new point of contact.
 
 e. **Public statement** issued by 72 hours if the situation warrants public disclosure. Drafted by the Board Chair and the Acting ED.
 
@@ -96,9 +96,9 @@ The Corporation maintains a **Cross-Trained Backup Matrix** ([`emergency-success
 - Donor communications
 - Funder communications
 - Major grant reporting deadlines
-- Companion engagement continuity (per Companion)
+- Reciprocate engagement continuity (per Reciprocate)
 - Contributor pool management
-- Sovereign Companions system access and operation
+- Sovereign Reciprocates system access and operation
 - Website, email, and social-media access
 - Legal hold compliance
 - Insurance broker contact
@@ -150,13 +150,13 @@ The Board Chair appoints a Transition Committee of 3 to 5 members at the time of
 
 For longer searches, a 3–9 month interim ED is recommended. Interim ED is not a candidate for the permanent role, allowing them to make hard calls without conflict.
 
-### Donor and Companion communication
+### Donor and Reciprocate communication
 
-a. **Departing ED's role** includes explicit handoff introductions to major donors, funders, partner organizations, and Companion groups.
+a. **Departing ED's role** includes explicit handoff introductions to major donors, funders, partner organizations, and Reciprocate groups.
 
 b. **Public message** drafted jointly with the departing ED, the Board Chair, and the incoming ED. Honest about the transition, appreciative of contributions, confident about continuity.
 
-c. **Companion-specific continuity plan** ensures each active Companion group has a clear point of contact through the transition.
+c. **Reciprocate-specific continuity plan** ensures each active Reciprocate group has a clear point of contact through the transition.
 
 ### Documentation
 
@@ -268,7 +268,7 @@ b. Prolonged unexcused absence (missing 3 consecutive regular meetings without c
 
 c. Material conflict of interest that cannot be managed by recusal.
 
-d. Conduct harmful to the Corporation, its staff, Companions, Contributors, or donors.
+d. Conduct harmful to the Corporation, its staff, Reciprocates, Contributors, or donors.
 
 e. Material violation of the Code of Ethics or Board Member Agreement.
 

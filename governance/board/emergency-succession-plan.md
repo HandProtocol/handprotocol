@@ -1,6 +1,6 @@
 # Emergency Succession Plan
 
-> The detailed operating plan if the Executive Director suddenly becomes unable to fulfill the role. Companion document to [`succession-and-replacement.md`](succession-and-replacement.md) §2.
+> The detailed operating plan if the Executive Director suddenly becomes unable to fulfill the role. Reciprocate document to [`succession-and-replacement.md`](succession-and-replacement.md) §2.
 
 **Status:** Draft v0.1 · May 2026 · Pre-adoption · Review annually
 
@@ -29,7 +29,7 @@ If the Executive Director is incapacitated, deceased, or has abruptly departed:
 | 5 | Board Chair → other directors | 6 hours | Phone or video meeting |
 | 6 | Executive Committee → staff and contractors | 24 hours | In-person, video, or phone (not email-only for first notification) |
 | 7 | Acting ED + Board Chair → key funders and donors | 48 hours | Personal call or video, follow-up email |
-| 8 | Acting ED + Board Chair → active Companion groups | 72 hours | Personal call or video |
+| 8 | Acting ED + Board Chair → active Reciprocate groups | 72 hours | Personal call or video |
 | 9 | Acting ED + Board Chair → public statement if warranted | 72 hours | Coordinated drafting |
 
 ## Section 2. Acting ED designation
@@ -71,8 +71,8 @@ Per [`succession-and-replacement.md`](succession-and-replacement.md) §2, the Ac
 | GitHub organization | [Name] | [Name] | [Name] | [Date] |
 | Social media accounts | [Name] | [Name] | [Name] | [Date] |
 | Discord server administration | [Name] | [Name] | [Name] | [Date] |
-| Sovereign Companions inference infrastructure | [Name] | [Name] | [Name] | [Date] |
-| Companion-group adapter custody | [Name] | [Name] | [Name] | [Date] |
+| Sovereign Reciprocates inference infrastructure | [Name] | [Name] | [Name] | [Date] |
+| Reciprocate-group adapter custody | [Name] | [Name] | [Name] | [Date] |
 | Insurance broker contact | [Name] | [Name] | [Name] | [Date] |
 | Legal counsel relationship | [Name] | [Name] | [Name] | [Date] |
 | Accountant / CPA relationship | [Name] | [Name] | [Name] | [Date] |
@@ -92,7 +92,7 @@ Per [`succession-and-replacement.md`](succession-and-replacement.md) §2, the Ac
 | St. David's Foundation (TX) | [Name] | [Name] | [Date] | |
 | Austin Community Foundation | [Name] | [Name] | [Date] | |
 | Anchor donors (top 10 by giving) | [Name] | [Name] | [Date] | |
-| Active Companion groups | [Per group] | [Per group] | [Date] | |
+| Active Reciprocate groups | [Per group] | [Per group] | [Date] | |
 | Major Contributors (anchor) | [Per Contributor] | [Per Contributor] | [Date] | |
 | Bank relationship manager | [Name] | [Name] | [Date] | |
 | Outside legal counsel | [Name] | [Name] | [Date] | |
@@ -112,7 +112,7 @@ Maintained by the Treasurer and Executive Director. In an emergency, this calend
 - Insurance renewals: [list with dates]
 - TX Comptroller franchise tax return: [date]
 - Texas SOS Periodic Report (when requested): [date]
-- Sovereign Companions Annual Accountability Report: [date]
+- Sovereign Reciprocates Annual Accountability Report: [date]
 - Major fundraising campaigns: [dates]
 - Board recruitment cycle: [dates]
 
@@ -142,7 +142,7 @@ d. **Audit:** Access log reviewed quarterly by the Treasurer
 | ☐ | Confirm grant-reporting deadlines for next 60 days; flag any at risk |
 | ☐ | Notify staff and contractors in person where possible |
 | ☐ | Notify key funders and major donors with proactive call |
-| ☐ | Notify active Companion groups personally |
+| ☐ | Notify active Reciprocate groups personally |
 | ☐ | Draft public statement if needed; have Board Chair review before publishing |
 | ☐ | Document everything: timeline, decisions, communications |
 | ☐ | Apply legal hold to all records (Document Retention §7) |
@@ -158,7 +158,7 @@ d. **Audit:** Access log reviewed quarterly by the Treasurer
 | ☐ | Continue reporting deadlines and donor stewardship without interruption |
 | ☐ | Initiate search process (interim ED or permanent ED) |
 | ☐ | Conduct staff and Contributor check-ins; address concerns |
-| ☐ | Maintain Companion-group communications |
+| ☐ | Maintain Reciprocate-group communications |
 | ☐ | Review and adjust budget for the transition period |
 | ☐ | Update website and public materials as appropriate |
 | ☐ | First 30-day status report to full Board |
@@ -171,7 +171,7 @@ d. **Audit:** Access log reviewed quarterly by the Treasurer
 | ☐ | Acting ED transition plan to successor in place |
 | ☐ | Full Board strategic review of the transition |
 | ☐ | Funder relationships restabilized |
-| ☐ | Companion-group continuity verified |
+| ☐ | Reciprocate-group continuity verified |
 | ☐ | Lessons learned documented |
 | ☐ | This Plan updated based on real-world experience |
 

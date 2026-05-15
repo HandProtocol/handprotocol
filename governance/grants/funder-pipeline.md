@@ -43,7 +43,7 @@ These funders are the closest philosophical kin to HAND. Most are relationship-l
 - **Range:** $50K–$500K typical.
 - **Status:** LOI drafted ([`../../funding/mcgovern-letter.md`](../../funding/mcgovern-letter.md), $111,111 ask over 18 months).
 - **Next action:** Identify program officer; warm introduction via Amnesty's Algorithmic Accountability Lab or other current grantee. Submit LOI when introduction is in hand.
-- **Notes:** McGovern wants sovereignty posture, open source, group ownership. HAND's Sovereign Companions program is a strong fit. Donor-advised LOI process; expect 6-12 months from first contact to formal application.
+- **Notes:** McGovern wants sovereignty posture, open source, group ownership. HAND's Sovereign Reciprocates program is a strong fit. Donor-advised LOI process; expect 6-12 months from first contact to formal application.
 - **Risk:** Highly selective. Plan B is essential.
 
 ### Kataly Foundation
@@ -105,7 +105,7 @@ Strong on two of three alignment vectors. Often more accessible than Tier 1.
 - **Range:** $25K–$200K typical.
 - **Status:** Cold; monitoring RFPs.
 - **Next action:** Apply to next Responsible Computing Fellowship cycle; submit project proposal in next themed call.
-- **Notes:** Open-weights and Companion-sovereignty posture is exactly Mozilla's brief.
+- **Notes:** Open-weights and Reciprocate-sovereignty posture is exactly Mozilla's brief.
 
 ### Ford Foundation (Tech & Society)
 
@@ -125,7 +125,7 @@ Strong on two of three alignment vectors. Often more accessible than Tier 1.
 
 ### Anthropic + OpenAI (nonprofit credit programs)
 
-- **Fit:** Practical alignment for Sovereign Companions prototype phase.
+- **Fit:** Practical alignment for Sovereign Reciprocates prototype phase.
 - **Access:** Application-based credit programs.
 - **Range:** API credits, often $5K–$20K equivalent.
 - **Status:** Apply once 501(c)(3) status is in place or via fiscal sponsor.
@@ -162,17 +162,17 @@ Reasonable alignment on one vector; lower priority unless an opportunity opens.
 
 ### NDN Collective
 
-- **Fit:** Mission alignment for indigenous-led grassroots Companion groups; data sovereignty aligned (CARE principles).
+- **Fit:** Mission alignment for indigenous-led grassroots Reciprocate groups; data sovereignty aligned (CARE principles).
 - **Access:** Invitation/relationship.
 - **Status:** Cold.
-- **Notes:** Pathway: if HAND has indigenous-led Companion groups, NDN may be a partner more than a funder.
+- **Notes:** Pathway: if HAND has indigenous-led Reciprocate groups, NDN may be a partner more than a funder.
 
 ### Hugging Face Community Grants
 
 - **Fit:** Open-source AI legitimacy signal.
 - **Access:** Application-based; small grants.
 - **Range:** $1K–$10K.
-- **Status:** Apply once Sovereign Companions has a published methodology.
+- **Status:** Apply once Sovereign Reciprocates has a published methodology.
 - **Notes:** Low dollar, high legitimacy. Good for the open-source release moment in Year 2-3.
 
 ### Echoing Green, Halcyon, Roddenberry Foundation, RSF Social Finance
@@ -188,7 +188,7 @@ The angel-number tier ladder structures individual giving:
 | Tier | Amount | Role |
 |---|---|---|
 | **Foundation** | $77,777 / $22,222 / $7,777 | Lead anchors for filing raise |
-| **Sovereign Companions** | $111,111 / $33,333 / $5,555 | AI workstream anchors |
+| **Sovereign Reciprocates** | $111,111 / $33,333 / $5,555 | AI workstream anchors |
 | **Contributor** | $77 to $2,222+ | Broad-base support |
 
 Major-donor tracker maintained separately by the Executive Director. Per [`../policies/gift-acceptance.md`](../policies/gift-acceptance.md), individual major gifts above 2% of expected 5-year revenue are reviewed for public-support-test implications.
@@ -227,7 +227,7 @@ c. **Crypto-specific grant programs** (Gitcoin, Optimism, etc.). HAND's pivot aw
 
 d. **AI vendor sponsorships** that compromise sovereignty principles. No "powered by [vendor]" relationships; vendor credits are operational tools, not partnership endorsements.
 
-e. **Anything that would require modifying the eight Sovereign Companions principles.** Funder pressure to do so is itself a signal of misalignment.
+e. **Anything that would require modifying the eight Sovereign Reciprocates principles.** Funder pressure to do so is itself a signal of misalignment.
 
 ## Section 9. Relationship cultivation discipline
 
@@ -248,7 +248,7 @@ e. **The Executive Director (or founder pre-ED) owns Tier 1 relationships.** Don
 - **Specific outreach plan for McGovern.** Pre-LOI introduction pathway not yet identified. Active research in May 2026.
 - **CRM choice.** Defer to revenue justifying the investment. Google Sheets sufficient through Year 1.
 - **Capital campaign.** Major-gift capital campaign for the $77,777 filing raise is being run organically. Whether to formalize for the post-Determination phase (a "Year 2 stabilization campaign") is open.
-- **Earned revenue.** Some Companions may have budget to pay for premium support. Whether to structure earned revenue as a real funder category or keep it case-by-case is open. Recommend keeping case-by-case until Year 3.
+- **Earned revenue.** Some Reciprocates may have budget to pay for premium support. Whether to structure earned revenue as a real funder category or keep it case-by-case is open. Recommend keeping case-by-case until Year 3.
 - **Fundraising consultant.** Whether to engage one (Spectrum Nonprofit Services, Marts & Lundy, Compass Point) at any point. Likely not until $300K+ ask in pipeline.
 
 ---

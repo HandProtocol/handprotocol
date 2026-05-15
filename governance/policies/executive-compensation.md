@@ -72,7 +72,7 @@ c. **Calculate a recommended compensation range** including base salary, benefit
 
 d. **Consider HAND's compensation ratio commitments.** Per the Code of Ethics, HAND commits to a compensation ratio of no more than **[ratio TBD by board, e.g., 3:1 or 4:1]** between the highest-paid and lowest-paid full-time employees. This ratio is a HAND-specific commitment, not an IRS requirement, but it constrains the upper bound of executive compensation.
 
-e. **Consider non-compensation factors** appropriate to HAND: relational responsibilities to Companions, the public-facing nature of the role, fundraising obligations, and the founder dynamic if applicable.
+e. **Consider non-compensation factors** appropriate to HAND: relational responsibilities to Reciprocates, the public-facing nature of the role, fundraising obligations, and the founder dynamic if applicable.
 
 f. **Deliberate without the affected person present** (the Executive Director or candidate is excused for the deliberation and vote).
 

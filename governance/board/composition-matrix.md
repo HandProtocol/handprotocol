@@ -35,10 +35,10 @@ The target reflects research that small-org effectiveness peaks at 5-7 active di
 | **Financial / accounting** | Treasurer; budget, audit, internal controls | Target: 1 director (Treasurer) with CPA/CFO background |
 | **Legal (nonprofit / tax-exempt / IP)** | Pro bono review of policies, contracts, IP for AI work | Desired: 1 director with relevant legal background |
 | **Fundraising / development** | Major gift cultivation, foundation relationships | Target: 2 directors with active fundraising networks |
-| **Programs / direct service** | Companion-side understanding; trauma-informed practice | Target: 1-2 directors with direct service experience |
-| **AI / technology** | Sovereign Companions oversight, open-source AI fluency | Target: 1 director with AI ethics or technical background |
+| **Programs / direct service** | Reciprocate-side understanding; trauma-informed practice | Target: 1-2 directors with direct service experience |
+| **AI / technology** | Sovereign Reciprocates oversight, open-source AI fluency | Target: 1 director with AI ethics or technical background |
 | **Communications / branding** | Voice fidelity, public representation, donor communications | Desired: 1 director with communications background |
-| **Lived experience as Companion** | Embodied knowledge of what the program serves | Target: 1-2 directors with lived experience in healer / impact-entrepreneur / grassroots community work |
+| **Lived experience as Reciprocate** | Embodied knowledge of what the program serves | Target: 1-2 directors with lived experience in healer / impact-entrepreneur / grassroots community work |
 | **Operations / HR / management** | As HAND scales to first hires | Desired: 1 director with operations background |
 | **Strategy / theory of change** | Mission discipline, evaluation rigor | Target: distributed across multiple directors |
 
@@ -48,11 +48,11 @@ HAND serves a heterogeneous population. The board should reflect:
 
 | Perspective | Why it matters |
 |---|---|
-| **Healing / wellness practitioners** | Companion segment 1 |
-| **Impact entrepreneurs** (post-accelerator, social enterprise) | Companion segment 2 |
-| **Grassroots organizing / mutual aid** | Companion segment 3 |
+| **Healing / wellness practitioners** | Reciprocate segment 1 |
+| **Impact entrepreneurs** (post-accelerator, social enterprise) | Reciprocate segment 2 |
+| **Grassroots organizing / mutual aid** | Reciprocate segment 3 |
 | **BIPOC perspectives** | Represented populations include BIPOC-led organizations |
-| **LGBTQ+ perspectives** | Many Companion groups serve these communities |
+| **LGBTQ+ perspectives** | Many Reciprocate groups serve these communities |
 | **Disability perspectives** | Accessibility is mission-aligned; disability community lived experience strengthens decisions |
 | **Texas / Central Texas roots** | Home base; community foundation funders prioritize local leadership |
 | **National-scale perspective** | HAND's reach is not just local; funders include national |
@@ -94,7 +94,7 @@ Example (illustrative, not actual):
 
 1. **Treasurer-qualified director with CPA/CFO background.** Most urgent. Without this, financial oversight is dependent on the founder, which weakens internal control and limits the rebuttable-presumption procedure.
 
-2. **Lived experience as Companion.** Founding board may be missing direct connection to one or more of the three Companion segments. Recruit specifically.
+2. **Lived experience as Reciprocate.** Founding board may be missing direct connection to one or more of the three Reciprocate segments. Recruit specifically.
 
 3. **Texas community foundation network.** Without this, HAND has limited direct paths to Hogg, St. David's, and Austin CF.
 
@@ -110,7 +110,7 @@ a. **Mission alignment is non-negotiable.** A candidate strong on skills but ind
 
 b. **Time commitment honest.** Candidates are told the 6-10 hour/month expectation and the 100% board giving expectation up front.
 
-c. **Companion / Contributor invitation friendly.** Where appropriate, recruit from HAND's own community. Mind the conflict-of-interest implications.
+c. **Reciprocate / Contributor invitation friendly.** Where appropriate, recruit from HAND's own community. Mind the conflict-of-interest implications.
 
 d. **No board-by-prestige.** A famous name without active engagement weakens governance. HAND prefers active over notable.
 
@@ -122,7 +122,7 @@ g. **Pipeline of interest, not just open recruitment.** Maintain an ongoing list
 
 ## Section 8. Recruitment process
 
-a. **Identification.** Through staff, board, Contributors, Companions, peer organizations, board placement services (BoardSource, BoardBuild, BoardLead).
+a. **Identification.** Through staff, board, Contributors, Reciprocates, peer organizations, board placement services (BoardSource, BoardBuild, BoardLead).
 
 b. **First conversation** with the Vice Chair (Governance Committee Chair) or Board Chair: discuss mission, role, expectations.
 
@@ -146,7 +146,7 @@ b. **Governance binder** (digital and/or paper): Articles, Bylaws, all policies,
 
 c. **Mentor pairing** with an existing director for the first 6 months.
 
-d. **Site visits** to HAND program activity (a Companion engagement, with Companion consent; a Sovereign Companions overview).
+d. **Site visits** to HAND program activity (a Reciprocate engagement, with Reciprocate consent; a Sovereign Reciprocates overview).
 
 e. **Committee assignment** based on skills and interest.
 
@@ -172,8 +172,8 @@ Per Bylaws, directors serve 3-year terms, eligible for one re-election (6 years 
 
 ## Open questions
 
-- **Companion / Contributor seats on board.** Strong argument for formal seats; logistical complications with conflict-of-interest and term overlap. Recommended path: add formally in year two amendment.
-- **Compensated board members.** Drafted as fully volunteer. If HAND grows to a point where adding compensated Companion-representative seats would be meaningful, revisit. Public-charity status implications.
+- **Reciprocate / Contributor seats on board.** Strong argument for formal seats; logistical complications with conflict-of-interest and term overlap. Recommended path: add formally in year two amendment.
+- **Compensated board members.** Drafted as fully volunteer. If HAND grows to a point where adding compensated Reciprocate-representative seats would be meaningful, revisit. Public-charity status implications.
 - **External board placement services.** BoardSource, BoardBuild, BoardLead worth contacting once HAND has clear gap-analysis priorities.
 - **Geographic distribution.** Should HAND aim for Texas-heavy board (community foundation alignment) or national board (funder reach)? Probably both, weighted toward Texas in early years.
 

@@ -12,7 +12,7 @@ Publication-quality PDFs of HAND Protocol Foundation's governance package, gener
 | [`out/01-filing-kit.pdf`](out/01-filing-kit.pdf) | 35 | Articles, Bylaws, Compliance Calendar, Form 1023 narrative. The Texas SOS + IRS filing packet. |
 | [`out/02-policy-book.pdf`](out/02-policy-book.pdf) | 88 | All fourteen policies: IRS-required, financial, operational, AI, community. |
 | [`out/03-board-kit.pdf`](out/03-board-kit.pdf) | 49 | Member Agreement, succession protocols, officer descriptions, composition matrix, disclosure form, prospect brief, outreach templates. |
-| [`out/04-program-kit.pdf`](out/04-program-kit.pdf) | 26 | Theory of Change, Logic Model, Strategic Plan 2026-2028, Companion Selection. Standard grant attachments. |
+| [`out/04-program-kit.pdf`](out/04-program-kit.pdf) | 26 | Theory of Change, Logic Model, Strategic Plan 2026-2028, Reciprocate Selection. Standard grant attachments. |
 | [`out/05-grant-kit.pdf`](out/05-grant-kit.pdf) | 34 | Boilerplate, Capacity Statement, Attachments Checklist, Budget Template, Funder Pipeline. The funder-application packet. |
 
 ## Layout

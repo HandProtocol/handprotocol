@@ -16,9 +16,9 @@ This document tells you what HAND has now, what HAND is building, and how HAND w
 
 ### The flywheel mechanism, designed and documented
 
-- **A three-flow resource pool model** (Donate, Exchange, Receive) with worked examples (Marcus the roofer, Anya the reiki practitioner, Río Verde Collective) drawn from real conversations with the populations HAND will serve. The flywheel is the primary mechanism, designed so that everyone involved can benefit if they choose to: a single person can be both giver and receiver, and cross-participation is encouraged but never required. Documented in [`../programs/companion-selection-and-graduation.md`](../programs/companion-selection-and-graduation.md), [`../policies/volunteer-and-contributor.md`](../policies/volunteer-and-contributor.md), and Bylaws Article XI.
+- **A three-flow resource pool model** (Donate, Exchange, Receive) with worked examples (Marcus the roofer, Anya the reiki practitioner, Río Verde Collective) drawn from real conversations with the populations HAND will serve. The flywheel is the primary mechanism, designed so that everyone involved can benefit if they choose to: a single person can be both giver and receiver, and cross-participation is encouraged but never required. Documented in [`../programs/reciprocate-selection-and-graduation.md`](../programs/reciprocate-selection-and-graduation.md), [`../policies/volunteer-and-contributor.md`](../policies/volunteer-and-contributor.md), and Bylaws Article XI.
 
-- **An alumni pathway** ensuring graduation is entry into a broader pool, not exit from a program. Graduated Companions may return as Contributors, mentors, or cross-cohort connectors. The pool grows denser over time through alumni return.
+- **An alumni pathway** ensuring graduation is entry into a broader pool, not exit from a program. Graduated Reciprocates may return as Contributors, mentors, or cross-cohort connectors. The pool grows denser over time through alumni return.
 
 - **An Annual Flywheel Health Check** required by Bylaws §11.5 and Compliance Calendar. Reports three-flow volumes, cross-participation rate, alumni return rate, and recommended program adjustments. Parallel to the Annual AI Accountability Report.
 
@@ -26,9 +26,9 @@ This document tells you what HAND has now, what HAND is building, and how HAND w
 
 - A published gap analysis: the U.S. capacity-building landscape map at handprotocol.org/discovery, the resource-pool vision document, and the research-on-existing-skill-exchange-models document. Together, ~30,000 words of cited research, named peer organizations, and identified market gaps.
 
-- A theory of change with five named links, with the resource-pool flywheel positioned as the foundational causal innovation and Sovereign Companions positioned as one optional augmentation. Documented at [`../programs/theory-of-change.md`](../programs/theory-of-change.md).
+- A theory of change with five named links, with the resource-pool flywheel positioned as the foundational causal innovation and Sovereign Reciprocates positioned as one optional augmentation. Documented at [`../programs/theory-of-change.md`](../programs/theory-of-change.md).
 
-- A three-year strategic plan with priorities, milestones, budget envelopes, and risk-mitigation. Sovereign Companions capped as a fraction of program budget (≤20% Y1, ≤30% Y2, ≤35% Y3). Documented at [`../programs/strategic-plan-2026-2028.md`](../programs/strategic-plan-2026-2028.md).
+- A three-year strategic plan with priorities, milestones, budget envelopes, and risk-mitigation. Sovereign Reciprocates capped as a fraction of program budget (≤20% Y1, ≤30% Y2, ≤35% Y3). Documented at [`../programs/strategic-plan-2026-2028.md`](../programs/strategic-plan-2026-2028.md).
 
 - A logic model with explicit Flywheel row and performance indicators (Donate / Exchange / Receive engagement counts, cross-participation rate, alumni return rate). Documented at [`../programs/logic-model.md`](../programs/logic-model.md).
 
@@ -49,7 +49,7 @@ This document tells you what HAND has now, what HAND is building, and how HAND w
 - Draft of all Form 990 Part VI-disclosed policies (Conflict of Interest, Whistleblower, Document Retention, Executive Compensation).
 - Draft operational policies (Financial Management, Gift Acceptance, Fiscal Sponsorship, Grant Management, Code of Ethics, Equal Opportunity and Anti-Harassment, Privacy, Data Sovereignty and AI, Community Standards, Volunteer and Contributor).
 - Draft board governance package (Member Agreement, Succession and Replacement, Emergency Succession Plan, Officer Job Descriptions, Composition Matrix, Annual Disclosure Form).
-- Draft program documents (Companion Selection and Graduation Protocol).
+- Draft program documents (Reciprocate Selection and Graduation Protocol).
 
 All published in this repository under [`../`](../).
 
@@ -65,15 +65,15 @@ All published in this repository under [`../`](../).
 
 - Texas community foundations: Hogg, St. David's, Austin Community Foundation identified as future eligibility targets for the flywheel work.
 - Trust-based funders: Kataly, Solidaire, Headwaters identified as aligned philosophical kin for the long-term accompaniment work.
-- Patrick J. McGovern Foundation: Letter of Inquiry drafted for the Sovereign Companions augmentation work.
+- Patrick J. McGovern Foundation: Letter of Inquiry drafted for the Sovereign Reciprocates augmentation work.
 - AI-aligned funders: Mozilla, Ford, Google.org identified as additional prospects for the AI workstream specifically.
 
-### Sovereign Companions program design (optional augmentation)
+### Sovereign Reciprocates program design (optional augmentation)
 
-- Eight sovereignty principles articulated and binding ([`../../AI-COMPANIONS.md`](../../AI-COMPANIONS.md)).
+- Eight sovereignty principles articulated and binding ([`../../AI-RECIPROCATES.md`](../../AI-RECIPROCATES.md)).
 - Evaluation framework drafted ([`../../AI-EVAL-FRAMEWORK.md`](../../AI-EVAL-FRAMEWORK.md)): six dimensions, three decision gates, participatory review panel.
 - Data Sovereignty and AI Policy operationalizing the principles ([`../policies/data-sovereignty-and-ai.md`](../policies/data-sovereignty-and-ai.md)).
-- Opt-in posture: no Companion is required to engage with Sovereign Companions as a condition of receiving accompaniment. The flywheel works whether or not a given Companion engages with the AI augmentation.
+- Opt-in posture: no Reciprocate is required to engage with Sovereign Reciprocates as a condition of receiving accompaniment. The flywheel works whether or not a given Reciprocate engages with the AI augmentation.
 
 ## What HAND is building (next 12 months)
 
@@ -90,9 +90,9 @@ All published in this repository under [`../`](../).
 - Expansion to five by year-end 2026.
 - Skills, lived experience, and network priorities documented in the Composition Matrix.
 
-### First Companion cohort
+### First Reciprocate cohort
 
-- Three Companion groups, one from each audience segment (healer, impact entrepreneur, grassroots).
+- Three Reciprocate groups, one from each audience segment (healer, impact entrepreneur, grassroots).
 - Onboarding through Q4 2026 and Q1 2027.
 - Three-year engagement commitment from each side.
 
@@ -101,7 +101,7 @@ All published in this repository under [`../`](../).
 - 10 active Contributors by year-end 2026.
 - Curated, screened, mission-aligned.
 
-### Sovereign Companions POC
+### Sovereign Reciprocates POC
 
 - Proof-of-concept agent system, scaffolded on existing AI infrastructure (closed-API for prototyping permitted at this stage).
 - First sovereignty drill (revocation, portability simulation) by end of Year 1.
@@ -139,7 +139,7 @@ All published in this repository under [`../`](../).
 - Funder-specific reports per grant agreement.
 - Annual Report (public).
 - Annual Form 990 filed timely.
-- Annual AI Accountability Report (public) for Sovereign Companions program.
+- Annual AI Accountability Report (public) for Sovereign Reciprocates program.
 
 ### Compliance
 
@@ -165,7 +165,7 @@ All published in this repository under [`../`](../).
 - Current operating budget.
 - Strategic plan and theory of change.
 - Logic model.
-- Quarterly Sovereign Companions reports.
+- Quarterly Sovereign Reciprocates reports.
 - Annual Report.
 
 ### Voluntary transparency
@@ -179,7 +179,7 @@ All published in this repository under [`../`](../).
 ### Communication
 
 - Major milestones communicated proactively.
-- Site visits welcomed, with Companion-group consent.
+- Site visits welcomed, with Reciprocate-group consent.
 - Convenings attended.
 - Honest about setbacks before being asked.
 
@@ -191,8 +191,8 @@ All published in this repository under [`../`](../).
 - Co-mingle restricted and unrestricted funds.
 - Engage in lobbying or political campaign activity (per Bylaws Article 4 and IRC §501(c)(3)).
 - Use AI funds for non-AI work, or non-AI funds for AI infrastructure HAND has not separately disclosed.
-- Train AI models on Companion group data without explicit, signed consent.
-- Compromise the eight Sovereign Companions sovereignty principles for funder convenience.
+- Train AI models on Reciprocate group data without explicit, signed consent.
+- Compromise the eight Sovereign Reciprocates sovereignty principles for funder convenience.
 
 ## What's missing right now, honestly
 
@@ -201,7 +201,7 @@ A capacity statement that pretends to have everything is not credible. HAND has 
 - Filed for 501(c)(3) status (in progress).
 - Received the IRS Determination Letter (expected mid-2027).
 - Hired a paid Executive Director (founder is the only operational lead currently).
-- Closed a full Year 1 of Companion engagement and produced outcomes data.
+- Closed a full Year 1 of Reciprocate engagement and produced outcomes data.
 - Engaged an external CPA (will engage at incorporation).
 - Carried D&O and general liability insurance (will bind before any program activity).
 - Run a full rebuttable-presumption procedure (will run before first compensation).
@@ -214,11 +214,11 @@ The honest case for funding HAND:
 
 a. **Rigorous discovery work.** The published research demonstrates that HAND has done the homework on the field and the gap.
 
-b. **Defensible model.** Long-term relational accompaniment is hard. The unit economics challenge is real. HAND's design (Sovereign Companions as parallelization, curated Contributor pool, three-year engagement) is a credible response.
+b. **Defensible model.** Long-term relational accompaniment is hard. The unit economics challenge is real. HAND's design (Sovereign Reciprocates as parallelization, curated Contributor pool, three-year engagement) is a credible response.
 
 c. **Sovereignty posture.** HAND's commitment to group-owned AI, open methodology, and inspectable governance is rare. It is the responsible-AI grantee profile some funders explicitly seek.
 
-d. **Voice integrity.** HAND has retired tools that did not serve the Companions (the pivot from Web3). The same posture applies to anything else that doesn't earn its place.
+d. **Voice integrity.** HAND has retired tools that did not serve the Reciprocates (the pivot from Web3). The same posture applies to anything else that doesn't earn its place.
 
 e. **Transparency from day one.** Governance documents, theory of change, strategic plan, and policies are all public before incorporation. This is the floor, not the ceiling.
 

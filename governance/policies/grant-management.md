@@ -121,9 +121,9 @@ f. **Late reports.** Notify funder in advance if a deadline will be missed. Late
 
 a. **Funder updates between deadlines.** Major milestones, public recognition opportunities, and material changes are communicated to the funder outside formal reporting.
 
-b. **Site visits.** When funders offer to visit, HAND welcomes and prepares thoughtfully: agenda, time with staff and Companions (with Companion consent), and documentation of the visit.
+b. **Site visits.** When funders offer to visit, HAND welcomes and prepares thoughtfully: agenda, time with staff and Reciprocates (with Reciprocate consent), and documentation of the visit.
 
-c. **Convenings.** When funders host learning convenings, HAND staff and (where appropriate) Companions or Contributors attend. Insights brought back to the team.
+c. **Convenings.** When funders host learning convenings, HAND staff and (where appropriate) Reciprocates or Contributors attend. Insights brought back to the team.
 
 d. **Long-game cultivation.** Reporting and stewardship are the relationship-building substrate for future funding cycles. Each grant is treated as the start of an ongoing relationship, not a transaction.
 
@@ -149,25 +149,25 @@ b. **Funder request to change scope.** Requests to redirect mid-grant are evalua
 
 c. **Funder reputational issues.** If a funder becomes the subject of reputational concern materially after award, the Board reviews. Default is to complete the funded engagement and decline future cycles, rather than refund mid-engagement.
 
-d. **Pass-through grants.** HAND may, at Board discretion, sub-grant to other organizations or Companion groups under terms aligned with HAND's mission. Sub-grants require written sub-grant agreements with the same reporting and closeout discipline as upstream grants.
+d. **Pass-through grants.** HAND may, at Board discretion, sub-grant to other organizations or Reciprocate groups under terms aligned with HAND's mission. Sub-grants require written sub-grant agreements with the same reporting and closeout discipline as upstream grants.
 
-## Section 12. Sovereign Companions program grants
+## Section 12. Sovereign Reciprocates program grants
 
-Special provisions for grants to or for the Sovereign Companions program:
+Special provisions for grants to or for the Sovereign Reciprocates program:
 
-a. **Adapter ownership preserved.** No grant accepted may transfer or restrict ownership of Companion-group-owned adapters, training data, or evaluation logs to the funder.
+a. **Adapter ownership preserved.** No grant accepted may transfer or restrict ownership of Reciprocate-group-owned adapters, training data, or evaluation logs to the funder.
 
 b. **Open-source release commitment honored.** Grants to the program assume the program's open-source posture; HAND will not accept a grant requiring the methodology, code, or eval framework to be proprietary.
 
-c. **Companion consent.** Grants funding work with specific Companion groups require those groups' written consent to be named (or anonymized) in funder reports.
+c. **Reciprocate consent.** Grants funding work with specific Reciprocate groups require those groups' written consent to be named (or anonymized) in funder reports.
 
-d. **Funder convenings.** Companion groups may attend funder convenings about their own work, at HAND's expense, with their consent.
+d. **Funder convenings.** Reciprocate groups may attend funder convenings about their own work, at HAND's expense, with their consent.
 
 ## Open questions
 
 - **Pipeline-conversion rate target.** No good industry benchmark. Recommend tracking but not setting a target until 12 months of data exists.
 - **Indirect cost rate.** HAND has no negotiated indirect cost rate with any funder. Federal grants would require one (NICRA). For now, indirect is built into program budgets as allocated lines.
-- **Sub-granting infrastructure.** If HAND begins sub-granting to Companion groups (a possible expansion of the program), a sub-grant agreement template is required. Defer until needed.
+- **Sub-granting infrastructure.** If HAND begins sub-granting to Reciprocate groups (a possible expansion of the program), a sub-grant agreement template is required. Defer until needed.
 - **Funder due-diligence package.** Standard 15-item packet maintained per [`../grants/standard-attachments-checklist.md`](../grants/standard-attachments-checklist.md). Keep current.
 
 ---
