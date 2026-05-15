@@ -1,22 +1,15 @@
 /* ============================================================
    /3dhand-test/ — focused hand visualization
-   J-Toastie's rigged GLB rendered as wireframe + glowing joint nodes.
-   Auto-cycles through give → receive → together → grow.
+   Ported from loading.html's WORKING hand orientation values.
+   pivot → turn → orient nested groups; orient holds the
+   dialed-in rotation that makes palm face the camera.
+   Plus +90° X rotation on pivot per user spec.
    ============================================================ */
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const HAND_GLB = 'models/jtoastie-rigged-hand.glb';
-// +90° around X = counter-clockwise looking from +X side (standard right-hand
-// rule). Tips the hand from palm-up flat to palm-toward-camera fingers-up.
-// Fine-tune from here with the on-screen rotation controls.
-const HAND_BASE_ROTATION = [Math.PI / 2, 0, 0];
-
-const COLOR_EDGE = 0xfbbf24;
-const COLOR_FILL = 0xd97706;
-const COLOR_NODE_CORE = 0xfffbeb;
-const COLOR_NODE_HALO = 0xfde68a;
 
 const POSES = ['give', 'receive', 'together', 'grow'];
 
@@ -91,28 +84,33 @@ const camera = new THREE.PerspectiveCamera(32, window.innerWidth / window.innerH
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.0;
 
-// Cinematic lighting
-scene.add(new THREE.AmbientLight(0xfff4e0, 0.55));
-const keyLight = new THREE.DirectionalLight(0xffd28a, 1.1);
-keyLight.position.set(3, 5, 4);
-scene.add(keyLight);
-const rimLight = new THREE.DirectionalLight(0x6cd5c0, 0.5);
-rimLight.position.set(-3, 1, -2);
-scene.add(rimLight);
-const underLight = new THREE.DirectionalLight(0xfbbf24, 0.3);
-underLight.position.set(0, -3, 2);
-scene.add(underLight);
+// Lighting from loading.html — warm amber rim + cool fill
+scene.add(new THREE.AmbientLight(0xfff2d6, 0.55));
+const key = new THREE.DirectionalLight(0xffcc88, 1.1);
+key.position.set(2.5, 3, 4);
+scene.add(key);
+const rim = new THREE.DirectionalLight(0xff8a3d, 0.9);
+rim.position.set(-3, 1.5, -2);
+scene.add(rim);
+const fillLight = new THREE.DirectionalLight(0x88aaff, 0.25);
+fillLight.position.set(-1, -2, 2);
+scene.add(fillLight);
 
+// Three-group rig from loading.html:
+//   pivot  — animated wobble + the +90° X rotation
+//   turn   — reserved (not used here, kept for parity)
+//   orient — the locked-in dialed orientation values
 const pivot = new THREE.Group();
 scene.add(pivot);
+const turn = new THREE.Group();
+pivot.add(turn);
+const orient = new THREE.Group();
+turn.add(orient);
 
-let boneRefs = null;
 let modelLoaded = false;
 let queuedPose = null;
-let modelRootRef = null;     // exposed so the on-screen rotation controls can drive it
+let boneRefs = null;
 
 /* ============================================================
    Load model
@@ -121,124 +119,72 @@ let modelRootRef = null;     // exposed so the on-screen rotation controls can d
 const loader = new GLTFLoader();
 loader.load(HAND_GLB, (gltf) => {
   const modelRoot = gltf.scene;
-  gltf.animations.length = 0;
+  if (gltf.animations?.length) gltf.animations.length = 0;
 
-  // Wireframe material — applied directly to SkinnedMesh so wireframe
-  // deforms with skinning.
-  const wireMat = new THREE.MeshStandardMaterial({
-    color: COLOR_EDGE,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.9,
-  });
-  const fillMat = new THREE.MeshStandardMaterial({
-    color: COLOR_FILL,
-    transparent: true,
-    opacity: 0.16,
-    depthWrite: false,
-    side: THREE.DoubleSide,
-  });
-
-  const bones = [];
+  // Material from loading.html — amber translucent with emissive glow
   modelRoot.traverse((obj) => {
     if (obj.isCamera || obj.isLight) obj.visible = false;
-    if (obj.isSkinnedMesh) {
-      // Two-pass render: faint solid fill underneath, wireframe over top
-      const fillMesh = obj.clone();
-      fillMesh.material = fillMat;
-      fillMesh.bind(obj.skeleton, obj.bindMatrix);
-      obj.parent.add(fillMesh);
-      obj.material = wireMat;
+    if (obj.isMesh || obj.isSkinnedMesh) {
+      obj.material = new THREE.MeshStandardMaterial({
+        color: 0xf59e0b,
+        emissive: 0x4a1f00,
+        emissiveIntensity: 0.25,
+        roughness: 0.4,
+        metalness: 0.1,
+        transparent: true,
+        opacity: 0.92,
+        side: THREE.DoubleSide,
+      });
     }
-    if (obj.isBone) bones.push(obj);
   });
 
-  pivot.add(modelRoot);
-  modelRoot.rotation.set(...HAND_BASE_ROTATION);
+  orient.add(modelRoot);
   modelRoot.updateMatrixWorld(true);
-  modelRootRef = modelRoot;     // expose for orientation controls
 
-  // Fit camera to model
+  // Mesh-only bbox for fit math
   const box = new THREE.Box3();
   let mc = 0;
-  modelRoot.traverse((obj) => {
-    if (obj.isMesh || obj.isSkinnedMesh) {
-      if (!obj.geometry.boundingBox) obj.geometry.computeBoundingBox();
-      const lb = obj.geometry.boundingBox.clone().applyMatrix4(obj.matrixWorld);
-      if (mc === 0) box.copy(lb); else box.union(lb);
+  modelRoot.traverse((o) => {
+    if (o.isMesh || o.isSkinnedMesh) {
+      if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+      const b = o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld);
+      if (mc === 0) box.copy(b); else box.union(b);
       mc++;
     }
   });
   const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
   const maxDim = Math.max(size.x, size.y, size.z) || 1;
-
   modelRoot.position.sub(center);
-  modelRoot.updateMatrixWorld(true);
 
+  // EXACT WORKING ORIENTATION VALUES from loading.html
+  orient.rotation.set(-6.0214, 1.8090, -1.8326);
+
+  // Base tilt on pivot — pivot also gets +90° X per user request, then a
+  // small static tilt for dynamism.
+  pivot.rotation.x = Math.PI / 2 + 0.05;
+  pivot.rotation.y = -0.15;
+
+  // Camera frame
   const fitDist = (maxDim / 2) / Math.tan((camera.fov * Math.PI / 180) / 2);
-  camera.position.set(0, 0, fitDist * 1.6);
-  camera.near = maxDim * 0.001;
+  camera.position.set(0, 0, fitDist * 1.85);
+  camera.near = maxDim * 0.01;
   camera.far = maxDim * 100;
   camera.updateProjectionMatrix();
   camera.lookAt(0, 0, 0);
 
-  // Glowing joint nodes — scale-compensated per bone
-  const fingerBones = bones.filter((b) => /^(Thumb|Index|Middle|Ring|Pinky)/.test(b.name) && !/_end$/.test(b.name));
-  const targetCoreR = maxDim * 0.013;
-  const targetHaloR = maxDim * 0.03;
-  const unitGeom = new THREE.SphereGeometry(1, 14, 12);
-  const coreMat = new THREE.MeshBasicMaterial({ color: COLOR_NODE_CORE });
-  const haloMat = new THREE.MeshBasicMaterial({
-    color: COLOR_NODE_HALO,
-    transparent: true,
-    opacity: 0.5,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-  });
-  const _v = new THREE.Vector3(), _q = new THREE.Quaternion(), _s = new THREE.Vector3();
-  const haloMeshes = [];
-  fingerBones.forEach((bone) => {
-    bone.updateMatrixWorld(true);
-    bone.matrixWorld.decompose(_v, _q, _s);
-    const avg = (Math.abs(_s.x) + Math.abs(_s.y) + Math.abs(_s.z)) / 3;
-    if (avg < 1e-9) return;
-    const core = new THREE.Mesh(unitGeom, coreMat);
-    core.scale.setScalar(targetCoreR / avg);
-    bone.add(core);
-    const halo = new THREE.Mesh(unitGeom, haloMat);
-    halo.scale.setScalar(targetHaloR / avg);
-    bone.add(halo);
-    haloMeshes.push({ halo, baseScale: targetHaloR / avg });
-  });
-
-  // Resolve pose-driving bone references
+  // Resolve bone refs and capture rest pose
   boneRefs = { fingers: {}, rest: {} };
-  let resolved = 0, missing = 0;
   Object.entries(BONE_MAP).forEach(([finger, names]) => {
-    boneRefs.fingers[finger] = names.map((n) => {
-      const b = modelRoot.getObjectByName(n);
-      if (!b) { console.warn(`bone missing: ${n}`); missing++; } else resolved++;
-      return b || null;
-    });
+    boneRefs.fingers[finger] = names.map((n) => modelRoot.getObjectByName(n) || null);
     boneRefs.rest[finger] = boneRefs.fingers[finger].map((b) => b ? b.rotation.x : 0);
   });
-  console.log(`[hand] ${resolved}/${resolved+missing} bones resolved`);
 
-  // Halo pulse — slight rhythmic glow
   modelLoaded = true;
-  haloMeshesRef = haloMeshes;
   if (queuedPose) { applyPose(queuedPose); queuedPose = null; }
 }, undefined, (err) => {
-  console.error('Failed to load hand GLB:', err);
-  const readout = document.getElementById('rot-readout');
-  if (readout) {
-    readout.textContent = 'MODEL LOAD FAILED — check console';
-    readout.style.color = '#ef4444';
-  }
+  console.error('GLB load error:', err);
 });
-
-let haloMeshesRef = [];
 
 /* ============================================================
    Pose driver + auto-cycle
@@ -247,7 +193,7 @@ let haloMeshesRef = [];
 let currentPoseIndex = 0;
 let cycleTimer = null;
 
-function applyPose(poseName, opts = {}) {
+function applyPose(poseName) {
   if (!modelLoaded) { queuedPose = poseName; return; }
   const pose = BONE_POSES[poseName];
   if (!pose || !boneRefs) return;
@@ -267,7 +213,6 @@ function applyPose(poseName, opts = {}) {
     });
   });
 
-  // Caption swap with fade
   const data = POSE_DATA[poseName];
   if (data) {
     poseLabel.classList.remove('is-show');
@@ -280,7 +225,6 @@ function applyPose(poseName, opts = {}) {
     }, 300);
   }
 
-  // Dot indicator
   poseDots.querySelectorAll('.dot').forEach((d) => {
     d.classList.toggle('is-active', d.dataset.pose === poseName);
   });
@@ -290,24 +234,17 @@ function advancePose() {
   currentPoseIndex = (currentPoseIndex + 1) % POSES.length;
   applyPose(POSES[currentPoseIndex]);
 }
-
 function startCycle() {
-  stopCycle();
+  if (cycleTimer) clearInterval(cycleTimer);
   cycleTimer = setInterval(advancePose, 3400);
 }
-function stopCycle() {
-  if (cycleTimer) clearInterval(cycleTimer);
-  cycleTimer = null;
-}
 
-// Click a dot to jump
 poseDots.addEventListener('click', (e) => {
   const dot = e.target.closest('.dot');
   if (!dot) return;
   const pose = dot.dataset.pose;
   currentPoseIndex = POSES.indexOf(pose);
   applyPose(pose);
-  // Reset cycle so we don't immediately advance away
   startCycle();
 });
 
@@ -328,15 +265,10 @@ window.addEventListener('resize', resize);
 const clock = new THREE.Clock();
 function renderLoop() {
   const t = clock.getElapsedTime();
-  // Gentle idle breathing on the pivot
-  pivot.rotation.y = Math.sin(t * 0.3) * 0.1;
-  pivot.position.y = Math.sin(t * 0.5) * (modelLoaded ? 0.02 : 0) * (camera.position.z * 0.05);
-  // Halo pulse
-  if (haloMeshesRef.length) {
-    const pulse = 0.92 + Math.sin(t * 1.8) * 0.08;
-    haloMeshesRef.forEach(({ halo, baseScale }) => {
-      halo.scale.setScalar(baseScale * pulse);
-    });
+  if (modelLoaded) {
+    // Subtle wobble on pivot (preserves the +90° X base rotation)
+    pivot.rotation.x = Math.PI / 2 + 0.05 + Math.sin(t * 0.4) * 0.04;
+    pivot.rotation.y = -0.15 + Math.sin(t * 0.6) * 0.08;
   }
   renderer.render(scene, camera);
   requestAnimationFrame(renderLoop);
@@ -347,7 +279,6 @@ renderLoop();
    Boot
    ============================================================ */
 
-// Set initial caption
 poseLabel.textContent = POSE_DATA.give.label;
 poseSub.textContent = POSE_DATA.give.sub;
 setTimeout(() => {
@@ -357,53 +288,3 @@ setTimeout(() => {
 
 applyPose('give');
 startCycle();
-
-/* ============================================================
-   Orientation controls
-   Click X/Y/Z ± buttons to nudge modelRoot's rotation in 15° steps.
-   Readout shows current rotation in degrees. Reset zeroes everything.
-   Once the right orientation is dialed in, the values can be copied
-   into HAND_BASE_ROTATION at the top of this file.
-   ============================================================ */
-
-const rotControls = document.getElementById('rot-controls');
-const rotReadout = document.getElementById('rot-readout');
-const rotReset = document.getElementById('rot-reset');
-
-function updateReadout() {
-  if (!modelRootRef) return;
-  const r = modelRootRef.rotation;
-  const deg = (rad) => Math.round(rad * 180 / Math.PI);
-  rotReadout.textContent = `x: ${deg(r.x)}°  y: ${deg(r.y)}°  z: ${deg(r.z)}°`;
-}
-
-rotControls.addEventListener('click', (e) => {
-  const btn = e.target.closest('button[data-axis]');
-  if (!btn) return;
-  const axis = btn.dataset.axis;
-  const dir = parseInt(btn.dataset.dir, 10);
-  console.log(`[rot] click ${axis}${dir > 0 ? '+' : '-'}, modelRootRef=`, modelRootRef);
-  if (!modelRootRef) {
-    rotReadout.textContent = 'model not loaded yet — try again in a sec';
-    return;
-  }
-  modelRootRef.rotation[axis] += dir * Math.PI / 12;  // 15° steps
-  updateReadout();
-  // Flash button so user has visual feedback
-  btn.style.background = 'rgba(245, 158, 11, 0.5)';
-  setTimeout(() => { btn.style.background = ''; }, 150);
-});
-
-rotReset.addEventListener('click', () => {
-  if (!modelRootRef) return;
-  modelRootRef.rotation.set(0, 0, 0);
-  updateReadout();
-});
-
-// Refresh readout after load completes
-const readoutInterval = setInterval(() => {
-  if (modelRootRef) {
-    updateReadout();
-    clearInterval(readoutInterval);
-  }
-}, 200);
