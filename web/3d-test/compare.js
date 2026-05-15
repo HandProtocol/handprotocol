@@ -94,10 +94,13 @@ const POSES = {
 
 const POSE_SEQUENCE = ['give', 'receive', 'together', 'grow'];
 
+// Per-model orientation overrides (radians, applied to modelRoot.rotation
+// BEFORE bbox computation). The right values depend on how the source FBX
+// was authored — this is iterated visually.
 const MODELS = [
   { key: 'elena-rigged',     file: 'models/rigged_hand.glb',           rigged: true  },
-  { key: 'jtoastie-rigged',  file: 'models/jtoastie-rigged-hand.glb',  rigged: true  },
-  { key: 'realistic-rigged', file: 'models/realistic-hand.glb',        rigged: true  },
+  { key: 'jtoastie-rigged',  file: 'models/jtoastie-rigged-hand.glb',  rigged: true,  baseRotation: [-Math.PI/2, 0, 0] },
+  { key: 'realistic-rigged', file: 'models/realistic-hand.glb',        rigged: true,  baseRotation: [-Math.PI/2, 0, 0] },
   { key: 'skeletal-static',  file: 'models/skeletal-hand.glb',         rigged: false },
   { key: 'google-static',    file: 'models/google-poly-hand.glb',      rigged: false },
 ];
@@ -113,7 +116,7 @@ const loader = new GLTFLoader();
    Setup one card
    ============================================================ */
 
-async function setupModelCard({ key, file, rigged }) {
+async function setupModelCard({ key, file, rigged, baseRotation }) {
   const cardEl = document.querySelector(`.model-card[data-model="${key}"]`);
   if (!cardEl) return null;
   const canvas = cardEl.querySelector('canvas');
@@ -133,6 +136,21 @@ async function setupModelCard({ key, file, rigged }) {
   const debugEl = document.createElement('div');
   debugEl.className = 'model-card__debug';
   wrap.appendChild(debugEl);
+
+  // Rotation controls — click to nudge model orientation in 15° steps.
+  // Useful for dialing in the right "facing" interactively.
+  const rotEl = document.createElement('div');
+  rotEl.className = 'model-card__rot';
+  rotEl.innerHTML = `
+    <button data-rot="x" data-dir="-1" title="Rotate X-">X−</button>
+    <button data-rot="x" data-dir="1"  title="Rotate X+">X+</button>
+    <button data-rot="y" data-dir="-1" title="Rotate Y-">Y−</button>
+    <button data-rot="y" data-dir="1"  title="Rotate Y+">Y+</button>
+    <button data-rot="z" data-dir="-1" title="Rotate Z-">Z−</button>
+    <button data-rot="z" data-dir="1"  title="Rotate Z+">Z+</button>
+    <span class="model-card__rot-readout">0, 0, 0</span>
+  `;
+  wrap.appendChild(rotEl);
 
   // ----- three.js setup -----
   const scene = new THREE.Scene();
@@ -197,6 +215,12 @@ async function setupModelCard({ key, file, rigged }) {
     });
 
     pivot.add(modelRoot);
+
+    // Apply per-model orientation override BEFORE bbox so bbox/recenter
+    // accounts for the rotated geometry.
+    if (baseRotation) {
+      modelRoot.rotation.set(baseRotation[0], baseRotation[1], baseRotation[2]);
+    }
     modelRoot.updateMatrixWorld(true);
 
     // Mesh-only bbox (excludes cameras/lights/empties that ship inside FBX
@@ -309,6 +333,23 @@ async function setupModelCard({ key, file, rigged }) {
 
     debugEl.textContent = `bbox ${size.x.toFixed(2)}×${size.y.toFixed(2)}×${size.z.toFixed(2)} · meshes ${meshCount} · bones ${bones.length}`;
     if (loadingEl) loadingEl.classList.add('hidden');
+
+    // Wire rotation controls
+    const readoutEl = rotEl.querySelector('.model-card__rot-readout');
+    function updateReadout() {
+      const r = modelRoot.rotation;
+      const deg = (rad) => Math.round(rad * 180 / Math.PI);
+      readoutEl.textContent = `${deg(r.x)}°, ${deg(r.y)}°, ${deg(r.z)}°`;
+    }
+    updateReadout();
+    rotEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      const axis = btn.dataset.rot;
+      const dir = parseInt(btn.dataset.dir, 10);
+      modelRoot.rotation[axis] += dir * Math.PI / 12; // 15° steps
+      updateReadout();
+    });
   } catch (err) {
     console.error(`Failed to load ${file}:`, err);
     if (loadingEl) loadingEl.textContent = 'load failed';
@@ -363,9 +404,9 @@ async function setupModelCard({ key, file, rigged }) {
   const clock = new THREE.Clock();
   function render() {
     const t = clock.getElapsedTime();
-    // Rigged hands rotate VERY slowly so deformation is the focus.
-    // Static hands rotate faster since rotation IS the show.
-    pivot.rotation.y += (rigged ? 0.0015 : 0.006);
+    // Rigged hands hold a fixed orientation so the chosen "facing" reads.
+    // Static hands rotate so we can see them in the round.
+    pivot.rotation.y += (rigged ? 0 : 0.006);
     renderer.render(scene, camera);
     requestAnimationFrame(render);
   }
