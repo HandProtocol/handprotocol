@@ -8,7 +8,9 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const HAND_GLB = 'models/jtoastie-rigged-hand.glb';
-const HAND_BASE_ROTATION = [-Math.PI / 2, 0, 0];
+// Start from neutral — user dials in orientation via on-screen controls.
+// Bake the final picked values back here once they're chosen.
+const HAND_BASE_ROTATION = [0, 0, 0];
 
 const COLOR_EDGE = 0xfbbf24;
 const COLOR_FILL = 0xd97706;
@@ -104,14 +106,12 @@ underLight.position.set(0, -3, 2);
 scene.add(underLight);
 
 const pivot = new THREE.Group();
-// 90° clockwise rotation around the view axis (screen-space CW).
-// This is the orientation correction; the render loop adds idle Y-sway on top.
-pivot.rotation.z = -Math.PI / 2;
 scene.add(pivot);
 
 let boneRefs = null;
 let modelLoaded = false;
 let queuedPose = null;
+let modelRootRef = null;     // exposed so the on-screen rotation controls can drive it
 
 /* ============================================================
    Load model
@@ -155,6 +155,7 @@ loader.load(HAND_GLB, (gltf) => {
   pivot.add(modelRoot);
   modelRoot.rotation.set(...HAND_BASE_ROTATION);
   modelRoot.updateMatrixWorld(true);
+  modelRootRef = modelRoot;     // expose for orientation controls
 
   // Fit camera to model
   const box = new THREE.Box3();
@@ -350,3 +351,45 @@ setTimeout(() => {
 
 applyPose('give');
 startCycle();
+
+/* ============================================================
+   Orientation controls
+   Click X/Y/Z ± buttons to nudge modelRoot's rotation in 15° steps.
+   Readout shows current rotation in degrees. Reset zeroes everything.
+   Once the right orientation is dialed in, the values can be copied
+   into HAND_BASE_ROTATION at the top of this file.
+   ============================================================ */
+
+const rotControls = document.getElementById('rot-controls');
+const rotReadout = document.getElementById('rot-readout');
+const rotReset = document.getElementById('rot-reset');
+
+function updateReadout() {
+  if (!modelRootRef) return;
+  const r = modelRootRef.rotation;
+  const deg = (rad) => Math.round(rad * 180 / Math.PI);
+  rotReadout.textContent = `x: ${deg(r.x)}°  y: ${deg(r.y)}°  z: ${deg(r.z)}°`;
+}
+
+rotControls.addEventListener('click', (e) => {
+  const btn = e.target.closest('button[data-axis]');
+  if (!btn || !modelRootRef) return;
+  const axis = btn.dataset.axis;
+  const dir = parseInt(btn.dataset.dir, 10);
+  modelRootRef.rotation[axis] += dir * Math.PI / 12;  // 15° steps
+  updateReadout();
+});
+
+rotReset.addEventListener('click', () => {
+  if (!modelRootRef) return;
+  modelRootRef.rotation.set(0, 0, 0);
+  updateReadout();
+});
+
+// Refresh readout after load completes
+const readoutInterval = setInterval(() => {
+  if (modelRootRef) {
+    updateReadout();
+    clearInterval(readoutInterval);
+  }
+}, 200);

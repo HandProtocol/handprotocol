@@ -148,3 +148,56 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .stage__pose, .stage__sub { transition: none; }
 }
+
+/* ----- Rotation controls (orientation dial-in) ----- */
+
+.rot-controls {
+  position: fixed;
+  top: 4rem;
+  right: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0.875rem;
+  background: rgba(12, 8, 4, 0.7);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  font-family: ui-monospace, 'JetBrains Mono', monospace;
+  z-index: 10;
+}
+.rot-row {
+  display: flex;
+  gap: 6px;
+}
+.rot-controls button {
+  width: 44px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(12, 18, 32, 0.6);
+  color: var(--color-accent-warm);
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 150ms;
+}
+.rot-controls button:hover {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: var(--color-accent-warm);
+}
+.rot-readout {
+  font-size: 0.6875rem;
+  color: rgba(245, 158, 11, 0.85);
+  text-align: center;
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+.rot-reset {
+  margin-top: 4px;
+  font-size: 0.6875rem;
+  color: rgba(249, 250, 251, 0.6) !important;
+  border-color: rgba(249, 250, 251, 0.15) !important;
+}
