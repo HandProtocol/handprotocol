@@ -121,8 +121,12 @@ loader.load(HAND_GLB, (gltf) => {
   const modelRoot = gltf.scene;
   if (gltf.animations?.length) gltf.animations.length = 0;
 
-  // Two-pass render: solid amber base + wireframe overlay so we keep
-  // the warm glow but get the wireframe protocol look back on top.
+  // Two-pass render: solid amber base + EdgesGeometry overlay.
+  // EdgesGeometry only draws edges where adjacent face angle exceeds the
+  // threshold (20°) — gives clean angular silhouette lines instead of every
+  // triangle face. That's the "architectural diagram" wireframe style.
+  // Trade-off: edges don't deform with skin (they stay at rest pose), but
+  // for a low-poly hand at slow pose transitions it reads fine.
   modelRoot.traverse((obj) => {
     if (obj.isCamera || obj.isLight) obj.visible = false;
     if (obj.isMesh || obj.isSkinnedMesh) {
@@ -133,22 +137,17 @@ loader.load(HAND_GLB, (gltf) => {
         roughness: 0.4,
         metalness: 0.1,
         transparent: true,
-        opacity: 0.65,         // dimmed slightly so wireframe reads on top
+        opacity: 0.55,
         side: THREE.DoubleSide,
       });
 
-      // Wireframe clone — same skinning, deforms with poses
-      const wireMesh = obj.clone();
-      wireMesh.material = new THREE.MeshStandardMaterial({
-        color: 0xfde68a,        // brighter cream amber
-        wireframe: true,
+      const edgeGeom = new THREE.EdgesGeometry(obj.geometry, 20);
+      const edges = new THREE.LineSegments(edgeGeom, new THREE.LineBasicMaterial({
+        color: 0xfde68a,
         transparent: true,
-        opacity: 0.55,
-      });
-      if (obj.isSkinnedMesh) {
-        wireMesh.bind(obj.skeleton, obj.bindMatrix);
-      }
-      obj.parent.add(wireMesh);
+        opacity: 0.85,
+      }));
+      obj.add(edges);
     }
   });
 
