@@ -117,10 +117,10 @@
   .rings svg { width: 100%; height: 100%; overflow: visible; }
   .ring-spin { transform-origin: 50% 50%; transform-box: fill-box; }
 
-  /* hand morph svg */
+  /* hand 3d canvas */
   .hand {
     position: relative;
-    width: 52%;
+    width: 58%;
     aspect-ratio: 1;
     display: grid;
     place-items: center;
@@ -128,14 +128,7 @@
       drop-shadow(0 0 18px var(--amber-glow))
       drop-shadow(0 0 60px rgba(217, 119, 6, 0.18));
   }
-  .hand svg { width: 100%; height: 100%; overflow: visible; }
-  .hand-path {
-    fill: url(#handGradient);
-    stroke: var(--amber-soft);
-    stroke-width: 1.2;
-    stroke-linejoin: round;
-    stroke-linecap: round;
-  }
+  .hand canvas { width: 100%; height: 100%; display: block; }
 
   /* letter readout under the circle */
   .letter-stack {
@@ -266,6 +259,7 @@
 
   /* hidden morph targets */
   .morph-targets { position: absolute; width: 0; height: 0; overflow: hidden; }
+
 </style>
 </head>
 <body>
@@ -384,11 +378,9 @@
     </svg>
   </div>
 
-  <!-- morphing hand silhouette -->
+  <!-- 3D hand (j-toastie rigged) -->
   <div class="hand">
-    <svg viewBox="0 0 200 240" preserveAspectRatio="xMidYMid meet">
-      <path id="handMorph" class="hand-path" d="" />
-    </svg>
+    <canvas id="handCanvas"></canvas>
   </div>
 
   <!-- big letter cross-fading under the hand -->
@@ -419,20 +411,27 @@
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 </div>
 
-<!-- flubber for bulletproof SVG path interpolation -->
-<script src="https://cdn.jsdelivr.net/npm/flubber@0.4.2/build/flubber.min.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
 <script type="module">
-  let _animejs;
+  let _animejs, THREE, GLTFLoader;
   try {
     _animejs = await import('https://cdn.jsdelivr.net/npm/animejs@4.0.2/lib/anime.esm.js');
+    THREE = await import('three');
+    ({ GLTFLoader } = await import('three/addons/loaders/GLTFLoader.js'));
   } catch (e) {
-    console.error('anime.js import failed', e);
+    console.error('module import failed', e);
     document.body.insertAdjacentHTML('beforeend',
-      `<div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;background:#300;color:#fcc;font-family:monospace;z-index:9999">anime.js load failed: ${e.message}</div>`);
+      `<div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;background:#300;color:#fcc;font-family:monospace;z-index:9999">module load failed: ${e.message}</div>`);
     throw e;
   }
-  const { animate, createTimeline, svg, utils } = _animejs;
-  console.log('anime.js v4 loaded. flubber:', typeof window.flubber);
+  const { animate } = _animejs;
 
   /* ---------- generate outer compass ticks ---------- */
   const tickG = document.getElementById('outerTicks');
@@ -460,70 +459,232 @@
   animate('#ringMid',   { rotate: -360, duration: 24000, easing: 'linear', loop: true });
   animate('#ringSweep', { rotate: 360, duration: 6000,  easing: 'linear', loop: true });
 
-  /* ---------- hand morph through H → A → N → D ----------
-     ASL fingerspelling, front of right hand, palm toward viewer.
-     Each path is a stylized silhouette in a 200x240 viewBox.
-  */
-  const PATHS = {
-    // H: index + middle fingers extended together
-    H: 'M 58,228 L 58,150 C 58,140 65,130 75,130 L 75,42 C 75,28 90,28 90,42 L 90,130 C 95,130 100,130 105,130 L 105,42 C 105,28 120,28 120,42 L 120,130 C 130,130 142,140 142,150 L 142,228 Z',
-
-    // A: closed fist, thumb resting on the side
-    A: 'M 58,228 L 58,150 C 58,120 78,100 102,100 C 124,100 138,120 138,148 C 150,148 156,158 156,170 C 156,182 150,190 138,192 L 138,228 L 58,228 Z',
-
-    // N: fist with small thumb-tip bump centered up top
-    N: 'M 58,228 L 58,150 C 58,118 78,98 90,98 L 90,80 C 90,68 110,68 110,80 L 110,98 C 122,98 142,118 142,150 L 142,228 L 58,228 Z',
-
-    // D: index finger up, others curled into an O at right of palm
-    D: 'M 58,228 L 58,150 C 58,140 65,130 78,128 L 78,42 C 78,28 100,28 100,42 L 100,128 C 124,132 142,150 142,178 C 142,206 122,228 96,228 L 58,228 Z'
-  };
-
+  /* ---------- 3D hand: j-toastie rigged GLB ---------- */
   const letters = ['H', 'A', 'N', 'D'];
   const letterEls = [...document.querySelectorAll('#letterSeq span')];
   const bigEls = [...document.querySelectorAll('#bigLetter span')];
-  const handPath = document.querySelector('#handMorph');
   let current = 0;
-
-  // set initial shape
-  handPath.setAttribute('d', PATHS.H);
-
   function setActive(i) {
     letterEls.forEach((el, k) => el.classList.toggle('active', k === i));
     bigEls.forEach((el, k) => el.classList.toggle('active', k === i));
   }
   setActive(0);
 
-  /* Morph driven by flubber.interpolate (handles different path topologies).
-     RAF drives a t value 0→1 with cubic ease, then writes the interpolated d. */
-  const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  // Bone names for j-toastie hand. Curl on X axis (positive = flex toward palm).
+  const BONE_MAP = {
+    thumb:  ['ThumbRoot', 'ThumbMiddle', 'ThumbTop'],
+    index:  ['IndexF_lower', 'IndexF_middle', 'IndexF_tip'],
+    middle: ['MiddleF_lower', 'MiddleF_middle', 'MiddleF_tip'],
+    ring:   ['RingF_lower', 'RingF_middle', 'RingF_tip'],
+    pinky:  ['PinkyF_lower', 'PinkyF_middle', 'PinkyF_tip'],
+  };
+  const CURL_AXIS = 'x';
+  const CURL_SIGN = 1;
 
-  function morphHand(fromLetter, toLetter, dur = 900) {
-    if (!window.flubber) {
-      console.warn('flubber not loaded, direct swap');
-      handPath.setAttribute('d', PATHS[toLetter]);
-      return;
+  // ASL letter poses — curl values per finger × phalanx (radians, relative to rest).
+  // 0 = extended, ~1.3 = fully curled to palm. `turn` is hand Y-rotation (radians).
+  const POSES = {
+    H: { // index + middle extended, others curled, thumb tucked across palm
+      turn: -0.4,      // turn left from N
+      thumb:  [-0.4, 1.0, 0.8],
+      index:  [0, 0, 0],
+      middle: [0, 0, 0],
+      ring:   [1.4, 1.6, 1.4],
+      pinky:  [1.4, 1.6, 1.4],
+    },
+    A: { // closed fist, thumb resting up the side
+      turn:  0.4,      // turn right from N
+      thumb:  [0, 0.1, 0.1],
+      index:  [1.4, 1.6, 1.4],
+      middle: [1.4, 1.6, 1.4],
+      ring:   [1.4, 1.6, 1.4],
+      pinky:  [1.4, 1.6, 1.4],
+    },
+    N: { // closed fist, thumb tucked between middle and ring — palm forward anchor
+      turn:  0,
+      thumb:  [0.6, 1.0, 0.7],
+      index:  [1.4, 1.6, 1.4],
+      middle: [1.4, 1.6, 1.4],
+      ring:   [1.4, 1.6, 1.4],
+      pinky:  [1.4, 1.6, 1.4],
+    },
+    D: { // index extended up, others curl to touch thumb in an O
+      turn: -0.4,      // turn left from N
+      thumb:  [0.5, 1.1, 1.0],
+      index:  [0, 0, 0],
+      middle: [1.4, 1.5, 1.3],
+      ring:   [1.4, 1.6, 1.4],
+      pinky:  [1.4, 1.6, 1.4],
+    },
+  };
+
+  /* Three.js scene */
+  const canvas3d = document.getElementById('handCanvas');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 1000);
+  const renderer = new THREE.WebGLRenderer({ canvas: canvas3d, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+  // Lighting: warm amber rim + cool fill for depth
+  scene.add(new THREE.AmbientLight(0xfff2d6, 0.55));
+  const key = new THREE.DirectionalLight(0xffcc88, 1.1);
+  key.position.set(2.5, 3, 4);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0xff8a3d, 0.9);
+  rim.position.set(-3, 1.5, -2);
+  scene.add(rim);
+  const fillLight = new THREE.DirectionalLight(0x88aaff, 0.25);
+  fillLight.position.set(-1, -2, 2);
+  scene.add(fillLight);
+
+  const pivot = new THREE.Group();
+  scene.add(pivot);
+  // Turn group: per-pose left/right rotation animated each cycle.
+  const turn = new THREE.Group();
+  pivot.add(turn);
+  // Orient group: static locked-in rotation. Modified AFTER bbox recenter.
+  const orient = new THREE.Group();
+  turn.add(orient);
+
+  // Resize handling
+  function resize3d() {
+    const rect = canvas3d.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    renderer.setSize(rect.width, rect.height, false);
+    camera.aspect = rect.width / rect.height;
+    camera.updateProjectionMatrix();
+  }
+  resize3d();
+  new ResizeObserver(resize3d).observe(canvas3d);
+
+  // Load the rigged hand
+  const loader = new GLTFLoader();
+  let modelRoot = null;
+  let boneRefs = null;
+
+  loader.load('models/jtoastie-rigged-hand.glb', (gltf) => {
+    modelRoot = gltf.scene;
+    if (gltf.animations?.length) gltf.animations.length = 0;
+
+    // Material treatment — amber translucent fill with edge highlights
+    modelRoot.traverse((obj) => {
+      if (obj.isCamera || obj.isLight) obj.visible = false;
+      if (obj.isMesh || obj.isSkinnedMesh) {
+        obj.material = new THREE.MeshStandardMaterial({
+          color: 0xf59e0b,
+          emissive: 0x4a1f00,
+          emissiveIntensity: 0.25,
+          roughness: 0.4,
+          metalness: 0.1,
+          transparent: true,
+          opacity: 0.92,
+          side: THREE.DoubleSide,
+        });
+      }
+    });
+
+    // Add into orient group; keep orient rotation 0 for bbox math, set after recenter.
+    orient.add(modelRoot);
+    modelRoot.updateMatrixWorld(true);
+
+    // Compute bbox from meshes only (skip stray empties)
+    const box = new THREE.Box3();
+    let mc = 0;
+    modelRoot.traverse((o) => {
+      if (o.isMesh || o.isSkinnedMesh) {
+        if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+        const b = o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld);
+        if (mc === 0) box.copy(b); else box.union(b);
+        mc++;
+      }
+    });
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
+    modelRoot.position.sub(center);
+
+    // Locked-in orientation for j-toastie hand (palm forward, fingers up).
+    // Y component includes N's +0.5 turn baked in so N = palm forward at turn 0.
+    orient.rotation.set(-6.0214, 1.8090, -1.8326);
+
+    // Tilt slightly so palm faces viewer + a touch of dynamism
+    pivot.rotation.y = -0.15;
+    pivot.rotation.x = 0.05;
+
+    // Frame camera
+    const fitDist = (maxDim / 2) / Math.tan((camera.fov * Math.PI / 180) / 2);
+    camera.position.set(0, 0, fitDist * 1.85);
+    camera.near = maxDim * 0.01;
+    camera.far = maxDim * 100;
+    camera.updateProjectionMatrix();
+    camera.lookAt(0, 0, 0);
+
+    // Resolve bone refs and capture rest pose
+    boneRefs = { fingers: {}, rest: {} };
+    Object.entries(BONE_MAP).forEach(([finger, names]) => {
+      boneRefs.fingers[finger] = names.map((n) => modelRoot.getObjectByName(n) || null);
+      boneRefs.rest[finger] = boneRefs.fingers[finger].map((b) => b ? b.rotation[CURL_AXIS] : 0);
+    });
+    // Apply initial pose (H) without animation
+    applyPose('H', 0);
+    setTimeout(cycle, 1100);
+  }, undefined, (err) => {
+    console.error('GLB load error', err);
+  });
+
+  function applyPose(letter, duration = 900) {
+    if (!boneRefs) return;
+    const pose = POSES[letter];
+    // Bones: iterate finger curl tables only (skip `turn` and any non-finger keys)
+    Object.entries(pose).forEach(([finger, curls]) => {
+      if (!Array.isArray(curls)) return;
+      const refs = boneRefs.fingers[finger];
+      const rests = boneRefs.rest[finger];
+      if (!refs) return;
+      refs.forEach((bone, i) => {
+        if (!bone) return;
+        const target = rests[i] + curls[i] * CURL_SIGN;
+        if (duration <= 0) {
+          bone.rotation[CURL_AXIS] = target;
+          return;
+        }
+        animate(bone.rotation, {
+          [CURL_AXIS]: target,
+          duration,
+          easing: 'easeInOutQuad',
+        });
+      });
+    });
+    // Turn: animate the turn group's Y rotation to the letter's turn value
+    const tgtTurn = pose.turn ?? 0;
+    if (duration <= 0) {
+      turn.rotation.y = tgtTurn;
+    } else {
+      animate(turn.rotation, { y: tgtTurn, duration, easing: 'easeInOutQuad' });
     }
-    const interp = window.flubber.interpolate(PATHS[fromLetter], PATHS[toLetter], { maxSegmentLength: 4 });
-    const t0 = performance.now();
-    function step(now) {
-      const raw = Math.min(1, (now - t0) / dur);
-      const t = easeInOutCubic(raw);
-      handPath.setAttribute('d', interp(t));
-      if (raw < 1) requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
   }
 
+  // Cycle through H → A → N → D, driving both bone curl pose and Y turn
   function cycle() {
     const next = (current + 1) % 4;
-    morphHand(letters[current], letters[next], 900);
-    setTimeout(() => {
-      current = next;
-      setActive(current);
-    }, 250);
-    setTimeout(cycle, 1700);
+    applyPose(letters[next], 850);
+    setTimeout(() => { current = next; setActive(current); }, 250);
+    setTimeout(cycle, 1900);
   }
-  setTimeout(cycle, 900);
+
+  // Render loop — gentle pivot wobble for life
+  const clock = new THREE.Clock();
+  function render() {
+    const t = clock.getElapsedTime();
+    if (modelRoot) {
+      pivot.rotation.y = -0.15 + Math.sin(t * 0.6) * 0.08;
+      pivot.rotation.x =  0.05 + Math.sin(t * 0.4) * 0.04;
+    }
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+  }
+  render();
 
   /* ---------- progress bar ---------- */
   const fill = document.getElementById('progressFill');
