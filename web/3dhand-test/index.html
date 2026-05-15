@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hand — HAND Protocol</title>
+  <meta name="description" content="Sign-language hand in wireframe, cycling through give, receive, together, grow.">
+  <meta name="robots" content="noindex,nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <canvas id="hand-canvas"></canvas>
+
+  <div class="stage">
+    <div class="stage__caption">
+      <div class="stage__pose" id="pose-label">Give</div>
+      <div class="stage__sub" id="pose-sub">An act of giving forward, before any return is named.</div>
+    </div>
+
+    <div class="stage__dots" id="pose-dots">
+      <span class="dot is-active" data-pose="give"></span>
+      <span class="dot" data-pose="receive"></span>
+      <span class="dot" data-pose="together"></span>
+      <span class="dot" data-pose="grow"></span>
+    </div>
+  </div>
+
+  <div class="meta">
+    <a class="meta__back" href="../foundation-campaign/">&larr; HAND Protocol</a>
+    <div class="meta__credit">3D model: <em>Rigged Hand</em> by J-Toastie · CC-BY · <a href="https://poly.pizza/m/BEy8jbxm6A" target="_blank" rel="noopener">Poly Pizza</a></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
