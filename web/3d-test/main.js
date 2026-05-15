@@ -1,20 +1,74 @@
 /* ============================================================
    3D Hand Test — three spikes, one scroll story
-   Spike A: Three.js procedural rigged hand
+   Spike A: Three.js with rigged J-Toastie GLB (wireframe + glowing nodes)
    Spike B: SVG hand with anime.js joint rotations
    Spike C: Frame sequence crossfade
    ============================================================ */
 
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
 const POSES = ['give', 'receive', 'together', 'grow'];
 const POSE_LABEL = { give: 'Give', receive: 'Receive', together: 'Together', grow: 'Grow' };
 
+// Sign-language pose curl values (radians) per finger × phalanx.
+// Driven onto J-Toastie's rig — same bone-axis convention as the
+// procedural hand (curl on rotation.x).
+const BONE_POSES = {
+  give: {
+    thumb:  [-0.3, 0.2, 0.2],
+    index:  [0.35, 0.5, 0.45],
+    middle: [0.35, 0.5, 0.45],
+    ring:   [0.4, 0.55, 0.45],
+    pinky:  [0.45, 0.6, 0.5],
+  },
+  receive: {
+    thumb:  [-0.55, 0.0, 0.0],
+    index:  [-0.05, -0.05, 0.0],
+    middle: [-0.05, -0.05, 0.0],
+    ring:   [-0.05, -0.05, 0.0],
+    pinky:  [-0.05, -0.05, 0.0],
+  },
+  together: {
+    thumb:  [-0.7, 0.8, 0.7],
+    index:  [1.3, 1.5, 1.3],
+    middle: [1.3, 1.5, 1.3],
+    ring:   [1.3, 1.5, 1.3],
+    pinky:  [1.3, 1.5, 1.3],
+  },
+  grow: {
+    thumb:  [-0.5, 0.6, 0.6],
+    index:  [-0.05, -0.05, 0.0],
+    middle: [1.3, 1.5, 1.3],
+    ring:   [1.3, 1.5, 1.3],
+    pinky:  [1.3, 1.5, 1.3],
+  },
+};
+
+// J-Toastie's bone names (Thumb has only 3 phalanges; we map proximal/middle/distal)
+const BONE_MAP = {
+  thumb:  ['ThumbRoot', 'ThumbMiddle', 'ThumbTop'],
+  index:  ['IndexF_lower', 'IndexF_middle', 'IndexF_tip'],
+  middle: ['MiddleF_lower', 'MiddleF_middle', 'MiddleF_tip'],
+  ring:   ['RingF_lower', 'RingF_middle', 'RingF_tip'],
+  pinky:  ['PinkyF_lower', 'PinkyF_middle', 'PinkyF_tip'],
+};
+
 /* ============================================================
-   SPIKE A — Three.js procedural hand
-   Builds a parented bone hierarchy. Each finger has 3 phalanges
-   (thumb has 2). setPose() animates rotations via anime.js.
+   SPIKE A — Three.js with J-Toastie rigged GLB
+   Wireframe + glowing joint nodes, scroll-driven bone poses.
+   The wireframe material is applied to the SkinnedMesh itself so the
+   wireframe deforms with the skin (unlike EdgesGeometry which is static).
    ============================================================ */
+
+const COLOR_EDGE = 0xfbbf24;        // warm amber
+const COLOR_FILL = 0xd97706;        // accent
+const COLOR_NODE_CORE = 0xfffbeb;   // pale cream
+const COLOR_NODE_HALO = 0xfde68a;   // pale gold
+
+const HAND_GLB = 'models/jtoastie-rigged-hand.glb';
+// FBX2glTF default orientation needs a 90° X flip to stand the hand upright.
+const HAND_BASE_ROTATION = [-Math.PI / 2, 0, 0];
 
 function initThreeSpike() {
   const canvas = document.getElementById('three-canvas');
@@ -23,9 +77,7 @@ function initThreeSpike() {
   const scene = new THREE.Scene();
   scene.background = null;
 
-  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-  camera.position.set(0, 0.5, 8);
-  camera.lookAt(0, 0, 0);
+  const camera = new THREE.PerspectiveCamera(35, 1, 0.01, 10000);
 
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -33,273 +85,199 @@ function initThreeSpike() {
     alpha: true,
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.1;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-  // Lighting — warm key, cool rim, soft ambient
-  scene.add(new THREE.AmbientLight(0xfff4e0, 0.45));
-
-  const keyLight = new THREE.DirectionalLight(0xffd28a, 1.3);
+  // Lighting — soft ambient + warm key + cool rim so the wireframe
+  // gets subtle depth shading without losing the x-ray feel.
+  scene.add(new THREE.AmbientLight(0xfff4e0, 0.7));
+  const keyLight = new THREE.DirectionalLight(0xffd28a, 0.8);
   keyLight.position.set(4, 6, 5);
-  keyLight.castShadow = true;
-  keyLight.shadow.mapSize.set(1024, 1024);
-  keyLight.shadow.camera.near = 0.5;
-  keyLight.shadow.camera.far = 30;
   scene.add(keyLight);
-
-  const rimLight = new THREE.DirectionalLight(0x6cd5c0, 0.6);
+  const rimLight = new THREE.DirectionalLight(0x6cd5c0, 0.4);
   rimLight.position.set(-4, 2, -3);
   scene.add(rimLight);
 
-  // Material — warm amber, slightly soft
-  const skinMaterial = new THREE.MeshStandardMaterial({
-    color: 0xe8a560,
-    roughness: 0.55,
-    metalness: 0.05,
-  });
+  // Pivot we rotate; hand mesh + nodes both attach inside
+  const pivot = new THREE.Group();
+  scene.add(pivot);
 
-  // ---------- Build the hand ----------
-  const hand = new THREE.Group();
-  scene.add(hand);
+  // State filled after async load
+  let boneRefs = null;   // { fingers: { thumb: [bone,...], ... }, rest: {...} }
+  let modelLoaded = false;
+  let queuedPose = null;
 
-  // Palm
-  const palmGeometry = new THREE.BoxGeometry(2.0, 2.4, 0.55);
-  const palm = new THREE.Mesh(palmGeometry, skinMaterial);
-  palm.castShadow = true;
-  palm.receiveShadow = true;
-  hand.add(palm);
+  // ---------- Load J-Toastie GLB ----------
+  const loader = new GLTFLoader();
+  loader.load(HAND_GLB, (gltf) => {
+    const modelRoot = gltf.scene;
+    // Discard the baked animation that ships with the model
+    gltf.animations.length = 0;
 
-  // Build a finger: returns { root, segments: [proximal, middle, distal] }
-  // root attaches to palm at base position; rotating root curls whole finger
-  function buildFinger({ name, basePos, lengths, widths, hasMiddle = true }) {
-    const segments = [];
-    const root = new THREE.Group();
-    root.position.set(...basePos);
-    palm.add(root);
-
-    let parent = root;
-    let yOffset = 0;
-    const phalanges = hasMiddle ? ['proximal', 'middle', 'distal'] : ['proximal', 'distal'];
-
-    phalanges.forEach((phalanx, i) => {
-      const pivot = new THREE.Group(); // pivot at joint (parent-relative)
-      pivot.position.y = yOffset;
-      parent.add(pivot);
-
-      const geom = new THREE.CylinderGeometry(widths[i] * 0.55, widths[i] * 0.45, lengths[i], 14);
-      const mesh = new THREE.Mesh(geom, skinMaterial);
-      mesh.position.y = lengths[i] / 2;
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-      pivot.add(mesh);
-
-      // knuckle bead at joint
-      const knuckleGeom = new THREE.SphereGeometry(widths[i] * 0.55, 12, 10);
-      const knuckle = new THREE.Mesh(knuckleGeom, skinMaterial);
-      knuckle.castShadow = true;
-      pivot.add(knuckle);
-
-      // fingertip cap on last segment
-      if (i === phalanges.length - 1) {
-        const tipGeom = new THREE.SphereGeometry(widths[i] * 0.5, 12, 10);
-        const tip = new THREE.Mesh(tipGeom, skinMaterial);
-        tip.position.y = lengths[i];
-        tip.castShadow = true;
-        pivot.add(tip);
-      }
-
-      segments.push(pivot);
-      parent = pivot;
-      yOffset = lengths[i];
+    // Wireframe material applied directly to SkinnedMesh — Three.js's
+    // shader handles skinning, so wireframe lines DEFORM with the pose
+    // (unlike EdgesGeometry which is static rest-pose only).
+    const wireMat = new THREE.MeshStandardMaterial({
+      color: COLOR_EDGE,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.85,
+    });
+    // A second, faint solid pass underneath for x-ray fill
+    const fillMat = new THREE.MeshStandardMaterial({
+      color: COLOR_FILL,
+      transparent: true,
+      opacity: 0.18,
+      depthWrite: false,
+      side: THREE.DoubleSide,
     });
 
-    return { name, root, segments };
-  }
+    const bones = [];
+    modelRoot.traverse((obj) => {
+      if (obj.isCamera || obj.isLight) obj.visible = false;
+      if (obj.isSkinnedMesh) {
+        // Clone the skinned mesh so we can render both fill + wireframe
+        // versions of the same skin in one pass each.
+        const fillMesh = obj.clone();
+        fillMesh.material = fillMat;
+        fillMesh.bind(obj.skeleton, obj.bindMatrix);
+        obj.parent.add(fillMesh);
+        obj.material = wireMat;
+      }
+      if (obj.isBone) bones.push(obj);
+    });
 
-  // Anatomy — slight differences per finger for character
-  const fingers = {
-    thumb: buildFinger({
-      name: 'thumb',
-      basePos: [-1.0, -0.4, 0.15],
-      lengths: [0.7, 0.55],
-      widths: [0.32, 0.28],
-      hasMiddle: false,
-    }),
-    index: buildFinger({
-      name: 'index',
-      basePos: [-0.7, 1.1, 0],
-      lengths: [0.75, 0.55, 0.45],
-      widths: [0.28, 0.26, 0.22],
-    }),
-    middle: buildFinger({
-      name: 'middle',
-      basePos: [-0.22, 1.22, 0],
-      lengths: [0.85, 0.62, 0.48],
-      widths: [0.3, 0.27, 0.23],
-    }),
-    ring: buildFinger({
-      name: 'ring',
-      basePos: [0.28, 1.15, 0],
-      lengths: [0.78, 0.58, 0.45],
-      widths: [0.28, 0.26, 0.22],
-    }),
-    pinky: buildFinger({
-      name: 'pinky',
-      basePos: [0.72, 0.92, 0],
-      lengths: [0.6, 0.42, 0.35],
-      widths: [0.24, 0.22, 0.19],
-    }),
-  };
+    pivot.add(modelRoot);
+    modelRoot.rotation.set(...HAND_BASE_ROTATION);
+    modelRoot.updateMatrixWorld(true);
 
-  // Set thumb root rotation so it points outward and forward
-  fingers.thumb.root.rotation.z = Math.PI * 0.35;
-  fingers.thumb.root.rotation.y = -Math.PI * 0.15;
+    // Mesh-only bbox (cameras/lights got hidden above but exclude them
+    // from bbox math too in case Three.js still factors them in).
+    const box = new THREE.Box3();
+    let mc = 0;
+    modelRoot.traverse((obj) => {
+      if (obj.isMesh || obj.isSkinnedMesh) {
+        if (!obj.geometry.boundingBox) obj.geometry.computeBoundingBox();
+        const lb = obj.geometry.boundingBox.clone().applyMatrix4(obj.matrixWorld);
+        if (mc === 0) box.copy(lb); else box.union(lb);
+        mc++;
+      }
+    });
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
 
-  // Set finger root y-spread for natural fan
-  fingers.index.root.rotation.z = 0.08;
-  fingers.middle.root.rotation.z = 0;
-  fingers.ring.root.rotation.z = -0.06;
-  fingers.pinky.root.rotation.z = -0.14;
+    modelRoot.position.sub(center);
+    modelRoot.updateMatrixWorld(true);
 
-  // Tilt the whole hand slightly toward camera
-  hand.rotation.x = -0.15;
-  hand.rotation.y = 0.05;
+    // Adapt camera to actual model size (J-Toastie is at ~km scale due
+    // to FBX2glTF's 100× × 380× scale baking — don't fight it, just fit).
+    const fitDist = (maxDim / 2) / Math.tan((camera.fov * Math.PI / 180) / 2);
+    camera.position.set(0, 0, fitDist * 1.6);
+    camera.near = maxDim * 0.001;
+    camera.far = maxDim * 100;
+    camera.updateProjectionMatrix();
+    camera.lookAt(0, 0, 0);
 
-  // ---------- Pose definitions ----------
-  // Each value = rotation.x in radians (curl).
-  // Positive curls finger toward palm (palm faces +Z, fingers point +Y).
-  // Pose shape: per-finger curl + optional finger spread (rotation.z on root)
-  function makePose(curls, opts = {}) {
-    return {
-      curls,                       // { thumb:[a,b], index:[a,b,c], middle:..., ring:..., pinky:... }
-      spread: opts.spread || {},   // { thumb, index, middle, ring, pinky } -- root.z rotation
-      handRotation: opts.handRotation || { x: -0.15, y: 0.05, z: 0 },
-    };
-  }
+    // ---------- Glowing joint nodes (scale-compensated per bone) ----------
+    const fingerBones = bones.filter((b) => {
+      const n = b.name;
+      return /^(Thumb|Index|Middle|Ring|Pinky)/.test(n) && !/_end$/.test(n);
+    });
+    const targetCoreR = maxDim * 0.012;
+    const targetHaloR = maxDim * 0.028;
+    const unitGeom = new THREE.SphereGeometry(1, 12, 10);
+    const coreMat = new THREE.MeshBasicMaterial({ color: COLOR_NODE_CORE });
+    const haloMat = new THREE.MeshBasicMaterial({
+      color: COLOR_NODE_HALO,
+      transparent: true,
+      opacity: 0.4,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+    });
+    const _v = new THREE.Vector3(), _q = new THREE.Quaternion(), _s = new THREE.Vector3();
+    fingerBones.forEach((bone) => {
+      bone.updateMatrixWorld(true);
+      bone.matrixWorld.decompose(_v, _q, _s);
+      const avg = (Math.abs(_s.x) + Math.abs(_s.y) + Math.abs(_s.z)) / 3;
+      if (avg < 1e-9) return;
+      const core = new THREE.Mesh(unitGeom, coreMat);
+      core.scale.setScalar(targetCoreR / avg);
+      bone.add(core);
+      const halo = new THREE.Mesh(unitGeom, haloMat);
+      halo.scale.setScalar(targetHaloR / avg);
+      bone.add(halo);
+    });
 
-  const poses = {
-    // GIVE — palm tilted up toward viewer, fingers gently cupped
-    give: makePose({
-      thumb:  [-0.4, 0.3],
-      index:  [0.35, 0.55, 0.55],
-      middle: [0.35, 0.55, 0.55],
-      ring:   [0.4, 0.6, 0.55],
-      pinky:  [0.45, 0.65, 0.6],
-    }, {
-      spread: { thumb: 1.25, index: 0.06, middle: 0, ring: -0.05, pinky: -0.12 },
-      handRotation: { x: -0.6, y: 0.1, z: -0.05 },
-    }),
+    // ---------- Resolve bone refs for pose driving ----------
+    boneRefs = { fingers: {}, rest: {} };
+    let resolved = 0, missing = 0;
+    Object.entries(BONE_MAP).forEach(([finger, names]) => {
+      boneRefs.fingers[finger] = names.map((n) => {
+        const b = modelRoot.getObjectByName(n);
+        if (!b) { console.warn(`bone missing: ${n}`); missing++; } else resolved++;
+        return b || null;
+      });
+      boneRefs.rest[finger] = boneRefs.fingers[finger].map((b) => b ? b.rotation.x : 0);
+    });
+    console.log(`[hand] ${resolved}/${resolved+missing} bones resolved`);
 
-    // RECEIVE — palm flat up, fingers extended and slightly spread
-    receive: makePose({
-      thumb:  [-0.55, 0.05],
-      index:  [-0.05, -0.05, 0.0],
-      middle: [-0.05, -0.05, 0.0],
-      ring:   [-0.05, -0.05, 0.0],
-      pinky:  [-0.05, -0.05, 0.0],
-    }, {
-      spread: { thumb: 1.35, index: 0.18, middle: 0.05, ring: -0.1, pinky: -0.22 },
-      handRotation: { x: -0.85, y: 0.0, z: 0 },
-    }),
+    modelLoaded = true;
+    // If a pose was requested while loading, apply it now
+    if (queuedPose) { applyPose(queuedPose, 0); queuedPose = null; }
+  }, undefined, (err) => {
+    console.error('Failed to load hand GLB:', err);
+  });
 
-    // TOGETHER — fist (closed hand, thumb wrapped over)
-    together: makePose({
-      thumb:  [-0.8, 1.0],
-      index:  [1.35, 1.7, 1.5],
-      middle: [1.35, 1.7, 1.5],
-      ring:   [1.35, 1.7, 1.5],
-      pinky:  [1.35, 1.7, 1.5],
-    }, {
-      spread: { thumb: 0.6, index: 0.04, middle: 0, ring: -0.04, pinky: -0.08 },
-      handRotation: { x: -0.1, y: 0.15, z: 0 },
-    }),
-
-    // GROW — index pointing up (sprout), others curled, thumb tucked
-    grow: makePose({
-      thumb:  [-0.6, 0.7],
-      index:  [-0.1, -0.05, 0.0],
-      middle: [1.4, 1.7, 1.5],
-      ring:   [1.4, 1.7, 1.5],
-      pinky:  [1.4, 1.7, 1.5],
-    }, {
-      spread: { thumb: 0.7, index: 0.04, middle: 0, ring: -0.04, pinky: -0.08 },
-      handRotation: { x: -0.25, y: 0.05, z: 0 },
-    }),
-  };
-
-  // ---------- Apply pose (animated) ----------
-  function applyPose(poseName, duration = 1200) {
-    const pose = poses[poseName];
-    if (!pose) return;
-
-    // Animate each finger segment's rotation.x
-    Object.keys(pose.curls).forEach((fingerName) => {
-      const finger = fingers[fingerName];
-      const targets = pose.curls[fingerName];
-      finger.segments.forEach((segment, i) => {
+  // ---------- Pose driver ----------
+  function applyPose(poseName, duration = 1100) {
+    if (!modelLoaded) { queuedPose = poseName; return; }
+    const pose = BONE_POSES[poseName];
+    if (!pose || !boneRefs) return;
+    Object.entries(pose).forEach(([finger, curls]) => {
+      const refs = boneRefs.fingers[finger];
+      const rests = boneRefs.rest[finger];
+      if (!refs) return;
+      refs.forEach((bone, i) => {
+        if (!bone) return;
         anime({
-          targets: segment.rotation,
-          x: targets[i],
+          targets: bone.rotation,
+          x: rests[i] + curls[i],
           duration,
           easing: 'easeInOutQuad',
         });
       });
-      // Animate root spread (z rotation) — but keep thumb's special outward rotation
-      if (pose.spread[fingerName] !== undefined) {
-        anime({
-          targets: finger.root.rotation,
-          z: pose.spread[fingerName],
-          duration,
-          easing: 'easeInOutQuad',
-        });
-      }
-    });
-
-    // Animate whole-hand orientation
-    anime({
-      targets: hand.rotation,
-      x: pose.handRotation.x,
-      y: pose.handRotation.y,
-      z: pose.handRotation.z,
-      duration,
-      easing: 'easeInOutQuad',
     });
   }
 
-  // Idle breathing — gentle whole-hand drift
-  const clock = new THREE.Clock();
-
+  // ---------- Resize ----------
   function resize() {
     const rect = canvas.getBoundingClientRect();
-    const w = rect.width;
-    const h = rect.height;
-    if (w === 0 || h === 0) return;
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
+    if (rect.width === 0 || rect.height === 0) return;
+    renderer.setSize(rect.width, rect.height, false);
+    camera.aspect = rect.width / rect.height;
     camera.updateProjectionMatrix();
   }
   resize();
   window.addEventListener('resize', resize);
-  // also observe size changes (sticky panel)
   new ResizeObserver(resize).observe(canvas);
 
+  // ---------- Render loop with subtle idle drift ----------
+  const clock = new THREE.Clock();
   function renderLoop() {
     const t = clock.getElapsedTime();
-    // tiny ambient drift on top of pose-driven rotation
-    hand.position.y = Math.sin(t * 0.6) * 0.08;
-    hand.position.x = Math.cos(t * 0.4) * 0.05;
+    pivot.rotation.y = Math.sin(t * 0.3) * 0.08;
+    pivot.position.y = Math.sin(t * 0.6) * (modelLoaded ? 0.02 : 0);
     renderer.render(scene, camera);
     requestAnimationFrame(renderLoop);
   }
   renderLoop();
 
-  // initial pose
+  // Initial pose (queued until load completes)
   applyPose('give', 0);
 
   return { applyPose };
 }
+
 
 /* ============================================================
    SPIKE B — SVG hand
