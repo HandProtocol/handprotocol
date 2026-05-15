@@ -231,6 +231,11 @@ loader.load(HAND_GLB, (gltf) => {
   if (queuedPose) { applyPose(queuedPose); queuedPose = null; }
 }, undefined, (err) => {
   console.error('Failed to load hand GLB:', err);
+  const readout = document.getElementById('rot-readout');
+  if (readout) {
+    readout.textContent = 'MODEL LOAD FAILED — check console';
+    readout.style.color = '#ef4444';
+  }
 });
 
 let haloMeshesRef = [];
@@ -374,11 +379,19 @@ function updateReadout() {
 
 rotControls.addEventListener('click', (e) => {
   const btn = e.target.closest('button[data-axis]');
-  if (!btn || !modelRootRef) return;
+  if (!btn) return;
   const axis = btn.dataset.axis;
   const dir = parseInt(btn.dataset.dir, 10);
+  console.log(`[rot] click ${axis}${dir > 0 ? '+' : '-'}, modelRootRef=`, modelRootRef);
+  if (!modelRootRef) {
+    rotReadout.textContent = 'model not loaded yet — try again in a sec';
+    return;
+  }
   modelRootRef.rotation[axis] += dir * Math.PI / 12;  // 15° steps
   updateReadout();
+  // Flash button so user has visual feedback
+  btn.style.background = 'rgba(245, 158, 11, 0.5)';
+  setTimeout(() => { btn.style.background = ''; }, 150);
 });
 
 rotReset.addEventListener('click', () => {
