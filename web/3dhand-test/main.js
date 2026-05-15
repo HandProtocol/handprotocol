@@ -121,34 +121,23 @@ loader.load(HAND_GLB, (gltf) => {
   const modelRoot = gltf.scene;
   if (gltf.animations?.length) gltf.animations.length = 0;
 
-  // Two-pass render: solid amber base + EdgesGeometry overlay.
-  // EdgesGeometry only draws edges where adjacent face angle exceeds the
-  // threshold (20°) — gives clean angular silhouette lines instead of every
-  // triangle face. That's the "architectural diagram" wireframe style.
-  // Trade-off: edges don't deform with skin (they stay at rest pose), but
-  // for a low-poly hand at slow pose transitions it reads fine.
+  // Dense wireframe directly on the SkinnedMesh material — every triangle
+  // face renders as lines via the skinning shader, so the wireframe DEFORMS
+  // with finger curls. Plus glowing joint nodes at each finger bone.
+  const bones = [];
   modelRoot.traverse((obj) => {
     if (obj.isCamera || obj.isLight) obj.visible = false;
     if (obj.isMesh || obj.isSkinnedMesh) {
       obj.material = new THREE.MeshStandardMaterial({
         color: 0xf59e0b,
         emissive: 0x4a1f00,
-        emissiveIntensity: 0.25,
-        roughness: 0.4,
-        metalness: 0.1,
+        emissiveIntensity: 0.3,
+        wireframe: true,
         transparent: true,
-        opacity: 0.55,
-        side: THREE.DoubleSide,
+        opacity: 0.9,
       });
-
-      const edgeGeom = new THREE.EdgesGeometry(obj.geometry, 20);
-      const edges = new THREE.LineSegments(edgeGeom, new THREE.LineBasicMaterial({
-        color: 0xfde68a,
-        transparent: true,
-        opacity: 0.85,
-      }));
-      obj.add(edges);
     }
+    if (obj.isBone) bones.push(obj);
   });
 
   orient.add(modelRoot);
@@ -184,6 +173,34 @@ loader.load(HAND_GLB, (gltf) => {
   camera.far = maxDim * 100;
   camera.updateProjectionMatrix();
   camera.lookAt(0, 0, 0);
+
+  // Glowing joint nodes at each finger phalanx. Scale-compensated per
+  // bone because J-Toastie's bone chain has 100× × 380× scale baked in.
+  const fingerBones = bones.filter((b) => /^(Thumb|Index|Middle|Ring|Pinky)/.test(b.name) && !/_end$/.test(b.name));
+  const targetCoreR = maxDim * 0.014;
+  const targetHaloR = maxDim * 0.032;
+  const unitGeom = new THREE.SphereGeometry(1, 14, 12);
+  const coreMat = new THREE.MeshBasicMaterial({ color: 0xfffbeb });
+  const haloMat = new THREE.MeshBasicMaterial({
+    color: 0xfde68a,
+    transparent: true,
+    opacity: 0.5,
+    blending: THREE.AdditiveBlending,
+    depthWrite: false,
+  });
+  const _v = new THREE.Vector3(), _q = new THREE.Quaternion(), _s = new THREE.Vector3();
+  fingerBones.forEach((bone) => {
+    bone.updateMatrixWorld(true);
+    bone.matrixWorld.decompose(_v, _q, _s);
+    const avg = (Math.abs(_s.x) + Math.abs(_s.y) + Math.abs(_s.z)) / 3;
+    if (avg < 1e-9) return;
+    const core = new THREE.Mesh(unitGeom, coreMat);
+    core.scale.setScalar(targetCoreR / avg);
+    bone.add(core);
+    const halo = new THREE.Mesh(unitGeom, haloMat);
+    halo.scale.setScalar(targetHaloR / avg);
+    bone.add(halo);
+  });
 
   // Resolve bone refs and capture rest pose
   boneRefs = { fingers: {}, rest: {} };
