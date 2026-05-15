@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>HAND — Loading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #07090f;
+    --bg-2: #0c1220;
+    --ink: #f5efe1;
+    --ink-dim: #8e8a7e;
+    --ink-faint: #4a4940;
+    --amber: #d97706;
+    --amber-glow: rgba(217, 119, 6, 0.55);
+    --amber-soft: rgba(255, 186, 73, 0.85);
+    --grid: rgba(217, 119, 6, 0.08);
+    --hud: rgba(245, 239, 225, 0.18);
+    --hud-strong: rgba(245, 239, 225, 0.55);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    position: relative;
+    display: grid;
+    place-items: center;
+  }
+
+  /* deep radial + vignette */
+  body::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(1200px 800px at 50% 50%, rgba(217,119,6,0.10), transparent 60%),
+      radial-gradient(circle at 50% 50%, var(--bg-2) 0%, var(--bg) 70%);
+    pointer-events: none;
+  }
+
+  /* fine HUD grid */
+  body::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 70%);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  /* particle canvas */
+  #particles {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+
+  /* corner HUD chrome */
+  .hud {
+    position: absolute;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    pointer-events: none;
+    user-select: none;
+  }
+  .hud b { color: var(--ink); font-weight: 500; }
+  .hud .amber { color: var(--amber-soft); }
+  .hud-tl { top: 28px; left: 32px; }
+  .hud-tr { top: 28px; right: 32px; text-align: right; }
+  .hud-bl { bottom: 28px; left: 32px; }
+  .hud-br { bottom: 28px; right: 32px; text-align: right; }
+
+  .hud .row { display: flex; gap: 14px; align-items: center; line-height: 1.7; }
+  .hud .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 10px var(--amber-glow); animation: blink 1.4s infinite ease-in-out; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+  /* corner brackets */
+  .bracket { position: absolute; width: 28px; height: 28px; border: 1px solid var(--hud); }
+  .bracket.tl { top: 18px; left: 18px; border-right: 0; border-bottom: 0; }
+  .bracket.tr { top: 18px; right: 18px; border-left: 0; border-bottom: 0; }
+  .bracket.bl { bottom: 18px; left: 18px; border-right: 0; border-top: 0; }
+  .bracket.br { bottom: 18px; right: 18px; border-left: 0; border-top: 0; }
+
+  /* central stage */
+  .stage {
+    position: relative;
+    width: min(460px, 78vw);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  /* concentric rings */
+  .rings {
+    position: absolute; inset: 0;
+    pointer-events: none;
+  }
+  .rings svg { width: 100%; height: 100%; overflow: visible; }
+  .ring-spin { transform-origin: 50% 50%; transform-box: fill-box; }
+
+  /* hand morph svg */
+  .hand {
+    position: relative;
+    width: 52%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    filter:
+      drop-shadow(0 0 18px var(--amber-glow))
+      drop-shadow(0 0 60px rgba(217, 119, 6, 0.18));
+  }
+  .hand svg { width: 100%; height: 100%; overflow: visible; }
+  .hand-path {
+    fill: url(#handGradient);
+    stroke: var(--amber-soft);
+    stroke-width: 1.2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+
+  /* letter readout under the circle */
+  .letter-stack {
+    position: absolute;
+    bottom: -84px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .letters {
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0.42em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+  .letters span {
+    display: inline-block;
+    transition: color 240ms ease, text-shadow 240ms ease, transform 240ms ease;
+  }
+  .letters span.active {
+    color: var(--amber-soft);
+    text-shadow: 0 0 14px var(--amber-glow);
+    transform: translateY(-1px);
+  }
+
+  /* big letter display under circle */
+  .big-letter {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: clamp(48px, 6.2vw, 76px);
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    line-height: 1;
+    pointer-events: none;
+    text-shadow: 0 0 36px rgba(217, 119, 6, 0.35);
+    display: grid;
+    place-items: center;
+    width: 1.4em;
+    height: 1em;
+  }
+  .big-letter span {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+    transition: opacity 360ms ease, transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    background: linear-gradient(180deg, #fff5dd 0%, #f59e0b 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .big-letter span.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  /* thin underline cursor */
+  .big-letter::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--amber-soft), transparent);
+    box-shadow: 0 0 12px var(--amber-glow);
+  }
+
+  /* progress */
+  .progress-wrap {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(560px, 80vw);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .progress-meta { display: flex; justify-content: space-between; width: 100%; }
+  .progress-meta .amber { color: var(--amber-soft); }
+  .progress-bar {
+    width: 100%;
+    height: 1px;
+    background: var(--hud);
+    overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    position: absolute; inset: 0 100% 0 0;
+    background: linear-gradient(90deg, transparent, var(--amber) 40%, var(--amber-soft));
+    box-shadow: 0 0 10px var(--amber-glow);
+  }
+
+  /* center label */
+  .center-label {
+    position: absolute;
+    top: 76px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .center-label .amber { color: var(--amber-soft); }
+
+  /* small ticks around outer ring */
+  .tick { stroke: var(--hud); stroke-width: 1; }
+  .tick-strong { stroke: var(--hud-strong); }
+
+  /* hidden morph targets */
+  .morph-targets { position: absolute; width: 0; height: 0; overflow: hidden; }
+</style>
+</head>
+<body>
+
+<!-- corner brackets -->
+<div class="bracket tl"></div>
+<div class="bracket tr"></div>
+<div class="bracket bl"></div>
+<div class="bracket br"></div>
+
+<!-- HUD readouts -->
+<div class="hud hud-tl">
+  <div class="row"><span class="dot"></span><b>HAND PROTOCOL</b></div>
+  <div>SYS: <b>BOOT</b> · NODE <span class="amber">01</span></div>
+  <div>LAT <span id="lat">30.2672</span>° N · LNG <span id="lng">-97.7431</span>° W</div>
+</div>
+
+<div class="hud hud-tr">
+  <div class="row" style="justify-content:flex-end"><b>UPLINK</b> · <span class="amber">STABLE</span></div>
+  <div>HASH <span id="hash">7e2a · b41c · 9f08</span></div>
+  <div>FRAME <span id="frame">000000</span></div>
+</div>
+
+<div class="hud hud-bl">
+  <div>CHANNEL: <b>ASL · FINGERSPELL</b></div>
+  <div>SEQUENCE: <span class="amber" id="seq">H · A · N · D</span></div>
+</div>
+
+<div class="hud hud-br">
+  <div>BUILD <b>0.1.0-test</b></div>
+  <div>RENDER <span id="fps">60.0</span> FPS</div>
+</div>
+
+<!-- particle field -->
+<canvas id="particles"></canvas>
+
+<div class="center-label">INITIALIZING <span class="amber">SOVEREIGN COMPANION</span></div>
+
+<!-- main stage -->
+<main class="stage">
+
+  <!-- concentric tech rings -->
+  <div class="rings">
+    <svg viewBox="0 0 600 600">
+      <defs>
+        <radialGradient id="ringFade" cx="50%" cy="50%" r="50%">
+          <stop offset="60%" stop-color="rgba(245,239,225,0)" />
+          <stop offset="100%" stop-color="rgba(245,239,225,0.15)" />
+        </radialGradient>
+        <linearGradient id="sweep" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%" stop-color="rgba(217,119,6,0)" />
+          <stop offset="100%" stop-color="rgba(217,119,6,0.8)" />
+        </linearGradient>
+        <linearGradient id="handGradient" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ffd49a" stop-opacity="0.95" />
+          <stop offset="50%" stop-color="#f59e0b" stop-opacity="0.85" />
+          <stop offset="100%" stop-color="#b45309" stop-opacity="0.95" />
+        </linearGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="4" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <!-- outer faint ring with ticks -->
+      <g class="ring-spin" id="ringOuter">
+        <circle cx="300" cy="300" r="282" fill="none" stroke="rgba(245,239,225,0.10)" stroke-width="1" />
+        <circle cx="300" cy="300" r="282" fill="none" stroke="rgba(245,239,225,0.35)" stroke-width="1" stroke-dasharray="2 22" />
+        <!-- compass-style ticks -->
+        <g id="outerTicks"></g>
+      </g>
+
+      <!-- mid ring dashed -->
+      <g class="ring-spin" id="ringMid">
+        <circle cx="300" cy="300" r="232" fill="none" stroke="rgba(245,239,225,0.18)" stroke-width="1" stroke-dasharray="4 8" />
+        <!-- 4 small notches at NSEW -->
+        <g stroke="rgba(245,239,225,0.55)" stroke-width="1.5">
+          <line x1="300" y1="58" x2="300" y2="74" />
+          <line x1="542" y1="300" x2="526" y2="300" />
+          <line x1="300" y1="542" x2="300" y2="526" />
+          <line x1="58" y1="300" x2="74" y2="300" />
+        </g>
+      </g>
+
+      <!-- inner ring with amber sweep -->
+      <g class="ring-spin" id="ringSweep">
+        <circle cx="300" cy="300" r="200" fill="none" stroke="rgba(217,119,6,0.18)" stroke-width="1" />
+        <!-- sweeping arc -->
+        <path id="sweepArc"
+          d="M 300 100 A 200 200 0 0 1 480 220"
+          fill="none" stroke="url(#sweep)" stroke-width="2" stroke-linecap="round" filter="url(#glow)" />
+      </g>
+
+      <!-- inner solid faint ring -->
+      <circle cx="300" cy="300" r="170" fill="none" stroke="rgba(245,239,225,0.10)" stroke-width="1" />
+      <circle cx="300" cy="300" r="170" fill="none" stroke="url(#ringFade)" stroke-width="1" />
+
+      <!-- center crosshair micro -->
+      <g stroke="rgba(245,239,225,0.25)" stroke-width="0.6">
+        <line x1="294" y1="300" x2="288" y2="300" />
+        <line x1="306" y1="300" x2="312" y2="300" />
+        <line x1="300" y1="294" x2="300" y2="288" />
+        <line x1="300" y1="306" x2="300" y2="312" />
+      </g>
+
+      <!-- corner data brackets -->
+      <g stroke="rgba(245,239,225,0.45)" stroke-width="1.2" fill="none">
+        <path d="M 56 300 L 36 300 L 36 280" />
+        <path d="M 544 300 L 564 300 L 564 280" />
+        <path d="M 300 56 L 300 36 L 280 36" />
+        <path d="M 300 544 L 300 564 L 280 564" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- morphing hand silhouette -->
+  <div class="hand">
+    <svg viewBox="0 0 200 240" preserveAspectRatio="xMidYMid meet">
+      <path id="handMorph" class="hand-path" d="" />
+    </svg>
+  </div>
+
+  <!-- big letter cross-fading under the hand -->
+  <div class="big-letter" id="bigLetter">
+    <span data-idx="0" class="active">H</span>
+    <span data-idx="1">A</span>
+    <span data-idx="2">N</span>
+    <span data-idx="3">D</span>
+  </div>
+
+  <!-- letter sequence below big letter -->
+  <div class="letter-stack">
+    <div class="letters" id="letterSeq">
+      <span data-idx="0">H</span>
+      <span data-idx="1">A</span>
+      <span data-idx="2">N</span>
+      <span data-idx="3">D</span>
+    </div>
+  </div>
+</main>
+
+<!-- progress -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span>LOADING · <span class="amber" id="loadStage">SIGNAL · LINK · WEAVE</span></span>
+    <span><span class="amber" id="loadPct">00</span>%</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<!-- flubber for bulletproof SVG path interpolation -->
+<script src="https://cdn.jsdelivr.net/npm/flubber@0.4.2/build/flubber.min.js"></script>
+<script type="module">
+  let _animejs;
+  try {
+    _animejs = await import('https://cdn.jsdelivr.net/npm/animejs@4.0.2/lib/anime.esm.js');
+  } catch (e) {
+    console.error('anime.js import failed', e);
+    document.body.insertAdjacentHTML('beforeend',
+      `<div style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);padding:20px;background:#300;color:#fcc;font-family:monospace;z-index:9999">anime.js load failed: ${e.message}</div>`);
+    throw e;
+  }
+  const { animate, createTimeline, svg, utils } = _animejs;
+  console.log('anime.js v4 loaded. flubber:', typeof window.flubber);
+
+  /* ---------- generate outer compass ticks ---------- */
+  const tickG = document.getElementById('outerTicks');
+  const tickCount = 60;
+  for (let i = 0; i < tickCount; i++) {
+    const a = (i / tickCount) * Math.PI * 2 - Math.PI / 2;
+    const long = i % 5 === 0;
+    const r1 = 282;
+    const r2 = long ? 268 : 274;
+    const x1 = 300 + Math.cos(a) * r1;
+    const y1 = 300 + Math.sin(a) * r1;
+    const x2 = 300 + Math.cos(a) * r2;
+    const y2 = 300 + Math.sin(a) * r2;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1.toFixed(2));
+    line.setAttribute('y1', y1.toFixed(2));
+    line.setAttribute('x2', x2.toFixed(2));
+    line.setAttribute('y2', y2.toFixed(2));
+    line.setAttribute('class', long ? 'tick tick-strong' : 'tick');
+    tickG.appendChild(line);
+  }
+
+  /* ---------- ring rotations ---------- */
+  animate('#ringOuter', { rotate: 360, duration: 38000, easing: 'linear', loop: true });
+  animate('#ringMid',   { rotate: -360, duration: 24000, easing: 'linear', loop: true });
+  animate('#ringSweep', { rotate: 360, duration: 6000,  easing: 'linear', loop: true });
+
+  /* ---------- hand morph through H → A → N → D ----------
+     ASL fingerspelling, front of right hand, palm toward viewer.
+     Each path is a stylized silhouette in a 200x240 viewBox.
+  */
+  const PATHS = {
+    // H: index + middle fingers extended together
+    H: 'M 58,228 L 58,150 C 58,140 65,130 75,130 L 75,42 C 75,28 90,28 90,42 L 90,130 C 95,130 100,130 105,130 L 105,42 C 105,28 120,28 120,42 L 120,130 C 130,130 142,140 142,150 L 142,228 Z',
+
+    // A: closed fist, thumb resting on the side
+    A: 'M 58,228 L 58,150 C 58,120 78,100 102,100 C 124,100 138,120 138,148 C 150,148 156,158 156,170 C 156,182 150,190 138,192 L 138,228 L 58,228 Z',
+
+    // N: fist with small thumb-tip bump centered up top
+    N: 'M 58,228 L 58,150 C 58,118 78,98 90,98 L 90,80 C 90,68 110,68 110,80 L 110,98 C 122,98 142,118 142,150 L 142,228 L 58,228 Z',
+
+    // D: index finger up, others curled into an O at right of palm
+    D: 'M 58,228 L 58,150 C 58,140 65,130 78,128 L 78,42 C 78,28 100,28 100,42 L 100,128 C 124,132 142,150 142,178 C 142,206 122,228 96,228 L 58,228 Z'
+  };
+
+  const letters = ['H', 'A', 'N', 'D'];
+  const letterEls = [...document.querySelectorAll('#letterSeq span')];
+  const bigEls = [...document.querySelectorAll('#bigLetter span')];
+  const handPath = document.querySelector('#handMorph');
+  let current = 0;
+
+  // set initial shape
+  handPath.setAttribute('d', PATHS.H);
+
+  function setActive(i) {
+    letterEls.forEach((el, k) => el.classList.toggle('active', k === i));
+    bigEls.forEach((el, k) => el.classList.toggle('active', k === i));
+  }
+  setActive(0);
+
+  /* Morph driven by flubber.interpolate (handles different path topologies).
+     RAF drives a t value 0→1 with cubic ease, then writes the interpolated d. */
+  const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+  function morphHand(fromLetter, toLetter, dur = 900) {
+    if (!window.flubber) {
+      console.warn('flubber not loaded, direct swap');
+      handPath.setAttribute('d', PATHS[toLetter]);
+      return;
+    }
+    const interp = window.flubber.interpolate(PATHS[fromLetter], PATHS[toLetter], { maxSegmentLength: 4 });
+    const t0 = performance.now();
+    function step(now) {
+      const raw = Math.min(1, (now - t0) / dur);
+      const t = easeInOutCubic(raw);
+      handPath.setAttribute('d', interp(t));
+      if (raw < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function cycle() {
+    const next = (current + 1) % 4;
+    morphHand(letters[current], letters[next], 900);
+    setTimeout(() => {
+      current = next;
+      setActive(current);
+    }, 250);
+    setTimeout(cycle, 1700);
+  }
+  setTimeout(cycle, 900);
+
+  /* ---------- progress bar ---------- */
+  const fill = document.getElementById('progressFill');
+  const pct = document.getElementById('loadPct');
+  const stages = ['SIGNAL', 'LINK', 'WEAVE', 'BLOOM'];
+  const stageEl = document.getElementById('loadStage');
+  let progress = 0;
+  function tickProgress() {
+    progress += Math.random() * 1.8 + 0.4;
+    if (progress >= 100) progress = 0;
+    fill.style.inset = `0 ${100 - progress}% 0 0`;
+    pct.textContent = String(Math.floor(progress)).padStart(2, '0');
+    const s = Math.min(stages.length - 1, Math.floor(progress / (100 / stages.length)));
+    stageEl.textContent = stages[s];
+    requestAnimationFrame(tickProgress);
+  }
+  tickProgress();
+
+  /* ---------- HUD readouts ---------- */
+  const frameEl = document.getElementById('frame');
+  const hashEl = document.getElementById('hash');
+  const fpsEl = document.getElementById('fps');
+  const latEl = document.getElementById('lat');
+  const lngEl = document.getElementById('lng');
+
+  function rndHex(n) {
+    return Array.from({length: n}, () => Math.floor(Math.random()*16).toString(16)).join('');
+  }
+  let frame = 0;
+  setInterval(() => {
+    frame = (frame + 7) % 1000000;
+    frameEl.textContent = String(frame).padStart(6, '0');
+  }, 80);
+  setInterval(() => {
+    hashEl.textContent = `${rndHex(4)} · ${rndHex(4)} · ${rndHex(4)}`;
+  }, 1400);
+
+  /* fps */
+  let lastT = performance.now(), fpsSamples = [];
+  function fpsLoop(t) {
+    const dt = t - lastT;
+    lastT = t;
+    const fps = 1000 / dt;
+    fpsSamples.push(fps);
+    if (fpsSamples.length > 30) fpsSamples.shift();
+    requestAnimationFrame(fpsLoop);
+  }
+  requestAnimationFrame(fpsLoop);
+  setInterval(() => {
+    if (!fpsSamples.length) return;
+    const avg = fpsSamples.reduce((a,b)=>a+b,0)/fpsSamples.length;
+    fpsEl.textContent = avg.toFixed(1);
+  }, 500);
+
+  /* small lat/lng jitter */
+  setInterval(() => {
+    latEl.textContent = (30.2672 + (Math.random()-0.5)*0.0008).toFixed(4);
+    lngEl.textContent = (-97.7431 + (Math.random()-0.5)*0.0008).toFixed(4);
+  }, 600);
+
+  /* ---------- particles ---------- */
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles, dpr;
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    W = canvas.clientWidth = window.innerWidth;
+    H = canvas.clientHeight = window.innerHeight;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    initParticles();
+  }
+
+  function initParticles() {
+    const n = Math.min(160, Math.floor((W*H) / 12000));
+    particles = Array.from({length: n}, () => spawnParticle(true));
+  }
+
+  function spawnParticle(spread) {
+    const cx = W / 2, cy = H / 2;
+    const angle = Math.random() * Math.PI * 2;
+    const dist = spread ? Math.random() * Math.min(W, H) * 0.5 : Math.min(W, H) * 0.55;
+    return {
+      x: cx + Math.cos(angle) * dist,
+      y: cy + Math.sin(angle) * dist,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      r: Math.random() * 1.4 + 0.4,
+      life: Math.random() * 1.0,
+      decay: 0.0015 + Math.random() * 0.0025,
+      hueShift: Math.random() < 0.2 ? 1 : 0  // some particles are ink-tinted
+    };
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, W, H);
+    const cx = W / 2, cy = H / 2;
+
+    // soft pull toward center for orbital feel
+    for (const p of particles) {
+      const dx = cx - p.x, dy = cy - p.y;
+      const d2 = dx*dx + dy*dy;
+      const d = Math.sqrt(d2) || 1;
+      const pull = 0.012;
+      const tangential = 0.018;
+      // tangent vector (perpendicular)
+      const tx = -dy / d;
+      const ty =  dx / d;
+      p.vx += (dx/d) * pull * 0.02 + tx * tangential * 0.015;
+      p.vy += (dy/d) * pull * 0.02 + ty * tangential * 0.015;
+      // mild damping
+      p.vx *= 0.985;
+      p.vy *= 0.985;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life -= p.decay;
+      if (p.life <= 0 || d < 60) {
+        Object.assign(p, spawnParticle(false));
+        p.life = 1;
+      }
+
+      const alpha = Math.max(0, Math.min(1, p.life)) * 0.85;
+      if (p.hueShift) {
+        ctx.fillStyle = `rgba(245, 239, 225, ${alpha * 0.6})`;
+      } else {
+        ctx.fillStyle = `rgba(255, 186, 73, ${alpha})`;
+      }
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+
+      // glow halo for amber ones
+      if (!p.hueShift) {
+        ctx.fillStyle = `rgba(217, 119, 6, ${alpha * 0.15})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // faint connecting lines between near particles
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d2 = dx*dx + dy*dy;
+        if (d2 < 5200) {
+          const al = (1 - d2 / 5200) * 0.10;
+          ctx.strokeStyle = `rgba(217, 119, 6, ${al})`;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(drawParticles);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  drawParticles();
+</script>
+</body>
+</html>

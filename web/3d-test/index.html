@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Hand Test — HAND Protocol</title>
+  <meta name="description" content="Prototyping scroll-driven sign-language hand animation for the HAND Protocol campaign page.">
+  <meta name="robots" content="noindex,nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <header class="page-header container">
+    <a class="back-link" href="../foundation-campaign/">&larr; campaign page</a>
+    <h1 class="page-title">Scroll-driven sign language <span>spike</span></h1>
+    <p class="page-lede">
+      Three approaches to the same idea: a hand that signs <strong>give</strong>,
+      <strong>receive</strong>, <strong>together</strong>, <strong>grow</strong>
+      as you scroll. Pick a winner.
+    </p>
+    <ol class="signs-key">
+      <li><span>01</span> Give</li>
+      <li><span>02</span> Receive</li>
+      <li><span>03</span> Together</li>
+      <li><span>04</span> Grow</li>
+    </ol>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- SPIKE 1: Three.js procedural hand                             -->
+  <!-- ============================================================ -->
+  <section class="spike" id="spike-three" data-spike="three">
+    <div class="spike__stage">
+      <div class="spike__sticky">
+        <div class="spike__label">
+          <span class="spike__num">A</span>
+          <div>
+            <h2>Three.js</h2>
+            <p>Procedural 3D hand. Real bones, real lighting.</p>
+          </div>
+        </div>
+        <canvas id="three-canvas" class="spike__canvas"></canvas>
+        <div class="spike__pose-label" id="three-pose">Give</div>
+      </div>
+    </div>
+    <div class="spike__scroll">
+      <article class="pose-block" data-pose="give">
+        <h3>Give</h3>
+        <p>
+          A contributor leans forward. The first $7,777 of the Foundation raise
+          is an act of <em>giving forward</em>, before any return is named.
+        </p>
+      </article>
+      <article class="pose-block" data-pose="receive">
+        <h3>Receive</h3>
+        <p>
+          Reciprocates, the healers, builders, and organizers we serve, receive
+          long-arc support. Not a grant cycle. A pool of resources.
+        </p>
+      </article>
+      <article class="pose-block" data-pose="together">
+        <h3>Together</h3>
+        <p>
+          Three communities of regenerative impact work, coordinating in one
+          place. The hand closes around something held in common.
+        </p>
+      </article>
+      <article class="pose-block" data-pose="grow">
+        <h3>Grow</h3>
+        <p>
+          What was given becomes infrastructure. Infrastructure compounds.
+          The fund regenerates itself across multiple time horizons.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SPIKE 2: SVG hand + anime.js                                  -->
+  <!-- ============================================================ -->
+  <section class="spike spike--alt" id="spike-svg" data-spike="svg">
+    <div class="spike__stage">
+      <div class="spike__sticky">
+        <div class="spike__label">
+          <span class="spike__num">B</span>
+          <div>
+            <h2>SVG + anime.js</h2>
+            <p>Stylized illustration. Finger joints rotate on scroll.</p>
+          </div>
+        </div>
+        <div class="spike__canvas spike__canvas--svg">
+          <svg id="svg-hand" viewBox="-150 -180 300 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="skinGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FBBF24"/>
+                <stop offset="100%" stop-color="#D97706"/>
+              </linearGradient>
+              <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="6" result="blur"/>
+                <feOffset in="blur" dy="4" result="offsetBlur"/>
+                <feMerge>
+                  <feMergeNode in="offsetBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <g id="svg-hand-root" filter="url(#softShadow)">
+              <!-- Palm -->
+              <path d="M -55 60 Q -65 0 -45 -50 Q 0 -75 45 -50 Q 65 0 55 60 Q 30 85 0 88 Q -30 85 -55 60 Z"
+                    fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+
+              <!-- Thumb (pivots at lower-left of palm) -->
+              <g id="finger-thumb" transform="translate(-50, 10)">
+                <g transform="rotate(0)" id="finger-thumb-p">
+                  <rect x="-12" y="-50" width="24" height="55" rx="12" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                  <g transform="translate(0, -50) rotate(0)" id="finger-thumb-d">
+                    <rect x="-10" y="-35" width="20" height="38" rx="10" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Index -->
+              <g id="finger-index" transform="translate(-32, -50)">
+                <g transform="rotate(0)" id="finger-index-p">
+                  <rect x="-10" y="-50" width="20" height="55" rx="10" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                  <g transform="translate(0, -50)" id="finger-index-m">
+                    <rect x="-9" y="-38" width="18" height="42" rx="9" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                    <g transform="translate(0, -38)" id="finger-index-d">
+                      <rect x="-8" y="-30" width="16" height="34" rx="8" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Middle -->
+              <g id="finger-middle" transform="translate(-8, -58)">
+                <g transform="rotate(0)" id="finger-middle-p">
+                  <rect x="-10" y="-58" width="20" height="63" rx="10" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                  <g transform="translate(0, -58)" id="finger-middle-m">
+                    <rect x="-9" y="-42" width="18" height="46" rx="9" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                    <g transform="translate(0, -42)" id="finger-middle-d">
+                      <rect x="-8" y="-32" width="16" height="36" rx="8" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Ring -->
+              <g id="finger-ring" transform="translate(16, -54)">
+                <g transform="rotate(0)" id="finger-ring-p">
+                  <rect x="-10" y="-52" width="20" height="57" rx="10" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                  <g transform="translate(0, -52)" id="finger-ring-m">
+                    <rect x="-9" y="-38" width="18" height="42" rx="9" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                    <g transform="translate(0, -38)" id="finger-ring-d">
+                      <rect x="-8" y="-28" width="16" height="32" rx="8" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Pinky -->
+              <g id="finger-pinky" transform="translate(38, -42)">
+                <g transform="rotate(0)" id="finger-pinky-p">
+                  <rect x="-9" y="-42" width="18" height="47" rx="9" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                  <g transform="translate(0, -42)" id="finger-pinky-m">
+                    <rect x="-8" y="-32" width="16" height="36" rx="8" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                    <g transform="translate(0, -32)" id="finger-pinky-d">
+                      <rect x="-7" y="-24" width="14" height="28" rx="7" fill="url(#skinGrad)" stroke="#92400E" stroke-width="2"/>
+                    </g>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="spike__pose-label" id="svg-pose">Give</div>
+      </div>
+    </div>
+    <div class="spike__scroll">
+      <article class="pose-block" data-pose="give">
+        <h3>Give</h3>
+        <p>Cupped, offering. The hand reaches outward, palm open.</p>
+      </article>
+      <article class="pose-block" data-pose="receive">
+        <h3>Receive</h3>
+        <p>Open, upturned. Fingers extended to catch what is given.</p>
+      </article>
+      <article class="pose-block" data-pose="together">
+        <h3>Together</h3>
+        <p>Closed around something held. Fist with thumb wrapped over.</p>
+      </article>
+      <article class="pose-block" data-pose="grow">
+        <h3>Grow</h3>
+        <p>Index extended upward. A sprout from a closed palm.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SPIKE 3: Frame sequence (placeholder icons)                   -->
+  <!-- ============================================================ -->
+  <section class="spike" id="spike-frames" data-spike="frames">
+    <div class="spike__stage">
+      <div class="spike__sticky">
+        <div class="spike__label">
+          <span class="spike__num">C</span>
+          <div>
+            <h2>Frame sequence</h2>
+            <p>Pre-rendered poses scrubbed on scroll. Apple-style.</p>
+          </div>
+        </div>
+        <div class="spike__canvas spike__canvas--frames" id="frames-stage">
+          <div class="frame active" data-frame="give" aria-hidden="true">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="90" fill="#FEF3C7"/>
+              <text x="100" y="135" font-size="100" text-anchor="middle">🤲</text>
+            </svg>
+          </div>
+          <div class="frame" data-frame="receive" aria-hidden="true">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="90" fill="#FEF3C7"/>
+              <text x="100" y="135" font-size="100" text-anchor="middle">✋</text>
+            </svg>
+          </div>
+          <div class="frame" data-frame="together" aria-hidden="true">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="90" fill="#FEF3C7"/>
+              <text x="100" y="135" font-size="100" text-anchor="middle">🤝</text>
+            </svg>
+          </div>
+          <div class="frame" data-frame="grow" aria-hidden="true">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="90" fill="#FEF3C7"/>
+              <text x="100" y="135" font-size="100" text-anchor="middle">🌱</text>
+            </svg>
+          </div>
+          <div class="frames-disclaimer">Emoji placeholders. Real version: 60-120 rendered or AI-generated frames.</div>
+        </div>
+        <div class="spike__pose-label" id="frames-pose">Give</div>
+      </div>
+    </div>
+    <div class="spike__scroll">
+      <article class="pose-block" data-pose="give">
+        <h3>Give</h3>
+        <p>Crossfade between rendered frames. Heavy upfront, dead-simple runtime.</p>
+      </article>
+      <article class="pose-block" data-pose="receive">
+        <h3>Receive</h3>
+        <p>Best if frames come from a real Blender render or matched AI set.</p>
+      </article>
+      <article class="pose-block" data-pose="together">
+        <h3>Together</h3>
+        <p>Total control of lighting, materials, character. No JS animation cost.</p>
+      </article>
+      <article class="pose-block" data-pose="grow">
+        <h3>Grow</h3>
+        <p>Hard to iterate, easy to ship once the art lands.</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="page-footer container">
+    <p>
+      Notes from this spike will go back into the campaign page once a direction
+      is picked. <a href="../foundation-campaign/">Back to campaign &rarr;</a>
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

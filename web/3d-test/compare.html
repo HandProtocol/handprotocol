@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hand Model Comparison — HAND Protocol</title>
+  <meta name="robots" content="noindex,nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <style>
+    body { background: #0C1220; color: var(--color-text-on-dark); }
+
+    .compare-header {
+      padding: 3rem 1.5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .compare-header h1 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.75rem;
+    }
+    .compare-header h1 span { color: var(--color-accent-warm); font-style: italic; }
+    .compare-header p {
+      color: rgba(249, 250, 251, 0.7);
+      max-width: 720px;
+      line-height: 1.65;
+    }
+    .compare-header .back-link { color: rgba(249, 250, 251, 0.55); }
+    .compare-header .back-link:hover { color: var(--color-accent-warm); }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+    @media (min-width: 1100px) {
+      .compare-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .model-card.is-featured {
+      grid-column: span 1;
+      border-color: rgba(245, 158, 11, 0.25);
+    }
+    .badge--new {
+      background: rgba(94, 234, 212, 0.15);
+      color: #5EEAD4;
+      border: 1px solid rgba(94, 234, 212, 0.4);
+    }
+
+    .model-card__pose {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.375rem 0.875rem;
+      background: rgba(12, 18, 32, 0.7);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 999px;
+      color: var(--color-accent-warm);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      pointer-events: none;
+    }
+    .model-card__debug {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-family: ui-monospace, 'JetBrains Mono', monospace;
+      font-size: 0.625rem;
+      color: rgba(249, 250, 251, 0.4);
+      pointer-events: none;
+      text-align: right;
+    }
+
+    .model-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      transition: border-color 250ms var(--ease-out), transform 250ms var(--ease-out);
+      display: flex;
+      flex-direction: column;
+    }
+    .model-card:hover {
+      border-color: rgba(245, 158, 11, 0.4);
+      transform: translateY(-2px);
+    }
+    .model-card.is-selected {
+      border-color: var(--color-accent-warm);
+      box-shadow: 0 0 0 1px var(--color-accent-warm), 0 20px 60px -20px rgba(245, 158, 11, 0.25);
+    }
+
+    .model-card__canvas-wrap {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background:
+        radial-gradient(circle at 50% 60%, rgba(245, 158, 11, 0.08), transparent 60%),
+        #0C1220;
+    }
+    .model-card__canvas-wrap canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+    .model-card__loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(249, 250, 251, 0.5);
+      font-size: 0.875rem;
+      pointer-events: none;
+      transition: opacity 400ms ease;
+    }
+    .model-card__loading.hidden { opacity: 0; }
+
+    .model-card__badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      display: inline-flex;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.375rem 0.625rem;
+      border-radius: 999px;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .badge--rigged {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--color-accent-warm);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+    }
+    .badge--static {
+      background: rgba(13, 148, 136, 0.15);
+      color: #5EEAD4;
+      border: 1px solid rgba(13, 148, 136, 0.35);
+    }
+
+    .model-card__body {
+      padding: 1.25rem 1.5rem 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .model-card__name {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .model-card__meta {
+      font-size: 0.8125rem;
+      color: rgba(249, 250, 251, 0.55);
+    }
+    .model-card__meta a {
+      color: rgba(249, 250, 251, 0.7);
+      border-bottom: 1px dotted rgba(249, 250, 251, 0.3);
+    }
+    .model-card__stats {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      font-family: ui-monospace, 'JetBrains Mono', monospace;
+      color: rgba(249, 250, 251, 0.5);
+    }
+    .model-card__stats span strong {
+      color: rgba(249, 250, 251, 0.9);
+      font-weight: 600;
+      margin-left: 0.25rem;
+    }
+    .model-card__pick {
+      margin-top: 1rem;
+      padding: 0.625rem 1rem;
+      background: rgba(245, 158, 11, 0.1);
+      color: var(--color-accent-warm);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 200ms var(--ease-out);
+    }
+    .model-card__pick:hover {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: var(--color-accent-warm);
+    }
+    .model-card.is-selected .model-card__pick {
+      background: var(--color-accent);
+      color: white;
+      border-color: var(--color-accent);
+    }
+
+    .compare-footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      color: rgba(249, 250, 251, 0.55);
+      font-size: 0.875rem;
+      text-align: center;
+    }
+    .compare-footer a {
+      color: var(--color-accent-warm);
+      border-bottom: 1px solid currentColor;
+    }
+
+    @media (max-width: 720px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="compare-header">
+    <a class="back-link" href="./">&larr; back to spikes</a>
+    <h1 style="margin-top: 1.5rem;">Pick a <span>hand mesh</span></h1>
+    <p>
+      Four candidates from Poly Pizza, rendered in the same wireframe + glowing-nodes
+      shader. The two amber-badged hands are <strong>rigged</strong> (can pose for
+      sign language). The two teal-badged hands are <strong>static</strong> (mesh
+      reference only, would need rigging work). Hover to read the wireframe; click
+      "Use this one" to lock it in.
+    </p>
+  </header>
+
+  <main class="compare-grid">
+
+    <article class="model-card is-featured" data-model="elena-rigged">
+      <div class="model-card__canvas-wrap">
+        <span class="model-card__badge badge--new">Just added · Sketchfab</span>
+        <canvas></canvas>
+        <div class="model-card__loading">loading…</div>
+      </div>
+      <div class="model-card__body">
+        <div class="model-card__name">Rigged hand</div>
+        <div class="model-card__meta">
+          by Elena FF · CC-BY-SA-4.0 · <a href="https://sketchfab.com/3d-models/rigged-hand-eae97cc2a742413cb5338ab942b12c1e" target="_blank" rel="noopener">Sketchfab</a>
+        </div>
+        <div class="model-card__stats">
+          <span>verts<strong>16,330</strong></span>
+          <span>joints<strong>69</strong></span>
+          <span>size<strong>3.8 MB</strong></span>
+        </div>
+        <button class="model-card__pick" data-pick="elena-rigged">Use this one</button>
+      </div>
+    </article>
+
+    <article class="model-card" data-model="jtoastie-rigged">
+      <div class="model-card__canvas-wrap">
+        <span class="model-card__badge badge--rigged">Rigged · 23 bones</span>
+        <canvas></canvas>
+        <div class="model-card__loading">loading…</div>
+      </div>
+      <div class="model-card__body">
+        <div class="model-card__name">Rigged Hand</div>
+        <div class="model-card__meta">
+          by J-Toastie · CC-BY · <a href="https://poly.pizza/m/BEy8jbxm6A" target="_blank" rel="noopener">Poly Pizza</a>
+        </div>
+        <div class="model-card__stats">
+          <span>verts<strong>1,134</strong></span>
+          <span>bones<strong>23</strong></span>
+          <span>size<strong>89 KB</strong></span>
+        </div>
+        <button class="model-card__pick" data-pick="jtoastie-rigged">Use this one</button>
+      </div>
+    </article>
+
+    <article class="model-card" data-model="realistic-rigged">
+      <div class="model-card__canvas-wrap">
+        <span class="model-card__badge badge--rigged">Rigged · 25 bones</span>
+        <canvas></canvas>
+        <div class="model-card__loading">loading…</div>
+      </div>
+      <div class="model-card__body">
+        <div class="model-card__name">Realistic Hand</div>
+        <div class="model-card__meta">
+          by J-Toastie · CC-BY · <a href="https://poly.pizza/m/2lEkhDqfQf" target="_blank" rel="noopener">Poly Pizza</a>
+        </div>
+        <div class="model-card__stats">
+          <span>verts<strong>2,074</strong></span>
+          <span>bones<strong>25</strong></span>
+          <span>size<strong>4.4 MB</strong></span>
+        </div>
+        <button class="model-card__pick" data-pick="realistic-rigged">Use this one</button>
+      </div>
+    </article>
+
+    <article class="model-card" data-model="skeletal-static">
+      <div class="model-card__canvas-wrap">
+        <span class="model-card__badge badge--static">Static · bone mesh</span>
+        <canvas></canvas>
+        <div class="model-card__loading">loading…</div>
+      </div>
+      <div class="model-card__body">
+        <div class="model-card__name">Skeletal Hand</div>
+        <div class="model-card__meta">
+          by Jeremy Swan · CC-BY · <a href="https://poly.pizza/m/3b3VmmxXZ7S" target="_blank" rel="noopener">Poly Pizza</a>
+        </div>
+        <div class="model-card__stats">
+          <span>verts<strong>7,796</strong></span>
+          <span>bones<strong>0</strong></span>
+          <span>size<strong>268 KB</strong></span>
+        </div>
+        <button class="model-card__pick" data-pick="skeletal-static">Use this one</button>
+      </div>
+    </article>
+
+    <article class="model-card" data-model="google-static">
+      <div class="model-card__canvas-wrap">
+        <span class="model-card__badge badge--static">Static</span>
+        <canvas></canvas>
+        <div class="model-card__loading">loading…</div>
+      </div>
+      <div class="model-card__body">
+        <div class="model-card__name">Hand</div>
+        <div class="model-card__meta">
+          by Poly by Google · CC-BY · <a href="https://poly.pizza/m/btWmPNVSKUc" target="_blank" rel="noopener">Poly Pizza</a>
+        </div>
+        <div class="model-card__stats">
+          <span>verts<strong>1,748</strong></span>
+          <span>bones<strong>0</strong></span>
+          <span>size<strong>52 KB</strong></span>
+        </div>
+        <button class="model-card__pick" data-pick="google-static">Use this one</button>
+      </div>
+    </article>
+
+  </main>
+
+  <footer class="compare-footer">
+    <p>
+      All four are CC-BY (commercial OK, attribution required). Selection persists
+      in localStorage so the main test page can read it next.
+      <br><br>
+      <a href="./">&larr; back to scroll spikes</a>
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <script type="module" src="compare.js"></script>
+</body>
+</html>
