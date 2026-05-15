@@ -121,7 +121,8 @@ loader.load(HAND_GLB, (gltf) => {
   const modelRoot = gltf.scene;
   if (gltf.animations?.length) gltf.animations.length = 0;
 
-  // Material from loading.html — amber translucent with emissive glow
+  // Two-pass render: solid amber base + wireframe overlay so we keep
+  // the warm glow but get the wireframe protocol look back on top.
   modelRoot.traverse((obj) => {
     if (obj.isCamera || obj.isLight) obj.visible = false;
     if (obj.isMesh || obj.isSkinnedMesh) {
@@ -132,9 +133,22 @@ loader.load(HAND_GLB, (gltf) => {
         roughness: 0.4,
         metalness: 0.1,
         transparent: true,
-        opacity: 0.92,
+        opacity: 0.65,         // dimmed slightly so wireframe reads on top
         side: THREE.DoubleSide,
       });
+
+      // Wireframe clone — same skinning, deforms with poses
+      const wireMesh = obj.clone();
+      wireMesh.material = new THREE.MeshStandardMaterial({
+        color: 0xfde68a,        // brighter cream amber
+        wireframe: true,
+        transparent: true,
+        opacity: 0.55,
+      });
+      if (obj.isSkinnedMesh) {
+        wireMesh.bind(obj.skeleton, obj.bindMatrix);
+      }
+      obj.parent.add(wireMesh);
     }
   });
 
@@ -160,9 +174,8 @@ loader.load(HAND_GLB, (gltf) => {
   // EXACT WORKING ORIENTATION VALUES from loading.html
   orient.rotation.set(-6.0214, 1.8090, -1.8326);
 
-  // Match loading.html's base tilt — small static rotation for dynamism.
-  // Fingers up, wrist down comes from orient.rotation above.
-  pivot.rotation.x = 0.05;
+  // Base tilt. Bumped X for a slight leftward spin per spec.
+  pivot.rotation.x = 0.2;
   pivot.rotation.y = -0.15;
 
   // Camera frame
@@ -266,7 +279,7 @@ const clock = new THREE.Clock();
 function renderLoop() {
   const t = clock.getElapsedTime();
   if (modelLoaded) {
-    pivot.rotation.x = 0.05 + Math.sin(t * 0.4) * 0.04;
+    pivot.rotation.x = 0.2 + Math.sin(t * 0.4) * 0.04;
     pivot.rotation.y = -0.15 + Math.sin(t * 0.6) * 0.08;
   }
   renderer.render(scene, camera);
