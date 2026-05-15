@@ -160,9 +160,9 @@ loader.load(HAND_GLB, (gltf) => {
   // EXACT WORKING ORIENTATION VALUES from loading.html
   orient.rotation.set(-6.0214, 1.8090, -1.8326);
 
-  // Base tilt on pivot — pivot also gets +90° X per user request, then a
-  // small static tilt for dynamism.
-  pivot.rotation.x = Math.PI / 2 + 0.05;
+  // Match loading.html's base tilt — small static rotation for dynamism.
+  // Fingers up, wrist down comes from orient.rotation above.
+  pivot.rotation.x = 0.05;
   pivot.rotation.y = -0.15;
 
   // Camera frame
@@ -266,8 +266,7 @@ const clock = new THREE.Clock();
 function renderLoop() {
   const t = clock.getElapsedTime();
   if (modelLoaded) {
-    // Subtle wobble on pivot (preserves the +90° X base rotation)
-    pivot.rotation.x = Math.PI / 2 + 0.05 + Math.sin(t * 0.4) * 0.04;
+    pivot.rotation.x = 0.05 + Math.sin(t * 0.4) * 0.04;
     pivot.rotation.y = -0.15 + Math.sin(t * 0.6) * 0.08;
   }
   renderer.render(scene, camera);
