@@ -234,16 +234,16 @@
     box-shadow: 0 0 12px var(--amber-glow);
   }
 
-  /* HAND acronym word reveal under the line */
+  /* HAND acronym word reveal under the line.
+     Each span lays out as a 3-column grid (1fr | auto | 1fr) so .key sits
+     in column 2 (always horizontally centered in the container) and
+     .connector lives in column 1, right-aligned against the key. */
   .word-stack {
     position: absolute;
     bottom: -28px;
     left: 50%;
     transform: translate(-50%, 100%);
-    display: grid;
-    place-items: center;
-    width: max-content;
-    min-width: 200px;
+    width: 320px;
     height: 1.4em;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
@@ -254,12 +254,13 @@
     pointer-events: none;
     white-space: nowrap;
   }
-  /* Only direct child spans (per-letter slots) get the reveal treatment.
-     Inner .key / .connector spans inherit naturally. */
   .word-stack > span {
-    grid-area: 1 / 1;
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: baseline;
     opacity: 0;
-    /* clip-path wipes in from left to right for a typewriter feel */
     clip-path: inset(0 100% 0 0);
     transition:
       opacity 220ms ease,
@@ -270,12 +271,16 @@
     clip-path: inset(0 0 0 0);
   }
   .word-stack .connector {
+    grid-column: 1;
+    justify-self: end;
+    padding-right: 0.6em;
     color: var(--ink-faint);
-    margin-right: 0.6em;
     letter-spacing: 0.22em;
     font-weight: 400;
   }
   .word-stack .key {
+    grid-column: 2;
+    text-align: center;
     color: var(--amber-soft);
   }
 
