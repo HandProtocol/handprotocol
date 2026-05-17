@@ -149,6 +149,183 @@ body {
   .stage__pose, .stage__sub { transition: none; }
 }
 
+/* ----- Finger tuner panel ----- */
+
+.fx-panel {
+  position: fixed;
+  top: 4rem;
+  right: 1.5rem;
+  width: 280px;
+  max-height: calc(100vh - 6rem);
+  display: flex;
+  flex-direction: column;
+  background: rgba(8, 6, 4, 0.78);
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  font-family: ui-monospace, 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--color-text);
+  z-index: 20;
+  pointer-events: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+.fx-panel.is-collapsed .fx-panel__body { display: none; }
+.fx-panel.is-collapsed { max-height: none; }
+
+.fx-panel__head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(245, 158, 11, 0.15);
+}
+.fx-panel.is-collapsed .fx-panel__head { border-bottom: 0; }
+.fx-panel__title {
+  flex: 1;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent-warm);
+  font-size: 0.6875rem;
+}
+.fx-panel__pose {
+  flex: 0 0 auto;
+  background: rgba(12, 8, 4, 0.7);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: var(--color-accent-warm);
+  border-radius: 6px;
+  padding: 3px 6px;
+  font: inherit;
+  font-size: 0.6875rem;
+  cursor: pointer;
+}
+.fx-panel button.fx-btn {
+  background: rgba(12, 8, 4, 0.7);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: var(--color-accent-warm);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font: inherit;
+  font-size: 0.6875rem;
+  cursor: pointer;
+  transition: background 150ms, border-color 150ms;
+}
+.fx-panel button.fx-btn:hover {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: var(--color-accent-warm);
+}
+.fx-panel button.fx-btn.is-active {
+  background: rgba(245, 158, 11, 0.25);
+}
+
+.fx-panel__body {
+  overflow-y: auto;
+  padding: 0.5rem 0.75rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  scrollbar-width: thin;
+}
+.fx-panel__body::-webkit-scrollbar { width: 6px; }
+.fx-panel__body::-webkit-scrollbar-thumb {
+  background: rgba(245, 158, 11, 0.25);
+  border-radius: 3px;
+}
+
+.fx-finger {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.fx-finger__name {
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245, 158, 11, 0.85);
+  font-weight: 500;
+}
+
+.fx-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 42px;
+  align-items: center;
+  gap: 6px;
+}
+.fx-row__label {
+  color: rgba(249, 250, 251, 0.55);
+  font-size: 0.6875rem;
+}
+.fx-row__val {
+  font-size: 0.6875rem;
+  text-align: right;
+  color: var(--color-accent-warm);
+  font-variant-numeric: tabular-nums;
+}
+.fx-row input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 14px;
+  background: transparent;
+  cursor: pointer;
+}
+.fx-row input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: rgba(245, 158, 11, 0.25);
+  border-radius: 1px;
+}
+.fx-row input[type="range"]::-moz-range-track {
+  height: 2px;
+  background: rgba(245, 158, 11, 0.25);
+  border-radius: 1px;
+}
+.fx-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--color-accent-warm);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+  border: 0;
+}
+.fx-row input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-accent-warm);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+  border: 0;
+}
+
+.fx-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: rgba(245, 158, 11, 0.95);
+  color: #1a1208;
+  font-family: ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.5rem 0.875rem;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 220ms, transform 220ms;
+  pointer-events: none;
+  z-index: 30;
+}
+.fx-toast.is-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  .fx-panel { width: calc(100vw - 2rem); right: 1rem; top: 3.5rem; max-height: 50vh; }
+}
+
 /* ----- Rotation controls (orientation dial-in) ----- */
 
 .rot-controls {

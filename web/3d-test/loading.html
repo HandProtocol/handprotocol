@@ -332,6 +332,112 @@
   /* hidden morph targets */
   .morph-targets { position: absolute; width: 0; height: 0; overflow: hidden; }
 
+  /* ----- Finger tuner panel ----- */
+  .fx-panel {
+    position: fixed; top: 5.5rem; right: 1rem; width: 260px;
+    max-height: calc(100vh - 11rem);
+    display: flex; flex-direction: column;
+    background: rgba(7, 9, 15, 0.82);
+    border: 1px solid rgba(217, 119, 6, 0.22);
+    border-radius: 10px; backdrop-filter: blur(10px);
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.7rem; color: var(--ink);
+    z-index: 30; box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+  }
+  .fx-panel.is-collapsed .fx-panel__body,
+  .fx-panel.is-collapsed .fx-panel__tools { display: none; }
+  .fx-panel.is-collapsed { max-height: none; }
+  .fx-panel__head {
+    display: flex; align-items: center; gap: 0.4rem;
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid rgba(217, 119, 6, 0.15);
+  }
+  .fx-panel.is-collapsed .fx-panel__head { border-bottom: 0; }
+  .fx-panel__title {
+    flex: 1; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--amber-soft); font-size: 0.625rem;
+  }
+  .fx-panel__pose {
+    background: rgba(12, 8, 4, 0.7);
+    border: 1px solid rgba(217, 119, 6, 0.3);
+    color: var(--amber-soft); border-radius: 5px;
+    padding: 2px 5px; font: inherit; font-size: 0.625rem; cursor: pointer;
+  }
+  .fx-panel button.fx-btn {
+    background: rgba(12, 8, 4, 0.7);
+    border: 1px solid rgba(217, 119, 6, 0.3);
+    color: var(--amber-soft); border-radius: 5px;
+    padding: 2px 7px; font: inherit; font-size: 0.625rem;
+    cursor: pointer; transition: background 150ms, border-color 150ms;
+  }
+  .fx-panel button.fx-btn:hover {
+    background: rgba(217, 119, 6, 0.18); border-color: var(--amber-soft);
+  }
+  .fx-panel button.fx-btn.is-active {
+    background: rgba(217, 119, 6, 0.28); border-color: var(--amber-soft);
+  }
+  .fx-panel__tools {
+    display: flex; gap: 0.35rem; padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid rgba(217, 119, 6, 0.12); align-items: center;
+  }
+  .fx-panel__tools .fx-btn { flex: 1; }
+  .fx-panel__body {
+    overflow-y: auto; padding: 0.45rem 0.6rem 0.6rem;
+    display: flex; flex-direction: column; gap: 0.45rem; scrollbar-width: thin;
+  }
+  .fx-panel__body::-webkit-scrollbar { width: 5px; }
+  .fx-panel__body::-webkit-scrollbar-thumb {
+    background: rgba(217, 119, 6, 0.25); border-radius: 3px;
+  }
+  .fx-finger { display: flex; flex-direction: column; gap: 3px; }
+  .fx-finger__name {
+    font-size: 0.5625rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(217, 119, 6, 0.85); font-weight: 500;
+  }
+  .fx-row {
+    display: grid; grid-template-columns: 44px 1fr 38px;
+    align-items: center; gap: 5px;
+  }
+  .fx-row__label { color: rgba(245, 239, 225, 0.55); font-size: 0.625rem; }
+  .fx-row__val {
+    font-size: 0.625rem; text-align: right;
+    color: var(--amber-soft); font-variant-numeric: tabular-nums;
+  }
+  .fx-row input[type="range"] {
+    -webkit-appearance: none; appearance: none;
+    width: 100%; height: 12px; background: transparent; cursor: pointer;
+  }
+  .fx-row input[type="range"]::-webkit-slider-runnable-track {
+    height: 2px; background: rgba(217, 119, 6, 0.25); border-radius: 1px;
+  }
+  .fx-row input[type="range"]::-moz-range-track {
+    height: 2px; background: rgba(217, 119, 6, 0.25); border-radius: 1px;
+  }
+  .fx-row input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 11px; height: 11px; margin-top: -4.5px;
+    border-radius: 50%; background: var(--amber-soft);
+    box-shadow: 0 0 8px var(--amber-glow); border: 0;
+  }
+  .fx-row input[type="range"]::-moz-range-thumb {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--amber-soft); box-shadow: 0 0 8px var(--amber-glow); border: 0;
+  }
+  .fx-toast {
+    position: fixed; bottom: 1.5rem; left: 50%;
+    transform: translate(-50%, 8px);
+    background: rgba(217, 119, 6, 0.95); color: #1a1208;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; font-weight: 600;
+    padding: 0.5rem 0.875rem; border-radius: 8px;
+    opacity: 0; transition: opacity 220ms, transform 220ms;
+    pointer-events: none; z-index: 40;
+  }
+  .fx-toast.is-show { opacity: 1; transform: translate(-50%, 0); }
+  @media (max-width: 700px) {
+    .fx-panel { width: calc(100vw - 2rem); right: 1rem; top: 4.5rem; max-height: 45vh; }
+  }
+
 </style>
 </head>
 <body>
@@ -364,6 +470,9 @@
   <div>BUILD <b>0.1.0-test</b></div>
   <div>RENDER <span id="fps">60.0</span> FPS</div>
 </div>
+
+<!-- finger tuner panel -->
+<aside class="fx-panel" id="fx-panel" aria-label="Finger tuner"></aside>
 
 <!-- particle field -->
 <canvas id="particles"></canvas>
@@ -573,37 +682,41 @@
     // ASL reference photos (EricMartinezIllamola/asl-alphabet on GitHub).
     // N tuned manually as a closed fist — dataset N photos use the alt
     // "pointing-down" variant which doesn't map to our upright wrist rig.
-    H: { // index + middle extended, others curled, thumb tucked
+    // Each finger:
+    //   curl  : [lower, middle, tip] X-axis flexion (radians, relative to rest).
+    //   splay : Y-axis abduction at the lower (MCP / CMC) joint (radians).
+    // Refine with the on-screen Finger panel (Stop → drag → Copy).
+    H: {
       turn: -0.4,
-      thumb:  [0.83, 0.78, 0.25],
-      index:  [0.53, 0.10, 0.11],
-      middle: [0.39, 0.04, 0.23],
-      ring:   [1.02, 1.95, 0.53],
-      pinky:  [1.01, 1.97, 0.41],
+      thumb:  { curl: [1.00, 1.00, 0.30], splay:  0.40 },
+      index:  { curl: [0.00, 0.00, 0.00], splay: -0.10 },
+      middle: { curl: [0.00, 0.00, 0.00], splay:  0.10 },
+      ring:   { curl: [1.40, 1.60, 1.30], splay:  0.00 },
+      pinky:  { curl: [1.40, 1.60, 1.30], splay:  0.00 },
     },
-    A: { // closed fist, thumb resting up the side of the index
+    A: {
       turn:  0.4,
-      thumb:  [0.1, 0.2, 0.1],
-      index:  [1.4, 1.6, 1.3],
-      middle: [1.4, 1.6, 1.3],
-      ring:   [1.4, 1.6, 1.3],
-      pinky:  [1.4, 1.6, 1.3],
+      thumb:  { curl: [0.10, 0.00, 0.00], splay: -0.30 },
+      index:  { curl: [1.40, 1.60, 1.30], splay:  0.00 },
+      middle: { curl: [1.40, 1.60, 1.30], splay:  0.00 },
+      ring:   { curl: [1.40, 1.60, 1.30], splay:  0.00 },
+      pinky:  { curl: [1.40, 1.60, 1.30], splay:  0.00 },
     },
-    N: { // closed fist with thumb tucked between middle and ring — palm forward anchor
+    N: {
       turn:  0,
-      thumb:  [0.6, 1.0, 0.7],
-      index:  [1.4, 1.6, 1.4],
-      middle: [1.4, 1.6, 1.4],
-      ring:   [1.4, 1.6, 1.4],
-      pinky:  [1.4, 1.6, 1.4],
+      thumb:  { curl: [0.60, 0.90, 0.40], splay:  0.50 },
+      index:  { curl: [1.30, 1.60, 1.30], splay:  0.00 },
+      middle: { curl: [1.30, 1.60, 1.30], splay:  0.00 },
+      ring:   { curl: [1.40, 1.60, 1.30], splay:  0.00 },
+      pinky:  { curl: [1.40, 1.60, 1.30], splay:  0.00 },
     },
-    D: { // index extended up, others curl tight to touch thumb in an O
+    D: {
       turn: -0.4,
-      thumb:  [0.5, 0.9, 0.7],
-      index:  [0.0, 0.0, 0.0],
-      middle: [1.4, 1.6, 1.3],
-      ring:   [1.4, 1.6, 1.3],
-      pinky:  [1.4, 1.6, 1.3],
+      thumb:  { curl: [0.30, 0.40, 0.60], splay:  0.20 },
+      index:  { curl: [0.00, 0.00, 0.00], splay:  0.00 },
+      middle: { curl: [1.30, 1.40, 0.80], splay: -0.20 },
+      ring:   { curl: [1.40, 1.50, 1.00], splay:  0.00 },
+      pinky:  { curl: [1.40, 1.50, 1.00], splay:  0.00 },
     },
   };
 
@@ -709,15 +822,28 @@
     camera.updateProjectionMatrix();
     camera.lookAt(0, 0, 0);
 
-    // Resolve bone refs and capture rest pose
+    // Resolve bone refs and capture rest pose (X for curl, Y at lower for splay).
     boneRefs = { fingers: {}, rest: {} };
     Object.entries(BONE_MAP).forEach(([finger, names]) => {
-      boneRefs.fingers[finger] = names.map((n) => modelRoot.getObjectByName(n) || null);
-      boneRefs.rest[finger] = boneRefs.fingers[finger].map((b) => b ? b.rotation[CURL_AXIS] : 0);
+      const bones = names.map((n) => modelRoot.getObjectByName(n) || null);
+      boneRefs.fingers[finger] = bones;
+      boneRefs.rest[finger] = {
+        x: bones.map((b) => b ? b.rotation.x : 0),
+        y: bones[0] ? bones[0].rotation.y : 0,
+      };
     });
-    // Apply initial pose (H) without animation
-    applyPose('H', 0);
-    setTimeout(cycle, 1100);
+    // URL param ?letter=H|A|N|D snaps to a specific letter (and freezes cycle).
+    const initParams = new URLSearchParams(location.search);
+    const wantedLetter = (initParams.get('letter') || '').toUpperCase();
+    if (LETTER_LIST.includes(wantedLetter)) {
+      current = LETTER_LIST.indexOf(wantedLetter);
+      setActive(current);
+      applyPose(wantedLetter, 0);
+      stopCycle();
+    } else {
+      applyPose('H', 0);
+      setTimeout(cycle, 1100);
+    }
   }, undefined, (err) => {
     console.error('GLB load error', err);
   });
@@ -725,27 +851,34 @@
   function applyPose(letter, duration = 900) {
     if (!boneRefs) return;
     const pose = POSES[letter];
-    // Bones: iterate finger curl tables only (skip `turn` and any non-finger keys)
-    Object.entries(pose).forEach(([finger, curls]) => {
-      if (!Array.isArray(curls)) return;
+    Object.entries(pose).forEach(([finger, data]) => {
+      if (!data || typeof data !== 'object' || !Array.isArray(data.curl)) return;
       const refs = boneRefs.fingers[finger];
       const rests = boneRefs.rest[finger];
-      if (!refs) return;
+      if (!refs || !rests) return;
+
+      // Curl: X-axis flexion per phalanx.
       refs.forEach((bone, i) => {
         if (!bone) return;
-        const target = rests[i] + curls[i] * CURL_SIGN;
+        const target = rests.x[i] + data.curl[i] * CURL_SIGN;
         if (duration <= 0) {
-          bone.rotation[CURL_AXIS] = target;
-          return;
+          bone.rotation.x = target;
+        } else {
+          animate(bone.rotation, { x: target, duration, easing: 'easeInOutQuad' });
         }
-        animate(bone.rotation, {
-          [CURL_AXIS]: target,
-          duration,
-          easing: 'easeInOutQuad',
-        });
       });
+
+      // Splay: Y-axis abduction at the lower (MCP / CMC) bone only.
+      const lower = refs[0];
+      if (lower) {
+        const splayTarget = rests.y + (data.splay ?? 0);
+        if (duration <= 0) {
+          lower.rotation.y = splayTarget;
+        } else {
+          animate(lower.rotation, { y: splayTarget, duration, easing: 'easeInOutQuad' });
+        }
+      }
     });
-    // Turn: animate the turn group's Y rotation to the letter's turn value
     const tgtTurn = pose.turn ?? 0;
     if (duration <= 0) {
       turn.rotation.y = tgtTurn;
@@ -754,41 +887,44 @@
     }
   }
 
-  // Ethereal effects fired on each pose transition: CSS pulse + particle burst.
-  const pulseEl = document.getElementById('pulseEl');
-  function triggerPulse() {
-    pulseEl.classList.remove('go');
-    void pulseEl.offsetWidth; // force reflow so animation restarts cleanly
-    pulseEl.classList.add('go');
-  }
-
-  // Burst particles: spawned at hand center, expand outward then fade.
-  // Added to the global particle canvas via the spawnBurst() hook defined later.
-  function transitionFX() {
-    triggerPulse();
-    if (typeof window.__spawnBurst === 'function') {
-      const cx = window.innerWidth / 2;
-      const cy = window.innerHeight / 2;
-      window.__spawnBurst(cx, cy, 38);
-    }
-  }
-
   // Cycle through H → A → N → D, driving both bone curl pose and Y turn
+  let cycleRunning = true;
+  let cycleNextTimeout = null;
+  let cycleActiveTimeout = null;
   function cycle() {
+    if (!cycleRunning) return;
     const next = (current + 1) % 4;
     applyPose(letters[next], 850);
-    transitionFX();
-    setTimeout(() => { current = next; setActive(current); }, 250);
-    setTimeout(cycle, 1900);
+    cycleActiveTimeout = setTimeout(() => {
+      current = next;
+      setActive(current);
+      if (typeof syncPanelFromPose === 'function') syncPanelFromPose();
+    }, 250);
+    cycleNextTimeout = setTimeout(cycle, 1900);
+  }
+  function stopCycle() {
+    cycleRunning = false;
+    if (cycleNextTimeout) { clearTimeout(cycleNextTimeout); cycleNextTimeout = null; }
+    if (cycleActiveTimeout) { clearTimeout(cycleActiveTimeout); cycleActiveTimeout = null; }
+  }
+  function resumeCycle() {
+    if (cycleRunning) return;
+    cycleRunning = true;
+    cycle();
   }
 
-  // Render loop — gentle pivot wobble for life
+  // Render loop — gentle pivot wobble for life (paused when cycle stopped)
   const clock = new THREE.Clock();
   function render() {
     const t = clock.getElapsedTime();
     if (modelRoot) {
-      pivot.rotation.y = -0.15 + Math.sin(t * 0.6) * 0.08;
-      pivot.rotation.x =  0.05 + Math.sin(t * 0.4) * 0.04;
+      if (cycleRunning) {
+        pivot.rotation.y = -0.15 + Math.sin(t * 0.6) * 0.08;
+        pivot.rotation.x =  0.05 + Math.sin(t * 0.4) * 0.04;
+      } else {
+        pivot.rotation.y = -0.15;
+        pivot.rotation.x =  0.05;
+      }
     }
     renderer.render(scene, camera);
     requestAnimationFrame(render);
@@ -861,10 +997,12 @@
 
   function resize() {
     dpr = window.devicePixelRatio || 1;
-    W = canvas.clientWidth = window.innerWidth;
-    H = canvas.clientHeight = window.innerHeight;
+    W = window.innerWidth;
+    H = window.innerHeight;
     canvas.width = W * dpr;
     canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     initParticles();
   }
@@ -1003,6 +1141,249 @@
   window.addEventListener('resize', resize);
   resize();
   drawParticles();
+
+  /* ============================================================
+     Finger tuner panel — splay + curl dial-in for H/A/N/D.
+     ============================================================ */
+  const PHALANX_NAMES = ['lower', 'middle', 'tip'];
+  const FINGER_ORDER = ['thumb', 'index', 'middle', 'ring', 'pinky'];
+  const LETTER_LIST = ['H', 'A', 'N', 'D'];
+  const SLIDER_MIN = -1.0;
+  const SLIDER_MAX = 2.5;
+  const SLIDER_STEP = 0.01;
+  const SPLAY_MIN = -0.8;
+  const SPLAY_MAX = 0.8;
+  const SPLAY_STEP = 0.01;
+  const TURN_MIN = -Math.PI;
+  const TURN_MAX = Math.PI;
+  const TURN_STEP = 0.01;
+
+  const fxPanel = document.getElementById('fx-panel');
+  let fxActivePose = 'H';
+  let fxRows = {};
+  let fxTurnRow = null;
+
+  function buildPanel() {
+    fxPanel.innerHTML = '';
+    const head = document.createElement('header');
+    head.className = 'fx-panel__head';
+    head.innerHTML = `
+      <span class="fx-panel__title">Fingers</span>
+      <select class="fx-panel__pose" id="fx-pose-select">
+        ${LETTER_LIST.map((p) => `<option value="${p}">${p}</option>`).join('')}
+      </select>
+      <button class="fx-btn" id="fx-collapse" title="Collapse">−</button>
+    `;
+    fxPanel.appendChild(head);
+
+    const tools = document.createElement('div');
+    tools.className = 'fx-panel__tools';
+    tools.innerHTML = `
+      <button class="fx-btn" id="fx-toggle-cycle">Stop</button>
+      <button class="fx-btn" id="fx-snap">Snap</button>
+      <button class="fx-btn" id="fx-copy">Copy</button>
+    `;
+    fxPanel.appendChild(tools);
+
+    const body = document.createElement('div');
+    body.className = 'fx-panel__body';
+    fxPanel.appendChild(body);
+
+    // Turn slider (single, per pose)
+    const turnGroup = document.createElement('div');
+    turnGroup.className = 'fx-finger';
+    const turnName = document.createElement('div');
+    turnName.className = 'fx-finger__name';
+    turnName.textContent = 'Hand turn (Y rad)';
+    turnGroup.appendChild(turnName);
+    const turnRow = document.createElement('div');
+    turnRow.className = 'fx-row';
+    turnRow.innerHTML = `
+      <span class="fx-row__label">turn</span>
+      <input type="range" min="${TURN_MIN}" max="${TURN_MAX}" step="${TURN_STEP}" value="0">
+      <span class="fx-row__val">0.00</span>
+    `;
+    const turnInput = turnRow.querySelector('input');
+    const turnVal = turnRow.querySelector('.fx-row__val');
+    turnInput.addEventListener('input', () => {
+      const v = parseFloat(turnInput.value);
+      turnVal.textContent = v.toFixed(2);
+      POSES[fxActivePose].turn = v;
+      turn.rotation.y = v;
+      stopCycle();
+      syncCycleButton();
+    });
+    turnGroup.appendChild(turnRow);
+    body.appendChild(turnGroup);
+    fxTurnRow = { input: turnInput, val: turnVal };
+
+    // 5 fingers × (3 curl + 1 splay) = 20 sliders
+    fxRows = {};
+    FINGER_ORDER.forEach((finger) => {
+      const group = document.createElement('div');
+      group.className = 'fx-finger';
+      const name = document.createElement('div');
+      name.className = 'fx-finger__name';
+      name.textContent = finger;
+      group.appendChild(name);
+      fxRows[finger] = { curl: [], splay: null };
+
+      PHALANX_NAMES.forEach((phalanx, i) => {
+        const row = document.createElement('div');
+        row.className = 'fx-row';
+        row.innerHTML = `
+          <span class="fx-row__label">${phalanx}</span>
+          <input type="range" min="${SLIDER_MIN}" max="${SLIDER_MAX}" step="${SLIDER_STEP}" value="0">
+          <span class="fx-row__val">0.00</span>
+        `;
+        const input = row.querySelector('input');
+        const val = row.querySelector('.fx-row__val');
+        input.addEventListener('input', () => {
+          const v = parseFloat(input.value);
+          val.textContent = v.toFixed(2);
+          POSES[fxActivePose][finger].curl[i] = v;
+          applyCurlInstant(finger, i, v);
+          stopCycle();
+          syncCycleButton();
+        });
+        group.appendChild(row);
+        fxRows[finger].curl.push({ input, val });
+      });
+
+      const splayRow = document.createElement('div');
+      splayRow.className = 'fx-row';
+      splayRow.innerHTML = `
+        <span class="fx-row__label">splay</span>
+        <input type="range" min="${SPLAY_MIN}" max="${SPLAY_MAX}" step="${SPLAY_STEP}" value="0">
+        <span class="fx-row__val">0.00</span>
+      `;
+      const splayInput = splayRow.querySelector('input');
+      const splayVal = splayRow.querySelector('.fx-row__val');
+      splayInput.addEventListener('input', () => {
+        const v = parseFloat(splayInput.value);
+        splayVal.textContent = v.toFixed(2);
+        POSES[fxActivePose][finger].splay = v;
+        applySplayInstant(finger, v);
+        stopCycle();
+        syncCycleButton();
+      });
+      group.appendChild(splayRow);
+      fxRows[finger].splay = { input: splayInput, val: splayVal };
+
+      body.appendChild(group);
+    });
+
+    document.getElementById('fx-pose-select').addEventListener('change', (e) => {
+      fxActivePose = e.target.value;
+      const idx = LETTER_LIST.indexOf(fxActivePose);
+      current = idx;
+      setActive(idx);
+      stopCycle();
+      syncCycleButton();
+      applyPose(fxActivePose, 0);
+      syncPanelFromPose();
+    });
+    document.getElementById('fx-toggle-cycle').addEventListener('click', () => {
+      if (cycleRunning) stopCycle(); else resumeCycle();
+      syncCycleButton();
+    });
+    document.getElementById('fx-snap').addEventListener('click', () => {
+      applyPose(fxActivePose, 0);
+    });
+    document.getElementById('fx-copy').addEventListener('click', copyPoses);
+    document.getElementById('fx-collapse').addEventListener('click', () => {
+      fxPanel.classList.toggle('is-collapsed');
+      const btn = document.getElementById('fx-collapse');
+      btn.textContent = fxPanel.classList.contains('is-collapsed') ? '+' : '−';
+    });
+
+    syncPanelFromPose();
+    syncCycleButton();
+  }
+
+  function syncCycleButton() {
+    const btn = document.getElementById('fx-toggle-cycle');
+    if (!btn) return;
+    btn.textContent = cycleRunning ? 'Stop' : 'Resume';
+    btn.classList.toggle('is-active', !cycleRunning);
+  }
+
+  function applyCurlInstant(finger, phalanxIndex, curl) {
+    if (!boneRefs) return;
+    const bone = boneRefs.fingers[finger]?.[phalanxIndex];
+    const restX = boneRefs.rest[finger]?.x?.[phalanxIndex];
+    if (!bone || restX === undefined) return;
+    bone.rotation.x = restX + curl * CURL_SIGN;
+  }
+  function applySplayInstant(finger, splay) {
+    if (!boneRefs) return;
+    const lower = boneRefs.fingers[finger]?.[0];
+    const restY = boneRefs.rest[finger]?.y ?? 0;
+    if (!lower) return;
+    lower.rotation.y = restY + splay;
+  }
+
+  function syncPanelFromPose() {
+    const pose = POSES[fxActivePose];
+    if (!pose) return;
+    FINGER_ORDER.forEach((finger) => {
+      const data = pose[finger] || { curl: [0, 0, 0], splay: 0 };
+      const curls = data.curl || [0, 0, 0];
+      const splay = data.splay ?? 0;
+      const row = fxRows[finger];
+      if (!row) return;
+      row.curl.forEach(({ input, val }, i) => {
+        input.value = curls[i];
+        val.textContent = curls[i].toFixed(2);
+      });
+      if (row.splay) {
+        row.splay.input.value = splay;
+        row.splay.val.textContent = splay.toFixed(2);
+      }
+    });
+    if (fxTurnRow) {
+      const t = pose.turn ?? 0;
+      fxTurnRow.input.value = t;
+      fxTurnRow.val.textContent = t.toFixed(2);
+    }
+    const sel = document.getElementById('fx-pose-select');
+    if (sel) sel.value = fxActivePose;
+  }
+
+  function copyPoses() {
+    const fmtArr = (a) => `[${a.map((n) => n.toFixed(2)).join(', ')}]`;
+    const fmtPose = (name, p) => {
+      const lines = FINGER_ORDER
+        .map((f) => {
+          const d = p[f];
+          return `      ${f.padEnd(7)} { curl: ${fmtArr(d.curl)}, splay: ${(d.splay ?? 0).toFixed(2)} },`;
+        })
+        .join('\n');
+      return `    ${name}: {\n      turn: ${(p.turn ?? 0).toFixed(2)},\n${lines}\n    },`;
+    };
+    const body = LETTER_LIST.map((p) => fmtPose(p, POSES[p])).join('\n');
+    const out = `const POSES = {\n${body}\n  };`;
+    navigator.clipboard.writeText(out).then(
+      () => showFxToast('Copied POSES'),
+      () => { console.log(out); showFxToast('Copy failed — see console'); },
+    );
+  }
+
+  let fxToastEl = null;
+  let fxToastTimer = null;
+  function showFxToast(msg) {
+    if (!fxToastEl) {
+      fxToastEl = document.createElement('div');
+      fxToastEl.className = 'fx-toast';
+      document.body.appendChild(fxToastEl);
+    }
+    fxToastEl.textContent = msg;
+    fxToastEl.classList.add('is-show');
+    if (fxToastTimer) clearTimeout(fxToastTimer);
+    fxToastTimer = setTimeout(() => fxToastEl.classList.remove('is-show'), 1600);
+  }
+
+  buildPanel();
 </script>
 </body>
 </html>

@@ -1,8 +1,7 @@
-// Subscribe a contact to the Resend audience.
-//
-// Audience-level double opt-in must be enabled at resend.com/audiences for the
-// confirmation email to be sent automatically. With double opt-in on, the
-// contact stays unconfirmed until they click the link Resend emails them.
+// Subscribe a contact to the Resend audience. Single opt-in: the contact is
+// added directly to the audience and counts as subscribed immediately. Every
+// outgoing Resend email must include an unsubscribe link (Resend handles this
+// automatically for audience sends).
 //
 // Env vars (Netlify dashboard → Site settings → Environment):
 //   RESEND_API_KEY      — Resend API key with audience write access

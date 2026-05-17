@@ -21,6 +21,7 @@ This monorepo holds the public web presence (foundation campaign + discovery res
 
 ## Documents
 
+- **[`HANDOFF.md`](HANDOFF.md):** current state of the project. Read this first if you are picking the work up cold or returning after time away. Names what just shipped, what is in motion, what is open, and where to find what.
 - **[`PRODUCT.md`](PRODUCT.md):** strategic context: users, mission, brand personality, anti-references, design principles.
 - **[`DESIGN.md`](DESIGN.md):** visual system: colors, typography, components, spacing, motion.
 - **[`AGENTS.md`](AGENTS.md):** guide for AI coding agents working in this repo.

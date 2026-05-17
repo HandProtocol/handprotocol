@@ -6,11 +6,13 @@ Orientation file for AI coding agents working in this monorepo. Read this first.
 
 The HAND Protocol monorepo. HAND is a regenerative-infrastructure nonprofit foundation, incorporating as a 501(c)(3) in Austin, Texas. The public web presence consists of three connected surfaces (foundation campaign, discovery docs, legacy archive) plus older Web3 tooling preserved under `sweetspot/`.
 
+For current state (what just shipped, what is in motion, what is open, where to find what), read **`HANDOFF.md`** at the repo root first. It is the fastest way to orient.
+
 For the full mission, audiences, voice, and constraints, read **`PRODUCT.md`** at the repo root before doing strategic work.
 
 For colors, typography, components, spacing, and motion conventions, read **`DESIGN.md`** at the repo root before doing visual work.
 
-Both files were written 2026-05-11 from accumulated session context and reflect the system as it stands now.
+`PRODUCT.md` and `DESIGN.md` were written 2026-05-11 from accumulated session context. `HANDOFF.md` is updated more frequently and reflects the system as it stands now.
 
 ## Repo layout
 

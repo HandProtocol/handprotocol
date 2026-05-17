@@ -222,7 +222,7 @@ loader.load(HAND_GLB, (gltf) => {
 let currentPoseIndex = 0;
 let cycleTimer = null;
 
-function applyPose(poseName) {
+function applyPose(poseName, { instant = false } = {}) {
   if (!modelLoaded) { queuedPose = poseName; return; }
   const pose = BONE_POSES[poseName];
   if (!pose || !boneRefs) return;
@@ -233,12 +233,17 @@ function applyPose(poseName) {
     if (!refs) return;
     refs.forEach((bone, i) => {
       if (!bone) return;
-      anime({
-        targets: bone.rotation,
-        x: rests[i] + curls[i],
-        duration: 1400,
-        easing: 'easeInOutQuad',
-      });
+      const target = rests[i] + curls[i];
+      if (instant) {
+        bone.rotation.x = target;
+      } else {
+        anime({
+          targets: bone.rotation,
+          x: target,
+          duration: 1400,
+          easing: 'easeInOutQuad',
+        });
+      }
     });
   });
 
@@ -261,7 +266,10 @@ function applyPose(poseName) {
 
 function advancePose() {
   currentPoseIndex = (currentPoseIndex + 1) % POSES.length;
-  applyPose(POSES[currentPoseIndex]);
+  const name = POSES[currentPoseIndex];
+  applyPose(name);
+  fxActivePose = name;
+  if (typeof syncPanelFromPose === 'function') syncPanelFromPose();
 }
 function startCycle() {
   if (cycleTimer) clearInterval(cycleTimer);
@@ -316,3 +324,164 @@ setTimeout(() => {
 
 applyPose('give');
 startCycle();
+
+/* ============================================================
+   Finger tuner panel — live slider edits, pose-scoped state,
+   copy-to-clipboard for paste-back into BONE_POSES.
+   ============================================================ */
+
+const PHALANX_NAMES = ['lower', 'middle', 'tip'];
+const FINGER_ORDER = ['thumb', 'index', 'middle', 'ring', 'pinky'];
+const SLIDER_MIN = -1.0;
+const SLIDER_MAX = 2.5;
+const SLIDER_STEP = 0.01;
+
+const fxPanel = document.getElementById('fx-panel');
+let fxActivePose = 'give';
+let fxRows = {};
+
+function buildPanel() {
+  fxPanel.innerHTML = '';
+
+  const head = document.createElement('header');
+  head.className = 'fx-panel__head';
+  head.innerHTML = `
+    <span class="fx-panel__title">Fingers</span>
+    <select class="fx-panel__pose" id="fx-pose-select">
+      ${POSES.map((p) => `<option value="${p}">${p}</option>`).join('')}
+    </select>
+    <button class="fx-btn" id="fx-copy" title="Copy BONE_POSES to clipboard">Copy</button>
+    <button class="fx-btn" id="fx-collapse" title="Collapse">−</button>
+  `;
+  fxPanel.appendChild(head);
+
+  const body = document.createElement('div');
+  body.className = 'fx-panel__body';
+  fxPanel.appendChild(body);
+
+  fxRows = {};
+  FINGER_ORDER.forEach((finger) => {
+    const group = document.createElement('div');
+    group.className = 'fx-finger';
+    const name = document.createElement('div');
+    name.className = 'fx-finger__name';
+    name.textContent = finger;
+    group.appendChild(name);
+    fxRows[finger] = [];
+
+    PHALANX_NAMES.forEach((phalanx, i) => {
+      const row = document.createElement('div');
+      row.className = 'fx-row';
+      row.innerHTML = `
+        <span class="fx-row__label">${phalanx}</span>
+        <input type="range" min="${SLIDER_MIN}" max="${SLIDER_MAX}" step="${SLIDER_STEP}" value="0">
+        <span class="fx-row__val">0.00</span>
+      `;
+      const input = row.querySelector('input');
+      const val = row.querySelector('.fx-row__val');
+      input.addEventListener('input', () => {
+        const v = parseFloat(input.value);
+        val.textContent = v.toFixed(2);
+        BONE_POSES[fxActivePose][finger][i] = v;
+        applyBoneInstant(finger, i, v);
+        stopCycle();
+      });
+      group.appendChild(row);
+      fxRows[finger].push({ input, val });
+    });
+
+    body.appendChild(group);
+  });
+
+  document.getElementById('fx-pose-select').addEventListener('change', (e) => {
+    fxActivePose = e.target.value;
+    syncPanelFromPose();
+    currentPoseIndex = POSES.indexOf(fxActivePose);
+    stopCycle();
+    applyPose(fxActivePose, { instant: true });
+    poseDots.querySelectorAll('.dot').forEach((d) => {
+      d.classList.toggle('is-active', d.dataset.pose === fxActivePose);
+    });
+    poseLabel.textContent = POSE_DATA[fxActivePose].label;
+    poseSub.textContent = POSE_DATA[fxActivePose].sub;
+  });
+
+  document.getElementById('fx-copy').addEventListener('click', copyBonePoses);
+  document.getElementById('fx-collapse').addEventListener('click', () => {
+    fxPanel.classList.toggle('is-collapsed');
+    const btn = document.getElementById('fx-collapse');
+    btn.textContent = fxPanel.classList.contains('is-collapsed') ? '+' : '−';
+  });
+
+  syncPanelFromPose();
+}
+
+function applyBoneInstant(finger, phalanxIndex, curl) {
+  if (!boneRefs) return;
+  const bone = boneRefs.fingers[finger]?.[phalanxIndex];
+  const rest = boneRefs.rest[finger]?.[phalanxIndex];
+  if (!bone || rest === undefined) return;
+  bone.rotation.x = rest + curl;
+}
+
+function syncPanelFromPose() {
+  const pose = BONE_POSES[fxActivePose];
+  if (!pose) return;
+  FINGER_ORDER.forEach((finger) => {
+    const curls = pose[finger] || [0, 0, 0];
+    fxRows[finger].forEach(({ input, val }, i) => {
+      input.value = curls[i];
+      val.textContent = curls[i].toFixed(2);
+    });
+  });
+  const sel = document.getElementById('fx-pose-select');
+  if (sel) sel.value = fxActivePose;
+}
+
+function stopCycle() {
+  if (cycleTimer) {
+    clearInterval(cycleTimer);
+    cycleTimer = null;
+  }
+}
+
+function copyBonePoses() {
+  const fmtArr = (a) => `[${a.map((n) => n.toFixed(2)).join(', ')}]`;
+  const fmtPose = (name, p) => {
+    const lines = FINGER_ORDER
+      .map((f) => `    ${f.padEnd(7)} ${fmtArr(p[f])},`)
+      .join('\n');
+    return `  ${name}: {\n${lines}\n  },`;
+  };
+  const body = POSES.map((p) => fmtPose(p, BONE_POSES[p])).join('\n');
+  const out = `const BONE_POSES = {\n${body}\n};`;
+
+  navigator.clipboard.writeText(out).then(
+    () => showToast('Copied BONE_POSES'),
+    () => showToast('Copy failed — check console') || console.log(out),
+  );
+}
+
+let toastEl = null;
+let toastTimer = null;
+function showToast(msg) {
+  if (!toastEl) {
+    toastEl = document.createElement('div');
+    toastEl.className = 'fx-toast';
+    document.body.appendChild(toastEl);
+  }
+  toastEl.textContent = msg;
+  toastEl.classList.add('is-show');
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('is-show'), 1600);
+}
+
+// Keep panel in sync when user clicks the pose dots
+poseDots.addEventListener('click', (e) => {
+  const dot = e.target.closest('.dot');
+  if (!dot) return;
+  fxActivePose = dot.dataset.pose;
+  syncPanelFromPose();
+});
+
+buildPanel();
