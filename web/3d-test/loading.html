@@ -282,6 +282,10 @@
     grid-column: 2;
     text-align: center;
     color: var(--amber-soft);
+    /* CSS counts trailing letter-spacing in the box width, so an auto-sized
+       column is 0.32em wider than the visible glyphs. Shift right by half
+       that delta to put the visible center exactly at the parent center. */
+    transform: translateX(0.16em);
   }
 
   /* progress */
