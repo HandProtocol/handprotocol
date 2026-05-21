@@ -29,3 +29,16 @@
 /policies               /governance/#policies                  301
 /board                  /governance/#board                     301
 /board-prospect         https://github.com/HandProtocol/handprotocol/blob/main/governance/board/director-prospect-brief.md  301
+
+# Mystic Hearts Airstream Studio (password-protected via edge function)
+/mystichearts/airstreamstudio  /mystichearts/airstreamstudio/  301
+/airstreamstudio        /mystichearts/airstreamstudio/         301
+/airstream              /mystichearts/airstreamstudio/         301
+
+# Mystic Hearts brief (password-protected via edge function)
+/mystichearts/brief     /mystichearts/brief/                   301
+/mystichearts           /mystichearts/brief/                   301
+/brief                  /mystichearts/brief/                   301
+
+# 404 fallback — branded compass page with radial sitemap (keep last; matches anything else)
+/*                      /404.html                              404

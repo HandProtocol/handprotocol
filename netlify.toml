@@ -9,6 +9,18 @@
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
+[[edge_functions]]
+  function = "grants-auth"
+  path = "/grants/*"
+
+[[edge_functions]]
+  function = "airstreamstudio-auth"
+  path = "/mystichearts/airstreamstudio/*"
+
+[[edge_functions]]
+  function = "mystichearts-brief-auth"
+  path = "/mystichearts/brief/*"
+
 # Root redirects to foundation campaign (primary surface)
 [[redirects]]
   from = "/"
@@ -88,6 +100,38 @@
   to = "/sovereign-reciprocates/"
   status = 301
 
+# Mystic Hearts Airstream Studio (password-protected, see edge function above)
+[[redirects]]
+  from = "/mystichearts/airstreamstudio"
+  to = "/mystichearts/airstreamstudio/"
+  status = 301
+
+[[redirects]]
+  from = "/airstreamstudio"
+  to = "/mystichearts/airstreamstudio/"
+  status = 301
+
+[[redirects]]
+  from = "/airstream"
+  to = "/mystichearts/airstreamstudio/"
+  status = 301
+
+# Mystic Hearts brief (password-protected, see edge function above)
+[[redirects]]
+  from = "/mystichearts/brief"
+  to = "/mystichearts/brief/"
+  status = 301
+
+[[redirects]]
+  from = "/mystichearts"
+  to = "/mystichearts/brief/"
+  status = 301
+
+[[redirects]]
+  from = "/brief"
+  to = "/mystichearts/brief/"
+  status = 301
+
 [[redirects]]
   from = "/ai"
   to = "/sovereign-reciprocates/"
@@ -128,10 +172,12 @@
   to = "https://github.com/HandProtocol/handprotocol/blob/main/governance/board/director-prospect-brief.md"
   status = 301
 
-# 404 fallback → foundation campaign (rather than a generic error)
+# 404 fallback → branded compass page with radial sitemap (3D hand pointing to sections).
+# Serves /404.html with HTTP 404. The previous rule pointed at /foundation-campaign/, which
+# broke relative CSS/JS paths because the browser kept the original (missing) URL as base.
 [[redirects]]
   from = "/*"
-  to = "/foundation-campaign/"
+  to = "/404.html"
   status = 404
 
 # Security + privacy headers
@@ -142,8 +188,10 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
-    # Allow Google Fonts; lock down everything else
-    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self';"
+    # Allow Google Fonts + jsDelivr (three.js / anime.js modules used by /404.html
+    # and the /3d-test, /3dhand-test pages). 404 responses can't get path-specific
+    # headers since the request URL doesn't match /404.html, so we widen globally.
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net;"
 
 # 3D test pages need cdn.jsdelivr.net for three.js + anime.js modules.
 # Override the global CSP for these paths only — the rest of the site stays tight.

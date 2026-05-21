@@ -1,0 +1,2052 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#f5efe6" />
+<title>Mystic Hearts · Product Brief v1</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+
+<style>
+  :root {
+    --ink: #1a1410;
+    --ink-2: #4a3f37;
+    --ink-3: #7b6f64;
+    --paper: #f5efe6;
+    --paper-2: #ede4d4;
+    --paper-3: #e3d6bf;
+    --line: #d8cab0;
+    --clay: #b65b3f;
+    --clay-soft: #d99b81;
+    --sage: #6a7d5c;
+    --sage-soft: #a8b89a;
+    --gold: #b08a3c;
+    --plum: #5a3a4a;
+    --shadow: 0 1px 0 rgba(26,20,16,.04), 0 8px 32px -12px rgba(26,20,16,.18);
+    --shadow-deep: 0 1px 0 rgba(26,20,16,.06), 0 24px 60px -20px rgba(26,20,16,.22);
+    --radius: 14px;
+    --radius-sm: 8px;
+    --maxw: 1180px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(217,155,129,.18), transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(106,125,92,.10), transparent 60%),
+      var(--paper);
+    color: var(--ink);
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  .display, h1, h2, h3 {
+    font-family: "Fraunces", "Times New Roman", serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); line-height: 1.02; font-variation-settings: "opsz" 144; }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.08; margin: 0 0 .4em; font-variation-settings: "opsz" 96; }
+  h3 { font-size: clamp(1.15rem, 2.4vw, 1.45rem); line-height: 1.2; margin: 0 0 .3em; font-weight: 500; font-variation-settings: "opsz" 36; }
+
+  p { margin: 0 0 1em; color: var(--ink-2); }
+
+  a { color: var(--clay); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+  a:hover { color: var(--ink); }
+
+  code, .mono { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 0.86em; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* ----- nav ----- */
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    background: rgba(245,239,230,.78);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: 14px 24px;
+    display: flex; align-items: center; gap: 24px;
+  }
+  .brand {
+    font-family: "Fraunces", serif; font-weight: 500; font-size: 18px;
+    letter-spacing: -.01em; display: flex; align-items: center; gap: 10px;
+    color: var(--ink); border: none;
+  }
+  .brand-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--clay-soft), var(--clay));
+    box-shadow: 0 0 0 3px rgba(182,91,63,.12);
+  }
+  .nav-links { display: none; gap: 22px; margin-left: auto; font-size: 13.5px; }
+  .nav-links a { color: var(--ink-2); border: none; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-tag {
+    margin-left: auto;
+    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-3); padding: 6px 10px; border: 1px solid var(--line); border-radius: 100px;
+  }
+  @media (min-width: 760px) {
+    .nav-links { display: flex; }
+    .nav-tag { margin-left: 0; }
+  }
+
+  /* ----- hero ----- */
+  .hero { padding: 80px 0 60px; position: relative; }
+  .hero .meta {
+    display: inline-flex; gap: 10px; align-items: center;
+    font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 28px;
+  }
+  .hero .meta .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--clay); }
+  .hero h1 .accent { color: var(--clay); font-style: italic; font-variation-settings: "opsz" 144; }
+  .hero .lede {
+    font-family: "Fraunces", serif; font-weight: 300;
+    font-size: clamp(1.15rem, 2vw, 1.5rem); line-height: 1.45;
+    color: var(--ink-2); max-width: 720px; margin-top: 28px;
+  }
+
+  .hero-stats {
+    display: grid; gap: 14px;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 48px;
+  }
+  @media (min-width: 720px) { .hero-stats { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
+  .stat {
+    padding: 22px 22px 24px; background: rgba(255,255,255,.5);
+    border: 1px solid var(--line); border-radius: var(--radius);
+    backdrop-filter: blur(8px);
+  }
+  .stat .k { font-family: "Fraunces", serif; font-size: 2.4rem; line-height: 1; color: var(--ink); font-weight: 500; }
+  .stat .v { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-top: 8px; }
+  .stat .x { font-size: 13.5px; color: var(--ink-2); margin-top: 8px; line-height: 1.4; }
+
+  /* ----- sections ----- */
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  section.no-border { border-top: none; }
+  .eyebrow {
+    font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--clay); font-weight: 500;
+    display: inline-flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  }
+  .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--clay); }
+  .section-lede { font-size: 17.5px; color: var(--ink-2); max-width: 680px; margin-bottom: 40px; }
+
+  /* ----- glance grid ----- */
+  .glance {
+    display: grid; gap: 14px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 760px) { .glance { grid-template-columns: repeat(3, 1fr); } }
+  .card {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 24px;
+    box-shadow: var(--shadow);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: var(--shadow-deep); }
+  .card h3 { font-family: "Fraunces", serif; margin-bottom: 10px; }
+  .card ul { padding-left: 18px; margin: 12px 0 0; color: var(--ink-2); font-size: 14.5px; }
+  .card li { margin-bottom: 6px; }
+
+  .card.role-member { border-top: 3px solid var(--clay); }
+  .card.role-practitioner { border-top: 3px solid var(--sage); }
+  .card.role-admin { border-top: 3px solid var(--plum); }
+
+  .pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 100px; font-size: 11.5px; letter-spacing: .04em; }
+  .pill.clay { background: rgba(182,91,63,.10); color: var(--clay); }
+  .pill.sage { background: rgba(106,125,92,.12); color: var(--sage); }
+  .pill.plum { background: rgba(90,58,74,.10); color: var(--plum); }
+  .pill.gold { background: rgba(176,138,60,.12); color: var(--gold); }
+  .pill.ghost { background: transparent; color: var(--ink-3); border: 1px solid var(--line); }
+
+  /* ----- wireframe viewer ----- */
+  .flow-section { margin-top: 32px; }
+  .flow-tabs {
+    display: inline-flex; padding: 4px; background: rgba(255,255,255,.6);
+    border: 1px solid var(--line); border-radius: 100px;
+    margin-bottom: 18px; flex-wrap: wrap; gap: 2px;
+  }
+  .flow-tab {
+    border: none; background: transparent; cursor: pointer;
+    padding: 9px 18px; border-radius: 100px;
+    font: 500 13.5px "Inter", sans-serif; color: var(--ink-2);
+    transition: all .2s ease;
+  }
+  .flow-tab[aria-selected="true"] { background: var(--ink); color: var(--paper); }
+  .flow-tab:hover:not([aria-selected="true"]) { color: var(--ink); }
+
+  .viewer {
+    position: relative;
+    background: linear-gradient(180deg, #faf6ee, #f0e7d5);
+    border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden;
+    height: clamp(420px, 60vh, 640px);
+    box-shadow: var(--shadow);
+  }
+  .viewer svg { width: 100%; height: 100%; display: block; cursor: grab; }
+  .viewer svg:active { cursor: grabbing; }
+
+  .viewer-bg {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(26,20,16,.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+    pointer-events: none;
+    opacity: .5;
+  }
+
+  .zoom-ctrls {
+    position: absolute; bottom: 16px; right: 16px; z-index: 4;
+    display: inline-flex; gap: 4px; padding: 4px;
+    background: rgba(255,255,255,.92);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+  }
+  .zoom-btn {
+    width: 36px; height: 36px;
+    border: none; background: transparent; cursor: pointer;
+    color: var(--ink-2); border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 17px; font-family: "Fraunces", serif;
+    transition: background .15s ease;
+  }
+  .zoom-btn:hover { background: var(--paper-2); color: var(--ink); }
+  .zoom-btn.reset { font-size: 13px; width: auto; padding: 0 14px; border-radius: 100px; letter-spacing: .04em; }
+
+  .viewer-hint {
+    position: absolute; bottom: 16px; left: 16px; z-index: 3;
+    font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--ink-3);
+    background: rgba(255,255,255,.85);
+    padding: 8px 12px; border-radius: 100px;
+    border: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+  }
+  .flow-panel { display: none; }
+  .flow-panel.active { display: block; }
+
+  .flow-legend {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    margin-top: 14px; font-size: 13px; color: var(--ink-3);
+  }
+  .flow-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .flow-legend i {
+    width: 10px; height: 10px; border-radius: 2px; display: inline-block;
+  }
+
+  /* ----- mindmap ----- */
+  .mindmap-wrap {
+    background: linear-gradient(180deg, #faf6ee, #efe4ce);
+    border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; position: relative;
+    height: clamp(520px, 72vh, 760px);
+    box-shadow: var(--shadow);
+  }
+  .mindmap-wrap svg { width: 100%; height: 100%; cursor: grab; }
+  .mindmap-wrap svg:active { cursor: grabbing; }
+
+  /* ----- data model ----- */
+  .entities {
+    display: grid; gap: 14px;
+    grid-template-columns: 1fr;
+    margin-top: 24px;
+  }
+  @media (min-width: 640px) { .entities { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 960px) { .entities { grid-template-columns: repeat(3, 1fr); } }
+  .entity {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-sm); padding: 16px 18px;
+    box-shadow: var(--shadow);
+  }
+  .entity h4 {
+    font: 500 14px "JetBrains Mono", monospace;
+    margin: 0 0 10px; color: var(--ink);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .entity-icon {
+    width: 18px; height: 18px; border-radius: 4px;
+    background: var(--paper-2);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--clay);
+  }
+  .entity ul { list-style: none; padding: 0; margin: 0; }
+  .entity li {
+    font: 400 12.5px "JetBrains Mono", monospace;
+    color: var(--ink-2); padding: 3px 0;
+    border-bottom: 1px dashed rgba(216,202,176,.5);
+  }
+  .entity li:last-child { border-bottom: none; }
+  .entity li .fk { color: var(--clay); }
+  .entity li .pk { color: var(--sage); font-weight: 500; }
+
+  /* ----- phasing timeline ----- */
+  .phases {
+    display: grid; gap: 18px;
+    grid-template-columns: 1fr;
+    margin-top: 30px;
+  }
+  @media (min-width: 880px) { .phases { grid-template-columns: repeat(4, 1fr); } }
+  .phase {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 22px;
+    position: relative; overflow: hidden;
+  }
+  .phase::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .phase.p1::before { background: var(--clay); }
+  .phase.p15::before { background: var(--gold); }
+  .phase.p2::before { background: var(--sage); }
+  .phase.p3::before { background: var(--ink-3); }
+  .phase-tag {
+    font: 600 11px "Inter", sans-serif; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--ink-3); margin-bottom: 10px;
+  }
+  .phase h4 {
+    font-family: "Fraunces", serif; font-weight: 500;
+    font-size: 1.15rem; margin: 0 0 4px; color: var(--ink);
+  }
+  .phase .when { font-size: 12.5px; color: var(--ink-3); margin-bottom: 14px; }
+  .phase ul { padding-left: 16px; margin: 0; font-size: 13.5px; color: var(--ink-2); }
+  .phase li { margin-bottom: 5px; line-height: 1.45; }
+
+  /* ----- open items ----- */
+  .qlist { margin-top: 24px; }
+  .qitem {
+    display: grid; grid-template-columns: 32px 1fr auto; gap: 16px;
+    padding: 18px 20px; align-items: start;
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--radius-sm); margin-bottom: 10px;
+    transition: transform .2s ease;
+  }
+  .qitem:hover { transform: translateX(4px); }
+  .qnum {
+    font-family: "Fraunces", serif; font-size: 1.4rem;
+    color: var(--clay); line-height: 1;
+  }
+  .qbody h4 { font: 500 15.5px "Inter", sans-serif; color: var(--ink); margin: 0 0 4px; }
+  .qbody p { margin: 0; font-size: 13.5px; color: var(--ink-2); line-height: 1.5; }
+  .qtag {
+    font: 500 10.5px "Inter", sans-serif; letter-spacing: .14em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 100px; background: var(--paper-2);
+    color: var(--ink-3); white-space: nowrap;
+  }
+  .qtag.blocking { background: rgba(182,91,63,.12); color: var(--clay); }
+  .qtag.arch { background: rgba(90,58,74,.10); color: var(--plum); }
+  .qtag.policy { background: rgba(106,125,92,.12); color: var(--sage); }
+
+  /* ----- next ----- */
+  .next-card {
+    margin-top: 36px;
+    background: linear-gradient(135deg, #1a1410, #2a1f18);
+    color: var(--paper);
+    border-radius: var(--radius);
+    padding: 40px;
+    box-shadow: var(--shadow-deep);
+  }
+  .next-card .eyebrow { color: var(--clay-soft); }
+  .next-card .eyebrow::before { background: var(--clay-soft); }
+  .next-card h2 { color: var(--paper); }
+  .next-card p { color: rgba(245,239,230,.78); }
+  .next-card ol { padding-left: 20px; color: rgba(245,239,230,.85); font-size: 14.5px; line-height: 1.7; }
+  .next-card ol li::marker { color: var(--clay-soft); font-family: "Fraunces", serif; font-weight: 500; }
+
+  /* ----- footer ----- */
+  footer {
+    padding: 56px 0 80px; border-top: 1px solid var(--line);
+    color: var(--ink-3); font-size: 13.5px;
+  }
+  footer .wrap { display: flex; gap: 24px; flex-wrap: wrap; justify-content: space-between; align-items: baseline; }
+  footer a { color: var(--ink-2); border-bottom-color: var(--line); }
+
+  /* ----- mobile tweaks ----- */
+  @media (max-width: 640px) {
+    .hero { padding: 56px 0 36px; }
+    section { padding: 48px 0; }
+    .next-card { padding: 28px; }
+    .qitem { grid-template-columns: 28px 1fr; }
+    .qtag { grid-column: 1 / -1; justify-self: start; margin-top: 4px; }
+  }
+
+  /* prevent layout shift while svg-pan-zoom mounts */
+  .viewer svg, .mindmap-wrap svg { opacity: 0; transition: opacity .3s ease; }
+  .viewer svg.ready, .mindmap-wrap svg.ready { opacity: 1; }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="brand-dot"></span> Mystic Hearts</a>
+    <div class="nav-links">
+      <a href="#glance">At a glance</a>
+      <a href="#flows">Flows</a>
+      <a href="#mindmap">Ecosystem</a>
+      <a href="#data">Data</a>
+      <a href="#phasing">Phasing</a>
+      <a href="#open">Open items</a>
+    </div>
+    <span class="nav-tag">Brief · Draft</span>
+  </div>
+</nav>
+
+<header id="top" class="hero">
+  <div class="wrap">
+    <div class="meta"><span class="dot"></span> Discovery · 2026‑05‑18 · For koH review</div>
+    <h1>A product brief for <span class="accent">Mystic Hearts</span>,<br/>HAND Protocol's first Reciprocate group.</h1>
+    <p class="lede">
+      What started as "an event listing and a practitioner directory" has become a full skill‑exchange
+      economy with attendance‑verified reviews, a bounty board, a two‑tier credit ledger, and a
+      cross‑Reciprocate data model dark‑launched for the day HAND onboards its second group.
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="k">13</div>
+        <div class="v">Ship‑blocking deliverables</div>
+        <div class="x">v1 scope locked 2026‑05‑17.</div>
+      </div>
+      <div class="stat">
+        <div class="k">3</div>
+        <div class="v">Roles in the system</div>
+        <div class="x">Member, Practitioner, Admin.</div>
+      </div>
+      <div class="stat">
+        <div class="k">11</div>
+        <div class="v">Open mechanism items</div>
+        <div class="x">Blocking design + architecture.</div>
+      </div>
+      <div class="stat">
+        <div class="k">3–6mo</div>
+        <div class="v">Build window</div>
+        <div class="x">Phase 1 alone is closer to six.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="glance">
+  <div class="wrap">
+    <span class="eyebrow">At a glance</span>
+    <h2>Three audiences, one surface.</h2>
+    <p class="section-lede">
+      Mystic Hearts is the product surface; HAND Protocol provides the accompaniment underneath.
+      Every screen serves one of three roles, and almost every interaction either earns, spends,
+      or records a credit.
+    </p>
+
+    <div class="glance">
+      <div class="card role-member">
+        <span class="pill clay">Member</span>
+        <h3>Browse, attend, give back.</h3>
+        <p>The public face of Mystic Hearts. Members find practitioners, RSVP to events, log
+        attendance, review what they experienced, claim bounties, and redeem credits for sessions.</p>
+        <ul>
+          <li>Browses without an account; signs up to act.</li>
+          <li>Earns credits through bounty completion or admin‑logged hours.</li>
+          <li>Spends credits 1:1 on sessions, partial on event discounts.</li>
+        </ul>
+      </div>
+      <div class="card role-practitioner">
+        <span class="pill sage">Practitioner</span>
+        <h3>Invite‑only, curated.</h3>
+        <p>Admin‑invited healers who post events and offer 1:1 sessions through a real‑time
+        booking calendar. They control their feedback window and verify attendance via QR,
+        link, or spoken code.</p>
+        <ul>
+          <li>No public application; admin issues invites.</li>
+          <li>Generates attendance code + QR + shareable link per event.</li>
+          <li>Reads anonymous reviews; cannot de‑anonymize.</li>
+        </ul>
+      </div>
+      <div class="card role-admin">
+        <span class="pill plum">Admin</span>
+        <h3>HAND ops + curator, fused.</h3>
+        <p>One role in v1, splittable later. Runs the bounty board, verifies completions,
+        issues credits, invites practitioners, vets specialists, and tends the modality
+        taxonomy.</p>
+        <ul>
+          <li>Posts bounties at two tiers: general 1:1 and specialist.</li>
+          <li>Manually logs Tier‑1 hours when work bypasses the board.</li>
+          <li>Owns the modality list, fed by the Mystic Hearts collective.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="flows">
+  <div class="wrap">
+    <span class="eyebrow">User flows · wireframes</span>
+    <h2>How each role moves through the app.</h2>
+    <p class="section-lede">
+      These are wireframes, not designs. Pinch, scroll, or use the controls to zoom in on any
+      panel. Each flow is one continuous canvas; the arrows connect the steps a real session
+      passes through.
+    </p>
+
+    <div class="flow-section">
+      <div class="flow-tabs" role="tablist">
+        <button class="flow-tab" role="tab" aria-selected="true" data-flow="member">Member</button>
+        <button class="flow-tab" role="tab" aria-selected="false" data-flow="practitioner">Practitioner</button>
+        <button class="flow-tab" role="tab" aria-selected="false" data-flow="admin">Admin</button>
+      </div>
+
+      <!-- ============ MEMBER FLOW ============ -->
+      <div class="flow-panel active" data-flow="member">
+        <div class="viewer">
+          <div class="viewer-bg"></div>
+          <div class="viewer-hint">Drag to pan · scroll or pinch to zoom</div>
+          <div class="zoom-ctrls">
+            <button class="zoom-btn" data-zoom="out" aria-label="Zoom out">−</button>
+            <button class="zoom-btn reset" data-zoom="reset" aria-label="Reset zoom">Fit</button>
+            <button class="zoom-btn" data-zoom="in" aria-label="Zoom in">+</button>
+          </div>
+
+          <svg viewBox="0 0 1820 700" xmlns="http://www.w3.org/2000/svg" id="flow-member" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <marker id="arrow-clay" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#b65b3f"/>
+              </marker>
+              <linearGradient id="screenGrad" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0%" stop-color="#ffffff"/>
+                <stop offset="100%" stop-color="#faf6ee"/>
+              </linearGradient>
+              <pattern id="dots-m" width="6" height="6" patternUnits="userSpaceOnUse">
+                <circle cx="3" cy="3" r="0.6" fill="#d8cab0"/>
+              </pattern>
+            </defs>
+
+            <!-- step labels along bottom -->
+            <g font-family="Inter, sans-serif" font-size="13" fill="#7b6f64" letter-spacing="2">
+              <text x="170" y="668" text-anchor="middle">01 · DISCOVER</text>
+              <text x="510" y="668" text-anchor="middle">02 · RSVP</text>
+              <text x="850" y="668" text-anchor="middle">03 · CHECK IN</text>
+              <text x="1190" y="668" text-anchor="middle">04 · REVIEW</text>
+              <text x="1530" y="668" text-anchor="middle">05 · EARN + SPEND</text>
+            </g>
+
+            <!-- arrows between phones -->
+            <g stroke="#b65b3f" stroke-width="1.5" fill="none" stroke-dasharray="4 4">
+              <path d="M 290 320 Q 340 320 380 320" marker-end="url(#arrow-clay)"/>
+              <path d="M 630 320 Q 680 320 720 320" marker-end="url(#arrow-clay)"/>
+              <path d="M 970 320 Q 1020 320 1060 320" marker-end="url(#arrow-clay)"/>
+              <path d="M 1310 320 Q 1360 320 1400 320" marker-end="url(#arrow-clay)"/>
+            </g>
+
+            <!-- ===== PHONE 1: Discover ===== -->
+            <g transform="translate(50,40)">
+              <rect width="240" height="540" rx="28" fill="#1a1410"/>
+              <rect x="6" y="6" width="228" height="528" rx="22" fill="url(#screenGrad)"/>
+              <!-- notch -->
+              <rect x="100" y="18" width="40" height="6" rx="3" fill="#1a1410"/>
+              <!-- header -->
+              <text x="22" y="60" font-family="Fraunces, serif" font-size="20" fill="#1a1410">Practitioners</text>
+              <text x="22" y="78" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.2">FILTER · MODALITY · LOCATION</text>
+              <!-- filter chips -->
+              <g font-family="Inter, sans-serif" font-size="9" fill="#4a3f37">
+                <rect x="20" y="92" width="50" height="20" rx="10" fill="#1a1410"/>
+                <text x="45" y="106" text-anchor="middle" fill="#f5efe6">All</text>
+                <rect x="76" y="92" width="60" height="20" rx="10" fill="none" stroke="#d8cab0"/>
+                <text x="106" y="106" text-anchor="middle">Bodywork</text>
+                <rect x="142" y="92" width="50" height="20" rx="10" fill="none" stroke="#d8cab0"/>
+                <text x="167" y="106" text-anchor="middle">Sound</text>
+              </g>
+              <!-- practitioner cards -->
+              <g>
+                <rect x="20" y="128" width="200" height="84" rx="10" fill="#ffffff" stroke="#e3d6bf"/>
+                <circle cx="44" cy="152" r="14" fill="#d99b81"/>
+                <text x="66" y="148" font-family="Fraunces, serif" font-size="13" fill="#1a1410">River Aslan</text>
+                <text x="66" y="162" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">Somatic · Breathwork</text>
+                <line x1="20" y1="180" x2="220" y2="180" stroke="#ede4d4"/>
+                <text x="30" y="198" font-family="Inter, sans-serif" font-size="9" fill="#6a7d5c">★ 4.9 · 31 reviews</text>
+                <text x="172" y="198" font-family="Inter, sans-serif" font-size="9" fill="#b65b3f">View →</text>
+              </g>
+              <g>
+                <rect x="20" y="224" width="200" height="84" rx="10" fill="#ffffff" stroke="#e3d6bf"/>
+                <circle cx="44" cy="248" r="14" fill="#a8b89a"/>
+                <text x="66" y="244" font-family="Fraunces, serif" font-size="13" fill="#1a1410">Sage Moriah</text>
+                <text x="66" y="258" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">Sound healing</text>
+                <line x1="20" y1="276" x2="220" y2="276" stroke="#ede4d4"/>
+                <text x="30" y="294" font-family="Inter, sans-serif" font-size="9" fill="#6a7d5c">★ 4.8 · 19 reviews</text>
+                <text x="172" y="294" font-family="Inter, sans-serif" font-size="9" fill="#b65b3f">View →</text>
+              </g>
+              <g>
+                <rect x="20" y="320" width="200" height="84" rx="10" fill="#ffffff" stroke="#e3d6bf"/>
+                <circle cx="44" cy="344" r="14" fill="#d8a8c8"/>
+                <text x="66" y="340" font-family="Fraunces, serif" font-size="13" fill="#1a1410">Wren Holloway</text>
+                <text x="66" y="354" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">Acupuncture</text>
+                <line x1="20" y1="372" x2="220" y2="372" stroke="#ede4d4"/>
+                <text x="30" y="390" font-family="Inter, sans-serif" font-size="9" fill="#6a7d5c">★ 5.0 · 12 reviews</text>
+                <text x="172" y="390" font-family="Inter, sans-serif" font-size="9" fill="#b65b3f">View →</text>
+              </g>
+              <!-- bottom tab -->
+              <rect x="20" y="470" width="200" height="48" rx="14" fill="#1a1410"/>
+              <g font-family="Inter, sans-serif" font-size="9" fill="#f5efe6">
+                <text x="50" y="498" text-anchor="middle">Browse</text>
+                <text x="95" y="498" text-anchor="middle" fill="#7b6f64">Events</text>
+                <text x="145" y="498" text-anchor="middle" fill="#7b6f64">Bounty</text>
+                <text x="195" y="498" text-anchor="middle" fill="#7b6f64">Me</text>
+              </g>
+            </g>
+
+            <!-- ===== PHONE 2: Event detail + RSVP ===== -->
+            <g transform="translate(390,40)">
+              <rect width="240" height="540" rx="28" fill="#1a1410"/>
+              <rect x="6" y="6" width="228" height="528" rx="22" fill="url(#screenGrad)"/>
+              <rect x="100" y="18" width="40" height="6" rx="3" fill="#1a1410"/>
+              <!-- back -->
+              <text x="22" y="50" font-family="Inter, sans-serif" font-size="11" fill="#7b6f64">‹ Events</text>
+              <!-- hero block -->
+              <rect x="20" y="62" width="200" height="80" rx="10" fill="url(#dots-m)" stroke="#d8cab0"/>
+              <text x="120" y="108" text-anchor="middle" font-family="Fraunces, serif" font-size="11" fill="#7b6f64">event imagery</text>
+              <!-- title -->
+              <text x="22" y="166" font-family="Fraunces, serif" font-size="17" fill="#1a1410">New Moon Sound Bath</text>
+              <text x="22" y="184" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">with Sage Moriah</text>
+              <!-- meta rows -->
+              <g font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">
+                <text x="22" y="212">📅  Sat May 23 · 7:30 pm</text>
+                <text x="22" y="232">📍  The Listening Room, Ojai</text>
+                <text x="22" y="252">⛬   18 of 24 spots open</text>
+              </g>
+              <!-- pricing -->
+              <rect x="20" y="270" width="200" height="60" rx="10" fill="#faf6ee" stroke="#e3d6bf"/>
+              <text x="32" y="288" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1">PAY WITH</text>
+              <g font-family="Inter, sans-serif" font-size="10">
+                <text x="32" y="304" fill="#1a1410">$22 cash</text>
+                <text x="32" y="318" fill="#b65b3f">— or 6 credits (save $14)</text>
+              </g>
+              <!-- CTA -->
+              <rect x="20" y="350" width="200" height="44" rx="22" fill="#b65b3f"/>
+              <text x="120" y="377" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="12" fill="#f5efe6">RSVP with 6 credits</text>
+              <rect x="20" y="402" width="200" height="40" rx="20" fill="none" stroke="#d8cab0"/>
+              <text x="120" y="426" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#1a1410">RSVP and pay cash</text>
+
+              <!-- annotation -->
+              <g transform="translate(20,460)">
+                <rect width="200" height="56" rx="8" fill="#1a1410"/>
+                <text x="12" y="20" font-family="Inter, sans-serif" font-size="9" fill="#d99b81" letter-spacing="1.4">CREDIT REDEMPTION</text>
+                <text x="12" y="36" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">Partial credits applied as</text>
+                <text x="12" y="50" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">an event discount.</text>
+              </g>
+            </g>
+
+            <!-- ===== PHONE 3: Check in at event ===== -->
+            <g transform="translate(730,40)">
+              <rect width="240" height="540" rx="28" fill="#1a1410"/>
+              <rect x="6" y="6" width="228" height="528" rx="22" fill="url(#screenGrad)"/>
+              <rect x="100" y="18" width="40" height="6" rx="3" fill="#1a1410"/>
+
+              <text x="22" y="58" font-family="Fraunces, serif" font-size="17" fill="#1a1410">Check in</text>
+              <text x="22" y="74" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">New Moon Sound Bath</text>
+
+              <!-- QR placeholder -->
+              <rect x="60" y="100" width="120" height="120" rx="8" fill="#1a1410"/>
+              <g fill="#f5efe6">
+                <rect x="68" y="108" width="20" height="20"/>
+                <rect x="152" y="108" width="20" height="20"/>
+                <rect x="68" y="192" width="20" height="20"/>
+                <rect x="96" y="116" width="6" height="6"/>
+                <rect x="110" y="124" width="6" height="6"/>
+                <rect x="120" y="116" width="6" height="6"/>
+                <rect x="100" y="140" width="14" height="6"/>
+                <rect x="124" y="148" width="6" height="14"/>
+                <rect x="140" y="140" width="6" height="6"/>
+                <rect x="96" y="172" width="6" height="6"/>
+                <rect x="116" y="180" width="14" height="6"/>
+                <rect x="136" y="172" width="6" height="14"/>
+                <rect x="148" y="188" width="6" height="6"/>
+              </g>
+
+              <text x="120" y="244" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">scan or use the code below</text>
+
+              <rect x="30" y="260" width="180" height="40" rx="20" fill="#faf6ee" stroke="#d8cab0"/>
+              <text x="120" y="286" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="16" fill="#1a1410" letter-spacing="6">M0NK·7A</text>
+
+              <text x="120" y="316" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">SHARE WITH ATTENDEES VERBALLY</text>
+
+              <!-- attended state -->
+              <rect x="20" y="346" width="200" height="76" rx="10" fill="#6a7d5c"/>
+              <text x="120" y="370" text-anchor="middle" font-family="Fraunces, serif" font-size="14" fill="#f5efe6">✓ Attendance verified</text>
+              <text x="120" y="388" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6" opacity=".8">You can review Sage</text>
+              <text x="120" y="402" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6" opacity=".8">until May 30.</text>
+
+              <rect x="20" y="438" width="200" height="40" rx="20" fill="#1a1410"/>
+              <text x="120" y="463" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="11" fill="#f5efe6">Write a review →</text>
+
+              <g transform="translate(20,490)">
+                <rect width="200" height="40" rx="6" fill="#faf6ee" stroke="#d8cab0"/>
+                <text x="100" y="18" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1">3 WAYS IN</text>
+                <text x="100" y="32" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#4a3f37">scan · link · spoken code</text>
+              </g>
+            </g>
+
+            <!-- ===== PHONE 4: Review ===== -->
+            <g transform="translate(1070,40)">
+              <rect width="240" height="540" rx="28" fill="#1a1410"/>
+              <rect x="6" y="6" width="228" height="528" rx="22" fill="url(#screenGrad)"/>
+              <rect x="100" y="18" width="40" height="6" rx="3" fill="#1a1410"/>
+
+              <text x="22" y="50" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">‹ Back to event</text>
+              <text x="22" y="78" font-family="Fraunces, serif" font-size="18" fill="#1a1410">How was it?</text>
+              <text x="22" y="96" font-family="Inter, sans-serif" font-size="11" fill="#7b6f64">Anonymous to everyone.</text>
+
+              <!-- stars -->
+              <g transform="translate(22,114)">
+                <text font-family="Fraunces, serif" font-size="28" fill="#b08a3c">★ ★ ★ ★</text>
+                <text x="124" font-family="Fraunces, serif" font-size="28" fill="#d8cab0">★</text>
+              </g>
+              <text x="22" y="170" font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">4 / 5</text>
+
+              <!-- textarea -->
+              <rect x="20" y="186" width="200" height="140" rx="8" fill="#ffffff" stroke="#d8cab0"/>
+              <g font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">
+                <text x="32" y="208">Sage held the room with</text>
+                <text x="32" y="224">such steady presence. The</text>
+                <text x="32" y="240">bowls felt like they were</text>
+                <text x="32" y="256">tuning my whole body...</text>
+                <text x="32" y="276" fill="#7b6f64" font-style="italic">cursor</text>
+              </g>
+
+              <!-- pre-fill notice -->
+              <rect x="20" y="338" width="200" height="32" rx="6" fill="#faf6ee" stroke="#e3d6bf"/>
+              <text x="30" y="358" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">code <tspan font-family="JetBrains Mono" fill="#1a1410">M0NK‑7A</tspan> verified</text>
+
+              <!-- timer -->
+              <text x="22" y="394" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f">⏱  4 days left in feedback window</text>
+
+              <!-- CTA -->
+              <rect x="20" y="412" width="200" height="44" rx="22" fill="#1a1410"/>
+              <text x="120" y="439" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="12" fill="#f5efe6">Submit anonymously</text>
+
+              <g transform="translate(20,472)">
+                <rect width="200" height="50" rx="6" fill="#1a1410"/>
+                <text x="12" y="20" font-family="Inter, sans-serif" font-size="9" fill="#d99b81" letter-spacing="1.4">ANONYMITY</text>
+                <text x="12" y="36" font-family="Inter, sans-serif" font-size="9" fill="#f5efe6">RLS hides member_id even</text>
+                <text x="12" y="48" font-family="Inter, sans-serif" font-size="9" fill="#f5efe6">from the practitioner.</text>
+              </g>
+            </g>
+
+            <!-- ===== PHONE 5: Bounties + balance ===== -->
+            <g transform="translate(1410,40)">
+              <rect width="240" height="540" rx="28" fill="#1a1410"/>
+              <rect x="6" y="6" width="228" height="528" rx="22" fill="url(#screenGrad)"/>
+              <rect x="100" y="18" width="40" height="6" rx="3" fill="#1a1410"/>
+
+              <text x="22" y="58" font-family="Fraunces, serif" font-size="17" fill="#1a1410">Your credits</text>
+
+              <!-- balance card -->
+              <rect x="20" y="74" width="200" height="86" rx="12" fill="#1a1410"/>
+              <text x="32" y="96" font-family="Inter, sans-serif" font-size="9" fill="#d99b81" letter-spacing="1.4">BALANCE</text>
+              <text x="32" y="132" font-family="Fraunces, serif" font-size="32" fill="#f5efe6">14</text>
+              <text x="78" y="132" font-family="Inter, sans-serif" font-size="11" fill="#f5efe6" opacity=".8">credits</text>
+              <text x="32" y="150" font-family="Inter, sans-serif" font-size="9" fill="#a8b89a">+3 this week · from 2 bounties</text>
+
+              <!-- public ledger nudge -->
+              <text x="22" y="184" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1">PUBLIC LEDGER</text>
+              <text x="22" y="200" font-family="Inter, sans-serif" font-size="10.5" fill="#4a3f37">1,284 hrs given · 412 in circulation</text>
+
+              <!-- open bounties -->
+              <text x="22" y="232" font-family="Fraunces, serif" font-size="14" fill="#1a1410">Open bounties</text>
+
+              <g>
+                <rect x="20" y="244" width="200" height="64" rx="8" fill="#ffffff" stroke="#e3d6bf"/>
+                <rect x="20" y="244" width="3" height="64" fill="#6a7d5c"/>
+                <text x="32" y="263" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#1a1410">Help set up Saturday event</text>
+                <text x="32" y="278" font-family="Inter, sans-serif" font-size="9.5" fill="#7b6f64">General · 3 hrs · 3 credits</text>
+                <text x="194" y="298" text-anchor="end" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f">Claim →</text>
+              </g>
+              <g>
+                <rect x="20" y="318" width="200" height="64" rx="8" fill="#ffffff" stroke="#e3d6bf"/>
+                <rect x="20" y="318" width="3" height="64" fill="#b08a3c"/>
+                <text x="32" y="337" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#1a1410">Draft practitioner agreement</text>
+                <text x="32" y="352" font-family="Inter, sans-serif" font-size="9.5" fill="#7b6f64">Specialist · legal · 8 credits</text>
+                <text x="194" y="372" text-anchor="end" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f">Claim →</text>
+              </g>
+
+              <!-- spend -->
+              <rect x="20" y="406" width="200" height="44" rx="22" fill="#b65b3f"/>
+              <text x="120" y="433" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="12" fill="#f5efe6">Book a session →</text>
+
+              <g transform="translate(20,464)">
+                <rect width="200" height="56" rx="8" fill="#1a1410"/>
+                <text x="12" y="20" font-family="Inter, sans-serif" font-size="9" fill="#d99b81" letter-spacing="1.4">TWO‑TIER CREDIT</text>
+                <text x="12" y="36" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">General 1 hr = 1 credit.</text>
+                <text x="12" y="50" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">Specialist set per task.</text>
+              </g>
+            </g>
+
+          </svg>
+        </div>
+
+        <div class="flow-legend">
+          <span><i style="background:#b65b3f"></i> Member path</span>
+          <span><i style="background:#6a7d5c"></i> Verified state</span>
+          <span><i style="background:#b08a3c"></i> Specialist tier</span>
+          <span><i style="background:#1a1410"></i> System annotation</span>
+        </div>
+      </div>
+
+      <!-- ============ PRACTITIONER FLOW ============ -->
+      <div class="flow-panel" data-flow="practitioner">
+        <div class="viewer">
+          <div class="viewer-bg"></div>
+          <div class="viewer-hint">Drag to pan · scroll or pinch to zoom</div>
+          <div class="zoom-ctrls">
+            <button class="zoom-btn" data-zoom="out" aria-label="Zoom out">−</button>
+            <button class="zoom-btn reset" data-zoom="reset" aria-label="Reset zoom">Fit</button>
+            <button class="zoom-btn" data-zoom="in" aria-label="Zoom in">+</button>
+          </div>
+
+          <svg viewBox="0 0 1820 700" xmlns="http://www.w3.org/2000/svg" id="flow-practitioner" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <marker id="arrow-sage" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#6a7d5c"/>
+              </marker>
+            </defs>
+
+            <g font-family="Inter, sans-serif" font-size="13" fill="#7b6f64" letter-spacing="2">
+              <text x="170" y="668" text-anchor="middle">01 · INVITED</text>
+              <text x="510" y="668" text-anchor="middle">02 · CREATE EVENT</text>
+              <text x="850" y="668" text-anchor="middle">03 · RUN EVENT</text>
+              <text x="1190" y="668" text-anchor="middle">04 · BOOKINGS</text>
+              <text x="1530" y="668" text-anchor="middle">05 · REVIEWS</text>
+            </g>
+
+            <g stroke="#6a7d5c" stroke-width="1.5" fill="none" stroke-dasharray="4 4">
+              <path d="M 290 320 Q 340 320 380 320" marker-end="url(#arrow-sage)"/>
+              <path d="M 630 320 Q 680 320 720 320" marker-end="url(#arrow-sage)"/>
+              <path d="M 970 320 Q 1020 320 1060 320" marker-end="url(#arrow-sage)"/>
+              <path d="M 1310 320 Q 1360 320 1400 320" marker-end="url(#arrow-sage)"/>
+            </g>
+
+            <!-- ===== PHONE 1: Invite email ===== -->
+            <g transform="translate(50,40)">
+              <rect width="240" height="540" rx="28" fill="#1a1410"/>
+              <rect x="6" y="6" width="228" height="528" rx="22" fill="url(#screenGrad)"/>
+              <rect x="100" y="18" width="40" height="6" rx="3" fill="#1a1410"/>
+
+              <text x="22" y="56" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">From HAND Protocol</text>
+              <text x="22" y="86" font-family="Fraunces, serif" font-size="17" fill="#1a1410">You're invited to</text>
+              <text x="22" y="108" font-family="Fraunces, serif" font-size="17" fill="#1a1410">Mystic Hearts.</text>
+
+              <line x1="22" y1="124" x2="218" y2="124" stroke="#e3d6bf"/>
+
+              <g font-family="Inter, sans-serif" font-size="11" fill="#4a3f37">
+                <text x="22" y="148">Hi Sage,</text>
+                <text x="22" y="170">We'd be honored if you</text>
+                <text x="22" y="186">joined Mystic Hearts as a</text>
+                <text x="22" y="202">practitioner. The collective</text>
+                <text x="22" y="218">is curated and invite‑only;</text>
+                <text x="22" y="234">this link is yours alone.</text>
+              </g>
+
+              <rect x="20" y="260" width="200" height="44" rx="22" fill="#6a7d5c"/>
+              <text x="120" y="287" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="12" fill="#f5efe6">Accept invite</text>
+
+              <text x="22" y="326" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">Expires in 14 days</text>
+
+              <!-- mini onboarding preview -->
+              <rect x="20" y="346" width="200" height="172" rx="10" fill="#ffffff" stroke="#e3d6bf"/>
+              <text x="32" y="368" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.2">AFTER YOU ACCEPT</text>
+              <g font-family="Inter, sans-serif" font-size="10.5" fill="#1a1410">
+                <text x="32" y="390">1.  Choose your modalities</text>
+                <text x="32" y="410">2.  Write a short bio</text>
+                <text x="32" y="430">3.  Set weekly availability</text>
+                <text x="32" y="450">4.  Pick a session length</text>
+                <text x="32" y="470">5.  Decide credits or cash</text>
+              </g>
+              <text x="32" y="500" font-family="Inter, sans-serif" font-size="9" fill="#6a7d5c">~ 10 minutes total</text>
+            </g>
+
+            <!-- ===== PHONE 2: Create event ===== -->
+            <g transform="translate(390,40)">
+              <rect width="240" height="540" rx="28" fill="#1a1410"/>
+              <rect x="6" y="6" width="228" height="528" rx="22" fill="url(#screenGrad)"/>
+              <rect x="100" y="18" width="40" height="6" rx="3" fill="#1a1410"/>
+
+              <text x="22" y="50" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">‹ Events</text>
+              <text x="22" y="78" font-family="Fraunces, serif" font-size="17" fill="#1a1410">New event</text>
+
+              <!-- form fields -->
+              <g font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1">
+                <text x="22" y="104">TITLE</text>
+                <text x="22" y="156">DATE &amp; TIME</text>
+                <text x="22" y="208">CAPACITY</text>
+                <text x="22" y="260">PRICING</text>
+                <text x="22" y="336">FEEDBACK WINDOW</text>
+              </g>
+
+              <rect x="20" y="112" width="200" height="32" rx="6" fill="#ffffff" stroke="#d8cab0"/>
+              <text x="30" y="132" font-family="Inter, sans-serif" font-size="11" fill="#1a1410">New Moon Sound Bath</text>
+
+              <rect x="20" y="164" width="200" height="32" rx="6" fill="#ffffff" stroke="#d8cab0"/>
+              <text x="30" y="184" font-family="Inter, sans-serif" font-size="11" fill="#1a1410">May 23 · 7:30 pm – 9:00 pm</text>
+
+              <rect x="20" y="216" width="200" height="32" rx="6" fill="#ffffff" stroke="#d8cab0"/>
+              <text x="30" y="236" font-family="Inter, sans-serif" font-size="11" fill="#1a1410">24 spots</text>
+
+              <!-- pricing pills -->
+              <g transform="translate(20,268)">
+                <rect width="60" height="28" rx="14" fill="#1a1410"/>
+                <text x="30" y="18" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">Mixed</text>
+                <rect x="66" width="70" height="28" rx="14" fill="none" stroke="#d8cab0"/>
+                <text x="101" y="18" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">Credits</text>
+                <rect x="142" width="60" height="28" rx="14" fill="none" stroke="#d8cab0"/>
+                <text x="172" y="18" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">Cash</text>
+              </g>
+
+              <rect x="20" y="304" width="95" height="24" rx="4" fill="#ffffff" stroke="#d8cab0"/>
+              <text x="28" y="320" font-family="Inter, sans-serif" font-size="10" fill="#1a1410">$22 cash</text>
+              <rect x="125" y="304" width="95" height="24" rx="4" fill="#ffffff" stroke="#d8cab0"/>
+              <text x="133" y="320" font-family="Inter, sans-serif" font-size="10" fill="#1a1410">6 cr ($14 off)</text>
+
+              <rect x="20" y="344" width="200" height="32" rx="6" fill="#ffffff" stroke="#d8cab0"/>
+              <text x="30" y="364" font-family="Inter, sans-serif" font-size="11" fill="#1a1410">Open for 7 days after event</text>
+
+              <!-- generated assets -->
+              <rect x="20" y="386" width="200" height="78" rx="10" fill="#faf6ee" stroke="#e3d6bf"/>
+              <text x="32" y="404" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1">AUTO‑GENERATED ON SAVE</text>
+              <g font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">
+                <text x="32" y="424">✓ QR poster (PDF)</text>
+                <text x="32" y="440">✓ Shareable check‑in link</text>
+                <text x="32" y="456">✓ Spoken code (6 chars)</text>
+              </g>
+
+              <rect x="20" y="478" width="200" height="40" rx="20" fill="#6a7d5c"/>
+              <text x="120" y="503" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="12" fill="#f5efe6">Publish event</text>
+            </g>
+
+            <!-- ===== PHONE 3: Live attendance ===== -->
+            <g transform="translate(730,40)">
+              <rect width="240" height="540" rx="28" fill="#1a1410"/>
+              <rect x="6" y="6" width="228" height="528" rx="22" fill="url(#screenGrad)"/>
+              <rect x="100" y="18" width="40" height="6" rx="3" fill="#1a1410"/>
+
+              <g>
+                <circle cx="32" cy="56" r="4" fill="#b65b3f">
+                  <animate attributeName="opacity" values="1;.3;1" dur="1.5s" repeatCount="indefinite"/>
+                </circle>
+                <text x="44" y="60" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f" letter-spacing="1.4">LIVE NOW</text>
+              </g>
+              <text x="22" y="88" font-family="Fraunces, serif" font-size="17" fill="#1a1410">Sound Bath · Tonight</text>
+
+              <!-- big count -->
+              <rect x="20" y="106" width="200" height="100" rx="12" fill="#1a1410"/>
+              <text x="32" y="128" font-family="Inter, sans-serif" font-size="9" fill="#d99b81" letter-spacing="1.4">CHECKED IN</text>
+              <text x="32" y="180" font-family="Fraunces, serif" font-size="48" fill="#f5efe6">17</text>
+              <text x="100" y="180" font-family="Inter, sans-serif" font-size="11" fill="#f5efe6" opacity=".7">of 24 expected</text>
+
+              <!-- QR small -->
+              <rect x="20" y="222" width="80" height="80" rx="6" fill="#1a1410"/>
+              <text x="60" y="266" text-anchor="middle" font-family="Fraunces, serif" font-size="10" fill="#f5efe6">QR</text>
+              <g transform="translate(112,222)">
+                <text font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1">SPOKEN CODE</text>
+                <text y="22" font-family="JetBrains Mono, monospace" font-size="18" fill="#1a1410" letter-spacing="3">M0NK·7A</text>
+                <text y="44" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1">SHARE LINK</text>
+                <text y="60" font-family="JetBrains Mono, monospace" font-size="8" fill="#b65b3f">mh.app/in/M0NK7A</text>
+                <rect y="68" width="100" height="20" rx="4" fill="#faf6ee" stroke="#d8cab0"/>
+                <text x="50" y="82" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#1a1410">Copy link</text>
+              </g>
+
+              <!-- recent check ins -->
+              <text x="22" y="334" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1">RECENT</text>
+              <g font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">
+                <text x="22" y="354">○  Marin K. · QR · 7:24 pm</text>
+                <text x="22" y="372">○  Anonymous · link · 7:23 pm</text>
+                <text x="22" y="390">○  Jude T. · code · 7:21 pm</text>
+                <text x="22" y="408">○  Em R. · QR · 7:18 pm</text>
+              </g>
+
+              <rect x="20" y="430" width="200" height="40" rx="20" fill="none" stroke="#1a1410"/>
+              <text x="120" y="455" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500" font-size="11" fill="#1a1410">Close feedback window early</text>
+
+              <g transform="translate(20,484)">
+                <rect width="200" height="38" rx="6" fill="#1a1410"/>
+                <text x="12" y="16" font-family="Inter, sans-serif" font-size="9" fill="#d99b81" letter-spacing="1.4">CONTROL</text>
+                <text x="12" y="30" font-family="Inter, sans-serif" font-size="9.5" fill="#f5efe6">Practitioner closes window per event</text>
+              </g>
+            </g>
+
+            <!-- ===== PHONE 4: Bookings inbox ===== -->
+            <g transform="translate(1070,40)">
+              <rect width="240" height="540" rx="28" fill="#1a1410"/>
+              <rect x="6" y="6" width="228" height="528" rx="22" fill="url(#screenGrad)"/>
+              <rect x="100" y="18" width="40" height="6" rx="3" fill="#1a1410"/>
+
+              <text x="22" y="58" font-family="Fraunces, serif" font-size="17" fill="#1a1410">Bookings</text>
+              <text x="22" y="76" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">3 requested · 2 confirmed</text>
+
+              <!-- segmented -->
+              <g transform="translate(20,90)">
+                <rect width="200" height="32" rx="16" fill="#faf6ee" stroke="#e3d6bf"/>
+                <rect width="98" height="28" x="2" y="2" rx="14" fill="#1a1410"/>
+                <text x="51" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#f5efe6">Requested</text>
+                <text x="149" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#4a3f37">Confirmed</text>
+              </g>
+
+              <!-- request card -->
+              <rect x="20" y="138" width="200" height="120" rx="10" fill="#ffffff" stroke="#e3d6bf"/>
+              <circle cx="40" cy="160" r="12" fill="#d99b81"/>
+              <text x="58" y="156" font-family="Fraunces, serif" font-size="12" fill="#1a1410">Mira J.</text>
+              <text x="58" y="170" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">requested 22 min ago</text>
+              <line x1="32" y1="184" x2="208" y2="184" stroke="#ede4d4"/>
+              <g font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">
+                <text x="32" y="202">Mon May 26 · 4:00 – 4:50 pm</text>
+                <text x="32" y="218">Pay: 8 credits</text>
+              </g>
+              <rect x="32" y="228" width="80" height="24" rx="12" fill="#6a7d5c"/>
+              <text x="72" y="244" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="10" fill="#f5efe6">Accept</text>
+              <rect x="120" y="228" width="80" height="24" rx="12" fill="none" stroke="#d8cab0"/>
+              <text x="160" y="244" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#1a1410">Decline</text>
+
+              <rect x="20" y="272" width="200" height="80" rx="10" fill="#ffffff" stroke="#e3d6bf"/>
+              <circle cx="40" cy="294" r="12" fill="#a8b89a"/>
+              <text x="58" y="290" font-family="Fraunces, serif" font-size="12" fill="#1a1410">Jude T.</text>
+              <text x="58" y="304" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">requested yesterday</text>
+              <line x1="32" y1="316" x2="208" y2="316" stroke="#ede4d4"/>
+              <text x="32" y="336" font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">Wed May 28 · 10 am · cash</text>
+
+              <!-- availability link -->
+              <text x="22" y="384" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f">→ Edit weekly availability</text>
+
+              <!-- calendar mini -->
+              <rect x="20" y="402" width="200" height="80" rx="10" fill="#faf6ee" stroke="#e3d6bf"/>
+              <g font-family="Inter, sans-serif" font-size="8" fill="#7b6f64">
+                <text x="32" y="418" letter-spacing="2">M  T  W  T  F  S  S</text>
+              </g>
+              <g>
+                <rect x="32" y="426" width="22" height="22" rx="3" fill="#6a7d5c" opacity=".7"/>
+                <rect x="56" y="426" width="22" height="22" rx="3" fill="#6a7d5c" opacity=".4"/>
+                <rect x="80" y="426" width="22" height="22" rx="3" fill="#6a7d5c"/>
+                <rect x="104" y="426" width="22" height="22" rx="3" fill="#e3d6bf"/>
+                <rect x="128" y="426" width="22" height="22" rx="3" fill="#6a7d5c" opacity=".7"/>
+                <rect x="152" y="426" width="22" height="22" rx="3" fill="#6a7d5c"/>
+                <rect x="176" y="426" width="22" height="22" rx="3" fill="#e3d6bf"/>
+              </g>
+              <text x="32" y="470" font-family="Inter, sans-serif" font-size="9" fill="#4a3f37">12 slots open this week</text>
+
+              <g transform="translate(20,496)">
+                <rect width="200" height="28" rx="6" fill="#1a1410"/>
+                <text x="12" y="18" font-family="Inter, sans-serif" font-size="9" fill="#f5efe6">DB constraint prevents double‑book</text>
+              </g>
+            </g>
+
+            <!-- ===== PHONE 5: My reviews ===== -->
+            <g transform="translate(1410,40)">
+              <rect width="240" height="540" rx="28" fill="#1a1410"/>
+              <rect x="6" y="6" width="228" height="528" rx="22" fill="url(#screenGrad)"/>
+              <rect x="100" y="18" width="40" height="6" rx="3" fill="#1a1410"/>
+
+              <text x="22" y="58" font-family="Fraunces, serif" font-size="17" fill="#1a1410">My reviews</text>
+              <g transform="translate(22,72)">
+                <text font-family="Fraunces, serif" font-size="14" fill="#b08a3c">★ 4.8</text>
+                <text x="50" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">average · 19 total</text>
+              </g>
+
+              <!-- distribution -->
+              <g font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">
+                <text x="22" y="106">5★</text><rect x="46" y="100" width="120" height="8" rx="4" fill="#e3d6bf"/><rect x="46" y="100" width="92" height="8" rx="4" fill="#6a7d5c"/><text x="174" y="108" fill="#4a3f37">14</text>
+                <text x="22" y="122">4★</text><rect x="46" y="116" width="120" height="8" rx="4" fill="#e3d6bf"/><rect x="46" y="116" width="30" height="8" rx="4" fill="#6a7d5c"/><text x="174" y="124" fill="#4a3f37">4</text>
+                <text x="22" y="138">3★</text><rect x="46" y="132" width="120" height="8" rx="4" fill="#e3d6bf"/><rect x="46" y="132" width="8" height="8" rx="4" fill="#6a7d5c"/><text x="174" y="140" fill="#4a3f37">1</text>
+              </g>
+
+              <!-- review item -->
+              <rect x="20" y="160" width="200" height="106" rx="10" fill="#ffffff" stroke="#e3d6bf"/>
+              <g transform="translate(32,180)">
+                <text font-family="Fraunces, serif" font-size="13" fill="#b08a3c">★ ★ ★ ★ ★</text>
+                <text y="22" font-family="Inter, sans-serif" font-size="9.5" fill="#4a3f37">"Sage held the room with</text>
+                <text y="36" font-family="Inter, sans-serif" font-size="9.5" fill="#4a3f37">such steady presence. The</text>
+                <text y="50" font-family="Inter, sans-serif" font-size="9.5" fill="#4a3f37">bowls were tuning my..."</text>
+                <text y="72" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">anonymous · Sound Bath · 4d ago</text>
+              </g>
+
+              <rect x="20" y="278" width="200" height="106" rx="10" fill="#ffffff" stroke="#e3d6bf"/>
+              <g transform="translate(32,298)">
+                <text font-family="Fraunces, serif" font-size="13" fill="#b08a3c">★ ★ ★ ★ ☆</text>
+                <text y="22" font-family="Inter, sans-serif" font-size="9.5" fill="#4a3f37">"Beautiful experience.</text>
+                <text y="36" font-family="Inter, sans-serif" font-size="9.5" fill="#4a3f37">Room ran a touch cold but</text>
+                <text y="50" font-family="Inter, sans-serif" font-size="9.5" fill="#4a3f37">the session itself was..."</text>
+                <text y="72" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">anonymous · Sound Bath · 1w ago</text>
+              </g>
+
+              <text x="22" y="404" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f">View all 19 →</text>
+
+              <g transform="translate(20,422)">
+                <rect width="200" height="100" rx="10" fill="#1a1410"/>
+                <text x="12" y="22" font-family="Inter, sans-serif" font-size="9" fill="#d99b81" letter-spacing="1.4">ANONYMITY GUARANTEE</text>
+                <text x="12" y="40" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">Reviews are anonymous even</text>
+                <text x="12" y="54" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">to the practitioner. No view</text>
+                <text x="12" y="68" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">layer exposes member_id;</text>
+                <text x="12" y="82" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">RLS enforces at DB.</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="flow-legend">
+          <span><i style="background:#6a7d5c"></i> Practitioner path</span>
+          <span><i style="background:#b65b3f"></i> Live state</span>
+          <span><i style="background:#b08a3c"></i> Rating</span>
+          <span><i style="background:#1a1410"></i> System annotation</span>
+        </div>
+      </div>
+
+      <!-- ============ ADMIN FLOW ============ -->
+      <div class="flow-panel" data-flow="admin">
+        <div class="viewer">
+          <div class="viewer-bg"></div>
+          <div class="viewer-hint">Drag to pan · scroll or pinch to zoom</div>
+          <div class="zoom-ctrls">
+            <button class="zoom-btn" data-zoom="out" aria-label="Zoom out">−</button>
+            <button class="zoom-btn reset" data-zoom="reset" aria-label="Reset zoom">Fit</button>
+            <button class="zoom-btn" data-zoom="in" aria-label="Zoom in">+</button>
+          </div>
+
+          <svg viewBox="0 0 1820 700" xmlns="http://www.w3.org/2000/svg" id="flow-admin" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <marker id="arrow-plum" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a3a4a"/>
+              </marker>
+            </defs>
+
+            <g font-family="Inter, sans-serif" font-size="13" fill="#7b6f64" letter-spacing="2">
+              <text x="220" y="668" text-anchor="middle">01 · OVERVIEW</text>
+              <text x="660" y="668" text-anchor="middle">02 · POST BOUNTY</text>
+              <text x="1100" y="668" text-anchor="middle">03 · VERIFY</text>
+              <text x="1540" y="668" text-anchor="middle">04 · LEDGER</text>
+            </g>
+
+            <g stroke="#5a3a4a" stroke-width="1.5" fill="none" stroke-dasharray="4 4">
+              <path d="M 380 350 Q 440 350 480 350" marker-end="url(#arrow-plum)"/>
+              <path d="M 820 350 Q 880 350 920 350" marker-end="url(#arrow-plum)"/>
+              <path d="M 1260 350 Q 1320 350 1360 350" marker-end="url(#arrow-plum)"/>
+            </g>
+
+            <!-- ===== PANEL 1: Dashboard (desktop frame) ===== -->
+            <g transform="translate(60,60)">
+              <rect width="320" height="580" rx="10" fill="#1a1410"/>
+              <rect x="6" y="6" width="308" height="568" rx="6" fill="url(#screenGrad)"/>
+              <!-- top bar -->
+              <rect x="6" y="6" width="308" height="28" rx="0" fill="#1a1410"/>
+              <circle cx="20" cy="20" r="4" fill="#b65b3f"/>
+              <circle cx="32" cy="20" r="4" fill="#b08a3c"/>
+              <circle cx="44" cy="20" r="4" fill="#6a7d5c"/>
+              <text x="160" y="24" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">admin.mystichearts.handprotocol.org</text>
+
+              <text x="20" y="60" font-family="Fraunces, serif" font-size="18" fill="#1a1410">Today</text>
+              <text x="20" y="76" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">2026‑05‑18 · Monday</text>
+
+              <!-- stat cards -->
+              <g transform="translate(20,92)">
+                <rect width="86" height="64" rx="8" fill="#ffffff" stroke="#e3d6bf"/>
+                <text x="10" y="20" font-family="Inter, sans-serif" font-size="8" fill="#7b6f64" letter-spacing="1">MEMBERS</text>
+                <text x="10" y="46" font-family="Fraunces, serif" font-size="22" fill="#1a1410">312</text>
+                <text x="10" y="58" font-family="Inter, sans-serif" font-size="8" fill="#6a7d5c">+14 this wk</text>
+
+                <rect x="96" width="86" height="64" rx="8" fill="#ffffff" stroke="#e3d6bf"/>
+                <text x="106" y="20" font-family="Inter, sans-serif" font-size="8" fill="#7b6f64" letter-spacing="1">EVENTS</text>
+                <text x="106" y="46" font-family="Fraunces, serif" font-size="22" fill="#1a1410">9</text>
+                <text x="106" y="58" font-family="Inter, sans-serif" font-size="8" fill="#6a7d5c">upcoming</text>
+
+                <rect x="192" width="86" height="64" rx="8" fill="#ffffff" stroke="#e3d6bf"/>
+                <text x="202" y="20" font-family="Inter, sans-serif" font-size="8" fill="#7b6f64" letter-spacing="1">BOUNTIES</text>
+                <text x="202" y="46" font-family="Fraunces, serif" font-size="22" fill="#1a1410">5</text>
+                <text x="202" y="58" font-family="Inter, sans-serif" font-size="8" fill="#b08a3c">2 await verify</text>
+              </g>
+
+              <!-- queue -->
+              <text x="20" y="184" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">PENDING YOUR REVIEW</text>
+
+              <g>
+                <rect x="20" y="194" width="278" height="48" rx="8" fill="#faf6ee" stroke="#e3d6bf"/>
+                <rect x="20" y="194" width="3" height="48" fill="#b65b3f"/>
+                <text x="34" y="212" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#1a1410">Verify bounty: setup help</text>
+                <text x="34" y="226" font-family="Inter, sans-serif" font-size="9.5" fill="#7b6f64">submitted by Marin K. · 2h ago</text>
+                <text x="286" y="222" text-anchor="end" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f">Open →</text>
+              </g>
+              <g>
+                <rect x="20" y="252" width="278" height="48" rx="8" fill="#faf6ee" stroke="#e3d6bf"/>
+                <rect x="20" y="252" width="3" height="48" fill="#b65b3f"/>
+                <text x="34" y="270" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#1a1410">Verify bounty: legal draft</text>
+                <text x="34" y="284" font-family="Inter, sans-serif" font-size="9.5" fill="#7b6f64">submitted by Jude T. · 1d ago</text>
+                <text x="286" y="280" text-anchor="end" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f">Open →</text>
+              </g>
+              <g>
+                <rect x="20" y="310" width="278" height="48" rx="8" fill="#faf6ee" stroke="#e3d6bf"/>
+                <rect x="20" y="310" width="3" height="48" fill="#5a3a4a"/>
+                <text x="34" y="328" font-family="Inter, sans-serif" font-size="11" font-weight="600" fill="#1a1410">Vet specialist: design</text>
+                <text x="34" y="342" font-family="Inter, sans-serif" font-size="9.5" fill="#7b6f64">nominated by 2 members</text>
+                <text x="286" y="338" text-anchor="end" font-family="Inter, sans-serif" font-size="10" fill="#5a3a4a">Open →</text>
+              </g>
+
+              <!-- quick actions -->
+              <text x="20" y="386" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">QUICK ACTIONS</text>
+              <g transform="translate(20,396)">
+                <rect width="135" height="40" rx="8" fill="#1a1410"/>
+                <text x="68" y="25" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="11" fill="#f5efe6">+ Post bounty</text>
+                <rect x="144" width="135" height="40" rx="8" fill="none" stroke="#1a1410"/>
+                <text x="212" y="25" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="11" fill="#1a1410">Invite practitioner</text>
+              </g>
+
+              <!-- modality list reminder -->
+              <rect x="20" y="450" width="278" height="48" rx="8" fill="#5a3a4a"/>
+              <text x="34" y="470" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6" letter-spacing="1">OPEN ITEM</text>
+              <text x="34" y="486" font-family="Inter, sans-serif" font-size="10.5" fill="#f5efe6">Modality list still pending from MH</text>
+
+              <!-- ledger health -->
+              <text x="20" y="518" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">LEDGER HEALTH</text>
+              <g transform="translate(20,524)">
+                <rect width="278" height="32" rx="6" fill="#ffffff" stroke="#e3d6bf"/>
+                <text x="10" y="20" font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">412 credits in circulation · 68% redemption rate</text>
+              </g>
+            </g>
+
+            <!-- ===== PANEL 2: Post bounty modal ===== -->
+            <g transform="translate(500,80)">
+              <rect width="320" height="540" rx="12" fill="#ffffff" stroke="#d8cab0" filter=""/>
+              <!-- modal header -->
+              <text x="22" y="40" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.6">NEW BOUNTY</text>
+              <text x="22" y="66" font-family="Fraunces, serif" font-size="20" fill="#1a1410">Post to the board</text>
+              <text x="296" y="40" text-anchor="end" font-family="Inter, sans-serif" font-size="18" fill="#7b6f64">×</text>
+
+              <!-- tier toggle -->
+              <text x="22" y="100" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">TIER</text>
+              <g transform="translate(22,108)">
+                <rect width="276" height="44" rx="10" fill="#faf6ee" stroke="#e3d6bf"/>
+                <rect width="136" height="40" x="2" y="2" rx="8" fill="#1a1410"/>
+                <text x="70" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="11" fill="#f5efe6">General</text>
+                <text x="70" y="33" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#d99b81">1 hr = 1 credit</text>
+                <text x="208" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="11" fill="#4a3f37">Specialist</text>
+                <text x="208" y="33" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">per‑task rate</text>
+              </g>
+
+              <!-- title -->
+              <text x="22" y="178" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">TITLE</text>
+              <rect x="22" y="186" width="276" height="34" rx="6" fill="#faf6ee" stroke="#e3d6bf"/>
+              <text x="32" y="208" font-family="Inter, sans-serif" font-size="11" fill="#1a1410">Help set up Saturday event</text>
+
+              <!-- description -->
+              <text x="22" y="236" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">DESCRIPTION</text>
+              <rect x="22" y="244" width="276" height="80" rx="6" fill="#faf6ee" stroke="#e3d6bf"/>
+              <g font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">
+                <text x="32" y="262">Arrive 4 pm at the Listening</text>
+                <text x="32" y="278">Room. Set up chairs, lighting,</text>
+                <text x="32" y="294">welcome attendees, help</text>
+                <text x="32" y="310">break down after.</text>
+              </g>
+
+              <!-- credit + expiry row -->
+              <g transform="translate(22,338)">
+                <text font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">CREDITS</text>
+                <rect y="10" width="130" height="34" rx="6" fill="#faf6ee" stroke="#e3d6bf"/>
+                <text x="12" y="31" font-family="Fraunces, serif" font-size="18" fill="#1a1410">3</text>
+                <text x="32" y="31" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">credits · ~3 hrs</text>
+
+                <text x="146" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">EXPIRES</text>
+                <rect x="146" y="10" width="130" height="34" rx="6" fill="#faf6ee" stroke="#e3d6bf"/>
+                <text x="158" y="31" font-family="Inter, sans-serif" font-size="10.5" fill="#1a1410">Sat 23 May · 4 pm</text>
+              </g>
+
+              <!-- verification requirements -->
+              <text x="22" y="410" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">VERIFICATION EVIDENCE</text>
+              <g transform="translate(22,418)">
+                <rect width="276" height="60" rx="6" fill="#faf6ee" stroke="#e3d6bf"/>
+                <g font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">
+                  <text x="12" y="20">☒ Text writeup of what was done</text>
+                  <text x="12" y="36">☐ Photo evidence</text>
+                  <text x="12" y="52">☐ Co‑signed by another member</text>
+                </g>
+              </g>
+
+              <!-- CTA -->
+              <rect x="22" y="492" width="276" height="36" rx="18" fill="#5a3a4a"/>
+              <text x="160" y="515" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="11" fill="#f5efe6">Post to the board</text>
+            </g>
+
+            <!-- ===== PANEL 3: Verify completion ===== -->
+            <g transform="translate(940,80)">
+              <rect width="320" height="540" rx="12" fill="#ffffff" stroke="#d8cab0"/>
+
+              <text x="22" y="40" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.6">VERIFY SUBMISSION</text>
+              <text x="22" y="66" font-family="Fraunces, serif" font-size="18" fill="#1a1410">Help set up Saturday event</text>
+
+              <!-- claimed by -->
+              <g transform="translate(22,86)">
+                <circle cx="12" cy="14" r="12" fill="#d99b81"/>
+                <text x="32" y="12" font-family="Fraunces, serif" font-size="12" fill="#1a1410">Marin K.</text>
+                <text x="32" y="26" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">claimed Mon · submitted Sat 9 pm</text>
+              </g>
+
+              <line x1="22" y1="130" x2="298" y2="130" stroke="#ede4d4"/>
+
+              <!-- submission -->
+              <text x="22" y="152" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">WRITEUP FROM MARIN</text>
+              <rect x="22" y="160" width="276" height="118" rx="6" fill="#faf6ee" stroke="#e3d6bf"/>
+              <g font-family="Inter, sans-serif" font-size="10" fill="#4a3f37">
+                <text x="32" y="180">Arrived 3:45 pm. Set up 24</text>
+                <text x="32" y="196">chairs in concentric arcs, hung</text>
+                <text x="32" y="212">the warm string lights, prepped</text>
+                <text x="32" y="228">water station. Stayed through</text>
+                <text x="32" y="244">close, packed everything by</text>
+                <text x="32" y="260">10:15. Sage co‑signed below.</text>
+              </g>
+
+              <!-- co-sign chip -->
+              <g transform="translate(22,288)">
+                <rect width="276" height="32" rx="6" fill="#6a7d5c"/>
+                <text x="12" y="20" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">✓ Co‑signed by Sage M. (practitioner)</text>
+              </g>
+
+              <!-- credit summary -->
+              <text x="22" y="346" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">ON APPROVE</text>
+              <rect x="22" y="354" width="276" height="58" rx="6" fill="#faf6ee" stroke="#e3d6bf"/>
+              <g font-family="Inter, sans-serif" font-size="11" fill="#4a3f37">
+                <text x="32" y="376">Issue <tspan fill="#1a1410" font-weight="600">3 credits</tspan> to Marin K.</text>
+                <text x="32" y="394">Source: <tspan font-family="JetBrains Mono">bounty/b_8821</tspan></text>
+              </g>
+
+              <!-- actions -->
+              <g transform="translate(22,430)">
+                <rect width="180" height="42" rx="21" fill="#6a7d5c"/>
+                <text x="90" y="27" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="12" fill="#f5efe6">Approve · issue 3 cr</text>
+                <rect x="190" width="86" height="42" rx="21" fill="none" stroke="#b65b3f"/>
+                <text x="233" y="27" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="11" fill="#b65b3f">Reject</text>
+              </g>
+
+              <text x="22" y="498" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f">↩  Request more evidence instead</text>
+            </g>
+
+            <!-- ===== PANEL 4: Credit ledger ===== -->
+            <g transform="translate(1380,80)">
+              <rect width="320" height="540" rx="12" fill="#1a1410"/>
+
+              <text x="22" y="40" font-family="Inter, sans-serif" font-size="9" fill="#d99b81" letter-spacing="1.6">CREDIT LEDGER · HAND</text>
+              <text x="22" y="68" font-family="Fraunces, serif" font-size="20" fill="#f5efe6">Cross‑Reciprocate view</text>
+              <text x="22" y="86" font-family="Inter, sans-serif" font-size="10.5" fill="#7b6f64">Dark‑launched · Mystic Hearts only in v1</text>
+
+              <!-- big totals -->
+              <g transform="translate(22,108)">
+                <rect width="276" height="86" rx="10" fill="#2a1f18"/>
+                <text x="14" y="22" font-family="Inter, sans-serif" font-size="9" fill="#d99b81" letter-spacing="1.4">HOURS GIVEN</text>
+                <text x="14" y="62" font-family="Fraunces, serif" font-size="32" fill="#f5efe6">1,284</text>
+                <text x="120" y="22" font-family="Inter, sans-serif" font-size="9" fill="#a8b89a" letter-spacing="1.4">IN CIRCULATION</text>
+                <text x="120" y="62" font-family="Fraunces, serif" font-size="32" fill="#f5efe6">412</text>
+              </g>
+
+              <!-- chart -->
+              <text x="22" y="220" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">FLOW · LAST 6 WEEKS</text>
+              <g transform="translate(22,232)">
+                <rect width="276" height="100" fill="none"/>
+                <!-- bars -->
+                <g>
+                  <rect x="0"   y="50" width="34" height="50" fill="#b65b3f" opacity=".8"/>
+                  <rect x="46"  y="40" width="34" height="60" fill="#b65b3f" opacity=".8"/>
+                  <rect x="92"  y="30" width="34" height="70" fill="#b65b3f" opacity=".8"/>
+                  <rect x="138" y="20" width="34" height="80" fill="#b65b3f"/>
+                  <rect x="184" y="35" width="34" height="65" fill="#b65b3f" opacity=".8"/>
+                  <rect x="230" y="10" width="34" height="90" fill="#b65b3f"/>
+                </g>
+                <!-- redemption overlay -->
+                <polyline points="17,80 63,72 109,68 155,55 201,62 247,40" fill="none" stroke="#a8b89a" stroke-width="2"/>
+                <g fill="#a8b89a">
+                  <circle cx="17" cy="80" r="3"/>
+                  <circle cx="63" cy="72" r="3"/>
+                  <circle cx="109" cy="68" r="3"/>
+                  <circle cx="155" cy="55" r="3"/>
+                  <circle cx="201" cy="62" r="3"/>
+                  <circle cx="247" cy="40" r="3"/>
+                </g>
+              </g>
+              <g font-family="Inter, sans-serif" font-size="9" fill="#7b6f64">
+                <text x="22" y="348">W14 · 5 weeks ago</text>
+                <text x="286" y="348" text-anchor="end">this wk</text>
+              </g>
+
+              <!-- legend -->
+              <g transform="translate(22,360)">
+                <rect width="10" height="10" fill="#b65b3f"/>
+                <text x="16" y="9" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">issued</text>
+                <line x1="80" y1="5" x2="100" y2="5" stroke="#a8b89a" stroke-width="2"/>
+                <text x="106" y="9" font-family="Inter, sans-serif" font-size="10" fill="#f5efe6">redeemed</text>
+              </g>
+
+              <!-- group breakdown -->
+              <text x="22" y="402" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" letter-spacing="1.4">BY RECIPROCATE GROUP</text>
+              <g transform="translate(22,414)">
+                <rect width="276" height="34" rx="6" fill="#2a1f18"/>
+                <circle cx="18" cy="17" r="5" fill="#d99b81"/>
+                <text x="32" y="22" font-family="Inter, sans-serif" font-size="11" fill="#f5efe6">Mystic Hearts</text>
+                <text x="266" y="22" text-anchor="end" font-family="Inter, sans-serif" font-size="11" fill="#f5efe6">412 cr · 100%</text>
+
+                <rect y="42" width="276" height="34" rx="6" fill="#2a1f18" opacity=".5"/>
+                <text x="32" y="64" font-family="Inter, sans-serif" font-size="11" fill="#7b6f64" font-style="italic">Group #2 · awaiting onboarding</text>
+                <text x="266" y="64" text-anchor="end" font-family="Inter, sans-serif" font-size="11" fill="#7b6f64">—</text>
+
+                <rect y="84" width="276" height="34" rx="6" fill="#2a1f18" opacity=".3"/>
+                <text x="32" y="106" font-family="Inter, sans-serif" font-size="11" fill="#7b6f64" font-style="italic">Group #3 · future</text>
+                <text x="266" y="106" text-anchor="end" font-family="Inter, sans-serif" font-size="11" fill="#7b6f64">—</text>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="flow-legend">
+          <span><i style="background:#5a3a4a"></i> Admin path</span>
+          <span><i style="background:#b65b3f"></i> Credit issuance</span>
+          <span><i style="background:#a8b89a"></i> Credit redemption</span>
+          <span><i style="background:#6a7d5c"></i> Co‑signed verification</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="mindmap">
+  <div class="wrap">
+    <span class="eyebrow">Ecosystem mindmap</span>
+    <h2>One picture of the whole system.</h2>
+    <p class="section-lede">
+      Mystic Hearts at the center; everything else radiates by concern. The branches with
+      dashed outlines are dark‑launched architecture (designed in v1, activated later).
+      Pan and zoom to read any node.
+    </p>
+
+    <div class="mindmap-wrap">
+      <div class="viewer-hint">Drag to pan · scroll or pinch to zoom</div>
+      <div class="zoom-ctrls">
+        <button class="zoom-btn" data-zoom="out" aria-label="Zoom out">−</button>
+        <button class="zoom-btn reset" data-zoom="reset" aria-label="Reset zoom">Fit</button>
+        <button class="zoom-btn" data-zoom="in" aria-label="Zoom in">+</button>
+      </div>
+
+      <svg id="mindmap-svg" viewBox="0 0 1600 1000" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <radialGradient id="centerGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#2a1f18"/>
+            <stop offset="100%" stop-color="#1a1410"/>
+          </radialGradient>
+          <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+            <feOffset dy="4"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.18"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- background ring guides -->
+        <g fill="none" stroke="#d8cab0" stroke-dasharray="2 6" opacity=".55">
+          <circle cx="800" cy="500" r="220"/>
+          <circle cx="800" cy="500" r="370"/>
+        </g>
+
+        <!-- connection lines (drawn first, behind nodes) -->
+        <g stroke="#b65b3f" stroke-width="1.3" fill="none" opacity=".7">
+          <!-- roles -->
+          <path d="M 800 500 Q 720 380 590 280"/>
+          <path d="M 800 500 Q 880 380 1010 280"/>
+          <path d="M 800 500 Q 720 620 590 720"/>
+          <!-- mechanisms -->
+          <path d="M 800 500 Q 980 460 1180 380"/>
+          <path d="M 800 500 Q 1020 540 1180 620"/>
+          <path d="M 800 500 Q 620 460 420 380"/>
+          <path d="M 800 500 Q 580 540 420 620"/>
+          <path d="M 800 500 Q 800 700 800 820"/>
+        </g>
+        <g stroke="#7b6f64" stroke-width="1" fill="none" stroke-dasharray="3 5" opacity=".6">
+          <!-- dark-launched / future -->
+          <path d="M 800 500 Q 1100 280 1330 180"/>
+          <path d="M 800 500 Q 460 260 240 200"/>
+          <path d="M 800 500 Q 1150 720 1400 820"/>
+        </g>
+
+        <!-- sub branches under roles -->
+        <g stroke="#b65b3f" stroke-width="1" fill="none" opacity=".5">
+          <path d="M 590 280 L 460 200"/>
+          <path d="M 590 280 L 480 320"/>
+          <path d="M 590 280 L 540 360"/>
+          <path d="M 1010 280 L 1140 220"/>
+          <path d="M 1010 280 L 1130 320"/>
+          <path d="M 1010 280 L 1080 360"/>
+          <path d="M 590 720 L 480 800"/>
+          <path d="M 590 720 L 540 820"/>
+          <path d="M 590 720 L 640 820"/>
+        </g>
+
+        <!-- CENTER NODE -->
+        <g filter="url(#softShadow)">
+          <circle cx="800" cy="500" r="120" fill="url(#centerGrad)"/>
+          <circle cx="800" cy="500" r="120" fill="none" stroke="#d99b81" stroke-width="1.5" opacity=".5"/>
+        </g>
+        <text x="800" y="486" text-anchor="middle" font-family="Fraunces, serif" font-size="22" fill="#f5efe6" font-style="italic">Mystic</text>
+        <text x="800" y="514" text-anchor="middle" font-family="Fraunces, serif" font-size="22" fill="#f5efe6" font-style="italic">Hearts</text>
+        <text x="800" y="540" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#d99b81" letter-spacing="3">v1 · 2026</text>
+
+        <!-- ===== ROLE: MEMBER ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="490" y="230" width="200" height="100" rx="50" fill="#ffffff" stroke="#b65b3f" stroke-width="2"/>
+        </g>
+        <text x="590" y="266" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f" letter-spacing="2">ROLE</text>
+        <text x="590" y="294" text-anchor="middle" font-family="Fraunces, serif" font-size="22" fill="#1a1410">Member</text>
+        <text x="590" y="314" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#7b6f64">public · auth to act</text>
+        <!-- sub leaves -->
+        <g font-family="Inter, sans-serif" font-size="11" fill="#4a3f37">
+          <g><circle cx="460" cy="200" r="38" fill="#faf6ee" stroke="#d8cab0"/><text x="460" y="196" text-anchor="middle">Browse</text><text x="460" y="210" text-anchor="middle">events</text></g>
+          <g><circle cx="450" cy="330" r="38" fill="#faf6ee" stroke="#d8cab0"/><text x="450" y="326" text-anchor="middle">Earn</text><text x="450" y="340" text-anchor="middle">credits</text></g>
+          <g><circle cx="510" cy="380" r="38" fill="#faf6ee" stroke="#d8cab0"/><text x="510" y="376" text-anchor="middle">Spend</text><text x="510" y="390" text-anchor="middle">credits</text></g>
+        </g>
+
+        <!-- ===== ROLE: PRACTITIONER ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="910" y="230" width="200" height="100" rx="50" fill="#ffffff" stroke="#6a7d5c" stroke-width="2"/>
+        </g>
+        <text x="1010" y="266" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#6a7d5c" letter-spacing="2">ROLE</text>
+        <text x="1010" y="294" text-anchor="middle" font-family="Fraunces, serif" font-size="22" fill="#1a1410">Practitioner</text>
+        <text x="1010" y="314" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#7b6f64">invite‑only · curated</text>
+        <g font-family="Inter, sans-serif" font-size="11" fill="#4a3f37">
+          <g><circle cx="1140" cy="220" r="38" fill="#faf6ee" stroke="#d8cab0"/><text x="1140" y="216" text-anchor="middle">Offer</text><text x="1140" y="230" text-anchor="middle">events</text></g>
+          <g><circle cx="1150" cy="330" r="38" fill="#faf6ee" stroke="#d8cab0"/><text x="1150" y="326" text-anchor="middle">Bookings</text><text x="1150" y="340" text-anchor="middle">inbox</text></g>
+          <g><circle cx="1080" cy="380" r="38" fill="#faf6ee" stroke="#d8cab0"/><text x="1080" y="376" text-anchor="middle">Verify</text><text x="1080" y="390" text-anchor="middle">attend.</text></g>
+        </g>
+
+        <!-- ===== ROLE: ADMIN ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="490" y="670" width="200" height="100" rx="50" fill="#ffffff" stroke="#5a3a4a" stroke-width="2"/>
+        </g>
+        <text x="590" y="706" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#5a3a4a" letter-spacing="2">ROLE</text>
+        <text x="590" y="734" text-anchor="middle" font-family="Fraunces, serif" font-size="22" fill="#1a1410">Admin</text>
+        <text x="590" y="754" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#7b6f64">HAND ops + curator</text>
+        <g font-family="Inter, sans-serif" font-size="11" fill="#4a3f37">
+          <g><circle cx="460" cy="820" r="38" fill="#faf6ee" stroke="#d8cab0"/><text x="460" y="816" text-anchor="middle">Invite</text><text x="460" y="830" text-anchor="middle">practs.</text></g>
+          <g><circle cx="540" cy="840" r="38" fill="#faf6ee" stroke="#d8cab0"/><text x="540" y="836" text-anchor="middle">Post</text><text x="540" y="850" text-anchor="middle">bounties</text></g>
+          <g><circle cx="660" cy="840" r="38" fill="#faf6ee" stroke="#d8cab0"/><text x="660" y="836" text-anchor="middle">Verify</text><text x="660" y="850" text-anchor="middle">+ issue</text></g>
+        </g>
+
+        <!-- ===== MECHANISM: REVIEWS ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="1120" y="340" width="180" height="80" rx="14" fill="#ffffff" stroke="#b08a3c" stroke-width="2"/>
+        </g>
+        <text x="1210" y="368" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#b08a3c" letter-spacing="2">MECHANISM</text>
+        <text x="1210" y="392" text-anchor="middle" font-family="Fraunces, serif" font-size="18" fill="#1a1410">Reviews</text>
+        <text x="1210" y="410" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">verified · anonymous</text>
+
+        <!-- ===== MECHANISM: BOOKINGS ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="1120" y="580" width="180" height="80" rx="14" fill="#ffffff" stroke="#6a7d5c" stroke-width="2"/>
+        </g>
+        <text x="1210" y="608" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#6a7d5c" letter-spacing="2">MECHANISM</text>
+        <text x="1210" y="632" text-anchor="middle" font-family="Fraunces, serif" font-size="18" fill="#1a1410">Bookings</text>
+        <text x="1210" y="650" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">real‑time calendar</text>
+
+        <!-- ===== MECHANISM: BOUNTIES ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="320" y="340" width="180" height="80" rx="14" fill="#ffffff" stroke="#b65b3f" stroke-width="2"/>
+        </g>
+        <text x="410" y="368" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#b65b3f" letter-spacing="2">MECHANISM</text>
+        <text x="410" y="392" text-anchor="middle" font-family="Fraunces, serif" font-size="18" fill="#1a1410">Bounty board</text>
+        <text x="410" y="410" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">two‑tier · claim flow</text>
+
+        <!-- ===== MECHANISM: EVENTS ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="320" y="580" width="180" height="80" rx="14" fill="#ffffff" stroke="#5a3a4a" stroke-width="2"/>
+        </g>
+        <text x="410" y="608" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#5a3a4a" letter-spacing="2">MECHANISM</text>
+        <text x="410" y="632" text-anchor="middle" font-family="Fraunces, serif" font-size="18" fill="#1a1410">Events</text>
+        <text x="410" y="650" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">QR · link · code</text>
+
+        <!-- ===== CORE LEDGER ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="680" y="780" width="240" height="100" rx="14" fill="#1a1410" stroke="#d99b81" stroke-width="1.5"/>
+        </g>
+        <text x="800" y="810" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#d99b81" letter-spacing="2.4">CORE INFRASTRUCTURE</text>
+        <text x="800" y="838" text-anchor="middle" font-family="Fraunces, serif" font-size="22" fill="#f5efe6">Credit ledger</text>
+        <text x="800" y="858" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#a8b89a">public totals · private balances</text>
+
+        <!-- ===== DARK-LAUNCHED ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="1230" y="120" width="220" height="120" rx="14" fill="#faf6ee" stroke="#7b6f64" stroke-dasharray="5 4" stroke-width="1.5"/>
+        </g>
+        <text x="1340" y="148" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64" letter-spacing="2">DARK‑LAUNCHED</text>
+        <text x="1340" y="174" text-anchor="middle" font-family="Fraunces, serif" font-size="17" fill="#1a1410">Cross‑Reciprocate</text>
+        <text x="1340" y="194" text-anchor="middle" font-family="Fraunces, serif" font-size="17" fill="#1a1410">credit pool</text>
+        <text x="1340" y="218" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64">activates with group #2</text>
+
+        <!-- ===== STACK ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="140" y="140" width="200" height="120" rx="14" fill="#faf6ee" stroke="#7b6f64" stroke-dasharray="5 4" stroke-width="1.5"/>
+        </g>
+        <text x="240" y="166" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64" letter-spacing="2">STACK</text>
+        <g font-family="Inter, sans-serif" font-size="11.5" fill="#1a1410">
+          <text x="240" y="192" text-anchor="middle">Next.js · React</text>
+          <text x="240" y="210" text-anchor="middle">Supabase (dedicated)</text>
+          <text x="240" y="228" text-anchor="middle">Resend · Stripe (P2)</text>
+          <text x="240" y="246" text-anchor="middle">mystichearts.handprotocol.org</text>
+        </g>
+
+        <!-- ===== PARKED ===== -->
+        <g filter="url(#softShadow)">
+          <rect x="1290" y="780" width="220" height="120" rx="14" fill="#faf6ee" stroke="#7b6f64" stroke-dasharray="5 4" stroke-width="1.5"/>
+        </g>
+        <text x="1400" y="808" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#7b6f64" letter-spacing="2">PARKED · P3+</text>
+        <g font-family="Inter, sans-serif" font-size="11" fill="#4a3f37">
+          <text x="1400" y="834" text-anchor="middle">3D / drone surfaces</text>
+          <text x="1400" y="852" text-anchor="middle">Mobile app</text>
+          <text x="1400" y="870" text-anchor="middle">Own domain</text>
+          <text x="1400" y="888" text-anchor="middle">Sovereign Reciprocate AI</text>
+        </g>
+
+        <!-- legend -->
+        <g transform="translate(60,920)">
+          <rect width="14" height="14" rx="3" fill="#ffffff" stroke="#b65b3f" stroke-width="2"/>
+          <text x="22" y="11" font-family="Inter, sans-serif" font-size="11" fill="#4a3f37">Role</text>
+          <rect x="80" width="14" height="14" rx="3" fill="#ffffff" stroke="#b08a3c" stroke-width="2"/>
+          <text x="100" y="11" font-family="Inter, sans-serif" font-size="11" fill="#4a3f37">Mechanism</text>
+          <rect x="200" width="14" height="14" rx="3" fill="#1a1410"/>
+          <text x="222" y="11" font-family="Inter, sans-serif" font-size="11" fill="#4a3f37">Core infra</text>
+          <rect x="312" width="14" height="14" rx="3" fill="#faf6ee" stroke="#7b6f64" stroke-dasharray="3 3"/>
+          <text x="334" y="11" font-family="Inter, sans-serif" font-size="11" fill="#4a3f37">Dark‑launched / parked</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="data">
+  <div class="wrap">
+    <span class="eyebrow">Data model sketch</span>
+    <h2>The shape of what we store.</h2>
+    <p class="section-lede">
+      Not a schema yet, just the entities that have to exist for v1 to cohere. Every
+      cross‑Reciprocate concept hangs off <code>group_id</code>, which is what dark‑launches
+      the multi‑group future without a migration.
+    </p>
+
+    <div class="entities">
+      <div class="entity">
+        <h4><span class="entity-icon">U</span> User</h4>
+        <ul>
+          <li><span class="pk">id</span> uuid</li>
+          <li>email · name</li>
+          <li>role: member | practitioner | admin</li>
+          <li>is_specialist · specialist_areas[]</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">G</span> ReciprocateGroup</h4>
+        <ul>
+          <li><span class="pk">id</span> · slug · name</li>
+          <li class="mono" style="color:var(--clay);font-style:italic">Mystic Hearts is row 1</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">P</span> PractitionerProfile</h4>
+        <ul>
+          <li><span class="fk">user_id</span> · <span class="fk">group_id</span></li>
+          <li>bio · photo_url · location</li>
+          <li>modality_ids[] · session_duration</li>
+          <li>pricing_model · accepting_bookings</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">M</span> Modality</h4>
+        <ul>
+          <li><span class="pk">id</span> · name</li>
+          <li><span class="fk">group_id</span></li>
+          <li class="mono" style="color:var(--clay);font-style:italic">list TBD from MH</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">E</span> Event</h4>
+        <ul>
+          <li><span class="pk">id</span> · <span class="fk">host_user_id</span> · <span class="fk">group_id</span></li>
+          <li>type: practitioner_hosted | group_gathering</li>
+          <li>starts_at · ends_at · capacity · location</li>
+          <li>price_model · attendance_code · qr_url</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">R</span> EventRSVP</h4>
+        <ul>
+          <li><span class="fk">event_id</span> · <span class="fk">user_id</span></li>
+          <li>status: rsvp'd | attended | no_show</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">A</span> EventAttendance</h4>
+        <ul>
+          <li><span class="fk">event_id</span> · <span class="fk">user_id</span></li>
+          <li>verified_at · method: qr | link | code</li>
+          <li class="mono" style="color:var(--clay);font-style:italic">unlocks review eligibility</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">V</span> Review</h4>
+        <ul>
+          <li><span class="pk">id</span> · <span class="fk">event_id</span> · <span class="fk">practitioner_user_id</span></li>
+          <li><span class="fk">member_user_id</span> · rating · body</li>
+          <li>is_visible · submitted_at</li>
+          <li class="mono" style="color:var(--clay);font-style:italic">anon enforced at RLS</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">C</span> PractitionerAvailability</h4>
+        <ul>
+          <li><span class="fk">practitioner_user_id</span></li>
+          <li>recurring_rule (RRULE) | one_off_slot</li>
+          <li>duration_min · timezone</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">B</span> Booking</h4>
+        <ul>
+          <li><span class="pk">id</span> · <span class="fk">practitioner_user_id</span> · <span class="fk">member_user_id</span></li>
+          <li>starts_at · ends_at</li>
+          <li>status · payment_method</li>
+          <li>credit_amount · cash_amount</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">$</span> Bounty</h4>
+        <ul>
+          <li><span class="pk">id</span> · <span class="fk">group_id</span></li>
+          <li>tier: general | specialist</li>
+          <li>credit_value · expires_at</li>
+          <li>status: open | claimed | submitted | completed</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">K</span> BountyClaim</h4>
+        <ul>
+          <li><span class="fk">bounty_id</span> · <span class="fk">user_id</span></li>
+          <li>claimed_at · submitted_at</li>
+          <li>submission_evidence</li>
+          <li><span class="fk">verified_by_admin_id</span></li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">¢</span> CreditTransaction</h4>
+        <ul>
+          <li><span class="pk">id</span> · <span class="fk">user_id</span> · <span class="fk">group_id</span></li>
+          <li>amount (signed)</li>
+          <li>source_type · source_id</li>
+          <li class="mono" style="color:var(--clay);font-style:italic">this table IS the ledger</li>
+        </ul>
+      </div>
+      <div class="entity">
+        <h4><span class="entity-icon">I</span> PractitionerInvite</h4>
+        <ul>
+          <li><span class="pk">id</span> · email · token</li>
+          <li><span class="fk">invited_by_admin_id</span></li>
+          <li>status: sent | accepted | expired</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="phasing">
+  <div class="wrap">
+    <span class="eyebrow">Build phasing</span>
+    <h2>What ships when.</h2>
+    <p class="section-lede">
+      Phase 1 alone is the deep end of the 3‑to‑6‑month range. If the launch date
+      tightens, Phase 1.5 items demote into Phase 2 before architecture starts.
+    </p>
+
+    <div class="phases">
+      <div class="phase p1">
+        <div class="phase-tag">Phase 1</div>
+        <h4>Ship‑blocking v1</h4>
+        <div class="when">Launch 2026</div>
+        <ul>
+          <li>Next.js + dedicated Supabase</li>
+          <li>Auth with 3 roles</li>
+          <li>Public practitioner directory</li>
+          <li>Public event feed</li>
+          <li>Practitioner invite + onboarding</li>
+          <li>Real‑time booking calendar</li>
+          <li>QR / link / code attendance</li>
+          <li>Verified anonymous reviews</li>
+          <li>Bounty board (general tier)</li>
+          <li>Credit ledger (public + private)</li>
+          <li>Redemption: full credits → sessions</li>
+        </ul>
+      </div>
+      <div class="phase p15">
+        <div class="phase-tag">Phase 1.5</div>
+        <h4>Aim for launch · drop without blocking</h4>
+        <div class="when">Same window</div>
+        <ul>
+          <li>Partial credits → event discounts</li>
+          <li>Specialist designation on profiles</li>
+          <li>Specialist‑tier bounties</li>
+          <li>Admin manual hour logging</li>
+          <li>Email notifications via Resend</li>
+        </ul>
+      </div>
+      <div class="phase p2">
+        <div class="phase-tag">Phase 2</div>
+        <h4>Post‑launch, on the roadmap</h4>
+        <div class="when">Months 7‑12</div>
+        <ul>
+          <li>Specialist vetting workflow</li>
+          <li>Specialist rate table</li>
+          <li>Stripe for cash events</li>
+          <li>Calendar exports (iCal · Google)</li>
+          <li>SMS notifications</li>
+          <li>Cancellation policy in code</li>
+          <li>Review flagging + moderation</li>
+        </ul>
+      </div>
+      <div class="phase p3">
+        <div class="phase-tag">Phase 3+</div>
+        <h4>Parked</h4>
+        <div class="when">When the time comes</div>
+        <ul>
+          <li>Cross‑Reciprocate activation (group #2)</li>
+          <li>3D / drone / experiential surfaces</li>
+          <li>Mobile app</li>
+          <li>Own domain migration</li>
+          <li>Sovereign Reciprocate AI workstream</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="open">
+  <div class="wrap">
+    <span class="eyebrow">Open items</span>
+    <h2>What blocks design and architecture.</h2>
+    <p class="section-lede">
+      Listed in roughly the order to resolve. <span class="pill clay">Blocking</span> means a
+      design or architecture step can't start without an answer. <span class="pill plum">Arch</span>
+      affects how the stack is shaped. <span class="pill sage">Policy</span> can be made into a
+      runtime config later.
+    </p>
+
+    <div class="qlist">
+      <div class="qitem">
+        <div class="qnum">01</div>
+        <div class="qbody">
+          <h4>Modality list</h4>
+          <p>Pending from Mystic Hearts. Practitioner profiles cannot be designed without it. Owner: the collective.</p>
+        </div>
+        <span class="qtag blocking">Blocking</span>
+      </div>
+      <div class="qitem">
+        <div class="qnum">02</div>
+        <div class="qbody">
+          <h4>Multi‑tenant Supabase vs. one per Reciprocate group</h4>
+          <p>Recommendation: per‑group Supabase for app data + HAND‑level credit ledger service. Validate before schema work.</p>
+        </div>
+        <span class="qtag arch">Arch</span>
+      </div>
+      <div class="qitem">
+        <div class="qnum">03</div>
+        <div class="qbody">
+          <h4>Event payment model for Phase 1</h4>
+          <p>Credits‑only and free events ship Phase 1; Stripe lands Phase 2. Confirm.</p>
+        </div>
+        <span class="qtag blocking">Blocking</span>
+      </div>
+      <div class="qitem">
+        <div class="qnum">04</div>
+        <div class="qbody">
+          <h4>Booking calendar specifics</h4>
+          <p>Single TZ vs. multi · cancellation window · session duration as per‑listing or per‑slot · no‑show policy.</p>
+        </div>
+        <span class="qtag blocking">Blocking</span>
+      </div>
+      <div class="qitem">
+        <div class="qnum">05</div>
+        <div class="qbody">
+          <h4>Specialist rate table vs. per‑task discretion</h4>
+          <p>Per‑task discretion in Phase 1 is the lower‑friction path. Formal rate table in Phase 2.</p>
+        </div>
+        <span class="qtag policy">Policy</span>
+      </div>
+      <div class="qitem">
+        <div class="qnum">06</div>
+        <div class="qbody">
+          <h4>Specialist vetting process</h4>
+          <p>Who nominates · who decides · what evidence · review cadence. Admin‑marked in Phase 1, formal process Phase 2.</p>
+        </div>
+        <span class="qtag policy">Policy</span>
+      </div>
+      <div class="qitem">
+        <div class="qnum">07</div>
+        <div class="qbody">
+          <h4>Bounty completion verification</h4>
+          <p>Per‑bounty checklist? Admin‑only, or peer co‑sign layer? Photo or text writeup or both?</p>
+        </div>
+        <span class="qtag policy">Policy</span>
+      </div>
+      <div class="qitem">
+        <div class="qnum">08</div>
+        <div class="qbody">
+          <h4>Review window defaults</h4>
+          <p>Default open duration (7 / 14 / 30 days?). Practitioner override in both directions or only to shorten?</p>
+        </div>
+        <span class="qtag policy">Policy</span>
+      </div>
+      <div class="qitem">
+        <div class="qnum">09</div>
+        <div class="qbody">
+          <h4>Anonymous review treatment</h4>
+          <p>member_id stored for audit. Confirm: the practitioner sees zero identifier, not even a hash. RLS at the DB.</p>
+        </div>
+        <span class="qtag arch">Arch</span>
+      </div>
+      <div class="qitem">
+        <div class="qnum">10</div>
+        <div class="qbody">
+          <h4>Bounty claim timeout</h4>
+          <p>If claimed but not submitted in N days, auto‑release back to open? What's N?</p>
+        </div>
+        <span class="qtag policy">Policy</span>
+      </div>
+      <div class="qitem">
+        <div class="qnum">11</div>
+        <div class="qbody">
+          <h4>Member cancellation of a practitioner booking</h4>
+          <p>Full refund window · partial refund tier · no‑refund window. Practitioner side too.</p>
+        </div>
+        <span class="qtag policy">Policy</span>
+      </div>
+    </div>
+
+    <div class="next-card">
+      <span class="eyebrow">Recommended next step</span>
+      <h2 style="margin-top:6px">Pick five answers and architecture can begin.</h2>
+      <p>Once the items below are answered, the next artifact is a thin technical
+      architecture doc plus the data model formalized into a Supabase schema. Design
+      can run in parallel with architecture once Phase 1 scope is locked.</p>
+      <ol>
+        <li>Confirm or compress the Phase 1 / Phase 1.5 / Phase 2 split.</li>
+        <li>Resolve per‑group vs. multi‑tenant Supabase (Architectural #1).</li>
+        <li>Pull the modality list from Mystic Hearts so practitioner profile design can begin.</li>
+        <li>Decide event payment model for Phase 1.</li>
+        <li>Decide booking calendar specifics.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      Internal HAND + Mystic Hearts working draft · last updated 2026‑05‑21
+    </div>
+    <div>
+      <em>M.A.S.S. bulletin · Mystic Airstream Studio · Sundays optional, sound check eternal</em>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- pan/zoom for each viewer ----------
+  const panZoomInstances = new Map();
+
+  function initPanZoom(svgEl, viewerEl) {
+    if (panZoomInstances.has(svgEl.id)) return panZoomInstances.get(svgEl.id);
+
+    const pz = svgPanZoom(svgEl, {
+      zoomEnabled: true,
+      controlIconsEnabled: false,
+      fit: true,
+      center: true,
+      minZoom: 0.5,
+      maxZoom: 8,
+      zoomScaleSensitivity: 0.3,
+      dblClickZoomEnabled: true,
+      mouseWheelZoomEnabled: true,
+      preventMouseEventsDefault: false,
+    });
+
+    panZoomInstances.set(svgEl.id, pz);
+
+    // ensure SVG only fades in once panzoom mounted
+    requestAnimationFrame(() => svgEl.classList.add('ready'));
+
+    // wire up controls inside the viewer
+    viewerEl.querySelectorAll('[data-zoom]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.dataset.zoom;
+        if (action === 'in') pz.zoomBy(1.3);
+        else if (action === 'out') pz.zoomBy(1 / 1.3);
+        else if (action === 'reset') { pz.resize(); pz.fit(); pz.center(); }
+      });
+    });
+
+    // reflow on resize
+    let rid;
+    window.addEventListener('resize', () => {
+      clearTimeout(rid);
+      rid = setTimeout(() => { pz.resize(); pz.fit(); pz.center(); }, 120);
+    });
+
+    return pz;
+  }
+
+  // ---------- flow tabs ----------
+  const tabs = document.querySelectorAll('.flow-tab');
+  const panels = document.querySelectorAll('.flow-panel');
+
+  function activateFlow(name) {
+    tabs.forEach(t => t.setAttribute('aria-selected', t.dataset.flow === name ? 'true' : 'false'));
+    panels.forEach(p => {
+      const active = p.dataset.flow === name;
+      p.classList.toggle('active', active);
+      if (active) {
+        const svg = p.querySelector('svg');
+        const viewer = p.querySelector('.viewer');
+        if (svg && viewer) {
+          // defer so the panel is laid out before we measure
+          requestAnimationFrame(() => {
+            const pz = initPanZoom(svg, viewer);
+            pz.resize(); pz.fit(); pz.center();
+          });
+        }
+      }
+    });
+  }
+
+  tabs.forEach(t => t.addEventListener('click', () => activateFlow(t.dataset.flow)));
+
+  // ---------- init on load ----------
+  window.addEventListener('load', () => {
+    // initial flow viewer
+    const initialSvg = document.querySelector('.flow-panel.active svg');
+    const initialViewer = document.querySelector('.flow-panel.active .viewer');
+    if (initialSvg && initialViewer) initPanZoom(initialSvg, initialViewer);
+
+    // mindmap
+    const mm = document.getElementById('mindmap-svg');
+    const mmWrap = document.querySelector('.mindmap-wrap');
+    if (mm && mmWrap) initPanZoom(mm, mmWrap);
+  });
+</script>
+
+</body>
+</html>
