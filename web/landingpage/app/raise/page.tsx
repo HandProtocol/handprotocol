@@ -49,55 +49,55 @@ const EVM_CHAINS = [
 
 const FUNDING_TIERS = [
   {
-    amount: '$7,777',
+    amount: '$22,222',
     name: 'Filing Floor',
     label: 'Legal existence plus a real beginning',
     items: [
-      'Federal 501(c)(3) filing fee & Texas state registration: $625',
-      'Legal counsel & bylaws (basic): $2,400',
-      'Domain, hosting & initial infrastructure: $1,500',
-      'Initial brand identity & foundation site: $1,500',
-      'Insurance setup: $500',
-      'Founding administrative cushion: $1,252'
+      'Federal 501(c)(3) filing fee & Texas state registration: $1,875',
+      'Legal counsel & bylaws: $7,200',
+      'Domain, hosting & initial infrastructure: $4,500',
+      'Initial brand identity & foundation site: $4,500',
+      'Insurance setup: $1,500',
+      'Founding administrative cushion: $2,647'
     ]
   },
   {
-    amount: '$22,222',
+    amount: '$66,666',
     name: 'Operating Minimum',
     label: 'Filing + websites + 6 months of work',
     featured: true,
     items: [
-      'Filing & nonprofit formation (rolls in floor tier): $7,777',
-      'Ongoing legal & compliance: $2,222',
-      '3 pilot Reciprocate websites & branding: $3,333',
-      'Core infrastructure, tools & insurance: $1,111',
-      '6-month part-time program lead: $7,779'
+      'Filing & nonprofit formation (rolls in floor tier): $22,222',
+      'Ongoing legal & compliance: $6,666',
+      '3 pilot Reciprocate websites & branding: $9,999',
+      'Core infrastructure, tools & insurance: $3,333',
+      '6-month part-time program lead: $24,446'
     ]
   },
   {
-    amount: '$77,777',
+    amount: '$222,222',
     name: 'First Goal',
     label: 'Full launch, 12 months of accompaniment',
     items: [
-      '501(c)(3) filing, compliance & legal: $7,777',
-      'Pilot Reciprocate websites & ongoing support: $11,111',
-      'Core infrastructure, tools & insurance: $5,555',
-      '12-month part-time program lead & ops: $33,333',
-      'Pilot program development & matching: $11,111',
-      'AI Reciprocate model — POC integration: $5,555',
-      'Contingency & opportunity fund: $3,335'
+      '501(c)(3) filing, compliance & legal: $22,222',
+      'Pilot Reciprocate websites & ongoing support: $33,333',
+      'Core infrastructure, tools & insurance: $11,111',
+      '12-month part-time program lead & ops: $99,999',
+      'Pilot program development & matching: $33,333',
+      'AI Reciprocate model — POC integration: $11,111',
+      'Contingency & opportunity fund: $11,113'
     ]
   }
 ]
 
 const CONTRIBUTION_TIERS = [
-  { amount: '$77', name: 'Seed Planter', perks: ['Our gratitude', 'Name on supporter wall'] },
-  { amount: '$111', name: 'Garden Tender', perks: ['Everything below', 'Quarterly impact updates'] },
-  { amount: '$222', name: 'Root Builder', perks: ['Everything below', 'Early access to healer directory'] },
-  { amount: '$333', name: 'Community Pillar', perks: ['Everything below', 'Virtual community gathering invite'] },
-  { amount: '$555', name: 'Foundation Stone', perks: ['Everything below', 'Recognized as founding supporter'], featured: true },
-  { amount: '$1,111', name: 'Architect', perks: ['Everything below', '1:1 conversation with founders'] },
-  { amount: '$2,222+', name: 'Keystone', perks: ['Everything below', 'Input on pilot program priorities'] }
+  { amount: '$222', name: 'Seed Planter', perks: ['Our gratitude', 'Name on supporter wall'] },
+  { amount: '$333', name: 'Garden Tender', perks: ['Everything below', 'Quarterly impact updates'] },
+  { amount: '$555', name: 'Root Builder', perks: ['Everything below', 'Early access to healer directory'] },
+  { amount: '$999', name: 'Community Pillar', perks: ['Everything below', 'Virtual community gathering invite'] },
+  { amount: '$1,111', name: 'Foundation Stone', perks: ['Everything below', 'Recognized as founding supporter'], featured: true },
+  { amount: '$3,333', name: 'Architect', perks: ['Everything below', '1:1 conversation with founders'] },
+  { amount: '$6,666+', name: 'Keystone', perks: ['Everything below', 'Input on pilot program priorities'] }
 ]
 
 const SERVE_DATA = {

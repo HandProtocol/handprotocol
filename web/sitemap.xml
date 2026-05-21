@@ -58,6 +58,13 @@
   </url>
 
   <url>
+    <loc>https://handprotocol.org/audio/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <lastmod>2026-05-19</lastmod>
+  </url>
+
+  <url>
     <loc>https://handprotocol.org/legacy/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

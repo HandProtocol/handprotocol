@@ -90,24 +90,26 @@ Drawn from [`../programs/strategic-plan-2026-2028.md`](../programs/strategic-pla
 
 ### Year 1 (2026): Minimum to maximum
 
+> **TODO (2026-05-19, tier 3x scaling):** Filing-raise contributions and Sovereign POC line items have been updated to the new tier ladders. The Total revenue, Total expenses, Net, and Reserves contribution rows below are *derived* from the old tier values and need to be recomputed against the new revenue projections. Recomputation involves budget judgment beyond a mechanical find/replace, so it is left for koH to revise.
+
 | Category | Min | Target | Max |
 |---|---|---|---|
 | **Revenue** | | | |
-| Filing-raise individual contributions | $22,222 | $77,777 | $111,111 |
-| Foundation grants (POC tier) | $0 | $5,555 | $33,333 |
+| Filing-raise individual contributions | $77,444 | $222,222 | $333,223 |
+| Foundation grants (POC tier) | $0 | $11,113 | $99,777 |
 | In-kind | $5,000 | $10,000 | $20,000 |
 | **Total revenue** | **$27,222** | **$93,332** | **$164,444** |
 | **Expenses** | | | |
 | Personnel (founder unpaid; possible part-time) | $0 | $25,000 | $45,000 |
 | Operations | $7,500 | $9,000 | $12,000 |
 | Program (Reciprocate engagement, Contributor support) | $5,000 | $10,000 | $15,000 |
-| Sovereign Reciprocates POC | $2,500 | $5,555 | $5,555 |
+| Sovereign Reciprocates POC | $2,500 | $11,113 | $11,113 |
 | Brand and communications | $3,000 | $5,000 | $7,500 |
 | Legal, accounting, professional | $5,000 | $7,500 | $10,000 |
 | Insurance | $1,500 | $2,500 | $3,500 |
 | Travel | $500 | $1,500 | $3,000 |
-| Reserves contribution (10% of unrestricted revenue) | $2,222 | $7,778 | $11,111 |
-| **Total expenses** | **$27,222** | **$73,833** | **$112,666** |
+| Reserves contribution (10% of unrestricted revenue) | $2,222 | $7,778 | $11,113 |
+| **Total expenses** | **$27,222** | **$73,833** | **$112,777** |
 | **Net** | $0 | $19,500 | $51,778 |
 
 Year 1 surplus funds Year 2 operations (especially during the wait for IRS Determination).

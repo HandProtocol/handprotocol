@@ -3,14 +3,14 @@
 **To:** Patrick J. McGovern Foundation · AI for Social Good
 **From:** HAND Protocol Foundation · Austin, Texas
 **Date:** May 2026
-**Ask:** $111,111 over 18 months
+**Ask:** $333,223 over 18 months
 **Contact:** hand@handprotocol.org
 
 ---
 
 ## In one paragraph
 
-HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, to operate a long-term, relational accompaniment model for solo healers, post-accelerator impact founders, and small grassroots collectives. We are writing because our hardest unsolved problem (*accompaniment does not parallelize the way project-based pro bono does*) is precisely the kind of structural bottleneck a small, **sovereign, open-source, Reciprocate-group-owned agent system** can address. We propose to build and openly evaluate exactly that infrastructure, with the source code, methodology, and evaluation framework published openly and with each Reciprocate group fully owning their own system. We are asking for **$111,111 over 18 months**.
+HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, to operate a long-term, relational accompaniment model for solo healers, post-accelerator impact founders, and small grassroots collectives. We are writing because our hardest unsolved problem (*accompaniment does not parallelize the way project-based pro bono does*) is precisely the kind of structural bottleneck a small, **sovereign, open-source, Reciprocate-group-owned agent system** can address. We propose to build and openly evaluate exactly that infrastructure, with the source code, methodology, and evaluation framework published openly and with each Reciprocate group fully owning their own system. We are asking for **$333,223 over 18 months**.
 
 ## What sovereign means here
 
@@ -66,15 +66,15 @@ If the sovereign agent systems work as designed, we will observe four measurable
 
 Full metrics, six evaluation dimensions, three decision gates, and the participatory review panel structure are detailed in `AI-EVAL-FRAMEWORK.md`.
 
-## What the $111,111 funds
+## What the $333,223 funds
 
 | Phase | Months | Allocation | What it produces |
 |---|---|---|---|
-| **POC** | 1–3 | $5,555 | Open-base model + RAG over discovery docs + one Reciprocate-group pilot, scaffolded as the prototype agent system. Closed-source APIs used for prototyping only. | Evaluation report; Gate 1 decision. |
-| **Pilot** | 4–15 | $33,333 | Open-base fine-tune, three sovereign Reciprocate-group agent systems with per-group adapters, self-hosted inference, quarterly participatory eval including sovereignty drills. | Three working sovereign systems, signed ownership records, eval framework v1.0, case studies. |
-| **Production & open-source release** | 16–18 | $72,223 | Per-group adapter productionization, the HAND coordination agent, full open-source release of methodology, eval framework, and agent scaffolding. Closure-simulation drill. Methodology paper. | A forkable stack adjacent orgs can adopt; transition to operating-budget sustainability. |
+| **POC** | 1–3 | $11,113 | Open-base model + RAG over discovery docs + one Reciprocate-group pilot, scaffolded as the prototype agent system. Closed-source APIs used for prototyping only. | Evaluation report; Gate 1 decision. |
+| **Pilot** | 4–15 | $99,777 | Open-base fine-tune, three sovereign Reciprocate-group agent systems with per-group adapters, self-hosted inference, quarterly participatory eval including sovereignty drills. | Three working sovereign systems, signed ownership records, eval framework v1.0, case studies. |
+| **Production & open-source release** | 16–18 | $222,333 | Per-group adapter productionization, the HAND coordination agent, full open-source release of methodology, eval framework, and agent scaffolding. Closure-simulation drill. Methodology paper. | A forkable stack adjacent orgs can adopt; transition to operating-budget sustainability. |
 
-The $5,555 POC tier is also folded into HAND's existing $77,777 filing-raise goal as a backup ignition path; the McGovern grant accelerates and de-risks the full arc.
+The $11,113 POC tier is also folded into HAND's existing $222,222 filing-raise goal as a backup ignition path; the McGovern grant accelerates and de-risks the full arc.
 
 ## What we are not asking you to fund
 

@@ -16,7 +16,7 @@ HAND's discovery work mapped the U.S. capacity-building ecosystem and found a sp
 
 HAND will build a **sovereign custom agent system** for each Reciprocate or Reciprocate group it accompanies, plus one cohort-wide coordination agent for HAND staff. The fine-tuned model is one component of each system; the system as a whole is the durable artifact of HAND's relationship with that group.
 
-- **Per-Reciprocate-group agent system.** A custom agent with: a small fine-tuned model on an open base (Llama 3.1 8B or Mistral 7B), a per-group LoRA adapter trained on the group's own work and voice, retrieval over the group's own document library, tool access scoped to the group's workflows (grant tracking, scheduling, social posting drafts, fiscal-sponsorship paperwork, donor stewardship), memory that persists across months, and a human-review gate before any external output ships.
+- **Per-Reciprocate-group agent system.** A custom agent with: a small fine-tuned model on a current best-in-class open base (the specific base rotates as the open-weight landscape moves; the commitment is to open weights and self-hostability, not to a vendor), a per-group LoRA adapter trained on the group's own work and voice, retrieval over the group's own document library, tool access scoped to the group's workflows (grant tracking, scheduling, social posting drafts, fiscal-sponsorship paperwork, donor stewardship), memory that persists across months, and a human-review gate before any external output ships.
 - **HAND coordination agent (cohort-wide).** A separate agent that runs on HAND's side only, supporting the program lead with intake-to-Contributor matching, cohort pattern surfacing, and check-in agenda drafting. Does **not** read individual Reciprocate-group data without that group's explicit, scoped consent.
 
 This directly attacks the hardest unsolved problem named in the landscape doc (*long-term accompaniment doesn't parallelize the way project-based pro bono does*) and operationalizes HAND's "we don't build and bounce" promise. The agent system is what stays. If HAND closes, the Reciprocate group keeps it. That is the meaning of *sovereign*.
@@ -25,7 +25,7 @@ This directly attacks the hardest unsolved problem named in the landscape doc (*
 
 These are design constraints, not aesthetics. Each one is testable.
 
-1. **Open base model.** Llama 3.1 8B or Mistral 7B. No proprietary API dependency for the core inference loop. Closed-source APIs (Claude, GPT) may be used for prototyping, burst capacity, or specialized sub-tasks, never as the only path between a Reciprocate group and their own system.
+1. **Open base model, bleeding edge and sovereign.** The inference loop runs on open-weight models HAND can self-host. The specific base rotates as the open-source frontier moves; capability is decisive when capability is decisive, and sovereignty is decisive always. Leading frontier APIs may be used for prototyping, burst capacity, or specialized sub-tasks, never as the only path between a Reciprocate group and their own system.
 2. **Reciprocate-group-owned adapter.** Each LoRA adapter belongs to the Reciprocate or Reciprocate group it was trained for. On departure, HAND closure, or request, the adapter weights, training data, eval logs, and a portable inference recipe are handed over.
 3. **Revocable training consent.** Every training datum is tagged with its source. A Reciprocate group can revoke at any time, and the affected adapter is retrained without that data or destroyed on a documented SLA (target: ≤ 30 days).
 4. **No cross-Reciprocate-group data extraction.** HAND does not aggregate Reciprocate-group data into a "platform model." Patterns learned working with one group stay with that group's adapter. Cross-pollination requires the contributing group's explicit, scoped, opt-in consent.
@@ -51,15 +51,15 @@ The fine-tune handles voice and domain fluency. The agent scaffolding handles wo
 
 ## Why a small open model + adapter, not a closed API
 
-A proof of concept ships on Claude or GPT in weeks, and we will start there. But sustainable, on-brand, sovereign, and grant-fundable means owning the inference stack:
+A proof of concept ships on a leading frontier API in weeks, and we will start there. But sustainable, on-brand, sovereign, and grant-fundable means owning the inference stack:
 
-- **Base model.** Llama 3.1 8B or Mistral 7B. Open weights. Self-hostable.
+- **Base model.** An open-weight model selected per task and per moment, with the right to switch as the landscape shifts. Self-hostable end-to-end. The political stance is bleeding edge and sovereign, both at once.
 - **Method.** LoRA / QLoRA adapters. A full HAND-tuned base trains for ~$200–$2,000 on rented A100s. Per-Reciprocate-group adapters cost ~$10–$50 each.
 - **Retrieval layer.** RAG over the group's own document library, plus the discovery docs and grant-landscape data when relevant.
 - **Agent scaffolding.** Tool-use, memory, and scheduled tasks built on open-source frameworks. No vendor lock-in.
 - **Evaluation.** A rotating Reciprocate + Contributor review panel. Participatory, on-brand for HAND, and the kind of governance trust-based funders now expect (Georgetown UP, *Participatory Grantmaking in Philanthropy*, 2024).
 
-All-in operating cost for a pilot cohort of three Reciprocate groups: ~$5,555–$22,222/year, including inference, training runs, agent infrastructure, and a part-time AI lead. The proof-of-concept tier is folded into the existing filing-raise goal; the pilot and production tiers are dedicated AI-funder asks parallel to the foundation campaign.
+All-in operating cost for a pilot cohort of three Reciprocate groups: ~$11,113–$77,444/year, including inference, training runs, agent infrastructure, and a part-time AI lead. The proof-of-concept tier is folded into the existing filing-raise goal; the pilot and production tiers are dedicated AI-funder asks parallel to the foundation campaign.
 
 ## Why now, and why funders will say yes
 
@@ -82,11 +82,11 @@ Three trends from the landscape doc converge here:
 
 | Tier | Scope | Deliverable |
 |------|-------|-------------|
-| **$5,555** | 3-month proof of concept. Claude API + RAG over discovery docs + one Reciprocate-group pilot, scaffolded as the prototype of the agent system. | Evaluation report, decision on full sovereign-stack build. |
-| **$33,333** | One-year pilot. Open-base fine-tune, three Reciprocate-group sovereign agent systems, self-hosted inference, quarterly participatory eval. | Three working systems, trained adapters handed to their groups, eval framework, case studies. |
-| **$111,111** | Production layer. Per-group adapters, the HAND coordination agent, full open-source release of the methodology and eval framework, methodology paper. | A forkable stack other accompaniment orgs can adopt; transition to operating-budget sustainability. |
+| **$11,113** | 3-month proof of concept. Claude API + RAG over discovery docs + one Reciprocate-group pilot, scaffolded as the prototype of the agent system. | Evaluation report, decision on full sovereign-stack build. |
+| **$99,777** | One-year pilot. Open-base fine-tune, three Reciprocate-group sovereign agent systems, self-hosted inference, quarterly participatory eval. | Three working systems, trained adapters handed to their groups, eval framework, case studies. |
+| **$333,223** | Production layer. Per-group adapters, the HAND coordination agent, full open-source release of the methodology and eval framework, methodology paper. | A forkable stack other accompaniment orgs can adopt; transition to operating-budget sustainability. |
 
-The $5,555 tier is folded into the existing $77,777 filing-raise goal and can ship immediately. The $33,333 and $111,111 tiers are dedicated AI-funder asks, parallel to the foundation campaign.
+The $11,113 tier is folded into the existing $222,222 filing-raise goal and can ship immediately. The $99,777 and $333,223 tiers are dedicated AI-funder asks, parallel to the foundation campaign.
 
 ## Honest open questions
 
@@ -99,7 +99,7 @@ The $5,555 tier is folded into the existing $77,777 filing-raise goal and can sh
 ## Reciprocate documents
 
 - **[AI-EVAL-FRAMEWORK.md](AI-EVAL-FRAMEWORK.md)**, how we measure whether the agent systems are earning their place. Six dimensions including sovereignty, three decision gates, public quarterly reporting.
-- **[funding/mcgovern-letter.md](funding/mcgovern-letter.md)**, draft letter of inquiry to the Patrick J. McGovern Foundation for the $111,111 production-layer ask.
+- **[funding/mcgovern-letter.md](funding/mcgovern-letter.md)**, draft letter of inquiry to the Patrick J. McGovern Foundation for the $333,223 production-layer ask.
 
 ---
 

@@ -38,7 +38,7 @@ a. **Incorporate.** File Texas Form 202; conduct organizational meeting; adopt B
 
 b. **File Form 1023.** Long form, with full narrative drawing from the discovery research and this plan.
 
-c. **Close the filing raise.** $77,777 minimum to fund incorporation, initial operations, and the pilot launch.
+c. **Close the filing raise.** $222,222 minimum to fund incorporation, initial operations, and the pilot launch.
 
 d. **Recruit the founding Board.** Three directors at incorporation; expand to five by year-end.
 
@@ -68,7 +68,7 @@ i. **Establish governance discipline.** Quarterly board meetings, monthly financ
 | Personnel (founder unpaid; first part-time hire if budget allows) | $0–$45,000 |
 | Operations (insurance, software, accounting, banking) | $7,500–$12,000 |
 | **Program: resource pool and Reciprocate engagement** (Contributor recruiting, matching, three-flow operations, sustained accompaniment, Contributor stipends where warranted) | **$10,000–$30,000** |
-| Sovereign Reciprocates infrastructure (optional POC, capped at ≤ 20% of program budget) | $2,500–$5,555 |
+| Sovereign Reciprocates infrastructure (optional POC, capped at ≤ 20% of program budget) | $2,500–$11,113 |
 | Brand and communications | $3,000–$7,500 |
 | Legal, accounting, professional services | $5,000–$10,000 |
 | Reserves contribution | 5–10% of unrestricted revenue |
@@ -104,7 +104,7 @@ d. **Expand Reciprocate cohort to 5-7 groups.**
 
 e. **Deploy sovereign agent systems for Reciprocate groups who opt in.** Open-base model with per-group LoRA adapters. Self-hostable. Sovereignty drills run. Reciprocate groups who decline AI augmentation continue with the same accompaniment quality.
 
-f. **Submit Patrick J. McGovern full application.** $33,333 pilot tier or $111,111 production tier.
+f. **Submit Patrick J. McGovern full application.** $99,777 pilot tier or $333,223 production tier.
 
 g. **Add 2-3 directors** based on the Composition Matrix gap analysis. Total board: 5-7.
 

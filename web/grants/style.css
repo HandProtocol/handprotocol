@@ -1,0 +1,353 @@
+/* ========================================
+   HAND Protocol — Grants tracker
+   Internal page styles. Inherits the discovery
+   stylesheet for base layout, typography, and tokens.
+   ======================================== */
+
+/* Subtle internal-page badge in the top nav */
+.grants-lock-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--radius-full);
+}
+.grants-lock-pill svg { opacity: 0.7; }
+
+/* Section titles in the listings */
+.grants-section-title {
+  margin-top: 0.25rem;
+}
+.grants-section-lede {
+  color: var(--color-text-secondary);
+  max-width: 60ch;
+  margin-bottom: 2rem;
+}
+
+/* Grants list */
+.grants-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Grant card */
+.grant-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  display: grid;
+  gap: 1.5rem;
+  box-shadow: 0 1px 0 var(--color-card-shadow);
+  transition: box-shadow var(--transition-base), border-color var(--transition-base);
+}
+.grant-card:target {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+@media (min-width: 720px) {
+  .grant-card { padding: 2rem 2.25rem; }
+}
+
+/* Compact variant — for batch-registered grants without a full body section.
+   Header + facts + footer, no prose. Tighter padding, lighter shadow. */
+.grant-card--compact {
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+}
+@media (min-width: 720px) {
+  .grant-card--compact { padding: 1.5rem 1.75rem; }
+}
+.grant-card--compact .grant-card__title {
+  font-size: clamp(1.125rem, 1.6vw, 1.25rem);
+}
+.grant-card--compact .grant-card__facts {
+  padding: 0.75rem 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.grant-card__head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.grant-card__head-text {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.grant-card__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: max-content;
+}
+.grant-card__chip--discovery {
+  background: var(--color-bg-alt);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+.grant-card__chip--drafting {
+  background: var(--color-accent-light);
+  color: var(--color-accent-hover);
+}
+.grant-card__chip--submitted {
+  background: var(--color-teal-light);
+  color: var(--color-teal-dark);
+}
+.grant-card__chip--awarded {
+  background: #DCFCE7;
+  color: #15803D;
+}
+.grant-card__chip--declined {
+  background: var(--color-warning-tint);
+  color: var(--color-warning-dark);
+}
+.grant-card__chip--withdrawn {
+  background: var(--color-rose-light);
+  color: var(--color-rose);
+}
+
+.grant-card__title {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+.grant-card__sub {
+  color: var(--color-text-secondary);
+  margin: 0;
+  max-width: 60ch;
+}
+
+.grant-card__source {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.grant-card__source:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+.grant-card__source svg { opacity: 0.7; }
+
+/* Facts grid */
+.grant-card__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-light);
+  margin: 0;
+}
+.grant-card__facts > div {
+  display: grid;
+  gap: 0.15rem;
+}
+.grant-card__facts dt {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+.grant-card__facts dd {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Body */
+.grant-card__body {
+  font-size: 0.95rem;
+}
+.grant-card__body .grant-card__h4 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 1.5rem 0 0.5rem;
+}
+.grant-card__body .grant-card__h4:first-child { margin-top: 0; }
+.grant-card__body p,
+.grant-card__body ul {
+  margin: 0 0 0.75rem;
+}
+.grant-card__body ul {
+  padding-left: 1.25rem;
+}
+.grant-card__body li { margin-bottom: 0.5rem; }
+.grant-card__body code {
+  background: var(--color-bg-alt);
+  padding: 0.1rem 0.35rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85em;
+}
+
+/* Timeline */
+.grant-card__foot {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border-light);
+}
+
+.grant-card__timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  position: relative;
+}
+.grant-card__timeline::before {
+  content: '';
+  position: absolute;
+  top: 0.5rem;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: var(--color-border);
+  z-index: 0;
+}
+
+.grant-card__tl-step {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  position: relative;
+  z-index: 1;
+}
+.grant-card__tl-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg);
+  border: 2px solid var(--color-border-strong);
+}
+.grant-card__tl-step--done .grant-card__tl-dot {
+  background: var(--color-text);
+  border-color: var(--color-text);
+}
+.grant-card__tl-step--active .grant-card__tl-dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-glow);
+}
+.grant-card__tl-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+.grant-card__tl-step--done .grant-card__tl-label,
+.grant-card__tl-step--active .grant-card__tl-label {
+  color: var(--color-text);
+}
+.grant-card__tl-date {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.grant-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.85rem;
+}
+.grant-card__link {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+.grant-card__link:hover { color: var(--color-accent-hover); text-decoration: underline; }
+.grant-card__link-sep { color: var(--color-text-muted); }
+
+/* Empty state */
+.grants-empty {
+  background: var(--color-bg-alt);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+.grants-empty code {
+  font-style: normal;
+  background: var(--color-bg);
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85em;
+}
+
+/* Small alternating section background */
+.section--alt {
+  background: var(--color-bg-alt);
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--color-border);
+  padding: 2rem 0;
+  margin-top: 4rem;
+  background: var(--color-bg);
+}
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+.footer__brand { display: inline-flex; gap: 0.5rem; align-items: center; }
+.footer__sep { opacity: 0.5; }
+.footer__links { display: inline-flex; gap: 1.25rem; }
+.footer__links a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+.footer__links a:hover { color: var(--color-accent); }

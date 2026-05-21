@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grants Tracker · HAND Protocol</title>
+  <meta name="description" content="Private grants tracker for HAND Protocol Foundation: discovery, applications in flight, decisions, and follow-up.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../discovery/style.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="mask-icon" href="../assets/favicon.svg" color="#D97706">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body class="grants-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="../foundation-campaign/index.html" class="nav__logo" aria-label="HAND Protocol home">
+        <svg class="nav__logo-icon" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M16 8v5m0 6v5m-5-13v10a3 3 0 003 3h4a3 3 0 003-3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="16" cy="11" r="2" fill="currentColor"/>
+        </svg>
+        <span>HAND Protocol</span>
+      </a>
+      <div class="nav__crumbs">
+        <a href="../foundation-campaign/index.html">Foundation</a>
+        <span class="nav__crumb-sep">/</span>
+        <span class="nav__crumb-current" aria-current="page">Grants</span>
+      </div>
+      <div class="nav__actions">
+        <span class="grants-lock-pill" aria-label="Authenticated session">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
+          Internal
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Hero -->
+    <header class="doc-header">
+      <div class="doc-header__bg"></div>
+      <div class="container container--doc doc-header__inner">
+        <div class="doc-header__eyebrow">
+          <span class="doc-header__eyebrow-dot"></span>
+          Internal · Grants tracker
+        </div>
+        <h1 class="doc-header__title">
+          The grants we're chasing,<br>
+          <span class="u-accent">and what they're funding.</span>
+        </h1>
+        <p class="doc-header__lede">
+          Working log of grant discovery, applications in flight, and post-decision follow-up.
+          Every entry links to a markdown file in <code>funding/grants/</code> with the full
+          application draft, fit assessment, and notes. Not public. Don't share the URL.
+        </p>
+        <div class="doc-header__meta">
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Open</span>
+            <span class="doc-header__meta-value" data-stat="open">5</span>
+          </div>
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Submitted</span>
+            <span class="doc-header__meta-value" data-stat="submitted">1</span>
+          </div>
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Awarded</span>
+            <span class="doc-header__meta-value" data-stat="awarded">0</span>
+          </div>
+          <div class="doc-header__meta-item">
+            <span class="doc-header__meta-label">Last updated</span>
+            <span class="doc-header__meta-value">2026-05-18</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- How this works -->
+    <section class="section">
+      <div class="container container--doc prose">
+        <span class="section__eyebrow">How this tracker works</span>
+        <h2>Three states, one source of truth.</h2>
+        <p>
+          A grant moves through four states: <strong>discovery</strong> (we found it,
+          haven't decided yet), <strong>drafting</strong> (we're writing the application),
+          <strong>submitted</strong> (in their queue), and <strong>decided</strong>
+          (awarded, declined, or withdrawn). The HTML below is a rendered view; the
+          authoritative record lives in <code>funding/grants/&lt;slug&gt;.md</code>.
+        </p>
+        <p>
+          The <code>/grants</code> skill in Claude Code handles all four phases:
+          register a new grant from a URL, run a fit assessment, draft application
+          answers from HAND's mission and governance docs, and log follow-up.
+          See <code>~/.claude/skills/grants/SKILL.md</code>.
+        </p>
+      </div>
+    </section>
+
+    <!-- In review (currently holds Trinity Builders) -->
+    <section class="section section--alt">
+      <div class="container container--wide">
+        <span class="section__eyebrow">Status · Submitted</span>
+        <h2 class="grants-section-title">In review</h2>
+        <p class="prose grants-section-lede">
+          Applications we've submitted and are waiting on a decision for.
+        </p>
+
+        <ul class="grants-list" role="list">
+
+          <!-- Trinity Builders Program -->
+          <li class="grant-card" id="trinity-builders">
+            <header class="grant-card__head">
+              <div class="grant-card__head-text">
+                <span class="grant-card__chip grant-card__chip--submitted">Submitted · In review</span>
+                <h3 class="grant-card__title">Arcee AI · Trinity Builders Program</h3>
+                <p class="grant-card__sub">
+                  Community credit grant — free inference on the Arcee API for builders,
+                  researchers, and open-source projects working with Trinity models.
+                </p>
+              </div>
+              <a class="grant-card__source" href="https://www.arcee.ai/blog/introducing-the-trinity-builders-program" target="_blank" rel="noopener">
+                arcee.ai
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+              </a>
+            </header>
+
+            <dl class="grant-card__facts">
+              <div><dt>Funder</dt><dd>Arcee AI</dd></div>
+              <div><dt>Announced</dt><dd>2026-04-14</dd></div>
+              <div><dt>Deadline</dt><dd>Rolling review</dd></div>
+              <div><dt>Award type</dt><dd>API credits (Trinity family)</dd></div>
+              <div><dt>Award size</dt><dd>Tiered: &lt;50M → &gt;1B tokens (90-day validity)</dd></div>
+              <div><dt>Match required</dt><dd>None</dd></div>
+              <div><dt>Reporting</dt><dd>Feedback appreciated, not required</dd></div>
+              <div><dt>HAND fit</dt><dd>Strong — Sovereign Reciprocates workstream</dd></div>
+            </dl>
+
+            <div class="grant-card__body prose">
+              <h4 class="grant-card__h4">Why this is a fit</h4>
+              <p>
+                HAND's Sovereign Reciprocates workstream commits to building custom
+                open-source agent systems for each Reciprocate group, owned by the
+                group itself. Arcee's Trinity-Large-Thinking is Apache-2.0 weights,
+                post-trained with agentic RL and extended chain-of-thought —
+                exactly the agent-loop substrate we'd otherwise have to fine-tune
+                ourselves. Credits move us from one-off prototypes to evaluable
+                multi-turn runs without paying retail inference.
+              </p>
+
+              <h4 class="grant-card__h4">What we'd build with the credits</h4>
+              <ul>
+                <li>
+                  <strong>Sovereign Reciprocate agent prototypes.</strong>
+                  Three pilot Reciprocate groups (healers, impact-driven business,
+                  grassroots collective) each get a custom Trinity-Large-Thinking
+                  agent harness covering intake, scheduling, ledger entries, and
+                  bounty matchmaking. Open-sourced as a reference template.
+                </li>
+                <li>
+                  <strong>Eval harness for "sovereignty-aware" agents.</strong>
+                  We're already drafting the AI-EVAL framework
+                  (<code>AI-EVAL-FRAMEWORK.md</code>); credits let us run the eval
+                  against Trinity-Large-Thinking as the reference open-weights baseline.
+                </li>
+                <li>
+                  <strong>Agentic onboarding flow for Mystic Hearts.</strong>
+                  Mystic Hearts is the first live Reciprocate-group product
+                  (Next.js + Supabase). Trinity drives the practitioner-intake
+                  agent, which handles a multi-turn conversation, populates the
+                  ledger, and flags reviewer cases.
+                </li>
+              </ul>
+
+              <h4 class="grant-card__h4">Token ask</h4>
+              <p>
+                <strong>200M–500M tokens.</strong> Three concurrent agent
+                workstreams, multi-turn (avg 8 turns × ~6K context), plus eval
+                runs and replay testing. The bracket fits without overclaiming.
+                We'll request 500M and accept a partial award gracefully.
+              </p>
+
+              <h4 class="grant-card__h4">Resolved before submission</h4>
+              <ul>
+                <li><strong>Framing:</strong> lead with Sovereign Reciprocates; Mystic Hearts is named as the first concrete instance.</li>
+                <li><strong>Applicant:</strong> Russell Herod (HAND Protocol Foundation), aka koH.</li>
+                <li><strong>Eval publication:</strong> aggregate results and the harness, yes — individual practitioner sessions stay private unless that practitioner opts in.</li>
+              </ul>
+            </div>
+
+            <footer class="grant-card__foot">
+              <div class="grant-card__timeline">
+                <div class="grant-card__tl-step grant-card__tl-step--done">
+                  <span class="grant-card__tl-dot"></span>
+                  <span class="grant-card__tl-label">Discovered</span>
+                  <span class="grant-card__tl-date">2026-05-17</span>
+                </div>
+                <div class="grant-card__tl-step grant-card__tl-step--done">
+                  <span class="grant-card__tl-dot"></span>
+                  <span class="grant-card__tl-label">Drafted</span>
+                  <span class="grant-card__tl-date">2026-05-17</span>
+                </div>
+                <div class="grant-card__tl-step grant-card__tl-step--done">
+                  <span class="grant-card__tl-dot"></span>
+                  <span class="grant-card__tl-label">Submitted</span>
+                  <span class="grant-card__tl-date">2026-05-17</span>
+                </div>
+                <div class="grant-card__tl-step grant-card__tl-step--active">
+                  <span class="grant-card__tl-dot"></span>
+                  <span class="grant-card__tl-label">Decision</span>
+                  <span class="grant-card__tl-date">awaiting</span>
+                </div>
+              </div>
+              <div class="grant-card__links">
+                <a class="grant-card__link" href="https://www.arcee.ai/blog/introducing-the-trinity-builders-program" target="_blank" rel="noopener">
+                  Read the announcement
+                </a>
+                <span class="grant-card__link-sep">·</span>
+                <a class="grant-card__link" href="https://github.com/HandProtocol/handprotocol/blob/main/funding/grants/trinity-builders.md" target="_blank" rel="noopener">
+                  Full draft (GitHub)
+                </a>
+              </div>
+            </footer>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- Active / drafting (empty state) -->
+    <section class="section">
+      <div class="container container--wide">
+        <span class="section__eyebrow">Status · Open</span>
+        <h2 class="grants-section-title">Active applications</h2>
+        <p class="prose grants-section-lede">
+          Grants we've decided to pursue and are currently writing or about to submit.
+        </p>
+        <ul class="grants-list" role="list">
+
+          <li class="grant-card grant-card--compact" id="hcb-fiscal-sponsorship">
+            <header class="grant-card__head">
+              <div class="grant-card__head-text">
+                <span class="grant-card__chip grant-card__chip--drafting">Drafting · Fiscal sponsor</span>
+                <h3 class="grant-card__title">Hack Club Bank · Fiscal Sponsorship</h3>
+                <p class="grant-card__sub">501(c)(3) umbrella with a flat 7% revenue fee. Adult-led caveat — apply anyway; intro call is the real screen.</p>
+              </div>
+              <a class="grant-card__source" href="https://hackclub.com/fiscal-sponsorship/" target="_blank" rel="noopener">
+                hackclub.com
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+              </a>
+            </header>
+            <dl class="grant-card__facts">
+              <div><dt>Type</dt><dd>Fiscal sponsorship</dd></div>
+              <div><dt>Fee</dt><dd>7% flat of revenue</dd></div>
+              <div><dt>Onboarding</dt><dd>~1 week (intro call)</dd></div>
+              <div><dt>Fit</dt><dd>3/5 — culture yes, demographic no</dd></div>
+            </dl>
+            <footer class="grant-card__foot">
+              <div class="grant-card__links">
+                <a class="grant-card__link" href="https://hcb.hackclub.com/applications/new" target="_blank" rel="noopener">Application form</a>
+                <span class="grant-card__link-sep">·</span>
+                <a class="grant-card__link" href="https://github.com/HandProtocol/handprotocol/blob/main/funding/grants/hcb-fiscal-sponsorship.md" target="_blank" rel="noopener">Draft</a>
+              </div>
+            </footer>
+          </li>
+
+          <li class="grant-card grant-card--compact" id="aspiration-fiscal-sponsorship">
+            <header class="grant-card__head">
+              <div class="grant-card__head-text">
+                <span class="grant-card__chip grant-card__chip--drafting">Drafting · Fiscal sponsor</span>
+                <h3 class="grant-card__title">Aspiration · Fiscal Sponsorship</h3>
+                <p class="grant-card__sub">Highest mission alignment. Full back-office. $150 application fee + 30-min interview. Primary fiscal-sponsor track.</p>
+              </div>
+              <a class="grant-card__source" href="https://aspirationtech.org/services/fiscalsponsorship" target="_blank" rel="noopener">
+                aspirationtech.org
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+              </a>
+            </header>
+            <dl class="grant-card__facts">
+              <div><dt>Type</dt><dd>Fiscal sponsorship + back-office</dd></div>
+              <div><dt>Fee</dt><dd>Sliding scale (8–15% typical)</dd></div>
+              <div><dt>App fee</dt><dd>$150 non-refundable</dd></div>
+              <div><dt>Fit</dt><dd>5/5 — mission language match</dd></div>
+            </dl>
+            <footer class="grant-card__foot">
+              <div class="grant-card__links">
+                <a class="grant-card__link" href="https://aspirationtech.org/services/fiscalsponsorship" target="_blank" rel="noopener">Program page</a>
+                <span class="grant-card__link-sep">·</span>
+                <a class="grant-card__link" href="https://github.com/HandProtocol/handprotocol/blob/main/funding/grants/aspiration-fiscal-sponsorship.md" target="_blank" rel="noopener">Draft</a>
+              </div>
+            </footer>
+          </li>
+
+          <li class="grant-card grant-card--compact" id="vercel-oss-program">
+            <header class="grant-card__head">
+              <div class="grant-card__head-text">
+                <span class="grant-card__chip grant-card__chip--drafting">Drafting · Infra credits</span>
+                <h3 class="grant-card__title">Vercel · Open Source Program</h3>
+                <p class="grant-card__sub">$3,600 in Vercel credits over 12 months + OSS Starter Pack. Frame around SR template, not Mystic Hearts marketplace.</p>
+              </div>
+              <a class="grant-card__source" href="https://vercel.com/open-source-program" target="_blank" rel="noopener">
+                vercel.com
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+              </a>
+            </header>
+            <dl class="grant-card__facts">
+              <div><dt>Award</dt><dd>$3,600 + Starter Pack</dd></div>
+              <div><dt>Cycle</dt><dd>Quarterly cohort</dd></div>
+              <div><dt>Status</dt><dd>Reopens May 2026 — watch</dd></div>
+              <div><dt>Fit</dt><dd>4/5 — marketplace clause to navigate</dd></div>
+            </dl>
+            <footer class="grant-card__foot">
+              <div class="grant-card__links">
+                <a class="grant-card__link" href="https://vercel.com/open-source-program" target="_blank" rel="noopener">Program page</a>
+                <span class="grant-card__link-sep">·</span>
+                <a class="grant-card__link" href="https://github.com/HandProtocol/handprotocol/blob/main/funding/grants/vercel-oss-program.md" target="_blank" rel="noopener">Draft</a>
+              </div>
+            </footer>
+          </li>
+
+          <li class="grant-card grant-card--compact" id="cloudflare-startups">
+            <header class="grant-card__head">
+              <div class="grant-card__head-text">
+                <span class="grant-card__chip grant-card__chip--drafting">Drafting · Infra credits</span>
+                <h3 class="grant-card__title">Cloudflare · Startup Program (Tier 1)</h3>
+                <p class="grant-card__sub">$10K in Cloudflare credits for bootstrapped projects. Workers + R2 + Pages free up Vercel/Supabase headroom.</p>
+              </div>
+              <a class="grant-card__source" href="https://www.cloudflare.com/startups/" target="_blank" rel="noopener">
+                cloudflare.com
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+              </a>
+            </header>
+            <dl class="grant-card__facts">
+              <div><dt>Award</dt><dd>$10,000 (Tier 1)</dd></div>
+              <div><dt>Eligibility</dt><dd>Bootstrapped, ≤5 yrs, business email</dd></div>
+              <div><dt>Decision</dt><dd>Days</dd></div>
+              <div><dt>Fit</dt><dd>4/5</dd></div>
+            </dl>
+            <footer class="grant-card__foot">
+              <div class="grant-card__links">
+                <a class="grant-card__link" href="https://www.cloudflare.com/startups/" target="_blank" rel="noopener">Program page</a>
+                <span class="grant-card__link-sep">·</span>
+                <a class="grant-card__link" href="https://github.com/HandProtocol/handprotocol/blob/main/funding/grants/cloudflare-startups.md" target="_blank" rel="noopener">Draft</a>
+              </div>
+            </footer>
+          </li>
+
+          <li class="grant-card grant-card--compact" id="netlify-oss-plan">
+            <header class="grant-card__head">
+              <div class="grant-card__head-text">
+                <span class="grant-card__chip grant-card__chip--drafting">Drafting · Infra credits</span>
+                <h3 class="grant-card__title">Netlify · Open Source Plan</h3>
+                <p class="grant-card__sub">Lowest-effort win — we already deploy here. Free production deploys, monthly credits, unlimited seats. Ticket submission.</p>
+              </div>
+              <a class="grant-card__source" href="https://www.netlify.com/legal/open-source-policy/" target="_blank" rel="noopener">
+                netlify.com
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+              </a>
+            </header>
+            <dl class="grant-card__facts">
+              <div><dt>Award</dt><dd>OSS Plan tier</dd></div>
+              <div><dt>Cost</dt><dd>Free (replaces paid plan)</dd></div>
+              <div><dt>Decision</dt><dd>Days (support ticket)</dd></div>
+              <div><dt>Fit</dt><dd>5/5</dd></div>
+            </dl>
+            <footer class="grant-card__foot">
+              <div class="grant-card__links">
+                <a class="grant-card__link" href="https://www.netlify.com/legal/open-source-policy/" target="_blank" rel="noopener">OSS policy</a>
+                <span class="grant-card__link-sep">·</span>
+                <a class="grant-card__link" href="https://github.com/HandProtocol/handprotocol/blob/main/funding/grants/netlify-oss-plan.md" target="_blank" rel="noopener">Draft</a>
+              </div>
+            </footer>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- Decisions (empty state) -->
+    <section class="section section--alt">
+      <div class="container container--wide">
+        <span class="section__eyebrow">Status · Decided</span>
+        <h2 class="grants-section-title">Awarded, declined, or withdrawn</h2>
+        <p class="prose grants-section-lede">
+          Final outcomes, with a short retrospective on each. Even the ones that didn't land.
+        </p>
+        <div class="grants-empty">
+          <p>No decisions yet.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Discovery backlog -->
+    <section class="section">
+      <div class="container container--wide">
+        <span class="section__eyebrow">Status · Discovery</span>
+        <h2 class="grants-section-title">Backlog</h2>
+        <p class="prose grants-section-lede">
+          Grants we've found but haven't decided to pursue yet. Filed for later review.
+        </p>
+        <div class="grants-empty">
+          <p>Add candidates here as they show up. The <code>/grants</code> skill can do the initial fit assessment.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process footer -->
+    <section class="section">
+      <div class="container container--doc prose">
+        <span class="section__eyebrow">Operating principles</span>
+        <h2>How we decide whether to apply.</h2>
+        <ol>
+          <li><strong>Mission alignment first.</strong> Does the funder's stated intent overlap with HAND's resource-pool model or the Sovereign Reciprocates workstream? If we'd have to bend our description to fit, we pass.</li>
+          <li><strong>Cost of application vs. expected value.</strong> Small rolling-review credit grants are worth a 2-hour write-up. Federal grants requiring 40 hours of narrative and matching funds we don't have are not, yet.</li>
+          <li><strong>Strings attached.</strong> Reporting cadence, IP claims, exclusivity clauses, naming requirements. If they conflict with our open-source defaults or the Sovereign Reciprocates sovereignty principles, we decline regardless of dollar size.</li>
+          <li><strong>Honest scope.</strong> We ask for what we'll actually use, in the bracket below "obviously too much." Partial awards are a feature, not a failure.</li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span>HAND Protocol Foundation</span>
+        <span class="footer__sep">·</span>
+        <span>Internal grants tracker</span>
+      </div>
+      <div class="footer__links">
+        <a href="../foundation-campaign/index.html">Foundation</a>
+        <a href="../discovery/">Discovery</a>
+        <a href="../governance/">Governance</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

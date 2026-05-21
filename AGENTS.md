@@ -82,7 +82,7 @@ These are bans, not preferences. The impeccable audit already removed all violat
 - **Contributors**, skilled professionals and tradespeople who give or exchange time into the resource pool.
 - **The pool** / **resource pool**, the curated skill-exchange marketplace HAND operates.
 - **Donate / Exchange / Receive**, the three flows of the pool.
-- **501(c)(3) filing raise**, the current fundraising effort ($77,777 first goal, $22,222 minimum).
+- **501(c)(3) filing raise**, the current fundraising effort ($222,222 first goal, $77,444 minimum).
 - **Sovereign Reciprocates**, HAND's AI workstream: custom open-source agent systems built per Reciprocate or Reciprocate group, owned by the group, designed to be portable, self-hostable, and the durable artifact of HAND's accompaniment. See `AI-RECIPROCATES.md`, `AI-EVAL-FRAMEWORK.md`. Eight sovereignty principles govern the design.
 
 Avoid: "clients" (paid-services language), "beneficiaries" (cold, hierarchical), "grantees" (passive, reserve for describing peer orgs' grantmaking), "users" (too SaaS), "stakeholders" (corporate).

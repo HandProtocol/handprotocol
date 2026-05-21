@@ -40,3 +40,13 @@ cache/
 # Local Netlify folder
 .netlify
 .gstack/
+
+# Personal property notes (kept local, not org-repo material)
+mosquitos/
+
+# NotebookLM CLI state (local artifacts, references personal notebook IDs)
+funding/updates/.history.jsonl
+funding/updates/.notebooks.json
+
+# Audio renders (too large for git history; keep in cloud storage / NotebookLM)
+funding/updates/*.m4a

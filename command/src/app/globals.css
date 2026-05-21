@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+/*
+  HUD-dark token layer for the HAND Command Center.
+  Tokens ported verbatim from web/3d-test/loading.html so the loader and
+  the dashboard share a visual language. Dark theme only in v1.
+*/
+
+:root {
+  /* Surface */
+  --bg: #07090f;
+  --bg-2: #0c1220;
+
+  /* Ink */
+  --ink: #f5efe1;
+  --ink-dim: #8e8a7e;
+  --ink-faint: #4a4940;
+
+  /* Amber accent family */
+  --amber: #d97706;
+  --amber-soft: #ffba49;
+  --amber-glow: rgba(217, 119, 6, 0.55);
+
+  /* Chrome */
+  --grid: rgba(217, 119, 6, 0.08);
+  --hud: rgba(245, 239, 225, 0.18);
+  --hud-strong: rgba(245, 239, 225, 0.55);
+
+  /* State colors */
+  --danger: #dc2626;
+  --success: #ffba49;
+
+  /* Status badges (port of public-side tracker classes to dark) */
+  --status-discovery: #6b8eff;
+  --status-drafting: #ffba49;
+  --status-submitted: #d97706;
+  --status-awarded: #4ade80;
+  --status-declined: #8e8a7e;
+  --status-withdrawn: #4a4940;
+}
+
+/* Expose tokens to Tailwind 4 utilities. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-hud: var(--hud);
+  --color-hud-strong: var(--hud-strong);
+  --color-danger: var(--danger);
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Background atmosphere shared by the loader and dashboard chrome. */
+.hud-surface {
+  position: relative;
+  background: var(--bg);
+  color: var(--ink);
+  isolation: isolate;
+}
+
+.hud-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200px 800px at 50% 50%, rgba(217, 119, 6, 0.1), transparent 60%),
+    radial-gradient(circle at 50% 50%, var(--bg-2) 0%, var(--bg) 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hud-surface::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Corner brackets at 18px inset on every full-screen view. */
+.hud-bracket {
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--hud);
+  pointer-events: none;
+  z-index: 5;
+}
+.hud-bracket-tl {
+  top: 18px;
+  left: 18px;
+  border-right: 0;
+  border-bottom: 0;
+}
+.hud-bracket-tr {
+  top: 18px;
+  right: 18px;
+  border-left: 0;
+  border-bottom: 0;
+}
+.hud-bracket-bl {
+  bottom: 18px;
+  left: 18px;
+  border-right: 0;
+  border-top: 0;
+}
+.hud-bracket-br {
+  bottom: 18px;
+  right: 18px;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* JetBrains Mono eyebrow used for status labels, IDs, timestamps. */
+.eyebrow {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.eyebrow .amber {
+  color: var(--amber-soft);
+}
+
+/* Panel base for cards and HUD modules. */
+.panel {
+  background: color-mix(in oklab, var(--bg-2) 92%, transparent);
+  border: 1px solid rgba(245, 239, 225, 0.07);
+  border-radius: 10px;
+}
+
+/* Amber action ring used for primary buttons and focus states. */
+.ring-amber:focus-visible {
+  outline: 1px solid var(--amber-soft);
+  outline-offset: 2px;
+  box-shadow: 0 0 12px var(--amber-glow);
+}

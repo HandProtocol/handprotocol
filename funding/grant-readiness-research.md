@@ -108,7 +108,7 @@ The advance ruling period has been eliminated; new organizations are presumed to
 
 Reference: `irs.gov/charities-non-profits/exempt-organizations-annual-reporting-requirements-form-990-schedules-a-and-b-public-charity-support-test`.
 
-**Practical implication for HAND:** angel-number tier gifts ($77,777, $22,222, $7,777 etc.) from individual donors generally count fully if each donor's cumulative gifts stay under 2% of 5-year total support. A single anchor gift larger than that 2% threshold is counted only up to the 2% cap toward the public support fraction, design the donor pyramid accordingly.
+**Practical implication for HAND:** angel-number tier gifts ($222,222, $77,444, $22,777 etc.) from individual donors generally count fully if each donor's cumulative gifts stay under 2% of 5-year total support. A single anchor gift larger than that 2% threshold is counted only up to the 2% cap toward the public support fraction, design the donor pyramid accordingly.
 
 ---
 
@@ -256,7 +256,7 @@ While waiting for IRS Determination (or as a long-term strategy), HAND could ope
 
 - **If HAND files 1023 in 2026 and expects determination by mid-2027:** fiscal sponsorship for ~12–18 months via PPF or HCB is reasonable.
 - **If HAND wants to be in MacKenzie Scott / Yield Giving's pipeline:** prioritize direct 501(c)(3) status; sponsorship may slow that.
-- **If the $77,777 incorporation campaign closes within 90 days:** skip sponsorship, file 1023 directly, and use the 27-month retroactive window for any pre-determination gifts.
+- **If the $222,222 incorporation campaign closes within 90 days:** skip sponsorship, file 1023 directly, and use the 27-month retroactive window for any pre-determination gifts.
 
 ---
 

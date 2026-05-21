@@ -79,7 +79,7 @@ b. Any gift with restrictions affecting strategy, programs, or hiring.
 
 c. Any naming gift (a gift conditioned on naming a program, fund, building, or other recognition).
 
-d. Any pledge of $77,777 or more (the Foundation tier threshold; coincides with HAND's filing-raise goal).
+d. Any pledge of $222,222 or more (the Foundation tier threshold; coincides with HAND's filing-raise goal).
 
 e. Any gift from a source identified through routine screening (Section 9) as raising mission-alignment concerns.
 
@@ -153,7 +153,7 @@ d. **Reverse anonymity** also respected: HAND will publish a donor's name if the
 
 ## Section 11. Donor stewardship
 
-a. **Stewardship plan.** Each Foundation tier donor and above ($7,777 and above on the contributor ladder) receives a personal touchpoint at least quarterly: an update on impact, an invitation to office hours, or a relevant publication.
+a. **Stewardship plan.** Each Foundation tier donor and above ($22,777 and above on the contributor ladder) receives a personal touchpoint at least quarterly: an update on impact, an invitation to office hours, or a relevant publication.
 
 b. **Annual Report.** All donors receive the Annual Report.
 
@@ -188,7 +188,7 @@ b. Disclosed conflicts do not automatically preclude the gift but may require co
 - **DAF distribution timing.** Some DAF grants come months after donor's intent. Should HAND track DAF intent letters as pledges? Lean no; DAFs are not legally binding until the sponsor pays.
 - **Mission-aligned investing of operating reserves.** Cross-link with [`financial-management.md`](financial-management.md) §15 and a future Investment Policy.
 - **In-kind valuation of Contributor services.** Most Contributor work is informal volunteer service and not in-kind-recordable per FASB. But some specific Contributor work (e.g., a contributed audit by a CPA Contributor) is recordable. Document case-by-case.
-- **Foundation Circle naming.** The angel-number tier "$77,777 Foundation tier" is HAND's public lead. Naming-rights threshold should be set distinctly; recommended $111,111+ for any program naming.
+- **Foundation Circle naming.** The angel-number tier "$222,222 Foundation tier" is HAND's public lead. Naming-rights threshold should be set distinctly; recommended $333,223+ for any program naming.
 
 ---
 

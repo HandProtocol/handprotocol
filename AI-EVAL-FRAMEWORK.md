@@ -129,14 +129,14 @@ These questions are real and we will address them on a published timeline. They 
 
 - **Cross-Reciprocate-group knowledge transfer.** Whether and how patterns learned working with one group are made available to another group's agent. Defaulting to *off* during the pilot. Opt-in only, and only by mutual consent if it ever happens.
 - **Multi-tenant deployment for adjacent organizations.** Adoption by other capacity-building orgs is a year-three question, not a pilot-phase question. The methodology release is the on-ramp.
-- **Base-model weight publication.** HAND uses open-base models (Llama / Mistral) and does not fine-tune the base. The adapter weights are the artifact whose publication is governed by the Sovereignty dimension above.
+- **Base-model weight publication.** HAND uses open-weight base models (selected per task as the open-source frontier moves; the commitment is to open weights and self-hostability, not to a specific vendor) and does not fine-tune the base. The adapter weights are the artifact whose publication is governed by the Sovereignty dimension above.
 - **Federation across Reciprocate groups.** Whether multiple groups could share certain agent infrastructure (a common harm-reduction knowledge layer, for instance) is a year-three question. Sovereignty defaults remain *separate* until that work is done.
 
 ## Public release
 
 The framework document, the eval harness code, the adapter-training methodology, the agent scaffolding code, and the quarterly reports are released under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (documents) and MIT (code), matching HAND Protocol's existing repository licensing. The intent is for organizations doing adjacent accompaniment work, fiscal sponsors, capacity-building intermediaries, peer accompaniment cohorts, to fork and adapt without re-litigating the structural design.
 
-Adapter weights are governed by the Sovereignty dimension and are not published by default. The base models used (Llama, Mistral) are already open under their own licenses.
+Adapter weights are governed by the Sovereignty dimension and are not published by default. The base models HAND uses are open-weight by commitment; the specific choice rotates with the landscape but is always released under its own open license.
 
 ---
 

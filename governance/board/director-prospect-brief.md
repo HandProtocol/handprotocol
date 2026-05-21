@@ -12,7 +12,7 @@
 
 Our distinctive innovation is **Sovereign Reciprocates**: custom open-source AI agent systems built for each Reciprocate group under eight sovereignty principles, owned by the group, portable, self-hostable, and the durable artifact of HAND's accompaniment.
 
-Founded August 2024. Pivoted from Web3 framing in early 2026. Pre-incorporation. Raising $77,777 to file Form 1023 and onboard the first pilot cohort.
+Founded August 2024. Pivoted from Web3 framing in early 2026. Pre-incorporation. Raising $222,222 to file Form 1023 and onboard the first pilot cohort.
 
 More at **handprotocol.org**. Discovery research at handprotocol.org/discovery.
 

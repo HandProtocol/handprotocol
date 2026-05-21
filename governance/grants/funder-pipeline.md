@@ -41,7 +41,7 @@ These funders are the closest philosophical kin to HAND. Most are relationship-l
 - **Fit:** AI sovereignty alignment (highest). $73.5M+/year toward AI for Humanity. Programs: AI for Climate, Health Equity, Human Rights, Digital Future. Data Practice Accelerator: up to $125K/year for responsible-data orgs.
 - **Access:** Invitation-only; LOI a typical first step where opening exists.
 - **Range:** $50K–$500K typical.
-- **Status:** LOI drafted ([`../../funding/mcgovern-letter.md`](../../funding/mcgovern-letter.md), $111,111 ask over 18 months).
+- **Status:** LOI drafted ([`../../funding/mcgovern-letter.md`](../../funding/mcgovern-letter.md), $333,223 ask over 18 months).
 - **Next action:** Identify program officer; warm introduction via Amnesty's Algorithmic Accountability Lab or other current grantee. Submit LOI when introduction is in hand.
 - **Notes:** McGovern wants sovereignty posture, open source, group ownership. HAND's Sovereign Reciprocates program is a strong fit. Donor-advised LOI process; expect 6-12 months from first contact to formal application.
 - **Risk:** Highly selective. Plan B is essential.
@@ -187,9 +187,9 @@ The angel-number tier ladder structures individual giving:
 
 | Tier | Amount | Role |
 |---|---|---|
-| **Foundation** | $77,777 / $22,222 / $7,777 | Lead anchors for filing raise |
-| **Sovereign Reciprocates** | $111,111 / $33,333 / $5,555 | AI workstream anchors |
-| **Contributor** | $77 to $2,222+ | Broad-base support |
+| **Foundation** | $222,222 / $77,444 / $22,777 | Lead anchors for filing raise |
+| **Sovereign Reciprocates** | $333,223 / $99,777 / $11,113 | AI workstream anchors |
+| **Contributor** | $222 to $7,777+ | Broad-base support |
 
 Major-donor tracker maintained separately by the Executive Director. Per [`../policies/gift-acceptance.md`](../policies/gift-acceptance.md), individual major gifts above 2% of expected 5-year revenue are reviewed for public-support-test implications.
 
@@ -247,7 +247,7 @@ e. **The Executive Director (or founder pre-ED) owns Tier 1 relationships.** Don
 
 - **Specific outreach plan for McGovern.** Pre-LOI introduction pathway not yet identified. Active research in May 2026.
 - **CRM choice.** Defer to revenue justifying the investment. Google Sheets sufficient through Year 1.
-- **Capital campaign.** Major-gift capital campaign for the $77,777 filing raise is being run organically. Whether to formalize for the post-Determination phase (a "Year 2 stabilization campaign") is open.
+- **Capital campaign.** Major-gift capital campaign for the $222,222 filing raise is being run organically. Whether to formalize for the post-Determination phase (a "Year 2 stabilization campaign") is open.
 - **Earned revenue.** Some Reciprocates may have budget to pay for premium support. Whether to structure earned revenue as a real funder category or keep it case-by-case is open. Recommend keeping case-by-case until Year 3.
 - **Fundraising consultant.** Whether to engage one (Spectrum Nonprofit Services, Marts & Lundy, Compass Point) at any point. Likely not until $300K+ ask in pipeline.
 

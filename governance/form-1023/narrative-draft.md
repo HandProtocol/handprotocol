@@ -193,7 +193,7 @@ The Organization requests classification as a **public charity** under **IRC §5
 
 The Organization will receive support from a broad base of public sources, including:
 
-a. **Individual contributors** at angel-number tier levels ($77, $777, $7,777, $22,222, $77,777 and intermediate amounts). The Organization's fundraising design diversifies donor base across many small to medium contributors rather than concentrating in a few large donors.
+a. **Individual contributors** at angel-number tier levels ($222, $2,222, $22,777, $77,444, $222,222 and intermediate amounts). The Organization's fundraising design diversifies donor base across many small to medium contributors rather than concentrating in a few large donors.
 
 b. **Foundation grants** from multiple foundations expected over a five-year horizon, including community foundations (Hogg Foundation, St. David's Foundation, Austin Community Foundation), national mission-aligned funders (Kataly, Solidaire), and AI-aligned funders (Patrick J. McGovern Foundation, Mozilla Foundation).
 

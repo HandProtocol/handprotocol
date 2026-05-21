@@ -38,7 +38,7 @@ g. **Retire what doesn't serve.** Tools, programs, framings. The pivot away from
 
 ## One-paragraph description
 
-HAND Protocol Foundation, incorporating as a 501(c)(3) in Austin, Texas in 2026, operates a curated resource pool where skilled Contributors and three communities of Reciprocates (practitioners who heal, founders who build, and organizers who steward) match to meet mutual needs. Three flows: **Donate** (one-way gift of skill), **Exchange** (skill for skill), **Receive** (Reciprocate onboarding). The pool is denser when participants flow between roles; a single person can be both giver and receiver, and the lines between communities are porous. Within and through the pool, HAND provides long-term branding, marketing, technology, design, and operational accompaniment. The defining commitment is durability: HAND walks alongside Reciprocates for years, not just months, and offers Sovereign Reciprocates (optional open-source AI agent systems, owned by the group, available to Reciprocate groups who choose them) as one tool inside the pool. Founded in August 2024, currently raising $77,777 to file for federal exemption, and accompanying the first pilot cohort of three Reciprocate groups.
+HAND Protocol Foundation, incorporating as a 501(c)(3) in Austin, Texas in 2026, operates a curated resource pool where skilled Contributors and three communities of Reciprocates (practitioners who heal, founders who build, and organizers who steward) match to meet mutual needs. Three flows: **Donate** (one-way gift of skill), **Exchange** (skill for skill), **Receive** (Reciprocate onboarding). The pool is denser when participants flow between roles; a single person can be both giver and receiver, and the lines between communities are porous. Within and through the pool, HAND provides long-term branding, marketing, technology, design, and operational accompaniment. The defining commitment is durability: HAND walks alongside Reciprocates for years, not just months, and offers Sovereign Reciprocates (optional open-source AI agent systems, owned by the group, available to Reciprocate groups who choose them) as one tool inside the pool. Founded in August 2024, currently raising $222,222 to file for federal exemption, and accompanying the first pilot cohort of three Reciprocate groups.
 
 ## One-page description
 
@@ -84,7 +84,7 @@ Based in Austin, Texas. National reach as the work justifies it.
 
 ### Status
 
-Pre-incorporation, pilot pre-launch. The foundation campaign is currently raising $77,777 to file Form 1023 and onboard the first pilot cohort of three Reciprocate groups. Documents at handprotocol.org/discovery articulate the gap, the model, and the landscape.
+Pre-incorporation, pilot pre-launch. The foundation campaign is currently raising $222,222 to file Form 1023 and onboard the first pilot cohort of three Reciprocate groups. Documents at handprotocol.org/discovery articulate the gap, the model, and the landscape.
 
 ---
 
@@ -151,7 +151,7 @@ HAND seeks funders aligned with three postures: trust-based philanthropy, long-t
 
 - **Founded:** August 2024.
 - **Pivot:** Early 2026 (Web3 protocol → resource pool + AI accompaniment).
-- **Filing raise:** Underway in 2026, $77,777 minimum.
+- **Filing raise:** Underway in 2026, $222,222 minimum.
 - **Pilot cohort:** Three Reciprocate groups, onboarding 2026-2027.
 - **Website:** handprotocol.org.
 - **Contact:** hand@handprotocol.org.
