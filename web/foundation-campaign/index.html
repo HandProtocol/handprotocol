@@ -34,26 +34,18 @@
   <nav class="nav" id="nav">
     <div class="nav__inner container">
       <a href="#hero" class="nav__logo">
-        <svg class="nav__logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
-          <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M16 8v5m0 6v5m-5-13v10a3 3 0 003 3h4a3 3 0 003-3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <circle cx="16" cy="11" r="2" fill="currentColor"/>
-        </svg>
-        <span>HAND Protocol</span>
+        <img class="nav__logo-img" src="../assets/logo.png" alt="" width="36" height="36" decoding="async">
+        <span class="nav__logo-text">HAND Protocol</span>
       </a>
       <div class="nav__links" id="navLinks">
         <a href="#about" class="nav__link">About</a>
-        <a href="#problem" class="nav__link">The Problem</a>
-        <a href="#solution" class="nav__link">Solution</a>
+        <a href="#problem" class="nav__link">Approach</a>
         <a href="../discovery/" class="nav__link">Discovery</a>
         <a href="../reciprocates/" class="nav__link">Reciprocates</a>
         <a href="../sovereign-reciprocates/" class="nav__link">AI</a>
         <a href="../governance/" class="nav__link">Governance</a>
-        <a href="#track-record" class="nav__link">Track Record</a>
-        <a href="#funding" class="nav__link">Funding</a>
-        <a href="#tiers" class="nav__link">Contribute</a>
       </div>
-      <a href="#tiers" class="nav__cta btn btn--sm">Support Us</a>
+      <a href="#funding" class="nav__cta btn btn--sm">Support</a>
       <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
         <span></span><span></span><span></span>
       </button>
@@ -427,61 +419,129 @@
     <section class="section section--dark" id="funding">
       <div class="container">
         <div class="section__header reveal">
-          <span class="section__label section__label--light">Funding Goals</span>
-          <h2 class="section__title section__title--light">Three numbers,<br>three honest commitments.</h2>
-          <p class="section__subtitle section__subtitle--light">$22,777 is the filing floor. $77,444 is the responsible operating minimum. $222,222 is the first goal: the amount that lets us launch the pilot cohort the way our Reciprocates actually need.</p>
+          <span class="section__label section__label--light">Funding goals</span>
+          <h2 class="section__title section__title--light">Two ladders.<br>The public ask rounds. The deeper commitments refuse to.</h2>
+          <p class="section__subtitle section__subtitle--light">The Foundation campaign carries the 501(c)(3) raise: $22,777 filing floor, $77,444 operating minimum, $222,222 first goal. The Sovereign Reciprocates ladder funds the AI workstream: $11,113 POC, $99,777 pilot, $333,223 production and release.</p>
         </div>
-        <div class="funding__tiers">
-          <div class="funding-tier reveal">
-            <div class="funding-tier__label">Filing floor</div>
-            <div class="funding-tier__amount">$22,777</div>
-            <div class="funding-tier__name">Legal existence plus a real beginning</div>
-            <div class="funding-tier__bar">
-              <div class="funding-tier__fill" data-width="100"></div>
+
+        <div class="funding__columns">
+
+          <div class="funding__column">
+            <div class="funding__column-head reveal">
+              <span class="funding__column-eyebrow">Foundation campaign</span>
+              <span class="funding__column-thread">Heritage 777 thread</span>
             </div>
-            <ul class="funding-tier__list">
-              <li>Federal 501(c)(3) filing fee &amp; Texas state registration: $1,875</li>
-              <li>Legal counsel &amp; bylaws: $7,200</li>
-              <li>Domain, hosting &amp; initial infrastructure: $4,500</li>
-              <li>Initial brand identity &amp; foundation site: $4,500</li>
-              <li>Insurance setup: $1,500</li>
-              <li>Founding administrative cushion: $3,202</li>
-            </ul>
-          </div>
-          <div class="funding-tier reveal">
-            <div class="funding-tier__label">Operating minimum</div>
-            <div class="funding-tier__amount">$77,444</div>
-            <div class="funding-tier__name">Filing + websites + 6 months of work</div>
-            <div class="funding-tier__bar">
-              <div class="funding-tier__fill" data-width="100"></div>
+            <div class="funding__tiers">
+              <div class="funding-tier reveal">
+                <div class="funding-tier__label">Filing floor</div>
+                <div class="funding-tier__amount">$22,777</div>
+                <div class="funding-tier__name">Legal existence plus a real beginning</div>
+                <div class="funding-tier__bar">
+                  <div class="funding-tier__fill" data-width="100"></div>
+                </div>
+                <ul class="funding-tier__list">
+                  <li>Federal 501(c)(3) filing fee &amp; Texas state registration: $1,875</li>
+                  <li>Legal counsel &amp; bylaws: $7,200</li>
+                  <li>Domain, hosting &amp; initial infrastructure: $4,500</li>
+                  <li>Initial brand identity &amp; foundation site: $4,500</li>
+                  <li>Insurance setup: $1,500</li>
+                  <li>Founding administrative cushion: $3,202</li>
+                </ul>
+              </div>
+              <div class="funding-tier reveal">
+                <div class="funding-tier__label">Operating minimum</div>
+                <div class="funding-tier__amount">$77,444</div>
+                <div class="funding-tier__name">Filing + websites + 6 months of work</div>
+                <div class="funding-tier__bar">
+                  <div class="funding-tier__fill" data-width="100"></div>
+                </div>
+                <ul class="funding-tier__list">
+                  <li>Filing &amp; nonprofit formation (rolls in floor tier): $22,777</li>
+                  <li>Ongoing legal &amp; compliance: $7,777</li>
+                  <li>3 pilot Reciprocate websites &amp; branding: $11,111</li>
+                  <li>Core infrastructure, tools &amp; insurance: $3,333</li>
+                  <li>6-month part-time program lead: $32,446</li>
+                </ul>
+              </div>
+              <div class="funding-tier funding-tier--featured reveal">
+                <div class="funding-tier__badge">First goal</div>
+                <div class="funding-tier__label">The real ask</div>
+                <div class="funding-tier__amount">$222,222</div>
+                <div class="funding-tier__name">Full launch, 12 months of accompaniment</div>
+                <div class="funding-tier__bar">
+                  <div class="funding-tier__fill" data-width="100"></div>
+                </div>
+                <ul class="funding-tier__list">
+                  <li>501(c)(3) filing, compliance &amp; legal: $22,777</li>
+                  <li>Pilot Reciprocate websites, branding &amp; ongoing support: $33,333</li>
+                  <li>Core infrastructure, tools &amp; insurance: $11,111</li>
+                  <li>12-month part-time program lead &amp; ops: $99,999</li>
+                  <li>Pilot program development &amp; matching: $33,333</li>
+                  <li>AI Reciprocate model (POC integration): $11,111</li>
+                  <li>Contingency &amp; opportunity fund: $10,558</li>
+                </ul>
+              </div>
             </div>
-            <ul class="funding-tier__list">
-              <li>Filing &amp; nonprofit formation (rolls in floor tier): $22,777</li>
-              <li>Ongoing legal &amp; compliance: $7,777</li>
-              <li>3 pilot Reciprocate websites &amp; branding: $11,111</li>
-              <li>Core infrastructure, tools &amp; insurance: $3,333</li>
-              <li>6-month part-time program lead: $32,446</li>
-            </ul>
           </div>
-          <div class="funding-tier funding-tier--featured reveal">
-            <div class="funding-tier__badge">First Goal</div>
-            <div class="funding-tier__label">The real ask</div>
-            <div class="funding-tier__amount">$222,222</div>
-            <div class="funding-tier__name">Full launch, 12 months of accompaniment</div>
-            <div class="funding-tier__bar">
-              <div class="funding-tier__fill" data-width="100"></div>
+
+          <div class="funding__column">
+            <div class="funding__column-head reveal">
+              <span class="funding__column-eyebrow">Sovereign Reciprocates</span>
+              <span class="funding__column-thread">Anchored angels, asymmetric tails</span>
             </div>
-            <ul class="funding-tier__list">
-              <li>501(c)(3) filing, compliance &amp; legal: $22,777</li>
-              <li>Pilot Reciprocate websites, branding &amp; ongoing support: $33,333</li>
-              <li>Core infrastructure, tools &amp; insurance: $11,111</li>
-              <li>12-month part-time program lead &amp; ops: $99,999</li>
-              <li>Pilot program development &amp; matching: $33,333</li>
-              <li>AI Reciprocate model (POC integration): $11,111</li>
-              <li>Contingency &amp; opportunity fund: $10,558</li>
-            </ul>
+            <div class="funding__tiers">
+              <div class="funding-tier reveal">
+                <div class="funding-tier__label">POC, months 1&ndash;3</div>
+                <div class="funding-tier__amount">$11,113</div>
+                <div class="funding-tier__name">Prototype agent system, one Reciprocate group</div>
+                <div class="funding-tier__bar">
+                  <div class="funding-tier__fill" data-width="100"></div>
+                </div>
+                <ul class="funding-tier__list">
+                  <li>Claude API + RAG over discovery docs</li>
+                  <li>One Reciprocate-group pilot scaffolded</li>
+                  <li>Evaluation report &amp; Gate 1 decision</li>
+                  <li>Folded into the $222,222 filing raise</li>
+                </ul>
+              </div>
+              <div class="funding-tier reveal">
+                <div class="funding-tier__label">Pilot, months 4&ndash;15</div>
+                <div class="funding-tier__amount">$99,777</div>
+                <div class="funding-tier__name">Three sovereign agent systems, open-base</div>
+                <div class="funding-tier__bar">
+                  <div class="funding-tier__fill" data-width="100"></div>
+                </div>
+                <ul class="funding-tier__list">
+                  <li>Open-base fine-tune, per-group adapters</li>
+                  <li>Self-hosted inference</li>
+                  <li>Quarterly participatory eval, sovereignty drills</li>
+                  <li>Dedicated AI-funder ask (McGovern / Mozilla)</li>
+                </ul>
+              </div>
+              <div class="funding-tier funding-tier--featured reveal">
+                <div class="funding-tier__badge">Ceiling</div>
+                <div class="funding-tier__label">Production &amp; release, months 16&ndash;18</div>
+                <div class="funding-tier__amount">$333,223</div>
+                <div class="funding-tier__name">Forkable stack, methodology paper, open release</div>
+                <div class="funding-tier__bar">
+                  <div class="funding-tier__fill" data-width="100"></div>
+                </div>
+                <ul class="funding-tier__list">
+                  <li>Per-group adapter productionization</li>
+                  <li>The HAND coordination agent</li>
+                  <li>Full open-source release: methodology + eval framework + scaffolding</li>
+                  <li>Closure-simulation drill, methodology paper</li>
+                  <li>Production grant + open-source signal</li>
+                </ul>
+              </div>
+            </div>
           </div>
+
         </div>
+
+        <p class="funding__footnote reveal">
+          Two ladders, on purpose. The Foundation ladder rounds to clean angels because the public ask wants legibility. The Sovereign ladder refuses to round because the deeper commitments are honest, specific, and non-performative. 223 is the 48th prime and the sum of three consecutive primes (71+73+79); the tail earns its asymmetry.
+        </p>
       </div>
     </section>
 
@@ -651,58 +711,61 @@
           <h2 class="section__title">Every contribution plants a seed.</h2>
           <p class="section__subtitle">All contributors receive transparent reporting on how funds are used and what outcomes are achieved.</p>
         </div>
+        <p class="tiers__open reveal">
+          <a href="https://giveth.io/project/hand-protocol" target="_blank" rel="noopener noreferrer">Give any amount on Giveth</a>, or pick a tier below.
+        </p>
         <div class="tiers__grid">
           <div class="tier-card reveal">
-            <div class="tier-card__amount">$25</div>
-            <h3 class="tier-card__name">Seed Planter</h3>
+            <div class="tier-card__amount">$222</div>
+            <h3 class="tier-card__name">Seed</h3>
             <ul class="tier-card__perks">
               <li>Our gratitude</li>
               <li>Name on supporter wall</li>
             </ul>
           </div>
           <div class="tier-card reveal">
-            <div class="tier-card__amount">$50</div>
-            <h3 class="tier-card__name">Garden Tender</h3>
+            <div class="tier-card__amount">$333</div>
+            <h3 class="tier-card__name">Tender</h3>
             <ul class="tier-card__perks">
               <li>Everything above</li>
               <li>Quarterly impact updates</li>
             </ul>
           </div>
           <div class="tier-card reveal">
-            <div class="tier-card__amount">$100</div>
-            <h3 class="tier-card__name">Root Builder</h3>
+            <div class="tier-card__amount">$555</div>
+            <h3 class="tier-card__name">Root</h3>
             <ul class="tier-card__perks">
               <li>Everything above</li>
-              <li>Early access to healer directory</li>
+              <li>Early access to Reciprocate directory</li>
             </ul>
           </div>
           <div class="tier-card reveal">
-            <div class="tier-card__amount">$250</div>
-            <h3 class="tier-card__name">Community Pillar</h3>
+            <div class="tier-card__amount">$999</div>
+            <h3 class="tier-card__name">Pillar</h3>
             <ul class="tier-card__perks">
               <li>Everything above</li>
-              <li>Virtual community gathering invite</li>
+              <li>Invitation to a virtual community gathering</li>
             </ul>
           </div>
           <div class="tier-card tier-card--featured reveal">
-            <div class="tier-card__amount">$500</div>
-            <h3 class="tier-card__name">Foundation Stone</h3>
+            <div class="tier-card__amount">$1,111</div>
+            <h3 class="tier-card__name">Foundation</h3>
             <ul class="tier-card__perks">
               <li>Everything above</li>
-              <li>Recognized as founding supporter</li>
+              <li>Recognized as a founding supporter</li>
             </ul>
           </div>
           <div class="tier-card reveal">
-            <div class="tier-card__amount">$1,000</div>
+            <div class="tier-card__amount">$3,333</div>
             <h3 class="tier-card__name">Architect</h3>
             <ul class="tier-card__perks">
               <li>Everything above</li>
-              <li>1:1 conversation with founders</li>
+              <li>1:1 conversation with the founders</li>
             </ul>
           </div>
           <div class="tier-card reveal">
-            <div class="tier-card__amount">$2,500+</div>
-            <h3 class="tier-card__name">Keystone</h3>
+            <div class="tier-card__amount">$7,777+</div>
+            <h3 class="tier-card__name">Patron</h3>
             <ul class="tier-card__perks">
               <li>Everything above</li>
               <li>Input on pilot program priorities</li>
@@ -719,6 +782,9 @@
             Indiegogo crowdfund launching soon.
             <a href="mailto:hand@handprotocol.org?subject=Notify%20me%20when%20Indiegogo%20launches">Get notified</a>
             or <a href="../donate-crypto/">send crypto directly</a>.
+          </p>
+          <p class="tiers__cta-note tiers__cta-note--major">
+            Considering a larger gift? <a href="mailto:hand@handprotocol.org?subject=Major%20gift%20inquiry">Email hand@handprotocol.org</a> to talk.
           </p>
         </div>
       </div>
@@ -880,11 +946,7 @@
       <div class="footer__inner">
         <div class="footer__brand">
           <div class="footer__logo">
-            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-              <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
-              <path d="M16 8v5m0 6v5m-5-13v10a3 3 0 003 3h4a3 3 0 003-3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="16" cy="11" r="2" fill="currentColor"/>
-            </svg>
+            <img class="footer__logo-img" src="../assets/logo.png" alt="" width="32" height="32" decoding="async" loading="lazy">
             <span>HAND Protocol Foundation</span>
           </div>
           <p class="footer__tagline">Regenerative infrastructure for those who heal, build, and serve.</p>
@@ -894,17 +956,19 @@
           <div class="footer__col">
             <h4>Navigate</h4>
             <a href="#about">About</a>
-            <a href="#problem">The Problem</a>
-            <a href="#solution">Our Solution</a>
-            <a href="#track-record">Track Record</a>
+            <a href="#problem">Approach</a>
+            <a href="#track-record">Track record</a>
+            <a href="../discovery/">Discovery</a>
+            <a href="../reciprocates/">Reciprocates</a>
+            <a href="../sovereign-reciprocates/">AI workstream</a>
+            <a href="../governance/">Governance</a>
           </div>
           <div class="footer__col">
             <h4>Support</h4>
-            <a href="#funding">Funding Goals</a>
+            <a href="#funding">Funding goals</a>
             <a href="#tiers">Contribute</a>
-            <a href="../donate-crypto/">Donate With Crypto</a>
-            <a href="../reciprocates/">Reciprocates</a>
-            <a href="../discovery/">Discovery</a>
+            <a href="../donate-crypto/">Donate with crypto</a>
+            <a href="mailto:hand@handprotocol.org?subject=Major%20gift%20inquiry">Major gifts</a>
           </div>
           <div class="footer__col">
             <h4>Connect</h4>
