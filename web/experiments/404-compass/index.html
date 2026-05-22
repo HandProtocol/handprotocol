@@ -1,0 +1,984 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Signal Lost · 404 — HAND Protocol</title>
+<meta name="description" content="The route you reached isn't on the map. Pick a heading and we'll guide you home." />
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #07090f;
+    --bg-2: #0c1220;
+    --ink: #f5efe1;
+    --ink-dim: #8e8a7e;
+    --ink-faint: #4a4940;
+    --amber: #d97706;
+    --amber-glow: rgba(217, 119, 6, 0.55);
+    --amber-soft: rgba(255, 186, 73, 0.85);
+    --grid: rgba(217, 119, 6, 0.08);
+    --hud: rgba(245, 239, 225, 0.18);
+    --hud-strong: rgba(245, 239, 225, 0.55);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    min-height: 100%;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      radial-gradient(1200px 800px at 50% 50%, rgba(217,119,6,0.10), transparent 60%),
+      radial-gradient(circle at 50% 50%, var(--bg-2) 0%, var(--bg) 70%);
+    pointer-events: none;
+    z-index: -2;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 70%);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  #particles {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    z-index: 0;
+  }
+
+  /* corner HUD chrome */
+  .hud {
+    position: fixed;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    pointer-events: none;
+    user-select: none;
+    z-index: 5;
+  }
+  .hud b { color: var(--ink); font-weight: 500; }
+  .hud .amber { color: var(--amber-soft); }
+  .hud .red { color: #ff7a6b; }
+  .hud-tl { top: 28px; left: 32px; }
+  .hud-tr { top: 28px; right: 32px; text-align: right; }
+  .hud-bl { bottom: 28px; left: 32px; }
+  .hud-br { bottom: 28px; right: 32px; text-align: right; }
+
+  .hud .row { display: flex; gap: 14px; align-items: center; line-height: 1.7; }
+  .hud .dot { width: 6px; height: 6px; border-radius: 50%; background: #ff7a6b; box-shadow: 0 0 10px rgba(255,122,107,0.55); animation: blink 1.0s infinite ease-in-out; }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+  .bracket { position: fixed; width: 28px; height: 28px; border: 1px solid var(--hud); z-index: 5; pointer-events: none; }
+  .bracket.tl { top: 18px; left: 18px; border-right: 0; border-bottom: 0; }
+  .bracket.tr { top: 18px; right: 18px; border-left: 0; border-bottom: 0; }
+  .bracket.bl { bottom: 18px; left: 18px; border-right: 0; border-top: 0; }
+  .bracket.br { bottom: 18px; right: 18px; border-left: 0; border-top: 0; }
+
+  /* outer compass — the stage radius drives the station ring radius */
+  .compass {
+    position: relative;
+    width: min(720px, 92vw);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    z-index: 2;
+  }
+
+  /* central stage (rings + hand) — sized as a fraction of compass */
+  .stage {
+    position: relative;
+    width: 64%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .rings { position: absolute; inset: 0; pointer-events: none; }
+  .rings svg { width: 100%; height: 100%; overflow: visible; }
+  .ring-spin { transform-origin: 50% 50%; transform-box: fill-box; }
+
+  /* the hand canvas, sized inside the stage */
+  .hand {
+    position: relative;
+    width: 60%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    filter:
+      drop-shadow(0 0 18px var(--amber-glow))
+      drop-shadow(0 0 60px rgba(217, 119, 6, 0.18));
+  }
+  .hand canvas { width: 100%; height: 100%; display: block; }
+
+  /* big 404 watermark behind the hand */
+  .watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: clamp(80px, 14vw, 180px);
+    letter-spacing: -0.06em;
+    color: rgba(245, 239, 225, 0.025);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    line-height: 1;
+  }
+
+  /* center label above the rings */
+  .center-label {
+    position: absolute;
+    top: -38px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    white-space: nowrap;
+  }
+  .center-label .amber { color: var(--amber-soft); }
+  .center-label .red   { color: #ff7a6b; }
+
+  /* the requested path readout — the URL the user hit */
+  .path-readout {
+    position: absolute;
+    bottom: -52px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    text-align: center;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .path-readout b { color: var(--amber-soft); font-weight: 500; }
+
+  /* tick attributes */
+  .tick { stroke: var(--hud); stroke-width: 1; }
+  .tick-strong { stroke: var(--hud-strong); }
+
+  /* ============================================
+     STATIONS — radial sitemap nodes
+     ============================================ */
+  .station {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 168px;
+    /* radial position: rotate to angle, translate outward, then un-rotate so card sits upright */
+    /* --radius is a fraction of compass width.
+       At 42% × 720px compass = ~302px from center; card half-width is 84px,
+       so the card's outer edge sits ~14px inside the compass bounds even at
+       the most horizontal station angles. */
+    transform:
+      translate(-50%, -50%)
+      rotate(var(--angle))
+      translateY(calc(-1 * var(--radius, 42%)))
+      rotate(calc(-1 * var(--angle)));
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px 12px;
+    background: rgba(7, 9, 15, 0.55);
+    border: 1px solid rgba(245, 239, 225, 0.10);
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    transition:
+      border-color 360ms ease,
+      background 360ms ease,
+      box-shadow 360ms ease,
+      transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  .station::before {
+    /* connector tick pointing toward center */
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 18px;
+    height: 1px;
+    background: var(--hud);
+    transition: background 360ms ease, width 360ms ease;
+  }
+  /* connector side depends on quadrant; we set a class on the station */
+  .station.side-left::before  { right: 100%; }
+  .station.side-right::before { left: 100%; }
+  .station.side-top::before,
+  .station.side-bottom::before {
+    /* for top/bottom stations, put a short vertical stub */
+    left: 50%;
+    top: auto;
+    width: 1px;
+    height: 14px;
+    transform: translateX(-50%);
+  }
+  .station.side-top::before    { bottom: 100%; }
+  .station.side-bottom::before { top: 100%; }
+
+  .station__code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    transition: color 360ms ease;
+  }
+  .station__label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    transition: color 360ms ease, text-shadow 360ms ease;
+  }
+  .station__sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    line-height: 1.35;
+    color: var(--ink-faint);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 480ms ease, color 360ms ease, margin-top 320ms ease;
+  }
+  .station.is-active {
+    background: rgba(217, 119, 6, 0.08);
+    border-color: rgba(217, 119, 6, 0.55);
+    box-shadow:
+      0 0 18px rgba(217, 119, 6, 0.22),
+      0 0 60px rgba(217, 119, 6, 0.08);
+  }
+  .station.is-active::before { background: var(--amber-soft); width: 28px; }
+  .station.is-active.side-top::before,
+  .station.is-active.side-bottom::before { height: 22px; width: 1px; background: var(--amber-soft); }
+  .station.is-active .station__code  { color: var(--amber-soft); }
+  .station.is-active .station__label { color: var(--ink); text-shadow: 0 0 12px var(--amber-glow); }
+  .station.is-active .station__sub   { color: var(--ink-dim); max-height: 60px; margin-top: 2px; }
+
+  .station:hover {
+    border-color: var(--amber-soft);
+    background: rgba(217, 119, 6, 0.10);
+  }
+  .station:hover .station__label { color: var(--ink); }
+  .station:focus-visible {
+    outline: 2px solid var(--amber-soft);
+    outline-offset: 3px;
+  }
+
+  /* recovery footer — always-accessible safety net */
+  .recovery {
+    position: fixed;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 6;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    pointer-events: none;
+  }
+  .recovery a {
+    color: var(--amber-soft);
+    text-decoration: none;
+    border: 1px solid rgba(217, 119, 6, 0.35);
+    padding: 8px 14px;
+    border-radius: 4px;
+    transition: background 200ms, border-color 200ms, color 200ms;
+    pointer-events: auto;
+  }
+  .recovery a:hover {
+    background: rgba(217, 119, 6, 0.15);
+    border-color: var(--amber-soft);
+    color: var(--ink);
+  }
+
+  /* ============================================
+     Mobile fallback — stack stations vertically
+     ============================================ */
+  @media (max-width: 720px) {
+    .hud-tl, .hud-bl { left: 16px; }
+    .hud-tr, .hud-br { right: 16px; }
+    .hud-tl, .hud-tr { top: 14px; }
+    .hud-bl, .hud-br { bottom: 14px; }
+    .hud { font-size: 9.5px; letter-spacing: 0.06em; }
+    .bracket { width: 18px; height: 18px; }
+    .bracket.tl, .bracket.tr { top: 8px; }
+    .bracket.tl, .bracket.bl { left: 8px; }
+    .bracket.tr, .bracket.br { right: 8px; }
+    .bracket.bl, .bracket.br { bottom: 8px; }
+
+    body { padding: 96px 18px 140px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+    .compass {
+      width: min(360px, 86vw);
+      margin-bottom: 32px;
+    }
+    /* station ring still works on mobile but tighter; we also render a list below */
+    .station {
+      display: none;  /* hide radial nodes — show stacked list instead */
+    }
+    .recovery { position: static; transform: none; margin-top: 8px; flex-direction: column; gap: 10px; }
+
+    .station-list {
+      display: flex !important;
+      flex-direction: column;
+      gap: 10px;
+      width: min(440px, 100%);
+      margin: 0 auto;
+    }
+    .station-list .station-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: rgba(7, 9, 15, 0.55);
+      border: 1px solid rgba(245, 239, 225, 0.10);
+      border-radius: 4px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: border-color 180ms, background 180ms;
+    }
+    .station-list .station-row:hover,
+    .station-list .station-row:focus-visible {
+      border-color: var(--amber-soft);
+      background: rgba(217, 119, 6, 0.08);
+      outline: none;
+    }
+    .station-list .station-row__code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--amber-soft);
+      letter-spacing: 0.2em;
+      flex-shrink: 0;
+      width: 40px;
+    }
+    .station-list .station-row__body { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+    .station-list .station-row__label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .station-list .station-row__sub {
+      font-size: 12px;
+      color: var(--ink-dim);
+      line-height: 1.35;
+    }
+    .station-list .station-row__arrow {
+      color: var(--ink-faint);
+      font-family: 'JetBrains Mono', monospace;
+      flex-shrink: 0;
+    }
+  }
+
+  /* desktop: hide the stacked list */
+  .station-list { display: none; }
+
+  /* respect reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .ring-spin { animation: none !important; }
+    .station { transition-duration: 0ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- corner brackets -->
+<div class="bracket tl"></div>
+<div class="bracket tr"></div>
+<div class="bracket bl"></div>
+<div class="bracket br"></div>
+
+<!-- HUD readouts -->
+<div class="hud hud-tl">
+  <div class="row"><span class="dot"></span><b>HAND PROTOCOL</b></div>
+  <div>SYS: <b class="red">SIGNAL LOST</b> · CODE <span class="red">404</span></div>
+  <div>STATUS · <span class="amber">RECOVERY</span></div>
+</div>
+
+<div class="hud hud-tr">
+  <div class="row" style="justify-content:flex-end"><b>UPLINK</b> · <span class="amber">STABLE</span></div>
+  <div>HASH <span id="hash">7e2a · b41c · 9f08</span></div>
+  <div>FRAME <span id="frame">000000</span></div>
+</div>
+
+<div class="hud hud-bl">
+  <div>NODE · <b>WAYFINDER</b></div>
+  <div>HEADING: <span class="amber" id="heading">0°</span> · TGT <span class="amber" id="targetCode">0x01</span></div>
+</div>
+
+<div class="hud hud-br">
+  <div>BUILD <b>0.1.0</b></div>
+  <div>RENDER <span id="fps">60.0</span> FPS</div>
+</div>
+
+<!-- particle field -->
+<canvas id="particles"></canvas>
+
+<!-- big 404 watermark, behind everything -->
+<div class="watermark" aria-hidden="true">404</div>
+
+<!-- main compass + radial stations -->
+<main class="compass" id="compass">
+  <div class="center-label">SIGNAL <span class="red">LOST</span> · ROUTE NOT FOUND</div>
+
+  <div class="stage">
+    <div class="rings">
+      <svg viewBox="0 0 600 600">
+        <defs>
+          <radialGradient id="ringFade" cx="50%" cy="50%" r="50%">
+            <stop offset="60%" stop-color="rgba(245,239,225,0)" />
+            <stop offset="100%" stop-color="rgba(245,239,225,0.15)" />
+          </radialGradient>
+          <linearGradient id="sweep" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stop-color="rgba(217,119,6,0)" />
+            <stop offset="100%" stop-color="rgba(217,119,6,0.8)" />
+          </linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="4" result="b" />
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <g class="ring-spin" id="ringOuter">
+          <circle cx="300" cy="300" r="282" fill="none" stroke="rgba(245,239,225,0.10)" stroke-width="1" />
+          <circle cx="300" cy="300" r="282" fill="none" stroke="rgba(245,239,225,0.35)" stroke-width="1" stroke-dasharray="2 22" />
+          <g id="outerTicks"></g>
+        </g>
+
+        <g class="ring-spin" id="ringMid">
+          <circle cx="300" cy="300" r="232" fill="none" stroke="rgba(245,239,225,0.18)" stroke-width="1" stroke-dasharray="4 8" />
+          <g stroke="rgba(245,239,225,0.55)" stroke-width="1.5">
+            <line x1="300" y1="58" x2="300" y2="74" />
+            <line x1="542" y1="300" x2="526" y2="300" />
+            <line x1="300" y1="542" x2="300" y2="526" />
+            <line x1="58" y1="300" x2="74" y2="300" />
+          </g>
+        </g>
+
+        <g class="ring-spin" id="ringSweep">
+          <circle cx="300" cy="300" r="200" fill="none" stroke="rgba(217,119,6,0.18)" stroke-width="1" />
+          <path id="sweepArc"
+            d="M 300 100 A 200 200 0 0 1 480 220"
+            fill="none" stroke="url(#sweep)" stroke-width="2" stroke-linecap="round" filter="url(#glow)" />
+        </g>
+
+        <circle cx="300" cy="300" r="170" fill="none" stroke="rgba(245,239,225,0.10)" stroke-width="1" />
+        <circle cx="300" cy="300" r="170" fill="none" stroke="url(#ringFade)" stroke-width="1" />
+
+        <g stroke="rgba(245,239,225,0.25)" stroke-width="0.6">
+          <line x1="294" y1="300" x2="288" y2="300" />
+          <line x1="306" y1="300" x2="312" y2="300" />
+          <line x1="300" y1="294" x2="300" y2="288" />
+          <line x1="300" y1="306" x2="300" y2="312" />
+        </g>
+
+        <g stroke="rgba(245,239,225,0.45)" stroke-width="1.2" fill="none">
+          <path d="M 56 300 L 36 300 L 36 280" />
+          <path d="M 544 300 L 564 300 L 564 280" />
+          <path d="M 300 56 L 300 36 L 280 36" />
+          <path d="M 300 544 L 300 564 L 280 564" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="hand">
+      <canvas id="handCanvas"></canvas>
+    </div>
+
+    <!-- requested-path readout -->
+    <div class="path-readout">
+      REQUESTED · <b id="reqPath">/unknown</b><br>
+      <span style="color: var(--ink-faint); letter-spacing: 0.18em;">PICK A HEADING ↓</span>
+    </div>
+  </div>
+
+  <!-- 6 radial station nodes; JS populates angle/side classes -->
+  <!-- Stations are also rendered in mobile-stacked form via JS -->
+</main>
+
+<!-- mobile-stacked sitemap (hidden on desktop via CSS) -->
+<nav class="station-list" id="stationList" aria-label="Site sections"></nav>
+
+<!-- recovery footer -->
+<div class="recovery">
+  <span>OR ·</span>
+  <a href="/">Return Home</a>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+  /* ==========================================================
+     Stations — the 6 radial sitemap nodes the hand points at.
+     Angles in degrees from top, clockwise (12 = 0°, 3 = 90°).
+     ========================================================== */
+  const STATIONS = [
+    { code: '0x01', label: 'Foundation', sub: 'Capital campaign · tiers · seed donors', href: '/foundation-campaign/', angle:   0 },
+    { code: '0x02', label: 'Discovery',  sub: 'Vision · models · landscape',           href: '/discovery/',           angle:  60 },
+    { code: '0x03', label: 'Reciprocates', sub: 'Communities we serve',                href: '/reciprocates/',        angle: 120 },
+    { code: '0x04', label: 'Sovereign',  sub: 'Group-owned domain agents',             href: '/sovereign-reciprocates/', angle: 180 },
+    { code: '0x05', label: 'Governance', sub: 'Bylaws · board · policies',             href: '/governance/',          angle: 240 },
+    { code: '0x06', label: 'Crypto',     sub: 'On-chain contribution',                 href: '/donate-crypto/',       angle: 300 },
+  ];
+
+  /* show requested path */
+  const reqPath = document.getElementById('reqPath');
+  if (reqPath) {
+    const p = (location.pathname || '/') + (location.search || '');
+    reqPath.textContent = p.length > 56 ? p.slice(0, 53) + '…' : p;
+  }
+
+  /* render radial stations + mobile list */
+  const compass = document.getElementById('compass');
+  const list = document.getElementById('stationList');
+  const stationEls = STATIONS.map((s) => {
+    const a = document.createElement('a');
+    a.className = 'station';
+    a.href = s.href;
+    a.style.setProperty('--angle', `${s.angle}deg`);
+    // angle classes drive which side the connector tick sits on
+    if (s.angle === 0)    a.classList.add('side-bottom');
+    else if (s.angle === 180) a.classList.add('side-top');
+    else if (s.angle < 180)   a.classList.add('side-left');
+    else                       a.classList.add('side-right');
+    a.innerHTML = `
+      <div class="station__code">${s.code} · ${String(s.angle).padStart(3, '0')}°</div>
+      <div class="station__label">${s.label}</div>
+      <div class="station__sub">${s.sub}</div>
+    `;
+    compass.appendChild(a);
+
+    const row = document.createElement('a');
+    row.className = 'station-row';
+    row.href = s.href;
+    row.innerHTML = `
+      <div class="station-row__code">${s.code}</div>
+      <div class="station-row__body">
+        <div class="station-row__label">${s.label}</div>
+        <div class="station-row__sub">${s.sub}</div>
+      </div>
+      <div class="station-row__arrow">→</div>
+    `;
+    list.appendChild(row);
+
+    return a;
+  });
+
+  let activeIdx = 0;
+  let userOverride = false;       // freeze cycle when user hovers a station
+  let userOverrideTimeout = null;
+  // aimAt is wired up later once three.js loads; until then it's a no-op.
+  let aimAt = () => {};
+
+  function setActive(i) {
+    activeIdx = ((i % STATIONS.length) + STATIONS.length) % STATIONS.length;
+    stationEls.forEach((el, k) => el.classList.toggle('is-active', k === activeIdx));
+    const s = STATIONS[activeIdx];
+    document.getElementById('heading').textContent = `${s.angle}°`;
+    document.getElementById('targetCode').textContent = s.code;
+  }
+  setActive(0);
+
+  /* hover/focus any station → lock onto it and re-aim the hand */
+  stationEls.forEach((el, i) => {
+    const lock = () => {
+      setActive(i);
+      aimAt(i, 600);
+      userOverride = true;
+      clearTimeout(userOverrideTimeout);
+    };
+    const release = () => {
+      // resume auto-cycle 1.2s after the user disengages
+      userOverrideTimeout = setTimeout(() => { userOverride = false; }, 1200);
+    };
+    el.addEventListener('mouseenter', lock);
+    el.addEventListener('focus', lock);
+    el.addEventListener('mouseleave', release);
+    el.addEventListener('blur', release);
+  });
+
+  /* ==========================================================
+     3D hand — pointing pose, rotates pivot.z to aim at active station.
+     ========================================================== */
+  let _animejs, THREE, GLTFLoader;
+  try {
+    _animejs = await import('https://cdn.jsdelivr.net/npm/animejs@4.0.2/lib/anime.esm.js');
+    THREE = await import('three');
+    ({ GLTFLoader } = await import('three/addons/loaders/GLTFLoader.js'));
+  } catch (e) {
+    console.error('module import failed', e);
+    // graceful degradation — the radial sitemap still works without the 3D hand
+  }
+  const animate = _animejs?.animate;
+
+  /* outer compass ticks */
+  const tickG = document.getElementById('outerTicks');
+  const tickCount = 60;
+  for (let i = 0; i < tickCount; i++) {
+    const a = (i / tickCount) * Math.PI * 2 - Math.PI / 2;
+    const long = i % 5 === 0;
+    const r1 = 282;
+    const r2 = long ? 268 : 274;
+    const x1 = 300 + Math.cos(a) * r1;
+    const y1 = 300 + Math.sin(a) * r1;
+    const x2 = 300 + Math.cos(a) * r2;
+    const y2 = 300 + Math.sin(a) * r2;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1.toFixed(2));
+    line.setAttribute('y1', y1.toFixed(2));
+    line.setAttribute('x2', x2.toFixed(2));
+    line.setAttribute('y2', y2.toFixed(2));
+    line.setAttribute('class', long ? 'tick tick-strong' : 'tick');
+    tickG.appendChild(line);
+  }
+
+  /* ring rotations (only if anime loaded) */
+  if (animate) {
+    animate('#ringOuter', { rotate:  360, duration: 38000, easing: 'linear', loop: true });
+    animate('#ringMid',   { rotate: -360, duration: 24000, easing: 'linear', loop: true });
+    animate('#ringSweep', { rotate:  360, duration:  6000, easing: 'linear', loop: true });
+  }
+
+  if (!THREE || !GLTFLoader) {
+    // 3D failed to load — still cycle station highlights so the page feels alive
+    setInterval(() => { if (!userOverride) setActive(activeIdx + 1); }, 2600);
+  } else {
+    /* ---------- 3D scene ---------- */
+    const BONE_MAP = {
+      thumb:  ['ThumbRoot', 'ThumbMiddle', 'ThumbTop'],
+      index:  ['IndexF_lower', 'IndexF_middle', 'IndexF_tip'],
+      middle: ['MiddleF_lower', 'MiddleF_middle', 'MiddleF_tip'],
+      ring:   ['RingF_lower', 'RingF_middle', 'RingF_tip'],
+      pinky:  ['PinkyF_lower', 'PinkyF_middle', 'PinkyF_tip'],
+    };
+
+    // single pose: pointing (index extended, others curled).
+    // Derived from the D pose in loading.html — thumb tucked a touch more.
+    const POINT_POSE = {
+      thumb:  { curl: [0.50, 0.60, 0.30], splay:  0.10 },
+      index:  { curl: [0.00, 0.00, 0.00], splay:  0.00 },
+      middle: { curl: [1.40, 1.55, 1.20], splay: -0.10 },
+      ring:   { curl: [1.40, 1.55, 1.20], splay:  0.00 },
+      pinky:  { curl: [1.40, 1.55, 1.20], splay:  0.10 },
+    };
+
+    const canvas3d = document.getElementById('handCanvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas3d, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    scene.add(new THREE.AmbientLight(0xfff2d6, 0.55));
+    const key = new THREE.DirectionalLight(0xffcc88, 1.1); key.position.set(2.5, 3, 4); scene.add(key);
+    const rim = new THREE.DirectionalLight(0xff8a3d, 0.9); rim.position.set(-3, 1.5, -2); scene.add(rim);
+    const fill = new THREE.DirectionalLight(0x88aaff, 0.25); fill.position.set(-1, -2, 2); scene.add(fill);
+
+    // pivot = whole-hand rotation (z-spin around camera axis = compass aim)
+    const pivot = new THREE.Group();
+    scene.add(pivot);
+    // orient = locked-in axis correction (same as loading.html)
+    const orient = new THREE.Group();
+    pivot.add(orient);
+
+    function resize3d() {
+      const rect = canvas3d.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      renderer.setSize(rect.width, rect.height, false);
+      camera.aspect = rect.width / rect.height;
+      camera.updateProjectionMatrix();
+    }
+    resize3d();
+    new ResizeObserver(resize3d).observe(canvas3d);
+
+    const loader = new GLTFLoader();
+    let modelRoot = null;
+    let boneRefs = null;
+
+    loader.load('/3d-test/models/jtoastie-rigged-hand.glb', (gltf) => {
+      modelRoot = gltf.scene;
+      if (gltf.animations?.length) gltf.animations.length = 0;
+
+      modelRoot.traverse((obj) => {
+        if (obj.isCamera || obj.isLight) obj.visible = false;
+        if (obj.isMesh || obj.isSkinnedMesh) {
+          obj.material = new THREE.MeshStandardMaterial({
+            color: 0xf59e0b,
+            emissive: 0x4a1f00,
+            emissiveIntensity: 0.25,
+            roughness: 0.4,
+            metalness: 0.1,
+            transparent: true,
+            opacity: 0.92,
+            side: THREE.DoubleSide,
+          });
+        }
+      });
+
+      orient.add(modelRoot);
+      modelRoot.updateMatrixWorld(true);
+
+      const box = new THREE.Box3();
+      let mc = 0;
+      modelRoot.traverse((o) => {
+        if (o.isMesh || o.isSkinnedMesh) {
+          if (!o.geometry.boundingBox) o.geometry.computeBoundingBox();
+          const b = o.geometry.boundingBox.clone().applyMatrix4(o.matrixWorld);
+          if (mc === 0) box.copy(b); else box.union(b);
+          mc++;
+        }
+      });
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z) || 1;
+      modelRoot.position.sub(center);
+
+      // Same orient as loading.html — palm forward, fingers up.
+      orient.rotation.set(-6.0214, 1.8090, -1.8326);
+
+      const fitDist = (maxDim / 2) / Math.tan((camera.fov * Math.PI / 180) / 2);
+      camera.position.set(0, 0, fitDist * 1.85);
+      camera.near = maxDim * 0.01;
+      camera.far = maxDim * 100;
+      camera.updateProjectionMatrix();
+      camera.lookAt(0, 0, 0);
+
+      // bone refs + rest pose snapshot
+      boneRefs = { fingers: {}, rest: {} };
+      Object.entries(BONE_MAP).forEach(([finger, names]) => {
+        const bones = names.map((n) => modelRoot.getObjectByName(n) || null);
+        boneRefs.fingers[finger] = bones;
+        boneRefs.rest[finger] = {
+          x: bones.map((b) => b ? b.rotation.x : 0),
+          y: bones[0] ? bones[0].rotation.y : 0,
+        };
+      });
+
+      applyPointPose();
+      startAiming();
+    }, undefined, (err) => {
+      console.error('GLB load error', err);
+      // fallback — still cycle stations
+      setInterval(() => { if (!userOverride) setActive(activeIdx + 1); }, 2400);
+    });
+
+    function applyPointPose() {
+      if (!boneRefs) return;
+      Object.entries(POINT_POSE).forEach(([finger, data]) => {
+        const refs = boneRefs.fingers[finger];
+        const rests = boneRefs.rest[finger];
+        if (!refs || !rests) return;
+        refs.forEach((bone, i) => {
+          if (!bone) return;
+          bone.rotation.x = rests.x[i] + data.curl[i];
+        });
+        const lower = refs[0];
+        if (lower) lower.rotation.y = rests.y + (data.splay ?? 0);
+      });
+    }
+
+    /* aim — rotate pivot.z so the index finger points at the given station's angle.
+       Compass angles are degrees from top, clockwise.
+       Camera looks down -z; positive z-rotation is CCW from our POV.
+       To rotate the hand clockwise (matching the compass), we use -angle.
+       Reassigning the outer aimAt so hover handlers (defined earlier) can use it. */
+    aimAt = function (stationIdx, duration = 900) {
+      const s = STATIONS[stationIdx];
+      const target = -s.angle * Math.PI / 180;
+      if (!animate) {
+        pivot.rotation.z = target;
+        return;
+      }
+      // Take the shortest rotational path so the hand doesn't unwind backwards.
+      const TWO_PI = Math.PI * 2;
+      let delta = target - pivot.rotation.z;
+      while (delta >  Math.PI) delta -= TWO_PI;
+      while (delta < -Math.PI) delta += TWO_PI;
+      animate(pivot.rotation, { z: pivot.rotation.z + delta, duration, easing: 'easeInOutQuad' });
+    };
+
+    function startAiming() {
+      aimAt(activeIdx, 0);
+      // Auto-cycle: every 2.6s advance to next station and aim there.
+      // userOverride pauses this when the user is hovering or focused on a station.
+      setInterval(() => {
+        if (userOverride) return;
+        const next = (activeIdx + 1) % STATIONS.length;
+        setActive(next);
+        aimAt(next, 900);
+      }, 2600);
+    }
+
+    /* gentle x/y wobble for life */
+    const clock = new THREE.Clock();
+    function render() {
+      const t = clock.getElapsedTime();
+      if (modelRoot) {
+        pivot.rotation.x = 0.04 + Math.sin(t * 0.4) * 0.03;
+        // pivot.rotation.y handled by orient; we don't touch y here so pose stays palm-forward
+      }
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
+    render();
+  }
+
+  /* ==========================================================
+     HUD micro-feeds — purely cosmetic
+     ========================================================== */
+  const frameEl = document.getElementById('frame');
+  const hashEl = document.getElementById('hash');
+  const fpsEl = document.getElementById('fps');
+  function rndHex(n) {
+    return Array.from({length: n}, () => Math.floor(Math.random()*16).toString(16)).join('');
+  }
+  let frame = 0;
+  setInterval(() => { frame = (frame + 7) % 1000000; frameEl.textContent = String(frame).padStart(6, '0'); }, 80);
+  setInterval(() => { hashEl.textContent = `${rndHex(4)} · ${rndHex(4)} · ${rndHex(4)}`; }, 1400);
+
+  let lastT = performance.now(), fpsSamples = [];
+  function fpsLoop(t) {
+    const dt = t - lastT; lastT = t;
+    fpsSamples.push(1000 / dt);
+    if (fpsSamples.length > 30) fpsSamples.shift();
+    requestAnimationFrame(fpsLoop);
+  }
+  requestAnimationFrame(fpsLoop);
+  setInterval(() => {
+    if (!fpsSamples.length) return;
+    const avg = fpsSamples.reduce((a,b)=>a+b,0)/fpsSamples.length;
+    fpsEl.textContent = avg.toFixed(1);
+  }, 500);
+
+  /* ==========================================================
+     particles — same drifting amber field as loading.html
+     ========================================================== */
+  const pCanvas = document.getElementById('particles');
+  const ctx = pCanvas.getContext('2d');
+  let W, H, particles, dpr;
+
+  function resize() {
+    dpr = window.devicePixelRatio || 1;
+    W = window.innerWidth; H = window.innerHeight;
+    pCanvas.width = W * dpr; pCanvas.height = H * dpr;
+    pCanvas.style.width = W + 'px'; pCanvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    initParticles();
+  }
+  function initParticles() {
+    const n = Math.min(140, Math.floor((W*H) / 14000));
+    particles = Array.from({length: n}, () => spawnParticle(true));
+  }
+  function spawnParticle(spread) {
+    const cx = W / 2, cy = H / 2;
+    const angle = Math.random() * Math.PI * 2;
+    const dist = spread ? Math.random() * Math.min(W, H) * 0.5 : Math.min(W, H) * 0.55;
+    return {
+      x: cx + Math.cos(angle) * dist,
+      y: cy + Math.sin(angle) * dist,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      r: Math.random() * 1.4 + 0.4,
+      life: Math.random() * 1.0,
+      decay: 0.0015 + Math.random() * 0.0025,
+      hueShift: Math.random() < 0.2 ? 1 : 0
+    };
+  }
+  function drawParticles() {
+    ctx.clearRect(0, 0, W, H);
+    const cx = W / 2, cy = H / 2;
+    for (const p of particles) {
+      const dx = cx - p.x, dy = cy - p.y;
+      const d = Math.sqrt(dx*dx + dy*dy) || 1;
+      const tx = -dy / d, ty = dx / d;
+      p.vx += (dx/d) * 0.012 * 0.02 + tx * 0.018 * 0.015;
+      p.vy += (dy/d) * 0.012 * 0.02 + ty * 0.018 * 0.015;
+      p.vx *= 0.985; p.vy *= 0.985;
+      p.x += p.vx; p.y += p.vy;
+      p.life -= p.decay;
+      if (p.life <= 0 || d < 60) { Object.assign(p, spawnParticle(false)); p.life = 1; }
+      const alpha = Math.max(0, Math.min(1, p.life)) * 0.85;
+      ctx.fillStyle = p.hueShift ? `rgba(245, 239, 225, ${alpha * 0.6})` : `rgba(255, 186, 73, ${alpha})`;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
+      if (!p.hueShift) {
+        ctx.fillStyle = `rgba(217, 119, 6, ${alpha * 0.15})`;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i], b = particles[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d2 = dx*dx + dy*dy;
+        if (d2 < 5200) {
+          const al = (1 - d2 / 5200) * 0.10;
+          ctx.strokeStyle = `rgba(217, 119, 6, ${al})`;
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(drawParticles);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+  drawParticles();
+</script>
+</body>
+</html>

@@ -188,10 +188,9 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
-    # Allow Google Fonts + jsDelivr (three.js / anime.js modules used by /404.html
-    # and the /3d-test, /3dhand-test pages). 404 responses can't get path-specific
-    # headers since the request URL doesn't match /404.html, so we widen globally.
-    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net;"
+    # Allow Google Fonts; lock down everything else. /3d-test, /3dhand-test, and
+    # /experiments/* relax this individually below for three.js + anime.js.
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self';"
 
 # 3D test pages need cdn.jsdelivr.net for three.js + anime.js modules.
 # Override the global CSP for these paths only — the rest of the site stays tight.
@@ -202,6 +201,13 @@
 
 [[headers]]
   for = "/3dhand-test/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net;"
+
+# Archived UI experiments (e.g. the 3D-hand compass 404 at /experiments/404-compass/)
+# need the same jsdelivr exception as the live 3D test pages.
+[[headers]]
+  for = "/experiments/*"
   [headers.values]
     Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net;"
 
