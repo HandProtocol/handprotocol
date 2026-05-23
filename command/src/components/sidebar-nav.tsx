@@ -13,6 +13,10 @@ import {
   CalendarClock,
   Settings,
   LogOut,
+  Inbox,
+  Search,
+  Crosshair,
+  MapPin,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -22,10 +26,16 @@ import { cn } from "@/lib/utils";
   Nav entries match the H-A-N-D pillars in PRD section 1 / 7:
    - Dashboard       (Holistic, overview)
    - Grants          (Holistic, the pipeline view)
+   - Inbox           (Holistic, quick-capture triage)
    - Funders         (Nurture, funder library)
    - Boilerplate     (Approach, snippet library)
    - Deadlines       (Develop, deadline radar)
+   - Inspector       (Develop, UX feedback capture)
+   - Pins            (Develop, UX feedback triage)
    - Settings        (admin)
+
+  A cmd+K hint sits above the account footer so the operator knows
+  universal search is one chord away.
 */
 
 type NavItem = {
@@ -39,9 +49,12 @@ type NavItem = {
 const navItems: NavItem[] = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutGrid, pillar: "H" },
   { label: "Grants", href: "/grants", icon: FileText, pillar: "H" },
+  { label: "Inbox", href: "/inbox", icon: Inbox, pillar: "H" },
   { label: "Funders", href: "/funders", icon: Users, pillar: "N" },
   { label: "Boilerplate", href: "/boilerplate", icon: BookOpen, pillar: "A" },
   { label: "Deadlines", href: "/deadlines", icon: CalendarClock, pillar: "D" },
+  { label: "Inspector", href: "/inspector", icon: Crosshair, pillar: "D" },
+  { label: "Pins", href: "/pins", icon: MapPin, pillar: "D" },
   { label: "Settings", href: "/settings", icon: Settings, pillar: "·" },
 ];
 
@@ -139,6 +152,19 @@ export function SidebarNav({
           })}
         </ul>
       </nav>
+
+      {/* Cmd+K hint */}
+      <div className="px-4 pb-2">
+        <div className="flex items-center justify-between rounded-md border border-[rgba(245,239,225,0.06)] px-3 py-2 text-xs text-[var(--ink-dim)]">
+          <span className="inline-flex items-center gap-2">
+            <Search className="h-3.5 w-3.5" aria-hidden />
+            Search
+          </span>
+          <kbd className="rounded border border-[rgba(245,239,225,0.12)] px-1.5 py-0.5 font-mono text-[10px] tracking-[0.18em] text-[var(--ink-faint)]">
+            CMD K
+          </kbd>
+        </div>
+      </div>
 
       {/* Footer: account */}
       <div className="border-t border-[rgba(245,239,225,0.06)] p-4">

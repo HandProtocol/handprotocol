@@ -1,0 +1,15 @@
+# Netlify config for the HAND Command Center Next.js app.
+# Lives at command.handprotocol.org. Sibling to the static
+# marketing site at handprotocol.org (handprotocol/netlify.toml).
+
+[build]
+  base = "command"
+  publish = "command/.next"
+  command = "npm run build"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
