@@ -28,18 +28,72 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.getElementById('navLinks');
 
   if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
+    function closeNav() {
+      if (!navLinks.classList.contains('active')) return;
+      navLinks.classList.remove('active');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
       const isOpen = navLinks.classList.toggle('active');
       navToggle.setAttribute('aria-expanded', String(isOpen));
       if (isOpen) nav.classList.add('nav--scrolled');
     });
 
     navLinks.querySelectorAll('.nav__link').forEach((link) => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
+      link.addEventListener('click', closeNav);
     });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+        closeNav();
+        navToggle.focus();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!navLinks.classList.contains('active')) return;
+      if (nav.contains(e.target)) return;
+      closeNav();
+    });
+  }
+
+  const sameRefLinks = Array.from(navLinks ? navLinks.querySelectorAll('a[href^="#"]') : []);
+  if (sameRefLinks.length) {
+    const linkBySectionId = new Map();
+    sameRefLinks.forEach((a) => {
+      const id = a.getAttribute('href').slice(1);
+      if (id) linkBySectionId.set(id, a);
+    });
+
+    // "Approach" link points at #problem but the section continues through #solution.
+    const approachLink = linkBySectionId.get('problem');
+    if (approachLink) linkBySectionId.set('solution', approachLink);
+
+    const targets = Array.from(linkBySectionId.keys())
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const visible = new Set();
+    const spyObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) visible.add(entry.target.id);
+        else visible.delete(entry.target.id);
+      });
+
+      let activeId = null;
+      targets.forEach((t) => {
+        if (visible.has(t.id)) activeId = t.id;
+      });
+      const activeLink = activeId ? linkBySectionId.get(activeId) : null;
+      sameRefLinks.forEach((a) => a.classList.toggle('nav__link--active', a === activeLink));
+    }, {
+      rootMargin: '-30% 0px -55% 0px',
+      threshold: 0
+    });
+
+    targets.forEach((t) => spyObserver.observe(t));
   }
 
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {

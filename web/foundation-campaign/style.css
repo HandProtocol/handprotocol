@@ -201,7 +201,7 @@ strong {
 }
 
 /* ========================================
-   Navigation
+   Navigation — floating liquid-glass pills over transparent bar
    ======================================== */
 .nav {
   position: fixed;
@@ -210,15 +210,55 @@ strong {
   right: 0;
   z-index: 100;
   padding: var(--space-md) 0;
-  transition: all var(--transition-base);
+  background: transparent;
+  transition: padding var(--transition-base);
 }
 
 .nav--scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-border-light);
   padding: var(--space-sm) 0;
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* Shared liquid-glass material */
+.nav__left,
+.nav__toggle,
+.nav__links.active {
+  --pill-bg: rgba(255, 255, 255, 0.62);
+  --pill-border: rgba(13, 148, 136, 0.30);
+  --pill-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    0 8px 32px rgba(13, 148, 136, 0.10),
+    0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+/* Left pill: logo + links. Transparent over hero, frosted glass on scroll. */
+.nav__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  border-radius: var(--radius-full);
+  padding: 6px var(--space-md) 6px 6px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition:
+    background-color var(--transition-base),
+    backdrop-filter var(--transition-base),
+    -webkit-backdrop-filter var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.nav--scrolled .nav__left {
+  background: var(--pill-bg);
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  border-color: var(--pill-border);
+  box-shadow: var(--pill-shadow);
 }
 
 .nav--scrolled .nav__logo,
@@ -226,25 +266,25 @@ strong {
   color: var(--color-text);
 }
 
-.nav--scrolled .nav__cta {
-  background: var(--color-accent);
-  color: #fff;
-}
-
-.nav__inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .nav__logo {
   display: flex;
   align-items: center;
   gap: var(--space-sm);
+  padding: 4px var(--space-md) 4px 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  background: transparent;
   font-weight: 700;
   font-size: 1.0625rem;
   color: var(--color-text-on-dark);
   letter-spacing: -0.01em;
+  transition:
+    color var(--transition-base),
+    background-color var(--transition-base),
+    backdrop-filter var(--transition-base),
+    -webkit-backdrop-filter var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
 }
 
 .nav__logo-img {
@@ -260,6 +300,26 @@ strong {
   letter-spacing: -0.015em;
 }
 
+.nav__logo-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-teal);
+  margin-left: 5px;
+  vertical-align: 0.14em;
+  box-shadow:
+    0 0 0 1px rgba(13, 148, 136, 0.20),
+    0 0 12px rgba(13, 148, 136, 0.55);
+  transition: box-shadow var(--transition-base), background var(--transition-base);
+}
+
+.nav--scrolled .nav__logo-dot {
+  box-shadow:
+    0 0 0 1px rgba(13, 148, 136, 0.30),
+    0 0 8px rgba(13, 148, 136, 0.40);
+}
+
 .nav__links {
   display: none;
   align-items: center;
@@ -267,73 +327,194 @@ strong {
 }
 
 .nav__link {
+  position: relative;
   font-size: 0.875rem;
   font-weight: 500;
   color: var(--color-text-on-dark-secondary);
   transition: color var(--transition-fast);
+  padding: 4px 0;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--color-teal);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: center;
+  opacity: 0;
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms ease-out;
 }
 
 .nav__link:hover {
   color: var(--color-text-on-dark);
 }
 
-.nav--scrolled .nav__link:hover {
-  color: var(--color-accent);
+.nav__link:hover::after {
+  transform: scaleX(0.5);
+  opacity: 0.6;
 }
 
+.nav__link--active {
+  color: var(--color-text-on-dark);
+}
+
+.nav__link--active::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+.nav--scrolled .nav__link:hover {
+  color: var(--color-text);
+}
+
+.nav--scrolled .nav__link--active {
+  color: var(--color-text);
+}
+
+/* Right pill: Support CTA, paired visually with the left glass pill */
 .nav__cta {
   display: inline-flex;
   background: rgba(255, 255, 255, 0.1);
   color: var(--color-text-on-dark);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   margin-left: auto;
-  margin-right: var(--space-md);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base),
+    box-shadow var(--transition-base),
+    transform var(--transition-base);
+}
+
+.nav--scrolled .nav__cta {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.30),
+    0 6px 20px rgba(217, 119, 6, 0.32),
+    0 2px 6px rgba(180, 83, 9, 0.18);
 }
 
 .nav__cta:hover {
   background: var(--color-accent);
   border-color: var(--color-accent);
   color: #fff;
+  transform: translateY(-1px);
 }
 
+.nav--scrolled .nav__cta:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 8px 28px rgba(217, 119, 6, 0.40),
+    0 2px 6px rgba(180, 83, 9, 0.22);
+}
+
+/* Mobile-only hamburger pill: matches .nav__left chrome on scroll */
 .nav__toggle {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  background: none;
-  border: none;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
   cursor: pointer;
   width: 44px;
   height: 44px;
   padding: 11px;
-  margin: -8px;
+  transition:
+    background-color var(--transition-base),
+    backdrop-filter var(--transition-base),
+    -webkit-backdrop-filter var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.nav--scrolled .nav__toggle {
+  background: var(--pill-bg);
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  border-color: var(--pill-border);
+  box-shadow: var(--pill-shadow);
 }
 
 .nav__toggle span {
   display: block;
-  width: 22px;
-  height: 2px;
+  width: 20px;
+  height: 1.5px;
   background: var(--color-text-on-dark);
   border-radius: 2px;
-  transition: all var(--transition-fast);
+  transform-origin: center;
+  transition:
+    transform var(--transition-fast),
+    opacity var(--transition-fast),
+    background var(--transition-fast);
 }
 
 .nav--scrolled .nav__toggle span {
   background: var(--color-text);
 }
 
-@media (min-width: 1024px) {
+.nav__toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav__toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+@media (min-width: 900px) {
   .nav__links {
     display: flex;
   }
-  .nav__cta {
-    margin-left: 0;
-    margin-right: 0;
-  }
   .nav__toggle {
     display: none;
+  }
+  /* On desktop the .nav__left wrapper is the pill, so the logo
+     inside doesn't need its own padding ring. */
+  .nav__logo {
+    padding: 0;
+  }
+}
+
+@media (max-width: 899px) {
+  /* Below desktop: no pill chrome on .nav__left wrapper.
+     A backdrop-filter on the wrapper would create a containing block
+     and trap the dropdown panel inside its tiny width. The .nav__logo
+     gets its own pill instead (sibling of .nav__links, so dropdown
+     positioning stays anchored to the full nav). */
+  .nav__left,
+  .nav--scrolled .nav__left {
+    gap: 0;
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: transparent;
+    box-shadow: none;
+  }
+
+  .nav--scrolled .nav__logo {
+    background: var(--pill-bg);
+    backdrop-filter: blur(28px) saturate(1.8);
+    -webkit-backdrop-filter: blur(28px) saturate(1.8);
+    border-color: var(--pill-border);
+    box-shadow: var(--pill-shadow);
   }
 }
 
@@ -341,26 +522,73 @@ strong {
   .nav__logo-text {
     display: none;
   }
+  /* No wordmark to protect, and the logo image is its own opaque graphic.
+     Drop the pill chrome so the logo doesn't read as a floating ring. */
+  .nav__logo,
+  .nav--scrolled .nav__logo {
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-color: transparent;
+    box-shadow: none;
+  }
 }
 
-/* Mobile Nav */
+/* Mobile dropdown panel — falls below the floating pills */
 .nav__links.active {
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: var(--color-bg);
-  padding: var(--space-lg);
-  border-bottom: 1px solid var(--color-border);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  top: calc(100% + var(--space-sm));
+  left: var(--space-md);
+  right: var(--space-md);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  border: 1px solid var(--pill-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 16px 48px rgba(13, 148, 136, 0.12),
+    0 4px 12px rgba(15, 23, 42, 0.10);
+  gap: 0;
 }
 
 .nav__links.active .nav__link {
   color: var(--color-text);
-  padding: var(--space-sm) 0;
+  padding: var(--space-md) var(--space-lg);
   font-size: 1rem;
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+/* Override the desktop underline pseudo on mobile dropdown */
+.nav__links.active .nav__link::after {
+  display: none;
+}
+
+.nav__links.active .nav__link:hover {
+  background: rgba(13, 148, 136, 0.08);
+  color: var(--color-accent);
+}
+
+.nav__links.active .nav__link--active {
+  background: rgba(13, 148, 136, 0.10);
+  color: var(--color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav,
+  .nav__left,
+  .nav__cta,
+  .nav__logo,
+  .nav__logo-dot,
+  .nav__toggle,
+  .nav__toggle span {
+    transition: none;
+  }
 }
 
 /* ========================================
