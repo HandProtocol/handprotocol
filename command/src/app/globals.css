@@ -37,6 +37,7 @@
   --status-awarded: #4ade80;
   --status-declined: #8e8a7e;
   --status-withdrawn: #4a4940;
+  --status-closed: #4a4940;
 }
 
 /* Expose tokens to Tailwind 4 utilities. */
@@ -52,8 +53,45 @@
   --color-hud-strong: var(--hud-strong);
   --color-danger: var(--danger);
 
-  --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Mono + display both resolve to Inter — editorial feel, no AI-tech mono.
+     Code-block fallbacks still hit system mono via the .prose-hud rules. */
+  --font-mono: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/*
+  Editorial chrome (mirrors web/3d-test/loading.html). Big readouts use
+  Inter with tight tracking; labels are light italic Inter at normal case
+  instead of uppercase tracked-out mono. The italic carries the "meta"
+  semantics that uppercase mono used to carry.
+*/
+.display {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+.display-eyebrow {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.8125rem;
+  letter-spacing: 0.005em;
+  color: var(--ink-dim);
+}
+
+.display-eyebrow .amber {
+  color: var(--amber-soft);
+  font-style: normal;
+}
+
+.display-stat {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
 
 html,
@@ -62,7 +100,8 @@ body {
   background: var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
-  font-family: var(--font-inter), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Background atmosphere shared by the loader and dashboard chrome. */
@@ -133,17 +172,29 @@ body {
   border-top: 0;
 }
 
-/* JetBrains Mono eyebrow used for status labels, IDs, timestamps. */
+/* Editorial eyebrow: light italic Inter for status labels, IDs, timestamps.
+   Replaces the prior uppercase-tracked-mono treatment to match the
+   loading-screen editorial language. */
 .eyebrow {
-  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.005em;
   color: var(--ink-dim);
 }
 
 .eyebrow .amber {
   color: var(--amber-soft);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.eyebrow b,
+.eyebrow strong {
+  font-weight: 500;
+  font-style: normal;
+  color: var(--ink);
 }
 
 /* Panel base for cards and HUD modules. */
@@ -158,4 +209,330 @@ body {
   outline: 1px solid var(--amber-soft);
   outline-offset: 2px;
   box-shadow: 0 0 12px var(--amber-glow);
+}
+
+/*
+  Status chip palette. Status colors are tokens; the chip mixes them
+  with a low-alpha background so the dark surface still reads as the
+  primary canvas. Matches the public tracker's `--<status>` semantics.
+*/
+.status-chip {
+  border-color: color-mix(in oklab, var(--chip) 50%, transparent);
+  background: color-mix(in oklab, var(--chip) 12%, transparent);
+  color: var(--chip-ink, var(--ink));
+}
+.status-chip .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--chip);
+}
+.status-chip[data-status="discovery"] {
+  --chip: var(--status-discovery);
+  --chip-ink: #c2d3ff;
+}
+.status-chip[data-status="drafting"] {
+  --chip: var(--status-drafting);
+  --chip-ink: var(--amber-soft);
+}
+.status-chip[data-status="submitted"] {
+  --chip: var(--status-submitted);
+  --chip-ink: var(--amber-soft);
+}
+.status-chip[data-status="awarded"] {
+  --chip: var(--status-awarded);
+  --chip-ink: #bef0d0;
+}
+.status-chip[data-status="declined"] {
+  --chip: var(--status-declined);
+  --chip-ink: var(--ink-dim);
+}
+.status-chip[data-status="withdrawn"] {
+  --chip: var(--status-withdrawn);
+  --chip-ink: var(--ink-dim);
+}
+.status-chip[data-status="closed"] {
+  --chip: var(--status-closed);
+  --chip-ink: var(--ink-dim);
+}
+
+/*
+  Prose styling for the grant detail markdown render. Constrained to the
+  dark theme. Inter for body, system mono only for actual code blocks,
+  amber for links.
+*/
+.prose-hud {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.65;
+}
+.prose-hud h1,
+.prose-hud h2,
+.prose-hud h3,
+.prose-hud h4 {
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.prose-hud h2 {
+  font-size: 1.05rem;
+  margin: 1.5rem 0 0.5rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(245, 239, 225, 0.08);
+}
+.prose-hud h3 {
+  font-size: 0.95rem;
+  margin: 1.2rem 0 0.4rem;
+  color: var(--ink-dim);
+}
+.prose-hud p {
+  margin: 0.6rem 0;
+  color: var(--ink);
+}
+.prose-hud a {
+  color: var(--amber-soft);
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 186, 73, 0.4);
+  text-underline-offset: 2px;
+}
+.prose-hud a:hover {
+  text-decoration-color: var(--amber-soft);
+}
+.prose-hud ul,
+.prose-hud ol {
+  margin: 0.5rem 0 0.6rem 1.25rem;
+}
+.prose-hud li {
+  margin: 0.2rem 0;
+}
+.prose-hud code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.86em;
+  padding: 0.1em 0.35em;
+  background: rgba(245, 239, 225, 0.05);
+  border: 1px solid rgba(245, 239, 225, 0.08);
+  border-radius: 3px;
+  color: var(--ink);
+}
+.prose-hud pre {
+  background: rgba(7, 9, 15, 0.7);
+  border: 1px solid rgba(245, 239, 225, 0.08);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+  overflow-x: auto;
+  font-size: 0.85rem;
+}
+.prose-hud pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.prose-hud blockquote {
+  border-left: 2px solid rgba(217, 119, 6, 0.4);
+  padding-left: 0.9rem;
+  margin: 0.7rem 0;
+  color: var(--ink-dim);
+  font-style: italic;
+}
+.prose-hud hr {
+  border: 0;
+  border-top: 1px solid rgba(245, 239, 225, 0.08);
+  margin: 1.2rem 0;
+}
+.prose-hud table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  margin: 0.8rem 0;
+}
+.prose-hud th,
+.prose-hud td {
+  border: 1px solid rgba(245, 239, 225, 0.08);
+  padding: 0.35rem 0.6rem;
+  text-align: left;
+}
+.prose-hud th {
+  background: rgba(245, 239, 225, 0.04);
+  color: var(--ink-dim);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.005em;
+}
+
+/* HUD form inputs (used in detail-view frontmatter form). */
+.hud-input {
+  background: rgba(7, 9, 15, 0.6);
+  border: 1px solid rgba(245, 239, 225, 0.1);
+  border-radius: 6px;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.85rem;
+  color: var(--ink);
+  outline: none;
+  width: 100%;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+.hud-input:focus {
+  border-color: rgba(217, 119, 6, 0.45);
+  box-shadow: 0 0 0 1px rgba(217, 119, 6, 0.3);
+}
+.hud-input::placeholder {
+  color: var(--ink-faint);
+}
+.hud-textarea {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  min-height: 8rem;
+  line-height: 1.55;
+  resize: vertical;
+}
+.hud-label {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.005em;
+  color: var(--ink-faint);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* ============================================================
+   Kanban polish (Phase 1.5)
+   Grant card corner brackets, column ambient chrome, status-band
+   tint on the column accent stripe.
+   ============================================================ */
+
+.grant-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.grant-card__bracket {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(217, 119, 6, 0.55);
+  border-style: solid;
+  border-width: 0;
+  opacity: 0;
+  transition: opacity 180ms ease;
+  pointer-events: none;
+}
+.grant-card:hover .grant-card__bracket {
+  opacity: 1;
+}
+.grant-card__bracket--tl { top: 6px; left: 6px; border-top-width: 1px; border-left-width: 1px; }
+.grant-card__bracket--tr { top: 6px; right: 6px; border-top-width: 1px; border-right-width: 1px; }
+.grant-card__bracket--bl { bottom: 6px; left: 6px; border-bottom-width: 1px; border-left-width: 1px; }
+.grant-card__bracket--br { bottom: 6px; right: 6px; border-bottom-width: 1px; border-right-width: 1px; }
+
+/* Subtle status accent on the card's top edge */
+.grant-card[data-status="drafting"]    { border-top: 1px solid rgba(255, 186, 73, 0.4); }
+.grant-card[data-status="submitted"]   { border-top: 1px solid rgba(107, 142, 255, 0.45); }
+.grant-card[data-status="awarded"]     { border-top: 1px solid rgba(74, 222, 128, 0.5); }
+.grant-card[data-status="declined"]    { border-top: 1px solid rgba(142, 138, 126, 0.4); }
+.grant-card[data-status="withdrawn"]   { border-top: 1px solid rgba(74, 73, 64, 0.4); }
+.grant-card[data-status="discovery"]   { border-top: 1px solid rgba(107, 142, 255, 0.3); }
+
+/* Column ambient: faint vertical gradient tuned per status */
+.kanban-column {
+  background-image: linear-gradient(
+    180deg,
+    rgba(245, 239, 225, 0.02) 0%,
+    transparent 40%
+  );
+}
+.kanban-column[data-status="drafting"]::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 186, 73, 0.6), transparent);
+}
+.kanban-column[data-status="submitted"]::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(107, 142, 255, 0.6), transparent);
+}
+.kanban-column[data-status="awarded"]::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.6), transparent);
+}
+.kanban-column[data-status="declined"]::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(142, 138, 126, 0.4), transparent);
+}
+.kanban-column[data-status="withdrawn"]::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(74, 73, 64, 0.4), transparent);
+}
+.kanban-column[data-status="discovery"]::before {
+  content: "";
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(107, 142, 255, 0.4), transparent);
+}
+
+/* Pillar tile chrome for the dashboard's H-A-N-D grid */
+.pillar-tile {
+  position: relative;
+  background: var(--bg-2);
+  border: 1px solid rgba(245, 239, 225, 0.08);
+  border-radius: 12px;
+  padding: 1.25rem;
+  overflow: hidden;
+  isolation: isolate;
+  transition: border-color 200ms ease, transform 200ms ease;
+}
+.pillar-tile:hover {
+  border-color: rgba(217, 119, 6, 0.35);
+}
+.pillar-tile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    300px 200px at 0% 0%,
+    rgba(217, 119, 6, 0.08),
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+.pillar-tile__letter {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  letter-spacing: -0.04em;
+  background: linear-gradient(180deg, #fff5dd 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+}
+.pillar-tile__eyebrow {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.005em;
+  color: var(--ink-faint);
+}
+.pillar-tile__stat {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+/* Display-stat helper for hero numbers across the app */
+.stat-large {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  letter-spacing: -0.025em;
+  color: var(--ink);
 }
