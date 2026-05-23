@@ -4,7 +4,7 @@
 
 [build]
   base = "command"
-  publish = "command/.next"
+  publish = ".next"
   command = "npm run build"
 
 [build.environment]
