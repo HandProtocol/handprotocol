@@ -84,30 +84,31 @@ body::after {
   overflow: hidden;
   background: #fff;
   z-index: 4;
+  /* Static box-shadow — never transitioned (transitioning shadow forces
+   * a paint per frame and was the source of the next-click jank). */
   box-shadow:
     0 14px 80px rgba(0, 0, 0, 0.7),
     0 0 0 1px rgba(245, 239, 225, 0.08),
     inset 0 0 0 1px rgba(217, 119, 6, 0.06);
+  /* Promote to its own compositor layer so the pop scale is GPU-only. */
   transform: translateZ(0);
-  transition:
-    transform 540ms var(--easing-overshoot),
-    box-shadow 540ms var(--easing-overshoot);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 360ms var(--easing);
   will-change: transform;
 }
 .frame.popping {
-  transform: scale(0.982);
-  box-shadow:
-    0 8px 40px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(217, 119, 6, 0.18),
-    inset 0 0 0 1px rgba(217, 119, 6, 0.1);
+  /* Subtler, faster scale — keeps focus on the iframe scrolling beneath. */
+  transform: scale(0.992) translateZ(0);
+  transition: transform 220ms cubic-bezier(.2, .7, .2, 1);
 }
 .frame.land {
-  animation: land 700ms var(--easing-overshoot);
+  animation: land 600ms var(--easing-overshoot);
 }
 @keyframes land {
-  0%   { transform: scale(0.965); opacity: 0.92; }
-  60%  { transform: scale(1.005); }
-  100% { transform: scale(1); opacity: 1; }
+  0%   { transform: scale(0.975) translateZ(0); opacity: 0.94; }
+  60%  { transform: scale(1.004) translateZ(0); }
+  100% { transform: scale(1) translateZ(0); opacity: 1; }
 }
 
 #page {
@@ -116,6 +117,9 @@ body::after {
   height: 100%;
   border: 0;
   background: #fff;
+  /* Hint the compositor; reduces flicker when the parent wrapper scales. */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* a thin vignette so the white page edges blend into the dark chrome */
@@ -753,6 +757,54 @@ body::after {
   border-color: var(--hud-strong);
 }
 
+/* Focal chip — shows exactly which heading/area on the page the user
+ * was looking at when they opened the modal. Pin links land back here. */
+.modal-focal {
+  margin: 14px 24px 0;
+  padding: 10px 14px;
+  background: rgba(217, 119, 6, 0.08);
+  border: 1px solid rgba(217, 119, 6, 0.28);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+.modal-focal[hidden] { display: none; }
+.modal-focal .focal-eye {
+  color: var(--amber);
+  font-size: 12px;
+  text-shadow: 0 0 8px var(--amber-glow);
+}
+.modal-focal .focal-label {
+  flex: 1;
+  color: var(--ink-dim);
+  text-transform: none;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.modal-focal .focal-label b {
+  color: var(--ink);
+  font-weight: 500;
+}
+.modal-focal .focal-meta {
+  color: var(--amber-soft);
+  font-variant-numeric: tabular-nums;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  background: rgba(7, 9, 15, 0.5);
+  border: 1px solid rgba(217, 119, 6, 0.3);
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+
 .modal-body {
   padding: 22px 24px;
   display: flex;
@@ -921,6 +973,19 @@ body::after {
   padding: 2px 8px;
   border-radius: 999px;
   border: 1px solid rgba(217, 119, 6, 0.25);
+}
+.feedback-list .fb-focal-inline {
+  margin-top: 6px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--amber-soft);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.feedback-list .fb-focal-inline span:first-child {
+  color: var(--amber);
 }
 .feedback-empty {
   font-family: 'JetBrains Mono', ui-monospace, monospace;
