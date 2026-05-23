@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>HAND — Deck</title>
+<meta name="description" content="HAND Protocol — page deck. Scroll the campaign, end to end." />
+<meta name="robots" content="noindex,nofollow" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+<link rel="mask-icon" href="../assets/favicon.svg" color="#D97706" />
+<meta name="theme-color" content="#07090f" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- iframe stage -->
+<div class="frame" id="frame">
+  <iframe
+    id="page"
+    title="HAND Protocol page preview"
+    src="/foundation-campaign/"
+    referrerpolicy="same-origin"
+    loading="eager"
+  ></iframe>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="scan" aria-hidden="true"></div>
+</div>
+
+<!-- top HUD -->
+<header class="hud hud-top">
+  <div class="hud-left">
+    <span class="hud-dot" aria-hidden="true"></span>
+    <span class="hud-label">DECK</span>
+    <span class="hud-sep">·</span>
+    <span class="hud-path" id="cur-path">/foundation-campaign/</span>
+  </div>
+  <div class="hud-center">
+    <span class="hud-title" id="cur-title">Foundation Campaign</span>
+    <span class="hud-tag" id="cur-tag">Campaign</span>
+  </div>
+  <div class="hud-right">
+    <span class="hud-counter">
+      <b id="page-index">1</b><span class="of">/</span><span id="page-total">11</span>
+    </span>
+    <a
+      class="hud-open"
+      id="open-link"
+      href="/foundation-campaign/"
+      target="_blank"
+      rel="noopener"
+      title="Open this page in a new tab"
+      aria-label="Open in new tab"
+    >↗</a>
+  </div>
+</header>
+
+<!-- progress + dots -->
+<div class="progress" aria-hidden="false">
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+  <div class="progress-dots" id="progress-dots" role="tablist" aria-label="Pages"></div>
+</div>
+
+<!-- bottom controls -->
+<div class="controls">
+  <button class="btn btn-feedback" id="btn-feedback" title="Leave feedback on this page (F)">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+    <span class="btn-text">Feedback</span>
+    <span class="kbd">F</span>
+  </button>
+
+  <div class="hint" id="hint">
+    <span class="hint-piece"><b>Space</b> · scroll</span>
+    <span class="hint-piece"><b>→</b> · next</span>
+    <span class="hint-piece"><b>F</b> · feedback</span>
+  </div>
+
+  <div class="control-stack">
+    <button class="btn btn-icon" id="btn-prev" title="Previous (←)" aria-label="Previous page">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+    <button class="btn btn-next" id="btn-next" title="Next (Space / →)">
+      <span class="btn-next-label" id="btn-next-label">Next</span>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+      <span class="kbd">␣</span>
+    </button>
+  </div>
+</div>
+
+<!-- loading transition overlay -->
+<div class="loading-overlay" id="loading-overlay" aria-hidden="true">
+  <div class="loading-grid" aria-hidden="true"></div>
+  <div class="loading-glow" aria-hidden="true"></div>
+  <canvas class="loading-particles" id="loading-particles" aria-hidden="true"></canvas>
+  <div class="loading-chrome" aria-hidden="true">
+    <span class="bracket tl"></span>
+    <span class="bracket tr"></span>
+    <span class="bracket bl"></span>
+    <span class="bracket br"></span>
+  </div>
+  <div class="loading-stack">
+    <div class="loading-eyebrow">
+      <span class="loading-dot"></span>
+      <span>LOADING</span>
+      <span class="loading-stream">// HAND · DECK · TRANSITION</span>
+    </div>
+    <div class="loading-path" id="loading-path">/reciprocates/</div>
+    <div class="loading-title" id="loading-title">Reciprocates</div>
+    <div class="loading-bar"><div class="loading-bar-fill" id="loading-bar-fill"></div></div>
+    <div class="loading-meta">
+      <span>HAND · DECK</span>
+      <span id="loading-counter">2 / 11</span>
+    </div>
+  </div>
+</div>
+
+<!-- feedback modal -->
+<div class="modal" id="feedback-modal" aria-hidden="true">
+  <div class="modal-scrim" id="modal-scrim"></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="fb-title">
+    <header class="modal-head">
+      <div>
+        <div class="modal-eyebrow">FEEDBACK</div>
+        <div class="modal-title" id="fb-title">On <span id="fb-page">/foundation-campaign/</span></div>
+      </div>
+      <button class="modal-x" id="modal-x" aria-label="Close feedback">✕</button>
+    </header>
+
+    <div class="modal-body">
+      <label class="modal-field">
+        <span>Your name or handle <em>(optional)</em></span>
+        <input id="fb-name" type="text" maxlength="80" placeholder="anonymous" autocomplete="off" />
+      </label>
+      <label class="modal-field">
+        <span>What stood out, what felt off, what to add?</span>
+        <textarea id="fb-text" rows="6" placeholder="Honest is most useful. Cmd/Ctrl + Enter to send."></textarea>
+      </label>
+      <div class="modal-tags" id="modal-tags">
+        <button data-tag="🪄 magic" class="tag" type="button">🪄 magic</button>
+        <button data-tag="🧱 confusing" class="tag" type="button">🧱 confusing</button>
+        <button data-tag="💡 idea" class="tag" type="button">💡 idea</button>
+        <button data-tag="🐛 bug" class="tag" type="button">🐛 bug</button>
+        <button data-tag="✂️ cut" class="tag" type="button">✂️ cut</button>
+        <button data-tag="❤️ keep" class="tag" type="button">❤️ keep</button>
+      </div>
+    </div>
+
+    <footer class="modal-foot">
+      <div class="modal-status" id="fb-status">Saved locally · synced when online</div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="fb-cancel" type="button">Cancel</button>
+        <button class="btn btn-primary" id="fb-submit" type="button">Send</button>
+      </div>
+    </footer>
+
+    <section class="feedback-list">
+      <header>
+        <span>Recent on this page</span>
+        <span class="fb-count-wrap"><b id="fb-count">0</b> notes</span>
+      </header>
+      <ul id="fb-list"></ul>
+      <p class="feedback-empty" id="fb-empty">No notes here yet. Be the first set of eyes.</p>
+    </section>
+  </div>
+</div>
+
+<!-- intro toast (first-visit) -->
+<div class="intro-toast" id="intro-toast" hidden>
+  <div class="intro-toast-inner">
+    <span class="intro-dot"></span>
+    <div>
+      <div class="intro-title">Welcome to the Deck</div>
+      <div class="intro-body">Tap <b>Next</b> (or Space) to flip through HAND. When a page ends, you'll fall into the next one.</div>
+    </div>
+    <button class="intro-x" id="intro-x" aria-label="Dismiss">✕</button>
+  </div>
+</div>
+
+<script src="main.js" defer></script>
+</body>
+</html>

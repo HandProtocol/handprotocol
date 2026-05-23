@@ -30,6 +30,9 @@
 /board                  /governance/#board                     301
 /board-prospect         https://github.com/HandProtocol/handprotocol/blob/main/governance/board/director-prospect-brief.md  301
 
+# Deck — internal page inspector (noindex; iframes through every public page)
+/deck                   /deck/                                 301
+
 # Mystic Hearts Airstream Studio (password-protected via edge function)
 /mystichearts/airstreamstudio  /mystichearts/airstreamstudio/  301
 /airstreamstudio        /mystichearts/airstreamstudio/         301
