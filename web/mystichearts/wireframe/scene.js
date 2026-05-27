@@ -13,6 +13,8 @@ const COLORS = {
   wave:   0xa97cff,  // soft violet
   barn:   0xc45f3a,  // weathered rust
   ground: 0x5a3a26,  // earthy brown
+  hand:   0xeac38a,  // warm peach/gold (palms)
+  mist:   0xfff0d6,  // pale cream (rising mist)
   bg:     0x0a0510,  // deep night
 };
 
@@ -38,6 +40,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(COLORS.bg, 1);
 
 const scene = new THREE.Scene();
+scene.background = new THREE.Color(COLORS.bg);   // explicit (EffectComposer otherwise leaves trails)
 scene.fog = new THREE.FogExp2(COLORS.bg, 0.028);
 
 const camera = new THREE.PerspectiveCamera(
@@ -212,12 +215,93 @@ new SVGLoader().load('./assets/heart.svg', (data) => {
   });
 });
 
+// ---------- Cupped hands (one pair under each heart) + particle mist ----------
+// handPairs lives at module scope so the animate loop can update positions/mist origins.
+const handPairs = [];
+
+// Hands sit just below their heart, lying flat (palms up toward the heart).
+// The SVG is drawn in the X/Y plane; rotating -PI/2 around X lays it flat and
+// orients the fill normal toward +y (palm faces up).
+const HAND_LAYOUTS = [
+  { pos: [-4.8, -1.5,  1.5], scale: 0.014, swayPhase: 0.0 },
+  { pos: [-1.6, -0.7,  0.5], scale: 0.018, swayPhase: 1.4 },
+  { pos: [ 1.6, -1.9, -1.0], scale: 0.013, swayPhase: 2.8 },
+];
+
+new SVGLoader().load('./assets/hands.svg', (data) => {
+  const shapes = [];
+  data.paths.forEach((p) => {
+    SVGLoader.createShapes(p).forEach((s) => shapes.push(s));
+  });
+
+  HAND_LAYOUTS.forEach((cfg) => {
+    const g = new THREE.Group();
+
+    shapes.forEach((shape) => {
+      // 2D outline: perimeter as a LineLoop (clean wireframe edge)
+      const pts2 = shape.getPoints(96);
+      const pts3 = pts2.map((p) => new THREE.Vector3(p.x, -p.y, 0)); // flip SVG y
+      const outlineGeo = new THREE.BufferGeometry().setFromPoints(pts3);
+      g.add(new THREE.LineLoop(outlineGeo, wireMat(COLORS.hand, 0.85)));
+
+      // Faint surface fill for warmth
+      const shapeGeo = new THREE.ShapeGeometry(shape);
+      shapeGeo.scale(1, -1, 1);
+      g.add(new THREE.Mesh(shapeGeo, new THREE.MeshBasicMaterial({
+        color: COLORS.hand,
+        transparent: true,
+        opacity: 0.12,
+        side: THREE.DoubleSide,
+      })));
+    });
+
+    g.position.set(...cfg.pos);
+    g.scale.setScalar(cfg.scale);
+    g.rotation.x = -Math.PI / 2;             // lay flat, palms up
+    g.userData = { basePos: [...cfg.pos], swayPhase: cfg.swayPhase };
+    handPairs.push(g);
+    scene.add(g);
+  });
+});
+
+// Particle mist — drifts up from each hand, swirls outward, fades.
+const PARTICLES_PER_HAND = 70;
+const PARTICLE_TOTAL = PARTICLES_PER_HAND * HAND_LAYOUTS.length;
+const particlePos = new Float32Array(PARTICLE_TOTAL * 3);
+const particleState = [];
+for (let i = 0; i < PARTICLE_TOTAL; i++) {
+  particleState.push({
+    handIdx: Math.floor(i / PARTICLES_PER_HAND),
+    life:    Math.random(),
+    speed:   0.10 + Math.random() * 0.10,
+    angle:   Math.random() * Math.PI * 2,
+    swirl:   0.4 + Math.random() * 0.8,
+    radius:  0.15 + Math.random() * 0.35,
+    rise:    1.2 + Math.random() * 0.9,
+  });
+  // Park offscreen until the loop populates real positions
+  particlePos[i * 3]     = 0;
+  particlePos[i * 3 + 1] = -999;
+  particlePos[i * 3 + 2] = 0;
+}
+const particleGeo = new THREE.BufferGeometry();
+particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
+const particles = new THREE.Points(particleGeo, new THREE.PointsMaterial({
+  color: COLORS.mist,
+  size: 0.07,
+  transparent: true,
+  opacity: 0.55,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false,
+}));
+scene.add(particles);
+
 // ---------- "Mystic Hearts" text ----------
 const textGroup = new THREE.Group();
 scene.add(textGroup);
 
 new FontLoader().load(
-  'https://threejs.org/examples/fonts/gentilis_regular.typeface.json',
+  'https://cdn.jsdelivr.net/npm/three@0.169.0/examples/fonts/gentilis_regular.typeface.json',
   (font) => {
     const geo = new TextGeometry('Mystic Hearts', {
       font,
@@ -301,6 +385,31 @@ function animate() {
   camera.position.x = CAM_BASE.x + Math.sin(t * 0.14) * 0.45;
   camera.position.y = CAM_BASE.y + Math.cos(t * 0.11) * 0.20;
   camera.lookAt(CAM_LOOK);
+
+  // Hands: gentle bob + slight tilt sway, palms up
+  handPairs.forEach((h) => {
+    const u = h.userData;
+    h.position.y = u.basePos[1] + Math.sin(t * 0.55 + u.swayPhase) * 0.08;
+    h.rotation.z = Math.sin(t * 0.35 + u.swayPhase) * 0.05;
+  });
+
+  // Particle mist: each particle rises from its assigned hand, swirls outward, fades
+  for (let i = 0; i < PARTICLE_TOTAL; i++) {
+    const s = particleState[i];
+    s.life += 0.0045 * s.speed * 10;
+    if (s.life > 1) s.life -= 1;
+
+    const hand = handPairs[s.handIdx];
+    if (!hand) continue;
+
+    const life = s.life;
+    const ang  = s.angle + t * s.swirl;
+    const r    = s.radius * (0.4 + life * 1.2);
+    particlePos[i * 3]     = hand.position.x + Math.cos(ang) * r;
+    particlePos[i * 3 + 1] = hand.position.y + 0.15 + life * s.rise;
+    particlePos[i * 3 + 2] = hand.position.z + Math.sin(ang) * r;
+  }
+  particleGeo.attributes.position.needsUpdate = true;
 
   // Energy wave: expanding pulses with fade in / fade out
   waveRings.forEach((ring) => {
