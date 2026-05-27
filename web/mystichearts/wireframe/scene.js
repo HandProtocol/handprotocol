@@ -3,34 +3,23 @@ import { EffectComposer }  from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass }      from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { SVGLoader }       from 'three/addons/loaders/SVGLoader.js';
-import { FontLoader }      from 'three/addons/loaders/FontLoader.js';
-import { TextGeometry }    from 'three/addons/geometries/TextGeometry.js';
 
 // ---------- Palette ----------
 const COLORS = {
-  heart:  0xff6b9d,  // rose
-  text:   0xd4b468,  // warm gold
-  wave:   0xa97cff,  // soft violet
-  barn:   0xc45f3a,  // weathered rust
-  ground: 0x5a3a26,  // earthy brown
-  hand:   0xeac38a,  // warm peach/gold (palms)
-  mist:   0xfff0d6,  // pale cream (rising mist)
-  bg:     0x0a0510,  // deep night
+  outerHeart: 0xff8fb5,
+  roofHeart:  0xff5d8f,
+  barn:       0xc45f3a,
+  hand:       0xeac38a,
+  human:      0xf5e8d4,
+  ground:     0x4a2f1e,
+  mist:       0xfff0d6,
+  ring:       0xa97cff,
+  bg:         0x0a0510,
 };
 
 // ---------- Materials ----------
-const wireMat = (color, opacity = 0.82) =>
+const wireMat = (color, opacity = 0.85) =>
   new THREE.LineBasicMaterial({ color, transparent: true, opacity });
-
-const glassMat = (color, opacity = 0.18) =>
-  new THREE.MeshStandardMaterial({
-    color: 0x080010,
-    emissive: new THREE.Color(color),
-    emissiveIntensity: 0.25,
-    transparent: true,
-    opacity,
-    side: THREE.DoubleSide,
-  });
 
 // ---------- Renderer / Scene / Camera ----------
 const canvas   = document.getElementById('three-canvas');
@@ -40,26 +29,27 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setClearColor(COLORS.bg, 1);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(COLORS.bg);   // explicit (EffectComposer otherwise leaves trails)
-scene.fog = new THREE.FogExp2(COLORS.bg, 0.028);
+scene.background = new THREE.Color(COLORS.bg);
+scene.fog        = new THREE.FogExp2(COLORS.bg, 0.020);
 
 const camera = new THREE.PerspectiveCamera(
-  58,                                      // wider FOV → stronger perspective
+  52,
   window.innerWidth / window.innerHeight,
   0.1,
   200
 );
-const CAM_BASE = new THREE.Vector3(-2.2, 2.0, 12.5);
-const CAM_LOOK = new THREE.Vector3(0.8, 0.2, -2.5);
-camera.position.copy(CAM_BASE);
+const CAM_RADIUS = 14;
+const CAM_HEIGHT = 2.8;
+const CAM_LOOK   = new THREE.Vector3(0, 2.8, 0);
+camera.position.set(0, CAM_HEIGHT, CAM_RADIUS);
 camera.lookAt(CAM_LOOK);
 
 // ---------- Lights ----------
-scene.add(new THREE.AmbientLight(0x404048, 0.6));
+scene.add(new THREE.AmbientLight(0x40404a, 0.55));
 const key = new THREE.DirectionalLight(0xffd9b3, 0.45);
-key.position.set(5, 10, 7);
+key.position.set(5, 12, 7);
 scene.add(key);
-const fill = new THREE.DirectionalLight(0x6f7fbf, 0.3);
+const fill = new THREE.DirectionalLight(0x6f7fbf, 0.30);
 fill.position.set(-6, 4, -5);
 scene.add(fill);
 
@@ -68,287 +58,312 @@ const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
 composer.addPass(new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.95, 0.85, 0.15
+  0.95, 0.85, 0.18
 ));
 
 // ---------- Starfield ----------
 {
-  const N = 700;
+  const N = 600;
   const pos = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) {
-    pos[i * 3]     = (Math.random() - 0.5) * 110;
-    pos[i * 3 + 1] = (Math.random() - 0.5) * 110;
-    pos[i * 3 + 2] = -20 - Math.random() * 70;
+    pos[i*3]     = (Math.random() - 0.5) * 120;
+    pos[i*3 + 1] = (Math.random() - 0.5) * 120;
+    pos[i*3 + 2] = -30 - Math.random() * 70;
   }
-  const starGeo = new THREE.BufferGeometry();
-  starGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-  scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({
-    color: 0xd4b468, size: 0.08, transparent: true, opacity: 0.45,
+  const g = new THREE.BufferGeometry();
+  g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  scene.add(new THREE.Points(g, new THREE.PointsMaterial({
+    color: 0xd4b468, size: 0.07, transparent: true, opacity: 0.40,
   })));
 }
 
-// ---------- Ground grid (sells depth via converging lines) ----------
+// ---------- Ground grid (subtle, under barn) ----------
 {
-  const SIZE = 60, DIV = 30, half = SIZE / 2, step = SIZE / DIV;
+  const SIZE = 40, DIV = 20, half = SIZE / 2, step = SIZE / DIV;
   const pts = [];
   for (let i = 0; i <= DIV; i++) {
     const t = -half + i * step;
     pts.push(new THREE.Vector3(-half, 0, t), new THREE.Vector3(half, 0, t));
     pts.push(new THREE.Vector3(t, 0, -half), new THREE.Vector3(t, 0, half));
   }
-  const geo = new THREE.BufferGeometry().setFromPoints(pts);
-  const grid = new THREE.LineSegments(geo, new THREE.LineBasicMaterial({
-    color: COLORS.ground, transparent: true, opacity: 0.45,
+  const g = new THREE.BufferGeometry().setFromPoints(pts);
+  const grid = new THREE.LineSegments(g, new THREE.LineBasicMaterial({
+    color: COLORS.ground, transparent: true, opacity: 0.35,
   }));
-  grid.position.y = -3.0;
+  grid.position.y = 0;
   scene.add(grid);
 }
 
-// ---------- Barn (gambrel roof, classic American) ----------
+// ---------- Barn skeleton ----------
+// Posts + beams + gambrel trusses + ridge + X-braces. No walls or roof skin —
+// pure structural frame so chairs/humans inside are visible from any angle.
 function buildBarn(group, color) {
-  // Gambrel profile, drawn in the X/Y plane, then extruded along Z
-  const profile = new THREE.Shape();
-  profile.moveTo(-2.6, 0);
-  profile.lineTo(-2.6, 2.4);
-  profile.lineTo(-1.8, 3.6);
-  profile.lineTo( 0.0, 4.4);
-  profile.lineTo( 1.8, 3.6);
-  profile.lineTo( 2.6, 2.4);
-  profile.lineTo( 2.6, 0);
-  profile.lineTo(-2.6, 0);
+  const W = 3.2;     // half-width  (X)
+  const D = 3.8;     // half-depth  (Z)
+  const H = 4.0;     // eaves height
+  const HB = 5.2;    // gambrel break height
+  const WB = 1.8;    // gambrel break half-width
+  const HP = 6.5;    // peak height
 
-  const barnGeo = new THREE.ExtrudeGeometry(profile, {
-    depth: 4.2,
-    bevelEnabled: false,
-    curveSegments: 1,
+  const addLine = (a, b, op = 0.85) => {
+    const g = new THREE.BufferGeometry().setFromPoints([a, b]);
+    group.add(new THREE.Line(g, wireMat(color, op)));
+  };
+  const addPath = (pts, op = 0.85) => {
+    const g = new THREE.BufferGeometry().setFromPoints(pts);
+    group.add(new THREE.Line(g, wireMat(color, op)));
+  };
+  const v = (x, y, z) => new THREE.Vector3(x, y, z);
+
+  // 4 corner posts
+  [[-W, -D], [W, -D], [-W, D], [W, D]].forEach(([x, z]) => {
+    addLine(v(x, 0, z), v(x, H, z));
   });
-  barnGeo.translate(0, 0, -2.1); // center on Z
 
-  group.add(new THREE.LineSegments(
-    new THREE.EdgesGeometry(barnGeo, 1),
-    wireMat(color, 0.88)
-  ));
-  group.add(new THREE.Mesh(barnGeo, glassMat(color, 0.10)));
+  // Floor perimeter (faint)
+  addPath([v(-W,0,-D), v(W,0,-D), v(W,0,D), v(-W,0,D), v(-W,0,-D)], 0.55);
+  // Eave perimeter
+  addPath([v(-W,H,-D), v(W,H,-D), v(W,H,D), v(-W,H,D), v(-W,H,-D)], 0.85);
 
-  // Front big sliding door
-  const doorGeo = new THREE.BoxGeometry(1.4, 1.8, 0.05);
-  const door = new THREE.LineSegments(new THREE.EdgesGeometry(doorGeo), wireMat(color, 0.95));
-  door.position.set(0, 0.9, 2.11);
-  group.add(door);
+  // Gambrel trusses (front and back walls)
+  for (const z of [-D, D]) {
+    addPath([
+      v(-W, H, z), v(-WB, HB, z), v(0, HP, z),
+      v(WB, HB, z), v(W, H, z)
+    ], 0.9);
+  }
 
-  // X-brace on door
-  const xMat = wireMat(color, 0.8);
-  const xPts1 = [new THREE.Vector3(-0.7, 0.0, 2.13), new THREE.Vector3(0.7, 1.8, 2.13)];
-  const xPts2 = [new THREE.Vector3(-0.7, 1.8, 2.13), new THREE.Vector3(0.7, 0.0, 2.13)];
-  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(xPts1), xMat));
-  group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(xPts2), xMat));
+  // Ridge beam (Z-axis)
+  addLine(v(0, HP, -D), v(0, HP, D), 0.95);
 
-  // Hayloft window high on the gable
-  const loftGeo = new THREE.BoxGeometry(0.8, 0.8, 0.05);
-  const loft = new THREE.LineSegments(new THREE.EdgesGeometry(loftGeo), wireMat(color, 0.9));
-  loft.position.set(0, 3.3, 2.11);
-  group.add(loft);
+  // Gambrel break beams along Z (where slope changes)
+  addLine(v(-WB, HB, -D), v(-WB, HB, D), 0.85);
+  addLine(v( WB, HB, -D), v( WB, HB, D), 0.85);
 
-  // Side windows (two per side)
-  const winGeo = new THREE.BoxGeometry(0.05, 0.6, 0.6);
-  [[-2.61, 1.4, -0.7], [-2.61, 1.4, 0.7], [2.61, 1.4, -0.7], [2.61, 1.4, 0.7]].forEach((p) => {
-    const w = new THREE.LineSegments(new THREE.EdgesGeometry(winGeo), wireMat(color, 0.85));
-    w.position.set(...p);
-    group.add(w);
-  });
+  // Mid rafters between trusses (a few interior rafters for depth)
+  for (const z of [-D * 0.4, D * 0.4]) {
+    addPath([
+      v(-W, H, z), v(-WB, HB, z), v(0, HP, z),
+      v(WB, HB, z), v(W, H, z)
+    ], 0.4);
+  }
+
+  // X-braces on long sides (cattycorner across each side panel)
+  // Left wall (x = -W)
+  addLine(v(-W, 0, -D), v(-W, H,  D), 0.45);
+  addLine(v(-W, H, -D), v(-W, 0,  D), 0.45);
+  // Right wall (x = +W)
+  addLine(v( W, 0, -D), v( W, H,  D), 0.45);
+  addLine(v( W, H, -D), v( W, 0,  D), 0.45);
+
+  // X-brace on back wall only (front stays open for camera view)
+  addLine(v(-W, 0, -D), v( W, H, -D), 0.35);
+  addLine(v( W, 0, -D), v(-W, H, -D), 0.35);
 }
 
 const barnGroup = new THREE.Group();
 buildBarn(barnGroup, COLORS.barn);
-barnGroup.position.set(4.2, -3.0, -5.0);
-barnGroup.rotation.y = -0.35;            // angled to face camera
 scene.add(barnGroup);
 
-// ---------- Hearts (loaded from SVG) ----------
-const heartGroup = new THREE.Group();
-scene.add(heartGroup);
+// ---------- Hand-chair (palm seat + finger backrest) ----------
+function buildHandChair(group, color) {
+  // Base column from floor to seat
+  const baseGeo = new THREE.CylinderGeometry(0.10, 0.14, 0.5, 8);
+  baseGeo.translate(0, 0.25, 0);
+  group.add(new THREE.LineSegments(
+    new THREE.EdgesGeometry(baseGeo), wireMat(color, 0.65)
+  ));
 
-new SVGLoader().load('./assets/heart.svg', (data) => {
-  const shapes = [];
-  data.paths.forEach((p) => {
-    SVGLoader.createShapes(p).forEach((s) => shapes.push(s));
-  });
+  // Palm rim — torus at seat height
+  const rimRadius = 0.48;
+  const seatY = 0.55;
+  const rimGeo = new THREE.TorusGeometry(rimRadius, 0.025, 8, 32);
+  rimGeo.rotateX(Math.PI / 2);  // lay flat
+  rimGeo.translate(0, seatY, 0);
+  group.add(new THREE.LineSegments(
+    new THREE.EdgesGeometry(rimGeo, 1), wireMat(color, 0.85)
+  ));
 
-  // Three hearts: clustered left of barn, varying depth for parallax
-  const layouts = [
-    { pos: [-4.8, -0.4,  1.5], scale: 0.022, rot:  0.12, spin: 0.0040, bobAmp: 0.18, bobPhase: 0.0 },
-    { pos: [-1.6,  0.6,  0.5], scale: 0.028, rot:  0.00, spin: 0.0028, bobAmp: 0.25, bobPhase: 1.4 },
-    { pos: [ 1.6, -0.8, -1.0], scale: 0.020, rot: -0.10, spin: 0.0050, bobAmp: 0.20, bobPhase: 2.8 },
-  ];
+  // Palm webbing — 4 crossing diameters at seat height (the cupped surface)
+  for (let i = 0; i < 4; i++) {
+    const a = (i / 4) * Math.PI;
+    const x = Math.cos(a) * rimRadius;
+    const z = Math.sin(a) * rimRadius;
+    const pts = [
+      new THREE.Vector3(-x, seatY, -z),
+      new THREE.Vector3(0, seatY - 0.05, 0),   // slight dip = cupped palm
+      new THREE.Vector3( x, seatY,  z),
+    ];
+    const g = new THREE.BufferGeometry().setFromPoints(pts);
+    group.add(new THREE.Line(g, wireMat(color, 0.55)));
+  }
 
-  layouts.forEach((cfg) => {
-    const g = new THREE.Group();
+  // Five finger backrest tubes from back arc, curling up and slightly inward
+  const FINGER_COUNT = 5;
+  for (let i = 0; i < FINGER_COUNT; i++) {
+    // back-half arc from -160° to -20° (relative to +z)
+    const a = Math.PI + (-0.7 + (i / (FINGER_COUNT - 1)) * 1.4);
+    const bx = Math.cos(a) * rimRadius;
+    const bz = Math.sin(a) * rimRadius;
+    const tipFactor = 0.55;
+    const pts = [
+      new THREE.Vector3(bx, seatY, bz),
+      new THREE.Vector3(bx * 1.02, seatY + 0.25, bz * 1.02),
+      new THREE.Vector3(bx * 0.92, seatY + 0.55, bz * 0.85),
+      new THREE.Vector3(bx * 0.78, seatY + 0.80, bz * 0.72),
+      new THREE.Vector3(bx * tipFactor, seatY + 0.95, bz * tipFactor),
+    ];
+    const curve = new THREE.CatmullRomCurve3(pts);
+    const tubeGeo = new THREE.TubeGeometry(curve, 14, 0.035, 6, false);
+    group.add(new THREE.LineSegments(
+      new THREE.EdgesGeometry(tubeGeo, 1), wireMat(color, 0.85)
+    ));
+  }
+}
 
-    shapes.forEach((shape) => {
-      const geo = new THREE.ExtrudeGeometry(shape, {
-        depth: 12,
-        bevelEnabled: true,
-        bevelThickness: 1.5,
-        bevelSize: 1.5,
-        bevelSegments: 3,
-        curveSegments: 28,
-      });
-      geo.center();
-      // SVG y is inverted — flip so heart point hangs down
-      geo.scale(1, -1, 1);
+// ---------- Human figure (head + tapered torso, seated) ----------
+function buildHuman(group, color) {
+  // Torso: tapered cylinder, narrower at top (shoulders) wider at bottom (hips)
+  const torsoGeo = new THREE.CylinderGeometry(0.18, 0.30, 0.65, 10, 2, true);
+  torsoGeo.translate(0, 0.325, 0);  // base at y=0
+  group.add(new THREE.LineSegments(
+    new THREE.EdgesGeometry(torsoGeo, 18), wireMat(color, 0.90)
+  ));
 
-      const edges = new THREE.LineSegments(
-        new THREE.EdgesGeometry(geo, 12),
-        wireMat(COLORS.heart, 0.92)
-      );
-      g.add(edges);
+  // Head: sphere
+  const headGeo = new THREE.SphereGeometry(0.17, 14, 10);
+  headGeo.translate(0, 0.85, 0);
+  group.add(new THREE.LineSegments(
+    new THREE.WireframeGeometry(headGeo), wireMat(color, 0.80)
+  ));
 
-      const shell = new THREE.Mesh(geo, glassMat(COLORS.heart, 0.16));
-      g.add(shell);
-    });
+  // Hands resting in lap — small sphere at front-low
+  const lapGeo = new THREE.SphereGeometry(0.10, 10, 8);
+  lapGeo.translate(0, 0.20, 0.20);
+  group.add(new THREE.LineSegments(
+    new THREE.WireframeGeometry(lapGeo), wireMat(color, 0.70)
+  ));
+}
 
-    g.position.set(...cfg.pos);
-    g.scale.setScalar(cfg.scale);
-    g.rotation.z = cfg.rot;
-    g.userData = cfg;
-    heartGroup.add(g);
-  });
-});
-
-// ---------- Cupped hands (one pair under each heart) + particle mist ----------
-// handPairs lives at module scope so the animate loop can update positions/mist origins.
-const handPairs = [];
-
-// Hands sit just below their heart, lying flat (palms up toward the heart).
-// The SVG is drawn in the X/Y plane; rotating -PI/2 around X lays it flat and
-// orients the fill normal toward +y (palm faces up).
-const HAND_LAYOUTS = [
-  { pos: [-4.8, -1.5,  1.5], scale: 0.014, swayPhase: 0.0 },
-  { pos: [-1.6, -0.7,  0.5], scale: 0.018, swayPhase: 1.4 },
-  { pos: [ 1.6, -1.9, -1.0], scale: 0.013, swayPhase: 2.8 },
+// Layout: 3 chair+human pairs in a slight arc on the barn floor, facing camera
+const SEAT_Y = 0.55;
+const PAIRS = [
+  { x: -2.3, z:  0.6, phase: 0.0 },
+  { x:  0.0, z:  1.2, phase: 1.4 },
+  { x:  2.3, z:  0.6, phase: 2.8 },
 ];
 
-new SVGLoader().load('./assets/hands.svg', (data) => {
-  const shapes = [];
+const humanGroups = [];
+PAIRS.forEach((p) => {
+  const chair = new THREE.Group();
+  buildHandChair(chair, COLORS.hand);
+  chair.position.set(p.x, 0, p.z);
+  scene.add(chair);
+
+  const human = new THREE.Group();
+  buildHuman(human, COLORS.human);
+  human.position.set(p.x, SEAT_Y, p.z);
+  human.userData = { basePos: [p.x, SEAT_Y, p.z], phase: p.phase };
+  scene.add(human);
+  humanGroups.push(human);
+});
+
+// ---------- Outer heart + roof hearts (loaded from SVG) ----------
+// Outer heart frames the whole scene; roof hearts perch along the ridge.
+// All hearts billboard toward the camera so the silhouette stays clean.
+const outerHeartGroup = new THREE.Group();
+const roofHeartGroups = [];
+scene.add(outerHeartGroup);
+
+new SVGLoader().load('./assets/heart.svg', (data) => {
+  // Build outline-only LineLoops (no fill) from the shape perimeter
+  const outlines = [];
   data.paths.forEach((p) => {
-    SVGLoader.createShapes(p).forEach((s) => shapes.push(s));
+    SVGLoader.createShapes(p).forEach((s) => {
+      const pts = s.getPoints(120).map((pt) => new THREE.Vector3(pt.x, -pt.y, 0));
+      outlines.push(pts);
+    });
   });
 
-  HAND_LAYOUTS.forEach((cfg) => {
+  // --- Outer heart: huge, behind the barn, dim glow ---
+  outlines.forEach((pts) => {
+    const g = new THREE.BufferGeometry().setFromPoints(pts);
+    const line = new THREE.LineLoop(g, wireMat(COLORS.outerHeart, 0.85));
+    outerHeartGroup.add(line);
+  });
+  outerHeartGroup.position.set(0, 3.6, -4.5);
+  outerHeartGroup.scale.setScalar(0.072);   // ~13 wide × 9.4 tall
+
+  // --- Roof hearts: 3 small ones along the ridge ---
+  const roofLayouts = [
+    { pos: [-2.4, 7.2,  0.0], scale: 0.0050, phase: 0.0 },
+    { pos: [ 0.0, 7.9,  0.0], scale: 0.0070, phase: 1.2 },
+    { pos: [ 2.4, 7.2,  0.0], scale: 0.0050, phase: 2.4 },
+  ];
+  roofLayouts.forEach((cfg) => {
     const g = new THREE.Group();
-
-    shapes.forEach((shape) => {
-      // 2D outline: perimeter as a LineLoop (clean wireframe edge)
-      const pts2 = shape.getPoints(96);
-      const pts3 = pts2.map((p) => new THREE.Vector3(p.x, -p.y, 0)); // flip SVG y
-      const outlineGeo = new THREE.BufferGeometry().setFromPoints(pts3);
-      g.add(new THREE.LineLoop(outlineGeo, wireMat(COLORS.hand, 0.85)));
-
-      // Faint surface fill for warmth
-      const shapeGeo = new THREE.ShapeGeometry(shape);
-      shapeGeo.scale(1, -1, 1);
-      g.add(new THREE.Mesh(shapeGeo, new THREE.MeshBasicMaterial({
-        color: COLORS.hand,
-        transparent: true,
-        opacity: 0.12,
-        side: THREE.DoubleSide,
-      })));
+    outlines.forEach((pts) => {
+      const geo = new THREE.BufferGeometry().setFromPoints(pts);
+      g.add(new THREE.LineLoop(geo, wireMat(COLORS.roofHeart, 0.95)));
     });
-
     g.position.set(...cfg.pos);
     g.scale.setScalar(cfg.scale);
-    g.rotation.x = -Math.PI / 2;             // lay flat, palms up
-    g.userData = { basePos: [...cfg.pos], swayPhase: cfg.swayPhase };
-    handPairs.push(g);
+    g.userData = { basePos: [...cfg.pos], phase: cfg.phase };
+    roofHeartGroups.push(g);
     scene.add(g);
   });
 });
 
-// Particle mist — drifts up from each hand, swirls outward, fades.
-const PARTICLES_PER_HAND = 70;
-const PARTICLE_TOTAL = PARTICLES_PER_HAND * HAND_LAYOUTS.length;
-const particlePos = new Float32Array(PARTICLE_TOTAL * 3);
-const particleState = [];
+// ---------- Particle mist (3 streams rising from humans toward outer heart) ----------
+const PARTICLES_PER_STREAM = 70;
+const STREAM_COUNT         = PAIRS.length;
+const PARTICLE_TOTAL       = PARTICLES_PER_STREAM * STREAM_COUNT;
+const particlePos          = new Float32Array(PARTICLE_TOTAL * 3);
+const particleState        = [];
+
 for (let i = 0; i < PARTICLE_TOTAL; i++) {
   particleState.push({
-    handIdx: Math.floor(i / PARTICLES_PER_HAND),
-    life:    Math.random(),
-    speed:   0.10 + Math.random() * 0.10,
-    angle:   Math.random() * Math.PI * 2,
-    swirl:   0.4 + Math.random() * 0.8,
-    radius:  0.15 + Math.random() * 0.35,
-    rise:    1.2 + Math.random() * 0.9,
+    streamIdx: Math.floor(i / PARTICLES_PER_STREAM),
+    life:      Math.random(),
+    speed:     0.7 + Math.random() * 0.6,
+    swirlAng:  Math.random() * Math.PI * 2,
+    swirlR:    0.08 + Math.random() * 0.18,
+    swirlRate: 0.4 + Math.random() * 0.8,
   });
-  // Park offscreen until the loop populates real positions
-  particlePos[i * 3]     = 0;
-  particlePos[i * 3 + 1] = -999;
-  particlePos[i * 3 + 2] = 0;
+  particlePos[i*3]     = 0;
+  particlePos[i*3 + 1] = -999;
+  particlePos[i*3 + 2] = 0;
 }
+
 const particleGeo = new THREE.BufferGeometry();
 particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePos, 3));
 const particles = new THREE.Points(particleGeo, new THREE.PointsMaterial({
   color: COLORS.mist,
-  size: 0.07,
+  size: 0.075,
   transparent: true,
-  opacity: 0.55,
+  opacity: 0.6,
   blending: THREE.AdditiveBlending,
   depthWrite: false,
 }));
 scene.add(particles);
 
-// ---------- "Mystic Hearts" text ----------
-const textGroup = new THREE.Group();
-scene.add(textGroup);
+// ---------- Ground energy ring (subtle pulse at barn center) ----------
+const RING_COUNT = 4;
+const groundRings = [];
+const groundRingGroup = new THREE.Group();
+groundRingGroup.position.set(0, 0.02, 0); // just above grid
+scene.add(groundRingGroup);
 
-new FontLoader().load(
-  'https://cdn.jsdelivr.net/npm/three@0.169.0/examples/fonts/gentilis_regular.typeface.json',
-  (font) => {
-    const geo = new TextGeometry('Mystic Hearts', {
-      font,
-      size: 1.35,
-      depth: 0.18,
-      curveSegments: 8,
-      bevelEnabled: true,
-      bevelThickness: 0.05,
-      bevelSize: 0.03,
-      bevelSegments: 2,
-    });
-    geo.center();
-
-    const edges = new THREE.LineSegments(
-      new THREE.EdgesGeometry(geo, 18),
-      wireMat(COLORS.text, 0.95)
-    );
-    textGroup.add(edges);
-
-    const fill = new THREE.Mesh(geo, glassMat(COLORS.text, 0.22));
-    textGroup.add(fill);
-
-    textGroup.position.set(-0.4, 3.4, 0.5);
-  },
-  undefined,
-  (err) => console.warn('Font load failed', err)
-);
-
-// ---------- Energy wave: expanding tilted rings ----------
-const WAVE_RINGS = 5;
-const waveRings = [];
-const waveGroup = new THREE.Group();
-waveGroup.position.set(4.2, -2.95, -5.0); // emanates from the ground around the barn
-scene.add(waveGroup);
-
-for (let i = 0; i < WAVE_RINGS; i++) {
-  const torusGeo = new THREE.TorusGeometry(1, 0.045, 14, 128);
-  const mat = wireMat(COLORS.wave, 0.7);
-  // Use the torus as a full wireframe (every triangle edge) for a soft glowing band
+for (let i = 0; i < RING_COUNT; i++) {
+  const geo = new THREE.TorusGeometry(1, 0.025, 10, 96);
   const ring = new THREE.LineSegments(
-    new THREE.WireframeGeometry(torusGeo),
-    mat
+    new THREE.WireframeGeometry(geo),
+    wireMat(COLORS.ring, 0.55)
   );
-  ring.rotation.x = -Math.PI / 2 + 0.32; // tilt toward camera
-  ring.userData.phase = i / WAVE_RINGS;
-  waveRings.push(ring);
-  waveGroup.add(ring);
+  ring.rotation.x = -Math.PI / 2;
+  ring.userData.phase = i / RING_COUNT;
+  groundRings.push(ring);
+  groundRingGroup.add(ring);
 }
 
 // ---------- Resize ----------
@@ -362,63 +377,77 @@ window.addEventListener('resize', () => {
 });
 
 // ---------- Animate ----------
+const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const clock = new THREE.Clock();
 
 function animate() {
   requestAnimationFrame(animate);
   const t = clock.getElapsedTime();
 
-  // Hearts: gentle Y-axis sway + bob
-  heartGroup.children.forEach((h) => {
-    const u = h.userData;
-    h.rotation.y += u.spin || 0.003;
-    if (u.pos && u.bobAmp !== undefined) {
-      h.position.y = u.pos[1] + Math.sin(t * 0.65 + (u.bobPhase || 0)) * u.bobAmp;
+  // Camera: subtle orbit so the barn's depth reads
+  const orbit = REDUCED_MOTION ? 0 : Math.sin(t * 0.10) * 0.18;
+  camera.position.x = Math.sin(orbit) * CAM_RADIUS;
+  camera.position.z = Math.cos(orbit) * CAM_RADIUS;
+  camera.position.y = CAM_HEIGHT + (REDUCED_MOTION ? 0 : Math.sin(t * 0.07) * 0.12);
+  camera.lookAt(CAM_LOOK);
+
+  // Outer heart: billboard to face camera, gentle breathing
+  outerHeartGroup.lookAt(camera.position);
+  const breath = 0.072 * (1 + (REDUCED_MOTION ? 0 : Math.sin(t * 0.6) * 0.018));
+  outerHeartGroup.scale.setScalar(breath);
+
+  // Roof hearts: billboard, small bob
+  roofHeartGroups.forEach((h) => {
+    h.lookAt(camera.position);
+    if (!REDUCED_MOTION) {
+      h.position.y = h.userData.basePos[1] + Math.sin(t * 0.9 + h.userData.phase) * 0.08;
     }
   });
 
-  // Text: slow drift
-  textGroup.rotation.y = Math.sin(t * 0.28) * 0.06;
-  textGroup.position.y = 3.4 + Math.sin(t * 0.55) * 0.10;
-
-  // Subtle camera parallax — emphasizes perspective without making text unreadable
-  camera.position.x = CAM_BASE.x + Math.sin(t * 0.14) * 0.45;
-  camera.position.y = CAM_BASE.y + Math.cos(t * 0.11) * 0.20;
-  camera.lookAt(CAM_LOOK);
-
-  // Hands: gentle bob + slight tilt sway, palms up
-  handPairs.forEach((h) => {
+  // Humans: gentle breathing scale + slight bob
+  humanGroups.forEach((h) => {
     const u = h.userData;
-    h.position.y = u.basePos[1] + Math.sin(t * 0.55 + u.swayPhase) * 0.08;
-    h.rotation.z = Math.sin(t * 0.35 + u.swayPhase) * 0.05;
+    if (REDUCED_MOTION) return;
+    const s = 1 + Math.sin(t * 0.9 + u.phase) * 0.022;
+    h.scale.set(s, s, s);
+    h.position.y = u.basePos[1] + Math.sin(t * 0.55 + u.phase) * 0.04;
   });
 
-  // Particle mist: each particle rises from its assigned hand, swirls outward, fades
+  // Particle streams: each particle rises from a human and drifts toward outer heart center
+  const heartCenter = outerHeartGroup.position;
   for (let i = 0; i < PARTICLE_TOTAL; i++) {
     const s = particleState[i];
-    s.life += 0.0045 * s.speed * 10;
+    s.life += 0.0035 * s.speed;
     if (s.life > 1) s.life -= 1;
 
-    const hand = handPairs[s.handIdx];
-    if (!hand) continue;
+    const h = humanGroups[s.streamIdx];
+    if (!h) continue;
 
     const life = s.life;
-    const ang  = s.angle + t * s.swirl;
-    const r    = s.radius * (0.4 + life * 1.2);
-    particlePos[i * 3]     = hand.position.x + Math.cos(ang) * r;
-    particlePos[i * 3 + 1] = hand.position.y + 0.15 + life * s.rise;
-    particlePos[i * 3 + 2] = hand.position.z + Math.sin(ang) * r;
+    // start at human's chest, drift toward heart center
+    const startX = h.position.x;
+    const startY = h.position.y + 0.55;
+    const startZ = h.position.z;
+    const x = startX + (heartCenter.x - startX) * life;
+    const y = startY + (heartCenter.y - startY) * life;
+    const z = startZ + (heartCenter.z - startZ) * life;
+    // add swirl that grows with life
+    const ang = s.swirlAng + t * s.swirlRate;
+    const r   = s.swirlR * (0.4 + life * 1.6);
+    particlePos[i*3]     = x + Math.cos(ang) * r;
+    particlePos[i*3 + 1] = y + Math.sin(ang * 0.7) * r * 0.5;
+    particlePos[i*3 + 2] = z + Math.sin(ang) * r;
   }
   particleGeo.attributes.position.needsUpdate = true;
 
-  // Energy wave: expanding pulses with fade in / fade out
-  waveRings.forEach((ring) => {
-    const p = (t * 0.28 + ring.userData.phase) % 1;
-    const scale = 0.4 + p * 9;
+  // Ground rings: expanding fade pulse
+  groundRings.forEach((ring) => {
+    const p = (t * 0.22 + ring.userData.phase) % 1;
+    const scale = 0.3 + p * 7;
     ring.scale.set(scale, scale, scale);
-    const fadeIn  = Math.min(p / 0.08, 1);
+    const fadeIn  = Math.min(p / 0.10, 1);
     const fadeOut = Math.max(0, 1 - p);
-    ring.material.opacity = 0.78 * fadeIn * fadeOut;
+    ring.material.opacity = 0.55 * fadeIn * fadeOut;
   });
 
   composer.render();

@@ -5,33 +5,82 @@ html, body {
   height: 100%;
   background: #0a0510;
   overflow: hidden;
-  font-family: Georgia, 'Times New Roman', serif;
-  color: rgba(212, 180, 104, 0.8);
+  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  color: rgba(245, 232, 212, 0.92);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #three-canvas {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   z-index: 0;
   display: block;
 }
 
+/* ---------- Hero (overlay above the 3D scene) ---------- */
+.hero {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  padding-top: clamp(2rem, 7vh, 5rem);
+  text-align: center;
+  pointer-events: none;             /* let cursor pass through to canvas */
+}
+
+.hero__title {
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(2.6rem, 7.5vw, 6rem);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  color: rgba(245, 232, 212, 0.96);
+  text-shadow: 0 0 40px rgba(212, 180, 104, 0.45),
+               0 0 12px rgba(10, 5, 16, 0.85);
+}
+
+.hero__tagline {
+  margin-top: clamp(0.7rem, 1.8vh, 1.3rem);
+  font-weight: 400;
+  font-size: clamp(0.95rem, 1.5vw, 1.3rem);
+  letter-spacing: 0.22em;
+  text-transform: lowercase;
+  color: rgba(234, 195, 138, 0.78);
+  text-shadow: 0 0 12px rgba(10, 5, 16, 0.9);
+}
+
+/* ---------- Back link ---------- */
 .back-link {
   position: fixed;
-  top: 1.5rem;
-  left: 1.5rem;
+  bottom: 1.4rem;
+  right: 1.6rem;
   color: rgba(212, 180, 104, 0.5);
   text-decoration: none;
-  font-size: 0.8rem;
-  letter-spacing: 0.12em;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.14em;
   text-transform: lowercase;
   z-index: 10;
   transition: color 250ms ease;
 }
+.back-link:hover { color: rgba(212, 180, 104, 0.95); }
 
-.back-link:hover {
-  color: rgba(212, 180, 104, 0.95);
+/* ---------- Mobile tuning ---------- */
+@media (max-width: 640px) {
+  .hero { padding-top: 2.5rem; }
+  .hero__title { font-size: 3rem; letter-spacing: 0.04em; }
+  .hero__tagline { font-size: 0.85rem; letter-spacing: 0.18em; }
+  .back-link { bottom: 1rem; right: 1.1rem; font-size: 0.78rem; }
+}
+
+/* ---------- Honor reduced-motion preferences ----------
+   The 3D scene reads motion-prefers state via JS too; CSS sets safe defaults. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__title, .hero__tagline { text-shadow: none; }
 }

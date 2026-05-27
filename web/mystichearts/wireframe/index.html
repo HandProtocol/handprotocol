@@ -4,7 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mystic Hearts</title>
+  <meta name="description" content="A healing land that holds you." />
+  <meta property="og:title" content="Mystic Hearts" />
+  <meta property="og:description" content="A healing land that holds you." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0a0510" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" />
   <link rel="stylesheet" href="./style.css" />
+
   <script type="importmap">
   {
     "imports": {
@@ -15,8 +26,15 @@
   </script>
 </head>
 <body>
-  <canvas id="three-canvas"></canvas>
+  <canvas id="three-canvas" aria-hidden="true"></canvas>
+
+  <main class="hero">
+    <h1 class="hero__title">Mystic Hearts</h1>
+    <p class="hero__tagline">A healing land. Held by hands.</p>
+  </main>
+
   <a class="back-link" href="/">handprotocol.org</a>
+
   <script type="module" src="./scene.js"></script>
 </body>
 </html>
