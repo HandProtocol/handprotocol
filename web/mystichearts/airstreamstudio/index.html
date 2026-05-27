@@ -39,6 +39,7 @@
       <div class="nav__links">
         <a href="#scope" class="nav__link">Scope</a>
         <a href="#modes" class="nav__link">Modes</a>
+        <a href="#insulation" class="nav__link">Insulation</a>
         <a href="#hvac" class="nav__link">HVAC</a>
         <a href="#tiers" class="nav__link">Tiers</a>
         <a href="#phasing" class="nav__link">Phasing</a>
@@ -194,16 +195,17 @@
             <li><a class="toc__item" href="#scope"><span class="toc__item-num">02</span>Locked-in scope</a></li>
             <li><a class="toc__item" href="#modes"><span class="toc__item-num">03</span>Four production modes</a></li>
             <li><a class="toc__item" href="#vehicle"><span class="toc__item-num">04</span>The vehicle: '67 Overlander, gutted</a></li>
-            <li><a class="toc__item" href="#hvac"><span class="toc__item-num">05</span>HVAC: the highest-leverage spend</a></li>
-            <li><a class="toc__item" href="#tiers"><span class="toc__item-num">06</span>Three build tiers</a></li>
-            <li><a class="toc__item" href="#booking"><span class="toc__item-num">07</span>Booking and payment</a></li>
-            <li><a class="toc__item" href="#operator"><span class="toc__item-num">08</span>Who runs the room</a></li>
-            <li><a class="toc__item" href="#integration"><span class="toc__item-num">09</span>Mystic Hearts platform integration</a></li>
-            <li><a class="toc__item" href="#phasing"><span class="toc__item-num">10</span>Build phasing</a></li>
-            <li><a class="toc__item" href="#credit-loop"><span class="toc__item-num">11</span>The build-labor credit loop</a></li>
-            <li><a class="toc__item" href="#open"><span class="toc__item-num">12</span>Open items</a></li>
-            <li><a class="toc__item" href="#decisions"><span class="toc__item-num">13</span>Decisions needed from koH</a></li>
-            <li><a class="toc__item" href="#procurement"><span class="toc__item-num">14</span>Immediate buys</a></li>
+            <li><a class="toc__item" href="#insulation"><span class="toc__item-num">05</span>Insulation: layered, healthy, reversible</a></li>
+            <li><a class="toc__item" href="#hvac"><span class="toc__item-num">06</span>HVAC: the highest-leverage spend</a></li>
+            <li><a class="toc__item" href="#tiers"><span class="toc__item-num">07</span>Three build tiers</a></li>
+            <li><a class="toc__item" href="#booking"><span class="toc__item-num">08</span>Booking and payment</a></li>
+            <li><a class="toc__item" href="#operator"><span class="toc__item-num">09</span>Who runs the room</a></li>
+            <li><a class="toc__item" href="#integration"><span class="toc__item-num">10</span>Mystic Hearts platform integration</a></li>
+            <li><a class="toc__item" href="#phasing"><span class="toc__item-num">11</span>Build phasing</a></li>
+            <li><a class="toc__item" href="#credit-loop"><span class="toc__item-num">12</span>The build-labor credit loop</a></li>
+            <li><a class="toc__item" href="#open"><span class="toc__item-num">13</span>Open items</a></li>
+            <li><a class="toc__item" href="#decisions"><span class="toc__item-num">14</span>Decisions needed from koH</a></li>
+            <li><a class="toc__item" href="#procurement"><span class="toc__item-num">15</span>Immediate buys</a></li>
           </ol>
         </nav>
       </div>
@@ -478,13 +480,13 @@
         <ol>
           <li><strong>Frame inspection and repair.</strong> Check for rust at outriggers, subfloor mating points, axle attachments. Weld as needed.</li>
           <li><strong>Subfloor.</strong> New 5/8 or 3/4-inch marine-grade plywood, sealed, bonded to frame.</li>
-          <li><strong>Insulation.</strong> Closed-cell spray foam or rigid panel plus spray hybrid throughout the shell cavities. Critical for both thermal comfort and acoustic isolation. The Airstream's curved aluminum skin is a tuning fork without it.</li>
+          <li><strong>Insulation.</strong> Layered cork-and-wool stack with aerogel rib breaks and a smart vapor retarder. Critical for thermal comfort, acoustic isolation, and humidity buffering. The Airstream's curved aluminum skin is a tuning fork without it. <a href="#insulation">See §5 for the full layer library and two build paths</a>.</li>
           <li><strong>Wiring.</strong> Full new 12V DC plus 120V AC, modern panel, GFCI/AFCI where code requires, RV-rated.</li>
           <li><strong>Plumbing.</strong> Only if the unit will have a bathroom or galley sink. Studio-use case may not need it. <em>Open question.</em></li>
           <li><strong>Windows.</strong> Original single-pane Airstream windows are acoustic and thermal sieves. Three options: replace with dual-pane, retain originals plus add removable interior secondary glazing for session use, or reduce window count entirely.</li>
           <li><strong>Skin and seals.</strong> Inspect rivets, replace any compromised; reseal all seams and windows.</li>
           <li><strong>HVAC install</strong> (Phase 0.6, see next section).</li>
-          <li><strong>Interior fit-out</strong>, done with acoustics in mind: wall and ceiling cavities filled with treatment material (rockwool or mineral wool batts) before final paneling, so finished surfaces work <em>with</em> the acoustic plan rather than against it.</li>
+          <li><strong>Interior fit-out</strong>, done with acoustics in mind: cavities filled per the §5 stack (cork on flat sections, sheep wool in the curves, rockwool reserved for priority acoustic zones) before final paneling, so finished surfaces work <em>with</em> the acoustic plan rather than against it.</li>
         </ol>
 
         <h3>Sourcing the restoration labor</h3>
@@ -503,10 +505,189 @@
       </div>
     </section>
 
-    <!-- 05 HVAC -->
+    <!-- 05 Insulation -->
+    <section class="section section--diagram" id="insulation">
+      <div class="container container--doc">
+        <span class="section__eyebrow">05 &middot; Insulation</span>
+        <h2>Layered, healthy, reversible.</h2>
+        <p class="section__caption">The wall assembly does four jobs at once: thermal isolation, sound out, sound in, and humidity buffering for two people breathing in a sealed aluminum tube. Closed-cell spray foam is the industry default for fast van builds, but it bulges vintage Airstream skins, off-gasses, and is unrepairable. For this trailer we want healthy, breathable, repairable. Cork and sheep wool are the headline materials.</p>
+      </div>
+
+      <div class="container container--wide">
+        <!-- Wall cross-section diagram -->
+        <div class="db-chart">
+          <div class="db-chart__title">Wall stack &middot; outside (left) to inside (right)</div>
+          <svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cross-section diagram of the Airstream wall layers from skin to room">
+
+            <!-- Outside zone background -->
+            <rect x="0" y="60" width="80" height="200" fill="#dbeafe" opacity="0.55"/>
+            <text x="40" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#1e40af" letter-spacing="0.05em">OUTSIDE</text>
+            <text x="40" y="280" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#1e40af" font-style="italic">cold side</text>
+
+            <!-- Room zone background -->
+            <rect x="560" y="60" width="160" height="200" fill="#fef3c7" opacity="0.55"/>
+            <text x="640" y="50" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#92400e" letter-spacing="0.05em">ROOM</text>
+            <text x="640" y="280" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#92400e" font-style="italic">warm side</text>
+
+            <!-- Layer 1: Aluminum skin -->
+            <rect x="80" y="60" width="12" height="200" fill="#9ca3af"/>
+            <text x="86" y="290" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#4b5563" transform="rotate(-30 86 290)">Al skin</text>
+
+            <!-- Layer 2: Aerogel rib break -->
+            <rect x="92" y="60" width="32" height="200" fill="#a8b89a"/>
+            <text x="108" y="290" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#365314" transform="rotate(-30 108 290)">Aerogel</text>
+            <text x="108" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="#1a2e05" font-weight="600">R-10</text>
+
+            <!-- Layer 3: Air gap + reflective -->
+            <rect x="124" y="60" width="22" height="200" fill="#e5e7eb"/>
+            <text x="135" y="290" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#374151" transform="rotate(-30 135 290)">Reflect</text>
+
+            <!-- Layer 4: Primary cavity fill, cork half -->
+            <rect x="146" y="60" width="140" height="100" fill="#b65b3f"/>
+            <text x="216" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#fff5ec">Cork board</text>
+            <text x="216" y="130" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#fff5ec" font-style="italic">flat sections, floor, ceiling</text>
+            <text x="216" y="146" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#fff5ec" font-weight="600">R-8 at 2 in &middot; ~$650</text>
+
+            <!-- Layer 4b: Primary cavity fill, wool half -->
+            <rect x="146" y="160" width="140" height="100" fill="#ede4d4"/>
+            <text x="216" y="195" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#4a3f37">Sheep wool</text>
+            <text x="216" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#7b6f64" font-style="italic">curved sections, end caps</text>
+            <text x="216" y="226" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#4a3f37" font-weight="600">R-7 at 2 in &middot; ~$250</text>
+            <text x="216" y="244" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="#7b6f64">+ humidity buffering</text>
+
+            <!-- Layer 5: Smart vapor retarder -->
+            <rect x="286" y="60" width="10" height="200" fill="#b08a3c" opacity="0.7"/>
+            <text x="291" y="290" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#78350f" transform="rotate(-30 291 290)">MemBrain</text>
+
+            <!-- Layer 6: Inner plywood -->
+            <rect x="296" y="60" width="28" height="200" fill="#d99b81"/>
+            <text x="310" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#5a2a16" transform="rotate(-90 310 160)">9 mm plywood</text>
+
+            <!-- Layer 7: Pro-only: decoupling clip + hat channel + MLV + Green Glue + 2nd plywood (dashed = optional/pro tier) -->
+            <rect x="324" y="60" width="80" height="200" fill="#5a3a4a" opacity="0.25" stroke="#5a3a4a" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="364" y="120" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#5a3a4a">Pro tier only</text>
+            <text x="364" y="138" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#5a3a4a">RSIC clips +</text>
+            <text x="364" y="152" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#5a3a4a">hat channel +</text>
+            <text x="364" y="166" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#5a3a4a">MLV +</text>
+            <text x="364" y="180" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#5a3a4a">Green Glue +</text>
+            <text x="364" y="194" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#5a3a4a">2nd plywood</text>
+            <text x="364" y="215" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-style="italic" fill="#5a3a4a">+~$3,800 mat'ls</text>
+
+            <!-- Layer 8: Acoustic face -->
+            <rect x="404" y="60" width="38" height="200" fill="#a8b89a" opacity="0.45"/>
+            <text x="423" y="160" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#365314" transform="rotate(-90 423 160)">Acoustic face</text>
+
+            <!-- Vapor drive arrow -->
+            <g>
+              <line x1="560" y1="40" x2="100" y2="40" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="3 3"/>
+              <polygon points="100,40 108,36 108,44" fill="#dc2626"/>
+              <text x="330" y="32" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="600" fill="#dc2626">Vapor drive &middot; warm to cold (winter)</text>
+            </g>
+
+            <!-- Cumulative R-value note -->
+            <g>
+              <line x1="146" y1="260" x2="442" y2="260" stroke="#0f766e" stroke-width="1.5"/>
+              <line x1="146" y1="256" x2="146" y2="264" stroke="#0f766e" stroke-width="1.5"/>
+              <line x1="442" y1="256" x2="442" y2="264" stroke="#0f766e" stroke-width="1.5"/>
+              <text x="294" y="275" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#0f766e">Indie wall: R-9 to R-11 &middot; Pro wall: R-13 to R-16</text>
+            </g>
+
+          </svg>
+
+          <div class="db-chart__legend">
+            <span class="db-chart__legend-item"><span class="db-chart__legend-swatch" style="background:#b65b3f"></span>Expanded cork (Thermacork / Amorim ICB)</span>
+            <span class="db-chart__legend-item"><span class="db-chart__legend-swatch" style="background:#ede4d4;border:1px solid #d8cab0"></span>Sheep wool (Havelock)</span>
+            <span class="db-chart__legend-item"><span class="db-chart__legend-swatch" style="background:#a8b89a"></span>Aerogel rib break (Aspen Spaceloft)</span>
+            <span class="db-chart__legend-item"><span class="db-chart__legend-swatch" style="background:#5a3a4a;opacity:0.45"></span>Decoupling, pro tier only</span>
+          </div>
+        </div>
+        <p class="diagram-caption">Cavity depth is ~1.5 to 2.5 in between skin and inner ribs. Aerogel goes on the steel ribs only (the thermal bridges that bypass the cavity fill). Cork is rigid and goes in flat sections; wool conforms to the curved roof crown and end caps. The smart vapor retarder (e.g., CertainTeed MemBrain) sits warm-side of the cavity to catch winter condensation drive, then opens up in summer to release stored moisture. Pro-tier layers add decoupling, mass, and Green Glue damping in front of the standard stack.</p>
+      </div>
+
+      <div class="container container--wide">
+        <div class="card-grid card-grid--3">
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">A. Indie build</h3>
+                <p class="card__subtitle">Volunteer-installable</p>
+              </div>
+              <span class="card__tag">DIY-friendly</span>
+            </div>
+            <p class="card__desc">Cork on flat sections, sheep wool in the curves, aerogel rib breaks, smart vapor retarder, plywood finish with acoustic panels in priority zones. Every layer reversible. Healthy materials, low off-gassing, repairable by anyone with hand tools.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Wall R-value</span>
+              <span class="card__meta-value">R-9 to R-11</span>
+              <span class="card__meta-label">Materials cost</span>
+              <span class="card__meta-value">~$2,500</span>
+              <span class="card__meta-label">Labor</span>
+              <span class="card__meta-value">80 to 140 volunteer hours, paid in Mystic Hearts credits</span>
+              <span class="card__meta-label">Acoustic ceiling</span>
+              <span class="card__meta-value">Well-recorded podcast tier</span>
+            </div>
+          </div>
+
+          <div class="card card--feature">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">B. Blended path</h3>
+                <p class="card__subtitle">Recommended</p>
+              </div>
+              <span class="card__tag card__tag--accent">Build indie, leave room</span>
+            </div>
+            <p class="card__desc">Build the indie stack now, but commit upfront to the aerogel rib breaks and a continuous smart vapor retarder. Those are the only layers that live inside the cavity and can't be retrofitted without opening the wall. Pro decoupling (RSIC clips, MLV, Green Glue) can bolt on later if the studio's revenue justifies it.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Phase 0.5 spend</span>
+              <span class="card__meta-value">~$2,500 materials</span>
+              <span class="card__meta-label">Optional upgrade later</span>
+              <span class="card__meta-value">+~$3,800 mat'ls + labor for full pro decoupling</span>
+              <span class="card__meta-label">Decision deferred</span>
+              <span class="card__meta-value">Until first REW noise-floor measurement</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__header">
+              <div>
+                <h3 class="card__title">C. Professional build</h3>
+                <p class="card__subtitle">Commercial-grade quiet</p>
+              </div>
+              <span class="card__tag card__tag--rose">Specialist install</span>
+            </div>
+            <p class="card__desc">Indie stack plus a full decoupling layer in front: RSIC clips, hat channel, mass-loaded vinyl, Green Glue between two layers of plywood, acoustician-tuned absorber face, optional floating floor on U-boats. STC mid-50s achievable in a 27 ft trailer.</p>
+            <div class="card__meta">
+              <span class="card__meta-label">Wall R-value</span>
+              <span class="card__meta-value">R-13 to R-16</span>
+              <span class="card__meta-label">Materials cost</span>
+              <span class="card__meta-value">~$6,900</span>
+              <span class="card__meta-label">Specialist labor</span>
+              <span class="card__meta-value">$15k to $25k + $1.5k to $3k acoustician</span>
+              <span class="card__meta-label">When justified</span>
+              <span class="card__meta-value">Paid commercial recording for outside clients</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="container container--doc prose">
+        <div class="callout callout--teal">
+          <svg class="callout__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <div class="callout__body">
+            <h4>Recommendation: Option B, blended path</h4>
+            <p>Build the indie stack now. Track the noise floor with a REW measurement after HVAC install (Phase 0.6) and the first acoustic treatment pass. Decide later whether to add the pro decoupling layer. <strong>The one decision that has to happen at the indie stage:</strong> aerogel rib thermal breaks on every steel rib (~$400 to $800). Those are inside the cavity; adding them later means opening the wall. Everything else can wait.</p>
+            <p>Materials to avoid in any path: closed-cell spray polyurethane foam (bulges vintage Airstream skins from the inside, off-gasses for months, turns to powder in cavities over decades, and adheres permanently so any future skin or electrical work is destructive); plain 6-mil polyethylene vapor barrier (wrong half the year in a mobile vehicle that sees every weather condition); fiberglass batts (particulate, itch, mediocre moisture handling).</p>
+            <p><strong>Full layer library, vendor sourcing, and sources:</strong> <code>funding/framing/airstream-insulation-research.md</code></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 HVAC -->
     <section class="section section--diagram" id="hvac">
       <div class="container container--doc">
-        <span class="section__eyebrow">05 &middot; HVAC</span>
+        <span class="section__eyebrow">06 &middot; HVAC</span>
         <h2>The single highest-leverage spend in the entire build.</h2>
         <p class="section__caption">HVAC noise floor sets the ceiling of how good the studio's audio can ever be. Once installed, it's not cheap to swap. This decision matters more than the choice of microphones.</p>
       </div>
@@ -637,10 +818,10 @@
       </div>
     </section>
 
-    <!-- 06 Tiers -->
+    <!-- 07 Tiers -->
     <section class="section section--diagram" id="tiers">
       <div class="container container--doc">
-        <span class="section__eyebrow">06 &middot; Build tiers</span>
+        <span class="section__eyebrow">07 &middot; Build tiers</span>
         <h2>Three credible end-states, pick one.</h2>
         <p class="section__caption">Each tier is a complete, ship-able studio. Not stepping stones, not gear lists. All numbers are rough 2026 estimates in US dollars for gear plus acoustic treatment plus install consumables. Phase 0.5 shell restoration is separate (see §4).</p>
       </div>
@@ -721,10 +902,10 @@
       </div>
     </section>
 
-    <!-- 07 Booking -->
+    <!-- 08 Booking -->
     <section class="section section--diagram" id="booking">
       <div class="container container--doc">
-        <span class="section__eyebrow">07 &middot; Booking and payment</span>
+        <span class="section__eyebrow">08 &middot; Booking and payment</span>
         <h2>How tenants and outside renters pay.</h2>
         <p class="section__caption">Recommended Option A: tenants use credits, outsiders use fiat. Both flow through the Mystic Hearts scheduling system.</p>
       </div>
@@ -849,10 +1030,10 @@
       </div>
     </section>
 
-    <!-- 08 Operator -->
+    <!-- 09 Operator -->
     <section class="section" id="operator">
       <div class="container container--doc">
-        <span class="section__eyebrow">08 &middot; Operator model</span>
+        <span class="section__eyebrow">09 &middot; Operator model</span>
         <h2>Who runs the room.</h2>
         <p class="prose">Three options, with recommendation. Aiylah and Takata on the land plus the volunteer pool make Option C realistically viable.</p>
       </div>
@@ -907,10 +1088,10 @@
       </div>
     </section>
 
-    <!-- 09 Integration -->
+    <!-- 10 Integration -->
     <section class="section" id="integration">
       <div class="container container--doc prose">
-        <span class="section__eyebrow">09 &middot; Platform</span>
+        <span class="section__eyebrow">10 &middot; Platform</span>
         <h2>Mystic Hearts platform integration.</h2>
         <p>
           The studio needs to show up in the Mystic Hearts scheduling system as a bookable resource alongside practitioner sessions. Some of this lifts existing MH platform work; some adds new requirements.
@@ -935,10 +1116,10 @@
       </div>
     </section>
 
-    <!-- 10 Phasing -->
+    <!-- 11 Phasing -->
     <section class="section section--diagram" id="phasing">
       <div class="container container--doc">
-        <span class="section__eyebrow">10 &middot; Phasing</span>
+        <span class="section__eyebrow">11 &middot; Phasing</span>
         <h2>Build phasing.</h2>
         <p class="section__caption">Phasing protects the small budget by letting demand validate before more spend. Vintage shell adds restoration phases up front. Warm markers are restoration; teal are studio; dashed are future.</p>
       </div>
@@ -1060,10 +1241,10 @@
       </div>
     </section>
 
-    <!-- 11 Credit loop -->
+    <!-- 12 Credit loop -->
     <section class="section section--diagram" id="credit-loop">
       <div class="container container--doc">
-        <span class="section__eyebrow">11 &middot; Strategic</span>
+        <span class="section__eyebrow">12 &middot; Strategic</span>
         <h2>The build-labor credit loop.</h2>
         <p class="section__caption">The studio doesn't just <em>accept</em> the Mystic Hearts credit economy as payment. Its construction <strong>capitalizes</strong> the credit pool that it will later accept. This is the cleanest possible proof of HAND's pool-of-resources model.</p>
       </div>
@@ -1152,10 +1333,10 @@
       </div>
     </section>
 
-    <!-- 12 Open items -->
+    <!-- 13 Open items -->
     <section class="section" id="open">
       <div class="container container--doc prose">
-        <span class="section__eyebrow">12 &middot; Honest unknowns</span>
+        <span class="section__eyebrow">13 &middot; Honest unknowns</span>
         <h2>Open items still to resolve.</h2>
         <p>In rough order of dependency.</p>
 
@@ -1178,10 +1359,10 @@
       </div>
     </section>
 
-    <!-- 13 Decisions -->
+    <!-- 14 Decisions -->
     <section class="section" id="decisions">
       <div class="container container--doc prose">
-        <span class="section__eyebrow">13 &middot; Next</span>
+        <span class="section__eyebrow">14 &middot; Next</span>
         <h2>Decisions needed from koH.</h2>
         <p>Before any acoustic treatment is purchased or any cable is run:</p>
         <ol>
@@ -1210,10 +1391,10 @@
       </div>
     </section>
 
-    <!-- 14 Procurement -->
+    <!-- 15 Procurement -->
     <section class="section section--diagram" id="procurement">
       <div class="container container--doc">
-        <span class="section__eyebrow">14 &middot; Procurement</span>
+        <span class="section__eyebrow">15 &middot; Procurement</span>
         <h2>Immediate buys.</h2>
         <p class="section__caption">Two items pre-greenlit ahead of the broader Tier 1 spend, because they're useful before the trailer is even on the pad and carry forward into every tier unchanged. Queue them up now.</p>
       </div>
