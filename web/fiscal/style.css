@@ -1,0 +1,506 @@
+/* ==========================================================================
+   Fiscal sponsorship pages — built on discovery/style.css tokens.
+   Bespoke SVG/CSS data viz. No chart libraries.
+   ========================================================================== */
+
+.fiscal-page {
+  background: var(--color-bg);
+}
+
+/* --- Section rhythm ------------------------------------------------------- */
+.fiscal-section {
+  padding: var(--space-4xl) 0;
+}
+.fiscal-section--tight { padding: var(--space-2xl) 0; }
+.fiscal-section--warm { background: var(--color-bg-warm); }
+.fiscal-section--dark {
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+}
+.fiscal-section__head {
+  max-width: 640px;
+  margin-bottom: var(--space-2xl);
+}
+.fiscal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+}
+.fiscal-eyebrow__dot {
+  width: 6px; height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-glow);
+}
+.fiscal-section__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin: 0 0 var(--space-md);
+}
+.fiscal-section__lede {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+.fiscal-section--dark .fiscal-section__lede { color: var(--color-text-on-dark-secondary); }
+.u-accent { color: var(--color-accent); }
+
+/* --- Verdict banner ------------------------------------------------------- */
+.verdict {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+  padding: var(--space-xl);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  background: var(--color-accent-tint);
+}
+.verdict__stamp {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: var(--color-accent);
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+.verdict__body h3 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  margin: 0 0 var(--space-sm);
+}
+.verdict__body p { margin: 0; color: var(--color-text-secondary); line-height: 1.6; }
+.verdict__crit {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-accent-hover);
+  background: var(--color-bg);
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+}
+
+/* --- Chart shell ---------------------------------------------------------- */
+.chart {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  padding: var(--space-xl);
+  box-shadow: 0 1px 3px var(--color-card-shadow);
+}
+.chart__head { margin-bottom: var(--space-xl); }
+.chart__title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0 0 var(--space-xs);
+  letter-spacing: -0.01em;
+}
+.chart__sub {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.02em;
+}
+.chart__note {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-md);
+  border-top: 1px dashed var(--color-border-strong);
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   CHART 1 — Cost-of-leakage by tier (grouped bars, CSS)
+   ========================================================================== */
+.leak {
+  display: grid;
+  gap: var(--space-2xl);
+}
+.leak__tier { }
+.leak__tier-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+.leak__tier-name {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+.leak__tier-amount {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-accent);
+}
+.leak__bars { display: grid; gap: var(--space-sm); }
+.leak__row {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: center;
+  gap: var(--space-md);
+}
+.leak__label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: right;
+  color: var(--color-text-secondary);
+}
+.leak__track {
+  position: relative;
+  height: 30px;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.leak__fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: var(--w, 0%);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(90deg, var(--color-accent-warm), var(--color-accent));
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: leakGrow 900ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+}
+.leak__row--best .leak__fill {
+  background: linear-gradient(90deg, var(--color-teal), var(--color-teal-dark));
+}
+.leak__val {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--w, 0%) + 8px);
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  opacity: 0;
+  animation: fadeIn 400ms ease forwards;
+  animation-delay: calc(var(--delay, 0ms) + 700ms);
+}
+@keyframes leakGrow { to { transform: scaleX(1); } }
+@keyframes fadeIn { to { opacity: 1; } }
+
+.leak__delta {
+  margin-top: var(--space-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+  border-radius: var(--radius-md);
+}
+.leak__delta-num {
+  font-family: var(--font-mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-accent-warm);
+}
+.leak__delta-txt { font-size: 0.9rem; line-height: 1.45; color: var(--color-text-on-dark-secondary); }
+
+/* ==========================================================================
+   CHART 2 — Scoring matrix heatmap (CSS grid)
+   ========================================================================== */
+.heat { overflow-x: auto; }
+.heat__grid {
+  display: grid;
+  grid-template-columns: 200px repeat(4, 1fr);
+  gap: 4px;
+  min-width: 560px;
+}
+.heat__cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 0.4rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.heat__corner { background: transparent; }
+.heat__colhead {
+  flex-direction: column;
+  gap: 2px;
+  background: var(--color-bg-dark);
+  color: var(--color-text-on-dark);
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+.heat__colhead small {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.68rem;
+  color: var(--color-text-on-dark-secondary);
+}
+.heat__colhead--win { background: var(--color-accent); }
+.heat__rowhead {
+  justify-content: flex-start;
+  background: var(--color-bg-alt);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text);
+  text-align: left;
+}
+/* score intensity 1..4 */
+.heat__s1 { background: var(--color-warning-tint); color: var(--color-warning-dark); }
+.heat__s2 { background: #FDF0D9; color: #92400E; }
+.heat__s3 { background: #FCE4A6; color: #92400E; }
+.heat__s4 { background: var(--color-accent); color: #fff; }
+.heat__total .heat__cell { font-size: 1rem; }
+.heat__rowhead--total { background: var(--color-bg-dark); color: var(--color-text-on-dark); font-weight: 700; }
+.heat__totcell {
+  background: var(--color-bg-warm);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.heat__totcell--win { background: var(--color-accent-light); color: var(--color-accent-hover); box-shadow: inset 0 0 0 2px var(--color-accent); }
+.heat__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+.heat__legend span { display: inline-flex; align-items: center; gap: 6px; }
+.heat__swatch { width: 14px; height: 14px; border-radius: 3px; display: inline-block; }
+
+/* ==========================================================================
+   CHART 3 — Filing timeline with sponsor period (SVG + CSS)
+   ========================================================================== */
+.timeline {
+  position: relative;
+  padding: var(--space-2xl) 0 var(--space-xl);
+}
+.timeline__band {
+  position: absolute;
+  top: var(--space-2xl);
+  height: 64px;
+  left: 8%;
+  right: 8%;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-accent-tint),
+    var(--color-accent-tint) 8px,
+    var(--color-accent-light) 8px,
+    var(--color-accent-light) 16px
+  );
+  border: 1px dashed var(--color-accent);
+  border-radius: var(--radius-md);
+}
+.timeline__band-label {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--color-accent);
+  color: #fff;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+.timeline__line {
+  position: relative;
+  height: 2px;
+  background: var(--color-border-strong);
+  margin: calc(var(--space-2xl) + 32px) 0 0;
+}
+.timeline__progress {
+  position: absolute;
+  inset: 0 auto 0 0;
+  height: 100%;
+  background: var(--color-accent);
+  width: 0;
+  animation: tlGrow 1400ms cubic-bezier(0.16,1,0.3,1) forwards 200ms;
+}
+@keyframes tlGrow { to { width: var(--progress, 30%); } }
+.timeline__nodes {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+.timeline__node {
+  position: absolute;
+  top: -7px;
+  transform: translateX(-50%);
+  left: var(--at, 0%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+}
+.timeline__dot {
+  width: 16px; height: 16px;
+  border-radius: var(--radius-full);
+  background: var(--color-bg);
+  border: 3px solid var(--color-border-strong);
+  z-index: 1;
+}
+.timeline__node--done .timeline__dot { background: var(--color-accent); border-color: var(--color-accent); }
+.timeline__node--now .timeline__dot {
+  background: var(--color-bg);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 5px var(--color-accent-glow);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 50% { box-shadow: 0 0 0 9px transparent; } }
+.timeline__node-label {
+  margin-top: var(--space-sm);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.2;
+}
+.timeline__node-time {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   CHART 4 — Donation flow diagram (SVG)
+   ========================================================================== */
+.flow { width: 100%; }
+.flow svg { width: 100%; height: auto; display: block; }
+.flow__stream-fee { fill: var(--color-warning); opacity: 0.18; }
+.flow__stream-net { fill: var(--color-accent); opacity: 0.22; }
+.flow__node-box { fill: var(--color-bg); stroke: var(--color-border-strong); stroke-width: 1.5; }
+.flow__node-box--accent { fill: var(--color-bg-dark); stroke: var(--color-bg-dark); }
+.flow__label { font-family: var(--font-sans); font-weight: 700; font-size: 14px; fill: var(--color-text); }
+.flow__label--light { fill: var(--color-text-on-dark); }
+.flow__amt { font-family: var(--font-mono); font-size: 13px; fill: var(--color-text-secondary); }
+.flow__amt--light { fill: var(--color-text-on-dark-secondary); }
+.flow__amt--fee { fill: var(--color-warning-dark); }
+.flow__tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.flow__path-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: none;
+}
+
+/* ==========================================================================
+   Candidate profile cards
+   ========================================================================== */
+.cands {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-lg);
+}
+.cand {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  background: var(--color-bg);
+  position: relative;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+.cand:hover { transform: translateY(-3px); box-shadow: 0 8px 24px var(--color-card-shadow-hover); }
+.cand--primary { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent); }
+.cand--backup { border-color: var(--color-teal); }
+.cand__rank {
+  position: absolute;
+  top: var(--space-lg);
+  right: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+.cand--primary .cand__rank { background: var(--color-accent); color: #fff; }
+.cand--backup .cand__rank { background: var(--color-teal-light); color: var(--color-teal-dark); }
+.cand--out .cand__rank { background: var(--color-bg-alt); color: var(--color-text-muted); }
+.cand__name { font-family: var(--font-serif); font-size: 1.25rem; margin: 0 0 var(--space-xs); }
+.cand__fee { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-accent); margin-bottom: var(--space-md); }
+.cand__why { font-size: 0.9rem; line-height: 1.55; color: var(--color-text-secondary); margin: 0 0 var(--space-md); }
+.cand__meta { display: grid; gap: 4px; font-family: var(--font-mono); font-size: 0.74rem; color: var(--color-text-muted); }
+.cand--out { opacity: 0.7; }
+
+/* --- Verification checklist ----------------------------------------------- */
+.checklist { display: grid; gap: var(--space-md); counter-reset: vstep; }
+.checklist__item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-md);
+  align-items: start;
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+}
+.checklist__num {
+  counter-increment: vstep;
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-light);
+  color: var(--color-accent-hover);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.checklist__num::before { content: counter(vstep); }
+.checklist__item--critical { border-left: 3px solid var(--color-warning); }
+.checklist__item--critical .checklist__num { background: var(--color-warning-tint); color: var(--color-warning-dark); }
+.checklist__body strong { display: block; margin-bottom: 2px; font-size: 0.95rem; }
+.checklist__body span { font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.5; }
+
+/* --- Internal lock pill (matches grants) ---------------------------------- */
+.fiscal-lock-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-dark); color: var(--color-text-on-dark);
+}
+
+/* --- responsive ----------------------------------------------------------- */
+@media (max-width: 640px) {
+  .verdict { grid-template-columns: 1fr; }
+  .heat__grid { grid-template-columns: 130px repeat(4, 1fr); }
+  .timeline__node { width: 80px; }
+  .timeline__node-label { font-size: 0.68rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leak__fill, .leak__val, .timeline__progress { animation: none; }
+  .leak__fill { transform: scaleX(1); }
+  .leak__val { opacity: 1; }
+  .timeline__progress { width: var(--progress, 30%); }
+  .timeline__node--now .timeline__dot { animation: none; }
+}

@@ -14,6 +14,10 @@
   path = "/grants/*"
 
 [[edge_functions]]
+  function = "fiscal-auth"
+  path = "/fiscal/decision/*"
+
+[[edge_functions]]
   function = "airstreamstudio-auth"
   path = "/mystichearts/airstreamstudio/*"
 

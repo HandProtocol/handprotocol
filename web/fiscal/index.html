@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tax-deductible giving during our filing period · HAND Protocol</title>
+  <meta name="description" content="How HAND Protocol Foundation handles tax-deductible donations while our 501(c)(3) determination is pending: the fiscal sponsorship approach, how money flows, and our plan to exit.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:ital,wght@0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../discovery/style.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link rel="mask-icon" href="../assets/favicon.svg" color="#D97706">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body class="fiscal-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="../foundation-campaign/index.html" class="nav__logo" aria-label="HAND Protocol home">
+        <svg class="nav__logo-icon" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M16 8v5m0 6v5m-5-13v10a3 3 0 003 3h4a3 3 0 003-3V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="16" cy="11" r="2" fill="currentColor"/>
+        </svg>
+        <span>HAND Protocol</span>
+      </a>
+      <div class="nav__crumbs">
+        <a href="../foundation-campaign/index.html">Foundation</a>
+        <span class="nav__crumb-sep">/</span>
+        <span class="nav__crumb-current" aria-current="page">Giving &amp; tax status</span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <!-- Hero -->
+    <header class="doc-header">
+      <div class="doc-header__bg"></div>
+      <div class="container container--doc doc-header__inner">
+        <div class="doc-header__eyebrow">
+          <span class="doc-header__eyebrow-dot"></span>
+          501(c)(3) in formation
+        </div>
+        <h1 class="doc-header__title">
+          Your gift is deductible<br>
+          <span class="u-accent">from the very first day.</span>
+        </h1>
+        <p class="doc-header__lede">
+          HAND Protocol Foundation is a Texas nonprofit corporation with its 501(c)(3)
+          application in preparation. While the IRS determination is pending, we plan to
+          receive donations through an established fiscal sponsor, so every contribution
+          is tax-deductible now, not someday. Here is exactly how that works, and how we
+          step out of it once our own determination arrives.
+        </p>
+      </div>
+    </header>
+
+    <!-- What it is -->
+    <section class="fiscal-section">
+      <div class="container container--doc">
+        <div class="fiscal-section__head">
+          <span class="fiscal-eyebrow"><span class="fiscal-eyebrow__dot"></span>The approach</span>
+          <h2 class="fiscal-section__title">A pass-through, not a parent.</h2>
+          <p class="fiscal-section__lede">
+            We use what is called a <strong>Model C, pre-approved grant relationship</strong>.
+            A fiscal sponsor that already holds 501(c)(3) status receives donations earmarked
+            for HAND, then re-grants them to us under a written agreement. HAND stays a fully
+            separate legal entity. We hold our own contracts, run our own programs, and own
+            everything we build. The sponsor is a tax-deductible doorway, not a landlord.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart 4: donation flow -->
+    <section class="fiscal-section fiscal-section--warm fiscal-section--tight">
+      <div class="container container--wide">
+        <div class="chart">
+          <div class="chart__head">
+            <h3 class="chart__title">Where your dollar goes</h3>
+            <p class="chart__sub">$100 donated · pass-through fee 6–7% · not drawn to scale</p>
+          </div>
+          <div class="flow">
+            <svg viewBox="0 0 940 300" role="img" aria-label="A $100 donation flows to the fiscal sponsor, who keeps a 6 to 7 dollar fee and re-grants 93 to 94 dollars to HAND Protocol.">
+              <!-- stream: donor -> sponsor (full) -->
+              <path class="flow__stream-net" d="M150,116 C 280,116 300,108 405,108 L 405,192 C 300,192 280,184 150,184 Z" opacity="0.22"/>
+              <!-- net continues sponsor -> HAND -->
+              <path class="flow__stream-net" d="M555,116 C 670,116 690,120 785,120 L 785,180 C 690,180 670,184 555,184 Z"/>
+              <!-- fee tributary peels up -->
+              <path class="flow__stream-fee" d="M555,108 C 610,108 612,60 660,52 L 760,52 L 760,74 L 668,74 C 624,80 624,116 555,124 Z"/>
+
+              <!-- donor node -->
+              <rect class="flow__node-box" x="20" y="120" width="130" height="60" rx="10"/>
+              <text class="flow__label" x="85" y="145" text-anchor="middle">Donor</text>
+              <text class="flow__amt" x="85" y="166" text-anchor="middle">$100</text>
+
+              <!-- sponsor node -->
+              <rect class="flow__node-box" x="405" y="105" width="150" height="90" rx="10"/>
+              <text class="flow__label" x="480" y="138" text-anchor="middle">Fiscal sponsor</text>
+              <text class="flow__amt" x="480" y="158" text-anchor="middle">receives $100</text>
+              <text class="flow__tag" x="480" y="178" text-anchor="middle" fill="#6B7280">501(c)(3)</text>
+
+              <!-- HAND node -->
+              <rect class="flow__node-box flow__node-box--accent" x="785" y="120" width="135" height="60" rx="10"/>
+              <text class="flow__label flow__label--light" x="852" y="145" text-anchor="middle">HAND</text>
+              <text class="flow__amt flow__amt--light" x="852" y="166" text-anchor="middle">net $93–94</text>
+
+              <!-- fee tag -->
+              <text class="flow__tag flow__amt--fee" x="760" y="44" text-anchor="end">Sponsor fee $6–7</text>
+            </svg>
+          </div>
+          <p class="chart__note">
+            The fee covers the sponsor's accounting, compliance, and the donor receipts they
+            issue on our behalf. We publish it as a separate line in our annual report during
+            any sponsorship period. The sponsor honors your designation: a gift earmarked for
+            a specific program reaches that program.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart 3: timeline -->
+    <section class="fiscal-section">
+      <div class="container container--wide">
+        <div class="fiscal-section__head">
+          <span class="fiscal-eyebrow"><span class="fiscal-eyebrow__dot"></span>The arc</span>
+          <h2 class="fiscal-section__title">A bridge we intend to cross and leave behind.</h2>
+          <p class="fiscal-section__lede">
+            Fiscal sponsorship is temporary by design. We expect to operate under it for
+            roughly 12 to 18 months, from incorporation through the IRS determination, then
+            transition donations directly to HAND.
+          </p>
+        </div>
+        <div class="chart">
+          <div class="timeline">
+            <div class="timeline__band">
+              <span class="timeline__band-label">Sponsorship period · ~12–18 months</span>
+            </div>
+            <div class="timeline__line">
+              <div class="timeline__progress" style="--progress: 22%;"></div>
+            </div>
+            <div class="timeline__nodes" style="height: 80px;">
+              <div class="timeline__node timeline__node--done" style="--at: 8%;">
+                <span class="timeline__dot"></span>
+                <span class="timeline__node-label">Incorporate</span>
+                <span class="timeline__node-time">Texas SOS · T0</span>
+              </div>
+              <div class="timeline__node timeline__node--now" style="--at: 30%;">
+                <span class="timeline__dot"></span>
+                <span class="timeline__node-label">File Form 1023</span>
+                <span class="timeline__node-time">T0 + ~2–3 mo</span>
+              </div>
+              <div class="timeline__node" style="--at: 70%;">
+                <span class="timeline__dot"></span>
+                <span class="timeline__node-label">IRS determination</span>
+                <span class="timeline__node-time">T0 + ~12–18 mo</span>
+              </div>
+              <div class="timeline__node" style="--at: 92%;">
+                <span class="timeline__dot"></span>
+                <span class="timeline__node-label">Direct giving</span>
+                <span class="timeline__node-time">Exit sponsor</span>
+              </div>
+            </div>
+          </div>
+          <p class="chart__note">
+            Timeline is illustrative; exact dates lock once incorporation is filed. The IRS
+            grants exemption retroactively to our incorporation date, so the bridge period is
+            covered either way.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Who we're evaluating -->
+    <section class="fiscal-section fiscal-section--warm">
+      <div class="container container--wide">
+        <div class="fiscal-section__head">
+          <span class="fiscal-eyebrow"><span class="fiscal-eyebrow__dot"></span>Status: evaluating</span>
+          <h2 class="fiscal-section__title">Who we're considering.</h2>
+          <p class="fiscal-section__lede">
+            We have not selected a sponsor yet. We are evaluating established Model C programs
+            against a written set of criteria: low and transparent fees, a posture friendly to
+            projects spinning out to their own 501(c)(3), and terms that protect the
+            independence of the communities we serve. The candidates below are under review.
+          </p>
+        </div>
+        <div class="cands">
+          <article class="cand">
+            <span class="cand__rank">Under review</span>
+            <h3 class="cand__name">Players Philanthropy Fund</h3>
+            <p class="cand__fee">6% pass-through</p>
+            <p class="cand__why">Mature, founder-friendly Model C program with a long track record and broad funder familiarity.</p>
+          </article>
+          <article class="cand">
+            <span class="cand__rank">Under review</span>
+            <h3 class="cand__name">Hack Club Bank</h3>
+            <p class="cand__fee">7% pass-through</p>
+            <p class="cand__why">Open-source operations culture, transparent ledger, and native handling of crypto gifts.</p>
+          </article>
+          <article class="cand">
+            <span class="cand__rank">Under review</span>
+            <h3 class="cand__name">Social Good Fund</h3>
+            <p class="cand__fee">6–8% + admin</p>
+            <p class="cand__why">Established California sponsor; currently weighing intake capacity against our timeline.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Exit plan -->
+    <section class="fiscal-section">
+      <div class="container container--doc">
+        <div class="fiscal-section__head">
+          <span class="fiscal-eyebrow"><span class="fiscal-eyebrow__dot"></span>The exit</span>
+          <h2 class="fiscal-section__title">When we stand on our own.</h2>
+          <p class="fiscal-section__lede">
+            The moment our IRS determination letter arrives and our own bank account is ready,
+            we give the sponsor notice, transfer the remaining balance to HAND, and donations
+            flow to us directly. We notify every donor of the transition and thank the sponsor
+            publicly in that year's annual report. Gifts made through the sponsor stay
+            deductible under their status; gifts after the switch are deductible under ours.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="fiscal-section fiscal-section--dark fiscal-section--tight">
+      <div class="container container--doc" style="text-align:center;">
+        <p class="fiscal-section__lede" style="margin-bottom: var(--space-md);">
+          Questions about giving? Reach us through the
+          <a href="../foundation-campaign/index.html" class="u-accent">foundation campaign</a>.
+        </p>
+        <p style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-text-on-dark-secondary);">
+          HAND Protocol Foundation · 501(c)(3) in formation · Austin, Texas
+        </p>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>
