@@ -431,9 +431,8 @@
 .cand--primary { border-color: var(--color-accent); box-shadow: 0 0 0 1px var(--color-accent); }
 .cand--backup { border-color: var(--color-teal); }
 .cand__rank {
-  position: absolute;
-  top: var(--space-lg);
-  right: var(--space-lg);
+  display: inline-block;
+  margin-bottom: var(--space-md);
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.1em;
