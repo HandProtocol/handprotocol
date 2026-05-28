@@ -150,11 +150,13 @@
 .leak__bars { display: grid; gap: var(--space-sm); }
 .leak__row {
   display: grid;
-  grid-template-columns: 56px 1fr;
+  grid-template-columns: 52px 1fr auto;
+  grid-template-areas: "label track value";
   align-items: center;
   gap: var(--space-md);
 }
 .leak__label {
+  grid-area: label;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   font-weight: 600;
@@ -162,6 +164,7 @@
   color: var(--color-text-secondary);
 }
 .leak__track {
+  grid-area: track;
   position: relative;
   height: 30px;
   background: var(--color-bg-alt);
@@ -183,10 +186,8 @@
   background: linear-gradient(90deg, var(--color-teal), var(--color-teal-dark));
 }
 .leak__val {
-  position: absolute;
-  top: 50%;
-  left: calc(var(--w, 0%) + 8px);
-  transform: translateY(-50%);
+  grid-area: value;
+  justify-self: end;
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 600;
@@ -491,9 +492,61 @@
 /* --- responsive ----------------------------------------------------------- */
 @media (max-width: 640px) {
   .verdict { grid-template-columns: 1fr; }
-  .heat__grid { grid-template-columns: 130px repeat(4, 1fr); }
-  .timeline__node { width: 80px; }
-  .timeline__node-label { font-size: 0.68rem; }
+  .chart { padding: var(--space-lg) var(--space-md); }
+
+  /* Leak bars: label + value on top line, full-width bar below */
+  .leak__row {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "label value"
+      "track track";
+    gap: 6px var(--space-sm);
+  }
+  .leak__label { text-align: left; }
+  .leak__track { margin-top: 2px; }
+
+  /* Heatmap: shrink to fit, no horizontal scroll */
+  .heat__grid { grid-template-columns: 78px repeat(4, 1fr); min-width: 0; gap: 3px; }
+  .heat__cell { padding: 0.5rem 0.15rem; font-size: 0.82rem; }
+  .heat__rowhead { font-size: 0.68rem; padding: 0.5rem 0.3rem; line-height: 1.15; }
+  .heat__colhead { font-size: 0.74rem; }
+  .heat__colhead small { font-size: 0.6rem; }
+  .heat__totcell { font-size: 0.95rem; }
+
+  /* Flow diagram: keep legible, scroll horizontally inside its own box */
+  .flow { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .flow svg { min-width: 460px; }
+
+  /* Timeline: vertical rail instead of overlapping horizontal nodes */
+  .timeline { padding: var(--space-sm) 0; }
+  .timeline__band, .timeline__line { display: none; }
+  .timeline__nodes {
+    height: auto !important;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    position: relative;
+    padding-left: var(--space-lg);
+    border-left: 2px solid var(--color-border-strong);
+  }
+  .timeline__node {
+    position: static !important;
+    left: auto !important;
+    transform: none !important;
+    width: auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "dot label" "dot time";
+    align-items: center;
+    column-gap: var(--space-md);
+    row-gap: 0;
+  }
+  .timeline__dot {
+    grid-area: dot;
+    margin-left: calc(-1 * var(--space-lg) - 9px);
+  }
+  .timeline__node-label { grid-area: label; margin-top: 0; text-align: left; }
+  .timeline__node-time { grid-area: time; margin-top: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
