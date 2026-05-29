@@ -205,44 +205,78 @@ cylinder("VentStack_Standard", 10.75, 11.6, 0.5, ROOF_BACK_Z + 1.5, 0.20, M_STAC
 box("RainCap_Accessible", (3.45, 11.3, ROOF_BACK_Z + 1.4), (4.05, 11.9, ROOF_BACK_Z + 1.7), M_STACK)
 box("RainCap_Standard", (10.45, 11.3, ROOF_BACK_Z + 1.4), (11.05, 11.9, ROOF_BACK_Z + 1.7), M_STACK)
 
-# 8. Switchback ramp (1:12), beside the deck on +X --------------------------------
-RW = 3.5  # ramp clear width (42 in)
-# lower run: grade entry at front (y=0) climbing to mid-landing height (z=1.0) at back
-sloped_slab("Plane_Ramp_Lower", 16.5, 16.5 + RW, 0.0, 12.0,
-            z_y0=0.10, z_y1=1.10, thickness=0.25, material=M_RAMP)
-# mid landing 5x5
-box("Plane_Ramp_LandingMid", (16.5, 12.0, 0.85), (21.5, 17.0, 1.10), M_RAMP)
-# upper run: from mid landing (z=1.10 at y=17) climbing to deck level (z=2.0 at y=5)
-sloped_slab("Plane_Ramp_Upper", 18.0, 18.0 + RW, 5.0, 17.0,
-            z_y0=2.00, z_y1=1.10, thickness=0.25, material=M_RAMP)
-# top landing connecting upper run to deck east edge
-box("Plane_Ramp_LandingTop", (16.0, 5.0, 1.96), (21.5, 10.0, 2.05), M_RAMP)
+# 8. Hairpin ramp (1:12), running EAST off the deck -------------------------------
+# A clean switchback: two parallel lanes run east (+X) from the deck, offset in Y so
+# they never overlap, joined by ONE flat turn-landing at the far (east) end. Enter at
+# grade on the SOUTH lane, climb east, turn 180 deg on the landing, climb west on the
+# NORTH lane onto the deck. Runs slope along X, so we need an X-sloping slab helper
+# (sloped_slab only slopes along Y).
 
-# 9. Handrails (36 in top rail) + posts + edge curbs along ramp runs ----------------
-def rail_along_run(name, x0, x1, y0, y1, z_y0, z_y1, n_posts=5):
-    """A real-reading handrail on both X edges of a sloped run: a 4-in edge curb,
-    evenly spaced 36-in posts, and a continuous top rail following the slope."""
-    POST = 0.15          # post half-thickness footprint (~3.6 in)
-    RAIL_H = 3.0         # 36 in
-    RAIL_T = 0.18
-    for edge_x in (x0, x1):
-        # edge curb (wheel stop)
-        sloped_slab(f"{name}_curb_{int(edge_x*10)}", edge_x - 0.05, edge_x + 0.05,
-                    y0, y1, z_y0 + 0.34, z_y1 + 0.34, 0.34, M_RAIL)
-        # continuous sloped top rail
-        sloped_slab(f"{name}_top_{int(edge_x*10)}", edge_x - RAIL_T/2, edge_x + RAIL_T/2,
-                    y0, y1, z_y0 + RAIL_H + RAIL_T, z_y1 + RAIL_H + RAIL_T, RAIL_T, M_RAIL)
-        # vertical posts, interpolating the run height at each station
-        for i in range(n_posts):
-            t = i / (n_posts - 1)
-            py = y0 + t * (y1 - y0)
-            pz = z_y0 + t * (z_y1 - z_y0)
-            box(f"{name}_post_{int(edge_x*10)}_{i}",
-                (edge_x - POST, py - POST, pz),
-                (edge_x + POST, py + POST, pz + RAIL_H), M_RAIL)
+def sloped_slab_x(name, x0, x1, y0, y1, z_x0, z_x1, thickness, material=None):
+    """Slab whose TOP surface slopes along X from z_x0 (at x0) to z_x1 (at x1)."""
+    t = thickness
+    verts = [
+        (x0, y0, z_x0), (x0, y1, z_x0), (x1, y1, z_x1), (x1, y0, z_x1),                  # top
+        (x0, y0, z_x0 - t), (x0, y1, z_x0 - t), (x1, y1, z_x1 - t), (x1, y0, z_x1 - t),  # bottom
+    ]
+    verts = [(vx * FT, vy * FT, vz * FT) for (vx, vy, vz) in verts]
+    faces = [(0, 1, 2, 3), (7, 6, 5, 4), (0, 4, 5, 1), (1, 5, 6, 2), (2, 6, 7, 3), (3, 7, 4, 0)]
+    me = bpy.data.meshes.new(name)
+    me.from_pydata(verts, [], faces)
+    me.update()
+    obj = bpy.data.objects.new(name, me)
+    bpy.context.collection.objects.link(obj)
+    return _finish(obj, material)
 
-rail_along_run("Ramp_Lower", 16.5, 16.5 + RW, 0.0, 12.0, 0.10, 1.10)
-rail_along_run("Ramp_Upper", 18.0, 18.0 + RW, 5.0, 17.0, 2.00, 1.10)
+RW = 4.0                          # lane clear width (48 in)
+LAND_Z = 1.0                      # turn-landing height (half the 2 ft rise)
+X_DECK = 16.0                     # deck east edge (ramp starts here)
+X_LAND0, X_LAND1 = 28.0, 32.5     # flat turn-landing X extent (~4.5 ft deep)
+Y_S0, Y_S1 = 3.0, 7.0            # SOUTH lane (lower run)
+Y_N0, Y_N1 = 8.0, 12.0           # NORTH lane (upper run) — 1 ft gap between lanes
+
+# North lane = UPPER run: deck (x=16, z=2.0) down to landing (x=28, z=1.0)
+sloped_slab_x("Plane_Ramp_Upper", X_DECK, X_LAND0, Y_N0, Y_N1,
+              z_x0=2.00, z_x1=LAND_Z, thickness=0.25, material=M_RAMP)
+# South lane = LOWER run: grade entry (x=16.5, z=0.12) up to landing (x=28, z=1.0)
+sloped_slab_x("Plane_Ramp_Lower", 16.5, X_LAND0, Y_S0, Y_S1,
+              z_x0=0.12, z_x1=LAND_Z, thickness=0.25, material=M_RAMP)
+# Flat turn landing joining both lanes at the east end
+box("Plane_Ramp_Landing", (X_LAND0, Y_S0, LAND_Z - 0.25), (X_LAND1, Y_N1, LAND_Z), M_RAMP)
+
+# 9. Handrails (36 in top rail) + posts + edge curbs --------------------------------
+RAIL_H, RAIL_T, POST = 3.0, 0.18, 0.13
+
+def rail_run_x(name, x0, x1, y_edge, z_x0, z_x1, n_posts=7):
+    """Curb + sloped top rail + posts along a run that slopes in X, at constant y_edge."""
+    sloped_slab_x(f"{name}_curb", x0, x1, y_edge - 0.05, y_edge + 0.05,
+                  z_x0 + 0.34, z_x1 + 0.34, 0.34, M_RAIL)
+    sloped_slab_x(f"{name}_top", x0, x1, y_edge - RAIL_T / 2, y_edge + RAIL_T / 2,
+                  z_x0 + RAIL_H + RAIL_T, z_x1 + RAIL_H + RAIL_T, RAIL_T, M_RAIL)
+    for i in range(n_posts):
+        f = i / (n_posts - 1)
+        px = x0 + f * (x1 - x0)
+        pz = z_x0 + f * (z_x1 - z_x0)
+        box(f"{name}_post_{i}", (px - POST, y_edge - POST, pz),
+            (px + POST, y_edge + POST, pz + RAIL_H), M_RAIL)
+
+def rail_run_y(name, y0, y1, x_edge, z_flat, n_posts=4):
+    """Flat rail along the landing's far (east) edge — runs in Y at constant x_edge."""
+    box(f"{name}_curb", (x_edge - 0.05, y0, z_flat), (x_edge + 0.05, y1, z_flat + 0.34), M_RAIL)
+    box(f"{name}_top", (x_edge - RAIL_T / 2, y0, z_flat + RAIL_H),
+        (x_edge + RAIL_T / 2, y1, z_flat + RAIL_H + RAIL_T), M_RAIL)
+    for i in range(n_posts):
+        f = i / (n_posts - 1)
+        py = y0 + f * (y1 - y0)
+        box(f"{name}_post_{i}", (x_edge - POST, py - POST, z_flat),
+            (x_edge + POST, py + POST, z_flat + RAIL_H), M_RAIL)
+
+# Outer long edge of each lane + the inner spine between them + the landing's east edge.
+rail_run_x("RampN_out", X_DECK, X_LAND0, Y_N1, 2.00, LAND_Z)   # north lane, outer edge
+rail_run_x("RampN_in", X_DECK, X_LAND0, Y_N0, 2.00, LAND_Z)    # north lane, inner edge
+rail_run_x("RampS_out", 16.5, X_LAND0, Y_S0, 0.12, LAND_Z)     # south lane, outer edge
+rail_run_x("RampS_in", 16.5, X_LAND0, Y_S1, 0.12, LAND_Z)      # south lane, inner edge
+rail_run_y("RampLandE", Y_S0, Y_N1, X_LAND1, LAND_Z)           # landing east edge
 
 # --------------------------------------------------------------------------------------
 # Daylight world (Nishita sky) + sun
