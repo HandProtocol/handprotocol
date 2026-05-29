@@ -137,7 +137,16 @@ M_RAMP = mat("CedarRamp", (0.60, 0.40, 0.22), rough=0.6)
 M_SKIRT = mat("Skirt", (0.38, 0.24, 0.13), rough=0.85)
 M_HATCH = mat("LouverHatch", (0.28, 0.18, 0.10), rough=0.9)
 M_PIER = mat("ScrewPier", (0.20, 0.20, 0.22), rough=0.6, metallic=0.5)
-M_ACCENT = mat("AccessibleAccent", (0.09, 0.34, 0.62), rough=0.5)
+M_ACCENT = mat("AccessibleAccent", (0.07, 0.40, 0.85), rough=0.4)
+M_SIGN_WHITE = mat("SignWhite", (0.98, 0.98, 1.0), rough=0.3)
+# Make the placard self-lit so the ISA wheelchair reads even in the deep roof shade.
+for _m, _str in ((M_ACCENT, 0.5), (M_SIGN_WHITE, 1.2)):
+    _bsdf = _m.node_tree.nodes.get("Principled BSDF")
+    try:
+        _bsdf.inputs["Emission Color"].default_value = (*_m.node_tree.nodes["Principled BSDF"].inputs["Base Color"].default_value[:3], 1.0)
+        _bsdf.inputs["Emission Strength"].default_value = _str
+    except Exception:
+        pass
 M_THRONE = mat("Throne", (0.74, 0.71, 0.64), rough=0.5)
 
 # --------------------------------------------------------------------------------------
@@ -168,29 +177,58 @@ box("Skirt_front", (DECK_X0, DECK_Y0, 0.0), (DECK_X1, DECK_Y0 + 0.1, FFL - SLAB)
 box("Skirt_back", (DECK_X0, DECK_Y1 - 0.1, 0.0), (DECK_X1, DECK_Y1, FFL - SLAB), M_SKIRT)
 box("Skirt_left", (DECK_X0, DECK_Y0, 0.0), (DECK_X0 + 0.1, DECK_Y1, FFL - SLAB), M_SKIRT)
 box("Skirt_right", (DECK_X1 - 0.1, DECK_Y0, 0.0), (DECK_X1, DECK_Y1, FFL - SLAB), M_SKIRT)
-# removable louver hatch under each chamber bay (on the back skirt)
-box("Hatch_accessible", (2.0, DECK_Y1 - 0.12, 0.2), (5.5, DECK_Y1, FFL - SLAB - 0.2), M_HATCH)
-box("Hatch_standard", (9.0, DECK_Y1 - 0.12, 0.2), (12.0, DECK_Y1, FFL - SLAB - 0.2), M_HATCH)
+# removable louver hatch under each chamber bay (on the back skirt) — 3 stalls
+box("Hatch_accessible", (1.5, DECK_Y1 - 0.12, 0.2), (5.0, DECK_Y1, FFL - SLAB - 0.2), M_HATCH)
+box("Hatch_standard1", (8.0, DECK_Y1 - 0.12, 0.2), (11.0, DECK_Y1, FFL - SLAB - 0.2), M_HATCH)
+box("Hatch_standard2", (12.0, DECK_Y1 - 0.12, 0.2), (15.5, DECK_Y1, FFL - SLAB - 0.2), M_HATCH)
 # 9 screw piers on a ~6 ft grid
 for gx in (1.0, 8.0, 15.0):
     for gy in (1.0, 6.0, 11.0):
         cylinder(f"Pier_{int(gx)}_{int(gy)}", gx, gy, 0.0, FFL - SLAB, 0.25, M_PIER)
 
 # 5. Stall floor planes + walls ------------------------------------------------------
-# Accessible stall: ~7x5 interior, door on front (-Y) side
+# Three stalls across the 16 ft back: ONE wide accessible + TWO small standard.
+
+def accessibility_sign(name, cx, y_face, z_base):
+    """A clear blue ISA-style handicap placard on the EXTERIOR (-Y) front wall:
+    blue panel + a white wheelchair glyph protruding toward the viewer (-Y), so the
+    south-facing camera sees the glyph in front of the panel, not occluded by it."""
+    s = 1.1  # placard half-size (~2.2 ft square)
+    # Panel: mostly proud of the wall toward -Y (exterior / camera side)
+    box(f"{name}_panel", (cx - s, y_face - 0.08, z_base - s), (cx + s, y_face + 0.02, z_base + s), M_ACCENT)
+    # White glyph, protruding FURTHER toward -Y so it sits in front of the blue panel
+    yg0, yg1 = y_face - 0.13, y_face - 0.08
+    box(f"{name}_head", (cx - 0.22, yg0, z_base + 0.50), (cx + 0.22, yg1, z_base + 0.92), M_SIGN_WHITE)  # head
+    box(f"{name}_back", (cx - 0.15, yg0, z_base - 0.12), (cx + 0.08, yg1, z_base + 0.58), M_SIGN_WHITE)  # seat back
+    box(f"{name}_seat", (cx - 0.15, yg0, z_base - 0.22), (cx + 0.55, yg1, z_base - 0.02), M_SIGN_WHITE)  # seat
+    box(f"{name}_wheel", (cx - 0.50, yg0, z_base - 0.66), (cx + 0.50, yg1, z_base - 0.48), M_SIGN_WHITE) # wheel
+    box(f"{name}_foot", (cx + 0.40, yg0, z_base - 0.22), (cx + 0.62, yg1, z_base - 0.48), M_SIGN_WHITE)  # foot
+
+# 5a. Accessible stall (the BIG one): ~7.5 x 5.5 interior, door on front (-Y) side
 AX0, AX1, AY0, AY1 = 0.0, 7.5, 6.5, 12.0
 box("Plane_StallFloor_Accessible", (AX0, AY0, FFL), (AX1, AY1, FFL + 0.04), M_PATIO)
 walled_room("Stall_Accessible", AX0, AX1, AY0, AY1, FFL, WALL_TOP, WALL_T,
             door=(2.6, 5.6), material=M_WALL)
-box("Stall_Accessible_marker", (2.6, AY0, FFL + 4.5), (5.6, AY0 + WALL_T, FFL + 5.3), M_ACCENT)
+# Handicap placard on the solid front wall beside the door (eye level ~5 ft AFF)
+accessibility_sign("ISA_Accessible", 1.3, AY0, FFL + 2.6)
 box("Throne_Accessible", (5.6, 9.5, FFL), (7.1, 11.0, FFL + 1.5), M_THRONE)
+# Side + rear grab bars (cedar) to read as the accessible fixture
+box("Grab_side_Accessible", (4.9, 9.3, FFL + 2.8), (7.2, 9.5, FFL + 3.0), M_RAIL)
+box("Grab_rear_Accessible", (5.4, 11.0, FFL + 2.8), (7.1, 11.2, FFL + 3.0), M_RAIL)
 
-# Standard stall: 4x4 interior
-SX0, SX1, SY0, SY1 = 8.5, 13.0, 7.5, 12.0
-box("Plane_StallFloor_Standard", (SX0, SY0, FFL), (SX1, SY1, FFL + 0.04), M_PATIO)
-walled_room("Stall_Standard", SX0, SX1, SY0, SY1, FFL, WALL_TOP, WALL_T,
-            door=(9.8, 11.7), material=M_WALL)
-box("Throne_Standard", (11.3, 9.8, FFL), (12.7, 11.2, FFL + 1.5), M_THRONE)
+# 5b. Standard stall 1 (small): ~3.5 x 4.5 interior
+S1X0, S1X1, S1Y0, S1Y1 = 8.0, 11.5, 7.5, 12.0
+box("Plane_StallFloor_Standard1", (S1X0, S1Y0, FFL), (S1X1, S1Y1, FFL + 0.04), M_PATIO)
+walled_room("Stall_Standard1", S1X0, S1X1, S1Y0, S1Y1, FFL, WALL_TOP, WALL_T,
+            door=(9.0, 10.5), material=M_WALL)
+box("Throne_Standard1", (9.9, 10.4, FFL), (11.1, 11.6, FFL + 1.5), M_THRONE)
+
+# 5c. Standard stall 2 (small): ~3.5 x 4.5 interior
+S2X0, S2X1, S2Y0, S2Y1 = 12.0, 15.5, 7.5, 12.0
+box("Plane_StallFloor_Standard2", (S2X0, S2Y0, FFL), (S2X1, S2Y1, FFL + 0.04), M_PATIO)
+walled_room("Stall_Standard2", S2X0, S2X1, S2Y0, S2Y1, FFL, WALL_TOP, WALL_T,
+            door=(13.0, 14.5), material=M_WALL)
+box("Throne_Standard2", (13.9, 10.4, FFL), (15.1, 11.6, FFL + 1.5), M_THRONE)
 
 # 6. Shed roof (single slope, high at back, big front overhang shading patio) --------
 ROOF_BACK_Z = WALL_TOP + 0.6        # ~9.6 ft at back ridge
@@ -199,18 +237,17 @@ ROOF_FRONT_Z = ROOF_BACK_Z - RUN * (2.0 / 12.0)  # 2:12 pitch
 sloped_slab("Roof_Shed", -1.0, 17.0, -2.0, 12.5,
             z_y0=ROOF_FRONT_Z, z_y1=ROOF_BACK_Z, thickness=0.35, material=M_ROOF)
 
-# 7. Vent stacks (4 in dia, through roof, above ridge, painted black) ---------------
-cylinder("VentStack_Accessible", 3.75, 11.6, 0.5, ROOF_BACK_Z + 1.5, 0.20, M_STACK)
-cylinder("VentStack_Standard", 10.75, 11.6, 0.5, ROOF_BACK_Z + 1.5, 0.20, M_STACK)
-box("RainCap_Accessible", (3.45, 11.3, ROOF_BACK_Z + 1.4), (4.05, 11.9, ROOF_BACK_Z + 1.7), M_STACK)
-box("RainCap_Standard", (10.45, 11.3, ROOF_BACK_Z + 1.4), (11.05, 11.9, ROOF_BACK_Z + 1.7), M_STACK)
+# 7. Vent stacks (4 in dia, through roof, above ridge, painted black) — one per stall
+for sname, sx in (("Accessible", 3.75), ("Standard1", 9.75), ("Standard2", 13.75)):
+    cylinder(f"VentStack_{sname}", sx, 11.6, 0.5, ROOF_BACK_Z + 1.5, 0.20, M_STACK)
+    box(f"RainCap_{sname}", (sx - 0.30, 11.3, ROOF_BACK_Z + 1.4),
+        (sx + 0.30, 11.9, ROOF_BACK_Z + 1.7), M_STACK)
 
-# 8. Hairpin ramp (1:12), running EAST off the deck -------------------------------
-# A clean switchback: two parallel lanes run east (+X) from the deck, offset in Y so
-# they never overlap, joined by ONE flat turn-landing at the far (east) end. Enter at
-# grade on the SOUTH lane, climb east, turn 180 deg on the landing, climb west on the
-# NORTH lane onto the deck. Runs slope along X, so we need an X-sloping slab helper
-# (sloped_slab only slopes along Y).
+# 8. L-shaped ramp (1:12), one 90-degree corner ----------------------------------
+# A single switchback at 90 deg: UPPER run comes off the deck's east edge and slopes
+# down running EAST to a corner landing; LOWER run turns 90 deg and slopes down running
+# NORTH to grade. One clean L, no overlap. The upper run slopes in X, the lower run
+# slopes in Y, so we need an X-sloping slab helper (sloped_slab already slopes in Y).
 
 def sloped_slab_x(name, x0, x1, y0, y1, z_x0, z_x1, thickness, material=None):
     """Slab whose TOP surface slopes along X from z_x0 (at x0) to z_x1 (at x1)."""
@@ -228,21 +265,21 @@ def sloped_slab_x(name, x0, x1, y0, y1, z_x0, z_x1, thickness, material=None):
     bpy.context.collection.objects.link(obj)
     return _finish(obj, material)
 
-RW = 4.0                          # lane clear width (48 in)
-LAND_Z = 1.0                      # turn-landing height (half the 2 ft rise)
-X_DECK = 16.0                     # deck east edge (ramp starts here)
-X_LAND0, X_LAND1 = 28.0, 32.5     # flat turn-landing X extent (~4.5 ft deep)
-Y_S0, Y_S1 = 3.0, 7.0            # SOUTH lane (lower run)
-Y_N0, Y_N1 = 8.0, 12.0           # NORTH lane (upper run) — 1 ft gap between lanes
+RW = 4.0                      # ramp clear width (48 in)
+LAND_Z = 1.0                  # corner-landing height (half the 2 ft rise)
+X_DECK = 16.0                 # deck east edge (upper run starts here at deck level)
+X_CORN0, X_CORN1 = 28.0, 32.0 # corner landing X extent (4 ft square)
+UY0, UY1 = 1.0, 5.0           # upper run width band (Y)
+LY_GRADE = 15.5               # lower run reaches grade at this Y
 
-# North lane = UPPER run: deck (x=16, z=2.0) down to landing (x=28, z=1.0)
-sloped_slab_x("Plane_Ramp_Upper", X_DECK, X_LAND0, Y_N0, Y_N1,
+# Upper run: deck (x=16, z=2.0) sloping down EAST to corner (x=28, z=1.0)
+sloped_slab_x("Plane_Ramp_Upper", X_DECK, X_CORN0, UY0, UY1,
               z_x0=2.00, z_x1=LAND_Z, thickness=0.25, material=M_RAMP)
-# South lane = LOWER run: grade entry (x=16.5, z=0.12) up to landing (x=28, z=1.0)
-sloped_slab_x("Plane_Ramp_Lower", 16.5, X_LAND0, Y_S0, Y_S1,
-              z_x0=0.12, z_x1=LAND_Z, thickness=0.25, material=M_RAMP)
-# Flat turn landing joining both lanes at the east end
-box("Plane_Ramp_Landing", (X_LAND0, Y_S0, LAND_Z - 0.25), (X_LAND1, Y_N1, LAND_Z), M_RAMP)
+# Corner landing (flat) — the 90 deg turn
+box("Plane_Ramp_Corner", (X_CORN0, UY0, LAND_Z - 0.25), (X_CORN1, LY_GRADE, LAND_Z), M_RAMP)
+# Lower run: corner (y=5, z=1.0) sloping down NORTH to grade (y=15.5, z=0.12)
+sloped_slab("Plane_Ramp_Lower", X_CORN0, X_CORN1, UY1, LY_GRADE,
+            z_y0=LAND_Z, z_y1=0.12, thickness=0.25, material=M_RAMP)
 
 # 9. Handrails (36 in top rail) + posts + edge curbs --------------------------------
 RAIL_H, RAIL_T, POST = 3.0, 0.18, 0.13
@@ -260,23 +297,24 @@ def rail_run_x(name, x0, x1, y_edge, z_x0, z_x1, n_posts=7):
         box(f"{name}_post_{i}", (px - POST, y_edge - POST, pz),
             (px + POST, y_edge + POST, pz + RAIL_H), M_RAIL)
 
-def rail_run_y(name, y0, y1, x_edge, z_flat, n_posts=4):
-    """Flat rail along the landing's far (east) edge — runs in Y at constant x_edge."""
-    box(f"{name}_curb", (x_edge - 0.05, y0, z_flat), (x_edge + 0.05, y1, z_flat + 0.34), M_RAIL)
-    box(f"{name}_top", (x_edge - RAIL_T / 2, y0, z_flat + RAIL_H),
-        (x_edge + RAIL_T / 2, y1, z_flat + RAIL_H + RAIL_T), M_RAIL)
+def rail_run_y(name, y0, y1, x_edge, z_y0, z_y1, n_posts=7):
+    """Curb + sloped top rail + posts along a run that slopes in Y, at constant x_edge."""
+    sloped_slab(f"{name}_curb", x_edge - 0.05, x_edge + 0.05, y0, y1,
+                z_y0 + 0.34, z_y1 + 0.34, 0.34, M_RAIL)
+    sloped_slab(f"{name}_top", x_edge - RAIL_T / 2, x_edge + RAIL_T / 2, y0, y1,
+                z_y0 + RAIL_H + RAIL_T, z_y1 + RAIL_H + RAIL_T, RAIL_T, M_RAIL)
     for i in range(n_posts):
         f = i / (n_posts - 1)
         py = y0 + f * (y1 - y0)
-        box(f"{name}_post_{i}", (x_edge - POST, py - POST, z_flat),
-            (x_edge + POST, py + POST, z_flat + RAIL_H), M_RAIL)
+        pz = z_y0 + f * (z_y1 - z_y0)
+        box(f"{name}_post_{i}", (x_edge - POST, py - POST, pz),
+            (x_edge + POST, py + POST, pz + RAIL_H), M_RAIL)
 
-# Outer long edge of each lane + the inner spine between them + the landing's east edge.
-rail_run_x("RampN_out", X_DECK, X_LAND0, Y_N1, 2.00, LAND_Z)   # north lane, outer edge
-rail_run_x("RampN_in", X_DECK, X_LAND0, Y_N0, 2.00, LAND_Z)    # north lane, inner edge
-rail_run_x("RampS_out", 16.5, X_LAND0, Y_S0, 0.12, LAND_Z)     # south lane, outer edge
-rail_run_x("RampS_in", 16.5, X_LAND0, Y_S1, 0.12, LAND_Z)      # south lane, inner edge
-rail_run_y("RampLandE", Y_S0, Y_N1, X_LAND1, LAND_Z)           # landing east edge
+# Both edges of the upper run (slope in X), both edges of the lower run (slope in Y).
+rail_run_x("RampU_out", X_DECK, X_CORN0, UY0, 2.00, LAND_Z)   # upper run, south edge
+rail_run_x("RampU_in", X_DECK, X_CORN0, UY1, 2.00, LAND_Z)    # upper run, north edge
+rail_run_y("RampL_out", UY1, LY_GRADE, X_CORN1, LAND_Z, 0.12) # lower run, east edge
+rail_run_y("RampL_in", UY1, LY_GRADE, X_CORN0, LAND_Z, 0.12)  # lower run, west edge
 
 # --------------------------------------------------------------------------------------
 # Daylight world (Nishita sky) + sun

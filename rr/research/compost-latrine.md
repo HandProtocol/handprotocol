@@ -2,8 +2,8 @@
 
 *Reimagine Ranch · first build · research compiled 2026-05-29*
 
-Companion research for the two-stall, raised, accessible **dry-cover (sawdust) composting
-latrine**. This is the source of truth for *system choice, dimensions, code, and materials*.
+Companion research for the three-stall (one accessible + two standard), raised, accessible
+**dry-cover (sawdust) composting latrine**. This is the source of truth for *system choice, dimensions, code, and materials*.
 The web build report (`web/reimagineranch/compost-latrine/`) is the visual summary; the Blender
 massing model (`rr/blender/`) is built from the dimensions locked in §7 here.
 
@@ -14,7 +14,7 @@ about the toilet system, the ramp, the structure, ventilation, or material sourc
 
 ## 0. The pitch, in one sentence
 
-> A waterless, two-stall, wheelchair-accessible latrine that turns the simplest possible inputs
+> A waterless, three-stall, wheelchair-accessible latrine that turns the simplest possible inputs
 > — a bucket, a scoop of sawdust — into safe compost, built on a raised cedar deck the community
 > can frame in a weekend.
 
@@ -87,9 +87,9 @@ for grant credibility).
 | Parameter | Requirement | RR design value |
 |---|---|---|
 | Max running slope | **1:12** (8.33%) | 1:12 |
-| Max rise per run | 30 in before a landing | 24 in deck → two 12-in runs *(or one run, see §7)* |
+| Max rise per run | 30 in before a landing | 24 in deck → L: two runs with a corner landing |
 | Clear width | ≥ 36 in between rails | **42 in** (comfortable) |
-| Landings | Level (1:48 max), as wide as ramp, **60 in** long min; **60×60 in** where the ramp changes direction | 60×60 in switchback landing |
+| Landings | Level (1:48 max), as wide as ramp, **60 in** long min; **60×60 in** where the ramp changes direction | 4 ft corner landing at the 90° turn |
 | Handrails | Both sides if rise > 6 in; 34–38 in high; extend 12 in at top/bottom | both sides, 36 in, cedar |
 | Edge protection | Curb/rail to stop a wheel running off | 4 in cedar curb both sides |
 | Cross slope | ≤ 1:48 | flat |
@@ -97,9 +97,9 @@ for grant credibility).
 
 **Slope math (the number that sizes the whole footprint):** rise ÷ slope = run.
 At 1:12, every **1 inch of deck height = 1 foot of ramp run.** A 24-in deck = **24 ft** of ramp.
-That's long, so v1 uses a **switchback** (two ~12 ft runs + a 60×60 landing) to fold the run into
-a compact L — saving footprint = "efficient" per the build brief. (If the deck drops to 18 in,
-a single straight 18 ft + landing also works — see Decisions.)
+That's long, so v1 folds it into a compact **L** — one run off the deck's east edge, a 90° corner
+landing, then a perpendicular run down to grade — saving footprint = "efficient" per the build
+brief. (If the deck drops to 18 in, a single straight 18 ft + landing also works — see Decisions.)
 
 ### 2b. Accessible stall / toilet room (ADA 603–604)
 | Parameter | Requirement | RR design value |
@@ -110,11 +110,12 @@ a single straight 18 ft + landing also works — see Decisions.)
 | Door | 32-in min clear opening; maneuvering clearance outside | 36-in out-swing door |
 | Interior (practical) | enough for circle + fixture + swing | **84 × 60 in (7 × 5 ft)** interior |
 
-### 2c. Standard stall
-Plenty at **48 × 48 in (4 × 4 ft)** interior. Same throne height, no turning circle.
+### 2c. Standard stalls (×2)
+Two small stalls, each ~**3.5 × 4.5 ft** interior. Same throne height, no turning circle. Two of
+them give the latrine real throughput for a gathering without inflating the accessible stall.
 
-> **Why this matters for Blender:** the accessible stall (7×5 ft) + the standard stall (4×4 ft)
-> + a shared front patio + the ramp's switchback landing are the four "planes" the massing model
+> **Why this matters for Blender:** the accessible stall (7×5 ft) + two standard stalls (~3.5×4.5 ft
+> each) + a shared front patio + the ramp's corner landing are the "planes" the massing model
 > lays down. Everything else hangs off these.
 
 ---
@@ -199,14 +200,14 @@ flag any you want changed and the script re-runs.
 
 | Element | Dimension | Notes |
 |---|---|---|
-| Overall deck | **16 × 12 ft** | Two stalls + circulation + patio strip |
+| Overall deck | **16 × 12 ft** | Three stalls + circulation + patio strip |
 | Deck height (FFL) | **24 in (2.0 ft)** above grade | Vault-ready clearance |
 | Accessible stall (interior) | **7 × 5 ft** | 60-in turn circle + fixture |
-| Standard stall (interior) | **4 × 4 ft** | |
+| Standard stalls (interior) | **~3.5 × 4.5 ft each, ×2** | Two small stalls |
 | Stall wall height | **7 ft** | Partial vent gaps top/bottom |
 | Covered patio (front porch) | **16 × 5 ft** | Shared approach, shade, waiting |
-| Ramp | **1:12**, 42-in clear width | 24-in rise → switchback |
-| Ramp runs | two ≈ **12 ft** runs | folds into an L |
+| Ramp | **1:12**, 48-in clear width | 24-in rise → L-shape |
+| Ramp runs | one run + 90° corner + perpendicular run | folds into an L |
 | Ramp landings | **5 × 5 ft** turn landing + top landing | ADA 405.7 |
 | Roof | shed, **2:12 pitch**, 24-in front overhang | standing-seam metal |
 | Vent stacks | **4-in dia**, 2 ×, through roof above ridge | painted black, south-faced |
@@ -216,8 +217,8 @@ flag any you want changed and the script re-runs.
 1. **Grade plane** — the ground.
 2. **Deck plane** — 16 × 12 ft raised 2 ft (the floor).
 3. **Patio plane** — front 16 × 5 ft strip (covered, same deck level).
-4. **Stall floor planes** — accessible 7 × 5, standard 4 × 4, set behind the patio.
-5. **Ramp planes** — two sloped 1:12 runs + level landings folding to grade.
+4. **Stall floor planes** — accessible 7 × 5, two standard ~3.5 × 4.5, set behind the patio.
+5. **Ramp planes** — an L: one sloped 1:12 run + corner landing + a perpendicular run to grade.
 
 Then massing: stall walls, shed roof, vent stacks, handrails, skirt + hatches.
 
@@ -229,7 +230,7 @@ Then massing: stall walls, shed roof, vent stacks, handrails, skirt + hatches.
    build size. *Structure supports both either way.*
 2. **Urine diversion:** yes (drier, easier compost, +1 fixture + drain) or no (simpler)?
    Recommended **yes for the accessible stall** at minimum.
-3. **Ramp geometry:** switchback at 24-in deck (compact L, recommended) **or** drop deck to 18 in
+3. **Ramp geometry:** L-shape at 24-in deck (compact, recommended) **or** drop deck to 18 in
    for a single straight ramp (longer, simpler, less vault headroom)?
 4. **Build path / tier:** confirm "frame to Path B, operate Path A."
 5. **Capacity / siting:** expected peak users at a gathering, and where on the land (sun angle for

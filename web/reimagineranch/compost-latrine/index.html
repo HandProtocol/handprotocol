@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Reimagine Ranch — Compost Latrine: Build Report | HAND Protocol</title>
-  <meta name="description" content="Build report for Reimagine Ranch's first project: a raised, accessible, two-stall dry-cover composting latrine with ramp and covered patio.">
+  <meta name="description" content="Build report for Reimagine Ranch's first project: a raised, accessible, three-stall dry-cover composting latrine with an L-shaped ramp and covered patio.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -129,13 +129,13 @@
       <div class="eyebrow"><span class="dot"></span> Reimagine Ranch · Build 01</div>
       <h1>The compost latrine.</h1>
       <p class="byline">Waterless, accessible, and buildable in a community weekend.</p>
-      <p class="lede">A raised, two-stall dry-cover composting latrine with a wheelchair ramp and a
+      <p class="lede">A raised, three-stall dry-cover composting latrine with a wheelchair ramp and a
         covered patio — Reimagine Ranch's first build, and the pilot for the land's community
         credit-loop. This report is the visual summary of the deeper build research.</p>
       <div class="meta">
         <div><span class="k">Status</span><span class="v">Discovery · pre-build</span></div>
         <div><span class="k">Footprint</span><span class="v">16 × 12 ft raised deck</span></div>
-        <div><span class="k">Stalls</span><span class="v">1 accessible + 1 standard</span></div>
+        <div><span class="k">Stalls</span><span class="v">1 accessible + 2 standard</span></div>
         <div><span class="k">System</span><span class="v">Dry-cover (sawdust)</span></div>
         <div><span class="k">Updated</span><span class="v">2026-05-29</span></div>
       </div>
@@ -145,8 +145,8 @@
   <section>
     <div class="wrap">
       <figure>
-        <img src="img/iso.jpg" alt="3/4 aerial massing render of the raised two-stall compost latrine with switchback ramp, covered front patio, shed roof, and twin black vent stacks." loading="lazy">
-        <figcaption>Massing model — 3/4 aerial. Cedar deck raised 24 in, two stalls under a single-slope metal roof, switchback ramp at 1:12 with handrails, twin south-faced vent stacks. Built in Blender from the locked dimensions; reproducible from <code>rr/blender/compost_latrine.py</code>.</figcaption>
+        <img src="img/iso.jpg" alt="3/4 aerial massing render of the raised three-stall compost latrine with an L-shaped ramp, covered front patio, shed roof, and three black vent stacks." loading="lazy">
+        <figcaption>Massing model — 3/4 aerial. Cedar deck raised 24 in, three stalls (one accessible + two standard) under a single-slope metal roof, L-shaped ramp at 1:12 with handrails, one south-faced vent stack per stall. Built in Blender from the locked dimensions; reproducible from <code>rr/blender/compost_latrine.py</code>.</figcaption>
       </figure>
     </div>
   </section>
@@ -155,7 +155,7 @@
     <div class="wrap">
       <div class="sec-eyebrow">01 · The premise</div>
       <h2>The pitch, in one sentence.</h2>
-      <p class="big">A waterless, two-stall, wheelchair-accessible latrine that turns the simplest
+      <p class="big">A waterless, three-stall, wheelchair-accessible latrine that turns the simplest
         possible inputs — a bucket and a scoop of sawdust — into safe compost, on a raised cedar
         deck the community can frame in a weekend.</p>
       <div class="callout">
@@ -219,7 +219,7 @@
         <tbody>
           <tr><td>Ramp slope</td><td>max 1:12 (8.33%)</td><td>1:12</td></tr>
           <tr><td>Ramp width</td><td>&ge; 36 in clear</td><td>42 in</td></tr>
-          <tr><td>Landings</td><td>60 in min; 60 &times; 60 at turns</td><td>60 &times; 60 switchback</td></tr>
+          <tr><td>Landings</td><td>60 in min; 60 &times; 60 at turns</td><td>4 ft corner landing</td></tr>
           <tr><td>Handrails</td><td>both sides, 34&ndash;38 in</td><td>both, 36 in cedar</td></tr>
           <tr><td>Turning space</td><td>60-in circle</td><td>60-in circle</td></tr>
           <tr><td>Toilet offset</td><td>16&ndash;18 in off side wall</td><td>18 in</td></tr>
@@ -231,8 +231,8 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
         <p><strong>The number that sizes the whole footprint.</strong> At 1:12, every inch of deck
           height = one foot of ramp run. A 24-in deck needs <strong>24 ft of ramp</strong> — so v1
-          folds it into a compact <strong>switchback</strong> (two ~12 ft runs + a 60 &times; 60
-          landing) to save footprint. That's the "efficient" in the brief, made literal.</p>
+          folds it into a compact <strong>L</strong> (one run off the deck + a 90&deg; corner landing +
+          a perpendicular run to grade) to save footprint. That's the "efficient" in the brief, made literal.</p>
       </div>
     </div>
   </section>
@@ -247,8 +247,8 @@
         roof pitched to the back with a big front overhang shading the patio.</p>
       <div class="fig-2">
         <figure>
-          <img src="img/plan.jpg" alt="Top-down plan render showing the deck footprint, two stall openings, and the L-shaped switchback ramp with handrails." loading="lazy">
-          <figcaption>Plan — deck, two stalls, and the switchback ramp folding to grade.</figcaption>
+          <img src="img/plan.jpg" alt="Top-down plan render showing the deck footprint, three stall openings, and the L-shaped ramp with handrails." loading="lazy">
+          <figcaption>Plan — deck, three stalls, and the L-shaped ramp folding to grade.</figcaption>
         </figure>
         <figure>
           <img src="img/front.jpg" alt="Front elevation render showing the ramp, covered patio, stall walls, shed roof slope, and vent stacks." loading="lazy">
@@ -302,12 +302,12 @@
           <tr><td>Overall deck</td><td>16 &times; 12 ft</td><td>Stalls + circulation + patio</td></tr>
           <tr><td>Deck height (FFL)</td><td>24 in above grade</td><td>Vault-ready clearance</td></tr>
           <tr><td>Accessible stall</td><td>7 &times; 5 ft interior</td><td>60-in turn circle + fixture</td></tr>
-          <tr><td>Standard stall</td><td>4 &times; 4 ft interior</td><td>&mdash;</td></tr>
+          <tr><td>Standard stalls</td><td>2 &times; ~3.5 &times; 4.5 ft interior</td><td>Two small stalls</td></tr>
           <tr><td>Stall walls</td><td>7 ft</td><td>Vent gaps top &amp; bottom</td></tr>
           <tr><td>Covered patio</td><td>16 &times; 5 ft</td><td>Shared approach + shade</td></tr>
-          <tr><td>Ramp</td><td>1:12, 42-in wide</td><td>24-in rise &rarr; switchback</td></tr>
+          <tr><td>Ramp</td><td>1:12, 48-in wide</td><td>24-in rise &rarr; L-shape</td></tr>
           <tr><td>Roof</td><td>shed, 2:12, 24-in overhang</td><td>Standing-seam metal</td></tr>
-          <tr><td>Vent stacks</td><td>4-in dia &times; 2</td><td>Above ridge, black, south</td></tr>
+          <tr><td>Vent stacks</td><td>4-in dia &times; 3</td><td>One per stall, above ridge, black, south</td></tr>
           <tr><td>Footings</td><td>9 screw piles, ~6 ft grid</td><td>No concrete</td></tr>
         </tbody>
       </table>
@@ -347,7 +347,7 @@
       <ol class="dec">
         <li><strong>System at launch</strong> — bucket (recommended) or twin-vault? Affects steward labor vs build size. Structure supports both either way.</li>
         <li><strong>Urine diversion</strong> — yes (drier, easier compost, +1 fixture + drain) or no (simpler)? Recommended yes for the accessible stall at minimum.</li>
-        <li><strong>Ramp geometry</strong> — switchback at 24-in deck (compact L, recommended) or drop to 18-in deck for a single straight ramp (longer, less vault headroom)?</li>
+        <li><strong>Ramp geometry</strong> — L-shape at 24-in deck (compact, recommended) or drop to 18-in deck for a single straight ramp (longer, less vault headroom)?</li>
         <li><strong>Build path</strong> — confirm "frame to Path B, operate Path A."</li>
         <li><strong>Capacity &amp; siting</strong> — expected peak users at a gathering, and where on the land (sun angle for the stacks, approach for the ramp).</li>
         <li><strong>Permitting</strong> — is health-department sign-off in scope? If yes, the commercial-unit fallback and urine handling gain weight.</li>
