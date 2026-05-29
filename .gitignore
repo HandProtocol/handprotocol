@@ -34,6 +34,10 @@ npm-debug.log*
 artifacts/
 cache/
 
+# Blender autosave backups (keep .blend + .py + committed renders)
+*.blend1
+*.blend2
+
 # Misc
 .bolt/
 

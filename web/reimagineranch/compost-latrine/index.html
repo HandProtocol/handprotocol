@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Reimagine Ranch — Compost Latrine: Build Report | HAND Protocol</title>
+  <meta name="description" content="Build report for Reimagine Ranch's first project: a raised, accessible, two-stall dry-cover composting latrine with ramp and covered patio.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f0e17; --surface:#1a1925; --surface-2:#252336; --line:#312f44;
+      --text:#e8e6f0; --dim:#a09db5; --faint:#6e6b85;
+      --accent:#00c2a8; --accent-hover:#2dd4bf; --purple:#7c6dd8; --gold:#f5b942;
+      --sans:'Inter',system-ui,sans-serif; --serif:'Fraunces',Georgia,serif; --mono:'JetBrains Mono',monospace;
+      --r:14px; --maxw:880px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;
+      -webkit-font-smoothing:antialiased;font-size:17px}
+    a{color:var(--accent-hover);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 1.5rem}
+    .wide{max-width:1180px;margin:0 auto;padding:0 1.5rem}
+
+    nav{position:sticky;top:0;z-index:50;background:rgba(15,14,23,.82);
+      backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav-in{display:flex;align-items:center;gap:1rem;height:60px}
+    .logo{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--text)}
+    .logo svg{width:26px;height:26px}
+    .crumbs{font-size:.82rem;color:var(--faint);font-family:var(--mono)}
+    .crumbs b{color:var(--dim);font-weight:500}
+    .nav-links{margin-left:auto;display:flex;gap:1.3rem;font-size:.9rem}
+    .nav-links a{color:var(--dim)} .nav-links a:hover{color:var(--accent-hover);text-decoration:none}
+    @media(max-width:780px){.nav-links{display:none}}
+
+    header.doc{padding:4.5rem 0 3rem;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+    header.doc::before{content:"";position:absolute;inset:0;
+      background:radial-gradient(120% 80% at 80% -10%,rgba(0,194,168,.13),transparent 60%);pointer-events:none}
+    .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);
+      font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
+    .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+    h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.08;letter-spacing:-.02em}
+    .byline{font-family:var(--serif);font-style:italic;color:var(--accent-hover);font-size:1rem;margin:1rem 0 .4rem}
+    .lede{color:var(--dim);font-size:1.15rem;max-width:60ch;margin-top:1rem}
+    .meta{display:flex;flex-wrap:wrap;gap:1.8rem;margin-top:2.2rem}
+    .meta div{display:flex;flex-direction:column}
+    .meta .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+    .meta .v{font-size:.95rem;color:var(--text);margin-top:.2rem}
+
+    section{padding:3.2rem 0;border-bottom:1px solid var(--line)}
+    .sec-eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
+    h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.15;letter-spacing:-.015em;margin-bottom:1rem}
+    h3{font-family:var(--sans);font-weight:600;font-size:1.12rem;margin:1.8rem 0 .6rem;color:var(--text)}
+    p{margin-bottom:1rem;color:#d6d4e4}
+    p.big{font-size:1.25rem;color:var(--text)}
+    ul,ol{margin:0 0 1rem 1.2rem;color:#d6d4e4}
+    li{margin-bottom:.4rem}
+    strong{color:var(--text);font-weight:600}
+    code{font-family:var(--mono);font-size:.86em;background:var(--surface-2);padding:.12em .4em;border-radius:5px;color:var(--accent-hover)}
+
+    figure{margin:1.6rem 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+    figure img{width:100%;display:block;background:#0a0913}
+    figcaption{padding:.8rem 1.2rem;font-size:.86rem;color:var(--dim);border-top:1px solid var(--line);font-family:var(--mono)}
+    .fig-2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    @media(max-width:680px){.fig-2{grid-template-columns:1fr}}
+
+    .callout{display:flex;gap:.9rem;background:linear-gradient(135deg,rgba(0,194,168,.08),rgba(124,109,216,.06));
+      border:1px solid rgba(0,194,168,.28);border-radius:var(--r);padding:1.2rem 1.4rem;margin:1.6rem 0}
+    .callout svg{width:22px;height:22px;color:var(--accent);flex-shrink:0;margin-top:.15rem}
+    .callout p{margin:0;color:var(--text)}
+    .callout.warn{background:rgba(245,185,66,.07);border-color:rgba(245,185,66,.3)}
+    .callout.warn svg{color:var(--gold)}
+
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.1rem;margin-top:1.4rem}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:1.3rem}
+    .card .tag{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+      padding:.18rem .5rem;border-radius:6px;margin-bottom:.7rem}
+    .tag.teal{background:rgba(0,194,168,.16);color:var(--accent-hover)}
+    .tag.gold{background:rgba(245,185,66,.16);color:var(--gold)}
+    .tag.purple{background:rgba(124,109,216,.2);color:#b3a6f0}
+    .card h4{font-size:1.02rem;margin-bottom:.4rem;color:var(--text)}
+    .card p{font-size:.92rem;color:var(--dim);margin:0}
+
+    .tbl{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.92rem}
+    .tbl th,.tbl td{text-align:left;padding:.65rem .8rem;border-bottom:1px solid var(--line);vertical-align:top}
+    .tbl th{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+    .tbl td:first-child{color:var(--text);font-weight:500}
+    .tbl tr:hover td{background:rgba(255,255,255,.015)}
+
+    .dec{counter-reset:d;list-style:none;margin-left:0}
+    .dec li{position:relative;padding-left:2.4rem;margin-bottom:1rem}
+    .dec li::before{counter-increment:d;content:counter(d);position:absolute;left:0;top:0;
+      width:1.7rem;height:1.7rem;border-radius:50%;background:var(--surface-2);border:1px solid var(--accent);
+      color:var(--accent);font-family:var(--mono);font-size:.8rem;display:flex;align-items:center;justify-content:center}
+
+    footer{padding:3rem 0 4rem;color:var(--faint);font-size:.88rem;text-align:center}
+    footer a{color:var(--dim)}
+    .rec{color:var(--accent-hover);font-weight:600}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wide nav-in">
+      <a href="../../foundation-campaign/index.html" class="logo" aria-label="HAND Protocol home">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 4C10 4 6 9 6 15c0 7 5 11 10 13 5-2 10-6 10-13 0-6-4-11-10-11z" stroke="#00c2a8" stroke-width="1.8"/>
+          <path d="M11 15v-3M14 15V11M17 15v-4M20 15v-3" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        HAND
+      </a>
+      <div class="crumbs">Reimagine Ranch <b>/ Compost Latrine</b></div>
+      <div class="nav-links">
+        <a href="#system">System</a>
+        <a href="#access">Access</a>
+        <a href="#model">Model</a>
+        <a href="#dims">Dimensions</a>
+        <a href="#paths">Paths</a>
+        <a href="#decisions">Decisions</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="doc">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span> Reimagine Ranch · Build 01</div>
+      <h1>The compost latrine.</h1>
+      <p class="byline">Waterless, accessible, and buildable in a community weekend.</p>
+      <p class="lede">A raised, two-stall dry-cover composting latrine with a wheelchair ramp and a
+        covered patio — Reimagine Ranch's first build, and the pilot for the land's community
+        credit-loop. This report is the visual summary of the deeper build research.</p>
+      <div class="meta">
+        <div><span class="k">Status</span><span class="v">Discovery · pre-build</span></div>
+        <div><span class="k">Footprint</span><span class="v">16 × 12 ft raised deck</span></div>
+        <div><span class="k">Stalls</span><span class="v">1 accessible + 1 standard</span></div>
+        <div><span class="k">System</span><span class="v">Dry-cover (sawdust)</span></div>
+        <div><span class="k">Updated</span><span class="v">2026-05-29</span></div>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="wrap">
+      <figure>
+        <img src="img/iso.jpg" alt="3/4 aerial massing render of the raised two-stall compost latrine with switchback ramp, covered front patio, shed roof, and twin black vent stacks." loading="lazy">
+        <figcaption>Massing model — 3/4 aerial. Cedar deck raised 24 in, two stalls under a single-slope metal roof, switchback ramp at 1:12 with handrails, twin south-faced vent stacks. Built in Blender from the locked dimensions; reproducible from <code>rr/blender/compost_latrine.py</code>.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="premise">
+    <div class="wrap">
+      <div class="sec-eyebrow">01 · The premise</div>
+      <h2>The pitch, in one sentence.</h2>
+      <p class="big">A waterless, two-stall, wheelchair-accessible latrine that turns the simplest
+        possible inputs — a bucket and a scoop of sawdust — into safe compost, on a raised cedar
+        deck the community can frame in a weekend.</p>
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg>
+        <p><strong>Why this is the first build.</strong> Any gathering on the land needs sanitation
+          before anything else. It's high-leverage, low-risk, and a perfect teaching project for
+          the community credit-loop to find its feet — while modeling the ranch's values in one
+          small structure: waterless, off-grid, nutrient-cycling, locally sourced, accessible.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="system">
+    <div class="wrap">
+      <div class="sec-eyebrow">02 · The system</div>
+      <h2>Dry-cover composting, three credible forms.</h2>
+      <p>A dry-cover toilet captures waste in a chamber; the user covers each deposit with a carbon
+        material (sawdust, shavings, leaf mould). The cover layer is the whole trick — it blocks
+        odor, balances carbon-to-nitrogen, soaks up moisture, and forms an aerobic biofilter.
+        <strong>No water, no chemicals, no electricity.</strong> The systems differ in where the
+        composting finishes.</p>
+      <div class="cards">
+        <div class="card">
+          <span class="tag teal">Recommended at launch</span>
+          <h4>Bucket / humanure batch</h4>
+          <p>Bucket under a wooden throne; full buckets cure in an outdoor 3-bin thermophilic pile
+            (130–150 °F kills pathogens). Cheapest, most resilient, needs a committed steward.</p>
+        </div>
+        <div class="card">
+          <span class="tag purple">Upgrade in place</span>
+          <h4>Twin-vault moldering</h4>
+          <p>Two sealed under-deck vaults, used alternately; each moldering a year before emptying.
+            No daily hauling — the chamber is the composter. The trailhead-privy classic.</p>
+        </div>
+        <div class="card">
+          <span class="tag gold">Fallback</span>
+          <h4>Commercial composter</h4>
+          <p>Manufactured unit (Clivus / Sun-Mar class). Code-legible and lower-touch, but
+            $1.5k–$9k each, often wants power, less in the DIY/credit-loop spirit.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+        <p><strong>Build once, choose later.</strong> The structure hosts a removable chamber bay
+          under each throne, sized for the taller twin-vault. Operate as a bucket system now;
+          swap buckets for sealed vaults later without rebuilding. Same reversible philosophy as
+          the Airstream Studio's insulation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="access">
+    <div class="wrap">
+      <div class="sec-eyebrow">03 · Accessibility</div>
+      <h2>The part that sets the geometry.</h2>
+      <p>The accessible stall and its ramp drive most of the building's dimensions, so we fix them
+        first — built to the 2010 ADA Standards on principle and for grant credibility, even though
+        a private community latrine may not be legally bound to them.</p>
+      <table class="tbl">
+        <thead><tr><th>Element</th><th>Requirement</th><th>RR value</th></tr></thead>
+        <tbody>
+          <tr><td>Ramp slope</td><td>max 1:12 (8.33%)</td><td>1:12</td></tr>
+          <tr><td>Ramp width</td><td>&ge; 36 in clear</td><td>42 in</td></tr>
+          <tr><td>Landings</td><td>60 in min; 60 &times; 60 at turns</td><td>60 &times; 60 switchback</td></tr>
+          <tr><td>Handrails</td><td>both sides, 34&ndash;38 in</td><td>both, 36 in cedar</td></tr>
+          <tr><td>Turning space</td><td>60-in circle</td><td>60-in circle</td></tr>
+          <tr><td>Toilet offset</td><td>16&ndash;18 in off side wall</td><td>18 in</td></tr>
+          <tr><td>Door clear</td><td>&ge; 32 in</td><td>36 in out-swing</td></tr>
+          <tr><td>Grab bars</td><td>42-in side, 36-in rear</td><td>both, cedar-backed</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        <p><strong>The number that sizes the whole footprint.</strong> At 1:12, every inch of deck
+          height = one foot of ramp run. A 24-in deck needs <strong>24 ft of ramp</strong> — so v1
+          folds it into a compact <strong>switchback</strong> (two ~12 ft runs + a 60 &times; 60
+          landing) to save footprint. That's the "efficient" in the brief, made literal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="model">
+    <div class="wrap">
+      <div class="sec-eyebrow">04 · Structure &amp; model</div>
+      <h2>A raised cedar platform, modeled before it's cut.</h2>
+      <p>Raised 24 in so the compost chamber lives underneath and stays removable, the floor stays
+        dry, and gravity helps. Screw-pile footings (no concrete) carry rot-resistant framing,
+        cedar decking, board-and-batten walls that breathe, and a single-slope standing-seam metal
+        roof pitched to the back with a big front overhang shading the patio.</p>
+      <div class="fig-2">
+        <figure>
+          <img src="img/plan.jpg" alt="Top-down plan render showing the deck footprint, two stall openings, and the L-shaped switchback ramp with handrails." loading="lazy">
+          <figcaption>Plan — deck, two stalls, and the switchback ramp folding to grade.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/front.jpg" alt="Front elevation render showing the ramp, covered patio, stall walls, shed roof slope, and vent stacks." loading="lazy">
+          <figcaption>Front elevation — ramp, raised patio, 7-ft walls, shed-roof slope, vent stacks above the ridge.</figcaption>
+        </figure>
+      </div>
+      <h3>Why Blender first, CAD later</h3>
+      <p>We model the <strong>form</strong> in Blender to iterate massing, siting, and ramp slope
+        fast — and to produce something the community can actually look at and react to. A precise,
+        board-by-board cut-list model (FreeCAD) comes <em>after</em> the massing and dimensions are
+        approved; that's a fabrication step, not a design step. The scene is generated by a
+        committed Python script, so changing a dimension re-runs into an updated model and render:</p>
+      <p><code>blender --background --python rr/blender/compost_latrine.py</code></p>
+    </div>
+  </section>
+
+  <section id="materials">
+    <div class="wrap">
+      <div class="sec-eyebrow">05 · Ventilation &amp; materials</div>
+      <h2>Passive stacks, healthy materials.</h2>
+      <p>After the cover material, the <strong>vent stack</strong> keeps a dry toilet odor-free:
+        one 4-in stack per chamber, straight up through the roof above the ridge with a rain cap
+        and insect screen. Paint it black and face it south — solar gain warms the stack and drives
+        a convective updraft that pulls air down through the seat and out the roof. A tiny solar PV
+        fan is the off-grid upgrade for still air.</p>
+      <table class="tbl">
+        <thead><tr><th>System</th><th>Choice</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Foundation</td><td>Screw piles / precast piers</td><td>Reversible, no concrete, community-installable</td></tr>
+          <tr><td>Decking &amp; touch surfaces</td><td>Cedar / cypress</td><td>Rot + insect resistance, no toxic treatment</td></tr>
+          <tr><td>Siding</td><td>Board-and-batten cedar / reclaimed</td><td>Breathable, repairable</td></tr>
+          <tr><td>Roof</td><td>Standing-seam metal</td><td>Longevity, rainwater-ready, fire-wise</td></tr>
+          <tr><td>Cover material</td><td>On-site / local sawdust</td><td>Free byproduct, closes a local loop</td></tr>
+          <tr><td>Finish</td><td>Raw or natural oil</td><td>Low-VOC, re-applyable</td></tr>
+        </tbody>
+      </table>
+      <p>Grant headline, every adjective true of the design: <strong>waterless · off-grid · zero
+        concrete · nutrient-cycling · locally sourced · accessible.</strong></p>
+    </div>
+  </section>
+
+  <section id="dims">
+    <div class="wrap">
+      <div class="sec-eyebrow">06 · Locked dimensions</div>
+      <h2>What the model is built from.</h2>
+      <p>These values drive the Blender script. They're documented assumptions — flag any to change
+        and the model re-runs.</p>
+      <table class="tbl">
+        <thead><tr><th>Element</th><th>Dimension</th><th>Note</th></tr></thead>
+        <tbody>
+          <tr><td>Overall deck</td><td>16 &times; 12 ft</td><td>Stalls + circulation + patio</td></tr>
+          <tr><td>Deck height (FFL)</td><td>24 in above grade</td><td>Vault-ready clearance</td></tr>
+          <tr><td>Accessible stall</td><td>7 &times; 5 ft interior</td><td>60-in turn circle + fixture</td></tr>
+          <tr><td>Standard stall</td><td>4 &times; 4 ft interior</td><td>&mdash;</td></tr>
+          <tr><td>Stall walls</td><td>7 ft</td><td>Vent gaps top &amp; bottom</td></tr>
+          <tr><td>Covered patio</td><td>16 &times; 5 ft</td><td>Shared approach + shade</td></tr>
+          <tr><td>Ramp</td><td>1:12, 42-in wide</td><td>24-in rise &rarr; switchback</td></tr>
+          <tr><td>Roof</td><td>shed, 2:12, 24-in overhang</td><td>Standing-seam metal</td></tr>
+          <tr><td>Vent stacks</td><td>4-in dia &times; 2</td><td>Above ridge, black, south</td></tr>
+          <tr><td>Footings</td><td>9 screw piles, ~6 ft grid</td><td>No concrete</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="paths">
+    <div class="wrap">
+      <div class="sec-eyebrow">07 · Build paths</div>
+      <h2>Two credible tiers.</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="tag teal">Path A · Community weekend</span>
+          <h4>&asymp; $2.2k&ndash;$3.5k materials</h4>
+          <p>Bucket system, screw piles, reclaimed/local lumber, cedar where touched, passive
+            stacks, hand-built grab bars on solid blocking. Labor = community credit-loop. The
+            accessible stall + ramp are non-negotiable even here.</p>
+        </div>
+        <div class="card">
+          <span class="tag purple">Path B · Permit-ready</span>
+          <h4>&asymp; $6k&ndash;$9k materials</h4>
+          <p>Twin-vault or commercial accessible unit, urine diversion to a mulch basin, standing-
+            seam roof, solar vent fans, finished cedar, code-rated hardware, signage, rain-catch
+            handwash. Survives a health-department visit and a grant site tour.</p>
+        </div>
+      </div>
+      <p class="rec" style="margin-top:1.4rem">Recommended: frame the structure to Path B (deck
+        height, vault bays, stack routing) and operate at Path A first. Upgrade in place as credits
+        and crowds accumulate. Build once.</p>
+    </div>
+  </section>
+
+  <section id="decisions">
+    <div class="wrap">
+      <div class="sec-eyebrow">08 · Decisions needed from koH</div>
+      <h2>Open items.</h2>
+      <ol class="dec">
+        <li><strong>System at launch</strong> — bucket (recommended) or twin-vault? Affects steward labor vs build size. Structure supports both either way.</li>
+        <li><strong>Urine diversion</strong> — yes (drier, easier compost, +1 fixture + drain) or no (simpler)? Recommended yes for the accessible stall at minimum.</li>
+        <li><strong>Ramp geometry</strong> — switchback at 24-in deck (compact L, recommended) or drop to 18-in deck for a single straight ramp (longer, less vault headroom)?</li>
+        <li><strong>Build path</strong> — confirm "frame to Path B, operate Path A."</li>
+        <li><strong>Capacity &amp; siting</strong> — expected peak users at a gathering, and where on the land (sun angle for the stacks, approach for the ramp).</li>
+        <li><strong>Permitting</strong> — is health-department sign-off in scope? If yes, the commercial-unit fallback and urine handling gain weight.</li>
+      </ol>
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>Once the system, ramp geometry, and tier are settled, the next step is a fabrication-grade
+          cut-list model and a material takeoff — the point at which Blender massing hands off to CAD.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>Reimagine Ranch · Build 01 — internal build report · HAND Protocol</p>
+      <p style="margin-top:.4rem">Source research: <code>rr/research/compost-latrine.md</code> ·
+        Model: <code>rr/blender/compost_latrine.py</code> ·
+        <a href="mailto:hand@handprotocol.org">hand@handprotocol.org</a></p>
+    </div>
+  </footer>
+</body>
+</html>
