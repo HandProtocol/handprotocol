@@ -243,78 +243,46 @@ for sname, sx in (("Accessible", 3.75), ("Standard1", 9.75), ("Standard2", 13.75
     box(f"RainCap_{sname}", (sx - 0.30, 11.3, ROOF_BACK_Z + 1.4),
         (sx + 0.30, 11.9, ROOF_BACK_Z + 1.7), M_STACK)
 
-# 8. L-shaped ramp (1:12), one 90-degree corner ----------------------------------
-# A single switchback at 90 deg: UPPER run comes off the deck's east edge and slopes
-# down running EAST to a corner landing; LOWER run turns 90 deg and slopes down running
-# NORTH to grade. One clean L, no overlap. The upper run slopes in X, the lower run
-# slopes in Y, so we need an X-sloping slab helper (sloped_slab already slopes in Y).
+# 8. Straight wide wooden ramp down to grade (Raw Republic style) -----------------
+# A single long, gentle, WIDE plank ramp running off the deck's front (-Y) edge down
+# to grade, low to the ground over a light gravel base — the Austin "Raw Republic"
+# deck-ramp look. At 1:12 a 24 in rise needs 24 ft of run, so it's long and gentle.
+# The ramp slopes in Y (deck at y=0, z=2.0 -> grade at y=-24, z=0.12).
 
-def sloped_slab_x(name, x0, x1, y0, y1, z_x0, z_x1, thickness, material=None):
-    """Slab whose TOP surface slopes along X from z_x0 (at x0) to z_x1 (at x1)."""
-    t = thickness
-    verts = [
-        (x0, y0, z_x0), (x0, y1, z_x0), (x1, y1, z_x1), (x1, y0, z_x1),                  # top
-        (x0, y0, z_x0 - t), (x0, y1, z_x0 - t), (x1, y1, z_x1 - t), (x1, y0, z_x1 - t),  # bottom
-    ]
-    verts = [(vx * FT, vy * FT, vz * FT) for (vx, vy, vz) in verts]
-    faces = [(0, 1, 2, 3), (7, 6, 5, 4), (0, 4, 5, 1), (1, 5, 6, 2), (2, 6, 7, 3), (3, 7, 4, 0)]
-    me = bpy.data.meshes.new(name)
-    me.from_pydata(verts, [], faces)
-    me.update()
-    obj = bpy.data.objects.new(name, me)
-    bpy.context.collection.objects.link(obj)
-    return _finish(obj, material)
+RW0, RW1 = 2.0, 8.0           # ramp X band (6 ft wide -- broad like the photo)
+RY_DECK = 0.0                 # top of ramp meets deck front edge
+RY_GRADE = -24.0             # ramp reaches grade here (24 ft run at 1:12)
+RAMP_TOP_Z, RAMP_GRADE_Z = 2.00, 0.12
 
-RW = 4.0                      # ramp clear width (48 in)
-LAND_Z = 1.0                  # corner-landing height (half the 2 ft rise)
-X_DECK = 16.0                 # deck east edge (upper run starts here at deck level)
-X_CORN0, X_CORN1 = 28.0, 32.0 # corner landing X extent (4 ft square)
-UY0, UY1 = 1.0, 5.0           # upper run width band (Y)
-LY_GRADE = 15.5               # lower run reaches grade at this Y
+# Plank deck of the ramp (slopes in Y: z_y0 at y0=grade, z_y1 at y1=deck)
+sloped_slab("Plane_Ramp", RW0, RW1, RY_GRADE, RY_DECK,
+            z_y0=RAMP_GRADE_Z, z_y1=RAMP_TOP_Z, thickness=0.30, material=M_RAMP)
+# Low timber cribbing under the long edges + a light gravel pad (like the photo)
+box("Ramp_crib_W", (RW0, RY_GRADE, 0.0), (RW0 + 0.3, RY_DECK, RAMP_GRADE_Z + 0.1), M_SKIRT)
+box("Ramp_crib_E", (RW1 - 0.3, RY_GRADE, 0.0), (RW1, RY_DECK, RAMP_GRADE_Z + 0.1), M_SKIRT)
+box("Ramp_gravel", (RW0 - 0.8, RY_GRADE - 0.8, -0.04), (RW1 + 0.8, RY_DECK, 0.05), M_GRAVEL)
 
-# Upper run: deck (x=16, z=2.0) sloping down EAST to corner (x=28, z=1.0)
-sloped_slab_x("Plane_Ramp_Upper", X_DECK, X_CORN0, UY0, UY1,
-              z_x0=2.00, z_x1=LAND_Z, thickness=0.25, material=M_RAMP)
-# Corner landing (flat) — the 90 deg turn
-box("Plane_Ramp_Corner", (X_CORN0, UY0, LAND_Z - 0.25), (X_CORN1, LY_GRADE, LAND_Z), M_RAMP)
-# Lower run: corner (y=5, z=1.0) sloping down NORTH to grade (y=15.5, z=0.12)
-sloped_slab("Plane_Ramp_Lower", X_CORN0, X_CORN1, UY1, LY_GRADE,
-            z_y0=LAND_Z, z_y1=0.12, thickness=0.25, material=M_RAMP)
+# 9. Simple thin metal-pipe handrail (two horizontal rails + slim posts) ----------
+# Galvanized-pipe rails like the photo: a top rail (~36 in) and a mid rail (~21 in),
+# thin posts every few feet. No chunky cedar curbs -- just light steel pipe.
+PR = 0.09           # pipe half-thickness (~2 in)
+RAIL_TOP, RAIL_MID = 3.0, 1.75   # 36 in and 21 in above the running surface
 
-# 9. Handrails (36 in top rail) + posts + edge curbs --------------------------------
-RAIL_H, RAIL_T, POST = 3.0, 0.18, 0.13
-
-def rail_run_x(name, x0, x1, y_edge, z_x0, z_x1, n_posts=7):
-    """Curb + sloped top rail + posts along a run that slopes in X, at constant y_edge."""
-    sloped_slab_x(f"{name}_curb", x0, x1, y_edge - 0.05, y_edge + 0.05,
-                  z_x0 + 0.34, z_x1 + 0.34, 0.34, M_RAIL)
-    sloped_slab_x(f"{name}_top", x0, x1, y_edge - RAIL_T / 2, y_edge + RAIL_T / 2,
-                  z_x0 + RAIL_H + RAIL_T, z_x1 + RAIL_H + RAIL_T, RAIL_T, M_RAIL)
-    for i in range(n_posts):
-        f = i / (n_posts - 1)
-        px = x0 + f * (x1 - x0)
-        pz = z_x0 + f * (z_x1 - z_x0)
-        box(f"{name}_post_{i}", (px - POST, y_edge - POST, pz),
-            (px + POST, y_edge + POST, pz + RAIL_H), M_RAIL)
-
-def rail_run_y(name, y0, y1, x_edge, z_y0, z_y1, n_posts=7):
-    """Curb + sloped top rail + posts along a run that slopes in Y, at constant x_edge."""
-    sloped_slab(f"{name}_curb", x_edge - 0.05, x_edge + 0.05, y0, y1,
-                z_y0 + 0.34, z_y1 + 0.34, 0.34, M_RAIL)
-    sloped_slab(f"{name}_top", x_edge - RAIL_T / 2, x_edge + RAIL_T / 2, y0, y1,
-                z_y0 + RAIL_H + RAIL_T, z_y1 + RAIL_H + RAIL_T, RAIL_T, M_RAIL)
+def pipe_rail_y(name, x_edge, y0, y1, z_y0, z_y1, n_posts=7):
+    """Two horizontal pipe rails + slim posts along a run that slopes in Y."""
+    for h, tag in ((RAIL_TOP, "top"), (RAIL_MID, "mid")):
+        sloped_slab(f"{name}_{tag}", x_edge - PR, x_edge + PR, y0, y1,
+                    z_y0 + h, z_y1 + h, 2 * PR, M_PIPE)
     for i in range(n_posts):
         f = i / (n_posts - 1)
         py = y0 + f * (y1 - y0)
         pz = z_y0 + f * (z_y1 - z_y0)
-        box(f"{name}_post_{i}", (x_edge - POST, py - POST, pz),
-            (x_edge + POST, py + POST, pz + RAIL_H), M_RAIL)
+        box(f"{name}_post_{i}", (x_edge - PR, py - PR, pz),
+            (x_edge + PR, py + PR, pz + RAIL_TOP + PR), M_PIPE)
 
-# Both edges of the upper run (slope in X), both edges of the lower run (slope in Y).
-rail_run_x("RampU_out", X_DECK, X_CORN0, UY0, 2.00, LAND_Z)   # upper run, south edge
-rail_run_x("RampU_in", X_DECK, X_CORN0, UY1, 2.00, LAND_Z)    # upper run, north edge
-rail_run_y("RampL_out", UY1, LY_GRADE, X_CORN1, LAND_Z, 0.12) # lower run, east edge
-rail_run_y("RampL_in", UY1, LY_GRADE, X_CORN0, LAND_Z, 0.12)  # lower run, west edge
+# A pipe rail on each long edge of the ramp.
+pipe_rail_y("RampRail_W", RW0 + 0.15, RY_GRADE, RY_DECK, RAMP_GRADE_Z, RAMP_TOP_Z)
+pipe_rail_y("RampRail_E", RW1 - 0.15, RY_GRADE, RY_DECK, RAMP_GRADE_Z, RAMP_TOP_Z)
 
 # --------------------------------------------------------------------------------------
 # Daylight world (Nishita sky) + sun
