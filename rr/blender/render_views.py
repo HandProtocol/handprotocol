@@ -16,6 +16,11 @@ RENDER_DIR = os.path.join(HERE, "renders")
 os.makedirs(RENDER_DIR, exist_ok=True)
 FT = 0.3048
 
+# Derive the output suffix from the loaded blend (compost_latrine_rainwater.blend ->
+# "_rainwater") so upgrade views land beside the base views instead of overwriting them.
+_stem = os.path.splitext(os.path.basename(bpy.data.filepath))[0]
+SUFFIX = _stem[len("compost_latrine"):] if _stem.startswith("compost_latrine") else ""
+
 scene = bpy.context.scene
 scene.render.engine = "CYCLES"
 scene.cycles.device = "CPU"
@@ -45,7 +50,7 @@ def shoot(name, location, ortho_scale, res=(1400, 1000)):
     bpy.context.view_layer.update()
     scene.camera = cam
     scene.render.resolution_x, scene.render.resolution_y = res
-    scene.render.filepath = os.path.join(RENDER_DIR, f"compost_latrine_{name}.png")
+    scene.render.filepath = os.path.join(RENDER_DIR, f"compost_latrine{SUFFIX}_{name}.png")
     bpy.ops.render.render(write_still=True)
     print(f"[RR] view '{name}' -> {scene.render.filepath}")
 

@@ -66,7 +66,11 @@
     figure img{width:100%;display:block;background:#0a0913}
     figcaption{padding:.8rem 1.2rem;font-size:.86rem;color:var(--dim);border-top:1px solid var(--line);font-family:var(--mono)}
     .fig-2{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-    @media(max-width:680px){.fig-2{grid-template-columns:1fr}}
+    .fig-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
+    @media(max-width:680px){.fig-2,.fig-3{grid-template-columns:1fr}}
+    .fig-badge{display:inline-block;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;
+      text-transform:uppercase;padding:.14rem .45rem;border-radius:5px;margin-bottom:.5rem;
+      background:rgba(0,194,168,.16);color:var(--accent-hover)}
 
     .callout{display:flex;gap:.9rem;background:linear-gradient(135deg,rgba(0,194,168,.08),rgba(124,109,216,.06));
       border:1px solid rgba(0,194,168,.28);border-radius:var(--r);padding:1.2rem 1.4rem;margin:1.6rem 0}
@@ -100,6 +104,21 @@
     footer{padding:3rem 0 4rem;color:var(--faint);font-size:.88rem;text-align:center}
     footer a{color:var(--dim)}
     .rec{color:var(--accent-hover);font-weight:600}
+
+    /* click-to-rotate wireframe modal */
+    #wire-modal{position:fixed;inset:0;z-index:100;display:none;background:#05070b}
+    #wire-modal.on{display:block}
+    #wire-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+    .wire-bar{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:1rem;
+      padding:.9rem 1.2rem;z-index:2;background:linear-gradient(180deg,rgba(5,7,11,.9),transparent)}
+    .wire-title{font-family:var(--serif);font-size:1.1rem;color:var(--text)}
+    .wire-hint{font-family:var(--mono);font-size:.72rem;color:var(--faint);margin-left:.4rem}
+    .wire-close{margin-left:auto;width:34px;height:34px;border-radius:8px;cursor:pointer;
+      background:var(--surface-2);border:1px solid var(--line);color:var(--text);font-size:1rem;line-height:1}
+    .wire-close:hover{border-color:var(--accent);color:var(--accent-hover)}
+    .wire-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+      font-family:var(--mono);font-size:.85rem;color:var(--accent-hover);pointer-events:none}
+    @media(max-width:780px){.wire-hint{display:none}}
   </style>
 </head>
 <body>
@@ -117,9 +136,9 @@
         <a href="#system">System</a>
         <a href="#access">Access</a>
         <a href="#model">Model</a>
-        <a href="#dims">Dimensions</a>
+        <a href="#options">Options</a>
         <a href="#paths">Paths</a>
-        <a href="#decisions">Decisions</a>
+        <a href="#roadmap">Roadmap</a>
       </div>
     </div>
   </nav>
@@ -134,10 +153,10 @@
         credit-loop. This report is the visual summary of the deeper build research.</p>
       <div class="meta">
         <div><span class="k">Status</span><span class="v">Discovery · pre-build</span></div>
-        <div><span class="k">Footprint</span><span class="v">16 × 12 ft raised deck</span></div>
-        <div><span class="k">Stalls</span><span class="v">1 accessible + 2 standard</span></div>
+        <div><span class="k">Footprint</span><span class="v">16×12 ft (or 12×12)</span></div>
+        <div><span class="k">Stalls</span><span class="v">2 or 3 (configurable)</span></div>
         <div><span class="k">System</span><span class="v">Dry-cover (sawdust)</span></div>
-        <div><span class="k">Updated</span><span class="v">2026-05-29</span></div>
+        <div><span class="k">Updated</span><span class="v">2026-05-30</span></div>
       </div>
     </div>
   </header>
@@ -145,8 +164,8 @@
   <section>
     <div class="wrap">
       <figure>
-        <img src="img/iso.jpg" alt="3/4 aerial massing render of the raised three-stall compost latrine with a long straight wooden ramp, metal pipe handrail, covered front patio, shed roof, and three black vent stacks." loading="lazy">
-        <figcaption>Massing model — 3/4 aerial. Cedar deck raised 24 in, three stalls (one accessible + two standard) under a single-slope metal roof, a long straight 1:12 plank ramp with a galvanized pipe handrail over a gravel pad, one south-faced vent stack per stall. Built in Blender from the locked dimensions; reproducible from <code>rr/blender/compost_latrine.py</code>.</figcaption>
+        <img src="img/iso.jpg?v=3" alt="3/4 aerial massing render of the raised three-stall compost latrine with a long straight wooden ramp, metal pipe handrail, covered front patio, shed roof, and three black vent stacks." loading="lazy">
+        <figcaption>Massing model — 3/4 aerial. Cedar deck raised 24 in, three stalls (one accessible + two standard) under a single-slope metal roof that drains to the back, a 1:12 ramp climbing onto the covered porch with a stair at the east end, cedar post-and-rail guards, a raked-louver vent crown wrapping the walls, and a solar-ready vent stack per stall. Built in Blender from the locked dimensions and reproducible from <code>rr/blender/compost_latrine.py</code> — which now renders every layout, vent, and upgrade option from one file.</figcaption>
       </figure>
     </div>
   </section>
@@ -230,10 +249,11 @@
       <div class="callout warn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
         <p><strong>The number that sizes the whole footprint.</strong> At 1:12, every inch of deck
-          height = one foot of ramp run. A 24-in deck needs <strong>24 ft of ramp</strong> — so v1
-          runs as a single long, gentle <strong>straight ramp</strong> off the deck's front edge down
-          to grade &mdash; a wide cedar plank deck on a low gravel pad with a simple galvanized pipe
-          handrail. Generous and easy to roll, the way a community front porch should read.</p>
+          height = one foot of ramp run. So the porch gets <strong>two ways up:</strong> a gentle
+          1:12 <strong>ramp that climbs onto the porch</strong> (the accessible route) and a short
+          <strong>stair at the east end</strong> for everyone else &mdash; cedar plank treads on a
+          low gravel pad with <strong>cedar post-and-rail guards</strong> (a warmer read than steel
+          pipe), the way a community front porch should feel.</p>
       </div>
     </div>
   </section>
@@ -248,11 +268,11 @@
         roof pitched to the back with a big front overhang shading the patio.</p>
       <div class="fig-2">
         <figure>
-          <img src="img/plan.jpg" alt="Top-down plan render showing the deck footprint, three stall openings, and the long straight ramp running off the front to grade." loading="lazy">
+          <img src="img/plan.jpg?v=3" alt="Top-down plan render showing the deck footprint, three stall openings, and the long straight ramp running off the front to grade." loading="lazy">
           <figcaption>Plan — deck, three stalls, and the long straight ramp running off the front to grade.</figcaption>
         </figure>
         <figure>
-          <img src="img/front.jpg" alt="Front elevation render showing the ramp, covered patio, stall walls, shed roof slope, and vent stacks." loading="lazy">
+          <img src="img/front.jpg?v=3" alt="Front elevation render showing the ramp, covered patio, stall walls, shed roof slope, and vent stacks." loading="lazy">
           <figcaption>Front elevation — ramp, raised patio, 7-ft walls, shed-roof slope, vent stacks above the ridge.</figcaption>
         </figure>
       </div>
@@ -271,10 +291,14 @@
       <div class="sec-eyebrow">05 · Ventilation &amp; materials</div>
       <h2>Passive stacks, healthy materials.</h2>
       <p>After the cover material, the <strong>vent stack</strong> keeps a dry toilet odor-free:
-        one 4-in stack per chamber, straight up through the roof above the ridge with a rain cap
-        and insect screen. Paint it black and face it south — solar gain warms the stack and drives
-        a convective updraft that pulls air down through the seat and out the roof. A tiny solar PV
-        fan is the off-grid upgrade for still air.</p>
+        one 4-in stack per chamber, straight up through the roof with a rain cap and insect screen.
+        Paint it black and face it south — solar gain warms the stack and drives a convective
+        updraft that pulls air down through the seat and out the roof. A raked-louver
+        <strong>vent crown wraps the walls</strong> top to bottom for cross-flow, and the whole box
+        breathes without a watt of power.</p>
+      <p>When still air or a packed gathering needs more, the model offers <strong>powered, solar +
+        battery extraction that runs 24/7</strong> — see the vent options below. A roof PV panel and
+        a small battery keep the fans turning day and night, so airflow never stops.</p>
       <table class="tbl">
         <thead><tr><th>System</th><th>Choice</th><th>Why</th></tr></thead>
         <tbody>
@@ -300,24 +324,80 @@
       <table class="tbl">
         <thead><tr><th>Element</th><th>Dimension</th><th>Note</th></tr></thead>
         <tbody>
-          <tr><td>Overall deck</td><td>16 &times; 12 ft</td><td>Stalls + circulation + patio</td></tr>
+          <tr><td>Layout</td><td>3-stall (16&times;12) or 2-stall (12&times;12)</td><td>Configurable — <code>--layout=3x3 | 2x2</code></td></tr>
           <tr><td>Deck height (FFL)</td><td>24 in above grade</td><td>Vault-ready clearance</td></tr>
           <tr><td>Accessible stall</td><td>7 &times; 5 ft interior</td><td>60-in turn circle + fixture</td></tr>
-          <tr><td>Standard stalls</td><td>2 &times; ~3.5 &times; 4.5 ft interior</td><td>Two small stalls</td></tr>
-          <tr><td>Stall walls</td><td>7 ft</td><td>Vent gaps top &amp; bottom</td></tr>
-          <tr><td>Covered patio</td><td>16 &times; 5 ft</td><td>Shared approach + shade</td></tr>
-          <tr><td>Ramp</td><td>1:12, 6 ft wide, 24 ft run</td><td>Straight, pipe handrail, gravel pad</td></tr>
-          <tr><td>Roof</td><td>shed, 2:12, 24-in overhang</td><td>Standing-seam metal</td></tr>
-          <tr><td>Vent stacks</td><td>4-in dia &times; 3</td><td>One per stall, above ridge, black, south</td></tr>
-          <tr><td>Footings</td><td>9 screw piles, ~6 ft grid</td><td>No concrete</td></tr>
+          <tr><td>Standard stalls</td><td>~3.5 &times; 4.5 ft each (1&ndash;2)</td><td>Small stalls</td></tr>
+          <tr><td>Stall walls</td><td>7 ft</td><td>Vent gaps + louver crown on top</td></tr>
+          <tr><td>Vent crown</td><td>raked cedar louver, ~1.2 ft</td><td>Wraps all four walls; vents + finishes the box</td></tr>
+          <tr><td>Covered patio (porch)</td><td>front strip, deck level</td><td>Shared approach + shade</td></tr>
+          <tr><td>Ramp + stair</td><td>1:12 ramp + 4-step east stair</td><td>Ramp climbs onto porch; cedar guards, gravel pad</td></tr>
+          <tr><td>Roof</td><td>shed, drains to back</td><td>Standing-seam metal; rainwater-ready</td></tr>
+          <tr><td>Vent stacks</td><td>4-in &times; per stall</td><td>Passive, or solar-powered 24/7 (see Options)</td></tr>
+          <tr><td>Footings</td><td>screw piles / piers, ~6 ft grid</td><td>No concrete</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
+  <section id="options">
+    <div class="wrap">
+      <div class="sec-eyebrow">07 · Configurations</div>
+      <h2>One model, every option.</h2>
+      <p>Each choice below renders from a <strong>single source file</strong>
+        (<code>compost_latrine.py</code>) — pick one from each group and they combine: layout ×
+        ventilation × upgrade, with no separate models to maintain.</p>
+
+      <h3>Bathrooms — 2 or 3</h3>
+      <div class="fig-2">
+        <figure>
+          <img src="img/iso.jpg?v=3" alt="Three-bathroom layout on a 16 by 12 ft deck." loading="lazy">
+          <figcaption><span class="fig-badge">3 bathrooms</span> 16×12 ft deck — 1 accessible + 2 standard. <code>--layout=3x3</code></figcaption>
+        </figure>
+        <figure>
+          <img src="img/opt-2x2.jpg?v=3" alt="Two-bathroom layout on a 12 by 12 ft deck." loading="lazy">
+          <figcaption><span class="fig-badge">2 bathrooms</span> 12×12 ft deck — 1 accessible + 1 standard. <code>--layout=2x2</code></figcaption>
+        </figure>
+      </div>
+
+      <h3>Ventilation — passive, or solar-powered 24/7</h3>
+      <p>The default is fully passive (black stacks + the louver crown). For dead-still air or a
+        packed gathering, any powered option adds a roof PV panel + battery so the fans never stop —
+        day or night.</p>
+      <div class="fig-3">
+        <figure>
+          <img src="img/vent-stackfan.jpg?v=3" alt="Slim vent stacks each topped with a small inline solar fan." loading="lazy">
+          <figcaption><span class="fig-badge">Preferred</span> Stack fans — a discreet inline fan on each slim stack. <code>--vent=stackfan</code></figcaption>
+        </figure>
+        <figure>
+          <img src="img/vent-solarchimney.jpg?v=3" alt="Tall matte-black solar-thermal chimneys with turbine cowls." loading="lazy">
+          <figcaption>Solar chimneys — tall black flues + turbine cowls. <code>--vent=solarchimney</code></figcaption>
+        </figure>
+        <figure>
+          <img src="img/vent-cupola.jpg?v=3" alt="One large louvered roof cupola with a central extraction fan." loading="lazy">
+          <figcaption>Cupola — one big louvered roof vent, ducted from every stall. <code>--vent=cupola</code></figcaption>
+        </figure>
+      </div>
+
+      <h3>Upgrade — rainwater catchment + showers</h3>
+      <p>The back-draining metal roof feeds a gutter → cistern → <strong>one outdoor shower per
+        stall</strong> on the back wall. Bolts on now or later. <code>--upgrade=rainwater</code></p>
+      <div class="fig-2">
+        <figure>
+          <img src="img/opt-rainwater.jpg?v=3" alt="Three-stall latrine with a rainwater tank and three back-wall showers." loading="lazy">
+          <figcaption>3-stall + rainwater — gutter, ~2,500-gal cistern, 3 showers.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/opt-2x2-rainwater.jpg?v=3" alt="Two-stall latrine with a rainwater tank and two back-wall showers." loading="lazy">
+          <figcaption>2-stall + rainwater — 2 bathrooms, 2 showers.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <section id="paths">
     <div class="wrap">
-      <div class="sec-eyebrow">07 · Build paths</div>
+      <div class="sec-eyebrow">08 · Build paths</div>
       <h2>Two credible tiers.</h2>
       <div class="cards">
         <div class="card">
@@ -341,14 +421,48 @@
     </div>
   </section>
 
+  <section id="roadmap">
+    <div class="wrap">
+      <div class="sec-eyebrow">09 · Roadmap</div>
+      <h2>Coming builds.</h2>
+      <p>The latrine is Reimagine Ranch's build 01. These are captured next — researched intent,
+        not yet built — each an upgrade-in-place sibling that reuses the same reproducible workflow:</p>
+      <div class="cards">
+        <div class="card">
+          <span class="tag teal">Next</span>
+          <h4>Louvered cedar wall</h4>
+          <p>A framed horizontal-louver shutter wall — privacy screen + wall system the other builds can share.</p>
+        </div>
+        <div class="card">
+          <span class="tag purple">Comfort tiers</span>
+          <h4>Passive cooling</h4>
+          <p>Tier 1 permaculture passive (closeable, optional heat) → light tech → full active. Upgrade-in-place.</p>
+        </div>
+        <div class="card">
+          <span class="tag gold">Rapid</span>
+          <h4>Day-build bathroom</h4>
+          <p>Super low-tech, high-performing, deployable in a single day. Minimal tools, permaculture cover.</p>
+        </div>
+        <div class="card">
+          <span class="tag teal">Support</span>
+          <h4>Envelope design</h4>
+          <p>Insulation + air-sealing that makes the cooling tiers actually perform.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="decisions">
     <div class="wrap">
-      <div class="sec-eyebrow">08 · Decisions needed from koH</div>
+      <div class="sec-eyebrow">10 · Decisions needed from koH</div>
       <h2>Open items.</h2>
       <ol class="dec">
         <li><strong>System at launch</strong> — bucket (recommended) or twin-vault? Affects steward labor vs build size. Structure supports both either way.</li>
         <li><strong>Urine diversion</strong> — yes (drier, easier compost, +1 fixture + drain) or no (simpler)? Recommended yes for the accessible stall at minimum.</li>
-        <li><strong>Ramp footprint</strong> — the straight 24 ft run is generous but long; if the parcel is tight we can fold it into an L or drop the deck to 18 in to shorten it. Confirm the straight run fits the site.</li>
+        <li><strong>Layout</strong> — 3 bathrooms (16×12 ft) or 2 (12×12 ft)? Drives footprint, cost, and shower count.</li>
+        <li><strong>Ventilation</strong> — passive (default), or a powered solar + battery option (stack fans preferred) for still air and big gatherings?</li>
+        <li><strong>Rainwater + showers</strong> — include the catchment upgrade in the pilot, or phase 2?</li>
+        <li><strong>Ramp + stair</strong> — confirm the 1:12 ramp-onto-porch plus the east stair fits the chosen site.</li>
         <li><strong>Build path</strong> — confirm "frame to Path B, operate Path A."</li>
         <li><strong>Capacity &amp; siting</strong> — expected peak users at a gathering, and where on the land (sun angle for the stacks, approach for the ramp).</li>
         <li><strong>Permitting</strong> — is health-department sign-off in scope? If yes, the commercial-unit fallback and urine handling gain weight.</li>
@@ -369,5 +483,15 @@
         <a href="mailto:hand@handprotocol.org">hand@handprotocol.org</a></p>
     </div>
   </footer>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="wire-viewer.js"></script>
 </body>
 </html>

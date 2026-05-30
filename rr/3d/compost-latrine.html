@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Reimagine Ranch · Compost Latrine — wire tour</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #040608; overflow: hidden;
+               font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  #three-canvas { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+  .brand { position: fixed; z-index: 2; left: 28px; top: 24px; color: #D4B468;
+           font-size: 13px; font-weight: 600; letter-spacing: 0.14em;
+           text-shadow: 0 0 18px rgba(212,180,104,0.4); }
+  .cap { position: fixed; z-index: 2; left: 28px; bottom: 30px; color: #D4B468;
+         letter-spacing: 0.04em; line-height: 1.5; max-width: 60%;
+         transition: opacity .35s ease; text-shadow: 0 0 16px rgba(212,180,104,0.3); }
+  .cap .n { font-size: 11px; opacity: 0.5; }
+  .cap .t { font-size: 20px; font-weight: 600; margin-top: 2px; }
+  .cap .s { font-size: 12px; opacity: 0.62; margin-top: 5px; }
+  .dots { position: fixed; z-index: 2; right: 26px; top: 50%; transform: translateY(-50%);
+          display: flex; flex-direction: column; gap: 14px; }
+  .dots button { width: 9px; height: 9px; border-radius: 50%; border: 1px solid #D4B468;
+                 background: transparent; padding: 0; cursor: pointer; opacity: 0.45;
+                 transition: all .3s ease; }
+  .dots button.on { background: #D4B468; opacity: 1; box-shadow: 0 0 12px #D4B468; }
+  .hint { position: fixed; z-index: 2; right: 24px; bottom: 22px; color: #5b6b78;
+          font-size: 11px; letter-spacing: 0.05em; }
+</style>
+</head>
+<body>
+  <canvas id="three-canvas"></canvas>
+  <div class="brand">REIMAGINE RANCH</div>
+  <div class="cap" id="cap">
+    <div class="n" id="cap-n">01 / 03</div>
+    <div class="t" id="cap-t">BASE MASSING</div>
+    <div class="s" id="cap-s">Compost sawdust latrine · 3-stall accessible · 16′ × 12′ raised deck · passive stack vents</div>
+  </div>
+  <div class="dots" id="dots"></div>
+  <div class="hint">scroll / arrows to tour · drag to look</div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+  import * as THREE from 'three';
+  import { EffectComposer }  from 'three/addons/postprocessing/EffectComposer.js';
+  import { RenderPass }      from 'three/addons/postprocessing/RenderPass.js';
+  import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+  // ============================================================================
+  // World-space mapping.  The Blender massing (rr/blender/compost_latrine.py)
+  // authors in FEET with Z up; Three.js wants Y up.  v() centres the 16×12 deck
+  // on the origin:  three.x=(bx-CX)·S, three.y=(bz-CZ)·S, three.z=(by-CY)·S
+  // ============================================================================
+  const CX = 8.0, CY = 6.0, CZ = 5.0, S = 0.34;
+  const GOLD = 0xD4B468, TEAL = 0x49e0c8, AMBER = 0xffb05a;
+  const v = (bx, by, bz) => new THREE.Vector3((bx - CX) * S, (bz - CZ) * S, (by - CY) * S);
+
+  const wireMat  = (c, o = 0.82) => new THREE.LineBasicMaterial({ color: c, transparent: true, opacity: o });
+  const glassMat = (c, o = 0.16) => new THREE.MeshStandardMaterial({
+    color: 0x080a0a, emissive: new THREE.Color(c), emissiveIntensity: 0.22,
+    transparent: true, opacity: o, side: THREE.DoubleSide });
+
+  // ---- primitives (Blender feet) --------------------------------------------
+  function box(g, c, p0, p1, { op = 0.9, fill = false, fillOp = 0.10 } = {}) {
+    const sx = Math.abs(p1[0]-p0[0])*S, sy = Math.abs(p1[1]-p0[1])*S, sz = Math.abs(p1[2]-p0[2])*S;
+    const ctr = v((p0[0]+p1[0])/2, (p0[1]+p1[1])/2, (p0[2]+p1[2])/2);
+    const geo = new THREE.BoxGeometry(sx, sz, sy);
+    const e = new THREE.LineSegments(new THREE.EdgesGeometry(geo), wireMat(c, op));
+    e.position.copy(ctr); g.add(e);
+    if (fill) { const s = new THREE.Mesh(geo, glassMat(c, fillOp)); s.position.copy(ctr); g.add(s); }
+  }
+  function slab(g, c, top4, t, { op = 0.92, fill = false, fillOp = 0.12 } = {}) {
+    const pts = [...top4, ...top4.map(p => [p[0], p[1], p[2]-t])].map(p => v(...p));
+    const geo = new THREE.BufferGeometry();
+    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(pts.flatMap(p => [p.x,p.y,p.z])), 3));
+    geo.setIndex([0,1,2,0,2,3, 4,6,5,4,7,6, 0,4,5,0,5,1, 1,5,6,1,6,2, 2,6,7,2,7,3, 3,7,4,3,4,0]);
+    geo.computeVertexNormals();
+    g.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo, 1), wireMat(c, op)));
+    if (fill) g.add(new THREE.Mesh(geo, glassMat(c, fillOp)));
+  }
+  function cyl(g, c, x, y, z0, z1, r, { op = 0.85, seg = 18 } = {}) {
+    const geo = new THREE.CylinderGeometry(r*S, r*S, (z1-z0)*S, seg);
+    const m = new THREE.LineSegments(new THREE.EdgesGeometry(geo), wireMat(c, op));
+    m.position.copy(v(x, y, (z0+z1)/2)); g.add(m);
+  }
+  const glass = (g, c, p0, p1) => box(g, c, p0, p1, { op: 0.55, fill: true, fillOp: 0.30 });
+
+  // ============================================================================
+  // Locked dimensions (research §7)
+  // ============================================================================
+  const FFL = 2.0, SLAB = 0.5, WALL_T = 0.33, WALL_TOP = 9.0;
+  const DECK_X1 = 16.0, DECK_Y1 = 12.0, EAST_FACE = DECK_X1 - 0.5;
+  const STALLS = [
+    ['acc',  0.0,  7.5, 6.5, [2.6, 5.6],  3.75],
+    ['std1', 8.0, 11.5, 7.5, [9.0, 10.5], 9.75],
+    ['std2', 12.0, 15.5, 7.5, [13.0, 14.5], 13.75],
+  ];
+  const ROOF_PITCH = 1.5/12, ROOF_FY = -2.0, ROOF_BY = 13.0;
+  const ROOF_BZ = WALL_TOP + 0.5, ROOF_FZ = ROOF_BZ + (ROOF_BY-ROOF_FY)*ROOF_PITCH;
+  const roofZ = (y) => ROOF_FZ + ((y-ROOF_FY)/(ROOF_BY-ROOF_FY))*(ROOF_BZ-ROOF_FZ);
+
+  function walledRoom(g, c, x0, x1, y0, y1, z0, z1, t, [gx0, gx1]) {
+    box(g, c, [x0, y1-t, z0], [x1, y1, z1]);
+    box(g, c, [x0, y0, z0], [x0+t, y1, z1]);
+    box(g, c, [x1-t, y0, z0], [x1, y1, z1]);
+    box(g, c, [x0, y0, z0], [gx0, y0+t, z1]);
+    box(g, c, [gx1, y0, z0], [x1, y0+t, z1]);
+    box(g, c, [gx0, y0, z1-0.75], [gx1, y0+t, z1]);
+  }
+
+  // shell common to every variant -------------------------------------------
+  function buildShell(g) {
+    box(g, GOLD, [0, 0, FFL-SLAB], [DECK_X1, DECK_Y1, FFL], { fill: true, fillOp: 0.08 });
+    box(g, GOLD, [0, 0, 0], [DECK_X1, 0.1, FFL-SLAB], { op: 0.6 });
+    box(g, GOLD, [0, DECK_Y1-0.1, 0], [DECK_X1, DECK_Y1, FFL-SLAB], { op: 0.6 });
+    for (const gx of [1.0, DECK_X1/2, DECK_X1-1.0])
+      for (const gy of [1.0, 6.0, 11.0]) cyl(g, GOLD, gx, gy, 0, FFL-SLAB, 0.25, { op: 0.55, seg: 10 });
+    for (const [, x0, x1, y0, door] of STALLS) {
+      walledRoom(g, GOLD, x0, x1, y0, DECK_Y1, FFL, WALL_TOP, WALL_T, door);
+      const tcx = (x0+x1)/2;
+      box(g, GOLD, [tcx-0.8, 9.6, FFL], [tcx+0.8, 11.0, FFL+1.5], { op: 0.7 });
+    }
+    box(g, AMBER, [0.2, 6.4, FFL+1.6], [2.4, 6.5, FFL+3.6], { op: 0.85 });   // ISA placard
+    glass(g, TEAL, [0.3, 6.47, 6.75], [2.45, 6.57, 7.75]);                    // front clerestory
+    glass(g, TEAL, [EAST_FACE-0.03, 8.0, 6.75], [EAST_FACE+0.07, 11.7, 7.85]); // east clerestory
+    slab(g, GOLD, [[-1, ROOF_FY, ROOF_FZ], [DECK_X1+1, ROOF_FY, ROOF_FZ],
+                   [DECK_X1+1, ROOF_BY, ROOF_BZ], [-1, ROOF_BY, ROOF_BZ]], 0.35, { fill: true, fillOp: 0.10 });
+    // ramp (west) + east stair
+    slab(g, GOLD, [[-13, 0, 0.12], [0, 0, FFL], [0, 5, FFL], [-13, 5, 0.12]], 0.3, { fill: true, fillOp: 0.07 });
+    const ST_X0 = 12.0;
+    for (let i = 0; i < 4; i++)
+      box(g, GOLD, [ST_X0, -i-1, 0], [EAST_FACE, -i, FFL-i*0.5], { op: 0.7 });
+  }
+
+  function buildVentStacks(g) {
+    const top = roofZ(11.6) + 1.4;
+    for (const [, , , , , vx] of STALLS) {
+      cyl(g, AMBER, vx, 11.6, 0.5, top, 0.20, { op: 0.9, seg: 12 });
+      box(g, AMBER, [vx-0.3, 11.3, top-0.1], [vx+0.3, 11.9, top+0.2], { op: 0.9 });
+    }
+  }
+
+  // one big solar-powered louvered roof cupola pulling every stall (--vent=cupola)
+  function buildCupola(g) {
+    const cx = DECK_X1/2, baseZ = roofZ(10.5), cz0 = baseZ+0.1, cz1 = baseZ+3.0;
+    const cx0 = cx-2.2, cx1 = cx+2.2, cy0 = 9.0, cy1 = 12.0;
+    for (const [, , , , , vx] of STALLS) cyl(g, GOLD, vx, 11.6, 0.5, baseZ+0.2, 0.22, { op: 0.6, seg: 10 });
+    for (const cxp of [cx0, cx1]) {
+      box(g, GOLD, [cxp-0.08, cy0, cz0], [cxp+0.08, cy0+0.16, cz1], { op: 0.8 });
+      box(g, GOLD, [cxp-0.08, cy1-0.16, cz0], [cxp+0.08, cy1, cz1], { op: 0.8 });
+    }
+    for (let i = 0; i < 6; i++) {
+      const z = cz0 + 0.3 + i*((cz1-cz0-0.6)/6);
+      box(g, AMBER, [cx0, cy0, z], [cx1, cy0+0.12, z+0.10], { op: 0.7 });
+      box(g, AMBER, [cx0, cy1-0.12, z], [cx1, cy1, z+0.10], { op: 0.7 });
+    }
+    box(g, GOLD, [cx0-0.4, cy0-0.4, cz1], [cx1+0.4, cy1+0.4, cz1+0.25], { op: 0.85 });
+    cyl(g, AMBER, cx, 10.5, cz1-0.55, cz1-0.2, 1.4, { op: 0.95, seg: 16 });   // extraction fan
+  }
+
+  // rainwater package: gutter -> cistern -> one shower per stall (--upgrade=rainwater)
+  function buildRainwater(g) {
+    const by = DECK_Y1, eaveY = ROOF_BY, eaveZ = roofZ(eaveY);
+    box(g, GOLD, [-1, eaveY-0.28, eaveZ-0.48], [DECK_X1, eaveY+0.04, eaveZ-0.16], { op: 0.7 }); // gutter
+    const tkx = DECK_X1+1.6, tky = 14.8, tkr = 2.5, tkh = 7.0;
+    cyl(g, TEAL, tkx, tky, 0, tkh, tkr, { op: 0.6, seg: 24, });                 // cistern
+    cyl(g, TEAL, tkx, tky, tkh, tkh+0.25, tkr*0.55, { op: 0.75, seg: 16 });     // lid
+    box(g, GOLD, [DECK_X1-0.8, eaveY-0.14, eaveZ-0.46], [tkx, eaveY+0.14, eaveZ-0.30], { op: 0.7 });
+    cyl(g, GOLD, tkx, eaveY, tkh, eaveZ-0.30, 0.16, { op: 0.7, seg: 10 });
+    box(g, GOLD, [2.6, by+0.12, 0.45], [tkx, by+0.32, 0.70], { op: 0.55 });     // supply line
+    for (const [, x0, x1] of STALLS) {
+      const sx = (x0+x1)/2, rtop = 7.2;
+      cyl(g, GOLD, sx, by+0.22, 0.55, rtop, 0.07, { op: 0.75, seg: 8 });
+      box(g, GOLD, [sx-0.06, by+0.16, rtop-0.10], [sx+0.06, by+1.05, rtop], { op: 0.75 });
+      cyl(g, AMBER, sx, by+0.95, rtop-0.34, rtop-0.12, 0.22, { op: 0.9, seg: 10 });
+    }
+    box(g, TEAL, [1.5, by, 0], [EAST_FACE-1.5, by+3.0, 0.06], { op: 0.4 });     // shower pad
+  }
+
+  function buildVariant(g, opts) {
+    buildShell(g);
+    if (opts.vent === 'cupola') buildCupola(g); else buildVentStacks(g);
+    if (opts.rainwater) buildRainwater(g);
+    const grid = new THREE.GridHelper(28, 28, 0x2a3a3a, 0x141e1e);
+    grid.position.y = (0 - CZ) * S;
+    grid.material.transparent = true; grid.material.opacity = 0.3;
+    g.add(grid);
+  }
+
+  // ============================================================================
+  // Scenes
+  // ============================================================================
+  const SCENES = [
+    { t: 'BASE MASSING', s: 'Compost sawdust latrine · 3-stall accessible · 16′ × 12′ raised deck · passive stack vents', opts: { vent: 'passive' } },
+    { t: 'POWERED CUPOLA', s: 'Solar-powered louvered roof cupola · short duct manifold · 24/7 extraction airflow', opts: { vent: 'cupola' } },
+    { t: 'RAINWATER UPGRADE', s: 'Shed-roof runoff → gutter → poly cistern → one gravity outdoor shower per stall', opts: { vent: 'passive', rainwater: true } },
+  ];
+  const SPACING = 12;
+
+  // ============================================================================
+  // Renderer / scene
+  // ============================================================================
+  const canvas = document.getElementById('three-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x040608, 1);
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2(0x040608, 0.035);
+  const camera = new THREE.PerspectiveCamera(46, window.innerWidth/window.innerHeight, 0.1, 200);
+
+  scene.add(new THREE.AmbientLight(0x404040, 0.6));
+  const key = new THREE.DirectionalLight(0xffeeaa, 0.45); key.position.set(5, 10, 7); scene.add(key);
+  const fill = new THREE.DirectionalLight(0x6688aa, 0.25); fill.position.set(-6, 4, -5); scene.add(fill);
+
+  // starfield (static backdrop)
+  const N = 800, sp = new Float32Array(N*3);
+  for (let i = 0; i < N; i++) { sp[i*3] = (Math.random()-0.5)*120; sp[i*3+1] = (Math.random()-0.5)*120; sp[i*3+2] = -25 - Math.random()*70; }
+  const sg = new THREE.BufferGeometry(); sg.setAttribute('position', new THREE.BufferAttribute(sp, 3));
+  scene.add(new THREE.Points(sg, new THREE.PointsMaterial({ color: GOLD, size: 0.08, transparent: true, opacity: 0.4 })));
+
+  // build each variant into its own group, stacked vertically
+  const groups = SCENES.map((cfg, i) => {
+    const g = new THREE.Group();
+    buildVariant(g, cfg.opts);
+    g.position.set(0, -i * SPACING, 0);
+    scene.add(g);
+    return g;
+  });
+
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  composer.addPass(new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.7, 0.85, 0.2));
+
+  // ============================================================================
+  // Snap-scroll navigation
+  // ============================================================================
+  const _s = parseInt(new URLSearchParams(location.search).get('s'), 10);
+  let current = Number.isFinite(_s) ? Math.max(0, Math.min(SCENES.length-1, _s)) : 0;  // ?s=N deep link
+  let camCenterY = -current * SPACING;   // start framed on the requested scene
+  let yaw = 0, dragging = false, lastX = 0, manualYaw = false;
+
+  const capN = document.getElementById('cap-n'), capT = document.getElementById('cap-t'),
+        capS = document.getElementById('cap-s'), capEl = document.getElementById('cap');
+  const dotsEl = document.getElementById('dots');
+  SCENES.forEach((_, i) => {
+    const b = document.createElement('button');
+    b.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(b);
+  });
+  const dotBtns = [...dotsEl.children];
+
+  function refresh() {
+    const c = SCENES[current];
+    capEl.style.opacity = 0;
+    setTimeout(() => {
+      capN.textContent = String(current+1).padStart(2,'0') + ' / ' + String(SCENES.length).padStart(2,'0');
+      capT.textContent = c.t; capS.textContent = c.s; capEl.style.opacity = 1;
+    }, 180);
+    dotBtns.forEach((b, i) => b.classList.toggle('on', i === current));
+  }
+  function goTo(i) {
+    const n = Math.max(0, Math.min(SCENES.length-1, i));
+    if (n === current) return;
+    current = n; refresh();
+  }
+  refresh();
+
+  let lastWheel = 0;
+  addEventListener('wheel', (e) => {
+    const now = performance.now();
+    if (now - lastWheel < 620) return;
+    lastWheel = now;
+    goTo(current + (e.deltaY > 0 ? 1 : -1));
+  }, { passive: true });
+  addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown') goTo(current+1);
+    if (e.key === 'ArrowUp'   || e.key === 'PageUp')   goTo(current-1);
+  });
+
+  // light drag-to-look (yaw only) so users can inspect, without losing snap-scroll
+  canvas.addEventListener('pointerdown', (e) => { dragging = true; manualYaw = true; lastX = e.clientX; });
+  addEventListener('pointerup', () => { dragging = false; });
+  addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    yaw += (e.clientX - lastX) * 0.005; lastX = e.clientX;
+  });
+
+  addEventListener('resize', () => {
+    camera.aspect = window.innerWidth/window.innerHeight; camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    composer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  (function animate() {
+    requestAnimationFrame(animate);
+    const wantY = -current * SPACING;
+    camCenterY += (wantY - camCenterY) * 0.07;
+    if (!manualYaw) yaw += 0.0016;                 // gentle auto-orbit until the user grabs it
+    const R = 14.0;
+    camera.position.set(Math.sin(yaw)*R, camCenterY + 3.0, Math.cos(yaw)*R);
+    camera.lookAt(0, camCenterY - 0.2, 0);
+    composer.render();
+  })();
+  </script>
+</body>
+</html>
