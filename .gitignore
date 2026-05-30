@@ -46,7 +46,8 @@ cache/
 .gstack/
 
 # Personal property notes (kept local, not org-repo material)
-mosquitos/
+# Anchored to repo root so the deployed web surface web/mosquitos/ stays tracked.
+/mosquitos/
 
 # NotebookLM CLI state (local artifacts, references personal notebook IDs)
 funding/updates/.history.jsonl

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Bucket of Doom — Mosquito Defense: Deployment Report | HAND Protocol</title>
+  <meta name="description" content="Where to place the mosquito Bucket-of-Doom traps, whether more is better, and the deployment + sustainability procedures for HAND's land at Mystic Hearts (9 ac) and Reimagine Ranch (23 ac), Austin TX.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0f0e17; --surface:#1a1925; --surface-2:#252336; --line:#312f44;
+      --text:#e8e6f0; --dim:#a09db5; --faint:#6e6b85;
+      --accent:#00c2a8; --accent-hover:#2dd4bf; --purple:#7c6dd8; --gold:#f5b942; --water:#5aa6d8;
+      --sans:'Inter',system-ui,sans-serif; --serif:'Fraunces',Georgia,serif; --mono:'JetBrains Mono',monospace;
+      --r:14px; --maxw:880px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.65;
+      -webkit-font-smoothing:antialiased;font-size:17px}
+    a{color:var(--accent-hover);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 1.5rem}
+    .wide{max-width:1180px;margin:0 auto;padding:0 1.5rem}
+
+    nav{position:sticky;top:0;z-index:50;background:rgba(15,14,23,.82);
+      backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+    .nav-in{display:flex;align-items:center;gap:1rem;height:60px}
+    .logo{display:flex;align-items:center;gap:.6rem;font-weight:700;color:var(--text)}
+    .logo svg{width:26px;height:26px}
+    .crumbs{font-size:.82rem;color:var(--faint);font-family:var(--mono)}
+    .crumbs b{color:var(--dim);font-weight:500}
+    .nav-links{margin-left:auto;display:flex;gap:1.3rem;font-size:.9rem}
+    .nav-links a{color:var(--dim)} .nav-links a:hover{color:var(--accent-hover);text-decoration:none}
+    @media(max-width:780px){.nav-links{display:none}}
+
+    header.doc{padding:4.5rem 0 3rem;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+    header.doc::before{content:"";position:absolute;inset:0;
+      background:radial-gradient(120% 80% at 80% -10%,rgba(0,194,168,.13),transparent 60%);pointer-events:none}
+    .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);
+      font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:1.1rem}
+    .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+    h1{font-family:var(--serif);font-weight:400;font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.08;letter-spacing:-.02em}
+    .byline{font-family:var(--serif);font-style:italic;color:var(--accent-hover);font-size:1rem;margin:1rem 0 .4rem}
+    .lede{color:var(--dim);font-size:1.15rem;max-width:60ch;margin-top:1rem}
+    .meta{display:flex;flex-wrap:wrap;gap:1.8rem;margin-top:2.2rem}
+    .meta div{display:flex;flex-direction:column}
+    .meta .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+    .meta .v{font-size:.95rem;color:var(--text);margin-top:.2rem}
+
+    section{padding:3.2rem 0;border-bottom:1px solid var(--line)}
+    .sec-eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
+    h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.6rem,3.4vw,2.2rem);line-height:1.15;letter-spacing:-.015em;margin-bottom:1rem}
+    h3{font-family:var(--sans);font-weight:600;font-size:1.12rem;margin:1.8rem 0 .6rem;color:var(--text)}
+    p{margin-bottom:1rem;color:#d6d4e4}
+    p.big{font-size:1.25rem;color:var(--text)}
+    ul,ol{margin:0 0 1rem 1.2rem;color:#d6d4e4}
+    li{margin-bottom:.4rem}
+    strong{color:var(--text);font-weight:600}
+    code{font-family:var(--mono);font-size:.86em;background:var(--surface-2);padding:.12em .4em;border-radius:5px;color:var(--accent-hover)}
+
+    figure{margin:1.6rem 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+    figure svg{width:100%;height:auto;display:block;background:#0a0913}
+    figcaption{padding:.8rem 1.2rem;font-size:.86rem;color:var(--dim);border-top:1px solid var(--line);font-family:var(--mono);line-height:1.5}
+    .legend{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin-top:.6rem}
+    .legend span{display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;color:var(--dim)}
+    .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+    .callout{display:flex;gap:.9rem;background:linear-gradient(135deg,rgba(0,194,168,.08),rgba(124,109,216,.06));
+      border:1px solid rgba(0,194,168,.28);border-radius:var(--r);padding:1.2rem 1.4rem;margin:1.6rem 0}
+    .callout svg{width:22px;height:22px;color:var(--accent);flex-shrink:0;margin-top:.15rem}
+    .callout p{margin:0;color:var(--text)}
+    .callout.warn{background:rgba(245,185,66,.07);border-color:rgba(245,185,66,.3)}
+    .callout.warn svg{color:var(--gold)}
+
+    .verdict{border:1px solid rgba(0,194,168,.4);border-radius:var(--r);padding:1.5rem 1.6rem;margin:1.6rem 0;
+      background:linear-gradient(135deg,rgba(0,194,168,.10),rgba(124,109,216,.05))}
+    .verdict .lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+    .verdict p.big{margin:0}
+
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.1rem;margin-top:1.4rem}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:1.3rem}
+    .card .tag{display:inline-block;font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+      padding:.18rem .5rem;border-radius:6px;margin-bottom:.7rem}
+    .tag.teal{background:rgba(0,194,168,.16);color:var(--accent-hover)}
+    .tag.gold{background:rgba(245,185,66,.16);color:var(--gold)}
+    .tag.purple{background:rgba(124,109,216,.2);color:#b3a6f0}
+    .tag.water{background:rgba(90,166,216,.18);color:#9cc8ea}
+    .card h4{font-size:1.02rem;margin-bottom:.4rem;color:var(--text)}
+    .card p{font-size:.92rem;color:var(--dim);margin:0}
+
+    .tbl{width:100%;border-collapse:collapse;margin:1.2rem 0;font-size:.92rem}
+    .tbl th,.tbl td{text-align:left;padding:.65rem .8rem;border-bottom:1px solid var(--line);vertical-align:top}
+    .tbl th{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+    .tbl td:first-child{color:var(--text);font-weight:500}
+    .tbl tr:hover td{background:rgba(255,255,255,.015)}
+
+    .dec{counter-reset:d;list-style:none;margin-left:0}
+    .dec li{position:relative;padding-left:2.4rem;margin-bottom:1rem}
+    .dec li::before{counter-increment:d;content:counter(d);position:absolute;left:0;top:0;
+      width:1.7rem;height:1.7rem;border-radius:50%;background:var(--surface-2);border:1px solid var(--accent);
+      color:var(--accent);font-family:var(--mono);font-size:.8rem;display:flex;align-items:center;justify-content:center}
+
+    footer{padding:3rem 0 4rem;color:var(--faint);font-size:.88rem;text-align:center}
+    footer a{color:var(--dim)}
+    .rec{color:var(--accent-hover);font-weight:600}
+
+    .dgram text{font-family:var(--mono)}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wide nav-in">
+      <a href="../foundation-campaign/index.html" class="logo" aria-label="HAND Protocol home">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 4C10 4 6 9 6 15c0 7 5 11 10 13 5-2 10-6 10-13 0-6-4-11-10-11z" stroke="#00c2a8" stroke-width="1.8"/>
+          <path d="M11 15v-3M14 15V11M17 15v-4M20 15v-3" stroke="#2dd4bf" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        HAND
+      </a>
+      <div class="crumbs">Land Health <b>/ Bucket of Doom</b></div>
+      <div class="nav-links">
+        <a href="#how">How</a>
+        <a href="#geometry">Geometry</a>
+        <a href="#placement">Placement</a>
+        <a href="#toomany">Too many?</a>
+        <a href="#tactics">Tactics</a>
+        <a href="#sustain">Sustainability</a>
+        <a href="styles/index.html">Styles ↗</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="doc">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span> HAND Land Health · Mosquito Defense</div>
+      <h1>The Bucket of Doom.</h1>
+      <p class="byline">Where to put them, how many is enough, and how to keep them from going feral.</p>
+      <p class="lede">A lethal-ovitrap system that out-competes every breeding site on the land,
+        kills larvae with a larvicide that spares bees, frogs, and fish, and composts back into the
+        soil at season's end. This report is the deployment + sustainability summary for HAND's two
+        parcels — built from the deeper materials research.</p>
+      <div class="meta">
+        <div><span class="k">Status</span><span class="v">Research · pre-deploy</span></div>
+        <div><span class="k">Parcels</span><span class="v">Mystic Hearts 9 ac · Reimagine Ranch 23 ac</span></div>
+        <div><span class="k">Region</span><span class="v">Austin, TX</span></div>
+        <div><span class="k">Core unit</span><span class="v">Black 5-gal GAT bucket</span></div>
+        <div><span class="k">Active dose</span><span class="v">½ Bti dunk / 30 days</span></div>
+        <div><span class="k">Updated</span><span class="v">2026-05-29</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO DIAGRAM: the bucket -->
+  <section>
+    <div class="wrap">
+      <figure>
+        <svg class="dgram" viewBox="0 0 760 540" role="img" aria-label="Cutaway diagram of the Bucket of Doom showing a deep black bucket, funnel entrance, fermented infusion, half a Bti dunk floating at the surface, an escape-ramp screen, and overflow drains.">
+          <!-- ground -->
+          <line x1="40" y1="486" x2="640" y2="486" stroke="#312f44" stroke-width="1.5"/>
+          <line x1="60" y1="492" x2="80" y2="486" stroke="#312f44" stroke-width="1"/>
+          <line x1="100" y1="492" x2="120" y2="486" stroke="#312f44" stroke-width="1"/>
+          <line x1="560" y1="492" x2="580" y2="486" stroke="#312f44" stroke-width="1"/>
+          <line x1="600" y1="492" x2="620" y2="486" stroke="#312f44" stroke-width="1"/>
+
+          <!-- bucket body (tapered, deep) -->
+          <polygon points="235,112 445,112 415,470 265,470" fill="#0a0913" stroke="#00c2a8" stroke-width="2"/>
+          <!-- water -->
+          <polygon points="240,178 439,178 415,470 265,470" fill="rgba(0,194,168,.13)"/>
+          <line x1="240" y1="178" x2="439" y2="178" stroke="#2dd4bf" stroke-width="1.5"/>
+          <!-- infusion at bottom -->
+          <ellipse cx="300" cy="452" rx="16" ry="6" fill="#3f5a2a"/>
+          <ellipse cx="345" cy="458" rx="20" ry="6" fill="#4d6b32"/>
+          <ellipse cx="388" cy="450" rx="14" ry="5" fill="#3f5a2a"/>
+          <line x1="290" y1="445" x2="320" y2="438" stroke="#6b8f3e" stroke-width="1.5"/>
+          <line x1="360" y1="446" x2="392" y2="436" stroke="#6b8f3e" stroke-width="1.5"/>
+          <!-- half dunk at surface -->
+          <ellipse cx="355" cy="178" rx="30" ry="7.5" fill="none" stroke="#f5b942" stroke-width="7"/>
+          <!-- lid + funnel -->
+          <rect x="222" y="100" width="236" height="12" rx="3" fill="#252336" stroke="#312f44"/>
+          <polygon points="316,112 364,112 343,158 337,158" fill="#1a1925" stroke="#00c2a8" stroke-width="1.5"/>
+          <!-- screen / bee ramp -->
+          <line x1="247" y1="200" x2="433" y2="200" stroke="#7c6dd8" stroke-width="2" stroke-dasharray="5 4"/>
+          <!-- drain holes -->
+          <circle cx="431" cy="168" r="3" fill="#0a0913" stroke="#2dd4bf"/>
+          <circle cx="431" cy="158" r="3" fill="#0a0913" stroke="#2dd4bf"/>
+
+          <!-- mouth width dim -->
+          <line x1="235" y1="90" x2="445" y2="90" stroke="#6e6b85" stroke-width="1"/>
+          <path d="M235 86 L235 94 M445 86 L445 94" stroke="#6e6b85" stroke-width="1"/>
+          <text x="340" y="82" fill="#a09db5" font-size="12" text-anchor="middle">open ~28 cm mouth</text>
+
+          <!-- depth dim -->
+          <line x1="206" y1="178" x2="206" y2="470" stroke="#2dd4bf" stroke-width="1"/>
+          <path d="M202 178 L210 178 M202 470 L210 470" stroke="#2dd4bf" stroke-width="1"/>
+          <text x="150" y="316" fill="#2dd4bf" font-size="12.5" text-anchor="middle" transform="rotate(-90 150 316)">DEEP column = the attractant</text>
+
+          <!-- cue arrow + labels -->
+          <path d="M598 150 Q470 120 366 116" fill="none" stroke="#6e6b85" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <path d="M366 116 l9 -4 l-2 8 z" fill="#6e6b85"/>
+          <text x="612" y="138" fill="#e8e6f0" font-size="12.5" text-anchor="end">a gravid female arrives by:</text>
+          <text x="612" y="156" fill="#2dd4bf" font-size="12" text-anchor="end">VISION — dark &amp; still</text>
+          <text x="612" y="172" fill="#f5b942" font-size="12" text-anchor="end">SMELL — fermentation</text>
+
+          <!-- right-side labels with leaders -->
+          <line x1="364" y1="135" x2="500" y2="250" stroke="#6e6b85" stroke-width=".8"/>
+          <text x="506" y="248" fill="#a09db5" font-size="12">funnel — easy in, hard out</text>
+          <line x1="385" y1="178" x2="500" y2="290" stroke="#6e6b85" stroke-width=".8"/>
+          <text x="506" y="288" fill="#f5b942" font-size="12">½ Bti dunk · 30-day kill</text>
+          <line x1="433" y1="200" x2="500" y2="330" stroke="#6e6b85" stroke-width=".8"/>
+          <text x="506" y="328" fill="#b3a6f0" font-size="12">¼″ screen = bee escape ramp</text>
+          <line x1="431" y1="163" x2="500" y2="372" stroke="#6e6b85" stroke-width=".8"/>
+          <text x="506" y="370" fill="#a09db5" font-size="12">overflow drains — rain can't</text>
+          <text x="506" y="386" fill="#a09db5" font-size="12">flush larvae out</text>
+          <line x1="345" y1="452" x2="500" y2="430" stroke="#6e6b85" stroke-width=".8"/>
+          <text x="506" y="428" fill="#6b8f3e" font-size="12">grass + leaves = scent engine</text>
+
+          <!-- left labels -->
+          <line x1="235" y1="112" x2="120" y2="150" stroke="#6e6b85" stroke-width=".8"/>
+          <text x="116" y="148" fill="#a09db5" font-size="12" text-anchor="end">black 5-gal HDPE</text>
+        </svg>
+        <figcaption>The unit, in cross-section. Vision + smell pull a blood-fed female in through the
+          funnel; the deep dark column reads as "won't dry out." Larvae are killed by ½ a Bti dunk
+          (harmless to bees, frogs, fish, mammals); the screen is only a pollinator escape ramp; the
+          overflow drains stop a downpour from flushing larvae into the yard. Sited in dappled shade,
+          30–50 ft downwind of where people sit.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-eyebrow">01 · How it works</div>
+      <h2>Out-compete the breeding sites, then kill the hatch.</h2>
+      <p class="big">A gravid female hunts for dark, still, microbially-rich water to lay in. The
+        bucket beats every gutter, tarp, and hoofprint on the land at exactly that — then the
+        larvae die.</p>
+      <p>Two cues do the attracting: <strong>vision</strong> (oviposition is vision-led — dark,
+        small, still water wins) and <strong>smell</strong> (a fermenting grass-and-leaf infusion
+        emits the phenol/cresol/indole blend that signals "good nursery"). The kill is
+        <strong>Bti</strong> — a soil bacterium whose toxin only activates in the gut of
+        mosquito/blackfly/midge larvae. Bees, dragonflies, frogs, fish, birds, and mammals lack the
+        receptor, so the trap sits safely inside a regenerating ecosystem.</p>
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg>
+        <p><strong>The trap is the cleanup tool, not the strategy.</strong> Source reduction (dump
+          standing water weekly) and predators (dragonflies, bats, frogs, pond fish) do the real
+          population work. The bucket mops up the breeding sites you can't eliminate.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="geometry">
+    <div class="wrap">
+      <div class="sec-eyebrow">02 · Geometry</div>
+      <h2>Tall-and-deep beats wide-and-shallow.</h2>
+      <p>The most common instinct — "a wide trough catches more" — is backwards. <strong>Depth
+        attracts; width only costs.</strong></p>
+      <figure>
+        <svg class="dgram" viewBox="0 0 680 270" role="img" aria-label="Comparison of a wide shallow pan versus a tall deep bucket. The wide pan is marked as a downgrade; the deep bucket is recommended.">
+          <!-- WIDE (bad) -->
+          <text x="170" y="34" fill="#f5b942" font-size="13" text-anchor="middle">WIDE &amp; SHALLOW — downgrade</text>
+          <polygon points="60,150 280,150 262,200 78,200" fill="#0a0913" stroke="#6e6b85" stroke-width="1.6"/>
+          <polygon points="66,162 274,162 262,200 78,200" fill="rgba(0,194,168,.10)"/>
+          <line x1="66" y1="162" x2="274" y2="162" stroke="#5aa6d8" stroke-width="1.4"/>
+          <!-- big surface marker -->
+          <line x1="66" y1="148" x2="274" y2="148" stroke="#f5b942" stroke-width="2.4"/>
+          <text x="170" y="140" fill="#f5b942" font-size="11" text-anchor="middle">big surface</text>
+          <text x="170" y="228" fill="#a09db5" font-size="11" text-anchor="middle">more Bti · more evaporation</text>
+          <text x="170" y="244" fill="#a09db5" font-size="11" text-anchor="middle">more rain dilution · more bee bycatch</text>
+          <text x="170" y="260" fill="#6e6b85" font-size="11" text-anchor="middle">…and no extra catch</text>
+          <!-- cross -->
+          <circle cx="300" cy="175" r="15" fill="none" stroke="#6e6b85" stroke-width="1.5"/>
+          <path d="M293 168 l14 14 M307 168 l-14 14" stroke="#6e6b85" stroke-width="2"/>
+
+          <!-- TALL (good) -->
+          <text x="505" y="34" fill="#2dd4bf" font-size="13" text-anchor="middle">TALL &amp; DEEP — recommended</text>
+          <polygon points="455,70 555,70 543,210 467,210" fill="#0a0913" stroke="#00c2a8" stroke-width="1.8"/>
+          <polygon points="460,96 550,96 543,210 467,210" fill="rgba(0,194,168,.14)"/>
+          <line x1="460" y1="96" x2="550" y2="96" stroke="#2dd4bf" stroke-width="1.4"/>
+          <!-- small surface marker -->
+          <line x1="460" y1="84" x2="550" y2="84" stroke="#2dd4bf" stroke-width="2.4"/>
+          <text x="505" y="78" fill="#2dd4bf" font-size="11" text-anchor="middle">small surface</text>
+          <!-- depth arrow -->
+          <line x1="437" y1="96" x2="437" y2="210" stroke="#2dd4bf" stroke-width="1"/>
+          <path d="M433 96 l8 0 M433 210 l8 0" stroke="#2dd4bf" stroke-width="1"/>
+          <text x="505" y="234" fill="#a09db5" font-size="11" text-anchor="middle">depth = free attraction</text>
+          <text x="505" y="250" fill="#a09db5" font-size="11" text-anchor="middle">stable temp · less Bti · low bycatch</text>
+          <!-- check -->
+          <circle cx="600" cy="120" r="15" fill="none" stroke="#00c2a8" stroke-width="1.5"/>
+          <path d="M593 120 l5 6 l10 -12" fill="none" stroke="#2dd4bf" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <figcaption>Bti is dosed per <em>surface area</em>, independent of depth — so surface is
+          where every cost lives (larvicide, evaporation, rain-dilution, drowned pollinators), while
+          depth buys attraction for free. <em>Aedes</em> even prefer medium/small surface over large.
+          Keep an open ~25–30 cm mouth (a narrow-necked jug loses <em>Culex</em>). The 5-gal bucket
+          sits at the sweet spot — and matches the validated CDC AGO-B trap.</figcaption>
+      </figure>
+      <div class="callout warn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        <p><strong>Central Texas tuning.</strong> Our #1 threat is West Nile via <em>Culex
+          quinquefasciatus</em>, which prefers <strong>aged, dirty, organic-rich</strong> water
+          (2–4 weeks). Run the infusion <strong>dirty and old — top it up, don't reset it clean.</strong>
+          A too-tidy bucket under-performs against our primary vector.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="placement">
+    <div class="wrap">
+      <div class="sec-eyebrow">03 · Placement</div>
+      <h2>Where to put them — by zone, not by acre.</h2>
+      <p>The "4–6 traps per acre" rule is <em>not</em> a license to scatter a hundred buckets over
+        23 acres. Mosquito control is a <strong>zone game</strong>: concentrate dense traps where
+        people and animals actually are, treat the standing water at its source, and let the
+        ecosystem cover the rest.</p>
+      <div class="cards" style="margin-bottom:1.4rem">
+        <div class="card">
+          <span class="tag teal">Zone 1 · core</span>
+          <h4>Dense buckets</h4>
+          <p>The human/animal core — kitchen, gathering, sleeping, gardens. Apply the 4–6/acre +
+            &gt;80% coverage rules here, ~30–50 ft apart, downwind of seating.</p>
+        </div>
+        <div class="card">
+          <span class="tag water">Zone 2 · water</span>
+          <h4>Treat in place</h4>
+          <p>Troughs get a dunk (safe to drink); ponds get fish — never a Bti-bomb; everything else
+            gets drained. Kill at the source, not downstream.</p>
+        </div>
+        <div class="card">
+          <span class="tag purple">Zone 3 · land</span>
+          <h4>Walk + predators</h4>
+          <p>The back acreage: weekly source-reduction walk plus predator habitat (bat houses,
+            dragonfly perches, frog cover). No buckets out here.</p>
+        </div>
+      </div>
+
+      <h3>Mystic Hearts — 9 acres</h3>
+      <figure>
+        <svg class="dgram" viewBox="0 0 760 430" role="img" aria-label="Schematic deployment map of the 9-acre Mystic Hearts parcel showing a ~2-acre core with a cluster of buckets, a pond stocked with fish, a water trough with a dunk, and predator habitat in the back land.">
+          <rect x="28" y="28" width="624" height="374" rx="18" fill="rgba(0,194,168,.04)" stroke="#312f44"/>
+          <text x="48" y="56" fill="#6e6b85" font-size="12">Mystic Hearts · ~9 acres · Austin TX</text>
+          <!-- wind -->
+          <path d="M600 70 q-34 16 -64 40" fill="none" stroke="#6e6b85" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <path d="M536 110 l10 -3 l-3 10 z" fill="#6e6b85"/>
+          <text x="606" y="64" fill="#a09db5" font-size="11" text-anchor="end">prevailing SE breeze</text>
+
+          <!-- Z1 core -->
+          <rect x="62" y="150" width="252" height="218" rx="14" fill="rgba(0,194,168,.10)" stroke="#00c2a8" stroke-width="1.4" stroke-dasharray="6 4"/>
+          <text x="74" y="172" fill="#2dd4bf" font-size="11">Z1 · event / kitchen / sleeping ~2 ac</text>
+          <!-- structures -->
+          <rect x="80" y="185" width="40" height="26" rx="4" fill="#252336" stroke="#3a3850"/>
+          <text x="100" y="202" fill="#a09db5" font-size="9" text-anchor="middle">kitchen</text>
+          <rect x="138" y="185" width="48" height="26" rx="4" fill="#252336" stroke="#3a3850"/>
+          <text x="162" y="202" fill="#a09db5" font-size="9" text-anchor="middle">gather</text>
+          <rect x="204" y="185" width="48" height="26" rx="4" fill="#252336" stroke="#3a3850"/>
+          <text x="228" y="202" fill="#a09db5" font-size="9" text-anchor="middle">sleep</text>
+          <!-- bucket dots (downwind / lower part of core) -->
+          <g fill="#2dd4bf" stroke="#0a0913" stroke-width="1">
+            <circle cx="92" cy="262" r="6"/><circle cx="140" cy="258" r="6"/><circle cx="190" cy="262" r="6"/>
+            <circle cx="240" cy="256" r="6"/><circle cx="288" cy="266" r="6"/>
+            <circle cx="100" cy="318" r="6"/><circle cx="152" cy="324" r="6"/><circle cx="206" cy="318" r="6"/>
+            <circle cx="258" cy="326" r="6"/><circle cx="300" cy="320" r="6"/>
+          </g>
+          <text x="188" y="356" fill="#6e6b85" font-size="10" text-anchor="middle">8–12 buckets · ~30–50 ft apart · &gt;80% coverage</text>
+
+          <!-- Z2 pond -->
+          <ellipse cx="468" cy="296" rx="78" ry="48" fill="rgba(90,166,216,.22)" stroke="#5aa6d8" stroke-width="1.4"/>
+          <g fill="#9cc8ea"><ellipse cx="452" cy="288" rx="8" ry="3.2"/><path d="M444 288 l-6 -4 l0 8 z"/></g>
+          <g fill="#9cc8ea"><ellipse cx="488" cy="306" rx="8" ry="3.2"/><path d="M480 306 l-6 -4 l0 8 z"/></g>
+          <text x="468" y="358" fill="#9cc8ea" font-size="10" text-anchor="middle">pond → stock fish · no Bti-bomb</text>
+
+          <!-- Z2 trough -->
+          <rect x="520" y="150" width="56" height="26" rx="5" fill="rgba(245,185,66,.16)" stroke="#f5b942" stroke-width="1.3"/>
+          <text x="548" y="167" fill="#f5b942" font-size="10" text-anchor="middle">trough</text>
+          <text x="548" y="192" fill="#f5b942" font-size="10" text-anchor="middle">1 dunk in place</text>
+
+          <!-- Z3 predators -->
+          <g>
+            <path d="M641 356 l14 -12 l14 12 z" fill="rgba(124,109,216,.25)" stroke="#7c6dd8"/>
+            <rect x="648" y="356" width="14" height="14" fill="rgba(124,109,216,.2)" stroke="#7c6dd8"/>
+            <text x="655" y="388" fill="#b3a6f0" font-size="10" text-anchor="middle">bat house</text>
+          </g>
+          <text x="430" y="120" fill="#b3a6f0" font-size="11">Z3 · weekly source-reduction walk + predators</text>
+        </svg>
+        <figcaption>~2-acre core carries <strong>8–12 buckets</strong> clustered downwind of the
+          sleeping/gathering structures; the pond is stocked, not dunked; the animal trough gets one
+          dunk in place; the back land runs on walks + predators.</figcaption>
+        <div class="legend" style="padding:0 1.2rem 1rem">
+          <span><i style="background:#2dd4bf"></i>Bucket of Doom</span>
+          <span><i style="background:#5aa6d8"></i>Pond → fish</span>
+          <span><i style="background:#f5b942"></i>Trough → dunk</span>
+          <span><i style="background:#7c6dd8"></i>Predator habitat</span>
+          <span><i style="background:#252336;border:1px solid #3a3850"></i>Structure</span>
+        </div>
+      </figure>
+
+      <h3>Reimagine Ranch — 23 acres</h3>
+      <figure>
+        <svg class="dgram" viewBox="0 0 760 440" role="img" aria-label="Schematic deployment map of the 23-acre Reimagine Ranch parcel showing a ~3-acre core with a larger cluster of buckets near the camp, compost latrine and garden, a stock tank with fish, a barn with troughs, and predator habitat across the back acreage.">
+          <rect x="24" y="24" width="632" height="392" rx="18" fill="rgba(0,194,168,.04)" stroke="#312f44"/>
+          <text x="44" y="52" fill="#6e6b85" font-size="12">Reimagine Ranch · ~23 acres · Austin TX</text>
+          <!-- wind -->
+          <path d="M608 66 q-34 16 -64 40" fill="none" stroke="#6e6b85" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <path d="M544 106 l10 -3 l-3 10 z" fill="#6e6b85"/>
+          <text x="614" y="60" fill="#a09db5" font-size="11" text-anchor="end">prevailing SE breeze</text>
+
+          <!-- Z1 core ~3 ac -->
+          <rect x="54" y="138" width="320" height="250" rx="14" fill="rgba(0,194,168,.10)" stroke="#00c2a8" stroke-width="1.4" stroke-dasharray="6 4"/>
+          <text x="66" y="160" fill="#2dd4bf" font-size="11">Z1 · camp / build core ~3 ac</text>
+          <!-- structures -->
+          <rect x="72" y="172" width="44" height="26" rx="4" fill="#252336" stroke="#3a3850"/>
+          <text x="94" y="189" fill="#a09db5" font-size="9" text-anchor="middle">camp</text>
+          <rect x="132" y="172" width="60" height="26" rx="4" fill="#252336" stroke="#3a3850"/>
+          <text x="162" y="189" fill="#a09db5" font-size="9" text-anchor="middle">latrine</text>
+          <rect x="208" y="172" width="56" height="26" rx="4" fill="#252336" stroke="#3a3850"/>
+          <text x="236" y="189" fill="#a09db5" font-size="9" text-anchor="middle">garden</text>
+          <!-- bucket dots ~15 grid -->
+          <g fill="#2dd4bf" stroke="#0a0913" stroke-width="1">
+            <circle cx="80" cy="240" r="6"/><circle cx="138" cy="236" r="6"/><circle cx="196" cy="240" r="6"/><circle cx="254" cy="236" r="6"/><circle cx="312" cy="242" r="6"/>
+            <circle cx="86" cy="292" r="6"/><circle cx="144" cy="296" r="6"/><circle cx="202" cy="290" r="6"/><circle cx="260" cy="296" r="6"/><circle cx="318" cy="292" r="6"/>
+            <circle cx="94" cy="344" r="6"/><circle cx="150" cy="348" r="6"/><circle cx="208" cy="342" r="6"/><circle cx="266" cy="348" r="6"/><circle cx="322" cy="344" r="6"/>
+          </g>
+          <text x="214" y="378" fill="#6e6b85" font-size="10" text-anchor="middle">12–18 buckets · ~30–50 ft apart · &gt;80% coverage</text>
+
+          <!-- Z2 stock tank -->
+          <ellipse cx="520" cy="300" rx="98" ry="58" fill="rgba(90,166,216,.22)" stroke="#5aa6d8" stroke-width="1.4"/>
+          <g fill="#9cc8ea"><ellipse cx="498" cy="292" rx="9" ry="3.5"/><path d="M489 292 l-7 -4 l0 8 z"/></g>
+          <g fill="#9cc8ea"><ellipse cx="542" cy="306" rx="9" ry="3.5"/><path d="M533 306 l-7 -4 l0 8 z"/></g>
+          <g fill="#9cc8ea"><ellipse cx="516" cy="320" rx="8" ry="3"/><path d="M508 320 l-6 -3 l0 6 z"/></g>
+          <text x="520" y="372" fill="#9cc8ea" font-size="10" text-anchor="middle">stock tank → fish (native Gambusia)</text>
+
+          <!-- Z2 barn + troughs -->
+          <path d="M452 132 l30 -16 l30 16 v44 h-60 z" fill="rgba(245,185,66,.10)" stroke="#f5b942" stroke-width="1.3"/>
+          <text x="482" y="160" fill="#f5b942" font-size="10" text-anchor="middle">barn</text>
+          <rect x="524" y="150" width="40" height="18" rx="4" fill="rgba(245,185,66,.16)" stroke="#f5b942"/>
+          <rect x="524" y="174" width="40" height="18" rx="4" fill="rgba(245,185,66,.16)" stroke="#f5b942"/>
+          <text x="586" y="166" fill="#f5b942" font-size="10">animals →</text>
+          <text x="586" y="182" fill="#f5b942" font-size="10">dunk troughs</text>
+
+          <!-- Z3 predators -->
+          <path d="M408 392 l13 -11 l13 11 z" fill="rgba(124,109,216,.25)" stroke="#7c6dd8"/>
+          <rect x="414" y="392" width="13" height="12" fill="rgba(124,109,216,.2)" stroke="#7c6dd8"/>
+          <path d="M598 392 l13 -11 l13 11 z" fill="rgba(124,109,216,.25)" stroke="#7c6dd8"/>
+          <rect x="604" y="392" width="13" height="12" fill="rgba(124,109,216,.2)" stroke="#7c6dd8"/>
+          <text x="430" y="110" fill="#b3a6f0" font-size="11">Z3 · back acreage = walks + predators</text>
+        </svg>
+        <figcaption>The bigger ~3-acre core carries <strong>12–18 buckets</strong> around camp, the
+          compost latrine, and the garden; the stock tank is stocked with fish; the barn's troughs
+          each take a dunk; the broad back acreage is held by source-reduction walks and predator
+          habitat — no buckets.</figcaption>
+        <div class="legend" style="padding:0 1.2rem 1rem">
+          <span><i style="background:#2dd4bf"></i>Bucket of Doom</span>
+          <span><i style="background:#5aa6d8"></i>Stock tank → fish</span>
+          <span><i style="background:#f5b942"></i>Trough → dunk</span>
+          <span><i style="background:#7c6dd8"></i>Predator habitat</span>
+          <span><i style="background:#252336;border:1px solid #3a3850"></i>Structure</span>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section id="toomany">
+    <div class="wrap">
+      <div class="sec-eyebrow">04 · Can you make too many?</div>
+      <h2>More is better — until it suddenly isn't.</h2>
+      <p>Yes, you can make too many — but the ceiling isn't the trap count, it's three other limits.
+        Inside the active zone, denser is genuinely better, because efficacy has a
+        <strong>coverage cliff</strong>, not a smooth gradient.</p>
+      <div class="verdict">
+        <div class="lbl">The verdict</div>
+        <p class="big">More buckets help <strong>only inside the core zone</strong>, <strong>only up
+          to your maintenance capacity</strong>, and <strong>only above a ~30–50 ft spacing
+          floor.</strong> Past any of those three, extra buckets add breeding risk, not control.</p>
+      </div>
+      <table class="tbl">
+        <thead><tr><th>Limit</th><th>What happens past it</th><th>The rule</th></tr></thead>
+        <tbody>
+          <tr><td>Coverage cliff</td><td>Below ~80% coverage of the use area, efficacy collapses; above it, suppression jumps (AGO field data: ~3 traps/structure → ~77% knockdown)</td><td>Saturate the core to &gt;80% — this is where "more" pays</td></tr>
+          <tr><td>Maintenance ceiling</td><td>Any bucket you can't re-dunk every 30 days <strong>inverts into a breeder</strong> — net-negative, worse than no bucket</td><td>Never deploy more than you can reliably tend monthly</td></tr>
+          <tr><td>Spacing floor</td><td>Buckets &lt;~30 ft apart compete for the same females — wasted units, no extra catch</td><td>Space ~30–50 ft; spread to cover, don't pile up</td></tr>
+          <tr><td>Wrong zone</td><td>Buckets in the empty back acreage do nothing — no one's being bitten there, and they can't out-compete a whole creek margin</td><td>Concentrate in the core; the back is Zone 3 work</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+        <p><strong>The discipline is the whole system.</strong> Ten well-tended buckets beat thirty
+          neglected ones — and the thirty neglected ones can make the problem <em>worse</em>. Size the
+          fleet to the labor you can guarantee, not to the acreage you own.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tactics">
+    <div class="wrap">
+      <div class="sec-eyebrow">05 · Deployment tactics</div>
+      <h2>How to place and run a fleet.</h2>
+      <ol class="dec">
+        <li><strong>Site each bucket in dappled shade, 30–50 ft from where people sleep or sit, and
+          downwind of them.</strong> You're building an attractant — pull mosquitoes <em>away</em>
+          from the patio, not toward it. Near the compost/garden edge is ideal.</li>
+        <li><strong>Space for coverage, not for tidiness.</strong> ~30–50 ft apart, spread to blanket
+          &gt;80% of the core. Even coverage beats clustering.</li>
+        <li><strong>Ferment 5–7 days before arming, then let it age.</strong> Fill 3/4, add a cup of
+          clippings + a handful of leaves, wait for the swampy smell, then drop in ½ a dunk. Top up
+          toward the 2–4 week <em>Culex</em> window — don't reset clean.</li>
+        <li><strong>Treat the water you already have.</strong> One dunk per animal trough and rain
+          barrel (safe for livestock to drink); stock ponds/tanks with fish; drain or screen the
+          rest.</li>
+        <li><strong>Label every bucket with its install date</strong> (paint pen or a zip-tied tag).
+          The fleet is only as good as the date you can read on it.</li>
+        <li><strong>Run a synchronized "dunk Sunday."</strong> Everyone refreshes on the same monthly
+          cadence. One lapsed bucket can re-seed the whole core — shared timing is the safeguard.</li>
+      </ol>
+      <table class="tbl">
+        <thead><tr><th>Parameter</th><th>Setting</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Container</td><td>Black 5-gal HDPE, open ~28 cm mouth, deep fill</td><td>Vision cue + depth attraction; matches CDC AGO-B</td></tr>
+          <tr><td>Bait</td><td>~1 cup grass + handful leaves, aged 2–4 wk</td><td>Scent engine; aged brew suits local <em>Culex</em></td></tr>
+          <tr><td>Larvicide</td><td>½ Summit Bti dunk</td><td>Organic-rich water; label allows up to 4× clean-water rate</td></tr>
+          <tr><td>Spacing</td><td>~30–50 ft, &gt;80% core coverage</td><td>Above the competition floor, below the coverage cliff</td></tr>
+          <tr><td>Siting</td><td>Dappled shade, downwind, 30–50 ft off seating</td><td>Draws bites away from people; slows evaporation</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="sustain">
+    <div class="wrap">
+      <div class="sec-eyebrow">06 · Sustainability procedures</div>
+      <h2>Keeping it regenerative, not feral.</h2>
+      <p>A Bucket of Doom is sustainable only as a tended system. Left alone it becomes the exact
+        thing it's meant to kill. These procedures keep it net-positive for the land.</p>
+      <div class="cards">
+        <div class="card">
+          <span class="tag teal">Monthly</span>
+          <h4>30-day Bti refresh</h4>
+          <p>Replace ½ dunk every 30 days; top up water every ~2 weeks (rain covers most). The
+            calendar reminder <em>is</em> the safety mechanism.</p>
+        </div>
+        <div class="card">
+          <span class="tag gold">Weekly</span>
+          <h4>Source-reduction walk</h4>
+          <p>Empty anything holding water &gt;5 days — saucers, tarps, toys, gutters, hoofprints. The
+            highest-ROI hour on the land; the bucket only mops up what's left.</p>
+        </div>
+        <div class="card">
+          <span class="tag purple">Standing</span>
+          <h4>Predator habitat</h4>
+          <p>Dragonfly perches by every water body, south-faced bat houses, frog/toad cover, pond
+            fish. Free, compounding control that scales to the whole acreage.</p>
+        </div>
+        <div class="card">
+          <span class="tag water">End of season</span>
+          <h4>Compost the brew</h4>
+          <p>Pour spent buckets onto the compost pile or under a fruit tree — nitrogen-rich, Bti
+            breaks down in soil in days, harmless to plants. Rinse, store dry.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v18M5 10l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p><strong>The regenerative loop.</strong> Grass clippings in → mosquito larvae killed →
+          nitrogen-rich brew out to the soil. Nothing is purchased that doesn't break back down, and
+          the Bti stays contained to the trap instead of drifting into amphibian water.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="design">
+    <div class="wrap">
+      <div class="sec-eyebrow">07 · Design &amp; disguise</div>
+      <h2>Beautiful enough for the land.</h2>
+      <p>The trap wants to be a black, dark-watered, still bucket; a healing land and gathering spaces want
+        it to look intentional. Those barely conflict — a mosquito only judges the water at the mouth
+        (<strong>dark · open · still</strong>, and deep), so the whole exterior and base are ours to make
+        lovely. <strong>Dress the outside; never touch the inside.</strong></p>
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-4.35-9.5-8.5C1 9 3 5.5 6.5 5.5c2 0 3.5 1.5 5.5 4 2-2.5 3.5-4 5.5-4C21 5.5 23 9 21.5 12.5 19 16.65 12 21 12 21Z" stroke-linejoin="round"/></svg>
+        <p>Skirt the base with foliage (it hides the vessel, adds shade, and feeds the dragonflies), disguise
+          it as a planted container pond, and at night use warm amber light on the <em>vessel</em>, never the
+          water. <strong>One trap to avoid: fountains/bubblers</strong> — moving water turns the trap off.
+          → <a href="styles/index.html"><strong>See the eight-style design gallery ↗</strong></a> (cedar,
+          corten, gabion, willow, planted urn, living mound, Mystic Hearts mosaic, and a night variant).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="numbers">
+    <div class="wrap">
+      <div class="sec-eyebrow">08 · Per-parcel summary</div>
+      <h2>The numbers, side by side.</h2>
+      <table class="tbl">
+        <thead><tr><th>&nbsp;</th><th>Mystic Hearts</th><th>Reimagine Ranch</th></tr></thead>
+        <tbody>
+          <tr><td>Total land</td><td>~9 acres</td><td>~23 acres</td></tr>
+          <tr><td>Active core (Z1)</td><td>~2 acres</td><td>~3 acres</td></tr>
+          <tr><td>Buckets in core</td><td>8–12</td><td>12–18</td></tr>
+          <tr><td>Spacing</td><td>~30–50 ft, &gt;80% coverage</td><td>~30–50 ft, &gt;80% coverage</td></tr>
+          <tr><td>Water (Z2)</td><td>Dunk troughs · stock pond</td><td>Dunk barn troughs · stock tank</td></tr>
+          <tr><td>Back land (Z3)</td><td>Walk + predators</td><td>Walk + predators (large)</td></tr>
+          <tr><td>Monthly Bti</td><td>~5–6 half-dunks</td><td>~7–9 half-dunks</td></tr>
+        </tbody>
+      </table>
+      <p class="rec" style="margin-top:1.2rem">Start at the low end of each range, run one full
+        season, and add buckets only where bite-pressure surveys justify it — never beyond the labor
+        you can guarantee for monthly refresh.</p>
+    </div>
+  </section>
+
+  <section id="open">
+    <div class="wrap">
+      <div class="sec-eyebrow">09 · Inputs that tighten the plan</div>
+      <h2>Open items.</h2>
+      <ol class="dec">
+        <li><strong>Exact core locations</strong> — where people and animals actually cluster on each parcel fixes the Z1 footprint and the final bucket count.</li>
+        <li><strong>Water inventory</strong> — number and surface acres of ponds/tanks/troughs sets fish stocking and dunk counts for Zone 2.</li>
+        <li><strong>Animals on site</strong> — species and trough locations; livestock raise local <em>Culex</em> pressure and their water is the biggest single source.</li>
+        <li><strong>Maintenance crew</strong> — who owns "dunk Sunday"? The honest monthly labor ceiling caps the fleet size, per §04.</li>
+        <li><strong>Kit vs. DIY</strong> — a distributed HAND kit (black bucket + funnel + screen + dunks + a dated tag + this one-pager) could standardize both parcels and any future Reciprocate land.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>HAND Land Health · Bucket of Doom — internal deployment report · HAND Protocol</p>
+      <p style="margin-top:.4rem">Source research: <code>mosquitos/MATERIALS-RESEARCH.md</code> ·
+        Plan: <code>mosquitos/PLAN.md</code> ·
+        <a href="mailto:hand@handprotocol.org">hand@handprotocol.org</a></p>
+    </div>
+  </footer>
+</body>
+</html>

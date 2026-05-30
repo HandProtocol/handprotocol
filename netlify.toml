@@ -152,6 +152,22 @@
   to = "/reimagineranch/compost-latrine/"
   status = 301
 
+# Land health — mosquito Bucket-of-Doom deployment report (internal, not yet public)
+[[redirects]]
+  from = "/mosquitos"
+  to = "/mosquitos/"
+  status = 301
+
+[[redirects]]
+  from = "/bucket-of-doom"
+  to = "/mosquitos/"
+  status = 301
+
+[[redirects]]
+  from = "/bucket-styles"
+  to = "/mosquitos/styles/"
+  status = 301
+
 [[redirects]]
   from = "/ai"
   to = "/sovereign-reciprocates/"
