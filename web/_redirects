@@ -43,5 +43,10 @@
 /mystichearts           /mystichearts/brief/                   301
 /brief                  /mystichearts/brief/                   301
 
+# Land health — mosquito Bucket-of-Doom (internal, noindex)
+/mosquitos              /mosquitos/                            301
+/bucket-of-doom         /mosquitos/                            301
+/bucket-styles          /mosquitos/styles/                     301
+
 # 404 fallback — branded compass page with radial sitemap (keep last; matches anything else)
 /*                      /404.html                              404
