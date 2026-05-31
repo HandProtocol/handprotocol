@@ -21,9 +21,12 @@ FT = 0.3048
 HERE = os.path.dirname(os.path.abspath(__file__))
 RENDER_DIR = os.path.join(HERE, "renders")
 os.makedirs(RENDER_DIR, exist_ok=True)
-BLEND_PATH = os.path.join(HERE, "hex_toilet.blend")
-RENDER_PATH = os.path.join(RENDER_DIR, "hex_toilet_iso.png")
 DO_RENDER = "--no-render" not in sys.argv
+NIGHT = "--night" in sys.argv               # night-beacon mode (glowing oculus + lantern)
+SUF = "_night" if NIGHT else ""
+BLEND_PATH = os.path.join(HERE, f"hex_toilet{SUF}.blend")
+RENDER_PATH = os.path.join(RENDER_DIR, f"hex_toilet{SUF}_iso.png")
+TWIST = math.radians(26)                    # total roof vortex twist (eave -> oculus)
 
 PANEL = dict(W=3.0, H=7.0, DEP=0.18, POST_W=0.30, RAIL_T=0.30, HORN=0.0,
              SILL_T=0.16, LOUVER_BW=0.30, LOUVER_TH=0.045,
@@ -153,9 +156,26 @@ try:
     M_NET.node_tree.nodes["Principled BSDF"].inputs["Alpha"].default_value = 0.40
 except Exception:
     pass
+M_COPPER = mat("Copper", (0.62, 0.34, 0.17), rough=0.32, metallic=0.95)
+M_CHARRED = mat("CharredCedar", (0.06, 0.055, 0.05), rough=0.8)
+M_SOLAR = mat("SolarPV", (0.04, 0.06, 0.14), rough=0.15, metallic=0.6)
+M_GLASS = mat("OculusGlass", (0.55, 0.72, 0.85), rough=0.05, metallic=0.2)
+M_GLOW = mat("Glow", (1.0, 0.74, 0.34), rough=0.5)
+for _m, _alpha in ((M_GLASS, 0.35),):
+    try:
+        _m.node_tree.nodes["Principled BSDF"].inputs["Alpha"].default_value = _alpha
+    except Exception:
+        pass
+try:  # the oculus glow ring (and a warm interior) carry the night beacon
+    _b = M_GLOW.node_tree.nodes["Principled BSDF"]
+    _b.inputs["Emission Color"].default_value = (1.0, 0.72, 0.32, 1.0)
+    _b.inputs["Emission Strength"].default_value = 16.0 if NIGHT else 3.5
+except Exception:
+    pass
 
 
-def build_panel(objs):
+def build_panel(objs, louver_mat=None):
+    lm = louver_mat or M_LOUVER
     P = PANEL
     W, H, DEP, PW = P["W"], P["H"], P["DEP"], P["POST_W"]
     y0, y1 = 0.0, DEP
@@ -172,7 +192,7 @@ def build_panel(objs):
     xx, i = bx0+0.10, 0
     while xx <= bx1-0.05:
         box_local(f"VentSlat_{i}", (xx, yc-0.065, vent_lo+0.02), (xx+0.14, yc+0.065, vent_hi-0.02),
-                  M_LOUVER, objs, rot_x=15.0)
+                  lm, objs, rot_x=15.0)
         xx += 0.30
         i += 1
     bw, th = P["LOUVER_BW"], P["LOUVER_TH"]
@@ -180,7 +200,7 @@ def build_panel(objs):
     z, i = field_lo + bw/2, 0
     while z <= field_hi:
         box_local(f"Louver_{i}", (bx0, yc-bw/2, z-th/2), (bx1, yc+bw/2, z+th/2),
-                  M_LOUVER, objs, rot_x=P["LOUVER_RAKE"])
+                  lm, objs, rot_x=P["LOUVER_RAKE"])
         z += P["LOUVER_PITCH"]
         i += 1
     box_local("Net", (bx0-0.05, -0.15, field_lo-0.05), (bx1+0.05, -0.13, vent_hi+0.05), M_NET, objs)
@@ -242,33 +262,73 @@ def build_toroidal_hex_roof():
     H = HEX
     ang = [math.radians(-120 + 60*j) for j in range(6)]   # the 6 hexagon vertices
 
-    def ring(rad, z):
-        return [(rad*math.cos(a), rad*math.sin(a), z) for a in ang]
+    def ring(rad, z, tw=0.0):
+        return [(rad*math.cos(a+tw), rad*math.sin(a+tw), z) for a in ang]
 
     Rv_e, z_e, Rv_o, z_o, C = H["ROOF_EAVE_R"], H["ROOF_EAVE_Z"], H["OCULUS_R"], H["OCULUS_Z"], H["ROOF_COURSES"]
-    rings = [ring(Rv_e + 0.30, z_e - 0.20)]               # flared eave lip (stays above the 7 ft door)
+    rings = [ring(Rv_e + 0.30, z_e - 0.20, 0.0)]          # flared eave lip (stays above the 7 ft door)
     for i in range(C + 1):
         t = i / C
         rad = Rv_e + (Rv_o - Rv_e) * t
         z = z_e + (z_o - z_e) * (t ** 1.6)                # concave rise = vortex throat
-        rings.append(ring(rad, z))
+        rings.append(ring(rad, z, TWIST * t))             # VORTEX: each course twists toward the throat
     objs = []
     for i in range(len(rings) - 1):
         A, B = rings[i], rings[i+1]
         for j in range(6):
             k = (j + 1) % 6
             quad_slab(f"RoofF_{i}_{j}", A[j], A[k], B[k], B[j], 0.12, M_METAL, objs)
-    # oculus rim (low vertical hex band around the open throat)
+    # solar PV collar — a low dark-blue band just outside the throat (powers the night ring)
+    pv = rings[-2]
+    for j in range(6):
+        k = (j + 1) % 6
+        quad_slab(f"PV_{j}", pv[j], pv[k], (pv[k][0]*0.7, pv[k][1]*0.7, pv[k][2]+0.18),
+                  (pv[j][0]*0.7, pv[j][1]*0.7, pv[j][2]+0.18), 0.04, M_SOLAR, objs)
+    # oculus rim (copper band around the open throat)
     top = rings[-1]
     for j in range(6):
         k = (j + 1) % 6
         quad_slab(f"OcRim_{j}", top[j], top[k],
                   (top[k][0], top[k][1], top[k][2]+0.30), (top[j][0], top[j][1], top[j][2]+0.30),
-                  0.05, M_FRAME, objs)
+                  0.05, M_COPPER, objs)
+    build_oculus_crown(Rv_o, z_o, TWIST)
+
+
+def build_oculus_crown(rv_o, z_o, tw):
+    """Copper finial ring + Flower-of-Life glass cap + a glow ring (the night beacon)."""
+    cz = z_o + 0.32
+    # glass cap (hex disc) over the throat
+    g = cyl_z("OculusGlass", 0.0, 0.0, cz, cz + 0.06, rv_o*0.95, M_GLASS, [], verts=6)
+    g.rotation_euler = (0, 0, tw)
+    # copper finial ring above the cap
+    bpy.ops.mesh.primitive_torus_add(major_radius=rv_o*0.8*FT, minor_radius=0.06*FT,
+                                     location=(0, 0, (cz+0.16)*FT))
+    bpy.context.active_object.name = "Finial"
+    bpy.context.active_object.data.materials.append(M_COPPER)
+    # Seed of Life — 7 small copper rings on the cap
+    sr = rv_o*0.40
+    for jj in range(7):
+        if jj == 0:
+            ox, oy = 0.0, 0.0
+        else:
+            aa = math.radians(60*(jj-1))
+            ox, oy = sr*math.cos(aa), sr*math.sin(aa)
+        bpy.ops.mesh.primitive_torus_add(major_radius=sr*FT, minor_radius=0.018*FT,
+                                         location=(ox*FT, oy*FT, (cz+0.085)*FT))
+        bpy.context.active_object.name = f"Seed_{jj}"
+        bpy.context.active_object.data.materials.append(M_COPPER)
+    # glow ring at the rim — the portal beacon (emissive; blazes at night)
+    bpy.ops.mesh.primitive_torus_add(major_radius=rv_o*0.78*FT, minor_radius=0.05*FT,
+                                     location=(0, 0, (z_o+0.16)*FT))
+    bpy.context.active_object.name = "GlowRing"
+    bpy.context.active_object.data.materials.append(M_GLOW)
 
 
 # ── Build the hexagon of walls ──────────────────────────────────────────────────────
+# CHARRED-cedar accents: alternate charred / natural louver panels in a Flower-of-Life
+# rhythm (door stays natural so the branding reads).
 Rv = HEX["SIDE"]
+lcount = 0
 for k, role in enumerate(ROLES):
     th = -90 + 60*k
     a0, a1 = math.radians(th - 30), math.radians(th + 30)
@@ -276,14 +336,16 @@ for k, role in enumerate(ROLES):
     ve = (Rv*math.cos(a1), Rv*math.sin(a1))
     edge_dir = math.degrees(math.atan2(ve[1]-vs[1], ve[0]-vs[0]))
     if role == "louver":
+        lm = M_CHARRED if (lcount % 2 == 1) else M_LOUVER
+        lcount += 1
         P = []
-        build_panel(P)
+        build_panel(P, louver_mat=lm)
         place(P, T(vs[0], vs[1], edge_dir))
     elif role == "metal":
         build_metal_wall(vs[0], vs[1], ve[0], ve[1], HEX["BOW"], HEX["METAL_H"])
     elif role == "door":
         D = []
-        build_panel(D)
+        build_panel(D, louver_mat=M_LOUVER)
         build_door_branding(D)
         place(D, T(vs[0], vs[1], edge_dir - HEX["DOOR_AJAR"]))
         for hz in (0.8, 3.4, 6.2):
@@ -291,6 +353,19 @@ for k, role in enumerate(ROLES):
 
 # Metal corner connectors conjoin the wood panels + carry the roof
 build_corner_connectors(HEX["ROOF_EAVE_Z"])
+
+# ── Raised hex platform + front step + a wrap bench (lift it into a little temple) ───
+_plat_r = HEX["SIDE"] + 0.9
+bpy.ops.mesh.primitive_cylinder_add(vertices=6, radius=_plat_r*FT, depth=0.5*FT, location=(0, 0, -0.20*FT))
+_pf = bpy.context.active_object
+_pf.name = "Platform"
+_pf.data.materials.append(M_FRAME)
+box_local("Step", (-1.3, -4.5, -0.45), (1.3, -3.4, 0.12), M_FRAME, [])     # front step at the door
+# wrap bench on the two back-side edges (a cedar ledge on charred legs)
+for _bx in (-2.5, 2.5):
+    box_local(f"BenchTop_{int(_bx)}", (_bx-0.55, 1.6, 1.28), (_bx+0.55, 3.0, 1.42), M_FRAME, [])
+    box_local(f"BenchLeg_{int(_bx)}a", (_bx-0.5, 1.7, 0.05), (_bx-0.38, 1.9, 1.28), M_CHARRED, [])
+    box_local(f"BenchLeg_{int(_bx)}b", (_bx+0.38, 2.7, 0.05), (_bx+0.5, 2.9, 1.28), M_CHARRED, [])
 
 # Toroidal hex roof + central oculus vent (the torus axis = the compost updraft)
 build_toroidal_hex_roof()
@@ -312,9 +387,13 @@ out = wn.nodes.new("ShaderNodeOutputWorld")
 grad = wn.nodes.new("ShaderNodeTexGradient")
 ramp = wn.nodes.new("ShaderNodeValToRGB")
 ramp.color_ramp.elements[0].position = 0.35
-ramp.color_ramp.elements[0].color = (0.60, 0.65, 0.54, 1.0)
 ramp.color_ramp.elements[1].position = 0.9
-ramp.color_ramp.elements[1].color = (0.36, 0.50, 0.62, 1.0)
+if NIGHT:                                    # dusk sky for the night beacon
+    ramp.color_ramp.elements[0].color = (0.03, 0.04, 0.08, 1.0)
+    ramp.color_ramp.elements[1].color = (0.02, 0.02, 0.05, 1.0)
+else:
+    ramp.color_ramp.elements[0].color = (0.60, 0.65, 0.54, 1.0)
+    ramp.color_ramp.elements[1].color = (0.36, 0.50, 0.62, 1.0)
 tex = wn.nodes.new("ShaderNodeTexCoord")
 mp = wn.nodes.new("ShaderNodeMapping")
 mp.inputs["Rotation"].default_value = (math.radians(90), 0, 0)
@@ -322,15 +401,24 @@ wn.links.new(tex.outputs["Generated"], mp.inputs["Vector"])
 wn.links.new(mp.outputs["Vector"], grad.inputs["Vector"])
 wn.links.new(grad.outputs["Color"], ramp.inputs["Fac"])
 wn.links.new(ramp.outputs["Color"], bg.inputs["Color"])
-bg.inputs["Strength"].default_value = 1.1
+bg.inputs["Strength"].default_value = 0.10 if NIGHT else 1.1
 wn.links.new(bg.outputs["Background"], out.inputs["Surface"])
 
 sun_d = bpy.data.lights.new("Sun", type="SUN")
-sun_d.energy = 3.0
+sun_d.energy = 0.12 if NIGHT else 3.0        # moonlight vs daylight
 sun_d.angle = math.radians(2.5)
 sun = bpy.data.objects.new("Sun", sun_d)
 bpy.context.collection.objects.link(sun)
-sun.rotation_euler = (math.radians(55), math.radians(12), math.radians(-46))
+sun.rotation_euler = (math.radians(62), math.radians(8), math.radians(-46))
+
+# Warm interior light — washes out by day, but at NIGHT it leaks through the louver gaps
+# and up the oculus: the stall becomes a lantern / the oculus a glowing portal.
+il = bpy.data.lights.new("Interior", type="POINT")
+il.energy = (2600 if NIGHT else 240)
+il.color = (1.0, 0.72, 0.42)
+ilo = bpy.data.objects.new("Interior", il)
+bpy.context.collection.objects.link(ilo)
+ilo.location = (0, 0.4*FT, 3.4*FT)
 
 # ── Camera ──────────────────────────────────────────────────────────────────────────
 target = bpy.data.objects.new("CamTarget", None)
