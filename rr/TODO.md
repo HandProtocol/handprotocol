@@ -22,6 +22,15 @@ items below are **future work — captured, not yet started.**
 
 ---
 
+## QUEUED — Hexagon platform (multi-stall) — start AFTER the single hex stall is final
+
+- [ ] New file that turns the 3-wall stall design into a **hexagon platform** — multiple
+  toilet/shower stalls arranged around (or sharing) a hexagonal platform/footprint, reusing
+  the hex_toilet.py panel/metal/toroidal-roof builders. Begin once the single hexagonal
+  composting-toilet stall (`rr/blender/hex_toilet.py`) is locked.
+
+---
+
 ## NEXT UP — Louvered cedar wall panel (from reference photo)
 
 - [ ] Recreate the **framed horizontal-louver wall** (reference photo, 2026-05-30): a full-height
