@@ -2,9 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import { ArrowLeft, Star, Phone, MapPin, Globe } from "lucide-react";
-import { getBizLeadBySlug, listTouchpoints } from "@/lib/develop/queries";
+import {
+  getBizLeadBySlug,
+  listTouchpoints,
+  listPitchResponses,
+} from "@/lib/develop/queries";
 import { BizStatusChip } from "@/components/develop/status-chip";
 import { GeneratePanel } from "@/components/develop/generate-panel";
+import { PitchPanel } from "@/components/develop/pitch-panel";
 import { TouchpointForm } from "@/components/develop/touchpoint-form";
 
 export const dynamic = "force-dynamic";
@@ -28,6 +33,7 @@ export default async function BizLeadDetailPage({
 
   const reviews = lead.reviews ?? [];
   const touchpoints = await listTouchpoints(lead.id);
+  const pitchResponses = await listPitchResponses(lead.id);
 
   return (
     <div className="space-y-6">
@@ -100,6 +106,72 @@ export default async function BizLeadDetailPage({
           hasReviews={reviews.length > 0}
         />
       </section>
+
+      {/* Pitch page generator + preview */}
+      <section className="space-y-3">
+        <p className="display-eyebrow">PITCH PAGE · HAND-OFF</p>
+        <PitchPanel slug={lead.slug} initialPitchUrl={null} />
+      </section>
+
+      {/* Pitch follow-up responses captured on the public pitch page */}
+      {pitchResponses.length > 0 && (
+        <section className="space-y-3">
+          <p className="display-eyebrow">
+            CALL RESULTS · <span className="amber">{pitchResponses.length}</span>
+          </p>
+          <ul className="space-y-2">
+            {pitchResponses.map((p) => (
+              <li key={p.id} className="panel p-3 text-sm space-y-1">
+                <div className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em]">
+                  {p.outcome && (
+                    <span className="text-[var(--amber-soft)]">{p.outcome}</span>
+                  )}
+                  {p.interest && (
+                    <span
+                      className={
+                        p.interest === "interested"
+                          ? "text-[#86efac]"
+                          : p.interest === "not_interested"
+                            ? "text-[var(--ink-faint)]"
+                            : "text-[#fbbf24]"
+                      }
+                    >
+                      · {p.interest}
+                    </span>
+                  )}
+                  <span className="text-[var(--ink-faint)]">
+                    · {format(new Date(p.created_at), "MMM d, h:mma")}
+                  </span>
+                  {p.caller && (
+                    <span className="text-[var(--ink-faint)]">· {p.caller}</span>
+                  )}
+                </div>
+                {(p.budget_band || p.timeline || p.best_contact || p.callback_at) && (
+                  <p className="text-[var(--ink-dim)] text-xs">
+                    {[
+                      p.budget_band && `Budget: ${p.budget_band}`,
+                      p.timeline && `Timeline: ${p.timeline}`,
+                      p.best_contact && `Contact: ${p.best_contact}`,
+                      p.callback_at && `Callback: ${p.callback_at}`,
+                    ]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </p>
+                )}
+                {p.objections && (
+                  <p className="text-[var(--ink)]">
+                    <span className="text-[var(--ink-faint)]">Pushback: </span>
+                    {p.objections}
+                  </p>
+                )}
+                {p.other_info && (
+                  <p className="text-[var(--ink)]">{p.other_info}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Reviews */}

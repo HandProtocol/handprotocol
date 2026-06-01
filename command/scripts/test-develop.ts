@@ -17,8 +17,13 @@ import {
   buildSiteUserMessage,
   parseSiteCopy,
   buildFallbackCopy,
+  buildScriptSystemPrompt,
+  buildScriptUserMessage,
+  parsePitchScript,
+  buildFallbackScript,
 } from "../src/lib/develop/prompts";
 import { renderDemoSite } from "../src/lib/develop/site-template";
+import { renderPitchPage } from "../src/lib/develop/pitch-template";
 import { parseReviews } from "../src/lib/develop/markdown";
 import type { BizLead, BizReview, SiteCopy } from "../src/lib/develop/types";
 
@@ -119,7 +124,48 @@ async function main() {
   const html = renderDemoSite(lead, copy);
   const out = "/tmp/develop-test-site.html";
   fs.writeFileSync(out, html);
-  console.log(`\nRendered ${html.length} bytes -> ${out}`);
+  console.log(`\nRendered demo ${html.length} bytes -> ${out}`);
+
+  // ─── Pitch script + page ────────────────────────────────────────────────
+  const demoUrl = "/demos/joes-bbq-austin/";
+  let script;
+  let scriptSource = "fallback";
+  if (router.hasAnyProvider()) {
+    console.log("\nGenerating pitch script...");
+    try {
+      const r = await router.chat({
+        messages: [
+          { role: "system", content: buildScriptSystemPrompt() },
+          { role: "user", content: buildScriptUserMessage(lead, reviews, demoUrl) },
+        ],
+        temperature: 0.55,
+        maxTokens: 1200,
+      });
+      const parsed = parsePitchScript(r.text);
+      if (parsed) {
+        script = parsed;
+        scriptSource = "assistant";
+      } else {
+        console.log("  script parse failed, fallback. head:", r.text.slice(0, 200));
+        script = buildFallbackScript(lead, demoUrl);
+      }
+    } catch (err) {
+      console.log(`  script error: ${err instanceof Error ? err.message : err}`);
+      script = buildFallbackScript(lead, demoUrl);
+    }
+  } else {
+    script = buildFallbackScript(lead, demoUrl);
+  }
+
+  console.log(`SCRIPT SOURCE: ${scriptSource}`);
+  console.log(`opener: ${script.opener}`);
+  console.log(`hook:   ${script.hook}`);
+  console.log(`objections: ${script.objections.length}`);
+
+  const pitchHtml = renderPitchPage(lead, script, demoUrl);
+  const pitchOut = "/tmp/develop-test-pitch.html";
+  fs.writeFileSync(pitchOut, pitchHtml);
+  console.log(`Rendered pitch ${pitchHtml.length} bytes -> ${pitchOut}`);
 }
 
 main().catch((e) => {

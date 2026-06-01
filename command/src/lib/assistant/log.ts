@@ -40,7 +40,7 @@ function writeClient() {
 }
 
 export type LogAssistantRunInput = {
-  surface: "draft" | "rfp-extract" | "biz-site";
+  surface: "draft" | "rfp-extract" | "biz-site" | "biz-pitch";
   grantId?: string | null;
   provider: string;
   modelKey: string;

@@ -51,7 +51,8 @@ psql "postgresql://postgres:$SUPABASE_DB_PASSWORD@db.vconmgerblqbworcqkvr.supaba
   -f supabase/migrations/013_rls_policies.sql \
   -f supabase/migrations/014_inbox_items.sql \
   -f supabase/migrations/015_feedback_pins.sql \
-  -f supabase/migrations/016_biz_leads.sql
+  -f supabase/migrations/016_biz_leads.sql \
+  -f supabase/migrations/017_biz_pitch_responses.sql
 ```
 
 ## After applying

@@ -5,7 +5,12 @@
 */
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { createClient as createServerClient } from "@/lib/supabase/server";
-import type { BizLead, BizReview, BizTouchpoint } from "./types";
+import type {
+  BizLead,
+  BizReview,
+  BizTouchpoint,
+  PitchResponse,
+} from "./types";
 
 function adminClient() {
   return createSupabaseClient(
@@ -87,6 +92,22 @@ export async function listTouchpoints(
     .order("occurred_at", { ascending: false });
   if (error || !data) return [];
   return data as unknown as BizTouchpoint[];
+}
+
+export async function listPitchResponses(
+  leadId: string,
+): Promise<PitchResponse[]> {
+  const client = await readClient();
+  if (!client) return [];
+  const { data, error } = await client
+    .from("biz_pitch_responses")
+    .select(
+      "id, lead_id, lead_slug, outcome, interest, budget_band, timeline, objections, best_contact, callback_at, other_info, caller, created_at",
+    )
+    .eq("lead_id", leadId)
+    .order("created_at", { ascending: false });
+  if (error || !data) return [];
+  return data as unknown as PitchResponse[];
 }
 
 export async function getBizSlugs(): Promise<Set<string>> {

@@ -47,3 +47,16 @@ export function demoSitePath(slug: string): string {
 export function demoPublicUrl(slug: string): string {
   return `/demos/${slug}/`;
 }
+
+// The pitch page (password-gated) lives one level under the demo.
+export function demoPitchDir(slug: string): string {
+  return path.join(demoSiteDir(slug), "pitch");
+}
+
+export function demoPitchPath(slug: string): string {
+  return path.join(demoPitchDir(slug), "index.html");
+}
+
+export function pitchPublicUrl(slug: string): string {
+  return `/demos/${slug}/pitch/`;
+}

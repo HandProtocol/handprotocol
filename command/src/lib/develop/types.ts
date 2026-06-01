@@ -125,3 +125,31 @@ export type SiteCopy = {
   testimonials: { body: string; author: string | null }[];
   cta: string;
 };
+
+// The call script the pitch page renders. Generated from the business + its
+// reviews + the demo angle.
+export type PitchScript = {
+  opener: string;
+  hook: string;
+  walkthrough: string[];
+  offer: string;
+  objections: { q: string; a: string }[];
+  close: string;
+};
+
+// A follow-up answer captured on the pitch page (command.biz_pitch_responses).
+export type PitchResponse = {
+  id: string;
+  lead_id: string | null;
+  lead_slug: string;
+  outcome: string | null;
+  interest: string | null;
+  budget_band: string | null;
+  timeline: string | null;
+  objections: string | null;
+  best_contact: string | null;
+  callback_at: string | null;
+  other_info: string | null;
+  caller: string | null;
+  created_at: string;
+};
