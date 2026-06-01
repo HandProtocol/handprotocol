@@ -25,6 +25,16 @@
   function = "mystichearts-brief-auth"
   path = "/mystichearts/brief/*"
 
+# Business-outreach pitch pages (password-protected, see edge function).
+# The demo site /demos/<slug>/ stays public; only /pitch/ is gated.
+[[edge_functions]]
+  function = "demos-pitch-auth"
+  path = "/demos/:slug/pitch"
+
+[[edge_functions]]
+  function = "demos-pitch-auth"
+  path = "/demos/:slug/pitch/*"
+
 # Root redirects to foundation campaign (primary surface)
 [[redirects]]
   from = "/"

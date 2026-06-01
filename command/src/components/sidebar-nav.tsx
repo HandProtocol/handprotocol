@@ -17,6 +17,7 @@ import {
   Search,
   Crosshair,
   MapPin,
+  Building2,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -52,6 +53,7 @@ const navItems: NavItem[] = [
   { label: "Inbox", href: "/inbox", icon: Inbox, pillar: "H" },
   { label: "Funders", href: "/funders", icon: Users, pillar: "N" },
   { label: "Boilerplate", href: "/boilerplate", icon: BookOpen, pillar: "A" },
+  { label: "Develop", href: "/develop", icon: Building2, pillar: "D" },
   { label: "Deadlines", href: "/deadlines", icon: CalendarClock, pillar: "D" },
   { label: "Inspector", href: "/inspector", icon: Crosshair, pillar: "D" },
   { label: "Pins", href: "/pins", icon: MapPin, pillar: "D" },
