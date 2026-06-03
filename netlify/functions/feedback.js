@@ -1,6 +1,12 @@
-// Deck feedback handler. Receives anonymous-by-default feedback from
-// /deck and pins it into the same kanban the operator inspector uses,
-// so public notes and operator notes converge in one triage view.
+// Public feedback handler. Receives anonymous-by-default feedback from
+// /deck AND from any presentation page running /assets/feedback-widget.js
+// (mosquitos, airstream, governance, …) and pins it into the same kanban
+// the operator inspector uses, so public notes and operator notes
+// converge in one triage view.
+//
+// The optional `source` field labels provenance (e.g. "mosquitos",
+// "airstream studio"). It defaults to "deck" so the original /deck client
+// keeps working unchanged.
 //
 // Two side effects, both best-effort:
 //   1. Insert a row into command.feedback_pins (Supabase) so it shows
@@ -23,6 +29,7 @@
 const MAX_TEXT = 2000;
 const MAX_NAME = 80;
 const MAX_TAGS = 12;
+const MAX_SOURCE = 48;
 
 function json(statusCode, body) {
   return {
@@ -58,20 +65,21 @@ async function insertPin(payload) {
     return { ok: false, reason: 'supabase-unconfigured' };
   }
 
+  const source = payload.source || 'deck';
   const row = {
     page_url: payload.path,
     page_title: payload.title || null,
     // synthetic selector — public feedback is page-level, not element-level
-    selector_primary: 'deck:page',
+    selector_primary: `${source}:page`,
     selector_fallback: ['body'],
     element_tag: 'body',
     comment: payload.text,
     priority: 'normal',
     status: 'open',
-    author_name: payload.name || 'anonymous (deck)',
+    author_name: payload.name || `anonymous (${source})`,
     author_email: null,
     element_context: {
-      source: 'deck',
+      source,
       tags: payload.tags || [],
       scroll_pct: typeof payload.scroll === 'number' ? payload.scroll : null,
       viewport: { w: payload.vw || null, h: payload.vh || null },
@@ -121,9 +129,10 @@ async function notifyTelegram(payload, pin) {
   const author = payload.name || 'anon';
   const tagBadge = (payload.tags && payload.tags.length) ? ` · ${payload.tags.join(' ')}` : '';
   const link = pin && pin.id ? `${base}/pins?pin=${pin.id}` : `${base}/pins`;
+  const sourceLabel = payload.source ? `${payload.source} note` : 'Deck note';
 
   const lines = [
-    `<b>🪶 Deck note</b> · <code>${escapeHtml(payload.path)}</code>`,
+    `<b>🪶 ${escapeHtml(sourceLabel)}</b> · <code>${escapeHtml(payload.path)}</code>`,
     `${escapeHtml(summary)}`,
     `<i>${escapeHtml(author)}${escapeHtml(tagBadge)}</i>`,
     `<a href="${escapeHtml(link)}">Open in kanban</a>`,
@@ -181,11 +190,20 @@ exports.handler = async (event) => {
     return json(422, { field: 'path', error: 'Missing page path.' });
   }
 
+  // source labels provenance ("mosquitos", "airstream studio", …). Strip
+  // control chars / markup so it is safe to interpolate into selectors and
+  // the Telegram HTML message; empty → server defaults to "deck".
+  const source = truncate(
+    String(body.source || '').replace(/[<>\n\r]/g, '').trim(),
+    MAX_SOURCE,
+  );
+
   const normalized = {
     text: truncate(text, MAX_TEXT),
     path,
     title: truncate(String(body.title || '').trim(), 160),
     name: truncate(String(body.name || '').trim(), MAX_NAME),
+    source: source || null,
     tags: Array.isArray(body.tags) ? body.tags.slice(0, MAX_TAGS).map((t) => truncate(String(t), 32)) : [],
     scroll: typeof body.scroll === 'number' ? body.scroll : null,
     vw: Number.isFinite(body.vw) ? body.vw : null,
