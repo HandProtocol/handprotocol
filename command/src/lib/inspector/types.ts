@@ -81,13 +81,21 @@ export const INSPECTOR_PAGES: InspectorPage[] = [
   { path: "/sovereign-reciprocates/", label: "Sovereign Reciprocates", group: "Primary" },
   { path: "/donate-crypto/", label: "Donate (crypto)", group: "Primary" },
 
+  { path: "/fiscal/", label: "Fiscal", group: "Foundation" },
+  { path: "/fiscal/decision/", label: "Fiscal Sponsor Decision", group: "Foundation" },
+
   { path: "/mystichearts/airstreamstudio/", label: "Mystic Hearts — Airstream", group: "Mystic Hearts" },
+  { path: "/mystichearts/brief/", label: "Mystic Hearts — Brief", group: "Mystic Hearts" },
+
+  { path: "/mosquitos/", label: "Mosquitos — Bucket of Doom", group: "Land" },
+  { path: "/reimagineranch/compost-latrine/", label: "Reimagine Ranch — Compost Latrine", group: "Land" },
 
   { path: "/discovery/", label: "Discovery", group: "Research" },
   { path: "/discovery/impact-org-landscape.html", label: "Impact org landscape", group: "Research" },
   { path: "/discovery/skill-exchange-models.html", label: "Skill exchange models", group: "Research" },
   { path: "/discovery/skill-exchange-vision.html", label: "Skill exchange vision", group: "Research" },
 
+  { path: "/legacy/", label: "Legacy Archive", group: "Misc" },
   { path: "/404.html", label: "404 (parallax)", group: "Misc" },
 ];
 
