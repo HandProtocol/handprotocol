@@ -3,6 +3,7 @@ import { SidebarNav } from "@/components/sidebar-nav";
 import { MobileNav } from "@/components/mobile-nav";
 import { NotificationBell } from "@/components/notification-bell";
 import { Toaster } from "@/components/ui/sonner";
+import { CommandPalette } from "@/components/search/command-palette";
 
 /*
   Gated dashboard route group.
@@ -10,6 +11,9 @@ import { Toaster } from "@/components/ui/sonner";
   in a "preview" role so the scaffold is visible end-to-end without a live
   project. Real auth gating runs as soon as NEXT_PUBLIC_SUPABASE_URL is set
   and the proxy starts redirecting unauth'd traffic to /auth/login.
+
+  The CommandPalette mounts here so cmd+K opens it from any dashboard
+  route. The palette renders nothing until the operator triggers it.
 */
 
 export const dynamic = "force-dynamic";
@@ -46,6 +50,7 @@ export default async function DashboardLayout({
       <div className="hud-bracket hud-bracket-br" />
 
       <Toaster />
+      <CommandPalette />
 
       {/* Sidebar (desktop only) */}
       <aside className="sticky top-0 hidden h-screen w-72 flex-shrink-0 border-r border-[rgba(245,239,225,0.06)] bg-[rgba(7,9,15,0.85)] backdrop-blur-md lg:block">

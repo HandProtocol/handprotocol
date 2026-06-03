@@ -44,3 +44,6 @@ next-env.d.ts
 
 # turbopack
 .turbo
+
+# supabase CLI scratch
+/supabase/.temp/

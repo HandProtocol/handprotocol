@@ -34,6 +34,10 @@ export default function LoginPage() {
       if (error) {
         toast.error(error.message);
       } else {
+        // Fire-and-forget sign-in alert. The route verifies the session
+        // server-side, so this can't forge a notification, and a failure
+        // here must never block the redirect.
+        fetch("/api/notify/signin", { method: "POST" }).catch(() => {});
         router.push("/dashboard");
         router.refresh();
       }
