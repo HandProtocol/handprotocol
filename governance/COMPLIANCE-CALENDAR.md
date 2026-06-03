@@ -59,6 +59,11 @@ This calendar assumes HAND incorporates in Texas in 2026 and files Form 1023 wit
 | ED departure | Trigger emergency or planned succession protocol within 48 hours | [`board/emergency-succession-plan.md`](board/emergency-succession-plan.md) |
 | Annual receipts cross $500K | Engage CPA for **financial review** (not full audit); some funders may require | [`policies/financial-management.md`](policies/financial-management.md) |
 | Annual receipts cross $1M | Engage CPA for **full audit**; required by some institutional funders | [`policies/financial-management.md`](policies/financial-management.md) |
+| Gross income from any unrelated business (e.g., the Develop biz-outreach pillar) reaches **$1,000/year** | File **Form 990-T** and pay 21% on net UBTI, in addition to the 990. Threshold is on **gross**, not net | `/hand-tax` Mode A · IRS Pub 598 |
+| Anticipated UBIT for the year **≥ $500** | Make **quarterly estimated tax** payments | `/hand-tax` Mode A · IRS Pub 598 |
+| HAND **sells** taxable services it produces (web design = a taxable Texas "data processing service") | Apply for a **Texas Sales-and-Use-Tax permit**; collect and remit sales tax from clients. The 501(c)(3) exemption covers HAND's **purchases**, not its **sales** | `/hand-tax` Mode G · 34 TAC §3.330 |
+
+> **Develop biz-outreach pillar — tax gate.** The tax positions for selling services (UBIT/990-T, Texas sales tax, worker classification, business-client invoicing, barter) are owned by the `/hand-tax` skill; cited brief at `~/.claude/skills/hand-tax/references/hand-tax-research.md`. **Two gates before the first Develop invoice:** (1) UBIT / entity-structure decision with counsel, (2) Texas sales-tax collection set up.
 
 ## What HAND does **not** owe
 
@@ -102,6 +107,7 @@ This is a template, not a rule. Adjust to actual fiscal year and incorporation d
 - **First 990 form.** Depends on first-year receipts. Likely 990-EZ in year one given the filing-raise goal.
 - **Sales tax exemption AP-205 vs AP-204.** AP-204 is the planned path (after IRS Determination); AP-205 could provide interim relief if program purchases are large enough to matter. Decide once first-year procurement is sketched.
 - **Insurance carriers.** D&O quotes from Hartford, Philadelphia Insurance, Nonprofits Insurance Alliance (NIA) pending. NIA is the nonprofit-specialist incumbent.
+- **Develop pillar entity structure.** Whether to house the biz-outreach service revenue in a **taxable subsidiary** (isolates UBIT, protects exemption, handles Texas sales-tax collection) vs. running it inside HAND. Decide with counsel **before the first invoice**. See `/hand-tax` Modes A–B and G + its cited brief.
 
 ---
 
