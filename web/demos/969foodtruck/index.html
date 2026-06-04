@@ -21,10 +21,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Overpass:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<!-- Leaflet, for the Austin-to-truck map intro. Keyless CARTO tiles, no token. -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <style>
   :root {
     /* Palette pulled from the trailer and the plates. OKLCH, warm-tinted neutrals. */
@@ -318,64 +314,6 @@
     .reveal { opacity: 1; transform: none; transition: none; }
   }
 
-  /* ---- Map intro (Austin, fly to the truck, lift to reveal) ---------- */
-  html.intro-lock { overflow: hidden; }
-  .intro {
-    position: fixed; inset: 0; z-index: 100; background: var(--red);
-    opacity: 1; transition: opacity 0.85s var(--ease), transform 0.95s var(--ease);
-  }
-  .intro.gone { opacity: 0; transform: scale(1.06); pointer-events: none; }
-  .intro-map { position: absolute; inset: 0; z-index: 0; }
-  .intro-veil {
-    position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background:
-      radial-gradient(120% 80% at 50% 32%, transparent 42%, oklch(0.42 0.14 32 / 0.42) 100%),
-      linear-gradient(to top, oklch(0.40 0.14 32 / 0.88) 0%, transparent 34%);
-  }
-  .intro-hud {
-    position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(2rem, 8vh, 5rem);
-    display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
-    text-align: center; pointer-events: none; padding-inline: 1.2rem;
-  }
-  .intro-marker { background: var(--bone); }
-  .intro-caption {
-    margin: 0; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800;
-    font-size: clamp(1.5rem, 1rem + 2.6vw, 2.6rem); color: var(--bone);
-    letter-spacing: -0.02em; text-shadow: 0 2px 18px oklch(0.30 0.10 30 / 0.6);
-  }
-  .intro-skip {
-    position: absolute; z-index: 3; top: 1rem; right: 1rem;
-    background: oklch(0.96 0.02 84 / 0.16); color: var(--bone);
-    border: 1.5px solid oklch(0.96 0.02 84 / 0.5); border-radius: 999px;
-    padding: 0.55em 1.05em; font: 700 0.82rem "Overpass", sans-serif; cursor: pointer;
-    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
-  }
-  .intro-skip:hover { background: oklch(0.96 0.02 84 / 0.30); }
-  .map-pin { position: relative; width: 46px; height: 58px; }
-  .map-pin .drop {
-    position: absolute; left: 0; top: 0; width: 46px; height: 46px;
-    background: var(--red); border: 3px solid var(--bone);
-    border-radius: 50% 50% 50% 3px; transform: rotate(45deg);
-    box-shadow: 0 8px 16px oklch(0.20 0.06 30 / 0.45);
-  }
-  .map-pin .num {
-    position: absolute; left: 0; right: 0; top: 11px; text-align: center;
-    font: 900 15px "Overpass", sans-serif; color: var(--bone); letter-spacing: 0.02em;
-  }
-  .map-pin .pulse {
-    position: absolute; left: 23px; top: 23px; width: 16px; height: 16px;
-    margin: -8px 0 0 -8px; border-radius: 50%; background: var(--marigold);
-    animation: pinpulse 1.8s var(--ease) infinite;
-  }
-  @keyframes pinpulse { from { transform: scale(0.5); opacity: 0.6; } to { transform: scale(3.6); opacity: 0; } }
-  .map-pin-wrap.drop-in .drop { animation: pindrop 0.7s var(--ease) both; }
-  @keyframes pindrop {
-    0% { transform: translateY(-22px) rotate(45deg); opacity: 0; }
-    60% { transform: translateY(4px) rotate(45deg); }
-    100% { transform: translateY(0) rotate(45deg); opacity: 1; }
-  }
-  @media (prefers-reduced-motion: reduce) { .intro { display: none; } }
-
   .skip {
     position: absolute; left: -999px; top: 0; z-index: 50;
     background: var(--ink); color: var(--bone); padding: 0.7em 1.1em; border-radius: 0 0 8px 0; font-weight: 700;
@@ -385,17 +323,6 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-
-<!-- Map intro: opens on Austin, flies east to the truck on FM 969, lifts away. -->
-<div id="intro" class="intro" aria-hidden="true">
-  <div id="intro-map" class="intro-map"></div>
-  <div class="intro-veil"></div>
-  <div class="intro-hud">
-    <span class="marker marker--sm intro-marker" aria-hidden="true"><span class="marker-fm">FM</span><span class="marker-num">969</span></span>
-    <p class="intro-caption" id="intro-caption">Austin, Texas</p>
-  </div>
-  <button type="button" class="intro-skip" id="intro-skip">Skip intro</button>
-</div>
 
 <header class="topbar">
   <div class="wrap">
@@ -597,79 +524,6 @@
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
     nodes.forEach(function (n) { io.observe(n); });
-  })();
-</script>
-
-<script>
-  // Map intro: Austin, fly east along 969 to the truck, then lift to reveal.
-  (function () {
-    var intro = document.getElementById("intro");
-    if (!intro) return;
-    var params = new URLSearchParams(location.search);
-    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    var skip = params.has("nointro") || location.hash === "#nointro";
-
-    function finish(now) {
-      document.documentElement.classList.remove("intro-lock");
-      if (now) { if (intro.parentNode) intro.parentNode.removeChild(intro); return; }
-      intro.classList.add("gone");
-      var done = false;
-      var rm = function () { if (done) return; done = true; if (intro.parentNode) intro.parentNode.removeChild(intro); };
-      intro.addEventListener("transitionend", rm, { once: true });
-      setTimeout(rm, 1300);
-    }
-
-    if (reduce || skip) { finish(true); return; }
-    document.documentElement.classList.add("intro-lock");
-
-    document.addEventListener("DOMContentLoaded", function () {
-      if (typeof L === "undefined") { finish(true); return; } // tiles/lib blocked, skip cleanly
-
-      var AUSTIN = [30.2672, -97.7431];
-      var TRUCK = [30.1779849, -97.4192594];
-      var cap = document.getElementById("intro-caption");
-      var skipBtn = document.getElementById("intro-skip");
-      var ended = false;
-
-      var map = L.map("intro-map", {
-        zoomControl: false, attributionControl: true, dragging: false,
-        scrollWheelZoom: false, doubleClickZoom: false, boxZoom: false,
-        keyboard: false, touchZoom: false, zoomSnap: 0
-      }).setView(AUSTIN, 10);
-
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-        subdomains: "abcd", maxZoom: 19, attribution: "&copy; OpenStreetMap &copy; CARTO"
-      }).addTo(map);
-
-      L.polyline([AUSTIN, TRUCK], { color: "#e8a838", weight: 3, opacity: 0.9, dashArray: "2 9", lineCap: "round" }).addTo(map);
-
-      var pin = L.marker(TRUCK, {
-        opacity: 0,
-        icon: L.divIcon({
-          className: "map-pin-wrap",
-          html: '<div class="map-pin"><span class="pulse"></span><span class="drop"></span><span class="num">969</span></div>',
-          iconSize: [46, 58], iconAnchor: [23, 52]
-        })
-      }).addTo(map);
-
-      function arrive() {
-        if (ended) return; ended = true;
-        cap.textContent = "969 Mexican Food Truck";
-        pin.setOpacity(1);
-        var el = pin.getElement(); if (el) el.classList.add("drop-in");
-        setTimeout(function () { finish(false); }, 1000);
-      }
-
-      skipBtn.addEventListener("click", function () { ended = true; finish(true); });
-      document.addEventListener("keydown", function (e) { if (e.key === "Escape") { ended = true; finish(true); } });
-
-      setTimeout(function () {
-        cap.textContent = "Heading east on Highway 969";
-        map.flyTo(TRUCK, 15, { duration: 2.8, easeLinearity: 0.12 });
-        map.once("moveend", arrive);
-        setTimeout(arrive, 3500); // safety net if moveend is missed
-      }, 700);
-    });
   })();
 </script>
 </body>

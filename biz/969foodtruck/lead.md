@@ -52,4 +52,4 @@ hand_lead: koH
 - Five owner/customer food photos saved under web/demos/969foodtruck/img/ (chilaquiles, breakfast taco, gorditas, caldo de albondigas, the truck).
 - Below the usual qualification bar (>=15 reviews) but chosen by the operator; the strong photos carry the demo.
 - Pitch price: flat $75 one-time to claim and publish. Add-ons (more pages, menu, own domain) priced on request. 33% of revenue to the HAND pool.
-- Demo has a map intro (opens on Austin, flies to the truck on FM 969). Pitch page gated at /demos/969foodtruck/pitch/ (password handme).
+- Pitch page gated at /demos/969foodtruck/pitch/ (login hand / handme). A map intro (Austin flies to the pin) was prototyped then pulled; parked as a potential future demo feature, not shipped.
