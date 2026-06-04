@@ -1,6 +1,6 @@
 import { getCurrentProfile, getCurrentUser } from "@/lib/supabase/profile";
 import { SidebarNav } from "@/components/sidebar-nav";
-import { MobileNav } from "@/components/mobile-nav";
+import { MobileRail } from "@/components/mobile-rail";
 import { NotificationBell } from "@/components/notification-bell";
 import { Toaster } from "@/components/ui/sonner";
 import { CommandPalette } from "@/components/search/command-palette";
@@ -57,16 +57,16 @@ export default async function DashboardLayout({
         <SidebarNav role={role} email={userEmail} />
       </aside>
 
-      <main className="flex-1 overflow-auto">
+      {/* Collapsed icon rail + expandable drawer (mobile only) */}
+      <MobileRail role={role} email={userEmail} />
+
+      <main className="min-w-0 flex-1 overflow-auto">
         {/* Mobile header */}
         <header className="flex h-16 items-center justify-between border-b border-[rgba(245,239,225,0.06)] px-4 lg:hidden">
           <span className="text-sm font-medium tracking-tight">
             HAND Command
           </span>
-          <div className="flex items-center gap-1">
-            <NotificationBell />
-            <MobileNav role={role} email={userEmail} />
-          </div>
+          <NotificationBell />
         </header>
 
         {/* Desktop top bar */}

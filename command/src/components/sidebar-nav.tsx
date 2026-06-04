@@ -5,60 +5,19 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
-import {
-  LayoutGrid,
-  FileText,
-  Users,
-  BookOpen,
-  CalendarClock,
-  Settings,
-  LogOut,
-  Inbox,
-  Search,
-  Crosshair,
-  MapPin,
-  Building2,
-} from "lucide-react";
+import { LogOut, Search } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { navItems, isActivePath } from "@/components/nav-items";
 
 /*
   Sidebar for the HAND Command Center.
-  Nav entries match the H-A-N-D pillars in PRD section 1 / 7:
-   - Dashboard       (Holistic, overview)
-   - Grants          (Holistic, the pipeline view)
-   - Inbox           (Holistic, quick-capture triage)
-   - Funders         (Nurture, funder library)
-   - Boilerplate     (Approach, snippet library)
-   - Deadlines       (Develop, deadline radar)
-   - Inspector       (Develop, UX feedback capture)
-   - Pins            (Develop, UX feedback triage)
-   - Settings        (admin)
+  Nav entries (shared with the mobile rail via @/components/nav-items)
+  match the H-A-N-D pillars in PRD section 1 / 7.
 
   A cmd+K hint sits above the account footer so the operator knows
   universal search is one chord away.
 */
-
-type NavItem = {
-  label: string;
-  href: string;
-  icon: React.ElementType;
-  // Pillar tag is H, A, N, D, or a centered dot for Settings.
-  pillar: string;
-};
-
-const navItems: NavItem[] = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutGrid, pillar: "H" },
-  { label: "Grants", href: "/grants", icon: FileText, pillar: "H" },
-  { label: "Inbox", href: "/inbox", icon: Inbox, pillar: "H" },
-  { label: "Funders", href: "/funders", icon: Users, pillar: "N" },
-  { label: "Boilerplate", href: "/boilerplate", icon: BookOpen, pillar: "A" },
-  { label: "Develop", href: "/develop", icon: Building2, pillar: "D" },
-  { label: "Deadlines", href: "/deadlines", icon: CalendarClock, pillar: "D" },
-  { label: "Inspector", href: "/inspector", icon: Crosshair, pillar: "D" },
-  { label: "Pins", href: "/pins", icon: MapPin, pillar: "D" },
-  { label: "Settings", href: "/settings", icon: Settings, pillar: "·" },
-];
 
 export function SidebarNav({
   role,
@@ -72,11 +31,6 @@ export function SidebarNav({
   const pathname = usePathname();
   const router = useRouter();
   const [signingOut, setSigningOut] = useState(false);
-
-  function isActive(href: string) {
-    if (href === "/dashboard") return pathname === "/dashboard";
-    return pathname.startsWith(href);
-  }
 
   async function handleSignOut() {
     setSigningOut(true);
@@ -123,7 +77,7 @@ export function SidebarNav({
         <ul className="space-y-0.5">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const active = isActive(item.href);
+            const active = isActivePath(pathname, item.href);
             return (
               <li key={item.href}>
                 <Link
