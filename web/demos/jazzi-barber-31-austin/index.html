@@ -146,8 +146,19 @@
   .vrow .lbl{font-family:"Oswald",sans-serif; font-weight:600; letter-spacing:.1em; text-transform:uppercase; font-size:.68rem; color:var(--muted)}
   .vrow a{color:var(--bone); text-decoration:none; font-size:1.02rem}
   .vrow a:hover{color:#fff; text-decoration:underline}
-  .map{border-radius:16px; overflow:hidden; border:1px solid var(--line); min-height:280px}
-  .map iframe{width:100%; height:100%; min-height:280px; border:0; filter:grayscale(.3) contrast(1.05) brightness(.9)}
+  .map{border-radius:16px; overflow:hidden; border:1px solid var(--line); min-height:300px; text-decoration:none;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:5px; padding:30px;
+    background:
+      radial-gradient(120% 100% at 50% 0%, rgba(23,105,255,.12), transparent 60%),
+      radial-gradient(90% 80% at 50% 100%, rgba(228,2,43,.10), transparent 62%),
+      repeating-linear-gradient(0deg, transparent 0 38px, rgba(255,255,255,.035) 38px 39px),
+      repeating-linear-gradient(90deg, transparent 0 38px, rgba(255,255,255,.035) 38px 39px),
+      var(--ink-2);
+    transition:border-color .2s, transform .12s}
+  .map:hover{border-color:#3a3a44; transform:translateY(-2px)}
+  .map .pin{font-size:2.5rem; line-height:1; filter:drop-shadow(0 8px 16px rgba(228,2,43,.55))}
+  .map .maptitle{font-family:"Bebas Neue",sans-serif; font-size:1.9rem; color:#fff; line-height:1; margin-top:6px}
+  .map .mapsub{font-family:"Oswald",sans-serif; letter-spacing:.16em; text-transform:uppercase; font-size:.74rem; color:var(--muted)}
   .vcta{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px}
 
   /* footer */
@@ -369,9 +380,12 @@
             <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&destination=6934%20E%20Ben%20White%20Blvd%2C%20Austin%2C%20TX%2078741" target="_blank" rel="noopener">Directions</a>
           </div>
         </div>
-        <div class="map">
-          <iframe title="Map to Jazzi Barber 31" src="https://maps.google.com/maps?q=6934%20E%20Ben%20White%20Blvd%2C%20Austin%2C%20TX%2078741&z=15&output=embed" loading="lazy"></iframe>
-        </div>
+        <a class="map" href="https://www.google.com/maps/dir/?api=1&destination=6934%20E%20Ben%20White%20Blvd%2C%20Austin%2C%20TX%2078741" target="_blank" rel="noopener" aria-label="Open directions to Jazzi Barber 31 in Google Maps">
+          <span class="pin" aria-hidden="true">💈</span>
+          <span class="maptitle">On E Ben White Blvd</span>
+          <span class="mapsub">SE Austin · 78741</span>
+          <span class="btn btn-chrome" style="margin-top:14px">Open in Google Maps</span>
+        </a>
       </div>
     </div>
   </section>
