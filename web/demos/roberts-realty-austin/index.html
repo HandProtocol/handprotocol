@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roberts Realty — Ryan Roberts, Austin Real Estate Agent</title>
+<meta name="description" content="Ryan Roberts helps people buy and sell homes across Austin, and keeps you informed at every step. 4.3 on Google. Call (512) 767-3100.">
+<meta name="theme-color" content="#1f3a2e">
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="Roberts Realty — Ryan Roberts, Austin Real Estate">
+<meta property="og:description" content="A local Austin agent for buying and selling, with you the whole way. Call (512) 767-3100.">
+<meta property="og:locale" content="en_US">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:oklch(0.972 0.008 95);
+    --paper-2:oklch(0.948 0.010 92);
+    --surface:oklch(0.992 0.005 95);
+    --ink:oklch(0.27 0.018 155);
+    --ink-soft:oklch(0.46 0.018 155);
+    --ink-faint:oklch(0.60 0.014 150);
+    --green:oklch(0.40 0.050 156);
+    --green-deep:oklch(0.30 0.042 157);
+    --green-ink:oklch(0.22 0.030 158);
+    --brass:oklch(0.70 0.108 74);
+    --brass-deep:oklch(0.60 0.106 68);
+    --brass-soft:oklch(0.86 0.060 80);
+    --line:color-mix(in oklch, var(--ink) 14%, transparent);
+    --line-strong:color-mix(in oklch, var(--ink) 24%, transparent);
+    --shadow:0 1px 2px color-mix(in oklch, var(--ink) 7%, transparent), 0 18px 40px -22px color-mix(in oklch, var(--ink) 55%, transparent);
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:clamp(16px,1.04vw + 13px,18px); line-height:1.62;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  h1,h2,h3{font-family:Spectral,Georgia,"Times New Roman",serif; font-weight:500; line-height:1.1; letter-spacing:-.005em; color:var(--ink); margin:0}
+  p{margin:0}
+  a{color:var(--green-deep)}
+  img{max-width:100%; display:block}
+  .wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(20px,5vw,42px)}
+  .eyebrow{font-size:.76rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--brass-deep); margin:0 0 1rem}
+
+  .btn{display:inline-flex; align-items:center; gap:.55rem; font:inherit; font-weight:600; text-decoration:none;
+    padding:.86rem 1.5rem; border-radius:8px; border:1px solid transparent; cursor:pointer;
+    transition:transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s ease, background .2s ease, color .2s ease}
+  .btn:focus-visible{outline:3px solid var(--brass); outline-offset:3px}
+  .btn-primary{background:var(--brass); color:var(--green-ink); box-shadow:var(--shadow)}
+  .btn-primary:hover{background:var(--brass-deep); color:oklch(0.99 0.01 90); transform:translateY(-2px)}
+  .btn-ghost{background:color-mix(in oklch, white 12%, transparent); color:oklch(0.97 0.01 95); border-color:color-mix(in oklch, white 48%, transparent)}
+  .btn-ghost:hover{background:color-mix(in oklch, white 22%, transparent)}
+  .btn-outline{background:transparent; color:var(--green-deep); border-color:var(--line-strong)}
+  .btn-outline:hover{background:var(--paper-2); border-color:var(--green)}
+
+  /* header */
+  header.site{position:sticky; top:0; z-index:30; background:color-mix(in oklch, var(--paper) 86%, transparent); backdrop-filter:saturate(1.3) blur(10px); border-bottom:1px solid var(--line)}
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:.72rem}
+  .brand{display:flex; align-items:baseline; gap:.6rem; line-height:1; text-decoration:none}
+  .brand b{font-family:Spectral,serif; font-weight:600; font-size:1.34rem; color:var(--green-ink); letter-spacing:.005em}
+  .brand span{font-size:.64rem; letter-spacing:.26em; text-transform:uppercase; color:var(--ink-faint)}
+  .nav-links{display:none; gap:1.7rem}
+  .nav-links a{color:var(--ink-soft); text-decoration:none; font-size:.92rem; font-weight:500}
+  .nav-links a:hover{color:var(--green-deep)}
+  .nav .btn{padding:.58rem 1.05rem; font-size:.9rem}
+  @media(min-width:880px){.nav-links{display:flex}}
+
+  /* hero */
+  .hero{position:relative; min-height:min(90vh,760px); display:flex; align-items:flex-end; overflow:hidden; isolation:isolate}
+  .hero-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 38%; z-index:-2}
+  .hero::after{content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(80deg, oklch(0.20 0.030 158 / .9) 0%, oklch(0.20 0.030 158 / .62) 40%, oklch(0.20 0.030 158 / .14) 76%, transparent 100%),
+               linear-gradient(0deg, oklch(0.18 0.028 158 / .68), transparent 46%)}
+  .hero-inner{color:oklch(0.97 0.012 95); padding-block:clamp(2.6rem,6.5vw,5rem); max-width:680px}
+  .hero h1{color:oklch(0.985 0.012 95); font-size:clamp(2.4rem,5.4vw,4.1rem); font-weight:500; text-shadow:0 1px 30px oklch(0.16 0.02 158 / .5)}
+  .hero p.lede{margin-top:1.15rem; font-size:clamp(1.06rem,1.5vw,1.24rem); color:oklch(0.93 0.014 95); max-width:50ch}
+  .rating{display:inline-flex; align-items:center; gap:.55rem; margin-bottom:1.25rem; background:color-mix(in oklch, white 14%, transparent); border:1px solid color-mix(in oklch, white 30%, transparent); padding:.42rem .9rem; border-radius:999px; font-size:.9rem; font-weight:500; color:oklch(0.97 0.01 95)}
+  .stars{color:var(--brass-soft); letter-spacing:.06em; font-size:.95rem}
+  .hero-cta{display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.8rem}
+
+  /* facts strip */
+  .facts{background:var(--green-deep); color:oklch(0.93 0.02 95)}
+  .facts .wrap{display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem 1.2rem; padding-block:1.9rem}
+  .fact b{display:block; font-family:Spectral,serif; font-size:1.42rem; font-weight:500; color:oklch(0.98 0.018 92)}
+  .fact span{font-size:.84rem; color:oklch(0.82 0.022 96); letter-spacing:.01em}
+  .fact .stars{font-size:1.15rem; color:var(--brass-soft)}
+  @media(min-width:780px){.facts .wrap{grid-template-columns:repeat(4,1fr)}}
+
+  section{padding-block:clamp(3.4rem,7.5vw,5.8rem)}
+  .section-head{max-width:44ch; margin-bottom:2.8rem}
+  .section-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem)}
+  .section-head p{margin-top:.9rem; color:var(--ink-soft)}
+
+  /* lede intro */
+  .intro .wrap{max-width:760px}
+  .intro p{font-family:Spectral,serif; font-size:clamp(1.3rem,2.4vw,1.7rem); line-height:1.42; color:var(--ink); font-weight:400}
+  .intro .sig{margin-top:1.4rem; font-size:.92rem; font-family:Inter,sans-serif; color:var(--ink-faint); letter-spacing:.02em}
+
+  /* how I help — editorial numbered list, no cards */
+  .help{background:var(--paper-2)}
+  .help-list{display:grid; gap:0}
+  .help-row{display:grid; gap:.5rem 2.2rem; grid-template-columns:1fr; padding-block:2rem; border-top:1px solid var(--line)}
+  .help-row:last-child{border-bottom:1px solid var(--line)}
+  .help-num{font-family:Spectral,serif; font-size:1.05rem; font-weight:500; color:var(--brass-deep); letter-spacing:.06em}
+  .help-row h3{font-size:clamp(1.4rem,2.4vw,1.85rem); font-weight:500}
+  .help-row p{color:var(--ink-soft); max-width:60ch}
+  @media(min-width:820px){
+    .help-row{grid-template-columns:5rem 16rem 1fr; align-items:baseline}
+    .help-num{padding-top:.3rem}
+  }
+
+  /* gallery */
+  .homes{background:var(--green-ink); color:oklch(0.94 0.016 95)}
+  .homes .section-head h2{color:oklch(0.98 0.016 92)}
+  .homes .section-head p{color:oklch(0.82 0.02 96)}
+  .gallery{display:grid; gap:1rem; grid-template-columns:1fr}
+  .gallery figure{margin:0; border-radius:14px; overflow:hidden; box-shadow:0 24px 50px -28px oklch(0.10 0.02 158); background:var(--green-deep); position:relative}
+  .gallery img{width:100%; height:100%; object-fit:cover; aspect-ratio:16/10; transition:transform .7s cubic-bezier(.22,1,.36,1)}
+  .gallery figure:hover img{transform:scale(1.035)}
+  .gallery figcaption{position:absolute; left:0; right:0; bottom:0; padding:1rem 1.1rem .9rem; font-size:.85rem; color:oklch(0.97 0.01 95);
+    background:linear-gradient(0deg, oklch(0.14 0.02 158 / .82), transparent)}
+  @media(min-width:760px){
+    .gallery{grid-template-columns:1.5fr 1fr; grid-auto-rows:1fr}
+    .gallery figure:first-child{grid-row:span 2}
+    .gallery figure:first-child img{aspect-ratio:auto; height:100%; min-height:340px}
+  }
+
+  /* testimonials */
+  .quotes{columns:1; column-gap:1.4rem}
+  @media(min-width:720px){.quotes{columns:2}}
+  blockquote{break-inside:avoid; margin:0 0 1.4rem; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:1.5rem 1.6rem; box-shadow:var(--shadow)}
+  blockquote .mark{font-family:Spectral,serif; font-size:2.4rem; line-height:.6; color:var(--brass); display:block; height:1rem}
+  blockquote p{font-family:Spectral,serif; font-size:1.14rem; line-height:1.52; color:var(--ink); margin-top:.6rem}
+  blockquote cite{display:block; margin-top:1rem; font-style:normal; font-size:.84rem; font-weight:600; color:var(--green-deep); letter-spacing:.02em}
+  blockquote cite::before{content:"— "}
+
+  /* about + contact */
+  .about{background:var(--green);}
+  .about .grid{display:grid; gap:2.6rem; grid-template-columns:1fr}
+  @media(min-width:880px){.about .grid{grid-template-columns:.85fr 1.15fr; align-items:center}}
+  .about-photo{border-radius:16px; overflow:hidden; box-shadow:0 26px 56px -28px oklch(0.12 0.02 158); aspect-ratio:4/5; background:var(--green-deep)}
+  .about-photo img{width:100%; height:100%; object-fit:cover; object-position:center top}
+  .about-copy h2{color:oklch(0.985 0.016 92)}
+  .about-copy .eyebrow{color:var(--brass-soft)}
+  .about-copy p{color:oklch(0.92 0.018 95); margin-top:1.1rem; max-width:56ch}
+
+  .contact{background:var(--paper)}
+  .contact .grid{display:grid; gap:2.4rem; grid-template-columns:1fr}
+  @media(min-width:860px){.contact .grid{grid-template-columns:1fr 1fr; align-items:center}}
+  .contact h2{font-size:clamp(2rem,3.6vw,2.8rem)}
+  .contact .lead{margin-top:1rem; color:var(--ink-soft); max-width:42ch}
+  .contact-card{background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:2rem; box-shadow:var(--shadow)}
+  .phone-line{display:flex; align-items:center; gap:.75rem; margin:.2rem 0 .3rem; font-family:Spectral,serif; font-size:clamp(1.6rem,3vw,2rem); font-weight:500; color:var(--green-ink); text-decoration:none}
+  .phone-line:hover{color:var(--brass-deep)}
+  .phone-line svg{width:24px; height:24px; flex:none; color:var(--brass-deep)}
+  .contact-card .muted{color:var(--ink-faint); font-size:.9rem}
+  .addr{display:flex; gap:.7rem; margin-top:1.4rem; color:var(--ink-soft); font-size:.96rem}
+  .addr svg{width:20px; height:20px; flex:none; color:var(--green); margin-top:.18rem}
+  .contact-card .btn{width:100%; justify-content:center; margin-top:1.5rem}
+
+  /* footer */
+  footer.site{background:var(--green-ink); color:oklch(0.78 0.02 96); padding-block:2.6rem; font-size:.9rem}
+  footer.site .wrap{display:flex; flex-wrap:wrap; gap:1rem 2.2rem; align-items:center; justify-content:space-between}
+  footer.site a{color:var(--brass-soft); font-weight:600}
+  .hand-credit{display:inline-flex; align-items:center; gap:.55rem}
+  .hand-credit .dot{width:8px; height:8px; border-radius:50%; background:var(--brass)}
+  .fineprint{color:oklch(0.66 0.018 150); font-size:.8rem; max-width:48ch}
+
+  .reveal{opacity:0; transform:translateY(20px); transition:opacity .8s cubic-bezier(.22,1,.36,1), transform .8s cubic-bezier(.22,1,.36,1)}
+  .reveal.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1; transform:none; transition:none}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Roberts Realty home">
+      <b>Roberts Realty</b><span>Austin, Texas</span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#help">How I help</a>
+      <a href="#homes">Recent homes</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-primary" href="tel:+15127673100">Call Ryan</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Roberts Realty, Austin">
+    <img class="hero-img" src="img/aerial.webp" width="1136" height="679" alt="An Austin home with a copper metal roof surrounded by mature live oak trees, seen from above" loading="eager" fetchpriority="high" decoding="async">
+    <div class="wrap hero-inner">
+      <p class="rating"><span class="stars" aria-hidden="true">★★★★</span><span>4.3 on Google · 13 reviews</span></p>
+      <p class="eyebrow" style="color:var(--brass-soft)">Ryan Roberts · Real estate in Austin</p>
+      <h1>Buying or selling a home in Austin</h1>
+      <p class="lede">I'm Ryan Roberts. I help people across Austin buy and sell, and I keep you in the loop at every step, so the decisions stay clear and they stay yours.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="tel:+15127673100">Call (512) 767-3100</a>
+        <a class="btn btn-ghost" href="#help">See how I help</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACTS -->
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><b><span class="stars" aria-hidden="true">★★★★</span> 4.3</b><span>Rated on Google, 13 reviews</span></div>
+      <div class="fact"><b>Buying &amp; selling</b><span>First homes to next moves</span></div>
+      <div class="fact"><b>Austin</b><span>And the surrounding metro</span></div>
+      <div class="fact"><b>Call anytime</b><span>By appointment, seven days</span></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="wrap reveal">
+      <p>A home is one of the biggest moves you'll make. My job is to take the guesswork out of it, answer your questions honestly, and keep you informed from the first call to the day you get the keys.</p>
+      <p class="sig">Ryan Roberts, Roberts Realty</p>
+    </div>
+  </section>
+
+  <!-- HOW I HELP -->
+  <section id="help" class="help">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">How I help</p>
+        <h2>Three ways I work with you</h2>
+      </div>
+      <div class="help-list">
+        <div class="help-row reveal">
+          <div class="help-num">01</div>
+          <h3>Selling your home</h3>
+          <p>We start with the right price and real, practical staging guidance, then I stay proactive through every showing and offer. You hear from me, you are not left wondering where things stand.</p>
+        </div>
+        <div class="help-row reveal">
+          <div class="help-num">02</div>
+          <h3>Buying, including your first</h3>
+          <p>Whether it is your first home or your next one, I walk you through it step by step and answer every question along the way. No pressure, no jargon, just a clear path to the right place.</p>
+        </div>
+        <div class="help-row reveal">
+          <div class="help-num">03</div>
+          <h3>Knowing the Austin market</h3>
+          <p>Pricing, neighborhoods, what is moving and what is sitting. I help you read the market here before you make a move, so you go in with a real picture and not a guess.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECENT HOMES -->
+  <section id="homes" class="homes">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow" style="color:var(--brass-soft)">A look inside</p>
+        <h2>Recent homes</h2>
+        <p>A few spaces from recent Austin listings.</p>
+      </div>
+      <div class="gallery reveal">
+        <figure>
+          <img src="img/living.webp" width="1136" height="679" alt="A bright, open living room with a neutral sofa, soft natural light and a ceiling fan" loading="lazy" decoding="async">
+          <figcaption>Bright, livable spaces</figcaption>
+        </figure>
+        <figure>
+          <img src="img/kitchen-double-oven.webp" width="1136" height="679" alt="A clean white kitchen with stainless double ovens, a cooktop and stone counters" loading="lazy" decoding="async">
+          <figcaption>Kitchens ready to cook in</figcaption>
+        </figure>
+        <figure>
+          <img src="img/interior-hall.webp" width="1136" height="679" alt="A light-filled hallway and dining area with white walls and warm wood floors" loading="lazy" decoding="async">
+          <figcaption>Light and flow throughout</figcaption>
+        </figure>
+        <figure>
+          <img src="img/kitchen-bar.webp" width="1136" height="679" alt="A kitchen with a breakfast bar, stainless appliances and pendant lighting" loading="lazy" decoding="async">
+          <figcaption>Room to gather</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="reviews">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">In their words</p>
+        <h2>What clients say</h2>
+        <p>Pulled from public Google reviews.</p>
+      </div>
+      <div class="quotes reveal">
+        <blockquote>
+          <span class="mark" aria-hidden="true">&ldquo;</span>
+          <p>I had a great experience working with Ryan as the listing agent for my property. He was highly professional, proactive, and kept me informed throughout the entire selling process.</p>
+          <cite>Shawna Sowder</cite>
+        </blockquote>
+        <blockquote>
+          <span class="mark" aria-hidden="true">&ldquo;</span>
+          <p>He was so knowledgeable and was happy to walk us through buying our first home.</p>
+          <cite>A Google review</cite>
+        </blockquote>
+        <blockquote>
+          <span class="mark" aria-hidden="true">&ldquo;</span>
+          <p>I highly recommend working with him for your real estate needs in Texas.</p>
+          <cite>A Google review</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="wrap grid">
+      <div class="about-photo reveal">
+        <img src="img/agent.webp" width="1053" height="620" alt="Ryan Roberts, real estate agent, standing in front of the downtown Austin skyline" loading="lazy" decoding="async">
+      </div>
+      <div class="about-copy reveal">
+        <p class="eyebrow">About Ryan</p>
+        <h2>A local agent who stays in your corner</h2>
+        <p>I'm a real estate agent based here in Austin, and I work with buyers and sellers across the city. Some of my clients are listing a home they have loved for years. Others are buying their very first one. Either way, my work is the same: make the process clear, keep you informed, and make the decisions easy to make.</p>
+        <p>When you are ready to talk it through, give me a call. No pressure, just a straight conversation about where you want to go.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap grid">
+      <div class="reveal">
+        <p class="eyebrow">Get in touch</p>
+        <h2>Let's talk about your move</h2>
+        <p class="lead">The best place to start is a quick call. Tell me what you are thinking and I will tell you, honestly, what I would do.</p>
+      </div>
+      <aside class="contact-card reveal" aria-label="Contact Ryan Roberts">
+        <p class="muted">Call or text</p>
+        <a class="phone-line" href="tel:+15127673100">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+          (512) 767-3100
+        </a>
+        <p class="muted">Available seven days, by appointment.</p>
+        <div class="addr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+          <span>2204 Montague St<br>Austin, TX 78741<br><span style="color:var(--ink-faint)">Southeast Austin, serving the metro</span></span>
+        </div>
+        <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&destination=2204%20Montague%20St%2C%20Austin%2C%20TX%2078741" target="_blank" rel="noopener">Get directions</a>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="hand-credit"><span class="dot" aria-hidden="true"></span> A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a></span>
+    <span class="fineprint">Roberts Realty, Ryan Roberts, Austin, Texas. Photos and client quotes are from public Google listings. This is a preview, not the official site.</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion:reduce)').matches){
+      els.forEach(function(e){e.classList.add('in')}); return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    els.forEach(function(e){io.observe(e)});
+  })();
+</script>
+</body>
+</html>
