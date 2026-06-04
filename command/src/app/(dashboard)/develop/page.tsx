@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Plus, Building2, ScrollText } from "lucide-react";
-import { listBizLeads } from "@/lib/develop/queries";
+import { listBizLeads, listVisitCounts } from "@/lib/develop/queries";
 import { BizKanban } from "@/components/develop/biz-kanban";
 
 /*
@@ -13,7 +13,10 @@ import { BizKanban } from "@/components/develop/biz-kanban";
 export const dynamic = "force-dynamic";
 
 export default async function DevelopPage() {
-  const leads = await listBizLeads();
+  const [leads, visitCounts] = await Promise.all([
+    listBizLeads(),
+    listVisitCounts(),
+  ]);
   const configured = Boolean(
     process.env.NEXT_PUBLIC_SUPABASE_URL &&
       process.env.SUPABASE_SERVICE_ROLE_KEY,
@@ -86,7 +89,9 @@ export default async function DevelopPage() {
         </div>
       )}
 
-      {leads.length > 0 && <BizKanban leads={leads} />}
+      {leads.length > 0 && (
+        <BizKanban leads={leads} visitCounts={visitCounts} />
+      )}
     </div>
   );
 }

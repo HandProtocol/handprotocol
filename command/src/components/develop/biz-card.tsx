@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { Star, Globe, MonitorCheck } from "lucide-react";
+import { Star, Globe, MonitorCheck, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { BizLead } from "@/lib/develop/types";
 import { cardPop, dragGlow } from "@/lib/motion/anime";
@@ -22,11 +22,13 @@ const WEBSITE_LABEL: Record<string, string> = {
 
 export function BizCard({
   lead,
+  visits = 0,
   isDragging,
   onDragStart,
   onDragEnd,
 }: {
   lead: BizLead;
+  visits?: number;
   isDragging?: boolean;
   onDragStart?: (slug: string) => void;
   onDragEnd?: () => void;
@@ -106,6 +108,15 @@ export function BizCard({
           >
             <MonitorCheck className="h-3 w-3" aria-hidden />
             DEMO
+          </span>
+        )}
+        {visits > 0 && (
+          <span
+            className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--amber-soft)]"
+            title={`${visits} demo ${visits === 1 ? "visit" : "visits"}`}
+          >
+            <Eye className="h-3 w-3" aria-hidden />
+            {visits}
           </span>
         )}
       </div>

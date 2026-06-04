@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>HAND · Demo Portfolio</title>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#11151f; --panel-2:#0e121b; --line:rgba(245,239,225,0.10);
+    --line-2:rgba(245,239,225,0.16); --ink:#f3eee2; --dim:#a7a195; --faint:#6f6a60;
+    --amber:#d9893a; --amber-soft:#f0b364; --good:#86efac;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;background-image:radial-gradient(900px 500px at 80% -10%, rgba(217,137,58,0.08), transparent 60%)}
+  a{color:var(--amber-soft);text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:34px 22px 90px}
+  .eyebrow{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber);margin:0 0 12px}
+  header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:28px}
+  h1{font-size:1.7rem;font-weight:600;letter-spacing:-0.01em;margin:0}
+  .sub{color:var(--dim);margin:6px 0 0;font-size:0.92rem}
+  .stats{display:flex;gap:26px;text-align:right}
+  .stat b{display:block;font-size:1.5rem;font-weight:600;color:var(--amber-soft);line-height:1}
+  .stat span{font:600 10px/1 ui-monospace,monospace;letter-spacing:0.16em;text-transform:uppercase;color:var(--faint)}
+  .grid{display:grid;gap:18px;grid-template-columns:1fr}
+  @media(min-width:680px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1040px){.grid{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s ease,transform .2s ease}
+  .card:hover{border-color:var(--line-2);transform:translateY(-2px)}
+  .thumb{position:relative;background:var(--panel-2);border-bottom:1px solid var(--line);overflow:hidden;height:200px}
+  .thumb iframe{border:0;transform-origin:0 0;pointer-events:none;background:#fff}
+  .thumb .open{position:absolute;inset:0;z-index:2}
+  .thumb .badge{position:absolute;top:10px;left:10px;z-index:3;font:600 10px/1 ui-monospace,monospace;letter-spacing:0.14em;text-transform:uppercase;padding:5px 8px;border-radius:6px;background:rgba(8,10,15,0.78);backdrop-filter:blur(4px)}
+  .body{padding:15px 16px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .name{font-size:1.06rem;font-weight:600;line-height:1.25;margin:0}
+  .meta{color:var(--dim);font-size:0.85rem;margin:0}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;font:600 10px/1 ui-monospace,monospace;letter-spacing:0.14em;text-transform:uppercase;color:var(--faint)}
+  .row .rate{color:var(--amber-soft)} .row .v{color:var(--good)}
+  .actions{display:flex;gap:8px;margin-top:auto;padding-top:6px}
+  .btn{flex:1;text-align:center;border:1px solid var(--line-2);border-radius:8px;padding:9px 10px;font-size:0.86rem;font-weight:600;color:var(--ink);transition:background .15s ease,border-color .15s ease}
+  .btn:hover{background:rgba(217,137,58,0.12);border-color:rgba(217,137,58,0.4)}
+  .btn.pitch{color:var(--dim)}
+  .note{margin-top:8px;font-size:0.74rem;color:var(--faint)}
+  .state{padding:64px 0;text-align:center;color:var(--dim)}
+  footer{margin-top:42px;border-top:1px solid var(--line);padding-top:18px;color:var(--faint);font-size:0.78rem}
+  /* status chips */
+  .st-prospect{color:#cbd5e1} .st-built{color:var(--amber-soft)} .st-contacted{color:#93c5fd}
+  .st-interested{color:var(--good)} .st-closed{color:#fcd34d} .st-passed{color:var(--faint)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">HAND · Develop · internal</p>
+      <h1>Demo portfolio</h1>
+      <p class="sub">Every free demo site we have built, with live visit counts. The sites are public; this index is not.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b id="stat-sites">·</b><span>Sites</span></div>
+      <div class="stat"><b id="stat-visits">·</b><span>Total visits</span></div>
+    </div>
+  </header>
+
+  <div id="grid" class="grid" hidden></div>
+  <div id="state" class="state">Loading the portfolio…</div>
+
+  <footer>
+    Internal tool. Add a lead in the <a href="/" >Command Center</a> · Develop, build its demo, and it appears here.
+  </footer>
+</div>
+
+<script>
+(function () {
+  var grid = document.getElementById('grid');
+  var state = document.getElementById('state');
+  var LOGICAL_W = 1200, RATIO = 0.625; // 16:10 logical viewport for the thumbnails
+
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function host(u){ try { return new URL(u).hostname.replace(/^www\./,''); } catch(_){ return ''; } }
+  function when(iso){
+    if(!iso) return '';
+    var d = new Date(iso), now = new Date(), days = Math.floor((now-d)/86400000);
+    if (days <= 0) return 'today';
+    if (days === 1) return 'yesterday';
+    if (days < 30) return days + 'd ago';
+    return d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+  }
+
+  function sizeThumbs(){
+    var thumbs = grid.querySelectorAll('.thumb');
+    for (var i=0;i<thumbs.length;i++){
+      var t = thumbs[i], w = t.clientWidth, s = w / LOGICAL_W;
+      var f = t.querySelector('iframe');
+      if (!f) continue;
+      f.style.width = LOGICAL_W + 'px';
+      f.style.height = (LOGICAL_W * RATIO) + 'px';
+      f.style.transform = 'scale(' + s + ')';
+      t.style.height = (w * RATIO) + 'px';
+    }
+  }
+
+  function card(d){
+    var built = d.built_at ? 'built ' + when(d.built_at) : 'not stamped';
+    var lastv = d.last_visit ? ' · last ' + when(d.last_visit) : '';
+    var ref = d.last_visit ? '' : '';
+    return ''
+      + '<article class="card">'
+      +   '<div class="thumb">'
+      +     '<span class="badge st-' + esc(d.status) + '">' + esc(d.status) + '</span>'
+      +     '<iframe src="' + esc(d.demo_url) + '" loading="lazy" title="' + esc(d.name) + ' preview" tabindex="-1" aria-hidden="true"></iframe>'
+      +     '<a class="open" href="' + esc(d.demo_url) + '" target="_blank" rel="noopener" aria-label="Open ' + esc(d.name) + '"></a>'
+      +   '</div>'
+      +   '<div class="body">'
+      +     '<p class="name">' + esc(d.name) + '</p>'
+      +     '<p class="meta">' + esc([d.category, d.city].filter(Boolean).join(' · ')) + '</p>'
+      +     '<div class="row">'
+      +       (d.google_rating != null ? '<span class="rate">★ ' + esc(d.google_rating) + '</span>' : '')
+      +       '<span class="v">👀 ' + (d.visits||0) + ' ' + ((d.visits===1)?'visit':'visits') + '</span>'
+      +       '<span>' + esc(built) + esc(lastv) + '</span>'
+      +     '</div>'
+      +     '<div class="actions">'
+      +       '<a class="btn" href="' + esc(d.demo_url) + '" target="_blank" rel="noopener">Open site ↗</a>'
+      +       '<a class="btn pitch" href="' + esc(d.pitch_url) + '" target="_blank" rel="noopener">Pitch ↗</a>'
+      +     '</div>'
+      +   '</div>'
+      + '</article>';
+  }
+
+  fetch('/demos/portfolio.json', { headers: { 'Accept': 'application/json' } })
+    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(data){
+      var demos = (data && data.demos) || [];
+      if (!demos.length){ state.textContent = 'No demos yet. Build one in the Command Center.'; return; }
+      grid.innerHTML = demos.map(card).join('');
+      document.getElementById('stat-sites').textContent = demos.length;
+      document.getElementById('stat-visits').textContent = demos.reduce(function(a,d){return a+(d.visits||0);},0);
+      state.hidden = true; grid.hidden = false;
+      sizeThumbs();
+      window.addEventListener('resize', sizeThumbs);
+    })
+    .catch(function(){
+      state.innerHTML = 'Could not load the portfolio data. The demo sites are still reachable directly at <code>/demos/&lt;slug&gt;/</code>.';
+    });
+})();
+</script>
+</body>
+</html>

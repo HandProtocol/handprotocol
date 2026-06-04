@@ -9,7 +9,11 @@
 import fs from "node:fs";
 import { admin, loadEnv, parseReviewsBody } from "./_lib.mts";
 import { readBizFile } from "../src/lib/develop/markdown.ts";
-import { bizLeadMarkdownPath, bizLeadMarkdownRelPath } from "../src/lib/develop/paths.ts";
+import {
+  bizLeadMarkdownPath,
+  bizLeadMarkdownRelPath,
+  demoSitePath,
+} from "../src/lib/develop/paths.ts";
 import { BIZ_STATUSES, WEBSITE_STATUSES } from "../src/lib/develop/types.ts";
 
 const slug = process.argv[2];
@@ -56,20 +60,31 @@ const row = {
   last_synced_at: new Date().toISOString(),
 };
 
-const { data: existing } = await client.from("biz_leads").select("id").eq("slug", slug).maybeSingle();
+// Stamp the build time once, the first time the demo index.html exists.
+const demoExists = fs.existsSync(demoSitePath(slug));
+const { data: existing } = await client
+  .from("biz_leads")
+  .select("id, demo_generated_at")
+  .eq("slug", slug)
+  .maybeSingle();
 let leadId: string;
 if (existing) {
-  await client.from("biz_leads").update(row).eq("id", existing.id);
+  const patch: Record<string, unknown> = { ...row };
+  const stampBuilt = demoExists && !existing.demo_generated_at;
+  if (stampBuilt) patch.demo_generated_at = new Date().toISOString();
+  await client.from("biz_leads").update(patch).eq("id", existing.id);
   leadId = existing.id as string;
-  console.log("updated lead", slug, leadId);
+  console.log("updated lead", slug, leadId, stampBuilt ? "(stamped built)" : "");
 } else {
-  const { data, error } = await client.from("biz_leads").insert(row).select("id").single();
+  const insertRow: Record<string, unknown> = { ...row };
+  if (demoExists) insertRow.demo_generated_at = new Date().toISOString();
+  const { data, error } = await client.from("biz_leads").insert(insertRow).select("id").single();
   if (error) {
     console.error("insert failed:", error.message);
     process.exit(1);
   }
   leadId = data!.id as string;
-  console.log("inserted lead", slug, leadId);
+  console.log("inserted lead", slug, leadId, demoExists ? "(stamped built)" : "");
 }
 
 const reviews = parseReviewsBody(body);

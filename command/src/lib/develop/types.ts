@@ -154,6 +154,28 @@ export type PitchResponse = {
   created_at: string;
 };
 
+// A single visit to a generated demo site (command.biz_visits), written by the
+// Netlify biz-visit function from the page beacon. One row per browser session.
+export type BizVisit = {
+  id: string;
+  lead_id: string | null;
+  lead_slug: string;
+  kind: "demo" | "pitch";
+  path: string | null;
+  referrer: string | null;
+  country: string | null;
+  city: string | null;
+  ua: string | null;
+  created_at: string;
+};
+
+// Rolled-up visit activity for one lead's demo, shown on the detail page.
+export type VisitStats = {
+  total: number;
+  lastVisitAt: string | null;
+  recent: BizVisit[];
+};
+
 // Cold-outreach script surfaces. The frontmatter `surface` field on each
 // template at biz/_templates/cold/*.md, used to tag and group the scripts on
 // /develop/scripts.

@@ -6,6 +6,7 @@ import {
   getBizLeadBySlug,
   listTouchpoints,
   listPitchResponses,
+  getVisitStats,
 } from "@/lib/develop/queries";
 import { BizStatusChip } from "@/components/develop/status-chip";
 import { GeneratePanel } from "@/components/develop/generate-panel";
@@ -22,6 +23,14 @@ const METHOD_LABEL: Record<string, string> = {
   other: "Note",
 };
 
+function refHost(ref: string): string {
+  try {
+    return new URL(ref).hostname.replace(/^www\./, "");
+  } catch {
+    return ref.slice(0, 40);
+  }
+}
+
 export default async function BizLeadDetailPage({
   params,
 }: {
@@ -34,6 +43,7 @@ export default async function BizLeadDetailPage({
   const reviews = lead.reviews ?? [];
   const touchpoints = await listTouchpoints(lead.id);
   const pitchResponses = await listPitchResponses(lead.id);
+  const visits = await getVisitStats(lead.id);
 
   return (
     <div className="space-y-6">
@@ -105,6 +115,68 @@ export default async function BizLeadDetailPage({
           initialDemoUrl={lead.demo_url}
           hasReviews={reviews.length > 0}
         />
+      </section>
+
+      {/* Site activity: when it was built + who has visited */}
+      <section className="space-y-3">
+        <p className="display-eyebrow">
+          SITE ACTIVITY · <span className="amber">{visits.total}</span>{" "}
+          {visits.total === 1 ? "VISIT" : "VISITS"}
+        </p>
+        <div className="panel p-4 space-y-3 text-sm">
+          <div className="flex flex-wrap gap-x-6 gap-y-1.5 text-[var(--ink-dim)]">
+            <span>
+              <span className="text-[var(--ink-faint)]">Built </span>
+              {lead.demo_generated_at
+                ? format(new Date(lead.demo_generated_at), "MMM d, yyyy")
+                : "not stamped"}
+            </span>
+            {lead.demo_deployed_at && (
+              <span>
+                <span className="text-[var(--ink-faint)]">Deployed </span>
+                {format(new Date(lead.demo_deployed_at), "MMM d, yyyy")}
+              </span>
+            )}
+            <span>
+              <span className="text-[var(--ink-faint)]">Last visit </span>
+              {visits.lastVisitAt
+                ? format(new Date(visits.lastVisitAt), "MMM d, h:mma")
+                : "none yet"}
+            </span>
+          </div>
+          {visits.recent.length === 0 ? (
+            <p className="text-xs text-[var(--ink-dim)]">
+              No visits recorded yet. Each view of{" "}
+              <code className="font-mono text-xs">
+                {lead.demo_url ?? `/demos/${lead.slug}/`}
+              </code>{" "}
+              shows up here.
+            </p>
+          ) : (
+            <ul className="space-y-1.5">
+              {visits.recent.map((v) => (
+                <li
+                  key={v.id}
+                  className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-faint)]"
+                >
+                  <span className="text-[var(--amber-soft)]">
+                    {format(new Date(v.created_at), "MMM d, h:mma")}
+                  </span>
+                  {(v.city || v.country) && (
+                    <span>
+                      · {[v.city, v.country].filter(Boolean).join(", ")}
+                    </span>
+                  )}
+                  {v.referrer && (
+                    <span className="normal-case tracking-normal text-[var(--ink-dim)]">
+                      · via {refHost(v.referrer)}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </section>
 
       {/* Pitch page generator + preview */}

@@ -9,7 +9,9 @@ import type {
   BizLead,
   BizReview,
   BizTouchpoint,
+  BizVisit,
   PitchResponse,
+  VisitStats,
 } from "./types";
 
 function adminClient() {
@@ -108,6 +110,42 @@ export async function listPitchResponses(
     .order("created_at", { ascending: false });
   if (error || !data) return [];
   return data as unknown as PitchResponse[];
+}
+
+export async function getVisitStats(leadId: string): Promise<VisitStats> {
+  const client = await readClient();
+  if (!client) return { total: 0, lastVisitAt: null, recent: [] };
+  const { count } = await client
+    .from("biz_visits")
+    .select("id", { count: "exact", head: true })
+    .eq("lead_id", leadId);
+  const { data } = await client
+    .from("biz_visits")
+    .select(
+      "id, lead_id, lead_slug, kind, path, referrer, country, city, ua, created_at",
+    )
+    .eq("lead_id", leadId)
+    .order("created_at", { ascending: false })
+    .limit(10);
+  const recent = (data ?? []) as unknown as BizVisit[];
+  return {
+    total: count ?? recent.length,
+    lastVisitAt: recent[0]?.created_at ?? null,
+    recent,
+  };
+}
+
+// Per-slug visit counts for the kanban badges. Low volume, rolled up in JS.
+export async function listVisitCounts(): Promise<Record<string, number>> {
+  const client = await readClient();
+  if (!client) return {};
+  const { data, error } = await client.from("biz_visits").select("lead_slug");
+  if (error || !data) return {};
+  const counts: Record<string, number> = {};
+  for (const r of data as { lead_slug: string }[]) {
+    counts[r.lead_slug] = (counts[r.lead_slug] ?? 0) + 1;
+  }
+  return counts;
 }
 
 export async function getBizSlugs(): Promise<Set<string>> {

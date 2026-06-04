@@ -193,6 +193,7 @@ export function renderDemoSite(lead: BizLead, copy: SiteCopy): string {
       <p class="credit">A free preview site built by <a href="https://handprotocol.org">HAND</a>.</p>
     </div>
   </footer>
+  <script defer src="/assets/demo-visit.js"></script>
 </body>
 </html>
 `;
