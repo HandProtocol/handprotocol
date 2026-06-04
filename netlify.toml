@@ -53,12 +53,6 @@
   function = "demos-portfolio-auth"
   path = "/demos/portfolio.json"
 
-# Portfolio data: rewrite (200) to the function, behind the edge gate above.
-[[redirects]]
-  from = "/demos/portfolio.json"
-  to = "/.netlify/functions/biz-portfolio"
-  status = 200
-
 # Root redirects to foundation campaign (primary surface)
 [[redirects]]
   from = "/"

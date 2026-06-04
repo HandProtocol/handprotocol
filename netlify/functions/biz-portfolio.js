@@ -16,7 +16,16 @@ function json(statusCode, body) {
   };
 }
 
-exports.handler = async () => {
+exports.handler = async (event) => {
+  // Only reachable through the gated edge proxy (/demos/portfolio.json), which
+  // adds this shared key. Blocks direct hits to the raw function path.
+  const required = process.env.DEMOS_PITCH_PASSWORD;
+  if (required) {
+    const hdrs = event && event.headers ? event.headers : {};
+    const key = hdrs["x-portfolio-key"] || hdrs["X-Portfolio-Key"] || "";
+    if (key !== required) return json(403, { error: "forbidden", demos: [] });
+  }
+
   const supabaseUrl = process.env.SUPABASE_URL;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!supabaseUrl || !serviceKey) {
