@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frontier Valley — Affordable Home Community in Southeast Austin</title>
+<meta name="description" content="Frontier Valley is an established, affordable mobile home community in southeast Austin, home to families since 1973. Shade trees, a clubhouse, and an on-site office, six miles from downtown. Call (737) 210-1171.">
+<meta name="theme-color" content="#6b2c23">
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="Frontier Valley — A Home Community in Southeast Austin">
+<meta property="og:description" content="An established, affordable place to call home in Austin since 1973. Call the office at (737) 210-1171.">
+<meta property="og:locale" content="en_US">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#2b2421; --ink-soft:#5a5048;
+    --brick:#8a3a2e; --brick-deep:#6b2c23;
+    --sand:#f7f0e3; --sand-card:#fbf6ec; --sand-deep:#efe4d1;
+    --pine:#3a5544; --gold:#c98a3a;
+    --line:rgba(43,36,33,.12); --line-strong:rgba(43,36,33,.2);
+    --shadow:0 1px 2px rgba(43,36,33,.06), 0 14px 34px -18px rgba(43,36,33,.4);
+    --maxw:1100px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0; background:var(--sand); color:var(--ink);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:clamp(16px,1.05vw + 13px,18px); line-height:1.62;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  h1,h2,h3{font-family:Fraunces,Georgia,"Times New Roman",serif; font-weight:600; line-height:1.08; letter-spacing:-.01em; color:var(--ink); margin:0}
+  p{margin:0}
+  a{color:var(--brick-deep)}
+  img{max-width:100%; display:block}
+  .wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(20px,5vw,40px)}
+  .eyebrow{font-size:.78rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--brick); margin:0 0 .9rem}
+
+  /* buttons */
+  .btn{display:inline-flex; align-items:center; gap:.5rem; font:inherit; font-weight:600; text-decoration:none;
+    padding:.85rem 1.4rem; border-radius:999px; border:1px solid transparent; cursor:pointer; transition:transform .15s ease, box-shadow .15s ease, background .15s ease}
+  .btn:focus-visible{outline:3px solid var(--gold); outline-offset:2px}
+  .btn-primary{background:var(--brick); color:#fff7ef; box-shadow:var(--shadow)}
+  .btn-primary:hover{background:var(--brick-deep); transform:translateY(-1px)}
+  .btn-ghost{background:rgba(255,255,255,.14); color:#fff7ef; border-color:rgba(255,247,239,.55)}
+  .btn-ghost:hover{background:rgba(255,255,255,.24)}
+  .btn-outline{background:transparent; color:var(--brick-deep); border-color:var(--line-strong)}
+  .btn-outline:hover{background:var(--sand-deep)}
+
+  /* header */
+  header.site{position:sticky; top:0; z-index:30; background:rgba(247,240,227,.86); backdrop-filter:saturate(1.4) blur(10px); border-bottom:1px solid var(--line)}
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:.7rem}
+  .brand{display:flex; flex-direction:column; line-height:1; text-decoration:none}
+  .brand b{font-family:Fraunces,serif; font-weight:700; font-size:1.32rem; color:var(--brick-deep); letter-spacing:.01em}
+  .brand span{font-size:.66rem; letter-spacing:.28em; text-transform:uppercase; color:var(--ink-soft); margin-top:.3rem}
+  .nav-links{display:none; gap:1.6rem}
+  .nav-links a{color:var(--ink-soft); text-decoration:none; font-size:.92rem; font-weight:500}
+  .nav-links a:hover{color:var(--brick)}
+  .nav .btn{padding:.6rem 1.1rem; font-size:.92rem}
+  @media(min-width:860px){.nav-links{display:flex}}
+
+  /* hero */
+  .hero{position:relative; min-height:min(86vh,720px); display:flex; align-items:flex-end; overflow:hidden; isolation:isolate}
+  .hero-img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:-2}
+  .hero::after{content:""; position:absolute; inset:0; z-index:-1;
+    background:linear-gradient(82deg, rgba(43,28,24,.86) 0%, rgba(43,28,24,.6) 42%, rgba(43,28,24,.18) 78%, rgba(43,28,24,.05) 100%),
+               linear-gradient(0deg, rgba(43,28,24,.55), rgba(43,28,24,0) 45%)}
+  .hero-inner{color:#fdf6ec; padding-block:clamp(2.4rem,6vw,4.6rem); max-width:660px}
+  .hero h1{color:#fff8ee; font-size:clamp(2.3rem,5.2vw,4rem); text-shadow:0 1px 24px rgba(20,12,10,.4)}
+  .hero p.lede{margin-top:1.1rem; font-size:clamp(1.05rem,1.5vw,1.22rem); color:#f3e7d6; max-width:48ch}
+  .rating{display:inline-flex; align-items:center; gap:.6rem; margin-bottom:1.2rem; background:rgba(255,247,239,.14); border:1px solid rgba(255,247,239,.3); padding:.4rem .85rem; border-radius:999px; font-size:.9rem; font-weight:500; color:#fff8ee}
+  .stars{color:#f1b34a; letter-spacing:.08em}
+  .hero-cta{display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.7rem}
+
+  /* facts strip */
+  .facts{background:var(--brick-deep); color:#f6e7d6}
+  .facts .wrap{display:grid; grid-template-columns:repeat(2,1fr); gap:1.4rem 1rem; padding-block:1.7rem}
+  .fact b{display:block; font-family:Fraunces,serif; font-size:1.5rem; color:#fff7ec; font-weight:600}
+  .fact span{font-size:.86rem; color:#e6c9b3; letter-spacing:.02em}
+  @media(min-width:760px){.facts .wrap{grid-template-columns:repeat(4,1fr)}}
+
+  /* sections */
+  section{padding-block:clamp(3.2rem,7vw,5.4rem)}
+  .section-head{max-width:42ch; margin-bottom:2.6rem}
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem)}
+  .section-head p{margin-top:.8rem; color:var(--ink-soft)}
+
+  .cards{display:grid; gap:1.2rem; grid-template-columns:1fr}
+  @media(min-width:760px){.cards{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--sand-card); border:1px solid var(--line); border-radius:18px; padding:1.6rem; box-shadow:var(--shadow)}
+  .card .ic{width:42px; height:42px; border-radius:11px; display:grid; place-items:center; background:var(--sand-deep); color:var(--brick); margin-bottom:1rem}
+  .card .ic svg{width:22px; height:22px}
+  .card h3{font-size:1.22rem; margin-bottom:.5rem}
+  .card p{color:var(--ink-soft); font-size:.98rem}
+
+  /* community gallery */
+  .community{background:var(--sand-deep)}
+  .gallery{display:grid; gap:1rem; grid-template-columns:1fr}
+  .gallery figure{margin:0; border-radius:16px; overflow:hidden; box-shadow:var(--shadow); background:#ded2bd; position:relative}
+  .gallery img{width:100%; height:100%; object-fit:cover; aspect-ratio:16/10}
+  .gallery figcaption{position:absolute; left:0; right:0; bottom:0; padding:.9rem 1rem; font-size:.85rem; color:#fff7ec;
+    background:linear-gradient(0deg, rgba(43,28,24,.78), rgba(43,28,24,0))}
+  @media(min-width:760px){
+    .gallery{grid-template-columns:1.5fr 1fr; grid-auto-rows:1fr}
+    .gallery figure:first-child{grid-row:span 2}
+    .gallery figure:first-child img{aspect-ratio:auto; height:100%}
+  }
+
+  /* testimonials */
+  .quotes{columns:1; column-gap:1.2rem}
+  @media(min-width:680px){.quotes{columns:2}}
+  blockquote{break-inside:avoid; margin:0 0 1.2rem; background:var(--sand-card); border:1px solid var(--line); border-left:4px solid var(--brick); border-radius:14px; padding:1.4rem 1.5rem; box-shadow:var(--shadow)}
+  blockquote p{font-family:Fraunces,serif; font-size:1.12rem; line-height:1.5; color:var(--ink)}
+  blockquote cite{display:block; margin-top:.85rem; font-style:normal; font-size:.86rem; font-weight:600; color:var(--brick-deep); letter-spacing:.02em}
+  blockquote cite::before{content:"— "}
+
+  /* about + contact split */
+  .about{background:var(--pine); color:#eef3ec}
+  .about .grid{display:grid; gap:2.4rem; grid-template-columns:1fr}
+  @media(min-width:880px){.about .grid{grid-template-columns:1.1fr .9fr; align-items:center}}
+  .about h2{color:#fff}
+  .about p{color:#dde7dc; margin-top:1rem}
+  .contact-card{background:#fbf6ec; color:var(--ink); border-radius:20px; padding:1.9rem; box-shadow:0 22px 50px -24px rgba(20,30,22,.7)}
+  .contact-card h3{font-size:1.35rem; margin-bottom:.4rem}
+  .contact-card .muted{color:var(--ink-soft); font-size:.92rem}
+  .phone-line{display:flex; align-items:center; gap:.7rem; margin:1.1rem 0 .3rem; font-family:Fraunces,serif; font-size:1.7rem; font-weight:600; color:var(--brick-deep); text-decoration:none}
+  .phone-line:hover{color:var(--brick)}
+  .phone-line svg{width:24px; height:24px; flex:none}
+  .addr{display:flex; gap:.7rem; margin-top:1.2rem; color:var(--ink-soft); font-size:.96rem}
+  .addr svg{width:20px; height:20px; flex:none; color:var(--brick); margin-top:.15rem}
+  .contact-card .btn{width:100%; justify-content:center; margin-top:1.4rem}
+
+  /* footer */
+  footer.site{background:var(--ink); color:#cdbfae; padding-block:2.4rem; font-size:.9rem}
+  footer.site .wrap{display:flex; flex-wrap:wrap; gap:1rem 2rem; align-items:center; justify-content:space-between}
+  footer.site a{color:#f0d9bf; font-weight:600}
+  .hand-credit{display:inline-flex; align-items:center; gap:.5rem}
+  .hand-credit .dot{width:8px; height:8px; border-radius:50%; background:var(--gold)}
+  .fineprint{color:#8c8073; font-size:.82rem; max-width:46ch}
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1; transform:none; transition:none}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="Frontier Valley home">
+      <b>Frontier Valley</b><span>Austin, Texas</span>
+    </a>
+    <nav class="nav-links" aria-label="Sections">
+      <a href="#community">Community</a>
+      <a href="#location">Location</a>
+      <a href="#reviews">Neighbors</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-primary" href="tel:+17372101171">Call the office</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Welcome to Frontier Valley">
+    <img class="hero-img" src="img/clubhouse.webp" width="895" height="438" alt="The stone clubhouse and office at Frontier Valley, with a green lawn, shade trees and Texas blue sky" loading="eager" fetchpriority="high" decoding="async">
+    <div class="wrap hero-inner">
+      <p class="rating"><span class="stars" aria-hidden="true">★★★★</span><span>4.0 on Google · 91 reviews</span></p>
+      <p class="eyebrow" style="color:#f0c79f">Mobile home community · Southeast Austin</p>
+      <h1>An affordable place to call home in Austin</h1>
+      <p class="lede">Frontier Valley has been home to Austin families since 1973. Shade trees, quiet streets, a clubhouse, and an office right on site, six miles from downtown and minutes from the airport.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="tel:+17372101171">Call (737) 210-1171</a>
+        <a class="btn btn-ghost" href="#location">See the location</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FACTS -->
+  <div class="facts">
+    <div class="wrap">
+      <div class="fact"><b>Since 1973</b><span>A home for Austin families for 50+ years</span></div>
+      <div class="fact"><b>154 homes</b><span>An established, settled community</span></div>
+      <div class="fact"><b>6 miles</b><span>From downtown Austin</span></div>
+      <div class="fact"><b>Minutes</b><span>From Austin-Bergstrom Airport</span></div>
+    </div>
+  </div>
+
+  <!-- WHY -->
+  <section id="community">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Why neighbors stay</p>
+        <h2>A real neighborhood, still within reach</h2>
+        <p>Frontier Valley is the kind of place where people put down roots and stay. Here is what neighbors point to.</p>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
+          <h3>Affordable, and still in Austin</h3>
+          <p>One of the more affordable ways to have a home and a yard inside the city, in a neighborhood that has stayed lived-in and real while the rest of Austin changed.</p>
+        </article>
+        <article class="card reveal">
+          <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <h3>Looked after</h3>
+          <p>An on-site management office, ongoing repairs and upkeep under current management, and neighbors who keep the streets clean and quiet. As one long-time resident put it, "Well managed. Clean. Well kept."</p>
+        </article>
+        <article class="card reveal">
+          <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div>
+          <h3>Close to everything</h3>
+          <p>Set along the Colorado River between Highway 71 and 183. You are six miles from downtown, minutes from the airport, and a short drive to Roy Guerrero Metro Park and the river trails.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY / GALLERY -->
+  <section id="location" class="community">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">Around the community</p>
+        <h2>Tree-lined streets in southeast Austin</h2>
+        <p>An established community in the Montopolis area, with mature shade, a clubhouse, and easy reach to the rest of the city.</p>
+      </div>
+      <div class="gallery reveal">
+        <figure>
+          <img src="img/aerial.webp" width="675" height="424" alt="Aerial view of Frontier Valley showing its grid of tree-lined streets and homes" loading="lazy" decoding="async">
+          <figcaption>An established, tree-filled community of 154 homes</figcaption>
+        </figure>
+        <figure>
+          <img src="img/street.webp" width="814" height="378" alt="The entrance road to Frontier Valley, lined with trees and hedges" loading="lazy" decoding="async">
+          <figcaption>Quiet, tree-lined streets</figcaption>
+        </figure>
+        <figure>
+          <img src="img/homes.webp" width="721" height="744" alt="A residential street inside Frontier Valley with homes and open space" loading="lazy" decoding="async">
+          <figcaption>Room for a home and a yard</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="reviews">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <p class="eyebrow">From the neighbors</p>
+        <h2>What residents say</h2>
+        <p>In their own words, pulled from public Google reviews.</p>
+      </div>
+      <div class="quotes reveal">
+        <blockquote><p>Very well managed. Clean. Well kept. Good manager.</p><cite>Delwin Goss</cite></blockquote>
+        <blockquote><p>A pleasant and peaceful place. Far away and close at the same time.</p><cite>Arturo Sanz</cite></blockquote>
+        <blockquote><p>Zero danger, very friendly people.</p><cite>Judith Velazquez</cite></blockquote>
+        <blockquote><p>It's a great area to live at and it's nice.</p><cite>Armando John Anaya</cite></blockquote>
+        <blockquote><p>I grew up here. I just love this neighborhood.</p><cite>Maria D. Peru</cite></blockquote>
+        <blockquote><p>Under new management, finally seeing repairs being made and things being added.</p><cite>drew lyon</cite></blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT + CONTACT -->
+  <section id="contact" class="about">
+    <div class="wrap grid">
+      <div class="reveal">
+        <p class="eyebrow" style="color:#bcd3c2">About Frontier Valley</p>
+        <h2>A settled corner of southeast Austin</h2>
+        <p>Frontier Valley is a community of 154 home sites off Frontier Valley Drive in the Montopolis area, first opened in 1973. It sits along the Colorado River with mature shade trees, a community clubhouse and pool, and a management office on site.</p>
+        <p>It remains one of the more affordable ways to have a place of your own inside the city, close to downtown, the airport, and the river parks.</p>
+      </div>
+      <aside class="contact-card reveal" aria-label="Contact the office">
+        <h3>Find out what's available</h3>
+        <p class="muted">Call the office about current homes and lot rent.</p>
+        <a class="phone-line" href="tel:+17372101171">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+          (737) 210-1171
+        </a>
+        <p class="muted">Office hours vary, please call ahead.</p>
+        <div class="addr">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+          <span>1430 Frontier Valley Dr<br>Austin, TX 78741</span>
+        </div>
+        <a class="btn btn-outline" href="https://www.google.com/maps/place/Frontier+Valley/@30.2284088,-97.6902261,17z/data=!4m6!3m5!1s0x8644b6a6d973c2b5:0xb649a4e7c3df0b76!8m2!3d30.2284526!4d-97.690277!16s%2Fg%2F12647pvfz" target="_blank" rel="noopener">Get directions</a>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="hand-credit"><span class="dot" aria-hidden="true"></span> A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a></span>
+    <span class="fineprint">Frontier Valley, Austin, Texas. Photos and resident quotes from public Google listings. Not the official site of the community.</span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion:reduce)').matches){
+      els.forEach(function(e){e.classList.add('in')}); return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    els.forEach(function(e){io.observe(e)});
+  })();
+</script>
+</body>
+</html>
