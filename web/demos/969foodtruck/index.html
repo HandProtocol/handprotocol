@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>969 Mexican Food Truck · Comida Casera on FM 969, East of Austin</title>
+<meta name="description" content="Homestyle Mexican from a little red trailer on Highway 969 in Utley, just east of Austin. Tortas, gorditas, breakfast tacos, and caldos made to order. 4.3 stars on Google.">
+<link rel="canonical" href="https://handprotocol.org/demos/969foodtruck/">
+
+<!-- Open Graph, so the link previews nicely when texted or shared -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="969 Mexican Food Truck">
+<meta property="og:description" content="Comida casera off Highway 969. Tortas, gorditas, breakfast tacos, and caldos made to order, just east of Austin.">
+<meta property="og:image" content="https://handprotocol.org/demos/969foodtruck/img/chilaquiles.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- FM 969 route-marker favicon -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23a32d22'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='900' text-anchor='middle' fill='%23f4ead7'%3E969%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Overpass:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Leaflet, for the Austin-to-truck map intro. Keyless CARTO tiles, no token. -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+  :root {
+    /* Palette pulled from the trailer and the plates. OKLCH, warm-tinted neutrals. */
+    --bone:      oklch(0.96 0.022 84);
+    --bone-2:    oklch(0.92 0.030 82);
+    --bone-3:    oklch(0.88 0.035 80);
+    --ink:       oklch(0.24 0.024 45);
+    --ink-soft:  oklch(0.42 0.030 45);
+    --red:       oklch(0.52 0.165 30);
+    --red-deep:  oklch(0.40 0.140 32);
+    --asphalt:   oklch(0.27 0.028 40);
+    --verde:     oklch(0.60 0.120 145);
+    --marigold:  oklch(0.80 0.150 78);
+
+    --maxw: 1180px;
+    --pad: clamp(1.15rem, 4vw, 3rem);
+
+    /* Modular type scale, ratio ~1.28, fluid on the display end */
+    --t-label: 0.78rem;
+    --t-body:  clamp(1rem, 0.96rem + 0.25vw, 1.18rem);
+    --t-lead:  clamp(1.2rem, 1.05rem + 0.7vw, 1.55rem);
+    --t-h3:    clamp(1.45rem, 1.2rem + 1.1vw, 2rem);
+    --t-h2:    clamp(2rem, 1.5rem + 2.4vw, 3.4rem);
+    --t-hero:  clamp(2.7rem, 1.6rem + 5.4vw, 5.6rem);
+
+    --r: 14px;
+    --shadow: 0 18px 40px -24px oklch(0.24 0.05 40 / 0.55);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bone);
+    color: var(--ink);
+    font-family: "Overpass", system-ui, sans-serif;
+    font-size: var(--t-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+
+  h1, h2, h3 {
+    font-family: "Bricolage Grotesque", "Overpass", sans-serif;
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
+
+  .eyebrow {
+    font-family: "Overpass", sans-serif;
+    font-weight: 700;
+    font-size: var(--t-label);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  /* ---- Buttons -------------------------------------------------------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.55em;
+    min-height: 52px;
+    padding: 0.7em 1.35em;
+    font-family: "Overpass", sans-serif;
+    font-weight: 800;
+    font-size: 1.02rem;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background-color 0.2s, color 0.2s;
+  }
+  .btn svg { width: 1.1em; height: 1.1em; flex: none; }
+  .btn-primary { background: var(--red); color: var(--bone); box-shadow: var(--shadow); }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-on-red { background: var(--bone); color: var(--red-deep); box-shadow: var(--shadow); }
+  .btn-on-red:hover { transform: translateY(-2px); }
+  .btn-ghost { background: transparent; border-color: currentColor; color: var(--ink); }
+  .btn-ghost:hover { background: var(--ink); color: var(--bone); }
+  :where(a, button):focus-visible {
+    outline: 3px solid var(--marigold);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  /* ---- FM route marker ------------------------------------------------ */
+  .marker {
+    display: inline-grid;
+    justify-items: center;
+    align-content: center;
+    gap: 0.05em;
+    background: var(--bone);
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    border-radius: 12px;
+    padding: 0.5em 0.7em 0.6em;
+    line-height: 0.92;
+    box-shadow: 0 2px 0 oklch(0.24 0.04 40 / 0.25);
+  }
+  .marker .marker-fm {
+    font-family: "Overpass", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    font-size: 0.46em;
+  }
+  .marker .marker-num {
+    font-family: "Overpass", sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+  }
+  .marker--lg { font-size: clamp(3.2rem, 2rem + 5vw, 5.4rem); }
+  .marker--lg .marker-num { font-size: 1em; }
+  .marker--sm { font-size: 1.55rem; border-width: 2px; border-radius: 8px; padding: 0.28em 0.42em 0.34em; }
+
+  /* ---- Sticky header -------------------------------------------------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 30;
+    background: oklch(0.96 0.022 84 / 0.92);
+    backdrop-filter: saturate(1.2);
+    border-bottom: 1px solid var(--bone-3);
+  }
+  .topbar .wrap {
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    padding-block: 0.6rem;
+  }
+  .brand-lockup { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+  .brand-lockup .brand-name {
+    font-family: "Bricolage Grotesque", sans-serif; font-weight: 800;
+    font-size: 1.05rem; line-height: 1; letter-spacing: -0.01em; color: var(--ink);
+  }
+  .brand-lockup .brand-name small { display: block; font-weight: 600; font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.2em; }
+  .topbar .btn { min-height: 44px; padding-block: 0.5em; font-size: 0.92rem; }
+  @media (max-width: 540px) { .topbar .btn-label-long { display: none; } }
+
+  /* ---- Hero ----------------------------------------------------------- */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(120% 90% at 85% -10%, oklch(0.58 0.17 34) 0%, transparent 55%),
+      var(--red);
+    color: var(--bone);
+    overflow: hidden;
+  }
+  .hero::after {
+    /* faint highway center-line dashes along the bottom */
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px;
+    background: repeating-linear-gradient(90deg, var(--marigold) 0 38px, transparent 38px 70px);
+    opacity: 0.85;
+  }
+  .hero .wrap {
+    display: grid; gap: clamp(2rem, 5vw, 4rem);
+    padding-block: clamp(2.6rem, 6vw, 5rem) clamp(3.4rem, 7vw, 6rem);
+    align-items: center;
+  }
+  @media (min-width: 860px) { .hero .wrap { grid-template-columns: 1.05fr 0.95fr; } }
+
+  .hero-eyebrow { color: oklch(0.92 0.04 84 / 0.9); display: inline-flex; align-items: center; gap: 0.6em; }
+  .hero-eyebrow::before { content: ""; width: 2.2em; height: 2px; background: var(--marigold); display: inline-block; }
+  .hero h1 { margin: 1rem 0 0; }
+  .hero .hero-name {
+    display: block;
+    font-size: var(--t-hero);
+    letter-spacing: -0.03em;
+  }
+  .hero .hero-name em { font-style: normal; display: block; color: var(--marigold); }
+  .hero-lead { font-size: var(--t-lead); max-width: 30ch; margin: 1.3rem 0 0; color: oklch(0.95 0.03 84 / 0.95); font-weight: 500; }
+
+  .rating { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem; flex-wrap: wrap; }
+  .stars { font-size: 1.3rem; letter-spacing: 0.08em; line-height: 1; }
+  .stars .on { color: var(--marigold); }
+  .stars .off { color: oklch(0.96 0.02 84 / 0.38); }
+  .rating-text { font-weight: 700; letter-spacing: 0.02em; font-size: 0.98rem; }
+
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.9rem; }
+
+  .hero-figure {
+    position: relative;
+    justify-self: center;
+    rotate: 1.4deg;
+    padding: 0.7rem 0.7rem 1.1rem;
+    background: var(--bone);
+    border-radius: 6px;
+    box-shadow: 0 30px 60px -30px oklch(0.2 0.08 35 / 0.75);
+    max-width: 480px;
+  }
+  .hero-figure img { border-radius: 3px; }
+  .hero-figure figcaption {
+    font-family: "Overpass", sans-serif; color: var(--ink-soft);
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em;
+    text-align: center; margin-top: 0.6rem;
+  }
+  .hero-marker-float { position: absolute; top: -22px; left: -18px; rotate: -6deg; }
+
+  /* ---- Section scaffolding ------------------------------------------- */
+  section { padding-block: clamp(3.2rem, 7vw, 6rem); }
+  .sec-head { max-width: 46ch; }
+  .sec-head .eyebrow { color: var(--red); }
+  .sec-head h2 { font-size: var(--t-h2); margin-top: 0.7rem; }
+  .sec-head p { color: var(--ink-soft); font-size: var(--t-lead); margin: 0.8rem 0 0; }
+
+  /* ---- Known-for grid (varied, not identical cards) ------------------- */
+  .menu-grid {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    display: grid; gap: 1.1rem;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) { .menu-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 980px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .plate { position: relative; border-radius: var(--r); overflow: hidden; background: var(--bone-2); min-height: 240px; display: flex; }
+  .plate img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .plate .plate-body {
+    position: relative; margin-top: auto; width: 100%;
+    padding: 1.1rem 1.2rem 1.2rem;
+    background: linear-gradient(to top, oklch(0.2 0.05 35 / 0.92) 0%, oklch(0.2 0.05 35 / 0.7) 55%, transparent 100%);
+    color: var(--bone);
+  }
+  .plate h3 { font-size: var(--t-h3); }
+  .plate p { margin: 0.35rem 0 0; font-size: 0.96rem; color: oklch(0.95 0.02 84 / 0.92); line-height: 1.5; }
+
+  /* The star item: tortas, text-forward, no photo, leans on the real quote */
+  .plate--star { background: var(--ink); color: var(--bone); min-height: 240px; }
+  @media (min-width: 720px) { .plate--star { grid-column: span 2; } }
+  @media (min-width: 980px) { .plate--star { grid-column: span 1; grid-row: span 1; } }
+  .plate--star .plate-body { background: none; margin: 0; display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 1.5rem; }
+  .plate--star .tag { color: var(--marigold); }
+  .plate--star blockquote { margin: 0; font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: 1.15rem; line-height: 1.25; }
+  .plate--star blockquote cite { display: block; font-family: "Overpass", sans-serif; font-style: normal; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.95 0.02 84 / 0.65); margin-top: 0.7rem; }
+
+  .spend-note {
+    margin-top: 1.6rem; font-size: 0.95rem; color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: 0.6em;
+  }
+  .spend-note b { color: var(--ink); font-weight: 800; }
+
+  /* ---- Testimonials band --------------------------------------------- */
+  .voices { background: var(--red); color: var(--bone); position: relative; }
+  .voices .eyebrow { color: oklch(0.95 0.05 84 / 0.8); }
+  .voices h2 { font-size: var(--t-h2); margin-top: 0.6rem; max-width: 16ch; }
+  .voices-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; gap: 1.4rem; }
+  @media (min-width: 760px) { .voices-grid { grid-template-columns: 1fr 1fr; } }
+  .voice {
+    background: oklch(0.46 0.15 31);
+    border-radius: var(--r);
+    padding: clamp(1.5rem, 3vw, 2.2rem);
+  }
+  .voice .qmark { font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; color: var(--marigold); font-size: 3rem; line-height: 0.6; display: block; height: 0.5em; }
+  .voice blockquote { margin: 0.6rem 0 0; font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; font-size: clamp(1.4rem, 1.1rem + 1.4vw, 2.1rem); line-height: 1.18; }
+  .voice cite { display: block; font-style: normal; margin-top: 1rem; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.95 0.04 84 / 0.78); }
+  .voices-proof { margin-top: 2rem; font-weight: 700; letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 0.6rem; }
+  .voices-proof .stars { font-size: 1.1rem; }
+
+  /* ---- Find us -------------------------------------------------------- */
+  .find { background: var(--asphalt); color: var(--bone); }
+  .find .wrap { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
+  @media (min-width: 820px) { .find .wrap { grid-template-columns: 0.9fr 1.1fr; } }
+  .find-figure { justify-self: center; rotate: -1.6deg; padding: 0.6rem 0.6rem 0.9rem; background: var(--bone); border-radius: 6px; box-shadow: 0 30px 60px -34px oklch(0 0 0 / 0.7); max-width: 420px; }
+  .find-figure img { border-radius: 3px; }
+  .find-figure figcaption { font-family: "Overpass", sans-serif; color: var(--ink-soft); font-size: 0.78rem; font-weight: 600; text-align: center; margin-top: 0.55rem; }
+  .find .eyebrow { color: var(--marigold); }
+  .find h2 { font-size: var(--t-h2); margin-top: 0.7rem; }
+  .find address {
+    font-style: normal; font-size: var(--t-lead); line-height: 1.4; margin: 1.1rem 0 0;
+    color: oklch(0.95 0.02 84 / 0.92);
+  }
+  .find .road { color: var(--marigold); font-weight: 800; }
+  .find-cta { margin-top: 1.7rem; }
+  .find-note { margin-top: 1.3rem; font-size: 0.9rem; color: oklch(0.95 0.02 84 / 0.6); }
+
+  /* ---- Footer --------------------------------------------------------- */
+  footer { background: var(--ink); color: oklch(0.95 0.02 84 / 0.75); }
+  footer .wrap { padding-block: clamp(2.2rem, 4vw, 3rem); display: flex; flex-wrap: wrap; gap: 1.2rem 2rem; align-items: center; justify-content: space-between; }
+  footer .foot-biz { font-family: "Bricolage Grotesque", sans-serif; font-weight: 700; color: var(--bone); font-size: 1.05rem; letter-spacing: -0.01em; }
+  footer .foot-biz small { display: block; font-family: "Overpass", sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.08em; color: oklch(0.95 0.02 84 / 0.55); margin-top: 0.25rem; }
+  footer .credit { font-size: 0.86rem; }
+  footer .credit a { color: var(--marigold); font-weight: 700; text-decoration: none; border-bottom: 1px solid oklch(0.80 0.15 78 / 0.4); }
+  footer .credit a:hover { border-bottom-color: var(--marigold); }
+
+  /* ---- Reveal on scroll ---------------------------------------------- */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---- Map intro (Austin, fly to the truck, lift to reveal) ---------- */
+  html.intro-lock { overflow: hidden; }
+  .intro {
+    position: fixed; inset: 0; z-index: 100; background: var(--red);
+    opacity: 1; transition: opacity 0.85s var(--ease), transform 0.95s var(--ease);
+  }
+  .intro.gone { opacity: 0; transform: scale(1.06); pointer-events: none; }
+  .intro-map { position: absolute; inset: 0; z-index: 0; }
+  .intro-veil {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background:
+      radial-gradient(120% 80% at 50% 32%, transparent 42%, oklch(0.42 0.14 32 / 0.42) 100%),
+      linear-gradient(to top, oklch(0.40 0.14 32 / 0.88) 0%, transparent 34%);
+  }
+  .intro-hud {
+    position: absolute; z-index: 2; left: 0; right: 0; bottom: clamp(2rem, 8vh, 5rem);
+    display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+    text-align: center; pointer-events: none; padding-inline: 1.2rem;
+  }
+  .intro-marker { background: var(--bone); }
+  .intro-caption {
+    margin: 0; font-family: "Bricolage Grotesque", sans-serif; font-weight: 800;
+    font-size: clamp(1.5rem, 1rem + 2.6vw, 2.6rem); color: var(--bone);
+    letter-spacing: -0.02em; text-shadow: 0 2px 18px oklch(0.30 0.10 30 / 0.6);
+  }
+  .intro-skip {
+    position: absolute; z-index: 3; top: 1rem; right: 1rem;
+    background: oklch(0.96 0.02 84 / 0.16); color: var(--bone);
+    border: 1.5px solid oklch(0.96 0.02 84 / 0.5); border-radius: 999px;
+    padding: 0.55em 1.05em; font: 700 0.82rem "Overpass", sans-serif; cursor: pointer;
+    -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+  }
+  .intro-skip:hover { background: oklch(0.96 0.02 84 / 0.30); }
+  .map-pin { position: relative; width: 46px; height: 58px; }
+  .map-pin .drop {
+    position: absolute; left: 0; top: 0; width: 46px; height: 46px;
+    background: var(--red); border: 3px solid var(--bone);
+    border-radius: 50% 50% 50% 3px; transform: rotate(45deg);
+    box-shadow: 0 8px 16px oklch(0.20 0.06 30 / 0.45);
+  }
+  .map-pin .num {
+    position: absolute; left: 0; right: 0; top: 11px; text-align: center;
+    font: 900 15px "Overpass", sans-serif; color: var(--bone); letter-spacing: 0.02em;
+  }
+  .map-pin .pulse {
+    position: absolute; left: 23px; top: 23px; width: 16px; height: 16px;
+    margin: -8px 0 0 -8px; border-radius: 50%; background: var(--marigold);
+    animation: pinpulse 1.8s var(--ease) infinite;
+  }
+  @keyframes pinpulse { from { transform: scale(0.5); opacity: 0.6; } to { transform: scale(3.6); opacity: 0; } }
+  .map-pin-wrap.drop-in .drop { animation: pindrop 0.7s var(--ease) both; }
+  @keyframes pindrop {
+    0% { transform: translateY(-22px) rotate(45deg); opacity: 0; }
+    60% { transform: translateY(4px) rotate(45deg); }
+    100% { transform: translateY(0) rotate(45deg); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) { .intro { display: none; } }
+
+  .skip {
+    position: absolute; left: -999px; top: 0; z-index: 50;
+    background: var(--ink); color: var(--bone); padding: 0.7em 1.1em; border-radius: 0 0 8px 0; font-weight: 700;
+  }
+  .skip:focus { left: 0; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Map intro: opens on Austin, flies east to the truck on FM 969, lifts away. -->
+<div id="intro" class="intro" aria-hidden="true">
+  <div id="intro-map" class="intro-map"></div>
+  <div class="intro-veil"></div>
+  <div class="intro-hud">
+    <span class="marker marker--sm intro-marker" aria-hidden="true"><span class="marker-fm">FM</span><span class="marker-num">969</span></span>
+    <p class="intro-caption" id="intro-caption">Austin, Texas</p>
+  </div>
+  <button type="button" class="intro-skip" id="intro-skip">Skip intro</button>
+</div>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand-lockup" href="#top" aria-label="969 Mexican Food Truck, home">
+      <span class="marker marker--sm" aria-hidden="true">
+        <span class="marker-fm">FM</span><span class="marker-num">969</span>
+      </span>
+      <span class="brand-name">969 Mexican Food Truck<small>Utley, Texas</small></span>
+    </a>
+    <a class="btn btn-primary" href="https://www.google.com/maps/place/969+MEXICAN+FOOD+TRUCK/@30.1779838,-97.4285894,14z/data=!4m8!3m7!1s0x86449772a422d579:0x461e68f668022fac!8m2!3d30.1779849!4d-97.4192594!9m1!1b1!16s%2Fg%2F11jzj20c1s" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      Get <span class="btn-label-long">directions</span>
+    </a>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow hero-eyebrow">FM 969 · Utley, Texas</span>
+      <h1 id="hero-title">
+        <span class="hero-name">969 <em>Mexican Food Truck</em></span>
+      </h1>
+      <p class="hero-lead">Comida casera off Highway 969. Tortas, gorditas, breakfast tacos, and caldos, all made to order in a little red trailer just east of Austin.</p>
+
+      <div class="rating" aria-label="Rated 4.3 out of 5 on Google across 7 reviews">
+        <span class="stars" aria-hidden="true"><span class="on">★★★★</span><span class="off">★</span></span>
+        <span class="rating-text">4.3 on Google · 7 reviews</span>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn btn-on-red" href="https://www.google.com/maps/place/969+MEXICAN+FOOD+TRUCK/@30.1779838,-97.4285894,14z/data=!4m8!3m7!1s0x86449772a422d579:0x461e68f668022fac!8m2!3d30.1779849!4d-97.4192594!9m1!1b1!16s%2Fg%2F11jzj20c1s" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Get directions
+        </a>
+        <a class="btn btn-on-red" style="background:transparent;color:var(--bone);border-color:oklch(0.96 0.02 84 / 0.45);box-shadow:none" href="#food">See the food</a>
+        <!-- OWNER TO PROVIDE: phone number. When ready, add a click-to-call button here, for example:
+             <a class="btn btn-on-red" href="tel:+15125550123">Call to order ahead</a> -->
+      </div>
+    </div>
+
+    <figure class="hero-figure reveal">
+      <span class="marker marker--sm hero-marker-float" aria-hidden="true">
+        <span class="marker-fm">FM</span><span class="marker-num">969</span>
+      </span>
+      <img src="img/chilaquiles.webp" width="1078" height="722" fetchpriority="high" decoding="async"
+           alt="A foam plate of crisp fried tortilla topped with shredded cabbage, crema, crumbled queso fresco, and salsa verde.">
+      <figcaption>Off the comal, served the way it's done at home.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ========================= KNOWN FOR ========================= -->
+<section id="food" aria-labelledby="food-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What we're known for</span>
+      <h2 id="food-title">Hecho al momento</h2>
+      <p>Made to order, the way it's made at home. Here's what people drive out for.</p>
+    </div>
+
+    <div class="menu-grid">
+      <article class="plate plate--star reveal">
+        <div class="plate-body">
+          <span class="eyebrow tag">The one to try first</span>
+          <blockquote>
+            Best tortas in town.
+            <cite>Little Rabbit42, Google review</cite>
+          </blockquote>
+        </div>
+      </article>
+
+      <article class="plate reveal">
+        <img src="img/gorditas.webp" width="704" height="700" loading="lazy" decoding="async"
+             alt="Two golden fried gorditas filled with meat, lettuce, avocado, and crema, served with crinkle-cut fries.">
+        <div class="plate-body">
+          <h3>Gorditas</h3>
+          <p>Hand made masa, fried golden, split and stuffed. Crinkle fries on the side if you want them.</p>
+        </div>
+      </article>
+
+      <article class="plate reveal">
+        <img src="img/breakfast-taco.webp" width="624" height="627" loading="lazy" decoding="async"
+             alt="A breakfast taco of scrambled egg and chorizo on a handmade corn tortilla.">
+        <div class="plate-body">
+          <h3>Breakfast tacos</h3>
+          <p>Egg and chorizo on a tortilla off the comal. The early start that's worth the drive.</p>
+        </div>
+      </article>
+
+      <article class="plate reveal">
+        <img src="img/caldo-albondigas.webp" width="704" height="700" loading="lazy" decoding="async"
+             alt="A pot of caldo de albondigas, meatballs in broth with squash, green beans, and a whole serrano pepper.">
+        <div class="plate-body">
+          <h3>Caldo de albóndigas</h3>
+          <p>Meatballs, squash, and green beans in a broth that tastes like somebody's abuela made it. A whole serrano in there if you're brave.</p>
+        </div>
+      </article>
+
+      <article class="plate reveal" style="background:var(--verde)">
+        <div class="plate-body" style="background:none;color:oklch(0.18 0.04 145);display:flex;flex-direction:column;justify-content:center;height:100%;padding:1.5rem">
+          <h3 style="color:oklch(0.15 0.04 145)">And the plates in between</h3>
+          <p style="color:oklch(0.22 0.05 145)">Chilaquiles, sopes, and whatever is good that day. Pure Mexican flavor, nothing fussy.</p>
+        </div>
+      </article>
+    </div>
+
+    <p class="spend-note reveal">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5a2.5 2 0 0 1 5 0c0 2.5-5 1.5-5 4a2.5 2 0 0 0 5 0"/></svg>
+      Most folks spend about <b>$10 to $20</b> a head.
+    </p>
+  </div>
+</section>
+
+<!-- ======================== TESTIMONIALS ======================= -->
+<section class="voices" aria-labelledby="voices-title">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Straight from Google</span>
+      <h2 id="voices-title">People drive out for this.</h2>
+    </div>
+    <div class="voices-grid">
+      <figure class="voice reveal">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Best tortas in town.</blockquote>
+        <cite>Little Rabbit42</cite>
+      </figure>
+      <figure class="voice reveal">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Delicious food, pure Mexican flavor.</blockquote>
+        <cite>Eleazar Martinez</cite>
+      </figure>
+    </div>
+    <p class="voices-proof reveal">
+      <span class="stars" aria-hidden="true"><span class="on" style="color:var(--marigold)">★★★★</span><span style="color:oklch(0.95 0.04 84 / 0.4)">★</span></span>
+      4.3 stars on Google, across 7 reviews.
+    </p>
+  </div>
+</section>
+
+<!-- ========================== FIND US ========================== -->
+<section class="find" aria-labelledby="find-title">
+  <div class="wrap">
+    <figure class="find-figure reveal">
+      <img src="img/truck.webp" width="406" height="263" loading="lazy" decoding="async"
+           alt="The red 969 food trailer parked on a dirt lot beside Highway 969, with open Texas country behind it.">
+      <figcaption>Look for the red trailer.</figcaption>
+    </figure>
+    <div class="reveal">
+      <span class="eyebrow">Find the red trailer</span>
+      <h2 id="find-title">Pull off Highway 969</h2>
+      <address>
+        On <span class="road">FM 969</span> in Utley, just east of Austin, Texas.<br>
+        Bastrop County. Look for the red trailer on the dirt lot.
+      </address>
+      <div class="find-cta">
+        <a class="btn btn-on-red" href="https://www.google.com/maps/place/969+MEXICAN+FOOD+TRUCK/@30.1779838,-97.4285894,14z/data=!4m8!3m7!1s0x86449772a422d579:0x461e68f668022fac!8m2!3d30.1779849!4d-97.4192594!9m1!1b1!16s%2Fg%2F11jzj20c1s" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+      <p class="find-note">Roadside stand on FM 969.</p>
+      <!-- OWNER TO PROVIDE: phone number + hours. When ready, drop them in here, for example:
+           <p class="find-note">Open Tue to Sun, 8am to 4pm. Call ahead: <a href="tel:+15125550123">(512) 555-0123</a></p> -->
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-biz">
+      969 Mexican Food Truck
+      <small>FM 969 · Utley, Texas</small>
+    </div>
+    <div class="credit">
+      A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal-on-scroll, opacity and transform only, once each. Honors reduced motion.
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var nodes = document.querySelectorAll(".reveal");
+    if (reduce || !("IntersectionObserver" in window)) {
+      nodes.forEach(function (n) { n.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+    nodes.forEach(function (n) { io.observe(n); });
+  })();
+</script>
+
+<script>
+  // Map intro: Austin, fly east along 969 to the truck, then lift to reveal.
+  (function () {
+    var intro = document.getElementById("intro");
+    if (!intro) return;
+    var params = new URLSearchParams(location.search);
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var skip = params.has("nointro") || location.hash === "#nointro";
+
+    function finish(now) {
+      document.documentElement.classList.remove("intro-lock");
+      if (now) { if (intro.parentNode) intro.parentNode.removeChild(intro); return; }
+      intro.classList.add("gone");
+      var done = false;
+      var rm = function () { if (done) return; done = true; if (intro.parentNode) intro.parentNode.removeChild(intro); };
+      intro.addEventListener("transitionend", rm, { once: true });
+      setTimeout(rm, 1300);
+    }
+
+    if (reduce || skip) { finish(true); return; }
+    document.documentElement.classList.add("intro-lock");
+
+    document.addEventListener("DOMContentLoaded", function () {
+      if (typeof L === "undefined") { finish(true); return; } // tiles/lib blocked, skip cleanly
+
+      var AUSTIN = [30.2672, -97.7431];
+      var TRUCK = [30.1779849, -97.4192594];
+      var cap = document.getElementById("intro-caption");
+      var skipBtn = document.getElementById("intro-skip");
+      var ended = false;
+
+      var map = L.map("intro-map", {
+        zoomControl: false, attributionControl: true, dragging: false,
+        scrollWheelZoom: false, doubleClickZoom: false, boxZoom: false,
+        keyboard: false, touchZoom: false, zoomSnap: 0
+      }).setView(AUSTIN, 10);
+
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+        subdomains: "abcd", maxZoom: 19, attribution: "&copy; OpenStreetMap &copy; CARTO"
+      }).addTo(map);
+
+      L.polyline([AUSTIN, TRUCK], { color: "#e8a838", weight: 3, opacity: 0.9, dashArray: "2 9", lineCap: "round" }).addTo(map);
+
+      var pin = L.marker(TRUCK, {
+        opacity: 0,
+        icon: L.divIcon({
+          className: "map-pin-wrap",
+          html: '<div class="map-pin"><span class="pulse"></span><span class="drop"></span><span class="num">969</span></div>',
+          iconSize: [46, 58], iconAnchor: [23, 52]
+        })
+      }).addTo(map);
+
+      function arrive() {
+        if (ended) return; ended = true;
+        cap.textContent = "969 Mexican Food Truck";
+        pin.setOpacity(1);
+        var el = pin.getElement(); if (el) el.classList.add("drop-in");
+        setTimeout(function () { finish(false); }, 1000);
+      }
+
+      skipBtn.addEventListener("click", function () { ended = true; finish(true); });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") { ended = true; finish(true); } });
+
+      setTimeout(function () {
+        cap.textContent = "Heading east on Highway 969";
+        map.flyTo(TRUCK, 15, { duration: 2.8, easeLinearity: 0.12 });
+        map.once("moveend", arrive);
+        setTimeout(arrive, 3500); // safety net if moveend is missed
+      }, 700);
+    });
+  })();
+</script>
+</body>
+</html>
