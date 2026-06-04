@@ -31,6 +31,16 @@ export function bizLeadMarkdownRelPath(slug: string): string {
   return `biz/${slug}/lead.md`;
 }
 
+// Cold-outreach script templates: biz/_templates/cold/*.md. One file per
+// variant (email-founder, call-live, voicemail, dm, ...), each with YAML
+// frontmatter and a markdown body carrying [BRACKET] placeholder tokens.
+// The reps read/copy these from /develop/scripts. The dir may be empty or
+// missing while the templates are still being authored; the loader codes
+// defensively around that, same posture as the deadlines page.
+export function coldTemplatesDir(): string {
+  return path.join(bizDir(), "_templates", "cold");
+}
+
 export function demosDir(): string {
   return path.join(repoRoot(), "web", "demos");
 }

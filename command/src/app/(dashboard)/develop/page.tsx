@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Plus, Building2 } from "lucide-react";
+import { Plus, Building2, ScrollText } from "lucide-react";
 import { listBizLeads } from "@/lib/develop/queries";
 import { BizKanban } from "@/components/develop/biz-kanban";
 
@@ -35,13 +35,22 @@ export default async function DevelopPage() {
             lead. A third of every closed deal funds the pool.
           </p>
         </div>
-        <Link
-          href="/develop/new"
-          className="inline-flex items-center gap-2 rounded-md bg-[var(--amber)] px-3 py-2 text-sm font-medium text-[#1a1208] hover:bg-[var(--amber-soft)] hover:shadow-[0_0_14px_var(--amber-glow)] transition-all"
-        >
-          <Plus className="h-4 w-4" aria-hidden />
-          New lead
-        </Link>
+        <div className="flex shrink-0 items-center gap-2">
+          <Link
+            href="/develop/scripts"
+            className="inline-flex items-center gap-2 rounded-md border border-[rgba(245,239,225,0.12)] px-3 py-2 text-xs text-[var(--ink-dim)] hover:text-[var(--ink)] hover:border-[rgba(217,119,6,0.35)] transition-colors"
+          >
+            <ScrollText className="h-3.5 w-3.5" aria-hidden />
+            Cold scripts
+          </Link>
+          <Link
+            href="/develop/new"
+            className="inline-flex items-center gap-2 rounded-md bg-[var(--amber)] px-3 py-2 text-sm font-medium text-[#1a1208] hover:bg-[var(--amber-soft)] hover:shadow-[0_0_14px_var(--amber-glow)] transition-all"
+          >
+            <Plus className="h-4 w-4" aria-hidden />
+            New lead
+          </Link>
+        </div>
       </header>
 
       {!configured && (

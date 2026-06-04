@@ -153,3 +153,41 @@ export type PitchResponse = {
   caller: string | null;
   created_at: string;
 };
+
+// Cold-outreach script surfaces. The frontmatter `surface` field on each
+// template at biz/_templates/cold/*.md, used to tag and group the scripts on
+// /develop/scripts.
+export const COLD_SCRIPT_SURFACES = [
+  "email",
+  "call",
+  "voicemail",
+  "dm",
+] as const;
+export type ColdScriptSurface = (typeof COLD_SCRIPT_SURFACES)[number];
+
+// Frontmatter as it appears in biz/_templates/cold/<variant>.md. All fields
+// optional at the file level; the loader fills sane fallbacks.
+export type ColdTemplateFrontmatter = {
+  title?: string;
+  variant?: string;
+  surface?: ColdScriptSurface | string;
+  order?: number | string;
+  subject_options?: string[];
+  status?: string;
+  updated?: string;
+};
+
+// A parsed cold-outreach template: frontmatter fields plus the markdown body
+// (the script itself, carrying [BRACKET] placeholder tokens). `slug` is the
+// source filename without its extension, the stable identity for the page.
+export type ColdTemplate = {
+  slug: string;
+  title: string;
+  variant: string;
+  surface: ColdScriptSurface;
+  order: number;
+  subjectOptions: string[];
+  status: string | null;
+  updated: string | null;
+  body: string;
+};
