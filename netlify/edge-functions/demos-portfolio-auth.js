@@ -42,6 +42,28 @@ export default async (request, context) => {
     return unauthorized();
   }
 
+  // Data endpoint: proxy to the function directly. A redirect/rewrite is not
+  // applied from inside context.next(), so we fetch it here and pass the shared
+  // key the function checks, keeping the raw function path ungettable directly.
+  const url = new URL(request.url);
+  if (url.pathname === "/demos/portfolio.json") {
+    try {
+      const r = await fetch(`${url.origin}/.netlify/functions/biz-portfolio`, {
+        headers: { "x-portfolio-key": expected, Accept: "application/json" },
+      });
+      const text = await r.text();
+      return new Response(text, {
+        status: r.status,
+        headers: { "Content-Type": "application/json", "Cache-Control": "no-store" },
+      });
+    } catch (_) {
+      return new Response(JSON.stringify({ error: "upstream", demos: [] }), {
+        status: 502,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+  }
+
   // Notify once per browser session on the first HTML page load (not the JSON).
   const cookieHeader = request.headers.get("Cookie") || "";
   const alreadyNotified = cookieHeader.split(/;\s*/).includes("portfolio_seen=1");
