@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense, useState } from "react";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
@@ -121,6 +122,16 @@ function LoginForm() {
             </Button>
           </form>
         </div>
+
+        <p className="text-center text-xs text-[var(--ink-dim)]">
+          Need access?{" "}
+          <Link
+            href="/apply"
+            className="text-[var(--amber-soft)] hover:underline"
+          >
+            Apply for the Command Center
+          </Link>
+        </p>
 
         <p className="text-center font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ink-faint)]">
           HAND Protocol, 501(c)(3) in formation, Austin, TX

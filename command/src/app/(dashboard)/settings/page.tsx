@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Settings as SettingsIcon, ExternalLink } from "lucide-react";
 import { getCurrentUser, getCurrentProfile, can } from "@/lib/supabase/profile";
 import { InvitesSection } from "@/components/settings/invites-section";
+import { ApplicationsSection } from "@/components/settings/applications-section";
 
 /*
   Settings. Operator identity + a read-only system status board.
@@ -129,6 +130,9 @@ export default async function SettingsPage() {
 
       {/* Access & Invites (admins only) */}
       {canManageUsers ? <InvitesSection /> : null}
+
+      {/* Applications review (admins only) */}
+      {canManageUsers ? <ApplicationsSection /> : null}
 
       {/* System status */}
       <section aria-labelledby="status-heading" className="panel p-5 space-y-1">

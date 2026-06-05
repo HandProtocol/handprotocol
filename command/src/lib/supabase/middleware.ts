@@ -62,6 +62,7 @@ export async function updateSession(request: NextRequest) {
     "/auth/login",
     "/auth/callback",
     "/auth/invite",
+    "/apply",
     "/loading.html",
     "/models",
     "/api/",
