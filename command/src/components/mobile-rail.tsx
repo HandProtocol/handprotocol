@@ -27,7 +27,7 @@ export function MobileRail({
   role,
   email,
 }: {
-  role: "admin" | "contributor" | "viewer";
+  role: "admin" | "funding_lead" | "develop_rep" | "contributor" | "viewer";
   email: string;
 }) {
   const pathname = usePathname();

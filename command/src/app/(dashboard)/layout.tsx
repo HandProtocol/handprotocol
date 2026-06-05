@@ -1,4 +1,8 @@
-import { getCurrentProfile, getCurrentUser } from "@/lib/supabase/profile";
+import {
+  getCurrentProfile,
+  getCurrentUser,
+  type CommandRole,
+} from "@/lib/supabase/profile";
 import { SidebarNav } from "@/components/sidebar-nav";
 import { MobileRail } from "@/components/mobile-rail";
 import { NotificationBell } from "@/components/notification-bell";
@@ -29,7 +33,7 @@ export default async function DashboardLayout({
   );
 
   let userEmail = "";
-  let role: "admin" | "contributor" | "viewer" = "admin";
+  let role: CommandRole = "admin";
 
   if (supabaseConfigured) {
     const user = await getCurrentUser();

@@ -24,7 +24,7 @@ export function SidebarNav({
   email,
   onNavigate,
 }: {
-  role: "admin" | "contributor" | "viewer";
+  role: "admin" | "funding_lead" | "develop_rep" | "contributor" | "viewer";
   email: string;
   onNavigate?: () => void;
 }) {
