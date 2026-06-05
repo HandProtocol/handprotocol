@@ -8,15 +8,17 @@
 // "airstream studio"). It defaults to "deck" so the original /deck client
 // keeps working unchanged.
 //
-// Two side effects, both best-effort:
+// Three side effects, all best-effort:
 //   1. Insert a row into command.feedback_pins (Supabase) so it shows
 //      up in /pins and /inspector
 //   2. POST a one-line summary into the Telegram "🎯 Inspector" topic
 //      so a human is paged within seconds
+//   3. Send a transactional email to EMAIL_TO_OPS via Resend (best-effort;
+//      no-op until the Resend sending domain is verified — see _email.js)
 //
-// Either failing alone does NOT fail the request — the client also
+// Any one failing alone does NOT fail the request — the client also
 // keeps the note in localStorage, and we want public feedback to feel
-// frictionless. We only 5xx when BOTH paths fail.
+// frictionless. We only 5xx when ALL THREE paths fail.
 //
 // Env vars (Netlify dashboard → Site settings → Environment):
 //   SUPABASE_URL                  — e.g. https://xxx.supabase.co
@@ -25,6 +27,9 @@
 //   FORUM_GROUP_ID                — negative chat ID of the forum group
 //   INSPECTOR_TOPIC_ID            — message_thread_id of "🎯 Inspector"
 //   COMMAND_BASE_URL              — defaults to https://command.handprotocol.org
+//   RESEND_API_KEY / EMAIL_FROM / EMAIL_TO_OPS  — transactional email (see _email.js)
+
+const { sendEmail } = require('./_email.js');
 
 const MAX_TEXT = 2000;
 const MAX_NAME = 80;
@@ -162,6 +167,46 @@ async function notifyTelegram(payload, pin) {
   }
 }
 
+async function notifyEmail(payload, pin) {
+  const base = (process.env.COMMAND_BASE_URL || 'https://command.handprotocol.org').replace(/\/$/, '');
+  const summary = truncate(payload.text.replace(/\s+/g, ' ').trim(), 280);
+  const author = payload.name || 'anon';
+  const sourceLabel = payload.source || 'deck';
+  const tagLine = (payload.tags && payload.tags.length) ? payload.tags.join(' ') : '—';
+  const link = pin && pin.id ? `${base}/pins?pin=${pin.id}` : `${base}/pins`;
+
+  const subject = truncate(`🪶 Feedback · ${sourceLabel} · ${payload.path}`, 160);
+
+  const html = [
+    `<p style="font-size:15px;line-height:1.5;margin:0 0 16px;white-space:pre-wrap;">${escapeHtml(summary)}</p>`,
+    '<table style="font-size:13px;color:#555;border-collapse:collapse;">',
+    `<tr><td style="padding:2px 12px 2px 0;"><b>Author</b></td><td>${escapeHtml(author)}</td></tr>`,
+    `<tr><td style="padding:2px 12px 2px 0;"><b>Source</b></td><td>${escapeHtml(sourceLabel)}</td></tr>`,
+    `<tr><td style="padding:2px 12px 2px 0;"><b>Tags</b></td><td>${escapeHtml(tagLine)}</td></tr>`,
+    `<tr><td style="padding:2px 12px 2px 0;"><b>Path</b></td><td><code>${escapeHtml(payload.path)}</code></td></tr>`,
+    '</table>',
+    `<p style="margin:16px 0 0;"><a href="${escapeHtml(link)}">Open in kanban →</a></p>`,
+  ].join('');
+
+  const text = [
+    summary,
+    '',
+    `Author: ${author}`,
+    `Source: ${sourceLabel}`,
+    `Tags:   ${tagLine}`,
+    `Path:   ${payload.path}`,
+    '',
+    `Open in kanban: ${link}`,
+  ].join('\n');
+
+  return sendEmail({
+    to: process.env.EMAIL_TO_OPS,
+    subject,
+    html,
+    text,
+  });
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return json(204, {});
   if (event.httpMethod !== 'POST') return json(405, { error: 'Method not allowed' });
@@ -212,15 +257,19 @@ exports.handler = async (event) => {
     ts: Number.isFinite(body.ts) ? body.ts : Date.now(),
   };
 
-  // Insert first so Telegram message can link to the pin row.
+  // Insert first so the Telegram message and email can link to the pin row.
   const pinResult = await insertPin(normalized);
   const tgResult = await notifyTelegram(normalized, pinResult.pin);
+  // Third best-effort sink. No-op ('email-unconfigured') until Resend is set
+  // up; pin + telegram succeeding must still yield 200.
+  const emailResult = await notifyEmail(normalized, pinResult.pin);
 
-  if (!pinResult.ok && !tgResult.ok) {
+  if (!pinResult.ok && !tgResult.ok && !emailResult.ok) {
     return json(502, {
       status: 'failed',
       pin: pinResult.reason,
       telegram: tgResult.reason,
+      email: emailResult.reason,
       error: 'Could not sync. Your note is saved locally; retry will run automatically.',
     });
   }
@@ -229,5 +278,6 @@ exports.handler = async (event) => {
     status: 'synced',
     pin: pinResult.ok ? { id: pinResult.pin && pinResult.pin.id } : { error: pinResult.reason },
     telegram: tgResult.ok ? 'pinned' : tgResult.reason,
+    email: emailResult.ok ? 'sent' : emailResult.reason,
   });
 };
