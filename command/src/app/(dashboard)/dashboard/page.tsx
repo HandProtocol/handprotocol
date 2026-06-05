@@ -1,8 +1,10 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { differenceInDays, parseISO } from "date-fns";
 import { listGrants } from "@/lib/grants/queries";
 import { PillarGrid, type PillarStats } from "@/components/dashboard/pillar-grid";
 import { StatusChip } from "@/components/kanban/status-chip";
+import { InviteRedeemedToast } from "@/components/settings/invite-redeemed-toast";
 import { ArrowRight, Calendar } from "lucide-react";
 
 /*
@@ -105,6 +107,9 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
+      <Suspense fallback={null}>
+        <InviteRedeemedToast />
+      </Suspense>
       <header className="space-y-2">
         <p className="display-eyebrow">
           <span className="amber">BRIDGE ONLINE</span> · {grants.length} GRANTS · {decided.length} DECIDED

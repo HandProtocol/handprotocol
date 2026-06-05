@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Settings as SettingsIcon, ExternalLink } from "lucide-react";
-import { getCurrentUser, getCurrentProfile } from "@/lib/supabase/profile";
+import { getCurrentUser, getCurrentProfile, can } from "@/lib/supabase/profile";
+import { InvitesSection } from "@/components/settings/invites-section";
 
 /*
   Settings. Operator identity + a read-only system status board.
@@ -68,6 +69,14 @@ export default async function SettingsPage() {
   const role = profile?.role ?? "admin";
   const displayName = profile?.display_name ?? email.split("@")[0];
 
+  // Show Access & Invites to admins (users.manage). In the unconfigured-env
+  // scaffold preview there's no profile but the dashboard renders as admin, so
+  // surface it there too — the createInvite/revokeInvite actions re-check the
+  // capability the moment Supabase is wired, so this is display-only gating.
+  const canManageUsers = supabaseConfigured
+    ? can(profile, "users.manage")
+    : true;
+
   const assistantActive = Boolean(
     process.env.XAI_API_KEY || process.env.ANTHROPIC_API_KEY,
   );
@@ -117,6 +126,9 @@ export default async function SettingsPage() {
           Supabase dashboard or the password-reset flow.
         </p>
       </section>
+
+      {/* Access & Invites (admins only) */}
+      {canManageUsers ? <InvitesSection /> : null}
 
       {/* System status */}
       <section aria-labelledby="status-heading" className="panel p-5 space-y-1">

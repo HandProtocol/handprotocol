@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
 import { createClient } from "@/lib/supabase/client";
@@ -16,11 +16,22 @@ import { Toaster } from "@/components/ui/sonner";
   parity, the callback route at /auth/callback handles that flow when we
   enable it via the Supabase dashboard.
 */
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Where to land after sign-in. Only honor same-origin relative paths so the
+  // `next` param can't be used as an open redirect. Invite redemption rides
+  // this: /auth/invite/<code> sends unauth'd visitors here with next set, and
+  // the (now authenticated) invite page redeems on return.
+  const rawNext = searchParams.get("next");
+  const nextPath =
+    rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//")
+      ? rawNext
+      : "/dashboard";
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -38,7 +49,7 @@ export default function LoginPage() {
         // server-side, so this can't forge a notification, and a failure
         // here must never block the redirect.
         fetch("/api/notify/signin", { method: "POST" }).catch(() => {});
-        router.push("/dashboard");
+        router.push(nextPath);
         router.refresh();
       }
     } catch (err) {
@@ -116,5 +127,15 @@ export default function LoginPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+// useSearchParams (for the post-login `next` target) must sit inside a Suspense
+// boundary in the App Router; the wrapper provides it.
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
   );
 }
