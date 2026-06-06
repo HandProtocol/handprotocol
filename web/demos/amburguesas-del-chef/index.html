@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hamburguesas Emilia · Chef's Burgers + Tacos on FM 969 in Manor, TX</title>
+<meta name="description" content="Juicy chef's burgers with a Mexican tilt, the chipotle and poblano burgers, seasoned fries, street tacos, and chicken flautas, from the Hamburguesas Emilia truck on FM 969 in Manor, Texas. 4.4 stars on Google across 37 reviews.">
+<link rel="canonical" href="https://handprotocol.org/demos/amburguesas-del-chef/">
+
+<!-- Open Graph, so the link previews nicely when texted or shared -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hamburguesas Emilia · al sabor del chef">
+<meta property="og:description" content="Chef's burgers with a Mexican tilt, plus street tacos and flautas. The burger truck on FM 969 in Manor, Texas.">
+<meta property="og:image" content="https://handprotocol.org/demos/amburguesas-del-chef/img/hero-cheeseburger.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Monogram favicon: cream E on chile red -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23b5302a'/%3E%3Ctext x='16' y='24' font-family='Georgia,serif' font-size='22' font-weight='700' text-anchor='middle' fill='%23f6e6c8'%3EE%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* Palette pulled from the food: the chile-print deli paper (red + green),
+       the cheddar in the cheeseburger, the masa cream tortillas, grill char,
+       and the cobalt enamel plate. OKLCH. */
+    --cream:     oklch(0.96 0.022 84);
+    --cream-2:   oklch(0.93 0.028 82);
+    --cream-3:   oklch(0.88 0.032 80);
+    --ink:       oklch(0.24 0.018 60);
+    --ink-soft:  oklch(0.43 0.022 60);
+    --char:      oklch(0.27 0.014 55);
+    --char-2:    oklch(0.21 0.012 55);
+    --red:       oklch(0.55 0.185 28);
+    --red-deep:  oklch(0.46 0.165 30);
+    --gold:      oklch(0.82 0.150 78);
+    --gold-2:    oklch(0.74 0.150 70);
+    --poblano:   oklch(0.55 0.115 150);
+    --poblano-d: oklch(0.42 0.100 152);
+    --cobalt:    oklch(0.50 0.120 250);
+
+    --maxw: 1180px;
+    --pad: clamp(1.15rem, 4vw, 3rem);
+
+    --t-label: 0.78rem;
+    --t-body:  clamp(1rem, 0.96rem + 0.25vw, 1.18rem);
+    --t-lead:  clamp(1.2rem, 1.05rem + 0.7vw, 1.55rem);
+    --t-h3:    clamp(1.4rem, 1.15rem + 1.1vw, 1.95rem);
+    --t-h2:    clamp(2.1rem, 1.4rem + 2.8vw, 3.6rem);
+    --t-hero:  clamp(2.7rem, 1.3rem + 6vw, 5.6rem);
+
+    --r: 16px;
+    --shadow: 0 20px 44px -26px oklch(0.2 0.02 60 / 0.6);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: "Hanken Grotesk", system-ui, sans-serif;
+    font-size: var(--t-body);
+    line-height: 1.62;
+    -webkit-font-smoothing: antialiased;
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; }
+
+  h1, h2, h3 { margin: 0; line-height: 1; }
+  .display { font-family: "Anton", Impact, sans-serif; font-weight: 400; letter-spacing: 0.005em; text-transform: uppercase; }
+  .script  { font-family: "Caveat", cursive; font-weight: 700; text-transform: none; letter-spacing: 0; }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
+
+  .eyebrow {
+    font-family: "Hanken Grotesk", sans-serif;
+    font-weight: 800;
+    font-size: var(--t-label);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* ---- Buttons -------------------------------------------------------- */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.55em;
+    min-height: 52px;
+    padding: 0.7em 1.4em;
+    font-family: "Hanken Grotesk", sans-serif;
+    font-weight: 800;
+    font-size: 1.02rem;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background-color 0.2s, color 0.2s;
+  }
+  .btn svg { width: 1.15em; height: 1.15em; flex: none; }
+  .btn-call { background: var(--gold); color: var(--char-2); box-shadow: var(--shadow); }
+  .btn-call:hover { transform: translateY(-2px); background: var(--gold-2); }
+  .btn-cream { background: var(--cream); color: var(--char-2); box-shadow: var(--shadow); }
+  .btn-cream:hover { transform: translateY(-2px); }
+  .btn-red { background: var(--red); color: var(--cream); box-shadow: var(--shadow); }
+  .btn-red:hover { transform: translateY(-2px); background: var(--red-deep); }
+  .btn-outline { background: transparent; border-color: oklch(0.96 0.02 84 / 0.5); color: var(--cream); box-shadow: none; }
+  .btn-outline:hover { background: var(--cream); color: var(--char-2); border-color: var(--cream); }
+  :where(a, button):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+
+  /* ---- Sticky header -------------------------------------------------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 30;
+    background: oklch(0.96 0.022 84 / 0.9);
+    backdrop-filter: saturate(1.3) blur(8px);
+    border-bottom: 1px solid var(--cream-3);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.6rem; }
+  .brand-lockup { display: inline-flex; align-items: center; gap: 0.7rem; text-decoration: none; }
+  .monogram {
+    display: inline-grid; place-items: center;
+    width: 2.5rem; height: 2.5rem; border-radius: 10px;
+    background: var(--red); color: var(--cream);
+    font-family: "Anton", sans-serif; font-size: 1.5rem;
+    box-shadow: inset 0 0 0 1.5px oklch(0.82 0.15 80 / 0.4);
+  }
+  .brand-lockup .brand-name { font-family: "Anton", sans-serif; font-size: 1.12rem; line-height: 0.95; letter-spacing: 0.01em; color: var(--ink); text-transform: uppercase; }
+  .brand-lockup .brand-name small { display: block; font-family: "Caveat", cursive; font-weight: 700; font-size: 1rem; letter-spacing: 0; text-transform: none; color: var(--red); margin-top: 0.12em; }
+  .topbar-cta { display: inline-flex; gap: 0.55rem; }
+  .topbar .btn { min-height: 44px; padding-block: 0.5em; font-size: 0.92rem; }
+  @media (max-width: 640px) { .topbar .btn-label-long { display: none; } .topbar-cta .btn-dir { display: none; } }
+
+  /* ---- Hero ----------------------------------------------------------- */
+  .hero {
+    position: relative;
+    background:
+      radial-gradient(120% 80% at 84% -10%, oklch(0.36 0.05 40) 0%, transparent 56%),
+      radial-gradient(90% 70% at -5% 110%, oklch(0.20 0.03 150) 0%, transparent 52%),
+      var(--char);
+    color: var(--cream);
+    overflow: hidden;
+  }
+  .hero::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 7px;
+    background: linear-gradient(90deg, var(--red), var(--gold) 50%, var(--poblano));
+  }
+  .hero .wrap { display: grid; gap: clamp(2rem, 5vw, 4rem); padding-block: clamp(2.6rem, 6vw, 5rem) clamp(3.6rem, 7vw, 6rem); align-items: center; }
+  @media (min-width: 880px) { .hero .wrap { grid-template-columns: 1.04fr 0.96fr; } }
+
+  .hero-eyebrow { color: var(--gold); display: inline-flex; align-items: center; gap: 0.6em; }
+  .hero-eyebrow::before { content: ""; width: 2.2em; height: 2px; background: var(--gold); display: inline-block; }
+  .hero h1 { margin: 1rem 0 0; }
+  .hero .hero-name { display: block; font-size: var(--t-hero); line-height: 0.9; }
+  .hero .hero-tag { display: block; font-family: "Caveat", cursive; font-weight: 700; font-size: clamp(1.8rem, 1rem + 3vw, 3rem); color: var(--gold); margin-top: 0.15em; }
+  .hero-lead { font-size: var(--t-lead); max-width: 33ch; margin: 1.3rem 0 0; color: oklch(0.95 0.02 84 / 0.92); font-weight: 500; }
+
+  .rating { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.6rem; flex-wrap: wrap; }
+  .stars { font-size: 1.35rem; letter-spacing: 0.06em; line-height: 1; color: var(--gold); }
+  .rating-text { font-weight: 700; letter-spacing: 0.01em; font-size: 0.98rem; }
+  .rating-text b { font-weight: 800; }
+
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.9rem; }
+
+  .hero-figure {
+    position: relative; justify-self: center; rotate: 1.6deg;
+    padding: 0.7rem 0.7rem 1.1rem; background: var(--cream); border-radius: 8px;
+    box-shadow: 0 32px 64px -30px oklch(0.12 0.02 40 / 0.85); max-width: 460px;
+  }
+  .hero-figure img { border-radius: 4px; }
+  .hero-figure figcaption { font-family: "Caveat", cursive; font-weight: 700; color: var(--ink-soft); font-size: 1.1rem; text-align: center; margin-top: 0.5rem; }
+  .now-badge {
+    position: absolute; top: -20px; right: -16px; rotate: 7deg; z-index: 2;
+    display: grid; place-items: center; width: 96px; height: 96px; border-radius: 50%;
+    background: var(--red); color: var(--cream); text-align: center;
+    font-family: "Anton", sans-serif; font-size: 1.05rem; line-height: 1.02; text-transform: uppercase;
+    box-shadow: 0 10px 22px -10px oklch(0.2 0.1 30 / 0.8), inset 0 0 0 2px oklch(0.82 0.15 80 / 0.55);
+  }
+  .now-badge span { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 800; font-size: 0.5rem; letter-spacing: 0.18em; color: var(--gold); margin-top: 0.25em; }
+
+  /* ---- Section scaffolding ------------------------------------------- */
+  section { padding-block: clamp(3.4rem, 7vw, 6rem); }
+  .sec-head { max-width: 50ch; }
+  .sec-head .eyebrow { color: var(--red); }
+  .sec-head h2 { font-size: var(--t-h2); margin-top: 0.7rem; }
+  .sec-head h2 .script { color: var(--red); font-size: 1.15em; }
+  .sec-head p { color: var(--ink-soft); font-size: var(--t-lead); margin: 0.8rem 0 0; }
+
+  /* ---- Burgers: menu board + photo ----------------------------------- */
+  .burgers .wrap { display: grid; gap: clamp(2rem, 4vw, 3.4rem); align-items: start; }
+  @media (min-width: 900px) { .burgers .wrap { grid-template-columns: 1.1fr 0.9fr; } .burgers .sec-head { grid-column: 1 / -1; } }
+
+  .menu-card { background: var(--char); color: var(--cream); border-radius: var(--r); padding: clamp(1.4rem, 3vw, 2.1rem); box-shadow: var(--shadow); }
+  .menu-card .menu-top { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-bottom: 2px dashed oklch(0.95 0.02 84 / 0.25); padding-bottom: 0.8rem; }
+  .menu-card .menu-top h3 { font-family: "Anton", sans-serif; font-size: 1.5rem; text-transform: uppercase; color: var(--cream); }
+  .menu-card .menu-top .with-fries { font-family: "Caveat", cursive; font-weight: 700; font-size: 1.15rem; color: var(--gold); white-space: nowrap; }
+  .menu-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.95rem; margin-top: 1.1rem; }
+  .menu-list li { display: grid; grid-template-columns: 1.6rem 1fr; gap: 0.7rem; }
+  .menu-list .num { font-family: "Anton", sans-serif; color: var(--gold); font-size: 1.15rem; line-height: 1.2; }
+  .menu-list .item-name { font-weight: 800; font-size: 1.04rem; color: var(--cream); }
+  .menu-list .item-name span { font-weight: 600; color: oklch(0.95 0.02 84 / 0.6); font-style: italic; }
+  .menu-list .item-desc { font-size: 0.92rem; color: oklch(0.95 0.02 84 / 0.78); line-height: 1.45; margin-top: 0.1rem; }
+  .menu-foot { margin-top: 1.2rem; padding-top: 0.9rem; border-top: 2px dashed oklch(0.95 0.02 84 / 0.25); font-size: 0.92rem; color: oklch(0.95 0.02 84 / 0.82); }
+  .menu-foot b { color: var(--gold); }
+
+  .burger-aside { display: grid; gap: 1.4rem; }
+  .burger-figure { position: relative; padding: 0.6rem 0.6rem 0.9rem; background: var(--cream); border-radius: 8px; box-shadow: var(--shadow); rotate: -1.3deg; }
+  .burger-figure img { border-radius: 4px; width: 100%; }
+  .burger-figure figcaption { font-family: "Caveat", cursive; font-weight: 700; color: var(--ink-soft); font-size: 1.1rem; text-align: center; margin-top: 0.5rem; }
+  .fries-note { background: var(--poblano); color: var(--cream); border-radius: var(--r); padding: 1.3rem 1.4rem; }
+  .fries-note .eyebrow { color: oklch(0.96 0.02 84 / 0.85); }
+  .fries-note blockquote { margin: 0.5rem 0 0; font-family: "Anton", sans-serif; text-transform: none; font-size: 1.35rem; line-height: 1.12; }
+  .fries-note cite { display: block; font-style: normal; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.96 0.02 84 / 0.7); margin-top: 0.7rem; }
+
+  .spend-note { margin-top: 1.7rem; grid-column: 1 / -1; font-size: 0.98rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 0.5em 1.4em; align-items: center; }
+  .spend-note span { display: inline-flex; align-items: center; gap: 0.5em; }
+  .spend-note b { color: var(--ink); font-weight: 800; }
+  .spend-note svg { color: var(--red); flex: none; }
+
+  /* ---- From the kitchen: photo cards --------------------------------- */
+  .kitchen { background: var(--cream-2); }
+  .plate-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; gap: 1.2rem; grid-template-columns: 1fr; }
+  @media (min-width: 740px) { .plate-grid { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px) { .plate-grid { grid-template-columns: 1.2fr 1.2fr 1fr; } }
+
+  .plate { position: relative; border-radius: var(--r); overflow: hidden; background: var(--cream-3); min-height: 280px; display: flex; box-shadow: 0 14px 30px -26px oklch(0.2 0.02 60 / 0.5); }
+  .plate img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 0.6s var(--ease); }
+  .plate:hover img { transform: scale(1.04); }
+  .plate .plate-body { position: relative; margin-top: auto; width: 100%; padding: 1.15rem 1.25rem 1.25rem; background: linear-gradient(to top, oklch(0.18 0.015 60 / 0.95) 0%, oklch(0.18 0.015 60 / 0.72) 50%, transparent 100%); color: var(--cream); }
+  .plate h3 { font-family: "Anton", sans-serif; font-size: var(--t-h3); text-transform: uppercase; }
+  .plate p { margin: 0.35rem 0 0; font-size: 0.95rem; color: oklch(0.96 0.02 84 / 0.92); line-height: 1.5; }
+  .plate--more { background: var(--red); color: var(--cream); }
+  .plate--more .plate-body { background: none; margin: 0; display: flex; flex-direction: column; justify-content: center; height: 100%; padding: 1.6rem; }
+  .plate--more .eyebrow { color: var(--gold); }
+  .plate--more h3 { color: var(--cream); margin-top: 0.5rem; }
+  .plate--more p { color: oklch(0.96 0.02 84 / 0.92); font-size: 1rem; }
+
+  /* ---- Testimonials --------------------------------------------------- */
+  .voices { background: var(--char); color: var(--cream); }
+  .voices .eyebrow { color: var(--gold); }
+  .voices h2 { font-size: var(--t-h2); margin-top: 0.6rem; max-width: 20ch; }
+  .voices h2 .script { color: var(--gold); font-size: 1.15em; }
+  .voices-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; gap: 1.4rem; }
+  @media (min-width: 760px) { .voices-grid { grid-template-columns: 1fr 1fr; } }
+  .voice { background: oklch(0.32 0.018 55); border-radius: var(--r); padding: clamp(1.5rem, 3vw, 2.2rem); }
+  .voice .qmark { font-family: "Anton", serif; color: var(--gold); font-size: 3rem; line-height: 0.55; display: block; height: 0.5em; }
+  .voice blockquote { margin: 0.7rem 0 0; font-family: "Anton", sans-serif; text-transform: none; font-weight: 400; font-size: clamp(1.3rem, 1rem + 1.3vw, 1.9rem); line-height: 1.16; letter-spacing: 0.004em; }
+  .voice cite { display: block; font-style: normal; margin-top: 1rem; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.13em; text-transform: uppercase; color: oklch(0.95 0.03 84 / 0.7); }
+  .voices-proof { margin-top: 2rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+  .voices-proof .stars { font-size: 1.1rem; }
+
+  /* ---- Find us -------------------------------------------------------- */
+  .find { background: var(--char-2); color: var(--cream); }
+  .find .wrap { display: grid; gap: clamp(2rem, 5vw, 3.5rem); align-items: center; }
+  @media (min-width: 840px) { .find .wrap { grid-template-columns: 0.85fr 1.15fr; } }
+  .find-figure { justify-self: center; rotate: -1.6deg; padding: 0.6rem 0.6rem 0.9rem; background: var(--cream); border-radius: 8px; box-shadow: 0 30px 60px -34px oklch(0 0 0 / 0.7); max-width: 360px; }
+  .find-figure img { border-radius: 4px; }
+  .find-figure figcaption { font-family: "Caveat", cursive; font-weight: 700; color: var(--ink-soft); font-size: 1.1rem; text-align: center; margin-top: 0.5rem; }
+  .find .eyebrow { color: var(--gold); }
+  .find h2 { font-size: var(--t-h2); margin-top: 0.7rem; }
+  .find address { font-style: normal; font-size: var(--t-lead); line-height: 1.42; margin: 1.1rem 0 0; color: oklch(0.95 0.02 84 / 0.92); }
+  .find .road { color: var(--gold); }
+  .find-hours { margin: 1.3rem 0 0; display: grid; gap: 0.4rem; font-size: 0.98rem; color: oklch(0.95 0.02 84 / 0.82); }
+  .find-hours .late { color: var(--gold); font-weight: 700; }
+  .pay-chip { display: inline-flex; align-items: center; gap: 0.55em; margin-top: 1.2rem; background: oklch(0.55 0.115 150 / 0.18); border: 1px solid oklch(0.55 0.115 150 / 0.5); color: var(--cream); border-radius: 999px; padding: 0.5em 1em; font-weight: 700; font-size: 0.9rem; }
+  .pay-chip svg { color: var(--gold); }
+  .find-cta { margin-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 0.8rem; }
+  .find-note { margin-top: 1.3rem; font-size: 0.9rem; color: oklch(0.95 0.02 84 / 0.6); }
+  .find-note a { color: var(--gold); font-weight: 700; text-decoration: none; border-bottom: 1px solid oklch(0.82 0.15 80 / 0.4); }
+
+  /* ---- Footer --------------------------------------------------------- */
+  footer { background: var(--ink); color: oklch(0.95 0.02 84 / 0.75); }
+  footer .wrap { padding-block: clamp(2.2rem, 4vw, 3rem); display: flex; flex-wrap: wrap; gap: 1.2rem 2rem; align-items: center; justify-content: space-between; }
+  footer .foot-biz { font-family: "Anton", sans-serif; text-transform: uppercase; color: var(--cream); font-size: 1.15rem; letter-spacing: 0.01em; }
+  footer .foot-biz small { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: none; color: oklch(0.95 0.02 84 / 0.55); margin-top: 0.3rem; }
+  footer .credit { font-size: 0.86rem; }
+  footer .credit a { color: var(--gold); font-weight: 700; text-decoration: none; border-bottom: 1px solid oklch(0.80 0.15 78 / 0.4); }
+  footer .credit a:hover { border-bottom-color: var(--gold); }
+
+  /* ---- Reveal on scroll ---------------------------------------------- */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  .skip { position: absolute; left: -999px; top: 0; z-index: 50; background: var(--red); color: var(--cream); padding: 0.7em 1.1em; border-radius: 0 0 8px 0; font-weight: 700; }
+  .skip:focus { left: 0; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand-lockup" href="#top" aria-label="Hamburguesas Emilia, home">
+      <span class="monogram" aria-hidden="true">E</span>
+      <span class="brand-name">Hamburguesas Emilia<small>al sabor del chef</small></span>
+    </a>
+    <div class="topbar-cta">
+      <a class="btn btn-outline btn-dir" style="border-color:var(--cream-3);color:var(--ink)" href="https://www.google.com/maps/dir/?api=1&destination=16419+FM+969+Manor+TX+78653" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        Directions
+      </a>
+      <a class="btn btn-red" href="tel:+15126333727">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
+        Call<span class="btn-label-long">&nbsp;to order</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ============================ HERO ============================ -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow hero-eyebrow">Manor, Texas · on FM 969</span>
+      <h1 id="hero-title">
+        <span class="hero-name display">Hamburguesas Emilia</span>
+        <span class="hero-tag">al sabor del chef</span>
+      </h1>
+      <p class="hero-lead">Juicy chef's burgers with a Mexican tilt, and the seasoned fries to match. Plus street tacos, flautas, and a whole Mexican kitchen, out of the truck on FM 969.</p>
+
+      <div class="rating" aria-label="Rated 4.4 out of 5 on Google across 37 reviews">
+        <span class="stars" aria-hidden="true">★★★★½</span>
+        <span class="rating-text"><b>4.4</b> on Google · 37 reviews</span>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn btn-call" href="tel:+15126333727">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
+          Call to order ahead
+        </a>
+        <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&destination=16419+FM+969+Manor+TX+78653" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Get directions
+        </a>
+      </div>
+    </div>
+
+    <figure class="hero-figure reveal">
+      <span class="now-badge" aria-hidden="true">Open<br>Late<span>til 10:30</span></span>
+      <img src="img/hero-cheeseburger.webp" width="1303" height="698" fetchpriority="high" decoding="async"
+           alt="A thick cheeseburger cut in half on a blue enamel plate, showing the juicy beef patty and melted cheese, with a pile of golden seasoned fries.">
+      <figcaption>The cheeseburger, and those seasoned fries.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================ BURGERS ============================ -->
+<section class="burgers" id="burgers" aria-labelledby="burgers-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What people drive out for</span>
+      <h2 id="burgers-title">The burgers, <span class="script">six ways</span></h2>
+      <p>Folks call them "the best burgers I have ever tasted in my life." Built to order by the chef, every one comes with fries.</p>
+    </div>
+
+    <div class="menu-card reveal">
+      <div class="menu-top">
+        <h3>Hamburguesas</h3>
+        <span class="with-fries">all come with fries</span>
+      </div>
+      <ul class="menu-list">
+        <li><span class="num">1</span><div><div class="item-name">Chipotle Burger <span>· de chipotle</span></div><div class="item-desc">Broiled onions, white cheese, and chipotle fries.</div></div></li>
+        <li><span class="num">2</span><div><div class="item-name">Cheese Burger <span>· con queso</span></div><div class="item-desc">Beef, lettuce, tomato, onion. The big ol' classic.</div></div></li>
+        <li><span class="num">3</span><div><div class="item-name">Poblano Burger <span>· poblana</span></div><div class="item-desc">Roasted poblano, mayo, ranch, and Swiss cheese.</div></div></li>
+        <li><span class="num">4</span><div><div class="item-name">BBQ Burger <span>· de BBQ</span></div><div class="item-desc">Lettuce, tomato, yellow cheese, and BBQ sauce.</div></div></li>
+        <li><span class="num">5</span><div><div class="item-name">Breakfast Burger <span>· de desayuno</span></div><div class="item-desc">Hash brown, egg, ham, bacon, and American cheese.</div></div></li>
+        <li><span class="num">6</span><div><div class="item-name">Pork Sandwich <span>· de puerco</span></div><div class="item-desc">Pulled pork with BBQ sauce.</div></div></li>
+      </ul>
+      <p class="menu-foot">Todas con papas fritas. <b>Most plates run $10 to $20.</b></p>
+    </div>
+
+    <div class="burger-aside">
+      <figure class="burger-figure reveal">
+        <img src="img/burger-build.webp" width="1270" height="702" loading="lazy" decoding="async"
+             alt="An open-faced cheeseburger on chile-pepper printed paper, stacked with melted cheese, pickles, fresh tomato, and shredded lettuce, with shoestring fries alongside.">
+        <figcaption>Stacked the way you like it.</figcaption>
+      </figure>
+      <div class="fries-note reveal">
+        <span class="eyebrow">Don't skip the fries</span>
+        <blockquote>"The fries are perfectly seasoned and cooked."</blockquote>
+        <cite>Kaycee Joan · Google review</cite>
+      </div>
+    </div>
+
+    <p class="spend-note reveal">
+      <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/></svg> <b>Cash only</b> &mdash; there's an ATM right on site.</span>
+      <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5a2.5 2 0 0 1 5 0c0 2.5-5 1.5-5 4a2.5 2 0 0 0 5 0"/></svg> About <b>$10 to $20</b> a head.</span>
+      <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Out in about <b>ten minutes</b>.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ========================= FROM THE KITCHEN ========================= -->
+<section class="kitchen" id="kitchen" aria-labelledby="kitchen-title">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Not just burgers</span>
+      <h2 id="kitchen-title">A whole <span class="script">Mexican kitchen</span></h2>
+      <p>Same truck, same chef. Street tacos, flautas, quesadillas, and more, made fresh to order.</p>
+    </div>
+
+    <div class="plate-grid">
+      <article class="plate reveal">
+        <img src="img/tacos.webp" width="1303" height="698" loading="lazy" decoding="async"
+             alt="Two street tacos in a green basket, topped with grilled steak, onion, cilantro, cheese, and avocado, with lime and a cup of salsa.">
+        <div class="plate-body">
+          <h3>Street tacos</h3>
+          <p>Grilled meat, onion, cilantro, cheese, avocado, and lime. Al pastor, barbacoa, carnitas, and more.</p>
+        </div>
+      </article>
+
+      <article class="plate reveal">
+        <img src="img/flautas.webp" width="733" height="675" loading="lazy" decoding="async"
+             alt="A plate of chicken flautas topped with lettuce, crema, and crumbled cheese, with refried beans, Mexican rice, pico de gallo, and a lime wedge.">
+        <div class="plate-body">
+          <h3>Chicken flautas</h3>
+          <p>Crispy rolled flautas with lettuce, crema, and cheese, plus rice, beans, and pico.</p>
+        </div>
+      </article>
+
+      <article class="plate plate--more reveal">
+        <div class="plate-body">
+          <span class="eyebrow">Ask about</span>
+          <h3>And plenty more</h3>
+          <p>Quesadillas, empanadas, corn beef tacos, buffalo wings, antojitos, and whole or half roast chicken. Just ask at the window.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== TESTIMONIALS ======================= -->
+<section class="voices" aria-labelledby="voices-title">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Straight from Google</span>
+      <h2 id="voices-title">An ATX <span class="script">hidden gem</span></h2>
+    </div>
+    <div class="voices-grid">
+      <figure class="voice reveal">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <blockquote>This place has the best burgers I have ever tasted in my life.</blockquote>
+        <cite>Google review</cite>
+      </figure>
+      <figure class="voice reveal">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <blockquote>The burgers here are amazing, they really hit the spot. It's a big ol burger too. Definitely my new burger spot.</blockquote>
+        <cite>Kaycee Joan</cite>
+      </figure>
+      <figure class="voice reveal">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Mr. Lorenzo did a great job making a tasty and juicy burger.</blockquote>
+        <cite>Google review</cite>
+      </figure>
+      <figure class="voice reveal">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Service was very fast. Ordered, and within ten minutes my food was ready.</blockquote>
+        <cite>lola perez</cite>
+      </figure>
+    </div>
+    <p class="voices-proof reveal">
+      <span class="stars" aria-hidden="true">★★★★½</span>
+      4.4 stars on Google, across 37 reviews.
+    </p>
+  </div>
+</section>
+
+<!-- ========================== FIND US ========================== -->
+<section class="find" aria-labelledby="find-title">
+  <div class="wrap">
+    <figure class="find-figure reveal">
+      <img src="img/sign-night.webp" width="960" height="1280" loading="lazy" decoding="async"
+           alt="The lit Hamburguesas Emilia sign at night with a neon OPEN sign and 'Pick up orders 512.633.3727', on the food truck on FM 969.">
+      <figcaption>Look for the lit sign on FM 969.</figcaption>
+    </figure>
+    <div class="reveal">
+      <span class="eyebrow">Find the truck</span>
+      <h2 id="find-title">On FM 969 in Manor</h2>
+      <address>
+        <span class="road">16419 FM 969</span>, Manor, TX 78653.<br>
+        Look for the orange Hamburguesas Emilia sign and the neon OPEN, Travis County.
+      </address>
+      <div class="find-hours">
+        <span class="late">Open late, kitchen runs until 10:30 PM.</span>
+        <span>Burgers, tacos, and breakfast off the same window.</span>
+      </div>
+      <span class="pay-chip"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/></svg> Cash only · ATM on site</span>
+      <div class="find-cta">
+        <a class="btn btn-call" href="tel:+15126333727">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
+          (512) 633-3727
+        </a>
+        <a class="btn btn-cream" href="https://www.google.com/maps/search/?api=1&query=Amburguesas+Al+Sabor+Del+Chef+16419+FM+969+Manor+TX+78653" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Open in Google Maps
+        </a>
+      </div>
+      <p class="find-note">Hours can shift with the truck. <a href="tel:+15126333727">Call ahead</a> to be sure.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-biz">
+      Hamburguesas Emilia
+      <small>16419 FM 969 · Manor, Texas · (512) 633-3727</small>
+    </div>
+    <div class="credit">
+      A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal-on-scroll, opacity and transform only, once each. Honors reduced motion.
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var nodes = document.querySelectorAll(".reveal");
+    if (reduce || !("IntersectionObserver" in window)) {
+      nodes.forEach(function (n) { n.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
+    nodes.forEach(function (n) { io.observe(n); });
+  })();
+</script>
+<script defer src="/assets/demo-visit.js"></script>
+</body>
+</html>
