@@ -19,7 +19,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500..900;1,9..144,500..700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -71,7 +71,7 @@
   a { color: inherit; }
 
   h1, h2, h3 {
-    font-family: "Fraunces", Georgia, serif;
+    font-family: "Bitter", Georgia, serif;
     font-weight: 800;
     line-height: 1.02;
     letter-spacing: -0.015em;
@@ -133,11 +133,11 @@
     display: inline-grid; place-items: center;
     width: 2.5rem; height: 2.5rem; border-radius: 10px;
     background: var(--navy); color: var(--marigold);
-    font-family: "Fraunces", Georgia, serif; font-weight: 800; font-size: 1.5rem;
+    font-family: "Bitter", Georgia, serif; font-weight: 800; font-size: 1.5rem;
     box-shadow: inset 0 0 0 1.5px oklch(0.82 0.15 80 / 0.35);
   }
   .brand-lockup .brand-name {
-    font-family: "Fraunces", Georgia, serif; font-weight: 800;
+    font-family: "Bitter", Georgia, serif; font-weight: 800;
     font-size: 1.18rem; line-height: 1; letter-spacing: -0.01em; color: var(--ink);
   }
   .brand-lockup .brand-name small { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.32em; }
@@ -196,7 +196,7 @@
     position: absolute; top: -20px; right: -16px; rotate: 7deg; z-index: 2;
     display: grid; place-items: center; width: 92px; height: 92px; border-radius: 50%;
     background: var(--red); color: var(--bone); text-align: center;
-    font-family: "Fraunces", serif; font-weight: 800; font-size: 0.95rem; line-height: 1.04;
+    font-family: "Bitter", serif; font-weight: 800; font-size: 0.95rem; line-height: 1.04;
     box-shadow: 0 10px 22px -10px oklch(0.2 0.1 30 / 0.8), inset 0 0 0 2px oklch(0.82 0.15 80 / 0.55);
   }
   .now-badge span { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 800; font-size: 0.5rem; letter-spacing: 0.18em; color: var(--marigold); margin-top: 0.2em; }
@@ -236,7 +236,7 @@
   @media (min-width: 980px) { .plate--star { grid-column: span 1; } }
   .plate--star .plate-body { background: none; margin: 0; display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 1.6rem; }
   .plate--star .tag { color: var(--marigold); }
-  .plate--star blockquote { margin: 0; font-family: "Fraunces", serif; font-weight: 700; font-size: 1.42rem; line-height: 1.18; }
+  .plate--star blockquote { margin: 0; font-family: "Bitter", serif; font-weight: 700; font-size: 1.42rem; line-height: 1.18; }
   .plate--star blockquote em { font-style: italic; color: var(--marigold); }
   .plate--star cite { display: block; font-family: "Hanken Grotesk", sans-serif; font-style: normal; font-weight: 700; font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.95 0.02 84 / 0.6); margin-top: 0.9rem; }
 
@@ -258,8 +258,8 @@
   .voices-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; gap: 1.4rem; }
   @media (min-width: 760px) { .voices-grid { grid-template-columns: 1fr 1fr; } }
   .voice { background: oklch(0.31 0.05 52); border-radius: var(--r); padding: clamp(1.5rem, 3vw, 2.2rem); }
-  .voice .qmark { font-family: "Fraunces", serif; font-weight: 900; color: var(--marigold); font-size: 3rem; line-height: 0.6; display: block; height: 0.5em; }
-  .voice blockquote { margin: 0.6rem 0 0; font-family: "Fraunces", serif; font-weight: 700; font-size: clamp(1.35rem, 1.05rem + 1.3vw, 1.95rem); line-height: 1.2; }
+  .voice .qmark { font-family: "Bitter", serif; font-weight: 900; color: var(--marigold); font-size: 3rem; line-height: 0.6; display: block; height: 0.5em; }
+  .voice blockquote { margin: 0.6rem 0 0; font-family: "Bitter", serif; font-weight: 700; font-size: clamp(1.35rem, 1.05rem + 1.3vw, 1.95rem); line-height: 1.2; }
   .voice cite { display: block; font-style: normal; margin-top: 1rem; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.13em; text-transform: uppercase; color: oklch(0.95 0.03 84 / 0.72); }
   .voices-proof { margin-top: 2rem; font-weight: 700; letter-spacing: 0.01em; display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
   .voices-proof .stars { font-size: 1.1rem; }
@@ -284,7 +284,7 @@
   /* ---- Footer --------------------------------------------------------- */
   footer { background: var(--ink); color: oklch(0.95 0.02 84 / 0.75); }
   footer .wrap { padding-block: clamp(2.2rem, 4vw, 3rem); display: flex; flex-wrap: wrap; gap: 1.2rem 2rem; align-items: center; justify-content: space-between; }
-  footer .foot-biz { font-family: "Fraunces", serif; font-weight: 800; color: var(--bone); font-size: 1.1rem; letter-spacing: -0.01em; }
+  footer .foot-biz { font-family: "Bitter", serif; font-weight: 800; color: var(--bone); font-size: 1.1rem; letter-spacing: -0.01em; }
   footer .foot-biz small { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 0.07em; color: oklch(0.95 0.02 84 / 0.55); margin-top: 0.25rem; }
   footer .credit { font-size: 0.86rem; }
   footer .credit a { color: var(--marigold); font-weight: 700; text-decoration: none; border-bottom: 1px solid oklch(0.80 0.15 78 / 0.4); }
