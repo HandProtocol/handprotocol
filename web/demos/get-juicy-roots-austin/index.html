@@ -19,7 +19,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Spectral:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -77,7 +77,7 @@
   a { color: inherit; }
 
   h1, h2, h3 { margin: 0; line-height: 1.02; }
-  .display { font-family: "Fraunces", Georgia, serif; font-weight: 600; letter-spacing: -0.01em; }
+  .display { font-family: "Spectral", Georgia, serif; font-weight: 600; letter-spacing: -0.01em; }
   .script  { font-family: "Caveat", cursive; font-weight: 700; letter-spacing: 0; }
 
   .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
@@ -130,7 +130,7 @@
   .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-block: 0.55rem; }
   .brand-lockup { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; }
   .brand-lockup .sf { width: 2.6rem; height: 2.6rem; flex: none; }
-  .brand-name { font-family: "Fraunces", serif; font-weight: 700; font-size: 1.16rem; line-height: 0.98; letter-spacing: -0.01em; color: var(--ink); }
+  .brand-name { font-family: "Spectral", serif; font-weight: 700; font-size: 1.16rem; line-height: 0.98; letter-spacing: -0.01em; color: var(--ink); }
   .brand-name small { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 700; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green-d); margin-top: 0.28em; }
   .topbar-cta { display: inline-flex; gap: 0.55rem; }
   .topbar .btn { min-height: 44px; padding-block: 0.5em; font-size: 0.92rem; }
@@ -206,7 +206,7 @@
     position: absolute; top: -22px; left: -20px; rotate: -8deg; z-index: 2;
     display: grid; place-items: center; width: 104px; height: 104px; border-radius: 50%;
     background: var(--green-d); color: var(--cream); text-align: center;
-    font-family: "Fraunces", serif; font-weight: 700; font-size: 0.95rem; line-height: 1.02;
+    font-family: "Spectral", serif; font-weight: 700; font-size: 0.95rem; line-height: 1.02;
     box-shadow: 0 12px 24px -12px oklch(0.3 0.08 150 / 0.8), inset 0 0 0 2px oklch(0.81 0.155 84 / 0.6);
   }
   .seal span { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 800; font-size: 0.5rem; letter-spacing: 0.18em; color: var(--sun); margin-top: 0.3em; }
@@ -240,7 +240,7 @@
   .menu-figure figcaption { font-family: "Caveat", cursive; font-weight: 700; color: var(--ink-soft); font-size: 1.1rem; text-align: center; margin-top: 0.5rem; }
   .water-note { background: var(--teal); color: var(--cream); border-radius: var(--r); padding: 1.25rem 1.4rem; }
   .water-note .eyebrow { color: oklch(0.99 0.01 95 / 0.85); }
-  .water-note p { margin: 0.45rem 0 0; font-family: "Fraunces", serif; font-size: 1.28rem; line-height: 1.18; }
+  .water-note p { margin: 0.45rem 0 0; font-family: "Spectral", serif; font-size: 1.28rem; line-height: 1.18; }
   .water-note cite { display: block; font-style: normal; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.99 0.01 95 / 0.78); margin-top: 0.7rem; }
 
   /* ---- Signature pours: photo grid ----------------------------------- */
@@ -252,7 +252,7 @@
   .pour img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transition: transform 0.6s var(--ease); }
   .pour:hover img { transform: scale(1.045); }
   .pour .pour-body { position: relative; margin-top: auto; width: 100%; padding: 1.1rem 1.25rem 1.2rem; background: linear-gradient(to top, oklch(0.24 0.04 55 / 0.92) 0%, oklch(0.24 0.04 55 / 0.6) 55%, transparent 100%); color: var(--cream); }
-  .pour h3 { font-family: "Fraunces", serif; font-weight: 600; font-size: var(--t-h3); }
+  .pour h3 { font-family: "Spectral", serif; font-weight: 600; font-size: var(--t-h3); }
   .pour p { margin: 0.3rem 0 0; font-size: 0.93rem; color: oklch(0.99 0.01 95 / 0.92); line-height: 1.45; }
 
   /* ---- Light / healing band ------------------------------------------ */
@@ -266,7 +266,7 @@
   .light .wrap { position: relative; z-index: 1; max-width: 760px; display: grid; justify-items: center; }
   .light .sf { width: clamp(72px, 12vw, 110px); height: clamp(72px, 12vw, 110px); filter: drop-shadow(0 10px 18px oklch(0.4 0.08 70 / 0.35)); }
   .light .eyebrow { color: var(--green-d); margin-top: 1.3rem; }
-  .light h2 { font-family: "Fraunces", serif; font-weight: 600; font-size: var(--t-h2); margin-top: 0.6rem; }
+  .light h2 { font-family: "Spectral", serif; font-weight: 600; font-size: var(--t-h2); margin-top: 0.6rem; }
   .light h2 em { font-style: normal; font-family: "Caveat", cursive; font-weight: 700; color: var(--green-d); font-size: 1.2em; }
   .light p { font-size: var(--t-lead); color: oklch(0.34 0.05 58 / 0.92); margin: 1.1rem 0 0; font-weight: 500; }
   .light .roots-wrap { width: min(420px, 70%); margin-top: 1.6rem; color: var(--green-d); opacity: 0.85; }
@@ -274,13 +274,13 @@
   /* ---- Testimonials --------------------------------------------------- */
   .voices { background: var(--green-d); color: var(--cream); position: relative; overflow: hidden; }
   .voices .eyebrow { color: var(--sun); }
-  .voices h2 { font-family: "Fraunces", serif; font-weight: 600; font-size: var(--t-h2); margin-top: 0.6rem; max-width: 22ch; }
+  .voices h2 { font-family: "Spectral", serif; font-weight: 600; font-size: var(--t-h2); margin-top: 0.6rem; max-width: 22ch; }
   .voices h2 .script { color: var(--sun); font-size: 1.16em; }
   .voices-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; gap: 1.3rem; }
   @media (min-width: 760px) { .voices-grid { grid-template-columns: 1fr 1fr; } }
   .voice { background: oklch(0.48 0.085 151); border-radius: var(--r); padding: clamp(1.5rem, 3vw, 2.1rem); }
-  .voice .qmark { font-family: "Fraunces", serif; color: var(--sun); font-size: 3rem; line-height: 0.5; display: block; height: 0.5em; }
-  .voice blockquote { margin: 0.7rem 0 0; font-family: "Fraunces", serif; font-weight: 500; font-size: clamp(1.25rem, 1rem + 1.1vw, 1.65rem); line-height: 1.28; }
+  .voice .qmark { font-family: "Spectral", serif; color: var(--sun); font-size: 3rem; line-height: 0.5; display: block; height: 0.5em; }
+  .voice blockquote { margin: 0.7rem 0 0; font-family: "Spectral", serif; font-weight: 500; font-size: clamp(1.25rem, 1rem + 1.1vw, 1.65rem); line-height: 1.28; }
   .voice cite { display: block; font-style: normal; margin-top: 1rem; font-weight: 700; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.99 0.01 95 / 0.72); }
   .voices-proof { margin-top: 2rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
   .voices-proof .stars { color: var(--sun); }
@@ -321,7 +321,7 @@
   footer .wrap { padding-block: clamp(2.2rem, 4vw, 3rem); display: flex; flex-wrap: wrap; gap: 1.2rem 2rem; align-items: center; justify-content: space-between; }
   footer .foot-biz { display: inline-flex; align-items: center; gap: 0.7rem; }
   footer .foot-biz .sf { width: 2.4rem; height: 2.4rem; flex: none; }
-  footer .foot-biz .ft { font-family: "Fraunces", serif; font-weight: 700; color: var(--cream); font-size: 1.12rem; }
+  footer .foot-biz .ft { font-family: "Spectral", serif; font-weight: 700; color: var(--cream); font-size: 1.12rem; }
   footer .foot-biz .ft small { display: block; font-family: "Hanken Grotesk", sans-serif; font-weight: 500; font-size: 0.78rem; color: oklch(0.97 0.02 90 / 0.55); margin-top: 0.25rem; }
   footer .credit { font-size: 0.86rem; }
   footer .credit a { color: var(--sun); font-weight: 700; text-decoration: none; border-bottom: 1px solid oklch(0.81 0.155 84 / 0.4); }
