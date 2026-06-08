@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>St. Peter's United Methodist Church · Worship in East Austin, Sundays 10:15 am</title>
+<meta name="description" content="A welcoming United Methodist church in East Austin, Texas, celebrating 161 years of ministry. Worship every Sunday at 10:15 am, in person and online. 4509 Springdale Road, Austin. Come step out on faith with us.">
+<link rel="canonical" href="https://handprotocol.org/demos/st-peters-umc-austin/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="St. Peter's UMC · Come step out on faith with us">
+<meta property="og:description" content="A welcoming United Methodist church in East Austin, celebrating 161 years of ministry. Worship Sundays at 10:15 am, in person and online.">
+<meta name="twitter:card" content="summary">
+
+<!-- Favicon: a slim cross in sage on warm ivory -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23fcfbf8'/%3E%3Cg fill='none' stroke='%235e7a6b' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M16 6 V26'/%3E%3Cpath d='M9 13 H23'/%3E%3C/g%3E%3Ccircle cx='16' cy='6.4' r='1.7' fill='%23bfa063'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    /* Sanctuary Light: airy ivory, sage, soft gold. Light through a window. OKLCH. */
+    --ivory:    oklch(0.992 0.005 95);
+    --paper:    #ffffff;
+    --mist:     oklch(0.972 0.009 160);   /* faint sage-cream, alt sections */
+    --mist-2:   oklch(0.945 0.014 160);
+    --sage-wash:oklch(0.955 0.024 162);   /* tint behind chips/cards */
+
+    --ink:      oklch(0.29 0.008 160);
+    --ink-soft: oklch(0.46 0.012 160);
+
+    --sage:     oklch(0.55 0.045 162);
+    --sage-d:   oklch(0.46 0.050 163);    /* links + text on light */
+    --sage-btn: oklch(0.49 0.052 163);    /* button fill, white text passes AA */
+    --sage-br:  oklch(0.72 0.060 160);
+
+    --gold:     oklch(0.76 0.090 84);
+    --gold-d:   oklch(0.60 0.090 78);
+
+    --line:     oklch(0.90 0.010 160);
+    --line-2:   oklch(0.85 0.014 160);
+
+    --maxw: 1140px;
+    --pad: clamp(1.15rem, 4.2vw, 3rem);
+    --r: 16px;
+    --shadow: 0 1px 2px oklch(0.4 0.02 160 / 0.05), 0 18px 40px -28px oklch(0.4 0.03 160 / 0.35);
+    --shadow-sm: 0 1px 2px oklch(0.4 0.02 160 / 0.06), 0 10px 24px -20px oklch(0.4 0.03 160 / 0.3);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(1rem, 0.97rem + 0.2vw, 1.08rem);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3 { font-family: "Spectral", Georgia, serif; font-weight: 600; line-height: 1.12; letter-spacing: -0.01em; margin: 0; color: var(--ink); }
+  p { margin: 0; }
+  a { color: var(--sage-d); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  img, svg { display: block; max-width: 100%; }
+
+  .skip {
+    position: absolute; left: -999px; top: 0; z-index: 100;
+    background: var(--paper); color: var(--sage-d); padding: 0.7rem 1rem;
+    border-radius: 0 0 12px 0; box-shadow: var(--shadow-sm); font-weight: 600;
+  }
+  .skip:focus { left: 0; }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--pad); }
+  .eyebrow {
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--sage-d);
+  }
+
+  /* ---------- header ---------- */
+  header.site {
+    position: sticky; top: 0; z-index: 40;
+    background: oklch(0.992 0.005 95 / 0.86);
+    -webkit-backdrop-filter: saturate(1.1) blur(10px);
+    backdrop-filter: saturate(1.1) blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; gap: 1rem; min-height: 68px; }
+  .brand { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; color: var(--ink); margin-right: auto; }
+  .brand svg { flex: none; }
+  .brand b { font-family: "Spectral", serif; font-weight: 600; font-size: 1.06rem; line-height: 1.05; letter-spacing: -0.01em; }
+  .brand span { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage-d); }
+  .nav-links { display: none; gap: 1.55rem; align-items: center; }
+  .nav-links a { color: var(--ink-soft); text-decoration: none; font-weight: 500; font-size: 0.96rem; }
+  .nav-links a:hover { color: var(--sage-d); }
+  @media (min-width: 880px) { .nav-links { display: flex; } }
+
+  /* ---------- buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    font: inherit; font-weight: 600; font-size: 0.98rem; line-height: 1;
+    padding: 0.85rem 1.35rem; border-radius: 999px; border: 1px solid transparent;
+    text-decoration: none; cursor: pointer; transition: transform .15s ease, background .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn-primary { background: var(--sage-btn); color: #fff; box-shadow: var(--shadow-sm); }
+  .btn-primary:hover { background: oklch(0.44 0.055 163); }
+  .btn-ghost { background: transparent; color: var(--sage-d); border-color: var(--line-2); }
+  .btn-ghost:hover { border-color: var(--sage); background: var(--sage-wash); }
+  .btn-gold { background: transparent; color: var(--gold-d); border-color: oklch(0.82 0.06 84); }
+  .btn-gold:hover { background: oklch(0.96 0.04 86); }
+  .btn-sm { padding: 0.6rem 1rem; font-size: 0.9rem; }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; overflow: hidden; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(120% 80% at 50% -20%, oklch(0.97 0.05 92 / 0.7), transparent 60%),
+      radial-gradient(90% 70% at 85% 0%, var(--sage-wash), transparent 55%);
+  }
+  .hero-grid {
+    position: relative;
+    display: grid; gap: clamp(2rem, 4vw, 3.5rem); align-items: center;
+    padding-block: clamp(3rem, 7vw, 5.5rem) clamp(3rem, 6vw, 5rem);
+  }
+  @media (min-width: 900px) { .hero-grid { grid-template-columns: 1.1fr 0.9fr; } }
+
+  .chip {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--paper); border: 1px solid var(--line-2); border-radius: 999px;
+    padding: 0.45rem 0.95rem; font-size: 0.85rem; font-weight: 600; color: var(--ink-soft);
+    box-shadow: var(--shadow-sm);
+  }
+  .chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sage-br); flex: none; }
+  .hero h1 {
+    font-size: clamp(2.5rem, 1.6rem + 4.4vw, 4.3rem);
+    margin-top: 1.2rem; margin-bottom: 0;
+  }
+  .hero h1 .soft { color: var(--sage-d); font-style: italic; font-weight: 500; }
+  .lede { font-size: clamp(1.1rem, 1.02rem + 0.4vw, 1.3rem); color: var(--ink-soft); margin-top: 1.25rem; max-width: 36ch; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.9rem; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; margin-top: 1.7rem; color: var(--ink-soft); font-size: 0.94rem; }
+  .hero-meta b { color: var(--ink); font-weight: 600; }
+
+  /* arched window motif */
+  .window { justify-self: center; width: min(330px, 80%); filter: drop-shadow(0 24px 40px oklch(0.5 0.03 160 / 0.18)); }
+  .window .frame { stroke: var(--sage); }
+  .window .mull { stroke: var(--sage); }
+  .window .pane-a { fill: oklch(0.95 0.03 162); }
+  .window .pane-b { fill: oklch(0.95 0.05 90); }
+  .window .glow { fill: oklch(0.93 0.07 92); }
+  .window .gold { stroke: var(--gold); }
+  .window .seed { fill: var(--gold); }
+
+  /* ---------- section scaffolding ---------- */
+  section { padding-block: clamp(3.2rem, 6vw, 5.5rem); }
+  .alt { background: var(--mist); border-block: 1px solid var(--line); }
+  .sec-head { max-width: 60ch; margin-bottom: 2.4rem; }
+  .sec-head h2 { font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.7rem); margin-top: 0.6rem; }
+  .sec-head p { color: var(--ink-soft); margin-top: 0.9rem; font-size: 1.08rem; }
+
+  /* invitation band */
+  .invite { background: var(--sage-btn); color: oklch(0.98 0.01 160); border-block: none; }
+  .invite .wrap { text-align: center; }
+  .invite p {
+    font-family: "Spectral", serif; font-style: italic; font-weight: 400;
+    font-size: clamp(1.4rem, 1.05rem + 1.6vw, 2.1rem); line-height: 1.4;
+    max-width: 24ch; margin-inline: auto; color: oklch(0.985 0.012 110);
+  }
+  .invite .ref { display: block; margin-top: 1rem; font-family: "Hanken Grotesk", sans-serif; font-style: normal; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(0.86 0.05 130); }
+
+  /* cards */
+  .cards { display: grid; gap: 1.1rem; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+  .card {
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--r);
+    padding: 1.7rem 1.6rem; box-shadow: var(--shadow-sm);
+  }
+  .card .ic { width: 44px; height: 44px; border-radius: 12px; background: var(--sage-wash); display: grid; place-items: center; color: var(--sage-d); margin-bottom: 1rem; }
+  .card h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .card p { color: var(--ink-soft); }
+  .card a.more { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 1rem; font-weight: 600; text-decoration: none; color: var(--sage-d); }
+  .card a.more:hover { gap: 0.55rem; }
+
+  /* gallery (2x2) */
+  .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(0.7rem, 1.6vw, 1.1rem); }
+  .gallery figure { margin: 0; border-radius: var(--r); overflow: hidden; background: var(--mist-2); border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
+  .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .5s ease; }
+  .gallery figure:hover img { transform: scale(1.04); }
+  @media (prefers-reduced-motion: reduce) { .gallery figure:hover img { transform: none; } }
+
+  /* watch (dark feature band, image behind the video) */
+  .watch-band { position: relative; overflow: hidden; background: oklch(0.26 0.014 162); color: oklch(0.93 0.01 160); border-block: none; }
+  .watch-band::before { content: ""; position: absolute; inset: 0; background: url('img/worship-band.webp') center/cover no-repeat; opacity: 0.30; }
+  .watch-band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(115deg, oklch(0.24 0.018 162 / 0.93) 28%, oklch(0.31 0.03 160 / 0.62)); }
+  .watch-band > .wrap { position: relative; z-index: 1; }
+  .watch-grid { display: grid; gap: clamp(1.6rem, 3vw, 3rem); align-items: center; }
+  @media (min-width: 900px) { .watch-grid { grid-template-columns: 1.4fr 1fr; } }
+  .video {
+    position: relative; aspect-ratio: 16 / 9; border-radius: var(--r); overflow: hidden;
+    background: oklch(0.2 0.01 160); border: 1px solid oklch(0.6 0.02 160 / 0.4);
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.65);
+  }
+  .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .watch-band .eyebrow { color: oklch(0.83 0.075 90); }
+  .watch-copy h2 { font-size: clamp(1.8rem, 1.4rem + 1.6vw, 2.5rem); color: oklch(0.97 0.01 160); }
+  .watch-copy p { color: oklch(0.86 0.01 160); margin-top: 0.9rem; }
+  .watch-copy .hero-cta { margin-top: 1.5rem; }
+  .watch-band .btn-ghost { color: oklch(0.96 0.01 160); border-color: oklch(0.7 0.02 160 / 0.4); }
+  .watch-band .btn-ghost:hover { border-color: oklch(0.85 0.05 130); background: oklch(0.42 0.02 160 / 0.35); }
+
+  /* story */
+  .story-grid { display: grid; gap: clamp(1.6rem, 3vw, 3rem); }
+  @media (min-width: 860px) { .story-grid { grid-template-columns: 0.8fr 1.2fr; align-items: start; } }
+  .story-stat { font-family: "Spectral", serif; }
+  .story-stat .big { font-size: clamp(3.4rem, 2rem + 5vw, 5.2rem); font-weight: 700; color: var(--sage-d); line-height: 0.95; }
+  .story-stat .lab { font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.5rem; font-family: "Hanken Grotesk", sans-serif; }
+  .story-body p + p { margin-top: 1.1rem; }
+  .story-body .pull { font-family: "Spectral", serif; font-style: italic; font-size: 1.3rem; color: var(--ink); border-left: 3px solid var(--gold); padding-left: 1.1rem; margin: 1.6rem 0; }
+
+  /* give */
+  .give-panel {
+    background: var(--paper); border: 1px solid var(--line); border-radius: 22px;
+    box-shadow: var(--shadow); padding: clamp(2rem, 4vw, 3.4rem);
+    display: grid; gap: 1.6rem; align-items: center; text-align: center;
+  }
+  .give-panel h2 { font-size: clamp(1.9rem, 1.4rem + 1.8vw, 2.6rem); }
+  .give-panel p { color: var(--ink-soft); max-width: 46ch; margin-inline: auto; }
+  .give-ways { display: flex; flex-wrap: wrap; gap: 0.7rem 1.6rem; justify-content: center; font-size: 0.95rem; color: var(--ink-soft); margin-top: 0.3rem; }
+  .give-ways span { display: inline-flex; align-items: center; gap: 0.45rem; }
+
+  /* visit */
+  .visit-grid { display: grid; gap: clamp(1.6rem, 3vw, 2.6rem); }
+  @media (min-width: 840px) { .visit-grid { grid-template-columns: 1fr 1fr; } }
+  .info-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+  .info-list li { display: flex; gap: 0.9rem; }
+  .info-list .ic { flex: none; width: 40px; height: 40px; border-radius: 11px; background: var(--sage-wash); display: grid; place-items: center; color: var(--sage-d); }
+  .info-list b { display: block; font-weight: 600; }
+  .info-list a { color: var(--sage-d); text-decoration: none; }
+  .info-list a:hover { text-decoration: underline; }
+  .info-list .muted { color: var(--ink-soft); font-size: 0.95rem; }
+  .map-card {
+    border: 1px solid var(--line); border-radius: var(--r); overflow: hidden;
+    background:
+      linear-gradient(transparent 49.3%, var(--line) 49.3% 50.7%, transparent 50.7%),
+      linear-gradient(90deg, transparent 49.3%, var(--line) 49.3% 50.7%, transparent 50.7%),
+      var(--mist);
+    background-size: 46px 46px, 46px 46px, auto;
+    box-shadow: var(--shadow-sm); display: flex; flex-direction: column; min-height: 260px;
+  }
+  .map-card .pin { margin: auto; text-align: center; padding: 1.5rem; }
+  .map-card .pin svg { margin-inline: auto; }
+  .map-card .pin b { display: block; margin-top: 0.7rem; font-family: "Spectral", serif; font-size: 1.15rem; }
+  .map-card .pin small { color: var(--ink-soft); }
+  .map-card .bar { border-top: 1px solid var(--line); background: var(--paper); padding: 0.85rem 1.1rem; text-align: center; }
+
+  /* connect / newsletter */
+  .connect-grid { display: grid; gap: clamp(1.6rem, 3vw, 2.6rem); align-items: center; }
+  @media (min-width: 800px) { .connect-grid { grid-template-columns: 1fr 1fr; } }
+  form.sub { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.3rem; }
+  form.sub input {
+    flex: 1 1 200px; min-width: 0; font: inherit; padding: 0.8rem 1rem;
+    border: 1px solid var(--line-2); border-radius: 12px; background: var(--paper); color: var(--ink);
+  }
+  form.sub input:focus-visible { outline: 2px solid var(--sage); outline-offset: 1px; border-color: var(--sage); }
+  .sub-note { font-size: 0.82rem; color: var(--ink-soft); margin-top: 0.7rem; }
+  .sub-thanks { display: none; margin-top: 1.3rem; padding: 1rem 1.2rem; border-radius: 12px; background: var(--sage-wash); color: var(--sage-d); font-weight: 600; }
+  .sub-thanks.show { display: block; }
+  .socials { display: flex; gap: 0.7rem; margin-top: 1.3rem; }
+  .socials a {
+    width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line-2);
+    display: grid; place-items: center; color: var(--ink-soft); background: var(--paper); transition: color .2s, border-color .2s, background .2s;
+  }
+  .socials a:hover { color: var(--sage-d); border-color: var(--sage); background: var(--sage-wash); }
+
+  /* ---------- footer ---------- */
+  footer.site { background: oklch(0.27 0.012 162); color: oklch(0.86 0.01 160); }
+  footer.site a { color: oklch(0.9 0.02 160); }
+  .foot-grid { display: grid; gap: 2rem; padding-block: clamp(2.6rem, 5vw, 3.6rem) 1.6rem; }
+  @media (min-width: 760px) { .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+  .foot-brand b { font-family: "Spectral", serif; font-size: 1.2rem; color: oklch(0.97 0.01 160); display: block; }
+  .foot-brand p { margin-top: 0.7rem; max-width: 34ch; color: oklch(0.8 0.01 160); }
+  .foot-col h4 { font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.78 0.03 160); margin: 0 0 0.9rem; font-family: "Hanken Grotesk", sans-serif; font-weight: 700; }
+  .foot-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; font-size: 0.96rem; }
+  .foot-col a { text-decoration: none; }
+  .foot-col a:hover { text-decoration: underline; }
+  .foot-bottom { border-top: 1px solid oklch(0.36 0.012 162); padding-block: 1.3rem; display: flex; flex-wrap: wrap; gap: 0.6rem 1.2rem; justify-content: space-between; align-items: center; font-size: 0.86rem; color: oklch(0.74 0.01 160); }
+  .credit { display: inline-flex; align-items: center; gap: 0.45rem; }
+  .credit a { font-weight: 600; color: oklch(0.92 0.03 130); text-decoration: none; }
+  .credit a:hover { text-decoration: underline; }
+
+  :focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; border-radius: 4px; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="St. Peter's United Methodist Church, home">
+      <svg width="30" height="34" viewBox="0 0 30 34" fill="none" aria-hidden="true">
+        <path d="M3 33 V14 Q3 4 15 1.5 Q27 4 27 14 V33" stroke="var(--sage)" stroke-width="2" fill="oklch(0.95 0.03 162)"/>
+        <path d="M15 8 V22 M9.5 13 H20.5" stroke="var(--sage-d)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="15" cy="8" r="1.6" fill="var(--gold)"/>
+      </svg>
+      <span style="display:flex;flex-direction:column;line-height:1">
+        <b>St. Peter's</b>
+        <span>United Methodist · Austin</span>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#worship">Worship</a>
+      <a href="#watch">Watch</a>
+      <a href="#story">Our Story</a>
+      <a href="#give">Give</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="#visit">Plan your visit</a>
+  </div>
+</header>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" aria-labelledby="hero-h">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="chip"><span class="dot"></span>Celebrating 161 years of ministry</span>
+      <h1 id="hero-h">Come step out<br>on faith <span class="soft">with us</span></h1>
+      <p class="lede">A welcoming United Methodist church in East Austin, sharing the love of God with everyone, since 1863.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#visit">Plan your visit</a>
+        <a class="btn btn-ghost" href="#watch">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 3.5v9l7-4.5-7-4.5Z"/></svg>
+          Watch a service
+        </a>
+      </div>
+      <div class="hero-meta">
+        <span>Worship <b>Sundays · 10:15 am</b></span>
+        <span><b>In person &amp; online</b></span>
+        <span>East Austin · <b>78723</b></span>
+      </div>
+    </div>
+
+    <!-- hand-built arched window motif (decorative) -->
+    <svg class="window" viewBox="0 0 200 326" role="img" aria-label="Illustration of a church window">
+      <!-- frame -->
+      <path class="frame" d="M14 312 V112 Q60 26 100 18 Q140 26 186 112 V312 Z" fill="var(--paper)" stroke-width="3.4" stroke-linejoin="round"/>
+      <!-- rose window -->
+      <circle class="glow" cx="100" cy="92" r="33" stroke="none"/>
+      <circle class="frame" cx="100" cy="92" r="33" fill="none" stroke-width="3"/>
+      <g class="gold" stroke-width="2" fill="none">
+        <path d="M100 60 V124 M68 92 H132 M77.5 69.5 L122.5 114.5 M122.5 69.5 L77.5 114.5"/>
+      </g>
+      <circle class="seed" cx="100" cy="92" r="6"/>
+      <!-- transom -->
+      <path class="mull" d="M22 168 H178" stroke-width="3" stroke-linecap="round"/>
+      <!-- three lancets below the transom -->
+      <rect class="pane-a" x="24" y="172" width="46" height="132" rx="4"/>
+      <rect class="pane-b" x="77" y="172" width="46" height="132" rx="4"/>
+      <rect class="pane-a" x="130" y="172" width="46" height="132" rx="4"/>
+      <g class="frame" fill="none" stroke-width="3">
+        <rect x="24" y="172" width="46" height="132" rx="4"/>
+        <rect x="77" y="172" width="46" height="132" rx="4"/>
+        <rect x="130" y="172" width="46" height="132" rx="4"/>
+      </g>
+      <!-- sill -->
+      <path class="frame" d="M8 312 H192" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ===================== INVITATION ===================== -->
+<section class="invite" aria-label="A welcome">
+  <div class="wrap">
+    <p>&ldquo;Fear not, for I am with you always.&rdquo;
+      <span class="ref">Wherever you are on the journey, there is a place for you here</span>
+    </p>
+  </div>
+</section>
+
+<!-- ===================== THREE WAYS IN ===================== -->
+<section aria-labelledby="ways-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">New here?</span>
+      <h2 id="ways-h">Three simple ways to join us</h2>
+      <p>Come as you are. Whether you visit in person, worship from home, or just want to listen first, we would love to welcome you.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-6h6v6"/></svg>
+        </div>
+        <h3>Worship in person</h3>
+        <p>Join our Sunday Worship Celebration at 10:15 am at 4509 Springdale Road. An hour of music, scripture, and community.</p>
+        <a class="more" href="#visit">Plan your visit
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+      <article class="card">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M10 9.5l5 2.5-5 2.5z" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <h3>Worship online</h3>
+        <p>Can't make it to the building? Our celebrations are livestreamed and saved, so you can worship from wherever you are.</p>
+        <a class="more" href="#watch">Watch the latest service
+          <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+      <article class="card">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-9.8-9.4A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.8 5.6C19.5 16.4 12 21 12 21z"/></svg>
+        </div>
+        <h3>Give &amp; serve</h3>
+        <p>Support the ministry of St. Peter's and the neighbors we serve in East Austin. Every gift is a step out on faith.</p>
+        <a class="more" href="#give">Ways to give
+          <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WORSHIP ===================== -->
+<section id="worship" class="alt" aria-labelledby="worship-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Sunday worship</span>
+      <h2 id="worship-h">An hour to be glad you came</h2>
+      <p>Our Worship Celebration is warm, lively, and rooted in scripture. Come early, stay for fellowship, and bring whoever you like.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+        </div>
+        <h3>When</h3>
+        <p><b style="color:var(--ink)">Sundays at 10:15 am.</b> Doors open beforehand for coffee and a welcome. Plan for about an hour of worship.</p>
+      </article>
+      <article class="card">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        </div>
+        <h3>Where</h3>
+        <p>4509 Springdale Road, Austin, TX 78723. Free parking on site. Everyone is welcome at the front door, come as you are.</p>
+      </article>
+      <article class="card">
+        <div class="ic" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="20" cy="16" r="3"/></svg>
+        </div>
+        <h3>What to expect</h3>
+        <p>Spirited music, an encouraging message, prayer, and a community that has been stepping out on faith together for generations.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALLERY (2x2) ===================== -->
+<section aria-labelledby="life-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Our community</span>
+      <h2 id="life-h">Life at St. Peter's</h2>
+      <p>More than a Sunday service, we're a family that worships, serves, and shares life together in East Austin.</p>
+    </div>
+    <div class="gallery">
+      <figure><img src="img/community.webp" width="800" height="600" loading="lazy" decoding="async" alt="Members of the congregation greeting one another"></figure>
+      <figure><img src="img/building.webp" width="800" height="600" loading="lazy" decoding="async" alt="The St. Peter's church building on a clear Austin morning"></figure>
+      <figure><img src="img/serve.webp" width="800" height="600" loading="lazy" decoding="async" alt="Fresh produce shared with neighbors"></figure>
+      <figure><img src="img/reflection.webp" width="800" height="600" loading="lazy" decoding="async" alt="A quiet moment of prayer in the light"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WATCH ===================== -->
+<section id="watch" class="watch-band" aria-labelledby="watch-h">
+  <div class="wrap watch-grid">
+    <div class="video">
+      <iframe
+        src="https://player.vimeo.com/video/952886080?title=0&amp;byline=0&amp;portrait=0&amp;dnt=1"
+        loading="lazy"
+        title="St. Peter's Worship Celebration"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <div class="watch-copy">
+      <span class="eyebrow">Watch &amp; listen</span>
+      <h2 id="watch-h">Worship with us, wherever you are</h2>
+      <p>Missed Sunday, or just want to know us before you visit? Press play on a recent Worship Celebration, then browse the full archive of past services.</p>
+      <div class="hero-cta">
+        <a class="btn btn-ghost" href="https://www.youtube.com/results?search_query=StPetersATXLive" target="_blank" rel="noopener">
+          Watch the full archive
+          <svg width="15" height="15" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STORY ===================== -->
+<section id="story" class="alt" aria-labelledby="story-h">
+  <div class="wrap story-grid">
+    <div class="story-stat">
+      <div class="big">161</div>
+      <div class="lab">Years of ministry</div>
+    </div>
+    <div class="story-body">
+      <span class="eyebrow">Our story</span>
+      <h2 id="story-h" style="font-size:clamp(1.9rem,1.4rem + 1.8vw,2.7rem);margin-top:0.5rem;margin-bottom:1.2rem;">The place where we step out on faith</h2>
+      <p>St. Peter's has been part of East Austin for more than a century and a half, a Christian community gathered around one simple calling: to share the love of God with everyone who walks through the door.</p>
+      <p class="pull">We are glad you're worshiping with us today.</p>
+      <p>Generations have prayed, sung, served, and stepped out on faith in this place. Whether you've belonged for decades or you're only now considering a first visit, you are part of the welcome. Come and see.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GIVE ===================== -->
+<section id="give" aria-labelledby="give-h">
+  <div class="wrap">
+    <div class="give-panel">
+      <span class="eyebrow">Give</span>
+      <h2 id="give-h">The Lord loves a cheerful giver</h2>
+      <p>Your generosity sustains worship, cares for our neighbors, and keeps the doors of St. Peter's open to all. Give securely online, or in person on a Sunday.</p>
+      <div class="give-ways">
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--sage-d)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M2 10h20"/></svg> Online, anytime</span>
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--sage-d)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.2a2.6 2.6 0 0 1 2.5-1.6c1.4 0 2.5.9 2.5 2s-1.1 1.7-2.5 1.7-2.5.7-2.5 1.8 1.1 2 2.5 2a2.6 2.6 0 0 0 2.5-1.6"/></svg> In the Sunday offering</span>
+        <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--sage-d)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.8-9.4A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.8 5.6C19.5 16.4 12 21 12 21z"/></svg> A planned gift</span>
+      </div>
+      <div class="hero-cta" style="justify-content:center;margin-top:0.4rem;">
+        <a class="btn btn-primary" href="https://www.stpetersatxlive.com/give" target="_blank" rel="noopener">Give online</a>
+        <a class="btn btn-gold" href="#visit">Give on Sunday</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== VISIT ===================== -->
+<section id="visit" class="alt" aria-labelledby="visit-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Plan your visit</span>
+      <h2 id="visit-h">We'll be glad to see you</h2>
+      <p>Here's everything you need for your first Sunday. Have a question before you come? Call the church office and a real person will help.</p>
+    </div>
+    <div class="visit-grid">
+      <ul class="info-list">
+        <li>
+          <span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-5.3-7-11a7 7 0 0 1 14 0c0 5.7-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+          <div>
+            <b>Address</b>
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=4509+Springdale+Road+Austin+TX+78723" target="_blank" rel="noopener">4509 Springdale Road, Austin, TX 78723</a>
+            <span class="muted" style="display:block">Free on-site parking · East Austin</span>
+          </div>
+        </li>
+        <li>
+          <span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+          <div>
+            <b>Sunday Worship</b>
+            <span class="muted">10:15 am · in person &amp; livestreamed</span>
+          </div>
+        </li>
+        <li>
+          <span class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 2 6a2 2 0 0 1 2-2z"/></svg></span>
+          <div>
+            <b>Church Office</b>
+            <a href="tel:+15129261686">512-926-1686</a>
+            <span class="muted" style="display:block">Office hours: Mon–Thu, 10 am–2 pm</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="map-card">
+        <div class="pin">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="var(--sage-d)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-7.5-5.6-7.5-12A7.5 7.5 0 0 1 12 2.5 7.5 7.5 0 0 1 19.5 10c0 6.4-7.5 12-7.5 12z"/><circle cx="12" cy="10" r="2.6" fill="var(--gold)" stroke="none"/></svg>
+          <b>St. Peter's UMC</b>
+          <small>4509 Springdale Road, East Austin</small>
+        </div>
+        <div class="bar">
+          <a class="btn btn-ghost btn-sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=4509+Springdale+Road+Austin+TX+78723" target="_blank" rel="noopener">Get directions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONNECT ===================== -->
+<section id="connect" aria-labelledby="connect-h">
+  <div class="wrap connect-grid">
+    <div>
+      <span class="eyebrow">Stay connected</span>
+      <h2 id="connect-h" style="font-size:clamp(1.8rem,1.4rem + 1.6vw,2.4rem);margin-top:0.5rem;">News, encouragement, and what's ahead</h2>
+      <p style="color:var(--ink-soft);margin-top:0.9rem;max-width:42ch;">Join our mailing list for service updates and the occasional word of encouragement. Or follow along on social.</p>
+      <div class="socials" aria-label="Social media">
+        <a href="https://www.youtube.com/results?search_query=StPetersATXLive" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.8-1.8C19.3 5 12 5 12 5s-7.3 0-8.8.5A2.5 2.5 0 0 0 1.4 7.3C1 8.8 1 12 1 12s0 3.2.4 4.7a2.5 2.5 0 0 0 1.8 1.8C4.7 19 12 19 12 19s7.3 0 8.8-.5a2.5 2.5 0 0 0 1.8-1.8C23 15.2 23 12 23 12zM9.7 15.3V8.7l6 3.3-6 3.3z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.2c-1.2 0-1.6.8-1.6 1.6V12h2.7l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>
+        </a>
+        <a href="mailto:office@stpetersatxlive.com" aria-label="Email the office">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 6 8-6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <form class="sub" id="subForm" novalidate>
+        <label for="subEmail" class="skip">Email address</label>
+        <input id="subEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+      <p class="sub-note">We'll only email you about St. Peter's. Unsubscribe anytime.</p>
+      <p class="sub-thanks" id="subThanks" role="status">Thank you, you're on the list. We'll be in touch.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <b>St. Peter's United Methodist Church</b>
+      <p>A welcoming Christian community in East Austin, sharing the love of God with everyone. Come step out on faith with us.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Visit</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/dir/?api=1&amp;destination=4509+Springdale+Road+Austin+TX+78723" target="_blank" rel="noopener">4509 Springdale Road<br>Austin, TX 78723</a></li>
+        <li>Sundays · 10:15 am</li>
+        <li><a href="tel:+15129261686">512-926-1686</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#worship">Worship</a></li>
+        <li><a href="#watch">Watch services</a></li>
+        <li><a href="#give">Give</a></li>
+        <li><a href="#visit">Plan a visit</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© St. Peter's United Methodist Church · Austin, Texas</span>
+    <span class="credit">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="oklch(0.9 0.03 130)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.8-9.4A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.8 5.6C19.5 16.4 12 21 12 21z"/></svg>
+      A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  // Mailing-list signup is a client-side preview only (no backend wired).
+  (function () {
+    var f = document.getElementById('subForm');
+    if (!f) return;
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('subEmail');
+      if (!email.value || !email.checkValidity()) { email.focus(); return; }
+      f.style.display = 'none';
+      var t = document.getElementById('subThanks');
+      t.classList.add('show');
+      t.focus && t.focus();
+    });
+  })();
+</script>
+<script defer src="/assets/demo-visit.js"></script>
+</body>
+</html>
