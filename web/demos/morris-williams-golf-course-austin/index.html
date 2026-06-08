@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morris Williams Golf Course · Austin</title>
+<meta name="description" content="Morris Williams is a public 18-hole golf course on Austin's east side. Wide rolling fairways, a lush practice green, and a brand-new clubhouse, restaurant, and patio. 4.1 stars from 215 golfers.">
+<meta name="theme-color" content="#1b3b2a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-deep: oklch(0.27 0.055 150);
+    --green-mid:  oklch(0.45 0.10 150);
+    --green-soft: oklch(0.62 0.10 150);
+    --sand:       oklch(0.93 0.030 85);
+    --paper:      oklch(0.975 0.012 95);
+    --ink:        oklch(0.26 0.02 152);
+    --muted:      oklch(0.46 0.02 152);
+    --gold:       oklch(0.74 0.125 78);
+    --line:       oklch(0.86 0.02 120);
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --serif: "Spectral", Georgia, "Times New Roman", serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    font-family:var(--sans);
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.6;
+    font-size:clamp(1rem,0.96rem + 0.2vw,1.075rem);
+  }
+  h1,h2,h3{font-family:var(--serif);font-weight:700;line-height:1.08;margin:0;letter-spacing:-0.01em}
+  a{color:inherit}
+  .wrap{width:min(72rem,100% - 2.5rem);margin-inline:auto}
+  .eyebrow{
+    font-family:var(--sans);font-size:0.78rem;font-weight:600;
+    letter-spacing:0.14em;text-transform:uppercase;
+  }
+
+  /* ── hero ── */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 80% -10%, oklch(0.34 0.06 152) 0%, transparent 55%),
+      var(--green-deep);
+    color:oklch(0.95 0.02 110);
+    padding:clamp(3.5rem,7vw,6.5rem) 0 clamp(3rem,6vw,5.5rem);
+  }
+  .hero::after{ /* subtle course contour lines */
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:0.16;
+    background-image:
+      radial-gradient(60% 50% at 18% 120%, transparent 38%, oklch(0.7 0.08 150) 39%, transparent 40%),
+      radial-gradient(48% 42% at 14% 122%, transparent 50%, oklch(0.7 0.08 150) 51%, transparent 52%),
+      radial-gradient(38% 34% at 10% 124%, transparent 62%, oklch(0.7 0.08 150) 63%, transparent 64%);
+  }
+  .hero .wrap{position:relative;z-index:1}
+  .hero .eyebrow{color:var(--green-soft)}
+  .hero h1{
+    font-size:clamp(2.6rem,7vw + 0.5rem,5rem);
+    margin:0.5rem 0 0;color:oklch(0.97 0.015 105);
+    text-wrap:balance;
+  }
+  .promise{
+    font-family:var(--serif);font-style:italic;
+    font-size:clamp(1.2rem,1rem + 1.1vw,1.7rem);
+    color:oklch(0.88 0.03 110);margin:1.1rem 0 0;max-width:30ch;
+  }
+  .rating{
+    display:inline-flex;align-items:center;gap:0.6rem;flex-wrap:wrap;
+    margin-top:1.6rem;font-size:0.98rem;color:oklch(0.9 0.02 110);
+  }
+  .stars{color:var(--gold);letter-spacing:0.1em;font-size:1.05rem}
+  .rating b{color:oklch(0.97 0.01 105);font-weight:600}
+  .cta-row{display:flex;flex-wrap:wrap;gap:0.85rem;margin-top:2rem}
+  .btn{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    font-weight:600;font-size:1rem;text-decoration:none;
+    padding:0.85rem 1.5rem;border-radius:999px;
+    transition:transform .25s cubic-bezier(.22,1,.36,1), background-color .25s, color .25s;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--gold);color:oklch(0.25 0.04 80)}
+  .btn-primary:hover{background:oklch(0.79 0.13 80)}
+  .btn-ghost{background:transparent;color:oklch(0.95 0.02 110);border:1px solid oklch(0.7 0.05 150)}
+  .btn-ghost:hover{background:oklch(0.34 0.05 150)}
+
+  /* ── section frame ── */
+  section{padding:clamp(3rem,6vw,5rem) 0}
+  .section-head{max-width:34ch}
+  .section-head .eyebrow{color:var(--green-mid)}
+  .section-head h2{font-size:clamp(1.8rem,1.3rem + 1.6vw,2.6rem);margin-top:0.5rem}
+  .lede{font-size:clamp(1.08rem,1rem + 0.4vw,1.3rem);color:var(--muted);max-width:60ch}
+
+  .about{background:var(--sand)}
+  .about p{max-width:62ch;margin:1.1rem 0 0;color:oklch(0.32 0.02 152)}
+
+  /* ── what's here ── */
+  .here{border-top:1px solid var(--line)}
+  .features{
+    margin-top:2.2rem;display:grid;gap:1.6rem 2.5rem;
+    grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
+  }
+  .feature h3{font-size:1.22rem;color:var(--green-deep)}
+  .feature p{margin:0.4rem 0 0;color:var(--muted);font-size:0.98rem}
+  .feature{border-top:2px solid var(--green-soft);padding-top:0.9rem}
+
+  /* ── testimonials ── */
+  .voices{background:var(--green-deep);color:oklch(0.93 0.02 110)}
+  .voices .eyebrow{color:var(--green-soft)}
+  .voices h2{color:oklch(0.97 0.015 105)}
+  .quotes{margin-top:2.4rem;columns:2;column-gap:2.5rem}
+  @media (max-width:48rem){.quotes{columns:1}}
+  .quote{break-inside:avoid;margin:0 0 2rem;padding:0}
+  .quote p{
+    font-family:var(--serif);font-size:1.18rem;line-height:1.5;
+    margin:0;color:oklch(0.94 0.02 108);
+  }
+  .quote footer{margin-top:0.7rem;font-size:0.85rem;color:var(--green-soft);font-weight:600;letter-spacing:0.02em}
+  .quote .s{color:var(--gold);letter-spacing:0.08em;margin-right:0.4rem}
+
+  /* ── contact ── */
+  .contact .grid{margin-top:2.2rem;display:grid;gap:1.6rem;grid-template-columns:1.1fr 1fr}
+  @media (max-width:46rem){.contact .grid{grid-template-columns:1fr}}
+  .contact dl{margin:0;display:grid;gap:1.2rem}
+  .contact dt{font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--green-mid);font-weight:600}
+  .contact dd{margin:0.25rem 0 0;font-size:1.15rem}
+  .contact dd a{text-decoration:none;border-bottom:1px solid var(--line)}
+  .contact dd a:hover{border-color:var(--green-mid)}
+  .directions{
+    display:flex;flex-direction:column;justify-content:space-between;
+    background:var(--sand);border-radius:14px;padding:1.5rem;text-decoration:none;color:var(--ink);
+    transition:transform .25s cubic-bezier(.22,1,.36,1);
+    min-height:11rem;position:relative;overflow:hidden;
+  }
+  .directions:hover{transform:translateY(-3px)}
+  .directions::before{ /* faux fairway map texture */
+    content:"";position:absolute;inset:0;opacity:0.5;
+    background:
+      linear-gradient(115deg, transparent 46%, oklch(0.86 0.04 150) 47%, transparent 49%),
+      radial-gradient(40% 60% at 80% 30%, oklch(0.88 0.05 150) 0%, transparent 60%),
+      var(--sand);
+  }
+  .directions span{position:relative}
+  .directions .pin{font-size:1.6rem}
+  .directions .go{font-weight:600;color:var(--green-mid)}
+
+  /* ── footer ── */
+  footer.site{background:var(--green-deep);color:oklch(0.8 0.03 120);padding:2.5rem 0;font-size:0.9rem}
+  footer.site .wrap{display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;justify-content:space-between;align-items:center}
+  footer.site a{color:oklch(0.86 0.05 150)}
+  .credit{font-size:0.8rem;color:oklch(0.68 0.03 120)}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Austin · Public Golf · Est. on the east side</p>
+    <h1>Morris Williams<br>Golf Course</h1>
+    <p class="promise">Eighteen holes of honest Austin golf, open to everyone.</p>
+    <p class="rating">
+      <span class="stars" aria-hidden="true">★★★★☆</span>
+      <b>4.1</b> from <b>215</b> golfers on Google
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="tel:+15129748333">Call to book · (512) 974-8333</a>
+      <a class="btn btn-ghost" href="https://www.google.com/maps/place/Morris+Williams+Golf+Course/@30.2895234,-97.7046638,15z/data=!4m24!1m15!4m14!1m6!1m2!1s0x8644b61801d01951:0x50272c0f5a9ab15c!2s4900+Single+Shot+Cir,+Austin,+TX+78723!2m2!1d-97.6767493!2d30.2912926!1m6!1m2!1s0x8644b61801d01951:0x50272c0f5a9ab15c!2s4900+Single+Shot+Cir,+Austin,+TX+78723!2m2!1d-97.6767493!2d30.2912926!3m7!1s0x8644b60804f01093:0x59e4f88323adaa8a!8m2!3d30.2894529!4d-97.6941982!9m1!1b1!16s%2Fg%2F1tj1mxqx" target="_blank" rel="noopener">Get directions</a>
+    </div>
+  </div>
+</header>
+
+<section class="about">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The course</p>
+      <h2>A real round, close to home.</h2>
+    </div>
+    <p>Morris Williams sits just east of downtown, with wide, rolling fairways that give you room to swing and greens that reward a good roll. It plays fair for a first-timer and still has enough teeth to keep a low handicap honest.</p>
+    <p>The clubhouse is new now, with a full restaurant, a bar, and an outdoor patio looking back over the course. Come for the round, stay for a cold drink and a bite when you walk off eighteen.</p>
+  </div>
+</section>
+
+<section class="here">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">On the grounds</p>
+      <h2>Everything for a good day out.</h2>
+    </div>
+    <div class="features">
+      <div class="feature">
+        <h3>18 holes for everyone</h3>
+        <p>Rolling, slightly hilly fairways with challenge for every skill level, and a pace of play that keeps you moving.</p>
+      </div>
+      <div class="feature">
+        <h3>Range &amp; practice green</h3>
+        <p>Warm up on the driving range and dial in your stroke on a lush practice putting green before the first tee.</p>
+      </div>
+      <div class="feature">
+        <h3>New clubhouse</h3>
+        <p>A brand-new clubhouse with a restaurant, bar, and a patio that looks out over the course.</p>
+      </div>
+      <div class="feature">
+        <h3>The cafe</h3>
+        <p>A cafe with genuinely good food, plus cart service so a cold drink is never far away on the course.</p>
+      </div>
+      <div class="feature">
+        <h3>Fair green fees</h3>
+        <p>Affordable rates, with twilight times if you want to play a relaxed evening round for less.</p>
+      </div>
+      <div class="feature">
+        <h3>Friendly staff</h3>
+        <p>A welcoming pro shop and crew who are glad you came out, whether it is your first round or your thousandth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="voices">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">From the scorecard</p>
+      <h2>What Austin golfers say.</h2>
+    </div>
+    <div class="quotes">
+      <blockquote class="quote">
+        <p>"100% best public course in Austin. Played a twilight round and it was immaculate. The new clubhouse, restaurant, bar, and outdoor patio is wonderful. The range is great, the practice green is lush."</p>
+        <footer><span class="s" aria-hidden="true">★★★★★</span>Aaron Canady</footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>"Best muni in Austin, arguably the country, maybe second to Torrey Pines."</p>
+        <footer><span class="s" aria-hidden="true">★★★★★</span>Michael Klemm</footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>"Well maintained course with nice rolling slightly hilly fairways. Nice putting green and practice area. Friendly staff. And, as a bonus, a great cafe with darn tasty offerings."</p>
+        <footer><span class="s" aria-hidden="true">★★★★★</span>Matt Lacey</footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>"Fun and cheap golf course. The fairways are wide and the greens are easy to roll up onto. Nice for me because I'm not a great golfer, but I enjoy to get out and play."</p>
+        <footer><span class="s" aria-hidden="true">★★★★★</span>Sam Cook</footer>
+      </blockquote>
+      <blockquote class="quote">
+        <p>"Played a twilight round last night to get a good rate. Course in good shape. Good pace of play. The drinks are really good too!"</p>
+        <footer><span class="s" aria-hidden="true">★★★★★</span>Andrea Fee</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Plan your round</p>
+      <h2>Come play.</h2>
+    </div>
+    <div class="grid">
+      <dl>
+        <div>
+          <dt>Book a tee time</dt>
+          <dd><a href="tel:+15129748333">(512) 974-8333</a></dd>
+        </div>
+        <div>
+          <dt>Where to find us</dt>
+          <dd>3851 Manor Rd<br>Austin, TX 78723</dd>
+        </div>
+        <div>
+          <dt>Hours</dt>
+          <dd>Open daily from early. Call the pro shop for tee times and rates.</dd>
+        </div>
+      </dl>
+      <a class="directions" href="https://www.google.com/maps/place/Morris+Williams+Golf+Course/@30.2895234,-97.7046638,15z/data=!4m24!1m15!4m14!1m6!1m2!1s0x8644b61801d01951:0x50272c0f5a9ab15c!2s4900+Single+Shot+Cir,+Austin,+TX+78723!2m2!1d-97.6767493!2d30.2912926!1m6!1m2!1s0x8644b61801d01951:0x50272c0f5a9ab15c!2s4900+Single+Shot+Cir,+Austin,+TX+78723!2m2!1d-97.6767493!2d30.2912926!3m7!1s0x8644b60804f01093:0x59e4f88323adaa8a!8m2!3d30.2894529!4d-97.6941982!9m1!1b1!16s%2Fg%2F1tj1mxqx" target="_blank" rel="noopener">
+        <span class="pin" aria-hidden="true">⛳</span>
+        <span>
+          <strong>3851 Manor Rd, Austin</strong><br>
+          <span class="go">Open in Google Maps →</span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Morris Williams Golf Course · 3851 Manor Rd, Austin, TX · <a href="tel:+15129748333">(512) 974-8333</a></span>
+    <span class="credit"><a href="https://handprotocol.org" target="_blank" rel="noopener">A free preview site built by HAND</a></span>
+  </div>
+</footer>
+
+<script defer src="/assets/demo-visit.js"></script>
+</body>
+</html>
