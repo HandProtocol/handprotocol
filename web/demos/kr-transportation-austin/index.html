@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>K &amp; R Transportation — Austin Limousine &amp; Car Service, Open 24 Hours</title>
+<meta name="description" content="K &amp; R Transportation is a Black-owned, veteran-owned car and limousine service in Austin, TX. Airport, events, nights out, and corporate rides, 24 hours a day. Call (512) 632-6134.">
+<meta name="theme-color" content="#0e0e13">
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="K &amp; R Transportation — Austin Car &amp; Limo Service, 24/7">
+<meta property="og:description" content="Black-owned and veteran-owned. A clean car, a driver who shows up on time, and the door held open. Any hour. Call (512) 632-6134.">
+<meta property="og:locale" content="en_US">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:oklch(0.16 0.012 268);
+    --night-2:oklch(0.12 0.012 268);
+    --night-3:oklch(0.09 0.010 268);
+    --panel:oklch(0.205 0.014 268);
+    --panel-2:oklch(0.235 0.016 268);
+    --paper:oklch(0.955 0.008 90);
+    --muted:oklch(0.74 0.012 268);
+    --faint:oklch(0.58 0.012 268);
+    --gold:oklch(0.83 0.085 84);
+    --gold-2:oklch(0.76 0.10 78);
+    --gold-deep:oklch(0.66 0.10 72);
+    --gold-soft:oklch(0.88 0.05 86);
+    --line:color-mix(in oklch, var(--paper) 12%, transparent);
+    --line-strong:color-mix(in oklch, var(--paper) 22%, transparent);
+    --gold-glow:color-mix(in oklch, var(--gold) 60%, transparent);
+    --shadow:0 2px 4px oklch(0 0 0 / .35), 0 30px 60px -32px oklch(0 0 0 / .75);
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0; background:var(--night); color:var(--paper);
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    font-size:clamp(16px,1.02vw + 13px,18px); line-height:1.62;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:Cinzel,Georgia,"Times New Roman",serif; font-weight:500; line-height:1.08; margin:0; color:var(--paper)}
+  p{margin:0}
+  a{color:var(--gold)}
+  .wrap{max-width:var(--maxw); margin-inline:auto; padding-inline:clamp(20px,5vw,46px)}
+  .eyebrow{font-family:Inter; font-size:.72rem; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:var(--gold-2); margin:0 0 1.1rem}
+  .amp{color:var(--gold); font-weight:400}
+
+  /* buttons */
+  .btn{display:inline-flex; align-items:center; justify-content:center; gap:.6rem; font:inherit; font-weight:600; text-decoration:none;
+    padding:.92rem 1.6rem; border-radius:9px; border:1px solid transparent; cursor:pointer; white-space:nowrap;
+    transition:transform .25s cubic-bezier(.22,1,.36,1), box-shadow .25s ease, background .2s ease, color .2s ease, border-color .2s ease}
+  .btn:focus-visible{outline:3px solid var(--gold); outline-offset:3px}
+  .btn svg{width:1.05em; height:1.05em}
+  .btn-primary{background:linear-gradient(180deg, var(--gold-soft), var(--gold-2)); color:oklch(0.18 0.02 70); box-shadow:0 1px 0 oklch(1 0 0 /.4) inset, 0 14px 30px -14px var(--gold-glow)}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 1px 0 oklch(1 0 0 /.5) inset, 0 20px 40px -16px var(--gold-glow)}
+  .btn-ghost{background:color-mix(in oklch, var(--paper) 6%, transparent); color:var(--paper); border-color:var(--line-strong)}
+  .btn-ghost:hover{background:color-mix(in oklch, var(--paper) 12%, transparent); border-color:var(--gold-deep)}
+
+  .pill{display:inline-flex; align-items:center; gap:.5rem; font-size:.78rem; font-weight:600; letter-spacing:.04em;
+    padding:.4rem .85rem; border-radius:100px; border:1px solid var(--line-strong); color:var(--gold-soft); background:color-mix(in oklch, var(--paper) 4%, transparent)}
+  .pulse{width:7px; height:7px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 0 var(--gold-glow); animation:pulse 2.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in oklch,var(--gold) 55%,transparent)} 70%{box-shadow:0 0 0 9px transparent} 100%{box-shadow:0 0 0 0 transparent}}
+  @media (prefers-reduced-motion:reduce){.pulse{animation:none}}
+
+  /* nav */
+  header.nav{position:sticky; top:0; z-index:40; backdrop-filter:saturate(140%) blur(10px);
+    background:color-mix(in oklch, var(--night-2) 78%, transparent); border-bottom:1px solid var(--line)}
+  .nav-in{display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-block:.85rem}
+  .brand{font-family:Cinzel; font-weight:600; font-size:1.06rem; letter-spacing:.14em; color:var(--paper); text-decoration:none; white-space:nowrap}
+  .brand .amp{margin-inline:.08em}
+  .nav-cta{display:flex; align-items:center; gap:.7rem}
+  .nav .pill{display:none}
+  @media (min-width:680px){ .nav .pill{display:inline-flex} }
+
+  /* hero */
+  .hero{position:relative; isolation:isolate; padding-block:clamp(4.5rem,11vw,8.5rem) clamp(3.5rem,8vw,6rem); overflow:hidden}
+  .hero::before{ /* drifting headlight / city glow */
+    content:""; position:absolute; z-index:-2; inset:-20% -10% auto -10%; height:140%;
+    background:
+      radial-gradient(60% 50% at 50% 92%, color-mix(in oklch, var(--gold) 34%, transparent), transparent 70%),
+      radial-gradient(40% 38% at 22% 18%, color-mix(in oklch, var(--gold-2) 12%, transparent), transparent 72%),
+      radial-gradient(46% 40% at 86% 24%, color-mix(in oklch, var(--gold-2) 9%, transparent), transparent 74%);
+    filter:blur(8px); transform:translateZ(0); animation:drift 22s ease-in-out infinite alternate;
+  }
+  .hero::after{ /* vignette + base wash */
+    content:""; position:absolute; z-index:-3; inset:0;
+    background:
+      radial-gradient(120% 90% at 50% 0%, var(--night-2), var(--night) 42%, var(--night-3) 100%),
+      radial-gradient(80% 60% at 50% 120%, color-mix(in oklch, var(--gold) 8%, transparent), transparent 60%);
+  }
+  @keyframes drift{0%{transform:translate3d(-2%,0,0) scale(1)} 100%{transform:translate3d(3%,-2%,0) scale(1.08)}}
+  @media (prefers-reduced-motion:reduce){.hero::before{animation:none}}
+
+  .hero-grid{display:grid; gap:2rem}
+  .hero h1{font-size:clamp(2.7rem,8.4vw,5.6rem); font-weight:500; letter-spacing:.02em; line-height:1.0;
+    text-shadow:0 1px 40px color-mix(in oklch, var(--gold) 14%, transparent)}
+  .hero h1 .ln{display:block}
+  .lede{font-size:clamp(1.06rem,1.4vw,1.28rem); color:var(--muted); max-width:46ch; margin-top:1.4rem; line-height:1.6}
+  .lede b{color:var(--paper); font-weight:600}
+  .hero-cta{display:flex; flex-wrap:wrap; gap:.85rem; margin-top:2rem}
+  .badges{display:flex; flex-wrap:wrap; gap:.55rem; margin-top:2.2rem}
+  .badge{display:inline-flex; align-items:center; gap:.5rem; font-size:.8rem; font-weight:500; letter-spacing:.02em; color:var(--paper);
+    padding:.5rem .9rem; border-radius:9px; border:1px solid var(--line-strong); background:color-mix(in oklch, var(--paper) 4%, transparent)}
+  .badge svg{width:1.05em; height:1.05em; color:var(--gold)}
+  .hero-meta{display:flex; flex-wrap:wrap; gap:.4rem 1.4rem; margin-top:1.9rem; color:var(--faint); font-size:.86rem; letter-spacing:.02em}
+  .hero-meta span{display:inline-flex; align-items:center; gap:.5rem}
+  .hero-meta svg{width:1em; height:1em; color:var(--gold-deep)}
+
+  /* shimmer sweep on wordmark, once */
+  .shine{position:relative; background:linear-gradient(100deg, var(--paper) 38%, var(--gold-soft) 50%, var(--paper) 62%);
+    background-size:280% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:sweep 2.6s ease-out .35s 1 both}
+  @keyframes sweep{0%{background-position:160% 0} 100%{background-position:-40% 0}}
+  @media (prefers-reduced-motion:reduce){.shine{animation:none; color:var(--paper)}}
+
+  /* light-streak road divider */
+  .streak{position:relative; height:1px; margin-top:clamp(2.6rem,6vw,4rem); background:var(--line)}
+  .streak::after{content:""; position:absolute; top:0; left:0; height:1px; width:34%;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent); animation:run 6.5s linear infinite}
+  @keyframes run{0%{transform:translateX(-110%)} 100%{transform:translateX(420%)}}
+  @media (prefers-reduced-motion:reduce){.streak::after{display:none}}
+
+  /* promise band */
+  .band{padding-block:clamp(3rem,7vw,4.6rem); border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--night-2)}
+  .band-grid{display:grid; gap:clamp(1.6rem,3vw,2.4rem); grid-template-columns:1fr}
+  @media (min-width:640px){.band-grid{grid-template-columns:1fr 1fr}}
+  @media (min-width:980px){.band-grid{grid-template-columns:repeat(4,1fr)}}
+  .feat .ic{width:42px; height:42px; display:grid; place-items:center; border-radius:11px; color:var(--gold);
+    background:color-mix(in oklch, var(--gold) 12%, transparent); border:1px solid color-mix(in oklch, var(--gold) 24%, transparent); margin-bottom:1rem}
+  .feat .ic svg{width:21px; height:21px}
+  .feat h3{font-family:Inter; font-weight:600; font-size:1.04rem; letter-spacing:.01em; margin-bottom:.45rem}
+  .feat p{color:var(--muted); font-size:.93rem; line-height:1.55}
+
+  /* sections */
+  section.block{padding-block:clamp(4rem,9vw,6.5rem)}
+  .head{max-width:62ch; margin-bottom:clamp(2.4rem,5vw,3.4rem)}
+  .head h2{font-size:clamp(1.9rem,4.4vw,3rem); font-weight:500; letter-spacing:.015em}
+  .head p{color:var(--muted); margin-top:1.1rem; font-size:1.05rem}
+
+  /* services */
+  .cards{display:grid; gap:1.1rem; grid-template-columns:1fr}
+  @media (min-width:620px){.cards{grid-template-columns:1fr 1fr}}
+  @media (min-width:960px){.cards{grid-template-columns:repeat(3,1fr)}}
+  .card{position:relative; padding:1.7rem 1.6rem 1.8rem; border-radius:15px; background:var(--panel);
+    border:1px solid var(--line); overflow:hidden; transition:transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease, background .3s ease}
+  .card::before{content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
+    background:linear-gradient(160deg, color-mix(in oklch,var(--gold) 40%,transparent), transparent 45%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite:xor; mask-composite:exclude;
+    opacity:0; transition:opacity .3s ease; pointer-events:none}
+  .card:hover{transform:translateY(-4px); background:var(--panel-2); border-color:color-mix(in oklch,var(--gold) 22%,transparent)}
+  .card:hover::before{opacity:1}
+  .card .ic{width:44px; height:44px; display:grid; place-items:center; border-radius:11px; color:var(--gold);
+    background:color-mix(in oklch, var(--gold) 11%, transparent); margin-bottom:1.15rem}
+  .card .ic svg{width:22px; height:22px}
+  .card h3{font-family:Inter; font-weight:600; font-size:1.12rem; letter-spacing:.01em; margin-bottom:.5rem}
+  .card p{color:var(--muted); font-size:.95rem; line-height:1.58}
+
+  /* about */
+  .about{display:grid; gap:clamp(2rem,5vw,3.4rem); align-items:center; grid-template-columns:1fr}
+  @media (min-width:900px){.about{grid-template-columns:1.05fr .95fr}}
+  .about .copy p{color:var(--muted); font-size:1.06rem; line-height:1.66}
+  .about .copy p + p{margin-top:1.1rem}
+  .about .copy b{color:var(--paper); font-weight:600}
+  .monogram{position:relative; aspect-ratio:1/1; border-radius:18px; background:
+      radial-gradient(80% 70% at 50% 30%, color-mix(in oklch,var(--gold) 16%,transparent), transparent 70%), var(--night-2);
+    border:1px solid var(--line); display:grid; place-items:center; overflow:hidden}
+  .monogram::after{content:""; position:absolute; inset:0; background:radial-gradient(60% 50% at 50% 120%, color-mix(in oklch,var(--gold) 18%,transparent), transparent 60%)}
+  .monogram .mk{font-family:Cinzel; font-weight:600; font-size:clamp(3.5rem,12vw,6rem); letter-spacing:.06em; color:var(--paper); z-index:1; line-height:1}
+  .monogram .mk .amp{color:var(--gold); display:inline-block; margin:0 .12em}
+  .monogram .sub{position:absolute; bottom:1.4rem; left:0; right:0; text-align:center; z-index:1; font-size:.74rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold-2)}
+
+  .welcome{margin-top:clamp(2.4rem,5vw,3.2rem); padding:1.5rem 1.6rem; border-radius:14px; border:1px solid color-mix(in oklch,var(--gold) 22%,transparent);
+    background:color-mix(in oklch,var(--gold) 7%, var(--night-2)); display:flex; gap:1rem; align-items:flex-start}
+  .welcome svg{flex:none; width:24px; height:24px; color:var(--gold); margin-top:.15rem}
+  .welcome p{color:var(--paper); font-size:1rem; line-height:1.6}
+  .welcome b{font-weight:600}
+
+  /* contact */
+  .contact{background:var(--night-2); border-top:1px solid var(--line)}
+  .contact-grid{display:grid; gap:1.2rem; grid-template-columns:1fr; margin-top:.5rem}
+  @media (min-width:780px){.contact-grid{grid-template-columns:1fr 1fr}}
+  .ccard{padding:1.9rem 1.8rem; border-radius:16px; background:var(--panel); border:1px solid var(--line)}
+  .ccard .lbl{font-size:.74rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--gold-2); margin-bottom:.9rem}
+  .phone-line{display:inline-flex; align-items:center; gap:.7rem; font-family:Cinzel; font-weight:500; font-size:clamp(1.6rem,4.5vw,2.15rem);
+    color:var(--paper); text-decoration:none; letter-spacing:.02em}
+  .phone-line svg{width:.85em; height:.85em; color:var(--gold)}
+  .phone-line:hover{color:var(--gold-soft)}
+  .ccard .note{color:var(--muted); margin-top:.8rem; font-size:.95rem}
+  .addr{display:flex; gap:.8rem; align-items:flex-start; color:var(--paper); font-size:1.02rem; line-height:1.5; margin-bottom:1.3rem}
+  .addr svg{flex:none; width:22px; height:22px; color:var(--gold); margin-top:.15rem}
+  .addr .small{color:var(--faint); font-size:.88rem}
+  /* faux map */
+  .map{position:relative; height:150px; border-radius:11px; overflow:hidden; margin-bottom:1.3rem; border:1px solid var(--line);
+    background:
+      linear-gradient(var(--line) 1px, transparent 1px) 0 0/100% 26px,
+      linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/26px 100%,
+      var(--night-3)}
+  .map .road{position:absolute; background:color-mix(in oklch,var(--gold) 30%,transparent)}
+  .map .r1{top:42%; left:-5%; right:-5%; height:3px; transform:rotate(-7deg)}
+  .map .r2{top:-10%; bottom:-10%; left:58%; width:3px; transform:rotate(6deg)}
+  .map .marker{position:absolute; top:42%; left:58%; transform:translate(-50%,-50%); z-index:2}
+  .map .marker svg{width:30px; height:30px; color:var(--gold); filter:drop-shadow(0 4px 8px oklch(0 0 0 /.5))}
+  .map .ring{position:absolute; top:42%; left:58%; width:14px; height:14px; transform:translate(-50%,-50%); border-radius:50%;
+    border:2px solid var(--gold); animation:ring 2.8s ease-out infinite; opacity:0}
+  @keyframes ring{0%{opacity:.7; transform:translate(-50%,-50%) scale(.5)} 100%{opacity:0; transform:translate(-50%,-50%) scale(3.4)}}
+  @media (prefers-reduced-motion:reduce){.map .ring{animation:none}}
+
+  /* footer */
+  footer.site{padding-block:2.4rem; border-top:1px solid var(--line); background:var(--night-3)}
+  footer.site .wrap{display:flex; flex-wrap:wrap; gap:.7rem 1.4rem; align-items:center; justify-content:space-between}
+  .hand-credit{display:inline-flex; align-items:center; gap:.55rem; font-size:.9rem; color:var(--muted)}
+  .hand-credit a{color:var(--gold); font-weight:600; text-decoration:none}
+  .hand-credit a:hover{text-decoration:underline}
+  .hand-credit .dot{width:7px; height:7px; border-radius:50%; background:var(--gold)}
+  .fineprint{font-size:.78rem; color:var(--faint); max-width:60ch; line-height:1.5}
+
+  /* reveal */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s cubic-bezier(.22,1,.36,1)}
+  .reveal.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1; transform:none; transition:none}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top">K <span class="amp">&amp;</span> R Transportation</a>
+    <div class="nav-cta">
+      <span class="pill"><span class="pulse" aria-hidden="true"></span> Open 24 hours</span>
+      <a class="btn btn-primary" href="tel:+15126326134">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Austin &middot; Chauffeured 24/7</p>
+        <h1><span class="ln shine">K <span class="amp">&amp;</span> R</span><span class="ln shine">Transportation</span></h1>
+        <p class="lede">Black-owned and veteran-owned. <b>A clean car, a driver who shows up on time, and the door held for you.</b> Any hour, day or night.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="tel:+15126326134">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Call (512) 632-6134
+          </a>
+          <a class="btn btn-ghost" href="#services">See where we take you</a>
+        </div>
+        <div class="badges">
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Black-owned</span>
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 19.6 7.2 17l.9-5.4L4.2 7.7l5.4-.8z"/></svg> Veteran-owned</span>
+          <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg> All riders welcome</span>
+        </div>
+        <div class="hero-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Open 24 hours</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg> East Austin</span>
+          <span>Serving the greater Austin area</span>
+        </div>
+      </div>
+    </div>
+    <div class="wrap"><div class="streak" aria-hidden="true"></div></div>
+  </section>
+
+  <!-- PROMISE BAND -->
+  <section class="band">
+    <div class="wrap band-grid">
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Open 24 hours</h3>
+        <p>Late flight, early start, last call downtown. We pick up when you need us, not just during business hours.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/><circle cx="12" cy="12" r="10"/></svg></div>
+        <h3>On time, every ride</h3>
+        <p>Veteran-owned, and it shows. We plan the route, we leave early, and we are out front before you walk down.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg></div>
+        <h3>Everyone welcome</h3>
+        <p>Black-owned and proud of it, and a friendly, judgment-free ride for every person who gets in the car.</p>
+      </div>
+      <div class="feat reveal">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div>
+        <h3>Austin born</h3>
+        <p>An East Austin company that knows the city, the traffic patterns, and the quick way to the airport.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="head reveal">
+        <p class="eyebrow">What we do</p>
+        <h2>Wherever you need to be</h2>
+        <p>One number, one car, one driver who has the evening handled. Tell us where you are going and we will get you there in comfort.</p>
+      </div>
+      <div class="cards">
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.8 19.8L21 16.6 14.6 13l-1.2-7.4a1.6 1.6 0 00-3.1 0L9 13l-6.4 3.6 3.2 3.2L9.6 19l1.6 3-1.2 1.4L12 24l1.8-2.6L12.6 20l1.6-1z"/></svg></div>
+          <h3>Airport transfers</h3>
+          <p>Clean, on-time rides to and from Austin-Bergstrom. Give us your flight and we will be at the curb when you land.</p>
+        </article>
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="14" r="5"/><circle cx="16" cy="14" r="5"/><path d="M8 9l1.5-5h5L16 9"/></svg></div>
+          <h3>Weddings &amp; events</h3>
+          <p>Arrive the way the day deserves. Rides for the couple, the wedding party, and the guests who matter most.</p>
+        </article>
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12l-1 7a5 5 0 01-10 0z"/><path d="M12 12v6"/><path d="M8 21h8"/></svg></div>
+          <h3>Nights out &amp; celebrations</h3>
+          <p>Birthdays, anniversaries, a show downtown, or a night on Rainey. Ride together and get everyone home safe.</p>
+        </article>
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></div>
+          <h3>Corporate &amp; executive</h3>
+          <p>Quiet, professional rides for clients, road shows, and anyone you need to impress. Show up unhurried and on time.</p>
+        </article>
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+          <h3>By the hour</h3>
+          <p>Book the car and driver for the evening and keep them. We will wait, circle back, and be out front when you are ready.</p>
+        </article>
+        <article class="card reveal">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17h2l3-9 4 12 3-7h4"/></svg></div>
+          <h3>Out-of-town runs</h3>
+          <p>San Antonio, Houston, the Hill Country wineries, a game-day road trip. The long hauls, handled door to door.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="block" id="about" style="padding-top:0">
+    <div class="wrap">
+      <div class="about">
+        <div class="copy reveal">
+          <p class="eyebrow">Who we are</p>
+          <h2 style="font-size:clamp(1.9rem,4.4vw,3rem); font-weight:500; letter-spacing:.015em; margin-bottom:1.3rem">Owned by Austin. Built on showing up.</h2>
+          <p>K <span class="amp">&amp;</span> R Transportation is a <b>Black-owned, veteran-owned</b> car and limousine service based in East Austin. We started with a simple idea: a ride you can count on, a driver who is glad you called, and a door held open whether you are headed to the airport at 4 a.m. or leaving a wedding at midnight.</p>
+          <p>We keep the cars clean, we know the city, and we treat your time like it matters. <b>We are open 24 hours</b> because the moments worth a good ride do not keep office hours.</p>
+        </div>
+        <div class="monogram reveal" aria-hidden="true">
+          <div class="mk">K<span class="amp">&amp;</span>R</div>
+          <div class="sub">Austin, Texas</div>
+        </div>
+      </div>
+      <div class="welcome reveal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+        <p><b>Everyone is welcome in our car, no exceptions.</b> Wherever you are headed and whoever you are, you will get a courteous, judgment-free ride from people who are happy to drive you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block contact" id="book">
+    <div class="wrap">
+      <div class="head reveal" style="margin-bottom:1.4rem">
+        <p class="eyebrow">Ready when you are</p>
+        <h2>Tell us where you're going</h2>
+        <p>The fastest way to book is to call. Give us the date, the pickup, and where you need to be, and we will take it from there.</p>
+      </div>
+      <div class="contact-grid">
+        <aside class="ccard reveal" aria-label="Call K and R Transportation">
+          <p class="lbl">Call or text</p>
+          <a class="phone-line" href="tel:+15126326134">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.8 19.8 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg>
+            (512) 632-6134
+          </a>
+          <p class="note">Open 24 hours, day or night. Booking ahead helps us hold the right car, but last-minute is welcome too.</p>
+          <a class="btn btn-primary" href="tel:+15126326134" style="margin-top:1.3rem">Call now</a>
+        </aside>
+        <aside class="ccard reveal" aria-label="Where we are based">
+          <p class="lbl">Where we are</p>
+          <div class="map" role="img" aria-label="Map showing K and R Transportation in East Austin">
+            <span class="road r1"></span><span class="road r2"></span>
+            <span class="ring"></span>
+            <span class="marker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+          </div>
+          <div class="addr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.5-7-11a7 7 0 0114 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+            <span>4808 Carsonhill Dr<br>Austin, TX 78723<br><span class="small">East Austin, serving the greater Austin area</span></span>
+          </div>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&destination=4808%20Carsonhill%20Dr%2C%20Austin%2C%20TX%2078723" target="_blank" rel="noopener">Get directions</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span class="hand-credit"><span class="dot" aria-hidden="true"></span> A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a></span>
+    <span class="fineprint">K &amp; R Transportation, Austin, Texas. This is a free preview, not the official site. Business details come from a public Google listing, please confirm services and pricing by phone.</span>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "name":"K & R Transportation",
+  "description":"Black-owned, veteran-owned car and limousine service in Austin, TX. Airport transfers, weddings, events, corporate, and nights out, 24 hours a day.",
+  "telephone":"+1-512-632-6134",
+  "address":{"@type":"PostalAddress","streetAddress":"4808 Carsonhill Dr","addressLocality":"Austin","addressRegion":"TX","postalCode":"78723","addressCountry":"US"},
+  "areaServed":"Austin, Texas",
+  "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}
+}
+</script>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion:reduce)').matches){
+      els.forEach(function(e){e.classList.add('in')}); return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    els.forEach(function(e){io.observe(e)});
+  })();
+</script>
+<script defer src="/assets/demo-visit.js"></script>
+</body>
+</html>
