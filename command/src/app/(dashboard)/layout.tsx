@@ -8,6 +8,7 @@ import { MobileRail } from "@/components/mobile-rail";
 import { NotificationBell } from "@/components/notification-bell";
 import { Toaster } from "@/components/ui/sonner";
 import { CommandPalette } from "@/components/search/command-palette";
+import { OnboardingFlow } from "@/components/onboarding/onboarding-flow";
 
 /*
   Gated dashboard route group.
@@ -34,16 +35,27 @@ export default async function DashboardLayout({
 
   let userEmail = "";
   let role: CommandRole = "admin";
+  let displayName: string | null = null;
+  let reciprocateGroup: string | null = null;
+  // Onboarding shows for real active operators; also enabled in preview (admin
+  // role) so the scaffold is demoable. localStorage gates it to run once.
+  let onboardingEnabled = false;
 
   if (supabaseConfigured) {
     const user = await getCurrentUser();
     if (user) {
       userEmail = user.email ?? "";
       const profile = await getCurrentProfile();
-      if (profile) role = profile.role;
+      if (profile) {
+        role = profile.role;
+        displayName = profile.display_name;
+        reciprocateGroup = profile.reciprocate_group;
+        onboardingEnabled = profile.status === "active";
+      }
     }
   } else {
     userEmail = "preview@handprotocol.org";
+    onboardingEnabled = true;
   }
 
   return (
@@ -55,6 +67,12 @@ export default async function DashboardLayout({
 
       <Toaster />
       <CommandPalette />
+      <OnboardingFlow
+        enabled={onboardingEnabled}
+        role={role}
+        displayName={displayName}
+        group={reciprocateGroup}
+      />
 
       {/* Sidebar (desktop only) */}
       <aside className="sticky top-0 hidden h-screen w-72 flex-shrink-0 border-r border-[rgba(245,239,225,0.06)] bg-[rgba(7,9,15,0.85)] backdrop-blur-md lg:block">

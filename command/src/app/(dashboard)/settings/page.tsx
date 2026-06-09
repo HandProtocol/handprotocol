@@ -3,6 +3,7 @@ import { Settings as SettingsIcon, ExternalLink } from "lucide-react";
 import { getCurrentUser, getCurrentProfile, can } from "@/lib/supabase/profile";
 import { InvitesSection } from "@/components/settings/invites-section";
 import { ApplicationsSection } from "@/components/settings/applications-section";
+import { ReplayOrientation } from "@/components/onboarding/replay-orientation";
 
 /*
   Settings. Operator identity + a read-only system status board.
@@ -209,6 +210,7 @@ export default async function SettingsPage() {
           >
             Back to dashboard
           </Link>
+          <ReplayOrientation />
         </div>
       </section>
     </div>
