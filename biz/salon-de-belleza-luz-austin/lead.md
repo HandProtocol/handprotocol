@@ -1,6 +1,6 @@
 ---
 slug: salon-de-belleza-luz-austin
-name: Salon de Belleza Luz
+name: Salon de Belleza Luz
 category: Beauty salon
 city: Austin
 state: TX
@@ -11,7 +11,8 @@ google_url: >-
 google_rating: 4.8
 reviews_count: 37
 website_status: none
-status: prospect
+status: built
+demo_url: /demos/salon-de-belleza-luz-austin/
 hand_lead: koH
 ---
 ## Reviews
