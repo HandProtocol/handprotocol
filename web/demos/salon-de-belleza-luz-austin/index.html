@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salón de Belleza Luz — Hair color, highlights & cuts in East Austin</title>
+<meta name="description" content="Salón de Belleza Luz on Thrasher Lane in East Austin. Color, highlights, cuts and color correction with Maura. 4.8 stars on Google. Se habla español. Call (512) 801-1151.">
+<meta property="og:title" content="Salón de Belleza Luz — East Austin hair salon">
+<meta property="og:description" content="Color, highlights, cuts and color correction with Maura. 4.8 stars, 37 reviews. Se habla español.">
+<meta property="og:type" content="business.business">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: oklch(0.976 0.009 350);
+    --bg-warm: oklch(0.962 0.014 348);
+    --surface: oklch(0.995 0.004 350);
+    --ink: oklch(0.28 0.045 350);
+    --ink-soft: oklch(0.44 0.035 350);
+    --muted: oklch(0.56 0.028 350);
+    --line: oklch(0.88 0.018 350);
+    --rose: oklch(0.585 0.165 352);
+    --rose-deep: oklch(0.49 0.16 354);
+    --rose-wash: oklch(0.95 0.03 350);
+    --gold: oklch(0.74 0.125 78);
+    --shadow: 0 1px 2px oklch(0.4 0.08 350 / .06), 0 12px 34px oklch(0.45 0.1 350 / .10);
+    --shadow-sm: 0 1px 2px oklch(0.4 0.08 350 / .07), 0 6px 16px oklch(0.45 0.1 350 / .08);
+    --r: 18px;
+    --maxw: 1140px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  h1,h2,h3{font-family:"Spectral",Georgia,serif;font-weight:600;line-height:1.08;letter-spacing:-0.01em;margin:0}
+  p{margin:0}
+  a{color:inherit}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .eyebrow{
+    font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--rose);
+  }
+  .es{color:var(--muted);font-style:italic;font-family:"Spectral",Georgia,serif}
+
+  /* header */
+  header{
+    position:sticky;top:0;z-index:40;
+    background:oklch(0.976 0.009 350 / .82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:"Spectral",serif;font-weight:600;font-size:1.18rem;letter-spacing:-.01em}
+  .brand b{color:var(--rose);font-weight:600}
+  .navcall{
+    display:inline-flex;align-items:center;gap:.5em;
+    font-weight:600;font-size:.95rem;color:var(--rose-deep);
+    text-decoration:none;padding:.5em .9em;border-radius:999px;border:1px solid var(--line);
+    background:var(--surface);transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s;
+  }
+  .navcall:hover{transform:translateY(-1px);box-shadow:var(--shadow-sm)}
+  .navcall svg{width:15px;height:15px}
+
+  /* hero */
+  .hero{padding:clamp(40px,7vw,84px) 0 clamp(36px,5vw,60px)}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,64px);align-items:center}
+  .hero h1{font-size:clamp(2.7rem,7vw,4.6rem);margin:.32em 0 .28em}
+  .hero .tag{font-size:clamp(1.12rem,2.4vw,1.4rem);color:var(--ink-soft);max-width:30ch;font-family:"Spectral",serif}
+  .hero .tag .es{display:block;font-size:.92em;margin-top:.15em}
+  .rating{display:flex;align-items:center;gap:.7em;margin:1.5em 0 1.7em;flex-wrap:wrap}
+  .stars{color:var(--gold);font-size:1.05rem;letter-spacing:.08em}
+  .rating .num{font-weight:700;color:var(--ink)}
+  .rating .src{color:var(--muted);font-size:.92rem}
+  .cta-row{display:flex;gap:.7em;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:.55em;font-weight:600;font-size:1rem;
+    padding:.85em 1.35em;border-radius:999px;text-decoration:none;
+    transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s,background .2s;
+  }
+  .btn svg{width:18px;height:18px}
+  .btn-primary{background:var(--rose);color:oklch(0.99 0.01 350);box-shadow:var(--shadow-sm)}
+  .btn-primary:hover{background:var(--rose-deep);transform:translateY(-2px);box-shadow:var(--shadow)}
+  .btn-ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+  .habla{margin-top:1.3em;display:inline-flex;align-items:center;gap:.5em;font-size:.9rem;color:var(--muted)}
+  .habla::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rose)}
+
+  .hero-photo{position:relative}
+  .hero-photo img{
+    width:100%;border-radius:calc(var(--r) + 6px);box-shadow:var(--shadow);
+    aspect-ratio:591/802;object-fit:cover;
+  }
+  .hero-photo .chip{
+    position:absolute;left:-14px;bottom:22px;background:var(--surface);
+    border:1px solid var(--line);border-radius:14px;padding:.7em 1em;box-shadow:var(--shadow-sm);
+    font-size:.86rem;line-height:1.3;max-width:11.5em;
+  }
+  .hero-photo .chip b{font-family:"Spectral",serif;display:block;color:var(--rose-deep);font-size:1rem}
+
+  /* section frame */
+  section{padding:clamp(46px,6vw,82px) 0}
+  .sec-head{max-width:40ch;margin-bottom:2.2em}
+  .sec-head h2{font-size:clamp(1.9rem,4vw,2.8rem);margin-top:.25em}
+  .sec-head p{color:var(--ink-soft);margin-top:.7em}
+
+  /* services */
+  .services{background:var(--bg-warm)}
+  .svc-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(20px,3vw,34px);align-items:start}
+  .feature{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+    padding:clamp(24px,3vw,34px);box-shadow:var(--shadow-sm);position:relative;overflow:hidden;
+  }
+  .feature .tagline{font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--rose)}
+  .feature h3{font-size:clamp(1.5rem,3vw,2rem);margin:.4em 0 .5em}
+  .feature p{color:var(--ink-soft)}
+  .feature blockquote{
+    margin:1.4em 0 0;padding-top:1.2em;border-top:1px solid var(--line);
+    font-family:"Spectral",serif;font-style:italic;color:var(--ink);font-size:1.05rem;line-height:1.5;
+  }
+  .feature blockquote cite{display:block;font-style:normal;font-family:"Inter",sans-serif;font-size:.85rem;color:var(--muted);margin-top:.6em}
+  .svc-list{display:flex;flex-direction:column;gap:.2em}
+  .svc-item{padding:1.05em .2em;border-bottom:1px solid var(--line);display:flex;gap:1em;align-items:baseline}
+  .svc-item:last-child{border-bottom:none}
+  .svc-item .name{font-family:"Spectral",serif;font-size:1.18rem;font-weight:600;flex:1}
+  .svc-item .name span{display:block;font-family:"Inter",sans-serif;font-size:.85rem;font-weight:400;color:var(--muted);margin-top:.15em}
+  .svc-extra{margin-top:1.4em;font-size:.95rem;color:var(--ink-soft);background:var(--rose-wash);border-radius:14px;padding:1em 1.2em}
+  .svc-extra b{color:var(--rose-deep)}
+
+  /* gallery */
+  .gal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .gal-grid figure{margin:0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow-sm);background:var(--bg-warm)}
+  .gal-grid img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .gal-grid figure:hover img{transform:scale(1.04)}
+  .gal-grid .tall{grid-row:span 2}
+  .gal-cap{margin-top:1.4em;font-size:.9rem;color:var(--muted);font-style:italic;font-family:"Spectral",serif}
+
+  /* testimonials */
+  .reviews{background:var(--bg-warm)}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .rev-big{grid-column:span 2}
+  blockquote.rev{
+    margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+    padding:clamp(20px,2.4vw,30px);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;
+  }
+  blockquote.rev .stars{font-size:.92rem;margin-bottom:.7em}
+  blockquote.rev p{font-family:"Spectral",serif;font-size:1.08rem;line-height:1.5;color:var(--ink)}
+  .rev-big p{font-size:clamp(1.3rem,2.4vw,1.7rem);line-height:1.4}
+  blockquote.rev .orig{font-size:.92rem;color:var(--muted);font-style:italic;margin-top:.6em}
+  blockquote.rev cite{margin-top:auto;padding-top:1.1em;font-style:normal;font-size:.86rem;color:var(--muted);font-family:"Inter",sans-serif}
+  blockquote.rev cite b{color:var(--ink);font-weight:600}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(26px,4vw,56px);align-items:center}
+  .about-photo{position:relative}
+  .about-photo img{width:100%;border-radius:var(--r);box-shadow:var(--shadow);aspect-ratio:721/824;object-fit:cover}
+  .about-body h2{font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:.5em}
+  .about-body p{color:var(--ink-soft);margin-bottom:1em;max-width:46ch}
+  .about-body p:first-of-type{font-size:1.12rem;color:var(--ink)}
+  .about-sign{margin-top:1.3em;font-family:"Spectral",serif;font-style:italic;font-size:1.2rem;color:var(--rose-deep)}
+
+  /* visit */
+  .visit{background:var(--ink);color:oklch(0.93 0.02 350)}
+  .visit .eyebrow{color:oklch(0.78 0.1 352)}
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(26px,4vw,56px);align-items:center}
+  .visit h2{font-size:clamp(1.9rem,4vw,2.7rem);color:oklch(0.97 0.01 350);margin-bottom:.6em}
+  .visit .lead{color:oklch(0.84 0.03 350);max-width:38ch;margin-bottom:1.6em}
+  .vrow{display:flex;gap:.85em;padding:1em 0;border-top:1px solid oklch(0.42 0.05 350)}
+  .vrow:first-of-type{border-top:none}
+  .vrow svg{width:20px;height:20px;color:oklch(0.8 0.11 352);flex-shrink:0;margin-top:2px}
+  .vrow .k{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:oklch(0.72 0.04 350)}
+  .vrow .v{font-size:1.12rem;color:oklch(0.96 0.01 350)}
+  .vrow .v a{color:inherit;text-decoration:none;border-bottom:1px solid oklch(0.6 0.1 352)}
+  .visit-cta{margin-top:1.8em;display:flex;gap:.7em;flex-wrap:wrap}
+  .visit .btn-ghost{background:transparent;color:oklch(0.96 0.01 350);border-color:oklch(0.5 0.06 350)}
+  .visit .btn-ghost:hover{background:oklch(0.34 0.05 350)}
+  .visit-photo img{width:100%;border-radius:var(--r);box-shadow:var(--shadow);aspect-ratio:1100/766;object-fit:cover}
+  .visit-photo .cap{margin-top:.8em;font-size:.85rem;color:oklch(0.74 0.03 350);text-align:center}
+
+  /* footer */
+  footer{background:var(--bg);padding:38px 0 46px;text-align:center}
+  .foot-name{font-family:"Spectral",serif;font-size:1.3rem;font-weight:600}
+  .foot-meta{color:var(--muted);font-size:.9rem;margin-top:.5em}
+  .foot-credit{margin-top:1.8em;font-size:.82rem;color:var(--muted)}
+  .foot-credit a{color:var(--rose-deep);font-weight:600;text-decoration:none}
+  .foot-credit a:hover{text-decoration:underline}
+
+  @media (max-width:860px){
+    .hero-grid,.svc-layout,.about-grid,.visit-grid{grid-template-columns:1fr}
+    .hero-photo{order:-1;max-width:420px;margin:0 auto}
+    .about-photo{max-width:380px;margin:0 auto}
+    .rev-grid{grid-template-columns:1fr 1fr}
+    .rev-big{grid-column:span 2}
+  }
+  @media (max-width:560px){
+    body{font-size:16px}
+    .gal-grid{grid-template-columns:1fr 1fr}
+    .gal-grid .tall{grid-row:span 1}
+    .rev-grid{grid-template-columns:1fr}
+    .rev-big{grid-column:span 1}
+    .cta-row .btn{flex:1;justify-content:center}
+    .navcall span{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none!important;scroll-behavior:auto!important}
+    .gal-grid figure:hover img{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <span class="brand">Salón de Belleza <b>Luz</b></span>
+    <a class="navcall" href="tel:+15128011151">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2.1z"/></svg>
+      <span>(512) 801-1151</span>
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">East Austin · Salón de belleza</span>
+        <h1>Salón de<br>Belleza Luz</h1>
+        <p class="tag">Color, highlights and cuts done right, by Maura.
+          <span class="es">Tu cabello, en buenas manos.</span>
+        </p>
+        <div class="rating">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <span class="num">4.8</span>
+          <span class="src">from 37 Google reviews</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="tel:+15128011151">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2.1z"/></svg>
+            Call to book
+          </a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/place/Salon+de+belleza+Luz/@30.2226314,-97.7001456,17z/data=!3m1!4b1!4m6!3m5!1s0x8644b6a89050a993:0xffe32d66811f390f" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Get directions
+          </a>
+        </div>
+        <span class="habla">Se habla español · We speak English</span>
+      </div>
+      <div class="hero-photo">
+        <img src="img/color-copper.webp" width="591" height="802" alt="Long, glossy copper-red hair color done at Salón de Belleza Luz" loading="eager" fetchpriority="high" decoding="async">
+        <div class="chip"><b>Real color work</b>done in the chair, not a stock photo</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What we do · Lo que hacemos</span>
+        <h2>Hair that holds up, for the whole family</h2>
+        <p>Maura has been coloring, cutting and fixing hair in East Austin for years. Walk in for a trim, or come in to get a color finally done right.</p>
+      </div>
+      <div class="svc-layout">
+        <div class="feature">
+          <span class="tagline">The specialty</span>
+          <h3>Color correction</h3>
+          <p>A lot of people find Maura after a color went wrong somewhere else. Box dye that turned brassy, highlights that came out patchy, a tone that was never what you asked for. She sorts it out and gets you back to the color you actually wanted.</p>
+          <blockquote>
+            "I had a bad experience at another salon and Maura fixed my hair color right to how I wanted it. They are very professional, and the price is worth it."
+            <cite>Deborah J. · Google review</cite>
+          </blockquote>
+        </div>
+        <div>
+          <div class="svc-list">
+            <div class="svc-item"><span class="name">Color &amp; tinte<span>Full color, root touch-ups, gloss</span></span></div>
+            <div class="svc-item"><span class="name">Highlights &amp; mechas<span>Balayage, foils, dimensional blends</span></span></div>
+            <div class="svc-item"><span class="name">Cuts for everyone<span>Cortes para hombre, mujer y niños</span></span></div>
+            <div class="svc-item"><span class="name">Smoothing &amp; keratin<span>Alisado y tratamiento de keratina</span></span></div>
+            <div class="svc-item"><span class="name">Styling &amp; blowouts<span>Peinados y cepillado for any occasion</span></span></div>
+          </div>
+          <p class="svc-extra">Also in the salon: <b>facials, makeup, lash extensions, and nails.</b> Ask Maura when you call. <span class="es">Pregunta cuando llames.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">The work · El trabajo</span>
+        <h2>A few recent looks</h2>
+      </div>
+      <div class="gal-grid">
+        <figure class="tall"><img src="img/balayage.webp" width="720" height="856" alt="Long hair with soft blonde balayage highlights and loose curls" loading="lazy" decoding="async"></figure>
+        <figure><img src="img/highlights-caramel.webp" width="718" height="834" alt="Wavy bob with warm caramel highlights" loading="lazy" decoding="async"></figure>
+        <figure><img src="img/waves-blonde.webp" width="721" height="824" alt="Side view of blonde highlighted waves" loading="lazy" decoding="async"></figure>
+        <figure class="tall"><img src="img/highlights-straight.webp" width="721" height="824" alt="Long straight hair with fine sun-kissed highlights" loading="lazy" decoding="async"></figure>
+        <figure><img src="img/color-copper.webp" width="591" height="802" alt="Long glossy copper-red color" loading="lazy" decoding="async"></figure>
+      </div>
+      <p class="gal-cap">Every one of these was done right here at the salon.</p>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="reviews">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">What people say · Lo que dicen</span>
+        <h2>Clients who keep coming back</h2>
+      </div>
+      <div class="rev-grid">
+        <blockquote class="rev rev-big">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <p>"Maura is an artist. Love her. Her place is modest, but don't be fooled. She knows her stuff."</p>
+          <cite><b>Mrs. H.</b> · Google review</cite>
+        </blockquote>
+        <blockquote class="rev">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <p>"My mom, my sister-in-law and I have been going to Maura for about 13 years. Great service as always, she did an amazing job."</p>
+          <cite><b>Adriana S.</b> · Google review</cite>
+        </blockquote>
+        <blockquote class="rev">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <p>"Maura has done my hair for many years. I wouldn't trust no one else. She is also a great person, lovely attitude."</p>
+          <cite><b>Maria S.</b> · Google review</cite>
+        </blockquote>
+        <blockquote class="rev">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <p>"Highly recommended. Whatever you want done, nothing is impossible for her. She really knows what she's doing."</p>
+          <p class="orig">"Lo que tú quieras hacerte, para ella no hay un imposible."</p>
+          <cite><b>Arelhy M.</b> · Google review</cite>
+        </blockquote>
+        <blockquote class="rev">
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <p>"First time at this salon and the quality of work and service were excellent. They are very kind and I loved the result."</p>
+          <cite><b>Maddy R.</b> · Google review</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section>
+    <div class="wrap about-grid">
+      <div class="about-photo">
+        <img src="img/maura.webp" width="721" height="824" alt="Maura with a client at Salón de Belleza Luz" loading="lazy" decoding="async">
+      </div>
+      <div class="about-body">
+        <span class="eyebrow">Meet Maura</span>
+        <h2>The hands behind the chair</h2>
+        <p>Maura has been doing hair in Austin for years, and a lot of her clients have stayed with her well over a decade. People come for her color and they stay for the way she treats them.</p>
+        <p>The salon on Thrasher Lane is a modest neighborhood spot, and that is part of why people love it. The work is excellent, the prices are fair, and you leave looking like you spent a lot more than you did.</p>
+        <p class="about-sign">"Don't be fooled. She knows her stuff."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit">
+    <div class="wrap visit-grid">
+      <div>
+        <span class="eyebrow">Come by · Visítanos</span>
+        <h2>Find us on Thrasher Lane</h2>
+        <p class="lead">Walk-ins are welcome, but a quick call is the surest way to get the time you want.</p>
+        <div class="vrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2.1z"/></svg>
+          <div><div class="k">Call or text</div><div class="v"><a href="tel:+15128011151">(512) 801-1151</a></div></div>
+        </div>
+        <div class="vrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><div class="k">Address · Dirección</div><div class="v">2009 Thrasher Ln, Austin, TX 78741</div></div>
+        </div>
+        <div class="vrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+          <div><div class="k">Language</div><div class="v">Se habla español · We speak English</div></div>
+        </div>
+        <div class="visit-cta">
+          <a class="btn btn-primary" href="tel:+15128011151">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2.1z"/></svg>
+            Reservar · Book a time
+          </a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/place/Salon+de+belleza+Luz/@30.2226314,-97.7001456,17z/data=!3m1!4b1!4m6!3m5!1s0x8644b6a89050a993:0xffe32d66811f390f" target="_blank" rel="noopener">Open in Maps</a>
+        </div>
+      </div>
+      <div class="visit-photo">
+        <a href="https://www.google.com/maps/place/Salon+de+belleza+Luz/@30.2226314,-97.7001456,17z/data=!3m1!4b1!4m6!3m5!1s0x8644b6a89050a993:0xffe32d66811f390f" target="_blank" rel="noopener">
+          <img src="img/storefront.webp" width="1100" height="766" alt="The Salón de Belleza Luz storefront on Thrasher Lane in East Austin" loading="lazy" decoding="async">
+        </a>
+        <div class="cap">2009 Thrasher Ln, just off East Riverside</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-name">Salón de Belleza Luz</div>
+    <div class="foot-meta">2009 Thrasher Ln, Austin, TX 78741 · (512) 801-1151 · Se habla español</div>
+    <p class="foot-credit">A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a></p>
+  </div>
+</footer>
+
+<script defer src="/assets/demo-visit.js"></script>
+</body>
+</html>
