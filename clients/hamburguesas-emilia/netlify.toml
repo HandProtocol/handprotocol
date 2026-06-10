@@ -1,0 +1,15 @@
+# Standalone client production site (HAND "graduate to production" step).
+# Deployed as its OWN Netlify site, decoupled from the handprotocol repo's
+# git auto-deploy. Update with:
+#   netlify deploy --prod --dir clients/<slug> --site <site-id>
+# This local toml pins the publish dir to this folder and carries NO functions
+# or edge functions, so a deploy from inside the monorepo never inherits the
+# root netlify.toml (publish="web", the HAND site config).
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

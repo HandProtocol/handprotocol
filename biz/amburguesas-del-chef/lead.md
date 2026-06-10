@@ -10,8 +10,10 @@ google_url: https://www.google.com/maps/search/?api=1&query=Amburguesas+Al+Sabor
 google_rating: 4.4
 reviews_count: 37
 website_status: none
-status: built
+status: closed
 demo_url: /demos/amburguesas-del-chef/
+production_url: https://hamburguesasemilia.com/
+live_domain: hamburguesasemilia.com
 hand_lead: koH
 ---
 
@@ -50,3 +52,4 @@ hand_lead: koH
 - Two of the five reviews kept are Google review-summary pull quotes shown without an author ("best burgers...life" and the Chef Lorenzo line); attributed generically to "Google review." The three full reviews (Kaycee Joan, lola perez, Twisted Tea) carry authors.
 - Photos: operator supplied 6 (pasted into chat; recovered from ~/.claude/image-cache and converted to webp). Demo uses 5: hero-cheeseburger (cut cheeseburger + seasoned fries on the blue enamel plate), burger-build (open-faced burger on chile-print paper + shoestring fries), tacos (steak tacos + Mexican Pepsi), flautas (flautas plate w/ rice, beans, pico), and sign-night (the lit Hamburguesas Emilia sign + neon OPEN, used as the find-us shot). Originals + the two burger-menu-board reference shots are in biz/amburguesas-del-chef/photos/ (not committed); webp live in web/demos/amburguesas-del-chef/img/.
 - Pitch page: NOT built this round (operator said skip the pitch). Demo only.
+- GRADUATED TO PRODUCTION 2026-06-10: closed as a paying client. Demo promoted out of the demo namespace to a standalone owned site at `clients/hamburguesas-emilia/`, deployed as its own Netlify site (`hamburguesas-emilia.netlify.app`, project id 53dce4ce-3c54-485d-b6de-beb2db7a7264) on the registered domain HamburguesasEmilia.com (Namecheap → Netlify DNS, zone 6a299345af2462c3dd63b168, nameservers dns1-4.p08.nsone.net). Lead status set to `closed`. The /demos/ copy stays up as a portfolio piece with a "now live" banner and its canonical pointed at the production domain.
