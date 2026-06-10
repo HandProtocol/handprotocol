@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C4U — Chris's 4U Server Build Guide</title>
+  <meta name="description" content="Setup guide and FAQ for Chris's 4U Rosewill rackmount server: AMD Ryzen 7 9000, Gigabyte B650, DDR5, Arctic AIO, Corsair RM1000e, CyberPower UPS. Build order, BIOS, OS picks.">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="C4U — Chris's 4U Server Build">
+  <meta property="og:description" content="Build order, BIOS first-boot, OS suggestions, UPS setup, and FAQ for the Rosewill RSV-L4620 AM5 server.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://handprotocol.org/c4u/">
+  <meta name="theme-color" content="#0C1220">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="topbar__inner container">
+      <a class="topbar__brand" href="https://handprotocol.org/">
+        <img src="../assets/logo.png" alt="" width="28" height="28" decoding="async">
+        HAND Protocol<span class="dot">.</span>
+      </a>
+      <span class="topbar__meta">build&nbsp;/&nbsp;c4u</span>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero__grid" aria-hidden="true"></div>
+      <div class="hero__content container">
+        <span class="hero__eyebrow"><span aria-hidden="true">▲</span> Build Guide · Chris's 4U</span>
+        <h1 class="hero__title">A quiet, capable <span class="accent">homelab server</span><br>in a 4U rack.</h1>
+        <p class="hero__sub">
+          Everything to take this pile of boxes to a running machine: the parts manifest, the order to
+          assemble them in, the one BIOS step that prevents a dead first boot, what OS to put on it, and
+          a FAQ for the questions that come up mid-build.
+        </p>
+        <div class="hero__specs">
+          <span class="spec-pill"><b>CPU</b> Ryzen 7 9700X · 8C/16T</span>
+          <span class="spec-pill"><b>RAM</b> 32 GB DDR5 EXPO</span>
+          <span class="spec-pill"><b>Disk</b> 2 TB NVMe Gen4</span>
+          <span class="spec-pill"><b>Net</b> 2.5 GbE + Wi-Fi 6E</span>
+          <span class="spec-pill"><b>Form</b> 4U rackmount</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTS -->
+    <section class="section anchor-pad" id="parts">
+      <div class="container">
+        <div class="section__head narrow">
+          <p class="section__eyebrow">01 — What's in the boxes</p>
+          <h2 class="section__title">Parts manifest</h2>
+          <p class="section__intro">Confirmed from the photos. All AM5 / DDR5 — everything matches once the RAM was swapped (see the note below).</p>
+        </div>
+        <div class="manifest">
+          <div class="part"><span class="part__role">Chassis</span><div><div class="part__name">Rosewill RSV-L4620</div><div class="part__detail">4U rackmount · E-ATX/SSI-EEB · 3×120mm PWM fans · front USB-C · up to 360mm AIO</div></div></div>
+          <div class="part"><span class="part__role">Board</span><div><div class="part__name">Gigabyte B650 Gaming X AX V2</div><div class="part__detail">AM5 · DDR5 · 3× M.2 · 2.5GbE · Wi-Fi 6E · Q-Flash Plus</div></div></div>
+          <div class="part"><span class="part__role">CPU</span><div><div class="part__name">AMD Ryzen 7 9700X</div><div class="part__detail">Zen 5 · 8C/16T · 65W · has integrated graphics (no GPU needed) — confirm exact SKU on box</div></div></div>
+          <div class="part"><span class="part__role">Cooler</span><div><div class="part__name">Arctic Liquid Freezer III Pro 240 A-RGB</div><div class="part__detail">240mm AIO · AM5 bracket + MX-6 paste in box · PWM pump/fans · 5V ARGB</div></div></div>
+          <div class="part"><span class="part__role">RAM</span><div><div class="part__name">XSKY Gaming Memory DDR5 32GB (2×16)</div><div class="part__detail">DDR5 · AMD EXPO profile — ✓ correct for this board</div></div></div>
+          <div class="part"><span class="part__role">Storage</span><div><div class="part__name">Crucial P3 Plus 2TB</div><div class="part__detail">PCIe 4.0 NVMe M.2 · boot + primary volume</div></div></div>
+          <div class="part"><span class="part__role">PSU</span><div><div class="part__name">Corsair RM1000e</div><div class="part__detail">1000W · ATX 3.1 · fully modular — generous (this build draws ~150–250W)</div></div></div>
+          <div class="part"><span class="part__role">UPS</span><div><div class="part__name">CyberPower CP1500PFCLCD</div><div class="part__detail">1500VA / 1000W · pure sine wave · USB → auto safe-shutdown</div></div></div>
+        </div>
+
+        <div class="callout callout--tip">
+          <span class="callout__icon" aria-hidden="true">✓</span>
+          <div>
+            <div class="callout__title">RAM fixed — thanks for catching it</div>
+            <p>The DDR4 kit in the first photos couldn't run in this DDR5/AM5 board. The replacement <strong>XSKY DDR5 32GB (2×16) with AMD EXPO</strong> is correct. EXPO is just a one-click profile you turn on in BIOS to run the RAM at its rated speed — covered in step&nbsp;6.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRE-FLIGHT -->
+    <section class="section section--alt anchor-pad" id="preflight">
+      <div class="container narrow">
+        <div class="section__head">
+          <p class="section__eyebrow">02 — Before you touch a screwdriver</p>
+          <h2 class="section__title">Three things that save a bad night</h2>
+        </div>
+
+        <div class="callout callout--warn">
+          <span class="callout__icon" aria-hidden="true">⚡</span>
+          <div>
+            <div class="callout__title">Flash the BIOS first — with no CPU installed</div>
+            <p>Ryzen 9000 (Zen 5) needs a recent BIOS. This board has <strong>Q-Flash Plus</strong>, which updates the BIOS using only the PSU and a USB stick — <em>no CPU, RAM, or GPU required</em>. Doing this <strong>before</strong> installing the chip removes the most common "it won't post and I don't know why" failure. Steps are in the build order.</p>
+          </div>
+        </div>
+
+        <div class="callout callout--info">
+          <span class="callout__icon" aria-hidden="true">🖥️</span>
+          <div>
+            <div class="callout__title">No graphics card — and you don't need one</div>
+            <p>The Ryzen 7 9700X has a built-in GPU, so the motherboard's <strong>HDMI/DisplayPort</strong> outputs work for setup and for a headless server. (Only exception: if the box model number ends in <code>F</code>, that chip has no graphics and would need a GPU. The 9700X is not an F chip.)</p>
+          </div>
+        </div>
+
+        <div class="callout callout--info">
+          <span class="callout__icon" aria-hidden="true">📏</span>
+          <div>
+            <div class="callout__title">The 240mm radiator mounts on the internal fan-wall</div>
+            <p>This chassis takes up to a 360mm rad, so the 240mm fits with room to spare. In a 4U it mounts on the <strong>middle fan-wall</strong> where the three 120mm fans pre-install — not the top like a tower. Test-fit the radiator and check the hoses reach the CPU before final screws. <em>(Confirm the exact bracket holes against the Rosewill manual — listings vary slightly.)</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUILD ORDER -->
+    <section class="section anchor-pad" id="build">
+      <div class="container narrow">
+        <div class="section__head">
+          <p class="section__eyebrow">03 — Assembly</p>
+          <h2 class="section__title">Build order</h2>
+          <p class="section__intro">Roughly 2–3 hours for a first build. Build the core <strong>on the motherboard box first</strong> and bench-test it before it ever goes in the chassis — far easier to troubleshoot in the open.</p>
+        </div>
+
+        <div class="steps">
+
+          <article class="step">
+            <span class="step__phase">Prep</span>
+            <h3 class="step__title">Set up clean and grounded</h3>
+            <div class="step__body">
+              Flat non-carpet surface, good light, a #2 Phillips. Touch the bare PSU case to discharge static (or wear a strap). Keep the boards in their anti-static bags until needed. Have a USB stick (8GB+) and a second computer to make the BIOS/OS media.
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">BIOS · do this first</span>
+            <h3 class="step__title">Q-Flash Plus the motherboard</h3>
+            <div class="step__body">
+              <ul>
+                <li>On the second PC, download the <strong>latest BIOS</strong> for "B650 Gaming X AX V2" from Gigabyte's support page.</li>
+                <li>Unzip, <strong>rename the BIOS file to <code>GIGABYTE.bin</code></strong> (the included renamer tool does this), put it on a FAT32 USB stick.</li>
+                <li>With the board out of the case: connect <strong>only</strong> the PSU 24-pin and 8-pin CPU power. Plug the USB stick into the rear <strong>Q-Flash Plus</strong> port.</li>
+                <li>Press the <strong>Q-Flash Plus button</strong>. The LED blinks while flashing (a few minutes) and stops when done. <strong>Do not cut power.</strong> No CPU or RAM is installed yet — that's expected.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">Core · on the bench</span>
+            <h3 class="step__title">CPU into the socket</h3>
+            <div class="step__body">
+              Lift the AM5 retention lever. Match the <strong>gold triangle</strong> on the CPU corner to the triangle on the socket. Drop it in — it seats with zero force. Lower the lever (firm, not forced). Save the plastic socket cover.
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">Core · on the bench</span>
+            <h3 class="step__title">RAM in slots 2 &amp; 4</h3>
+            <div class="step__body">
+              For a 2-stick kit, use the <strong>second and fourth slots from the CPU</strong> (labeled A2/B2) for dual-channel — check the board silkscreen. Open the clips, line up the notch, press both ends until they <strong>click</strong>. Firm pressure is normal.
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">Core · on the bench</span>
+            <h3 class="step__title">NVMe SSD into M.2 slot 1</h3>
+            <div class="step__body">
+              Use the <strong>top M.2 slot</strong> (CPU-connected, fastest) for the boot drive. Lift the thermal heatsink, seat the drive at ~30°, push down, secure with the screw or latch, peel the thermal pad film, replace the heatsink.
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">Core · on the bench</span>
+            <h3 class="step__title">Mount the AIO pump &amp; apply paste</h3>
+            <div class="step__body">
+              <ul>
+                <li>Fit the Arctic <strong>AM5 mounting</strong> hardware (the stock AMD backplate stays on the board).</li>
+                <li>Apply the included <strong>MX-6</strong> — a pea-sized blob or small X; the pump spreads it.</li>
+                <li>Seat the pump, tighten the screws <strong>a little at a time in a cross pattern</strong> so it seats evenly. Don't fully torque one corner first.</li>
+                <li>Leave the radiator loose for now — it gets mounted in the chassis.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">Test · before the case</span>
+            <h3 class="step__title">Bench POST &amp; enter BIOS</h3>
+            <div class="step__body">
+              <ul>
+                <li>Connect 24-pin, 8-pin EPS, the AIO <strong>pump/fan PWM</strong>, and a monitor to the board's <strong>HDMI/DisplayPort</strong>.</li>
+                <li>Power on (jump the two PWR_SW pins with a screwdriver, or use the case button temporarily).</li>
+                <li><strong>First boot runs memory training and can take 1–several minutes of black screen, even a reboot or two.</strong> This is normal AM5 behavior — wait it out.</li>
+                <li>Get into BIOS, confirm it sees the CPU, all 32GB RAM, and the SSD. Power down. <em>Now</em> it's worth moving into the case.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">Chassis</span>
+            <h3 class="step__title">Board into the 4U</h3>
+            <div class="step__body">
+              Install the <strong>I/O shield</strong> (if not pre-attached to the board), set the brass <strong>standoffs</strong> to the ATX pattern, lower the board onto them, and screw it down. Don't overtighten.
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">Chassis</span>
+            <h3 class="step__title">Radiator, fans &amp; airflow</h3>
+            <div class="step__body">
+              <ul>
+                <li>Mount the 240mm radiator + 2 fans on the <strong>front/mid fan-wall</strong>; route hoses to the pump.</li>
+                <li>Set fans as <strong>front-to-back intake</strong> through the rad so the rack pulls cool air across the board.</li>
+                <li>Use the 3 stock 120mm fans as exhaust / extra intake to keep a clean front-to-back path.</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">Chassis</span>
+            <h3 class="step__title">PSU &amp; cabling</h3>
+            <div class="step__body">
+              The RM1000e is <strong>fully modular</strong> — only attach the cables you need: <strong>24-pin</strong>, <strong>8-pin EPS</strong> (CPU power, top-left of board), and SATA power if you add drives. No PCIe/GPU cables. Tuck the rest away.
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">Chassis</span>
+            <h3 class="step__title">Front-panel headers</h3>
+            <div class="step__body">
+              <ul>
+                <li>Power switch / reset / power LED / HDD LED → the <strong>F_PANEL</strong> header (check the board manual pinout).</li>
+                <li>Front USB 3.0 → the 19/20-pin <strong>USB 3.2 Gen1</strong> header.</li>
+                <li>Front <strong>USB-C</strong> → the board's internal <strong>USB-C (Type-C / Key-A)</strong> header.</li>
+                <li>AIO <strong>ARGB</strong> lead → a <strong>3-pin 5V ARGB</strong> header (not the 4-pin 12V RGB).</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="step">
+            <span class="step__phase">Chassis</span>
+            <h3 class="step__title">Drives (optional, now or later)</h3>
+            <div class="step__body">
+              The chassis holds <strong>2× 3.5" + 3–4× 2.5"</strong> (verify the bay count on the unit). Mount any SATA drives, run SATA data to the board and SATA power from the PSU. The boot NVMe alone is enough to get running.
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- BIOS / FIRST BOOT -->
+    <section class="section section--alt anchor-pad" id="firstboot">
+      <div class="container narrow">
+        <div class="section__head">
+          <p class="section__eyebrow">04 — First real boot</p>
+          <h2 class="section__title">BIOS settings to set once</h2>
+        </div>
+        <div class="prose">
+          <p>Boot into BIOS (tap <kbd>Delete</kbd> at power-on) and set these before installing the OS:</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <h3 class="step__title">Enable EXPO</h3>
+            <div class="step__body">Turn on the <strong>EXPO profile</strong> so the DDR5 runs at its rated speed instead of a slow default. It may reboot and re-train memory once — normal.</div>
+          </article>
+          <article class="step">
+            <h3 class="step__title">Confirm boot device &amp; fan mode</h3>
+            <div class="step__body">Set the NVMe as the boot drive. Set the CPU fan/pump header to <strong>PWM</strong>; a "Silent" or custom fan curve keeps it quiet under a light server load.</div>
+          </article>
+          <article class="step">
+            <h3 class="step__title">Set power-on behavior</h3>
+            <div class="step__body">For a server, set <strong>"AC Back / Power-on after power loss" → Always On</strong> so it restarts itself after an outage once the UPS battery is exhausted.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- OS SUGGESTIONS -->
+    <section class="section anchor-pad" id="os">
+      <div class="container">
+        <div class="section__head narrow">
+          <p class="section__eyebrow">05 — What to run on it</p>
+          <h2 class="section__title">Pick an OS for the job</h2>
+          <p class="section__intro">A suggestion for each direction. If you're unsure, start with the recommended one — it can <em>become</em> all the others by running them as virtual machines.</p>
+        </div>
+
+        <div class="os-grid">
+
+          <div class="os os--rec">
+            <span class="os__flag">Recommended</span>
+            <div class="os__name">Proxmox VE</div>
+            <div class="os__for">Do-everything homelab base</div>
+            <div class="os__body">
+              <p>Free, open-source virtualization. Run multiple isolated VMs and lightweight containers on one box — spin up a NAS, a media server, and a dev box side by side, snapshot them, and roll back mistakes. With 8 cores and 32GB, this hardware is a great fit.</p>
+              <ul class="os__notes">
+                <li>Install to the NVMe; add HDDs later as a storage pool</li>
+                <li>Manage everything from a browser on another machine</li>
+                <li>Pass the iGPU to a media VM for hardware transcoding</li>
+                <li>Best choice if Chris wants to experiment without commitment</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="os">
+            <div class="os__name">TrueNAS SCALE</div>
+            <div class="os__for">Storage / NAS first</div>
+            <div class="os__body">
+              <p>Purpose-built network storage with ZFS, shares, and app plugins. Great if the main goal is a central file/backup server.</p>
+              <ul class="os__notes">
+                <li>Heads-up: this chassis holds <strong>only 2× 3.5" + a few 2.5"</strong> — fine for a modest NAS, not a big bulk-storage array</li>
+                <li>Add matched HDDs in a mirror for redundancy</li>
+                <li>Can also run apps/containers, but it's storage-led</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="os">
+            <div class="os__name">Debian + Jellyfin/Plex</div>
+            <div class="os__for">Media server</div>
+            <div class="os__body">
+              <p>Bare-metal Linux running a media stack in Docker. The 9700X iGPU handles hardware transcoding well.</p>
+              <ul class="os__notes">
+                <li>Jellyfin (free) or Plex; add the <code>*arr</code> apps in Docker</li>
+                <li>Enable <code>VAAPI</code> transcoding on the AMD iGPU</li>
+                <li>Wire it on 2.5GbE for smooth 4K streaming</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="os">
+            <div class="os__name">Ubuntu Server LTS</div>
+            <div class="os__for">General Linux / Docker host</div>
+            <div class="os__body">
+              <p>The familiar, well-documented default. A clean base for self-hosted apps, dev work, and Docker — no virtualization layer to learn.</p>
+              <ul class="os__notes">
+                <li>Pick the LTS release for 5 years of updates</li>
+                <li>Install <code>docker</code> + a reverse proxy (Caddy/Traefik)</li>
+                <li>Easiest path if Chris just wants "a Linux server"</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- UPS -->
+    <section class="section section--alt anchor-pad" id="ups">
+      <div class="container narrow">
+        <div class="section__head">
+          <p class="section__eyebrow">06 — Power &amp; protection</p>
+          <h2 class="section__title">Wire up the UPS</h2>
+        </div>
+        <div class="prose">
+          <p>The CyberPower CP1500PFCLCD does two jobs: it rides through short outages, and it tells the server to <strong>shut down gracefully</strong> before the battery dies — so no corrupted filesystems.</p>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <h3 class="step__title">Plug into the right outlets</h3>
+            <div class="step__body">Put the <strong>PC and monitor on the battery+surge</strong> outlets (one half of the back is surge-only — skip those for the critical gear). Its pure sine-wave output is the type the Corsair's active-PFC PSU wants.</div>
+          </article>
+          <article class="step">
+            <h3 class="step__title">Connect the USB data cable</h3>
+            <div class="step__body">Run the bundled <strong>USB cable from the UPS to the server</strong>. That's how the OS reads battery status and triggers shutdown.</div>
+          </article>
+          <article class="step">
+            <h3 class="step__title">Install the shutdown software</h3>
+            <div class="step__body">
+              <ul>
+                <li>On Linux, use <strong>NUT (Network UPS Tools)</strong> with the <code>usbhid-ups</code> driver, <em>or</em> CyberPower's <strong>PowerPanel for Linux</strong>.</li>
+                <li>On Windows, use <strong>CyberPower PowerPanel</strong>.</li>
+                <li>Use <strong>only one</strong> — NUT and PowerPanel fight over the USB device.</li>
+                <li>Set a rule like "shut down when ~5 minutes of runtime remain."</li>
+              </ul>
+            </div>
+          </article>
+          <article class="step">
+            <h3 class="step__title">Test it</h3>
+            <div class="step__body">With everything running, <strong>pull the UPS wall plug</strong>. The server should keep running on battery, then auto-shut-down at your threshold. At this build's ~150–250W draw, expect roughly <strong>20–40 minutes</strong> of runtime — plenty for a clean shutdown.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section anchor-pad" id="faq">
+      <div class="container narrow">
+        <div class="section__head">
+          <p class="section__eyebrow">07 — Questions that come up</p>
+          <h2 class="section__title">FAQ</h2>
+        </div>
+        <div class="faq">
+
+          <details>
+            <summary>Will the original DDR4 RAM work?</summary>
+            <div class="faq__a">No. This board is <strong>AM5 / DDR5 only</strong> — DDR4 is keyed differently and physically won't seat. The XSKY DDR5 kit is the right replacement. Hang on to the DDR4 for a different (AM4/Intel DDR4) build or resell it.</div>
+          </details>
+
+          <details>
+            <summary>Do I need a graphics card?</summary>
+            <div class="faq__a">No. The Ryzen 7 9700X has <strong>integrated graphics</strong>, so the motherboard's HDMI/DisplayPort outputs work for install and console. A server runs headless anyway. (You'd only add a GPU for gaming, heavy GPU compute, or if the chip were an <code>F</code> model with no graphics — the 9700X isn't.)</div>
+          </details>
+
+          <details>
+            <summary>Why flash the BIOS before installing the CPU?</summary>
+            <div class="faq__a">Ryzen 9000 needs a recent BIOS; an older one may not recognize the chip, leaving you with a no-boot you can't diagnose. <strong>Q-Flash Plus</strong> updates the BIOS with just the PSU and a USB stick — no CPU needed — so you eliminate that risk up front. Five minutes now saves an evening later.</div>
+          </details>
+
+          <details>
+            <summary>First boot is a black screen for a minute+. Did it break?</summary>
+            <div class="faq__a">Almost certainly not. AM5 boards run <strong>memory training</strong> on the first boot with new CPU/RAM — black screen for 1–several minutes, sometimes a reboot or two, occasionally a DRAM debug light. <strong>Don't cut power.</strong> It caches the result, so later boots are fast.</div>
+          </details>
+
+          <details>
+            <summary>Does the 240mm cooler fit? Should it have been a 360?</summary>
+            <div class="faq__a">The 240mm fits comfortably — the chassis supports up to 360mm. A 360 would cool marginally better, but the 65W 9700X is easy to cool and the 240 is plenty, especially with good front-to-back rack airflow. Mount the radiator on the internal fan-wall and confirm the hoses reach the pump before final screws.</div>
+          </details>
+
+          <details>
+            <summary>Isn't a 1000W PSU way too big?</summary>
+            <div class="faq__a">It's generous — this build draws roughly <strong>150–250W</strong>. That's fine: the PSU runs cool, quiet, and efficient at low load, and you've got huge headroom to add drives or a GPU later. No downside beyond cost already spent.</div>
+          </details>
+
+          <details>
+            <summary>How long does the UPS last, and what does it actually do?</summary>
+            <div class="faq__a">At this load, expect roughly <strong>20–40 minutes</strong> on battery (an estimate — runtime climbs steeply at lighter loads). Its real value isn't long runtime; it's the <strong>automatic graceful shutdown</strong> over USB so an outage never corrupts your data. Configure shutdown at ~5 minutes remaining.</div>
+          </details>
+
+          <details>
+            <summary>Can I add more storage later?</summary>
+            <div class="faq__a">Yes. The board has <strong>two more M.2 slots</strong> and several SATA ports, and the chassis has <strong>2× 3.5" + a few 2.5"</strong> bays. Start with the 2TB NVMe boot drive and expand when you need it.</div>
+          </details>
+
+          <details>
+            <summary>Does a 4U go straight in a rack?</summary>
+            <div class="faq__a">It needs either <strong>rack rails/shelf</strong> or a sturdy surface — a loaded 4U is heavy, so don't hang it from front screws alone. Also check the <strong>chassis depth</strong> against your rack before mounting. It runs fine sitting on a shelf too.</div>
+          </details>
+
+          <details>
+            <summary>RGB on a server — really?</summary>
+            <div class="faq__a">The Arctic AIO and the RAM have addressable RGB. Harmless. If you'd rather it be dark in a closet, set it to off/static in the BIOS or lighting software. Functionally irrelevant either way.</div>
+          </details>
+
+          <details>
+            <summary>Wired or Wi-Fi?</summary>
+            <div class="faq__a">Use the <strong>2.5GbE wired port</strong> for a server — faster and rock-stable. The board's Wi-Fi 6E is a nice fallback, but a stationary rack server should be on a cable.</div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="footer__brand">
+          <img src="../assets/logo.png" alt="" width="28" height="28" decoding="async">
+          HAND Protocol
+        </div>
+        <p class="footer__note">Build notes for Chris's 4U server. Specs read from the parts on hand; a few chassis details (bay count, radiator bracket) worth confirming against the Rosewill manual.</p>
+      </div>
+      <div class="footer__note">
+        <a href="https://handprotocol.org/">handprotocol.org</a> · Austin, TX
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
