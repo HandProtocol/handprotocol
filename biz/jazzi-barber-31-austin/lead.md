@@ -5,14 +5,17 @@ category: Barber shop
 city: Austin
 state: TX
 phone: (512) 796-2805
-address: 6934 E Ben White Blvd, Austin, TX 78741
-google_url: https://www.google.com/maps/place/J+A+Z+Z+I+B+A+R+B+E+R+31/@30.2152358,-97.6992131,17z
-google_rating: 5.0
+address: '6934 E Ben White Blvd, Austin, TX 78741'
+google_url: >-
+  https://www.google.com/maps/place/J+A+Z+Z+I+B+A+R+B+E+R+31/@30.2152358,-97.6992131,17z
+google_rating: 5
 reviews_count: 2
 website_status: none
 status: built
 demo_url: /demos/jazzi-barber-31-austin/
 hand_lead: koH
+lat: 30.214382
+lng: -97.704695
 ---
 
 ## Reviews

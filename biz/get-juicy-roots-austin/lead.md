@@ -5,14 +5,17 @@ category: Juice and smoothie bar
 city: Austin
 state: TX
 phone: (971) 645-8870
-address: 2118 S Congress Ave, Austin, TX 78704
-google_url: https://www.google.com/maps/search/?api=1&query=Get+Juicy+Roots+2118+S+Congress+Ave+Austin+TX+78704
-google_rating: 5.0
+address: '2118 S Congress Ave, Austin, TX 78704'
+google_url: >-
+  https://www.google.com/maps/search/?api=1&query=Get+Juicy+Roots+2118+S+Congress+Ave+Austin+TX+78704
+google_rating: 5
 reviews_count: 157
 website_status: none
 status: built
 demo_url: /demos/get-juicy-roots-austin/
 hand_lead: koH
+lat: 30.242409
+lng: -97.752672
 ---
 
 ## Reviews

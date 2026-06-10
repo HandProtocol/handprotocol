@@ -70,3 +70,25 @@ export function demoPitchPath(slug: string): string {
 export function pitchPublicUrl(slug: string): string {
   return `/demos/${slug}/pitch/`;
 }
+
+// ─── Production (owned) sites ───────────────────────────────────────────────
+// Once a lead graduates (hand-biz-pitch Phase 6) its site is promoted out of
+// web/demos into clients/<slug>/ and deployed as its OWN Netlify site on a
+// custom domain. The folder lives at the repo root, OUTSIDE web/, so the main
+// handprotocol deploy never publishes it. The production slug can differ from
+// the lead slug (it matches the domain), so callers pass it explicitly.
+export function clientsDir(): string {
+  return path.join(repoRoot(), "clients");
+}
+
+export function clientSiteDir(prodSlug: string): string {
+  return path.join(clientsDir(), prodSlug);
+}
+
+export function clientSitePath(prodSlug: string): string {
+  return path.join(clientSiteDir(prodSlug), "index.html");
+}
+
+export function clientSiteRelPath(prodSlug: string): string {
+  return `clients/${prodSlug}`;
+}

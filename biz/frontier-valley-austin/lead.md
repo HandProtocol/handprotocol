@@ -5,14 +5,17 @@ category: Mobile home community
 city: Austin
 state: TX
 phone: (737) 210-1171
-address: 1430 Frontier Valley Dr, Austin, TX 78741
-google_url: https://www.google.com/maps/place/Frontier+Valley/@30.2284088,-97.6902261,17z/data=!4m6!3m5!1s0x8644b6a6d973c2b5:0xb649a4e7c3df0b76!8m2!3d30.2284526!4d-97.690277!16s%2Fg%2F12647pvfz
-google_rating: 4.0
+address: '1430 Frontier Valley Dr, Austin, TX 78741'
+google_url: >-
+  https://www.google.com/maps/place/Frontier+Valley/@30.2284088,-97.6902261,17z/data=!4m6!3m5!1s0x8644b6a6d973c2b5:0xb649a4e7c3df0b76!8m2!3d30.2284526!4d-97.690277!16s%2Fg%2F12647pvfz
+google_rating: 4
 reviews_count: 91
 website_status: none
 status: built
 demo_url: /demos/frontier-valley-austin/
 hand_lead: koH
+lat: 30.228453
+lng: -97.690277
 ---
 
 ## Reviews

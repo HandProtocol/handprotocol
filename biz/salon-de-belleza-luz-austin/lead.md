@@ -14,6 +14,8 @@ website_status: none
 status: built
 demo_url: /demos/salon-de-belleza-luz-austin/
 hand_lead: koH
+lat: 30.222631
+lng: -97.700146
 ---
 ## Reviews
 

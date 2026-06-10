@@ -38,7 +38,20 @@ const status = (BIZ_STATUSES as readonly string[]).includes(String(fm.status))
   ? fm.status
   : "prospect";
 
-const row = {
+// Resolve the campaign slug (frontmatter) to its id, if any.
+let campaignId: string | null = null;
+if (fm.campaign) {
+  const { data: camp } = await client
+    .from("biz_campaigns")
+    .select("id")
+    .eq("slug", String(fm.campaign))
+    .maybeSingle();
+  campaignId = (camp?.id as string) ?? null;
+}
+
+const liveDomain = fm.live_domain ? String(fm.live_domain) : null;
+
+const row: Record<string, unknown> = {
   slug,
   name: String(fm.name ?? slug),
   category: fm.category ? String(fm.category) : null,
@@ -53,7 +66,16 @@ const row = {
     fm.reviews_count != null && fm.reviews_count !== "" ? Math.round(Number(fm.reviews_count)) : null,
   website_status: websiteStatus,
   status,
+  campaign_id: campaignId,
+  tags: Array.isArray(fm.tags) ? fm.tags : [],
+  lat: fm.lat != null && fm.lat !== "" ? Number(fm.lat) : null,
+  lng: fm.lng != null && fm.lng !== "" ? Number(fm.lng) : null,
   demo_url: fm.demo_url ? String(fm.demo_url) : null,
+  production_url: fm.production_url ? String(fm.production_url) : null,
+  live_domain: liveDomain,
+  netlify_site_id: fm.netlify_site_id ? String(fm.netlify_site_id) : null,
+  dns_zone_id: fm.dns_zone_id ? String(fm.dns_zone_id) : null,
+  ssl_state: fm.ssl_state ? String(fm.ssl_state) : null,
   hand_lead: fm.hand_lead ? String(fm.hand_lead) : null,
   markdown_path: bizLeadMarkdownRelPath(slug),
   content_checksum: cs,
@@ -64,7 +86,7 @@ const row = {
 const demoExists = fs.existsSync(demoSitePath(slug));
 const { data: existing } = await client
   .from("biz_leads")
-  .select("id, demo_generated_at")
+  .select("id, demo_generated_at, live_at")
   .eq("slug", slug)
   .maybeSingle();
 let leadId: string;
@@ -72,12 +94,15 @@ if (existing) {
   const patch: Record<string, unknown> = { ...row };
   const stampBuilt = demoExists && !existing.demo_generated_at;
   if (stampBuilt) patch.demo_generated_at = new Date().toISOString();
+  // Stamp live_at the first time a live_domain appears.
+  if (liveDomain && !existing.live_at) patch.live_at = new Date().toISOString();
   await client.from("biz_leads").update(patch).eq("id", existing.id);
   leadId = existing.id as string;
   console.log("updated lead", slug, leadId, stampBuilt ? "(stamped built)" : "");
 } else {
   const insertRow: Record<string, unknown> = { ...row };
   if (demoExists) insertRow.demo_generated_at = new Date().toISOString();
+  if (liveDomain) insertRow.live_at = new Date().toISOString();
   const { data, error } = await client.from("biz_leads").insert(insertRow).select("id").single();
   if (error) {
     console.error("insert failed:", error.message);

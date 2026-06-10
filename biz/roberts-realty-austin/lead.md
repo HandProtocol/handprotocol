@@ -5,14 +5,17 @@ category: Real estate agent
 city: Austin
 state: TX
 phone: (512) 767-3100
-address: 2204 Montague St, Austin, TX 78741
-google_url: https://www.google.com/maps/place/Roberts+Realty/@30.2202103,-97.698206,17z/data=!4m6!3m5!1s0x865b4bf36c77e39b:0xe02101a41696e50a!8m2!3d30.2202103!4d-97.698206
+address: '2204 Montague St, Austin, TX 78741'
+google_url: >-
+  https://www.google.com/maps/place/Roberts+Realty/@30.2202103,-97.698206,17z/data=!4m6!3m5!1s0x865b4bf36c77e39b:0xe02101a41696e50a!8m2!3d30.2202103!4d-97.698206
 google_rating: 4.3
 reviews_count: 13
 website_status: none
 status: built
 demo_url: /demos/roberts-realty-austin/
 hand_lead: koH
+lat: 30.22021
+lng: -97.698206
 ---
 
 ## Reviews

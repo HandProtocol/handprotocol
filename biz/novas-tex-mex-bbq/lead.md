@@ -5,14 +5,17 @@ category: Barbecue restaurant
 city: Del Valle
 state: TX
 phone: (512) 995-4657
-address: 13000 FM812, Del Valle, TX 78617
-google_url: https://www.google.com/maps/place/Novas+Tex-Mex+Fusion+BBQ/@30.1302583,-97.6433586,15z/data=!4m6!3m5!1s0x8644b1afb104afeb:0xf71fb40082aede8!8m2!3d30.1301236!4d-97.6433786!16s%2Fg%2F11hqbfrw5g
+address: '13000 FM812, Del Valle, TX 78617'
+google_url: >-
+  https://www.google.com/maps/place/Novas+Tex-Mex+Fusion+BBQ/@30.1302583,-97.6433586,15z/data=!4m6!3m5!1s0x8644b1afb104afeb:0xf71fb40082aede8!8m2!3d30.1301236!4d-97.6433786!16s%2Fg%2F11hqbfrw5g
 google_rating: 4.8
 reviews_count: 88
 website_status: none
 status: built
 demo_url: /demos/novas-tex-mex-bbq/
 hand_lead: koH
+lat: 30.130124
+lng: -97.643379
 ---
 
 ## Reviews

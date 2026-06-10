@@ -1,7 +1,12 @@
 import Link from "next/link";
 import { Plus, Building2, ScrollText } from "lucide-react";
-import { listBizLeads, listVisitCounts } from "@/lib/develop/queries";
-import { BizKanban } from "@/components/develop/biz-kanban";
+import {
+  listBizLeads,
+  listCampaigns,
+  listVisitCounts,
+} from "@/lib/develop/queries";
+import { BizBoard } from "@/components/develop/biz-board";
+import { DevelopNav } from "@/components/develop/develop-nav";
 
 /*
   Business-development pipeline. The "Develop" pillar (the D in H-A-N-D).
@@ -13,8 +18,9 @@ import { BizKanban } from "@/components/develop/biz-kanban";
 export const dynamic = "force-dynamic";
 
 export default async function DevelopPage() {
-  const [leads, visitCounts] = await Promise.all([
+  const [leads, campaigns, visitCounts] = await Promise.all([
     listBizLeads(),
+    listCampaigns(),
     listVisitCounts(),
   ]);
   const configured = Boolean(
@@ -56,6 +62,8 @@ export default async function DevelopPage() {
         </div>
       </header>
 
+      <DevelopNav />
+
       {!configured && (
         <div className="panel border-[rgba(217,119,6,0.3)] bg-[rgba(217,119,6,0.04)] p-4">
           <p className="eyebrow text-[var(--amber-soft)]">CONFIG · PENDING</p>
@@ -90,7 +98,11 @@ export default async function DevelopPage() {
       )}
 
       {leads.length > 0 && (
-        <BizKanban leads={leads} visitCounts={visitCounts} />
+        <BizBoard
+          leads={leads}
+          campaigns={campaigns}
+          visitCounts={visitCounts}
+        />
       )}
     </div>
   );

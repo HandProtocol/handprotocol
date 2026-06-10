@@ -5,13 +5,16 @@ category: Mexican food truck
 city: Utley
 state: TX
 phone: (512) 629-6484
-google_url: https://www.google.com/maps/place/969+MEXICAN+FOOD+TRUCK/@30.1779838,-97.4285894,14z/data=!4m8!3m7!1s0x86449772a422d579:0x461e68f668022fac!8m2!3d30.1779849!4d-97.4192594!9m1!1b1!16s%2Fg%2F11jzj20c1s
+google_url: >-
+  https://www.google.com/maps/place/969+MEXICAN+FOOD+TRUCK/@30.1779838,-97.4285894,14z/data=!4m8!3m7!1s0x86449772a422d579:0x461e68f668022fac!8m2!3d30.1779849!4d-97.4192594!9m1!1b1!16s%2Fg%2F11jzj20c1s
 google_rating: 4.3
 reviews_count: 7
 website_status: none
 status: built
 demo_url: /demos/969foodtruck/
 hand_lead: koH
+lat: 30.177985
+lng: -97.419259
 ---
 
 ## Reviews
