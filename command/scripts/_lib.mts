@@ -11,7 +11,7 @@
 */
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
-import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { createClient } from "@supabase/supabase-js";
 
 process.chdir(fileURLToPath(new URL("../", import.meta.url))); // -> command/
 
@@ -28,7 +28,7 @@ export function loadEnv(): Record<string, string> {
   );
 }
 
-export function admin(env: Record<string, string> = loadEnv()): SupabaseClient {
+export function admin(env: Record<string, string> = loadEnv()) {
   return createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY, {
     db: { schema: "command" },
     auth: { persistSession: false, autoRefreshToken: false },
