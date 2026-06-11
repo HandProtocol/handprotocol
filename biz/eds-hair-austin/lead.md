@@ -1,6 +1,6 @@
 ---
 slug: eds-hair-austin
-name: Ed's Hair Salon
+name: Ed's Hair Salon
 category: Hair salon
 city: Austin
 state: TX
@@ -11,7 +11,8 @@ google_url: >-
 google_rating: 4.5
 reviews_count: 51
 website_status: none
-status: prospect
+demo_url: /demos/eds-hair-austin/
+status: built
 hand_lead: koH
 lat: 30.22673
 lng: -97.702585
