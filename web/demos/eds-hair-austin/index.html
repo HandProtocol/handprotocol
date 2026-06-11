@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ed's Hair Salon · Montopolis Barbershop & Color Salon · Austin TX</title>
+<meta name="description" content="Family-run barbershop and color salon in Montopolis, East Austin. Sharp fades, beard line-ups, kids' cuts, blowouts, and bold creative color. 4.5 stars, 51 reviews. Walk-ins welcome.">
+<link rel="canonical" href="https://handprotocol.org/demos/eds-hair-austin/">
+<meta property="og:title" content="Ed's Hair Salon · Montopolis, Austin">
+<meta property="og:description" content="Barbershop precision and salon color in one neighborhood shop. Fades, beards, kids' cuts, blowouts, and bold color. Walk-ins welcome.">
+<meta property="og:type" content="business.business">
+<meta property="og:image" content="https://handprotocol.org/demos/eds-hair-austin/img/mens-slickback.webp">
+<meta property="og:url" content="https://handprotocol.org/demos/eds-hair-austin/">
+<meta name="theme-color" content="#1a1411">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:        oklch(0.165 0.018 50);
+    --bg-raised: oklch(0.215 0.020 52);
+    --bg-panel:  oklch(0.255 0.022 55);
+    --bg-cream:  oklch(0.955 0.012 75);
+    --ink:       oklch(0.965 0.010 75);
+    --ink-2:     oklch(0.820 0.016 70);
+    --ink-3:     oklch(0.680 0.018 65);
+    --ink-dark:  oklch(0.255 0.020 50);
+    --ink-dark-2:oklch(0.430 0.022 55);
+    --accent:    oklch(0.685 0.205 352);
+    --accent-hi: oklch(0.760 0.190 350);
+    --accent-dim:oklch(0.685 0.205 352 / 0.14);
+    --gold:      oklch(0.815 0.135 80);
+    --line:      oklch(0.380 0.020 55);
+    --line-soft: oklch(0.300 0.018 52);
+    --r-sm: 8px; --r-md: 14px; --r-lg: 22px; --r-xl: 32px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --maxw: 1180px;
+    --font-display:'Bricolage Grotesque', system-ui, sans-serif;
+    --font-body:'Hanken Grotesk', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;
+    font-weight:400;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-family:var(--font-display);font-weight:800;line-height:1.02;letter-spacing:-0.02em}
+  ::selection{background:var(--accent);color:oklch(0.99 0 0)}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.1rem,4vw,2.6rem)}
+  .eyebrow{
+    font-weight:700;font-size:0.74rem;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--accent-hi);display:inline-flex;align-items:center;gap:0.6rem;
+  }
+  .eyebrow::before{content:"";width:1.7rem;height:2px;background:var(--accent);border-radius:2px}
+
+  /* skip link */
+  .skip{position:absolute;left:-999px;top:0;z-index:200;background:var(--accent);color:#fff;
+    padding:0.7rem 1.1rem;border-radius:0 0 var(--r-sm) 0;font-weight:700}
+  .skip:focus{left:0}
+
+  /* nav */
+  header.nav{position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);
+    background:oklch(0.165 0.018 50 / 0.82);border-bottom:1px solid var(--line-soft)}
+  .nav__row{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .brand{font-family:var(--font-display);font-weight:800;font-size:1.32rem;letter-spacing:-0.03em;color:var(--ink)}
+  .brand span{color:var(--accent-hi)}
+  .nav__links{display:flex;align-items:center;gap:2rem}
+  .nav__links a{color:var(--ink-2);font-weight:500;font-size:0.95rem;transition:color .18s var(--ease)}
+  .nav__links a:hover{color:var(--ink)}
+  .nav__cta{
+    background:var(--accent);color:oklch(0.99 0 0);padding:0.6rem 1.15rem;border-radius:var(--r-md);
+    font-weight:700;font-size:0.92rem;transition:background .2s var(--ease),transform .2s var(--ease);
+  }
+  .nav__cta:hover{background:var(--accent-hi);transform:translateY(-1px)}
+  @media(max-width:760px){.nav__links a:not(.nav__cta){display:none}}
+
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:0.55rem;font-weight:700;font-size:1rem;
+    padding:0.95rem 1.5rem;border-radius:var(--r-md);transition:transform .2s var(--ease),background .2s var(--ease),border-color .2s var(--ease);
+    min-height:52px;border:1.5px solid transparent;cursor:pointer}
+  .btn--primary{background:var(--accent);color:oklch(0.99 0 0)}
+  .btn--primary:hover{background:var(--accent-hi);transform:translateY(-2px)}
+  .btn--ghost{border-color:var(--line);color:var(--ink);background:transparent}
+  .btn--ghost:hover{border-color:var(--ink-2);background:oklch(0.99 0 0 / 0.04);transform:translateY(-2px)}
+  .btn svg{width:19px;height:19px;flex:none}
+
+  /* HERO */
+  .hero{position:relative;padding:clamp(2.4rem,6vw,4.6rem) 0 clamp(2.8rem,6vw,4.4rem);overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;z-index:0;
+    background:radial-gradient(120% 90% at 88% 8%, var(--accent-dim), transparent 60%);pointer-events:none}
+  .hero__grid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 0.95fr;gap:clamp(1.6rem,4vw,3.5rem);align-items:center}
+  .hero__copy{max-width:34rem}
+  .hero h1{font-size:clamp(2.7rem,7vw,4.5rem);margin:1.1rem 0 0}
+  .hero h1 em{font-style:normal;color:var(--accent-hi)}
+  .hero__sub{color:var(--ink-2);font-size:clamp(1.05rem,1.6vw,1.22rem);margin-top:1.2rem;max-width:30rem}
+  .hero__rating{display:flex;align-items:center;gap:0.7rem;margin-top:1.5rem;font-weight:600;color:var(--ink-2);font-size:0.98rem}
+  .stars{display:inline-flex;gap:2px;color:var(--gold)}
+  .stars svg{width:18px;height:18px}
+  .hero__actions{display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:1.8rem}
+  .hero__note{margin-top:1.15rem;font-size:0.9rem;color:var(--ink-3);display:flex;align-items:center;gap:0.5rem}
+  .hero__note b{color:var(--gold);font-weight:700}
+
+  /* hero photo cluster */
+  .hero__art{position:relative;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;
+    gap:0.7rem;align-self:stretch}
+  .hero__art figure{position:relative;overflow:hidden;border-radius:var(--r-lg);border:1px solid var(--line-soft);
+    box-shadow:0 18px 50px -20px oklch(0 0 0 / 0.7)}
+  .hero__art img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+  .hero__art figure:hover img{transform:scale(1.04)}
+  .hero__art .a{grid-column:1;grid-row:1 / span 2;aspect-ratio:3/4.5}
+  .hero__art .b{grid-column:2;grid-row:1;aspect-ratio:1/1}
+  .hero__art .c{grid-column:2;grid-row:2;aspect-ratio:1/1.04}
+  .tag{position:absolute;left:0.7rem;bottom:0.7rem;background:oklch(0.165 0.018 50 / 0.85);
+    color:var(--ink);font-size:0.72rem;font-weight:700;letter-spacing:0.04em;padding:0.32rem 0.65rem;
+    border-radius:var(--r-sm);backdrop-filter:blur(4px)}
+
+  /* section scaffold */
+  section{position:relative}
+  .band{padding:clamp(3.2rem,7vw,5.6rem) 0}
+  .band--raised{background:var(--bg-raised)}
+  .sec-head{max-width:40rem;margin-bottom:clamp(1.8rem,4vw,2.8rem)}
+  .sec-head h2{font-size:clamp(1.9rem,4vw,2.9rem);margin:0.9rem 0 0}
+  .sec-head p{color:var(--ink-2);margin-top:0.85rem;font-size:1.08rem}
+
+  /* services */
+  .svc{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+  .svc__item{padding:1.5rem 1.5rem 1.65rem;border-radius:var(--r-lg);background:var(--bg-panel);
+    border:1px solid var(--line-soft);transition:transform .25s var(--ease),border-color .25s var(--ease)}
+  .svc__item:hover{transform:translateY(-3px);border-color:var(--accent)}
+  .svc__item h3{font-size:1.22rem;font-weight:700;margin-bottom:0.4rem}
+  .svc__item p{color:var(--ink-2);font-size:0.97rem;line-height:1.55}
+  .svc__ico{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;
+    background:var(--accent-dim);color:var(--accent-hi);margin-bottom:1rem}
+  .svc__ico svg{width:21px;height:21px}
+  .svc__feature{grid-column:span 2;display:grid;grid-template-columns:1fr 1fr;padding:0;overflow:hidden}
+  .svc__feature .fimg{position:relative}
+  .svc__feature img{width:100%;height:100%;object-fit:cover;min-height:100%}
+  .svc__feature .ftext{padding:1.6rem 1.6rem 1.7rem;align-self:center}
+  @media(max-width:560px){.svc__feature,.svc__feature.svc__item{grid-column:span 1}.svc__feature{grid-template-columns:1fr}.svc__feature .fimg{aspect-ratio:4/3}}
+
+  /* gallery */
+  .gal{columns:4;column-gap:0.85rem}
+  .gal figure{break-inside:avoid;margin:0 0 0.85rem;position:relative;border-radius:var(--r-md);overflow:hidden;
+    border:1px solid var(--line-soft)}
+  .gal img{width:100%;height:auto;transition:transform .6s var(--ease)}
+  .gal figure:hover img{transform:scale(1.05)}
+  .gal figure::after{content:attr(data-label);position:absolute;left:0;right:0;bottom:0;
+    padding:1.5rem 0.8rem 0.6rem;font-size:0.76rem;font-weight:600;color:var(--ink);
+    background:linear-gradient(transparent, oklch(0.10 0.01 50 / 0.78));opacity:0;transition:opacity .3s var(--ease)}
+  .gal figure:hover::after{opacity:1}
+  @media(max-width:980px){.gal{columns:3}}
+  @media(max-width:680px){.gal{columns:2;column-gap:0.6rem}.gal figure{margin-bottom:0.6rem}}
+
+  /* testimonials */
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.1rem}
+  .quote{padding:1.6rem 1.7rem;border-radius:var(--r-lg);background:var(--bg-panel);border:1px solid var(--line-soft)}
+  .quote .stars{margin-bottom:0.9rem}
+  .quote p{font-size:1.04rem;line-height:1.55;color:var(--ink)}
+  .quote cite{display:block;margin-top:1rem;font-style:normal;font-weight:700;color:var(--ink-2);font-size:0.92rem}
+  .quote--wide{grid-column:span 2}
+  .quote--wide p{font-family:var(--font-display);font-weight:600;font-size:clamp(1.3rem,2.4vw,1.7rem);line-height:1.25;letter-spacing:-0.01em}
+  @media(max-width:680px){.quote--wide{grid-column:span 1}}
+
+  /* about */
+  .about{display:grid;grid-template-columns:0.92fr 1.08fr;gap:clamp(1.6rem,4vw,3.2rem);align-items:center}
+  .about__img{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line-soft);
+    box-shadow:0 20px 60px -28px oklch(0 0 0 / 0.7)}
+  .about__img img{width:100%;height:auto}
+  .about h2{font-size:clamp(1.9rem,4vw,2.8rem)}
+  .about p{color:var(--ink-2);margin-top:1rem;font-size:1.08rem}
+  .about p strong{color:var(--ink);font-weight:700}
+  .bienvenidos{margin-top:1.5rem;display:inline-flex;align-items:center;gap:0.65rem;
+    font-weight:700;color:var(--gold);font-size:1rem}
+  .bienvenidos svg{width:20px;height:20px}
+
+  /* visit */
+  .visit{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,3.5vw,2.6rem);align-items:stretch}
+  .visit__card{background:var(--bg-panel);border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:clamp(1.6rem,3.5vw,2.4rem)}
+  .visit__card h3{font-size:1.4rem;font-weight:700;margin-bottom:1.3rem}
+  .vrow{display:flex;gap:0.95rem;padding:0.85rem 0;border-top:1px solid var(--line-soft)}
+  .vrow:first-of-type{border-top:none;padding-top:0}
+  .vrow svg{width:21px;height:21px;color:var(--accent-hi);flex:none;margin-top:2px}
+  .vrow .k{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-3);font-weight:700}
+  .vrow .v{color:var(--ink);font-weight:500;line-height:1.5}
+  .vrow .v a{color:var(--accent-hi);font-weight:700}
+  .hours{margin:0.2rem 0 0;list-style:none}
+  .hours li{display:flex;justify-content:space-between;gap:1rem;padding:0.26rem 0;color:var(--ink-2);font-size:0.96rem;max-width:18rem}
+  .hours li b{color:var(--ink);font-weight:600}
+  .hours__note{font-size:0.82rem;color:var(--ink-3);margin-top:0.6rem}
+  .visit__btns{display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:1.5rem}
+  .visit__store{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line-soft);position:relative}
+  .visit__store img{width:100%;height:100%;object-fit:cover;min-height:260px}
+  .visit__store figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.6rem 1rem 0.85rem;
+    font-size:0.86rem;font-weight:600;color:var(--ink);background:linear-gradient(transparent,oklch(0.10 0.01 50 / 0.82))}
+  @media(max-width:760px){.visit{grid-template-columns:1fr}}
+
+  /* footer */
+  footer{padding:clamp(2.6rem,5vw,3.6rem) 0 2.4rem;border-top:1px solid var(--line-soft);background:var(--bg)}
+  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.4rem;align-items:flex-end}
+  .foot__brand{font-family:var(--font-display);font-weight:800;font-size:1.5rem;letter-spacing:-0.03em}
+  .foot__brand span{color:var(--accent-hi)}
+  .foot p{color:var(--ink-3);font-size:0.92rem;margin-top:0.45rem;max-width:24rem}
+  .foot__hand{font-size:0.86rem;color:var(--ink-3)}
+  .foot__hand a{color:var(--ink-2);font-weight:700;border-bottom:1px solid var(--line)}
+  .foot__hand a:hover{color:var(--accent-hi)}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  :focus-visible{outline:3px solid var(--accent-hi);outline-offset:3px;border-radius:4px}
+
+  @media(max-width:860px){
+    .hero__grid{grid-template-columns:1fr}
+    .hero__art{max-width:30rem;margin-top:0.6rem}
+    .about{grid-template-columns:1fr}
+    .about__img{order:-1;max-width:30rem}
+    .svc__feature{grid-column:span 1}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .hero__art img,.gal img,.svc__item,.btn{transition:none}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav">
+  <div class="wrap nav__row">
+    <a class="brand" href="#top">Ed's <span>Hair Salon</span></a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#visit">Visit</a>
+      <a class="nav__cta" href="tel:+17372471710">Call the shop</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<a id="top"></a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <span class="eyebrow">Montopolis · East Austin</span>
+      <h1>Sharp fades.<br>Bold color.<br><em>One neighborhood shop.</em></h1>
+      <p class="hero__sub">Ed's is a barbershop and a hair salon under one roof. Crisp fades and beard work, kids' cuts, blowouts, and color that turns heads. Angela and the team have you, walk-ins and all.</p>
+      <div class="hero__rating">
+        <span class="stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.8V2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8z"/></svg>
+        </span>
+        <span><b style="color:var(--ink)">4.5</b> from 51 Google reviews</span>
+      </div>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="https://www.google.com/maps/place/Ed's+Hair/@30.2245668,-97.7200372,15z/data=!4m10!1m2!2m1!1shaircut+near+1504+Coriander+Dr!3m6!1s0x8644b59952f71d77:0xfa0cdd8fa85c83d2!8m2!3d30.2267296!4d-97.7025851!16s%2Fg%2F11k381l2jp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Get directions
+        </a>
+        <a class="btn btn--ghost" href="tel:+17372471710">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (737) 247-1710
+        </a>
+      </div>
+      <p class="hero__note"><b>Todos bienvenidos.</b> Walk-ins welcome, hablamos español.</p>
+    </div>
+
+    <div class="hero__art" aria-hidden="false">
+      <figure class="a">
+        <img src="img/mens-slickback.webp" width="1002" height="857" loading="eager" fetchpriority="high" alt="A fresh slicked-back taper fade, clean and tight on the sides.">
+        <span class="tag">The fade</span>
+      </figure>
+      <figure class="b">
+        <img src="img/color-purple-teal.webp" width="468" height="806" loading="eager" alt="Long hair colored in vivid purple melting into teal and green.">
+        <span class="tag">The color</span>
+      </figure>
+      <figure class="c">
+        <img src="img/strawberry-layers.webp" width="544" height="839" loading="eager" alt="Strawberry-blonde layers with a soft, bouncy blowout.">
+        <span class="tag">The blowout</span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="band band--raised" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What we do</span>
+      <h2>Two chairs, one standard: get it right.</h2>
+      <p>Most folks come in for a fade or a beard. Plenty come in for color and a blowout. We do all of it, and we take our time on every head that sits down.</p>
+    </div>
+    <div class="svc">
+
+      <article class="svc__item svc__feature reveal">
+        <div class="fimg"><img src="img/mens-fade-beard.webp" width="474" height="751" loading="lazy" decoding="async" alt="A skin fade blended into a sharp beard line-up."></div>
+        <div class="ftext">
+          <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 0V3m0 12v6m12-12a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 0V3m0 12v6"/></svg></div>
+          <h3>Fades, tapers & beard work</h3>
+          <p>The signature. Skin fades, tapers, line-ups, and a beard trim that frames the whole thing. "Best fades in town, hands down" is a real review, not our words.</p>
+        </div>
+      </article>
+
+      <article class="svc__item reveal">
+        <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 8a5 5 0 0 0 10 0c0-3 2-5 2-8a7 7 0 0 0-7-7z"/></svg></div>
+        <h3>Kids' haircuts</h3>
+        <p>Patient with the little ones, even the squirmy ones. Parents come back because the first cut goes well.</p>
+      </article>
+
+      <article class="svc__item reveal">
+        <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l6-6m0 0l3-3m-3 3l-2-2m11-7a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M14 7l4 4"/></svg></div>
+        <h3>Freehand designs & hard parts</h3>
+        <p>Want a part carved in, a star, a clean piece of line work? The clippers do more than fades here.</p>
+      </article>
+
+      <article class="svc__item reveal">
+        <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 4-6 6-6 10a6 6 0 0 0 12 0c0-4-3-6-6-10z"/></svg></div>
+        <h3>Color & balayage</h3>
+        <p>Soft highlights and natural balayage, or full bold fashion color: purple, teal, green, blue. Sherry and the team are not afraid of a vivid box.</p>
+      </article>
+
+      <article class="svc__item reveal">
+        <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M4 12h7M4 18h12"/><circle cx="18" cy="6" r="2.5"/><circle cx="15" cy="12" r="2.5"/></svg></div>
+        <h3>Women's cuts, layers & curtain bangs</h3>
+        <p>Shapes that grow out well and layers that move. Curtain bangs done so they actually sit right.</p>
+      </article>
+
+      <article class="svc__item reveal">
+        <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12a7 7 0 0 1 14 0M3 12h2m14 0h2M12 19v2M7.5 17.5l-1.5 1.5m12 0l-1.5-1.5"/></svg></div>
+        <h3>Blowouts & styling</h3>
+        <p>Smooth, full, and finished. The kind of blowout that makes a regular out of a first-timer.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="band" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Our work</span>
+      <h2>Walk through the chair.</h2>
+      <p>Every photo here is real work from the shop. Fades and beards on one wall, color and styling on the other.</p>
+    </div>
+    <div class="gal reveal">
+      <figure data-label="Slicked-back taper"><img src="img/mens-slickback.webp" width="1002" height="857" loading="lazy" decoding="async" alt="Men's slicked-back taper fade in profile."></figure>
+      <figure data-label="Purple into teal"><img src="img/color-purple-teal.webp" width="468" height="806" loading="lazy" decoding="async" alt="Vivid purple-to-teal creative color on long hair."></figure>
+      <figure data-label="Star design"><img src="img/mens-mohawk-design.webp" width="731" height="810" loading="lazy" decoding="async" alt="Curly mohawk with a freehand star shaved into the side."></figure>
+      <figure data-label="Blonde bob blowout"><img src="img/blonde-bob.webp" width="731" height="810" loading="lazy" decoding="async" alt="Sleek blonde bob with a smooth blowout finish."></figure>
+      <figure data-label="Hard-part pompadour"><img src="img/boys-pompadour.webp" width="731" height="810" loading="lazy" decoding="async" alt="Boy's pompadour with a crisp hard part and clean fade."></figure>
+      <figure data-label="Caramel highlights"><img src="img/color-caramel.webp" width="539" height="859" loading="lazy" decoding="async" alt="Dark hair with caramel highlights and soft curls."></figure>
+      <figure data-label="Green melt"><img src="img/color-green-bob.webp" width="731" height="810" loading="lazy" decoding="async" alt="Short bob in a bright green color melt."></figure>
+      <figure data-label="Fade & beard line-up"><img src="img/mens-fade-beard.webp" width="474" height="751" loading="lazy" decoding="async" alt="Skin fade blended into a sharp beard line-up."></figure>
+      <figure data-label="Blue & black"><img src="img/color-blue-black.webp" width="731" height="810" loading="lazy" decoding="async" alt="Curly top split into electric blue and natural black."></figure>
+      <figure data-label="Balayage"><img src="img/color-balayage.webp" width="731" height="810" loading="lazy" decoding="async" alt="Long hair with a hand-painted balayage from brown to blonde."></figure>
+      <figure data-label="Strawberry layers"><img src="img/strawberry-layers.webp" width="544" height="839" loading="lazy" decoding="async" alt="Strawberry-blonde layered cut with a bouncy blowout."></figure>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="band band--raised">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">From the neighborhood</span>
+      <h2>People do not switch once they find Ed's.</h2>
+    </div>
+    <div class="quotes">
+      <blockquote class="quote quote--wide reveal">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"Best fades in town hands down. It's more of a barber shop than a salon, so don't let the name scare you away. Took me 5 shops to find this place and I haven't switched since."</p>
+        <cite>Samuel Lopez</cite>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"I've been a customer for five years. Angela the owner has been doing an excellent job. She and the team are really friendly and the prices are very affordable. The best barber shop in Austin."</p>
+        <cite>Miguel Carrillo</cite>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"One of the best places in Austin to get a haircut. I get mine by Yoendry and Hector, their attention to detail is spectacular. Angela runs a great shop!"</p>
+        <cite>Edward Lambert</cite>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"Sherry is awesome. She does the best blowout and awesome layers with curtain bangs. She even does my dad's bald fades perfect. Great service!"</p>
+        <cite>kennn mataa</cite>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"Super clean and the guys are very friendly. I get my son's hair cut by Leo, a professional barber, and I'll keep going back."</p>
+        <cite>Nerianny Garcia</cite>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"My hair is not easy to style but Hector gave me the best haircut I've ever had."</p>
+        <cite>Paul Grau</cite>
+      </blockquote>
+      <blockquote class="quote reveal">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>"Did a walk-in while visiting for work. Very personable, paid close attention to detail, and the cut plus beard trim was so affordable. Would go back."</p>
+        <cite>Jeff N</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="band">
+  <div class="wrap about">
+    <div class="about__img reveal">
+      <img src="img/team.webp" width="731" height="810" loading="lazy" decoding="async" alt="Angela, the owner, smiling up front with her barbers behind her in the shop.">
+    </div>
+    <div class="reveal">
+      <span class="eyebrow">The shop</span>
+      <h2>Run by Angela, kept by the regulars.</h2>
+      <p>Ed's has been cutting Montopolis for years. <strong>Angela owns the place</strong> and runs it like family, which is why folks like Miguel have been coming back for half a decade and bring their kids along.</p>
+      <p>The crew, Leo, Paul, Hector, Yoendry, Angel, and Sherry, can take you from a number-two fade to a full head of color without missing a beat. Clean shop, honest prices, no rush in the chair.</p>
+      <span class="bienvenidos">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Todos bienvenidos · everyone welcome
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="band band--raised" id="visit">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Come by</span>
+      <h2>Find us on Montopolis.</h2>
+      <p>Look for the barber pole and the Ed's Hair Salon sign. We are in the back unit, so the photo below is your landmark.</p>
+    </div>
+    <div class="visit">
+      <div class="visit__card reveal">
+        <h3>Hours & contact</h3>
+        <div class="vrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><div class="k">Address</div><div class="v">1710 Montopolis Dr, Unit B<br>Austin, TX 78741</div></div>
+        </div>
+        <div class="vrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div><div class="k">Phone</div><div class="v"><a href="tel:+17372471710">(737) 247-1710</a></div></div>
+        </div>
+        <div class="vrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <div>
+            <div class="k">Hours</div>
+            <ul class="hours">
+              <li><span>Mon &ndash; Thu</span><b>10am &ndash; 7pm</b></li>
+              <li><span>Friday</span><b>10am &ndash; 8pm</b></li>
+              <li><span>Saturday</span><b>9am &ndash; 8pm</b></li>
+              <li><span>Sunday</span><b>Reduced</b></li>
+            </ul>
+            <p class="hours__note">Give us a call to confirm Sunday and holiday hours.</p>
+          </div>
+        </div>
+        <div class="visit__btns">
+          <a class="btn btn--primary" href="https://www.google.com/maps/place/Ed's+Hair/@30.2245668,-97.7200372,15z/data=!4m10!1m2!2m1!1shaircut+near+1504+Coriander+Dr!3m6!1s0x8644b59952f71d77:0xfa0cdd8fa85c83d2!8m2!3d30.2267296!4d-97.7025851!16s%2Fg%2F11k381l2jp" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Get directions
+          </a>
+          <a class="btn btn--ghost" href="tel:+17372471710">Call now</a>
+        </div>
+      </div>
+      <figure class="visit__store reveal">
+        <img src="img/storefront.webp" width="731" height="810" loading="lazy" decoding="async" alt="The Ed's Hair Salon storefront on Montopolis Drive with a striped barber pole out front.">
+        <figcaption>This is the place. Look for the barber pole.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="foot__brand">Ed's <span>Hair Salon</span></div>
+      <p>Barbershop precision and salon color, in the heart of Montopolis. Walk-ins welcome.</p>
+    </div>
+    <div class="foot__hand">
+      A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els=document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      els.forEach(function(e){e.classList.add('in')});return;
+    }
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+    },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){io.observe(e);});
+  })();
+</script>
+<script defer src="/assets/demo-visit.js"></script>
+</body>
+</html>
