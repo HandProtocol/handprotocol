@@ -8,6 +8,12 @@
 */
 import type { BizLead, SiteCopy } from "./types";
 
+// A photo pulled from the business's own Google Maps listing, already
+// converted to webp at web/demos/<slug>/img/<file>. Written by
+// scripts/scrape-photos.mts as img/manifest.json; w/h are intrinsic pixels
+// so the page reserves space and never shifts while images load.
+export type DemoPhoto = { file: string; w: number; h: number };
+
 function esc(s: string | null | undefined): string {
   if (!s) return "";
   return s
@@ -37,8 +43,53 @@ function stars(rating: number | null): string {
   return "★".repeat(full) + "☆".repeat(Math.max(0, 5 - full));
 }
 
-export function renderDemoSite(lead: BizLead, copy: SiteCopy): string {
+export function renderDemoSite(
+  lead: BizLead,
+  copy: SiteCopy,
+  photos: DemoPhoto[] = [],
+): string {
   const tel = telHref(lead.phone);
+  const hero = photos[0];
+  const galleryPhotos = photos.slice(1);
+
+  // All photo styling rides in only when the demo actually has photos, so a
+  // photo-less lead renders byte-identical to the original template.
+  const photoCss = photos.length
+    ? `
+  header.hero.has-photo { position: relative; overflow: hidden; background: #221910; }
+  .hero-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26,17,9,0.5) 0%, rgba(26,17,9,0.62) 55%, rgba(26,17,9,0.78) 100%); }
+  header.hero.has-photo .wrap { position: relative; }
+  header.hero.has-photo h1 { color: #fff; text-shadow: 0 2px 22px rgba(0,0,0,0.45); }
+  header.hero.has-photo .kicker { color: #ffc89b; }
+  header.hero.has-photo .subhead { color: rgba(255,250,243,0.94); text-shadow: 0 1px 12px rgba(0,0,0,0.4); }
+  header.hero.has-photo .rating { color: rgba(255,250,243,0.85); text-shadow: 0 1px 10px rgba(0,0,0,0.4); }
+  header.hero.has-photo .stars { color: #ffce9b; }
+  .gallery h2 { margin-bottom: 28px; }
+  .shots { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .shots img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 14px; border: 1px solid var(--line); background: var(--card); }`
+    : "";
+
+  const heroImg = hero
+    ? `<img class="hero-photo" src="img/${esc(hero.file)}" alt="" width="${hero.w}" height="${hero.h}" loading="eager" fetchpriority="high" decoding="async" />
+    <div class="hero-shade"></div>
+    `
+    : "";
+
+  const gallery = galleryPhotos.length
+    ? `<section class="gallery">
+    <div class="wrap">
+      <h2>A look inside</h2>
+      <div class="shots">${galleryPhotos
+        .map(
+          (p) => `
+        <img src="img/${esc(p.file)}" alt="" width="${p.w}" height="${p.h}" loading="lazy" decoding="async" />`,
+        )
+        .join("")}
+      </div>
+    </div>
+  </section>`
+    : "";
   const callBlock = lead.phone
     ? `<a class="cta" href="tel:${esc(tel)}">${esc(copy.cta || "Call us")} · ${esc(lead.phone)}</a>`
     : `<a class="cta" href="${esc(mapsHref(lead))}">${esc(copy.cta || "Find us on Google")}</a>`;
@@ -139,12 +190,12 @@ export function renderDemoSite(lead: BizLead, copy: SiteCopy): string {
   footer.contact .bits { color: var(--dim); display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
   footer.contact .dot { color: var(--line); }
   .credit { margin-top: 40px; font-size: 0.78rem; color: #9b9285; }
-  .credit a { color: #9b9285; }
+  .credit a { color: #9b9285; }${photoCss}
 </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="wrap">
+  <header class="hero${hero ? " has-photo" : ""}">
+    ${heroImg}<div class="wrap">
       ${lead.category ? `<p class="kicker">${esc(lead.category)}${lead.city ? ` · ${esc(lead.city)}, ${esc(lead.state || "")}` : ""}</p>` : ""}
       <h1>${esc(lead.name)}</h1>
       <p class="subhead">${esc(copy.headline)}</p>
@@ -173,7 +224,7 @@ export function renderDemoSite(lead: BizLead, copy: SiteCopy): string {
       : ""
   }
 
-  ${
+  ${gallery ? `${gallery}\n\n  ` : ""}${
     copy.testimonials.length
       ? `<section class="testimonials">
     <div class="wrap">

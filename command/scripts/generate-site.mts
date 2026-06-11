@@ -18,6 +18,8 @@
 
   --out writes elsewhere (preview) and skips the DB stamp; --dry just reports.
 */
+import fs from "node:fs";
+import path from "node:path";
 import { admin, loadEnv } from "./_lib.mts";
 import {
   buildSiteSystemPrompt,
@@ -25,9 +27,9 @@ import {
   parseSiteCopy,
   buildFallbackCopy,
 } from "../src/lib/develop/prompts.ts";
-import { renderDemoSite } from "../src/lib/develop/site-template.ts";
+import { renderDemoSite, type DemoPhoto } from "../src/lib/develop/site-template.ts";
 import { writeFileAtomic } from "../src/lib/develop/markdown.ts";
-import { demoSitePath, demoPublicUrl } from "../src/lib/develop/paths.ts";
+import { demoSitePath, demoSiteDir, demoPublicUrl } from "../src/lib/develop/paths.ts";
 import type { BizLead, BizReview, SiteCopy } from "../src/lib/develop/types.ts";
 
 const args = process.argv.slice(2);
@@ -100,8 +102,25 @@ if (env.ANTHROPIC_API_KEY && reviews.length > 0) {
   }
 }
 
+// Place photos, when scrape-photos has captured them. No manifest (or a bad
+// one) means no photos, which renders exactly the photo-less template.
+let photos: DemoPhoto[] = [];
+try {
+  const raw = JSON.parse(
+    fs.readFileSync(path.join(demoSiteDir(slug), "img", "manifest.json"), "utf8"),
+  ) as unknown;
+  if (Array.isArray(raw)) {
+    photos = raw.filter(
+      (p): p is DemoPhoto =>
+        !!p && typeof p.file === "string" && Number.isFinite(p.w) && Number.isFinite(p.h),
+    );
+  }
+} catch {
+  /* no photos */
+}
+
 copy = clean(copy);
-const html = renderDemoSite(lead as BizLead, copy);
+const html = renderDemoSite(lead as BizLead, copy, photos);
 const out = outArg ? outArg.split("=").slice(1).join("=") : demoSitePath(slug);
 
 if (dry) {

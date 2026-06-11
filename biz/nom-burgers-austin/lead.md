@@ -11,8 +11,11 @@ google_url: >-
 google_rating: 4.4
 reviews_count: 149
 website_status: ok
+campaign: east-austin-food-trucks
 status: prospect
 hand_lead: koH
+lat: 30.25509
+lng: -97.718227
 ---
 ## Reviews
 
