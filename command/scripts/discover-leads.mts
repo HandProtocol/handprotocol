@@ -4,12 +4,16 @@
   result card shows a Website chip (cheap pre-filter; the per-place scrape in
   scrape-lead.mts stays authoritative for website_status).
 
-    npx tsx scripts/discover-leads.mts "<maps-search-url>" [--max-scrolls=40] [--headful]
+    npx tsx scripts/discover-leads.mts "<maps-search-url>" [--max-scrolls=40] [--skip-known] [--headful]
 
   Output: one JSON object per line on stdout:
     {"name","href","rating","reviews","category","website"}
+
+  --skip-known drops places already in biz/_registry/checked-places.ndjson
+  (built by registry-merge.mts) so repeat sweeps only surface new ground.
 */
 import fs from "node:fs";
+import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium, type Browser } from "playwright-core";
 
@@ -23,10 +27,28 @@ const flag = (name: string, dflt = ""): string => {
   return a ? a.split("=").slice(1).join("=") : dflt;
 };
 if (!url) {
-  console.error('usage: npx tsx scripts/discover-leads.mts "<maps-search-url>" [--max-scrolls=40]');
+  console.error('usage: npx tsx scripts/discover-leads.mts "<maps-search-url>" [--max-scrolls=40] [--skip-known]');
   process.exit(1);
 }
 const MAX_SCROLLS = Math.max(1, Number(flag("max-scrolls", "40")) || 40);
+
+// --skip-known: feature ids (fallback: lowercased names) already in the
+// checked-place registry; matching results are dropped from the output.
+const FEATURE_ID = /0x[0-9a-f]+:0x[0-9a-f]+/i;
+const known = new Set<string>();
+if (has("skip-known")) {
+  const registryPath = path.resolve(process.cwd(), "..", "biz", "_registry", "checked-places.ndjson");
+  if (fs.existsSync(registryPath)) {
+    for (const line of fs.readFileSync(registryPath, "utf8").split("\n").filter(Boolean)) {
+      const row = JSON.parse(line) as { href?: string; name?: string };
+      const m = String(row.href || "").match(FEATURE_ID);
+      const key = m ? m[0].toLowerCase() : String(row.name || "").trim().toLowerCase();
+      if (key) known.add(key);
+    }
+  } else {
+    console.error(`⚠ --skip-known: no registry at ${registryPath} (run registry-merge.mts first)`);
+  }
+}
 
 function chromePath(): string {
   const candidates = [
@@ -130,8 +152,19 @@ try {
   await browser.close();
   browser = undefined;
 
-  console.error(`found ${results.length} places`);
-  for (const r of results) console.log(JSON.stringify(r));
+  let skipped = 0;
+  const fresh = known.size
+    ? results.filter((r) => {
+        const m = r.href.match(FEATURE_ID);
+        const key = m ? m[0].toLowerCase() : r.name.trim().toLowerCase();
+        if (!known.has(key)) return true;
+        skipped += 1;
+        return false;
+      })
+    : results;
+
+  console.error(`found ${results.length} places${skipped ? ` (skipped ${skipped} already in the registry)` : ""}`);
+  for (const r of fresh) console.log(JSON.stringify(r));
 } catch (err) {
   if (browser) await browser.close().catch(() => {});
   console.error("discover failed:", (err as Error).message);

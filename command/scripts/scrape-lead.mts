@@ -134,6 +134,7 @@ try {
   // Pin / canonical url from the resolved page url (carries @lat,lng + !3d!4d).
   const resolvedUrl = page.url();
   facts.google_url = bestGoogleUrl(resolvedUrl, target, facts);
+  const pin = pinFromUrl(resolvedUrl);
 
   // Reviews: headless Maps never renders the interactive reviews UI, but the
   // place's feature id unlocks Google's own review endpoint, which we call from
@@ -175,6 +176,8 @@ try {
     reviews_count: facts.reviewsCount ?? undefined,
     website_status: facts.websiteStatus,
     status: "prospect",
+    lat: pin?.lat,
+    lng: pin?.lng,
     hand_lead: handLead,
   };
   const body = reviewsToBody(reviews as ParsedReview[]);
@@ -191,6 +194,7 @@ try {
   console.error(`phone:    ${facts.phone || "(none on the card)"}`);
   console.error(`address:  ${facts.address || "(none on the card)"}`);
   console.error(`website:  ${facts.websiteStatus}${facts.websiteUrl ? ` — ${facts.websiteUrl}` : ""}`);
+  console.error(`pin:      ${pin ? `${pin.lat},${pin.lng}` : "(none in the url — run backfill-geo)"}`);
   console.error(`reviews:  scraped ${reviews.length}${facts.reviewsCount != null ? ` of ${facts.reviewsCount}` : ""} (cap ${MAX})`);
   console.error(`slug:     ${slug}`);
   if (facts.websiteStatus === "ok") {
@@ -223,6 +227,16 @@ function bestGoogleUrl(resolved: string, target: string, facts: PlaceFacts): str
   if (/@-?\d+\.\d+,-?\d+\.\d+/.test(resolved)) return resolved.split("?")[0];
   const q = [facts.name, facts.address, facts.city, facts.state].filter(Boolean).join(" ");
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+}
+
+// Pin coordinates from the resolved place url: the !3d<lat>!4d<lng> pair is the
+// place's own pin (exact); @lat,lng is the viewport center (close fallback).
+// Writing lat/lng straight into the frontmatter means bulk batches skip the
+// separate backfill-geo pass.
+function pinFromUrl(u: string): { lat: number; lng: number } | null {
+  const m = u.match(/!3d(-?\d+\.\d+)!4d(-?\d+\.\d+)/) || u.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
+  if (!m) return null;
+  return { lat: Number(Number(m[1]).toFixed(6)), lng: Number(Number(m[2]).toFixed(6)) };
 }
 
 async function dismissConsent(page: Page): Promise<void> {
