@@ -20,3 +20,7 @@
 
 ## How to deploy (the settled machinery)
 Feature branch → `git worktree add --detach /tmp/hp-deploy origin/main` → checkout paths from the feat commit → commit → `push origin HEAD:main` → worktree remove. Public site auto-deploys from main. Verify demo 200/beacon, pitch 401/200, pitch img 401, portfolio 401/200.
+
+Note: command-side code (site-assets.ts hardening etc.) lives on the feat
+branch and reaches main via PR #2 (main's command/ snapshot is stale; piecemeal
+cherry-picks conflict). Public-site main is complete.
