@@ -6,7 +6,7 @@
 // Env vars: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
 
 const SELECT =
-  'slug,name,category,city,state,google_rating,reviews_count,status,demo_url,demo_generated_at,demo_deployed_at';
+  'slug,name,category,city,state,google_rating,reviews_count,status,demo_url,demo_generated_at,demo_deployed_at,lat,lng,phone,live_domain';
 
 function json(statusCode, body) {
   return {
@@ -79,6 +79,10 @@ exports.handler = async (event) => {
     google_rating: l.google_rating,
     reviews_count: l.reviews_count,
     status: l.status,
+    lat: l.lat != null ? Number(l.lat) : null,
+    lng: l.lng != null ? Number(l.lng) : null,
+    phone: l.phone || null,
+    live_domain: l.live_domain || null,
     demo_url: l.demo_url || `/demos/${l.slug}/`,
     pitch_url: `/demos/${l.slug}/pitch/`,
     built_at: l.demo_generated_at || l.demo_deployed_at || null,

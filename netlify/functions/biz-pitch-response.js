@@ -12,6 +12,7 @@ const { notify, escapeHtml } = require('./_telegram.js');
 
 const OUTCOMES = ['reached', 'no_answer', 'voicemail', 'callback', 'other'];
 const INTERESTS = ['interested', 'not_now', 'not_interested', 'unknown'];
+const CHANNELS = ['call', 'in_person'];
 
 function json(statusCode, body) {
   return {
@@ -80,8 +81,10 @@ exports.handler = async (event) => {
 
   const outcome = OUTCOMES.includes(payload.outcome) ? payload.outcome : null;
   const interest = INTERESTS.includes(payload.interest) ? payload.interest : null;
+  const channel = CHANNELS.includes(payload.channel) ? payload.channel : 'call';
 
   const row = {
+    channel,
     lead_id: leadId,
     lead_slug: slug,
     outcome,
@@ -96,15 +99,32 @@ exports.handler = async (event) => {
   };
 
   try {
-    const res = await fetch(`${restBase}/biz_pitch_responses`, {
-      method: 'POST',
-      headers: {
-        ...baseHeaders,
-        'Content-Profile': 'command',
-        Prefer: 'return=minimal'
-      },
-      body: JSON.stringify(row)
-    });
+    const insert = (body) =>
+      fetch(`${restBase}/biz_pitch_responses`, {
+        method: 'POST',
+        headers: {
+          ...baseHeaders,
+          'Content-Profile': 'command',
+          Prefer: 'return=minimal'
+        },
+        body: JSON.stringify(body)
+      });
+
+    let res = await insert(row);
+
+    // Tolerate the channel column not existing yet (migration 020 not applied):
+    // PostgREST 400s with the column name in the message; retry without it.
+    if (!res.ok && res.status === 400) {
+      const detail = await res.text().catch(() => '');
+      if (/channel/i.test(detail)) {
+        console.warn('channel column missing, retrying insert without it');
+        const { channel: _omit, ...legacyRow } = row;
+        res = await insert(legacyRow);
+      } else {
+        console.error('Supabase insert failed', { status: res.status, detail });
+        return json(502, { error: 'Could not save the response.' });
+      }
+    }
 
     if (!res.ok) {
       const detail = await res.text().catch(() => '');
@@ -116,6 +136,7 @@ exports.handler = async (event) => {
       title: '📞 Pitch follow-up',
       lines: [
         `<b>${escapeHtml(slug)}</b>`,
+        channel === 'in_person' ? 'channel: <i>in person</i>' : '',
         outcome ? `outcome: <i>${escapeHtml(outcome)}</i>` : '',
         interest ? `interest: <i>${escapeHtml(interest)}</i>` : '',
         row.caller ? `by ${escapeHtml(row.caller)}` : '',

@@ -12,6 +12,7 @@
     --amber:#d9893a; --amber-soft:#f0b364; --good:#86efac;
   }
   *{box-sizing:border-box}
+  [hidden]{display:none !important}
   body{margin:0;background:var(--bg);color:var(--ink);
     font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;background-image:radial-gradient(900px 500px at 80% -10%, rgba(217,137,58,0.08), transparent 60%)}
@@ -48,6 +49,39 @@
   /* status chips */
   .st-prospect{color:#cbd5e1} .st-built{color:var(--amber-soft)} .st-contacted{color:#93c5fd}
   .st-interested{color:var(--good)} .st-closed{color:#fcd34d} .st-passed{color:var(--faint)}
+  /* field mode */
+  .fbtn{appearance:none;border:1px solid rgba(217,137,58,0.45);background:rgba(217,137,58,0.12);
+    color:var(--amber-soft);border-radius:999px;padding:10px 18px;font:600 0.9rem/1 inherit;
+    font-family:inherit;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+  .fbtn:hover{background:rgba(217,137,58,0.2);border-color:rgba(217,137,58,0.7)}
+  .fbtn[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:#0b0e14}
+  #field{max-width:680px;margin:0 auto}
+  .fnote{color:var(--faint);font-size:0.78rem;margin:0 0 16px;text-align:center}
+  .fcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+  .fcard.pin{border-color:rgba(252,211,77,0.35)}
+  .fhead{display:flex;align-items:flex-start;gap:12px}
+  .fdist{font:600 12px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--amber-soft);
+    min-width:52px;padding-top:3px;white-space:nowrap}
+  .fcard.pin .fdist{color:#fcd34d}
+  .finfo{flex:1;min-width:0}
+  .finfo .name{font-size:1rem}
+  .finfo .meta{font-size:0.82rem;margin-top:2px}
+  .fchip{font:600 10px/1 ui-monospace,monospace;letter-spacing:0.12em;text-transform:uppercase;
+    padding:5px 8px;border-radius:6px;background:rgba(8,10,15,0.6);border:1px solid var(--line);white-space:nowrap}
+  .factions{display:flex;gap:7px;margin-top:12px}
+  .factions .btn{flex:1;padding:10px 4px;font-size:0.82rem;min-width:0}
+  .factions .btn.qr{cursor:pointer;background:none;font-family:inherit;appearance:none}
+  .fsection{font:600 10px/1 ui-monospace,monospace;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--faint);margin:26px 0 12px;text-align:center}
+  .fretry{margin-top:14px}
+  /* QR overlay */
+  #qr-overlay{position:fixed;inset:0;z-index:60;background:rgba(8,10,15,0.94);
+    display:flex;align-items:center;justify-content:center;padding:20px;cursor:pointer}
+  .qr-panel{background:#fff;color:#15130d;border-radius:18px;padding:22px 22px 18px;text-align:center;max-width:92vw}
+  .qr-panel canvas,.qr-panel img{display:block;width:min(76vw,320px);height:auto;image-rendering:pixelated;margin:0 auto}
+  .qr-panel .qr-name{font-weight:600;font-size:1.02rem;margin:14px 0 2px}
+  .qr-panel .qr-url{font:11px/1.4 ui-monospace,monospace;color:#6b6757;margin:0;word-break:break-all}
+  .qr-panel .qr-hint{font-size:0.74rem;color:#9c968a;margin:10px 0 0}
 </style>
 </head>
 <body>
@@ -61,11 +95,27 @@
     <div class="stats">
       <div class="stat"><b id="stat-sites">·</b><span>Sites</span></div>
       <div class="stat"><b id="stat-visits">·</b><span>Total visits</span></div>
+      <button id="field-toggle" class="fbtn" aria-pressed="false" hidden>Near me</button>
     </div>
   </header>
 
   <div id="grid" class="grid" hidden></div>
+  <section id="field" hidden>
+    <p class="fnote">Your location stays on this phone. Ranking happens right here in the browser; nothing is sent anywhere.</p>
+    <div id="field-state" class="state" hidden></div>
+    <div id="field-list"></div>
+    <div id="field-pins"></div>
+  </section>
   <div id="state" class="state">Loading the portfolio…</div>
+
+  <div id="qr-overlay" hidden>
+    <div class="qr-panel">
+      <canvas id="qr-canvas" width="0" height="0"></canvas>
+      <p class="qr-name" id="qr-name"></p>
+      <p class="qr-url" id="qr-url"></p>
+      <p class="qr-hint">Tap anywhere to close</p>
+    </div>
+  </div>
 
   <footer>
     Internal tool. Add a lead in the <a href="https://command.handprotocol.org/develop">Command Center</a> · Develop, build its demo, and it appears here.
@@ -129,21 +179,415 @@
       + '</article>';
   }
 
+  var ALL = []; // demos, shared with field mode
+
+  function boot(demos){
+    ALL = demos;
+    grid.innerHTML = demos.map(card).join('');
+    document.getElementById('stat-sites').textContent = demos.length;
+    document.getElementById('stat-visits').textContent = demos.reduce(function(a,d){return a+(d.visits||0);},0);
+    state.hidden = true; grid.hidden = false;
+    document.getElementById('field-toggle').hidden = false;
+    sizeThumbs();
+    window.addEventListener('resize', sizeThumbs);
+    // Dev hook: a pinned #at=lat,lng position means field mode is wanted.
+    if (hashOpts().at) document.getElementById('field-toggle').click();
+  }
+
   fetch('/demos/portfolio.json', { headers: { 'Accept': 'application/json' } })
     .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
     .then(function(data){
       var demos = (data && data.demos) || [];
       if (!demos.length){ state.textContent = 'No demos yet. Build one in the Command Center.'; return; }
-      grid.innerHTML = demos.map(card).join('');
-      document.getElementById('stat-sites').textContent = demos.length;
-      document.getElementById('stat-visits').textContent = demos.reduce(function(a,d){return a+(d.visits||0);},0);
-      state.hidden = true; grid.hidden = false;
-      sizeThumbs();
-      window.addEventListener('resize', sizeThumbs);
+      boot(demos);
     })
     .catch(function(){
+      // Dev hook: open the page with #mock to exercise the UI (including field
+      // mode ranking) against inline sample data when portfolio.json is absent.
+      if (hashOpts().mock) { boot(MOCK); return; }
       state.innerHTML = 'Could not load the portfolio data. The demo sites are still reachable directly at <code>/demos/&lt;slug&gt;/</code>.';
     });
+
+  // ───────────────────────── field mode ─────────────────────────
+  // "Near me": rank leads by proximity x warmth for walk-up pitching.
+  // The browser position never leaves the device; everything below is local.
+
+  var field = document.getElementById('field');
+  var fieldState = document.getElementById('field-state');
+  var fieldList = document.getElementById('field-list');
+  var fieldPins = document.getElementById('field-pins');
+  var fieldBtn = document.getElementById('field-toggle');
+  var fieldOn = false, mePos = null;
+
+  // Dev hooks in the hash: "#at=30.2672,-97.7431" pins the position (no
+  // geolocation prompt, handy on desktop); "#mock" enables the sample data
+  // fallback above. They combine: "#at=30.2672,-97.7431&mock".
+  function hashOpts(){
+    var out = {};
+    location.hash.replace(/^#/, '').split('&').forEach(function(part){
+      if (part === 'mock') { out.mock = true; return; }
+      var m = /^at=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)$/.exec(part);
+      if (m) out.at = { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
+    });
+    return out;
+  }
+
+  function haversineKm(lat1, lng1, lat2, lng2){
+    var R = 6371, toRad = Math.PI / 180;
+    var dLat = (lat2 - lat1) * toRad, dLng = (lng2 - lng1) * toRad;
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2)
+          + Math.cos(lat1 * toRad) * Math.cos(lat2 * toRad) * Math.sin(dLng/2) * Math.sin(dLng/2);
+    return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  }
+
+  // score = proximity x warmth. Proximity decays on a walking radius
+  // (exp(-km/2)); warmth folds in status, reviews, what has already sold
+  // nearby, and demo engagement. Closed and passed leads leave the ranked
+  // list; live clients come back as proof pins below it.
+  function rankLeads(demos, pos){
+    var soldCats = {};
+    demos.forEach(function(d){
+      if ((d.live_domain || d.status === 'closed') && d.category)
+        soldCats[String(d.category).toLowerCase()] = true;
+    });
+    var ranked = [], pins = [], unpinned = 0;
+    demos.forEach(function(d){
+      if (d.lat == null || d.lng == null) { unpinned++; return; }
+      var e = Object.create(d);
+      e.km = haversineKm(pos.lat, pos.lng, d.lat, d.lng);
+      if (d.live_domain) { pins.push(e); return; }
+      if (d.status === 'closed' || d.status === 'passed') return;
+      var statusW = d.status === 'interested' ? 3
+        : (d.status === 'built' && !(d.visits > 0)) ? 1.5
+        : d.status === 'contacted' ? 0.6 : 1;
+      // Unrated leads get a neutral 3.0 prior so they stay in the list.
+      var review = (d.google_rating || 3) * Math.log10(Math.max(d.reviews_count || 0, 10));
+      var sold = (d.category && soldCats[String(d.category).toLowerCase()]) ? 1.3 : 1;
+      var engage = 1 + Math.min(d.visits || 0, 20) / 10;
+      e.score = Math.exp(-e.km / 2) * statusW * review * sold * engage;
+      ranked.push(e);
+    });
+    ranked.sort(function(a,b){ return b.score - a.score; });
+    pins.sort(function(a,b){ return a.km - b.km; });
+    return { ranked: ranked.slice(0, 12), pins: pins, unpinned: unpinned };
+  }
+
+  function kmLabel(km){ return km.toFixed(1) + ' km'; }
+  function dirHref(d){ return 'https://www.google.com/maps/dir/?api=1&destination=' + d.lat + ',' + d.lng; }
+  function absUrl(u){ try { return new URL(u, location.href).href; } catch(_){ return u; } }
+
+  function fieldCard(d){
+    var bits = [];
+    if (d.category) bits.push(esc(d.category));
+    if (d.google_rating != null) bits.push('★ ' + esc(d.google_rating) + (d.reviews_count ? ' (' + esc(d.reviews_count) + ')' : ''));
+    bits.push('👀 ' + (d.visits || 0));
+    return ''
+      + '<article class="fcard">'
+      +   '<div class="fhead">'
+      +     '<span class="fdist">' + kmLabel(d.km) + '</span>'
+      +     '<div class="finfo">'
+      +       '<p class="name">' + esc(d.name) + '</p>'
+      +       '<p class="meta">' + bits.join(' · ') + '</p>'
+      +     '</div>'
+      +     '<span class="fchip st-' + esc(d.status) + '">' + esc(d.status) + '</span>'
+      +   '</div>'
+      +   '<div class="factions">'
+      +     '<a class="btn" href="' + esc(dirHref(d)) + '" target="_blank" rel="noopener">Go</a>'
+      +     (d.phone ? '<a class="btn" href="tel:' + esc(String(d.phone).replace(/[^+\d]/g,'')) + '">Call</a>' : '')
+      +     '<a class="btn" href="' + esc(d.demo_url) + '" target="_blank" rel="noopener">Demo</a>'
+      +     '<a class="btn pitch" href="' + esc(d.pitch_url) + '" target="_blank" rel="noopener">Pitch</a>'
+      +     '<button class="btn qr" type="button" data-slug="' + esc(d.slug) + '">QR</button>'
+      +   '</div>'
+      + '</article>';
+  }
+
+  function pinCard(d){
+    var site = 'https://' + d.live_domain;
+    return ''
+      + '<article class="fcard pin">'
+      +   '<div class="fhead">'
+      +     '<span class="fdist">' + kmLabel(d.km) + '</span>'
+      +     '<div class="finfo">'
+      +       '<p class="name">' + esc(d.name) + '</p>'
+      +       '<p class="meta">Live client · <a href="' + esc(site) + '" target="_blank" rel="noopener">' + esc(d.live_domain) + '</a></p>'
+      +     '</div>'
+      +     '<span class="fchip st-closed">live</span>'
+      +   '</div>'
+      + '</article>';
+  }
+
+  function showFieldState(html){
+    fieldList.innerHTML = ''; fieldPins.innerHTML = '';
+    fieldState.innerHTML = html; fieldState.hidden = false;
+  }
+
+  function renderField(){
+    fieldState.hidden = true;
+    var r = rankLeads(ALL, mePos);
+    if (!r.ranked.length && !r.pins.length){
+      showFieldState('No leads have map pins yet. Run the geo backfill and they will show up here.');
+      return;
+    }
+    var html = '';
+    if (r.ranked.length){
+      html += '<p class="fsection">Walk-up list · closest warm doors first</p>';
+      html += r.ranked.map(fieldCard).join('');
+    } else {
+      html += '<p class="fsection">No open leads with pins near you</p>';
+    }
+    fieldList.innerHTML = html;
+    var pinsHtml = '';
+    if (r.pins.length){
+      pinsHtml += '<p class="fsection">Proof nearby · live client sites</p>';
+      pinsHtml += r.pins.map(pinCard).join('');
+    }
+    if (r.unpinned > 0){
+      pinsHtml += '<p class="fnote">' + r.unpinned + (r.unpinned === 1 ? ' lead has' : ' leads have') + ' no map pin yet, so they are not ranked.</p>';
+    }
+    fieldPins.innerHTML = pinsHtml;
+  }
+
+  function locate(){
+    var at = hashOpts().at;
+    if (at){ mePos = at; renderField(); return; }
+    if (mePos){ renderField(); return; }
+    if (!navigator.geolocation){
+      showFieldState('This browser cannot share your location. Open the page on your phone, or add #at=lat,lng to the address.');
+      return;
+    }
+    showFieldState('Finding where you are…');
+    navigator.geolocation.getCurrentPosition(function(p){
+      mePos = { lat: p.coords.latitude, lng: p.coords.longitude };
+      if (fieldOn) renderField();
+    }, function(err){
+      var msg = err && err.code === 1
+        ? 'Location is blocked for this page. Allow it in your browser settings, then try again.'
+        : 'Could not get a location fix. Try again in a moment, ideally outdoors.';
+      showFieldState(msg + '<div class="fretry"><button class="fbtn" type="button" id="field-retry">Try again</button></div>');
+      var retry = document.getElementById('field-retry');
+      if (retry) retry.addEventListener('click', locate);
+    }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+  }
+
+  fieldBtn.addEventListener('click', function(){
+    fieldOn = !fieldOn;
+    fieldBtn.setAttribute('aria-pressed', String(fieldOn));
+    fieldBtn.textContent = fieldOn ? 'All demos' : 'Near me';
+    grid.hidden = fieldOn;
+    field.hidden = !fieldOn;
+    if (fieldOn) locate();
+  });
+
+  // ───────────────────────── QR overlay ─────────────────────────
+
+  var qrOverlay = document.getElementById('qr-overlay');
+  var qrCanvas = document.getElementById('qr-canvas');
+
+  function drawQR(text){
+    var m = qrMatrix(text);
+    var panel = qrOverlay.querySelector('.qr-panel');
+    var img = panel.querySelector('img.qr-fallback');
+    if (img) img.remove();
+    if (!m){
+      // URL too long for the inline encoder; last-resort external render.
+      qrCanvas.hidden = true;
+      img = document.createElement('img');
+      img.className = 'qr-fallback';
+      img.alt = 'QR code';
+      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=640x640&data=' + encodeURIComponent(text);
+      panel.insertBefore(img, panel.firstChild);
+      return;
+    }
+    qrCanvas.hidden = false;
+    var n = m.length, quiet = 4, scale = 10, px = (n + quiet * 2) * scale;
+    qrCanvas.width = px; qrCanvas.height = px;
+    var ctx = qrCanvas.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, px, px);
+    ctx.fillStyle = '#000';
+    for (var r = 0; r < n; r++) for (var c = 0; c < n; c++)
+      if (m[r][c]) ctx.fillRect((c + quiet) * scale, (r + quiet) * scale, scale, scale);
+  }
+
+  function openQR(d){
+    var url = absUrl(d.demo_url);
+    drawQR(url);
+    document.getElementById('qr-name').textContent = d.name;
+    document.getElementById('qr-url').textContent = url;
+    qrOverlay.hidden = false;
+  }
+
+  fieldList.addEventListener('click', function(ev){
+    var btn = ev.target.closest('button.qr');
+    if (!btn) return;
+    var slug = btn.getAttribute('data-slug');
+    for (var i = 0; i < ALL.length; i++){
+      if (ALL[i].slug === slug){ openQR(ALL[i]); break; }
+    }
+  });
+  qrOverlay.addEventListener('click', function(){ qrOverlay.hidden = true; });
+  document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') qrOverlay.hidden = true; });
+
+  // Minimal QR encoder: byte mode, EC level L, versions 1-6, mask 0.
+  // Self-contained on purpose; this page ships with no outside scripts.
+  // Returns a square 2D array of 0/1 modules, or null if the text is too long.
+  function qrMatrix(text){
+    var enc = unescape(encodeURIComponent(String(text)));
+    var bytes = [];
+    for (var i = 0; i < enc.length; i++) bytes.push(enc.charCodeAt(i));
+
+    // EC level L: [ec codewords per block, [data codewords per block]]
+    var TAB = [[7,[19]], [10,[34]], [15,[55]], [20,[80]], [26,[108]], [18,[68,68]]];
+    var ALIGN = [null, [], [6,18], [6,22], [6,26], [6,30], [6,34]];
+    var ver = 0, ecLen, blocks;
+    for (var v = 1; v <= 6; v++){
+      var total = TAB[v-1][1].reduce(function(a,b){ return a + b; }, 0);
+      if (bytes.length <= total - 2){ ver = v; ecLen = TAB[v-1][0]; blocks = TAB[v-1][1]; break; }
+    }
+    if (!ver) return null;
+    var D = blocks.reduce(function(a,b){ return a + b; }, 0);
+
+    // Bit stream: mode 0100, 8-bit count, data, terminator, byte pads.
+    var bits = [];
+    function put(val, len){ for (var i = len - 1; i >= 0; i--) bits.push((val >> i) & 1); }
+    put(4, 4);
+    put(bytes.length, 8);
+    for (i = 0; i < bytes.length; i++) put(bytes[i], 8);
+    put(0, Math.min(4, D * 8 - bits.length));
+    while (bits.length % 8) bits.push(0);
+    var data = [];
+    for (i = 0; i < bits.length; i += 8){
+      var byteVal = 0;
+      for (var j = 0; j < 8; j++) byteVal = (byteVal << 1) | bits[i + j];
+      data.push(byteVal);
+    }
+    var pads = [0xEC, 0x11], pi = 0;
+    while (data.length < D) data.push(pads[pi++ % 2]);
+
+    // Reed-Solomon over GF(256), poly 0x11d.
+    var EXP = new Array(512), LOG = new Array(256), x = 1;
+    for (i = 0; i < 255; i++){ EXP[i] = x; LOG[x] = i; x <<= 1; if (x & 0x100) x ^= 0x11d; }
+    for (i = 255; i < 512; i++) EXP[i] = EXP[i - 255];
+    function gmul(a, b){ return (a && b) ? EXP[LOG[a] + LOG[b]] : 0; }
+    var gen = [1];
+    for (i = 0; i < ecLen; i++){
+      var ng = new Array(gen.length + 1).fill(0);
+      for (j = 0; j < gen.length; j++){
+        ng[j] ^= gen[j];
+        ng[j + 1] ^= gmul(gen[j], EXP[i]);
+      }
+      gen = ng;
+    }
+    function rsRemainder(d){
+      var res = d.concat(new Array(ecLen).fill(0));
+      for (var i = 0; i < d.length; i++){
+        var f = res[i];
+        if (!f) continue;
+        for (var j = 0; j < gen.length; j++) res[i + j] ^= gmul(gen[j], f);
+      }
+      return res.slice(d.length);
+    }
+
+    // Split into blocks, compute EC, interleave.
+    var dB = [], eB = [], off = 0;
+    for (i = 0; i < blocks.length; i++){
+      var part = data.slice(off, off + blocks[i]); off += blocks[i];
+      dB.push(part); eB.push(rsRemainder(part));
+    }
+    var seq = [], maxD = Math.max.apply(null, blocks);
+    for (i = 0; i < maxD; i++) for (j = 0; j < dB.length; j++) if (i < dB[j].length) seq.push(dB[j][i]);
+    for (i = 0; i < ecLen; i++) for (j = 0; j < eB.length; j++) seq.push(eB[j][i]);
+
+    // Matrix scaffolding: finders, timing, alignment, reserved areas.
+    var size = 17 + ver * 4;
+    var M = [], used = [];
+    for (i = 0; i < size; i++){ M.push(new Array(size).fill(0)); used.push(new Array(size).fill(0)); }
+    function set(r, c, val){ M[r][c] = val ? 1 : 0; used[r][c] = 1; }
+    function finder(r, c){
+      for (var dr = -1; dr <= 7; dr++) for (var dc = -1; dc <= 7; dc++){
+        var rr = r + dr, cc = c + dc;
+        if (rr < 0 || rr >= size || cc < 0 || cc >= size) continue;
+        var on = (dr >= 0 && dr <= 6 && dc >= 0 && dc <= 6) &&
+                 (dr === 0 || dr === 6 || dc === 0 || dc === 6 || (dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4));
+        set(rr, cc, on);
+      }
+    }
+    finder(0, 0); finder(0, size - 7); finder(size - 7, 0);
+    for (i = 0; i < size; i++){
+      if (!used[6][i]) set(6, i, i % 2 === 0);
+      if (!used[i][6]) set(i, 6, i % 2 === 0);
+    }
+    var centers = ALIGN[ver];
+    for (i = 0; i < centers.length; i++) for (j = 0; j < centers.length; j++){
+      var ar = centers[i], ac = centers[j];
+      if (used[ar][ac]) continue;
+      for (var dr2 = -2; dr2 <= 2; dr2++) for (var dc2 = -2; dc2 <= 2; dc2++)
+        set(ar + dr2, ac + dc2, Math.max(Math.abs(dr2), Math.abs(dc2)) !== 1);
+    }
+    set(size - 8, 8, 1); // dark module
+    for (i = 0; i < 9; i++){ if (!used[8][i]) set(8, i, 0); if (!used[i][8]) set(i, 8, 0); }
+    for (i = 0; i < 8; i++){ if (!used[8][size-1-i]) set(8, size-1-i, 0); if (!used[size-1-i][8]) set(size-1-i, 8, 0); }
+
+    // Data placement, zigzag from bottom-right; mask 0 inverts when (r+c) is even.
+    var k = 0;
+    function bitAt(n){ var b = seq[n >> 3]; return b === undefined ? 0 : (b >> (7 - (n & 7))) & 1; }
+    var col = size - 1, up = true;
+    while (col > 0){
+      if (col === 6) col--;
+      for (var s = 0; s < size; s++){
+        var rr2 = up ? size - 1 - s : s;
+        for (var d2 = 0; d2 < 2; d2++){
+          var cc2 = col - d2;
+          if (used[rr2][cc2]) continue;
+          var bit = bitAt(k++);
+          if ((rr2 + cc2) % 2 === 0) bit ^= 1;
+          M[rr2][cc2] = bit;
+        }
+      }
+      up = !up; col -= 2;
+    }
+
+    // Format info: level L, mask 0. MSB lands at (8,0).
+    var fdata = (1 << 3) | 0, rem = fdata;
+    for (i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537);
+    var fbits = ((fdata << 10) | rem) ^ 0x5412;
+    function fb(n){ return (fbits >> (14 - n)) & 1; }
+    for (i = 0; i <= 5; i++) M[8][i] = fb(i);
+    M[8][7] = fb(6); M[8][8] = fb(7); M[7][8] = fb(8);
+    for (i = 9; i < 15; i++) M[14 - i][8] = fb(i);
+    for (i = 0; i < 8; i++) M[size - 1 - i][8] = fb(i);
+    for (i = 8; i < 15; i++) M[8][size - 15 + i] = fb(i);
+    M[size - 8][8] = 1;
+
+    return M;
+  }
+
+  // Sample data for the #mock dev hook: a small spread around downtown Austin.
+  var MOCK = [
+    { slug: 'mock-taco-trailer', name: 'Taco Trailer Sample', category: 'Mexican restaurant', city: 'Austin', state: 'TX',
+      google_rating: 4.7, reviews_count: 212, status: 'built', lat: 30.2691, lng: -97.7405, phone: '+15125550101',
+      live_domain: null, demo_url: '/demos/mock-taco-trailer/', pitch_url: '/demos/mock-taco-trailer/pitch/',
+      built_at: '2026-06-01T12:00:00Z', visits: 0, last_visit: null },
+    { slug: 'mock-barber', name: 'Eastside Barber Sample', category: 'Barber shop', city: 'Austin', state: 'TX',
+      google_rating: 4.9, reviews_count: 88, status: 'interested', lat: 30.2599, lng: -97.7287, phone: '+15125550102',
+      live_domain: null, demo_url: '/demos/mock-barber/', pitch_url: '/demos/mock-barber/pitch/',
+      built_at: '2026-05-28T12:00:00Z', visits: 6, last_visit: '2026-06-08T12:00:00Z' },
+    { slug: 'mock-bbq', name: 'Smoked BBQ Sample', category: 'Barbecue restaurant', city: 'Austin', state: 'TX',
+      google_rating: 4.4, reviews_count: 1320, status: 'contacted', lat: 30.2755, lng: -97.7522, phone: null,
+      live_domain: null, demo_url: '/demos/mock-bbq/', pitch_url: '/demos/mock-bbq/pitch/',
+      built_at: '2026-05-25T12:00:00Z', visits: 14, last_visit: '2026-06-09T12:00:00Z' },
+    { slug: 'mock-burgers', name: 'Burger Stand Sample', category: 'Mexican restaurant', city: 'Austin', state: 'TX',
+      google_rating: 4.8, reviews_count: 451, status: 'closed', lat: 30.2530, lng: -97.7405, phone: '+15125550104',
+      live_domain: 'sampleburgers.example.com', demo_url: '/demos/mock-burgers/', pitch_url: '/demos/mock-burgers/pitch/',
+      built_at: '2026-05-10T12:00:00Z', visits: 40, last_visit: '2026-06-07T12:00:00Z' },
+    { slug: 'mock-passed', name: 'Passed Lead Sample', category: 'Food truck', city: 'Austin', state: 'TX',
+      google_rating: 3.9, reviews_count: 41, status: 'passed', lat: 30.2666, lng: -97.7333, phone: null,
+      live_domain: null, demo_url: '/demos/mock-passed/', pitch_url: '/demos/mock-passed/pitch/',
+      built_at: '2026-05-20T12:00:00Z', visits: 1, last_visit: '2026-05-21T12:00:00Z' },
+    { slug: 'mock-nopin', name: 'No Pin Sample', category: 'Hair salon', city: 'Austin', state: 'TX',
+      google_rating: 4.6, reviews_count: 73, status: 'built', lat: null, lng: null, phone: '+15125550106',
+      live_domain: null, demo_url: '/demos/mock-nopin/', pitch_url: '/demos/mock-nopin/pitch/',
+      built_at: '2026-06-05T12:00:00Z', visits: 2, last_visit: '2026-06-06T12:00:00Z' }
+  ];
 })();
 </script>
 </body>

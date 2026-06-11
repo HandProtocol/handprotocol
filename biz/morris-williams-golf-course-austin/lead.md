@@ -14,6 +14,8 @@ website_status: poor
 status: built
 demo_url: /demos/morris-williams-golf-course-austin/
 hand_lead: koH
+lat: 30.289453
+lng: -97.694198
 ---
 ## Reviews
 

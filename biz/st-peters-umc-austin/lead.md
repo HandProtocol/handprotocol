@@ -5,13 +5,16 @@ category: United Methodist church
 city: Austin
 state: TX
 phone: 512-926-1686
-address: 4509 Springdale Road, Austin, TX 78723
-google_url: https://www.google.com/maps/search/?api=1&query=4509+Springdale+Road+Austin+TX+78723
-source_url: https://www.stpetersatxlive.com
+address: '4509 Springdale Road, Austin, TX 78723'
+google_url: >-
+  https://www.google.com/maps/search/?api=1&query=4509+Springdale+Road+Austin+TX+78723
+source_url: 'https://www.stpetersatxlive.com'
 website_status: poor
 status: built
 demo_url: /demos/st-peters-umc-austin/
 hand_lead: koH
+lat: 30.287794
+lng: -97.680127
 ---
 
 ## Notes

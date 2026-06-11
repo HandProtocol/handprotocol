@@ -5,12 +5,15 @@ category: Limousine service
 city: Austin
 state: TX
 phone: 512-632-6134
-address: 4808 Carsonhill Dr, Austin, TX 78723
-google_url: https://www.google.com/maps/search/?api=1&query=K+%26+R+Transportation+4808+Carsonhill+Dr+Austin+TX+78723
+address: '4808 Carsonhill Dr, Austin, TX 78723'
+google_url: >-
+  https://www.google.com/maps/search/?api=1&query=K+%26+R+Transportation+4808+Carsonhill+Dr+Austin+TX+78723
 website_status: none
 status: built
 demo_url: /demos/kr-transportation-austin/
 hand_lead: koH
+lat: 30.289755
+lng: -97.675661
 ---
 
 ## Notes
