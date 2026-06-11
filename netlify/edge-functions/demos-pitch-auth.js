@@ -13,7 +13,7 @@
 // The demo site itself (/demos/<slug>/) stays public; only the /pitch/ subpath
 // is gated.
 
-import { notify, describeVisitor, escapeHtml } from "./_telegram.js";
+import { notify, describeVisitor, escapeHtml } from "./lib/_telegram.js";
 
 export default async (request, context) => {
   const expected = Netlify.env.get("DEMOS_PITCH_PASSWORD");

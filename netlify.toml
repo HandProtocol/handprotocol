@@ -53,6 +53,21 @@
   function = "demos-portfolio-auth"
   path = "/demos/portfolio.json"
 
+# Vanity subdomain: gofundme.handprotocol.org → the live GoFundMe campaign.
+# MUST stay first — host-scoped, so it wins before the path-only "/" and "/*"
+# rules below (which would otherwise capture requests to this subdomain).
+[[redirects]]
+  from = "https://gofundme.handprotocol.org/*"
+  to = "https://www.gofundme.com/f/help-hand-protocol-grow"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://gofundme.handprotocol.org/*"
+  to = "https://www.gofundme.com/f/help-hand-protocol-grow"
+  status = 301
+  force = true
+
 # Root redirects to foundation campaign (primary surface)
 [[redirects]]
   from = "/"
