@@ -13,18 +13,17 @@
   caller. --out writes elsewhere (e.g. /tmp to preview without clobbering a
   hand-tuned page); --dry prints what it would do.
 */
-import { admin, loadEnv } from "./_lib.mts";
+import { admin, loadEnv, readWithRetry } from "./_lib.mts";
 import {
   buildScriptSystemPrompt,
   buildPriceFallbackScript,
   parsePitchScript,
   type PitchLang,
 } from "../src/lib/develop/prompts.ts";
-import fs from "node:fs";
-import path from "node:path";
-import { renderPitchPage, type PitchPhoto } from "../src/lib/develop/pitch-template.ts";
+import { renderPitchPage } from "../src/lib/develop/pitch-template.ts";
+import { loadPitchPhotos } from "../src/lib/develop/site-assets.ts";
 import { writeFileAtomic } from "../src/lib/develop/markdown.ts";
-import { demoPitchDir, demoPitchPath, demoPublicUrl } from "../src/lib/develop/paths.ts";
+import { demoPitchPath, demoPublicUrl } from "../src/lib/develop/paths.ts";
 import type { BizLead, PitchScript } from "../src/lib/develop/types.ts";
 
 const args = process.argv.slice(2);
@@ -45,16 +44,18 @@ if (!slug) {
 
 const env = loadEnv();
 const client = admin(env);
-const { data: lead } = await client.from("biz_leads").select("*").eq("slug", slug).single();
+const { data: lead } = await readWithRetry(
+  () => client.from("biz_leads").select("*").eq("slug", slug).single(),
+  { label: `lead ${slug}`, expectRow: true },
+);
 if (!lead) {
   console.error("lead not found:", slug);
   process.exit(1);
 }
-const { data: reviews } = await client
-  .from("biz_reviews")
-  .select("*")
-  .eq("lead_id", lead.id)
-  .order("sort", { ascending: true });
+const { data: reviews } = await readWithRetry(
+  () => client.from("biz_reviews").select("*").eq("lead_id", lead.id).order("sort", { ascending: true }),
+  { label: `reviews ${slug}` },
+);
 
 const demoUrl = lead.demo_url ?? demoPublicUrl(slug);
 const fullUrl = `handprotocol.org${demoUrl}`;
@@ -131,23 +132,9 @@ if (env.ANTHROPIC_API_KEY) {
   }
 }
 
-// The business's scraped Maps photos, when scrape-photos has captured them.
-// They live at web/demos/<slug>/pitch/img/ (gated path only, never public)
-// and render as the "With your photos" section for the rep.
-let photos: PitchPhoto[] = [];
-try {
-  const raw = JSON.parse(
-    fs.readFileSync(path.join(demoPitchDir(slug), "img", "manifest.json"), "utf8"),
-  ) as unknown;
-  if (Array.isArray(raw)) {
-    photos = raw.filter(
-      (p): p is PitchPhoto =>
-        !!p && typeof p.file === "string" && Number.isFinite(p.w) && Number.isFinite(p.h),
-    );
-  }
-} catch {
-  /* no scraped photos for this lead */
-}
+// The business's scraped Maps photos, when scrape-photos has captured them
+// (shared loader, same one the API route uses).
+const photos = loadPitchPhotos(slug);
 
 script = clean(script);
 const html = renderPitchPage(lead as BizLead, script, demoUrl, photos);

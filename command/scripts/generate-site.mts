@@ -18,23 +18,17 @@
 
   --out writes elsewhere (preview) and skips the DB stamp; --dry just reports.
 */
-import fs from "node:fs";
-import path from "node:path";
-import { admin, loadEnv } from "./_lib.mts";
+import { admin, loadEnv, readWithRetry } from "./_lib.mts";
 import {
   buildSiteSystemPrompt,
   buildSiteUserMessage,
   parseSiteCopy,
   buildFallbackCopy,
 } from "../src/lib/develop/prompts.ts";
-import {
-  renderDemoSite,
-  pickSampleImages,
-  deriveMentions,
-  type SampleImages,
-} from "../src/lib/develop/site-template.ts";
+import { renderDemoSite } from "../src/lib/develop/site-template.ts";
+import { demoRenderOptions } from "../src/lib/develop/site-assets.ts";
 import { writeFileAtomic } from "../src/lib/develop/markdown.ts";
-import { demoSitePath, demoPublicUrl, repoRoot } from "../src/lib/develop/paths.ts";
+import { demoSitePath, demoPublicUrl } from "../src/lib/develop/paths.ts";
 import type { BizLead, BizReview, SiteCopy } from "../src/lib/develop/types.ts";
 
 const args = process.argv.slice(2);
@@ -48,16 +42,18 @@ if (!slug) {
 
 const env = loadEnv();
 const client = admin(env);
-const { data: lead } = await client.from("biz_leads").select("*").eq("slug", slug).single();
+const { data: lead } = await readWithRetry(
+  () => client.from("biz_leads").select("*").eq("slug", slug).single(),
+  { label: `lead ${slug}`, expectRow: true },
+);
 if (!lead) {
   console.error("lead not found:", slug, "(run register-lead first)");
   process.exit(1);
 }
-const { data: reviewRows } = await client
-  .from("biz_reviews")
-  .select("*")
-  .eq("lead_id", lead.id)
-  .order("sort", { ascending: true });
+const { data: reviewRows } = await readWithRetry(
+  () => client.from("biz_reviews").select("*").eq("lead_id", lead.id).order("sort", { ascending: true }),
+  { label: `reviews ${slug}` },
+);
 const reviews = (reviewRows ?? []) as BizReview[];
 
 // Fix em dashes in the GENERATED narrative only; testimonials stay verbatim
@@ -107,29 +103,10 @@ if (env.ANTHROPIC_API_KEY && reviews.length > 0) {
   }
 }
 
-// Ambient sample imagery, image policy: the public page never shows the
-// business's scraped Maps photos (those live only on the gated pitch page).
-// It may use the curated free-license library at web/assets/biz-samples/,
-// keyed by category. No manifest (or no category match) means no images and
-// the type+color system carries the page.
-let samples: SampleImages = {};
-try {
-  const manifest = JSON.parse(
-    fs.readFileSync(
-      path.join(repoRoot(), "web", "assets", "biz-samples", "manifest.json"),
-      "utf8",
-    ),
-  ) as unknown;
-  samples = pickSampleImages(manifest, lead.category, slug);
-} catch {
-  /* no sample library yet */
-}
-
-// Dish/service words actually present in the reviews (grounded chips).
-const mentions = deriveMentions(reviews.map((r) => r.body));
-
+// Ambient sample imagery + review-mention chips, selected by the shared
+// helper (site-assets.ts) so the script and the API route render identically.
 copy = clean(copy);
-const html = renderDemoSite(lead as BizLead, copy, { samples, mentions });
+const html = renderDemoSite(lead as BizLead, copy, demoRenderOptions(lead as BizLead, reviews));
 const out = outArg ? outArg.split("=").slice(1).join("=") : demoSitePath(slug);
 
 if (dry) {

@@ -7,7 +7,7 @@
     npx tsx scripts/register-lead.mts <slug>
 */
 import fs from "node:fs";
-import { admin, loadEnv, parseReviewsBody } from "./_lib.mts";
+import { admin, loadEnv, parseReviewsBody, readWithRetry } from "./_lib.mts";
 import { readBizFile } from "../src/lib/develop/markdown.ts";
 import {
   bizLeadMarkdownPath,
@@ -41,11 +41,12 @@ const status = (BIZ_STATUSES as readonly string[]).includes(String(fm.status))
 // Resolve the campaign slug (frontmatter) to its id, if any.
 let campaignId: string | null = null;
 if (fm.campaign) {
-  const { data: camp } = await client
-    .from("biz_campaigns")
-    .select("id")
-    .eq("slug", String(fm.campaign))
-    .maybeSingle();
+  // .maybeSingle(): an empty row is a real answer (no such campaign), so no
+  // expectRow; only network/5xx failures retry.
+  const { data: camp } = await readWithRetry(
+    () => client.from("biz_campaigns").select("id").eq("slug", String(fm.campaign)).maybeSingle(),
+    { label: `campaign ${fm.campaign}` },
+  );
   campaignId = (camp?.id as string) ?? null;
 }
 
@@ -84,11 +85,17 @@ const row: Record<string, unknown> = {
 
 // Stamp the build time once, the first time the demo index.html exists.
 const demoExists = fs.existsSync(demoSitePath(slug));
-const { data: existing } = await client
-  .from("biz_leads")
-  .select("id, demo_generated_at, live_at")
-  .eq("slug", slug)
-  .maybeSingle();
+// A transient failure here would mis-route an existing lead into the insert
+// branch (and trip the unique slug constraint), so retry network/5xx. An
+// empty row is a real answer (first registration), so no expectRow.
+const { data: existing, error: existingErr } = await readWithRetry(
+  () => client.from("biz_leads").select("id, demo_generated_at, live_at").eq("slug", slug).maybeSingle(),
+  { label: `lead ${slug}` },
+);
+if (existingErr) {
+  console.error("lead lookup failed:", existingErr.message);
+  process.exit(1);
+}
 let leadId: string;
 if (existing) {
   const patch: Record<string, unknown> = { ...row };

@@ -24,6 +24,7 @@ import {
   buildFallbackScript,
 } from "@/lib/develop/prompts";
 import { renderPitchPage } from "@/lib/develop/pitch-template";
+import { loadPitchPhotos } from "@/lib/develop/site-assets";
 import { writeFileAtomic } from "@/lib/develop/markdown";
 import { demoPitchPath, pitchPublicUrl, demoPublicUrl } from "@/lib/develop/paths";
 import type { PitchScript } from "@/lib/develop/types";
@@ -115,7 +116,9 @@ export async function POST(request: NextRequest) {
     script = buildFallbackScript(lead, demoUrl);
   }
 
-  const html = renderPitchPage(lead, script, demoUrl);
+  // Scraped Maps photos for the gated page, via the shared loader so this
+  // matches scripts/generate-pitch.mts for the same lead.
+  const html = renderPitchPage(lead, script, demoUrl, loadPitchPhotos(slug));
   try {
     await writeFileAtomic(demoPitchPath(slug), html);
   } catch (err) {
