@@ -1,0 +1,2253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jesuscoins's Passion for Kitties</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap');
+
+    :root {
+      --pink: #ff6eb4;
+      --purple: #a855f7;
+      --lavender: #c084fc;
+      --cream: #fff8f0;
+      --dark: #1a0a2e;
+      --accent: #ff9de2;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Quicksand', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 18px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(20px);
+      background: rgba(26,10,46,0.6);
+      border-bottom: 1px solid rgba(168,85,247,0.2);
+    }
+    .nav-logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      margin-left: 32px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--pink); }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      pointer-events: none;
+    }
+    .hero-content h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 1.1;
+      background: linear-gradient(135deg, #fff 0%, var(--accent) 40%, var(--lavender) 80%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+      filter: drop-shadow(0 0 40px rgba(255,110,180,0.5));
+    }
+    .hero-content .subtitle {
+      margin-top: 16px;
+      font-size: 1.3rem;
+      color: rgba(255,248,240,0.8);
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .hero-content .byline {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: var(--lavender);
+      letter-spacing: 4px;
+    }
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,248,240,0.5);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      animation: bounce 2s infinite;
+    }
+    .scroll-hint::after {
+      content: '';
+      width: 2px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--pink), transparent);
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ─── SECTION BASE ─── */
+    section {
+      padding: 100px 48px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      color: rgba(255,248,240,0.6);
+      font-size: 1.1rem;
+      margin-bottom: 60px;
+      max-width: 600px;
+    }
+
+    /* ─── ABOUT ─── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-text p {
+      color: rgba(255,248,240,0.75);
+      font-size: 1.15rem;
+      line-height: 1.9;
+      margin-bottom: 20px;
+    }
+    .about-text .highlight {
+      color: var(--pink);
+      font-weight: 700;
+    }
+    #about-canvas-wrap {
+      height: 420px;
+      border-radius: 24px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(168,85,247,0.3);
+      box-shadow: 0 0 60px rgba(168,85,247,0.2), inset 0 0 40px rgba(26,10,46,0.5);
+    }
+    #about-canvas { width: 100%; height: 100%; display: block; }
+
+    /* ─── GALLERY ─── */
+    #gallery-section {
+      text-align: center;
+    }
+    .cats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .cat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+    .cat-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 24px 60px rgba(255,110,180,0.3);
+    }
+    .cat-canvas-wrap {
+      height: 280px;
+      position: relative;
+    }
+    .cat-canvas-wrap canvas { width: 100%; height: 100%; display: block; }
+    .cat-info {
+      padding: 20px 24px;
+      text-align: left;
+    }
+    .cat-info h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.3rem;
+      color: var(--pink);
+      margin-bottom: 6px;
+    }
+    .cat-info p { color: rgba(255,248,240,0.6); font-size: 0.9rem; }
+
+    /* ─── FACTS ─── */
+    #facts-section {
+      text-align: center;
+    }
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .fact-card {
+      background: linear-gradient(135deg, rgba(168,85,247,0.15), rgba(255,110,180,0.1));
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      padding: 36px 24px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .fact-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 40px rgba(168,85,247,0.25);
+    }
+    .fact-icon { font-size: 2.8rem; margin-bottom: 16px; display: block; }
+    .fact-number {
+      font-family: 'Pacifico', cursive;
+      font-size: 2.5rem;
+      color: var(--pink);
+      line-height: 1;
+    }
+    .fact-label {
+      color: rgba(255,248,240,0.65);
+      font-size: 0.9rem;
+      margin-top: 8px;
+    }
+
+    /* ─── LOVE LETTER ─── */
+    #love-section {
+      text-align: center;
+      padding: 80px 48px;
+    }
+    .love-card {
+      background: linear-gradient(135deg, rgba(255,110,180,0.1), rgba(168,85,247,0.1));
+      border: 1px solid rgba(255,110,180,0.3);
+      border-radius: 32px;
+      padding: 60px;
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .love-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(255,110,180,0.25), transparent);
+      border-radius: 50%;
+    }
+    .love-card blockquote {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      line-height: 1.7;
+      color: var(--cream);
+      font-style: normal;
+    }
+    .love-card .author {
+      margin-top: 28px;
+      color: var(--lavender);
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* ─── INTERACTIVE 3D SCENE ─── */
+    #scene-section {
+      text-align: center;
+    }
+    #big-scene-canvas {
+      width: 100%;
+      height: 560px;
+      border-radius: 28px;
+      border: 1px solid rgba(168,85,247,0.3);
+      box-shadow: 0 0 80px rgba(168,85,247,0.15);
+      cursor: grab;
+      display: block;
+    }
+    #big-scene-canvas:active { cursor: grabbing; }
+    .scene-hint {
+      margin-top: 16px;
+      color: rgba(255,248,240,0.4);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+    }
+
+    /* ─── PICKUP CINEMATIC ─── */
+    #pickup-section { text-align: center; }
+    #pickup-stage {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(255,110,180,0.35);
+      box-shadow: 0 0 90px rgba(255,110,180,0.18);
+    }
+    #pickup-canvas {
+      width: 100%;
+      height: 600px;
+      display: block;
+    }
+    /* letterbox bars for cinema feel */
+    #pickup-stage::before, #pickup-stage::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 42px;
+      background: #000;
+      z-index: 5;
+      pointer-events: none;
+    }
+    #pickup-stage::before { top: 0; }
+    #pickup-stage::after { bottom: 0; }
+    .pickup-caption {
+      position: absolute;
+      bottom: 54px;
+      left: 0; right: 0;
+      z-index: 6;
+      pointer-events: none;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--cream);
+      text-shadow: 0 2px 18px rgba(0,0,0,0.9);
+      transition: opacity 0.5s ease;
+    }
+    .pickup-title-tag {
+      position: absolute;
+      top: 54px;
+      left: 24px;
+      z-index: 6;
+      pointer-events: none;
+      font-family: 'Pacifico', cursive;
+      font-size: 1.1rem;
+      color: rgba(255,157,226,0.85);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+    }
+
+    /* ─── NODALUX KITTIES NFT COLLECTION ─── */
+    #nft-section { text-align: center; }
+    .nft-mint-badge {
+      display: inline-block;
+      margin: 0 auto 48px;
+      padding: 10px 28px;
+      border: 1px solid rgba(255,110,180,0.5);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(255,110,180,0.08);
+      box-shadow: 0 0 30px rgba(255,110,180,0.15);
+    }
+    .nft-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .nft-card {
+      position: relative;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      text-align: left;
+    }
+    .nft-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(255,110,180,0.35);
+    }
+    .nft-img-wrap {
+      position: relative;
+      aspect-ratio: 1;
+      background: radial-gradient(circle at 35% 30%, rgba(168,85,247,0.35), rgba(26,10,46,0.9));
+      overflow: hidden;
+    }
+    .nft-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .nft-holo {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.18) 45%, rgba(255,110,180,0.22) 50%, rgba(0,255,204,0.15) 55%, transparent 70%);
+      background-size: 250% 250%;
+      background-position: 100% 100%;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .nft-card:hover .nft-holo {
+      opacity: 1;
+      animation: holo-sweep 1.6s ease infinite;
+    }
+    @keyframes holo-sweep {
+      0% { background-position: 100% 100%; }
+      100% { background-position: 0% 0%; }
+    }
+    .nft-serial {
+      position: absolute;
+      top: 12px; right: 12px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: 1px;
+    }
+    .nft-type {
+      position: absolute;
+      top: 12px; left: 12px;
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      backdrop-filter: blur(6px);
+    }
+    .nft-type.t-van { background: rgba(6,182,212,0.3); color: #7deeff; border: 1px solid rgba(6,182,212,0.5); }
+    .nft-type.t-cat { background: rgba(255,110,180,0.3); color: #ffc4e4; border: 1px solid rgba(255,110,180,0.5); }
+    .nft-meta { padding: 16px 18px 18px; }
+    .nft-collection {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--lavender);
+      margin-bottom: 4px;
+    }
+    .nft-meta h3 {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.15rem;
+      color: var(--pink);
+      margin-bottom: 6px;
+    }
+    .nft-stat {
+      font-size: 0.82rem;
+      color: rgba(255,248,240,0.7);
+      margin-bottom: 12px;
+      min-height: 2.4em;
+    }
+    .nft-stat b { color: #00ffcc; }
+    .nft-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nft-rarity {
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .r-common    { background: rgba(160,160,180,0.2); color: #c8c8d8; border: 1px solid rgba(160,160,180,0.4); }
+    .r-rare      { background: rgba(6,182,212,0.2);   color: #67e8f9; border: 1px solid rgba(6,182,212,0.5); }
+    .r-epic      { background: rgba(168,85,247,0.25); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.6); }
+    .r-legendary { background: rgba(245,158,11,0.2);  color: #fcd34d; border: 1px solid rgba(245,158,11,0.6); box-shadow: 0 0 16px rgba(245,158,11,0.25); }
+    .nft-price {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--cream);
+    }
+    .nft-price span { color: var(--lavender); font-size: 0.75rem; }
+    @keyframes nft-in {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 1000px) { .nft-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px)  { .nft-grid { grid-template-columns: 1fr; } }
+
+    /* ─── MUSIC TOGGLE ─── */
+    #music-toggle {
+      position: fixed;
+      bottom: 24px; right: 24px;
+      z-index: 1002;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,110,180,0.5);
+      background: linear-gradient(135deg, rgba(255,110,180,0.85), rgba(168,85,247,0.85));
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 30px rgba(255,110,180,0.4);
+      transition: transform 0.3s;
+    }
+    #music-toggle:hover { transform: scale(1.1); }
+    #music-toggle.playing { animation: music-pulse 1.4s ease-in-out infinite; }
+    @keyframes music-pulse {
+      0%, 100% { box-shadow: 0 8px 30px rgba(255,110,180,0.4); }
+      50% { box-shadow: 0 8px 50px rgba(255,110,180,0.9), 0 0 30px rgba(168,85,247,0.6); }
+    }
+    #music-toggle .music-label {
+      position: absolute;
+      right: 70px;
+      white-space: nowrap;
+      font-family: 'Quicksand', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: rgba(255,248,240,0.75);
+      background: rgba(26,10,46,0.85);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(168,85,247,0.35);
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    #music-toggle:hover .music-label { opacity: 1; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 60px 48px;
+      border-top: 1px solid rgba(168,85,247,0.2);
+      background: rgba(0,0,0,0.3);
+    }
+    footer .footer-logo {
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--pink), var(--lavender));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+    footer p {
+      color: rgba(255,248,240,0.4);
+      font-size: 0.9rem;
+    }
+    footer .hearts {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      letter-spacing: 8px;
+    }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(168,85,247,0.4), transparent);
+      margin: 0;
+    }
+
+    /* ─── FLOATING PARTICLES ─── */
+    #particles-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: float-up linear infinite;
+    }
+    @keyframes float-up {
+      0% { opacity: 0; transform: translateY(100vh) scale(0); }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-10vh) scale(1); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      #about { grid-template-columns: 1fr; }
+      .cats-grid { grid-template-columns: 1fr 1fr; }
+      .facts-grid { grid-template-columns: 1fr 1fr; }
+      nav { padding: 16px 24px; }
+      section { padding: 70px 24px; }
+    }
+    @media (max-width: 600px) {
+      .cats-grid { grid-template-columns: 1fr; }
+      .facts-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Floating particles background -->
+<div id="particles-bg"></div>
+
+<!-- Navbar -->
+<nav>
+  <div class="nav-logo">🐱 Kitty Love</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#gallery-section">Gallery</a>
+    <a href="#pickup-section">The Pickup</a>
+    <a href="#nft-section">NFTs</a>
+    <a href="#scene-section">3D World</a>
+    <a href="#facts-section">Facts</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section id="hero" style="padding:0; max-width:none; margin:0;">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <h1>Passion for<br>Kitties</h1>
+    <div class="subtitle">A love letter to the feline world</div>
+    <div class="byline">— by Jesuscoins —</div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- About -->
+<section id="about" style="padding-top:100px; max-width:1300px; margin:0 auto;">
+  <div class="about-text">
+    <div class="section-title">Why Kitties?</div>
+    <p>There is something <span class="highlight">profoundly magical</span> about a cat. The way they stretch with impossible grace, the thunderous purr that vibrates through your chest, the slow deliberate blink that says <em>"I trust you"</em> — no other creature communicates so much with so little.</p>
+    <p>Jesuscoins has spent a lifetime captivated by these <span class="highlight">mysterious, dignified, endlessly entertaining</span> creatures. From the tiniest tabby kitten tumbling over its own paws to the regal elder cat surveying its domain from the highest shelf — every single one is a work of art.</p>
+    <p>This website is a <span class="highlight">celebration of that love</span> — a place where three-dimensional kitties roam free, where facts delight and stories enchant. Welcome to the world of cats, as seen through Ryan's eyes.</p>
+  </div>
+  <div id="about-canvas-wrap">
+    <canvas id="about-canvas"></canvas>
+  </div>
+</section>
+
+<div class="divider" style="margin: 40px 0;"></div>
+
+<!-- Gallery -->
+<section id="gallery-section" style="max-width:1300px; margin:0 auto;">
+  <div class="section-title">Meet the Kitties</div>
+  <div class="section-sub">Six purrfect personalities, brought to life in 3D. Hover to say hello.</div>
+  <div class="cats-grid">
+    <div class="cat-card">
+      <div class="cat-canvas-wrap"><canvas class="gallery-cat" data-color="#ff6eb4" data-name="Luna"></canvas></div>
+      <div class="cat-info"><h3>Luna</h3><p>Mysterious moon-gazer. Loves 3am zoomies.</p></div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-canvas-wrap"><canvas class="gallery-cat" data-color="#a855f7" data-name="Mochi"></canvas></div>
+      <div class="cat-info"><h3>Mochi</h3><p>Fluffy royalty. Demands chin scratches constantly.</p></div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-canvas-wrap"><canvas class="gallery-cat" data-color="#06b6d4" data-name="Cosmo"></canvas></div>
+      <div class="cat-info"><h3>Cosmo</h3><p>Space explorer. Has knocked over 1,000 things.</p></div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-canvas-wrap"><canvas class="gallery-cat" data-color="#f59e0b" data-name="Biscuit"></canvas></div>
+      <div class="cat-info"><h3>Biscuit</h3><p>Champion bread-maker. Purrs at max volume.</p></div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-canvas-wrap"><canvas class="gallery-cat" data-color="#10b981" data-name="Pixel"></canvas></div>
+      <div class="cat-info"><h3>Pixel</h3><p>Digital native. Walks across keyboards professionally.</p></div>
+    </div>
+    <div class="cat-card">
+      <div class="cat-canvas-wrap"><canvas class="gallery-cat" data-color="#ef4444" data-name="Ember"></canvas></div>
+      <div class="cat-info"><h3>Ember</h3><p>Fiery spirit. Tiny paws, enormous attitude.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="margin: 40px 0;"></div>
+
+<!-- The Pickup: cinematic sprinter scene -->
+<section id="pickup-section" style="max-width:1300px; margin:0 auto;">
+  <div class="section-title">The Pickup</div>
+  <div class="section-sub" style="margin:0 auto 40px;">The Kitty Express rolls up. A cat is driving. Jesuscoins is waiting. Nothing about this is negotiable.</div>
+  <div id="pickup-stage">
+    <canvas id="pickup-canvas"></canvas>
+    <div class="pickup-title-tag">🎬 Kitty Express — a Jesuscoins production</div>
+    <div class="pickup-caption" id="pickup-caption">The Kitty Express approaches…</div>
+  </div>
+</section>
+
+<div class="divider" style="margin: 40px 0;"></div>
+
+<!-- NodaLux Kitties NFT Collection -->
+<section id="nft-section" style="max-width:1300px; margin:0 auto;">
+  <div class="section-title">NodaLux Kitties</div>
+  <div class="section-sub" style="margin:0 auto 24px;">The official NFT collection. Sprinter van upgrades and kitty power-ups — equip them to the Kitty Express and level up every pickup.</div>
+  <div class="nft-mint-badge">✦ NodaLux Official Mint · Season 1 · 8 of 8 ✦</div>
+  <div class="nft-grid" id="nft-grid"></div>
+</section>
+
+<div class="divider" style="margin: 40px 0;"></div>
+
+<!-- Interactive 3D Scene -->
+<section id="scene-section" style="max-width:1300px; margin:0 auto;">
+  <div class="section-title">The Kitty Kingdom</div>
+  <div class="section-sub" style="margin:0 auto 40px;">An interactive 3D world where Ryan's kitties play. Click and drag to explore.</div>
+  <canvas id="big-scene-canvas"></canvas>
+  <div class="scene-hint">DRAG TO ROTATE &nbsp;·&nbsp; SCROLL TO ZOOM</div>
+</section>
+
+<div class="divider" style="margin: 40px 0;"></div>
+
+<!-- Facts -->
+<section id="facts-section" style="max-width:1300px; margin:0 auto;">
+  <div class="section-title">Purrfect Facts</div>
+  <div class="section-sub" style="margin: 0 auto 60px;">Things that make cats even more amazing than you thought.</div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <span class="fact-icon">😴</span>
+      <div class="fact-number">16</div>
+      <div class="fact-label">Hours cats sleep daily</div>
+    </div>
+    <div class="fact-card">
+      <span class="fact-icon">👂</span>
+      <div class="fact-number">32</div>
+      <div class="fact-label">Muscles in each ear</div>
+    </div>
+    <div class="fact-card">
+      <span class="fact-icon">🏃</span>
+      <div class="fact-number">30</div>
+      <div class="fact-label">MPH top running speed</div>
+    </div>
+    <div class="fact-card">
+      <span class="fact-icon">🎵</span>
+      <div class="fact-number">100</div>
+      <div class="fact-label">Different vocal sounds</div>
+    </div>
+    <div class="fact-card">
+      <span class="fact-icon">💝</span>
+      <div class="fact-number">9500</div>
+      <div class="fact-label">Years cats have been pets</div>
+    </div>
+    <div class="fact-card">
+      <span class="fact-icon">👁️</span>
+      <div class="fact-number">6x</div>
+      <div class="fact-label">Better night vision than humans</div>
+    </div>
+    <div class="fact-card">
+      <span class="fact-icon">❤️</span>
+      <div class="fact-number">25Hz</div>
+      <div class="fact-label">Purr frequency (healing!)</div>
+    </div>
+    <div class="fact-card">
+      <span class="fact-icon">🌍</span>
+      <div class="fact-number">600M</div>
+      <div class="fact-label">Domestic cats worldwide</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" style="margin: 40px 0;"></div>
+
+<!-- Love Letter -->
+<section id="love-section" style="max-width:1300px; margin:0 auto;">
+  <div class="love-card">
+    <blockquote>
+      "A cat does not simply sit in your lap.<br>
+      It chooses you — and in that choice,<br>
+      bestows upon you the greatest honor<br>
+      a small, furry sovereign can give."
+    </blockquote>
+    <div class="author">— Jesuscoins</div>
+  </div>
+</section>
+
+<!-- Background music: Kitty Express theme -->
+<audio id="bg-music" src="kitty-express.mp3" loop preload="auto"></audio>
+<button id="music-toggle" title="Toggle music">
+  <span id="music-icon">🎵</span>
+  <span class="music-label">KITTY EXPRESS FM</span>
+</button>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">Jesuscoins's Kitty World</div>
+  <p>Made with endless love for cats, code, and three dimensions.</p>
+  <div class="hearts">🐱 💜 🐱 💜 🐱</div>
+</footer>
+
+<script>
+// ─── UTILITIES ───────────────────────────────────────────────────────────────
+function hexToThreeColor(hex) {
+  return new THREE.Color(hex);
+}
+
+// ─── BUILD A 3D CAT (from Three.js primitives) ───────────────────────────────
+function createCat(bodyColor, eyeColor = '#00ffcc', scene3D) {
+  const group = new THREE.Group();
+
+  const mat = (color, emissive = '#000', rough = 0.6) => new THREE.MeshStandardMaterial({
+    color: new THREE.Color(color),
+    emissive: new THREE.Color(emissive),
+    emissiveIntensity: 0.15,
+    roughness: rough,
+    metalness: 0.05,
+  });
+
+  // Body
+  const body = new THREE.Mesh(
+    new THREE.SphereGeometry(0.52, 24, 24),
+    mat(bodyColor)
+  );
+  body.scale.set(1, 0.85, 0.9);
+  body.position.y = 0;
+  group.add(body);
+
+  // Head
+  const head = new THREE.Mesh(
+    new THREE.SphereGeometry(0.38, 24, 24),
+    mat(bodyColor)
+  );
+  head.position.set(0, 0.72, 0.08);
+  group.add(head);
+
+  // Ears (left & right)
+  const earGeo = new THREE.ConeGeometry(0.13, 0.22, 4);
+  const earMat = mat(bodyColor);
+  const leftEar = new THREE.Mesh(earGeo, earMat);
+  leftEar.position.set(-0.22, 1.04, 0.05);
+  leftEar.rotation.z = -0.3;
+  group.add(leftEar);
+
+  const rightEar = new THREE.Mesh(earGeo, earMat);
+  rightEar.position.set(0.22, 1.04, 0.05);
+  rightEar.rotation.z = 0.3;
+  group.add(rightEar);
+
+  // Inner ear
+  const innerEarGeo = new THREE.ConeGeometry(0.07, 0.14, 4);
+  const innerMat = mat('#ffb6c1');
+  const innerL = new THREE.Mesh(innerEarGeo, innerMat);
+  innerL.position.set(-0.22, 1.04, 0.08);
+  innerL.rotation.z = -0.3;
+  group.add(innerL);
+  const innerR = new THREE.Mesh(innerEarGeo, innerMat);
+  innerR.position.set(0.22, 1.04, 0.08);
+  innerR.rotation.z = 0.3;
+  group.add(innerR);
+
+  // Eyes
+  const eyeGeo = new THREE.SphereGeometry(0.07, 12, 12);
+  const eyeMat = mat(eyeColor, eyeColor, 0.1);
+  eyeMat.emissiveIntensity = 0.6;
+  const leftEye = new THREE.Mesh(eyeGeo, eyeMat);
+  leftEye.position.set(-0.13, 0.78, 0.33);
+  group.add(leftEye);
+  const rightEye = new THREE.Mesh(eyeGeo, eyeMat);
+  rightEye.position.set(0.13, 0.78, 0.33);
+  group.add(rightEye);
+
+  // Pupils
+  const pupilGeo = new THREE.SphereGeometry(0.04, 8, 8);
+  const pupilMat = mat('#000010');
+  const lPupil = new THREE.Mesh(pupilGeo, pupilMat);
+  lPupil.position.set(-0.13, 0.78, 0.38);
+  group.add(lPupil);
+  const rPupil = new THREE.Mesh(pupilGeo, pupilMat);
+  rPupil.position.set(0.13, 0.78, 0.38);
+  group.add(rPupil);
+
+  // Nose
+  const noseMat = mat('#ffb6c1', '#ff8fae', 0.3);
+  noseMat.emissiveIntensity = 0.3;
+  const nose = new THREE.Mesh(new THREE.SphereGeometry(0.04, 8, 8), noseMat);
+  nose.position.set(0, 0.69, 0.37);
+  group.add(nose);
+
+  // Cheeks
+  const cheekMat = new THREE.MeshStandardMaterial({ color: new THREE.Color('#ffcce0'), transparent: true, opacity: 0.45 });
+  const lCheek = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), cheekMat);
+  lCheek.position.set(-0.2, 0.7, 0.3);
+  group.add(lCheek);
+  const rCheek = new THREE.Mesh(new THREE.SphereGeometry(0.09, 8, 8), cheekMat);
+  rCheek.position.set(0.2, 0.7, 0.3);
+  group.add(rCheek);
+
+  // Tail
+  const tailCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0, -0.1, -0.4),
+    new THREE.Vector3(-0.5, 0.2, -0.5),
+    new THREE.Vector3(-0.8, 0.5, -0.2),
+    new THREE.Vector3(-0.6, 0.85, 0.1),
+  ]);
+  const tailGeo = new THREE.TubeGeometry(tailCurve, 20, 0.055, 8, false);
+  const tail = new THREE.Mesh(tailGeo, mat(bodyColor));
+  group.add(tail);
+  // Tail tip
+  const tipMat = mat('#ffffff');
+  const tailTip = new THREE.Mesh(new THREE.SphereGeometry(0.08, 8, 8), tipMat);
+  tailTip.position.set(-0.6, 0.88, 0.1);
+  group.add(tailTip);
+
+  // Legs
+  const legGeo = new THREE.CylinderGeometry(0.09, 0.08, 0.35, 8);
+  const legMat = mat(bodyColor);
+  const legPositions = [
+    [-0.25, -0.52, 0.2], [0.25, -0.52, 0.2],
+    [-0.25, -0.52, -0.2], [0.25, -0.52, -0.2]
+  ];
+  legPositions.forEach(([x,y,z]) => {
+    const leg = new THREE.Mesh(legGeo, legMat);
+    leg.position.set(x, y, z);
+    group.add(leg);
+  });
+
+  // Paws
+  const pawGeo = new THREE.SphereGeometry(0.1, 8, 8);
+  pawGeo.scale(1.2, 0.6, 1);
+  const pawMat = mat(bodyColor);
+  legPositions.forEach(([x,y,z]) => {
+    const paw = new THREE.Mesh(pawGeo, pawMat);
+    paw.position.set(x, y - 0.2, z);
+    group.add(paw);
+  });
+
+  // Belly patch
+  const bellyMat = mat('#fff5f0');
+  const belly = new THREE.Mesh(new THREE.SphereGeometry(0.28, 16, 16), bellyMat);
+  belly.position.set(0, 0, 0.42);
+  belly.scale.set(1, 0.9, 0.3);
+  group.add(belly);
+
+  return group;
+}
+
+// ─── HERO CANVAS ─────────────────────────────────────────────────────────────
+(function initHero() {
+  const canvas = document.getElementById('hero-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(60, 1, 0.1, 100);
+  camera.position.set(0, 1.5, 6);
+  camera.lookAt(0, 0.5, 0);
+
+  // Resize
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Lights
+  const ambient = new THREE.AmbientLight('#c084fc', 0.6);
+  scene.add(ambient);
+  const pinkLight = new THREE.PointLight('#ff6eb4', 3, 15);
+  pinkLight.position.set(-4, 4, 4);
+  scene.add(pinkLight);
+  const purpleLight = new THREE.PointLight('#a855f7', 2, 15);
+  purpleLight.position.set(4, 2, 2);
+  scene.add(purpleLight);
+  const fillLight = new THREE.PointLight('#ffffff', 1, 10);
+  fillLight.position.set(0, -2, 5);
+  scene.add(fillLight);
+
+  // Stars
+  const starGeo = new THREE.BufferGeometry();
+  const starCount = 2000;
+  const starPos = new Float32Array(starCount * 3);
+  for (let i = 0; i < starCount * 3; i++) {
+    starPos[i] = (Math.random() - 0.5) * 60;
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+  const starMat = new THREE.PointsMaterial({ color: '#ffffff', size: 0.08, transparent: true, opacity: 0.7 });
+  scene.add(new THREE.Points(starGeo, starMat));
+
+  // Floating orbs
+  const orbs = [];
+  const orbColors = ['#ff6eb4', '#a855f7', '#c084fc', '#ff9de2', '#7c3aed'];
+  for (let i = 0; i < 18; i++) {
+    const orb = new THREE.Mesh(
+      new THREE.SphereGeometry(0.06 + Math.random() * 0.14, 8, 8),
+      new THREE.MeshStandardMaterial({
+        color: orbColors[i % orbColors.length],
+        emissive: orbColors[i % orbColors.length],
+        emissiveIntensity: 0.8,
+        transparent: true,
+        opacity: 0.75,
+      })
+    );
+    const angle = (i / 18) * Math.PI * 2;
+    const r = 2 + Math.random() * 2;
+    orb.position.set(Math.cos(angle) * r, -1 + Math.random() * 4, Math.sin(angle) * r - 1);
+    orb.userData = { speed: 0.3 + Math.random() * 0.5, offset: Math.random() * Math.PI * 2 };
+    scene.add(orb);
+    orbs.push(orb);
+  }
+
+  // Hero cats
+  const colors = ['#ff6eb4', '#c084fc', '#a855f7'];
+  const eyeColors = ['#00ffcc', '#ffcc00', '#ff6eb4'];
+  const heroCats = [];
+  for (let i = 0; i < 3; i++) {
+    const cat = createCat(colors[i], eyeColors[i]);
+    const angle = (i / 3) * Math.PI * 2;
+    cat.position.set(Math.cos(angle) * 2.2, 0, Math.sin(angle) * 0.5 - 0.5);
+    cat.rotation.y = -angle + Math.PI * 0.5;
+    const s = 0.7 + i * 0.05;
+    cat.scale.setScalar(s);
+    scene.add(cat);
+    heroCats.push({ mesh: cat, angle, speed: 0.3 + i * 0.1 });
+  }
+
+  // The Kitty Express cruises through the first scene, cat at the wheel
+  const heroVan = createSprinterVan();
+  heroVan.group.scale.setScalar(0.55);
+  heroVan.group.position.set(-14, -1.6, 1.8);
+  scene.add(heroVan.group);
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.01;
+
+    // van drives left → right across the bottom, loops around
+    heroVan.group.position.x += 0.05;
+    if (heroVan.group.position.x > 14) heroVan.group.position.x = -14;
+    heroVan.group.position.y = -1.6 + Math.sin(t * 8) * 0.015; // road rumble
+    heroVan.wheels.forEach(w => { w.rotation.y += 0.12; });
+    heroVan.headlights.forEach(b => { b.material.opacity = 0.06 + Math.abs(Math.sin(t * 3)) * 0.04; });
+    heroVan.driverCat.position.y = 1.15 + Math.sin(t * 6) * 0.03;
+
+    heroCats.forEach((c, i) => {
+      c.angle += 0.004 * c.speed;
+      c.mesh.position.x = Math.cos(c.angle) * 2.2;
+      c.mesh.position.z = Math.sin(c.angle) * 0.5 - 1;
+      c.mesh.rotation.y = -c.angle + Math.PI * 0.5;
+      c.mesh.position.y = Math.sin(t * c.speed + i) * 0.15;
+    });
+
+    orbs.forEach(orb => {
+      orb.position.y += Math.sin(t * orb.userData.speed + orb.userData.offset) * 0.005;
+      orb.position.x += Math.cos(t * orb.userData.speed * 0.5) * 0.003;
+    });
+
+    pinkLight.position.x = Math.sin(t * 0.7) * 5;
+    pinkLight.position.z = Math.cos(t * 0.7) * 3;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ─── ABOUT CANVAS ────────────────────────────────────────────────────────────
+(function initAbout() {
+  const canvas = document.getElementById('about-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  camera.position.set(0, 1, 4.5);
+  camera.lookAt(0, 0.5, 0);
+
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  scene.add(new THREE.AmbientLight('#ffffff', 0.5));
+  const l1 = new THREE.PointLight('#ff6eb4', 3, 10); l1.position.set(-3, 3, 3); scene.add(l1);
+  const l2 = new THREE.PointLight('#a855f7', 2, 10); l2.position.set(3, 1, 2); scene.add(l2);
+
+  const cat = createCat('#c084fc', '#ffcc00');
+  cat.scale.setScalar(1.1);
+  scene.add(cat);
+
+  // Floating hearts
+  const hearts = [];
+  for (let i = 0; i < 8; i++) {
+    const heart = new THREE.Mesh(
+      new THREE.SphereGeometry(0.06, 8, 8),
+      new THREE.MeshStandardMaterial({ color: '#ff6eb4', emissive: '#ff6eb4', emissiveIntensity: 0.8 })
+    );
+    heart.position.set((Math.random()-0.5)*3, Math.random()*2-0.5, (Math.random()-0.5)*1.5);
+    heart.userData = { oy: heart.position.y, phase: Math.random()*Math.PI*2, speed: 0.5+Math.random()*0.5 };
+    scene.add(heart);
+    hearts.push(heart);
+  }
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.012;
+    cat.rotation.y = Math.sin(t * 0.4) * 0.5;
+    cat.position.y = Math.sin(t * 0.7) * 0.1;
+    hearts.forEach(h => {
+      h.position.y = h.userData.oy + Math.sin(t * h.userData.speed + h.userData.phase) * 0.3;
+    });
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ─── GALLERY CATS ────────────────────────────────────────────────────────────
+document.querySelectorAll('.gallery-cat').forEach((canvas, idx) => {
+  const color = canvas.dataset.color;
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 50);
+  camera.position.set(0, 0.8, 3.8);
+  camera.lookAt(0, 0.5, 0);
+
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  scene.add(new THREE.AmbientLight('#ffffff', 0.5));
+  const pl = new THREE.PointLight(color, 3, 8);
+  pl.position.set(2, 2, 2);
+  scene.add(pl);
+  scene.add(new THREE.PointLight('#ffffff', 1, 8).position.set(-2, 1, 2));
+
+  const eyeColors = ['#00ffcc','#ffcc00','#ff6eb4','#ff4500','#00ff88','#ff0066'];
+  const cat = createCat(color, eyeColors[idx % eyeColors.length]);
+  scene.add(cat);
+
+  let t = idx * 1.2;
+  let hovered = false;
+  const card = canvas.closest('.cat-card');
+  card.addEventListener('mouseenter', () => { hovered = true; });
+  card.addEventListener('mouseleave', () => { hovered = false; });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    t += hovered ? 0.025 : 0.008;
+    cat.rotation.y = Math.sin(t * 0.5) * (hovered ? 1.2 : 0.5);
+    cat.position.y = Math.sin(t * 0.8) * 0.12;
+    pl.intensity = hovered ? 5 : 3;
+    renderer.render(scene, camera);
+  }
+  animate();
+});
+
+// ─── BIG SCENE (interactive) ─────────────────────────────────────────────────
+(function initBigScene() {
+  const canvas = document.getElementById('big-scene-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.2;
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2('#1a0a2e', 0.04);
+  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 100);
+  camera.position.set(0, 3, 12);
+  camera.lookAt(0, 0.5, 0);
+
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Lights
+  scene.add(new THREE.AmbientLight('#c084fc', 0.5));
+  const sun = new THREE.PointLight('#ff9de2', 4, 30);
+  sun.position.set(0, 8, 0);
+  sun.castShadow = true;
+  scene.add(sun);
+  const l2 = new THREE.PointLight('#a855f7', 2, 20); l2.position.set(-6, 2, 0); scene.add(l2);
+  const l3 = new THREE.PointLight('#00ffcc', 1.5, 20); l3.position.set(6, 2, 0); scene.add(l3);
+
+  // Ground
+  const ground = new THREE.Mesh(
+    new THREE.CircleGeometry(14, 64),
+    new THREE.MeshStandardMaterial({
+      color: '#2d1060',
+      roughness: 0.8,
+      metalness: 0.1,
+    })
+  );
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = -1.1;
+  ground.receiveShadow = true;
+  scene.add(ground);
+
+  // Grid lines on ground
+  const gridHelper = new THREE.GridHelper(28, 28, '#a855f7', '#3b0764');
+  gridHelper.position.y = -1.09;
+  gridHelper.material.opacity = 0.3;
+  gridHelper.material.transparent = true;
+  scene.add(gridHelper);
+
+  // Stars
+  const starGeo = new THREE.BufferGeometry();
+  const sPos = new Float32Array(3000 * 3);
+  for (let i = 0; i < 3000 * 3; i++) sPos[i] = (Math.random()-0.5)*80;
+  starGeo.setAttribute('position', new THREE.BufferAttribute(sPos, 3));
+  scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: '#ffffff', size: 0.08, transparent: true, opacity: 0.6 })));
+
+  // 7 cats arranged in a circle + center
+  const catDefs = [
+    { color: '#ff6eb4', eye: '#00ffcc', r: 5, a: 0 },
+    { color: '#a855f7', eye: '#ffcc00', r: 5, a: Math.PI*2/7 },
+    { color: '#06b6d4', eye: '#ff6eb4', r: 5, a: Math.PI*4/7 },
+    { color: '#f59e0b', eye: '#00ff88', r: 5, a: Math.PI*6/7 },
+    { color: '#10b981', eye: '#ff9900', r: 5, a: Math.PI*8/7 },
+    { color: '#ef4444', eye: '#00ccff', r: 5, a: Math.PI*10/7 },
+    { color: '#c084fc', eye: '#ff0066', r: 5, a: Math.PI*12/7 },
+    { color: '#ffffff', eye: '#ff6eb4', r: 0, a: 0 }, // center
+  ];
+  const sceneCats = catDefs.map(d => {
+    const cat = createCat(d.color, d.eye);
+    cat.position.set(d.r > 0 ? Math.cos(d.a)*d.r : 0, -0.6, d.r > 0 ? Math.sin(d.a)*d.r : 0);
+    cat.rotation.y = d.r > 0 ? -d.a + Math.PI/2 : 0;
+    cat.scale.setScalar(d.r > 0 ? 0.85 : 1.1);
+    cat.castShadow = true;
+    scene.add(cat);
+    return { mesh: cat, ...d, t: Math.random()*Math.PI*2 };
+  });
+
+  // Floating orbs / sparkles
+  const sparkles = [];
+  for (let i = 0; i < 30; i++) {
+    const s = new THREE.Mesh(
+      new THREE.SphereGeometry(0.04+Math.random()*0.08, 6, 6),
+      new THREE.MeshStandardMaterial({
+        color: ['#ff6eb4','#a855f7','#00ffcc','#ffcc00'][i%4],
+        emissive: ['#ff6eb4','#a855f7','#00ffcc','#ffcc00'][i%4],
+        emissiveIntensity: 1,
+        transparent: true, opacity: 0.8,
+      })
+    );
+    const angle = Math.random()*Math.PI*2;
+    const r = 1+Math.random()*7;
+    s.position.set(Math.cos(angle)*r, Math.random()*3-0.5, Math.sin(angle)*r);
+    s.userData = { phase: Math.random()*Math.PI*2, speed: 0.3+Math.random()*0.7 };
+    scene.add(s);
+    sparkles.push(s);
+  }
+
+  // Mouse drag orbit
+  let isPointerDown = false, prevX = 0, prevY = 0;
+  let theta = 0, phi = Math.PI/3, radius = 12;
+  canvas.addEventListener('pointerdown', e => { isPointerDown = true; prevX = e.clientX; prevY = e.clientY; });
+  window.addEventListener('pointerup', () => { isPointerDown = false; });
+  window.addEventListener('pointermove', e => {
+    if (!isPointerDown) return;
+    theta -= (e.clientX - prevX) * 0.01;
+    phi = Math.max(0.1, Math.min(Math.PI/2, phi - (e.clientY - prevY) * 0.01));
+    prevX = e.clientX; prevY = e.clientY;
+  });
+  canvas.addEventListener('wheel', e => {
+    radius = Math.max(5, Math.min(22, radius + e.deltaY * 0.02));
+  });
+
+  let t = 0;
+  function animate() {
+    requestAnimationFrame(animate);
+    t += 0.008;
+
+    theta += 0.003;
+    camera.position.x = Math.sin(theta) * Math.sin(phi) * radius;
+    camera.position.y = Math.cos(phi) * radius;
+    camera.position.z = Math.cos(theta) * Math.sin(phi) * radius;
+    camera.lookAt(0, 0.5, 0);
+
+    sceneCats.forEach((c, i) => {
+      c.t += 0.01;
+      c.mesh.position.y = -0.6 + Math.sin(c.t) * 0.12;
+      if (c.r > 0) c.mesh.rotation.y = -c.a + Math.PI/2 + Math.sin(c.t*0.5)*0.3;
+      else c.mesh.rotation.y = t * 0.4;
+    });
+
+    sparkles.forEach(s => {
+      s.position.y += Math.sin(t * s.userData.speed + s.userData.phase) * 0.008;
+    });
+
+    sun.position.x = Math.sin(t*0.3) * 8;
+    sun.position.z = Math.cos(t*0.3) * 8;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ─── TEXT SPRITE (name tags, neon signs) ─────────────────────────────────────
+function makeTextSprite(text, opts = {}) {
+  const { font = 'bold 64px Quicksand, sans-serif', color = '#ffffff', glow = '#ff6eb4', pad = 30, bg = 'rgba(10,4,20,0.65)' } = opts;
+  const cv = document.createElement('canvas');
+  const ctx = cv.getContext('2d');
+  ctx.font = font;
+  const w = Math.ceil(ctx.measureText(text).width) + pad * 2;
+  cv.width = w; cv.height = 110;
+  const c2 = cv.getContext('2d');
+  if (bg) {
+    c2.fillStyle = bg;
+    c2.beginPath();
+    c2.roundRect(0, 8, w, 94, 22);
+    c2.fill();
+  }
+  c2.font = font;
+  c2.textAlign = 'center';
+  c2.textBaseline = 'middle';
+  c2.shadowColor = glow;
+  c2.shadowBlur = 24;
+  c2.fillStyle = color;
+  c2.fillText(text, w / 2, 56);
+  const tex = new THREE.CanvasTexture(cv);
+  const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthWrite: false }));
+  sprite.scale.set(w / 110, 1, 1);
+  return sprite;
+}
+
+// ─── SPRINTER VAN (cat at the wheel) ─────────────────────────────────────────
+// Built facing +X. Returns { group, door, wheels, headlights, driverCat }.
+function createSprinterVan(paintHex = '#f3eef7') {
+  const g = new THREE.Group();
+  const M = (color, opts = {}) => new THREE.MeshStandardMaterial({
+    color: new THREE.Color(color), roughness: 0.45, metalness: 0.35, ...opts,
+  });
+
+  const paint = M(paintHex);
+  const trim = M('#1c1230', { roughness: 0.7, metalness: 0.1 });
+  const glass = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('#1c2c4a'), roughness: 0.05, metalness: 0.9,
+    transparent: true, opacity: 0.4,
+  });
+
+  // Cargo body (tall sprinter box)
+  const body = new THREE.Mesh(new THREE.BoxGeometry(3.4, 1.9, 1.9), paint);
+  body.position.set(-0.7, 1.45, 0);
+  g.add(body);
+  // Roof cap, slightly rounded feel
+  const roof = new THREE.Mesh(new THREE.BoxGeometry(3.5, 0.12, 1.95), M('#e4d9f0'));
+  roof.position.set(-0.7, 2.45, 0);
+  g.add(roof);
+  // Nose / hood
+  const nose = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.95, 1.8), paint);
+  nose.position.set(1.5, 0.95, 0);
+  g.add(nose);
+  // Windshield, raked back
+  const shield = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.05, 1.7), glass);
+  shield.position.set(1.18, 1.85, 0);
+  shield.rotation.z = -0.38;
+  g.add(shield);
+  // Cab side windows
+  [-1, 1].forEach(s => {
+    const win = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.6, 0.04), glass);
+    win.position.set(0.55, 1.85, s * 0.96);
+    g.add(win);
+  });
+  // Cargo side window strip (rear)
+  const strip = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.45, 0.04), glass);
+  strip.position.set(-1.5, 1.9, 0.96);
+  g.add(strip);
+  // Bumpers + grille
+  const bumperF = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.35, 1.85), trim);
+  bumperF.position.set(2.05, 0.55, 0);
+  g.add(bumperF);
+  const bumperR = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.35, 1.85), trim);
+  bumperR.position.set(-2.45, 0.55, 0);
+  g.add(bumperR);
+  const grille = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.45, 1.2), trim);
+  grille.position.set(2.06, 0.95, 0);
+  g.add(grille);
+
+  // Sliding door (camera side, +z) — slides rearward to open
+  const door = new THREE.Mesh(new THREE.BoxGeometry(1.15, 1.7, 0.08), M('#e9e0f2'));
+  door.position.set(-0.35, 1.35, 0.99);
+  const doorHandle = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.06, 0.04), trim);
+  doorHandle.position.set(0.3, -0.05, 0.05);
+  door.add(doorHandle);
+  const doorWin = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.5, 0.04), glass);
+  doorWin.position.set(0, 0.5, 0.04);
+  door.add(doorWin);
+  g.add(door);
+  // Dark opening revealed behind the door
+  const opening = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.65, 0.02), new THREE.MeshBasicMaterial({ color: '#08030f' }));
+  opening.position.set(-0.35, 1.3, 0.945);
+  g.add(opening);
+
+  // "KITTY EXPRESS" livery on the flank
+  const liveryCv = document.createElement('canvas');
+  liveryCv.width = 512; liveryCv.height = 160;
+  const lc = liveryCv.getContext('2d');
+  lc.fillStyle = 'rgba(0,0,0,0)';
+  lc.font = 'bold 74px Pacifico, cursive';
+  lc.textAlign = 'center';
+  const grad = lc.createLinearGradient(0, 0, 512, 0);
+  grad.addColorStop(0, '#ff6eb4'); grad.addColorStop(1, '#a855f7');
+  lc.fillStyle = grad;
+  lc.fillText('Kitty Express', 256, 78);
+  lc.font = '600 30px Quicksand, sans-serif';
+  lc.fillStyle = '#7c6a94';
+  lc.fillText('— cat-operated since forever —', 256, 128);
+  const liveryTex = new THREE.CanvasTexture(liveryCv);
+  const livery = new THREE.Mesh(
+    new THREE.PlaneGeometry(2.1, 0.66),
+    new THREE.MeshBasicMaterial({ map: liveryTex, transparent: true })
+  );
+  livery.position.set(-1.45, 1.35, 1.0);
+  g.add(livery);
+  const livery2 = livery.clone();
+  livery2.rotation.y = Math.PI;
+  livery2.position.z = -1.0;
+  g.add(livery2);
+
+  // Wheels: group orients axle along Z, inner mesh spins
+  const wheels = [];
+  const wheelGeo = new THREE.CylinderGeometry(0.42, 0.42, 0.3, 20);
+  const tire = M('#15101f', { roughness: 0.9, metalness: 0 });
+  const hub = M('#cbb8e8', { metalness: 0.8, roughness: 0.2 });
+  [[1.45, 0.85], [1.45, -0.85], [-1.55, 0.85], [-1.55, -0.85]].forEach(([x, z]) => {
+    const wg = new THREE.Group();
+    wg.position.set(x, 0.42, z);
+    wg.rotation.x = Math.PI / 2;
+    const wm = new THREE.Mesh(wheelGeo, tire);
+    // spokes make the spin visible
+    for (let i = 0; i < 3; i++) {
+      const spoke = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.32, 0.09), hub);
+      spoke.rotation.y = (i / 3) * Math.PI;
+      wm.add(spoke);
+    }
+    wg.add(wm);
+    g.add(wg);
+    wheels.push(wm);
+  });
+
+  // Headlights + glowing beam cones
+  const headlights = [];
+  [-0.6, 0.6].forEach(z => {
+    const lamp = new THREE.Mesh(
+      new THREE.SphereGeometry(0.11, 10, 10),
+      new THREE.MeshStandardMaterial({ color: '#fff7d6', emissive: '#ffe9a0', emissiveIntensity: 2 })
+    );
+    lamp.position.set(2.08, 0.95, z);
+    g.add(lamp);
+    const beam = new THREE.Mesh(
+      new THREE.ConeGeometry(0.55, 3.2, 16, 1, true),
+      new THREE.MeshBasicMaterial({ color: '#fff3c4', transparent: true, opacity: 0.08, side: THREE.DoubleSide, depthWrite: false })
+    );
+    beam.rotation.z = Math.PI / 2;
+    beam.position.set(3.7, 0.85, z);
+    g.add(beam);
+    headlights.push(beam);
+  });
+  // Taillights
+  [-0.7, 0.7].forEach(z => {
+    const tail = new THREE.Mesh(
+      new THREE.BoxGeometry(0.06, 0.3, 0.14),
+      new THREE.MeshStandardMaterial({ color: '#ff2244', emissive: '#ff2244', emissiveIntensity: 1.5 })
+    );
+    tail.position.set(-2.55, 1.0, z);
+    g.add(tail);
+  });
+
+  // The driver: a cat, paws on the wheel
+  const driverCat = createCat('#f59e0b', '#00ffcc');
+  driverCat.scale.setScalar(0.52);
+  driverCat.position.set(0.78, 1.15, -0.45);
+  driverCat.rotation.y = 0; // facing +X, eyes on the road
+  g.add(driverCat);
+  // Steering wheel
+  const sw = new THREE.Mesh(new THREE.TorusGeometry(0.18, 0.035, 8, 20), trim);
+  sw.rotation.y = Math.PI / 2;
+  sw.position.set(1.12, 1.45, -0.45);
+  g.add(sw);
+
+  return { group: g, door, wheels, headlights, driverCat };
+}
+
+// ─── PLAYER: Jesuscoins (robed Jesus avatar — halo, beard, sandals) ──────────
+function createPlayer() {
+  const g = new THREE.Group();
+  const skin = new THREE.MeshStandardMaterial({ color: new THREE.Color('#e8b08a'), roughness: 0.7 });
+  const robe = new THREE.MeshStandardMaterial({ color: new THREE.Color('#f5efe0'), roughness: 0.8 });
+  const hairMat = new THREE.MeshStandardMaterial({ color: new THREE.Color('#5a3a22'), roughness: 0.85 });
+  const sashMat = new THREE.MeshStandardMaterial({ color: new THREE.Color('#a83244'), roughness: 0.6 });
+  const sandalMat = new THREE.MeshStandardMaterial({ color: new THREE.Color('#7a5230'), roughness: 0.9 });
+
+  // Face: serene eyes, beard and mustache painted on
+  const faceCv = document.createElement('canvas');
+  faceCv.width = faceCv.height = 128;
+  const fc = faceCv.getContext('2d');
+  fc.fillStyle = '#e8b08a'; fc.fillRect(0, 0, 128, 128);
+  fc.fillStyle = '#5a3a22'; fc.fillRect(0, 0, 128, 20);                    // hairline
+  fc.fillStyle = '#241a30'; fc.fillRect(30, 46, 16, 16); fc.fillRect(82, 46, 16, 16); // eyes
+  fc.fillStyle = '#c98a66'; fc.fillRect(56, 64, 16, 14);                   // nose
+  fc.fillStyle = '#6b4423';
+  fc.fillRect(0, 78, 22, 50); fc.fillRect(106, 78, 22, 50);                // beard sides
+  fc.fillRect(0, 104, 128, 24);                                            // beard chin
+  fc.fillRect(34, 86, 60, 8);                                              // mustache
+  fc.fillStyle = '#8a4a3a'; fc.fillRect(52, 97, 24, 6);                    // gentle smile
+  const faceTex = new THREE.CanvasTexture(faceCv);
+  faceTex.magFilter = THREE.NearestFilter;
+  const faceMat = new THREE.MeshStandardMaterial({ map: faceTex, roughness: 0.7 });
+  const headMats = [skin, skin, skin, skin, faceMat, skin]; // +z face
+  const head = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.42, 0.42), headMats);
+  head.position.y = 1.5;
+  g.add(head);
+
+  // Long flowing hair: crown, back curtain, side curtains
+  const crown = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.14, 0.46), hairMat);
+  crown.position.y = 1.73;
+  g.add(crown);
+  const backHair = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.58, 0.12), hairMat);
+  backHair.position.set(0, 1.4, -0.22);
+  g.add(backHair);
+  [-1, 1].forEach(s => {
+    const side = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.52, 0.34), hairMat);
+    side.position.set(s * 0.25, 1.43, -0.06);
+    g.add(side);
+  });
+
+  // Halo
+  const halo = new THREE.Mesh(
+    new THREE.TorusGeometry(0.2, 0.028, 10, 28),
+    new THREE.MeshStandardMaterial({ color: '#ffd96b', emissive: '#ffcc33', emissiveIntensity: 2.2 })
+  );
+  halo.rotation.x = Math.PI / 2;
+  halo.position.y = 1.96;
+  g.add(halo);
+
+  // Robe: torso, flowing skirt, crimson sash
+  const torso = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.62, 0.3), robe);
+  torso.position.y = 1.0;
+  g.add(torso);
+  const skirt = new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.5, 0.36), robe);
+  skirt.position.y = 0.46;
+  g.add(skirt);
+  const sash = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.62, 0.32), sashMat);
+  sash.position.set(0.12, 1.0, 0.005);
+  g.add(sash);
+
+  // Limbs pivot at the shoulder/hip: mesh offset inside a pivot group
+  function limb(w, h, mat, x, y) {
+    const pivot = new THREE.Group();
+    pivot.position.set(x, y, 0);
+    const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, w), mat);
+    m.position.y = -h / 2;
+    pivot.add(m);
+    g.add(pivot);
+    return pivot;
+  }
+  // Sleeved arms with skin hands
+  const armL = limb(0.17, 0.5, robe, -0.34, 1.28);
+  const armR = limb(0.17, 0.5, robe, 0.34, 1.28);
+  [armL, armR].forEach(a => {
+    const hand = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.12, 0.13), skin);
+    hand.position.y = -0.56;
+    a.add(hand);
+  });
+  // Bare lower legs with sandals
+  const legL = limb(0.15, 0.62, skin, -0.13, 0.66);
+  const legR = limb(0.15, 0.62, skin, 0.13, 0.66);
+  [legL, legR].forEach(l => {
+    const sandal = new THREE.Mesh(new THREE.BoxGeometry(0.17, 0.05, 0.26), sandalMat);
+    sandal.position.set(0, -0.64, 0.03);
+    l.add(sandal);
+  });
+
+  // Name tag: Jesuscoins
+  const tag = makeTextSprite('Jesuscoins', { color: '#ffe96b', glow: '#ffcc00' });
+  tag.position.y = 2.35;
+  tag.scale.multiplyScalar(0.62);
+  g.add(tag);
+
+  return { group: g, armL, armR, legL, legR, tag, halo };
+}
+
+// ─── THE PICKUP: cinematic scene ─────────────────────────────────────────────
+(function initPickup() {
+  const canvas = document.getElementById('pickup-canvas');
+  const caption = document.getElementById('pickup-caption');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
+  renderer.setClearColor('#0d0620');
+
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.FogExp2('#0d0620', 0.028);
+  const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 200);
+
+  function resize() {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Lights
+  scene.add(new THREE.AmbientLight('#9d7bd8', 0.55));
+  const moon = new THREE.DirectionalLight('#cdb8ff', 0.8);
+  moon.position.set(-6, 12, 8);
+  scene.add(moon);
+  const stopGlow = new THREE.PointLight('#ff6eb4', 3, 14);
+  stopGlow.position.set(3, 4, 3);
+  scene.add(stopGlow);
+
+  // Road along X
+  const road = new THREE.Mesh(
+    new THREE.PlaneGeometry(120, 5),
+    new THREE.MeshStandardMaterial({ color: '#16101f', roughness: 0.95 })
+  );
+  road.rotation.x = -Math.PI / 2;
+  scene.add(road);
+  // Dashed center line
+  for (let i = -15; i <= 15; i++) {
+    const dash = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.2, 0.14),
+      new THREE.MeshBasicMaterial({ color: '#ffd96b' })
+    );
+    dash.rotation.x = -Math.PI / 2;
+    dash.position.set(i * 3.4, 0.01, 0);
+    scene.add(dash);
+  }
+  // Sidewalk / grass on the camera side
+  const walk = new THREE.Mesh(
+    new THREE.PlaneGeometry(120, 6),
+    new THREE.MeshStandardMaterial({ color: '#231640', roughness: 1 })
+  );
+  walk.rotation.x = -Math.PI / 2;
+  walk.position.set(0, -0.01, 5.5);
+  scene.add(walk);
+
+  // Pickup pad: glowing ring where Jesuscoins waits
+  const pad = new THREE.Mesh(
+    new THREE.RingGeometry(0.9, 1.25, 40),
+    new THREE.MeshBasicMaterial({ color: '#ff6eb4', transparent: true, opacity: 0.7, side: THREE.DoubleSide })
+  );
+  pad.rotation.x = -Math.PI / 2;
+  pad.position.set(3, 0.02, 3.4);
+  scene.add(pad);
+
+  // Bus-stop neon sign
+  const pole = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.06, 0.06, 3.4, 8),
+    new THREE.MeshStandardMaterial({ color: '#3a2a5a', metalness: 0.6 })
+  );
+  pole.position.set(5, 1.7, 4.2);
+  scene.add(pole);
+  const sign = makeTextSprite('🐾 KITTY EXPRESS STOP', { color: '#ff9de2', glow: '#ff6eb4', font: 'bold 52px Quicksand, sans-serif' });
+  sign.position.set(5, 3.6, 4.2);
+  sign.scale.multiplyScalar(0.9);
+  scene.add(sign);
+
+  // Street lamps
+  [-9, 9].forEach(x => {
+    const lp = pole.clone();
+    lp.position.set(x, 1.7, 3.8);
+    scene.add(lp);
+    const bulb = new THREE.Mesh(
+      new THREE.SphereGeometry(0.14, 10, 10),
+      new THREE.MeshStandardMaterial({ color: '#ffeab0', emissive: '#ffd96b', emissiveIntensity: 2 })
+    );
+    bulb.position.set(x, 3.45, 3.8);
+    scene.add(bulb);
+    const pl = new THREE.PointLight('#ffd96b', 1.2, 9);
+    pl.position.copy(bulb.position);
+    scene.add(pl);
+  });
+
+  // Stars + a fat low moon
+  const starGeo = new THREE.BufferGeometry();
+  const sp = new Float32Array(2500 * 3);
+  for (let i = 0; i < 2500; i++) {
+    sp[i*3] = (Math.random()-0.5)*140;
+    sp[i*3+1] = 2 + Math.random()*40;
+    sp[i*3+2] = -10 - Math.random()*60;
+  }
+  starGeo.setAttribute('position', new THREE.BufferAttribute(sp, 3));
+  scene.add(new THREE.Points(starGeo, new THREE.PointsMaterial({ color: '#fff', size: 0.12, transparent: true, opacity: 0.7 })));
+  const bigMoon = new THREE.Mesh(
+    new THREE.SphereGeometry(2.4, 24, 24),
+    new THREE.MeshBasicMaterial({ color: '#f4e9ff' })
+  );
+  bigMoon.position.set(-16, 12, -30);
+  scene.add(bigMoon);
+
+  // Cast: the van and the player
+  const van = createSprinterVan();
+  scene.add(van.group);
+  const player = createPlayer();
+  player.group.position.set(3, 0, 3.4);
+  player.group.rotation.y = -Math.PI / 2; // watching down the road for the van
+  scene.add(player.group);
+
+  // Exhaust puff pool
+  const puffs = [];
+  const puffMat = new THREE.MeshBasicMaterial({ color: '#9d8ab8', transparent: true, opacity: 0 });
+  for (let i = 0; i < 24; i++) {
+    const p = new THREE.Mesh(new THREE.SphereGeometry(0.12, 8, 8), puffMat.clone());
+    p.visible = false;
+    scene.add(p);
+    puffs.push({ mesh: p, life: 0 });
+  }
+  let puffIdx = 0;
+  function spawnPuff(x, z) {
+    const p = puffs[puffIdx++ % puffs.length];
+    p.mesh.position.set(x, 0.5, z + (Math.random()-0.5)*0.4);
+    p.mesh.scale.setScalar(1);
+    p.mesh.visible = true;
+    p.life = 1;
+  }
+
+  // Blessing pool: gold coins that shoot out the back once Jesuscoins boards
+  const coinGeo = new THREE.CylinderGeometry(0.09, 0.09, 0.03, 14);
+  const coins = [];
+  for (let i = 0; i < 60; i++) {
+    const c = new THREE.Mesh(coinGeo, new THREE.MeshStandardMaterial({
+      color: '#ffd700', emissive: '#ffaa00', emissiveIntensity: 0.9,
+      metalness: 0.9, roughness: 0.25, transparent: true,
+    }));
+    c.visible = false;
+    scene.add(c);
+    coins.push({ mesh: c, vel: new THREE.Vector3(), spin: 0, life: 0 });
+  }
+  let coinIdx = 0;
+  function spawnCoin(x, z) {
+    const c = coins[coinIdx++ % coins.length];
+    c.mesh.position.set(x, 1.2 + Math.random() * 0.8, z + (Math.random() - 0.5) * 0.9);
+    c.vel.set(-(0.04 + Math.random() * 0.09), 0.06 + Math.random() * 0.08, (Math.random() - 0.5) * 0.04);
+    c.spin = 0.15 + Math.random() * 0.2;
+    c.life = 1;
+    c.mesh.material.opacity = 1;
+    c.mesh.visible = true;
+  }
+
+  // Glowing cross that rises out the back of the van with the coins
+  const crossMat = new THREE.MeshStandardMaterial({
+    color: '#ffd96b', emissive: '#ffcc33', emissiveIntensity: 1.8,
+    metalness: 0.7, roughness: 0.3, transparent: true,
+  });
+  const cross = new THREE.Group();
+  const crossV = new THREE.Mesh(new THREE.BoxGeometry(0.16, 1.1, 0.16), crossMat);
+  const crossH = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.16, 0.16), crossMat);
+  crossH.position.y = 0.22;
+  cross.add(crossV, crossH);
+  const crossLight = new THREE.PointLight('#ffcc33', 0, 8);
+  cross.add(crossLight);
+  cross.visible = false;
+  scene.add(cross);
+
+  // ── Timeline ──
+  const CYCLE = 16; // seconds
+  const VAN_START = -26, VAN_STOP = 0, VAN_EXIT = 30;
+  const easeOut = u => 1 - Math.pow(1 - u, 3);
+  const easeIn = u => u * u * u;
+  const easeIO = u => u < 0.5 ? 4*u*u*u : 1 - Math.pow(-2*u+2, 3)/2;
+  const clamp01 = u => Math.max(0, Math.min(1, u));
+  const DOOR_CLOSED_X = -0.35;
+
+  const captions = [
+    [0,   'The Kitty Express approaches…'],
+    [4.2, 'Door\'s open. Hop in, Jesuscoins!'],
+    [5.6, 'Jesuscoins heads for the van'],
+    [8.4, 'Buckle up — cat at the wheel'],
+    [9.2, 'Blessed! Coins rain out the back 🪙✝️'],
+    [11.5,'Off to adventure 🐾'],
+    [14.5,'…he\'ll be back'],
+  ];
+  let lastCaption = '';
+
+  const startTime = performance.now();
+  let prevVanX = VAN_START;
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const elapsed = (performance.now() - startTime) / 1000;
+    const t = elapsed % CYCLE;
+
+    // captions
+    for (let i = captions.length - 1; i >= 0; i--) {
+      if (t >= captions[i][0]) {
+        if (lastCaption !== captions[i][1]) {
+          lastCaption = captions[i][1];
+          caption.style.opacity = '0';
+          setTimeout(() => { caption.textContent = lastCaption; caption.style.opacity = '1'; }, 250);
+        }
+        break;
+      }
+    }
+
+    // ── Van position ──
+    let vanX;
+    if (t < 4) {
+      vanX = VAN_START + (VAN_STOP - VAN_START) * easeOut(t / 4);
+    } else if (t < 10) {
+      vanX = VAN_STOP;
+    } else if (t < 14.5) {
+      vanX = VAN_STOP + (VAN_EXIT - VAN_STOP) * easeIn((t - 10) / 4.5);
+    } else {
+      vanX = VAN_START; // reset, parked offscreen
+    }
+    van.group.position.x = vanX;
+    van.group.position.z = 0.9; // camera-side lane
+    const vanSpeed = vanX - prevVanX;
+    prevVanX = vanX;
+
+    // wheels spin with actual speed; slight body lean on accel
+    van.wheels.forEach(w => { w.rotation.y += vanSpeed * 2.4; });
+    van.group.rotation.z = THREE.MathUtils.clamp(-vanSpeed * 0.35, -0.04, 0.04);
+    // headlight beams shimmer
+    van.headlights.forEach(b => { b.material.opacity = 0.06 + Math.abs(Math.sin(elapsed*3)) * 0.04; });
+    // driver cat bobs to the radio
+    van.driverCat.position.y = 1.15 + Math.sin(elapsed * 6) * 0.03;
+    van.driverCat.rotation.z = Math.sin(elapsed * 3) * 0.06;
+    // exhaust while moving
+    if (Math.abs(vanSpeed) > 0.01 && Math.random() < 0.5) {
+      spawnPuff(vanX - 2.6, 0.9);
+    }
+
+    // ── Door (slides rearward 4.0–5.2s, closes 9.0–9.8s) ──
+    let doorAmt = 0;
+    if (t >= 4 && t < 5.2) doorAmt = easeIO(clamp01((t - 4) / 1.2));
+    else if (t >= 5.2 && t < 9) doorAmt = 1;
+    else if (t >= 9 && t < 9.8) doorAmt = 1 - easeIO(clamp01((t - 9) / 0.8));
+    van.door.position.x = DOOR_CLOSED_X - doorAmt * 1.15;
+    van.door.position.z = 0.99 + doorAmt * 0.1;
+
+    // ── Player ──
+    const P = player.group;
+    const waitPos = new THREE.Vector3(3, 0, 3.4);
+    const doorPos = new THREE.Vector3(VAN_STOP - 0.35, 0, 2.0);
+    let walking = false;
+    if (t < 5.6) {
+      // waiting at the pad: idle bob + excited wave once the van is near
+      P.visible = true;
+      P.position.copy(waitPos);
+      P.position.y = Math.abs(Math.sin(elapsed * 2.2)) * 0.04;
+      P.rotation.y = -Math.PI / 2; // watching the van roll in
+      const waving = t > 1.5 && t < 4.5;
+      player.armR.rotation.z = waving ? Math.PI - 0.4 + Math.sin(elapsed * 9) * 0.45 : Math.sin(elapsed*1.3)*0.05;
+      player.armL.rotation.x = Math.sin(elapsed * 1.3) * 0.06;
+      player.legL.rotation.x = 0; player.legR.rotation.x = 0;
+    } else if (t < 8.4) {
+      // walk to the open door
+      P.visible = true;
+      const u = easeIO(clamp01((t - 5.6) / 2.8));
+      P.position.lerpVectors(waitPos, doorPos, u);
+      P.position.y = 0;
+      const dir = doorPos.clone().sub(waitPos);
+      P.rotation.y = Math.atan2(dir.x, dir.z); // face travel direction (face is +z)
+      walking = u > 0.02 && u < 0.98;
+      const swing = Math.sin(elapsed * 10) * (walking ? 0.7 : 0);
+      player.legL.rotation.x = swing;
+      player.legR.rotation.x = -swing;
+      player.armL.rotation.x = -swing * 0.8;
+      player.armR.rotation.x = swing * 0.8;
+      player.armR.rotation.z = 0;
+    } else if (t < 9.2) {
+      // hop in: up and into the dark doorway
+      P.visible = true;
+      const u = easeIO(clamp01((t - 8.4) / 0.8));
+      P.position.lerpVectors(doorPos, new THREE.Vector3(VAN_STOP - 0.35, 0.55, 0.8), u);
+      P.rotation.y = Math.PI; // butt to camera, hopping in — keep face toward door
+      const hop = Math.sin(u * Math.PI);
+      P.position.y += hop * 0.35;
+      player.legL.rotation.x = -0.9 * hop;
+      player.legR.rotation.x = -0.9 * hop;
+      player.tag.material.opacity = 1 - u;
+    } else if (t < 14.5) {
+      P.visible = false; // riding inside
+    } else {
+      // reset: back at the pad for the next loop
+      P.visible = true;
+      P.position.copy(waitPos);
+      player.tag.material.opacity = 1;
+      player.legL.rotation.x = 0; player.legR.rotation.x = 0;
+      player.armR.rotation.z = 0; player.armL.rotation.x = 0;
+    }
+
+    // ── Exhaust puffs decay ──
+    puffs.forEach(p => {
+      if (!p.mesh.visible) return;
+      p.life -= 0.025;
+      if (p.life <= 0) { p.mesh.visible = false; return; }
+      p.mesh.material.opacity = p.life * 0.35;
+      p.mesh.scale.multiplyScalar(1.035);
+      p.mesh.position.y += 0.012;
+    });
+
+    // ── Blessing: coins shoot out the back + cross rises, once he's aboard ──
+    const blessing = t >= 9 && t < 14.5;
+    if (blessing && Math.random() < (t < 10.5 ? 0.9 : 0.45)) {
+      spawnCoin(vanX - 2.7, 0.9);
+    }
+    cross.visible = blessing;
+    if (blessing) {
+      const cu = clamp01((t - 9) / 0.6);
+      cross.scale.setScalar(0.4 + cu * 0.8);
+      // emerges from the rear bumper, detaches and hovers over the stop as the van exits
+      cross.position.set(Math.min(vanX - 3.1, 1.5), 1.4 + (t - 9) * 0.16 + Math.sin(elapsed * 2) * 0.12, 0.9);
+      cross.rotation.y += 0.03;
+      crossMat.opacity = t > 13.5 ? clamp01((14.5 - t)) : 1;
+      crossMat.emissiveIntensity = 1.4 + Math.sin(elapsed * 5) * 0.6;
+      crossLight.intensity = 2.5 * crossMat.opacity;
+    }
+    coins.forEach(c => {
+      if (!c.mesh.visible) return;
+      c.life -= 0.008;
+      if (c.life <= 0) { c.mesh.visible = false; return; }
+      c.vel.y -= 0.0045;
+      c.mesh.position.add(c.vel);
+      if (c.mesh.position.y < 0.06) { // bounce off the road
+        c.mesh.position.y = 0.06;
+        c.vel.y *= -0.45;
+        c.vel.x *= 0.8;
+      }
+      c.mesh.rotation.x += c.spin;
+      c.mesh.rotation.z += c.spin * 0.6;
+      c.mesh.material.opacity = Math.min(1, c.life * 3);
+    });
+
+    // halo shimmer
+    player.halo.position.y = 1.96 + Math.sin(elapsed * 2.2) * 0.035;
+    player.halo.rotation.z = elapsed * 0.8;
+
+    // ── Cinematic camera: track the action ──
+    let focus;
+    if (t < 5.6) focus = new THREE.Vector3((vanX + 3) / 2, 1.2, 1.8);          // wide: van + player
+    else if (t < 9.2) focus = P.position.clone().add(new THREE.Vector3(-0.5, 1.1, 0)); // follow Jesuscoins
+    else focus = new THREE.Vector3(THREE.MathUtils.clamp(vanX, -4, 14), 1.4, 0.9);     // follow the van out
+    const camTargetPos = focus.clone().add(new THREE.Vector3(
+      Math.sin(elapsed * 0.18) * 1.2 - 1.5,
+      2.6 + Math.sin(elapsed * 0.13) * 0.3,
+      9.5
+    ));
+    camera.position.lerp(camTargetPos, 0.035);
+    if (!camera.userData.init) { camera.position.copy(camTargetPos); camera.userData.init = true; }
+    const look = camera.userData.look || (camera.userData.look = focus.clone());
+    look.lerp(focus, 0.05);
+    camera.lookAt(look);
+
+    // pad pulse + sign sway
+    pad.material.opacity = 0.45 + Math.sin(elapsed * 2.5) * 0.25;
+    sign.position.y = 3.6 + Math.sin(elapsed * 1.1) * 0.06;
+
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
+
+// ─── NODALUX KITTIES: NFT MINT (van upgrades + kitty power-ups) ──────────────
+// One shared offscreen renderer snapshots each 3D NFT to a PNG, so we don't
+// burn a WebGL context per card.
+(function initNFTs() {
+  const glowMat = (c, i = 1.5) => new THREE.MeshStandardMaterial({
+    color: new THREE.Color(c), emissive: new THREE.Color(c), emissiveIntensity: i,
+    transparent: true, opacity: 0.95,
+  });
+  const chrome = new THREE.MeshStandardMaterial({ color: '#cbb8e8', metalness: 0.9, roughness: 0.2 });
+
+  function vanBase(scene, paint) {
+    const van = createSprinterVan(paint);
+    van.group.rotation.y = -0.5; // three-quarter beauty shot
+    scene.add(van.group);
+    return van.group;
+  }
+
+  const VAN_CAM = [6.2, 3.6, 7.2], VAN_LOOK = [0, 1.2, 0];
+  const CAT_CAM = [0, 1.1, 4.2], CAT_LOOK = [0, 0.5, 0];
+
+  const NFTS = [
+    {
+      type: 'van', name: 'Turbo Thrusters', rarity: 'legendary', price: '12.0',
+      stat: '<b>+40% top speed</b> · twin boosters for never-late pickups',
+      cam: VAN_CAM, look: VAN_LOOK,
+      build(scene) {
+        const v = vanBase(scene, '#f3eef7');
+        [-0.55, 0.55].forEach(z => {
+          const booster = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.26, 0.7, 14), chrome);
+          booster.rotation.z = Math.PI / 2;
+          booster.position.set(-2.8, 1.1, z);
+          v.add(booster);
+          const flame = new THREE.Mesh(new THREE.ConeGeometry(0.2, 1.0, 12), glowMat('#ff8c1a', 2.2));
+          flame.rotation.z = Math.PI / 2; // exhaust points rearward
+          flame.position.set(-3.65, 1.1, z);
+          v.add(flame);
+        });
+      },
+    },
+    {
+      type: 'van', name: 'Neon Underglow', rarity: 'epic', price: '5.5',
+      stat: '<b>+15 style</b> · customers tip double when the street glows pink',
+      cam: VAN_CAM, look: VAN_LOOK,
+      build(scene) {
+        const v = vanBase(scene, '#241a3a');
+        const ring = new THREE.Mesh(
+          new THREE.RingGeometry(1.0, 2.4, 40),
+          new THREE.MeshBasicMaterial({ color: '#ff2dad', transparent: true, opacity: 0.55, side: THREE.DoubleSide })
+        );
+        ring.rotation.x = -Math.PI / 2;
+        ring.position.y = 0.05;
+        ring.scale.x = 1.7;
+        v.add(ring);
+        const gl = new THREE.PointLight('#ff2dad', 4, 9);
+        gl.position.set(-0.3, 0.4, 0);
+        v.add(gl);
+      },
+    },
+    {
+      type: 'van', name: 'Whisker-Nav Antenna', rarity: 'rare', price: '2.3',
+      stat: '<b>+20 navigation</b> · locks onto any waiting customer, citywide',
+      cam: VAN_CAM, look: VAN_LOOK,
+      build(scene) {
+        const v = vanBase(scene, '#f3eef7');
+        const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.05, 1.1, 8), chrome);
+        mast.position.set(-0.7, 3.0, 0);
+        v.add(mast);
+        const tip = new THREE.Mesh(new THREE.SphereGeometry(0.12, 10, 10), glowMat('#00ffcc', 2));
+        tip.position.set(-0.7, 3.6, 0);
+        v.add(tip);
+        [0.32, 0.58].forEach(rr => {
+          const wave = new THREE.Mesh(new THREE.TorusGeometry(rr, 0.02, 8, 24), glowMat('#00ffcc', 1.4));
+          wave.position.set(-0.7, 3.6, 0);
+          v.add(wave);
+        });
+      },
+    },
+    {
+      type: 'van', name: 'Bubblegum Wrap', rarity: 'common', price: '0.9',
+      stat: '<b>+5 charm</b> · full-body pink wrap, kitty-approved paintwork',
+      cam: VAN_CAM, look: VAN_LOOK,
+      build(scene) { vanBase(scene, '#ff6eb4'); },
+    },
+    {
+      type: 'cat', name: 'Silver Tongue', rarity: 'legendary', price: '9.9',
+      stat: '<b>+25 customer charm</b> · greets every rider by name',
+      cam: CAT_CAM, look: CAT_LOOK,
+      build(scene) {
+        scene.add(createCat('#f5c84b', '#00ffcc'));
+        const bubble = makeTextSprite('“Right this way!”', {
+          color: '#1a0a2e', glow: '#ffffff', bg: 'rgba(255,248,240,0.95)',
+          font: 'bold 48px Quicksand, sans-serif',
+        });
+        bubble.position.set(0.85, 1.65, 0.2);
+        bubble.scale.multiplyScalar(0.5);
+        scene.add(bubble);
+      },
+    },
+    {
+      type: 'cat', name: 'Pathfinder Whiskers', rarity: 'epic', price: '4.2',
+      stat: '<b>+20 navigation</b> · reads the stars, never needs the map',
+      cam: CAT_CAM, look: CAT_LOOK,
+      build(scene) {
+        scene.add(createCat('#06b6d4', '#ffcc00'));
+        const ring = new THREE.Mesh(new THREE.TorusGeometry(0.52, 0.03, 8, 32), glowMat('#00ffcc', 1.6));
+        ring.rotation.x = Math.PI / 2.3;
+        ring.position.y = 1.45;
+        scene.add(ring);
+        const needle = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.3, 8), glowMat('#ff4d6d', 1.8));
+        needle.rotation.z = -Math.PI / 2;
+        needle.position.set(0.55, 1.45, 0);
+        scene.add(needle);
+      },
+    },
+    {
+      type: 'cat', name: 'Turbo Paws', rarity: 'rare', price: '1.8',
+      stat: '<b>+15 speed</b> · zoomies on demand, flame decals included',
+      cam: CAT_CAM, look: CAT_LOOK,
+      build(scene) {
+        scene.add(createCat('#f59e0b', '#00ffcc'));
+        [[-0.25, 0.2], [0.25, 0.2], [-0.25, -0.2], [0.25, -0.2]].forEach(([x, z]) => {
+          const f = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.32, 8), glowMat('#ff8c1a', 2));
+          f.rotation.z = Math.PI / 2;
+          f.position.set(x - 0.28, -0.7, z);
+          scene.add(f);
+        });
+        for (let i = 0; i < 3; i++) {
+          const streak = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.04, 0.04), glowMat('#ffd96b', 1.4));
+          streak.position.set(-0.95, 0.1 + i * 0.35, 0.15);
+          scene.add(streak);
+        }
+      },
+    },
+    {
+      type: 'cat', name: 'Mega Purr', rarity: 'common', price: '0.7',
+      stat: '<b>+10 soothing</b> · 25Hz healing purr calms any anxious rider',
+      cam: CAT_CAM, look: CAT_LOOK,
+      build(scene) {
+        scene.add(createCat('#ff6eb4', '#00ffcc'));
+        [0.75, 1.05, 1.35].forEach((rr, i) => {
+          const wave = new THREE.Mesh(new THREE.TorusGeometry(rr, 0.025, 8, 36), glowMat('#ff9de2', 1.6 - i * 0.4));
+          wave.position.y = 0.4;
+          scene.add(wave);
+        });
+      },
+    },
+  ];
+
+  const SIZE = 512;
+  const offCv = document.createElement('canvas');
+  offCv.width = offCv.height = SIZE;
+  const offRenderer = new THREE.WebGLRenderer({ canvas: offCv, antialias: true, alpha: true, preserveDrawingBuffer: true });
+  offRenderer.setSize(SIZE, SIZE, false);
+  offRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+  function snapshot(n) {
+    const scene = new THREE.Scene();
+    scene.add(new THREE.AmbientLight('#ffffff', 0.55));
+    const key = new THREE.PointLight('#ff9de2', 3, 40); key.position.set(5, 6, 6); scene.add(key);
+    const rim = new THREE.PointLight('#a855f7', 2.5, 40); rim.position.set(-6, 4, -3); scene.add(rim);
+    const fill = new THREE.PointLight('#ffffff', 1.3, 30); fill.position.set(0, 2, 7); scene.add(fill);
+    n.build(scene);
+    const cam = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    cam.position.set(n.cam[0], n.cam[1], n.cam[2]);
+    cam.lookAt(n.look[0], n.look[1], n.look[2]);
+    offRenderer.render(scene, cam);
+    return offCv.toDataURL('image/png');
+  }
+
+  function mint() {
+    const grid = document.getElementById('nft-grid');
+    NFTS.forEach((n, i) => {
+      const card = document.createElement('div');
+      card.className = 'nft-card';
+      card.style.animation = `nft-in 0.6s ease ${i * 0.08}s both`;
+      card.innerHTML = `
+        <div class="nft-img-wrap">
+          <img src="${snapshot(n)}" alt="${n.name}">
+          <div class="nft-holo"></div>
+          <span class="nft-type t-${n.type}">${n.type === 'van' ? '🚐 Van Upgrade' : '🐱 Kitty Power-Up'}</span>
+          <span class="nft-serial">#00${i + 1}</span>
+        </div>
+        <div class="nft-meta">
+          <div class="nft-collection">NodaLux Kitties</div>
+          <h3>${n.name}</h3>
+          <div class="nft-stat">${n.stat}</div>
+          <div class="nft-row">
+            <span class="nft-rarity r-${n.rarity}">${n.rarity}</span>
+            <span class="nft-price">Ξ ${n.price} <span>ETH</span></span>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+    offRenderer.dispose();
+  }
+
+  // wait for Pacifico/Quicksand so the van livery renders with the right font
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(mint);
+  else mint();
+})();
+
+// ─── BACKGROUND MUSIC: kitty-express.mp3 ─────────────────────────────────────
+(function initMusic() {
+  const audio = document.getElementById('bg-music');
+  const btn = document.getElementById('music-toggle');
+  const icon = document.getElementById('music-icon');
+  audio.volume = 0.55;
+
+  function update() {
+    const playing = !audio.paused;
+    btn.classList.toggle('playing', playing);
+    icon.textContent = playing ? '🔊' : '🎵';
+  }
+  audio.addEventListener('play', update);
+  audio.addEventListener('pause', update);
+
+  btn.addEventListener('click', () => {
+    if (audio.paused) audio.play().catch(() => {});
+    else audio.pause();
+  });
+
+  // autoplay is usually blocked: try once, then start on the first interaction
+  audio.play().catch(() => {});
+  window.addEventListener('pointerdown', () => {
+    if (audio.paused && !btn.classList.contains('playing')) audio.play().catch(() => {});
+  }, { once: true });
+})();
+
+// ─── FLOATING PARTICLES DOM ───────────────────────────────────────────────────
+(function spawnParticles() {
+  const bg = document.getElementById('particles-bg');
+  const colors = ['#ff6eb4','#a855f7','#c084fc','#ff9de2','#ffffff'];
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = 3 + Math.random() * 6;
+    p.style.cssText = `
+      width:${size}px;height:${size}px;
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      animation-duration:${8+Math.random()*12}s;
+      animation-delay:${Math.random()*10}s;
+    `;
+    bg.appendChild(p);
+  }
+})();
+
+// ─── SCROLL REVEAL ────────────────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.cat-card, .fact-card, .love-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>

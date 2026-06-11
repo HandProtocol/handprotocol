@@ -10,6 +10,10 @@
   node_bundler = "esbuild"
 
 [[edge_functions]]
+  function = "kitties-auth"
+  path = "/kitties/*"
+
+[[edge_functions]]
   function = "grants-auth"
   path = "/grants/*"
 
@@ -249,6 +253,11 @@
 [[redirects]]
   from = "/board-prospect"
   to = "https://github.com/HandProtocol/handprotocol/blob/main/governance/board/director-prospect-brief.md"
+  status = 301
+
+[[redirects]]
+  from = "/kitties"
+  to = "/kitties/"
   status = 301
 
 # 404 fallback → branded compass page with radial sitemap (3D hand pointing to sections).
