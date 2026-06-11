@@ -21,3 +21,7 @@ State when paused, what's NOT done, in priority order:
 5. **Premium /impeccable upgrades** for top leads not started (wait for photos).
 6. Slug lists for the batches live in the campaign frontmatter (grep
    "^campaign:" biz/*/lead.md) — /tmp data may be gone.
+7. **Census recheck pool**: 908 of 2,194 checks errored (timeouts + network
+   drop), so the 196-qualified list undercounts; ~476 errored places showed no
+   site on the discovery card. Re-shard rows with website_status=error from
+   /tmp/atx-census/checked-*.ndjson (or the registry) through check-websites.mts.
