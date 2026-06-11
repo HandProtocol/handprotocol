@@ -142,7 +142,19 @@ export function buildFallbackCopy(
   const ranked = [...reviews].sort(
     (a, b) => (b.rating ?? 0) - (a.rating ?? 0) || b.body.length - a.body.length,
   );
-  const testimonials = ranked.slice(0, 4).map((r) => ({
+  const top = ranked.slice(0, 4);
+  // Add one punchy short review when there is one: the template's pull-quote
+  // band wants a clean line it can set huge, and length-ranked picks are all
+  // long. Still verbatim, still the customer's words.
+  const punchy = ranked.find(
+    (r) =>
+      (r.rating ?? 0) >= 4 &&
+      r.body.length >= 25 &&
+      r.body.length <= 160 &&
+      !/(!{3,}|\.{4,})/.test(r.body) &&
+      !top.includes(r),
+  );
+  const testimonials = (punchy ? [...top, punchy] : top).map((r) => ({
     body: r.body,
     author: r.author,
   }));
@@ -153,7 +165,7 @@ export function buildFallbackCopy(
       lead.google_rating != null
         ? `Rated ${lead.google_rating} on Google by ${lead.reviews_count ?? "our"} customers.`
         : `Reliable ${cat}${place}.`,
-    about: `${lead.name} is a ${cat}${place}. The reviews below come straight from our customers on Google.`,
+    about: `${lead.name} is a ${cat}${place}. The reviews on this page come straight from our customers on Google, word for word.`,
     services: [],
     testimonials,
     cta: lead.phone ? "Call us" : "Find us on Google",
