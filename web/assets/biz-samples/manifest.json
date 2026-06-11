@@ -1,0 +1,200 @@
+{
+  "_note": "Copyright-clean ambient imagery for PUBLIC demo pages. Every image permits commercial use with NO attribution requirement (CC0/Public Domain or Unsplash License). See LICENSES.md. Never use a business's real photos here — those are gated to pitch pages.",
+  "images": [
+    {
+      "file": "taco-1.webp",
+      "category": "taco",
+      "tags": ["street tacos", "cilantro", "onion", "lime", "corn tortilla", "mexican"],
+      "w": 960, "h": 1444,
+      "source_url": "https://stocksnap.io/photo/mexican-tacos-UPG7YS3LGW",
+      "author": "Tim Sullivan",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "taco-2.webp",
+      "category": "taco",
+      "tags": ["tacos", "plate", "shredded meat", "pico de gallo", "restaurant table"],
+      "w": 1024, "h": 684,
+      "source_url": "https://www.rawpixel.com/image/5970864/tortillas",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "taco-3.webp",
+      "category": "taco",
+      "tags": ["fish tacos", "slaw", "lime", "seafood", "flour tortilla"],
+      "w": 1600, "h": 1092,
+      "source_url": "https://wordpress.org/photos/photo/65365382d8/",
+      "author": "Michelle Frechette",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "bbq-1.webp",
+      "category": "bbq",
+      "tags": ["ribs", "grill", "glazed", "barbecue", "cherry tomatoes"],
+      "w": 1024, "h": 576,
+      "source_url": "https://www.rawpixel.com/image/5920703/photo-image-public-domain-summer-food",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "bbq-2.webp",
+      "category": "bbq",
+      "tags": ["smoked ribs", "bark", "spice rub", "close-up", "smokehouse"],
+      "w": 1024, "h": 680,
+      "source_url": "https://www.rawpixel.com/image/5920641/photo-image-public-domain-leaf-red",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "burger-1.webp",
+      "category": "burger",
+      "tags": ["cheeseburger", "fries", "plate", "fresh vegetables", "diner"],
+      "w": 1024, "h": 684,
+      "source_url": "https://www.rawpixel.com/image/5970429/burger-fries",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "coffee-1.webp",
+      "category": "coffee",
+      "tags": ["latte art", "cappuccino", "top-down", "wood table", "cafe"],
+      "w": 1024, "h": 684,
+      "source_url": "https://www.rawpixel.com/image/5908079/image-public-domain-art-coffee",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "coffee-2.webp",
+      "category": "coffee",
+      "tags": ["barista", "pouring", "latte art", "espresso machine", "hands"],
+      "w": 819, "h": 1024,
+      "source_url": "https://www.rawpixel.com/image/5926460/photo-image-public-domain-art-hands",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "bakery-1.webp",
+      "category": "bakery",
+      "tags": ["croissants", "pastries", "golden", "close-up", "french bakery"],
+      "w": 1600, "h": 1066,
+      "source_url": "https://wordpress.org/photos/photo/210622cf27/",
+      "author": "Reyes Martínez",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "bakery-2.webp",
+      "category": "bakery",
+      "tags": ["danish", "puff pastry", "cooling rack", "baked", "sugar"],
+      "w": 1024, "h": 684,
+      "source_url": "https://www.rawpixel.com/image/463160/free-photo-image-patisserie-baked-bakery",
+      "author": "Markus Spiske",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "asian-1.webp",
+      "category": "asian",
+      "tags": ["xiaolongbao", "soup dumplings", "bamboo steamer", "dim sum"],
+      "w": 1024, "h": 768,
+      "source_url": "https://www.rawpixel.com/image/5921090/xiaolongbao-free-food-public-domain-cc0-photo",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "asian-2.webp",
+      "category": "asian",
+      "tags": ["baozi", "steamed buns", "dumplings", "steamer basket", "street food"],
+      "w": 1024, "h": 728,
+      "source_url": "https://www.rawpixel.com/image/5925639/photo-image-public-domain-food-free",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "thai-1.webp",
+      "category": "thai",
+      "tags": ["pad thai", "noodles", "lime", "peanuts", "chili", "plated"],
+      "w": 1024, "h": 684,
+      "source_url": "https://www.rawpixel.com/image/5928354/photo-image-public-domain-food-free",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "viet-1.webp",
+      "category": "viet",
+      "tags": ["pho", "noodle soup", "herbs", "lime", "hands", "vietnamese"],
+      "w": 1024, "h": 600,
+      "source_url": "https://www.rawpixel.com/image/5975051/eating-vietnamese-pho-soup-with-fresh-lime",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "viet-2.webp",
+      "category": "viet",
+      "tags": ["banh mi", "baguette", "baskets", "hands", "top-down", "vietnamese"],
+      "w": 1024, "h": 1024,
+      "source_url": "https://www.rawpixel.com/image/447770/free-photo-image-sandwich-bread-vietnamese-food",
+      "author": "Jakub Kapusnak",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "med-1.webp",
+      "category": "mediterranean",
+      "tags": ["falafel", "pita", "tabbouleh", "takeaway", "fresh vegetables"],
+      "w": 683, "h": 1024,
+      "source_url": "https://www.rawpixel.com/image/448189/free-photo-image-falafel-sandwich-bread",
+      "author": "Jakub Kapusnak",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "seafood-1.webp",
+      "category": "seafood",
+      "tags": ["grilled shrimp", "prawns", "char", "platter"],
+      "w": 1024, "h": 684,
+      "source_url": "https://www.rawpixel.com/image/6032120/grilled-shrimp-free-public-domain-cc0-photo",
+      "author": "rawpixel",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "breakfast-1.webp",
+      "category": "breakfast",
+      "tags": ["eggs benedict", "hollandaise", "asparagus", "brunch", "plated"],
+      "w": 960, "h": 640,
+      "source_url": "https://stocksnap.io/photo/breakfast-eggs-KZTN4JDEIX",
+      "author": "Foodie Girl",
+      "license": "CC0 1.0"
+    },
+    {
+      "file": "caribbean-1.webp",
+      "category": "caribbean",
+      "tags": ["jerk chicken", "smoker", "grill", "tongs", "smoke"],
+      "w": 1600, "h": 1068,
+      "source_url": "https://unsplash.com/photos/a-grill-with-meat-on-it-ofXy_NRwyjI",
+      "author": "Jopopz Tallorin",
+      "license": "Unsplash License"
+    },
+    {
+      "file": "default-1.webp",
+      "category": "default",
+      "tags": ["market", "produce", "fruit", "stall", "colorful", "ambient"],
+      "w": 1023, "h": 652,
+      "source_url": "https://www.flickr.com/photos/88123769@N02/11194506414",
+      "author": "Bernard Spragg",
+      "license": "CC0 1.0"
+    }
+  ],
+  "categoryMap": {
+    "taco|mexican|taqueria|antojitos|birria|pupus": ["taco-1.webp", "taco-2.webp", "taco-3.webp"],
+    "bbq|barbecue|smoke": ["bbq-1.webp", "bbq-2.webp"],
+    "burger": ["burger-1.webp"],
+    "coffee|cafe": ["coffee-1.webp", "coffee-2.webp"],
+    "baker|panader|donut|pastry|crepe|dessert|paleta|shaved ice": ["bakery-1.webp", "bakery-2.webp"],
+    "asian|chinese|noodle|momo|dumpling": ["asian-1.webp", "asian-2.webp"],
+    "thai": ["thai-1.webp"],
+    "viet|banh|pho": ["viet-1.webp", "viet-2.webp"],
+    "mediterranean|halal|gyro|shawarma|kebab|turkish|afghan|persian": ["med-1.webp"],
+    "caribbean|jamaican|jerk|puerto": ["caribbean-1.webp"],
+    "seafood|mariscos|crab|fish": ["seafood-1.webp", "taco-3.webp"],
+    "breakfast|brunch": ["breakfast-1.webp"],
+    "_default": ["default-1.webp", "asian-2.webp", "caribbean-1.webp", "coffee-2.webp"]
+  }
+}

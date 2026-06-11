@@ -11,9 +11,10 @@
   top --max in page order, upgrades each to w1600, downloads, and converts to
   webp with ffmpeg.
 
-  Writes:
-    web/demos/<slug>/img/photo-1.webp .. photo-N.webp
-    web/demos/<slug>/img/manifest.json   [{file,w,h}, ...]
+  Writes (the GATED pitch path; scraped photos never render on the public
+  demo page, they appear only in the pitch page's "With your photos" section):
+    web/demos/<slug>/pitch/img/photo-1.webp .. photo-N.webp
+    web/demos/<slug>/pitch/img/manifest.json   [{file,w,h}, ...]
 
   Last stdout line is machine-readable: {"slug","photos":[{"file","w","h"}...]}
   A search-fallback URL with no place panel (or a place with no photos) is not
@@ -29,7 +30,7 @@ import { chromium, type Browser, type Page } from "playwright-core";
 process.chdir(fileURLToPath(new URL("../", import.meta.url)));
 
 const { readBizFile } = await import("../src/lib/develop/markdown.ts");
-const { bizLeadMarkdownPath, demoSiteDir } = await import("../src/lib/develop/paths.ts");
+const { bizLeadMarkdownPath, demoPitchDir } = await import("../src/lib/develop/paths.ts");
 
 // ─── args ───────────────────────────────────────────────────────────────────
 const argv = process.argv.slice(2);
@@ -285,7 +286,7 @@ try {
   }
   console.error(`found ${picks.length} candidate photo(s)`);
 
-  const imgDir = path.join(demoSiteDir(slug), "img");
+  const imgDir = path.join(demoPitchDir(slug), "img");
   type Entry = { file: string; w: number; h: number };
   const manifest: Entry[] = [];
 

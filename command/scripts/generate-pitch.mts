@@ -20,9 +20,11 @@ import {
   parsePitchScript,
   type PitchLang,
 } from "../src/lib/develop/prompts.ts";
-import { renderPitchPage } from "../src/lib/develop/pitch-template.ts";
+import fs from "node:fs";
+import path from "node:path";
+import { renderPitchPage, type PitchPhoto } from "../src/lib/develop/pitch-template.ts";
 import { writeFileAtomic } from "../src/lib/develop/markdown.ts";
-import { demoPitchPath, demoPublicUrl } from "../src/lib/develop/paths.ts";
+import { demoPitchDir, demoPitchPath, demoPublicUrl } from "../src/lib/develop/paths.ts";
 import type { BizLead, PitchScript } from "../src/lib/develop/types.ts";
 
 const args = process.argv.slice(2);
@@ -129,8 +131,26 @@ if (env.ANTHROPIC_API_KEY) {
   }
 }
 
+// The business's scraped Maps photos, when scrape-photos has captured them.
+// They live at web/demos/<slug>/pitch/img/ (gated path only, never public)
+// and render as the "With your photos" section for the rep.
+let photos: PitchPhoto[] = [];
+try {
+  const raw = JSON.parse(
+    fs.readFileSync(path.join(demoPitchDir(slug), "img", "manifest.json"), "utf8"),
+  ) as unknown;
+  if (Array.isArray(raw)) {
+    photos = raw.filter(
+      (p): p is PitchPhoto =>
+        !!p && typeof p.file === "string" && Number.isFinite(p.w) && Number.isFinite(p.h),
+    );
+  }
+} catch {
+  /* no scraped photos for this lead */
+}
+
 script = clean(script);
-const html = renderPitchPage(lead as BizLead, script, demoUrl);
+const html = renderPitchPage(lead as BizLead, script, demoUrl, photos);
 const out = outArg ? outArg.split("=").slice(1).join("=") : demoPitchPath(slug);
 if (dry) {
   console.log(`[dry] would write ${out} (${html.length} bytes), source=${source}`);

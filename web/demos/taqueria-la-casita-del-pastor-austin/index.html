@@ -5,111 +5,253 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Taqueria La Casita del pastor · Austin</title>
 <meta name="description" content="Rated 4.9 on Google by 237 customers." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Taqueria La Casita del pastor" />
+<meta property="og:description" content="Rated 4.9 on Google by 237 customers." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C03A14'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23FFF4E4'%3ET%3C/text%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --ink: #211d18; --dim: #5c544a; --line: #e7e0d4;
-    --bg: #faf7f1; --card: #ffffff; --accent: #b4541e; --accent-soft: #d97742;
+    --bg: #FBF4E4; --ink: #2D1A10; --dim: #6E5847; --line: #EAD9BD; --card: #FFFDF6;
+    --accent: #C03A14; --accent-ink: #FFF4E4; --gold: #F0A832;
+    --tint: #F6E8CC; --band: #8E2912; --band-ink: #FFEFD9;
+    --deep-ink: #F7E7D4;
+    --chip-bg: #C03A1414;
+    --t-hero: clamp(3rem, 11vw, 6.2rem);
+    --maxw: 1060px;
+    --shadow: 0 16px 38px -20px rgba(0,0,0,0.45);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0; color: var(--ink); background: var(--bg);
-    font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: clamp(1rem, 0.97rem + 0.2vw, 1.12rem); line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 600; line-height: 1.15; }
   a { color: var(--accent); }
-  .wrap { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3, .display {
+    font-family: "Anton", "Arial Narrow", sans-serif;
+    font-weight: 400;
+    line-height: 1.04; margin: 0;
+    text-transform: uppercase; letter-spacing: 0.015em;
+  }
+  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(20px, 5vw, 48px); }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.74rem;
+    font-weight: 700; color: var(--accent); margin: 0 0 14px;
+  }
+
+  /* ── Buttons ─────────────────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.55em;
+    min-height: 52px; padding: 0.75em 1.45em;
+    border-radius: 999px; border: 2px solid transparent;
+    font-weight: 700; font-size: 1.02rem; text-decoration: none;
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+  }
+  .btn svg { width: 1.1em; height: 1.1em; flex: none; }
+  .btn-solid { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow); }
+  .btn-solid:hover { transform: translateY(-2px); }
+  .btn-line { border-color: currentColor; color: inherit; }
+  .btn-line:hover { transform: translateY(-2px); }
+  :where(a, button):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+
+  /* ── Hero ─────────────────────────────────────────────────────────────── */
   header.hero {
-    padding: 88px 0 64px; text-align: center;
-    background: linear-gradient(180deg, #fff8ef 0%, var(--bg) 100%);
-    border-bottom: 1px solid var(--line);
+    position: relative; overflow: hidden;
+    background: linear-gradient(168deg, #93290F 0%, #5F1A08 100%);
+    color: #F7E7D4;
   }
-  header.hero h1 { font-size: clamp(2.2rem, 6vw, 3.6rem); margin: 0 0 8px; }
-  header.hero .kicker {
-    text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.72rem;
-    color: var(--accent); font-weight: 700; margin: 0 0 18px;
+  header.hero::before {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
+    background: repeating-linear-gradient(90deg, var(--gold) 0 34px, var(--accent) 34px 68px);
+    z-index: 2;
   }
-  header.hero .subhead { font-size: 1.25rem; color: var(--dim); max-width: 36ch; margin: 0 auto 12px; }
-  .rating { color: var(--dim); font-size: 0.95rem; margin: 6px 0 26px; }
-  .stars { color: var(--accent-soft); letter-spacing: 2px; }
-  .cta {
-    display: inline-block; background: var(--accent); color: #fff; text-decoration: none;
-    padding: 14px 26px; border-radius: 999px; font-weight: 600; font-size: 1.05rem;
-    box-shadow: 0 6px 20px rgba(180,84,30,0.25); transition: transform .12s ease;
+  header.hero::after, .visit::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.07; z-index: 1;
   }
-  .cta:hover { transform: translateY(-1px); }
-  section { padding: 56px 0; }
-  section h2 { font-size: 1.8rem; text-align: center; margin: 0 0 8px; }
-  .lead-in { text-align: center; color: var(--dim); max-width: 52ch; margin: 0 auto 36px; }
-  .services { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-  .service { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
-  .service h3 { margin: 0 0 8px; font-size: 1.15rem; }
-  .service p { margin: 0; color: var(--dim); font-size: 0.98rem; }
-  .quotes { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-  .quote { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin: 0; }
-  .quote blockquote { margin: 0 0 12px; font-size: 1.05rem; }
-  .quote blockquote::before { content: "\201C"; color: var(--accent-soft); font-size: 1.6rem; margin-right: 2px; }
-  .quote figcaption { color: var(--dim); font-size: 0.9rem; font-weight: 600; }
-  .about { background: #fff8ef; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .about p { max-width: 60ch; margin: 0 auto; text-align: center; font-size: 1.1rem; color: var(--ink); }
-  footer.contact { padding: 56px 0 28px; text-align: center; }
-  footer.contact .bits { color: var(--dim); display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; }
-  footer.contact .dot { color: var(--line); }
-  .credit { margin-top: 40px; font-size: 0.78rem; color: #9b9285; }
-  .credit a { color: #9b9285; }
+  .bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-size: cover; background-position: center;
+    background-blend-mode: multiply;
+    filter: saturate(0.7) brightness(0.96);
+  }
+  .bg::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(100deg, rgba(8,4,2,0.6) 0%, rgba(8,4,2,0.22) 55%, rgba(8,4,2,0.38) 100%);
+  }
+  .hero-inner { position: relative; z-index: 1; padding: clamp(4.2rem, 10vw, 7.5rem) 0 clamp(3.6rem, 9vw, 6.5rem); }
+  .kicker {
+    display: inline-flex; align-items: center; gap: 0.7em; margin: 0 0 1.1rem;
+    text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.74rem;
+    font-weight: 700; color: var(--gold);
+  }
+  .kicker::before { content: ""; width: 2.4em; height: 2px; background: var(--gold); }
+  h1.biz-name { font-size: var(--t-hero); max-width: 16ch; color: #FFFDF8; text-wrap: balance; }
+  .lede {
+    font-size: clamp(1.12rem, 1rem + 0.9vw, 1.45rem); font-weight: 500;
+    max-width: 40ch; margin: 1.1rem 0 0; color: #F7E7D4; opacity: 0.94;
+  }
+  .rating { display: inline-flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.12em; line-height: 1; }
+  .score { font-weight: 700; font-size: 0.98rem; letter-spacing: 0.02em; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
+
+  /* ── Pull-quote band ──────────────────────────────────────────────────── */
+  .pull { background: var(--band); color: var(--band-ink); padding: clamp(3.2rem, 7vw, 5.5rem) 0; }
+  .pull .mark { display: block; font-family: "Anton", "Arial Narrow", sans-serif; font-size: 4.6rem; line-height: 0.45; color: var(--gold); height: 0.55em; }
+  .pull blockquote { margin: 0.9rem 0 0; font-family: "Anton", "Arial Narrow", sans-serif; line-height: 1.18; text-wrap: balance; }
+  .pull blockquote.q-xl { font-size: clamp(1.7rem, 1.2rem + 2.6vw, 3rem); }
+  .pull blockquote.q-lg { font-size: clamp(1.35rem, 1.05rem + 1.6vw, 2.1rem); }
+  .pull blockquote.q-md { font-size: clamp(1.12rem, 1rem + 0.8vw, 1.5rem); line-height: 1.4; }
+  .pull cite {
+    display: block; font-style: normal; margin-top: 1.3rem;
+    font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 0.78rem;
+    letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75;
+  }
+  .pull .proof { margin-top: 1.6rem; font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 0.92rem; opacity: 0.85; }
+
+  /* ── Sections ─────────────────────────────────────────────────────────── */
+  section { padding: clamp(3rem, 7vw, 5.5rem) 0; }
+  section h2 { font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.6rem); margin: 0 0 10px; }
+  .lead-in { color: var(--dim); margin: 0 0 2.2rem; max-width: 56ch; }
+
+  .q-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+  .q-card {
+    position: relative; margin: 0; background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 28px 26px 24px; box-shadow: 0 10px 28px -22px rgba(0,0,0,0.3);
+  }
+  .q-card::before {
+    content: "\201C"; position: absolute; top: 10px; left: 22px;
+    font-family: "Anton", "Arial Narrow", sans-serif; font-size: 2.6rem; color: var(--accent); opacity: 0.5; line-height: 1;
+  }
+  .q-card blockquote {
+    margin: 14px 0 0; font-size: 1.03rem;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 12; overflow: hidden;
+  }
+  .q-card blockquote.q-md { font-size: 0.96rem; }
+  .q-card figcaption { margin-top: 14px; color: var(--dim); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  .mentions { border-top: 1px solid var(--line); }
+  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chip {
+    padding: 0.5em 1.1em; border-radius: 999px; border: 1.5px solid var(--accent);
+    background: var(--chip-bg); color: var(--ink); font-weight: 600; font-size: 0.97rem;
+  }
+  .mentions .note { margin-top: 1.2rem; color: var(--dim); font-size: 0.88rem; }
+
+  .services-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
+  .service { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 20px 22px; }
+  .service h3 { font-size: 1.12rem; margin: 0 0 6px; }
+  .service p { margin: 0; color: var(--dim); font-size: 0.97rem; }
+
+  .about { background: var(--tint); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .about p { max-width: 62ch; margin: 0; font-size: clamp(1.1rem, 1rem + 0.6vw, 1.32rem); line-height: 1.7; }
+
+  /* ── Visit band + footer ─────────────────────────────────────────────── */
+  .visit {
+    position: relative; overflow: hidden;
+    background: linear-gradient(168deg, #461309 0%, #2C0C05 100%);
+    color: var(--deep-ink); padding: clamp(3.6rem, 8vw, 6rem) 0 2rem;
+  }
+  .visit > .wrap { position: relative; z-index: 1; }
+  .visit h2 { color: #FFFDF8; font-size: clamp(2rem, 1.5rem + 2.4vw, 3.2rem); }
+  .visit address { font-style: normal; margin: 1rem 0 0; font-size: 1.1rem; opacity: 0.92; max-width: 44ch; }
+  .visit .cta-row { margin-top: 1.8rem; }
+  .visit .bits {
+    display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
+    margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.14);
+    font-size: 0.92rem; opacity: 0.85;
+  }
+  .visit .bits a { color: var(--gold); }
+  .visit .dot { opacity: 0.5; }
+  .credit { margin: 2.2rem 0 0; font-size: 0.78rem; opacity: 0.55; }
+  .credit a { color: inherit; }
 </style>
 </head>
 <body>
   <header class="hero">
-    <div class="wrap">
-      <p class="kicker">Mexican restaurant · Austin, TX</p>
-      <h1>Taqueria La Casita del pastor</h1>
-      <p class="subhead">Mexican restaurant in Austin our customers trust</p>
-      <p class="rating">Rated 4.9 on Google by 237 customers.</p>
-      <p class="rating"><span class="stars" aria-hidden="true">★★★★★</span> 4.9 on Google · 237 reviews</p>
-      <a class="cta" href="tel:7372241744">Call us · (737) 224-1744</a>
+    <div class="bg" style="background-image: linear-gradient(168deg, #93290F 0%, #5F1A08 100%), url('/assets/biz-samples/taco-1.webp')" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <p class="kicker">Austin, TX</p>
+      <h1 class="biz-name">Taqueria La Casita del pastor</h1>
+      <p class="lede">Mexican restaurant in Austin our customers trust</p>
+      <div class="rating" role="img" aria-label="Rated 4.9 out of 5 on Google across 237 reviews">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span class="score">4.9 on Google · 237 reviews</span>
+      </div>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="tel:7372241744"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (737) 224-1744</a>
+        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Taqueria%20La%20Casita%20del%20pastor%2C%204720%20S%20Congress%20Ave%2C%20Austin%2C%20TX%2078745%2C%20Austin%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
+      </div>
     </div>
   </header>
 
-  
-
-  <section class="about">
-    <div class="wrap"><p>Taqueria La Casita del pastor is a mexican restaurant in Austin. The reviews below come straight from our customers on Google.</p></div>
+  <section class="pull" aria-label="Customer review">
+    <div class="wrap">
+      <span class="mark" aria-hidden="true">“</span>
+      <blockquote class="q-lg">Al Pastor tacos are among the best I&#39;ve ever had. Went two days in a row, including a stop just before heading to the airport. Corn tortillas are delicious!</blockquote>
+      <cite>Macy M, on Google</cite>
+      <p class="proof"><span class="stars" aria-hidden="true">★★★★★</span> 4.9 stars on Google, across 237 reviews.</p>
+    </div>
   </section>
 
-  <section class="testimonials">
+  <section class="quotes">
     <div class="wrap">
-      <h2>What our customers say</h2>
-      <p class="lead-in">Straight from our Google reviews.</p>
-      <div class="quotes">
-        <figure class="quote">
-          <blockquote>We live in San Marcos but drove in to handle some things on a Sunday Morning. We thought, tacos sound bomb why not? Googled and this spot popped up, saw all the great reviews and decided to try it! WOW!! Let me tell you, we have tried all kinds of spots and this is top tier. The Al Pastor, Saudero, and barbacoa were amazing. The meat was tender and really well cooked. The salsas, green and red, were perfect. The small details were also there, with the limon being fresh and juicy, the cilantro and onion not wilted and crisp, and the tortillas fresh. The customer service was wonderful. We couldn’t decide what we wanted, but they were patient and got the order right even with all the changes. Try the Maracuya agua, also really good. Love this spot and WILL be back! Give it a shot, you will not regret trying!! (also we tore up the food before we got the chance to take a photo)</blockquote>
+      <p class="eyebrow">Straight from Google</p>
+      <h2>What customers say</h2>
+      <p class="lead-in">Real reviews, word for word.</p>
+      <div class="q-grid">
+        <figure class="q-card">
+          <blockquote class="q-md">We live in San Marcos but drove in to handle some things on a Sunday Morning. We thought, tacos sound bomb why not? Googled and this spot popped up, saw all the great reviews and decided to try it! WOW!! Let me tell you, we have tried all kinds of spots and this is top tier. The Al Pastor, Saudero, and barbacoa were amazing. The meat was tender and really well cooked. The salsas, green and red, were perfect. The small details were also there, with the limon being fresh and juicy, the cilantro and onion not wilted and crisp, and the tortillas fresh. The customer service was wonderful. We couldn’t decide what we wanted, but they were patient and got the order right even with all the changes. Try the Maracuya agua, also really good. Love this spot and WILL be back! Give it a shot, you will not regret trying!! (also we tore up the food before we got the chance to take a photo)</blockquote>
           <figcaption>Arlette Figueroa</figcaption>
         </figure>
-        <figure class="quote">
-          <blockquote>Been coming here for almost a year now, got tired of the other pastor spots dropping their quality and consistency, but so far these guys have been nothing but amazing service and food time and time again, and as of today, 8/28, they really stepped up their menu!
+        <figure class="q-card">
+          <blockquote class="q-md">Been coming here for almost a year now, got tired of the other pastor spots dropping their quality and consistency, but so far these guys have been nothing but amazing service and food time and time again, and as of today, 8/28, they really stepped up their menu!
 
 Give these guys a try if you like food that feels as if it was made at home, personally love their orange salsa, and their pineapple portion on the tacos blend very well with the meat instead of having that big ol square chunk you have to chomp to break.</blockquote>
           <figcaption>Marco Avila</figcaption>
         </figure>
-        <figure class="quote">
-          <blockquote>I came in from out of town and was looking for a good place to purchase some tacos and I was specifically wanting to eat tacos Al Pastore, and I’ll tell you what these are the best tacos that I have had in my life very good service. The owner went ahead and gave me one taco to taste and I’ll tell you what it was delicious so if you ever in the Austin area, make sure you come and check this place out. It is delicious. You won’t be disappointed and the pricing is amazing.</blockquote>
+        <figure class="q-card">
+          <blockquote class="q-md">I came in from out of town and was looking for a good place to purchase some tacos and I was specifically wanting to eat tacos Al Pastore, and I’ll tell you what these are the best tacos that I have had in my life very good service. The owner went ahead and gave me one taco to taste and I’ll tell you what it was delicious so if you ever in the Austin area, make sure you come and check this place out. It is delicious. You won’t be disappointed and the pricing is amazing.</blockquote>
           <figcaption>Edward Garcia</figcaption>
         </figure>
-        <figure class="quote">
-          <blockquote>Got corn tortillas with Al pastor and WOW seasoned well the pineapple made it even better. Corn tortillas didn’t fall apart seems made in house. Also got tripa 5/5. Had places to sit but multiple homeless pass by. Service was 5/5 he was trying to understand me and also gave free watermelon juice since horchata was out! Tacos was priced at $4 each. Steak Quesadilla was $8 (only thing I’d pass on)
-All in all: get corn tortilla al pastor</blockquote>
-          <figcaption>Andrea Nguyen</figcaption>
-        </figure></div>
+      </div>
     </div>
   </section>
 
-  <footer class="contact">
+  <section class="mentions">
     <div class="wrap">
-      <h2>Come see us</h2>
-      <div class="bits"><a href="tel:7372241744">(737) 224-1744</a><span class="dot">·</span><span>4720 S Congress Ave, Austin, TX 78745</span><span class="dot">·</span><span>Austin, TX</span><span class="dot">·</span><a href="https://www.google.com/maps/place/Taqueria+La+Casita+del+pastor/data=!4m7!3m6!1s0x8644b3fa8472226f:0x3609d8f565efb440!8m2!3d30.2142603!4d-97.769929!16s%2Fg%2F11t16_8h5p!19sChIJbyJyhPqzRIYRQLTvZfXYCTY">View on Google</a></div>
-      <p style="margin-top:26px"><a class="cta" href="tel:7372241744">Call us · (737) 224-1744</a></p>
-      <p class="credit">A free preview site built by <a href="https://handprotocol.org">HAND</a>.</p>
+      <p class="eyebrow">In their own words</p>
+      <h2>What people come back for</h2>
+      <p class="lead-in">Every one of these shows up in real customer reviews.</p>
+      <div class="chips"><span class="chip">Tacos</span><span class="chip">Al pastor</span><span class="chip">Salsas</span><span class="chip">Barbacoa</span><span class="chip">Carne asada</span><span class="chip">Quesadillas</span></div>
+    </div>
+  </section>
+
+  
+
+  <section class="about">
+    <div class="wrap"><p>Taqueria La Casita del pastor is a mexican restaurant in Austin. The reviews on this page come straight from our customers on Google, word for word.</p></div>
+  </section>
+
+  <footer class="visit">
+    <div class="bg" style="background-image: linear-gradient(168deg, #461309 0%, #2C0C05 100%), url('/assets/biz-samples/taco-2.webp')" aria-hidden="true"></div>
+    <div class="wrap">
+      <p class="kicker">Austin, TX</p>
+      <h2>Come find us</h2>
+      <address>4720 S Congress Ave, Austin, TX 78745<br />Austin, TX</address>
+      <div class="cta-row">
+        <a class="btn btn-solid" href="tel:7372241744"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (737) 224-1744</a>
+        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Taqueria%20La%20Casita%20del%20pastor%2C%204720%20S%20Congress%20Ave%2C%20Austin%2C%20TX%2078745%2C%20Austin%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
+      </div>
+      <div class="bits"><a href="tel:7372241744">(737) 224-1744</a><span class="dot" aria-hidden="true">·</span><span>4720 S Congress Ave, Austin, TX 78745</span><span class="dot" aria-hidden="true">·</span><span>Austin, TX</span><span class="dot" aria-hidden="true">·</span><a href="https://www.google.com/maps/place/Taqueria+La+Casita+del+pastor/data=!4m7!3m6!1s0x8644b3fa8472226f:0x3609d8f565efb440!8m2!3d30.2142603!4d-97.769929!16s%2Fg%2F11t16_8h5p!19sChIJbyJyhPqzRIYRQLTvZfXYCTY" target="_blank" rel="noopener">View on Google</a></div>
+      <p class="credit">A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>. Preview imagery is licensed sample art. Your real photos replace it when you claim the site.</p>
     </div>
   </footer>
   <script defer src="/assets/demo-visit.js"></script>

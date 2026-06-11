@@ -222,6 +222,21 @@ not have to ask its usual discovery questions. Assemble the brief from the revie
   out.webp` (no cwebp/ImageMagick in this env) takes ~3MB to ~250KB. Reference
   relatively from `img/`; hero `loading=eager fetchpriority=high`, the rest
   `loading=lazy decoding=async`; set width/height to kill layout shift.
+- **Image policy (settled 2026-06-11, do not relitigate per-lead)**:
+  - **Scraped Google Maps photos NEVER go on a public demo.** Copyright belongs to
+    the uploaders, and customer-uploaded photos cannot even be licensed by the
+    business. Scraped photos live ONLY under `web/demos/<slug>/pitch/img/` (the
+    Basic-Auth gated path) as the "With your photos" preview the caller shows the
+    owner. `scrape-photos.mts <slug>` collects them there; run it at pitch-prep
+    time (top leads pre-warmed), not in bulk for the whole pipeline (repo bloat).
+  - **On close**: the owner provides or explicitly approves those photos (they own
+    the ones they uploaded), and the production site uses them with permission.
+    Note the approval in the pitch follow-up.
+  - **Public demos** stay sellable through design plus the curated free-license
+    sample library at `web/assets/biz-samples/` (manifest + LICENSES.md, CC0 or
+    equivalent only) used as AMBIENT imagery with the honest footer line; never
+    presented as the business's own food. Operator-provided photos (the business
+    handed them over) remain fine on public demos as before.
 - **Constraints**: single self-contained `index.html`, no build step, mobile-first,
   fast. Footer credit: "A free preview site built by HAND" linking handprotocol.org.
 - **Visit beacon (required)**: add `<script defer src="/assets/demo-visit.js"></script>`

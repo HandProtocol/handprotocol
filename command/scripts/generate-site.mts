@@ -27,9 +27,14 @@ import {
   parseSiteCopy,
   buildFallbackCopy,
 } from "../src/lib/develop/prompts.ts";
-import { renderDemoSite, type DemoPhoto } from "../src/lib/develop/site-template.ts";
+import {
+  renderDemoSite,
+  pickSampleImages,
+  deriveMentions,
+  type SampleImages,
+} from "../src/lib/develop/site-template.ts";
 import { writeFileAtomic } from "../src/lib/develop/markdown.ts";
-import { demoSitePath, demoSiteDir, demoPublicUrl } from "../src/lib/develop/paths.ts";
+import { demoSitePath, demoPublicUrl, repoRoot } from "../src/lib/develop/paths.ts";
 import type { BizLead, BizReview, SiteCopy } from "../src/lib/develop/types.ts";
 
 const args = process.argv.slice(2);
@@ -102,25 +107,29 @@ if (env.ANTHROPIC_API_KEY && reviews.length > 0) {
   }
 }
 
-// Place photos, when scrape-photos has captured them. No manifest (or a bad
-// one) means no photos, which renders exactly the photo-less template.
-let photos: DemoPhoto[] = [];
+// Ambient sample imagery, image policy: the public page never shows the
+// business's scraped Maps photos (those live only on the gated pitch page).
+// It may use the curated free-license library at web/assets/biz-samples/,
+// keyed by category. No manifest (or no category match) means no images and
+// the type+color system carries the page.
+let samples: SampleImages = {};
 try {
-  const raw = JSON.parse(
-    fs.readFileSync(path.join(demoSiteDir(slug), "img", "manifest.json"), "utf8"),
+  const manifest = JSON.parse(
+    fs.readFileSync(
+      path.join(repoRoot(), "web", "assets", "biz-samples", "manifest.json"),
+      "utf8",
+    ),
   ) as unknown;
-  if (Array.isArray(raw)) {
-    photos = raw.filter(
-      (p): p is DemoPhoto =>
-        !!p && typeof p.file === "string" && Number.isFinite(p.w) && Number.isFinite(p.h),
-    );
-  }
+  samples = pickSampleImages(manifest, lead.category, slug);
 } catch {
-  /* no photos */
+  /* no sample library yet */
 }
 
+// Dish/service words actually present in the reviews (grounded chips).
+const mentions = deriveMentions(reviews.map((r) => r.body));
+
 copy = clean(copy);
-const html = renderDemoSite(lead as BizLead, copy, photos);
+const html = renderDemoSite(lead as BizLead, copy, { samples, mentions });
 const out = outArg ? outArg.split("=").slice(1).join("=") : demoSitePath(slug);
 
 if (dry) {
