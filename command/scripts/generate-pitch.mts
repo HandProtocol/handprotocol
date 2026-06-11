@@ -5,14 +5,21 @@
   (Anthropic if ANTHROPIC_API_KEY is set, else a grounded deterministic
   fallback), and renders with the real renderPitchPage.
 
-    npx tsx scripts/generate-pitch.mts <slug> [--price=75] [--out=path] [--dry]
+    npx tsx scripts/generate-pitch.mts <slug> [--price=75] [--lang=es] [--out=path] [--dry]
 
-  Default price is a flat $75 one-time with optional add-ons. --out writes
-  elsewhere (e.g. /tmp to preview without clobbering a hand-tuned page); --dry
-  prints what it would do.
+  Default price is a flat $75 one-time with optional add-ons. --lang=es writes
+  the call script in Spanish (usted form, Mexican business register) for the
+  Spanish-speaking owner-operators; the page chrome stays English for the
+  caller. --out writes elsewhere (e.g. /tmp to preview without clobbering a
+  hand-tuned page); --dry prints what it would do.
 */
 import { admin, loadEnv } from "./_lib.mts";
-import { buildScriptSystemPrompt, parsePitchScript } from "../src/lib/develop/prompts.ts";
+import {
+  buildScriptSystemPrompt,
+  buildPriceFallbackScript,
+  parsePitchScript,
+  type PitchLang,
+} from "../src/lib/develop/prompts.ts";
 import { renderPitchPage } from "../src/lib/develop/pitch-template.ts";
 import { writeFileAtomic } from "../src/lib/develop/markdown.ts";
 import { demoPitchPath, demoPublicUrl } from "../src/lib/develop/paths.ts";
@@ -23,8 +30,14 @@ const slug = args.find((a) => !a.startsWith("--"));
 const price = (args.find((a) => a.startsWith("--price=")) ?? "--price=75").split("=")[1];
 const outArg = args.find((a) => a.startsWith("--out="));
 const dry = args.includes("--dry");
+const langArg = (args.find((a) => a.startsWith("--lang=")) ?? "--lang=en").split("=")[1];
+if (langArg !== "en" && langArg !== "es") {
+  console.error(`unsupported --lang=${langArg} (supported: en, es)`);
+  process.exit(1);
+}
+const lang: PitchLang = langArg;
 if (!slug) {
-  console.error("usage: npx tsx scripts/generate-pitch.mts <slug> [--price=75] [--out=path] [--dry]");
+  console.error("usage: npx tsx scripts/generate-pitch.mts <slug> [--price=75] [--lang=es] [--out=path] [--dry]");
   process.exit(1);
 }
 
@@ -54,40 +67,9 @@ const clean = (s: PitchScript): PitchScript => ({
   close: fixDashes(s.close),
 });
 
-const ratingBit =
-  lead.google_rating != null
-    ? `${lead.google_rating} stars${lead.reviews_count ? ` from ${lead.reviews_count} reviews` : ""}`
-    : "great reviews";
-
-const fallback: PitchScript = {
-  opener: `Hi, is this the owner of ${lead.name}? My name is ____, I am calling from HAND, a local nonprofit. Do you have a quick minute?`,
-  hook: `I found you on Google. You have ${ratingBit}, but you do not have a website yet. So we built you one, for free.`,
-  walkthrough: [
-    `I can text you the link right now, it is at ${fullUrl}.`,
-    "It is built around your own photos and your real Google reviews, so it sounds like your customers.",
-    "It works on a phone, and the main button gives people directions straight to you.",
-  ],
-  offer: `It is yours to look at, no cost. To make it yours and put it online is a flat $${price}, one time, no monthly anything. A third of that funds our community work here in town. If you ever want more, more pages, your menu, your own web address, automatic social posting, or help getting found on Google, we can add that too.`,
-  objections: [
-    {
-      q: "I already get plenty of business.",
-      a: "That is great to hear. A website just gives people one more way to find and trust you, and you own it, not Google.",
-    },
-    {
-      q: "How much does it cost?",
-      a: `$${price}, one time, to make it yours and put it live. No monthly anything. Anything more later we price when you want it.`,
-    },
-    {
-      q: "I do not have time for this.",
-      a: "I hear you. Let me just text you the link, take a look when you have a minute and I will follow up.",
-    },
-    {
-      q: "I do not know anything about websites.",
-      a: "You do not need to. We handle all of it. You tell us what to change and we change it.",
-    },
-  ],
-  close: "Can I text you the link so you can see it for yourself? What is the best number to reach you?",
-};
+// The deterministic fallback lives in prompts.ts (both languages, side by
+// side) so it can be smoke-tested directly without Supabase.
+const fallback: PitchScript = buildPriceFallbackScript(lead as BizLead, fullUrl, price, lang);
 
 let script = fallback;
 let source = "fallback";
@@ -103,6 +85,9 @@ const userMessage = [
     : "",
   `Demo we built: ${fullUrl}`,
   `Offer to land: flat $${price} one-time to claim and publish, a third to the HAND pool, optional add-ons (more pages, full menu, own domain, automatic social posting, SEO, online ordering) only if they ask.`,
+  lang === "es"
+    ? "The owner speaks Spanish. Write the whole script in Spanish as instructed."
+    : "",
   "",
   "Their reviews (lean on ones with real text, ignore rating-only ones):",
   (reviews ?? []).map((r: { body: string }) => `- ${r.body}`).join("\n") || "(none)",
@@ -125,7 +110,7 @@ if (env.ANTHROPIC_API_KEY) {
         model: "claude-sonnet-4-6",
         max_tokens: 1200,
         temperature: 0.55,
-        system: buildScriptSystemPrompt(),
+        system: buildScriptSystemPrompt(lang),
         messages: [{ role: "user", content: userMessage }],
       }),
     });

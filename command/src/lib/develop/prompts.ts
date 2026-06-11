@@ -169,9 +169,17 @@ function capitalize(s: string): string {
   The script a volunteer reads on the call. It is internal, so it can name HAND
   and the offer plainly. It is grounded in the business's own reviews and the
   free demo we already built. Warm and direct, not a hard-sell telemarketer.
+
+  Language: a large share of the food-truck leads are Spanish-speaking
+  owner-operators, so the script (NOT the page chrome, which stays English
+  and operator-facing) can be generated in Spanish. "es" means warm, natural
+  Mexican business Spanish in the usted form, written the way a bilingual
+  local rep would actually talk, never a word-for-word translation.
 */
-export function buildScriptSystemPrompt(): string {
-  return `You write a short, natural phone-call script for a friendly outreach call to a local small business owner. The caller is from HAND, a nonprofit in formation. HAND has already built the owner a free one-page website using their real Google reviews, and is calling to show it to them.
+export type PitchLang = "en" | "es";
+
+export function buildScriptSystemPrompt(lang: PitchLang = "en"): string {
+  const base = `You write a short, natural phone-call script for a friendly outreach call to a local small business owner. The caller is from HAND, a nonprofit in formation. HAND has already built the owner a free one-page website using their real Google reviews, and is calling to show it to them.
 
 The angle: this business has great reviews but no website. We built one for free as a gift and a sample of what we do. A third of anything they pay (if they want to keep and grow it) funds HAND's community work. Lead with the gift, not the pitch.
 
@@ -188,6 +196,12 @@ Output ONLY valid minified JSON, no prose, no code fences:
 }
 
 Give 3 to 4 objections. Keep every field short enough to say naturally.`;
+
+  if (lang !== "es") return base;
+
+  return `${base}
+
+Language: write every JSON value in Spanish. Not a translation. Write it the way a warm, bilingual local rep would actually talk to the owner of a taqueria: natural Mexican business Spanish, usted form throughout, plain and respectful. Keep the JSON keys in English exactly as shown. Keep the business name, the numbers, the price, and the demo link exactly as given. Keep the same structure (opener, hook, walkthrough, offer, objections, close). No em dashes in Spanish either, use commas or periods.`;
 }
 
 export function buildScriptUserMessage(
@@ -266,7 +280,9 @@ export function parsePitchScript(text: string): PitchScript | null {
 export function buildFallbackScript(
   lead: BizLead,
   demoUrl: string,
+  lang: PitchLang = "en",
 ): PitchScript {
+  if (lang === "es") return buildFallbackScriptEs(lead, demoUrl);
   const ratingBit =
     lead.google_rating != null
       ? `${lead.google_rating} stars${lead.reviews_count ? ` from ${lead.reviews_count} reviews` : ""}`
@@ -296,5 +312,130 @@ export function buildFallbackScript(
       },
     ],
     close: `Can I text you the link to take a look? What is the best number?`,
+  };
+}
+
+/*
+  Spanish parallel of buildFallbackScript. Same structure, same factual slots
+  (name, rating, reviews count, demo URL), written as a bilingual rep would
+  actually say it: Mexican business Spanish, usted form, no em dashes.
+*/
+export function buildFallbackScriptEs(
+  lead: BizLead,
+  demoUrl: string,
+): PitchScript {
+  const ratingBit =
+    lead.google_rating != null
+      ? `${lead.google_rating} estrellas${lead.reviews_count ? ` con ${lead.reviews_count} reseñas` : ""}`
+      : "muy buenas reseñas";
+  return {
+    opener: `Buenas, ¿hablo con el dueño o la dueña de ${lead.name}? Le habla ____, de HAND, una organización sin fines de lucro aquí de la zona. ¿Tiene un minutito?`,
+    hook: `Estuve viendo ${lead.name} en Google. Tienen ${ratingBit}, pero vi que todavía no tienen página web. Así que les hicimos una, gratis.`,
+    walkthrough: [
+      `Le puedo mandar el enlace ahorita mismo por mensaje, está en ${demoUrl}.`,
+      "Está hecha con sus reseñas reales de Google, así que habla como hablan sus propios clientes.",
+      "Se ve bien en el celular, y trae su horario, su teléfono y un mapa para llegar con ustedes.",
+    ],
+    offer:
+      "La página es suya para verla, sin ningún costo. Si quiere dejarla en línea y que nosotros se la mantengamos, es una cuota mensual pequeña, y una tercera parte de eso apoya nuestro trabajo comunitario aquí mismo.",
+    objections: [
+      {
+        q: "Ya me llega suficiente clientela por Google.",
+        a: "Qué bueno, eso habla muy bien de ustedes. La página nomás le da a la gente una manera más de encontrarlo y tenerle confianza, y es suya, no de Google.",
+      },
+      {
+        q: "¿Cuánto cuesta?",
+        a: "Verla no cuesta nada. Dejarla en línea y mantenida es una cuota mensual pequeña, podemos platicar qué le acomoda.",
+      },
+      {
+        q: "No tengo tiempo para esto.",
+        a: "Lo entiendo perfectamente. Le mando el enlace por mensaje, lo ve cuando tenga un momento y yo le marco después.",
+      },
+    ],
+    close: `¿Le puedo mandar el enlace por mensaje para que le eche un ojo? ¿Cuál es el mejor número?`,
+  };
+}
+
+/*
+  The fallback the headless generate-pitch script uses: same bones as
+  buildFallbackScript but priced, a flat one-time $price with optional
+  add-ons, a third to the HAND pool. Factored out of scripts/generate-pitch.mts
+  so both languages live next to each other and can be smoke-tested directly.
+  The "en" output is byte-identical to the inline version it replaced.
+*/
+export function buildPriceFallbackScript(
+  lead: BizLead,
+  fullUrl: string,
+  price: string,
+  lang: PitchLang = "en",
+): PitchScript {
+  if (lang === "es") {
+    const ratingBit =
+      lead.google_rating != null
+        ? `${lead.google_rating} estrellas${lead.reviews_count ? ` con ${lead.reviews_count} reseñas` : ""}`
+        : "muy buenas reseñas";
+    return {
+      opener: `Buenas, ¿hablo con el dueño o la dueña de ${lead.name}? Le habla ____, de HAND, una organización sin fines de lucro aquí de la zona. ¿Tiene un minutito?`,
+      hook: `Los encontré en Google. Tienen ${ratingBit}, pero vi que todavía no tienen página web. Así que les hicimos una, gratis.`,
+      walkthrough: [
+        `Le puedo mandar el enlace ahorita mismo por mensaje, está en ${fullUrl}.`,
+        "Está hecha con sus propias fotos y sus reseñas reales de Google, así que habla como hablan sus propios clientes.",
+        "Se ve bien en el celular, y el botón principal le da a la gente las direcciones para llegar directo con ustedes.",
+      ],
+      offer: `La página es suya para verla, sin ningún costo. Para quedársela y ponerla en línea son $${price}, un solo pago, nada mensual. Una tercera parte de eso apoya nuestro trabajo comunitario aquí mismo. Y si algún día quiere más, más páginas, su menú completo, su propio dominio, publicaciones automáticas en redes, o ayuda para salir mejor en Google, eso también se lo podemos agregar.`,
+      objections: [
+        {
+          q: "Ya tengo suficiente clientela.",
+          a: "Qué bueno, eso habla muy bien de ustedes. La página nomás le da a la gente una manera más de encontrarlo y tenerle confianza, y es suya, no de Google.",
+        },
+        {
+          q: "¿Cuánto cuesta?",
+          a: `Son $${price}, un solo pago, para quedársela y ponerla en línea. Nada mensual. Si después quiere algo más, lo cotizamos cuando usted diga.`,
+        },
+        {
+          q: "No tengo tiempo para esto.",
+          a: "Lo entiendo perfectamente. Déjeme mandarle el enlace por mensaje, lo ve cuando tenga un momento y yo le marco después.",
+        },
+        {
+          q: "Yo no sé nada de páginas web.",
+          a: "No necesita saber. Nosotros nos encargamos de todo. Usted nos dice qué cambiar y nosotros lo cambiamos.",
+        },
+      ],
+      close: "¿Le puedo mandar el enlace por mensaje para que la vea usted mismo? ¿A qué número le marco?",
+    };
+  }
+
+  const ratingBit =
+    lead.google_rating != null
+      ? `${lead.google_rating} stars${lead.reviews_count ? ` from ${lead.reviews_count} reviews` : ""}`
+      : "great reviews";
+  return {
+    opener: `Hi, is this the owner of ${lead.name}? My name is ____, I am calling from HAND, a local nonprofit. Do you have a quick minute?`,
+    hook: `I found you on Google. You have ${ratingBit}, but you do not have a website yet. So we built you one, for free.`,
+    walkthrough: [
+      `I can text you the link right now, it is at ${fullUrl}.`,
+      "It is built around your own photos and your real Google reviews, so it sounds like your customers.",
+      "It works on a phone, and the main button gives people directions straight to you.",
+    ],
+    offer: `It is yours to look at, no cost. To make it yours and put it online is a flat $${price}, one time, no monthly anything. A third of that funds our community work here in town. If you ever want more, more pages, your menu, your own web address, automatic social posting, or help getting found on Google, we can add that too.`,
+    objections: [
+      {
+        q: "I already get plenty of business.",
+        a: "That is great to hear. A website just gives people one more way to find and trust you, and you own it, not Google.",
+      },
+      {
+        q: "How much does it cost?",
+        a: `$${price}, one time, to make it yours and put it live. No monthly anything. Anything more later we price when you want it.`,
+      },
+      {
+        q: "I do not have time for this.",
+        a: "I hear you. Let me just text you the link, take a look when you have a minute and I will follow up.",
+      },
+      {
+        q: "I do not know anything about websites.",
+        a: "You do not need to. We handle all of it. You tell us what to change and we change it.",
+      },
+    ],
+    close: "Can I text you the link so you can see it for yourself? What is the best number to reach you?",
   };
 }
