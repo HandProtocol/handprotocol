@@ -11,6 +11,14 @@
 
 [[edge_functions]]
   function = "kitties-auth"
+  path = "/kitties"
+
+[[edge_functions]]
+  function = "kitties-auth"
+  path = "/kitties/"
+
+[[edge_functions]]
+  function = "kitties-auth"
   path = "/kitties/*"
 
 [[edge_functions]]
