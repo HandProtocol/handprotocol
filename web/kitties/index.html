@@ -1352,160 +1352,229 @@ function makeTextSprite(text, opts = {}) {
   return sprite;
 }
 
-// ─── SPRINTER VAN (cat at the wheel) ─────────────────────────────────────────
+// ─── SPRINTER VAN — Dumb & Dumber Cat Edition ────────────────────────────────
+// Orange tabby fur body, cat ears, glowing eyes, whiskers, curved tail.
 // Built facing +X. Returns { group, door, wheels, headlights, driverCat }.
-function createSprinterVan(paintHex = '#f3eef7') {
+function createSprinterVan(paintHex = '#e07828') {
   const g = new THREE.Group();
   const M = (color, opts = {}) => new THREE.MeshStandardMaterial({
-    color: new THREE.Color(color), roughness: 0.45, metalness: 0.35, ...opts,
+    color: new THREE.Color(color), roughness: 0.55, metalness: 0.15, ...opts,
   });
 
-  const paint = M(paintHex);
+  // ── Tabby fur canvas texture (orange base + dark brown stripes) ──────────
+  const furCv = document.createElement('canvas');
+  furCv.width = 512; furCv.height = 512;
+  const fc = furCv.getContext('2d');
+  fc.fillStyle = '#d96e18'; fc.fillRect(0, 0, 512, 512);
+  // Bold diagonal tabby stripes
+  fc.strokeStyle = '#7a3308'; fc.lineWidth = 22;
+  for (let i = -4; i < 9; i++) {
+    fc.beginPath(); fc.moveTo(i * 75 - 30, 0); fc.lineTo(i * 75 + 90, 512); fc.stroke();
+  }
+  // Lighter highlight streaks
+  fc.strokeStyle = '#f0a050'; fc.lineWidth = 7; fc.globalAlpha = 0.35;
+  for (let i = -4; i < 9; i++) {
+    fc.beginPath(); fc.moveTo(i * 75 - 8, 0); fc.lineTo(i * 75 + 112, 512); fc.stroke();
+  }
+  fc.globalAlpha = 1;
+  const furTex = new THREE.CanvasTexture(furCv);
+  furTex.wrapS = furTex.wrapT = THREE.RepeatWrapping;
+  furTex.repeat.set(2.2, 1);
+
+  const fur  = new THREE.MeshStandardMaterial({ map: furTex, roughness: 0.8, metalness: 0.0 });
   const trim = M('#1c1230', { roughness: 0.7, metalness: 0.1 });
   const glass = new THREE.MeshStandardMaterial({
     color: new THREE.Color('#1c2c4a'), roughness: 0.05, metalness: 0.9,
     transparent: true, opacity: 0.4,
   });
+  const pink  = M('#ff9eb5', { roughness: 0.85, metalness: 0 });
+  const cream = M('#f5e8d0', { roughness: 0.75, metalness: 0 });
 
-  // Cargo body (tall sprinter box)
-  const body = new THREE.Mesh(new THREE.BoxGeometry(3.4, 1.9, 1.9), paint);
+  // ── Body ────────────────────────────────────────────────────────────────
+  const body = new THREE.Mesh(new THREE.BoxGeometry(3.4, 1.9, 1.9), fur);
   body.position.set(-0.7, 1.45, 0);
   g.add(body);
-  // Roof cap, slightly rounded feel
-  const roof = new THREE.Mesh(new THREE.BoxGeometry(3.5, 0.12, 1.95), M('#e4d9f0'));
+  const roof = new THREE.Mesh(new THREE.BoxGeometry(3.5, 0.12, 1.95), fur);
   roof.position.set(-0.7, 2.45, 0);
   g.add(roof);
-  // Nose / hood
-  const nose = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.95, 1.8), paint);
-  nose.position.set(1.5, 0.95, 0);
-  g.add(nose);
-  // Windshield, raked back
+  const hood = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.95, 1.8), fur);
+  hood.position.set(1.5, 0.95, 0);
+  g.add(hood);
+
+  // Windshield
   const shield = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.05, 1.7), glass);
-  shield.position.set(1.18, 1.85, 0);
-  shield.rotation.z = -0.38;
+  shield.position.set(1.18, 1.85, 0); shield.rotation.z = -0.38;
   g.add(shield);
-  // Cab side windows
   [-1, 1].forEach(s => {
     const win = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.6, 0.04), glass);
-    win.position.set(0.55, 1.85, s * 0.96);
-    g.add(win);
+    win.position.set(0.55, 1.85, s * 0.96); g.add(win);
   });
-  // Cargo side window strip (rear)
   const strip = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.45, 0.04), glass);
-  strip.position.set(-1.5, 1.9, 0.96);
-  g.add(strip);
-  // Bumpers + grille
-  const bumperF = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.35, 1.85), trim);
-  bumperF.position.set(2.05, 0.55, 0);
-  g.add(bumperF);
-  const bumperR = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.35, 1.85), trim);
-  bumperR.position.set(-2.45, 0.55, 0);
-  g.add(bumperR);
-  const grille = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.45, 1.2), trim);
-  grille.position.set(2.06, 0.95, 0);
-  g.add(grille);
+  strip.position.set(-1.5, 1.9, 0.96); g.add(strip);
 
-  // Sliding door (camera side, +z) — slides rearward to open
-  const door = new THREE.Mesh(new THREE.BoxGeometry(1.15, 1.7, 0.08), M('#e9e0f2'));
+  // Bumpers
+  const bumperF = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.35, 1.85), trim);
+  bumperF.position.set(2.05, 0.55, 0); g.add(bumperF);
+  const bumperR = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.35, 1.85), trim);
+  bumperR.position.set(-2.45, 0.55, 0); g.add(bumperR);
+
+  // ── Sliding door ────────────────────────────────────────────────────────
+  const door = new THREE.Mesh(new THREE.BoxGeometry(1.15, 1.7, 0.08), fur);
   door.position.set(-0.35, 1.35, 0.99);
   const doorHandle = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.06, 0.04), trim);
-  doorHandle.position.set(0.3, -0.05, 0.05);
-  door.add(doorHandle);
+  doorHandle.position.set(0.3, -0.05, 0.05); door.add(doorHandle);
   const doorWin = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.5, 0.04), glass);
-  doorWin.position.set(0, 0.5, 0.04);
-  door.add(doorWin);
+  doorWin.position.set(0, 0.5, 0.04); door.add(doorWin);
+  // Paw print on door (canvas texture plane)
+  const pawCv = document.createElement('canvas');
+  pawCv.width = pawCv.height = 256;
+  const pc = pawCv.getContext('2d');
+  const drawPaw = (cx, cy, r, col) => {
+    pc.fillStyle = col;
+    pc.beginPath(); pc.arc(cx, cy, r, 0, Math.PI * 2); pc.fill();
+    [[-r * 1.3, -r * 1.5], [0, -r * 1.8], [r * 1.3, -r * 1.5]].forEach(([dx, dy]) => {
+      pc.beginPath(); pc.arc(cx + dx, cy + dy, r * 0.6, 0, Math.PI * 2); pc.fill();
+    });
+  };
+  drawPaw(128, 148, 34, 'rgba(30,10,50,0.55)');
+  const pawTex = new THREE.CanvasTexture(pawCv);
+  const pawPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.7, 0.7),
+    new THREE.MeshBasicMaterial({ map: pawTex, transparent: true })
+  );
+  pawPlane.position.set(-0.28, -0.28, 0.06); door.add(pawPlane);
   g.add(door);
-  // Dark opening revealed behind the door
   const opening = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.65, 0.02), new THREE.MeshBasicMaterial({ color: '#08030f' }));
-  opening.position.set(-0.35, 1.3, 0.945);
-  g.add(opening);
+  opening.position.set(-0.35, 1.3, 0.945); g.add(opening);
 
-  // "KITTY EXPRESS" livery on the flank
+  // ── "KITTY EXPRESS" livery ──────────────────────────────────────────────
   const liveryCv = document.createElement('canvas');
   liveryCv.width = 512; liveryCv.height = 160;
   const lc = liveryCv.getContext('2d');
-  lc.fillStyle = 'rgba(0,0,0,0)';
-  lc.font = 'bold 74px Pacifico, cursive';
-  lc.textAlign = 'center';
+  lc.font = 'bold 74px Pacifico, cursive'; lc.textAlign = 'center';
   const grad = lc.createLinearGradient(0, 0, 512, 0);
   grad.addColorStop(0, '#ff6eb4'); grad.addColorStop(1, '#a855f7');
-  lc.fillStyle = grad;
-  lc.fillText('Kitty Express', 256, 78);
-  lc.font = '600 30px Quicksand, sans-serif';
-  lc.fillStyle = '#7c6a94';
-  lc.fillText('— cat-operated since forever —', 256, 128);
+  lc.fillStyle = grad; lc.fillText('Kitty Express', 256, 78);
+  lc.font = '600 28px Quicksand, sans-serif';
+  lc.fillStyle = '#fff0e0'; lc.fillText('— cat-operated since forever —', 256, 128);
   const liveryTex = new THREE.CanvasTexture(liveryCv);
   const livery = new THREE.Mesh(
     new THREE.PlaneGeometry(2.1, 0.66),
     new THREE.MeshBasicMaterial({ map: liveryTex, transparent: true })
   );
-  livery.position.set(-1.45, 1.35, 1.0);
-  g.add(livery);
+  livery.position.set(-1.45, 1.35, 1.01); g.add(livery);
   const livery2 = livery.clone();
-  livery2.rotation.y = Math.PI;
-  livery2.position.z = -1.0;
-  g.add(livery2);
+  livery2.rotation.y = Math.PI; livery2.position.z = -1.01; g.add(livery2);
 
-  // Wheels: group orients axle along Z, inner mesh spins
+  // ── Wheels ──────────────────────────────────────────────────────────────
   const wheels = [];
   const wheelGeo = new THREE.CylinderGeometry(0.42, 0.42, 0.3, 20);
   const tire = M('#15101f', { roughness: 0.9, metalness: 0 });
-  const hub = M('#cbb8e8', { metalness: 0.8, roughness: 0.2 });
+  const hub  = M('#cbb8e8', { metalness: 0.8, roughness: 0.2 });
   [[1.45, 0.85], [1.45, -0.85], [-1.55, 0.85], [-1.55, -0.85]].forEach(([x, z]) => {
     const wg = new THREE.Group();
-    wg.position.set(x, 0.42, z);
-    wg.rotation.x = Math.PI / 2;
+    wg.position.set(x, 0.42, z); wg.rotation.x = Math.PI / 2;
     const wm = new THREE.Mesh(wheelGeo, tire);
-    // spokes make the spin visible
     for (let i = 0; i < 3; i++) {
       const spoke = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.32, 0.09), hub);
-      spoke.rotation.y = (i / 3) * Math.PI;
-      wm.add(spoke);
+      spoke.rotation.y = (i / 3) * Math.PI; wm.add(spoke);
     }
-    wg.add(wm);
-    g.add(wg);
-    wheels.push(wm);
+    wg.add(wm); g.add(wg); wheels.push(wm);
   });
 
-  // Headlights + glowing beam cones
-  const headlights = [];
-  [-0.6, 0.6].forEach(z => {
-    const lamp = new THREE.Mesh(
-      new THREE.SphereGeometry(0.11, 10, 10),
-      new THREE.MeshStandardMaterial({ color: '#fff7d6', emissive: '#ffe9a0', emissiveIntensity: 2 })
-    );
-    lamp.position.set(2.08, 0.95, z);
-    g.add(lamp);
-    const beam = new THREE.Mesh(
-      new THREE.ConeGeometry(0.55, 3.2, 16, 1, true),
-      new THREE.MeshBasicMaterial({ color: '#fff3c4', transparent: true, opacity: 0.08, side: THREE.DoubleSide, depthWrite: false })
-    );
-    beam.rotation.z = Math.PI / 2;
-    beam.position.set(3.7, 0.85, z);
-    g.add(beam);
-    headlights.push(beam);
-  });
-  // Taillights
+  // ── Taillights ──────────────────────────────────────────────────────────
   [-0.7, 0.7].forEach(z => {
-    const tail = new THREE.Mesh(
+    const tl = new THREE.Mesh(
       new THREE.BoxGeometry(0.06, 0.3, 0.14),
       new THREE.MeshStandardMaterial({ color: '#ff2244', emissive: '#ff2244', emissiveIntensity: 1.5 })
     );
-    tail.position.set(-2.55, 1.0, z);
-    g.add(tail);
+    tl.position.set(-2.55, 1.0, z); g.add(tl);
   });
 
-  // The driver: a cat, paws on the wheel
+  // ── CAT EYES on the front face (glowing green, vertical slit pupils) ────
+  const headlights = [];
+  [-0.52, 0.52].forEach(z => {
+    // Glowing iris
+    const iris = new THREE.Mesh(
+      new THREE.SphereGeometry(0.17, 14, 14),
+      new THREE.MeshStandardMaterial({ color: '#00e890', emissive: '#00e890', emissiveIntensity: 2.2 })
+    );
+    iris.position.set(2.1, 1.2, z); g.add(iris);
+    // Vertical slit pupil
+    const pupil = new THREE.Mesh(
+      new THREE.BoxGeometry(0.04, 0.26, 0.1),
+      new THREE.MeshBasicMaterial({ color: '#040204' })
+    );
+    pupil.position.set(2.12, 1.2, z); g.add(pupil);
+    // Light beam cone (reusing headlights array for animation hook)
+    const beam = new THREE.Mesh(
+      new THREE.ConeGeometry(0.5, 3.0, 16, 1, true),
+      new THREE.MeshBasicMaterial({ color: '#c8ffd4', transparent: true, opacity: 0.07, side: THREE.DoubleSide, depthWrite: false })
+    );
+    beam.rotation.z = Math.PI / 2;
+    beam.position.set(3.6, 1.1, z); g.add(beam);
+    headlights.push(beam);
+  });
+
+  // ── CAT NOSE (pink triangle) on front ───────────────────────────────────
+  const noseMesh = new THREE.Mesh(
+    new THREE.ConeGeometry(0.13, 0.18, 3),
+    pink
+  );
+  noseMesh.rotation.z = Math.PI; // point downward
+  noseMesh.position.set(2.1, 0.92, 0); g.add(noseMesh);
+
+  // ── WHISKERS — thin lines spreading outward from the nose ───────────────
+  const whiskerMat = new THREE.LineBasicMaterial({ color: '#ffffff' });
+  [
+    [[2.08, 0.98, 0.08], [3.0, 0.98, 0.75]],
+    [[2.08, 0.88, 0.08], [3.0, 0.84, 0.65]],
+    [[2.08, 0.98, -0.08], [3.0, 0.98, -0.75]],
+    [[2.08, 0.88, -0.08], [3.0, 0.84, -0.65]],
+  ].forEach(([p1, p2]) => {
+    const pts = [new THREE.Vector3(...p1), new THREE.Vector3(...p2)];
+    const geo = new THREE.BufferGeometry().setFromPoints(pts);
+    g.add(new THREE.Line(geo, whiskerMat));
+  });
+
+  // ── CAT EARS on roof (triangular cones, pink inner) ─────────────────────
+  [-0.55, 0.55].forEach((z, i) => {
+    const outer = new THREE.Mesh(new THREE.ConeGeometry(0.3, 0.62, 3), M('#c85e10'));
+    const inner = new THREE.Mesh(new THREE.ConeGeometry(0.17, 0.42, 3), pink);
+    inner.position.y = -0.08; outer.add(inner);
+    outer.position.set(-0.25, 2.82, z);
+    outer.rotation.y = (i === 0 ? 1 : -1) * 0.18;
+    g.add(outer);
+  });
+
+  // ── CURVED CAT TAIL at the rear ─────────────────────────────────────────
+  const tailCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-2.38, 0.65, 0),
+    new THREE.Vector3(-2.72, 1.25, 0),
+    new THREE.Vector3(-3.05, 2.05, 0.04),
+    new THREE.Vector3(-2.88, 2.82, 0.14),
+    new THREE.Vector3(-2.28, 3.12, 0.22),
+  ]);
+  const tailMesh = new THREE.Mesh(
+    new THREE.TubeGeometry(tailCurve, 26, 0.12, 8, false),
+    M('#c85e10', { roughness: 0.8 })
+  );
+  g.add(tailMesh);
+  // Fluffy tail tip
+  const tailTip = new THREE.Mesh(
+    new THREE.SphereGeometry(0.24, 10, 10),
+    cream
+  );
+  tailTip.position.set(-2.28, 3.12, 0.22); g.add(tailTip);
+
+  // ── Driver cat at the wheel ──────────────────────────────────────────────
   const driverCat = createCat('#f59e0b', '#00ffcc');
   driverCat.scale.setScalar(0.52);
   driverCat.position.set(0.78, 1.15, -0.45);
-  driverCat.rotation.y = 0; // facing +X, eyes on the road
   g.add(driverCat);
-  // Steering wheel
   const sw = new THREE.Mesh(new THREE.TorusGeometry(0.18, 0.035, 8, 20), trim);
   sw.rotation.y = Math.PI / 2;
-  sw.position.set(1.12, 1.45, -0.45);
-  g.add(sw);
+  sw.position.set(1.12, 1.45, -0.45); g.add(sw);
 
   return { group: g, door, wheels, headlights, driverCat };
 }
