@@ -10,21 +10,41 @@
     --bg:#0b0e14; --panel:#11151f; --panel-2:#0e121b; --line:rgba(245,239,225,0.10);
     --line-2:rgba(245,239,225,0.16); --ink:#f3eee2; --dim:#a7a195; --faint:#6f6a60;
     --amber:#d9893a; --amber-soft:#f0b364; --good:#86efac;
+    --stage1:#6b7280; --stage2:#a78bfa; --stage3:#fcd34d;
   }
   *{box-sizing:border-box}
   [hidden]{display:none !important}
   body{margin:0;background:var(--bg);color:var(--ink);
     font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased;background-image:radial-gradient(900px 500px at 80% -10%, rgba(217,137,58,0.08), transparent 60%)}
+    -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(900px 500px at 80% -10%, rgba(217,137,58,0.08), transparent 60%)}
   a{color:var(--amber-soft);text-decoration:none}
   .wrap{max-width:1240px;margin:0 auto;padding:34px 22px 90px}
   .eyebrow{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:0.22em;text-transform:uppercase;color:var(--amber);margin:0 0 12px}
-  header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:28px}
+  header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;border-bottom:1px solid var(--line);padding-bottom:22px;margin-bottom:20px}
   h1{font-size:1.7rem;font-weight:600;letter-spacing:-0.01em;margin:0}
   .sub{color:var(--dim);margin:6px 0 0;font-size:0.92rem}
-  .stats{display:flex;gap:26px;text-align:right}
+  .stats{display:flex;gap:26px;align-items:flex-end;flex-wrap:wrap}
   .stat b{display:block;font-size:1.5rem;font-weight:600;color:var(--amber-soft);line-height:1}
   .stat span{font:600 10px/1 ui-monospace,monospace;letter-spacing:0.16em;text-transform:uppercase;color:var(--faint)}
+
+  /* ── filter bar ── */
+  .filter-bar{display:flex;flex-wrap:wrap;gap:10px 22px;margin-bottom:22px;align-items:center}
+  .filter-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+  .filter-label{font:600 10px/1 ui-monospace,monospace;letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--faint);margin-right:2px;white-space:nowrap}
+  .fc{appearance:none;border:1px solid var(--line);background:transparent;color:var(--dim);
+    border-radius:999px;padding:6px 13px;font:600 0.78rem/1 inherit;font-family:inherit;
+    cursor:pointer;transition:background .15s,border-color .15s,color .15s;white-space:nowrap}
+  .fc:hover{border-color:var(--line-2);color:var(--ink)}
+  .fc.on{background:rgba(217,137,58,0.15);border-color:rgba(217,137,58,0.5);color:var(--amber-soft)}
+  .fc.on-s2{background:rgba(167,139,250,0.15);border-color:rgba(167,139,250,0.5);color:var(--stage2)}
+  .fc.on-s3{background:rgba(252,211,77,0.15);border-color:rgba(252,211,77,0.5);color:var(--stage3)}
+  .filter-count{font:600 11px/1 ui-monospace,monospace;letter-spacing:0.14em;color:var(--faint);
+    margin-left:auto;white-space:nowrap}
+  .sep{width:1px;height:18px;background:var(--line);flex-shrink:0}
+
+  /* ── grid ── */
   .grid{display:grid;gap:18px;grid-template-columns:1fr}
   @media(min-width:680px){.grid{grid-template-columns:repeat(2,1fr)}}
   @media(min-width:1040px){.grid{grid-template-columns:repeat(3,1fr)}}
@@ -34,6 +54,10 @@
   .thumb iframe{border:0;transform-origin:0 0;pointer-events:none;background:#fff}
   .thumb .open{position:absolute;inset:0;z-index:2}
   .thumb .badge{position:absolute;top:10px;left:10px;z-index:3;font:600 10px/1 ui-monospace,monospace;letter-spacing:0.14em;text-transform:uppercase;padding:5px 8px;border-radius:6px;background:rgba(8,10,15,0.78);backdrop-filter:blur(4px)}
+  .thumb .tier-badge{position:absolute;top:10px;right:10px;z-index:3;font:600 9px/1 ui-monospace,monospace;letter-spacing:0.12em;text-transform:uppercase;padding:4px 7px;border-radius:5px}
+  .tier-badge.t1{background:rgba(107,114,128,0.25);color:var(--stage1);border:1px solid rgba(107,114,128,0.3)}
+  .tier-badge.t2{background:rgba(167,139,250,0.18);color:var(--stage2);border:1px solid rgba(167,139,250,0.35)}
+  .tier-badge.t3{background:rgba(252,211,77,0.18);color:var(--stage3);border:1px solid rgba(252,211,77,0.35)}
   .body{padding:15px 16px 16px;display:flex;flex-direction:column;gap:9px;flex:1}
   .name{font-size:1.06rem;font-weight:600;line-height:1.25;margin:0}
   .meta{color:var(--dim);font-size:0.85rem;margin:0}
@@ -46,10 +70,12 @@
   .note{margin-top:8px;font-size:0.74rem;color:var(--faint)}
   .state{padding:64px 0;text-align:center;color:var(--dim)}
   footer{margin-top:42px;border-top:1px solid var(--line);padding-top:18px;color:var(--faint);font-size:0.78rem}
-  /* status chips */
+
+  /* ── status chips ── */
   .st-prospect{color:#cbd5e1} .st-built{color:var(--amber-soft)} .st-contacted{color:#93c5fd}
   .st-interested{color:var(--good)} .st-closed{color:#fcd34d} .st-passed{color:var(--faint)}
-  /* field mode */
+
+  /* ── field mode ── */
   .fbtn{appearance:none;border:1px solid rgba(217,137,58,0.45);background:rgba(217,137,58,0.12);
     color:var(--amber-soft);border-radius:999px;padding:10px 18px;font:600 0.9rem/1 inherit;
     font-family:inherit;cursor:pointer;transition:background .15s ease,border-color .15s ease}
@@ -74,7 +100,18 @@
   .fsection{font:600 10px/1 ui-monospace,monospace;letter-spacing:0.18em;text-transform:uppercase;
     color:var(--faint);margin:26px 0 12px;text-align:center}
   .fretry{margin-top:14px}
-  /* QR overlay */
+
+  /* ── location blocked guide ── */
+  .loc-blocked{background:var(--panel);border:1px solid rgba(217,137,58,0.25);border-radius:14px;
+    padding:24px 20px;max-width:480px;margin:0 auto;text-align:center}
+  .loc-blocked p{margin:0 0 10px;color:var(--dim);font-size:0.9rem;line-height:1.5}
+  .loc-blocked p:first-child{color:var(--ink);font-weight:600;font-size:1rem;margin-bottom:14px}
+  .loc-steps{text-align:left;margin:14px 0 18px;padding:14px 16px;
+    background:rgba(8,10,15,0.5);border-radius:8px;border:1px solid var(--line)}
+  .loc-steps li{color:var(--dim);font-size:0.85rem;margin-bottom:5px;list-style:none;padding-left:0}
+  .loc-steps li::before{content:'→ ';color:var(--amber);font-weight:600}
+
+  /* ── QR overlay ── */
   #qr-overlay{position:fixed;inset:0;z-index:60;background:rgba(8,10,15,0.94);
     display:flex;align-items:center;justify-content:center;padding:20px;cursor:pointer}
   .qr-panel{background:#fff;color:#15130d;border-radius:18px;padding:22px 22px 18px;text-align:center;max-width:92vw}
@@ -98,6 +135,27 @@
       <button id="field-toggle" class="fbtn" aria-pressed="false" hidden>Near me</button>
     </div>
   </header>
+
+  <div id="filter-bar" class="filter-bar" hidden>
+    <div class="filter-group">
+      <span class="filter-label">Stage</span>
+      <button class="fc on" data-fg="stage" data-fv="all">All</button>
+      <button class="fc" data-fg="stage" data-fv="1">1 · Standard</button>
+      <button class="fc" data-fg="stage" data-fv="2">2 · Impeccable</button>
+      <button class="fc" data-fg="stage" data-fv="3">3 · Live</button>
+    </div>
+    <div class="sep"></div>
+    <div class="filter-group">
+      <span class="filter-label">Status</span>
+      <button class="fc on" data-fg="status" data-fv="all">All</button>
+      <button class="fc" data-fg="status" data-fv="open">Open</button>
+      <button class="fc" data-fg="status" data-fv="contacted">Contacted</button>
+      <button class="fc" data-fg="status" data-fv="interested">Interested</button>
+      <button class="fc" data-fg="status" data-fv="closed">Closed</button>
+      <button class="fc" data-fg="status" data-fv="passed">Passed</button>
+    </div>
+    <span class="filter-count" id="filter-count"></span>
+  </div>
 
   <div id="grid" class="grid" hidden></div>
   <section id="field" hidden>
@@ -124,42 +182,128 @@
 
 <script>
 (function () {
-  var grid = document.getElementById('grid');
-  var state = document.getElementById('state');
-  var LOGICAL_W = 1200, RATIO = 0.625; // 16:10 logical viewport for the thumbnails
+  var grid        = document.getElementById('grid');
+  var state       = document.getElementById('state');
+  var filterBar   = document.getElementById('filter-bar');
+  var filterCount = document.getElementById('filter-count');
+  var LOGICAL_W   = 1200, RATIO = 0.625;
 
-  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
-  function host(u){ try { return new URL(u).hostname.replace(/^www\./,''); } catch(_){ return ''; } }
-  function when(iso){
-    if(!iso) return '';
-    var d = new Date(iso), now = new Date(), days = Math.floor((now-d)/86400000);
+  // ── Tier classification ──────────────────────────────────────────────────
+  // Stage 3: graduated to their own domain (live_domain set in Supabase).
+  // Stage 2: hand-crafted /impeccable demo — tracked by slug until a DB column exists.
+  // Stage 1: everything else (quick template).
+  var IMPECCABLE = {
+    // Original hand-built demos
+    '969foodtruck': 1,
+    'eds-hair-austin': 1,
+    'jazzi-barber-31': 1,
+    'salon-de-belleza-luz': 1,
+    'get-juicy-roots': 1,
+    'frontier-valley': 1,
+    'roberts-realty': 1,
+    'kr-transportation': 1,
+    'morris-williams-golf-course': 1,
+    'st-peters-umc': 1,
+    'novas-tex-mex-bbq-austin': 1,
+    // 2026-06-12 batch
+    'las-trancas-taco-stand-austin': 1,
+    'tacoly-moly-by-ygor-austin': 1,
+    'monks-momo-austin': 1,
+    'mamis-tacos-austin': 1,
+    'the-urban-turban-round-rock': 1,
+    'tacos-guerrero-austin': 1,
+    'tonys-jamaican-food-austin-austin': 1,
+    'the-paratha-rollers-austin': 1
+  };
+
+  function tier(d) {
+    if (d.live_domain) return 3;
+    if (IMPECCABLE[d.slug]) return 2;
+    return 1;
+  }
+  var TIER_LABEL = { 1: 'S1', 2: 'S2', 3: 'S3' };
+  var TIER_TIP   = { 1: 'Stage 1 · Standard', 2: 'Stage 2 · Impeccable', 3: 'Stage 3 · Live site' };
+
+  // ── Filter state ─────────────────────────────────────────────────────────
+  var activeFilters = { stage: 'all', status: 'all' };
+
+  var STATUS_OPEN = { prospect: 1, built: 1 };
+
+  function matchesFilters(d) {
+    var t = tier(d);
+    if (activeFilters.stage !== 'all' && String(t) !== String(activeFilters.stage)) return false;
+    var sv = activeFilters.status;
+    if (sv === 'all') return true;
+    if (sv === 'open')       return d.status === 'prospect' || d.status === 'built';
+    if (sv === 'contacted')  return d.status === 'contacted';
+    if (sv === 'interested') return d.status === 'interested';
+    if (sv === 'closed')     return d.status === 'closed';
+    if (sv === 'passed')     return d.status === 'passed';
+    return true;
+  }
+
+  function applyFilters() {
+    var visible = ALL.filter(matchesFilters);
+    grid.innerHTML = visible.map(card).join('');
+    filterCount.textContent = visible.length + ' of ' + ALL.length;
+    sizeThumbs();
+  }
+
+  // Wire filter chips
+  function initFilters() {
+    filterBar.hidden = false;
+    document.querySelectorAll('.fc').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var fg = btn.getAttribute('data-fg');
+        var fv = btn.getAttribute('data-fv');
+        activeFilters[fg] = fv;
+        // Update active state for this group
+        document.querySelectorAll('.fc[data-fg="' + fg + '"]').forEach(function(b) {
+          b.classList.remove('on', 'on-s2', 'on-s3');
+        });
+        var cls = fv === '2' ? 'on-s2' : fv === '3' ? 'on-s3' : 'on';
+        btn.classList.add(cls);
+        applyFilters();
+      });
+    });
+  }
+
+  // ── Helpers ───────────────────────────────────────────────────────────────
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function(c) {
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];
+    });
+  }
+  function when(iso) {
+    if (!iso) return '';
+    var d = new Date(iso), now = new Date(), days = Math.floor((now - d) / 86400000);
     if (days <= 0) return 'today';
     if (days === 1) return 'yesterday';
     if (days < 30) return days + 'd ago';
-    return d.toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+    return d.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
   }
 
-  function sizeThumbs(){
-    var thumbs = grid.querySelectorAll('.thumb');
-    for (var i=0;i<thumbs.length;i++){
-      var t = thumbs[i], w = t.clientWidth, s = w / LOGICAL_W;
+  function sizeThumbs() {
+    grid.querySelectorAll('.thumb').forEach(function(t) {
+      var w = t.clientWidth, s = w / LOGICAL_W;
       var f = t.querySelector('iframe');
-      if (!f) continue;
+      if (!f) return;
       f.style.width = LOGICAL_W + 'px';
       f.style.height = (LOGICAL_W * RATIO) + 'px';
       f.style.transform = 'scale(' + s + ')';
       t.style.height = (w * RATIO) + 'px';
-    }
+    });
   }
 
-  function card(d){
+  function card(d) {
+    var t = tier(d);
     var built = d.built_at ? 'built ' + when(d.built_at) : 'not stamped';
-    var lastv = d.last_visit ? ' · last ' + when(d.last_visit) : '';
-    var ref = d.last_visit ? '' : '';
+    var lastv  = d.last_visit ? ' · last ' + when(d.last_visit) : '';
     return ''
       + '<article class="card">'
       +   '<div class="thumb">'
       +     '<span class="badge st-' + esc(d.status) + '">' + esc(d.status) + '</span>'
+      +     '<span class="tier-badge t' + t + '" title="' + esc(TIER_TIP[t]) + '">' + esc(TIER_LABEL[t]) + '</span>'
       +     '<iframe src="' + esc(d.demo_url) + '" loading="lazy" title="' + esc(d.name) + ' preview" tabindex="-1" aria-hidden="true"></iframe>'
       +     '<a class="open" href="' + esc(d.demo_url) + '" target="_blank" rel="noopener" aria-label="Open ' + esc(d.name) + '"></a>'
       +   '</div>'
@@ -168,7 +312,7 @@
       +     '<p class="meta">' + esc([d.category, d.city].filter(Boolean).join(' · ')) + '</p>'
       +     '<div class="row">'
       +       (d.google_rating != null ? '<span class="rate">★ ' + esc(d.google_rating) + '</span>' : '')
-      +       '<span class="v">👀 ' + (d.visits||0) + ' ' + ((d.visits===1)?'visit':'visits') + '</span>'
+      +       '<span class="v">👀 ' + (d.visits || 0) + ' ' + (d.visits === 1 ? 'visit' : 'visits') + '</span>'
       +       '<span>' + esc(built) + esc(lastv) + '</span>'
       +     '</div>'
       +     '<div class="actions">'
@@ -179,52 +323,44 @@
       + '</article>';
   }
 
-  var ALL = []; // demos, shared with field mode
+  var ALL = [];
 
-  function boot(demos){
+  function boot(demos) {
     ALL = demos;
-    grid.innerHTML = demos.map(card).join('');
-    document.getElementById('stat-sites').textContent = demos.length;
-    document.getElementById('stat-visits').textContent = demos.reduce(function(a,d){return a+(d.visits||0);},0);
-    state.hidden = true; grid.hidden = false;
+    document.getElementById('stat-sites').textContent  = demos.length;
+    document.getElementById('stat-visits').textContent = demos.reduce(function(a, d) { return a + (d.visits || 0); }, 0);
+    initFilters();
+    applyFilters();
+    state.hidden = true;
+    grid.hidden = false;
     document.getElementById('field-toggle').hidden = false;
-    sizeThumbs();
     window.addEventListener('resize', sizeThumbs);
-    // Dev hook: a pinned #at=lat,lng position means field mode is wanted.
     if (hashOpts().at) document.getElementById('field-toggle').click();
   }
 
   fetch('/demos/portfolio.json', { headers: { 'Accept': 'application/json' } })
-    .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function(data){
+    .then(function(r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function(data) {
       var demos = (data && data.demos) || [];
-      if (!demos.length){ state.textContent = 'No demos yet. Build one in the Command Center.'; return; }
+      if (!demos.length) { state.textContent = 'No demos yet. Build one in the Command Center.'; return; }
       boot(demos);
     })
-    .catch(function(){
-      // Dev hook: open the page with #mock to exercise the UI (including field
-      // mode ranking) against inline sample data when portfolio.json is absent.
+    .catch(function() {
       if (hashOpts().mock) { boot(MOCK); return; }
       state.innerHTML = 'Could not load the portfolio data. The demo sites are still reachable directly at <code>/demos/&lt;slug&gt;/</code>.';
     });
 
-  // ───────────────────────── field mode ─────────────────────────
-  // "Near me": rank leads by proximity x warmth for walk-up pitching.
-  // The browser position never leaves the device; everything below is local.
-
-  var field = document.getElementById('field');
+  // ── Field mode ────────────────────────────────────────────────────────────
+  var field      = document.getElementById('field');
   var fieldState = document.getElementById('field-state');
-  var fieldList = document.getElementById('field-list');
-  var fieldPins = document.getElementById('field-pins');
-  var fieldBtn = document.getElementById('field-toggle');
-  var fieldOn = false, mePos = null;
+  var fieldList  = document.getElementById('field-list');
+  var fieldPins  = document.getElementById('field-pins');
+  var fieldBtn   = document.getElementById('field-toggle');
+  var fieldOn    = false, mePos = null;
 
-  // Dev hooks in the hash: "#at=30.2672,-97.7431" pins the position (no
-  // geolocation prompt, handy on desktop); "#mock" enables the sample data
-  // fallback above. They combine: "#at=30.2672,-97.7431&mock".
-  function hashOpts(){
+  function hashOpts() {
     var out = {};
-    location.hash.replace(/^#/, '').split('&').forEach(function(part){
+    location.hash.replace(/^#/, '').split('&').forEach(function(part) {
       if (part === 'mock') { out.mock = true; return; }
       var m = /^at=(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)$/.exec(part);
       if (m) out.at = { lat: parseFloat(m[1]), lng: parseFloat(m[2]) };
@@ -232,7 +368,7 @@
     return out;
   }
 
-  function haversineKm(lat1, lng1, lat2, lng2){
+  function haversineKm(lat1, lng1, lat2, lng2) {
     var R = 6371, toRad = Math.PI / 180;
     var dLat = (lat2 - lat1) * toRad, dLng = (lng2 - lng1) * toRad;
     var a = Math.sin(dLat/2) * Math.sin(dLat/2)
@@ -240,18 +376,14 @@
     return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   }
 
-  // score = proximity x warmth. Proximity decays on a walking radius
-  // (exp(-km/2)); warmth folds in status, reviews, what has already sold
-  // nearby, and demo engagement. Closed and passed leads leave the ranked
-  // list; live clients come back as proof pins below it.
-  function rankLeads(demos, pos){
+  function rankLeads(demos, pos) {
     var soldCats = {};
-    demos.forEach(function(d){
+    demos.forEach(function(d) {
       if ((d.live_domain || d.status === 'closed') && d.category)
         soldCats[String(d.category).toLowerCase()] = true;
     });
     var ranked = [], pins = [], unpinned = 0;
-    demos.forEach(function(d){
+    demos.forEach(function(d) {
       if (d.lat == null || d.lng == null) { unpinned++; return; }
       var e = Object.create(d);
       e.km = haversineKm(pos.lat, pos.lng, d.lat, d.lng);
@@ -260,23 +392,22 @@
       var statusW = d.status === 'interested' ? 3
         : (d.status === 'built' && !(d.visits > 0)) ? 1.5
         : d.status === 'contacted' ? 0.6 : 1;
-      // Unrated leads get a neutral 3.0 prior so they stay in the list.
-      var review = (d.google_rating || 3) * Math.log10(Math.max(d.reviews_count || 0, 10));
-      var sold = (d.category && soldCats[String(d.category).toLowerCase()]) ? 1.3 : 1;
-      var engage = 1 + Math.min(d.visits || 0, 20) / 10;
+      var review  = (d.google_rating || 3) * Math.log10(Math.max(d.reviews_count || 0, 10));
+      var sold    = (d.category && soldCats[String(d.category).toLowerCase()]) ? 1.3 : 1;
+      var engage  = 1 + Math.min(d.visits || 0, 20) / 10;
       e.score = Math.exp(-e.km / 2) * statusW * review * sold * engage;
       ranked.push(e);
     });
-    ranked.sort(function(a,b){ return b.score - a.score; });
-    pins.sort(function(a,b){ return a.km - b.km; });
+    ranked.sort(function(a, b) { return b.score - a.score; });
+    pins.sort(function(a, b) { return a.km - b.km; });
     return { ranked: ranked.slice(0, 12), pins: pins, unpinned: unpinned };
   }
 
-  function kmLabel(km){ return km.toFixed(1) + ' km'; }
-  function dirHref(d){ return 'https://www.google.com/maps/dir/?api=1&destination=' + d.lat + ',' + d.lng; }
-  function absUrl(u){ try { return new URL(u, location.href).href; } catch(_){ return u; } }
+  function kmLabel(km) { return km.toFixed(1) + ' km'; }
+  function dirHref(d) { return 'https://www.google.com/maps/dir/?api=1&destination=' + d.lat + ',' + d.lng; }
+  function absUrl(u) { try { return new URL(u, location.href).href; } catch(_) { return u; } }
 
-  function fieldCard(d){
+  function fieldCard(d) {
     var bits = [];
     if (d.category) bits.push(esc(d.category));
     if (d.google_rating != null) bits.push('★ ' + esc(d.google_rating) + (d.reviews_count ? ' (' + esc(d.reviews_count) + ')' : ''));
@@ -301,7 +432,7 @@
       + '</article>';
   }
 
-  function pinCard(d){
+  function pinCard(d) {
     var site = 'https://' + d.live_domain;
     return ''
       + '<article class="fcard pin">'
@@ -316,20 +447,20 @@
       + '</article>';
   }
 
-  function showFieldState(html){
+  function showFieldState(html) {
     fieldList.innerHTML = ''; fieldPins.innerHTML = '';
     fieldState.innerHTML = html; fieldState.hidden = false;
   }
 
-  function renderField(){
+  function renderField() {
     fieldState.hidden = true;
     var r = rankLeads(ALL, mePos);
-    if (!r.ranked.length && !r.pins.length){
+    if (!r.ranked.length && !r.pins.length) {
       showFieldState('No leads have map pins yet. Run the geo backfill and they will show up here.');
       return;
     }
     var html = '';
-    if (r.ranked.length){
+    if (r.ranked.length) {
       html += '<p class="fsection">Walk-up list · closest warm doors first</p>';
       html += r.ranked.map(fieldCard).join('');
     } else {
@@ -337,59 +468,99 @@
     }
     fieldList.innerHTML = html;
     var pinsHtml = '';
-    if (r.pins.length){
+    if (r.pins.length) {
       pinsHtml += '<p class="fsection">Proof nearby · live client sites</p>';
       pinsHtml += r.pins.map(pinCard).join('');
     }
-    if (r.unpinned > 0){
-      pinsHtml += '<p class="fnote">' + r.unpinned + (r.unpinned === 1 ? ' lead has' : ' leads have') + ' no map pin yet, so they are not ranked.</p>';
+    if (r.unpinned > 0) {
+      pinsHtml += '<p class="fnote">' + r.unpinned + (r.unpinned === 1 ? ' lead has' : ' leads have') + ' no map pin yet, so it is not ranked.</p>';
     }
     fieldPins.innerHTML = pinsHtml;
   }
 
-  function locate(){
-    var at = hashOpts().at;
-    if (at){ mePos = at; renderField(); return; }
-    if (mePos){ renderField(); return; }
-    if (!navigator.geolocation){
-      showFieldState('This browser cannot share your location. Open the page on your phone, or add #at=lat,lng to the address.');
-      return;
+  // ── Location with helpful blocked-state UI ────────────────────────────────
+  function locBlockedHtml() {
+    var ua = navigator.userAgent;
+    var isIOS     = /iPhone|iPad|iPod/.test(ua);
+    var isAndroid = /Android/.test(ua);
+    var steps;
+    if (isIOS) {
+      steps = [
+        'Open the iPhone Settings app',
+        'Scroll down and tap Safari (or Chrome if that\'s your browser)',
+        'Tap Location',
+        'Choose "Allow" or "Ask Next Time"',
+        'Come back here and tap Try again'
+      ];
+    } else if (isAndroid) {
+      steps = [
+        'Tap the lock icon in your browser\'s address bar',
+        'Tap "Site settings" or "Permissions"',
+        'Tap Location and set it to "Allow"',
+        'Tap Try again below'
+      ];
+    } else {
+      steps = [
+        'Click the lock icon to the left of the address bar',
+        'Find "Location" and change it to "Allow"',
+        'Reload this page or tap Try again'
+      ];
     }
-    showFieldState('Finding where you are…');
-    navigator.geolocation.getCurrentPosition(function(p){
-      mePos = { lat: p.coords.latitude, lng: p.coords.longitude };
-      if (fieldOn) renderField();
-    }, function(err){
-      var msg = err && err.code === 1
-        ? 'Location is blocked for this page. Allow it in your browser settings, then try again.'
-        : 'Could not get a location fix. Try again in a moment, ideally outdoors.';
-      showFieldState(msg + '<div class="fretry"><button class="fbtn" type="button" id="field-retry">Try again</button></div>');
-      var retry = document.getElementById('field-retry');
-      if (retry) retry.addEventListener('click', locate);
-    }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+    return '<div class="loc-blocked">'
+      + '<p>Location is blocked for this page.</p>'
+      + '<p>To enable it:</p>'
+      + '<ul class="loc-steps">' + steps.map(function(s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul>'
+      + '<div class="fretry"><button class="fbtn" type="button" id="field-retry">Try again</button></div>'
+      + '</div>';
   }
 
-  fieldBtn.addEventListener('click', function(){
+  function locate() {
+    var at = hashOpts().at;
+    if (at) { mePos = at; renderField(); return; }
+    if (mePos) { renderField(); return; }
+    if (!navigator.geolocation) {
+      showFieldState('<p>This browser cannot share your location. Open on your phone, or add <code>#at=lat,lng</code> to the address bar.</p>');
+      return;
+    }
+    showFieldState('<p style="color:var(--dim)">Finding where you are…</p>');
+    navigator.geolocation.getCurrentPosition(
+      function(p) {
+        mePos = { lat: p.coords.latitude, lng: p.coords.longitude };
+        if (fieldOn) renderField();
+      },
+      function(err) {
+        var html = err && err.code === 1
+          ? locBlockedHtml()
+          : '<div class="loc-blocked"><p>Could not get a location fix.</p><p>Try again outdoors or somewhere with a clearer signal.</p>'
+            + '<div class="fretry"><button class="fbtn" type="button" id="field-retry">Try again</button></div></div>';
+        showFieldState(html);
+        var retry = document.getElementById('field-retry');
+        if (retry) retry.addEventListener('click', locate);
+      },
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 }
+    );
+  }
+
+  fieldBtn.addEventListener('click', function() {
     fieldOn = !fieldOn;
     fieldBtn.setAttribute('aria-pressed', String(fieldOn));
     fieldBtn.textContent = fieldOn ? 'All demos' : 'Near me';
     grid.hidden = fieldOn;
+    filterBar.hidden = fieldOn; // hide filters in field mode
     field.hidden = !fieldOn;
     if (fieldOn) locate();
   });
 
-  // ───────────────────────── QR overlay ─────────────────────────
-
+  // ── QR overlay ────────────────────────────────────────────────────────────
   var qrOverlay = document.getElementById('qr-overlay');
-  var qrCanvas = document.getElementById('qr-canvas');
+  var qrCanvas  = document.getElementById('qr-canvas');
 
-  function drawQR(text){
+  function drawQR(text) {
     var m = qrMatrix(text);
     var panel = qrOverlay.querySelector('.qr-panel');
     var img = panel.querySelector('img.qr-fallback');
     if (img) img.remove();
-    if (!m){
-      // URL too long for the inline encoder; last-resort external render.
+    if (!m) {
       qrCanvas.hidden = true;
       img = document.createElement('img');
       img.className = 'qr-fallback';
@@ -408,7 +579,7 @@
       if (m[r][c]) ctx.fillRect((c + quiet) * scale, (r + quiet) * scale, scale, scale);
   }
 
-  function openQR(d){
+  function openQR(d) {
     var url = absUrl(d.demo_url);
     drawQR(url);
     document.getElementById('qr-name').textContent = d.name;
@@ -416,177 +587,108 @@
     qrOverlay.hidden = false;
   }
 
-  fieldList.addEventListener('click', function(ev){
+  fieldList.addEventListener('click', function(ev) {
     var btn = ev.target.closest('button.qr');
     if (!btn) return;
     var slug = btn.getAttribute('data-slug');
-    for (var i = 0; i < ALL.length; i++){
-      if (ALL[i].slug === slug){ openQR(ALL[i]); break; }
+    for (var i = 0; i < ALL.length; i++) {
+      if (ALL[i].slug === slug) { openQR(ALL[i]); break; }
     }
   });
-  qrOverlay.addEventListener('click', function(){ qrOverlay.hidden = true; });
-  document.addEventListener('keydown', function(ev){ if (ev.key === 'Escape') qrOverlay.hidden = true; });
+  qrOverlay.addEventListener('click', function() { qrOverlay.hidden = true; });
+  document.addEventListener('keydown', function(ev) { if (ev.key === 'Escape') qrOverlay.hidden = true; });
 
-  // Minimal QR encoder: byte mode, EC level L, versions 1-6, mask 0.
-  // Self-contained on purpose; this page ships with no outside scripts.
-  // Returns a square 2D array of 0/1 modules, or null if the text is too long.
-  function qrMatrix(text){
+  // ── Minimal QR encoder ───────────────────────────────────────────────────
+  // Byte mode, EC level L, versions 1-6, mask 0. Self-contained.
+  function qrMatrix(text) {
     var enc = unescape(encodeURIComponent(String(text)));
     var bytes = [];
     for (var i = 0; i < enc.length; i++) bytes.push(enc.charCodeAt(i));
-
-    // EC level L: [ec codewords per block, [data codewords per block]]
-    var TAB = [[7,[19]], [10,[34]], [15,[55]], [20,[80]], [26,[108]], [18,[68,68]]];
+    var TAB   = [[7,[19]], [10,[34]], [15,[55]], [20,[80]], [26,[108]], [18,[68,68]]];
     var ALIGN = [null, [], [6,18], [6,22], [6,26], [6,30], [6,34]];
     var ver = 0, ecLen, blocks;
-    for (var v = 1; v <= 6; v++){
-      var total = TAB[v-1][1].reduce(function(a,b){ return a + b; }, 0);
-      if (bytes.length <= total - 2){ ver = v; ecLen = TAB[v-1][0]; blocks = TAB[v-1][1]; break; }
+    for (var v = 1; v <= 6; v++) {
+      var total = TAB[v-1][1].reduce(function(a,b){ return a+b; }, 0);
+      if (bytes.length <= total - 2) { ver = v; ecLen = TAB[v-1][0]; blocks = TAB[v-1][1]; break; }
     }
     if (!ver) return null;
-    var D = blocks.reduce(function(a,b){ return a + b; }, 0);
-
-    // Bit stream: mode 0100, 8-bit count, data, terminator, byte pads.
+    var D = blocks.reduce(function(a,b){ return a+b; }, 0);
     var bits = [];
-    function put(val, len){ for (var i = len - 1; i >= 0; i--) bits.push((val >> i) & 1); }
-    put(4, 4);
-    put(bytes.length, 8);
-    for (i = 0; i < bytes.length; i++) put(bytes[i], 8);
-    put(0, Math.min(4, D * 8 - bits.length));
-    while (bits.length % 8) bits.push(0);
-    var data = [];
-    for (i = 0; i < bits.length; i += 8){
-      var byteVal = 0;
-      for (var j = 0; j < 8; j++) byteVal = (byteVal << 1) | bits[i + j];
-      data.push(byteVal);
-    }
-    var pads = [0xEC, 0x11], pi = 0;
-    while (data.length < D) data.push(pads[pi++ % 2]);
-
-    // Reed-Solomon over GF(256), poly 0x11d.
-    var EXP = new Array(512), LOG = new Array(256), x = 1;
-    for (i = 0; i < 255; i++){ EXP[i] = x; LOG[x] = i; x <<= 1; if (x & 0x100) x ^= 0x11d; }
-    for (i = 255; i < 512; i++) EXP[i] = EXP[i - 255];
-    function gmul(a, b){ return (a && b) ? EXP[LOG[a] + LOG[b]] : 0; }
-    var gen = [1];
-    for (i = 0; i < ecLen; i++){
-      var ng = new Array(gen.length + 1).fill(0);
-      for (j = 0; j < gen.length; j++){
-        ng[j] ^= gen[j];
-        ng[j + 1] ^= gmul(gen[j], EXP[i]);
-      }
-      gen = ng;
-    }
-    function rsRemainder(d){
-      var res = d.concat(new Array(ecLen).fill(0));
-      for (var i = 0; i < d.length; i++){
-        var f = res[i];
-        if (!f) continue;
-        for (var j = 0; j < gen.length; j++) res[i + j] ^= gmul(gen[j], f);
-      }
-      return res.slice(d.length);
-    }
-
-    // Split into blocks, compute EC, interleave.
-    var dB = [], eB = [], off = 0;
-    for (i = 0; i < blocks.length; i++){
-      var part = data.slice(off, off + blocks[i]); off += blocks[i];
-      dB.push(part); eB.push(rsRemainder(part));
-    }
-    var seq = [], maxD = Math.max.apply(null, blocks);
-    for (i = 0; i < maxD; i++) for (j = 0; j < dB.length; j++) if (i < dB[j].length) seq.push(dB[j][i]);
-    for (i = 0; i < ecLen; i++) for (j = 0; j < eB.length; j++) seq.push(eB[j][i]);
-
-    // Matrix scaffolding: finders, timing, alignment, reserved areas.
-    var size = 17 + ver * 4;
-    var M = [], used = [];
-    for (i = 0; i < size; i++){ M.push(new Array(size).fill(0)); used.push(new Array(size).fill(0)); }
-    function set(r, c, val){ M[r][c] = val ? 1 : 0; used[r][c] = 1; }
-    function finder(r, c){
-      for (var dr = -1; dr <= 7; dr++) for (var dc = -1; dc <= 7; dc++){
-        var rr = r + dr, cc = c + dc;
-        if (rr < 0 || rr >= size || cc < 0 || cc >= size) continue;
-        var on = (dr >= 0 && dr <= 6 && dc >= 0 && dc <= 6) &&
-                 (dr === 0 || dr === 6 || dc === 0 || dc === 6 || (dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4));
-        set(rr, cc, on);
-      }
-    }
-    finder(0, 0); finder(0, size - 7); finder(size - 7, 0);
-    for (i = 0; i < size; i++){
-      if (!used[6][i]) set(6, i, i % 2 === 0);
-      if (!used[i][6]) set(i, 6, i % 2 === 0);
-    }
-    var centers = ALIGN[ver];
-    for (i = 0; i < centers.length; i++) for (j = 0; j < centers.length; j++){
-      var ar = centers[i], ac = centers[j];
-      if (used[ar][ac]) continue;
-      for (var dr2 = -2; dr2 <= 2; dr2++) for (var dc2 = -2; dc2 <= 2; dc2++)
-        set(ar + dr2, ac + dc2, Math.max(Math.abs(dr2), Math.abs(dc2)) !== 1);
-    }
-    set(size - 8, 8, 1); // dark module
-    for (i = 0; i < 9; i++){ if (!used[8][i]) set(8, i, 0); if (!used[i][8]) set(i, 8, 0); }
-    for (i = 0; i < 8; i++){ if (!used[8][size-1-i]) set(8, size-1-i, 0); if (!used[size-1-i][8]) set(size-1-i, 8, 0); }
-
-    // Data placement, zigzag from bottom-right; mask 0 inverts when (r+c) is even.
-    var k = 0;
-    function bitAt(n){ var b = seq[n >> 3]; return b === undefined ? 0 : (b >> (7 - (n & 7))) & 1; }
-    var col = size - 1, up = true;
-    while (col > 0){
-      if (col === 6) col--;
-      for (var s = 0; s < size; s++){
-        var rr2 = up ? size - 1 - s : s;
-        for (var d2 = 0; d2 < 2; d2++){
-          var cc2 = col - d2;
-          if (used[rr2][cc2]) continue;
-          var bit = bitAt(k++);
-          if ((rr2 + cc2) % 2 === 0) bit ^= 1;
-          M[rr2][cc2] = bit;
-        }
-      }
-      up = !up; col -= 2;
-    }
-
-    // Format info: level L, mask 0. MSB lands at (8,0).
-    var fdata = (1 << 3) | 0, rem = fdata;
-    for (i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537);
-    var fbits = ((fdata << 10) | rem) ^ 0x5412;
-    function fb(n){ return (fbits >> (14 - n)) & 1; }
-    for (i = 0; i <= 5; i++) M[8][i] = fb(i);
-    M[8][7] = fb(6); M[8][8] = fb(7); M[7][8] = fb(8);
-    for (i = 9; i < 15; i++) M[14 - i][8] = fb(i);
-    for (i = 0; i < 8; i++) M[size - 1 - i][8] = fb(i);
-    for (i = 8; i < 15; i++) M[8][size - 15 + i] = fb(i);
-    M[size - 8][8] = 1;
-
+    function put(val,len){ for(var i=len-1;i>=0;i--) bits.push((val>>i)&1); }
+    put(4,4); put(bytes.length,8);
+    for(i=0;i<bytes.length;i++) put(bytes[i],8);
+    put(0,Math.min(4,D*8-bits.length));
+    while(bits.length%8) bits.push(0);
+    var data=[];
+    for(i=0;i<bits.length;i+=8){ var bv=0; for(var j=0;j<8;j++) bv=(bv<<1)|bits[i+j]; data.push(bv); }
+    var pads=[0xEC,0x11],pi=0;
+    while(data.length<D) data.push(pads[pi++%2]);
+    var EXP=new Array(512),LOG=new Array(256),x=1;
+    for(i=0;i<255;i++){ EXP[i]=x; LOG[x]=i; x<<=1; if(x&0x100) x^=0x11d; }
+    for(i=255;i<512;i++) EXP[i]=EXP[i-255];
+    function gmul(a,b){ return(a&&b)?EXP[LOG[a]+LOG[b]]:0; }
+    var gen=[1];
+    for(i=0;i<ecLen;i++){ var ng=new Array(gen.length+1).fill(0); for(j=0;j<gen.length;j++){ ng[j]^=gen[j]; ng[j+1]^=gmul(gen[j],EXP[i]); } gen=ng; }
+    function rsRemainder(d){ var res=d.concat(new Array(ecLen).fill(0)); for(var i=0;i<d.length;i++){ var f=res[i]; if(!f) continue; for(var j=0;j<gen.length;j++) res[i+j]^=gmul(gen[j],f); } return res.slice(d.length); }
+    var dB=[],eB=[],off=0;
+    for(i=0;i<blocks.length;i++){ var part=data.slice(off,off+blocks[i]); off+=blocks[i]; dB.push(part); eB.push(rsRemainder(part)); }
+    var seq=[],maxD=Math.max.apply(null,blocks);
+    for(i=0;i<maxD;i++) for(j=0;j<dB.length;j++) if(i<dB[j].length) seq.push(dB[j][i]);
+    for(i=0;i<ecLen;i++) for(j=0;j<eB.length;j++) seq.push(eB[j][i]);
+    var size=17+ver*4,M=[],used=[];
+    for(i=0;i<size;i++){ M.push(new Array(size).fill(0)); used.push(new Array(size).fill(0)); }
+    function set(r,c,val){ M[r][c]=val?1:0; used[r][c]=1; }
+    function finder(r,c){ for(var dr=-1;dr<=7;dr++) for(var dc=-1;dc<=7;dc++){ var rr=r+dr,cc=c+dc; if(rr<0||rr>=size||cc<0||cc>=size) continue; var on=(dr>=0&&dr<=6&&dc>=0&&dc<=6)&&(dr===0||dr===6||dc===0||dc===6||(dr>=2&&dr<=4&&dc>=2&&dc<=4)); set(rr,cc,on); } }
+    finder(0,0); finder(0,size-7); finder(size-7,0);
+    for(i=0;i<size;i++){ if(!used[6][i]) set(6,i,i%2===0); if(!used[i][6]) set(i,6,i%2===0); }
+    var centers=ALIGN[ver];
+    for(i=0;i<centers.length;i++) for(j=0;j<centers.length;j++){ var ar=centers[i],ac=centers[j]; if(used[ar][ac]) continue; for(var dr2=-2;dr2<=2;dr2++) for(var dc2=-2;dc2<=2;dc2++) set(ar+dr2,ac+dc2,Math.max(Math.abs(dr2),Math.abs(dc2))!==1); }
+    set(size-8,8,1);
+    for(i=0;i<9;i++){ if(!used[8][i]) set(8,i,0); if(!used[i][8]) set(i,8,0); }
+    for(i=0;i<8;i++){ if(!used[8][size-1-i]) set(8,size-1-i,0); if(!used[size-1-i][8]) set(size-1-i,8,0); }
+    var k=0;
+    function bitAt(n){ var b=seq[n>>3]; return b===undefined?0:(b>>(7-(n&7)))&1; }
+    var col=size-1,up=true;
+    while(col>0){ if(col===6) col--; for(var s=0;s<size;s++){ var rr2=up?size-1-s:s; for(var d2=0;d2<2;d2++){ var cc2=col-d2; if(used[rr2][cc2]) continue; var bit=bitAt(k++); if((rr2+cc2)%2===0) bit^=1; M[rr2][cc2]=bit; } } up=!up; col-=2; }
+    var fdata=(1<<3)|0,rem=fdata;
+    for(i=0;i<10;i++) rem=(rem<<1)^((rem>>>9)*0x537);
+    var fbits=((fdata<<10)|rem)^0x5412;
+    function fb(n){ return(fbits>>(14-n))&1; }
+    for(i=0;i<=5;i++) M[8][i]=fb(i);
+    M[8][7]=fb(6); M[8][8]=fb(7); M[7][8]=fb(8);
+    for(i=9;i<15;i++) M[14-i][8]=fb(i);
+    for(i=0;i<8;i++) M[size-1-i][8]=fb(i);
+    for(i=8;i<15;i++) M[8][size-15+i]=fb(i);
+    M[size-8][8]=1;
     return M;
   }
 
-  // Sample data for the #mock dev hook: a small spread around downtown Austin.
+  // ── Mock data for #mock dev hook ──────────────────────────────────────────
   var MOCK = [
-    { slug: 'mock-taco-trailer', name: 'Taco Trailer Sample', category: 'Mexican restaurant', city: 'Austin', state: 'TX',
-      google_rating: 4.7, reviews_count: 212, status: 'built', lat: 30.2691, lng: -97.7405, phone: '+15125550101',
-      live_domain: null, demo_url: '/demos/mock-taco-trailer/', pitch_url: '/demos/mock-taco-trailer/pitch/',
-      built_at: '2026-06-01T12:00:00Z', visits: 0, last_visit: null },
-    { slug: 'mock-barber', name: 'Eastside Barber Sample', category: 'Barber shop', city: 'Austin', state: 'TX',
-      google_rating: 4.9, reviews_count: 88, status: 'interested', lat: 30.2599, lng: -97.7287, phone: '+15125550102',
-      live_domain: null, demo_url: '/demos/mock-barber/', pitch_url: '/demos/mock-barber/pitch/',
-      built_at: '2026-05-28T12:00:00Z', visits: 6, last_visit: '2026-06-08T12:00:00Z' },
-    { slug: 'mock-bbq', name: 'Smoked BBQ Sample', category: 'Barbecue restaurant', city: 'Austin', state: 'TX',
-      google_rating: 4.4, reviews_count: 1320, status: 'contacted', lat: 30.2755, lng: -97.7522, phone: null,
-      live_domain: null, demo_url: '/demos/mock-bbq/', pitch_url: '/demos/mock-bbq/pitch/',
-      built_at: '2026-05-25T12:00:00Z', visits: 14, last_visit: '2026-06-09T12:00:00Z' },
-    { slug: 'mock-burgers', name: 'Burger Stand Sample', category: 'Mexican restaurant', city: 'Austin', state: 'TX',
-      google_rating: 4.8, reviews_count: 451, status: 'closed', lat: 30.2530, lng: -97.7405, phone: '+15125550104',
-      live_domain: 'sampleburgers.example.com', demo_url: '/demos/mock-burgers/', pitch_url: '/demos/mock-burgers/pitch/',
-      built_at: '2026-05-10T12:00:00Z', visits: 40, last_visit: '2026-06-07T12:00:00Z' },
-    { slug: 'mock-passed', name: 'Passed Lead Sample', category: 'Food truck', city: 'Austin', state: 'TX',
-      google_rating: 3.9, reviews_count: 41, status: 'passed', lat: 30.2666, lng: -97.7333, phone: null,
-      live_domain: null, demo_url: '/demos/mock-passed/', pitch_url: '/demos/mock-passed/pitch/',
-      built_at: '2026-05-20T12:00:00Z', visits: 1, last_visit: '2026-05-21T12:00:00Z' },
-    { slug: 'mock-nopin', name: 'No Pin Sample', category: 'Hair salon', city: 'Austin', state: 'TX',
-      google_rating: 4.6, reviews_count: 73, status: 'built', lat: null, lng: null, phone: '+15125550106',
-      live_domain: null, demo_url: '/demos/mock-nopin/', pitch_url: '/demos/mock-nopin/pitch/',
-      built_at: '2026-06-05T12:00:00Z', visits: 2, last_visit: '2026-06-06T12:00:00Z' }
+    { slug:'mock-taco-trailer', name:'Taco Trailer Sample', category:'Mexican restaurant', city:'Austin', state:'TX',
+      google_rating:4.7, reviews_count:212, status:'built', lat:30.2691, lng:-97.7405, phone:'+15125550101',
+      live_domain:null, demo_url:'/demos/mock-taco-trailer/', pitch_url:'/demos/mock-taco-trailer/pitch/',
+      built_at:'2026-06-01T12:00:00Z', visits:0, last_visit:null },
+    { slug:'mock-barber', name:'Eastside Barber Sample', category:'Barber shop', city:'Austin', state:'TX',
+      google_rating:4.9, reviews_count:88, status:'interested', lat:30.2599, lng:-97.7287, phone:'+15125550102',
+      live_domain:null, demo_url:'/demos/mock-barber/', pitch_url:'/demos/mock-barber/pitch/',
+      built_at:'2026-05-28T12:00:00Z', visits:6, last_visit:'2026-06-08T12:00:00Z' },
+    { slug:'mock-bbq', name:'Smoked BBQ Sample', category:'Barbecue restaurant', city:'Austin', state:'TX',
+      google_rating:4.4, reviews_count:1320, status:'contacted', lat:30.2755, lng:-97.7522, phone:null,
+      live_domain:null, demo_url:'/demos/mock-bbq/', pitch_url:'/demos/mock-bbq/pitch/',
+      built_at:'2026-05-25T12:00:00Z', visits:14, last_visit:'2026-06-09T12:00:00Z' },
+    { slug:'mock-burgers', name:'Burger Stand Sample', category:'Mexican restaurant', city:'Austin', state:'TX',
+      google_rating:4.8, reviews_count:451, status:'closed', lat:30.2530, lng:-97.7405, phone:'+15125550104',
+      live_domain:'sampleburgers.example.com', demo_url:'/demos/mock-burgers/', pitch_url:'/demos/mock-burgers/pitch/',
+      built_at:'2026-05-10T12:00:00Z', visits:40, last_visit:'2026-06-07T12:00:00Z' },
+    { slug:'mock-passed', name:'Passed Lead Sample', category:'Food truck', city:'Austin', state:'TX',
+      google_rating:3.9, reviews_count:41, status:'passed', lat:30.2666, lng:-97.7333, phone:null,
+      live_domain:null, demo_url:'/demos/mock-passed/', pitch_url:'/demos/mock-passed/pitch/',
+      built_at:'2026-05-20T12:00:00Z', visits:1, last_visit:'2026-05-21T12:00:00Z' },
+    { slug:'mock-nopin', name:'No Pin Sample', category:'Hair salon', city:'Austin', state:'TX',
+      google_rating:4.6, reviews_count:73, status:'built', lat:null, lng:null, phone:'+15125550106',
+      live_domain:null, demo_url:'/demos/mock-nopin/', pitch_url:'/demos/mock-nopin/pitch/',
+      built_at:'2026-06-05T12:00:00Z', visits:2, last_visit:'2026-06-06T12:00:00Z' }
   ];
 })();
 </script>
