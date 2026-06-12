@@ -7,6 +7,11 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.resolve(__dirname),
   },
+  // The dev-mode indicator defaults to bottom-left, where it sits on top of
+  // the mobile icon rail's expand button. Move it clear of the rail.
+  devIndicators: {
+    position: "bottom-right",
+  },
 };
 
 export default nextConfig;

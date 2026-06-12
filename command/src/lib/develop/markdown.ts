@@ -108,7 +108,16 @@ const FRONTMATTER_KEY_ORDER: (keyof BizFrontmatter)[] = [
   "reviews_count",
   "website_status",
   "status",
+  "campaign",
+  "tags",
+  "lat",
+  "lng",
   "demo_url",
+  "production_url",
+  "live_domain",
+  "netlify_site_id",
+  "dns_zone_id",
+  "ssl_state",
   "hand_lead",
 ];
 

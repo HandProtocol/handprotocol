@@ -1,7 +1,12 @@
 import Link from "next/link";
-import { Plus, Building2 } from "lucide-react";
-import { listBizLeads } from "@/lib/develop/queries";
-import { BizKanban } from "@/components/develop/biz-kanban";
+import { Plus, Building2, ScrollText } from "lucide-react";
+import {
+  listBizLeads,
+  listCampaigns,
+  listVisitCounts,
+} from "@/lib/develop/queries";
+import { BizBoard } from "@/components/develop/biz-board";
+import { DevelopNav } from "@/components/develop/develop-nav";
 
 /*
   Business-development pipeline. The "Develop" pillar (the D in H-A-N-D).
@@ -13,7 +18,11 @@ import { BizKanban } from "@/components/develop/biz-kanban";
 export const dynamic = "force-dynamic";
 
 export default async function DevelopPage() {
-  const leads = await listBizLeads();
+  const [leads, campaigns, visitCounts] = await Promise.all([
+    listBizLeads(),
+    listCampaigns(),
+    listVisitCounts(),
+  ]);
   const configured = Boolean(
     process.env.NEXT_PUBLIC_SUPABASE_URL &&
       process.env.SUPABASE_SERVICE_ROLE_KEY,
@@ -35,14 +44,25 @@ export default async function DevelopPage() {
             lead. A third of every closed deal funds the pool.
           </p>
         </div>
-        <Link
-          href="/develop/new"
-          className="inline-flex items-center gap-2 rounded-md bg-[var(--amber)] px-3 py-2 text-sm font-medium text-[#1a1208] hover:bg-[var(--amber-soft)] hover:shadow-[0_0_14px_var(--amber-glow)] transition-all"
-        >
-          <Plus className="h-4 w-4" aria-hidden />
-          New lead
-        </Link>
+        <div className="flex shrink-0 items-center gap-2">
+          <Link
+            href="/develop/scripts"
+            className="inline-flex items-center gap-2 rounded-md border border-[rgba(245,239,225,0.12)] px-3 py-2 text-xs text-[var(--ink-dim)] hover:text-[var(--ink)] hover:border-[rgba(217,119,6,0.35)] transition-colors"
+          >
+            <ScrollText className="h-3.5 w-3.5" aria-hidden />
+            Cold scripts
+          </Link>
+          <Link
+            href="/develop/new"
+            className="inline-flex items-center gap-2 rounded-md bg-[var(--amber)] px-3 py-2 text-sm font-medium text-[#1a1208] hover:bg-[var(--amber-soft)] hover:shadow-[0_0_14px_var(--amber-glow)] transition-all"
+          >
+            <Plus className="h-4 w-4" aria-hidden />
+            New lead
+          </Link>
+        </div>
       </header>
+
+      <DevelopNav />
 
       {!configured && (
         <div className="panel border-[rgba(217,119,6,0.3)] bg-[rgba(217,119,6,0.04)] p-4">
@@ -77,7 +97,13 @@ export default async function DevelopPage() {
         </div>
       )}
 
-      {leads.length > 0 && <BizKanban leads={leads} />}
+      {leads.length > 0 && (
+        <BizBoard
+          leads={leads}
+          campaigns={campaigns}
+          visitCounts={visitCounts}
+        />
+      )}
     </div>
   );
 }

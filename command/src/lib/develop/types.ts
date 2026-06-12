@@ -38,6 +38,11 @@ export const BIZ_KANBAN_COLUMNS: {
 export const WEBSITE_STATUSES = ["none", "poor", "ok"] as const;
 export type WebsiteStatus = (typeof WEBSITE_STATUSES)[number];
 
+// The board can be grouped on more than status once volume climbs. Status keeps
+// the drag-to-transition kanban; the others render static, click-through columns.
+export const BIZ_GROUP_BY = ["status", "campaign", "city", "category"] as const;
+export type BizGroupBy = (typeof BIZ_GROUP_BY)[number];
+
 export const TOUCHPOINT_METHODS = [
   "call",
   "walk_in",
@@ -67,6 +72,25 @@ export type BizTouchpoint = {
   created_at: string;
 };
 
+// A batch of leads worked together (command.biz_campaigns). A lead belongs to
+// at most one. Rollups are joined in for the campaigns index.
+export type BizCampaign = {
+  id: string;
+  slug: string;
+  name: string;
+  region: string | null;
+  color: string | null;
+  goal: number | null;
+  notes: string | null;
+  archived: boolean;
+  created_at: string;
+  updated_at: string;
+  // joined rollups (optional)
+  lead_count?: number;
+  closed_count?: number;
+  live_count?: number;
+};
+
 export type BizLead = {
   id: string;
   slug: string;
@@ -93,9 +117,28 @@ export type BizLead = {
   last_synced_at: string | null;
   created_at: string;
   updated_at: string;
+  // ── scaling additions (019) ──────────────────────────────────────────────
+  campaign_id: string | null;
+  tags: string[];
+  lat: number | null;
+  lng: number | null;
+  // production lifecycle: set once the lead graduates to its own owned site
+  // (hand-biz-pitch Phase 6). live_domain present ⇒ it shows in /develop/sites.
+  production_url: string | null;
+  live_domain: string | null;
+  netlify_site_id: string | null;
+  dns_zone_id: string | null;
+  ssl_state: string | null;
+  live_at: string | null;
   // Joined for the kanban / detail views
+  campaign?: Pick<BizCampaign, "slug" | "name" | "color"> | null;
   reviews?: BizReview[];
 };
+
+// True once a lead has graduated to an owned production site.
+export function isLiveSite(lead: BizLead): boolean {
+  return Boolean(lead.live_domain);
+}
 
 // Frontmatter as it appears in biz/<slug>/lead.md. All optional in the file.
 export type BizFrontmatter = {
@@ -113,6 +156,16 @@ export type BizFrontmatter = {
   status?: BizStatus | string;
   demo_url?: string;
   hand_lead?: string;
+  // ── scaling additions (019) ──────────────────────────────────────────────
+  campaign?: string; // campaign slug
+  tags?: string[];
+  lat?: number | string;
+  lng?: number | string;
+  production_url?: string;
+  live_domain?: string;
+  netlify_site_id?: string;
+  dns_zone_id?: string;
+  ssl_state?: string;
 };
 
 // The structured copy the assistant returns (or the deterministic fallback
@@ -152,4 +205,64 @@ export type PitchResponse = {
   other_info: string | null;
   caller: string | null;
   created_at: string;
+};
+
+// A single visit to a generated demo site (command.biz_visits), written by the
+// Netlify biz-visit function from the page beacon. One row per browser session.
+export type BizVisit = {
+  id: string;
+  lead_id: string | null;
+  lead_slug: string;
+  kind: "demo" | "pitch";
+  path: string | null;
+  referrer: string | null;
+  country: string | null;
+  city: string | null;
+  ua: string | null;
+  created_at: string;
+};
+
+// Rolled-up visit activity for one lead's demo, shown on the detail page.
+export type VisitStats = {
+  total: number;
+  lastVisitAt: string | null;
+  recent: BizVisit[];
+};
+
+// Cold-outreach script surfaces. The frontmatter `surface` field on each
+// template at biz/_templates/cold/*.md, used to tag and group the scripts on
+// /develop/scripts.
+export const COLD_SCRIPT_SURFACES = [
+  "email",
+  "call",
+  "voicemail",
+  "dm",
+] as const;
+export type ColdScriptSurface = (typeof COLD_SCRIPT_SURFACES)[number];
+
+// Frontmatter as it appears in biz/_templates/cold/<variant>.md. All fields
+// optional at the file level; the loader fills sane fallbacks.
+export type ColdTemplateFrontmatter = {
+  title?: string;
+  variant?: string;
+  surface?: ColdScriptSurface | string;
+  order?: number | string;
+  subject_options?: string[];
+  status?: string;
+  updated?: string;
+};
+
+// A parsed cold-outreach template: frontmatter fields plus the markdown body
+// (the script itself, carrying [BRACKET] placeholder tokens). `slug` is the
+// source filename without its extension, the stable identity for the page.
+export type ColdTemplate = {
+  slug: string;
+  title: string;
+  variant: string;
+  surface: ColdScriptSurface;
+  order: number;
+  subjectOptions: string[];
+  status: string | null;
+  updated: string | null;
+  body: string;
 };
