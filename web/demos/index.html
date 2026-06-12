@@ -40,6 +40,8 @@
   .fc.on{background:rgba(217,137,58,0.15);border-color:rgba(217,137,58,0.5);color:var(--amber-soft)}
   .fc.on-s2{background:rgba(167,139,250,0.15);border-color:rgba(167,139,250,0.5);color:var(--stage2)}
   .fc.on-s3{background:rgba(252,211,77,0.15);border-color:rgba(252,211,77,0.5);color:var(--stage3)}
+  .fc:disabled{opacity:0.32;cursor:default;pointer-events:none}
+  .fc-count{margin-left:5px;font:700 9px/1 ui-monospace,monospace;opacity:0.55}
   .filter-count{font:600 11px/1 ui-monospace,monospace;letter-spacing:0.14em;color:var(--faint);
     margin-left:auto;white-space:nowrap}
   .sep{width:1px;height:18px;background:var(--line);flex-shrink:0}
@@ -148,7 +150,8 @@
     <div class="filter-group">
       <span class="filter-label">Status</span>
       <button class="fc on" data-fg="status" data-fv="all">All</button>
-      <button class="fc" data-fg="status" data-fv="open">Open</button>
+      <button class="fc" data-fg="status" data-fv="prospect">Prospect</button>
+      <button class="fc" data-fg="status" data-fv="built">Built</button>
       <button class="fc" data-fg="status" data-fv="contacted">Contacted</button>
       <button class="fc" data-fg="status" data-fv="interested">Interested</button>
       <button class="fc" data-fg="status" data-fv="closed">Closed</button>
@@ -227,18 +230,10 @@
   // ── Filter state ─────────────────────────────────────────────────────────
   var activeFilters = { stage: 'all', status: 'all' };
 
-  var STATUS_OPEN = { prospect: 1, built: 1 };
-
   function matchesFilters(d) {
     var t = tier(d);
     if (activeFilters.stage !== 'all' && String(t) !== String(activeFilters.stage)) return false;
-    var sv = activeFilters.status;
-    if (sv === 'all') return true;
-    if (sv === 'open')       return d.status === 'prospect' || d.status === 'built';
-    if (sv === 'contacted')  return d.status === 'contacted';
-    if (sv === 'interested') return d.status === 'interested';
-    if (sv === 'closed')     return d.status === 'closed';
-    if (sv === 'passed')     return d.status === 'passed';
+    if (activeFilters.status !== 'all' && d.status !== activeFilters.status) return false;
     return true;
   }
 
@@ -249,15 +244,32 @@
     sizeThumbs();
   }
 
+  // Stamp live counts on each non-All chip, disable zero-count chips
+  function stampCounts() {
+    document.querySelectorAll('.fc[data-fg][data-fv]').forEach(function(btn) {
+      var fg = btn.getAttribute('data-fg');
+      var fv = btn.getAttribute('data-fv');
+      if (fv === 'all') return;
+      var n = ALL.filter(function(d) {
+        if (fg === 'stage')  return String(tier(d)) === String(fv);
+        if (fg === 'status') return d.status === fv;
+        return false;
+      }).length;
+      var badge = btn.querySelector('.fc-count');
+      if (!badge) { badge = document.createElement('span'); badge.className = 'fc-count'; btn.appendChild(badge); }
+      badge.textContent = n;
+      btn.disabled = (n === 0);
+    });
+  }
+
   // Wire filter chips
   function initFilters() {
     filterBar.hidden = false;
-    document.querySelectorAll('.fc').forEach(function(btn) {
+    document.querySelectorAll('.fc[data-fg]').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var fg = btn.getAttribute('data-fg');
         var fv = btn.getAttribute('data-fv');
         activeFilters[fg] = fv;
-        // Update active state for this group
         document.querySelectorAll('.fc[data-fg="' + fg + '"]').forEach(function(b) {
           b.classList.remove('on', 'on-s2', 'on-s3');
         });
@@ -330,6 +342,7 @@
     document.getElementById('stat-sites').textContent  = demos.length;
     document.getElementById('stat-visits').textContent = demos.reduce(function(a, d) { return a + (d.visits || 0); }, 0);
     initFilters();
+    stampCounts();
     applyFilters();
     state.hidden = true;
     grid.hidden = false;
