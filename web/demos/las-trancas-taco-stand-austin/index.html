@@ -1,278 +1,550 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Las Trancas Taco Stand · Austin</title>
-<meta name="description" content="Rated 4.7 on Google by 2149 customers." />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Las Trancas Taco Stand" />
-<meta property="og:description" content="Rated 4.7 on Google by 2149 customers." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C03A14'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23FFF4E4'%3EL%3C/text%3E%3C/svg%3E" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Las Trancas Taco Stand — East Austin Carnitas, Lengua & Chicharron</title>
+<meta name="description" content="Las Trancas Taco Stand on E Cesar Chavez. Carnitas, lengua, chicharron and cuts you won't find everywhere. 4.7 stars across 2,149 reviews. (512) 701-8287.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
-  :root {
-    --bg: #FBF4E4; --ink: #2D1A10; --dim: #6E5847; --line: #EAD9BD; --card: #FFFDF6;
-    --accent: #C03A14; --accent-ink: #FFF4E4; --gold: #F0A832;
-    --tint: #F6E8CC; --band: #8E2912; --band-ink: #FFEFD9;
-    --deep-ink: #F7E7D4;
-    --chip-bg: #C03A1414;
-    --t-hero: clamp(3rem, 11vw, 6.2rem);
-    --maxw: 1060px;
-    --shadow: 0 16px 38px -20px rgba(0,0,0,0.45);
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: clamp(1rem, 0.97rem + 0.2vw, 1.12rem); line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: var(--accent); }
-  h1, h2, h3, .display {
-    font-family: "Anton", "Arial Narrow", sans-serif;
-    font-weight: 400;
-    line-height: 1.04; margin: 0;
-    text-transform: uppercase; letter-spacing: 0.015em;
-  }
-  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(20px, 5vw, 48px); }
-  .eyebrow {
-    text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.74rem;
-    font-weight: 700; color: var(--accent); margin: 0 0 14px;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
-  /* ── Buttons ─────────────────────────────────────────────────────────── */
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.55em;
-    min-height: 52px; padding: 0.75em 1.45em;
-    border-radius: 999px; border: 2px solid transparent;
-    font-weight: 700; font-size: 1.02rem; text-decoration: none;
-    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-  }
-  .btn svg { width: 1.1em; height: 1.1em; flex: none; }
-  .btn-solid { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow); }
-  .btn-solid:hover { transform: translateY(-2px); }
-  .btn-line { border-color: currentColor; color: inherit; }
-  .btn-line:hover { transform: translateY(-2px); }
-  :where(a, button):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+:root{
+  --bg:#0d1a0f;
+  --gold:#e8c44a;
+  --cream:#f5f0e8;
+  --card:#1a2d1c;
+  --line:rgba(245,240,232,0.12);
+  --muted:rgba(245,240,232,0.62);
+}
 
-  /* ── Hero ─────────────────────────────────────────────────────────────── */
-  header.hero {
-    position: relative; overflow: hidden;
-    background: linear-gradient(168deg, #93290F 0%, #5F1A08 100%);
-    color: #F7E7D4;
-  }
-  header.hero::before {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
-    background: repeating-linear-gradient(90deg, var(--gold) 0 34px, var(--accent) 34px 68px);
-    z-index: 2;
-  }
-  header.hero::after, .visit::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.07; z-index: 1;
-  }
-  .bg {
-    position: absolute; inset: 0; z-index: 0;
-    background-size: cover; background-position: center;
-    background-blend-mode: multiply;
-    filter: saturate(0.7) brightness(0.96);
-  }
-  .bg::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(100deg, rgba(8,4,2,0.6) 0%, rgba(8,4,2,0.22) 55%, rgba(8,4,2,0.38) 100%);
-  }
-  .hero-inner { position: relative; z-index: 1; padding: clamp(4.2rem, 10vw, 7.5rem) 0 clamp(3.6rem, 9vw, 6.5rem); }
-  .kicker {
-    display: inline-flex; align-items: center; gap: 0.7em; margin: 0 0 1.1rem;
-    text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.74rem;
-    font-weight: 700; color: var(--gold);
-  }
-  .kicker::before { content: ""; width: 2.4em; height: 2px; background: var(--gold); }
-  h1.biz-name { font-size: var(--t-hero); max-width: 16ch; color: #FFFDF8; text-wrap: balance; }
-  .lede {
-    font-size: clamp(1.12rem, 1rem + 0.9vw, 1.45rem); font-weight: 500;
-    max-width: 40ch; margin: 1.1rem 0 0; color: #F7E7D4; opacity: 0.94;
-  }
-  .rating { display: inline-flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; margin-top: 1.5rem; }
-  .stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.12em; line-height: 1; }
-  .score { font-weight: 700; font-size: 0.98rem; letter-spacing: 0.02em; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
+*{margin:0;padding:0;box-sizing:border-box}
 
-  /* ── Pull-quote band ──────────────────────────────────────────────────── */
-  .pull { background: var(--band); color: var(--band-ink); padding: clamp(3.2rem, 7vw, 5.5rem) 0; }
-  .pull .mark { display: block; font-family: "Anton", "Arial Narrow", sans-serif; font-size: 4.6rem; line-height: 0.45; color: var(--gold); height: 0.55em; }
-  .pull blockquote { margin: 0.9rem 0 0; font-family: "Anton", "Arial Narrow", sans-serif; line-height: 1.18; text-wrap: balance; }
-  .pull blockquote.q-xl { font-size: clamp(1.7rem, 1.2rem + 2.6vw, 3rem); }
-  .pull blockquote.q-lg { font-size: clamp(1.35rem, 1.05rem + 1.6vw, 2.1rem); }
-  .pull blockquote.q-md { font-size: clamp(1.12rem, 1rem + 0.8vw, 1.5rem); line-height: 1.4; }
-  .pull cite {
-    display: block; font-style: normal; margin-top: 1.3rem;
-    font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 0.78rem;
-    letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75;
-  }
-  .pull .proof { margin-top: 1.6rem; font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 0.92rem; opacity: 0.85; }
+html{scroll-behavior:smooth}
 
-  /* ── Sections ─────────────────────────────────────────────────────────── */
-  section { padding: clamp(3rem, 7vw, 5.5rem) 0; }
-  section h2 { font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.6rem); margin: 0 0 10px; }
-  .lead-in { color: var(--dim); margin: 0 0 2.2rem; max-width: 56ch; }
+body{
+  background:var(--bg);
+  color:var(--cream);
+  font-family:system-ui,-apple-system,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
 
-  .q-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
-  .q-card {
-    position: relative; margin: 0; background: var(--card); border: 1px solid var(--line);
-    border-radius: 16px; padding: 28px 26px 24px; box-shadow: 0 10px 28px -22px rgba(0,0,0,0.3);
-  }
-  .q-card::before {
-    content: "\201C"; position: absolute; top: 10px; left: 22px;
-    font-family: "Anton", "Arial Narrow", sans-serif; font-size: 2.6rem; color: var(--accent); opacity: 0.5; line-height: 1;
-  }
-  .q-card blockquote {
-    margin: 14px 0 0; font-size: 1.03rem;
-    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 12; overflow: hidden;
-  }
-  .q-card blockquote.q-md { font-size: 0.96rem; }
-  .q-card figcaption { margin-top: 14px; color: var(--dim); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.anton{
+  font-family:'Anton',system-ui,sans-serif;
+  font-weight:400;
+  letter-spacing:0.01em;
+  line-height:0.98;
+  text-transform:uppercase;
+}
 
-  .mentions { border-top: 1px solid var(--line); }
-  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-  .chip {
-    padding: 0.5em 1.1em; border-radius: 999px; border: 1.5px solid var(--accent);
-    background: var(--chip-bg); color: var(--ink); font-weight: 600; font-size: 0.97rem;
-  }
-  .mentions .note { margin-top: 1.2rem; color: var(--dim); font-size: 0.88rem; }
+a{color:inherit;text-decoration:none}
 
-  .services-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
-  .service { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 20px 22px; }
-  .service h3 { font-size: 1.12rem; margin: 0 0 6px; }
-  .service p { margin: 0; color: var(--dim); font-size: 0.97rem; }
+.wrap{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 22px;
+}
 
-  .about { background: var(--tint); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .about p { max-width: 62ch; margin: 0; font-size: clamp(1.1rem, 1rem + 0.6vw, 1.32rem); line-height: 1.7; }
+/* ---------- HERO ---------- */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+  isolation:isolate;
+}
 
-  /* ── Visit band + footer ─────────────────────────────────────────────── */
-  .visit {
-    position: relative; overflow: hidden;
-    background: linear-gradient(168deg, #461309 0%, #2C0C05 100%);
-    color: var(--deep-ink); padding: clamp(3.6rem, 8vw, 6rem) 0 2rem;
-  }
-  .visit > .wrap { position: relative; z-index: 1; }
-  .visit h2 { color: #FFFDF8; font-size: clamp(2rem, 1.5rem + 2.4vw, 3.2rem); }
-  .visit address { font-style: normal; margin: 1rem 0 0; font-size: 1.1rem; opacity: 0.92; max-width: 44ch; }
-  .visit .cta-row { margin-top: 1.8rem; }
-  .visit .bits {
-    display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
-    margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.14);
-    font-size: 0.92rem; opacity: 0.85;
-  }
-  .visit .bits a { color: var(--gold); }
-  .visit .dot { opacity: 0.5; }
-  .credit { margin: 2.2rem 0 0; font-size: 0.78rem; opacity: 0.55; }
-  .credit a { color: inherit; }
+.hero__img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:sepia(1) saturate(3) hue-rotate(60deg);
+  z-index:-2;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  background:
+    linear-gradient(180deg, rgba(13,26,15,0.55) 0%, rgba(13,26,15,0.30) 35%, rgba(13,26,15,0.82) 78%, rgba(13,26,15,0.98) 100%),
+    radial-gradient(120% 90% at 50% 0%, rgba(13,26,15,0) 40%, rgba(13,26,15,0.55) 100%);
+}
+
+.hero__top{
+  position:absolute;
+  top:0;left:0;right:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:20px 22px;
+  z-index:2;
+}
+
+.kicker{
+  font-size:0.72rem;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:700;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:7px 13px;
+  border:1px solid var(--gold);
+  border-radius:999px;
+  font-size:0.78rem;
+  font-weight:600;
+  color:var(--gold);
+  background:rgba(13,26,15,0.45);
+  backdrop-filter:blur(6px);
+  white-space:nowrap;
+}
+
+.badge .star{font-size:0.9rem;line-height:1}
+
+.hero__body{
+  position:relative;
+  z-index:2;
+  padding-bottom:clamp(38px,7vh,72px);
+}
+
+.hero__name{
+  font-size:clamp(3rem,12vw,7rem);
+  margin-bottom:18px;
+  text-shadow:0 4px 40px rgba(0,0,0,0.5);
+}
+
+.hero__quote{
+  font-family:'Anton',system-ui,sans-serif;
+  font-style:italic;
+  font-size:clamp(1.25rem,4.4vw,2rem);
+  line-height:1.12;
+  color:var(--gold);
+  max-width:18ch;
+  text-transform:none;
+  letter-spacing:0.005em;
+  margin-bottom:6px;
+}
+
+.hero__attr{
+  font-size:0.82rem;
+  color:var(--muted);
+  letter-spacing:0.04em;
+  margin-bottom:30px;
+}
+
+.hero__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+  align-items:center;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:15px 26px;
+  border-radius:12px;
+  font-weight:700;
+  font-size:1.02rem;
+  letter-spacing:0.01em;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+  will-change:transform;
+}
+
+.btn--gold{
+  background:var(--gold);
+  color:#1a1305;
+  box-shadow:0 10px 30px -8px rgba(232,196,74,0.55);
+}
+.btn--gold:hover{transform:translateY(-2px);box-shadow:0 16px 38px -8px rgba(232,196,74,0.7)}
+
+.btn--ghost{
+  border:1px solid var(--line);
+  color:var(--cream);
+  background:rgba(245,240,232,0.04);
+}
+.btn--ghost:hover{transform:translateY(-2px);border-color:var(--gold);color:var(--gold)}
+
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ---------- SECTION SCAFFOLD ---------- */
+section.block{padding:clamp(64px,11vh,108px) 0}
+
+.eyebrow{
+  font-size:0.72rem;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:700;
+  margin-bottom:14px;
+}
+
+.heading{
+  font-size:clamp(2rem,7vw,3.4rem);
+  margin-bottom:8px;
+}
+
+.lede{
+  color:var(--muted);
+  max-width:54ch;
+  font-size:1.04rem;
+}
+
+/* ---------- SERVICES ---------- */
+.menu-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+  margin-top:38px;
+}
+
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:18px 20px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:14px;
+  transition:transform .18s ease, border-color .18s ease;
+}
+.menu-item:hover{transform:translateX(4px);border-color:rgba(232,196,74,0.5)}
+
+.menu-item__num{
+  font-family:'Anton',system-ui,sans-serif;
+  font-size:1.25rem;
+  color:var(--gold);
+  min-width:34px;
+}
+
+.menu-item__name{
+  font-weight:700;
+  font-size:1.12rem;
+  letter-spacing:0.01em;
+}
+
+.menu-item__note{
+  margin-left:auto;
+  font-size:0.78rem;
+  color:var(--muted);
+  text-align:right;
+}
+
+/* ---------- TESTIMONIALS ---------- */
+.section-tint{
+  background:
+    linear-gradient(180deg, rgba(26,45,28,0) 0%, rgba(26,45,28,0.45) 50%, rgba(26,45,28,0) 100%);
+}
+
+.reviews{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+  margin-top:38px;
+}
+
+.review{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:28px 26px;
+  position:relative;
+  overflow:hidden;
+}
+
+.review::before{
+  content:"\201C";
+  font-family:'Anton',system-ui,sans-serif;
+  position:absolute;
+  top:-18px;right:14px;
+  font-size:6rem;
+  color:rgba(232,196,74,0.14);
+  line-height:1;
+}
+
+.review__stars{
+  color:var(--gold);
+  letter-spacing:2px;
+  font-size:0.95rem;
+  margin-bottom:14px;
+}
+
+.review__text{
+  font-size:1.05rem;
+  line-height:1.55;
+  margin-bottom:18px;
+  position:relative;
+  z-index:1;
+}
+
+.review__author{
+  font-size:0.82rem;
+  font-weight:700;
+  color:var(--gold);
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+}
+
+/* ---------- ABOUT ---------- */
+.about-card{
+  margin-top:34px;
+  padding:clamp(28px,5vw,46px);
+  border-radius:22px;
+  border:1px solid var(--line);
+  background:
+    radial-gradient(120% 140% at 0% 0%, rgba(232,196,74,0.10) 0%, rgba(232,196,74,0) 45%),
+    var(--card);
+}
+
+.about-card p{
+  font-size:clamp(1.1rem,3vw,1.45rem);
+  line-height:1.5;
+  max-width:42ch;
+}
+.about-card p + p{margin-top:18px}
+
+.about-card strong{color:var(--gold);font-weight:600}
+
+/* ---------- CONTACT ---------- */
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  margin-top:38px;
+}
+
+.contact-card{
+  padding:24px 24px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:var(--card);
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.contact-card .label{
+  font-size:0.7rem;
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:700;
+}
+
+.contact-card .value{
+  font-size:1.18rem;
+  font-weight:700;
+}
+
+.contact-card a.value:hover{color:var(--gold)}
+
+.contact-card .sub{font-size:0.86rem;color:var(--muted)}
+
+.contact-cta{
+  margin-top:30px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+}
+
+/* ---------- FOOTER ---------- */
+footer{
+  border-top:1px solid var(--line);
+  padding:34px 0 40px;
+  text-align:center;
+}
+
+footer p{
+  font-size:0.82rem;
+  color:var(--muted);
+}
+
+footer a{color:var(--gold);font-weight:600}
+
+footer .mark{
+  font-family:'Anton',system-ui,sans-serif;
+  font-size:1.1rem;
+  letter-spacing:0.05em;
+  color:var(--cream);
+  display:inline-block;
+  margin-bottom:8px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (min-width:680px){
+  .menu-grid{grid-template-columns:1fr 1fr}
+  .reviews{grid-template-columns:1fr 1fr}
+  .reviews .review:first-child{grid-column:1 / -1}
+  .contact-grid{grid-template-columns:1fr 1fr}
+}
+
+@media (min-width:980px){
+  .reviews{grid-template-columns:repeat(3,1fr)}
+  .reviews .review:first-child{grid-column:auto}
+  .contact-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto !important;transition:none !important}
+}
 </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="bg" style="background-image: linear-gradient(168deg, #93290F 0%, #5F1A08 100%), url('/assets/biz-samples/taco-1.webp')" aria-hidden="true"></div>
-    <div class="wrap hero-inner">
-      <p class="kicker">Austin, TX</p>
-      <h1 class="biz-name">Las Trancas Taco Stand</h1>
-      <p class="lede">Taco restaurant in Austin our customers trust</p>
-      <div class="rating" role="img" aria-label="Rated 4.7 out of 5 on Google across 2149 reviews">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span class="score">4.7 on Google · 2149 reviews</span>
-      </div>
-      <div class="cta-row">
-        <a class="btn btn-solid" href="tel:5127018287"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 701-8287</a>
-        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Las%20Trancas%20Taco%20Stand%2C%201210%20E%20Cesar%20Chavez%20St%2C%20Austin%2C%20TX%2078702%2C%20Austin%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
-      </div>
-    </div>
-  </header>
 
-  <section class="pull" aria-label="Customer review">
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <img
+    class="hero__img"
+    src="../../assets/biz-samples/taco-1.webp"
+    alt="Hot tacos plated at Las Trancas Taco Stand in East Austin"
+    width="960" height="1444"
+    loading="eager" fetchpriority="high" decoding="async">
+
+  <div class="hero__top">
+    <span class="kicker">East Austin · E Cesar Chavez</span>
+    <span class="badge"><span class="star">★</span>4.7 · 2,149 reviews</span>
+  </div>
+
+  <div class="hero__body">
     <div class="wrap">
-      <span class="mark" aria-hidden="true">“</span>
-      <blockquote class="q-lg">The tacos are the best I’ve had in the US. Campechano on corn with onions and cilantro and ask for the spicy creamy salsa verde. A gift from the gods.</blockquote>
-      <cite>Brea Simpson, on Google</cite>
-      <p class="proof"><span class="stars" aria-hidden="true">★★★★★</span> 4.7 stars on Google, across 2149 reviews.</p>
-    </div>
-  </section>
+      <h1 class="anton hero__name">Las Trancas<br>Taco Stand</h1>
+      <p class="hero__quote anton">"The only taco I do not leave ATX without eating."</p>
+      <p class="hero__attr">— Ronell Smith, 5★ Google review</p>
 
-  <section class="quotes">
-    <div class="wrap">
-      <p class="eyebrow">Straight from Google</p>
-      <h2>What customers say</h2>
-      <p class="lead-in">Real reviews, word for word.</p>
-      <div class="q-grid">
-        <figure class="q-card">
-          <blockquote class="q-md">Las Trancas is everything I need and want from a taco truck. Efficient service, didn’t have to wait long for our order. Plenty of seating and lighting if you’re going for late night munchies. Easy to find parking in the lot or on the side street.
-
-Tacos are super flavourful, meat is tender, good portions overall. Tried the flour and corn tortillas and both are great. They fry the corn tortillas a bit. Flour tortillas are soft and chewy.
-
-Favourites: Lengua and tripa. Wow I wish I could take that lengua home with me. It was so supple and buttery. Don’t tell my mom, but I think it’s softer than the one she makes. Tripa is crispy. Love the contrast of textures between the two.
-
-Barbacoa was good, but not a standout. Brisket was a tad on the dry side. Maybe it was the time of night since we’ve only gone after 10pm.
-
-They provide two types of salsas, lime, and packaged salt with the tacos. Didn’t need the salt personally.  Lime and mild salsa (red) was lovely. The other salsa was proper spicy 🌶️
-
-Spent $22 after tip for 6 tacos.
-
-We came back for more a different night and food quality was consistent. Will definitely make a stop here again next time I’m in Austin.</blockquote>
-          <figcaption>Justine Yiu</figcaption>
-        </figure>
-        <figure class="q-card">
-          <blockquote class="q-md">My favorite with D10 while we were in Austin. What sets Las Trancas apart is the depth of choice for tacos.
-
-Lengua &amp; tripe tacos are seldom on any menus out there. Try these uncommon flavours, they are worth seeking. Tripe is an acquired taste because of the soft texture, but lengua was very flavourful. In the end, it was actually the chicharron that won our hearts, really good and flavourful, authentic taste.
-
-Service was impersonal, fast-food style, not the highlight of the visit. Vast area of picnic tables to sit outside and eat your order.
-
-Highly recommended.
-
-P.S.: if this review was useful, please leave a 👍, thank you for your support</blockquote>
-          <figcaption>Mister Morelight</figcaption>
-        </figure>
-        <figure class="q-card">
-          <blockquote class="q-md">⭐️⭐️⭐️⭐️⭐️
-Las Taco Stand is hands down one of the best spots I’ve eaten at in a long time! The tacos are packed with flavor, made fresh, and loaded just right. You can really taste the quality in every bite. The service is fast and super friendly, and the prices are more than fair for the portion sizes. Whether you’re grabbing a quick bite or bringing friends along, this place never disappoints. Definitely a 5-star experience—I’ll be coming back again and again! 🌮🔥</blockquote>
-          <figcaption>Wesley Rowland</figcaption>
-        </figure>
+      <div class="hero__actions">
+        <a class="btn btn--gold" href="tel:+15127018287">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Call (512) 701-8287
+        </a>
+        <a class="btn btn--ghost" href="#menu">See the menu</a>
       </div>
     </div>
-  </section>
+  </div>
+</header>
 
-  <section class="mentions">
-    <div class="wrap">
-      <p class="eyebrow">In their own words</p>
-      <h2>What people come back for</h2>
-      <p class="lead-in">Every one of these shows up in real customer reviews.</p>
-      <div class="chips"><span class="chip">Tacos</span><span class="chip">Lengua</span><span class="chip">Salsas</span><span class="chip">Barbacoa</span><span class="chip">Quesadillas</span><span class="chip">Brisket</span></div>
+<!-- ============ SERVICES ============ -->
+<section class="block" id="menu">
+  <div class="wrap">
+    <p class="eyebrow">What people drive across town for</p>
+    <h2 class="anton heading">The Tacos</h2>
+    <p class="lede">A deeper menu than most stands carry, cooked the way East Austin remembers it. Order at the window, grab a picnic table.</p>
+
+    <div class="menu-grid">
+      <div class="menu-item"><span class="menu-item__num anton">01</span><span class="menu-item__name">Carnitas</span><span class="menu-item__note">juicy, the house favorite</span></div>
+      <div class="menu-item"><span class="menu-item__num anton">02</span><span class="menu-item__name">Campechano</span><span class="menu-item__note">a fan blew their mind</span></div>
+      <div class="menu-item"><span class="menu-item__num anton">03</span><span class="menu-item__name">Asada</span><span class="menu-item__note">grilled, no shortcuts</span></div>
+      <div class="menu-item"><span class="menu-item__num anton">04</span><span class="menu-item__name">Lengua</span><span class="menu-item__note">rarely on any menu</span></div>
+      <div class="menu-item"><span class="menu-item__num anton">05</span><span class="menu-item__name">Chicharron</span><span class="menu-item__note">won hearts, authentic</span></div>
+      <div class="menu-item"><span class="menu-item__num anton">06</span><span class="menu-item__name">Tripe</span><span class="menu-item__note">for the ones who know</span></div>
+      <div class="menu-item"><span class="menu-item__num anton">07</span><span class="menu-item__name">Brisket</span><span class="menu-item__note">best of the best territory</span></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  
+<!-- ============ TESTIMONIALS ============ -->
+<section class="block section-tint">
+  <div class="wrap">
+    <p class="eyebrow">Straight from Google</p>
+    <h2 class="anton heading">The Word On The Street</h2>
+    <p class="lede">2,149 reviews and a 4.7 average. Here is how three of them put it.</p>
 
-  <section class="about">
-    <div class="wrap"><p>Las Trancas Taco Stand is a taco restaurant in Austin. The reviews on this page come straight from our customers on Google, word for word.</p></div>
-  </section>
+    <div class="reviews">
+      <article class="review">
+        <div class="review__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p class="review__text">There is not a better carnitas taco on the planet. I am very picky about tacos, preferring carnitas, but only if it's juicy and tasty, and brisket if it's best of the best. Las Trancas is the only taco I do not leave ATX without eating because they check both boxes.</p>
+        <div class="review__author">Ronell Smith</div>
+      </article>
 
-  <footer class="visit">
-    <div class="bg" style="background-image: linear-gradient(168deg, #461309 0%, #2C0C05 100%), url('/assets/biz-samples/taco-2.webp')" aria-hidden="true"></div>
-    <div class="wrap">
-      <p class="kicker">Austin, TX</p>
-      <h2>Come find us</h2>
-      <address>1210 E Cesar Chavez St, Austin, TX 78702<br />Austin, TX</address>
-      <div class="cta-row">
-        <a class="btn btn-solid" href="tel:5127018287"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 701-8287</a>
-        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Las%20Trancas%20Taco%20Stand%2C%201210%20E%20Cesar%20Chavez%20St%2C%20Austin%2C%20TX%2078702%2C%20Austin%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
+      <article class="review">
+        <div class="review__stars" aria-label="4 out of 5 stars">★★★★☆</div>
+        <p class="review__text">I don't usually do Google reviews but the tacos here blew my mind. Wasn't expecting much for a road side taco stand but the asada and the campechano tacos were amazing.</p>
+        <div class="review__author">Jay T</div>
+      </article>
+
+      <article class="review">
+        <div class="review__stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p class="review__text">What sets Las Trancas apart is the depth of choice for tacos. Lengua &amp; tripe tacos are seldom on any menus out there. Chicharron won our hearts, really good and flavourful, authentic taste.</p>
+        <div class="review__author">Mister Morelight</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section class="block">
+  <div class="wrap">
+    <p class="eyebrow">Who we are</p>
+    <h2 class="anton heading">A Corner Of East Austin</h2>
+
+    <div class="about-card">
+      <p>An East Austin classic on E Cesar Chavez, known for <strong>carnitas, lengua and chicharron</strong> — cuts you won't find everywhere.</p>
+      <p>It is a straightforward walk-up window with outdoor picnic tables. You come for the taco, not the frills.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="block section-tint" id="visit">
+  <div class="wrap">
+    <p class="eyebrow">Come eat</p>
+    <h2 class="anton heading">Find Us</h2>
+    <p class="lede">Walk up, order, sit down. We are right on the corner.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <span class="label">Call</span>
+        <a class="value" href="tel:+15127018287">(512) 701-8287</a>
+        <span class="sub">Order ahead or just walk up</span>
       </div>
-      <div class="bits"><a href="tel:5127018287">(512) 701-8287</a><span class="dot" aria-hidden="true">·</span><span>1210 E Cesar Chavez St, Austin, TX 78702</span><span class="dot" aria-hidden="true">·</span><span>Austin, TX</span><span class="dot" aria-hidden="true">·</span><a href="https://www.google.com/maps/place/Las+Trancas+Taco+Stand/data=!4m7!3m6!1s0x8644b5ae0eda0a8f:0xded80473af776597!8m2!3d30.2597778!4d-97.7316662!16s%2Fg%2F11bcd_2wvb!19sChIJjwraDq61RIYRl2V3r3ME2N4" target="_blank" rel="noopener">View on Google</a></div>
-      <p class="credit">A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>. Preview imagery is licensed sample art. Your real photos replace it when you claim the site.</p>
+
+      <div class="contact-card">
+        <span class="label">Where</span>
+        <span class="value">1210 E Cesar Chavez St</span>
+        <span class="sub">Austin, TX 78702</span>
+      </div>
+
+      <div class="contact-card">
+        <span class="label">Directions</span>
+        <a class="value" href="https://www.google.com/maps/place/Las+Trancas+Taco+Stand/data=!4m7!3m6!1s0x8644b5ae0eda0a8f:0xded80473af776597" target="_blank" rel="noopener">Open in Maps</a>
+        <span class="sub">East side, on the corner</span>
+      </div>
     </div>
-  </footer>
-  <script defer src="/assets/demo-visit.js"></script>
+
+    <div class="contact-cta">
+      <a class="btn btn--gold" href="tel:+15127018287">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.33 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Call now
+      </a>
+      <a class="btn btn--ghost" href="https://www.google.com/maps/place/Las+Trancas+Taco+Stand/data=!4m7!3m6!1s0x8644b5ae0eda0a8f:0xded80473af776597" target="_blank" rel="noopener">Get directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <span class="anton mark">Las Trancas Taco Stand</span>
+    <p>A free preview site built by <a href="https://handprotocol.org">HAND</a></p>
+  </div>
+</footer>
+
+<script defer src="/assets/demo-visit.js"></script>
 </body>
 </html>

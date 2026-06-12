@@ -3,254 +3,679 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Urban Turban · Round Rock</title>
-<meta name="description" content="Rated 4.7 on Google by 496 customers." />
+<title>The Urban Turban · Round Rock, TX</title>
+<meta name="description" content="Pakistani-Mexican fusion, 100% halal. Birria the way a Pakistani chef makes it. Rated 4.7 on Google by 496 customers in Round Rock, TX." />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="The Urban Turban" />
-<meta property="og:description" content="Rated 4.7 on Google by 496 customers." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2337717E'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23EFF7F6'%3ET%3C/text%3E%3C/svg%3E" />
+<meta property="og:description" content="Pakistani spice. Mexican soul. The best birria many people have ever had. 100% halal in Round Rock, TX." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1520'/%3E%3Ctext x='32' y='45' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23d4af37'%3EUT%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@400;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #F8F3E7; --ink: #27291F; --dim: #67695A; --line: #E5DFC9; --card: #FEFBF2;
-    --accent: #37717E; --accent-ink: #EFF7F6; --gold: #D9B25F;
-    --tint: #EFE9D4; --band: #4A5631; --band-ink: #F2F0DF;
-    --deep-ink: #E9F0EC;
-    --chip-bg: #37717E14;
-    --t-hero: clamp(2.7rem, 9vw, 5rem);
-    --maxw: 1060px;
-    --shadow: 0 16px 38px -20px rgba(0,0,0,0.45);
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --bg: #0d1520;
+    --bg-2: #0a111a;
+    --card: #152030;
+    --card-2: #1a2738;
+    --gold: #d4af37;
+    --gold-soft: #e6c75e;
+    --text: #f0ece0;
+    --muted: #9aa6b4;
+    --line: rgba(212, 175, 55, 0.18);
+    --maxw: 1120px;
   }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
   body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: "Karla", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: clamp(1rem, 0.97rem + 0.2vw, 1.12rem); line-height: 1.65;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    font-size: 17px;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  a { color: var(--accent); }
+
   h1, h2, h3, .display {
-    font-family: "Marcellus", Georgia, serif;
-    font-weight: 700;
-    line-height: 1.04; margin: 0;
-    letter-spacing: -0.01em;
-  }
-  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(20px, 5vw, 48px); }
-  .eyebrow {
-    text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.74rem;
-    font-weight: 700; color: var(--accent); margin: 0 0 14px;
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.05;
+    text-transform: uppercase;
   }
 
-  /* ── Buttons ─────────────────────────────────────────────────────────── */
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.55em;
-    min-height: 52px; padding: 0.75em 1.45em;
-    border-radius: 999px; border: 2px solid transparent;
-    font-weight: 700; font-size: 1.02rem; text-decoration: none;
-    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-  }
-  .btn svg { width: 1.1em; height: 1.1em; flex: none; }
-  .btn-solid { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow); }
-  .btn-solid:hover { transform: translateY(-2px); }
-  .btn-line { border-color: currentColor; color: inherit; }
-  .btn-line:hover { transform: translateY(-2px); }
-  :where(a, button):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+  a { color: inherit; }
 
-  /* ── Hero ─────────────────────────────────────────────────────────────── */
-  header.hero {
-    position: relative; overflow: hidden;
-    background: linear-gradient(168deg, #2A4D54 0%, #182F33 100%);
-    color: #E9F0EC;
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 22px;
   }
-  header.hero::before {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
-    background: repeating-linear-gradient(90deg, var(--gold) 0 34px, var(--accent) 34px 68px);
-    z-index: 2;
-  }
-  header.hero::after, .visit::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.07; z-index: 1;
-  }
-  .bg {
-    position: absolute; inset: 0; z-index: 0;
-    background-size: cover; background-position: center;
-    background-blend-mode: multiply;
-    filter: saturate(0.7) brightness(0.96);
-  }
-  .bg::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(100deg, rgba(8,4,2,0.6) 0%, rgba(8,4,2,0.22) 55%, rgba(8,4,2,0.38) 100%);
-  }
-  .hero-inner { position: relative; z-index: 1; padding: clamp(4.2rem, 10vw, 7.5rem) 0 clamp(3.6rem, 9vw, 6.5rem); }
+
   .kicker {
-    display: inline-flex; align-items: center; gap: 0.7em; margin: 0 0 1.1rem;
-    text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.74rem;
-    font-weight: 700; color: var(--gold);
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 12px;
+    color: var(--gold);
   }
-  .kicker::before { content: ""; width: 2.4em; height: 2px; background: var(--gold); }
-  h1.biz-name { font-size: var(--t-hero); max-width: 16ch; color: #FFFDF8; text-wrap: balance; }
-  .lede {
-    font-size: clamp(1.12rem, 1rem + 0.9vw, 1.45rem); font-weight: 500;
-    max-width: 40ch; margin: 1.1rem 0 0; color: #E9F0EC; opacity: 0.94;
-  }
-  .rating { display: inline-flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; margin-top: 1.5rem; }
-  .stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.12em; line-height: 1; }
-  .score { font-weight: 700; font-size: 0.98rem; letter-spacing: 0.02em; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
 
-  /* ── Pull-quote band ──────────────────────────────────────────────────── */
-  .pull { background: var(--band); color: var(--band-ink); padding: clamp(3.2rem, 7vw, 5.5rem) 0; }
-  .pull .mark { display: block; font-family: "Marcellus", Georgia, serif; font-size: 4.6rem; line-height: 0.45; color: var(--gold); height: 0.55em; }
-  .pull blockquote { margin: 0.9rem 0 0; font-family: "Marcellus", Georgia, serif; line-height: 1.18; text-wrap: balance; }
-  .pull blockquote.q-xl { font-size: clamp(1.7rem, 1.2rem + 2.6vw, 3rem); }
-  .pull blockquote.q-lg { font-size: clamp(1.35rem, 1.05rem + 1.6vw, 2.1rem); }
-  .pull blockquote.q-md { font-size: clamp(1.12rem, 1rem + 0.8vw, 1.5rem); line-height: 1.4; }
-  .pull cite {
-    display: block; font-style: normal; margin-top: 1.3rem;
-    font-family: "Karla", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 0.78rem;
-    letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75;
+  /* ===== Buttons ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 15px;
+    padding: 14px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+    border: 1.5px solid transparent;
+    white-space: nowrap;
   }
-  .pull .proof { margin-top: 1.6rem; font-family: "Karla", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 0.92rem; opacity: 0.85; }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+  .btn-solid {
+    background: var(--gold);
+    color: #1a1206;
+    box-shadow: 0 8px 26px rgba(212, 175, 55, 0.28);
+  }
+  .btn-solid:hover { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(212, 175, 55, 0.4); background: var(--gold-soft); }
+  .btn-line {
+    background: transparent;
+    color: var(--text);
+    border-color: rgba(240, 236, 224, 0.32);
+  }
+  .btn-line:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 
-  /* ── Sections ─────────────────────────────────────────────────────────── */
-  section { padding: clamp(3rem, 7vw, 5.5rem) 0; }
-  section h2 { font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.6rem); margin: 0 0 10px; }
-  .lead-in { color: var(--dim); margin: 0 0 2.2rem; max-width: 56ch; }
+  /* ===== Hero ===== */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 96px 0 64px;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('../../assets/biz-samples/asian-2.webp');
+    background-size: cover;
+    background-position: center;
+    filter: sepia(1) hue-rotate(185deg) saturate(2.5) brightness(0.62);
+    transform: scale(1.06);
+    z-index: 0;
+  }
+  .hero-veil {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(13,21,32,0.62) 0%, rgba(13,21,32,0.82) 55%, rgba(10,17,26,0.97) 100%),
+      radial-gradient(120% 90% at 75% 20%, rgba(212,175,55,0.16) 0%, transparent 55%);
+    z-index: 1;
+  }
+  .hero .wrap { position: relative; z-index: 2; }
 
-  .q-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
-  .q-card {
-    position: relative; margin: 0; background: var(--card); border: 1px solid var(--line);
-    border-radius: 16px; padding: 28px 26px 24px; box-shadow: 0 10px 28px -22px rgba(0,0,0,0.3);
+  .hero-tags {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 14px;
+    margin-bottom: 22px;
   }
-  .q-card::before {
-    content: "\201C"; position: absolute; top: 10px; left: 22px;
-    font-family: "Marcellus", Georgia, serif; font-size: 2.6rem; color: var(--accent); opacity: 0.5; line-height: 1;
+  .hero-tags .seg {
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 12.5px;
+    color: var(--gold);
   }
-  .q-card blockquote {
-    margin: 14px 0 0; font-size: 1.03rem;
-    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 12; overflow: hidden;
-  }
-  .q-card blockquote.q-md { font-size: 0.96rem; }
-  .q-card figcaption { margin-top: 14px; color: var(--dim); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .hero-tags .pipe { color: rgba(240,236,224,0.3); }
 
-  .mentions { border-top: 1px solid var(--line); }
-  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-  .chip {
-    padding: 0.5em 1.1em; border-radius: 999px; border: 1.5px solid var(--accent);
-    background: var(--chip-bg); color: var(--ink); font-weight: 600; font-size: 0.97rem;
+  .hero h1 {
+    font-size: clamp(3.3rem, 12vw, 7rem);
+    margin: 6px 0 4px;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
   }
-  .mentions .note { margin-top: 1.2rem; color: var(--dim); font-size: 0.88rem; }
+  .hero h1 .line2 { display: block; color: var(--gold); }
 
-  .services-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
-  .service { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 20px 22px; }
-  .service h3 { font-size: 1.12rem; margin: 0 0 6px; }
-  .service p { margin: 0; color: var(--dim); font-size: 0.97rem; }
-
-  .about { background: var(--tint); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .about p { max-width: 62ch; margin: 0; font-size: clamp(1.1rem, 1rem + 0.6vw, 1.32rem); line-height: 1.7; }
-
-  /* ── Visit band + footer ─────────────────────────────────────────────── */
-  .visit {
-    position: relative; overflow: hidden;
-    background: linear-gradient(168deg, #234046 0%, #14272B 100%);
-    color: var(--deep-ink); padding: clamp(3.6rem, 8vw, 6rem) 0 2rem;
+  .hero .sub {
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: clamp(0.95rem, 2.6vw, 1.25rem);
+    color: var(--text);
+    margin-top: 6px;
   }
-  .visit > .wrap { position: relative; z-index: 1; }
-  .visit h2 { color: #FFFDF8; font-size: clamp(2rem, 1.5rem + 2.4vw, 3.2rem); }
-  .visit address { font-style: normal; margin: 1rem 0 0; font-size: 1.1rem; opacity: 0.92; max-width: 44ch; }
-  .visit .cta-row { margin-top: 1.8rem; }
-  .visit .bits {
-    display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
-    margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.14);
-    font-size: 0.92rem; opacity: 0.85;
+  .hero .sub strong { color: var(--gold); font-weight: 600; }
+
+  .pull {
+    margin: 30px 0 6px;
+    max-width: 640px;
+    border-left: 3px solid var(--gold);
+    padding-left: 20px;
   }
-  .visit .bits a { color: var(--gold); }
-  .visit .dot { opacity: 0.5; }
-  .credit { margin: 2.2rem 0 0; font-size: 0.78rem; opacity: 0.55; }
-  .credit a { color: inherit; }
+  .pull p {
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.2rem, 4vw, 1.85rem);
+    line-height: 1.2;
+    color: var(--text);
+    text-transform: none;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px 22px;
+    margin: 30px 0 32px;
+  }
+  .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 11px;
+    background: rgba(13,21,32,0.55);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 9px 18px 9px 14px;
+    backdrop-filter: blur(4px);
+  }
+  .rating .stars { color: var(--gold); letter-spacing: 2px; font-size: 16px; line-height: 1; }
+  .rating .score { font-family: "Oswald", system-ui, sans-serif; font-weight: 600; font-size: 19px; }
+  .rating .count { color: var(--muted); font-size: 13.5px; }
+
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  /* ===== Section frame ===== */
+  section.block { padding: 96px 0; position: relative; }
+  .sec-head { margin-bottom: 46px; }
+  .sec-head .kicker { display: block; margin-bottom: 14px; }
+  .sec-head h2 { font-size: clamp(2rem, 6vw, 3.2rem); }
+  .sec-head h2 .accent { color: var(--gold); }
+
+  /* ===== Concept ===== */
+  .concept { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .concept-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .concept-lead {
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    font-size: clamp(1.25rem, 3.4vw, 1.7rem);
+    line-height: 1.4;
+    letter-spacing: 0.005em;
+    color: var(--text);
+  }
+  .concept-lead .hl { color: var(--gold); }
+  .fusion-bridge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .fusion-bridge .node {
+    text-align: center;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 20px 24px;
+    background: var(--card);
+    min-width: 150px;
+    flex: 1;
+  }
+  .fusion-bridge .node .n-kick {
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 12px;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .fusion-bridge .node .n-word {
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: clamp(1.05rem, 3vw, 1.35rem);
+    line-height: 1.1;
+  }
+  .fusion-bridge .plus {
+    font-family: "Oswald", system-ui, sans-serif;
+    color: var(--gold);
+    font-size: 1.8rem;
+    line-height: 1;
+  }
+
+  /* ===== Menu ===== */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .dish {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px 24px 22px;
+    transition: transform 0.18s ease, border-color 0.2s ease, background 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .dish::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.22s ease;
+  }
+  .dish:hover { transform: translateY(-3px); border-color: rgba(212,175,55,0.42); background: var(--card-2); }
+  .dish:hover::before { transform: scaleY(1); }
+  .dish .d-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .dish h3 {
+    font-size: 1.18rem;
+    text-transform: uppercase;
+  }
+  .dish .tag {
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10.5px;
+    color: var(--gold);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 10px;
+    white-space: nowrap;
+    flex: none;
+  }
+  .dish p { color: var(--muted); font-size: 15px; line-height: 1.5; }
+
+  .menu-note {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14.5px;
+  }
+  .menu-note .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    font-size: 12.5px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 18px;
+  }
+  .menu-note .badge svg { width: 16px; height: 16px; }
+
+  /* ===== Testimonials ===== */
+  .reviews { background: var(--bg-2); border-top: 1px solid var(--line); }
+  .review-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .review {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 30px 28px 26px;
+    position: relative;
+  }
+  .review .qmark {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--gold);
+    opacity: 0.5;
+    font-size: 70px;
+    line-height: 0.5;
+    height: 28px;
+    display: block;
+  }
+  .review .stars { color: var(--gold); letter-spacing: 2px; font-size: 15px; margin-bottom: 12px; }
+  .review blockquote {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+  .review cite {
+    font-style: normal;
+    font-family: "Oswald", system-ui, sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 13.5px;
+    color: var(--gold);
+  }
+  .review cite span { color: var(--muted); letter-spacing: 0.04em; }
+
+  /* ===== About ===== */
+  .about .a-inner {
+    max-width: 780px;
+  }
+  .about p {
+    font-size: clamp(1.1rem, 3vw, 1.42rem);
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .about p + p { margin-top: 18px; }
+  .about .em { color: var(--gold); }
+
+  /* ===== Contact / Footer ===== */
+  .contact {
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+  }
+  .contact-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(160deg, rgba(13,21,32,0.88) 0%, rgba(10,17,26,0.97) 100%),
+      url('../../assets/biz-samples/asian-2.webp');
+    background-size: cover;
+    background-position: center;
+    filter: sepia(1) hue-rotate(185deg) saturate(2.2) brightness(0.5);
+    z-index: 0;
+  }
+  .contact .wrap { position: relative; z-index: 1; text-align: center; padding-top: 92px; padding-bottom: 64px; }
+  .contact h2 { font-size: clamp(2.2rem, 7vw, 3.6rem); margin: 14px 0 8px; }
+  .contact address {
+    font-style: normal;
+    color: var(--text);
+    font-size: 17px;
+    margin: 8px 0 26px;
+    line-height: 1.55;
+  }
+  .contact .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+  }
+  .bits {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 12px;
+    margin-top: 34px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .bits a { color: var(--muted); text-decoration: none; }
+  .bits a:hover { color: var(--gold); }
+  .bits .dot { color: rgba(240,236,224,0.28); }
+
+  .credit {
+    margin-top: 30px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 13.5px;
+  }
+  .credit a { color: var(--gold); text-decoration: none; font-weight: 600; }
+  .credit a:hover { text-decoration: underline; }
+
+  /* ===== Responsive ===== */
+  @media (min-width: 640px) {
+    .menu-grid { grid-template-columns: 1fr 1fr; }
+    .review-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 980px) {
+    .menu-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .review-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .concept-grid { grid-template-columns: 1.15fr 1fr; gap: 56px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; transition: none !important; }
+  }
 </style>
 </head>
 <body>
+
+  <!-- ===== HERO ===== -->
   <header class="hero">
-    <div class="bg" style="background-image: linear-gradient(168deg, #2A4D54 0%, #182F33 100%), url('/assets/biz-samples/med-1.webp')" aria-hidden="true"></div>
-    <div class="wrap hero-inner">
-      <p class="kicker">Round Rock, TX</p>
-      <h1 class="biz-name">The Urban Turban</h1>
-      <p class="lede">Halal restaurant in Round Rock our customers trust</p>
-      <div class="rating" role="img" aria-label="Rated 4.7 out of 5 on Google across 496 reviews">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span class="score">4.7 on Google · 496 reviews</span>
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-veil" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="hero-tags">
+        <span class="seg">Pakistani-Mexican Fusion</span>
+        <span class="pipe">&middot;</span>
+        <span class="seg">100% Halal</span>
       </div>
-      <div class="cta-row">
-        <a class="btn btn-solid" href="tel:5122437905"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 243-7905</a>
-        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=The%20Urban%20Turban%2C%204257%20Gattis%20School%20Rd%2C%20Round%20Rock%2C%20TX%2078664%2C%20Round%20Rock%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
+
+      <h1>The Urban<span class="line2">Turban</span></h1>
+      <p class="sub">Round Rock, TX &middot; <strong>Halal Food Truck</strong></p>
+
+      <blockquote class="pull">
+        <p>"Pakistani spice. Mexican soul. The best birria I've ever had."</p>
+      </blockquote>
+
+      <div class="hero-meta">
+        <span class="rating">
+          <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="score">4.7</span>
+          <span class="count">496 Google reviews</span>
+        </span>
+      </div>
+
+      <div class="hero-cta">
+        <a class="btn btn-solid" href="tel:5122437905">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+          Call (512) 243-7905
+        </a>
+        <a class="btn btn-line" href="#menu">See the Menu</a>
       </div>
     </div>
   </header>
 
-  <section class="pull" aria-label="Customer review">
+  <!-- ===== THE CONCEPT ===== -->
+  <section class="block concept" id="concept">
     <div class="wrap">
-      <span class="mark" aria-hidden="true">“</span>
-      <blockquote class="q-xl">Pakistani mexican infused food.It&#39;s amazing.Definitely will spice up your life!</blockquote>
-      <cite>L al, on Google</cite>
-      <p class="proof"><span class="stars" aria-hidden="true">★★★★★</span> 4.7 stars on Google, across 496 reviews.</p>
-    </div>
-  </section>
-
-  <section class="quotes">
-    <div class="wrap">
-      <p class="eyebrow">Straight from Google</p>
-      <h2>What customers say</h2>
-      <p class="lead-in">Real reviews, word for word.</p>
-      <div class="q-grid">
-        <figure class="q-card">
-          <blockquote class="q-md">Went here with my wife and got the birria quesadillas, chicken tikka quesadillas, a mango lassi, and an iced chai frappe. It was all good, but the birria quesadillas were phenomenal. Just wow! The meat and soup have a delicious blend of south Asian spices that just works with tender beef and the rest of the quesadilla. Additionally, This food truck has great service and covered all outdoor seating. It also seems like they are about to open an area for kids to play at next to this food truck called “Flamingo Kids”, so we will be excited to try that out next time!</blockquote>
-          <figcaption>Alex Havlick</figcaption>
-        </figure>
-        <figure class="q-card">
-          <blockquote class="q-md">🤩 Absolutely amazing food - a new go to spot for my husband and I! I got the tandoori chicken quesadillas and LOVED it. My husband got the chicken over rice and loved his meal too. Great vibe and the owner was kind and obviously great at what he does. The food is delicious, the Thirsty Turban is like a slightly less sweet Pakola and the Mango Lassi was good. I can’t wait to go back! Next time I might try the tacos and my husband is thinking of trying their cheesesteak! 😋</blockquote>
-          <figcaption>Maliha Chaudhry</figcaption>
-        </figure>
-        <figure class="q-card">
-          <blockquote class="q-md">Best birria I&#39;ve ever had—hands down! Went for the Birria&#39;s Cousin tacos (their halal twist on the classic) and they were insanely tender, flavorful, and perfectly dipped in consommé. Also tried the birria ramen (spicy and spot-on) and beef &amp; rice plate—everything was fresh and packed with taste. It&#39;s wild how a halal Pakistani spot nails Mexican fusion this well. These guys know how to cook! Worth the wait after the ice storm closure. Highly recommend!</blockquote>
-          <figcaption>Ross Brookshire</figcaption>
-        </figure>
+      <div class="sec-head">
+        <span class="kicker">The Concept</span>
+        <h2>Two cuisines, <span class="accent">one kitchen</span></h2>
+      </div>
+      <div class="concept-grid">
+        <p class="concept-lead">
+          The Urban Turban makes birria tacos the way a Pakistani chef would, with the spice technique of South Asian cooking poured into Mexican street food. The fusion works because the sensibilities line up: <span class="hl">the same warmth, the same depth, the same love of bold spice</span>. Everything is 100% halal, and the result is birria many people swear is the best they have ever tasted.
+        </p>
+        <div class="fusion-bridge">
+          <div class="node">
+            <span class="n-kick">From</span>
+            <span class="n-word">Pakistani<br>Spice</span>
+          </div>
+          <span class="plus" aria-hidden="true">&#43;</span>
+          <div class="node">
+            <span class="n-kick">Meets</span>
+            <span class="n-word">Mexican<br>Street Food</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="mentions">
+  <!-- ===== MENU ===== -->
+  <section class="block" id="menu">
     <div class="wrap">
-      <p class="eyebrow">In their own words</p>
-      <h2>What people come back for</h2>
-      <p class="lead-in">Every one of these shows up in real customer reviews.</p>
-      <div class="chips"><span class="chip">Tacos</span><span class="chip">Birria</span><span class="chip">Quesadillas</span><span class="chip">Tikka</span><span class="chip">Burritos</span><span class="chip">Ramen</span></div>
+      <div class="sec-head">
+        <span class="kicker">The Menu</span>
+        <h2>What they're <span class="accent">known for</span></h2>
+      </div>
+      <div class="menu-grid">
+
+        <article class="dish">
+          <div class="d-top"><h3>Birria's Cousin</h3><span class="tag">Signature</span></div>
+          <p>Their halal twist on classic birria tacos. Insanely tender, packed with Pakistani spice, dipped in rich consomm&eacute;. The dish people drive across town for.</p>
+        </article>
+
+        <article class="dish">
+          <div class="d-top"><h3>Tandoori Tacos</h3><span class="tag">Fan favorite</span></div>
+          <p>Tandoori-style protein folded into a taco. Desi marinade, Mexican street format, flavors that stay authentic to both sides.</p>
+        </article>
+
+        <article class="dish">
+          <div class="d-top"><h3>Chicken Tikka Quesadilla</h3><span class="tag">Fusion</span></div>
+          <p>Chicken tikka and melted cheese pressed into a quesadilla. South Asian and Tex-Mex in perfect, harmonious balance.</p>
+        </article>
+
+        <article class="dish">
+          <div class="d-top"><h3>Turban Cheesesteak</h3><span class="tag">Chicken &amp; beef</span></div>
+          <p>The house cheesesteak, available in both chicken and beef. A cult favorite that proves the kitchen reaches well beyond tacos.</p>
+        </article>
+
+        <article class="dish">
+          <div class="d-top"><h3>Chicken Over Rice</h3><span class="tag">Plate</span></div>
+          <p>The mixed plate over rice, layered with that signature spice. Hearty, comforting, and built for an appetite.</p>
+        </article>
+
+        <article class="dish">
+          <div class="d-top"><h3>Birria Ramen</h3><span class="tag">Spicy</span></div>
+          <p>Birria consomm&eacute; meets ramen for a deep, spicy, slurp-worthy bowl. Fusion taken one bold step further.</p>
+        </article>
+
+        <article class="dish">
+          <div class="d-top"><h3>Mango Lassi</h3><span class="tag">Drink</span></div>
+          <p>The classic creamy, cooling mango lassi. The perfect counter to all that spice.</p>
+        </article>
+
+        <article class="dish">
+          <div class="d-top"><h3>Thirsty Turban</h3><span class="tag">Drink</span></div>
+          <p>The house specialty drink. Refreshing, a little unexpected, and made to pair with the food.</p>
+        </article>
+
+        <article class="dish">
+          <div class="d-top"><h3>Iced Chai Frapp&eacute;</h3><span class="tag">Drink</span></div>
+          <p>Spiced chai blended cold and smooth. A sweet South Asian finish to the meal.</p>
+        </article>
+
+      </div>
+
+      <p class="menu-note">
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Everything on the menu is 100% halal
+        </span>
+      </p>
     </div>
   </section>
 
-  
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="block reviews" id="reviews">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">From the Reviews</span>
+        <h2>What people are <span class="accent">saying</span></h2>
+      </div>
+      <div class="review-grid">
 
-  <section class="about">
-    <div class="wrap"><p>The Urban Turban is a halal restaurant in Round Rock. The reviews on this page come straight from our customers on Google, word for word.</p></div>
+        <figure class="review">
+          <span class="qmark" aria-hidden="true">&ldquo;</span>
+          <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>Best birria I've ever had, hands down! Went for the Birria's Cousin tacos (their halal twist on the classic) and they were insanely tender, flavorful, and perfectly dipped in consomm&eacute;. It's wild how a halal Pakistani spot nails Mexican fusion this well.</blockquote>
+          <cite>Ross Brookshire <span>&middot; 5&#9733; on Google</span></cite>
+        </figure>
+
+        <figure class="review">
+          <span class="qmark" aria-hidden="true">&ldquo;</span>
+          <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>If you love desi food and Mexican food, you'll certainly love this. They blend the flavors so well, and at the same time, keep the flavors authentic. We tried the tandoori tacos and chicken tikka quesadillas. Both were awesome.</blockquote>
+          <cite>Taylor Tiwari <span>&middot; 5&#9733; on Google</span></cite>
+        </figure>
+
+        <figure class="review">
+          <span class="qmark" aria-hidden="true">&ldquo;</span>
+          <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>Everything was SO DELICIOUS! We got both the chicken and beef cheesesteaks, the chicken tikka quesadilla, birria's cousin, and the mixed plate over rice. Everything was packed with harmonious flavor!</blockquote>
+          <cite>Erin Som <span>&middot; 5&#9733; on Google</span></cite>
+        </figure>
+
+      </div>
+    </div>
   </section>
 
-  <footer class="visit">
+  <!-- ===== ABOUT ===== -->
+  <section class="block about" id="about">
     <div class="wrap">
-      <p class="kicker">Round Rock, TX</p>
-      <h2>Come find us</h2>
-      <address>4257 Gattis School Rd, Round Rock, TX 78664<br />Round Rock, TX</address>
+      <div class="sec-head">
+        <span class="kicker">About</span>
+        <h2>The story behind <span class="accent">the truck</span></h2>
+      </div>
+      <div class="a-inner">
+        <p>The Urban Turban does something most spots won't try: South Asian spice technique applied to Mexican street food, all of it halal.</p>
+        <p>The birria is dipped in consomm&eacute; seasoned with Pakistani spices, and the result is the <span class="em">best birria in Round Rock by a wide margin</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT / FOOTER ===== -->
+  <footer class="contact" id="contact">
+    <div class="contact-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="kicker">Round Rock, TX</span>
+      <h2>Come find the truck</h2>
+      <address>
+        4257 Gattis School Rd<br>
+        Round Rock, TX 78664
+      </address>
       <div class="cta-row">
-        <a class="btn btn-solid" href="tel:5122437905"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 243-7905</a>
-        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=The%20Urban%20Turban%2C%204257%20Gattis%20School%20Rd%2C%20Round%20Rock%2C%20TX%2078664%2C%20Round%20Rock%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
+        <a class="btn btn-solid" href="tel:5122437905">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+          Call (512) 243-7905
+        </a>
+        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=The%20Urban%20Turban%2C%204257%20Gattis%20School%20Rd%2C%20Round%20Rock%2C%20TX%2078664" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+          Get directions
+        </a>
       </div>
-      <div class="bits"><a href="tel:5122437905">(512) 243-7905</a><span class="dot" aria-hidden="true">·</span><span>4257 Gattis School Rd, Round Rock, TX 78664</span><span class="dot" aria-hidden="true">·</span><span>Round Rock, TX</span><span class="dot" aria-hidden="true">·</span><a href="https://www.google.com/maps/place/The+Urban+Turban/data=!4m7!3m6!1s0x8644dbce401329b9:0x4534e3e9c55bf5c7!8m2!3d30.4969013!4d-97.5941263!16s%2Fg%2F11rgh8hz3v!19sChIJuSkTQM7bRIYRx_VbxenjNEU" target="_blank" rel="noopener">View on Google</a></div>
+
+      <div class="bits">
+        <a href="tel:5122437905">(512) 243-7905</a>
+        <span class="dot" aria-hidden="true">&middot;</span>
+        <span>4257 Gattis School Rd, Round Rock, TX 78664</span>
+        <span class="dot" aria-hidden="true">&middot;</span>
+        <a href="https://www.google.com/maps/place/The+Urban+Turban" target="_blank" rel="noopener">View on Google</a>
+      </div>
+
       <p class="credit">A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>. Preview imagery is licensed sample art. Your real photos replace it when you claim the site.</p>
     </div>
   </footer>
+
   <script defer src="/assets/demo-visit.js"></script>
 </body>
 </html>
