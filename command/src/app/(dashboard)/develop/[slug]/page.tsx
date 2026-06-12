@@ -1,13 +1,25 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
-import { ArrowLeft, Star, Phone, MapPin, Globe } from "lucide-react";
+import {
+  ArrowLeft,
+  Star,
+  Phone,
+  MapPin,
+  Globe,
+  ExternalLink,
+  ShieldCheck,
+} from "lucide-react";
 import {
   getBizLeadBySlug,
+  listCampaigns,
   listTouchpoints,
   listPitchResponses,
+  getVisitStats,
 } from "@/lib/develop/queries";
+import { isLiveSite } from "@/lib/develop/types";
 import { BizStatusChip } from "@/components/develop/status-chip";
+import { CampaignPicker } from "@/components/develop/campaign-picker";
 import { GeneratePanel } from "@/components/develop/generate-panel";
 import { PitchPanel } from "@/components/develop/pitch-panel";
 import { TouchpointForm } from "@/components/develop/touchpoint-form";
@@ -22,6 +34,14 @@ const METHOD_LABEL: Record<string, string> = {
   other: "Note",
 };
 
+function refHost(ref: string): string {
+  try {
+    return new URL(ref).hostname.replace(/^www\./, "");
+  } catch {
+    return ref.slice(0, 40);
+  }
+}
+
 export default async function BizLeadDetailPage({
   params,
 }: {
@@ -32,8 +52,13 @@ export default async function BizLeadDetailPage({
   if (!lead) notFound();
 
   const reviews = lead.reviews ?? [];
-  const touchpoints = await listTouchpoints(lead.id);
-  const pitchResponses = await listPitchResponses(lead.id);
+  const [touchpoints, pitchResponses, visits, campaigns] = await Promise.all([
+    listTouchpoints(lead.id),
+    listPitchResponses(lead.id),
+    getVisitStats(lead.id),
+    listCampaigns(),
+  ]);
+  const live = isLiveSite(lead);
 
   return (
     <div className="space-y-6">
@@ -97,6 +122,52 @@ export default async function BizLeadDetailPage({
         </div>
       </header>
 
+      {/* Campaign assignment (+ live-site facts once graduated) */}
+      <div className="grid gap-3 sm:grid-cols-2">
+        <CampaignPicker
+          slug={lead.slug}
+          campaigns={campaigns}
+          current={lead.campaign?.slug ?? null}
+        />
+
+        {live && (
+          <div className="panel p-4 space-y-2">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#86efac]">
+              Live site
+            </p>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm">
+              {lead.production_url ? (
+                <a
+                  href={lead.production_url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-[var(--amber-soft)] hover:text-[var(--amber)]"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+                  {lead.live_domain ?? "Open site"}
+                </a>
+              ) : (
+                <span className="inline-flex items-center gap-1.5 text-[var(--ink)]">
+                  <Globe className="h-3.5 w-3.5" aria-hidden />
+                  {lead.live_domain}
+                </span>
+              )}
+              {lead.ssl_state && (
+                <span className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-dim)]">
+                  <ShieldCheck className="h-3 w-3" aria-hidden />
+                  SSL · {lead.ssl_state}
+                </span>
+              )}
+            </div>
+            {lead.live_at && (
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-faint)]">
+                Live since {format(new Date(lead.live_at), "MMM d, yyyy")}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+
       {/* Demo site generator + preview */}
       <section className="space-y-3">
         <p className="display-eyebrow">DEMO SITE</p>
@@ -105,6 +176,68 @@ export default async function BizLeadDetailPage({
           initialDemoUrl={lead.demo_url}
           hasReviews={reviews.length > 0}
         />
+      </section>
+
+      {/* Site activity: when it was built + who has visited */}
+      <section className="space-y-3">
+        <p className="display-eyebrow">
+          SITE ACTIVITY · <span className="amber">{visits.total}</span>{" "}
+          {visits.total === 1 ? "VISIT" : "VISITS"}
+        </p>
+        <div className="panel p-4 space-y-3 text-sm">
+          <div className="flex flex-wrap gap-x-6 gap-y-1.5 text-[var(--ink-dim)]">
+            <span>
+              <span className="text-[var(--ink-faint)]">Built </span>
+              {lead.demo_generated_at
+                ? format(new Date(lead.demo_generated_at), "MMM d, yyyy")
+                : "not stamped"}
+            </span>
+            {lead.demo_deployed_at && (
+              <span>
+                <span className="text-[var(--ink-faint)]">Deployed </span>
+                {format(new Date(lead.demo_deployed_at), "MMM d, yyyy")}
+              </span>
+            )}
+            <span>
+              <span className="text-[var(--ink-faint)]">Last visit </span>
+              {visits.lastVisitAt
+                ? format(new Date(visits.lastVisitAt), "MMM d, h:mma")
+                : "none yet"}
+            </span>
+          </div>
+          {visits.recent.length === 0 ? (
+            <p className="text-xs text-[var(--ink-dim)]">
+              No visits recorded yet. Each view of{" "}
+              <code className="font-mono text-xs">
+                {lead.demo_url ?? `/demos/${lead.slug}/`}
+              </code>{" "}
+              shows up here.
+            </p>
+          ) : (
+            <ul className="space-y-1.5">
+              {visits.recent.map((v) => (
+                <li
+                  key={v.id}
+                  className="flex flex-wrap items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-faint)]"
+                >
+                  <span className="text-[var(--amber-soft)]">
+                    {format(new Date(v.created_at), "MMM d, h:mma")}
+                  </span>
+                  {(v.city || v.country) && (
+                    <span>
+                      · {[v.city, v.country].filter(Boolean).join(", ")}
+                    </span>
+                  )}
+                  {v.referrer && (
+                    <span className="normal-case tracking-normal text-[var(--ink-dim)]">
+                      · via {refHost(v.referrer)}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </section>
 
       {/* Pitch page generator + preview */}

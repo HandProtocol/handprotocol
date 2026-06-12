@@ -9,6 +9,12 @@
 */
 import type { BizLead, PitchScript } from "./types";
 
+// A photo pulled from the business's own Google Maps listing, written by
+// scripts/scrape-photos.mts to web/demos/<slug>/pitch/img/ (the gated path;
+// scraped photos NEVER render on the public demo). w/h are intrinsic pixels
+// so the grid reserves space while images load.
+export type PitchPhoto = { file: string; w: number; h: number };
+
 function esc(s: string | null | undefined): string {
   if (!s) return "";
   return s
@@ -27,6 +33,7 @@ export function renderPitchPage(
   lead: BizLead,
   script: PitchScript,
   demoUrl: string,
+  photos: PitchPhoto[] = [],
 ): string {
   const facts = [
     lead.google_rating != null
@@ -58,6 +65,20 @@ export function renderPitchPage(
     )
     .join("");
 
+  const photoSection = photos.length
+    ? `<div class="card">
+    <h2>With your photos</h2>
+    <p class="rep-note">These are the photos from their Google listing. When they claim the site, these go on it with their permission.</p>
+    <div class="shots">${photos
+      .map(
+        (p) => `
+      <img src="img/${esc(p.file)}" alt="" width="${p.w}" height="${p.h}" loading="lazy" decoding="async" />`,
+      )
+      .join("")}
+    </div>
+  </div>`
+    : "";
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -82,6 +103,9 @@ export function renderPitchPage(
   .btn { display:inline-block; background:var(--accent); color:#fff; text-decoration:none; padding:11px 18px; border-radius:8px; font-weight:600; border:0; cursor:pointer; font-size:1rem; }
   .btn.secondary { background:#eef1f6; color:var(--ink); }
   iframe { width:100%; height:420px; border:1px solid var(--line); border-radius:10px; margin-top:12px; background:#fff; }
+  .rep-note { color:var(--dim); font-size:0.92rem; margin:0 0 12px; }
+  .shots { display:grid; gap:10px; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); }
+  .shots img { width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; display:block; border-radius:8px; border:1px solid var(--line); background:#fff; }
   ul { margin:0; padding-left:20px; } li { margin:4px 0; }
   .obj { border-top:1px solid var(--line); padding:10px 0; }
   .obj:first-of-type { border-top:0; }
@@ -109,6 +133,8 @@ export function renderPitchPage(
     </div>
     <iframe title="Demo preview" src="${esc(demoUrl)}" loading="lazy"></iframe>
   </div>
+
+  ${photoSection}
 
   <div class="card">
     <h2>Opener</h2>

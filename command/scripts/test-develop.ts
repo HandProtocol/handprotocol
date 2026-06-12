@@ -53,6 +53,16 @@ const lead: BizLead = {
   last_synced_at: null,
   created_at: "",
   updated_at: "",
+  campaign_id: null,
+  tags: [],
+  lat: null,
+  lng: null,
+  production_url: null,
+  live_domain: null,
+  netlify_site_id: null,
+  dns_zone_id: null,
+  ssl_state: null,
+  live_at: null,
 };
 
 const rawReviews = `Maria G (5): Best brisket in south Austin, the line moves fast and the staff are kind.

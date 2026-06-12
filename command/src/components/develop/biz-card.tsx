@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useEffect, useRef } from "react";
-import { Star, Globe, MonitorCheck } from "lucide-react";
+import { Star, Globe, MonitorCheck, Eye, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { BizLead } from "@/lib/develop/types";
+import { isLiveSite, type BizLead } from "@/lib/develop/types";
 import { cardPop, dragGlow } from "@/lib/motion/anime";
 
 /*
@@ -22,11 +22,13 @@ const WEBSITE_LABEL: Record<string, string> = {
 
 export function BizCard({
   lead,
+  visits = 0,
   isDragging,
   onDragStart,
   onDragEnd,
 }: {
   lead: BizLead;
+  visits?: number;
   isDragging?: boolean;
   onDragStart?: (slug: string) => void;
   onDragEnd?: () => void;
@@ -37,6 +39,8 @@ export function BizCard({
     if (!isDragging || !ref.current) return;
     return dragGlow(ref.current);
   }, [isDragging]);
+
+  const live = isLiveSite(lead);
 
   return (
     <Link
@@ -106,6 +110,44 @@ export function BizCard({
           >
             <MonitorCheck className="h-3 w-3" aria-hidden />
             DEMO
+          </span>
+        )}
+        {live && (
+          <span
+            className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[#86efac]"
+            title={lead.live_domain ?? "Live owned site"}
+          >
+            <span
+              aria-hidden
+              className="h-1.5 w-1.5 rounded-full bg-[#86efac]"
+            />
+            LIVE
+          </span>
+        )}
+        {visits > 0 && (
+          <span
+            className="inline-flex items-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--amber-soft)]"
+            title={`${visits} demo ${visits === 1 ? "visit" : "visits"}`}
+          >
+            <Eye className="h-3 w-3" aria-hidden />
+            {visits}
+          </span>
+        )}
+        {lead.campaign && (
+          <span
+            className="inline-flex max-w-[10rem] items-center gap-1 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-dim)]"
+            title={lead.campaign.name}
+          >
+            {lead.campaign.color ? (
+              <span
+                aria-hidden
+                className="h-1.5 w-1.5 shrink-0 rounded-full"
+                style={{ backgroundColor: lead.campaign.color }}
+              />
+            ) : (
+              <Layers className="h-3 w-3 shrink-0" aria-hidden />
+            )}
+            <span className="truncate">{lead.campaign.name}</span>
           </span>
         )}
       </div>

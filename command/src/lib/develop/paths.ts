@@ -31,6 +31,16 @@ export function bizLeadMarkdownRelPath(slug: string): string {
   return `biz/${slug}/lead.md`;
 }
 
+// Cold-outreach script templates: biz/_templates/cold/*.md. One file per
+// variant (email-founder, call-live, voicemail, dm, ...), each with YAML
+// frontmatter and a markdown body carrying [BRACKET] placeholder tokens.
+// The reps read/copy these from /develop/scripts. The dir may be empty or
+// missing while the templates are still being authored; the loader codes
+// defensively around that, same posture as the deadlines page.
+export function coldTemplatesDir(): string {
+  return path.join(bizDir(), "_templates", "cold");
+}
+
 export function demosDir(): string {
   return path.join(repoRoot(), "web", "demos");
 }
@@ -59,4 +69,26 @@ export function demoPitchPath(slug: string): string {
 
 export function pitchPublicUrl(slug: string): string {
   return `/demos/${slug}/pitch/`;
+}
+
+// ─── Production (owned) sites ───────────────────────────────────────────────
+// Once a lead graduates (hand-biz-pitch Phase 6) its site is promoted out of
+// web/demos into clients/<slug>/ and deployed as its OWN Netlify site on a
+// custom domain. The folder lives at the repo root, OUTSIDE web/, so the main
+// handprotocol deploy never publishes it. The production slug can differ from
+// the lead slug (it matches the domain), so callers pass it explicitly.
+export function clientsDir(): string {
+  return path.join(repoRoot(), "clients");
+}
+
+export function clientSiteDir(prodSlug: string): string {
+  return path.join(clientsDir(), prodSlug);
+}
+
+export function clientSitePath(prodSlug: string): string {
+  return path.join(clientSiteDir(prodSlug), "index.html");
+}
+
+export function clientSiteRelPath(prodSlug: string): string {
+  return `clients/${prodSlug}`;
 }

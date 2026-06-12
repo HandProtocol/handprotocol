@@ -21,7 +21,13 @@ import { BizStatusChip } from "./status-chip";
   Supabase. Pulse on every drop, burst on a closed deal.
 */
 
-export function BizKanban({ leads }: { leads: BizLead[] }) {
+export function BizKanban({
+  leads,
+  visitCounts = {},
+}: {
+  leads: BizLead[];
+  visitCounts?: Record<string, number>;
+}) {
   const router = useRouter();
   const boardRef = useRef<HTMLDivElement | null>(null);
   const [dragging, setDragging] = useState<{
@@ -143,6 +149,7 @@ export function BizKanban({ leads }: { leads: BizLead[] }) {
                   <BizCard
                     key={l.id}
                     lead={l}
+                    visits={visitCounts[l.slug] ?? 0}
                     isDragging={dragging?.slug === l.slug}
                     onDragStart={handleDragStart}
                     onDragEnd={handleDragEnd}

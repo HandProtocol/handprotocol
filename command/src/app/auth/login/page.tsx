@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState } from "react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
 import { createClient } from "@/lib/supabase/client";
@@ -16,11 +17,22 @@ import { Toaster } from "@/components/ui/sonner";
   parity, the callback route at /auth/callback handles that flow when we
   enable it via the Supabase dashboard.
 */
-export default function LoginPage() {
+function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Where to land after sign-in. Only honor same-origin relative paths so the
+  // `next` param can't be used as an open redirect. Invite redemption rides
+  // this: /auth/invite/<code> sends unauth'd visitors here with next set, and
+  // the (now authenticated) invite page redeems on return.
+  const rawNext = searchParams.get("next");
+  const nextPath =
+    rawNext && rawNext.startsWith("/") && !rawNext.startsWith("//")
+      ? rawNext
+      : "/dashboard";
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -34,7 +46,11 @@ export default function LoginPage() {
       if (error) {
         toast.error(error.message);
       } else {
-        router.push("/dashboard");
+        // Fire-and-forget sign-in alert. The route verifies the session
+        // server-side, so this can't forge a notification, and a failure
+        // here must never block the redirect.
+        fetch("/api/notify/signin", { method: "POST" }).catch(() => {});
+        router.push(nextPath);
         router.refresh();
       }
     } catch (err) {
@@ -107,10 +123,30 @@ export default function LoginPage() {
           </form>
         </div>
 
+        <p className="text-center text-xs text-[var(--ink-dim)]">
+          Need access?{" "}
+          <Link
+            href="/apply"
+            className="text-[var(--amber-soft)] hover:underline"
+          >
+            Apply for the Command Center
+          </Link>
+        </p>
+
         <p className="text-center font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ink-faint)]">
           HAND Protocol, 501(c)(3) in formation, Austin, TX
         </p>
       </div>
     </div>
+  );
+}
+
+// useSearchParams (for the post-login `next` target) must sit inside a Suspense
+// boundary in the App Router; the wrapper provides it.
+export default function LoginPage() {
+  return (
+    <Suspense fallback={null}>
+      <LoginForm />
+    </Suspense>
   );
 }

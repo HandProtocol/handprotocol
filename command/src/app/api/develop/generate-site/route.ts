@@ -26,6 +26,7 @@ import {
   buildFallbackCopy,
 } from "@/lib/develop/prompts";
 import { renderDemoSite } from "@/lib/develop/site-template";
+import { demoRenderOptions } from "@/lib/develop/site-assets";
 import { writeFileAtomic } from "@/lib/develop/markdown";
 import { demoSitePath, demoPublicUrl } from "@/lib/develop/paths";
 import type { SiteCopy } from "@/lib/develop/types";
@@ -146,8 +147,10 @@ export async function POST(request: NextRequest) {
     copy = buildFallbackCopy(lead, reviews);
   }
 
-  // Render and write the static site.
-  const html = renderDemoSite(lead, copy);
+  // Render and write the static site. Sample imagery + review-mention chips
+  // come from the shared helper so this matches scripts/generate-site.mts
+  // byte for byte for the same lead.
+  const html = renderDemoSite(lead, copy, demoRenderOptions(lead, reviews));
   try {
     await writeFileAtomic(demoSitePath(slug), html);
   } catch (err) {
