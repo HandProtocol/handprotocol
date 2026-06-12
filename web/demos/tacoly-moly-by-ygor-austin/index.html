@@ -3,264 +3,776 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tacoly Moly By Ygor · Austin</title>
-<meta name="description" content="Rated 4.9 on Google by 463 customers." />
+<title>Tacoly Moly By Ygor · South Austin Tacos &amp; Burritos</title>
+<meta name="description" content="The best burrito in South Austin, made by Ygor and Jose at Nomadic Beerworks. Breakfast burritos, pastor tacos, tres leches. 4.9 stars on Google from 463 reviews." />
+<meta name="theme-color" content="#1c1408" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Tacoly Moly By Ygor" />
-<meta property="og:description" content="Rated 4.9 on Google by 463 customers." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23B4541E'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23FFF3E8'%3ET%3C/text%3E%3C/svg%3E" />
+<meta property="og:description" content="&quot;The best burrito I've ever had. And I've been looking since I was 12.&quot; · 4.9 stars, 463 reviews. South Austin." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231c1408'/%3E%3Ctext x='32' y='46' font-family='Arial,sans-serif' font-size='38' font-weight='900' text-anchor='middle' fill='%23f59e0b'%3ET%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;600;800&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #F8F4EB; --ink: #27211A; --dim: #6C6052; --line: #E7DECC; --card: #FFFCF4;
-    --accent: #B4541E; --accent-ink: #FFF3E8; --gold: #D9A441;
-    --tint: #F0E7D3; --band: #33281C; --band-ink: #F2EADC;
-    --deep-ink: #EFE7D9;
-    --chip-bg: #B4541E14;
-    --t-hero: clamp(2.7rem, 9vw, 5.2rem);
-    --maxw: 1060px;
-    --shadow: 0 16px 38px -20px rgba(0,0,0,0.45);
+    --bg: #1c1408;
+    --bg-2: #241a0c;
+    --card: #2a1f0e;
+    --card-2: #32260f;
+    --line: #443218;
+    --accent: #f59e0b;
+    --accent-2: #fbbf24;
+    --ember: #ea7317;
+    --text: #fdf6ec;
+    --dim: #cdb892;
+    --faint: #9a8763;
+    --star: #fcd34d;
+    --maxw: 1080px;
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --shadow: 0 24px 60px -28px rgba(0,0,0,0.85);
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: clamp(1rem, 0.97rem + 0.2vw, 1.12rem); line-height: 1.65;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.02rem, 0.99rem + 0.22vw, 1.16rem);
+    line-height: 1.68;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  a { color: var(--accent); }
-  h1, h2, h3, .display {
-    font-family: "Bitter", Georgia, serif;
-    font-weight: 700;
-    line-height: 1.04; margin: 0;
-    letter-spacing: -0.01em;
+  a { color: var(--accent); text-decoration: none; }
+
+  .display {
+    font-family: "Bebas Neue", Impact, "Arial Narrow Bold", sans-serif;
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: 0.012em;
+    margin: 0;
   }
-  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(20px, 5vw, 48px); }
+  h2.display { font-size: clamp(2.3rem, 6.5vw, 4rem); }
+
+  .wrap {
+    width: 100%;
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: clamp(20px, 5vw, 52px);
+  }
+
   .eyebrow {
-    text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.74rem;
-    font-weight: 700; color: var(--accent); margin: 0 0 14px;
+    font-family: "Bebas Neue", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+    color: var(--accent);
+    margin: 0 0 16px;
+    display: inline-block;
   }
 
-  /* ── Buttons ─────────────────────────────────────────────────────────── */
+  /* ── String lights ─────────────────────────────────────────────── */
+  .lights {
+    position: relative;
+    height: 26px;
+    overflow: visible;
+    z-index: 3;
+  }
+  .lights::before {
+    content: "";
+    position: absolute;
+    inset: 0 -40px;
+    top: 0;
+    height: 16px;
+    border-bottom: 2px solid #2e2210;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  }
+  .bulbs {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 4px;
+  }
+  .bulb {
+    width: 9px;
+    height: 13px;
+    margin-top: 9px;
+    border-radius: 50% 50% 50% 50% / 38% 38% 62% 62%;
+    background: var(--accent);
+    box-shadow: 0 0 9px 2px rgba(245,158,11,0.65);
+    animation: glow 3.4s ease-in-out infinite;
+    flex: 0 0 auto;
+  }
+  .bulb:nth-child(2n) { background: var(--ember); box-shadow: 0 0 9px 2px rgba(234,115,23,0.6); animation-delay: -0.9s; }
+  .bulb:nth-child(3n) { background: var(--accent-2); box-shadow: 0 0 9px 2px rgba(251,191,36,0.6); animation-delay: -1.7s; }
+  .bulb:nth-child(4n) { animation-delay: -2.4s; }
+  @keyframes glow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.45; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bulb { animation: none; }
+  }
+
+  /* ── Hero ──────────────────────────────────────────────────────── */
+  .hero {
+    position: relative;
+    background: var(--bg);
+    padding-top: 8px;
+  }
+  .hero-grid {
+    display: grid;
+    gap: clamp(28px, 5vw, 56px);
+    align-items: center;
+    padding: clamp(36px, 7vw, 76px) 0 clamp(44px, 7vw, 80px);
+  }
+  @media (min-width: 880px) {
+    .hero-grid { grid-template-columns: 1.05fr 0.95fr; }
+  }
+  .hero-name {
+    font-size: clamp(3.6rem, 13vw, 8.2rem);
+    color: var(--text);
+    text-shadow: 0 2px 0 rgba(0,0,0,0.3);
+  }
+  .hero-name .by {
+    display: block;
+    font-size: 0.38em;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-top: 0.18em;
+  }
+  .hero-quote {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1.25rem, 3.2vw, 1.7rem);
+    line-height: 1.42;
+    color: var(--text);
+    max-width: 30ch;
+    margin: 22px 0 6px;
+    border-left: 3px solid var(--accent);
+    padding-left: 18px;
+  }
+  .hero-quote-src {
+    font-style: normal;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 0.92rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 4px 0 0 21px;
+  }
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin: 28px 0 30px;
+  }
+  .rating {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(245,158,11,0.12);
+    border: 1px solid rgba(245,158,11,0.4);
+    border-radius: 999px;
+    padding: 9px 18px 9px 14px;
+  }
+  .rating .num {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.7rem;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .rating .stars { color: var(--star); letter-spacing: 2px; font-size: 0.9rem; }
+  .rating .meta {
+    font-family: Georgia, serif;
+    font-size: 0.82rem;
+    color: var(--dim);
+    line-height: 1.25;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 0.14em;
+    font-size: 1rem;
+    color: var(--dim);
+  }
+  .pill svg { width: 15px; height: 15px; fill: var(--accent); }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
   .btn {
-    display: inline-flex; align-items: center; gap: 0.55em;
-    min-height: 52px; padding: 0.75em 1.45em;
-    border-radius: 999px; border: 2px solid transparent;
-    font-weight: 700; font-size: 1.02rem; text-decoration: none;
-    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 0.1em;
+    font-size: 1.18rem;
+    padding: 15px 28px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.2s, border-color 0.2s;
+    text-decoration: none;
   }
-  .btn svg { width: 1.1em; height: 1.1em; flex: none; }
-  .btn-solid { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow); }
-  .btn-solid:hover { transform: translateY(-2px); }
-  .btn-line { border-color: currentColor; color: inherit; }
-  .btn-line:hover { transform: translateY(-2px); }
-  :where(a, button):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+  .btn svg { width: 18px; height: 18px; }
+  .btn-primary {
+    background: linear-gradient(180deg, var(--accent-2), var(--accent));
+    color: #2a1604;
+    box-shadow: 0 12px 30px -12px rgba(245,158,11,0.7);
+  }
+  .btn-primary svg { fill: #2a1604; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 38px -12px rgba(245,158,11,0.85); }
+  .btn-ghost {
+    background: transparent;
+    border-color: var(--line);
+    color: var(--text);
+  }
+  .btn-ghost svg { fill: var(--accent); }
+  .btn-ghost:hover { border-color: var(--accent); transform: translateY(-2px); }
 
-  /* ── Hero ─────────────────────────────────────────────────────────────── */
-  header.hero {
-    position: relative; overflow: hidden;
-    background: linear-gradient(168deg, #3A2C1D 0%, #231A10 100%);
-    color: #EFE7D9;
+  .hero-media {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--line);
+    aspect-ratio: 1600 / 1092;
+    margin: 0;
   }
-  header.hero::before {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
-    background: repeating-linear-gradient(90deg, var(--gold) 0 34px, var(--accent) 34px 68px);
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: sepia(1) saturate(2.5) hue-rotate(5deg);
+  }
+  .hero-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(195deg, rgba(28,20,8,0) 38%, rgba(28,20,8,0.78) 100%);
+  }
+  .hero-media .stamp {
+    position: absolute;
+    left: 18px;
+    bottom: 16px;
     z-index: 2;
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 0.12em;
+    font-size: 1.05rem;
+    color: var(--accent-2);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
   }
-  header.hero::after, .visit::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.07; z-index: 1;
-  }
-  .bg {
-    position: absolute; inset: 0; z-index: 0;
-    background-size: cover; background-position: center;
-    background-blend-mode: multiply;
-    filter: saturate(0.7) brightness(0.96);
-  }
-  .bg::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(100deg, rgba(8,4,2,0.6) 0%, rgba(8,4,2,0.22) 55%, rgba(8,4,2,0.38) 100%);
-  }
-  .hero-inner { position: relative; z-index: 1; padding: clamp(4.2rem, 10vw, 7.5rem) 0 clamp(3.6rem, 9vw, 6.5rem); }
-  .kicker {
-    display: inline-flex; align-items: center; gap: 0.7em; margin: 0 0 1.1rem;
-    text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.74rem;
-    font-weight: 700; color: var(--gold);
-  }
-  .kicker::before { content: ""; width: 2.4em; height: 2px; background: var(--gold); }
-  h1.biz-name { font-size: var(--t-hero); max-width: 16ch; color: #FFFDF8; text-wrap: balance; }
-  .lede {
-    font-size: clamp(1.12rem, 1rem + 0.9vw, 1.45rem); font-weight: 500;
-    max-width: 40ch; margin: 1.1rem 0 0; color: #EFE7D9; opacity: 0.94;
-  }
-  .rating { display: inline-flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; margin-top: 1.5rem; }
-  .stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.12em; line-height: 1; }
-  .score { font-weight: 700; font-size: 0.98rem; letter-spacing: 0.02em; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
 
-  /* ── Pull-quote band ──────────────────────────────────────────────────── */
-  .pull { background: var(--band); color: var(--band-ink); padding: clamp(3.2rem, 7vw, 5.5rem) 0; }
-  .pull .mark { display: block; font-family: "Bitter", Georgia, serif; font-size: 4.6rem; line-height: 0.45; color: var(--gold); height: 0.55em; }
-  .pull blockquote { margin: 0.9rem 0 0; font-family: "Bitter", Georgia, serif; line-height: 1.18; text-wrap: balance; }
-  .pull blockquote.q-xl { font-size: clamp(1.7rem, 1.2rem + 2.6vw, 3rem); }
-  .pull blockquote.q-lg { font-size: clamp(1.35rem, 1.05rem + 1.6vw, 2.1rem); }
-  .pull blockquote.q-md { font-size: clamp(1.12rem, 1rem + 0.8vw, 1.5rem); line-height: 1.4; }
-  .pull cite {
-    display: block; font-style: normal; margin-top: 1.3rem;
-    font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 0.78rem;
-    letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75;
-  }
-  .pull .proof { margin-top: 1.6rem; font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 0.92rem; opacity: 0.85; }
+  /* ── Section frame ─────────────────────────────────────────────── */
+  section { position: relative; }
+  .sec-pad { padding: clamp(56px, 9vw, 100px) 0; }
+  .sec-head { max-width: 640px; margin-bottom: clamp(30px, 5vw, 48px); }
+  .sec-head p { color: var(--dim); margin: 14px 0 0; }
 
-  /* ── Sections ─────────────────────────────────────────────────────────── */
-  section { padding: clamp(3rem, 7vw, 5.5rem) 0; }
-  section h2 { font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.6rem); margin: 0 0 10px; }
-  .lead-in { color: var(--dim); margin: 0 0 2.2rem; max-width: 56ch; }
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line) 18%, var(--line) 82%, transparent);
+  }
 
-  .q-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
-  .q-card {
-    position: relative; margin: 0; background: var(--card); border: 1px solid var(--line);
-    border-radius: 16px; padding: 28px 26px 24px; box-shadow: 0 10px 28px -22px rgba(0,0,0,0.3);
+  /* ── Services ──────────────────────────────────────────────────── */
+  .services { background: var(--bg-2); }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
   }
-  .q-card::before {
-    content: "\201C"; position: absolute; top: 10px; left: 22px;
-    font-family: "Bitter", Georgia, serif; font-size: 2.6rem; color: var(--accent); opacity: 0.5; line-height: 1;
+  .menu-item {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 20px 22px;
+    transition: transform 0.25s var(--ease), border-color 0.25s, background 0.25s;
+    position: relative;
+    overflow: hidden;
   }
-  .q-card blockquote {
-    margin: 14px 0 0; font-size: 1.03rem;
-    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 12; overflow: hidden;
+  .menu-item::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: linear-gradient(180deg, var(--accent), var(--ember));
+    opacity: 0;
+    transition: opacity 0.25s;
   }
-  .q-card blockquote.q-md { font-size: 0.96rem; }
-  .q-card figcaption { margin-top: 14px; color: var(--dim); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .menu-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(245,158,11,0.45);
+    background: var(--card-2);
+  }
+  .menu-item:hover::before { opacity: 1; }
+  .menu-item .ico {
+    font-size: 1.5rem;
+    line-height: 1;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .menu-item h3 {
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 0.05em;
+    font-size: 1.42rem;
+    color: var(--text);
+    margin: 0 0 4px;
+    font-weight: 400;
+  }
+  .menu-item p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--faint);
+    line-height: 1.5;
+  }
 
-  .mentions { border-top: 1px solid var(--line); }
-  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-  .chip {
-    padding: 0.5em 1.1em; border-radius: 999px; border: 1.5px solid var(--accent);
-    background: var(--chip-bg); color: var(--ink); font-weight: 600; font-size: 0.97rem;
+  /* ── Testimonials ──────────────────────────────────────────────── */
+  .quotes-grid {
+    display: grid;
+    gap: 18px;
   }
-  .mentions .note { margin-top: 1.2rem; color: var(--dim); font-size: 0.88rem; }
-
-  .services-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
-  .service { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 20px 22px; }
-  .service h3 { font-size: 1.12rem; margin: 0 0 6px; }
-  .service p { margin: 0; color: var(--dim); font-size: 0.97rem; }
-
-  .about { background: var(--tint); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .about p { max-width: 62ch; margin: 0; font-size: clamp(1.1rem, 1rem + 0.6vw, 1.32rem); line-height: 1.7; }
-
-  /* ── Visit band + footer ─────────────────────────────────────────────── */
-  .visit {
-    position: relative; overflow: hidden;
-    background: linear-gradient(168deg, #30251A 0%, #1C140D 100%);
-    color: var(--deep-ink); padding: clamp(3.6rem, 8vw, 6rem) 0 2rem;
+  @media (min-width: 760px) {
+    .quotes-grid { grid-template-columns: repeat(3, 1fr); }
+    .quote-card.featured { grid-column: span 3; }
   }
-  .visit > .wrap { position: relative; z-index: 1; }
-  .visit h2 { color: #FFFDF8; font-size: clamp(2rem, 1.5rem + 2.4vw, 3.2rem); }
-  .visit address { font-style: normal; margin: 1rem 0 0; font-size: 1.1rem; opacity: 0.92; max-width: 44ch; }
-  .visit .cta-row { margin-top: 1.8rem; }
-  .visit .bits {
-    display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
-    margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.14);
-    font-size: 0.92rem; opacity: 0.85;
+  .quote-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 28px 26px 24px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
   }
-  .visit .bits a { color: var(--gold); }
-  .visit .dot { opacity: 0.5; }
-  .credit { margin: 2.2rem 0 0; font-size: 0.78rem; opacity: 0.55; }
-  .credit a { color: inherit; }
+  .quote-card.featured {
+    background:
+      radial-gradient(120% 140% at 0% 0%, rgba(245,158,11,0.1), transparent 55%),
+      var(--card-2);
+    border-color: rgba(245,158,11,0.35);
+  }
+  .quote-mark {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3.4rem;
+    color: var(--accent);
+    line-height: 0.6;
+    opacity: 0.55;
+    margin-bottom: 6px;
+  }
+  .quote-card .stars { color: var(--star); letter-spacing: 2px; font-size: 0.85rem; margin-bottom: 12px; }
+  .quote-card blockquote {
+    margin: 0;
+    font-size: clamp(1rem, 1.6vw, 1.12rem);
+    line-height: 1.6;
+    color: var(--text);
+    flex: 1;
+  }
+  .quote-card.featured blockquote {
+    font-size: clamp(1.12rem, 2.2vw, 1.42rem);
+    line-height: 1.55;
+    max-width: 52ch;
+  }
+  .quote-card cite {
+    display: block;
+    margin-top: 18px;
+    font-style: normal;
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 0.14em;
+    font-size: 0.96rem;
+    color: var(--accent);
+  }
+  .quote-card cite span {
+    font-family: Georgia, serif;
+    letter-spacing: 0;
+    color: var(--faint);
+    font-size: 0.8rem;
+    text-transform: none;
+  }
+
+  /* ── About ─────────────────────────────────────────────────────── */
+  .about { background: var(--bg-2); }
+  .about-grid {
+    display: grid;
+    gap: clamp(28px, 5vw, 52px);
+    align-items: center;
+  }
+  @media (min-width: 820px) {
+    .about-grid { grid-template-columns: 0.9fr 1.1fr; }
+  }
+  .about-card {
+    background:
+      radial-gradient(130% 120% at 100% 0%, rgba(234,115,23,0.16), transparent 60%),
+      var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: clamp(28px, 4vw, 40px);
+  }
+  .about-card .names {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  .about-card .names .chip {
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 0.1em;
+    background: rgba(245,158,11,0.14);
+    border: 1px solid rgba(245,158,11,0.4);
+    color: var(--accent-2);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 1.02rem;
+  }
+  .about p { color: var(--dim); margin: 0 0 14px; }
+  .about p strong { color: var(--text); font-weight: normal; font-style: italic; }
+  .about-photo {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    aspect-ratio: 4 / 3;
+    box-shadow: var(--shadow);
+    margin: 0;
+  }
+  .about-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: sepia(0.85) saturate(2.2) hue-rotate(4deg) brightness(0.95);
+  }
+  .about-photo::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(28,20,8,0.6), transparent 50%);
+  }
+
+  /* ── Contact ───────────────────────────────────────────────────── */
+  .contact-grid {
+    display: grid;
+    gap: 18px;
+  }
+  @media (min-width: 760px) {
+    .contact-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .info-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .info-card .label {
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    font-size: 0.9rem;
+  }
+  .info-card .val {
+    font-size: 1.08rem;
+    color: var(--text);
+    line-height: 1.45;
+  }
+  .info-card .val a { color: var(--text); }
+  .info-card .val a:hover { color: var(--accent); }
+  .info-card .sub { font-size: 0.86rem; color: var(--faint); }
+  .hours {
+    display: grid;
+    gap: 4px;
+    font-size: 0.92rem;
+    color: var(--dim);
+  }
+  .hours .row { display: flex; justify-content: space-between; gap: 12px; }
+  .hours .row span:last-child { color: var(--text); }
+
+  .contact-cta {
+    margin-top: clamp(34px, 5vw, 52px);
+    text-align: center;
+    background:
+      radial-gradient(120% 160% at 50% 0%, rgba(245,158,11,0.12), transparent 60%),
+      var(--card-2);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 20px;
+    padding: clamp(36px, 6vw, 60px) 24px;
+  }
+  .contact-cta h2 { color: var(--text); margin-bottom: 16px; }
+  .contact-cta p { color: var(--dim); max-width: 44ch; margin: 0 auto 26px; }
+
+  /* ── Footer ────────────────────────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 40px 20px 48px;
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+  footer .mark {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.08em;
+    color: var(--text);
+  }
+  footer .mark span { color: var(--accent); }
+  footer .built { font-size: 0.86rem; color: var(--faint); margin-top: 10px; }
+  footer .built a { color: var(--accent); }
 </style>
 </head>
 <body>
+
+  <!-- String lights along the top, food-truck style -->
+  <div class="lights" aria-hidden="true">
+    <div class="bulbs">
+      <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+      <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+      <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+      <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+      <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+      <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+      <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+      <span class="bulb"></span><span class="bulb"></span><span class="bulb"></span>
+    </div>
+  </div>
+
+  <!-- ══ HERO ══════════════════════════════════════════════════════ -->
   <header class="hero">
-    <div class="bg" style="background-image: linear-gradient(168deg, #3A2C1D 0%, #231A10 100%), url('/assets/biz-samples/caribbean-1.webp')" aria-hidden="true"></div>
-    <div class="wrap hero-inner">
-      <p class="kicker">Austin, TX</p>
-      <h1 class="biz-name">Tacoly Moly By Ygor</h1>
-      <p class="lede">Restaurant in Austin our customers trust</p>
-      <div class="rating" role="img" aria-label="Rated 4.9 out of 5 on Google across 463 reviews">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span class="score">4.9 on Google · 463 reviews</span>
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">South Austin · Nomadic Beerworks</span>
+        <h1 class="display hero-name">
+          Tacoly Moly
+          <span class="by">by Ygor</span>
+        </h1>
+
+        <p class="hero-quote">
+          The best burrito I've ever had. And I've been looking since I was 12.
+        </p>
+        <p class="hero-quote-src">Real Google review · 5 stars</p>
+
+        <div class="hero-badges">
+          <span class="rating">
+            <span class="num">4.9</span>
+            <span>
+              <span class="stars" aria-hidden="true">★★★★★</span>
+              <span class="meta" style="display:block;">463 Google reviews</span>
+            </span>
+          </span>
+          <span class="pill">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h13l-1.5 8H6.2L6 12h10v2H4.7L3 3zm5 16a1.6 1.6 0 1 1 0 3.2A1.6 1.6 0 0 1 8 19zm8 0a1.6 1.6 0 1 1 0 3.2A1.6 1.6 0 0 1 16 19z"/></svg>
+            Food Truck
+          </span>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="tel:+15126203333">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1l-2.23 2.2z"/></svg>
+            Call to order
+          </a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/place/Tacoly+Moly+By+Ygor/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+            Find the truck
+          </a>
+        </div>
       </div>
-      <div class="cta-row">
-        <a class="btn btn-solid" href="tel:5126203333"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 620-3333</a>
-        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tacoly%20Moly%20By%20Ygor%2C%20By%20Nomadic%20Beerworks%2C%203505%20Country%20White%20Ln%2C%20Austin%2C%20TX%2078749%2C%20Austin%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
-      </div>
+
+      <figure class="hero-media">
+        <img
+          src="../../assets/biz-samples/taco-3.webp"
+          width="1600" height="1092"
+          alt="A loaded plate of tacos from Tacoly Moly By Ygor"
+          loading="eager" fetchpriority="high" decoding="async" />
+        <figcaption class="stamp">Tacos · Burritos · Breakfast all day</figcaption>
+      </figure>
     </div>
   </header>
 
-  <section class="pull" aria-label="Customer review">
+  <div class="divider"></div>
+
+  <!-- ══ SERVICES / MENU ═══════════════════════════════════════════ -->
+  <section class="services sec-pad" id="menu">
     <div class="wrap">
-      <span class="mark" aria-hidden="true">“</span>
-      <blockquote class="q-lg">Love the breakfast tacos! Appreciate their friendly and quick service— so awesome to have this food truck at Nomadic!</blockquote>
-      <cite>Sammi McKenzie, on Google</cite>
-      <p class="proof"><span class="stars" aria-hidden="true">★★★★★</span> 4.9 stars on Google, across 463 reviews.</p>
+      <div class="sec-head">
+        <span class="eyebrow">What we cook</span>
+        <h2 class="display">Off the truck, made to order</h2>
+        <p>Breakfast that opens the day, tacos and burritos built big, and tres leches for the road. Here's what regulars come back for.</p>
+      </div>
+
+      <div class="menu-grid">
+        <article class="menu-item">
+          <span class="ico" aria-hidden="true">🌯</span>
+          <h3>Breakfast Burritos</h3>
+          <p>Eggs, potato, and everything you'd want first thing, wrapped to go.</p>
+        </article>
+        <article class="menu-item">
+          <span class="ico" aria-hidden="true">🔥</span>
+          <h3>Al Pastor Burrito</h3>
+          <p>The one the reviews won't stop talking about. Massive, under thirteen dollars.</p>
+        </article>
+        <article class="menu-item">
+          <span class="ico" aria-hidden="true">🌮</span>
+          <h3>Chicken Tacos</h3>
+          <p>Simple, done right, with that salsa that hits different.</p>
+        </article>
+        <article class="menu-item">
+          <span class="ico" aria-hidden="true">🦐</span>
+          <h3>Shrimp Tacos</h3>
+          <p>Off the flat-top, dressed fresh, gone fast.</p>
+        </article>
+        <article class="menu-item">
+          <span class="ico" aria-hidden="true">🍳</span>
+          <h3>Migas Breakfast Tacos</h3>
+          <p>Crispy strips, egg, and salsa folded into a warm tortilla.</p>
+        </article>
+        <article class="menu-item">
+          <span class="ico" aria-hidden="true">🥣</span>
+          <h3>Chicken &amp; Pastor Bowls</h3>
+          <p>Same flavors, no tortilla needed. Pile it high.</p>
+        </article>
+        <article class="menu-item">
+          <span class="ico" aria-hidden="true">🧀</span>
+          <h3>Nachos with Queso</h3>
+          <p>Loaded for the table, melted for one. Your call.</p>
+        </article>
+        <article class="menu-item">
+          <span class="ico" aria-hidden="true">🍰</span>
+          <h3>Tres Leches</h3>
+          <p>Soaked, cold, and the reason you order one more.</p>
+        </article>
+      </div>
     </div>
   </section>
 
-  <section class="quotes">
+  <!-- ══ TESTIMONIALS ══════════════════════════════════════════════ -->
+  <section class="sec-pad" id="reviews">
     <div class="wrap">
-      <p class="eyebrow">Straight from Google</p>
-      <h2>What customers say</h2>
-      <p class="lead-in">Real reviews, word for word.</p>
-      <div class="q-grid">
-        <figure class="q-card">
-          <blockquote class="q-md">Okay, Tacoly Moly — where have you been all my life?
-I came in not knowing what to expect and left fully obsessed. The tacos are the real deal — fresh, flavorful, and packed in a way that actually respects the ingredients. Nothing felt like an afterthought. These are tacos made by people who genuinely give a damn.
-But let’s talk about the salsa, because it deserves its own paragraph. I don’t know what they’re doing back there, but it hit different. Bold, layered, with just the right kick — I was finding excuses to keep dipping long after the tacos were gone. Easily some of the best salsa I’ve had in Austin, and that’s saying something in this city.
-Bonus points: they’re attached to one of the coolest bars around. So you can grab incredible tacos AND a great drink without moving more than 10 feet. Honestly, the perfect combo. Whether you’re doing a full night out or just need a quick taco fix, this spot delivers on every level.
-Tacoly Moly is the move. Full stop.</blockquote>
-          <figcaption>Blythe Rutherford</figcaption>
-        </figure>
-        <figure class="q-card">
-          <blockquote class="q-md">At the time of writing this, they have a solid 5 ⭐️ with 425 reviews. I’m currently adding another 5 ⭐️ review because this place is amazing!
-Tacoly Moly is a food truck that sits next to Nomadic, Nomadic is a great place to grab a drink. The area has seating indoor and outdoor, pups are welcome.
+      <div class="sec-head">
+        <span class="eyebrow">In their words</span>
+        <h2 class="display">463 reviews. Here are three.</h2>
+      </div>
 
-I walked up to the festive food truck and was greeted by Jose, he was very friendly and attentive to what I was asking for. We ordered breakfast burritos and they did not disappoint! Crunchy outside without an inside that is a party in your mouth! Also, the tres leches was perfect 😋
-
-I decided this will be a regular stop for us. I highly recommend Tocoly Moly!</blockquote>
-          <figcaption>J K</figcaption>
+      <div class="quotes-grid">
+        <figure class="quote-card featured">
+          <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <blockquote>
+            I can't put this lightly, but this was the best burrito I've ever had in my entire life. When I was 12 years old I said I'm going to tour the world and find the best burrito, and this is it. And it's not even close. Ygor has a heart of gold and it bleeds into the food.
+          </blockquote>
+          <cite>Andrew Sulski <span>· Google review</span></cite>
         </figure>
-        <figure class="q-card">
-          <blockquote class="q-md">We came to Tacoly Moly on a rainy Wednesday and were absolutely blown away! Ygor is a real sweetheart and brought our food inside the coffee shop so we didn’t have to come into the rain! The queso was lovely, the salsa was so fresh and spicy. We had the chicken and pastor bowls and they were so incredibly flavorful. Everything was seasoned to perfection. Highly highly recommend if you’re on this side of town!</blockquote>
-          <figcaption>Devin-Marie Brown</figcaption>
+
+        <figure class="quote-card">
+          <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <blockquote>
+            Tacoly Moly is the move. Full stop. These are tacos made by people who genuinely give a damn. And the salsa, I don't know what they're doing back there, but it hit different. Bold, layered, with just the right kick.
+          </blockquote>
+          <cite>Blythe Rutherford <span>· Google review</span></cite>
+        </figure>
+
+        <figure class="quote-card">
+          <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+          <div class="stars" aria-hidden="true">★★★★★</div>
+          <blockquote>
+            I had the burrito. For under $13, I expected a normal sized burrito. No, this thing was MASSIVE. It was just so tasty, I had to take bite after bite. Legitimately some of the best food I've had in a long time.
+          </blockquote>
+          <cite>Martin Badot <span>· Google review</span></cite>
         </figure>
       </div>
     </div>
   </section>
 
-  <section class="mentions">
-    <div class="wrap">
-      <p class="eyebrow">In their own words</p>
-      <h2>What people come back for</h2>
-      <p class="lead-in">Every one of these shows up in real customer reviews.</p>
-      <div class="chips"><span class="chip">Burritos</span><span class="chip">Breakfast tacos</span><span class="chip">Salsas</span><span class="chip">Tres leches</span><span class="chip">Al pastor</span><span class="chip">Quesadillas</span></div>
-    </div>
-  </section>
-
-  
-
-  <section class="about">
-    <div class="wrap"><p>Tacoly Moly By Ygor is a restaurant in Austin. The reviews on this page come straight from our customers on Google, word for word.</p></div>
-  </section>
-
-  <footer class="visit">
-    <div class="bg" style="background-image: linear-gradient(168deg, #30251A 0%, #1C140D 100%), url('/assets/biz-samples/coffee-2.webp')" aria-hidden="true"></div>
-    <div class="wrap">
-      <p class="kicker">Austin, TX</p>
-      <h2>Come find us</h2>
-      <address>By Nomadic Beerworks, 3505 Country White Ln, Austin, TX 78749<br />Austin, TX</address>
-      <div class="cta-row">
-        <a class="btn btn-solid" href="tel:5126203333"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 620-3333</a>
-        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tacoly%20Moly%20By%20Ygor%2C%20By%20Nomadic%20Beerworks%2C%203505%20Country%20White%20Ln%2C%20Austin%2C%20TX%2078749%2C%20Austin%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
+  <!-- ══ ABOUT ═════════════════════════════════════════════════════ -->
+  <section class="about sec-pad" id="about">
+    <div class="wrap about-grid">
+      <figure class="about-photo">
+        <img
+          src="../../assets/biz-samples/taco-1.webp"
+          width="1200" height="900"
+          alt="Tacos plated up at the Tacoly Moly truck"
+          loading="lazy" decoding="async" />
+      </figure>
+      <div class="about-card">
+        <span class="eyebrow">The truck</span>
+        <h2 class="display" style="font-size:clamp(2rem,5.5vw,3.2rem); margin-bottom:18px;">Run by Ygor &amp; Jose</h2>
+        <div class="names">
+          <span class="chip">Ygor</span>
+          <span class="chip">Jose</span>
+        </div>
+        <p>
+          Ygor runs this truck with Jose out of Nomadic Beerworks in South Austin, cooking breakfast burritos, pastor tacos, and tres leches off the flat-top all day.
+        </p>
+        <p>
+          Everything is made with the kind of care that turns first-timers into regulars. <strong>Pull up, order big, and you'll get why people keep coming back.</strong>
+        </p>
       </div>
-      <div class="bits"><a href="tel:5126203333">(512) 620-3333</a><span class="dot" aria-hidden="true">·</span><span>By Nomadic Beerworks, 3505 Country White Ln, Austin, TX 78749</span><span class="dot" aria-hidden="true">·</span><span>Austin, TX</span><span class="dot" aria-hidden="true">·</span><a href="https://www.google.com/maps/place/Tacoly+Moly+By+Ygor/data=!4m7!3m6!1s0x8644b593d6a84d0b:0xcfc8043616f16eb1!8m2!3d30.2213386!4d-97.8265335!16s%2Fg%2F11wj02c5lz!19sChIJC02o1pO1RIYRsW7xFjYEyM8" target="_blank" rel="noopener">View on Google</a></div>
-      <p class="credit">A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>. Preview imagery is licensed sample art. Your real photos replace it when you claim the site.</p>
     </div>
+  </section>
+
+  <!-- ══ CONTACT ═══════════════════════════════════════════════════ -->
+  <section class="sec-pad" id="contact">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Come find us</span>
+        <h2 class="display">Parked at Nomadic Beerworks</h2>
+      </div>
+
+      <div class="contact-grid">
+        <div class="info-card">
+          <span class="label">Where</span>
+          <span class="val">
+            <a href="https://www.google.com/maps/place/Tacoly+Moly+By+Ygor/" target="_blank" rel="noopener">
+              3505 Country White Ln<br>Austin, TX 78749
+            </a>
+          </span>
+          <span class="sub">In the lot at Nomadic Beerworks</span>
+        </div>
+
+        <div class="info-card">
+          <span class="label">Call ahead</span>
+          <span class="val"><a href="tel:+15126203333">(512) 620-3333</a></span>
+          <span class="sub">Order to go and skip the wait</span>
+        </div>
+
+        <div class="info-card">
+          <span class="label">Hours</span>
+          <div class="hours">
+            <div class="row"><span>Mon &ndash; Fri</span><span>8a &ndash; 9p</span></div>
+            <div class="row"><span>Saturday</span><span>9a &ndash; 9p</span></div>
+            <div class="row"><span>Sunday</span><span>9a &ndash; 4p</span></div>
+          </div>
+          <span class="sub">Hours can shift with the brewery</span>
+        </div>
+      </div>
+
+      <div class="contact-cta">
+        <h2 class="display">Hungry yet?</h2>
+        <p>Roll up to Nomadic Beerworks or call your order in. The burrito's waiting.</p>
+        <div class="cta-row" style="justify-content:center;">
+          <a class="btn btn-primary" href="tel:+15126203333">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .58 3.6 1 1 0 0 1-.25 1l-2.23 2.2z"/></svg>
+            (512) 620-3333
+          </a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/place/Tacoly+Moly+By+Ygor/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+            Directions
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════════════ -->
+  <footer>
+    <div class="mark">Tacoly Moly <span>by Ygor</span></div>
+    <p class="built">A free preview site built by <a href="https://handprotocol.org">HAND</a></p>
   </footer>
+
   <script defer src="/assets/demo-visit.js"></script>
 </body>
 </html>

@@ -1,259 +1,424 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Monks Momo · Austin</title>
-<meta name="description" content="Rated 4.7 on Google by 371 customers." />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Monks Momo" />
-<meta property="og:description" content="Rated 4.7 on Google by 371 customers." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23BE3A2B'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23FFF3EE'%3EM%3C/text%3E%3C/svg%3E" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monks Momo · Nepali &amp; Indian Dumplings in North Austin</title>
+<meta name="description" content="Monks Momo is a North Austin food truck serving fresh Nepali and Indian momos: chili, jhol, butter masala, and kothey. 4.7 stars across 371 reviews. 7221 McNeil Dr.">
+<meta name="theme-color" content="#1a0f2e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
-  :root {
-    --bg: #F6F4EC; --ink: #1B201D; --dim: #5C655F; --line: #DFE0D2; --card: #FDFCF7;
-    --accent: #BE3A2B; --accent-ink: #FFF3EE; --gold: #D9A441;
-    --tint: #E9EBDD; --band: #14342A; --band-ink: #ECF2E9;
-    --deep-ink: #E8F0EA;
-    --chip-bg: #BE3A2B14;
-    --t-hero: clamp(2.4rem, 8.5vw, 4.9rem);
-    --maxw: 1060px;
-    --shadow: 0 16px 38px -20px rgba(0,0,0,0.45);
-    --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
-  body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: clamp(1rem, 0.97rem + 0.2vw, 1.12rem); line-height: 1.65;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: var(--accent); }
-  h1, h2, h3, .display {
-    font-family: "Archivo Black", "Arial Black", sans-serif;
-    font-weight: 400;
-    line-height: 1.04; margin: 0;
-    letter-spacing: -0.01em;
-  }
-  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(20px, 5vw, 48px); }
-  .eyebrow {
-    text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.74rem;
-    font-weight: 700; color: var(--accent); margin: 0 0 14px;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&display=swap');
 
-  /* ── Buttons ─────────────────────────────────────────────────────────── */
-  .btn {
-    display: inline-flex; align-items: center; gap: 0.55em;
-    min-height: 52px; padding: 0.75em 1.45em;
-    border-radius: 999px; border: 2px solid transparent;
-    font-weight: 700; font-size: 1.02rem; text-decoration: none;
-    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
-  }
-  .btn svg { width: 1.1em; height: 1.1em; flex: none; }
-  .btn-solid { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow); }
-  .btn-solid:hover { transform: translateY(-2px); }
-  .btn-line { border-color: currentColor; color: inherit; }
-  .btn-line:hover { transform: translateY(-2px); }
-  :where(a, button):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+:root{
+  --bg:#1a0f2e;
+  --bg-2:#150c25;
+  --accent:#e8a020;
+  --accent-soft:#f2c66b;
+  --text:#f5f0e8;
+  --muted:#b6a8c6;
+  --card:#251545;
+  --card-line:rgba(232,160,32,.18);
+  --maxw:1080px;
+}
 
-  /* ── Hero ─────────────────────────────────────────────────────────────── */
-  header.hero {
-    position: relative; overflow: hidden;
-    background: linear-gradient(168deg, #173B2F 0%, #0D241C 100%);
-    color: #E8F0EA;
-  }
-  header.hero::before {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
-    background: repeating-linear-gradient(90deg, var(--gold) 0 34px, var(--accent) 34px 68px);
-    z-index: 2;
-  }
-  header.hero::after, .visit::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.07; z-index: 1;
-  }
-  .bg {
-    position: absolute; inset: 0; z-index: 0;
-    background-size: cover; background-position: center;
-    background-blend-mode: multiply;
-    filter: saturate(0.7) brightness(0.96);
-  }
-  .bg::after {
-    content: ""; position: absolute; inset: 0;
-    background: linear-gradient(100deg, rgba(8,4,2,0.6) 0%, rgba(8,4,2,0.22) 55%, rgba(8,4,2,0.38) 100%);
-  }
-  .hero-inner { position: relative; z-index: 1; padding: clamp(4.2rem, 10vw, 7.5rem) 0 clamp(3.6rem, 9vw, 6.5rem); }
-  .kicker {
-    display: inline-flex; align-items: center; gap: 0.7em; margin: 0 0 1.1rem;
-    text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.74rem;
-    font-weight: 700; color: var(--gold);
-  }
-  .kicker::before { content: ""; width: 2.4em; height: 2px; background: var(--gold); }
-  h1.biz-name { font-size: var(--t-hero); max-width: 16ch; color: #FFFDF8; text-wrap: balance; }
-  .lede {
-    font-size: clamp(1.12rem, 1rem + 0.9vw, 1.45rem); font-weight: 500;
-    max-width: 40ch; margin: 1.1rem 0 0; color: #E8F0EA; opacity: 0.94;
-  }
-  .rating { display: inline-flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; margin-top: 1.5rem; }
-  .stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.12em; line-height: 1; }
-  .score { font-weight: 700; font-size: 0.98rem; letter-spacing: 0.02em; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit}
+img{display:block;max-width:100%}
+h1,h2,h3{font-family:"Marcellus",Georgia,serif;font-weight:400;letter-spacing:.01em;line-height:1.1;margin:0}
 
-  /* ── Pull-quote band ──────────────────────────────────────────────────── */
-  .pull { background: var(--band); color: var(--band-ink); padding: clamp(3.2rem, 7vw, 5.5rem) 0; }
-  .pull .mark { display: block; font-family: "Archivo Black", "Arial Black", sans-serif; font-size: 4.6rem; line-height: 0.45; color: var(--gold); height: 0.55em; }
-  .pull blockquote { margin: 0.9rem 0 0; font-family: "Archivo Black", "Arial Black", sans-serif; line-height: 1.18; text-wrap: balance; }
-  .pull blockquote.q-xl { font-size: clamp(1.7rem, 1.2rem + 2.6vw, 3rem); }
-  .pull blockquote.q-lg { font-size: clamp(1.35rem, 1.05rem + 1.6vw, 2.1rem); }
-  .pull blockquote.q-md { font-size: clamp(1.12rem, 1rem + 0.8vw, 1.5rem); line-height: 1.4; }
-  .pull cite {
-    display: block; font-style: normal; margin-top: 1.3rem;
-    font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 0.78rem;
-    letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75;
-  }
-  .pull .proof { margin-top: 1.6rem; font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 0.92rem; opacity: 0.85; }
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 
-  /* ── Sections ─────────────────────────────────────────────────────────── */
-  section { padding: clamp(3rem, 7vw, 5.5rem) 0; }
-  section h2 { font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.6rem); margin: 0 0 10px; }
-  .lead-in { color: var(--dim); margin: 0 0 2.2rem; max-width: 56ch; }
+/* ---------- HERO ---------- */
+.hero{position:relative;min-height:94vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero__img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:sepia(1) hue-rotate(220deg) saturate(2);
+}
+.hero__veil{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(120% 90% at 75% 10%, rgba(232,160,32,.16), transparent 55%),
+    linear-gradient(180deg, rgba(26,15,46,.35) 0%, rgba(26,15,46,.78) 55%, var(--bg) 100%);
+}
+/* string lights */
+.lights{position:absolute;top:0;left:0;right:0;height:120px;pointer-events:none;opacity:.9;z-index:2}
+.lights span{
+  position:absolute;top:38px;width:7px;height:7px;border-radius:50%;
+  background:var(--accent-soft);
+  box-shadow:0 0 8px 2px rgba(242,198,107,.6);
+  animation:twinkle 3.4s ease-in-out infinite;
+}
+@keyframes twinkle{0%,100%{opacity:.45}50%{opacity:1}}
 
-  .q-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
-  .q-card {
-    position: relative; margin: 0; background: var(--card); border: 1px solid var(--line);
-    border-radius: 16px; padding: 28px 26px 24px; box-shadow: 0 10px 28px -22px rgba(0,0,0,0.3);
-  }
-  .q-card::before {
-    content: "\201C"; position: absolute; top: 10px; left: 22px;
-    font-family: "Archivo Black", "Arial Black", sans-serif; font-size: 2.6rem; color: var(--accent); opacity: 0.5; line-height: 1;
-  }
-  .q-card blockquote {
-    margin: 14px 0 0; font-size: 1.03rem;
-    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 12; overflow: hidden;
-  }
-  .q-card blockquote.q-md { font-size: 0.96rem; }
-  .q-card figcaption { margin-top: 14px; color: var(--dim); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.hero__inner{position:relative;z-index:3;width:100%;padding-bottom:64px}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent-soft);margin-bottom:18px;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent)}
+.hero h1{
+  font-size:clamp(3.4rem,13vw,7.4rem);
+  text-shadow:0 2px 30px rgba(0,0,0,.5);
+  margin-bottom:6px;
+}
+.hero__sub{
+  font-family:"Marcellus",serif;font-size:clamp(1rem,2.6vw,1.4rem);
+  color:var(--accent-soft);margin-bottom:26px;letter-spacing:.02em;
+}
+.quote{
+  max-width:640px;font-family:"Marcellus",serif;
+  font-size:clamp(1.3rem,3.6vw,2rem);line-height:1.32;
+  color:var(--text);margin:0 0 30px;
+}
+.quote .mark{color:var(--accent)}
 
-  .mentions { border-top: 1px solid var(--line); }
-  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-  .chip {
-    padding: 0.5em 1.1em; border-radius: 999px; border: 1.5px solid var(--accent);
-    background: var(--chip-bg); color: var(--ink); font-weight: 600; font-size: 0.97rem;
-  }
-  .mentions .note { margin-top: 1.2rem; color: var(--dim); font-size: 0.88rem; }
+.hero__row{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+.badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(37,21,69,.7);border:1px solid var(--card-line);
+  padding:11px 16px;border-radius:999px;backdrop-filter:blur(6px);
+}
+.badge .stars{color:var(--accent);letter-spacing:2px;font-size:.95rem}
+.badge .num{font-weight:600}
+.badge .rev{color:#cdbfe0;font-size:.85rem}
 
-  .services-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
-  .service { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 20px 22px; }
-  .service h3 { font-size: 1.12rem; margin: 0 0 6px; }
-  .service p { margin: 0; color: var(--dim); font-size: 0.97rem; }
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--accent);color:#1a0f2e;
+  font-weight:700;letter-spacing:.02em;text-decoration:none;
+  padding:14px 26px;border-radius:999px;
+  box-shadow:0 10px 30px rgba(232,160,32,.28);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(232,160,32,.42)}
+.btn--ghost{
+  background:transparent;color:var(--text);
+  border:1px solid var(--card-line);box-shadow:none;font-weight:600;
+}
+.btn--ghost:hover{border-color:var(--accent);box-shadow:none}
 
-  .about { background: var(--tint); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .about p { max-width: 62ch; margin: 0; font-size: clamp(1.1rem, 1rem + 0.6vw, 1.32rem); line-height: 1.7; }
+/* ---------- SECTION SCAFFOLD ---------- */
+section{padding:84px 0;position:relative}
+.tag{
+  font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:14px;display:block;
+}
+.h2{font-size:clamp(2rem,5vw,3rem);margin-bottom:18px}
+.lede{max-width:620px;color:#d8ccea;font-size:1.08rem}
 
-  /* ── Visit band + footer ─────────────────────────────────────────────── */
-  .visit {
-    position: relative; overflow: hidden;
-    background: linear-gradient(168deg, #122A22 0%, #0A1A14 100%);
-    color: var(--deep-ink); padding: clamp(3.6rem, 8vw, 6rem) 0 2rem;
-  }
-  .visit > .wrap { position: relative; z-index: 1; }
-  .visit h2 { color: #FFFDF8; font-size: clamp(2rem, 1.5rem + 2.4vw, 3.2rem); }
-  .visit address { font-style: normal; margin: 1rem 0 0; font-size: 1.1rem; opacity: 0.92; max-width: 44ch; }
-  .visit .cta-row { margin-top: 1.8rem; }
-  .visit .bits {
-    display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
-    margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.14);
-    font-size: 0.92rem; opacity: 0.85;
-  }
-  .visit .bits a { color: var(--gold); }
-  .visit .dot { opacity: 0.5; }
-  .credit { margin: 2.2rem 0 0; font-size: 0.78rem; opacity: 0.55; }
-  .credit a { color: inherit; }
+/* ---------- WHAT'S A MOMO ---------- */
+.momo{background:var(--bg-2);border-top:1px solid var(--card-line);border-bottom:1px solid var(--card-line)}
+.momo .wrap{display:grid;gap:28px;grid-template-columns:1fr;align-items:center}
+.momo__text p{font-size:clamp(1.15rem,3vw,1.5rem);font-family:"Marcellus",serif;line-height:1.45;color:var(--text);margin:0}
+.momo__text .small{font-family:system-ui,sans-serif;font-size:1rem;color:#c4b6d8;margin-top:16px;line-height:1.6}
+.momo__icon{font-size:2rem;color:var(--accent);letter-spacing:.4em}
+
+/* ---------- MENU ---------- */
+.menu-grid{
+  display:grid;gap:18px;margin-top:42px;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+}
+.dish{
+  background:var(--card);border:1px solid var(--card-line);border-radius:18px;
+  padding:26px 24px;position:relative;overflow:hidden;
+  transition:transform .2s ease,border-color .2s ease;
+}
+.dish::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 80% at 100% 0%,rgba(232,160,32,.1),transparent 60%);
+  opacity:0;transition:opacity .25s ease;
+}
+.dish:hover{transform:translateY(-4px);border-color:var(--accent)}
+.dish:hover::after{opacity:1}
+.dish h3{font-size:1.32rem;margin-bottom:8px;position:relative;z-index:1}
+.dish p{margin:0;color:#cbbce0;font-size:.96rem;position:relative;z-index:1}
+.dish .glyph{font-size:1.4rem;display:block;margin-bottom:10px;color:var(--accent);position:relative;z-index:1}
+
+/* ---------- TESTIMONIALS ---------- */
+.reviews{background:var(--bg-2)}
+.review-grid{display:grid;gap:20px;margin-top:42px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.review{
+  background:var(--card);border:1px solid var(--card-line);border-radius:18px;
+  padding:30px 28px;display:flex;flex-direction:column;
+}
+.review .qmark{font-family:"Marcellus",serif;font-size:3rem;line-height:0;color:var(--accent);height:24px;opacity:.55}
+.review blockquote{margin:18px 0 22px;font-size:1.04rem;color:var(--text);line-height:1.6}
+.review .who{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--card-line);padding-top:16px}
+.review .name{font-family:"Marcellus",serif;font-size:1.05rem}
+.review .stars{color:var(--accent);letter-spacing:1px;font-size:.9rem}
+
+/* ---------- ABOUT ---------- */
+.about .wrap{display:grid;gap:40px;grid-template-columns:1fr;align-items:center}
+.about__copy p{font-size:1.12rem;color:#ddd2ee;margin:0 0 18px}
+.about__copy p:last-child{margin-bottom:0}
+.about__copy strong{color:var(--accent-soft);font-weight:600}
+.about__card{
+  background:var(--card);border:1px solid var(--card-line);border-radius:20px;padding:30px;
+}
+.about__card .label{font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.about__card .val{font-family:"Marcellus",serif;font-size:1.5rem;margin-bottom:22px}
+.about__card .val:last-child{margin-bottom:0}
+
+/* ---------- CONTACT ---------- */
+.contact{background:var(--bg-2)}
+.contact .wrap{display:grid;gap:30px;grid-template-columns:1fr}
+.info-list{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:18px}
+.info-list li{display:flex;gap:14px;align-items:flex-start}
+.info-list .ic{flex:0 0 auto;width:40px;height:40px;border-radius:12px;background:rgba(232,160,32,.12);border:1px solid var(--card-line);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:1.15rem}
+.info-list .k{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:#b29fc9}
+.info-list .v{font-size:1.12rem;font-family:"Marcellus",serif}
+.info-list a{text-decoration:none}
+.info-list a:hover .v{color:var(--accent-soft)}
+.contact__cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+
+.map-card{
+  background:var(--card);border:1px solid var(--card-line);border-radius:20px;
+  overflow:hidden;display:flex;flex-direction:column;min-height:260px;
+}
+.map-faux{
+  flex:1;position:relative;
+  background:
+    linear-gradient(rgba(232,160,32,.07) 1px,transparent 1px) 0 0/100% 34px,
+    linear-gradient(90deg,rgba(232,160,32,.07) 1px,transparent 1px) 0 0/34px 100%,
+    var(--bg-2);
+  display:flex;align-items:center;justify-content:center;
+}
+.map-faux .pin{text-align:center}
+.map-faux .pin .dot{font-size:2.2rem;color:var(--accent);filter:drop-shadow(0 4px 10px rgba(232,160,32,.5))}
+.map-faux .pin .lbl{font-family:"Marcellus",serif;margin-top:6px;font-size:1.05rem}
+.map-card .map-foot{padding:16px 20px;border-top:1px solid var(--card-line);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.map-card .map-foot .addr{color:#cbbce0;font-size:.95rem}
+
+/* ---------- FOOTER ---------- */
+footer{padding:48px 0 56px;text-align:center;border-top:1px solid var(--card-line)}
+footer .name{font-family:"Marcellus",serif;font-size:1.6rem;color:var(--accent-soft)}
+footer .stars{color:var(--accent);letter-spacing:2px;margin:10px 0 4px}
+.credit{color:#9a8ab2;font-size:.9rem;margin-top:22px}
+.credit a{color:var(--accent-soft);text-decoration:none}
+.credit a:hover{text-decoration:underline}
+
+@media (min-width:760px){
+  .momo .wrap{grid-template-columns:auto 1fr;gap:40px}
+  .about .wrap{grid-template-columns:1.4fr 1fr}
+  .contact .wrap{grid-template-columns:1fr 1fr;align-items:start}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .lights span{animation:none}
+  .btn,.dish{transition:none}
+}
 </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="bg" style="background-image: linear-gradient(168deg, #173B2F 0%, #0D241C 100%), url('/assets/biz-samples/asian-2.webp')" aria-hidden="true"></div>
-    <div class="wrap hero-inner">
-      <p class="kicker">Austin, TX</p>
-      <h1 class="biz-name">Monks Momo</h1>
-      <p class="lede">Momo restaurant in Austin our customers trust</p>
-      <div class="rating" role="img" aria-label="Rated 4.7 out of 5 on Google across 371 reviews">
-        <span class="stars" aria-hidden="true">★★★★★</span>
-        <span class="score">4.7 on Google · 371 reviews</span>
+
+<!-- HERO -->
+<header class="hero">
+  <img class="hero__img" src="../../assets/biz-samples/asian-1.webp" alt="Steaming momos served from the Monks Momo food truck" width="1024" height="768" loading="eager" fetchpriority="high">
+  <div class="hero__veil"></div>
+  <div class="lights" aria-hidden="true">
+    <span style="left:6%;animation-delay:0s"></span>
+    <span style="left:18%;animation-delay:.5s"></span>
+    <span style="left:30%;animation-delay:1.1s"></span>
+    <span style="left:42%;animation-delay:.3s"></span>
+    <span style="left:54%;animation-delay:1.4s"></span>
+    <span style="left:66%;animation-delay:.7s"></span>
+    <span style="left:78%;animation-delay:1.7s"></span>
+    <span style="left:90%;animation-delay:.9s"></span>
+  </div>
+  <div class="wrap hero__inner">
+    <span class="eyebrow">Nepali &amp; Indian Dumplings · North Austin</span>
+    <h1>Monks Momo</h1>
+    <p class="hero__sub">Hand-folded momos, made fresh on McNeil Drive</p>
+    <p class="quote"><span class="mark">&ldquo;</span>Better than anything I&rsquo;ve had in California. I came back two days in a row.<span class="mark">&rdquo;</span></p>
+    <div class="hero__row">
+      <span class="badge">
+        <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <span class="num">4.7</span>
+        <span class="rev">371 Google reviews</span>
+      </span>
+      <a class="btn" href="tel:+15126880991">
+        <span aria-hidden="true">&#9742;</span> Call to order
+      </a>
+      <a class="btn btn--ghost" href="#menu">See the momos</a>
+    </div>
+  </div>
+</header>
+
+<!-- WHAT'S A MOMO -->
+<section class="momo" id="momo">
+  <div class="wrap">
+    <div class="momo__icon" aria-hidden="true">&#10042;</div>
+    <div class="momo__text">
+      <p>Momos are South Asian dumplings, Nepali and Tibetan in origin, steamed or pan-fried and stuffed with spiced meat or vegetables.</p>
+      <p class="small">Chili momo gets tossed in a bold sauce, jhol momo arrives in a tangy soup, and butter momo comes rich and creamy. Comfort food with serious flavor depth.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="wrap">
+    <span class="tag">The Menu</span>
+    <h2 class="h2">What mood are you in?</h2>
+    <p class="lede">Every momo is a different feeling. Pick your sauce, pick your heat, and let Pepe pack the box.</p>
+    <div class="menu-grid">
+      <article class="dish">
+        <span class="glyph" aria-hidden="true">&#128293;</span>
+        <h3>Chili Chicken Momo</h3>
+        <p>Steamed momos tossed in a bold, glossy chili sauce. The one everyone talks about.</p>
+      </article>
+      <article class="dish">
+        <span class="glyph" aria-hidden="true">&#129481;</span>
+        <h3>Butter Masala Momo</h3>
+        <p>Rich, creamy, Indo-Nepali fusion. &ldquo;To die for,&rdquo; in the words of a regular.</p>
+      </article>
+      <article class="dish">
+        <span class="glyph" aria-hidden="true">&#127858;</span>
+        <h3>Jhol Momo</h3>
+        <p>Served swimming in a tangy, soupy broth. Bright, warming, made to be sipped.</p>
+      </article>
+      <article class="dish">
+        <span class="glyph" aria-hidden="true">&#127859;</span>
+        <h3>Kothey Momo</h3>
+        <p>Pan-fried for a crisp golden bottom with the steamed-soft top still intact.</p>
+      </article>
+      <article class="dish">
+        <span class="glyph" aria-hidden="true">&#129382;</span>
+        <h3>Veg &amp; Paneer Momo</h3>
+        <p>Garden vegetables or soft paneer, spiced and folded the same careful way.</p>
+      </article>
+      <article class="dish">
+        <span class="glyph" aria-hidden="true">&#129380;</span>
+        <h3>Mango Lassi &amp; Chai</h3>
+        <p>A cold, sweet mango lassi or a hot spiced chai to round out the order.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="reviews" id="reviews">
+  <div class="wrap">
+    <span class="tag">Why People Drive Back</span>
+    <h2 class="h2">From the 371 reviews</h2>
+    <div class="review-grid">
+      <figure class="review">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <blockquote>Never in my life have I tasted something so delicious. I got the butter masala dumplings. If you love dumplings. Run. Don&rsquo;t walk!</blockquote>
+        <figcaption class="who">
+          <span class="name">Jenn J</span>
+          <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </figcaption>
+      </figure>
+      <figure class="review">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <blockquote>I was visiting Austin from the San Francisco Bay Area and found this amazing food truck. Was blown away by the flavors, better than anything I&rsquo;ve had in California. Had to come back to back for 2 days just to sample all the momo varieties.</blockquote>
+        <figcaption class="who">
+          <span class="name">Chintan Intwala</span>
+          <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </figcaption>
+      </figure>
+      <figure class="review">
+        <span class="qmark" aria-hidden="true">&ldquo;</span>
+        <blockquote>What kinda dumpling mood are you in? The butter momos are to die for. What an innovative Indo-Nepali fusion.</blockquote>
+        <figcaption class="who">
+          <span class="name">Janardan Sharma</span>
+          <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about__copy">
+      <span class="tag">The Truck</span>
+      <h2 class="h2">A warm corner of North Austin</h2>
+      <p>Monks Momo is a food truck in North Austin where the momos are made fresh and the owner is the kind of person who packs in extra <strong>halwa</strong> when your order runs a little late.</p>
+      <p>Chili momo, jhol momo, butter masala. Each one a different mood, served under the string lights with the game on the screen.</p>
+    </div>
+    <div class="about__card">
+      <div class="label">Find the truck</div>
+      <div class="val">7221 McNeil Dr</div>
+      <div class="label">Neighborhood</div>
+      <div class="val">North Austin, TX 78729</div>
+      <div class="label">Loved for</div>
+      <div class="val">4.7&#9733; across 371 reviews</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div>
+      <span class="tag">Come Hungry</span>
+      <h2 class="h2">Roll up to Monks Momo</h2>
+      <p class="lede">Call ahead so the box is hot when you arrive, or just pull into the court and follow the smell of fresh momos.</p>
+      <ul class="info-list">
+        <li>
+          <span class="ic" aria-hidden="true">&#9742;</span>
+          <a href="tel:+15126880991">
+            <div class="k">Phone</div>
+            <div class="v">(512) 688-0991</div>
+          </a>
+        </li>
+        <li>
+          <span class="ic" aria-hidden="true">&#9678;</span>
+          <a href="https://www.google.com/maps/place/Monks+Momo" target="_blank" rel="noopener">
+            <div class="k">Address</div>
+            <div class="v">7221 McNeil Dr, Austin, TX 78729</div>
+          </a>
+        </li>
+      </ul>
+      <div class="contact__cta">
+        <a class="btn" href="tel:+15126880991"><span aria-hidden="true">&#9742;</span> Call now</a>
+        <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Monks+Momo+7221+McNeil+Dr+Austin+TX+78729" target="_blank" rel="noopener">Get directions</a>
       </div>
-      <div class="cta-row">
-        <a class="btn btn-solid" href="tel:5126880991"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 688-0991</a>
-        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Monks%20Momo%2C%20Monks%20Momo%20Food%20Truck%2C%207221%20McNeil%20Dr%2C%20Austin%2C%20TX%2078729%2C%20Austin%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
+    </div>
+
+    <div class="map-card">
+      <div class="map-faux" aria-hidden="true">
+        <div class="pin">
+          <div class="dot">&#9679;</div>
+          <div class="lbl">Monks Momo</div>
+        </div>
+      </div>
+      <div class="map-foot">
+        <span class="addr">7221 McNeil Dr, Austin, TX 78729</span>
+        <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Monks+Momo+7221+McNeil+Dr+Austin+TX+78729" target="_blank" rel="noopener" style="padding:9px 18px">Open in Maps</a>
       </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <section class="pull" aria-label="Customer review">
-    <div class="wrap">
-      <span class="mark" aria-hidden="true">“</span>
-      <blockquote class="q-lg">SO FRIKKIN GOOD!
-Got the Jhol and Chili Momos (Veggie) and they’re both fantastic.
-The folks that run the place are super nice too :)</blockquote>
-      <cite>Maddy, on Google</cite>
-      <p class="proof"><span class="stars" aria-hidden="true">★★★★★</span> 4.7 stars on Google, across 371 reviews.</p>
-    </div>
-  </section>
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="name">Monks Momo</div>
+    <div class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+    <div style="color:#bcaed0;font-size:.95rem">4.7 from 371 reviews · 7221 McNeil Dr, Austin, TX 78729 · (512) 688-0991</div>
+    <p class="credit">A free preview site built by <a href="https://handprotocol.org">HAND</a></p>
+  </div>
+</footer>
 
-  <section class="quotes">
-    <div class="wrap">
-      <p class="eyebrow">Straight from Google</p>
-      <h2>What customers say</h2>
-      <p class="lead-in">Real reviews, word for word.</p>
-      <div class="q-grid">
-        <figure class="q-card">
-          <blockquote class="q-md">When in Austin, Food trucks are a must try for me. Love their scene and outdoorsy vibes. There are several food truck options and ample seating around with tv screens and string lights setting the vibe. We ordered the chilli chicken momos, butter chicken momos and lasai. Food was really enjoyable, very tasty. I ordered ahead but still there was a bit of wait time, the owner was kind enough to acknowledge it without me even saying anything about it. He packed some gahar halwa and mentioned that he was not pleased I had to wait even though I ordered ahead. I mean this kind of customer service just stays with you and I am glad I tried this spot.</blockquote>
-          <figcaption>surya chinthalaphani</figcaption>
-        </figure>
-        <figure class="q-card">
-          <blockquote class="q-md">Was visiting Austin from San Francisco Bay Area and found this amazing food truck in an amazing food truck park. Was blown away by the flavors; better than anything I’ve had in California. Had to come back to back for 2 days just to sample all momo varieties. Chili momo and butter momo were our favorite.  The owner is such a joyful passionate fellow; had a great conversation!! Needless to say, highly recommend!! Cheers and all the best.</blockquote>
-          <figcaption>Chintan Intwala</figcaption>
-        </figure>
-        <figure class="q-card">
-          <blockquote class="q-md">We ordered the Kothey momo and Jhol momo. Frankly speaking they are really good. Meat is tender and juicy in the momos. It was dripping from the Kothey momo right there when we were eating. The sauce in the Jhol momo is tangy and fresh from i guess the cilantro. Service is good and the person there was friendly to have a conversation. Good place to hangout in the evening. Oh the spicy sauce has a hard kick to it, careful with that.</blockquote>
-          <figcaption>Vignan Uppugandla</figcaption>
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <section class="mentions">
-    <div class="wrap">
-      <p class="eyebrow">In their own words</p>
-      <h2>What people come back for</h2>
-      <p class="lead-in">Every one of these shows up in real customer reviews.</p>
-      <div class="chips"><span class="chip">Momos</span><span class="chip">Dumplings</span></div>
-    </div>
-  </section>
-
-  
-
-  <section class="about">
-    <div class="wrap"><p>Monks Momo is a momo restaurant in Austin. The reviews on this page come straight from our customers on Google, word for word.</p></div>
-  </section>
-
-  <footer class="visit">
-    <div class="bg" style="background-image: linear-gradient(168deg, #122A22 0%, #0A1A14 100%), url('/assets/biz-samples/asian-1.webp')" aria-hidden="true"></div>
-    <div class="wrap">
-      <p class="kicker">Austin, TX</p>
-      <h2>Come find us</h2>
-      <address>Monks Momo Food Truck, 7221 McNeil Dr, Austin, TX 78729<br />Austin, TX</address>
-      <div class="cta-row">
-        <a class="btn btn-solid" href="tel:5126880991"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 688-0991</a>
-        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Monks%20Momo%2C%20Monks%20Momo%20Food%20Truck%2C%207221%20McNeil%20Dr%2C%20Austin%2C%20TX%2078729%2C%20Austin%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
-      </div>
-      <div class="bits"><a href="tel:5126880991">(512) 688-0991</a><span class="dot" aria-hidden="true">·</span><span>Monks Momo Food Truck, 7221 McNeil Dr, Austin, TX 78729</span><span class="dot" aria-hidden="true">·</span><span>Austin, TX</span><span class="dot" aria-hidden="true">·</span><a href="https://www.google.com/maps/place/Monks+Momo/data=!4m7!3m6!1s0x8644b5abd2e867b1:0x6a5340d29368addf!8m2!3d30.4351438!4d-97.7664394!16s%2Fg%2F11gcy5f3x0!19sChIJsWfo0qu1RIYR361ok9JAU2o" target="_blank" rel="noopener">View on Google</a></div>
-      <p class="credit">A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>. Preview imagery is licensed sample art. Your real photos replace it when you claim the site.</p>
-    </div>
-  </footer>
-  <script defer src="/assets/demo-visit.js"></script>
+<script defer src="/assets/demo-visit.js"></script>
 </body>
 </html>

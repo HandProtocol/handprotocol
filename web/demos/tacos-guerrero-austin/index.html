@@ -3,269 +3,417 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tacos Guerrero · Austin</title>
-<meta name="description" content="Rated 4.8 on Google by 342 customers." />
+<title>Tacos Guerrero · Breakfast Tacos · East Austin</title>
+<meta name="description" content="Yolanda Guerrero's little orange taco truck on Pleasant Valley. Homemade tortillas, breakfast tacos, three salsas. Cash only. 4.8 stars on Google across 342 reviews." />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="Tacos Guerrero" />
-<meta property="og:description" content="Rated 4.8 on Google by 342 customers." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23C03A14'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23FFF4E4'%3ET%3C/text%3E%3C/svg%3E" />
+<meta property="og:description" content="It's like someone's little abuelita made you your meal. Homemade tortillas, cash only, East Austin." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23e86510'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='36' font-weight='700' text-anchor='middle' fill='%231f0d00'%3ETG%3C/text%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@400;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #FBF4E4; --ink: #2D1A10; --dim: #6E5847; --line: #EAD9BD; --card: #FFFDF6;
-    --accent: #C03A14; --accent-ink: #FFF4E4; --gold: #F0A832;
-    --tint: #F6E8CC; --band: #8E2912; --band-ink: #FFEFD9;
-    --deep-ink: #F7E7D4;
-    --chip-bg: #C03A1414;
-    --t-hero: clamp(3rem, 11vw, 6.2rem);
-    --maxw: 1060px;
-    --shadow: 0 16px 38px -20px rgba(0,0,0,0.45);
+    --bg: #1f0d00;
+    --card: #2e1500;
+    --accent: #e86510;
+    --accent-deep: #c4500a;
+    --text: #f9f2e7;
+    --muted: #cbb39a;
+    --line: #4a2a10;
+    --warm-line: #6b3c14;
+    --cream: #f9f2e7;
+    --t-hero: clamp(3.1rem, 12vw, 7rem);
+    --maxw: 1040px;
+    --shadow: 0 22px 50px -24px rgba(0,0,0,0.75);
     --ease: cubic-bezier(0.16, 1, 0.3, 1);
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: clamp(1rem, 0.97rem + 0.2vw, 1.12rem); line-height: 1.65;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: clamp(1rem, 0.97rem + 0.2vw, 1.1rem);
+    line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
   a { color: var(--accent); }
-  h1, h2, h3, .display {
-    font-family: "Anton", "Arial Narrow", sans-serif;
-    font-weight: 400;
-    line-height: 1.04; margin: 0;
-    text-transform: uppercase; letter-spacing: 0.015em;
+  h1, h2, h3, .slab {
+    font-family: "Bitter", Georgia, "Times New Roman", serif;
+    font-weight: 700;
+    line-height: 1.08;
+    margin: 0;
   }
-  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(20px, 5vw, 48px); }
+  .wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: clamp(20px, 5vw, 44px); }
   .eyebrow {
-    text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.74rem;
+    text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.74rem;
     font-weight: 700; color: var(--accent); margin: 0 0 14px;
   }
+
+  /* ── Cash-only badge ─────────────────────────────────────────────────── */
+  .cash-badge {
+    display: inline-flex; align-items: center; gap: 0.5em;
+    padding: 0.42em 1em; border-radius: 999px;
+    border: 1.5px solid var(--accent);
+    background: rgba(232,101,16,0.12); color: var(--text);
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .cash-badge svg { width: 1.15em; height: 1.15em; flex: none; color: var(--accent); }
 
   /* ── Buttons ─────────────────────────────────────────────────────────── */
   .btn {
     display: inline-flex; align-items: center; gap: 0.55em;
-    min-height: 52px; padding: 0.75em 1.45em;
+    min-height: 52px; padding: 0.72em 1.5em;
     border-radius: 999px; border: 2px solid transparent;
     font-weight: 700; font-size: 1.02rem; text-decoration: none;
-    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+    transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
   }
   .btn svg { width: 1.1em; height: 1.1em; flex: none; }
-  .btn-solid { background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow); }
-  .btn-solid:hover { transform: translateY(-2px); }
-  .btn-line { border-color: currentColor; color: inherit; }
-  .btn-line:hover { transform: translateY(-2px); }
-  :where(a, button):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
+  .btn-solid { background: var(--accent); color: #1f0d00; box-shadow: var(--shadow); }
+  .btn-solid:hover { transform: translateY(-2px); background: #f4761f; }
+  .btn-line { border-color: var(--warm-line); color: var(--text); }
+  .btn-line:hover { transform: translateY(-2px); border-color: var(--accent); }
+  :where(a, button):focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 10px; }
 
-  /* ── Hero ─────────────────────────────────────────────────────────────── */
-  header.hero {
-    position: relative; overflow: hidden;
-    background: linear-gradient(168deg, #93290F 0%, #5F1A08 100%);
-    color: #F7E7D4;
+  /* ── Hero ────────────────────────────────────────────────────────────── */
+  header.hero { position: relative; overflow: hidden; }
+  .hero-media { position: absolute; inset: 0; z-index: 0; }
+  .hero-media img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    filter: sepia(1) saturate(2) hue-rotate(20deg) brightness(0.82);
   }
-  header.hero::before {
-    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 8px;
-    background: repeating-linear-gradient(90deg, var(--gold) 0 34px, var(--accent) 34px 68px);
-    z-index: 2;
-  }
-  header.hero::after, .visit::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.7 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); opacity: 0.07; z-index: 1;
-  }
-  .bg {
-    position: absolute; inset: 0; z-index: 0;
-    background-size: cover; background-position: center;
-    background-blend-mode: multiply;
-    filter: saturate(0.7) brightness(0.96);
-  }
-  .bg::after {
+  .hero-media::after {
     content: ""; position: absolute; inset: 0;
-    background: linear-gradient(100deg, rgba(8,4,2,0.6) 0%, rgba(8,4,2,0.22) 55%, rgba(8,4,2,0.38) 100%);
+    background:
+      linear-gradient(180deg, rgba(31,13,0,0.55) 0%, rgba(31,13,0,0.78) 48%, rgba(31,13,0,0.97) 100%),
+      linear-gradient(95deg, rgba(31,13,0,0.6) 0%, rgba(31,13,0,0.1) 70%);
   }
-  .hero-inner { position: relative; z-index: 1; padding: clamp(4.2rem, 10vw, 7.5rem) 0 clamp(3.6rem, 9vw, 6.5rem); }
-  .kicker {
-    display: inline-flex; align-items: center; gap: 0.7em; margin: 0 0 1.1rem;
-    text-transform: uppercase; letter-spacing: 0.24em; font-size: 0.74rem;
-    font-weight: 700; color: var(--gold);
+  header.hero::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 7px; z-index: 2;
+    background: repeating-linear-gradient(90deg, var(--accent) 0 28px, #f6a04a 28px 56px);
   }
-  .kicker::before { content: ""; width: 2.4em; height: 2px; background: var(--gold); }
-  h1.biz-name { font-size: var(--t-hero); max-width: 16ch; color: #FFFDF8; text-wrap: balance; }
-  .lede {
-    font-size: clamp(1.12rem, 1rem + 0.9vw, 1.45rem); font-weight: 500;
-    max-width: 40ch; margin: 1.1rem 0 0; color: #F7E7D4; opacity: 0.94;
+  .hero-inner {
+    position: relative; z-index: 1;
+    padding: clamp(3.4rem, 9vw, 6rem) 0 clamp(3.6rem, 9vw, 6rem);
+    min-height: 86vh; display: flex; flex-direction: column; justify-content: center;
   }
-  .rating { display: inline-flex; align-items: center; gap: 0.65rem; flex-wrap: wrap; margin-top: 1.5rem; }
-  .stars { color: var(--gold); font-size: 1.2rem; letter-spacing: 0.12em; line-height: 1; }
-  .score { font-weight: 700; font-size: 0.98rem; letter-spacing: 0.02em; }
-  .cta-row { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
+  .hero-top { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 1.8rem; }
+  .place-tag {
+    text-transform: uppercase; letter-spacing: 0.22em; font-size: 0.74rem;
+    font-weight: 700; color: var(--cream); opacity: 0.85;
+  }
+  h1.biz-name { font-size: var(--t-hero); color: #fff; text-wrap: balance; letter-spacing: -0.01em; }
+  .pull-quote {
+    font-family: "Bitter", Georgia, serif; font-weight: 400; font-style: italic;
+    font-size: clamp(1.3rem, 1rem + 1.8vw, 2.05rem);
+    line-height: 1.34; max-width: 22ch; margin: 1.4rem 0 0; color: var(--cream); text-wrap: balance;
+  }
+  .pull-quote .qmark { color: var(--accent); font-weight: 700; }
+  .rating { display: inline-flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.7rem; }
+  .stars { color: var(--accent); font-size: 1.18rem; letter-spacing: 0.1em; line-height: 1; }
+  .score { font-weight: 600; font-size: 0.96rem; letter-spacing: 0.01em; color: var(--cream); }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
 
-  /* ── Pull-quote band ──────────────────────────────────────────────────── */
-  .pull { background: var(--band); color: var(--band-ink); padding: clamp(3.2rem, 7vw, 5.5rem) 0; }
-  .pull .mark { display: block; font-family: "Anton", "Arial Narrow", sans-serif; font-size: 4.6rem; line-height: 0.45; color: var(--gold); height: 0.55em; }
-  .pull blockquote { margin: 0.9rem 0 0; font-family: "Anton", "Arial Narrow", sans-serif; line-height: 1.18; text-wrap: balance; }
-  .pull blockquote.q-xl { font-size: clamp(1.7rem, 1.2rem + 2.6vw, 3rem); }
-  .pull blockquote.q-lg { font-size: clamp(1.35rem, 1.05rem + 1.6vw, 2.1rem); }
-  .pull blockquote.q-md { font-size: clamp(1.12rem, 1rem + 0.8vw, 1.5rem); line-height: 1.4; }
-  .pull cite {
-    display: block; font-style: normal; margin-top: 1.3rem;
-    font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 0.78rem;
-    letter-spacing: 0.16em; text-transform: uppercase; opacity: 0.75;
-  }
-  .pull .proof { margin-top: 1.6rem; font-family: "Work Sans", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-weight: 600; font-size: 0.92rem; opacity: 0.85; }
+  /* ── Section base ────────────────────────────────────────────────────── */
+  section { padding: clamp(3.2rem, 7vw, 5.6rem) 0; }
+  section h2 { font-size: clamp(1.8rem, 1.3rem + 1.9vw, 2.7rem); margin: 0 0 12px; color: #fff; }
+  .lead-in { color: var(--muted); margin: 0 0 2.4rem; max-width: 54ch; }
 
-  /* ── Sections ─────────────────────────────────────────────────────────── */
-  section { padding: clamp(3rem, 7vw, 5.5rem) 0; }
-  section h2 { font-size: clamp(1.7rem, 1.3rem + 1.8vw, 2.6rem); margin: 0 0 10px; }
-  .lead-in { color: var(--dim); margin: 0 0 2.2rem; max-width: 56ch; }
-
-  .q-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
-  .q-card {
-    position: relative; margin: 0; background: var(--card); border: 1px solid var(--line);
-    border-radius: 16px; padding: 28px 26px 24px; box-shadow: 0 10px 28px -22px rgba(0,0,0,0.3);
+  /* ── Menu / services ─────────────────────────────────────────────────── */
+  .menu { border-top: 1px solid var(--line); }
+  .menu-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); }
+  .dish {
+    background: var(--card); border: 1px solid var(--line);
+    border-left: 4px solid var(--accent); border-radius: 12px;
+    padding: 18px 20px; transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
   }
-  .q-card::before {
-    content: "\201C"; position: absolute; top: 10px; left: 22px;
-    font-family: "Anton", "Arial Narrow", sans-serif; font-size: 2.6rem; color: var(--accent); opacity: 0.5; line-height: 1;
+  .dish:hover { border-left-color: #f6a04a; transform: translateY(-2px); }
+  .dish h3 { font-size: 1.1rem; margin: 0 0 5px; color: #fff; }
+  .dish p { margin: 0; color: var(--muted); font-size: 0.94rem; line-height: 1.55; }
+  .dish .star { color: var(--accent); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; display: inline-block; margin-bottom: 7px; }
+  .menu-note {
+    margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px;
+    color: var(--muted); font-size: 0.95rem;
   }
-  .q-card blockquote {
-    margin: 14px 0 0; font-size: 1.03rem;
-    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 12; overflow: hidden;
+  .price-tag {
+    display: inline-flex; align-items: baseline; gap: 0.35em;
+    font-family: "Bitter", Georgia, serif; font-weight: 700; color: var(--accent);
   }
-  .q-card blockquote.q-md { font-size: 0.96rem; }
-  .q-card figcaption { margin-top: 14px; color: var(--dim); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-
-  .mentions { border-top: 1px solid var(--line); }
-  .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-  .chip {
-    padding: 0.5em 1.1em; border-radius: 999px; border: 1.5px solid var(--accent);
-    background: var(--chip-bg); color: var(--ink); font-weight: 600; font-size: 0.97rem;
+  .price-tag .big { font-size: 1.5rem; line-height: 1; }
+  .salsa-line {
+    margin-top: 1.4rem; padding-top: 1.4rem; border-top: 1px solid var(--line);
+    color: var(--cream); font-size: 0.98rem;
   }
-  .mentions .note { margin-top: 1.2rem; color: var(--dim); font-size: 0.88rem; }
+  .salsa-line strong { color: #fff; font-family: "Bitter", Georgia, serif; }
 
-  .services-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); }
-  .service { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 20px 22px; }
-  .service h3 { font-size: 1.12rem; margin: 0 0 6px; }
-  .service p { margin: 0; color: var(--dim); font-size: 0.97rem; }
-
-  .about { background: var(--tint); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .about p { max-width: 62ch; margin: 0; font-size: clamp(1.1rem, 1rem + 0.6vw, 1.32rem); line-height: 1.7; }
-
-  /* ── Visit band + footer ─────────────────────────────────────────────── */
-  .visit {
-    position: relative; overflow: hidden;
-    background: linear-gradient(168deg, #461309 0%, #2C0C05 100%);
-    color: var(--deep-ink); padding: clamp(3.6rem, 8vw, 6rem) 0 2rem;
+  /* ── Testimonials ────────────────────────────────────────────────────── */
+  .reviews { background: #170a00; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .review-grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr)); }
+  .review {
+    position: relative; margin: 0; background: var(--card);
+    border: 1px solid var(--warm-line); border-radius: 16px;
+    padding: 30px 26px 26px; box-shadow: 0 14px 34px -28px rgba(0,0,0,0.8);
   }
-  .visit > .wrap { position: relative; z-index: 1; }
-  .visit h2 { color: #FFFDF8; font-size: clamp(2rem, 1.5rem + 2.4vw, 3.2rem); }
-  .visit address { font-style: normal; margin: 1rem 0 0; font-size: 1.1rem; opacity: 0.92; max-width: 44ch; }
-  .visit .cta-row { margin-top: 1.8rem; }
-  .visit .bits {
+  .review::before {
+    content: "\201C"; position: absolute; top: 8px; left: 20px;
+    font-family: "Bitter", Georgia, serif; font-size: 3rem; color: var(--accent); opacity: 0.4; line-height: 1;
+  }
+  .review .rstars { color: var(--accent); font-size: 0.95rem; letter-spacing: 0.1em; margin-bottom: 12px; }
+  .review blockquote {
+    margin: 0; font-size: 1.04rem; line-height: 1.6; color: var(--text);
+    font-family: "Bitter", Georgia, serif; font-weight: 400;
+  }
+  .review figcaption {
+    margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line);
+    color: var(--muted); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  /* ── About ───────────────────────────────────────────────────────────── */
+  .about { background: var(--bg); }
+  .about-card {
+    background: var(--card); border: 1px solid var(--warm-line); border-radius: 18px;
+    padding: clamp(28px, 5vw, 44px); position: relative;
+    box-shadow: var(--shadow);
+  }
+  .about-card::before {
+    content: ""; position: absolute; top: 0; left: 28px; right: 28px; height: 3px;
+    background: repeating-linear-gradient(90deg, var(--accent) 0 14px, transparent 14px 28px);
+    opacity: 0.7;
+  }
+  .about-card .eyebrow { margin-top: 6px; }
+  .about-card p {
+    max-width: 60ch; margin: 0 0 1.1rem;
+    font-family: "Bitter", Georgia, serif; font-weight: 400;
+    font-size: clamp(1.12rem, 1rem + 0.6vw, 1.3rem); line-height: 1.66;
+  }
+  .about-card p:last-child { margin-bottom: 0; }
+  .signature {
+    margin-top: 1.8rem; font-family: "Bitter", Georgia, serif; font-style: italic;
+    font-size: 1.15rem; color: var(--accent);
+  }
+
+  /* ── Contact / footer ────────────────────────────────────────────────── */
+  .contact { position: relative; overflow: hidden; background: #170a00; border-top: 1px solid var(--line); }
+  .contact-grid { display: grid; gap: clamp(24px, 5vw, 48px); grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .contact-grid { grid-template-columns: 1.05fr 0.95fr; align-items: start; } }
+  .contact h2 { margin-bottom: 6px; }
+  .contact address { font-style: normal; margin: 1.2rem 0 0; font-size: 1.08rem; line-height: 1.7; color: var(--cream); }
+  .contact .cash-callout {
+    margin: 1.6rem 0 0; padding: 16px 18px; border-radius: 14px;
+    border: 1.5px solid var(--accent); background: rgba(232,101,16,0.1);
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .contact .cash-callout svg { width: 1.4em; height: 1.4em; flex: none; color: var(--accent); margin-top: 2px; }
+  .contact .cash-callout strong { color: #fff; font-family: "Bitter", Georgia, serif; }
+  .contact .cash-callout span { color: var(--cream); font-size: 0.96rem; }
+  .contact .cta-row { margin-top: 1.8rem; }
+
+  /* Directions card (static, no embed) */
+  .dir-card {
+    background: var(--card); border: 1px solid var(--warm-line); border-radius: 16px;
+    overflow: hidden; box-shadow: 0 14px 34px -28px rgba(0,0,0,0.8);
+  }
+  .dir-map {
+    position: relative; height: 168px;
+    background:
+      linear-gradient(115deg, rgba(232,101,16,0.16), rgba(232,101,16,0) 60%),
+      repeating-linear-gradient(0deg, #2a1303 0 1px, transparent 1px 34px),
+      repeating-linear-gradient(90deg, #2a1303 0 1px, transparent 1px 34px),
+      #241001;
+    display: grid; place-items: center;
+  }
+  .dir-map .road {
+    position: absolute; background: var(--line);
+  }
+  .dir-map .road.a { top: 0; bottom: 0; left: 36%; width: 8px; transform: skewX(-8deg); }
+  .dir-map .road.b { left: 0; right: 0; top: 58%; height: 8px; }
+  .dir-map .pin {
+    position: relative; z-index: 1; width: 38px; height: 38px; border-radius: 50% 50% 50% 0;
+    background: var(--accent); transform: rotate(-45deg);
+    box-shadow: 0 6px 16px -4px rgba(0,0,0,0.7); border: 2px solid #1f0d00;
+  }
+  .dir-map .pin::after { content: ""; position: absolute; inset: 10px; border-radius: 50%; background: #1f0d00; }
+  .dir-body { padding: 20px 22px; }
+  .dir-body .label { font-size: 0.74rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .dir-body p { margin: 8px 0 0; color: var(--cream); }
+  .dir-body .sub { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+
+  .footer-bits {
+    margin-top: clamp(2.4rem, 5vw, 3.4rem); padding-top: 1.6rem; border-top: 1px solid var(--line);
     display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
-    margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid rgba(255,255,255,0.14);
-    font-size: 0.92rem; opacity: 0.85;
+    font-size: 0.9rem; color: var(--muted);
   }
-  .visit .bits a { color: var(--gold); }
-  .visit .dot { opacity: 0.5; }
-  .credit { margin: 2.2rem 0 0; font-size: 0.78rem; opacity: 0.55; }
+  .footer-bits a { color: var(--accent); }
+  .footer-bits .dot { opacity: 0.45; }
+  .footer-bits .cash-mini { color: var(--accent); font-weight: 700; letter-spacing: 0.04em; }
+  .credit { margin: 1.6rem 0 0; font-size: 0.78rem; color: var(--muted); opacity: 0.75; line-height: 1.6; }
   .credit a { color: inherit; }
 </style>
 </head>
 <body>
   <header class="hero">
-    <div class="bg" style="background-image: linear-gradient(168deg, #93290F 0%, #5F1A08 100%), url('/assets/biz-samples/taco-2.webp')" aria-hidden="true"></div>
+    <div class="hero-media" aria-hidden="true">
+      <img src="../../assets/biz-samples/taco-2.webp" alt="" width="1024" height="684" loading="eager" fetchpriority="high" />
+    </div>
     <div class="wrap hero-inner">
-      <p class="kicker">Austin, TX</p>
+      <div class="hero-top">
+        <span class="place-tag">East Austin · Pleasant Valley</span>
+        <span class="cash-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M5 12h.01M19 12h.01"/></svg>
+          Cash only, bring a few bucks
+        </span>
+      </div>
       <h1 class="biz-name">Tacos Guerrero</h1>
-      <p class="lede">Taco restaurant in Austin our customers trust</p>
+      <p class="pull-quote"><span class="qmark">&ldquo;</span>It's like someone's little abuelita made you your meal.<span class="qmark">&rdquo;</span></p>
       <div class="rating" role="img" aria-label="Rated 4.8 out of 5 on Google across 342 reviews">
-        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
         <span class="score">4.8 on Google · 342 reviews</span>
       </div>
       <div class="cta-row">
         <a class="btn btn-solid" href="tel:5129392308"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 939-2308</a>
-        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tacos%20Guerrero%2C%2096%20N%20Pleasant%20Valley%20Rd%2C%20Austin%2C%20TX%2078702%2C%20Austin%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
+        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tacos%20Guerrero%2C%2096%20N%20Pleasant%20Valley%20Rd%2C%20Austin%2C%20TX%2078702" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Find the truck</a>
       </div>
     </div>
   </header>
 
-  <section class="pull" aria-label="Customer review">
+  <section class="menu" id="menu">
     <div class="wrap">
-      <span class="mark" aria-hidden="true">“</span>
-      <blockquote class="q-lg">Absolutely amazing tacos! The lady making the tacos is very friendly, and my friends and I ended up going back many times. Wish I could go back for more!</blockquote>
-      <cite>Hiroki Hayashi, on Google</cite>
-      <p class="proof"><span class="stars" aria-hidden="true">★★★★★</span> 4.8 stars on Google, across 342 reviews.</p>
+      <p class="eyebrow">Made to order, on homemade tortillas</p>
+      <h2>The tacos</h2>
+      <p class="lead-in">Everything is cooked fresh on the truck. Corn tortillas are made by hand. Flour available early. These are the ones people drive across town for.</p>
+      <div class="menu-grid">
+        <div class="dish">
+          <span class="star">House favorite</span>
+          <h3>Chorizo &amp; egg</h3>
+          <p>The one reviewers name first. Fresh, never greasy, the kind of breakfast taco that ruins you for other places.</p>
+        </div>
+        <div class="dish">
+          <span class="star">House favorite</span>
+          <h3>Migas</h3>
+          <p>Eggs and crispy tortilla, served with Yolanda's own homemade refried beans on the side.</p>
+        </div>
+        <div class="dish">
+          <span class="star">House favorite</span>
+          <h3>Al pastor</h3>
+          <p>Shredded, marinated, with real pineapple flavor coming through. People call it crazy good.</p>
+        </div>
+        <div class="dish">
+          <h3>Chicharron &amp; egg</h3>
+          <p>Tender chicharron that goes right with the egg. A quiet classic on the truck.</p>
+        </div>
+        <div class="dish">
+          <h3>Potato &amp; egg</h3>
+          <p>Simple, fresh, homemade. The breakfast taco you grew up wishing you had.</p>
+        </div>
+        <div class="dish">
+          <h3>Beef fajita</h3>
+          <p>Seasoned beef, hot off the flat top, folded into a handmade tortilla.</p>
+        </div>
+        <div class="dish">
+          <h3>Carnitas</h3>
+          <p>Slow, savory, and worth the trip. Ask what's freshest that morning.</p>
+        </div>
+        <div class="dish">
+          <h3>Carne asada</h3>
+          <p>Grilled to order. Add a spoon of whichever house salsa you're feeling.</p>
+        </div>
+      </div>
+      <div class="menu-note">
+        <span class="price-tag"><span class="big">$4</span> a taco</span>
+        <span>·</span>
+        <span>Corn tortillas made by hand. Flour available early.</span>
+        <span>·</span>
+        <span>Sopa de pescado some days, just ask.</span>
+      </div>
+      <p class="salsa-line"><strong>Three house salsas</strong>, made fresh. Reviewers call them really great, so don't skip them.</p>
     </div>
   </section>
 
-  <section class="quotes">
+  <section class="reviews" id="reviews" aria-label="Customer reviews">
     <div class="wrap">
-      <p class="eyebrow">Straight from Google</p>
-      <h2>What customers say</h2>
-      <p class="lead-in">Real reviews, word for word.</p>
-      <div class="q-grid">
-        <figure class="q-card">
-          <blockquote class="q-md">Wow wow wow.  This place is truly a gem.  I know there are a million taco trucks in Austin, but this one is pretty special.
-
-We stopped in and split a few different tacos: chicharron and egg, al pastor, migas, and chorizo/egg/cactus.  The chicharron was really tender and went well with the egg.  The pastor was crazy good.  It was shredded and had a lovely marinade and pineapple flavor.  The chorizo was fantastic because it wasn&#39;t super greasy.  Finally, the migas was super good and came with their homemade refried beans.  I&#39;m pretty sure the tortillas were homemade or at least tasted like they were.  Their three salsas were really great too.
-
-The older lady working the truck is so sweet.  She gave us great service and cooked up ridiculously good food.  It&#39;s like someone&#39;s little abuelita made us our meal. :)
-
-We will 100% be returning for more.
-
-BIG NOTE: The truck is cash only.</blockquote>
-          <figcaption>Brittany Enfield</figcaption>
-        </figure>
-        <figure class="q-card">
-          <blockquote class="q-md">⭐️⭐️⭐️⭐️⭐️ 8/23/2025
-
-We stopped by Tacos Guerrero and tried the chorizo &amp; egg taco, potato &amp; egg taco, and the migas taco—all were absolutely delicious! Everything tasted so fresh and homemade, the kind of breakfast tacos that hit the spot and remind you why Texas tacos are the best.
-
-What really made the visit special was Yolanda Guerrero, the sweet little old lady running the stand. Her smile melts your heart, and you can tell she puts so much love into her food. She reminded me of my grandma—hardworking, kind, and out here hustling every day.
-
-Just a quick note: she only takes cash, so come prepared. But trust me, it’s 100% worth it. If you’re looking for authentic, fresh, and flavorful breakfast tacos, please swing by and support her. Thank you, Yolanda Guerrero—we’ll definitely be back. You’ve earned this five stars for sure! 🌟🌟🌟🌟🌟</blockquote>
+      <p class="eyebrow">Straight from Google, word for word</p>
+      <h2>What people say about Yolanda</h2>
+      <p class="lead-in">Real reviews from real customers. Nothing here is rewritten.</p>
+      <div class="review-grid">
+        <figure class="review">
+          <div class="rstars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>She reminded me of my grandma, hardworking, kind, and out here hustling every day. Tacos were fresh and the perfect size. I had the chorizo and egg taco and it was amazing.</blockquote>
           <figcaption>Billy Roberts</figcaption>
         </figure>
-        <figure class="q-card">
-          <blockquote class="q-md">(Cash only establishment) Best breakfast tacos I&#39;ve ever had at such a good price. Found this truck while visiting Austin bc our regular place we got breakfast from was closed and we were so hungry. They didn&#39;t disappoint and we bookmarked the location to come back the next morning. The lady who works the truck is the sweetest soul in Austin by far and treats everyone who visits her like family. Definitely made my trip amazing and will be recommending this place for anyone visiting, and will return here next time I visit myself. 100/10 loved it</blockquote>
-          <figcaption>Miah Paige</figcaption>
+        <figure class="review">
+          <div class="rstars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>The older lady working the truck is so sweet. She gave us great service and cooked up ridiculously good food. It's like someone's little abuelita made us our meal. We will 100% be returning.</blockquote>
+          <figcaption>Brittany Enfield</figcaption>
+        </figure>
+        <figure class="review">
+          <div class="rstars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <blockquote>Just a quick note: she only takes cash, so come prepared. But trust me, it's 100% worth it. Homemade tortillas, fresh, and cooked with love. You've earned this five stars, Yolanda.</blockquote>
+          <figcaption>Billy Roberts</figcaption>
         </figure>
       </div>
     </div>
   </section>
 
-  <section class="mentions">
+  <section class="about" id="about">
     <div class="wrap">
-      <p class="eyebrow">In their own words</p>
-      <h2>What people come back for</h2>
-      <p class="lead-in">Every one of these shows up in real customer reviews.</p>
-      <div class="chips"><span class="chip">Breakfast tacos</span><span class="chip">Migas</span><span class="chip">Carnitas</span><span class="chip">Al pastor</span><span class="chip">Salsas</span><span class="chip">Chicharron</span></div>
-    </div>
-  </section>
-
-  
-
-  <section class="about">
-    <div class="wrap"><p>Tacos Guerrero is a taco restaurant in Austin. The reviews on this page come straight from our customers on Google, word for word.</p></div>
-  </section>
-
-  <footer class="visit">
-    <div class="bg" style="background-image: linear-gradient(168deg, #461309 0%, #2C0C05 100%), url('/assets/biz-samples/taco-3.webp')" aria-hidden="true"></div>
-    <div class="wrap">
-      <p class="kicker">Austin, TX</p>
-      <h2>Come find us</h2>
-      <address>96 N Pleasant Valley Rd, Austin, TX 78702<br />Austin, TX</address>
-      <div class="cta-row">
-        <a class="btn btn-solid" href="tel:5129392308"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 939-2308</a>
-        <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tacos%20Guerrero%2C%2096%20N%20Pleasant%20Valley%20Rd%2C%20Austin%2C%20TX%2078702%2C%20Austin%2C%20TX" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
+      <div class="about-card">
+        <p class="eyebrow">The little orange truck</p>
+        <p>Yolanda Guerrero has been making breakfast tacos on Pleasant Valley since before it was on anyone's radar. Cash only, homemade tortillas, three salsas, and that's the whole point.</p>
+        <p>The truck is small and orange and tucked behind a building, which is exactly how a neighborhood taco institution should look.</p>
+        <p class="signature">Come hungry, bring cash, say hi to Yolanda.</p>
       </div>
-      <div class="bits"><a href="tel:5129392308">(512) 939-2308</a><span class="dot" aria-hidden="true">·</span><span>96 N Pleasant Valley Rd, Austin, TX 78702</span><span class="dot" aria-hidden="true">·</span><span>Austin, TX</span><span class="dot" aria-hidden="true">·</span><a href="https://www.google.com/maps/place/Tacos+Guerrero/data=!4m7!3m6!1s0x8644b4331260bf6b:0xcdfe496f2ad30a14!8m2!3d30.2528799!4d-97.7131832!16s%2Fg%2F11c0vq9ktp!19sChIJa79gEjO0RIYRFArTKm9J_s0" target="_blank" rel="noopener">View on Google</a></div>
-      <p class="credit">A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>. Preview imagery is licensed sample art. Your real photos replace it when you claim the site.</p>
     </div>
-  </footer>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div>
+          <p class="eyebrow">East Austin · 78702</p>
+          <h2>Come find the truck</h2>
+          <address>
+            96 N Pleasant Valley Rd<br />
+            Austin, TX 78702<br />
+            <a href="tel:5129392308">(512) 939-2308</a>
+          </address>
+          <div class="cash-callout">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M5 12h.01M19 12h.01"/></svg>
+            <span><strong>Cash only.</strong> No cards, no apps. Bring a few dollars and you're set. Tacos are $4 each, so it doesn't take much.</span>
+          </div>
+          <div class="cta-row">
+            <a class="btn btn-solid" href="tel:5129392308"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>Call (512) 939-2308</a>
+            <a class="btn btn-line" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tacos%20Guerrero%2C%2096%20N%20Pleasant%20Valley%20Rd%2C%20Austin%2C%20TX%2078702" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Get directions</a>
+          </div>
+        </div>
+        <a class="dir-card" href="https://www.google.com/maps/dir/?api=1&amp;destination=Tacos%20Guerrero%2C%2096%20N%20Pleasant%20Valley%20Rd%2C%20Austin%2C%20TX%2078702" target="_blank" rel="noopener" style="text-decoration:none; color:inherit; display:block;">
+          <div class="dir-map" aria-hidden="true">
+            <span class="road a"></span>
+            <span class="road b"></span>
+            <span class="pin"></span>
+          </div>
+          <div class="dir-body">
+            <span class="label">Tap for directions</span>
+            <p>96 N Pleasant Valley Rd</p>
+            <p class="sub">Behind the insurance building. Look for the little orange truck.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="footer-bits">
+        <a href="tel:5129392308">(512) 939-2308</a>
+        <span class="dot" aria-hidden="true">·</span>
+        <span>96 N Pleasant Valley Rd, Austin, TX 78702</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <span class="cash-mini">Cash only</span>
+        <span class="dot" aria-hidden="true">·</span>
+        <a href="https://www.google.com/maps/place/Tacos+Guerrero/data=!4m7!3m6!1s0x8644b4331260bf6b:0xcdfe496f2ad30a14!8m2!3d30.2528799!4d-97.7131832!16s%2Fg%2F11c0vq9ktp!19sChIJa79gEjO0RIYRFArTKm9J_s0" target="_blank" rel="noopener">View on Google</a>
+      </div>
+      <p class="credit">A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>. Preview imagery is licensed sample art. Your real photos of Yolanda and the truck replace it when you claim the site.</p>
+    </div>
+  </section>
+
   <script defer src="/assets/demo-visit.js"></script>
 </body>
 </html>
