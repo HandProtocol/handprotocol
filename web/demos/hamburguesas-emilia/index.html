@@ -3,17 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hamburguesas Emilia · Chef's Burgers + Tacos on FM 969 in Manor, TX</title>
-<meta name="description" content="Juicy chef's burgers with a Mexican tilt, the chipotle and poblano burgers, seasoned fries, street tacos, and chicken flautas, from the Hamburguesas Emilia truck on FM 969 in Manor, Texas. 4.4 stars on Google across 37 reviews.">
-<!-- This business graduated to its own site; point canonical there so the demo
-     copy doesn't compete with the live site in search. -->
+<title>Hamburguesas Emilia · Chef's Burgers + Tacos on FM 969 in Austin, TX</title>
+<meta name="description" content="Juicy chef's burgers with a Mexican tilt, the chipotle and poblano burgers, seasoned fries, street tacos, and chicken flautas, from the Hamburguesas Emilia truck on FM 969 in Austin, Texas. 4.3 stars on Google across 14 reviews.">
 <link rel="canonical" href="https://hamburguesasemilia.com/">
 
 <!-- Open Graph, so the link previews nicely when texted or shared -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hamburguesas Emilia · al sabor del chef">
-<meta property="og:description" content="Chef's burgers with a Mexican tilt, plus street tacos and flautas. The burger truck on FM 969 in Manor, Texas.">
-<meta property="og:image" content="https://handprotocol.org/demos/amburguesas-del-chef/img/hero-cheeseburger.webp">
+<meta property="og:title" content="Hamburguesas Emilia · chef's burgers &amp; tacos">
+<meta property="og:description" content="Chef's burgers with a Mexican tilt, plus quesabirria, street tacos, and breakfast tacos. The burger truck on FM 969 in Austin, Texas.">
+<meta property="og:image" content="https://hamburguesasemilia.com/img/cheeseburger.webp">
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- Monogram favicon: cream E on chile red -->
@@ -208,6 +206,11 @@
   .menu-foot b { color: var(--gold); }
 
   .burger-aside { display: grid; gap: 1.4rem; }
+  .burger-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 0.9rem; }
+  .burger-gallery .burger-figure { margin: 0; }
+  .burger-gallery .burger-figure--lead { grid-column: 1 / -1; }
+  .burger-gallery .burger-figure:nth-child(2) { rotate: 1.2deg; }
+  .burger-gallery .burger-figure:nth-child(3) { rotate: -1deg; }
   .burger-figure { position: relative; padding: 0.6rem 0.6rem 0.9rem; background: var(--cream); border-radius: 8px; box-shadow: var(--shadow); rotate: -1.3deg; }
   .burger-figure img { border-radius: 4px; width: 100%; }
   .burger-figure figcaption { font-family: "Caveat", cursive; font-weight: 700; color: var(--ink-soft); font-size: 1.1rem; text-align: center; margin-top: 0.5rem; }
@@ -223,6 +226,9 @@
 
   /* ---- From the kitchen: photo cards --------------------------------- */
   .kitchen { background: var(--cream-2); }
+  .kitchen-feature { margin: clamp(2rem, 4vw, 3rem) 0 0; padding: 0.7rem 0.7rem 1rem; background: var(--cream); border-radius: 10px; box-shadow: var(--shadow); rotate: -0.6deg; }
+  .kitchen-feature img { width: 100%; border-radius: 5px; display: block; }
+  .kitchen-feature figcaption { font-family: "Caveat", cursive; font-weight: 700; color: var(--ink-soft); font-size: 1.15rem; text-align: center; margin-top: 0.55rem; }
   .plate-grid { margin-top: clamp(2rem, 4vw, 3rem); display: grid; gap: 1.2rem; grid-template-columns: 1fr; }
   @media (min-width: 740px) { .plate-grid { grid-template-columns: 1fr 1fr; } }
   @media (min-width: 1000px) { .plate-grid { grid-template-columns: 1.2fr 1.2fr 1fr; } }
@@ -293,21 +299,14 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- Graduated to production: this lead became a paying client and launched their
-     own site. Banner marks the demo as progressed and sends visitors to the live site. -->
-<div role="note" style="background:oklch(0.42 0.100 152);color:#f6e6c8;text-align:center;font-family:'Hanken Grotesk',system-ui,sans-serif;font-weight:700;font-size:0.92rem;line-height:1.4;padding:0.65rem 1rem;letter-spacing:0.01em;">
-  ✦ Now live &mdash; Hamburguesas Emilia launched their own site at
-  <a href="https://hamburguesasemilia.com" style="color:#ffd87a;font-weight:800;text-decoration:underline;text-underline-offset:2px;">hamburguesasemilia.com</a>
-</div>
-
 <header class="topbar">
   <div class="wrap">
     <a class="brand-lockup" href="#top" aria-label="Hamburguesas Emilia, home">
       <span class="monogram" aria-hidden="true">E</span>
-      <span class="brand-name">Hamburguesas Emilia<small>al sabor del chef</small></span>
+      <span class="brand-name">Hamburguesas Emilia<small>chef's burgers &amp; tacos</small></span>
     </a>
     <div class="topbar-cta">
-      <a class="btn btn-outline btn-dir" style="border-color:var(--cream-3);color:var(--ink)" href="https://www.google.com/maps/dir/?api=1&destination=16419+FM+969+Manor+TX+78653" target="_blank" rel="noopener">
+      <a class="btn btn-outline btn-dir" style="border-color:var(--cream-3);color:var(--ink)" href="https://www.google.com/maps/dir/?api=1&destination=30.2516145,-97.5579938" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
         Directions
       </a>
@@ -326,16 +325,16 @@
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap">
     <div class="hero-copy">
-      <span class="eyebrow hero-eyebrow">Manor, Texas · on FM 969</span>
+      <span class="eyebrow hero-eyebrow">Austin, Texas · on FM 969</span>
       <h1 id="hero-title">
         <span class="hero-name display">Hamburguesas Emilia</span>
-        <span class="hero-tag">al sabor del chef</span>
+        <span class="hero-tag">chef's burgers &amp; tacos</span>
       </h1>
       <p class="hero-lead">Juicy chef's burgers with a Mexican tilt, and the seasoned fries to match. Plus street tacos, flautas, and a whole Mexican kitchen, out of the truck on FM 969.</p>
 
-      <div class="rating" aria-label="Rated 4.4 out of 5 on Google across 37 reviews">
+      <div class="rating" aria-label="Rated 4.3 out of 5 on Google across 14 reviews">
         <span class="stars" aria-hidden="true">★★★★½</span>
-        <span class="rating-text"><b>4.4</b> on Google · 37 reviews</span>
+        <span class="rating-text"><b>4.3</b> on Google · 14 reviews</span>
       </div>
 
       <div class="hero-cta">
@@ -343,7 +342,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
           Call to order ahead
         </a>
-        <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&destination=16419+FM+969+Manor+TX+78653" target="_blank" rel="noopener">
+        <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&destination=30.2516145,-97.5579938" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
           Get directions
         </a>
@@ -352,8 +351,8 @@
 
     <figure class="hero-figure reveal">
       <span class="now-badge" aria-hidden="true">Open<br>Late<span>til 10:30</span></span>
-      <img src="img/hero-cheeseburger.webp" width="1303" height="698" fetchpriority="high" decoding="async"
-           alt="A thick cheeseburger cut in half on a blue enamel plate, showing the juicy beef patty and melted cheese, with a pile of golden seasoned fries.">
+      <img src="img/cheeseburger.webp" width="845" height="547" fetchpriority="high" decoding="async"
+           alt="A classic Hamburguesas Emilia cheeseburger with melted American cheese, fresh tomato, jalapeños, and lettuce on a soft bun, with a pile of golden seasoned fries.">
       <figcaption>The cheeseburger, and those seasoned fries.</figcaption>
     </figure>
   </div>
@@ -365,7 +364,7 @@
     <div class="sec-head reveal">
       <span class="eyebrow">What people drive out for</span>
       <h2 id="burgers-title">The burgers, <span class="script">six ways</span></h2>
-      <p>Folks call them "the best burgers I have ever tasted in my life." Built to order by the chef, every one comes with fries.</p>
+      <p>Regulars call it "one of the best spots in Austin." Built to order by the chef, every one comes with fries.</p>
     </div>
 
     <div class="menu-card reveal">
@@ -385,15 +384,25 @@
     </div>
 
     <div class="burger-aside">
-      <figure class="burger-figure reveal">
-        <img src="img/burger-build.webp" width="1270" height="702" loading="lazy" decoding="async"
-             alt="An open-faced cheeseburger on chile-pepper printed paper, stacked with melted cheese, pickles, fresh tomato, and shredded lettuce, with shoestring fries alongside.">
-        <figcaption>Stacked the way you like it.</figcaption>
-      </figure>
+      <div class="burger-gallery reveal">
+        <figure class="burger-figure burger-figure--lead">
+          <img src="img/avocado-burger.webp" width="845" height="547" loading="lazy" decoding="async"
+               alt="A Hamburguesas Emilia burger topped with sliced avocado, melted white cheese, grilled onions, and chipotle mayo on a toasted bun, with seasoned fries.">
+          <figcaption>Stacked the way you like it.</figcaption>
+        </figure>
+        <figure class="burger-figure">
+          <img src="img/bacon-avocado-burger.webp" width="845" height="547" loading="lazy" decoding="async"
+               alt="A burger layered with crispy bacon, white cheese, and avocado on a toasted bun, served with seasoned fries.">
+        </figure>
+        <figure class="burger-figure">
+          <img src="img/pork-sandwich.webp" width="829" height="559" loading="lazy" decoding="async"
+               alt="A pulled pork sandwich glazed in BBQ sauce with pickles and onions, served with seasoned fries.">
+        </figure>
+      </div>
       <div class="fries-note reveal">
         <span class="eyebrow">Don't skip the fries</span>
-        <blockquote>"The fries are perfectly seasoned and cooked."</blockquote>
-        <cite>Kaycee Joan · Google review</cite>
+        <blockquote>"Chipotle burger and fries were delicious."</blockquote>
+        <cite>Alexander Lopez · Google review</cite>
       </div>
     </div>
 
@@ -414,22 +423,37 @@
       <p>Same truck, same chef. Street tacos, flautas, quesadillas, and more, made fresh to order.</p>
     </div>
 
+    <figure class="kitchen-feature reveal">
+      <img src="img/quesabirria.webp" width="1165" height="651" loading="lazy" decoding="async"
+           alt="Three griddle-crisped quesabirria tacos with melted cheese and tender birria beef on red-and-white checkered paper, with a cup of rich consomé and lime wedges.">
+      <figcaption>Quesabirria, dipped in consomé &mdash; the one to get.</figcaption>
+    </figure>
+
     <div class="plate-grid">
       <article class="plate reveal">
-        <img src="img/tacos.webp" width="1303" height="698" loading="lazy" decoding="async"
-             alt="Two street tacos in a green basket, topped with grilled steak, onion, cilantro, cheese, and avocado, with lime and a cup of salsa.">
+        <img src="img/quesabirria-plate.webp" width="798" height="544" loading="lazy" decoding="async"
+             alt="Quesabirria tacos with crispy cheese edges next to a cup of consomé topped with cilantro and lime.">
         <div class="plate-body">
-          <h3>Street tacos</h3>
-          <p>Grilled meat, onion, cilantro, cheese, avocado, and lime. Al pastor, barbacoa, carnitas, and more.</p>
+          <h3>Quesabirria</h3>
+          <p>Tender birria and melted cheese on a griddle-crisped tortilla, with rich consomé to dip.</p>
         </div>
       </article>
 
       <article class="plate reveal">
-        <img src="img/flautas.webp" width="733" height="675" loading="lazy" decoding="async"
-             alt="A plate of chicken flautas topped with lettuce, crema, and crumbled cheese, with refried beans, Mexican rice, pico de gallo, and a lime wedge.">
+        <img src="img/street-tacos.webp" width="641" height="521" loading="lazy" decoding="async"
+             alt="Street tacos on double corn tortillas topped with grilled meat and raw onion.">
         <div class="plate-body">
-          <h3>Chicken flautas</h3>
-          <p>Crispy rolled flautas with lettuce, crema, and cheese, plus rice, beans, and pico.</p>
+          <h3>Street tacos</h3>
+          <p>Grilled meat, onion, and cilantro on a double corn tortilla. Asada, al pastor, and more.</p>
+        </div>
+      </article>
+
+      <article class="plate reveal">
+        <img src="img/breakfast-tacos.webp" width="700" height="783" loading="lazy" decoding="async"
+             alt="Two breakfast tacos on flour tortillas, one chorizo and egg and one potato and egg, with a side of salsa.">
+        <div class="plate-body">
+          <h3>Breakfast tacos</h3>
+          <p>Chorizo and egg, potato and egg, and more on a warm flour tortilla. Hot and fresh off the griddle.</p>
         </div>
       </article>
 
@@ -437,7 +461,7 @@
         <div class="plate-body">
           <span class="eyebrow">Ask about</span>
           <h3>And plenty more</h3>
-          <p>Quesadillas, empanadas, corn beef tacos, buffalo wings, antojitos, and whole or half roast chicken. Just ask at the window.</p>
+          <p>Flautas, quesadillas, empanadas (queso or tinga de pollo), antojitos, and more. Just ask at the window.</p>
         </div>
       </article>
     </div>
@@ -449,33 +473,33 @@
   <div class="wrap">
     <div class="reveal">
       <span class="eyebrow">Straight from Google</span>
-      <h2 id="voices-title">An ATX <span class="script">hidden gem</span></h2>
+      <h2 id="voices-title">One of the best <span class="script">spots in Austin</span></h2>
     </div>
     <div class="voices-grid">
       <figure class="voice reveal">
         <span class="qmark" aria-hidden="true">&ldquo;</span>
-        <blockquote>This place has the best burgers I have ever tasted in my life.</blockquote>
-        <cite>Google review</cite>
+        <blockquote>Chipotle burger and fries were delicious. Would recommend to anyone in the area!</blockquote>
+        <cite>Alexander Lopez</cite>
       </figure>
       <figure class="voice reveal">
         <span class="qmark" aria-hidden="true">&ldquo;</span>
-        <blockquote>The burgers here are amazing, they really hit the spot. It's a big ol burger too. Definitely my new burger spot.</blockquote>
-        <cite>Kaycee Joan</cite>
+        <blockquote>Everything is excellent! You absolutely must try the #1 chipotle burger!</blockquote>
+        <cite>Jesus Diaz</cite>
       </figure>
       <figure class="voice reveal">
         <span class="qmark" aria-hidden="true">&ldquo;</span>
-        <blockquote>Mr. Lorenzo did a great job making a tasty and juicy burger.</blockquote>
-        <cite>Google review</cite>
+        <blockquote>This burger is amazing. I recommend the poblano; it's very tasty.</blockquote>
+        <cite>Santiago de la Cerda</cite>
       </figure>
       <figure class="voice reveal">
         <span class="qmark" aria-hidden="true">&ldquo;</span>
-        <blockquote>Service was very fast. Ordered, and within ten minutes my food was ready.</blockquote>
-        <cite>lola perez</cite>
+        <blockquote>Great burger and fries.</blockquote>
+        <cite>David Johnson · Local Guide</cite>
       </figure>
     </div>
     <p class="voices-proof reveal">
       <span class="stars" aria-hidden="true">★★★★½</span>
-      4.4 stars on Google, across 37 reviews.
+      4.3 stars on Google, across 14 reviews.
     </p>
   </div>
 </section>
@@ -490,9 +514,9 @@
     </figure>
     <div class="reveal">
       <span class="eyebrow">Find the truck</span>
-      <h2 id="find-title">On FM 969 in Manor</h2>
+      <h2 id="find-title">On FM 969 in Austin</h2>
       <address>
-        <span class="road">16419 FM 969</span>, Manor, TX 78653.<br>
+        <span class="road">16419 FM 969</span>, Austin, TX 78724.<br>
         Look for the orange Hamburguesas Emilia sign and the neon OPEN, Travis County.
       </address>
       <div class="find-hours">
@@ -505,7 +529,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
           (512) 633-3727
         </a>
-        <a class="btn btn-cream" href="https://www.google.com/maps/search/?api=1&query=Amburguesas+Al+Sabor+Del+Chef+16419+FM+969+Manor+TX+78653" target="_blank" rel="noopener">
+        <a class="btn btn-cream" href="https://www.google.com/maps/place/HAMBURGUESAS+EMILIA/@30.2516191,-97.5605687,17z/data=!3m1!4b1!4m6!3m5!1s0x8644b9b26b492089:0xf4bbd1ae9c4b986c!8m2!3d30.2516145!4d-97.5579938!16s%2Fg%2F11wnj6d1mh" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
           Open in Google Maps
         </a>
@@ -521,10 +545,10 @@
   <div class="wrap">
     <div class="foot-biz">
       Hamburguesas Emilia
-      <small>16419 FM 969 · Manor, Texas · (512) 633-3727</small>
+      <small>16419 FM 969 · Austin, Texas · (512) 633-3727</small>
     </div>
     <div class="credit">
-      A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
+      Made by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
     </div>
   </div>
 </footer>
@@ -546,6 +570,5 @@
     nodes.forEach(function (n) { io.observe(n); });
   })();
 </script>
-<script defer src="/assets/demo-visit.js"></script>
 </body>
 </html>

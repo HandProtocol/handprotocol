@@ -10,13 +10,7 @@ google_url: https://www.google.com/maps/search/?api=1&query=Amburguesas+Al+Sabor
 google_rating: 4.4
 reviews_count: 37
 website_status: none
-status: closed
-demo_url: /demos/amburguesas-del-chef/
-production_url: https://hamburguesasemilia.com/
-live_domain: hamburguesasemilia.com
-netlify_site_id: 53dce4ce-3c54-485d-b6de-beb2db7a7264
-dns_zone_id: 6a299345af2462c3dd63b168
-ssl_state: issued
+status: prospect
 lat: 30.368285
 lng: -97.474450
 hand_lead: koH
