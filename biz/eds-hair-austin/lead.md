@@ -12,7 +12,18 @@ google_rating: 4.5
 reviews_count: 51
 website_status: none
 demo_url: /demos/eds-hair-austin/
-status: built
+status: closed
+production_url: https://eds-barbershop.com/
+live_domain: eds-barbershop.com
+netlify_site_id: 8cb2dae5-d10b-4f79-863a-73ef11b86944
+dns_zone_id: 6a2ef3ae0a1bf7dae805ecca
+ssl_state: pending
+brand_primary: "#e5bd61"
+brand_accent: "#f3e1a8"
+brand_bg: "#0d0c0a"
+brand_logo: "img/crest.webp"
+google_cid: "0x8644b59952f71d77:0xfa0cdd8fa85c83d2"
+photo_permission: true
 hand_lead: koH
 lat: 30.22673
 lng: -97.702585
@@ -134,3 +145,6 @@ lng: -97.702585
 - **Address**: 1710 Montopolis Dr, Unit B, Austin, TX 78741. A review notes two adjacent units — "1710 unit B and 1708 unit C" — and "the building in the back". Scrape originally read 1708; corrected to 1710 per Yelp/Fresha/Facebook.
 - **Photos**: 13 owner-provided photos converted to `web/demos/eds-hair-austin/img/` (men's fades/slickback/beard, boy's pompadour, curly mohawk w/ star design, women's purple+teal / green / blue+black creative color, balayage, blonde + strawberry blowouts, the storefront, and the team selfie).
 - **Found via**: Yelp (eds-hair-salon-austin), Fresha, the shop's Facebook (ED'S HAIR SALON), Instagram @eds.hairsalon. Strong social presence but **no real website** — qualifies.
+- **FINALIZE 2026-06-14 (koH)**: deal closed, owner purchased **eds-barbershop.com**. Graduated to production at `clients/eds-barbershop/` on its own Netlify site (see production frontmatter). Brand palette extracted from the shop card's black-and-gold foil + their real crest: primary `#e5bd61` gold, highlight `#f3e1a8`, page bg `#0d0c0a`; crest is the logo/favicon. **Photo permission**: the 13 photos are owner-provided (handed over directly), so they self-host on the production domain with no Google attribution needed; `photo_permission: true`. **Maps id** is a CID (`0x8644b59952f71d77:0xfa0cdd8fa85c83d2`), not a ChIJ Place ID — no Places API proxy is used since photos are self-hosted.
+- **HOURS STILL UNCONFIRMED at go-live**: production carries the same Yelp/Fresha hours (Mon–Thu 10–7, Fri 10–8, Sat 9–8, Sun reduced) with the hedge "call to confirm Sunday/holiday hours." Confirm with Angela and update `clients/eds-barbershop/index.html` if wrong.
+- **Infra (2026-06-14)**: Netlify site `eds-barbershop` (id `8cb2dae5-d10b-4f79-863a-73ef11b86944`, live at eds-barbershop.netlify.app). Netlify DNS zone `6a2ef3ae0a1bf7dae805ecca` for eds-barbershop.com; apex + www NETLIFY ALIAS → eds-barbershop.netlify.app. Nameservers to set at Namecheap (Custom DNS): `dns1.p01.nsone.net`, `dns2.p01.nsone.net`, `dns3.p01.nsone.net`, `dns4.p01.nsone.net`. SSL auto-provisions (Let's Encrypt) once NS propagate; `ssl_state: pending` until then. Redeploy with `cd clients/eds-barbershop && netlify deploy --prod --dir . --site 8cb2dae5-d10b-4f79-863a-73ef11b86944`.

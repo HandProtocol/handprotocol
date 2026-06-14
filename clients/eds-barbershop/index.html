@@ -9,8 +9,8 @@
 <meta property="og:title" content="Ed's Barber Shop · Montopolis, Austin">
 <meta property="og:description" content="Barber shop precision and salon color in one neighborhood shop. Fades, beards, kids' cuts, blowouts, and bold color. Walk-ins welcome.">
 <meta property="og:type" content="business.business">
-<meta property="og:image" content="https://handprotocol.org/demos/eds-hair-austin/img/mens-slickback.webp">
-<meta property="og:url" content="https://handprotocol.org/demos/eds-hair-austin/">
+<meta property="og:image" content="https://eds-barbershop.com/img/mens-slickback.webp">
+<meta property="og:url" content="https://eds-barbershop.com/">
 <meta name="theme-color" content="#0f0e0c">
 <link rel="icon" type="image/webp" href="img/crest.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,16 +74,6 @@
   .skip{position:absolute;left:-999px;top:0;z-index:200;background:var(--gold);color:var(--ink-dark);
     padding:0.7rem 1.1rem;border-radius:0 0 var(--r-sm) 0;font-weight:700}
   .skip:focus{left:0}
-
-  /* now-live banner — this demo graduated to a real client site */
-  .nowlive{display:flex;align-items:center;justify-content:center;gap:0.55rem;
-    background:var(--foil);color:var(--ink-dark);font-family:var(--font-body);
-    font-weight:700;font-size:0.84rem;letter-spacing:0.015em;text-align:center;
-    padding:0.6rem 1rem;line-height:1.3;box-shadow:0 1px 0 oklch(1 0 0 / 0.22) inset}
-  .nowlive b{font-weight:800}
-  .nowlive__arrow{transition:transform .2s var(--ease)}
-  .nowlive:hover .nowlive__arrow{transform:translateX(3px)}
-  @media(max-width:480px){.nowlive{font-size:0.78rem}}
 
   /* nav */
   header.nav{position:sticky;top:0;z-index:100;backdrop-filter:blur(12px);
@@ -265,12 +255,6 @@
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-
-<a class="nowlive" href="https://eds-barbershop.com" target="_blank" rel="noopener">
-  <span aria-hidden="true">✦</span>
-  Now live — Ed&rsquo;s real site is at <b>eds-barbershop.com</b>
-  <span class="nowlive__arrow" aria-hidden="true">&rarr;</span>
-</a>
 
 <header class="nav">
   <div class="wrap nav__row">
@@ -550,7 +534,7 @@
       <p>Barber shop precision and salon color, in the heart of Montopolis. Walk-ins welcome.</p>
     </div>
     <div class="foot__hand">
-      A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
+      Made by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
     </div>
   </div>
 </footer>
@@ -567,6 +551,5 @@
     els.forEach(function(e){io.observe(e);});
   })();
 </script>
-<script defer src="/assets/demo-visit.js"></script>
 </body>
 </html>
