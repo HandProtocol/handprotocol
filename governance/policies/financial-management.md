@@ -146,7 +146,9 @@ a. **Worker classification.** Each engagement is reviewed for employee vs indepe
 
 b. **Payroll.** Outsourced to a reputable payroll provider (Gusto, ADP, or equivalent) from the first hire. The provider handles tax withholding, deposits, and W-2 issuance.
 
-c. **Contractors.** Receive 1099-NEC if cumulative payments exceed $600 in a calendar year. W-9 collected before first payment.
+c. **Contractors.** File Form 1099-NEC for each contractor whose cumulative payments reach the annual reporting threshold; collect a W-9 before first payment; apply 24% backup withholding (Form 945) if a valid TIN isn't furnished. **Threshold note (updated 2026-06-01):** the figure was historically $600; the OBBBA (P.L. 119-21) raised the 1099-NEC threshold to **$2,000 for payments made in 2026**, inflation-adjusted thereafter — confirm the current figure at filing time. See the `/hand-tax` skill (Mode C) for worker classification and the cited brief for sources.
+
+> **Note — unrelated business income (Develop pillar).** Service revenue from selling web/SEO/ecommerce to outside businesses is almost certainly **unrelated business income** (Form 990-T at $1,000 gross, 21% on net), and the web work is a **taxable Texas data-processing service** requiring sales-tax collection. This is owned by the `/hand-tax` skill (Modes A, G) and gated on counsel before the first invoice; it is not a payroll matter and is cross-referenced here only so the bookkeeper flags it.
 
 d. **Time tracking.** Salaried staff exempt from FLSA time tracking, except for grant-allocation purposes if any grant requires effort certification.
 

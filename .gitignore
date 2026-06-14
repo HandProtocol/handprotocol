@@ -56,3 +56,9 @@ funding/updates/.notebooks.json
 # Audio renders (too large for git history; keep in cloud storage / NotebookLM)
 funding/updates/*.m4a
 __pycache__/
+
+# Lead source photos (originals); only the optimized webp under web/demos/ are committed
+biz/*/photos/
+
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json

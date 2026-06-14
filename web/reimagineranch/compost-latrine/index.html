@@ -137,6 +137,7 @@
         <a href="#access">Access</a>
         <a href="#model">Model</a>
         <a href="#options">Options</a>
+        <a href="#hex">Hex stall</a>
         <a href="#paths">Paths</a>
         <a href="#roadmap">Roadmap</a>
       </div>
@@ -421,9 +422,70 @@
     </div>
   </section>
 
+  <section id="hex">
+    <div class="wrap">
+      <div class="sec-eyebrow">09 · A single-stall sibling</div>
+      <h2>The hexagonal toilet — one person, one beautiful object.</h2>
+      <p>The raised platform above is the shared, multi-stall build. Alongside it we've started a
+        <strong>standalone single-occupant version</strong> — a freestanding hexagonal composting
+        toilet meant to drop almost anywhere on the land. Same dry-cover, waterless system; a
+        completely different feeling. Where the platform is a porch, this is a small <em>object</em>
+        — closer to a shrine than an outhouse.</p>
+      <figure>
+        <img src="img/hex-iso.jpg" alt="3/4 render of a freestanding hexagonal composting toilet: six full-height cedar louver walls joined by slim curved corrugated-metal corners, capped by a six-facet toroidal metal roof that twists up to a small central oculus vent, standing on a green pad." loading="lazy">
+        <figcaption>Massing model — 3/4 view. A hexagon of six 7-ft cedar louver walls (one is the branded door), joined at the vertices by slim curved corrugated-galvanized corners, under a six-facet <strong>toroidal roof</strong> that flares at the eaves and twists 26° as it sweeps up to a central <strong>oculus vent</strong>. Built in Blender, reproducible from <code>rr/blender/hex_toilet.py</code>.</figcaption>
+      </figure>
+      <div class="fig-2">
+        <figure>
+          <img src="img/hex-front.jpg" alt="Front view of the hexagonal toilet showing the branded louver door with a Reimagine Ranch sign and the HAND logo, flanked by louver walls." loading="lazy">
+          <figcaption>Front — the branded louver door (Reimagine Ranch + the HAND mark). Mosquito netting sits behind every louver; the gap between the wall tops and the flared eave is the vented air intake.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/hex-night.jpg" alt="Night render of the hexagonal toilet glowing from within, light spilling through the louvers and out the central oculus like a lantern." loading="lazy">
+          <figcaption><span class="fig-badge">Night-beacon</span> Lit from inside, it reads as a lantern — louver light on the ground, a glowing oculus. <code>--night</code> renders this mode.</figcaption>
+        </figure>
+      </div>
+      <div class="callout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke-linecap="round"/></svg>
+        <p><strong>The roof is the vent.</strong> The toroidal facets sweep up to an open
+          <strong>oculus</strong> at the apex — the throat of the torus. Warm air and compost odor
+          rise off the chamber, up through the hexagon, and out the oculus on a passive convective
+          draft. No stack, no fan, no power: the geometry that makes the form is the same geometry
+          that ventilates it.</p>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <span class="tag teal">Footprint</span>
+          <h4>~6 ft across</h4>
+          <p>Hexagon of 3-ft sides — about 6 ft point-to-point, 5.2 ft across the flats. One person,
+            one chamber, a small pad. Sites almost anywhere.</p>
+        </div>
+        <div class="card">
+          <span class="tag purple">Walls</span>
+          <h4>Cedar louver × 6</h4>
+          <p>Five raked-cedar louver panels + one branded louver door, joined by slim curved
+            corrugated-metal corners. It breathes on every side.</p>
+        </div>
+        <div class="card">
+          <span class="tag gold">Roof</span>
+          <h4>Toroidal, twisting</h4>
+          <p>Six metal facets flaring at a 3.7-ft eave, twisting 26° up to a ~9.7-ft oculus.
+            Rain-shedding shell and passive chimney in one move.</p>
+        </div>
+      </div>
+      <div class="callout warn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 7v10l8 5 8-5V7l-8-5z"/><path d="M12 22V12M4 7l8 5 8-5" stroke-linecap="round"/></svg>
+        <p><strong>It's also a tile.</strong> The hexagon is deliberate: this single stall is the
+          base unit for a future <strong>hexagonal platform</strong> — several toilet and shower
+          stalls clustered around (or sharing) a hex footprint, reusing this exact panel, corner,
+          and toroidal-roof kit. We lock the single stall first, then tessellate.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="roadmap">
     <div class="wrap">
-      <div class="sec-eyebrow">09 · Roadmap</div>
+      <div class="sec-eyebrow">10 · Roadmap</div>
       <h2>Coming builds.</h2>
       <p>The latrine is Reimagine Ranch's build 01. These are captured next — researched intent,
         not yet built — each an upgrade-in-place sibling that reuses the same reproducible workflow:</p>
@@ -454,7 +516,7 @@
 
   <section id="decisions">
     <div class="wrap">
-      <div class="sec-eyebrow">10 · Decisions needed from koH</div>
+      <div class="sec-eyebrow">11 · Decisions needed from koH</div>
       <h2>Open items.</h2>
       <ol class="dec">
         <li><strong>System at launch</strong> — bucket (recommended) or twin-vault? Affects steward labor vs build size. Structure supports both either way.</li>
@@ -479,7 +541,7 @@
     <div class="wrap">
       <p>Reimagine Ranch · Build 01 — internal build report · HAND Protocol</p>
       <p style="margin-top:.4rem">Source research: <code>rr/research/compost-latrine.md</code> ·
-        Model: <code>rr/blender/compost_latrine.py</code> ·
+        Models: <code>rr/blender/compost_latrine.py</code>, <code>rr/blender/hex_toilet.py</code> ·
         <a href="mailto:hand@handprotocol.org">hand@handprotocol.org</a></p>
     </div>
   </footer>
