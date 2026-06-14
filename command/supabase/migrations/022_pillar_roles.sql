@@ -1,4 +1,4 @@
--- 019_pillar_roles.sql
+-- 022_pillar_roles.sql
 -- HAND Command Center — extend the role model from 3 coarse roles to the
 -- pillar model, and add an access `status` gate for the Apply flow.
 --

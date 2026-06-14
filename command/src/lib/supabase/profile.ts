@@ -5,7 +5,7 @@ import { createClient } from "./server";
   Profile + access-control helpers for the HAND Command Center.
 
   Identity is Supabase Auth (auth.users); command.profiles extends it with a
-  pillar role + access status (see migration 019_pillar_roles.sql):
+  pillar role + access status (see migration 022_pillar_roles.sql):
 
     admin         full access, manages users/invites/settings, all pillars
     funding_lead  manages Grants/Funders/Deadlines/Boilerplate; reads Develop;
@@ -46,7 +46,7 @@ export type CommandProfile = {
 
 // ─── Capability model ────────────────────────────────────────────────────
 // One vocabulary the whole app gates on: server actions, nav visibility, and
-// page guards. Keep in lockstep with the RLS policies in 019_pillar_roles.sql.
+// page guards. Keep in lockstep with the RLS policies in 022_pillar_roles.sql.
 export type Capability =
   | "users.manage" // create/promote/suspend profiles, manage invites
   | "settings.manage"

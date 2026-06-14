@@ -2,7 +2,7 @@
 
 The design spec for who can do what in the HAND Command Center, how people get
 in, and how access is handed off. Source of truth for the role model; the code
-that enforces it lives in `supabase/migrations/019_pillar_roles.sql` (DB/RLS) and
+that enforces it lives in `supabase/migrations/022_pillar_roles.sql` (DB/RLS) and
 `src/lib/supabase/profile.ts` (app guards).
 
 ## Identity

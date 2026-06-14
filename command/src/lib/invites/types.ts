@@ -1,6 +1,6 @@
 /*
   HAND Command Center — invite types. Mirrors command.invites (012_invites.sql,
-  role enum widened in 019_pillar_roles.sql). One-time-use codes that pre-assign
+  role enum widened in 022_pillar_roles.sql). One-time-use codes that pre-assign
   a role (+ optional reciprocate_group) and land the redeemer at status='active'.
 */
 import type { CommandRole } from "@/lib/supabase/profile";

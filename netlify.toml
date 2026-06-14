@@ -10,6 +10,18 @@
   node_bundler = "esbuild"
 
 [[edge_functions]]
+  function = "kitties-auth"
+  path = "/kitties"
+
+[[edge_functions]]
+  function = "kitties-auth"
+  path = "/kitties/"
+
+[[edge_functions]]
+  function = "kitties-auth"
+  path = "/kitties/*"
+
+[[edge_functions]]
   function = "grants-auth"
   path = "/grants/*"
 
@@ -251,6 +263,11 @@
   to = "https://github.com/HandProtocol/handprotocol/blob/main/governance/board/director-prospect-brief.md"
   status = 301
 
+[[redirects]]
+  from = "/kitties"
+  to = "/kitties/"
+  status = 301
+
 # 404 fallback → branded compass page with radial sitemap (3D hand pointing to sections).
 # Serves /404.html with HTTP 404. The previous rule pointed at /foundation-campaign/, which
 # broke relative CSS/JS paths because the browser kept the original (missing) URL as base.
@@ -295,6 +312,12 @@
   for = "/mystichearts/wireframe/*"
   [headers.values]
     Content-Security-Policy = "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; connect-src 'self' https://cdn.jsdelivr.net;"
+
+# Kitties page loads three.js from cdnjs.cloudflare.com
+[[headers]]
+  for = "/kitties/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; connect-src 'self' https://cdnjs.cloudflare.com; worker-src blob:;"
 
 # Cache static assets aggressively, HTML lightly
 [[headers]]
