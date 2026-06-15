@@ -100,8 +100,29 @@ function escAttr(s: string): string {
 
 // --- extract ----------------------------------------------------------------
 
+// Is index `i` inside an element whose class/section marks it as a verbatim
+// review quote? Scan the open tags before i for a quote-ish container that
+// hasn't closed. Coarse but safe: a false positive just leaves a string for the
+// translator to skip; the apply pass is exact-match either way.
+const QUOTE_CLASS = /class="[^"]*\b(quote|quotes|voice|voices|review|reviews|testimonial|testimonials|cite)\b/i;
+function inQuoteContainer(html: string, i: number): boolean {
+  const before = html.slice(Math.max(0, i - 1400), i);
+  // nearest preceding <blockquote …> / <figure|div|section class="…quote…"> with no closer after it
+  const opens = before.match(/<(blockquote|figure|div|section|article|cite)\b[^>]*>/gi) || [];
+  for (let k = opens.length - 1; k >= 0; k--) {
+    const tag = opens[k];
+    const name = tag.match(/^<(\w+)/)![1].toLowerCase();
+    if (name === "blockquote" || name === "cite" || QUOTE_CLASS.test(tag)) {
+      const openIdx = before.lastIndexOf(tag);
+      const closer = new RegExp(`</${name}>`, "i");
+      if (!closer.test(before.slice(openIdx + tag.length))) return true; // still open at i
+    }
+  }
+  return false;
+}
+
 if (cmd === "extract") {
-  const out: Record<string, { runs: string[]; title?: string; description?: string }> = {};
+  const out: Record<string, { runs: string[]; skippedReviews?: string[]; title?: string; description?: string }> = {};
   for (const slug of slugs) {
     const p = demoPath(slug);
     if (!existsSync(p)) { console.error(`skip (missing): ${slug}`); continue; }
@@ -109,6 +130,7 @@ if (cmd === "extract") {
     const masked = maskedHtml(html);
     const seen = new Set<string>();
     const runs: string[] = [];
+    const skippedReviews: string[] = [];
     let m: RegExpExecArray | null;
     RUN_RE.lastIndex = 0;
     while ((m = RUN_RE.exec(masked))) {
@@ -117,12 +139,14 @@ if (cmd === "extract") {
       if (CHROME[raw]) continue;          // already covered by the shared dict
       if (seen.has(raw)) continue;
       seen.add(raw);
+      // route verbatim review quotes / cites to a do-not-translate list
+      if (inQuoteContainer(html, m.index)) { skippedReviews.push(raw); continue; }
       runs.push(raw);
     }
     const title = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1].trim();
     const description = html.match(/<meta\s+name=["']description["'][^>]*\bcontent=["']([^"']*)["']/i)?.[1].trim();
-    out[slug] = { runs, ...(title ? { title } : {}), ...(description ? { description } : {}) };
-    console.error(`${slug}: ${runs.length} unique runs to translate` +
+    out[slug] = { runs, ...(skippedReviews.length ? { skippedReviews } : {}), ...(title ? { title } : {}), ...(description ? { description } : {}) };
+    console.error(`${slug}: ${runs.length} runs to translate, ${skippedReviews.length} review/cite runs skipped` +
       (title ? " + title" : "") + (description ? " + description" : ""));
   }
   writeFileSync(EXTRACT_OUT, JSON.stringify(out, null, 2));
