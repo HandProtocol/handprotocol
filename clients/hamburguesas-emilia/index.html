@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hamburguesas Emilia · Chef's Burgers + Tacos on FM 969 in Austin, TX</title>
-<meta name="description" content="Juicy chef's burgers with a Mexican tilt, the chipotle and poblano burgers, seasoned fries, street tacos, and chicken flautas, from the Hamburguesas Emilia truck on FM 969 in Austin, Texas. 4.3 stars on Google across 14 reviews.">
+<title data-es="Hamburguesas Emilia · Hamburguesas y tacos del chef en FM 969, Austin, TX">Hamburguesas Emilia · Chef's Burgers + Tacos on FM 969 in Austin, TX</title>
+<meta name="description" data-es="Jugosas hamburguesas del chef con sazón mexicano: la de chipotle y la poblana, papas sazonadas, tacos de la calle y flautas de pollo, del food truck Hamburguesas Emilia en FM 969 en Austin, Texas. 4.3 estrellas en Google con 14 reseñas." content="Juicy chef's burgers with a Mexican tilt, the chipotle and poblano burgers, seasoned fries, street tacos, and chicken flautas, from the Hamburguesas Emilia truck on FM 969 in Austin, Texas. 4.3 stars on Google across 14 reviews.">
 <link rel="canonical" href="https://hamburguesasemilia.com/">
 
 <!-- Open Graph, so the link previews nicely when texted or shared -->
@@ -111,6 +111,20 @@
   .btn-outline:hover { background: var(--cream); color: var(--char-2); border-color: var(--cream); }
   :where(a, button):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 8px; }
 
+  /* ---- Language toggle ------------------------------------------------ */
+  .lang-toggle {
+    display: inline-flex; align-items: center; gap: 0.4em;
+    min-height: 44px; padding: 0.4em 0.9em;
+    font-family: "Hanken Grotesk", sans-serif; font-weight: 800;
+    font-size: 0.85rem; letter-spacing: 0.01em;
+    color: var(--ink); background: transparent;
+    border: 2px solid var(--cream-3); border-radius: 999px;
+    cursor: pointer; white-space: nowrap;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .lang-toggle:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .lang-toggle svg { width: 1.05em; height: 1.05em; flex: none; }
+
   /* ---- Sticky header -------------------------------------------------- */
   .topbar {
     position: sticky; top: 0; z-index: 30;
@@ -129,9 +143,9 @@
   }
   .brand-lockup .brand-name { font-family: "Anton", sans-serif; font-size: 1.12rem; line-height: 0.95; letter-spacing: 0.01em; color: var(--ink); text-transform: uppercase; }
   .brand-lockup .brand-name small { display: block; font-family: "Caveat", cursive; font-weight: 700; font-size: 1rem; letter-spacing: 0; text-transform: none; color: var(--red); margin-top: 0.12em; }
-  .topbar-cta { display: inline-flex; gap: 0.55rem; }
+  .topbar-cta { display: inline-flex; align-items: center; gap: 0.55rem; }
   .topbar .btn { min-height: 44px; padding-block: 0.5em; font-size: 0.92rem; }
-  @media (max-width: 640px) { .topbar .btn-label-long { display: none; } .topbar-cta .btn-dir { display: none; } }
+  @media (max-width: 640px) { .topbar .btn-label-long { display: none; } .topbar-cta .btn-dir { display: none; } .lang-toggle .lang-label { display: none; } .lang-toggle { padding-inline: 0.6em; } }
 
   /* ---- Hero ----------------------------------------------------------- */
   .hero {
@@ -297,7 +311,7 @@
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main" data-es="Saltar al contenido">Skip to content</a>
 
 <header class="topbar">
   <div class="wrap">
@@ -306,13 +320,17 @@
       <span class="brand-name">Hamburguesas Emilia<small>chef's burgers &amp; tacos</small></span>
     </a>
     <div class="topbar-cta">
+      <button class="lang-toggle" type="button" data-lang-to="es" aria-label="Ver en español" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="lang-label">Español</span>
+      </button>
       <a class="btn btn-outline btn-dir" style="border-color:var(--cream-3);color:var(--ink)" href="https://www.google.com/maps/dir/?api=1&destination=30.2516145,-97.5579938" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-        Directions
+        <span class="btn-txt" data-es="Cómo llegar">Directions</span>
       </a>
       <a class="btn btn-red" href="tel:+15126333727">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
-        Call<span class="btn-label-long">&nbsp;to order</span>
+        <span class="btn-txt" data-es='Llama<span class="btn-label-long">&nbsp;para ordenar</span>'>Call<span class="btn-label-long">&nbsp;to order</span></span>
       </a>
     </div>
   </div>
@@ -325,35 +343,35 @@
 <section class="hero" aria-labelledby="hero-title">
   <div class="wrap">
     <div class="hero-copy">
-      <span class="eyebrow hero-eyebrow">Austin, Texas · on FM 969</span>
+      <span class="eyebrow hero-eyebrow" data-es="Austin, Texas · en FM 969">Austin, Texas · on FM 969</span>
       <h1 id="hero-title">
         <span class="hero-name display">Hamburguesas Emilia</span>
-        <span class="hero-tag">chef's burgers &amp; tacos</span>
+        <span class="hero-tag" data-es="hamburguesas y tacos del chef">chef's burgers &amp; tacos</span>
       </h1>
-      <p class="hero-lead">Juicy chef's burgers with a Mexican tilt, and the seasoned fries to match. Plus street tacos, flautas, and a whole Mexican kitchen, out of the truck on FM 969.</p>
+      <p class="hero-lead" data-es="Jugosas hamburguesas del chef con sazón mexicano, y las papas sazonadas que las acompañan. Más tacos de la calle, flautas y toda una cocina mexicana, desde el food truck en FM 969.">Juicy chef's burgers with a Mexican tilt, and the seasoned fries to match. Plus street tacos, flautas, and a whole Mexican kitchen, out of the truck on FM 969.</p>
 
       <div class="rating" aria-label="Rated 4.3 out of 5 on Google across 14 reviews">
         <span class="stars" aria-hidden="true">★★★★½</span>
-        <span class="rating-text"><b>4.3</b> on Google · 14 reviews</span>
+        <span class="rating-text" data-es="<b>4.3</b> en Google · 14 reseñas"><b>4.3</b> on Google · 14 reviews</span>
       </div>
 
       <div class="hero-cta">
         <a class="btn btn-call" href="tel:+15126333727">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
-          Call to order ahead
+          <span class="btn-txt" data-es="Llama para ordenar">Call to order ahead</span>
         </a>
         <a class="btn btn-outline" href="https://www.google.com/maps/dir/?api=1&destination=30.2516145,-97.5579938" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          Get directions
+          <span class="btn-txt" data-es="Cómo llegar">Get directions</span>
         </a>
       </div>
     </div>
 
     <figure class="hero-figure reveal">
-      <span class="now-badge" aria-hidden="true">Open<br>Late<span>til 10:30</span></span>
+      <span class="now-badge" aria-hidden="true" data-es="Abierto<br>tarde<span>hasta 10:30</span>">Open<br>Late<span>til 10:30</span></span>
       <img src="img/cheeseburger.webp" width="845" height="547" fetchpriority="high" decoding="async"
            alt="A classic Hamburguesas Emilia cheeseburger with melted American cheese, fresh tomato, jalapeños, and lettuce on a soft bun, with a pile of golden seasoned fries.">
-      <figcaption>The cheeseburger, and those seasoned fries.</figcaption>
+      <figcaption data-es="La cheeseburger, con esas papas sazonadas.">The cheeseburger, and those seasoned fries.</figcaption>
     </figure>
   </div>
 </section>
@@ -362,25 +380,25 @@
 <section class="burgers" id="burgers" aria-labelledby="burgers-title">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">What people drive out for</span>
-      <h2 id="burgers-title">The burgers, <span class="script">six ways</span></h2>
-      <p>Regulars call it "one of the best spots in Austin." Built to order by the chef, every one comes with fries.</p>
+      <span class="eyebrow" data-es="Por lo que la gente maneja hasta acá">What people drive out for</span>
+      <h2 id="burgers-title" data-es="Las hamburguesas, <span class=&quot;script&quot;>de seis formas</span>">The burgers, <span class="script">six ways</span></h2>
+      <p data-es="Los clientes de siempre le dicen &quot;uno de los mejores lugares de Austin&quot;. Hechas al momento por el chef, y todas vienen con papas.">Regulars call it "one of the best spots in Austin." Built to order by the chef, every one comes with fries.</p>
     </div>
 
     <div class="menu-card reveal">
       <div class="menu-top">
         <h3>Hamburguesas</h3>
-        <span class="with-fries">all come with fries</span>
+        <span class="with-fries" data-es="todas con papas">all come with fries</span>
       </div>
       <ul class="menu-list">
-        <li><span class="num">1</span><div><div class="item-name">Chipotle Burger <span>· de chipotle</span></div><div class="item-desc">Broiled onions, white cheese, and chipotle fries.</div></div></li>
-        <li><span class="num">2</span><div><div class="item-name">Cheese Burger <span>· con queso</span></div><div class="item-desc">Beef, lettuce, tomato, onion. The big ol' classic.</div></div></li>
-        <li><span class="num">3</span><div><div class="item-name">Poblano Burger <span>· poblana</span></div><div class="item-desc">Roasted poblano, mayo, ranch, and Swiss cheese.</div></div></li>
-        <li><span class="num">4</span><div><div class="item-name">BBQ Burger <span>· de BBQ</span></div><div class="item-desc">Lettuce, tomato, yellow cheese, and BBQ sauce.</div></div></li>
-        <li><span class="num">5</span><div><div class="item-name">Breakfast Burger <span>· de desayuno</span></div><div class="item-desc">Hash brown, egg, ham, bacon, and American cheese.</div></div></li>
-        <li><span class="num">6</span><div><div class="item-name">Pork Sandwich <span>· de puerco</span></div><div class="item-desc">Pulled pork with BBQ sauce.</div></div></li>
+        <li><span class="num">1</span><div><div class="item-name" data-es="Hamburguesa de Chipotle">Chipotle Burger <span>· de chipotle</span></div><div class="item-desc" data-es="Cebolla dorada, queso blanco y papas con chipotle.">Broiled onions, white cheese, and chipotle fries.</div></div></li>
+        <li><span class="num">2</span><div><div class="item-name" data-es="Hamburguesa con Queso">Cheese Burger <span>· con queso</span></div><div class="item-desc" data-es="Carne, lechuga, jitomate y cebolla. La clásica de siempre.">Beef, lettuce, tomato, onion. The big ol' classic.</div></div></li>
+        <li><span class="num">3</span><div><div class="item-name" data-es="Hamburguesa Poblana">Poblano Burger <span>· poblana</span></div><div class="item-desc" data-es="Chile poblano asado, mayonesa, aderezo ranch y queso suizo.">Roasted poblano, mayo, ranch, and Swiss cheese.</div></div></li>
+        <li><span class="num">4</span><div><div class="item-name" data-es="Hamburguesa BBQ">BBQ Burger <span>· de BBQ</span></div><div class="item-desc" data-es="Lechuga, jitomate, queso amarillo y salsa BBQ.">Lettuce, tomato, yellow cheese, and BBQ sauce.</div></div></li>
+        <li><span class="num">5</span><div><div class="item-name" data-es="Hamburguesa de Desayuno">Breakfast Burger <span>· de desayuno</span></div><div class="item-desc" data-es="Hash brown, huevo, jamón, tocino y queso americano.">Hash brown, egg, ham, bacon, and American cheese.</div></div></li>
+        <li><span class="num">6</span><div><div class="item-name" data-es="Sándwich de Puerco">Pork Sandwich <span>· de puerco</span></div><div class="item-desc" data-es="Puerco deshebrado con salsa BBQ.">Pulled pork with BBQ sauce.</div></div></li>
       </ul>
-      <p class="menu-foot">Todas con papas fritas. <b>Most plates run $10 to $20.</b></p>
+      <p class="menu-foot" data-es="Todas con papas fritas. <b>La mayoría de los platillos cuestan entre $10 y $20.</b>">Todas con papas fritas. <b>Most plates run $10 to $20.</b></p>
     </div>
 
     <div class="burger-aside">
@@ -388,7 +406,7 @@
         <figure class="burger-figure burger-figure--lead">
           <img src="img/avocado-burger.webp" width="845" height="547" loading="lazy" decoding="async"
                alt="A Hamburguesas Emilia burger topped with sliced avocado, melted white cheese, grilled onions, and chipotle mayo on a toasted bun, with seasoned fries.">
-          <figcaption>Stacked the way you like it.</figcaption>
+          <figcaption data-es="Armada justo como te gusta.">Stacked the way you like it.</figcaption>
         </figure>
         <figure class="burger-figure">
           <img src="img/bacon-avocado-burger.webp" width="845" height="547" loading="lazy" decoding="async"
@@ -400,16 +418,16 @@
         </figure>
       </div>
       <div class="fries-note reveal">
-        <span class="eyebrow">Don't skip the fries</span>
+        <span class="eyebrow" data-es="No te saltes las papas">Don't skip the fries</span>
         <blockquote>"Chipotle burger and fries were delicious."</blockquote>
         <cite>Alexander Lopez · Google review</cite>
       </div>
     </div>
 
     <p class="spend-note reveal">
-      <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/></svg> <b>Cash only</b> &mdash; there's an ATM right on site.</span>
-      <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5a2.5 2 0 0 1 5 0c0 2.5-5 1.5-5 4a2.5 2 0 0 0 5 0"/></svg> About <b>$10 to $20</b> a head.</span>
-      <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Out in about <b>ten minutes</b>.</span>
+      <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/></svg> <span class="t" data-es="<b>Solo efectivo</b> &mdash; hay un cajero en el lugar."><b>Cash only</b> &mdash; there's an ATM right on site.</span></span>
+      <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5a2.5 2 0 0 1 5 0c0 2.5-5 1.5-5 4a2.5 2 0 0 0 5 0"/></svg> <span class="t" data-es="Como <b>$10 a $20</b> por persona.">About <b>$10 to $20</b> a head.</span></span>
+      <span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> <span class="t" data-es="Listo en unos <b>diez minutos</b>.">Out in about <b>ten minutes</b>.</span></span>
     </p>
   </div>
 </section>
@@ -418,15 +436,15 @@
 <section class="kitchen" id="kitchen" aria-labelledby="kitchen-title">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Not just burgers</span>
-      <h2 id="kitchen-title">A whole <span class="script">Mexican kitchen</span></h2>
-      <p>Same truck, same chef. Street tacos, flautas, quesadillas, and more, made fresh to order.</p>
+      <span class="eyebrow" data-es="No solo hamburguesas">Not just burgers</span>
+      <h2 id="kitchen-title" data-es="Toda una <span class=&quot;script&quot;>cocina mexicana</span>">A whole <span class="script">Mexican kitchen</span></h2>
+      <p data-es="El mismo food truck, el mismo chef. Tacos de la calle, flautas, quesadillas y más, hechos al momento.">Same truck, same chef. Street tacos, flautas, quesadillas, and more, made fresh to order.</p>
     </div>
 
     <figure class="kitchen-feature reveal">
       <img src="img/quesabirria.webp" width="1165" height="651" loading="lazy" decoding="async"
            alt="Three griddle-crisped quesabirria tacos with melted cheese and tender birria beef on red-and-white checkered paper, with a cup of rich consomé and lime wedges.">
-      <figcaption>Quesabirria, dipped in consomé &mdash; the one to get.</figcaption>
+      <figcaption data-es="Quesabirria, para mojar en consomé &mdash; la que tienes que pedir.">Quesabirria, dipped in consomé &mdash; the one to get.</figcaption>
     </figure>
 
     <div class="plate-grid">
@@ -435,7 +453,7 @@
              alt="Quesabirria tacos with crispy cheese edges next to a cup of consomé topped with cilantro and lime.">
         <div class="plate-body">
           <h3>Quesabirria</h3>
-          <p>Tender birria and melted cheese on a griddle-crisped tortilla, with rich consomé to dip.</p>
+          <p data-es="Birria tierna y queso derretido en tortilla dorada al comal, con consomé bien rico para mojar.">Tender birria and melted cheese on a griddle-crisped tortilla, with rich consomé to dip.</p>
         </div>
       </article>
 
@@ -443,8 +461,8 @@
         <img src="img/street-tacos.webp" width="641" height="521" loading="lazy" decoding="async"
              alt="Street tacos on double corn tortillas topped with grilled meat and raw onion.">
         <div class="plate-body">
-          <h3>Street tacos</h3>
-          <p>Grilled meat, onion, and cilantro on a double corn tortilla. Asada, al pastor, and more.</p>
+          <h3 data-es="Tacos de la calle">Street tacos</h3>
+          <p data-es="Carne asada, cebolla y cilantro en doble tortilla de maíz. Asada, al pastor y más.">Grilled meat, onion, and cilantro on a double corn tortilla. Asada, al pastor, and more.</p>
         </div>
       </article>
 
@@ -452,16 +470,16 @@
         <img src="img/breakfast-tacos.webp" width="700" height="783" loading="lazy" decoding="async"
              alt="Two breakfast tacos on flour tortillas, one chorizo and egg and one potato and egg, with a side of salsa.">
         <div class="plate-body">
-          <h3>Breakfast tacos</h3>
-          <p>Chorizo and egg, potato and egg, and more on a warm flour tortilla. Hot and fresh off the griddle.</p>
+          <h3 data-es="Tacos de desayuno">Breakfast tacos</h3>
+          <p data-es="Chorizo con huevo, papa con huevo y más en tortilla de harina calientita. Recién salidos del comal.">Chorizo and egg, potato and egg, and more on a warm flour tortilla. Hot and fresh off the griddle.</p>
         </div>
       </article>
 
       <article class="plate plate--more reveal">
         <div class="plate-body">
-          <span class="eyebrow">Ask about</span>
-          <h3>And plenty more</h3>
-          <p>Flautas, quesadillas, empanadas (queso or tinga de pollo), antojitos, and more. Just ask at the window.</p>
+          <span class="eyebrow" data-es="Pregunta por">Ask about</span>
+          <h3 data-es="Y mucho más">And plenty more</h3>
+          <p data-es="Flautas, quesadillas, empanadas (de queso o tinga de pollo), antojitos y más. Solo pregunta en la ventanilla.">Flautas, quesadillas, empanadas (queso or tinga de pollo), antojitos, and more. Just ask at the window.</p>
         </div>
       </article>
     </div>
@@ -472,8 +490,8 @@
 <section class="voices" aria-labelledby="voices-title">
   <div class="wrap">
     <div class="reveal">
-      <span class="eyebrow">Straight from Google</span>
-      <h2 id="voices-title">One of the best <span class="script">spots in Austin</span></h2>
+      <span class="eyebrow" data-es="Directo de Google">Straight from Google</span>
+      <h2 id="voices-title" data-es="Uno de los mejores <span class=&quot;script&quot;>lugares de Austin</span>">One of the best <span class="script">spots in Austin</span></h2>
     </div>
     <div class="voices-grid">
       <figure class="voice reveal">
@@ -499,7 +517,7 @@
     </div>
     <p class="voices-proof reveal">
       <span class="stars" aria-hidden="true">★★★★½</span>
-      4.3 stars on Google, across 14 reviews.
+      <span class="t" data-es="4.3 estrellas en Google, de 14 reseñas.">4.3 stars on Google, across 14 reviews.</span>
     </p>
   </div>
 </section>
@@ -510,20 +528,20 @@
     <figure class="find-figure reveal">
       <img src="img/sign-night.webp" width="960" height="1280" loading="lazy" decoding="async"
            alt="The lit Hamburguesas Emilia sign at night with a neon OPEN sign and 'Pick up orders 512.633.3727', on the food truck on FM 969.">
-      <figcaption>Look for the lit sign on FM 969.</figcaption>
+      <figcaption data-es="Busca el letrero iluminado en FM 969.">Look for the lit sign on FM 969.</figcaption>
     </figure>
     <div class="reveal">
-      <span class="eyebrow">Find the truck</span>
-      <h2 id="find-title">On FM 969 in Austin</h2>
-      <address>
+      <span class="eyebrow" data-es="Encuentra el food truck">Find the truck</span>
+      <h2 id="find-title" data-es="En FM 969 en Austin">On FM 969 in Austin</h2>
+      <address data-es="<span class=&quot;road&quot;>16419 FM 969</span>, Austin, TX 78724.<br> Busca el letrero naranja de Hamburguesas Emilia y el OPEN de neón, Travis County.">
         <span class="road">16419 FM 969</span>, Austin, TX 78724.<br>
         Look for the orange Hamburguesas Emilia sign and the neon OPEN, Travis County.
       </address>
       <div class="find-hours">
-        <span class="late">Open late, kitchen runs until 10:30 PM.</span>
-        <span>Burgers, tacos, and breakfast off the same window.</span>
+        <span class="late" data-es="Abierto hasta tarde, la cocina trabaja hasta las 10:30 PM.">Open late, kitchen runs until 10:30 PM.</span>
+        <span data-es="Hamburguesas, tacos y desayuno en la misma ventanilla.">Burgers, tacos, and breakfast off the same window.</span>
       </div>
-      <span class="pay-chip"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/></svg> Cash only · ATM on site</span>
+      <span class="pay-chip"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20"/></svg> <span class="t" data-es="Solo efectivo · cajero en el lugar">Cash only · ATM on site</span></span>
       <div class="find-cta">
         <a class="btn btn-call" href="tel:+15126333727">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
@@ -531,10 +549,10 @@
         </a>
         <a class="btn btn-cream" href="https://www.google.com/maps/place/HAMBURGUESAS+EMILIA/@30.2516191,-97.5605687,17z/data=!3m1!4b1!4m6!3m5!1s0x8644b9b26b492089:0xf4bbd1ae9c4b986c!8m2!3d30.2516145!4d-97.5579938!16s%2Fg%2F11wnj6d1mh" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          Open in Google Maps
+          <span class="btn-txt" data-es="Abrir en Google Maps">Open in Google Maps</span>
         </a>
       </div>
-      <p class="find-note">Hours can shift with the truck. <a href="tel:+15126333727">Call ahead</a> to be sure.</p>
+      <p class="find-note" data-es="Los horarios pueden cambiar con el food truck. <a href=&quot;tel:+15126333727&quot;>Llama antes</a> para confirmar.">Hours can shift with the truck. <a href="tel:+15126333727">Call ahead</a> to be sure.</p>
     </div>
   </div>
 </section>
@@ -547,7 +565,7 @@
       Hamburguesas Emilia
       <small>16419 FM 969 · Austin, Texas · (512) 633-3727</small>
     </div>
-    <div class="credit">
+    <div class="credit" data-es="Hecho por <a href=&quot;https://handprotocol.org&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>HAND</a>.">
       Made by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
     </div>
   </div>
@@ -568,6 +586,49 @@
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.12 });
     nodes.forEach(function (n) { io.observe(n); });
+  })();
+
+  // Bilingual EN/ES. Spanish-set browsers get Spanish automatically; the
+  // toggle is a manual override and the choice is remembered. No build step,
+  // no dependencies: each translatable node carries its Spanish in data-es.
+  (function () {
+    var KEY = "hand-lang";
+    var nodes = [].slice.call(document.querySelectorAll("[data-es]"));
+    nodes.forEach(function (n) {
+      n.__en = (n.tagName === "META") ? n.getAttribute("content") : n.innerHTML;
+    });
+    function setToggles(es) {
+      [].forEach.call(document.querySelectorAll(".lang-toggle"), function (b) {
+        b.setAttribute("data-lang-to", es ? "en" : "es");
+        b.setAttribute("aria-pressed", es ? "true" : "false");
+        b.setAttribute("aria-label", es ? "View in English" : "Ver en español");
+        var l = b.querySelector(".lang-label");
+        if (l) l.textContent = es ? "English" : "Español";
+      });
+    }
+    function apply(lang) {
+      var es = lang === "es";
+      nodes.forEach(function (n) {
+        var v = es ? n.getAttribute("data-es") : n.__en;
+        if (v == null) return;
+        if (n.tagName === "META") n.setAttribute("content", v);
+        else n.innerHTML = v;
+      });
+      document.documentElement.lang = es ? "es" : "en";
+      setToggles(es);
+    }
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch (e) {}
+    var nav = (navigator.language || navigator.userLanguage || "").toLowerCase();
+    apply(stored || (nav.indexOf("es") === 0 ? "es" : "en"));
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest(".lang-toggle");
+      if (!b) return;
+      e.preventDefault();
+      var to = b.getAttribute("data-lang-to") || "es";
+      apply(to);
+      try { localStorage.setItem(KEY, to); } catch (e2) {}
+    });
   })();
 </script>
 </body>
