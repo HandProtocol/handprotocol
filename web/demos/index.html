@@ -45,6 +45,10 @@
   .filter-count{font:600 11px/1 ui-monospace,monospace;letter-spacing:0.14em;color:var(--faint);
     margin-left:auto;white-space:nowrap}
   .sep{width:1px;height:18px;background:var(--line);flex-shrink:0}
+  .search-input{appearance:none;border:1px solid var(--line);background:rgba(8,10,15,0.45);color:var(--ink);
+    border-radius:999px;padding:7px 14px;font:600 0.8rem/1 inherit;font-family:inherit;min-width:200px;width:220px}
+  .search-input::placeholder{color:var(--faint);font-weight:500}
+  .search-input:focus{outline:none;border-color:rgba(217,137,58,0.5);background:rgba(8,10,15,0.65)}
 
   /* ── grid ── */
   .grid{display:grid;gap:18px;grid-template-columns:1fr}
@@ -85,6 +89,10 @@
   .fbtn[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:#0b0e14}
   #field{max-width:680px;margin:0 auto}
   .fnote{color:var(--faint);font-size:0.78rem;margin:0 0 16px;text-align:center}
+  #field-search{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px;align-items:center;justify-content:center}
+  #field-search .search-input{flex:1;min-width:220px;width:auto;max-width:420px}
+  #field-search .fbtn{padding:9px 16px;font-size:0.82rem}
+  #field-where{color:var(--amber-soft);font-size:0.82rem;text-align:center;margin:0 0 14px}
   .fcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
   .fcard.pin{border-color:rgba(252,211,77,0.35)}
   .fhead{display:flex;align-items:flex-start;gap:12px}
@@ -140,6 +148,11 @@
 
   <div id="filter-bar" class="filter-bar" hidden>
     <div class="filter-group">
+      <input id="search-input" class="search-input" type="search" autocomplete="off"
+             placeholder="Search name, category, city…" aria-label="Search demos">
+    </div>
+    <div class="sep"></div>
+    <div class="filter-group">
       <span class="filter-label">Stage</span>
       <button class="fc on" data-fg="stage" data-fv="all">All</button>
       <button class="fc" data-fg="stage" data-fv="1">1 · Standard</button>
@@ -162,7 +175,14 @@
 
   <div id="grid" class="grid" hidden></div>
   <section id="field" hidden>
-    <p class="fnote">Your location stays on this phone. Ranking happens right here in the browser; nothing is sent anywhere.</p>
+    <form id="field-search">
+      <input id="loc-input" class="search-input" type="search" autocomplete="off"
+             placeholder="Type a street or address — e.g. Barton Springs Rd, Austin" aria-label="Search by address">
+      <button type="submit" class="fbtn">Search here</button>
+      <button type="button" id="use-gps" class="fbtn">Use my GPS</button>
+    </form>
+    <p id="field-where"></p>
+    <p class="fnote">Stores are ranked by distance right here in the browser. Use your GPS, or type any address to scout an area before you drive.</p>
     <div id="field-state" class="state" hidden></div>
     <div id="field-list"></div>
     <div id="field-pins"></div>
@@ -228,12 +248,17 @@
   var TIER_TIP   = { 1: 'Stage 1 · Standard', 2: 'Stage 2 · Impeccable', 3: 'Stage 3 · Live site' };
 
   // ── Filter state ─────────────────────────────────────────────────────────
-  var activeFilters = { stage: 'all', status: 'all' };
+  var activeFilters = { stage: 'all', status: 'all', q: '' };
 
   function matchesFilters(d) {
     var t = tier(d);
     if (activeFilters.stage !== 'all' && String(t) !== String(activeFilters.stage)) return false;
     if (activeFilters.status !== 'all' && d.status !== activeFilters.status) return false;
+    if (activeFilters.q) {
+      var hay = [d.name, d.category, d.city, d.state].filter(Boolean).join(' ').toLowerCase();
+      var terms = activeFilters.q.split(/\s+/);
+      for (var i = 0; i < terms.length; i++) if (hay.indexOf(terms[i]) === -1) return false;
+    }
     return true;
   }
 
@@ -278,6 +303,13 @@
         applyFilters();
       });
     });
+    var searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() {
+        activeFilters.q = searchInput.value.trim().toLowerCase();
+        applyFilters();
+      });
+    }
   }
 
   // ── Helpers ───────────────────────────────────────────────────────────────
@@ -369,7 +401,7 @@
   var fieldList  = document.getElementById('field-list');
   var fieldPins  = document.getElementById('field-pins');
   var fieldBtn   = document.getElementById('field-toggle');
-  var fieldOn    = false, mePos = null;
+  var fieldOn    = false, mePos = null, manualPos = false;
 
   function hashOpts() {
     var out = {};
@@ -538,6 +570,7 @@
     showFieldState('<p style="color:var(--dim)">Finding where you are…</p>');
     navigator.geolocation.getCurrentPosition(
       function(p) {
+        if (manualPos) return; // user typed an address before GPS resolved — don't override
         mePos = { lat: p.coords.latitude, lng: p.coords.longitude };
         if (fieldOn) renderField();
       },
@@ -553,6 +586,42 @@
       { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 }
     );
   }
+
+  // Typed-address scouting: geocode any address (OSM Nominatim) and rank from
+  // there — so the walk-up list works on a laptop, not just live phone GPS.
+  var fieldWhere = document.getElementById('field-where');
+  function setWhere(txt) { if (fieldWhere) fieldWhere.textContent = txt || ''; }
+
+  function geocodeText(q) {
+    var url = 'https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=' + encodeURIComponent(q);
+    return fetch(url, { headers: { 'Accept': 'application/json' } })
+      .then(function(r) { return r.ok ? r.json() : []; })
+      .then(function(a) {
+        return (a && a[0]) ? { lat: parseFloat(a[0].lat), lng: parseFloat(a[0].lon), label: a[0].display_name } : null;
+      })
+      .catch(function() { return null; });
+  }
+
+  var fieldSearch = document.getElementById('field-search');
+  var locInput    = document.getElementById('loc-input');
+  if (fieldSearch) {
+    fieldSearch.addEventListener('submit', function(ev) {
+      ev.preventDefault();
+      var q = (locInput.value || '').trim();
+      if (!q) return;
+      manualPos = true;
+      setWhere('');
+      showFieldState('<p style="color:var(--dim)">Looking up “' + esc(q) + '”…</p>');
+      geocodeText(q).then(function(hit) {
+        if (!hit) { showFieldState('<p>Could not find “' + esc(q) + '”. Try adding the city and state.</p>'); return; }
+        mePos = { lat: hit.lat, lng: hit.lng };
+        setWhere('Showing stores near ' + hit.label);
+        renderField();
+      });
+    });
+  }
+  var gpsBtn = document.getElementById('use-gps');
+  if (gpsBtn) gpsBtn.addEventListener('click', function() { manualPos = false; setWhere(''); locate(); });
 
   fieldBtn.addEventListener('click', function() {
     fieldOn = !fieldOn;
