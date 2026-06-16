@@ -66,6 +66,41 @@ single deploy).
 
 ---
 
+## Finding leads near a place — `find-nearby.mts`
+
+Before you have a Maps link, find the businesses worth one. Drop a street, an
+address, or a business you are standing next to and get a ranked shortlist of
+nearby places with no (or weak) website — each with the `build-lead` command
+ready to paste. This is the front door on the sidewalk: "what's near me that a
+low-cost site would help?"
+
+```bash
+# what's near me that needs a site
+npx tsx scripts/find-nearby.mts "Barton Springs Rd, Austin TX" --category="food truck"
+# standing on the corner — search from exact coords, tighten to a walk
+npx tsx scripts/find-nearby.mts --lat=30.2615 --lng=-97.7682 --radius-km=1
+# anchor on a business instead of a street
+npx tsx scripts/find-nearby.mts "Terry Black's Barbecue Austin"
+```
+
+It geocodes `<where>` with Nominatim (OSM, no API key), builds a Maps search URL,
+then runs the existing discovery pipeline headless — `discover-leads.mts` (scroll
+the Maps feed) → `check-websites.mts` (authoritative website_status + phone +
+address per place) — and keeps only the ones worth a knock: **no/weak website,
+rating + reviews above the floor.** Output is a ranked list with distance, phone,
+address, and the `build-lead.mts "<href>"` command per pick.
+
+Flags: `--category` (default `food truck`), `--zoom` (lower = wider net),
+`--radius-km` (0 = no limit; set it to keep the list walkable), `--min-rating`
+(4.0), `--min-reviews` (10), `--top` (20), `--skip-known` (drop places already in
+`biz/_registry/checked-places.ndjson`), `--out=<file.ndjson>`, `--headful`. Needs
+headless Chrome, same as the scrapers.
+
+Then run `build-lead.mts` on the hrefs worth building. The phone-confirm rule still
+applies before any number goes on a public demo.
+
+---
+
 ## Automated path — drop a link, get a lead + demo + pitch
 
 `npx tsx scripts/build-lead.mts "<maps-url>" [--max=12] [--slug=] [--price=75] [--no-pitch]`
