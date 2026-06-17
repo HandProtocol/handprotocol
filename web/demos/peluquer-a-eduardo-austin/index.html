@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-es="Peluquería Eduardo · Cortes en Montopolis · Austin TX">Peluquería Eduardo · Haircuts on Montopolis · Austin TX</title>
+<meta name="description" content="Neighborhood barbershop on the Montopolis strip, Austin TX. Walk-ins welcome. Se habla español. 5.0 stars on Google." data-es="Peluquería de barrio en la calle Montopolis, Austin TX. Se aceptan clientes sin cita. Se habla español. 5.0 estrellas en Google.">
+<link rel="canonical" href="https://handprotocol.org/demos/peluquer-a-eduardo-austin/">
+<meta property="og:title" content="Peluquería Eduardo · Montopolis, Austin TX">
+<meta property="og:description" content="Neighborhood barber on the Montopolis strip. Walk-ins welcome. Se habla español. 5.0 stars.">
+<meta property="og:type" content="business.business">
+<meta property="og:url" content="https://handprotocol.org/demos/peluquer-a-eduardo-austin/">
+<meta name="theme-color" content="#1a1410">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --orange:     #E07020;
+    --orange-hi:  #F08030;
+    --orange-dim: rgba(224,112,32,0.13);
+    --orange-line:rgba(224,112,32,0.28);
+    --charcoal:   #1A1410;
+    --charcoal-2: #251E17;
+    --charcoal-3: #322A21;
+    --cream:      #F4EDE2;
+    --cream-2:    #C9B89E;
+    --cream-3:    #9A876F;
+    --ink:        #F2EAD8;
+    --ink-2:      #C5B49A;
+    --ink-3:      #8A7760;
+    --r-sm: 7px; --r-md: 12px; --r-lg: 18px;
+    --ease: cubic-bezier(0.22,1,0.36,1);
+    --maxw: 860px;
+    --font-display: 'Anton', Impact, 'Arial Black', sans-serif;
+    --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:var(--charcoal);color:var(--ink);
+    font-family:var(--font-body);font-size:1.0625rem;line-height:1.65;
+    font-weight:400;-webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--orange);color:var(--charcoal)}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.1rem,4vw,2.2rem)}
+
+  /* skip link */
+  .skip{position:absolute;left:-999px;top:0;z-index:200;background:var(--orange);color:var(--charcoal);
+    padding:0.7rem 1.1rem;border-radius:0 0 var(--r-sm) 0;font-weight:700}
+  .skip:focus{left:0}
+
+  /* -- BARBER POLE STRIPE accent -- */
+  .pole-stripe{
+    height:4px;
+    background:repeating-linear-gradient(
+      90deg,
+      var(--orange)     0 14px,
+      var(--charcoal-3) 14px 20px,
+      #fff              20px 24px,
+      var(--charcoal-3) 24px 30px
+    );
+    opacity:0.55;
+  }
+
+  /* -- HERO -- */
+  .hero{
+    position:relative;
+    padding:clamp(3.2rem,8vw,5.4rem) 0 clamp(2.8rem,6vw,4.4rem);
+    text-align:center;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:radial-gradient(120% 70% at 50% -10%, rgba(224,112,32,0.15), transparent 60%);
+    pointer-events:none;
+  }
+  .hero::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--orange-line),transparent);
+  }
+  .hero__inner{position:relative;z-index:1}
+
+  /* scissors SVG badge */
+  .hero__badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:clamp(52px,10vw,70px);height:clamp(52px,10vw,70px);
+    border-radius:50%;
+    border:1.5px solid var(--orange-line);
+    background:var(--charcoal-2);
+    margin:0 auto 1.4rem;
+    color:var(--orange);
+  }
+  .hero__badge svg{width:clamp(26px,5vw,36px);height:auto}
+
+  .hero h1{
+    font-family:var(--font-display);
+    font-size:clamp(3.2rem,11vw,6.4rem);
+    line-height:0.96;
+    letter-spacing:0.02em;
+    color:var(--cream);
+    text-transform:uppercase;
+    margin-bottom:0.65rem;
+  }
+  .hero__name-line{
+    color:var(--orange);
+  }
+  .hero__tag{
+    font-family:var(--font-body);
+    font-size:clamp(1rem,2.4vw,1.2rem);
+    color:var(--ink-2);
+    font-weight:500;
+    margin-bottom:1.5rem;
+    letter-spacing:0.01em;
+  }
+  .hero__rating{
+    display:inline-flex;align-items:center;gap:0.6rem;
+    font-size:0.95rem;color:var(--ink-2);font-weight:500;
+    margin-bottom:2rem;
+  }
+  .stars{display:inline-flex;gap:2px;color:var(--orange)}
+  .stars svg{width:15px;height:15px}
+
+  .hero__ctas{
+    display:flex;flex-wrap:wrap;gap:0.85rem;justify-content:center;
+  }
+
+  /* -- BUTTONS -- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:0.55rem;
+    font-family:var(--font-body);font-weight:700;font-size:0.97rem;
+    padding:0.88rem 1.55rem;border-radius:var(--r-md);
+    min-height:50px;border:1.5px solid transparent;cursor:pointer;
+    transition:transform .2s var(--ease),box-shadow .2s var(--ease),border-color .2s var(--ease),background .2s var(--ease);
+    text-decoration:none;
+  }
+  .btn--primary{
+    background:var(--orange);
+    color:var(--charcoal);
+    border-color:var(--orange);
+    box-shadow:0 1px 0 rgba(255,255,255,0.2) inset;
+  }
+  .btn--primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px -10px var(--orange)}
+  .btn--ghost{
+    border-color:var(--orange-line);
+    color:var(--orange-hi);
+    background:transparent;
+  }
+  .btn--ghost:hover{border-color:var(--orange);background:var(--orange-dim);transform:translateY(-2px)}
+  .btn svg{width:17px;height:17px;flex:none}
+
+  /* -- SECTION BASE -- */
+  section{padding:clamp(2.6rem,6vw,4rem) 0}
+  .section-label{
+    font-family:var(--font-body);font-weight:700;font-size:0.70rem;
+    letter-spacing:0.28em;text-transform:uppercase;color:var(--orange);
+    display:inline-flex;align-items:center;gap:0.6rem;margin-bottom:0.9rem;
+  }
+  .section-label::before{content:"";width:1.6rem;height:1px;background:var(--orange);opacity:0.7}
+
+  /* -- TESTIMONIAL -- */
+  .testimonial{
+    background:var(--charcoal-2);
+    border:1px solid var(--orange-line);
+    border-radius:var(--r-lg);
+    padding:clamp(1.8rem,5vw,3rem) clamp(1.6rem,4vw,2.6rem);
+    max-width:540px;
+    margin:0 auto;
+    text-align:center;
+    position:relative;
+  }
+  .testimonial::before{
+    content:"\201C";
+    position:absolute;top:-0.3rem;left:1.4rem;
+    font-family:Georgia,serif;font-size:5rem;line-height:1;
+    color:var(--orange);opacity:0.25;pointer-events:none;
+  }
+  .testimonial__quote{
+    font-size:clamp(1.35rem,3.5vw,1.7rem);
+    font-weight:700;
+    color:var(--cream);
+    line-height:1.25;
+    margin-bottom:1.1rem;
+    font-style:italic;
+  }
+  .testimonial__byline{
+    font-size:0.88rem;
+    color:var(--ink-3);
+    font-weight:500;
+    letter-spacing:0.04em;
+  }
+  .testimonial__byline .stars{display:inline-flex;margin:0 0.3rem;vertical-align:middle}
+  .testimonial__byline .stars svg{width:13px;height:13px}
+
+  /* -- ABOUT -- */
+  .about{
+    background:var(--charcoal-2);
+    border-top:1px solid var(--charcoal-3);
+    border-bottom:1px solid var(--charcoal-3);
+  }
+  .about__grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:1.4rem;
+    max-width:580px;
+  }
+  .about__headline{
+    font-family:var(--font-display);
+    font-size:clamp(2rem,5.5vw,2.8rem);
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    color:var(--cream);
+    line-height:1;
+    margin-bottom:0.5rem;
+  }
+  .about__text{
+    color:var(--ink-2);
+    font-size:1.02rem;
+    line-height:1.7;
+  }
+  .about__tags{
+    display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.85rem;
+  }
+  .tag{
+    display:inline-block;
+    background:var(--charcoal-3);
+    color:var(--ink-2);
+    border:1px solid var(--charcoal-3);
+    border-radius:999px;
+    padding:0.32rem 0.85rem;
+    font-size:0.82rem;
+    font-weight:600;
+    letter-spacing:0.03em;
+  }
+
+  /* -- VISIT -- */
+  .visit__grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:clamp(1.4rem,4vw,2.4rem);
+    align-items:start;
+  }
+  @media(max-width:580px){
+    .visit__grid{grid-template-columns:1fr}
+  }
+  .visit__info{}
+  .visit__address{
+    font-size:1.05rem;
+    color:var(--ink-2);
+    line-height:1.55;
+    margin-bottom:1.3rem;
+  }
+  .visit__address strong{
+    display:block;
+    font-family:var(--font-display);
+    font-size:clamp(1.5rem,4vw,2rem);
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    color:var(--cream);
+    margin-bottom:0.25rem;
+  }
+  .visit__ctas{display:flex;flex-direction:column;gap:0.65rem;max-width:220px}
+  .visit__photo-wrap{
+    border-radius:var(--r-lg);
+    overflow:hidden;
+    border:1px solid var(--charcoal-3);
+    background:var(--charcoal-2);
+    box-shadow:0 8px 32px -12px rgba(0,0,0,0.6);
+    max-width:380px;
+  }
+  .visit__photo-wrap img{
+    width:100%;
+    height:auto;
+    max-height:260px;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+  }
+  .visit__photo-cap{
+    padding:0.7rem 1rem;
+    font-size:0.78rem;
+    color:var(--ink-3);
+    letter-spacing:0.02em;
+    border-top:1px solid var(--charcoal-3);
+  }
+
+  /* -- FOOTER -- */
+  footer{
+    padding:1.8rem 0;
+    border-top:1px solid var(--charcoal-3);
+    text-align:center;
+    font-size:0.82rem;
+    color:var(--ink-3);
+  }
+  footer a{color:var(--orange);text-decoration:underline;text-underline-offset:3px}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip" data-es="Saltar al contenido">Skip to content</a>
+
+<div class="pole-stripe" aria-hidden="true"></div>
+
+<!-- HERO -->
+<section class="hero" id="main" aria-label="Hero">
+  <div class="wrap">
+    <div class="hero__inner">
+
+      <!-- scissors badge -->
+      <div class="hero__badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+          <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+          <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+          <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+        </svg>
+      </div>
+
+      <h1>
+        <span class="hero__name-line" data-es="Peluquería">Peluquería</span><br>
+        <span data-es="Eduardo">Eduardo</span>
+      </h1>
+
+      <p class="hero__tag" data-es="La silla de Eduardo en Montopolis. Pasa y te cortamos.">Eduardo's chair on Montopolis. Walk in for a cut.</p>
+
+      <div class="hero__rating">
+        <span class="stars" aria-label="5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </span>
+        <span data-es="5.0 en Google">5.0 on Google</span>
+      </div>
+
+      <div class="hero__ctas">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Peluquer%C3%ADa%20Eduardo%2C%201710B%20Montopolis%20Dr%2C%20Austin%2C%20TX%2078741"
+           class="btn btn--primary"
+           target="_blank" rel="noopener noreferrer"
+           data-es="Cómo llegar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+          Get directions
+        </a>
+        <a href="https://www.google.com/maps/place/Peluquer%C3%ADa+Eduardo/data=!4m7!3m6!1s0x8644b536931fc9f7:0x22a25ebc33bca8cb!8m2!3d30.2267107!4d-97.7025385!16s%2Fg%2F11h8bmnh66!19sChIJ98kfkza1RIYRy6i8M7xeoiI"
+           class="btn btn--ghost"
+           target="_blank" rel="noopener noreferrer"
+           data-es="Ver en Google">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          View on Google
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="pole-stripe" aria-hidden="true" style="opacity:0.25"></div>
+
+<!-- TESTIMONIAL -->
+<section aria-label="Reviews" style="padding:clamp(2.6rem,6vw,4rem) 0">
+  <div class="wrap">
+    <div style="text-align:center;margin-bottom:1.4rem">
+      <span class="section-label" data-es="Lo que dicen">What they say</span>
+    </div>
+    <div class="testimonial">
+      <p class="testimonial__quote" data-es="&ldquo;Eduardo es el mejor&rdquo;">&ldquo;Eduardo is the man&rdquo;</p>
+      <p class="testimonial__byline">
+        Juan Ruiz &bull;
+        <span class="stars" aria-label="5 stars">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </span>
+        <span data-es="Google">Google</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" aria-label="About">
+  <div class="wrap" style="padding-top:clamp(2.4rem,5vw,3.6rem);padding-bottom:clamp(2.4rem,5vw,3.6rem)">
+    <div class="about__grid">
+      <div>
+        <span class="section-label" data-es="La peluquería">The shop</span>
+        <h2 class="about__headline" data-es="Barrio.<br>Montopolis.">Neighborhood.<br>Montopolis.</h2>
+        <p class="about__text" data-es="Una peluquería de barrio en la franja de Montopolis, en el este de Austin. Clientes sin cita bienvenidos.">A neighborhood barber shop on the Montopolis strip in East Austin. Walk-ins welcome.</p>
+        <div class="about__tags">
+          <span class="tag" data-es="Cortes de pelo">Haircuts</span>
+          <span class="tag" data-es="Sin cita previa">Walk-ins</span>
+          <span class="tag" data-es="Se habla español">Se habla español</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section aria-label="Visit us" id="visit">
+  <div class="wrap">
+    <span class="section-label" data-es="Visítanos">Visit us</span>
+    <div class="visit__grid">
+
+      <div class="visit__info">
+        <div class="visit__address">
+          <strong data-es="Peluquería Eduardo">Peluquería Eduardo</strong>
+          1710B Montopolis Dr<br>Austin, TX 78741
+        </div>
+        <div class="visit__ctas">
+          <a href="https://www.google.com/maps/dir/?api=1&destination=Peluquer%C3%ADa%20Eduardo%2C%201710B%20Montopolis%20Dr%2C%20Austin%2C%20TX%2078741"
+             class="btn btn--primary"
+             target="_blank" rel="noopener noreferrer"
+             data-es="Cómo llegar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Get directions
+          </a>
+          <a href="https://www.google.com/maps/place/Peluquer%C3%ADa+Eduardo/data=!4m7!3m6!1s0x8644b536931fc9f7:0x22a25ebc33bca8cb!8m2!3d30.2267107!4d-97.7025385!16s%2Fg%2F11h8bmnh66!19sChIJ98kfkza1RIYRy6i8M7xeoiI"
+             class="btn btn--ghost"
+             target="_blank" rel="noopener noreferrer"
+             data-es="Ver en Google">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            View on Google
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <figure class="visit__photo-wrap">
+          <img src="img/storefront.webp"
+               alt="Peluquería Eduardo storefront on Montopolis Drive, Austin TX, orange building with a BARBER feather flag"
+               width="400" height="260"
+               loading="lazy" decoding="async">
+          <figcaption class="visit__photo-cap" data-es="El local en Montopolis Dr, Austin">The shop on Montopolis Dr, Austin</figcaption>
+        </figure>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="pole-stripe" aria-hidden="true" style="margin-top:clamp(2rem,4vw,3rem);opacity:0.3"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <p data-es="Un sitio de muestra gratuito hecho por <a href='https://handprotocol.org' target='_blank' rel='noopener'>HAND</a>.">A free preview site built by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.</p>
+  </div>
+</footer>
+
+<!-- Lang toggle button -->
+<button data-lang-toggle data-lang-to="es" type="button" aria-label="Ver en español" aria-pressed="false" style="position:fixed;bottom:16px;right:16px;z-index:99999;display:inline-flex;align-items:center;gap:.45em;padding:.6em 1em;font:700 14px/1 system-ui,-apple-system,sans-serif;color:#fff;background:rgba(20,20,20,.92);border:1px solid rgba(255,255,255,.3);border-radius:999px;cursor:pointer;backdrop-filter:blur(8px);box-shadow:0 6px 20px -6px rgba(0,0,0,.6)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span class="hand-lang-label">Español</span></button>
+
+<script defer src="/assets/demo-visit.js"></script>
+<script>
+(function(){var KEY="hand-lang";var nodes=[].slice.call(document.querySelectorAll("[data-es]"));nodes.forEach(function(n){n.__en=(n.tagName==="META")?n.getAttribute("content"):n.innerHTML;});function setToggles(es){[].forEach.call(document.querySelectorAll("[data-lang-toggle]"),function(b){b.setAttribute("data-lang-to",es?"en":"es");b.setAttribute("aria-pressed",es?"true":"false");b.setAttribute("aria-label",es?"View in English":"Ver en español");var l=b.querySelector(".hand-lang-label");if(l)l.textContent=es?"English":"Español";});}function apply(lang){var es=lang==="es";nodes.forEach(function(n){var v=es?n.getAttribute("data-es"):n.__en;if(v==null)return;if(n.tagName==="META")n.setAttribute("content",v);else n.innerHTML=v;});document.documentElement.lang=es?"es":"en";setToggles(es);}var stored=null;try{stored=localStorage.getItem(KEY);}catch(e){}var nav=(navigator.language||navigator.userLanguage||"").toLowerCase();apply(stored||(nav.indexOf("es")===0?"es":"en"));document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-lang-toggle]");if(!b)return;e.preventDefault();var to=b.getAttribute("data-lang-to")||"es";apply(to);try{localStorage.setItem(KEY,to);}catch(e2){}});})();
+</script>
+</body>
+</html>
