@@ -11,7 +11,7 @@ google_url: >-
 google_rating: 4.6
 reviews_count: 7
 website_status: none
-status: prospect
+status: built
 campaign: riverside-coriander
 lat: 30.226831
 lng: -97.702465
