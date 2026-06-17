@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-es="Tigre Del Barrio Tire Shop · Austin TX · Reparaciones rapidas, precios justos">Tigre Del Barrio Tire Shop · Austin TX · Fast Repairs, Fair Prices</title>
+<meta name="description" content="Tigre Del Barrio Tire Shop on Montopolis Drive, Austin TX. Flat tire repair, new and used tires, mounting, brakes, tune-ups, and oil changes. 4.8 stars, 38 reviews. Open late." data-es="Tigre Del Barrio Tire Shop en Montopolis Drive, Austin TX. Reparacion de llantas, llantas nuevas y usadas, montaje, frenos, afinaciones y cambio de aceite. 4.8 estrellas, 38 resenas. Abierto hasta tarde.">
+<link rel="canonical" href="https://handprotocol.org/demos/tigre-del-barrio-tire-shop-austin/">
+<meta property="og:title" content="Tigre Del Barrio Tire Shop · Austin TX">
+<meta property="og:description" content="Fast flat repair, new and used tires, mounting, brakes and more. 4.8 stars on Google. Open late on Montopolis Drive.">
+<meta property="og:type" content="business.business">
+<meta property="og:image" content="https://handprotocol.org/demos/tigre-del-barrio-tire-shop-austin/img/yard.webp">
+<meta property="og:url" content="https://handprotocol.org/demos/tigre-del-barrio-tire-shop-austin/">
+<meta name="theme-color" content="#111111">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #111111;
+    --bg-raised: #191919;
+    --bg-panel:  #212121;
+    --ink:       #f2ede8;
+    --ink-2:     #b8b0a8;
+    --ink-3:     #786e68;
+    --red:       #d62b2b;
+    --red-hi:    #e83c3c;
+    --red-dim:   rgba(214,43,43,0.12);
+    --red-line:  rgba(214,43,43,0.28);
+    --steel:     #8a9198;
+    --line:      rgba(255,255,255,0.08);
+    --line-soft: rgba(255,255,255,0.06);
+    --r-sm: 6px; --r-md: 10px; --r-lg: 16px; --r-xl: 24px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --maxw: 1160px;
+    --font-display: 'Anton', Impact, 'Arial Narrow', sans-serif;
+    --font-body: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.64;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { line-height: 1.05; }
+  ::selection { background: var(--red); color: #fff; }
+  :focus-visible { outline: 3px solid var(--red); outline-offset: 3px; border-radius: 4px; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 clamp(1.1rem, 4vw, 2.4rem); }
+
+  /* eyebrow label */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-family: var(--font-body); font-weight: 700; font-size: 0.7rem;
+    letter-spacing: 0.26em; text-transform: uppercase; color: var(--red);
+  }
+  .eyebrow::before { content: ""; width: 1.6rem; height: 2px; background: var(--red); }
+
+  /* skip link */
+  .skip {
+    position: absolute; left: -999px; top: 0; z-index: 300;
+    background: var(--red); color: #fff;
+    padding: 0.7rem 1.1rem; border-radius: 0 0 var(--r-sm) 0; font-weight: 700;
+  }
+  .skip:focus { left: 0; }
+
+  /* stars */
+  .stars { display: inline-flex; gap: 2px; color: #f5a623; }
+  .stars svg { width: 16px; height: 16px; }
+
+  /* NAV */
+  header.nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(17,17,17,0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav__row {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 68px;
+  }
+  .brand { display: inline-flex; flex-direction: column; line-height: 1; gap: 1px; }
+  .brand__name {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    letter-spacing: 0.02em;
+    color: #fff;
+  }
+  .brand__sub {
+    font-size: 0.58rem; font-weight: 700; letter-spacing: 0.32em;
+    text-transform: uppercase; color: var(--steel);
+  }
+  .nav__links { display: flex; align-items: center; gap: 1.8rem; }
+  .nav__links a {
+    color: var(--ink-2); font-weight: 500; font-size: 0.92rem;
+    transition: color .18s var(--ease);
+  }
+  .nav__links a:hover { color: var(--ink); }
+  .nav__cta {
+    background: var(--red) !important;
+    color: #fff !important;
+    padding: 0.58rem 1.1rem;
+    border-radius: var(--r-md);
+    font-weight: 700; font-size: 0.88rem;
+    transition: background .2s, transform .2s var(--ease);
+  }
+  .nav__cta:hover { background: var(--red-hi) !important; transform: translateY(-1px); }
+  @media (max-width: 740px) { .nav__links a:not(.nav__cta) { display: none; } }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 0.5rem; font-weight: 700; font-size: 1rem;
+    padding: 0.92rem 1.5rem; border-radius: var(--r-md);
+    min-height: 52px; border: 2px solid transparent; cursor: pointer;
+    transition: transform .2s var(--ease), box-shadow .2s var(--ease),
+                background .2s, border-color .2s;
+    font-family: var(--font-body);
+  }
+  .btn svg { width: 18px; height: 18px; flex: none; }
+  .btn--red {
+    background: var(--red); color: #fff;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.15) inset;
+  }
+  .btn--red:hover { background: var(--red-hi); transform: translateY(-2px); box-shadow: 0 12px 28px -10px var(--red); }
+  .btn--outline {
+    border-color: rgba(255,255,255,0.22); color: var(--ink);
+    background: rgba(255,255,255,0.04);
+  }
+  .btn--outline:hover { border-color: rgba(255,255,255,0.42); background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+  .btn--xl { font-size: 1.15rem; padding: 1.1rem 1.8rem; min-height: 60px; }
+
+  /* HERO */
+  .hero {
+    position: relative; overflow: hidden;
+    padding: 0;
+    min-height: clamp(520px, 72vh, 820px);
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .hero__bg {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .hero__bg img {
+    width: 100%; height: 100%; object-fit: cover;
+    object-position: center 40%;
+  }
+  .hero__overlay {
+    position: absolute; inset: 0; z-index: 1;
+    background: linear-gradient(
+      180deg,
+      rgba(17,17,17,0.20) 0%,
+      rgba(17,17,17,0.35) 35%,
+      rgba(17,17,17,0.78) 65%,
+      rgba(17,17,17,0.96) 88%,
+      rgba(17,17,17,1) 100%
+    );
+  }
+  .hero__content {
+    position: relative; z-index: 2;
+    padding: clamp(2.4rem, 5vw, 3.8rem) 0 clamp(2.8rem, 6vw, 4.4rem);
+  }
+  .hero__badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--red); color: #fff;
+    font-family: var(--font-body); font-weight: 700; font-size: 0.72rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 0.4rem 0.85rem; border-radius: var(--r-sm);
+    margin-bottom: 1.2rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 9.5vw, 6.8rem);
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    color: #fff;
+    margin-bottom: 0.25rem;
+  }
+  .hero h1 .line2 {
+    display: block;
+    color: var(--red);
+  }
+  .hero__promise {
+    font-size: clamp(1.06rem, 2vw, 1.28rem);
+    color: var(--ink-2);
+    max-width: 38rem;
+    margin: 1rem 0 1.6rem;
+    line-height: 1.5;
+  }
+  .hero__rating {
+    display: inline-flex; align-items: center; gap: 0.65rem;
+    font-weight: 600; font-size: 0.95rem;
+    color: var(--ink-2);
+    margin-bottom: 1.8rem;
+  }
+  .hero__rating b { color: #fff; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: 0.8rem; }
+  .hero__note {
+    margin-top: 1.1rem;
+    font-size: 0.88rem; color: var(--ink-3);
+  }
+
+  /* PROOF STRIP */
+  .proof-strip {
+    background: var(--red);
+    padding: 0.85rem 0;
+    overflow: hidden;
+  }
+  .proof-strip__inner {
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 0 2.2rem;
+  }
+  .proof-item {
+    display: flex; align-items: center; gap: 0.55rem;
+    font-family: var(--font-body); font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.04em; color: #fff; white-space: nowrap;
+    padding: 0.2rem 0;
+  }
+  .proof-item svg { width: 16px; height: 16px; flex: none; opacity: 0.85; }
+  .proof-sep { color: rgba(255,255,255,0.4); font-size: 1.1rem; }
+  @media (max-width: 520px) { .proof-sep { display: none; } .proof-strip__inner { gap: 0.4rem 1.4rem; } }
+
+  /* SECTIONS */
+  section { position: relative; }
+  .band { padding: clamp(3rem, 7vw, 5rem) 0; }
+  .band--raised {
+    background: var(--bg-raised);
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .sec-head {
+    max-width: 44rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+  .sec-head h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    letter-spacing: 0.01em;
+    color: #fff;
+    margin: 0.8rem 0 0;
+  }
+  .sec-head p { color: var(--ink-2); margin-top: 0.85rem; font-size: 1.06rem; }
+
+  /* PHOTO MOSAIC */
+  .mosaic {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.7rem;
+  }
+  .mosaic figure {
+    position: relative; overflow: hidden;
+    border-radius: var(--r-md);
+    border: 1px solid var(--line-soft);
+  }
+  .mosaic figure img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform .7s var(--ease);
+  }
+  .mosaic figure:hover img { transform: scale(1.04); }
+  .mosaic .m-main { grid-row: span 2; }
+  .mosaic .m-main img { min-height: 340px; }
+  .mosaic .m-sm img { aspect-ratio: 4/3; }
+  .mosaic figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 1.4rem 0.85rem 0.65rem;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: rgba(255,255,255,0.82);
+    background: linear-gradient(transparent, rgba(10,10,10,0.85));
+  }
+  @media (max-width: 680px) {
+    .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .mosaic .m-main { grid-column: span 2; grid-row: span 1; }
+    .mosaic .m-main img { min-height: 0; aspect-ratio: 16/9; }
+    .mosaic .m-sm img { aspect-ratio: 1/1; }
+  }
+
+  /* SERVICES */
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .svc-card {
+    padding: 1.55rem 1.6rem 1.7rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-lg);
+    transition: transform .25s var(--ease), border-color .25s;
+  }
+  .svc-card:hover { transform: translateY(-3px); border-color: var(--red-line); }
+  .svc-ico {
+    width: 40px; height: 40px;
+    border-radius: 9px;
+    display: grid; place-items: center;
+    background: var(--red-dim);
+    border: 1px solid var(--red-line);
+    margin-bottom: 1rem;
+  }
+  .svc-ico svg { width: 20px; height: 20px; color: var(--red); }
+  .svc-card h3 {
+    font-family: var(--font-body); font-weight: 700;
+    font-size: 1.08rem; margin-bottom: 0.35rem; color: #fff;
+  }
+  .svc-card p { color: var(--ink-2); font-size: 0.96rem; line-height: 1.55; }
+
+  /* FEATURE BLOCK */
+  .feature {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(1.6rem, 4vw, 3.2rem);
+    align-items: center;
+  }
+  .feature--rev { }
+  .feature__img {
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    border: 1px solid var(--line-soft);
+    box-shadow: 0 20px 55px -30px rgba(0,0,0,0.85);
+  }
+  .feature__img img { width: 100%; height: auto; }
+  .feature__text {}
+  .feature__text h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    letter-spacing: 0.01em; color: #fff;
+    margin: 0.8rem 0 0;
+  }
+  .feature__text p { color: var(--ink-2); margin-top: 1rem; font-size: 1.06rem; }
+  .feature__text strong { color: var(--ink); font-weight: 600; }
+  .feature__note {
+    margin-top: 1.4rem;
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-weight: 700; color: var(--red); font-size: 0.94rem;
+  }
+  .feature__note svg { width: 18px; height: 18px; }
+  @media (max-width: 820px) {
+    .feature { grid-template-columns: 1fr; }
+    .feature__img { max-width: 100%; }
+  }
+
+  /* TESTIMONIALS */
+  .quotes { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.1rem; }
+  .quote {
+    position: relative;
+    padding: 1.65rem 1.75rem;
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-lg);
+  }
+  .quote .stars { margin-bottom: 0.8rem; }
+  .quote p { font-size: 1.02rem; line-height: 1.56; color: var(--ink); }
+  .quote cite {
+    display: block; margin-top: 1rem;
+    font-style: normal; font-weight: 700; font-size: 0.88rem;
+    color: var(--red); letter-spacing: 0.03em;
+  }
+  .quote--hero {
+    grid-column: span 2;
+    border-color: var(--red-line);
+    background: rgba(214,43,43,0.06);
+  }
+  .quote--hero p {
+    font-family: var(--font-display);
+    font-size: clamp(1.35rem, 2.6vw, 1.9rem);
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    color: #fff;
+  }
+  @media (max-width: 680px) { .quote--hero { grid-column: span 1; } }
+
+  /* VISIT / CONTACT */
+  .visit-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(1.4rem, 3.5vw, 2.6rem);
+    align-items: stretch;
+  }
+  .vcard {
+    background: var(--bg-panel);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r-lg);
+    padding: clamp(1.6rem, 3.5vw, 2.3rem);
+  }
+  .vcard h3 {
+    font-family: var(--font-body);
+    font-size: 1.4rem; font-weight: 700; color: #fff;
+    margin-bottom: 1.25rem;
+  }
+  .vrow {
+    display: flex; gap: 0.9rem;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--line-soft);
+  }
+  .vrow:first-of-type { border-top: none; padding-top: 0; }
+  .vrow svg { width: 20px; height: 20px; color: var(--red); flex: none; margin-top: 2px; }
+  .vrow .k {
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--ink-3); font-weight: 700;
+  }
+  .vrow .v { color: var(--ink); font-weight: 500; line-height: 1.5; margin-top: 0.2rem; }
+  .vrow .v a { color: var(--red-hi); font-weight: 700; }
+  .vrow .v a:hover { text-decoration: underline; }
+  .hours-note {
+    font-size: 0.82rem; color: var(--ink-3); margin-top: 0.5rem; line-height: 1.45;
+  }
+  .visit__btns { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.5rem; }
+
+  /* directions card */
+  .dir-card {
+    border: 1px solid var(--red-line);
+    border-radius: var(--r-lg);
+    background: rgba(214,43,43,0.07);
+    padding: 1.4rem 1.6rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .dir-card__label {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--red);
+  }
+  .dir-card__addr {
+    font-size: 1.08rem; font-weight: 600; color: #fff; line-height: 1.4;
+  }
+  .dir-card__addr span { display: block; color: var(--ink-2); font-weight: 400; font-size: 0.96rem; margin-top: 0.15rem; }
+  .dir-card__link {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-weight: 700; color: #fff; font-size: 0.92rem;
+    background: var(--red); padding: 0.7rem 1.1rem;
+    border-radius: var(--r-md);
+    transition: background .2s, transform .2s var(--ease);
+    align-self: flex-start;
+  }
+  .dir-card__link:hover { background: var(--red-hi); transform: translateY(-1px); }
+  .dir-card__link svg { width: 16px; height: 16px; }
+
+  .store-img {
+    border-radius: var(--r-lg); overflow: hidden;
+    border: 1px solid var(--line-soft);
+    position: relative;
+  }
+  .store-img img { width: 100%; height: 100%; object-fit: cover; min-height: 260px; }
+  .store-img figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 2rem 1rem 0.85rem;
+    font-size: 0.84rem; font-weight: 600; color: rgba(255,255,255,0.82);
+    background: linear-gradient(transparent, rgba(10,10,10,0.88));
+  }
+  @media (max-width: 740px) { .visit-grid { grid-template-columns: 1fr; } }
+
+  /* FOOTER */
+  footer {
+    padding: clamp(2.6rem, 5vw, 3.8rem) 0 2.2rem;
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .foot {
+    display: flex; flex-wrap: wrap;
+    justify-content: space-between; gap: 1.4rem; align-items: flex-end;
+  }
+  .foot__name {
+    font-family: var(--font-display);
+    font-size: 1.9rem; color: #fff; letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .foot__sub { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--steel); margin-top: 2px; }
+  .foot p { color: var(--ink-3); font-size: 0.92rem; margin-top: 0.5rem; max-width: 24rem; }
+  .foot__hand { font-size: 0.85rem; color: var(--ink-3); }
+  .foot__hand a { color: var(--red-hi); font-weight: 700; border-bottom: 1px solid var(--red-line); }
+  .foot__hand a:hover { color: #fff; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .65s var(--ease), transform .65s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { scroll-behavior: auto !important; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .mosaic figure img, .feature__img img, .svc-card, .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Language toggle -->
+<button data-lang-toggle data-lang-to="es" type="button" aria-label="Ver en español" aria-pressed="false" style="position:fixed;bottom:16px;right:16px;z-index:99999;display:inline-flex;align-items:center;gap:.45em;padding:.6em 1em;font:700 14px/1 system-ui,-apple-system,sans-serif;color:#fff;background:rgba(20,20,20,.92);border:1px solid rgba(255,255,255,.3);border-radius:999px;cursor:pointer;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 20px -6px rgba(0,0,0,.6)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span class="hand-lang-label">Español</span></button>
+
+<a class="skip" href="#main"><span data-es="Saltar al contenido">Skip to content</span></a>
+
+<header class="nav">
+  <div class="wrap nav__row">
+    <a class="brand" href="#top" aria-label="Tigre Del Barrio Tire Shop home">
+      <span class="brand__name" data-es="Tigre Del Barrio">Tigre Del Barrio</span>
+      <span class="brand__sub" data-es="Llantera · Austin TX">Tire Shop · Austin TX</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#services"><span data-es="Servicios">Services</span></a>
+      <a href="#reviews"><span data-es="Resenas">Reviews</span></a>
+      <a href="#visit"><span data-es="Visitanos">Visit</span></a>
+      <a class="nav__cta" href="tel:+17373685380" style="color:#fff!important;"><span data-es="Llama ahora">Call now</span></a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<a id="top"></a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__bg">
+    <img src="img/yard.webp" width="1400" height="860" fetchpriority="high" loading="eager"
+         alt="Tall stacks of tires with sizes chalked on them fill the Tigre Del Barrio lot, a neon OPEN sign glows in the background.">
+  </div>
+  <div class="hero__overlay" aria-hidden="true"></div>
+  <div class="hero__content">
+    <div class="wrap">
+      <div class="hero__badge" data-es="Montopolis Drive · Austin TX">Montopolis Drive · Austin TX</div>
+      <h1>
+        <span data-es="TIGRE">TIGRE</span>
+        <span class="line2" data-es="DEL BARRIO">DEL BARRIO</span>
+      </h1>
+      <p class="hero__promise" data-es="Reparacion rapida de llantas. Precios justos. Abierto cuando los demas ya cerraron. El taller de llantas que el barrio necesita.">Fast tire repair. Fair prices. Open when everyone else is closed. The tire shop Montopolis counts on.</p>
+      <div class="hero__rating">
+        <span class="stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+        </span>
+        <span><b>4.8</b> <span data-es="de 38 resenas en Google">from 38 Google reviews</span></span>
+      </div>
+      <div class="hero__actions">
+        <a class="btn btn--red btn--xl" href="tel:+17373685380" style="color:#fff!important;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-es="Llama: (737) 368-5380">Call: (737) 368-5380</span>
+        </a>
+        <a class="btn btn--outline" href="https://www.google.com/maps/dir/?api=1&destination=Tigre%20Del%20Barrio%20Tire%20Shop%2C%201710%20Montopolis%20Dr%2C%20Austin%2C%20TX%2078741" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-es="Como llegar">Get directions</span>
+        </a>
+      </div>
+      <p class="hero__note" data-es="Abierto hasta tarde, incluso de noche. Llama para confirmar horario.">Open late, even at night. Call to confirm hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<div class="proof-strip" role="complementary" aria-label="Quick facts">
+  <div class="wrap">
+    <div class="proof-strip__inner">
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <span data-es="Reparacion en 7 minutos">Done in 7 minutes</span>
+      </div>
+      <span class="proof-sep" aria-hidden="true">·</span>
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        <span data-es="Menos de $20 una reparacion">Under $20 a repair</span>
+      </div>
+      <span class="proof-sep" aria-hidden="true">·</span>
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span data-es="Te tratan como familia">Treat you like fam</span>
+      </div>
+      <span class="proof-sep" aria-hidden="true">·</span>
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6.364 6.364 0 0 0 9 9 9 9 0 1 1-9-9z"/></svg>
+        <span data-es="Abierto de noche">Open at night</span>
+      </div>
+      <span class="proof-sep" aria-hidden="true">·</span>
+      <div class="proof-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <span data-es="4.8 estrellas en Google">4.8 stars on Google</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHOTOS -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span data-es="El taller">The shop</span></span>
+      <h2 data-es="Llantas en el lote, trabajo de verdad.">Tires in the lot, real work being done.</h2>
+      <p data-es="Todo lo que ves aqui es Tigre Del Barrio: un lote abierto con pilas de llantas, mecanicos trabajando, y un letrero de OPEN que brilla hasta tarde.">Everything here is Tigre Del Barrio: an open lot stacked with tires, workers in motion, and an OPEN sign burning late.</p>
+    </div>
+    <div class="mosaic reveal">
+      <figure class="m-main">
+        <img src="img/service.webp" width="800" height="960" loading="lazy" decoding="async"
+             alt="A worker mounting a tire on a lifted truck at Tigre Del Barrio Tire Shop.">
+        <figcaption><span data-es="El trabajo">The work</span></figcaption>
+      </figure>
+      <figure class="m-sm">
+        <img src="img/storefront.webp" width="900" height="680" loading="lazy" decoding="async"
+             alt="Tigre Del Barrio storefront at dusk: Milestar Tires signage, OPEN neon, rims on display.">
+        <figcaption><span data-es="El local">The storefront</span></figcaption>
+      </figure>
+      <figure class="m-sm">
+        <img src="img/tread-stack.webp" width="900" height="680" loading="lazy" decoding="async"
+             alt="Close-up of chunky off-road tire treads stacked at the shop.">
+        <figcaption><span data-es="Inventario">Inventory</span></figcaption>
+      </figure>
+      <figure class="m-sm">
+        <img src="img/lot.webp" width="900" height="680" loading="lazy" decoding="async"
+             alt="Wide view of the open lot and tire stacks at Tigre Del Barrio.">
+        <figcaption><span data-es="El lote">The lot</span></figcaption>
+      </figure>
+      <figure class="m-sm">
+        <img src="img/tread-closeup.webp" width="900" height="680" loading="lazy" decoding="async"
+             alt="Close-up detail of a tire tread.">
+        <figcaption><span data-es="Calidad">Quality</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="band band--raised" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span data-es="Lo que hacemos">What we do</span></span>
+      <h2 data-es="Reparacion de llanta. Llantas nuevas y usadas. Y mas.">Tire repair. New and used tires. And more.</h2>
+      <p data-es="Desde un pinchazo rapido hasta cuatro llantas nuevas. El letrero del frente lo dice todo: llantas, frenos, afinaciones, cambio de aceite.">From a quick flat fix to four fresh tires. The sign out front says it: tires, brakes, tune-ups, oil change.</p>
+    </div>
+    <div class="svc-grid">
+
+      <article class="svc-card reveal">
+        <div class="svc-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg>
+        </div>
+        <h3 data-es="Reparacion de pinchazos">Flat tire repair</h3>
+        <p data-es="Un clavo, un tornillo, lo que sea. Lo sacan y lo reparan rapido. Una resena dice que tardaron 7 minutos. Precios por debajo de $20.">A nail, a screw, whatever it is. They pull it and patch it fast. One reviewer clocked them at 7 minutes. Under $20 for the repair.</p>
+      </article>
+
+      <article class="svc-card reveal">
+        <div class="svc-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/></svg>
+        </div>
+        <h3 data-es="Llantas nuevas y usadas">New and used tires</h3>
+        <p data-es="Un lote lleno de llantas con las medidas marcadas con gis. Nuevas y usadas, para todo tipo de vehiculo.">A lot full of tires with sizes chalked on them. New and used, for all kinds of vehicles.</p>
+      </article>
+
+      <article class="svc-card reveal">
+        <div class="svc-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/><path d="M4.93 4.93l14.14 14.14"/></svg>
+        </div>
+        <h3 data-es="Montaje e instalacion">Tire mounting and installation</h3>
+        <p data-es="Te montan las llantas en el momento. Sin citas, sin esperas largas.">They mount your tires right there on the lot. No appointment, no long wait.</p>
+      </article>
+
+      <article class="svc-card reveal">
+        <div class="svc-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <h3 data-es="Presion de llantas">Tire pressure check</h3>
+        <p data-es="Revisan la presion y te tratan como si fueras de la familia. Asi lo dicen los clientes una y otra vez.">They check your pressure and treat you like you belong there. That shows up in the reviews over and over.</p>
+      </article>
+
+      <article class="svc-card reveal">
+        <div class="svc-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </div>
+        <h3 data-es="Frenos">Brakes</h3>
+        <p data-es="Servicio de frenos en el mismo taller. El letrero del local lo dice claro.">Brake service in the same shop. The sign out front says so.</p>
+      </article>
+
+      <article class="svc-card reveal">
+        <div class="svc-ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <h3 data-es="Afinaciones y cambio de aceite">Tune-ups and oil changes</h3>
+        <p data-es="No solo llantas. Afinaciones y cambio de aceite tambien, en el mismo lugar.">Not just tires. Tune-ups and oil changes too, all in one stop.</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE: OPEN LATE -->
+<section class="band">
+  <div class="wrap">
+    <div class="feature reveal">
+      <div class="feature__img">
+        <img src="img/storefront.webp" width="900" height="700" loading="lazy" decoding="async"
+             alt="Tigre Del Barrio storefront at dusk with OPEN neon glowing and tires stacked outside.">
+      </div>
+      <div class="feature__text">
+        <span class="eyebrow"><span data-es="Un diferenciador real">A real differentiator</span></span>
+        <h2 data-es="Abierto tarde. Abierto de noche.">Open late. Open at night.</h2>
+        <p data-es="Clientes una y otra vez mencionan llegar al taller a altas horas de la noche y encontrarlo abierto. Una llanta ponchada no espera hasta el dia siguiente."><strong data-es="Los clientes mencionan esto una y otra vez:">Customers mention this again and again:</strong> <span data-es="llegaron tarde en la noche y el taller estaba abierto. Una llanta ponchada no espera hasta el dia siguiente, y Tigre Del Barrio lo entiende.">they showed up late at night and the shop was open. A flat doesn't wait until morning, and Tigre Del Barrio gets that.</span></p>
+        <p data-es="Dicho esto, los horarios publicados a veces no cuadran con la realidad. Llama primero para confirmar. El numero esta arriba.">That said, posted hours don't always match. Call ahead to confirm. The number is up top.</p>
+        <span class="feature__note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-es="Llama para confirmar: (737) 368-5380">Call to confirm: (737) 368-5380</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="band band--raised" id="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span data-es="Lo que dice el barrio">From the neighborhood</span></span>
+      <h2 data-es="38 resenas. La mayoria dicen lo mismo: rapido, barato, amable.">38 reviews. Most say the same: fast, cheap, friendly.</h2>
+    </div>
+    <div class="quotes">
+
+      <blockquote class="quote quote--hero reveal">
+        <span class="stars" aria-label="5 stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+        </span>
+        <p data-es='"Brad es mi nuevo mecanico de llantas. Precios justos con un servicio por encima y mas alla."'>"Brad is now my new Tire Guy. Fair prices with above and beyond service."</p>
+        <cite>Adrian Mendez</cite>
+      </blockquote>
+
+      <blockquote class="quote reveal">
+        <span class="stars" aria-label="5 stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+        </span>
+        <p data-es='"Eduardo fue fantastico. Llegue directo y pusieron manos a la obra. Tenia un par de clavos en la llanta. Listo en 7 minutos. El precio fue una ganga. Definitivamente vuelvo."'>"Eduardo was fantastic. I pulled in went straight to work. Had a couple Nails in my tire. Got it done in 7 minutes. The price was a steel. Definitely coming back."</p>
+        <cite>DEADLY SAINTS</cite>
+      </blockquote>
+
+      <blockquote class="quote reveal">
+        <span class="stars" aria-label="5 stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+        </span>
+        <p data-es='"Encontre mi nueva llantera favorita. Fui por un parche y fueron increiblemente rapidos, de regreso en la carretera en menos de 30 minutos. El precio fue imbatible, menos de $20."'>"Found my new go-to tire shop! I went in for a patch job, and they were incredibly fast, getting me back on the road in under 30 minutes. The price was unbeatable, under $20 for the repair."</p>
+        <cite>Mark</cite>
+      </blockquote>
+
+      <blockquote class="quote reveal">
+        <span class="stars" aria-label="5 stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+        </span>
+        <p data-es='"Necesitaba arreglar una llanta tarde en la noche y encontre este lugar abierto las 24 hrs. Excelente servicio. De regreso en la carretera en menos de 30 minutos."'>"Needed a tire fixed late at night and found this place open 24 hrs. Excellent service! We were back on the road in less than 30 minutes."</p>
+        <cite>Carolina Najera</cite>
+      </blockquote>
+
+      <blockquote class="quote reveal">
+        <span class="stars" aria-label="5 stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+        </span>
+        <p data-es='"Tenia un tornillo metido en la llanta del lado del conductor. Entraron y pudieron quitarlo y parchearlo rapidamente. Extremadamente amables, eficientes, precios justos."'>"Had a screw lodged in my driver's side front tire. Went in and the employees were able to quickly remove and patch it up. Extremely friendly, extremely efficient, extremely fair prices."</p>
+        <cite>krunk fu</cite>
+      </blockquote>
+
+      <blockquote class="quote reveal">
+        <span class="stars" aria-label="5 stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+        </span>
+        <p data-es='"Reparacion de llantas, revisan la presion y te tratan como familia. Que mas puedes pedir."'>"Tire repairs, check your tire pressure and treat you like fam, how awesome is that."</p>
+        <cite>Jesus Medrano</cite>
+      </blockquote>
+
+      <blockquote class="quote reveal">
+        <span class="stars" aria-label="5 stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+        </span>
+        <p data-es='"Los mejores amigos en Austin. Fueron super amables, rapidos y serviciales. Nos dieron un buen precio, y el gerente hablo buen ingles. Definitivamente volvemos."'>"Best tire shop experience ever. They were all super nice, and fast, and helpful. They gave us a good deal, and best of all, the manager spoke good English! They did that, and quickly!"</p>
+        <cite>Stephen Doss</cite>
+      </blockquote>
+
+      <blockquote class="quote reveal">
+        <span class="stars" aria-label="5 stars" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
+        </span>
+        <p data-es='"Estaba muy feliz de poder arreglar mi llanta a esa hora de la noche. Muchas gracias."'>"I was so happy I was able to fix my tire at this time at night. Everywhere else was closed. Thank you."</p>
+        <cite>G Garcia</cite>
+      </blockquote>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="band">
+  <div class="wrap">
+    <div class="feature feature--rev reveal">
+      <div class="feature__img">
+        <img src="img/lot.webp" width="900" height="680" loading="lazy" decoding="async"
+             alt="Wide view of the open Tigre Del Barrio lot lined with stacked tires on Montopolis Drive.">
+      </div>
+      <div class="feature__text">
+        <span class="eyebrow"><span data-es="Sobre el taller">About the shop</span></span>
+        <h2 data-es="Rapidos. Honestos. Ahi cuando los necesitas.">Fast. Honest. There when you need them.</h2>
+        <p data-es="Tigre Del Barrio es el tipo de llantera de barrio que Austin necesita: te arreglan la llanta rapido, cobran lo justo, y encuentran la fuga que otros no pudieron encontrar."><strong data-es="Tigre Del Barrio">Tigre Del Barrio</strong> <span data-es="es el tipo de llantera que el barrio necesita: rapida, justa, y open when it counts. Encuentran la fuga que el dealer de autos no pudo encontrar.">is the kind of neighborhood tire shop Austin's east side needs. Fast repair, fair price, and they find the leak the car dealer couldn't.</span></p>
+        <p data-es="El lote a cielo abierto esta lleno de llantas nuevas y usadas con medidas en gis. El equipo va directo al trabajo, sin rodeos, sin cargos escondidos. Por eso los clientes regresan."><span data-es="El lote abierto esta lleno de llantas nuevas y usadas. El equipo trabaja rapido, sin rodeos, sin costos escondidos. Por eso la gente regresa.">The open lot is stacked with new and used tires. The crew works fast, no runaround, no hidden charges. That's why people come back.</span></p>
+        <span class="feature__note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-es="1710 Montopolis Dr · Austin TX 78741">1710 Montopolis Dr · Austin TX 78741</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="band band--raised" id="visit">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow"><span data-es="Visitanos">Come by</span></span>
+      <h2 data-es="Encontranos en Montopolis.">Find us on Montopolis.</h2>
+    </div>
+    <div class="visit-grid">
+      <div class="vcard reveal">
+        <h3 data-es="Contacto y direccion">Contact and address</h3>
+        <div class="vrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div>
+            <div class="k"><span data-es="Telefono">Phone</span></div>
+            <div class="v"><a href="tel:+17373685380">(737) 368-5380</a></div>
+          </div>
+        </div>
+        <div class="vrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div>
+            <div class="k"><span data-es="Direccion">Address</span></div>
+            <div class="v">1710 Montopolis Dr<br>Austin, TX 78741</div>
+          </div>
+        </div>
+        <div class="vrow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <div>
+            <div class="k"><span data-es="Horario">Hours</span></div>
+            <div class="v" data-es="Abierto hasta tarde, incluso de noche.">Open late, including at night.</div>
+            <p class="hours-note" data-es="Los horarios publicados no siempre son exactos. Llama para confirmar antes de venir.">Posted hours don't always match. Call ahead to confirm before making the trip.</p>
+          </div>
+        </div>
+        <div class="visit__btns">
+          <a class="btn btn--red" href="tel:+17373685380" style="color:#fff!important;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span data-es="Llama ahora">Call now</span>
+          </a>
+          <a class="btn btn--outline" href="https://www.google.com/maps/place/Tigre+Del+Barrio+Tire+Shop/data=!4m7!3m6!1s0x8644b595a2e4aa29:0x19cde971ee85d321!8m2!3d30.2267769!4d-97.7025427!16s%2Fg%2F11yb8_s4nq!19sChIJKarkopW1RIYRIdOF7nHpzRk" target="_blank" rel="noopener">
+            <span data-es="Ver en Google">View on Google</span>
+          </a>
+        </div>
+
+        <!-- Directions card -->
+        <div class="dir-card" style="margin-top:1.4rem;">
+          <div class="dir-card__label" data-es="Como llegar">Get directions</div>
+          <div class="dir-card__addr">
+            Tigre Del Barrio Tire Shop
+            <span>1710 Montopolis Dr, Austin, TX 78741</span>
+          </div>
+          <a class="dir-card__link" href="https://www.google.com/maps/dir/?api=1&destination=Tigre%20Del%20Barrio%20Tire%20Shop%2C%201710%20Montopolis%20Dr%2C%20Austin%2C%20TX%2078741" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            <span data-es="Abrir en Google Maps">Open in Google Maps</span>
+          </a>
+        </div>
+      </div>
+
+      <figure class="store-img reveal">
+        <img src="img/storefront.webp" width="900" height="700" loading="lazy" decoding="async"
+             alt="The Tigre Del Barrio storefront at dusk on Montopolis Drive, rims displayed on the wall, neon OPEN sign glowing.">
+        <figcaption data-es="1710 Montopolis Dr · Busca el letrero de MILESTAR TIRES">1710 Montopolis Dr · Look for the MILESTAR TIRES sign</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <div class="foot__name" data-es="Tigre Del Barrio">Tigre Del Barrio</div>
+      <div class="foot__sub" data-es="Llantera · Austin TX">Tire Shop · Austin TX</div>
+      <p data-es="Reparacion rapida, precios justos, abierto cuando los demas ya cerraron. En Montopolis Drive desde siempre.">Fast repair, fair prices, open when others aren't. On Montopolis Drive in Austin, TX.</p>
+    </div>
+    <div class="foot__hand">
+      <span data-es="Un sitio de muestra gratuito hecho por">A free preview site built by</span> <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      els.forEach(function(e){ e.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -6% 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+<script defer src="/assets/demo-visit.js"></script>
+<script>
+(function(){var KEY="hand-lang";var nodes=[].slice.call(document.querySelectorAll("[data-es]"));nodes.forEach(function(n){n.__en=(n.tagName==="META")?n.getAttribute("content"):n.innerHTML;});function setToggles(es){[].forEach.call(document.querySelectorAll("[data-lang-toggle]"),function(b){b.setAttribute("data-lang-to",es?"en":"es");b.setAttribute("aria-pressed",es?"true":"false");b.setAttribute("aria-label",es?"View in English":"Ver en español");var l=b.querySelector(".hand-lang-label");if(l)l.textContent=es?"English":"Español";});}function apply(lang){var es=lang==="es";nodes.forEach(function(n){var v=es?n.getAttribute("data-es"):n.__en;if(v==null)return;if(n.tagName==="META")n.setAttribute("content",v);else n.innerHTML=v;});document.documentElement.lang=es?"es":"en";setToggles(es);}var stored=null;try{stored=localStorage.getItem(KEY);}catch(e){}var nav=(navigator.language||navigator.userLanguage||"").toLowerCase();apply(stored||(nav.indexOf("es")===0?"es":"en"));document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-lang-toggle]");if(!b)return;e.preventDefault();var to=b.getAttribute("data-lang-to")||"es";apply(to);try{localStorage.setItem(KEY,to);}catch(e2){}});})();
+</script>
+</body>
+</html>
