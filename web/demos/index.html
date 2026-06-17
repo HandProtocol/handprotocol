@@ -250,14 +250,25 @@
   // ── Filter state ─────────────────────────────────────────────────────────
   var activeFilters = { stage: 'all', status: 'all', q: '' };
 
+  // Fold case, strip accents (yucatán -> yucatan), and drop apostrophes/punctuation
+  // so "eds" matches "Ed's" and "yucatan" matches "Yucatán".
+  function norm(s) {
+    return String(s == null ? '' : s)
+      .toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/['’ʼ`]/g, '')
+      .replace(/[^a-z0-9]+/g, ' ')
+      .replace(/\s+/g, ' ').trim();
+  }
+
   function matchesFilters(d) {
     var t = tier(d);
     if (activeFilters.stage !== 'all' && String(t) !== String(activeFilters.stage)) return false;
     if (activeFilters.status !== 'all' && d.status !== activeFilters.status) return false;
     if (activeFilters.q) {
-      var hay = [d.name, d.category, d.city, d.state].filter(Boolean).join(' ').toLowerCase();
+      var hay = norm([d.name, d.category, d.city, d.state].filter(Boolean).join(' '));
       var terms = activeFilters.q.split(/\s+/);
-      for (var i = 0; i < terms.length; i++) if (hay.indexOf(terms[i]) === -1) return false;
+      for (var i = 0; i < terms.length; i++) if (terms[i] && hay.indexOf(terms[i]) === -1) return false;
     }
     return true;
   }
@@ -306,7 +317,7 @@
     var searchInput = document.getElementById('search-input');
     if (searchInput) {
       searchInput.addEventListener('input', function() {
-        activeFilters.q = searchInput.value.trim().toLowerCase();
+        activeFilters.q = norm(searchInput.value);
         applyFilters();
       });
     }

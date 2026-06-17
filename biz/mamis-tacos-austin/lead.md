@@ -5,7 +5,7 @@ category: Mexican restaurant
 city: Austin
 state: TX
 phone: (512) 373-6229
-address: '7200 Menchaca Rd, Austin, TX 78745'
+address: '7200 Manchaca Rd, Austin, TX 78745'
 google_url: >-
   https://www.google.com/maps/place/Mami%27s+tacos/data=!4m7!3m6!1s0x865b4c9f73fbb75d:0x5380d565639c0285!8m2!3d30.2000107!4d-97.8080591!16s%2Fg%2F11clsjm9pb!19sChIJXbf7c59MW4YRhQKcY2XVgFM
 google_rating: 4.8
