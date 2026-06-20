@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="WaterDrop">
+  <rect width="512" height="512" fill="#1f5a4a"/>
+  <path d="M256 118 C256 118 372 256 372 324 a116 116 0 1 1 -232 0 C140 256 256 118 256 118 Z" fill="#5fd0a8"/>
+  <path d="M196 330 C232 296 276 372 332 312" fill="none" stroke="#1f5a4a" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

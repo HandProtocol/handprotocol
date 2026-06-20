@@ -1,0 +1,118 @@
+/* WaterDrop design tokens — see DESIGN.md. OKLCH; never #000/#fff; neutrals
+   tinted toward the river hue. Theme: light (sunlight legibility). */
+:root {
+  /* ── Limestone neutrals (warm, brand-tinted, low chroma) ── */
+  --stone-0: oklch(0.992 0.006 150);
+  --stone-50: oklch(0.975 0.008 150);
+  --stone-100: oklch(0.955 0.009 150);
+  --stone-200: oklch(0.91 0.01 152);
+  --stone-300: oklch(0.85 0.011 154);
+  --stone-400: oklch(0.7 0.013 158);
+  --stone-500: oklch(0.56 0.015 162);
+  --stone-600: oklch(0.46 0.016 164);
+  --stone-700: oklch(0.37 0.017 166);
+  --stone-800: oklch(0.285 0.017 168);
+  --stone-900: oklch(0.22 0.018 170);
+  --ink: oklch(0.18 0.018 172);
+
+  /* ── Spring green — signature accent + river (San Marcos clarity) ── */
+  --spring-200: oklch(0.93 0.045 172);
+  --spring-300: oklch(0.88 0.075 172);
+  --spring-400: oklch(0.8 0.11 171);
+  --spring-500: oklch(0.72 0.132 170);
+  --spring-600: oklch(0.62 0.132 168);
+  --spring-700: oklch(0.52 0.12 166);
+  --spring-800: oklch(0.42 0.1 165);
+
+  /* ── Cypress — deep shaded green-teal, crew identity ── */
+  --cypress-500: oklch(0.46 0.055 196);
+  --cypress-700: oklch(0.33 0.048 198);
+  --cypress-900: oklch(0.25 0.038 200);
+
+  /* ── Clay — cypress-bark warm accent ── */
+  --clay-400: oklch(0.72 0.11 46);
+  --clay-500: oklch(0.62 0.14 42);
+  --clay-600: oklch(0.54 0.15 40);
+
+  /* ── Semantic (always paired with text + icon, never color alone) ── */
+  --good: oklch(0.6 0.13 162);
+  --low: oklch(0.72 0.135 80);
+  --high: oklch(0.64 0.16 50);
+  --danger: oklch(0.56 0.185 28);
+  --info: oklch(0.6 0.07 240);
+  --hazard: oklch(0.66 0.15 60);
+
+  --sev-trace: oklch(0.8 0.1 92);
+  --sev-minor: oklch(0.72 0.14 70);
+  --sev-moderate: oklch(0.64 0.17 45);
+  --sev-severe: oklch(0.54 0.19 25);
+
+  /* ── Tinted fills for status surfaces (subtle backgrounds) ── */
+  --good-soft: oklch(0.95 0.04 162);
+  --low-soft: oklch(0.95 0.05 88);
+  --high-soft: oklch(0.95 0.05 55);
+  --danger-soft: oklch(0.94 0.05 30);
+
+  /* ── Roles ── */
+  --bg: var(--stone-50);
+  --surface: var(--stone-0);
+  --surface-2: var(--stone-100);
+  --border: var(--stone-200);
+  --border-strong: var(--stone-300);
+  --text: var(--stone-700);
+  --text-strong: var(--stone-900);
+  --text-muted: var(--stone-500);
+  --accent: var(--spring-600);
+  --accent-quiet: var(--spring-200);
+  --on-accent: var(--stone-0);
+  --focus: var(--spring-600);
+
+  /* ── Typography ── */
+  --font-ui: 'InterVariable', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
+    sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --text-4xl: 3rem;
+
+  /* ── Spacing (4px base) ── */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 20px;
+  --s6: 24px;
+  --s8: 32px;
+  --s10: 40px;
+  --s12: 48px;
+  --s16: 64px;
+
+  /* ── Radii ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* ── Elevation (cypress-tinted, soft) ── */
+  --e1: 0 1px 2px oklch(0.25 0.04 200 / 0.06), 0 1px 1px oklch(0.25 0.04 200 / 0.04);
+  --e2: 0 6px 24px -6px oklch(0.25 0.04 200 / 0.18), 0 2px 6px oklch(0.25 0.04 200 / 0.08);
+  --e3: 0 16px 48px -12px oklch(0.25 0.04 200 / 0.26), 0 4px 12px oklch(0.25 0.04 200 / 0.1);
+
+  /* ── Motion (ease-out only, exponential) ── */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 150ms;
+  --dur: 200ms;
+  --dur-slow: 280ms;
+
+  /* ── Layout ── */
+  --appbar-h: 56px;
+  --sheet-peek: 128px; /* resting height of the bottom sheet; floating controls clear it */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}

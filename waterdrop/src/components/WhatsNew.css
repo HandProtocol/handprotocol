@@ -1,0 +1,69 @@
+.wd-whatsnew {
+  position: fixed;
+  top: calc(var(--appbar-h) + var(--safe-top) + var(--s3));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  width: max-content;
+  max-width: min(92vw, 380px);
+  padding: var(--s2) var(--s2) var(--s2) var(--s3);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--e2);
+  animation: wd-whatsnew-in var(--dur-slow) var(--ease);
+}
+
+.wd-whatsnew__icon {
+  display: inline-flex;
+  color: var(--spring-600);
+  flex: none;
+}
+
+.wd-whatsnew__text {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.wd-whatsnew__text strong {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+.wd-whatsnew__close {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.wd-whatsnew__close:hover {
+  background: var(--stone-100);
+  color: var(--text-strong);
+}
+
+@keyframes wd-whatsnew-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-whatsnew {
+    animation: none;
+  }
+}
