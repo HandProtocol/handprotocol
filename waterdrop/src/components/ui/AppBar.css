@@ -1,0 +1,59 @@
+.wd-appbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 800;
+  height: calc(var(--appbar-h) + var(--safe-top));
+  padding-top: var(--safe-top);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--e1);
+}
+
+.wd-appbar__inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--s2);
+  height: var(--appbar-h);
+  max-width: 560px;
+  margin-inline: auto;
+  padding-inline: var(--s2);
+}
+
+.wd-appbar__slot {
+  display: flex;
+  align-items: center;
+  gap: var(--s1);
+  min-width: 0;
+}
+
+.wd-appbar__right {
+  justify-content: flex-end;
+}
+
+.wd-appbar__title {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-strong);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* Pull toward the left slot when one exists; honest left/centered title. */
+  padding-inline-start: var(--s1);
+}
+
+/* Desktop: span the full bar, anchoring left and right slots to the edges. */
+@media (min-width: 900px) {
+  .wd-appbar__inner {
+    max-width: none;
+    padding-inline: var(--s5);
+  }
+}

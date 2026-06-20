@@ -1,0 +1,86 @@
+.wd-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  min-height: 28px;
+  padding: var(--s1) var(--s3);
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  /* fallbacks; per-tone rules override */
+  background: var(--surface-2);
+  color: var(--text-strong);
+}
+
+.wd-pill__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: calc(var(--s1) * -0.5);
+}
+
+.wd-pill__icon > svg {
+  width: 1em;
+  height: 1em;
+}
+
+.wd-pill__label {
+  display: inline-flex;
+}
+
+/* ── Sizes ── */
+.wd-pill--sm {
+  min-height: 22px;
+  padding: 2px var(--s2);
+  font-size: var(--text-xs);
+  gap: var(--s1);
+}
+
+/* ── Tones ──
+   Background = soft tint; text + hairline = strong hue. Text colors are
+   darkened from the base semantic hue for AAA contrast on the soft fill. */
+.wd-pill--good {
+  background: var(--good-soft);
+  color: oklch(0.44 0.12 162);
+  border-color: oklch(0.6 0.13 162 / 0.28);
+}
+
+.wd-pill--low {
+  background: var(--low-soft);
+  color: oklch(0.46 0.1 84);
+  border-color: oklch(0.72 0.135 80 / 0.34);
+}
+
+.wd-pill--high {
+  background: var(--high-soft);
+  color: oklch(0.46 0.13 48);
+  border-color: oklch(0.64 0.16 50 / 0.32);
+}
+
+.wd-pill--danger {
+  background: var(--danger-soft);
+  color: oklch(0.46 0.18 28);
+  border-color: oklch(0.56 0.185 28 / 0.32);
+}
+
+.wd-pill--hazard {
+  background: oklch(0.95 0.05 60);
+  color: oklch(0.46 0.13 56);
+  border-color: oklch(0.66 0.15 60 / 0.34);
+}
+
+.wd-pill--info {
+  background: oklch(0.95 0.025 240);
+  color: oklch(0.44 0.07 240);
+  border-color: oklch(0.6 0.07 240 / 0.3);
+}
+
+.wd-pill--neutral {
+  background: var(--stone-100);
+  color: var(--stone-700);
+  border-color: var(--border);
+}

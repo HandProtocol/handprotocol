@@ -1,0 +1,234 @@
+/* Gauge detail card, rendered inside the bottom sheet. Vertical rhythm is
+   deliberately varied (verdict gets room; rows are tighter). */
+
+.wd-cond-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s4);
+  padding-bottom: var(--s4);
+}
+
+/* ── Header ── */
+.wd-cond-detail__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s3);
+}
+
+.wd-cond-detail__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1);
+  min-width: 0;
+}
+
+.wd-cond-detail__name {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--text-strong);
+}
+
+.wd-cond-detail__site {
+  /* .eyebrow supplies size/weight/spacing/uppercase/muted color */
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Verdict first ── */
+.wd-cond-detail__verdict {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+
+.wd-cond-detail__blurb {
+  margin: 0;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--text);
+  max-width: 60ch;
+}
+
+/* ── Stat readouts ── */
+.wd-cond-detail__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s6);
+}
+
+/* ── Updated + refresh ── */
+.wd-cond-detail__updated {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-top: calc(var(--s2) * -1);
+}
+
+.wd-cond-detail__updated-text {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.wd-cond-detail__spin svg {
+  animation: wd-cond-spin 0.9s linear infinite;
+}
+
+@keyframes wd-cond-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Stale note ── */
+.wd-cond-detail__stale {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: var(--s2) var(--s3);
+  border-radius: var(--radius-md);
+  background: var(--stone-100);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+}
+
+.wd-cond-detail__stale-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  color: var(--text-muted);
+}
+
+/* ── Section labels ── */
+.wd-cond-detail__section {
+  margin: 0 0 var(--s2);
+}
+
+/* ── Trend ── */
+.wd-cond-detail__trend-empty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s2);
+}
+
+.wd-cond-detail__trend-note {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* ── Chart ── */
+.wd-cond-chart {
+  width: 100%;
+  /* recharts ResponsiveContainer needs a definite parent height */
+  user-select: none;
+}
+
+.wd-cond-chart .recharts-cartesian-axis-tick text {
+  font-variant-numeric: tabular-nums;
+}
+
+.wd-cond-tooltip {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: var(--s1) var(--s2);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--e2);
+  pointer-events: none;
+}
+
+.wd-cond-tooltip__value {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.wd-cond-tooltip__time {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Reach segments ── */
+.wd-cond-detail__segments {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wd-cond-detail__segment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--s2) var(--s1);
+  border: 0;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.wd-cond-detail__segment:hover {
+  background: var(--stone-100);
+}
+
+.wd-cond-detail__segment:active {
+  background: var(--stone-200);
+}
+
+.wd-cond-detail__segment:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.wd-cond-detail__segment-label {
+  min-width: 0;
+  line-height: 1.35;
+}
+
+.wd-cond-detail__segment-from,
+.wd-cond-detail__segment-to {
+  font-weight: 500;
+  color: var(--text-strong);
+}
+
+.wd-cond-detail__segment-arrow {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.wd-cond-detail__segment-chevron {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-cond-detail__segment {
+    transition: none;
+  }
+  .wd-cond-detail__spin svg {
+    animation: none;
+  }
+}

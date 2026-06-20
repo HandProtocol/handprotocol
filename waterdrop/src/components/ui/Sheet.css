@@ -1,0 +1,137 @@
+.wd-sheet {
+  /* The panel is always full-detent tall; detents are realised by translateY.
+     Keep this in sync with heightFor('full') in Sheet.tsx. */
+  --wd-sheet-full: calc(100% - var(--appbar-h) - var(--safe-top));
+
+  /* Centered horizontally with left/right + auto margins so the inline
+     `transform: translateY(...)` can own the Y axis alone (no X conflict). */
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1200;
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+  box-shadow: var(--e2);
+  transform: translateY(0);
+  will-change: transform;
+  overscroll-behavior: contain;
+  touch-action: none;
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.wd-sheet--dragging {
+  transition: none;
+}
+
+/* ── Scrim (full detent only) ── */
+.wd-sheet__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: oklch(0.2 0.02 200 / 0.32);
+  animation: wd-scrim-in var(--dur) var(--ease);
+}
+
+@keyframes wd-scrim-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ── Grab handle ── */
+.wd-sheet__handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 28px;
+  padding: var(--s3) 0 var(--s2);
+  border: none;
+  background: transparent;
+  cursor: grab;
+  touch-action: none;
+  flex: none;
+}
+
+.wd-sheet__handle:active {
+  cursor: grabbing;
+}
+
+.wd-sheet__handle:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+  border-top-left-radius: var(--radius-xl);
+  border-top-right-radius: var(--radius-xl);
+}
+
+.wd-sheet__grip {
+  display: block;
+  width: 40px;
+  height: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--stone-300);
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.wd-sheet__handle:hover .wd-sheet__grip {
+  background: var(--stone-400);
+}
+
+/* ── Scrollable content ── */
+.wd-sheet__content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 var(--s4) calc(var(--s4) + var(--safe-bottom));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-sheet {
+    transition: none;
+  }
+  .wd-sheet__scrim {
+    animation: none;
+  }
+}
+
+/* Desktop: the bottom sheet becomes a docked left rail beside the map. The
+   detent/translateY machinery is overridden; the rail is always full height. */
+@media (min-width: 900px) {
+  .wd-sheet {
+    top: calc(var(--appbar-h) + var(--safe-top) + var(--s4));
+    bottom: var(--s4);
+    left: var(--s4);
+    right: auto;
+    width: 384px;
+    max-width: 384px;
+    height: auto !important;
+    transform: none !important;
+    margin: 0;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--e3);
+    transition: none;
+  }
+  .wd-sheet__scrim {
+    display: none;
+  }
+  .wd-sheet__handle {
+    cursor: default;
+    min-height: 14px;
+    padding: var(--s2) 0 0;
+  }
+  .wd-sheet__grip {
+    display: none;
+  }
+}

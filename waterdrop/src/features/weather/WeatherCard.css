@@ -1,0 +1,143 @@
+/* Weather-at-the-river card. A calm sibling to the flow conditions, NOT a hero
+   metric: condition reads first, the temperature is a tabular value with a small
+   "feels" beside it, then a quiet row of wind / precip / humidity stats.
+   Vertical rhythm is varied on purpose (condition gets room; the stat row is
+   tighter). Prefixed wd-wx-. */
+
+.wd-wx-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  padding: var(--s4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+
+.wd-wx-card__eyebrow {
+  /* .eyebrow supplies size/weight/spacing/uppercase/muted color */
+  line-height: 1.2;
+}
+
+/* ── Condition: icon + plain label, then the temperature ── */
+.wd-wx-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  min-width: 0;
+}
+
+.wd-wx-card__condition {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  min-width: 0;
+}
+
+.wd-wx-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: var(--stone-600);
+}
+
+.wd-wx-card__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.wd-wx-card__label {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text-strong);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wd-wx-card__temp {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  flex: 0 0 auto;
+}
+
+.wd-wx-card__temp-value {
+  font-family: var(--font-ui);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.wd-wx-card__feels {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--stone-600);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Stat row: wind / precip / humidity ── */
+.wd-wx-card__stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s5);
+}
+
+/* Tighten the StatReadout scale here: it is supporting data, not the headline,
+   and must not out-shout the river-flow verdict it sits beside. */
+.wd-wx-card__stats .wd-stat__value {
+  font-size: var(--text-lg);
+}
+
+.wd-wx-card__gust {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--stone-600);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Footer: observation time ── */
+.wd-wx-card__updated {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Unavailable / stale ── */
+.wd-wx-card__unavailable {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  font-size: var(--text-sm);
+  line-height: 1.4;
+  color: var(--text);
+}
+
+.wd-wx-card__unavailable-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  color: var(--text-muted);
+}
+
+/* ── Loading skeleton layout ── */
+.wd-wx-card__skeleton-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+}
+
+.wd-wx-card__skeleton-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s5);
+}

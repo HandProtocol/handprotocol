@@ -1,0 +1,11 @@
+.wd-map-root {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.wd-appbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}

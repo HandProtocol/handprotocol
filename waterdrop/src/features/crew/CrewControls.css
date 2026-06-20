@@ -1,0 +1,151 @@
+.wd-crew-controls {
+  position: fixed;
+  left: var(--s4);
+  /* Float just above the resting bottom sheet so the Log action is always reachable. */
+  bottom: calc(var(--sheet-peek) + var(--s4) + var(--safe-bottom));
+  /* Above the map, below the full-screen sheet (1200) and overlays. */
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s3);
+}
+
+.wd-crew-controls__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.wd-crew-controls__log {
+  box-shadow: var(--e3);
+}
+
+/* Secondary round button for the crew menu. */
+.wd-crew-controls__menu-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  flex: none;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--cypress-700);
+  box-shadow: var(--e2);
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+.wd-crew-controls__menu-btn:hover {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+}
+.wd-crew-controls__menu-btn:active {
+  background: var(--stone-200);
+}
+.wd-crew-controls__menu-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ── Popover menu ── */
+.wd-crew-controls__menu {
+  min-width: 13rem;
+  padding: var(--s2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--e3);
+  animation: wd-crew-menu-in var(--dur-fast) var(--ease);
+}
+
+.wd-crew-controls__menu-head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s2) var(--s3) var(--s1);
+}
+.wd-crew-controls__menu-head .eyebrow {
+  color: var(--stone-500);
+}
+.wd-crew-controls__count {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-strong);
+}
+
+.wd-crew-controls__menu-divider {
+  height: 1px;
+  margin: var(--s1) 0;
+  background: var(--border);
+}
+
+.wd-crew-controls__item {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  width: 100%;
+  min-height: 44px;
+  padding: 0 var(--s3);
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  text-align: start;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+.wd-crew-controls__item > svg {
+  flex: none;
+  color: var(--stone-500);
+}
+.wd-crew-controls__item:hover:not(:disabled) {
+  background: var(--surface-2);
+  color: var(--text-strong);
+}
+.wd-crew-controls__item:active:not(:disabled) {
+  background: var(--stone-200);
+}
+.wd-crew-controls__item:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+.wd-crew-controls__item:disabled {
+  color: var(--stone-400);
+  cursor: not-allowed;
+}
+.wd-crew-controls__item:disabled > svg {
+  color: var(--stone-300);
+}
+
+.wd-crew-controls__item--exit {
+  color: var(--clay-600);
+}
+.wd-crew-controls__item--exit > svg {
+  color: var(--clay-500);
+}
+.wd-crew-controls__item--exit:hover:not(:disabled) {
+  background: oklch(0.95 0.05 42);
+  color: var(--clay-600);
+}
+
+@keyframes wd-crew-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-crew-controls__menu,
+  .wd-crew-controls__menu-btn {
+    animation: none;
+    transition: none;
+  }
+}
