@@ -1,7 +1,7 @@
 # WaterDrop — Ops & Integration (for HAND AI / future sessions)
 
 Single reference for how WaterDrop is deployed and wired into HAND Protocol's infra.
-Last updated 2026-06-19.
+Last updated 2026-06-20.
 
 ## What it is
 A mobile-first PWA (great on desktop too) for paddling Central Texas: find drop-in
@@ -12,22 +12,30 @@ backend DB yet.
 
 ## Hosting / deploy
 - **Live:** https://waterdrop.handprotocol.org
-- **Netlify site:** `waterdrop-sanmarcos`, id `8a5f8ec9-e857-4196-887b-8bd1cb83ad10`
-  (default URL `waterdrop-sanmarcos.netlify.app`), team **koH** (`cryptokoh`).
+- **Netlify site:** `waterdrop-app`, id `8a5f8ec9-e857-4196-887b-8bd1cb83ad10`
+  (default URL `waterdrop-app.netlify.app`), team **koH** (`cryptokoh`). (Renamed from
+  `waterdrop-sanmarcos` 2026-06-20 — the plain `waterdrop` subdomain is taken globally.)
 - **Custom domain:** set as the site's PRIMARY `custom_domain` via the Netlify API
   (PATCH the site with `{"custom_domain":"waterdrop.handprotocol.org"}`). That auto-
   created the NETLIFY DNS record in the handprotocol.org zone (`6a034490d8f0c5ec10542e20`)
   and provisioned SSL. (A plain `domain_aliases` PATCH 422s; and a manually created
   NETLIFY record auto-claims to the zone-owner site — setting `custom_domain` is the fix.)
-- **Build + deploy (MUST include functions):**
+- **Deploy = git auto-deploy from `main`** (since 2026-06-20). The site is repo-connected
+  (`HandProtocol/handprotocol`, GitHub app installation `108354379`) with **base directory
+  `waterdrop`**, so a push to `main` that touches `waterdrop/` builds (`npm run build`) and
+  publishes `dist` + the functions. Netlify's monorepo detection SKIPS the build when
+  `waterdrop/` is unchanged (shows as a benign "no content change" / canceled deploy — not
+  a failure). The whole repo tree must therefore carry `waterdrop/`; it lands on `main` via
+  PR (don't entangle it with feature branches). Build config lives in `netlify.toml`
+  (publish `dist`, `[functions] directory`, SPA fallback, no-cache for sw.js/index.html) +
+  `public/_redirects`.
+- **Manual fallback** (hotfix without a push, MUST include functions):
   ```bash
   cd ~/Documents/handprotocol/waterdrop
   npm run build
   netlify deploy --prod --dir dist --functions netlify/functions \
     --site 8a5f8ec9-e857-4196-887b-8bd1cb83ad10
   ```
-  Config in `netlify.toml` (publish `dist`, `[functions] directory`, SPA fallback,
-  no-cache for sw.js/index.html) + `public/_redirects`.
 
 ## Netlify functions (on the WaterDrop site)
 - `netlify/functions/subscribe.mjs` — "subscribe to updates". Adds the email to a
