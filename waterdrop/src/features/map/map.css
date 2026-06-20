@@ -152,6 +152,46 @@
   }
 }
 
+/* ── Put-in / drop-in glow ─────────────────────────────────────────────────── */
+/* A soft light-blue halo behind the teardrop body with a slow, slight pulse, so
+   the spots you can launch from read as "drop in here". Skipped on dam-portage
+   (a hazard, not a put-in) and while selected (the spring selection ring owns
+   the emphasis there). Honors reduced-motion by holding a static glow. */
+.wd-map-pin:not(.wd-map-pin--dam) .wd-map-pin__body::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: var(--wd-dropin-glow, oklch(0.76 0.12 233));
+  opacity: 0.5;
+  filter: blur(2.5px);
+  z-index: -2;
+  pointer-events: none;
+  animation: wd-dropin-glow 2600ms var(--ease) infinite;
+}
+.wd-map-pin--selected .wd-map-pin__body::before {
+  animation: none;
+  opacity: 0;
+}
+@keyframes wd-dropin-glow {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.14);
+    opacity: 0.6;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wd-map-pin:not(.wd-map-pin--dam) .wd-map-pin__body::before {
+    animation: none;
+    transform: scale(1);
+    opacity: 0.42;
+  }
+}
+
 /* ── Gauge data badge ──────────────────────────────────────────────────────── */
 .wd-map-gauge {
   display: grid;
