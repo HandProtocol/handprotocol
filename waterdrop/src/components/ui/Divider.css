@@ -1,0 +1,11 @@
+.wd-divider {
+  height: 1px;
+  margin: 0;
+  border: none;
+  background: var(--border);
+  flex: none;
+}
+
+.wd-divider--inset {
+  margin-inline-start: var(--s4);
+}

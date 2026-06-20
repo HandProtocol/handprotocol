@@ -1,0 +1,71 @@
+.wd-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+  min-height: 34px;
+  padding: 0 var(--s3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.wd-chip:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.wd-chip:hover:not(:disabled):not(.wd-chip--selected) {
+  background: var(--stone-100);
+  border-color: var(--stone-400);
+}
+
+.wd-chip:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.wd-chip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wd-chip__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: calc(var(--s1) * -0.5);
+}
+
+.wd-chip__icon > svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Selected ── */
+.wd-chip--selected {
+  background: var(--accent-quiet);
+  border-color: var(--spring-600);
+  color: var(--spring-800);
+  font-weight: 600;
+}
+
+.wd-chip--selected:hover:not(:disabled) {
+  background: var(--spring-300);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-chip:active:not(:disabled) {
+    transform: none;
+  }
+}

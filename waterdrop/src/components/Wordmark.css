@@ -1,0 +1,17 @@
+.wd-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.wd-wordmark__mark {
+  display: block;
+  flex: none;
+}
+
+.wd-wordmark__text {
+  font-size: var(--text-xl);
+  color: var(--text-strong);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}

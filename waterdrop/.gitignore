@@ -1,0 +1,15 @@
+# Build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Netlify CLI local state / build cache
+.netlify/
+
+# Local screenshot/QA artifacts (browse, design-review)
+.shots/
+
+# Local env
+*.local
+.env*.local

@@ -1,0 +1,31 @@
+.wd-skeleton {
+  display: block;
+  background: var(--stone-100);
+  background-image: linear-gradient(
+    90deg,
+    var(--stone-100) 0%,
+    var(--stone-200) 40%,
+    var(--stone-200) 60%,
+    var(--stone-100) 100%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: wd-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes wd-shimmer {
+  from {
+    background-position: 150% 0;
+  }
+  to {
+    background-position: -150% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-skeleton {
+    animation: none;
+    background-image: none;
+    background: var(--stone-200);
+  }
+}

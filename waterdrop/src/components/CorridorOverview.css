@@ -1,0 +1,144 @@
+.wd-overview {
+  padding: 0 var(--s5) var(--s6);
+}
+
+/* Region switcher: a horizontally scrollable row of chips. */
+.wd-overview__regions {
+  display: flex;
+  gap: var(--s2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 calc(-1 * var(--s5)) var(--s4);
+  padding: 0 var(--s5) var(--s1);
+  -webkit-overflow-scrolling: touch;
+}
+.wd-overview__regions::-webkit-scrollbar {
+  display: none;
+}
+.wd-overview__regions > * {
+  flex: none;
+}
+
+.wd-overview__head {
+  margin-bottom: var(--s4);
+}
+
+.wd-overview__count {
+  margin-top: var(--s2);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--spring-700);
+}
+
+.wd-overview__group {
+  margin-bottom: var(--s2);
+}
+
+.wd-overview__star {
+  color: var(--clay-500);
+  flex: none;
+  fill: var(--clay-400);
+}
+
+.wd-overview__title {
+  font-size: var(--text-3xl);
+  margin: var(--s1) 0 var(--s2);
+  color: var(--text-strong);
+}
+
+.wd-overview__sub {
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.wd-overview__conditions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s2) var(--s3);
+  margin-bottom: var(--s4);
+}
+
+.wd-overview__plan {
+  margin: var(--s4) 0 var(--s2);
+}
+
+.wd-overview__blurb {
+  color: var(--text);
+  font-size: var(--text-sm);
+}
+
+.wd-overview__listlabel {
+  margin: var(--s4) 0 var(--s2);
+}
+
+.wd-overview__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wd-overview__row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  padding: var(--s3) var(--s2);
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  text-align: left;
+  min-height: 52px;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.wd-overview__row:hover {
+  background: var(--stone-100);
+}
+
+.wd-overview__row:active {
+  background: var(--stone-200);
+}
+
+.wd-overview__mile {
+  flex: none;
+  width: 40px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--spring-700);
+  text-align: right;
+}
+
+.wd-overview__rowtext {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.wd-overview__name {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  color: var(--text-strong);
+  font-weight: 500;
+  font-size: var(--text-base);
+}
+
+.wd-overview__lock {
+  color: var(--text-muted);
+  flex: none;
+}
+
+.wd-overview__type {
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+}
+
+.wd-overview__chev {
+  flex: none;
+  color: var(--stone-400);
+}

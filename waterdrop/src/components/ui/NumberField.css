@@ -1,0 +1,100 @@
+.wd-numberfield {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+.wd-numberfield:focus-within {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-color: var(--spring-600);
+}
+
+.wd-numberfield--disabled {
+  background: var(--stone-100);
+}
+
+/* ── Stepper buttons ── */
+.wd-numberfield__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  flex: none;
+  border: none;
+  background: transparent;
+  color: var(--text-strong);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease);
+}
+
+.wd-numberfield__step:first-child {
+  border-right: 1px solid var(--border);
+}
+
+.wd-numberfield__step:last-child {
+  border-left: 1px solid var(--border);
+}
+
+.wd-numberfield__step:hover:not(:disabled) {
+  background: var(--stone-100);
+}
+
+.wd-numberfield__step:active:not(:disabled) {
+  background: var(--stone-200);
+}
+
+.wd-numberfield__step:disabled {
+  color: var(--stone-400);
+  cursor: not-allowed;
+}
+
+/* ── Field + unit ── */
+.wd-numberfield__field {
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-inline: var(--s3);
+  gap: var(--s1);
+}
+
+.wd-numberfield__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text-strong);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  outline: none;
+}
+
+.wd-numberfield__input::placeholder {
+  color: var(--stone-400);
+}
+
+.wd-numberfield__input:disabled {
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.wd-numberfield__unit {
+  flex: none;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}

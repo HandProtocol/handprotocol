@@ -1,0 +1,31 @@
+.wd-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s1);
+  min-width: 0;
+}
+
+.wd-stat__label {
+  /* .eyebrow supplies size/weight/spacing/uppercase/muted color */
+  line-height: 1.2;
+}
+
+.wd-stat__value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--s1);
+  font-family: var(--font-ui);
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--text-strong);
+  letter-spacing: -0.01em;
+}
+
+.wd-stat__unit {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  /* Part of a primary readout: hold ~7:1 contrast, not the muted chrome tone. */
+  color: var(--stone-600);
+  letter-spacing: 0;
+}

@@ -1,0 +1,152 @@
+.wd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s2);
+  min-height: 44px;
+  padding: 0 var(--s4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  user-select: none;
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.wd-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.wd-btn:active:not(:disabled) {
+  transform: translateY(0.5px) scale(0.99);
+}
+
+.wd-btn:disabled {
+  cursor: not-allowed;
+}
+
+/* Loading keeps full opacity (it is doing work, not unavailable). */
+.wd-btn:disabled:not(.wd-btn--loading) {
+  opacity: 0.5;
+}
+
+.wd-btn--loading {
+  cursor: progress;
+}
+
+/* ── Sizes ── */
+.wd-btn--md {
+  min-height: 44px;
+  font-size: var(--text-sm);
+}
+
+.wd-btn--lg {
+  min-height: 56px;
+  padding: 0 var(--s5);
+  font-size: var(--text-base);
+  border-radius: var(--radius-lg);
+}
+
+.wd-btn--full {
+  display: flex;
+  width: 100%;
+}
+
+/* ── Icon / label slots ── */
+.wd-btn__icon,
+.wd-btn__spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.wd-btn__icon > svg,
+.wd-btn__spinner > svg {
+  width: 1.15em;
+  height: 1.15em;
+}
+
+/* Optical: pull icons slightly toward the label for tighter rhythm. */
+.wd-btn__icon {
+  margin-inline-start: calc(var(--s1) * -1);
+}
+
+.wd-btn__icon--right {
+  margin-inline: 0 calc(var(--s1) * -1);
+}
+
+.wd-btn__label {
+  display: inline-flex;
+  min-width: 0;
+}
+
+/* ── Primary ── */
+.wd-btn--primary {
+  background: var(--spring-600);
+  color: var(--on-accent);
+  box-shadow: var(--e1);
+}
+.wd-btn--primary:hover:not(:disabled) {
+  background: oklch(0.66 0.132 168);
+}
+.wd-btn--primary:active:not(:disabled) {
+  background: var(--spring-700);
+}
+
+/* ── Secondary ── */
+.wd-btn--secondary {
+  background: var(--surface);
+  color: var(--text-strong);
+  border-color: var(--border-strong);
+  box-shadow: var(--e1);
+}
+.wd-btn--secondary:hover:not(:disabled) {
+  background: var(--stone-100);
+  border-color: var(--stone-400);
+}
+.wd-btn--secondary:active:not(:disabled) {
+  background: var(--stone-200);
+}
+
+/* ── Ghost ── */
+.wd-btn--ghost {
+  background: transparent;
+  color: var(--text-strong);
+}
+.wd-btn--ghost:hover:not(:disabled) {
+  background: var(--stone-100);
+}
+.wd-btn--ghost:active:not(:disabled) {
+  background: var(--stone-200);
+}
+
+/* ── Danger ── */
+.wd-btn--danger {
+  background: var(--danger);
+  color: var(--on-accent);
+  box-shadow: var(--e1);
+}
+.wd-btn--danger:hover:not(:disabled) {
+  background: oklch(0.6 0.185 28);
+}
+.wd-btn--danger:active:not(:disabled) {
+  background: oklch(0.5 0.185 28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-btn:active:not(:disabled) {
+    transform: none;
+  }
+}

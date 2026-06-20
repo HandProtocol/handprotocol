@@ -1,0 +1,40 @@
+.wd-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 var(--s3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-strong);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: 1.4;
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    background-color var(--dur-fast) var(--ease);
+}
+
+.wd-input::placeholder {
+  color: var(--stone-400);
+}
+
+.wd-input:hover:not(:disabled):not(:focus) {
+  border-color: var(--stone-400);
+}
+
+.wd-input:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-color: var(--spring-600);
+}
+
+.wd-input:disabled {
+  background: var(--stone-100);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+.wd-input--numeric {
+  font-variant-numeric: tabular-nums;
+}

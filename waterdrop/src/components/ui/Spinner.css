@@ -1,0 +1,16 @@
+.wd-spinner {
+  animation: wd-spin 0.9s linear infinite;
+  flex: none;
+}
+
+@keyframes wd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-spinner {
+    animation: none;
+  }
+}
