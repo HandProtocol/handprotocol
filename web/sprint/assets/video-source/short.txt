@@ -1,0 +1,5 @@
+file '/home/koh/Documents/handprotocol/web/sprint/assets/video-source/short-01.mp4'
+file '/home/koh/Documents/handprotocol/web/sprint/assets/video-source/short-02.mp4'
+file '/home/koh/Documents/handprotocol/web/sprint/assets/video-source/short-03.mp4'
+file '/home/koh/Documents/handprotocol/web/sprint/assets/video-source/short-04.mp4'
+file '/home/koh/Documents/handprotocol/web/sprint/assets/video-source/short-05.mp4'
