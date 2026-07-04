@@ -191,6 +191,18 @@
   to = "/mystichearts/brief/"
   status = 301
 
+# Sprint presentation
+[[redirects]]
+  from = "/sprint"
+  to = "/sprint/"
+  status = 301
+
+# Story Story residency support page
+[[redirects]]
+  from = "/story-story"
+  to = "/story-story/"
+  status = 301
+
 # Reimagine Ranch — compost latrine build report (internal, not yet public)
 [[redirects]]
   from = "/reimagineranch/compost-latrine"

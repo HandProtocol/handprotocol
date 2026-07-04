@@ -38,6 +38,9 @@ http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protoc
 # Deck — internal page inspector (noindex; iframes through every public page)
 /deck                   /deck/                                 301
 
+/sprint                 /sprint/                               301
+/story-story            /story-story/                          301
+
 # Mystic Hearts Airstream Studio (password-protected via edge function)
 /mystichearts/airstreamstudio  /mystichearts/airstreamstudio/  301
 /airstreamstudio        /mystichearts/airstreamstudio/         301
