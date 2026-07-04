@@ -2,5 +2,5 @@
 2:I[19873,["/mystichearts/demo/_next/static/chunks/158myu8e_yme3.js","/mystichearts/demo/_next/static/chunks/3to3a3zk9p9tg.js"],"MysticHeartsPage"]
 3:I[97367,["/mystichearts/demo/_next/static/chunks/158myu8e_yme3.js"],"OutletBoundary"]
 4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/mystichearts/demo/_next/static/chunks/3to3a3zk9p9tg.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"vwE38UixIuKXDsbeoosGg"}
+0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/mystichearts/demo/_next/static/chunks/3to3a3zk9p9tg.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"pJMA0owbAcfAWX9tz1wiF"}
 5:null
