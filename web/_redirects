@@ -51,6 +51,9 @@ http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protoc
 /mystichearts           /mystichearts/brief/                   301
 /brief                  /mystichearts/brief/                   301
 
+# Mystic Hearts immersive demo (password-protected via edge function)
+/mystichearts/demo      /mystichearts/demo/                    301
+
 # Land health — mosquito Bucket-of-Doom (internal, noindex)
 /mosquitos              /mosquitos/                            301
 /bucket-of-doom         /mosquitos/                            301
