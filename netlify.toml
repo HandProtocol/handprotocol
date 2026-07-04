@@ -37,6 +37,10 @@
   function = "mystichearts-brief-auth"
   path = "/mystichearts/brief/*"
 
+[[edge_functions]]
+  function = "mystichearts-demo-auth"
+  path = "/mystichearts/demo/*"
+
 # Business-outreach pitch pages (password-protected, see edge function).
 # The demo site /demos/<slug>/ stays public; only /pitch/ is gated.
 [[edge_functions]]
@@ -189,6 +193,12 @@
 [[redirects]]
   from = "/brief"
   to = "/mystichearts/brief/"
+  status = 301
+
+# Mystic Hearts immersive demo (password-protected, see edge function above)
+[[redirects]]
+  from = "/mystichearts/demo"
+  to = "/mystichearts/demo/"
   status = 301
 
 # Reimagine Ranch — compost latrine build report (internal, not yet public)
