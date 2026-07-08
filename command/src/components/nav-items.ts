@@ -8,6 +8,7 @@ import {
   Building2,
   CalendarClock,
   Crosshair,
+  Eye,
   MapPin,
   Settings,
 } from "lucide-react";
@@ -34,6 +35,7 @@ export const navItems: NavItem[] = [
   { label: "Boilerplate", href: "/boilerplate", icon: BookOpen, pillar: "A" },
   { label: "Develop", href: "/develop", icon: Building2, pillar: "D" },
   { label: "Deadlines", href: "/deadlines", icon: CalendarClock, pillar: "D" },
+  { label: "Public", href: "/public", icon: Eye, pillar: "D" },
   { label: "Inspector", href: "/inspector", icon: Crosshair, pillar: "D" },
   { label: "Pins", href: "/pins", icon: MapPin, pillar: "D" },
   { label: "Settings", href: "/settings", icon: Settings, pillar: "·" },

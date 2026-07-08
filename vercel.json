@@ -4,17 +4,20 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/", "destination": "/foundation-campaign/", "permanent": true },
-    { "source": "/campaign", "destination": "/foundation-campaign/", "permanent": true },
-    { "source": "/foundation-campaign", "destination": "/foundation-campaign/", "permanent": true },
+    { "source": "/campaign", "destination": "/", "permanent": true },
+    { "source": "/foundation-campaign", "destination": "/", "permanent": true },
+    { "source": "/foundation-campaign/", "destination": "/", "permanent": true },
     { "source": "/discovery", "destination": "/discovery/", "permanent": true },
     { "source": "/legacy", "destination": "/legacy/", "permanent": true },
-    { "source": "/raise", "destination": "/foundation-campaign/#tiers", "permanent": true },
-    { "source": "/crypto", "destination": "/foundation-campaign/#crypto", "permanent": true },
+    { "source": "/raise", "destination": "/#tiers", "permanent": true },
+    { "source": "/crypto", "destination": "/donate-crypto/", "permanent": true },
     { "source": "/vision", "destination": "/discovery/skill-exchange-vision.html", "permanent": true },
     { "source": "/models", "destination": "/discovery/skill-exchange-models.html", "permanent": true },
     { "source": "/landscape", "destination": "/discovery/impact-org-landscape.html", "permanent": true },
     { "source": "/mystichearts/demo", "destination": "/mystichearts/demo/", "permanent": true }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/foundation-campaign/index.html" }
   ],
   "headers": [
     {

@@ -84,11 +84,11 @@
   status = 301
   force = true
 
-# Root redirects to foundation campaign (primary surface)
+# Root serves the foundation campaign as the canonical public surface.
 [[redirects]]
   from = "/"
-  to = "/foundation-campaign/"
-  status = 301
+  to = "/foundation-campaign/index.html"
+  status = 200
   force = true
 
 # Pretty URLs without trailing slash → with slash
@@ -104,18 +104,25 @@
 
 [[redirects]]
   from = "/foundation-campaign"
-  to = "/foundation-campaign/"
+  to = "/"
   status = 301
+  force = true
+
+[[redirects]]
+  from = "/foundation-campaign/"
+  to = "/"
+  status = 301
+  force = true
 
 # Aliases — shorter URLs for sharing
 [[redirects]]
   from = "/campaign"
-  to = "/foundation-campaign/"
+  to = "/"
   status = 301
 
 [[redirects]]
   from = "/raise"
-  to = "/foundation-campaign/#tiers"
+  to = "/#tiers"
   status = 301
 
 [[redirects]]

@@ -14,7 +14,7 @@ thread the operator inspector uses.
 
 A self-contained tool at `https://handprotocol.org/deck/` that:
 
-- iframes every public page in order (foundation-campaign → … → legacy)
+- iframes every public page in order (home, discovery, governance, legacy)
 - scrolls the current page ~85% per **Next** click with a brief frame pop
 - triggers a cinematic loading overlay (amber HUD, particles, brackets) when
   the current page reaches its bottom, then swaps the iframe to the next page
@@ -65,7 +65,7 @@ Top of `web/deck/main.js`:
 
 ```js
 const PAGES = [
-  { path: '/foundation-campaign/', title: 'Foundation Campaign', tag: 'Campaign' },
+  { path: '/', title: 'Foundation Campaign', tag: 'Campaign' },
   { path: '/discovery/',           title: 'Discovery Hub',       tag: 'Hub' },
   // … 9 more
 ];
@@ -99,7 +99,7 @@ and queues failures in `hand_deck_feedback_queue_v1` for retry.
 ```json
 {
   "text": "the actual note",
-  "path": "/foundation-campaign/",
+  "path": "/",
   "title": "Foundation Campaign",
   "name": "anonymous",
   "tags": ["🪄 magic"],

@@ -7,7 +7,7 @@
 
   // ---------- Pages ------------------------------------------------------
   const PAGES = [
-    { path: '/foundation-campaign/',                       title: 'Foundation Campaign',    tag: 'Campaign' },
+    { path: '/',                                           title: 'Foundation Campaign',    tag: 'Campaign' },
     { path: '/discovery/',                                 title: 'Discovery Hub',          tag: 'Hub' },
     { path: '/discovery/skill-exchange-vision.html',       title: 'Skill Exchange · Vision',   tag: 'Doc' },
     { path: '/discovery/skill-exchange-models.html',       title: 'Skill Exchange · Models',   tag: 'Doc' },

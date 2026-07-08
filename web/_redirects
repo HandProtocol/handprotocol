@@ -6,12 +6,13 @@
 https://gofundme.handprotocol.org/*  https://www.gofundme.com/f/help-hand-protocol-grow  301!
 http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protocol-grow  301!
 
-/                       /foundation-campaign/      301
-/campaign               /foundation-campaign/      301
+/                       /foundation-campaign/index.html 200
+/campaign               /                          301
 /discovery              /discovery/                301
 /legacy                 /legacy/                   301
-/foundation-campaign    /foundation-campaign/      301
-/raise                  /foundation-campaign/#tiers 301
+/foundation-campaign    /                          301
+/foundation-campaign/   /                          301
+/raise                  /#tiers                    301
 /crypto                 /donate-crypto/                       301
 /donate-crypto          /donate-crypto/                       301
 /vision                 /discovery/skill-exchange-vision.html  301
