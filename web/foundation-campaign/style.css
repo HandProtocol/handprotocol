@@ -201,7 +201,7 @@ strong {
 }
 
 /* ========================================
-   Navigation — floating liquid-glass pills over transparent bar
+   Navigation, floating liquid-glass pills over transparent bar
    ======================================== */
 .nav {
   position: fixed;
@@ -535,7 +535,7 @@ strong {
   }
 }
 
-/* Mobile dropdown panel — falls below the floating pills */
+/* Mobile dropdown panel, falls below the floating pills */
 .nav__links.active {
   display: flex;
   flex-direction: column;
@@ -543,6 +543,7 @@ strong {
   top: calc(100% + var(--space-sm));
   left: var(--space-md);
   right: var(--space-md);
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(28px) saturate(1.8);
   -webkit-backdrop-filter: blur(28px) saturate(1.8);
@@ -556,7 +557,70 @@ strong {
   gap: 0;
 }
 
+.nav__links.active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 84% 20%, rgba(217, 119, 6, 0.12), transparent 34%),
+    radial-gradient(circle at 18% 92%, rgba(13, 148, 136, 0.10), transparent 38%);
+  pointer-events: none;
+}
+
+.nav__hand {
+  display: none;
+}
+
+.nav__links.active .nav__hand {
+  display: block;
+  position: absolute;
+  top: 26px;
+  right: 4px;
+  z-index: 0;
+  width: min(48vw, 210px);
+  max-width: 64%;
+  aspect-ratio: 11 / 13;
+  opacity: 0.30;
+  perspective: 540px;
+  pointer-events: none;
+}
+
+.nav__hand-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotateX(58deg) rotateZ(-15deg) rotateY(-24deg);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 18px 26px rgba(13, 148, 136, 0.18));
+  animation: navHandFloat 9s ease-in-out infinite;
+}
+
+.nav__hand-drift {
+  transform-origin: 112px 132px;
+  animation: navHandTrace 6.5s ease-in-out infinite;
+}
+
+.nav__hand-line {
+  stroke: rgba(13, 148, 136, 0.62);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.nav__hand-line--soft {
+  stroke: rgba(217, 119, 6, 0.44);
+  stroke-width: 1.2;
+}
+
+.nav__hand-node {
+  fill: rgba(217, 119, 6, 0.72);
+  filter: drop-shadow(0 0 7px rgba(217, 119, 6, 0.24));
+}
+
 .nav__links.active .nav__link {
+  position: relative;
+  z-index: 1;
   color: var(--color-text);
   padding: var(--space-md) var(--space-lg);
   font-size: 1rem;
@@ -579,6 +643,26 @@ strong {
   color: var(--color-text);
 }
 
+@keyframes navHandFloat {
+  0%, 100% {
+    transform: rotateX(58deg) rotateZ(-15deg) rotateY(-24deg) translate3d(0, 0, 0);
+  }
+  50% {
+    transform: rotateX(54deg) rotateZ(-11deg) rotateY(-18deg) translate3d(-5px, 7px, 0);
+  }
+}
+
+@keyframes navHandTrace {
+  0%, 100% {
+    opacity: 0.78;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nav,
   .nav__left,
@@ -586,8 +670,11 @@ strong {
   .nav__logo,
   .nav__logo-dot,
   .nav__toggle,
-  .nav__toggle span {
+  .nav__toggle span,
+  .nav__hand-svg,
+  .nav__hand-drift {
     transition: none;
+    animation: none;
   }
 }
 
@@ -881,7 +968,7 @@ strong {
 }
 
 /* ========================================
-   Problem — vertical numbered narrative
+   Problem, vertical numbered narrative
    (breaks the card-grid monoculture; the asymmetry vs. the
    surrounding sections is intentional)
    ======================================== */
@@ -1534,7 +1621,7 @@ strong {
 }
 
 /* ========================================
-   Year 1 Success — milestone narrative
+   Year 1 Success, milestone narrative
    (vertical list with a hairline-numbered prefix; the capstone
    row uses a thicker amber rule to mark the year-end outcome)
    ======================================== */
@@ -2164,7 +2251,7 @@ strong {
 }
 
 /* ========================================
-   Research pointer — discreet inline cross-link from a campaign
+   Research pointer, discreet inline cross-link from a campaign
    section to the relevant discovery doc. One per section, placed
    at the bottom of the section container. Mono-eyebrow + amber
    link with arrow that translates on hover.
@@ -2242,7 +2329,7 @@ strong {
   gap: var(--space-lg);
   margin-bottom: var(--space-2xl);
 }
-/* Asymmetric 2:1 layout — vision card spans both rows on the left,
+/* Asymmetric 2:1 layout, vision card spans both rows on the left,
    transparency and team stack on the right. Breaks the equal-card monoculture. */
 @media (min-width: 768px) {
   .backstory__grid {
@@ -2558,11 +2645,11 @@ strong {
   border-bottom-color: var(--color-accent-warm);
 }
 
-/* --- Stay close — mailing-list section ---
+/* --- Stay close, mailing-list section ---
    Scene: a healer or supporter sitting with their phone after reading
    the campaign on a kitchen table. The form should feel like an invitation,
-   not a marketing capture. Two-column asymmetric — copy left (smaller),
-   form right (larger) — so the form is the gravity well, not the headline. */
+   not a marketing capture. Two-column asymmetric, copy left (smaller),
+   form right (larger), so the form is the gravity well, not the headline. */
 .section--stay-close {
   background: var(--color-bg);
 }
@@ -2621,7 +2708,7 @@ strong {
   margin: 0;
 }
 
-/* Form column — sits on a quiet card so it reads as a discrete input zone */
+/* Form column, sits on a quiet card so it reads as a discrete input zone */
 .stay-close__form {
   background: var(--color-bg-warm);
   border: 1px solid var(--color-border);
@@ -2767,7 +2854,7 @@ strong {
   border-color: var(--color-accent);
 }
 
-/* Honeypot — visually hidden but accessible to bots */
+/* Honeypot, visually hidden but accessible to bots */
 .stay-close__honeypot {
   position: absolute;
   left: -9999px;
