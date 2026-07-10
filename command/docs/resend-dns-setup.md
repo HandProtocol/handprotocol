@@ -1,6 +1,8 @@
 # Resend transactional email — handprotocol.org setup
 
-**Status:** Blocked at one credential boundary (Russell action required). DNS is a clean slate — no collisions, ready to receive Resend records. Everything is pre-staged for one-step completion once a full-access Resend API key is available.
+**Status (updated 2026-06-19):** ✅ **DNS records ADDED.** `handprotocol.org` was registered in Resend (full-access key obtained) and all four records — DKIM TXT, SPF TXT + MX on `send`, DMARC — were added to the Netlify DNS zone `6a034490d8f0c5ec10542e20`. See §3 for the exact records. **Remaining:** click Verify in Resend, set `EMAIL_FROM`, and set `RESEND_AUDIENCE_ID` (per app — see the multi-app note below). The original "blocked" notes are retained for history.
+
+> **Multi-app sending (IMPORTANT):** Resend free tier = **1 verified domain**. Do NOT add per-app subdomains (e.g. `waterdrop.handprotocol.org`) as separate Resend domains — that exceeds the limit and is unnecessary. The verified `handprotocol.org` can send from any address on it. Separate each app by **from-address + audience**, not domain: e.g. WaterDrop sends as `WaterDrop <updates@handprotocol.org>` to its own Resend **audience** (`RESEND_AUDIENCE_ID` set on the WaterDrop Netlify site). Audiences are the per-app unit; the domain is shared.
 
 **Date:** 2026-06-04
 **Goal:** Send transactional email FROM `team@handprotocol.org` (Command Center invites, feedback notifications, "Apply for Command Center" flow) via Resend.
@@ -51,7 +53,16 @@ Full record list (only 3 records — a clean slate):
 
 ## 3. What I changed in DNS
 
-**Nothing yet.** No DNS records were added or modified. Reason: the exact DKIM CNAME *values* are generated per-domain by Resend and are only retrievable after the domain is registered with a **full-access** API key (see boundary). I will not guess/fabricate DKIM values.
+**Done 2026-06-19.** Added these four records to zone `6a034490d8f0c5ec10542e20` (via `POST /api/v1/dns_zones/{zone}/dns_records`):
+
+| Type | Hostname | Value | Priority |
+|------|----------|-------|----------|
+| TXT | `resend._domainkey.handprotocol.org` | `p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCk9yKeXJz3ZtwLXEBa9HMFGIfDMSmvCLZRey1vDyDtK4BFs8cStUp6Ntfdu/HflDG6uK6V+Qs5KsAL2dZY4hwj5ewoPp9EV+o1GfOx0kT6sWAkjeM/ts494TbInVd2egB9WQ1O0CKvGmGyjDhlP43egBQUXr8Jc+rVVaI6b6tiyQIDAQAB` (218 chars) | — |
+| MX | `send.handprotocol.org` | `feedback-smtp.us-east-1.amazonses.com` | 10 |
+| TXT | `send.handprotocol.org` | `v=spf1 include:amazonses.com ~all` | — |
+| TXT | `_dmarc.handprotocol.org` | `v=DMARC1; p=none;` | — |
+
+All additive, zero collision with the prior 3 NETLIFY records. Note: modern Resend uses a **TXT** DKIM record (`p=…`) at `resend._domainkey`, not a CNAME. Verify values stored intact via `GET /dns_zones/{zone}/dns_records` before clicking Verify in Resend.
 
 ---
 

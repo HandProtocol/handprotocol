@@ -18,7 +18,10 @@ export function checksum(content: string): string {
 export function kebabCase(input: string): string {
   return input
     .toLowerCase()
-    .replace(/['"]/g, "")
+    // Strip apostrophes/quotes BEFORE the separator pass so possessives collapse:
+    // "Ed's" -> "eds", "Mary's" -> "marys" (NOT "ed-s"/"mary-s"). Google Maps names
+    // use the curly apostrophe U+2019, so cover the typographic variants too, not just '.
+    .replace(/['"‘’‛ʼ`]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "")
     .slice(0, 60);

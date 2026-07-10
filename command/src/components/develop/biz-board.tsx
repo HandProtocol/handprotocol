@@ -25,6 +25,19 @@ import { BizCard } from "./biz-card";
   <BizCard> bucketed by campaign / city / category. All state is client-side.
 */
 
+// Fold case, strip accents (yucatán -> yucatan), and drop apostrophes/punctuation
+// so "eds" matches "Ed's" and "yucatan" matches "Yucatán".
+function normSearch(s: string): string {
+  return s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/['’ʼ`]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 const WEBSITE_LABEL: Record<WebsiteStatus, string> = {
   none: "NO SITE",
   poor: "POOR SITE",
@@ -78,14 +91,13 @@ export function BizBoard({
   }
 
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const terms = normSearch(query).split(" ").filter(Boolean);
     return leads.filter((l) => {
-      if (q) {
-        const haystack = [l.name, l.category, l.city]
-          .filter(Boolean)
-          .join(" ")
-          .toLowerCase();
-        if (!haystack.includes(q)) return false;
+      if (terms.length) {
+        const haystack = normSearch(
+          [l.name, l.category, l.city].filter(Boolean).join(" "),
+        );
+        if (!terms.every((t) => haystack.includes(t))) return false;
       }
       if (statuses.length > 0 && !statuses.includes(l.status)) return false;
       if (websites.length > 0 && !websites.includes(l.website_status))

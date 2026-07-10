@@ -87,7 +87,7 @@ function SecondaryLinks({ lead }: { lead: BizLead }) {
         </a>
       )}
       <Link
-        href={`/develop/${lead.slug}`}
+        href={`/projects/${lead.slug}`}
         className="hover:text-[var(--ink-dim)]"
       >
         lead
@@ -138,7 +138,7 @@ export function SitesTable({
               >
                 <td className="px-4 py-3 align-top">
                   <Link
-                    href={`/develop/${lead.slug}`}
+                    href={`/projects/${lead.slug}`}
                     className="font-medium text-[var(--ink)] hover:text-[var(--amber-soft)]"
                   >
                     {lead.name}
@@ -191,7 +191,7 @@ export function SitesTable({
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0 space-y-0.5">
                 <Link
-                  href={`/develop/${lead.slug}`}
+                  href={`/projects/${lead.slug}`}
                   className="font-medium text-[var(--ink)] hover:text-[var(--amber-soft)]"
                 >
                   {lead.name}

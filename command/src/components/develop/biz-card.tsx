@@ -45,7 +45,7 @@ export function BizCard({
   return (
     <Link
       ref={ref}
-      href={`/develop/${lead.slug}`}
+      href={`/projects/${lead.slug}`}
       draggable
       onDragStart={(e) => {
         e.dataTransfer.setData("text/plain", lead.slug);

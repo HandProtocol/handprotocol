@@ -67,7 +67,7 @@ function popupHtml(lead: BizLead): string {
     `<div class="lm-pop-name">${esc(lead.name)}${live}</div>`,
     meta ? `<div class="lm-pop-meta">${meta}</div>` : "",
     rating,
-    `<a class="lm-pop-link" href="/develop/${esc(lead.slug)}">Open lead &rarr;</a>`,
+    `<a class="lm-pop-link" href="/projects/${esc(lead.slug)}">Open lead &rarr;</a>`,
     `</div>`,
   ].join("");
 }

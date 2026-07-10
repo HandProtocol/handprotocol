@@ -4,9 +4,8 @@ import { DevelopNav } from "@/components/develop/develop-nav";
 import { SitesTable } from "@/components/develop/sites-table";
 
 /*
-  Live owned-sites registry. The management surface for businesses that
-  graduated from a free demo to their own production domain (hand-biz-pitch
-  Phase 6). A lead earns a row here the moment it has a live_domain.
+  Live owned-sites registry. A lead earns a row here the moment it has a
+  live_domain.
 */
 
 export const dynamic = "force-dynamic";
@@ -25,12 +24,13 @@ export default async function DevelopSitesPage() {
   return (
     <div className="space-y-6">
       <header className="space-y-2">
-        <p className="eyebrow">
-          <span className="amber">D</span> · DEVELOP · LIVE SITES
+        <p className="display-eyebrow">
+          <span className="amber">Projects</span> with production sites
         </p>
         <h1 className="text-2xl font-medium tracking-tight">Live sites</h1>
         <p className="text-sm text-[var(--ink-dim)] max-w-2xl">
-          Businesses that graduated to their own owned site.
+          Projects that moved beyond a generated demo into an owned production
+          site.
         </p>
       </header>
 
@@ -39,10 +39,10 @@ export default async function DevelopSitesPage() {
       {sites.length === 0 ? (
         <div className="panel p-6 text-center space-y-3">
           <Globe className="mx-auto h-5 w-5 text-[var(--ink-faint)]" />
-          <p className="eyebrow">REGISTRY · EMPTY</p>
+          <p className="display-eyebrow">No live sites yet</p>
           <p className="text-sm text-[var(--ink-dim)] max-w-md mx-auto">
-            No live sites yet. A business appears here once a lead graduates to
-            its own owned domain (hand-biz-pitch Phase 6).
+            A project appears here once a lead graduates to its own owned
+            domain.
           </p>
         </div>
       ) : (

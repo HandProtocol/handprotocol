@@ -12,11 +12,8 @@ import { navItems, isActivePath } from "@/components/nav-items";
 
 /*
   Sidebar for the HAND Command Center.
-  Nav entries (shared with the mobile rail via @/components/nav-items)
-  match the H-A-N-D pillars in PRD section 1 / 7.
-
-  A cmd+K hint sits above the account footer so the operator knows
-  universal search is one chord away.
+  Nav entries are shared with the mobile rail. Labels stay plain so the
+  operator sees work areas first, with a small meta label for orientation.
 */
 
 export function SidebarNav({
@@ -60,7 +57,7 @@ export function SidebarNav({
             HAND Command
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink-faint)]">
-            Holistic · Approach · Nurture · Develop
+            Internal operating desk
           </span>
         </div>
       </div>
@@ -100,7 +97,7 @@ export function SidebarNav({
                         : "text-[var(--ink-faint)]",
                     )}
                   >
-                    {item.pillar}
+                      {item.meta}
                   </span>
                 </Link>
               </li>
