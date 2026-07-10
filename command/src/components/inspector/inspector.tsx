@@ -369,7 +369,7 @@ export function Inspector({ initialPins }: { initialPins: FeedbackPin[] }) {
     const frame = frameRef.current;
     const doc = frame?.contentDocument || frame?.contentWindow?.document || null;
     if (doc) {
-      // Note: capture dataURL only — we don't upload to Supabase Storage
+      // Note: capture dataURL only, we don't upload to Supabase Storage
       // in v1. The DB column accepts a data: URL but for a stable kanban
       // thumbnail, this should later upload to a bucket. Skipped here to
       // ship the core loop.
@@ -458,7 +458,7 @@ export function Inspector({ initialPins }: { initialPins: FeedbackPin[] }) {
         <div className="flex items-center gap-2 display-eyebrow">
           <Crosshair className="h-3.5 w-3.5" aria-hidden />
           <span>
-            INSPECTOR · <span className="amber">{pinsOnPage.length}</span> ON THIS PAGE
+            Page review <span className="amber">{pinsOnPage.length}</span> notes
           </span>
           {pending && (
             <>
@@ -567,10 +567,10 @@ export function Inspector({ initialPins }: { initialPins: FeedbackPin[] }) {
           {!currentPage ? (
             <div className="grid h-full place-items-center text-center">
               <div className="space-y-2">
-                <p className="display-eyebrow">SELECT · PAGE</p>
+                <p className="display-eyebrow">Select a page</p>
                 <p className="text-sm text-[var(--ink-dim)] max-w-xs">
                   Choose a HAND surface from the dropdown to load it in
-                  the inspector iframe.
+                  page review.
                 </p>
               </div>
             </div>
@@ -612,7 +612,7 @@ export function Inspector({ initialPins }: { initialPins: FeedbackPin[] }) {
         {/* Sidebar */}
         <aside className="panel flex min-h-0 flex-col overflow-hidden">
           <header className="flex items-center justify-between border-b border-[rgba(245,239,225,0.06)] px-3 py-2">
-            <span className="display-eyebrow">FEEDBACK · PINS</span>
+            <span className="display-eyebrow">Feedback notes</span>
             <span className="display-stat text-base leading-none text-[var(--amber-soft)]">
               {pinsOnPage.length}
             </span>
@@ -652,7 +652,7 @@ export function Inspector({ initialPins }: { initialPins: FeedbackPin[] }) {
                   type="button"
                   onClick={cancelCaptured}
                   className="rounded p-1 text-[var(--ink-dim)] hover:text-[var(--ink)]"
-                  aria-label="Cancel pin"
+                  aria-label="Cancel note"
                 >
                   <X className="h-3.5 w-3.5" />
                 </button>
@@ -699,7 +699,7 @@ export function Inspector({ initialPins }: { initialPins: FeedbackPin[] }) {
                   disabled={pending}
                   className="rounded-md bg-[var(--amber)] px-3 py-1 text-xs font-medium text-[#1a1208] hover:bg-[var(--amber-soft)] disabled:opacity-50"
                 >
-                  Pin it
+                  Save note
                 </button>
               </div>
             </div>
@@ -709,7 +709,7 @@ export function Inspector({ initialPins }: { initialPins: FeedbackPin[] }) {
           <div className="flex-1 min-h-0 overflow-y-auto px-3 py-2">
             {filteredPins.length === 0 && (
               <p className="px-2 py-8 text-center font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ink-faint)]">
-                {pinsOnPage.length === 0 ? "NO · PINS · YET" : "NONE · MATCH · FILTER"}
+                {pinsOnPage.length === 0 ? "NO NOTES YET" : "NONE MATCH FILTER"}
               </p>
             )}
             <ul className="space-y-2">
@@ -796,7 +796,7 @@ function PinSidebarCard({
             onDelete();
           }}
           className="rounded p-1 text-[var(--ink-faint)] hover:text-[#fda4a4]"
-          aria-label="Delete pin"
+          aria-label="Delete note"
         >
           <Trash2 className="h-3 w-3" />
         </button>
@@ -964,7 +964,7 @@ function CssEditor({
   return (
     <div className="border-t border-[rgba(245,239,225,0.06)] bg-[rgba(7,9,15,0.6)] p-3 space-y-2 max-h-72 overflow-y-auto">
       <div className="flex items-center justify-between">
-        <span className="display-eyebrow">LIVE · CSS · EDITOR</span>
+        <span className="display-eyebrow">Style editor</span>
         <div className="flex items-center gap-1">
           <button
             type="button"

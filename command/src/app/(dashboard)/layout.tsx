@@ -95,17 +95,17 @@ export default async function DashboardLayout({
         <div className="hidden lg:flex h-14 items-center justify-between border-b border-[rgba(245,239,225,0.06)] px-6">
           <div className="flex items-center gap-4 eyebrow">
             <span>
-              SYS <span className="amber">ONLINE</span>
+              Command <span className="amber">open</span>
             </span>
             <span aria-hidden className="text-[var(--ink-faint)]">
               ·
             </span>
-            <span>NODE 01</span>
+            <span>Dashboard, feedback, projects, Reciprocates</span>
             <span aria-hidden className="text-[var(--ink-faint)]">
               ·
             </span>
             <span>
-              BUILD <span className="amber">0.1.0</span>
+              Build <span className="amber">0.1.0</span>
             </span>
           </div>
           <NotificationBell />

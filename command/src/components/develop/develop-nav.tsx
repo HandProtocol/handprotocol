@@ -6,20 +6,20 @@ import { KanbanSquare, Map, Globe, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /*
-  Sub-navigation for the Develop pillar. Four lenses on the same pipeline:
-    Board     — the status kanban (+ group/filter/search)
-    Map       — leads plotted by location
-    Sites     — the registry of live owned sites
-    Campaigns — the batches leads are worked in
+  Sub-navigation for Projects. Four lenses on the same pipeline:
+    Board, the status kanban (+ group/filter/search)
+    Map, leads plotted by location
+    Sites, the registry of live owned sites
+    Campaigns, the batches leads are worked in
   Kept as in-section tabs (not sidebar items) so the primary nav stays
-  pillar-flat. Active tab matches on prefix, /develop matches exactly.
+  plain. Active tab matches on prefix, /projects matches exactly.
 */
 
 const TABS = [
-  { label: "Board", href: "/develop", icon: KanbanSquare, exact: true },
-  { label: "Map", href: "/develop/map", icon: Map },
-  { label: "Sites", href: "/develop/sites", icon: Globe },
-  { label: "Campaigns", href: "/develop/campaigns", icon: Layers },
+  { label: "Board", href: "/projects", icon: KanbanSquare, exact: true },
+  { label: "Map", href: "/projects/map", icon: Map },
+  { label: "Sites", href: "/projects/sites", icon: Globe },
+  { label: "Campaigns", href: "/projects/campaigns", icon: Layers },
 ] as const;
 
 export function DevelopNav() {
@@ -29,7 +29,7 @@ export function DevelopNav() {
 
   return (
     <nav
-      aria-label="Develop views"
+      aria-label="Project views"
       className="flex flex-wrap items-center gap-1 border-b border-[rgba(245,239,225,0.07)] pb-px"
     >
       {TABS.map((t) => {

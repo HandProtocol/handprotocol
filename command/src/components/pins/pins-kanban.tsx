@@ -18,11 +18,11 @@ import {
 import { updatePinStatus } from "@/lib/inspector/actions";
 
 /*
-  Pins kanban. Three columns: open / in-progress / resolved.
+  Feedback kanban. Three columns: open / in-progress / resolved.
 
   Drag is HTML5 native, matching the grants kanban so the operator
-  doesn't have to relearn the gesture. Pin click navigates back to the
-  inspector with a deep-link so the operator lands on exactly the same
+  doesn't have to relearn the gesture. Note click navigates back to page
+  review with a deep-link so the operator lands on exactly the same
   page + element.
 
   Filter chips (page, priority, author) live above the board. Filters
@@ -65,7 +65,7 @@ export function PinsKanban({ pins }: { pins: FeedbackPin[] }) {
   const [pending, startTransition] = useTransition();
 
   // Distinct page + author values for filter chips. We compute these off
-  // the live pin set so brand-new pages appear without redeploying.
+  // the live note set so brand-new pages appear without redeploying.
   const pageOptions = useMemo(() => {
     const set = new Set<string>();
     pins.forEach((p) => set.add(p.page_url));
@@ -143,7 +143,7 @@ export function PinsKanban({ pins }: { pins: FeedbackPin[] }) {
       <div className="flex flex-wrap items-center gap-3">
         <div className="display-eyebrow">
           <span>
-            PIPELINE · <span className="amber">{filtered.length}</span> PINS
+            Feedback <span className="amber">{filtered.length}</span> notes
           </span>
           {pending && (
             <>
@@ -288,7 +288,7 @@ function PinCard({
   onDragStart: () => void;
   onDragEnd: () => void;
 }) {
-  const href = `/inspector?page=${encodeURIComponent(pin.page_url)}&pin=${pin.id}`;
+  const href = `/review?page=${encodeURIComponent(pin.page_url)}&pin=${pin.id}`;
   return (
     <Link
       href={href}
