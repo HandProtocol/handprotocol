@@ -4,7 +4,7 @@ import { DevelopNav } from "@/components/develop/develop-nav";
 import { LeadsMap } from "@/components/develop/leads-map";
 
 /*
-  Develop pillar, map lens. The same pipeline as the board, plotted by
+  Projects map lens. The same pipeline as the board, plotted by
   location. Only leads with both lat and lng get a pin; the page is honest
   about coverage by counting the ones that don't. MapLibre runs token-free on
   the CARTO dark basemap, so there's no API-key dependency to manage.
@@ -20,13 +20,15 @@ export default async function DevelopMapPage() {
   return (
     <div className="space-y-6">
       <header className="space-y-2">
-        <p className="eyebrow">
-          <span className="amber">D</span> · DEVELOP · MAP
+        <p className="display-eyebrow">
+          <span className="amber">Projects</span> by location
         </p>
-        <h1 className="text-2xl font-medium tracking-tight">Leads on the map</h1>
+        <h1 className="text-2xl font-medium tracking-tight">
+          Outreach map
+        </h1>
         <p className="text-sm text-[var(--ink-dim)] max-w-2xl">
-          Every lead with a known location, plotted on a token-free basemap.
-          Colour reads the pipeline status; live owned sites carry a brighter
+          Every outreach lead with a known location, plotted on a token-free
+          basemap. Color reads the pipeline status; live owned sites carry a brighter
           ring. Click a pin for the business and a jump into its lead.
         </p>
       </header>
@@ -49,7 +51,7 @@ export default async function DevelopMapPage() {
       {pinned.length === 0 ? (
         <div className="panel p-6 text-center space-y-3">
           <MapPinOff className="mx-auto h-5 w-5 text-[var(--ink-faint)]" aria-hidden />
-          <p className="eyebrow">COVERAGE · EMPTY</p>
+          <p className="display-eyebrow">No mapped projects yet</p>
           <p className="text-sm text-[var(--ink-dim)] max-w-md mx-auto">
             {leads.length === 0
               ? "No leads yet. Add one from the board and set its location to see it here."

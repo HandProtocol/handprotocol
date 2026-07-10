@@ -64,7 +64,7 @@ export default async function BizLeadDetailPage({
     <div className="space-y-6">
       <header className="space-y-3">
         <Link
-          href="/develop"
+          href="/projects"
           className="inline-flex items-center gap-1.5 text-xs text-[var(--ink-dim)] hover:text-[var(--ink)]"
         >
           <ArrowLeft className="h-3.5 w-3.5" aria-hidden />

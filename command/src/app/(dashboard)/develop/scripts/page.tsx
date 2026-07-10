@@ -6,7 +6,7 @@ import { CopyButton } from "@/components/develop/copy-button";
 import type { ColdScriptSurface } from "@/lib/develop/types";
 
 /*
-  Cold-outreach scripts. A read/copy surface under the Develop pillar so reps
+  Cold-outreach scripts. A read/copy surface under Projects so reps
   have the canonical cold templates in front of them while working the phones
   and inbox. The templates are pure markdown at biz/_templates/cold/*.md, with
   YAML frontmatter parsed by gray-matter in the loader. No Supabase mirror,
@@ -37,15 +37,15 @@ export default async function ColdScriptsPage() {
     <div className="space-y-6">
       <header className="space-y-3">
         <Link
-          href="/develop"
+          href="/projects"
           className="inline-flex items-center gap-1.5 text-xs text-[var(--ink-dim)] hover:text-[var(--ink)]"
         >
           <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
-          Back to Develop
+          Back to Projects
         </Link>
         <div className="space-y-2">
-          <p className="eyebrow">
-            <span className="amber">D</span> · DEVELOP · COLD SCRIPTS
+          <p className="display-eyebrow">
+            <span className="amber">Projects</span> outreach scripts
           </p>
           <h1 className="text-2xl font-medium tracking-tight">
             <ScrollText className="mr-2 -mt-1 inline-block h-5 w-5" aria-hidden />
@@ -71,7 +71,7 @@ export default async function ColdScriptsPage() {
       {templates.length === 0 && (
         <div className="panel p-6 text-center space-y-2">
           <ScrollText className="mx-auto h-5 w-5 text-[var(--ink-faint)]" aria-hidden />
-          <p className="eyebrow">SCRIPTS · EMPTY</p>
+          <p className="display-eyebrow">No scripts yet</p>
           <p className="text-sm text-[var(--ink-dim)] max-w-md mx-auto">
             No cold scripts yet. They live as markdown at{" "}
             <code className="font-mono text-xs">biz/_templates/cold/</code> and

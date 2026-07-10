@@ -21,12 +21,12 @@ export default async function DevelopCampaignsPage() {
   return (
     <div className="space-y-6">
       <header className="space-y-2">
-        <p className="eyebrow">
-          <span className="amber">D</span> · DEVELOP · CAMPAIGNS
+        <p className="display-eyebrow">
+          <span className="amber">Projects</span> grouped for outreach
         </p>
         <h1 className="text-2xl font-medium tracking-tight">Campaigns</h1>
         <p className="text-sm text-[var(--ink-dim)] max-w-2xl">
-          Group leads into the batch you work them in: a neighborhood sweep, a
+          Group outreach leads into the batch you work them in: a neighborhood sweep, a
           vertical, a week of outreach. Set a goal, give it a color, then assign
           leads from their detail page.
         </p>
@@ -36,7 +36,9 @@ export default async function DevelopCampaignsPage() {
 
       {!configured && (
         <div className="panel border-[rgba(217,119,6,0.3)] bg-[rgba(217,119,6,0.04)] p-4">
-          <p className="eyebrow text-[var(--amber-soft)]">CONFIG · PENDING</p>
+          <p className="display-eyebrow text-[var(--amber-soft)]">
+            Configuration pending
+          </p>
           <p className="mt-2 text-sm text-[var(--ink)]">
             Supabase env vars are not set, so campaigns cannot be created or
             listed in the preview.
@@ -49,12 +51,12 @@ export default async function DevelopCampaignsPage() {
 
         <section className="space-y-3">
           <p className="display-eyebrow">
-            ROSTER · <span className="amber">{campaigns.length}</span>
+            Roster <span className="amber">{campaigns.length}</span>
           </p>
           {campaigns.length === 0 ? (
             <div className="panel p-6 text-center space-y-3">
               <Layers className="mx-auto h-5 w-5 text-[var(--ink-faint)]" />
-              <p className="eyebrow">CAMPAIGNS · EMPTY</p>
+              <p className="display-eyebrow">No campaigns yet</p>
               <p className="text-sm text-[var(--ink-dim)] max-w-md mx-auto">
                 No campaigns yet. Create one on the left, then assign leads to
                 it from the board or a lead's detail page.

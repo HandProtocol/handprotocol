@@ -104,6 +104,7 @@ export function renderPitchPage(
   .btn.secondary { background:#eef1f6; color:var(--ink); }
   iframe { width:100%; height:420px; border:1px solid var(--line); border-radius:10px; margin-top:12px; background:#fff; }
   .rep-note { color:var(--dim); font-size:0.92rem; margin:0 0 12px; }
+  .ask { background:#fff7ed; border:1px solid #fdba74; border-radius:12px; padding:14px 18px; margin:0 0 16px; color:#9a3412; font-weight:600; }
   .shots { display:grid; gap:10px; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); }
   .shots img { width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; display:block; border-radius:8px; border:1px solid var(--line); background:#fff; }
   ul { margin:0; padding-left:20px; } li { margin:4px 0; }
@@ -124,6 +125,12 @@ export function renderPitchPage(
   <p class="eyebrow">HAND · Outreach pitch</p>
   <h1>${esc(lead.name)}</h1>
   <p class="facts">${facts}</p>
+
+  ${
+    lead.phone
+      ? ""
+      : `<div class="ask">No phone number on Google for this one. Ask the owner for their number so we can add a tap-to-call button to the site, then log it below.</div>`
+  }
 
   <div class="card">
     <h2>The demo we built</h2>
