@@ -1,0 +1,451 @@
+/* Zacharius Photography and Hair Styling
+   Pink and black starter base.
+*/
+
+:root {
+  --z-bg: #09090f;
+  --z-surface: #11111a;
+  --z-surface-2: #171722;
+  --z-border: #2b2b3a;
+  --z-border-strong: #444357;
+  --z-text: #f7f5fb;
+  --z-text-secondary: #c8c2d2;
+  --z-text-muted: #9a93a8;
+  --z-pink: #ff4fa3;
+  --z-pink-soft: rgba(255, 79, 163, 0.16);
+  --z-pink-faint: rgba(255, 79, 163, 0.08);
+}
+
+body.zacharius-page {
+  background:
+    radial-gradient(900px 500px at 12% 0%, rgba(255, 79, 163, 0.18), transparent 55%),
+    radial-gradient(700px 420px at 88% 18%, rgba(255, 79, 163, 0.08), transparent 60%),
+    var(--z-bg);
+  color: var(--z-text);
+}
+
+.zacharius-page .skip-link {
+  background: var(--z-pink);
+  color: #111;
+}
+
+.z-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(9, 9, 15, 0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.z-nav__inner,
+.z-hero__grid,
+.z-cta,
+.z-two-column {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.z-nav__inner {
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+@media (min-width: 760px) {
+  .z-nav__inner {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+.z-nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--z-text);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.z-nav__brand-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 35% 35%, #fff 0 8%, transparent 10%),
+    radial-gradient(circle at 60% 60%, rgba(255, 255, 255, 0.25) 0 6%, transparent 8%),
+    linear-gradient(135deg, #ff4fa3, #11111a 70%);
+  border: 1px solid rgba(255, 79, 163, 0.5);
+  box-shadow: 0 0 0 6px rgba(255, 79, 163, 0.08);
+}
+
+.z-nav__brand-top,
+.z-nav__brand-bottom {
+  display: block;
+}
+
+.z-nav__brand-bottom {
+  color: var(--z-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-top: 0.18rem;
+}
+
+.z-nav__links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+@media (min-width: 760px) {
+  .z-nav__links {
+    justify-content: flex-end;
+  }
+}
+
+.z-nav__link,
+.z-nav__cta {
+  text-decoration: none;
+  border-radius: 9999px;
+  padding: 0.72rem 1rem;
+  font-weight: 600;
+}
+
+.z-nav__link {
+  color: var(--z-text-secondary);
+  border: 1px solid transparent;
+}
+
+.z-nav__link:hover {
+  color: var(--z-text);
+  border-color: rgba(255, 79, 163, 0.28);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.z-nav__cta {
+  color: #111;
+  background: var(--z-pink);
+}
+
+.z-nav__cta:hover {
+  background: #ff74b6;
+}
+
+.z-hero {
+  padding: 4.5rem 0 3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.z-hero__grid {
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+@media (min-width: 980px) {
+  .z-hero__grid {
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 2rem;
+  }
+}
+
+.z-hero__title,
+.z-section__header h2,
+.z-card h3,
+.z-note h3 {
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+.z-hero__title {
+  max-width: 10ch;
+  margin: 0 0 1.25rem;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+}
+
+.z-hero__lede,
+.z-hero__note,
+.z-section__header p,
+.z-card p,
+.z-note p,
+.z-footer p,
+.z-panel__label,
+.z-meta dd,
+.z-list li {
+  color: var(--z-text-secondary);
+}
+
+.z-hero__lede {
+  max-width: 58ch;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.z-hero__note {
+  max-width: 56ch;
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(255, 79, 163, 0.24);
+  border-radius: 1rem;
+  background: rgba(255, 79, 163, 0.06);
+}
+
+.z-hero__actions,
+.z-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.z-btn--ghost {
+  background: transparent;
+  color: var(--z-text);
+  border: 1.5px solid var(--z-border-strong);
+}
+
+.z-btn--ghost:hover {
+  border-color: var(--z-pink);
+  background: rgba(255, 79, 163, 0.08);
+  color: var(--z-text);
+}
+
+.z-panel,
+.z-card,
+.z-note,
+.z-frame {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 100%), var(--z-surface);
+  border: 1px solid var(--z-border);
+  border-radius: 1rem;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.24);
+}
+
+.z-panel {
+  padding: 1.25rem;
+}
+
+.z-panel__label,
+.z-card__kicker,
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+}
+
+.eyebrow,
+.z-card__kicker,
+.z-panel__label {
+  color: var(--z-pink);
+}
+
+.z-meta {
+  display: grid;
+  gap: 1rem;
+  margin: 1rem 0 0;
+}
+
+.z-meta div {
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.z-meta dt {
+  color: var(--z-text);
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+
+.z-meta dd {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.z-section {
+  padding: 4rem 0;
+}
+
+.z-section--dark {
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.z-section__header {
+  max-width: 42rem;
+  margin-bottom: 2rem;
+}
+
+.z-section__header h2 {
+  margin: 0.35rem 0 1rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.z-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 860px) {
+  .z-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+.z-card {
+  padding: 1.4rem;
+}
+
+.z-card h3 {
+  margin: 0.4rem 0 0.85rem;
+  font-size: 1.4rem;
+  color: var(--z-text);
+}
+
+.z-list {
+  margin: 1rem 0 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.z-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 700px) {
+  .z-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.z-frame {
+  position: relative;
+  min-height: 18rem;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 79, 163, 0.12), transparent 55%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent 65%),
+    var(--z-surface-2);
+}
+
+.z-frame::before {
+  content: "";
+  position: absolute;
+  inset: 1rem;
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+}
+
+.z-frame figcaption {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  color: var(--z-text);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.z-two-column {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .z-two-column {
+    grid-template-columns: 0.9fr 1.1fr;
+    align-items: start;
+    gap: 1.5rem;
+  }
+}
+
+.z-note-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.z-note {
+  padding: 1.25rem;
+}
+
+.z-note h3 {
+  margin: 0 0 0.45rem;
+  color: var(--z-text);
+}
+
+.z-section--cta {
+  padding-bottom: 5rem;
+}
+
+.z-cta {
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding: 1.4rem;
+  border: 1px solid rgba(255, 79, 163, 0.22);
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(255, 79, 163, 0.12), rgba(255, 255, 255, 0.02)), var(--z-surface);
+}
+
+@media (min-width: 860px) {
+  .z-cta {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.z-cta h2 {
+  margin: 0.35rem 0 1rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.z-footer {
+  padding: 1.5rem 0 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.z-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.z-footer__meta {
+  color: var(--z-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 600ms ease, transform 600ms ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
