@@ -466,6 +466,89 @@ strong {
   background: var(--color-text);
 }
 
+.nav.nav--light,
+.nav.nav--light.nav--scrolled {
+  padding: var(--space-sm) 0;
+}
+
+.nav.nav--light .nav__left,
+.nav.nav--light.nav--scrolled .nav__left {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  border-color: rgba(13, 148, 136, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.62),
+    0 8px 32px rgba(13, 148, 136, 0.08),
+    0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.nav.nav--light .nav__logo,
+.nav.nav--light .nav__link,
+.nav.nav--light.nav--scrolled .nav__logo,
+.nav.nav--light.nav--scrolled .nav__link {
+  color: var(--color-text);
+}
+
+.nav.nav--light .nav__link,
+.nav.nav--light.nav--scrolled .nav__link {
+  color: var(--color-text-secondary);
+}
+
+.nav.nav--light .nav__link:hover,
+.nav.nav--light.nav--scrolled .nav__link:hover {
+  color: var(--color-accent);
+}
+
+.nav.nav--light .nav__cta,
+.nav.nav--light.nav--scrolled .nav__cta {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    0 6px 20px rgba(217, 119, 6, 0.22);
+}
+
+.nav.nav--light .nav__cta:hover,
+.nav.nav--light.nav--scrolled .nav__cta:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: #fff;
+}
+
+.nav.nav--light .nav__toggle,
+.nav.nav--light.nav--scrolled .nav__toggle {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  border-color: rgba(13, 148, 136, 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.62),
+    0 8px 32px rgba(13, 148, 136, 0.08),
+    0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.nav.nav--light .nav__toggle span,
+.nav.nav--light.nav--scrolled .nav__toggle span {
+  background: var(--color-text);
+}
+
+.nav.nav--light .nav__links.active,
+.nav.nav--light.nav--scrolled .nav__links.active {
+  --pill-bg: rgba(255, 255, 255, 0.72);
+  --pill-border: rgba(13, 148, 136, 0.18);
+  --pill-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.62),
+    0 8px 32px rgba(13, 148, 136, 0.08),
+    0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.nav.nav--light .nav__links.active .nav__link,
+.nav.nav--light.nav--scrolled .nav__links.active .nav__link {
+  color: var(--color-text);
+}
+
 .nav__toggle[aria-expanded="true"] span:nth-child(1) {
   transform: translateY(6.5px) rotate(45deg);
 }

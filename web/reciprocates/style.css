@@ -36,7 +36,7 @@ body.reciprocates {
 .nav.nav--light .nav__link:hover {
   color: var(--color-accent);
 }
-.nav.nav--light .nav__link--current {
+.nav.nav--light .nav__link--active {
   color: var(--color-accent);
 }
 .nav.nav--light .nav__cta {
