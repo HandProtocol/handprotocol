@@ -25,6 +25,13 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.getByRole('dialog', { name: 'Send feedback' })).toBeInTheDocument()
   })
 
+  it('links anonymous visitors from the profile card to sign in', () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    expect(screen.getByRole('link', { name: /Browsing openly/i })).toHaveAttribute('href', '/app/?mode=login')
+  })
+
   it('expands the mobile icon rail with its arrow control', async () => {
     Object.defineProperty(window, 'innerWidth', { value: 390, configurable: true })
     window.history.replaceState({}, '', '/app/?mode=anonymous')

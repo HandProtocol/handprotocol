@@ -24,7 +24,7 @@ button { border: 0; cursor: pointer; }
 .nav-item b { margin-left: auto; background: #e6b65d; color: #49351a; min-width: 21px; height: 18px; border-radius: 99px; text-align: center; font-size: 10px; line-height: 18px; }
 .sidebar-bottom { margin-top: auto; }
 .help-link { color: #a4c0aa; background: transparent; display: flex; gap: 9px; align-items: center; padding: 10px; font-size: 12px; }
-.profile { width: 100%; display: flex; align-items: center; gap: 9px; text-align: left; background: #183d30; color: #e5efe5; border-radius: 8px; padding: 10px; margin-top: 13px; }
+.profile { width: 100%; display: flex; align-items: center; gap: 9px; text-align: left; text-decoration: none; background: #183d30; color: #e5efe5; border-radius: 8px; padding: 10px; margin-top: 13px; }
 .profile > svg { margin-left: auto; color: #86a793; }
 .profile strong, .profile small { display: block; }
 .profile strong { font-size: 12px; font-weight: 600; }

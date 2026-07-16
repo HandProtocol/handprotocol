@@ -177,7 +177,7 @@ function DashboardApp() {
           <NavItem icon={<Boxes size={18} />} label="Inventory" />
           <NavItem icon={<ShieldCheck size={18} />} label="Impact reports" />
         </nav>
-        <div className="sidebar-bottom"><button className="help-link" onClick={() => setFeedbackOpen(true)}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div><button className="profile"><span className="avatar">WX</span><span><strong>{isAuthenticated ? 'WXL member' : 'Browsing openly'}</strong><small>{isAuthenticated ? 'Community account' : 'Sign in to coordinate'}</small></span><Settings size={16} /></button></div>
+        <div className="sidebar-bottom"><button className="help-link" onClick={() => setFeedbackOpen(true)}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div>{isAuthenticated ? <button className="profile"><span className="avatar">WX</span><span><strong>WXL member</strong><small>Community account</small></span><Settings size={16} /></button> : <a className="profile" href="/app/?mode=login"><span className="avatar">WX</span><span><strong>Browsing openly</strong><small>Sign in to coordinate</small></span><ArrowUpRight size={16} /></a>}</div>
       </aside>
 
       <main className="main-content">
