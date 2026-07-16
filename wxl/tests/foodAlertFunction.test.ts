@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { handler } from './food-alert.mjs'
+import { handler } from '../netlify/functions/food-alert.mjs'
 
 afterEach(() => {
   vi.unstubAllEnvs()
