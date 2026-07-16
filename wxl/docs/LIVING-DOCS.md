@@ -234,6 +234,8 @@ The function:
 4. Sends a best-effort operations email through Resend.
 5. Leaves the in-app alert intact if email delivery is unavailable.
 
+If the WXL site does not have Resend variables, the function forwards the authenticated alert to HAND's shared feedback endpoint. The shared endpoint provides the existing Command Center, Telegram, and Resend notification fan-out.
+
 The database remains the source of truth. Email is an additional notification channel.
 
 ## Local development

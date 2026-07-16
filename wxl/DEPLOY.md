@@ -29,6 +29,8 @@ EMAIL_TO_OPS
 
 `EMAIL_FROM` should use the existing verified `handprotocol.org` domain, for example `WXL:FOOD <alerts@handprotocol.org>`. The function falls back to HAND's existing `RESEND_NOTIFY_FROM`, `RESEND_NOTIFY_TO`, and `RESEND_FORWARD_TO` names when present. Do not add a Resend key to any `VITE_` variable.
 
+If WXL does not have its own Resend variables, the function forwards the authenticated alert to HAND's shared feedback endpoint. That endpoint provides the existing Command Center, Telegram, and Resend notification fan-out without exposing a key to WXL.
+
 ## Routing
 
 - `/` is the WXL landing page.

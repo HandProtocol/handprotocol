@@ -4,6 +4,29 @@ const json = (statusCode, body) => ({
   body: JSON.stringify(body),
 })
 
+async function forwardToHand(alert) {
+  const endpoint = process.env.HAND_FEEDBACK_ENDPOINT || 'https://handprotocol.org/.netlify/functions/feedback'
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        source: 'WXL:FOOD Alert',
+        title: `FOOD IS HERE · ${alert.neighborhood}`,
+        path: '/app/',
+        text: `${alert.title}\n\n${alert.message}\n\nNeighborhood: ${alert.neighborhood}`,
+        tags: ['food-alert', `neighborhood:${alert.neighborhood}`],
+        name: '',
+        website: '',
+        ts: Date.now(),
+      }),
+    })
+    return response.ok
+  } catch {
+    return false
+  }
+}
+
 export async function handler(event) {
   if (event.httpMethod === 'OPTIONS') return json(204, {})
   if (event.httpMethod !== 'POST') return json(405, { error: 'Method not allowed' })
@@ -32,7 +55,10 @@ export async function handler(event) {
   const apiKey = process.env.RESEND_API_KEY
   const to = process.env.EMAIL_TO_OPS || process.env.RESEND_NOTIFY_TO || process.env.RESEND_FORWARD_TO
   const from = process.env.EMAIL_FROM || process.env.RESEND_NOTIFY_FROM || 'WXL:FOOD <alerts@handprotocol.org>'
-  if (!apiKey || !to) return json(202, { status: 'saved', email: 'unconfigured' })
+  if (!apiKey || !to) {
+    const forwarded = await forwardToHand(alert)
+    return json(202, { status: 'saved', notification: forwarded ? 'forwarded-to-hand' : 'unavailable' })
+  }
 
   const sent = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -46,7 +72,8 @@ export async function handler(event) {
   })
   if (!sent.ok) {
     console.warn('[wxl-food-alert] Resend failed', sent.status, (await sent.text()).slice(0, 300))
-    return json(202, { status: 'saved', email: 'failed' })
+    const forwarded = await forwardToHand(alert)
+    return json(202, { status: 'saved', email: 'failed', notification: forwarded ? 'forwarded-to-hand' : 'unavailable' })
   }
   return json(200, { status: 'sent' })
 }
