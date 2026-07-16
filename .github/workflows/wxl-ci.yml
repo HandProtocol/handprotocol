@@ -1,0 +1,37 @@
+name: WXL tests
+
+on:
+  pull_request:
+    paths:
+      - 'wxl/**'
+      - 'command/supabase/migrations/024_wxl_food.sql'
+      - 'command/supabase/migrations/025_wxl_community_map_alerts.sql'
+      - '.github/workflows/wxl-ci.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'wxl/**'
+      - 'command/supabase/migrations/024_wxl_food.sql'
+      - 'command/supabase/migrations/025_wxl_community_map_alerts.sql'
+      - '.github/workflows/wxl-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: wxl
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: wxl/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run build

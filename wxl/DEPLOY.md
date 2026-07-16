@@ -19,6 +19,16 @@ VITE_SUPABASE_ANON_KEY=<HAND anon key>
 
 The browser receives only the anon key. The service-role key stays in the HAND Command Center and is never added to WXL:FOOD.
 
+The `FOOD IS HERE!` operations email hook also reads these server-side values:
+
+```text
+RESEND_API_KEY
+EMAIL_FROM
+EMAIL_TO_OPS
+```
+
+`EMAIL_FROM` should use the existing verified `handprotocol.org` domain, for example `WXL:FOOD <alerts@handprotocol.org>`. The function falls back to HAND's existing `RESEND_NOTIFY_FROM`, `RESEND_NOTIFY_TO`, and `RESEND_FORWARD_TO` names when present. Do not add a Resend key to any `VITE_` variable.
+
 ## Routing
 
 - `/` is the WXL landing page.
@@ -27,7 +37,7 @@ The browser receives only the anon key. The service-role key stays in the HAND C
 
 ## Database
 
-Apply `../command/supabase/migrations/024_wxl_food.sql` to the HAND Supabase project, then add `command` to the project's exposed schemas if it is not already present.
+Apply `../command/supabase/migrations/024_wxl_food.sql` and `../command/supabase/migrations/025_wxl_community_map_alerts.sql` to the HAND Supabase project, then add `command` to the project's exposed schemas if it is not already present.
 
 ## Domain
 

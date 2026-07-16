@@ -4,6 +4,8 @@ Last updated: 2026-07-16
 
 This is the working orientation document for `wxl/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on WXL:FOOD, its current behavior, what is real, what is illustrative, and what should be built next.
 
+Public-facing product behavior and safety boundaries are maintained in `docs/LIVING-DOCS.md`. Keep it current when a feature promise or workflow changes. It is intended to become the source for a future HTML documentation page.
+
 ## Orient in one paragraph
 
 WXL:FOOD is a local food coordination app for Austin. It is intended to help neighbors, community groups, food sources, volunteers, and coordinators see available food, publish needs, offer help, nominate sources, and organize rescue and harvest activity. The current app is a Vite, React, and TypeScript prototype with a polished landing page and command-center interface. It uses the HAND Supabase project for authentication and a small set of persisted workflows. Much of the dashboard is still illustrative. The immediate product task is to turn the strongest prototype flows into honest, complete, persisted workflows without implying that placeholder data is live network activity.
@@ -37,7 +39,7 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 | Main UI | `src/App.tsx` |
 | Styles | `src/styles.css` |
 | Data access | `src/lib/foodRepository.ts` |
-| Database migration | `../command/supabase/migrations/024_wxl_food.sql` |
+| Database migrations | `../command/supabase/migrations/024_wxl_food.sql`, `025_wxl_community_map_alerts.sql` |
 | Deployment notes | `DEPLOY.md` |
 
 ## Routes and entry states
@@ -95,6 +97,28 @@ Routing is currently implemented with `window.location.pathname` and query param
 - Anonymous visitors who try to nominate a source receive the account prompt.
 - Only verified nominations are publicly readable under the current row-level security policy.
 
+### East Austin map and community signals
+
+- The overview map now starts with current public-directory listings for East Austin and links to Central Texas Food Bank for current hours.
+- Authenticated members can add a public food spot with produce and availability details. New spots are labeled as community pins until reviewed.
+- Authenticated members can publish a six-hour `FOOD IS HERE!` alert. Active alerts are public, appear in the top-right alert center, and arrive in other open sessions through Supabase Realtime.
+- Alert creation invokes `netlify/functions/food-alert.mjs`, which validates the Supabase session and sends a best-effort Resend operations email using HAND's existing environment-variable pattern.
+- Alert writes are limited to five per account per 15 minutes. Private home addresses and household details are explicitly prohibited in the interface.
+
+### Feedback, experiments, and testing
+
+- The sidebar feedback flow posts to HAND's shared feedback endpoint, so notes continue into Command Center, Telegram, and Resend. Failed notes queue locally and retry on focus or reconnection.
+- The command CTA runs a stable two-variant test, `map_first` or `rescue_first`, stored in local storage.
+- Click progress persists locally for every visitor. Authenticated interaction events batch to `command.food_engagement_events` every ten interactions.
+- Admins can query `command.food_engagement_leaderboard`; invoker row-level security keeps it internal.
+- Vitest covers landing links, anonymous write gates, feedback, the mobile navigation rail, and mocked database contracts. Run `npm test`.
+- `.github/workflows/wxl-ci.yml` runs tests and the production build for WXL pull requests, relevant pushes to `main`, and manual dispatches.
+
+### Mobile navigation
+
+- Mobile keeps a compact icon rail visible on the left. The arrow or top menu button expands it into the labeled navigation drawer.
+- Desktop navigation can also collapse and remembers its state locally.
+
 ### Database and security baseline
 
 Migration `024_wxl_food.sql` defines:
@@ -104,6 +128,9 @@ Migration `024_wxl_food.sql` defines:
 - `command.food_requests`
 - `command.food_request_messages`
 - `command.food_request_supporters`
+- `command.food_spots`
+- `command.food_alerts`
+- `command.food_engagement_events`
 - indexes for status, neighborhood, request messages, and review queues
 - row-level security for public reads, authenticated inserts, and administrative management
 
@@ -158,10 +185,10 @@ The app should not claim these boards are ready until they contain functional wo
 
 - Request messages are inserted but not loaded from the database.
 - The response count is incremented only in local React state. It is not updated transactionally in the database.
-- Supporting a request does not insert into `food_request_supporters`.
+- Supporting a persisted request inserts into `food_request_supporters`; sample fallback requests remain explicitly non-persistent.
 - Offering food or help has no data model or persisted workflow.
 - Rescue opportunities have no dedicated repository functions or confirmed data model.
-- Harvest runs, inventory, notifications, and impact reporting have no front-end repositories.
+- Harvest runs, inventory, and impact reporting have no front-end repositories. Food alerts now have a focused notification repository and interface.
 - Source nominations are not loaded into a coordinator review queue in WXL.
 - Request status transitions are administrative in the migration but have no WXL interface.
 - There is no sign-out action.
