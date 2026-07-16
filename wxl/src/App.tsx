@@ -149,6 +149,11 @@ function DashboardApp() {
     return () => data.subscription.unsubscribe()
   }, [])
 
+  useEffect(() => {
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }, [view])
+
   const visibleLocations = useMemo(() => mapFilter === 'all' ? mapLocations : mapLocations.filter((location) => location.status === mapFilter), [mapFilter, mapLocations])
   const notify = (message: string) => { setToast(message); window.setTimeout(() => setToast(''), 3000) }
   const requireAuth = (action?: () => void) => { if (!isAuthenticated) setAuthPromptOpen(true); else action?.() }

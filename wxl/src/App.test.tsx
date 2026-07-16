@@ -32,4 +32,17 @@ describe('WXL entry points and interaction gates', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Collapse navigation' }))
     expect(container.querySelector('.sidebar')).toHaveClass('open')
   })
+
+  it('returns to the top when switching command-center views', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+    document.documentElement.scrollTop = 240
+    document.body.scrollTop = 240
+
+    await userEvent.click(screen.getByRole('button', { name: /Rescue opportunities/i }))
+
+    expect(document.documentElement.scrollTop).toBe(0)
+    expect(document.body.scrollTop).toBe(0)
+    expect(screen.getByRole('heading', { name: 'Rescue opportunities' })).toBeInTheDocument()
+  })
 })

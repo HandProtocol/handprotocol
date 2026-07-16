@@ -105,7 +105,7 @@ button { border: 0; cursor: pointer; }
 .login-field-spaced { margin-top: 14px; }.login-switch { display: block; width: 100%; color: #4b805d; background: transparent; padding: 10px 0 0; font-size: 10px; text-align: center; text-decoration: underline; text-underline-offset: 3px; }.login-switch:hover { color: #2d6b50; }
 
 /* Community coordination additions */
-.sidebar { position: relative; transition: width .2s ease, transform .2s ease; }
+.sidebar { position: sticky; top: 0; height: 100vh; align-self: flex-start; transition: width .2s ease, transform .2s ease; }
 .sidebar-toggle { position: absolute; z-index: 3; top: 72px; right: -13px; width: 27px; height: 27px; display: grid; place-items: center; color: #315d46; background: #f7fbf4; border: 1px solid #bfd0c1; border-radius: 50%; box-shadow: 0 4px 12px #183d2b20; }
 .sidebar.collapsed { width: 70px; padding-inline: 9px; }
 .sidebar.collapsed .brand { padding-inline: 9px; }
