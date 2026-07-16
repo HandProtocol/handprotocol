@@ -145,7 +145,7 @@ button { border: 0; cursor: pointer; }
 
 @media (max-width: 720px) {
   .app-shell { padding-left: 56px; }
-  .sidebar, .sidebar.collapsed { inset: 0 auto 0 0; width: 56px; padding: 15px 7px; transform: none; overflow: visible; box-shadow: 4px 0 16px #183d2b1f; }
+  .sidebar, .sidebar.collapsed { position: fixed; inset: 0 auto 0 0; width: 56px; padding: 15px 7px; transform: none; overflow: visible; box-shadow: 4px 0 16px #183d2b1f; }
   .sidebar.open { width: min(280px, calc(100vw - 34px)); padding: 22px 14px; }
   .sidebar:not(.open) .brand { padding: 0 4px 18px; }
   .sidebar:not(.open) .brand > div:not(.brand-mark), .sidebar:not(.open) .network-status, .sidebar:not(.open) .nav-label, .sidebar:not(.open) .nav-item span, .sidebar:not(.open) .nav-item b, .sidebar:not(.open) .help-link span, .sidebar:not(.open) .engagement-chip span, .sidebar:not(.open) .profile > span:not(.avatar), .sidebar:not(.open) .profile > svg { display: none; }
