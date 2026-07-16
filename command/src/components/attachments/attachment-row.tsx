@@ -58,7 +58,7 @@ export function AttachmentRow({
   });
 
   return (
-    <li className="panel flex items-center justify-between gap-4 px-4 py-3">
+    <li className="panel flex flex-col gap-3 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm text-[var(--ink)]">
           {attachment.filename}
@@ -71,13 +71,13 @@ export function AttachmentRow({
           <span>{dateLabel}</span>
         </p>
       </div>
-      <div className="flex shrink-0 items-center gap-2">
+      <div className="flex w-full shrink-0 flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
         {attachment.signed_url ? (
           <a
             href={attachment.signed_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 rounded-md border border-[rgba(217,119,6,0.45)] px-2.5 py-1 text-xs text-[var(--amber-soft)] hover:bg-[rgba(217,119,6,0.08)]"
+            className="inline-flex w-full items-center justify-center gap-1 rounded-md border border-[rgba(217,119,6,0.45)] px-2.5 py-1 text-xs text-[var(--amber-soft)] hover:bg-[rgba(217,119,6,0.08)] sm:w-auto"
           >
             <ExternalLink className="h-3 w-3" aria-hidden />
             Open

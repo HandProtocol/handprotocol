@@ -82,7 +82,7 @@ export default async function DashboardLayout({
       {/* Collapsed icon rail + expandable drawer (mobile only) */}
       <MobileRail role={role} email={userEmail} />
 
-      <main className="min-w-0 flex-1 overflow-auto">
+      <main className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto">
         {/* Mobile header */}
         <header className="flex h-16 items-center justify-between border-b border-[rgba(245,239,225,0.06)] px-4 lg:hidden">
           <span className="text-sm font-medium tracking-tight">

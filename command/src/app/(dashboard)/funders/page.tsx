@@ -46,7 +46,7 @@ export default async function FundersPage() {
 
   return (
     <div className="space-y-6">
-      <header className="flex items-start justify-between gap-4">
+      <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="space-y-2">
           <p className="eyebrow">
             <span className="amber">N</span> · NURTURE · RELATIONSHIPS &amp; VOICE
@@ -60,7 +60,7 @@ export default async function FundersPage() {
         </div>
         <Link
           href="/grants/new"
-          className="inline-flex items-center gap-2 rounded-md border border-[rgba(245,239,225,0.12)] px-3 py-2 text-sm text-[var(--ink-dim)] hover:border-[rgba(217,119,6,0.35)] hover:text-[var(--ink)] transition-colors"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-[rgba(245,239,225,0.12)] px-3 py-2 text-sm text-[var(--ink-dim)] hover:border-[rgba(217,119,6,0.35)] hover:text-[var(--ink)] transition-colors sm:w-auto"
         >
           New grant
           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
@@ -105,7 +105,7 @@ export default async function FundersPage() {
                 href={`/funders/${f.slug}`}
                 className="panel group flex flex-col gap-3 p-5 transition-colors hover:border-[rgba(217,119,6,0.3)]"
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                   <div className="min-w-0">
                     <h2 className="truncate text-base font-medium tracking-tight text-[var(--ink)] group-hover:text-[var(--amber-soft)] transition-colors">
                       {f.name}

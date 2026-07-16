@@ -91,7 +91,7 @@ export function ApplicationReview({ app }: { app: AccessApplication }) {
           <code className="min-w-0 flex-1 break-all font-mono text-xs text-[var(--ink)]">
             {inviteLink}
           </code>
-          <CopyButton text={inviteLink} label="Copy link" />
+          <CopyButton text={inviteLink} label="Copy link" className="w-full sm:w-auto" />
         </div>
         <p className="text-xs text-[var(--ink-dim)]">
           One-time use. The applicant signs in, then this link activates their
@@ -103,7 +103,7 @@ export function ApplicationReview({ app }: { app: AccessApplication }) {
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap items-center justify-end gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end">
         {open ? (
           <button
             type="button"
@@ -116,7 +116,7 @@ export function ApplicationReview({ app }: { app: AccessApplication }) {
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className="inline-flex items-center gap-1.5 rounded-md bg-[var(--amber)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#1a1208] transition-all hover:bg-[var(--amber-soft)] hover:shadow-[0_0_12px_var(--amber-glow)]"
+            className="inline-flex w-full items-center justify-center gap-1.5 rounded-md bg-[var(--amber)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[#1a1208] transition-all hover:bg-[var(--amber-soft)] hover:shadow-[0_0_12px_var(--amber-glow)] sm:w-auto"
           >
             <Check className="h-3.5 w-3.5" aria-hidden />
             Approve
@@ -126,7 +126,7 @@ export function ApplicationReview({ app }: { app: AccessApplication }) {
           type="button"
           onClick={onReject}
           disabled={busy !== null}
-          className="inline-flex items-center gap-1.5 rounded-md border border-[rgba(245,239,225,0.12)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-dim)] transition-colors hover:border-[rgba(220,38,38,0.4)] hover:text-[#f87171] disabled:opacity-50"
+          className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-[rgba(245,239,225,0.12)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-dim)] transition-colors hover:border-[rgba(220,38,38,0.4)] hover:text-[#f87171] disabled:opacity-50 sm:w-auto"
         >
           {busy === "reject" ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />
@@ -139,7 +139,7 @@ export function ApplicationReview({ app }: { app: AccessApplication }) {
 
       {open ? (
         <div className="rounded-md border border-[rgba(245,239,225,0.1)] bg-[rgba(7,9,15,0.4)] p-3 space-y-3">
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
               <label className={microLabel} htmlFor={`role-${app.id}`}>
                 Grant role

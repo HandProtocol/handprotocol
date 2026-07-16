@@ -79,7 +79,7 @@ export default async function FunderDetailPage({
           Funder library
         </Link>
 
-        <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-2">
             <p className="eyebrow">
               <span className="amber">N</span> · NURTURE ·{" "}
@@ -98,7 +98,7 @@ export default async function FunderDetailPage({
               </a>
             )}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <FitScoreChip score={funder.fit_score} />
             {funder.annual_cycle && (
               <span className="inline-flex items-center gap-1 rounded border border-[rgba(245,239,225,0.12)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--ink-dim)]">
@@ -155,7 +155,7 @@ export default async function FunderDetailPage({
                 <li key={g.id}>
                   <Link
                     href={`/grants/${g.slug}`}
-                    className="flex items-center justify-between gap-3 rounded-md border border-transparent px-2 py-2 transition-colors hover:border-[rgba(217,119,6,0.25)] hover:bg-[rgba(217,119,6,0.04)]"
+                    className="flex flex-col gap-2 rounded-md border border-transparent px-2 py-2 transition-colors hover:border-[rgba(217,119,6,0.25)] hover:bg-[rgba(217,119,6,0.04)] sm:flex-row sm:items-center sm:justify-between"
                   >
                     <span className="min-w-0 flex-1 truncate text-sm text-[var(--ink)]">
                       {g.name}
@@ -187,9 +187,9 @@ export default async function FunderDetailPage({
               {touchpoints.map((t) => (
                 <li
                   key={t.id}
-                  className="border-l border-[rgba(217,119,6,0.3)] pl-3"
+                  className="rounded-md border border-[rgba(217,119,6,0.18)] bg-[rgba(217,119,6,0.03)] p-3"
                 >
-                  <div className="flex items-center justify-between gap-2">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                     <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--amber-soft)]">
                       {t.channel ? (CHANNEL_LABEL[t.channel] ?? t.channel) : "Note"}
                       {t.direction ? ` · ${t.direction}` : ""}

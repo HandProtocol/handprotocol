@@ -22,21 +22,23 @@ HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, t
 
 | Path | What it is | Status |
 |---|---|---|
-| `web/foundation-campaign/` | Primary public site. 501(c)(3) filing campaign, $222,222 first goal. | Live |
+| `web/index.html` | Primary public site. 501(c)(3) filing campaign, $222,222 first goal. Canonical public URL is `/`. | Live |
+| `web/foundation-campaign/` | Campaign source files and shared assets. | Live |
 | `web/discovery/` | Three long-form discovery docs: vision, models, landscape. | Live |
 | `web/sovereign-reciprocates/` | AI workstream public page. Reuses discovery design system. | Live |
 | `web/governance/` | Governance hub. Reuses discovery design system + own style.css. | Live |
 | `web/donate-crypto/` | Dedicated crypto-donation page. Crypto demoted from main campaign. | Live |
+| `wxl/` | WXL:FOOD, an independent local-food coordination app with a landing page, command center, community requests, dialogue, source nominations, and HAND Command Center database tables. | Live at `wxl.handprotocol.org` |
 | `web/legacy/` | Archive of HAND's earlier landing-page and crowdfunding designs. Intentionally preserved with original $600 / $12K / $56K tiers as historical record. Do not update. | Live |
 | `web/landingpage/` | Pre-pivot Next.js Web3 starter homepage. | Preserved, not deployed |
 | `sweetspot/` | SweetSpot dApp + Solidity contracts + subgraph indexer. | Preserved, not deployed |
 
 ## Workstreams in motion
 
-- **Foundation filing raise.** Primary public ask. $222,222 first goal, $77,444 operating minimum, $22,777 filing floor. Campaign at `/foundation-campaign/`. See `PRODUCT.md` for strategic context.
+- **Foundation filing raise.** Primary public ask. $222,222 first goal, $77,444 operating minimum, $22,777 filing floor. Campaign at `/`. See `PRODUCT.md` for strategic context.
 - **Sovereign Reciprocates (AI).** Three-phase build: $11,113 POC, $99,777 pilot, $333,223 production. Open source by default; per-group ownership; eight sovereignty principles. McGovern LOI drafted. See `AI-RECIPROCATES.md` and `AI-EVAL-FRAMEWORK.md`.
 - **Governance.** Pre-incorporation publication of bylaws, policies, and grants kit. Board prospect brief in `governance/board/`. Compliance calendar in `governance/COMPLIANCE-CALENDAR.md`.
-- **Mailing list.** Resend Audiences integration via Netlify Function (`netlify/functions/subscribe.js`). Live on `/foundation-campaign/#stay-close`. Audience UUID env var pending. See TODO.
+- **Mailing list.** Resend Audiences integration via Netlify Function (`netlify/functions/subscribe.js`). Live on `/#stay-close`. Audience UUID env var pending. See TODO.
 - **Discovery iteration.** Living documents. Open-question pattern is being normalized. See TODO.
 
 ## Active funding ladder
@@ -54,7 +56,7 @@ HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, t
 **Individual contributor pledge ladder:**
 - $222, $333, $555, $999, $1,111 (featured), $3,333, $7,777+
 
-If you change any of these, update: `web/foundation-campaign/index.html`, `web/landingpage/app/raise/page.tsx`, `web/discovery/index.html`, `web/discovery/impact-org-landscape.html`, `web/discovery/skill-exchange-vision.html`, `web/assets/og-card.html`, `PRODUCT.md`, `AGENTS.md`, `README.md`, `AI-RECIPROCATES.md`. The legacy archive intentionally keeps its original numbers.
+If you change any of these, update: `web/index.html`, `web/foundation-campaign/index.html`, `web/landingpage/app/raise/page.tsx`, `web/discovery/index.html`, `web/discovery/impact-org-landscape.html`, `web/discovery/skill-exchange-vision.html`, `web/assets/og-card.html`, `PRODUCT.md`, `AGENTS.md`, `README.md`, `AI-RECIPROCATES.md`. The legacy archive intentionally keeps its original numbers.
 
 ## Where to find things
 

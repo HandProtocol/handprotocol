@@ -67,8 +67,7 @@ export default async function PublicPage() {
         </p>
       </header>
 
-      <section
-        className="grid gap-4 lg:grid-cols-3"
+      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
         aria-label="Public visit summary"
       >
         <div className="panel p-5">
@@ -122,7 +121,7 @@ export default async function PublicPage() {
                     href={pageHref(page.path)}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center justify-between gap-3 rounded-md border border-transparent px-2 py-2 transition-colors hover:border-[rgba(217,119,6,0.25)] hover:bg-[rgba(217,119,6,0.04)]"
+                    className="flex flex-col gap-2 rounded-md border border-transparent px-2 py-2 transition-colors hover:border-[rgba(217,119,6,0.25)] hover:bg-[rgba(217,119,6,0.04)] sm:flex-row sm:items-center sm:justify-between"
                   >
                     <span className="min-w-0">
                       <span className="block truncate text-sm text-[var(--ink)]">

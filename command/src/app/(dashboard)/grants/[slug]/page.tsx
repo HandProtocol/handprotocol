@@ -91,7 +91,7 @@ export default async function GrantDetailPage({
   return (
     <div className="space-y-6">
       {/* Eyebrow + breadcrumbs */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <Link
           href="/grants"
           className="inline-flex items-center gap-2 text-sm text-[var(--ink-dim)] hover:text-[var(--ink)]"
@@ -106,7 +106,7 @@ export default async function GrantDetailPage({
 
       {/* Header */}
       <header className="space-y-3">
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-3">
             <p className="eyebrow">
               {grant.funder_name ?? "Unknown funder"}

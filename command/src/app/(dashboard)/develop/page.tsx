@@ -28,7 +28,7 @@ export default async function DevelopPage() {
 
   return (
     <div className="space-y-6">
-      <header className="flex items-start justify-between gap-4">
+      <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="space-y-2">
           <p className="display-eyebrow">
             <span className="amber">Projects</span> across HAND
@@ -42,17 +42,17 @@ export default async function DevelopPage() {
             too as soon as those projects get their own table.
           </p>
         </div>
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center sm:justify-end">
           <Link
             href="/projects/scripts"
-            className="inline-flex items-center gap-2 rounded-md border border-[rgba(245,239,225,0.12)] px-3 py-2 text-xs text-[var(--ink-dim)] hover:text-[var(--ink)] hover:border-[rgba(217,119,6,0.35)] transition-colors"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md border border-[rgba(245,239,225,0.12)] px-3 py-2 text-xs text-[var(--ink-dim)] hover:text-[var(--ink)] hover:border-[rgba(217,119,6,0.35)] transition-colors sm:w-auto"
           >
             <ScrollText className="h-3.5 w-3.5" aria-hidden />
             Cold scripts
           </Link>
           <Link
             href="/projects/new"
-            className="inline-flex items-center gap-2 rounded-md bg-[var(--amber)] px-3 py-2 text-sm font-medium text-[#1a1208] hover:bg-[var(--amber-soft)] hover:shadow-[0_0_14px_var(--amber-glow)] transition-all"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-[var(--amber)] px-3 py-2 text-sm font-medium text-[#1a1208] hover:bg-[var(--amber-soft)] hover:shadow-[0_0_14px_var(--amber-glow)] transition-all sm:w-auto"
           >
             <Plus className="h-4 w-4" aria-hidden />
             New outreach lead
@@ -61,7 +61,7 @@ export default async function DevelopPage() {
       </header>
 
       <section
-        className="grid gap-3 lg:grid-cols-3"
+        className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3"
         aria-label="Project lanes"
       >
         <div className="panel p-4">

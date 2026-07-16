@@ -10,7 +10,8 @@ This monorepo holds the public web presence (foundation campaign + discovery res
 
 | Path | What it is | Status |
 |---|---|---|
-| [`web/foundation-campaign/`](web/foundation-campaign/) | Primary public site. 501(c)(3) filing campaign, $222,222 first goal. | Live in source |
+| [`web/index.html`](web/index.html) | Primary public site. 501(c)(3) filing campaign, $222,222 first goal. | Live in source |
+| [`web/foundation-campaign/`](web/foundation-campaign/) | Campaign source files and shared assets. | Live in source |
 | [`web/discovery/`](web/discovery/) | Three long-form discovery docs: vision of the resource pool, research on existing skill-exchange models, national landscape map. | Live in source |
 | [`web/sovereign-reciprocates/`](web/sovereign-reciprocates/) | Sovereign Reciprocates: HAND's AI workstream as a public page. Reuses the discovery design system. | Live in source |
 | [`web/governance/`](web/governance/) | Governance package: Articles, Bylaws, all policies, board governance, theory of change, strategic plan, Form 1023 narrative. | Live in source |
@@ -40,7 +41,8 @@ cd web && python3 -m http.server 8000
 ```
 
 Then open:
-- http://localhost:8000/foundation-campaign/ (campaign)
+- http://localhost:8000/ (campaign)
+- http://localhost:8000/foundation-campaign/ (legacy alias)
 - http://localhost:8000/discovery/ (discovery hub)
 - http://localhost:8000/legacy/ (archive)
 
@@ -62,7 +64,7 @@ The code in this repository is released under the [MIT License](LICENSE). Conten
 
 ## Status
 
-Pre-incorporation. The foundation campaign is currently raising toward a $222,222 first goal ($77,444 operating minimum) to file for tax-exempt 501(c)(3) status and launch the pilot cohort. Watch the [foundation campaign](web/foundation-campaign/) for the current status, or [reach out](#contributing) to support.
+Pre-incorporation. The foundation campaign is currently raising toward a $222,222 first goal ($77,444 operating minimum) to file for tax-exempt 501(c)(3) status and launch the pilot cohort. Watch the [foundation campaign](/) for the current status, or [reach out](#contributing) to support.
 
 ---
 

@@ -29,7 +29,7 @@
 //   COMMAND_BASE_URL              — defaults to https://command.handprotocol.org
 //   RESEND_API_KEY / EMAIL_FROM / EMAIL_TO_OPS  — transactional email (see _email.js)
 
-const { sendEmail } = require('./_email.js');
+import { sendEmail } from './_email.js';
 
 const MAX_TEXT = 2000;
 const MAX_NAME = 80;
@@ -200,14 +200,18 @@ async function notifyEmail(payload, pin) {
   ].join('\n');
 
   return sendEmail({
-    to: process.env.EMAIL_TO_OPS,
+    to: [
+      process.env.EMAIL_TO_OPS,
+      process.env.CONTACT_NOTIFY_TO,
+      process.env.RESEND_FORWARD_TO,
+    ],
     subject,
     html,
     text,
   });
 }
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') return json(204, {});
   if (event.httpMethod !== 'POST') return json(405, { error: 'Method not allowed' });
 

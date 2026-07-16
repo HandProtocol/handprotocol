@@ -42,7 +42,7 @@ function StatusRow({
   offText: string;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 py-3">
+    <div className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-3">
         <Dot on={on} />
         <span className="text-sm text-[var(--ink)]">{label}</span>
@@ -108,7 +108,7 @@ export default async function SettingsPage() {
         <h2 id="identity-heading" className="display-eyebrow">
           OPERATOR
         </h2>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
           <div className="grid h-12 w-12 place-items-center rounded-xl border border-[rgba(217,119,6,0.35)] bg-[rgba(217,119,6,0.12)] font-mono text-lg uppercase text-[var(--amber-soft)]">
             {email.charAt(0)}
           </div>
@@ -116,7 +116,7 @@ export default async function SettingsPage() {
             <p className="truncate text-base text-[var(--ink)]">{displayName}</p>
             <p className="truncate text-sm text-[var(--ink-dim)]">{email}</p>
           </div>
-          <span className="ml-auto inline-flex items-center gap-2 rounded-full border border-[rgba(217,119,6,0.3)] bg-[rgba(217,119,6,0.08)] px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--amber-soft)]">
+          <span className="inline-flex items-center gap-2 rounded-full border border-[rgba(217,119,6,0.3)] bg-[rgba(217,119,6,0.08)] px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--amber-soft)] sm:ml-auto">
             <span className="h-1.5 w-1.5 rounded-full bg-[var(--amber)]" />
             {role}
           </span>

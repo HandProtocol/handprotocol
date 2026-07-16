@@ -188,7 +188,7 @@ export function SitesTable({
       <ul className="space-y-3 lg:hidden">
         {sites.map((lead) => (
           <li key={lead.slug} className="panel p-4 space-y-3">
-            <div className="flex items-start justify-between gap-3">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <div className="min-w-0 space-y-0.5">
                 <Link
                   href={`/projects/${lead.slug}`}

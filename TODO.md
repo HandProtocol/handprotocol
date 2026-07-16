@@ -6,7 +6,7 @@ A working list of what's next for the public website. Items added at the bottom;
 
 - [ ] **Create the Resend audience** (via `POST /audiences` or dashboard), copy the UUID, and `netlify env:set RESEND_AUDIENCE_ID <uuid>` in production scope. Single opt-in: contacts join immediately, no confirmation email. Resend still adds the unsubscribe link to every audience send.
 - [ ] **Rotate the Resend API key.** The key was sent through chat (twice) and is now in conversation logs + this session's bash command history. The current key works and is set in Netlify env vars (`RESEND_API_KEY`, production scope). After rotating at resend.com/api-keys, update the Netlify env var via `netlify env:set RESEND_API_KEY <new-key>` from this directory (already linked), then trigger a redeploy.
-- [ ] **Smoke-test the live subscribe flow** after redeploy: submit on `/foundation-campaign/#stay-close`, confirm the contact appears in the Resend audience with `unsubscribed: false`.
+- [ ] **Smoke-test the live subscribe flow** after redeploy: submit on `/#stay-close`, confirm the contact appears in the Resend audience with `unsubscribed: false`.
 - [ ] **Update GitHub `Website` field** on the repo About panel to the live URL once domain is final.
 - [ ] **More discovery iteration.** Audit each doc for v0.1-sounding language; fold resolved questions into prose; mark genuinely-open ones with a consistent "Open question →" pattern so they read as deliberately-public unknowns rather than "we don't know what we're doing."
 - [ ] **Final impeccable audit pass against the live site.** Cohesion work (nav unification, footer, cross-links, qf-link visibility) + new `/donate-crypto/` page + `#stay-close` form verified at desktop, tablet, mobile.

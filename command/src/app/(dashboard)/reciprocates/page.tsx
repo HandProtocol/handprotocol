@@ -89,7 +89,7 @@ export default async function ReciprocatesPage() {
         <section className="grid gap-4 xl:grid-cols-2">
           {groups.map((group) => (
             <article key={group.name} className="panel p-5">
-              <header className="flex items-start justify-between gap-4">
+              <header className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="min-w-0">
                   <h2 className="truncate text-lg font-medium tracking-tight">
                     {group.name}
@@ -105,7 +105,7 @@ export default async function ReciprocatesPage() {
                 </div>
                 <Link
                   href={`/grants?group=${encodeURIComponent(group.name)}`}
-                  className="inline-flex shrink-0 items-center gap-1 text-xs text-[var(--amber-soft)] hover:underline"
+                  className="inline-flex w-full items-center justify-center gap-1 rounded-md border border-[rgba(217,119,6,0.35)] px-3 py-2 text-xs text-[var(--amber-soft)] hover:bg-[rgba(217,119,6,0.08)] hover:no-underline sm:w-auto"
                 >
                   Grants
                   <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />

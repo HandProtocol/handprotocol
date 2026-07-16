@@ -2,6 +2,7 @@ import { createElement, type ReactNode } from "react";
 import Link from "next/link";
 import { ExternalLink, Mail, ShieldCheck } from "lucide-react";
 import { ResendActionPanel } from "@/components/resend/resend-action-panel";
+import { getResendControlSnapshot } from "@/lib/resend/control";
 
 export const dynamic = "force-dynamic";
 
@@ -12,7 +13,7 @@ const WEBHOOK_URL = "https://handprotocol.org/.netlify/functions/resend-inbound-
 function StatusRow({ label, detail, ready }: { label: string; detail: string; ready: boolean }) {
   return createElement(
     "div",
-    { className: "flex items-start justify-between gap-4 py-3" },
+    { className: "flex flex-col gap-2 py-3 sm:flex-row sm:items-start sm:justify-between" },
     createElement(
       "div",
       { className: "flex items-start gap-3" },
@@ -49,12 +50,15 @@ function CodeBlock({ children }: { children: ReactNode }) {
   );
 }
 
-export default function ResendPage() {
+export default async function ResendPage() {
+  const snapshot = await getResendControlSnapshot();
   const hasApiKey = Boolean(process.env.RESEND_API_KEY);
   const hasWebhookSecret = Boolean(process.env.RESEND_WEBHOOK_SECRET);
   const hasForwardTo = Boolean(process.env.RESEND_FORWARD_TO);
   const hasForwardFrom = Boolean(process.env.RESEND_FORWARD_FROM);
-  const receivingReady = hasApiKey && hasWebhookSecret;
+  const domainReceiving = snapshot.domain?.capabilities?.receiving === "enabled";
+  const webhookEnabled = snapshot.inboundWebhook?.status === "enabled";
+  const receivingReady = hasApiKey && hasWebhookSecret && domainReceiving && webhookEnabled;
 
   return createElement(
     "div",
@@ -84,7 +88,7 @@ export default function ResendPage() {
           href: "https://resend.com/domains",
           target: "_blank",
           rel: "noreferrer",
-          className: "inline-flex items-center gap-2 rounded-md border border-[rgba(245,239,225,0.12)] px-3 py-2 text-xs text-[var(--ink-dim)] transition-colors hover:border-[rgba(217,119,6,0.35)] hover:text-[var(--ink)]",
+          className: "inline-flex w-full items-center justify-center gap-2 rounded-md border border-[rgba(245,239,225,0.12)] px-3 py-2 text-xs text-[var(--ink-dim)] transition-colors hover:border-[rgba(217,119,6,0.35)] hover:text-[var(--ink)] sm:w-auto",
         },
         "Resend dashboard",
         createElement(ExternalLink, { className: "h-3.5 w-3.5", "aria-hidden": true }),
@@ -112,7 +116,7 @@ export default function ResendPage() {
         { className: "panel p-5" },
         createElement("p", { className: "display-eyebrow" }, "WEBHOOK"),
         createElement("p", { className: "display-stat mt-2 text-xl" }, receivingReady ? "ready" : "pending"),
-        createElement("p", { className: "mt-2 text-xs text-[var(--ink-dim)]" }, "Requires receiving access and the Svix signing secret."),
+        createElement("p", { className: "mt-2 text-xs text-[var(--ink-dim)]" }, receivingReady ? "Receiving, signature verification, and forwarding are active." : "Requires receiving access and the Svix signing secret."),
       ),
     ),
     createElement(
@@ -144,26 +148,32 @@ export default function ResendPage() {
         createElement(
           "div",
           { className: "divide-y divide-[rgba(245,239,225,0.06)]" },
-          createElement(StatusRow, { label: "RESEND_API_KEY", detail: "Needed for receiving lookup and forwarding send.", ready: hasApiKey }),
+          createElement(StatusRow, { label: "RESEND_API_KEY", detail: "Used for receiving lookup and forwarding send.", ready: hasApiKey }),
           createElement(StatusRow, { label: "RESEND_WEBHOOK_SECRET", detail: "Needed to verify Resend Svix webhook signatures.", ready: hasWebhookSecret }),
           createElement(StatusRow, { label: "RESEND_FORWARD_TO", detail: "Defaults to handprotocol@gmail.com when unset.", ready: hasForwardTo }),
           createElement(StatusRow, { label: "RESEND_FORWARD_FROM", detail: "Defaults to the HAND Protocol sender when unset.", ready: hasForwardFrom }),
         ),
       ),
     ),
-    createElement(ResendActionPanel),
+    receivingReady ? null : createElement(ResendActionPanel),
     createElement(
       "section",
       { className: "panel p-5 space-y-4" },
-      createElement("h2", { className: "display-eyebrow" }, "REMAINING SETUP"),
-      createElement(
-        "ol",
-        { className: "space-y-3 text-sm text-[var(--ink-dim)]" },
-        createElement("li", null, "1. Use a full-access Resend key to enable receiving for handprotocol.org."),
-        createElement("li", null, "2. Create an email.received webhook pointed at the Netlify function endpoint."),
-        createElement("li", null, "3. Save the webhook signing secret as RESEND_WEBHOOK_SECRET on the public handprotocol Netlify site."),
-        createElement("li", null, "4. Add the Resend receiving MX record in Netlify DNS, then redeploy and smoke test reachout@handprotocol.org and hand@handprotocol.org."),
-      ),
+      createElement("h2", { className: "display-eyebrow" }, receivingReady ? "VERIFIED" : "REMAINING SETUP"),
+      receivingReady
+        ? createElement(
+            "p",
+            { className: "text-sm text-[var(--ink-dim)]" },
+            "Domain receiving, the root MX record, signed webhook delivery, Command Center capture, and forwarding to both Gmail inboxes passed an end-to-end production test.",
+          )
+        : createElement(
+            "ol",
+            { className: "space-y-3 text-sm text-[var(--ink-dim)]" },
+            createElement("li", null, "1. Enable receiving for handprotocol.org."),
+            createElement("li", null, "2. Create the email.received webhook and store its signing secret."),
+            createElement("li", null, "3. Add and verify the root receiving MX record."),
+            createElement("li", null, "4. Redeploy and complete an end-to-end forwarding test."),
+          ),
       createElement(
         "div",
         { className: "flex flex-wrap gap-3 border-t border-[rgba(245,239,225,0.06)] pt-3" },

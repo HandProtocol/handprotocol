@@ -6,7 +6,15 @@
 https://gofundme.handprotocol.org/*  https://www.gofundme.com/f/help-hand-protocol-grow  301!
 http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protocol-grow  301!
 
+# Vanity subdomain → live Giveth project page.
+https://giveth.handprotocol.org/     https://giveth.io/project/handprotocol  301!
+https://giveth.handprotocol.org/*    https://giveth.io/project/handprotocol  301!
+http://giveth.handprotocol.org/      https://giveth.io/project/handprotocol  301!
+http://giveth.handprotocol.org/*     https://giveth.io/project/handprotocol  301!
+
+# Root serves the foundation campaign as the canonical public surface.
 /                       /foundation-campaign/index.html 200
+
 /campaign               /                          301
 /discovery              /discovery/                301
 /legacy                 /legacy/                   301

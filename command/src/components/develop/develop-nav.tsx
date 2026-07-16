@@ -30,7 +30,7 @@ export function DevelopNav() {
   return (
     <nav
       aria-label="Project views"
-      className="flex flex-wrap items-center gap-1 border-b border-[rgba(245,239,225,0.07)] pb-px"
+      className="flex items-center gap-1 overflow-x-auto border-b border-[rgba(245,239,225,0.07)] pb-px"
     >
       {TABS.map((t) => {
         const on = active(t.href, "exact" in t ? Boolean(t.exact) : false);
@@ -40,7 +40,7 @@ export function DevelopNav() {
             key={t.href}
             href={t.href}
             className={cn(
-              "inline-flex items-center gap-1.5 rounded-t-md border-b-2 px-3 py-2 text-xs font-medium tracking-wide transition-colors -mb-px",
+              "inline-flex shrink-0 items-center gap-1.5 rounded-t-md border-b-2 px-3 py-2 text-xs font-medium tracking-wide transition-colors -mb-px",
               on
                 ? "border-[var(--amber)] text-[var(--ink)]"
                 : "border-transparent text-[var(--ink-dim)] hover:text-[var(--ink)] hover:border-[rgba(217,119,6,0.35)]",

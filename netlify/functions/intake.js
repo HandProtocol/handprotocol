@@ -12,6 +12,8 @@
 //                                   Defaults to "HAND Intake <hand@handprotocol.org>".
 //   RESEND_NOTIFY_TO               — Where the notification lands.
 //                                   Defaults to "hand@handprotocol.org".
+//   COMMAND_CAPTURE_URL            — Command Center capture endpoint.
+//   INBOX_CAPTURE_KEY              — Shared secret for the capture endpoint.
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -61,7 +63,7 @@ function buildNotificationHtml(payload) {
   const variantLabel = VARIANT_LABELS[payload.variant] || payload.variant || 'unknown';
   const signalLabels = (payload.signals || [])
     .map((s) => SIGNAL_LABELS[s] || s)
-    .join(', ') || '—';
+    .join(', ') || 'none';
 
   const variantRows = Object.entries(payload.variant_fields || {})
     .map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#6B7280;font-size:13px;vertical-align:top;">${escapeHtml(k)}</td><td style="padding:4px 0;color:#111827;font-size:14px;">${escapeHtml(v)}</td></tr>`)
@@ -93,8 +95,17 @@ function buildNotificationHtml(payload) {
 }
 
 async function sendNotification(apiKey, payload) {
-  const from = process.env.RESEND_NOTIFY_FROM || 'HAND Intake <hand@handprotocol.org>';
-  const to = process.env.RESEND_NOTIFY_TO || 'hand@handprotocol.org';
+  const from =
+    process.env.RESEND_NOTIFY_FROM ||
+    process.env.EMAIL_FROM ||
+    process.env.RESEND_FORWARD_FROM ||
+    'HAND Intake <hand@handprotocol.org>';
+  const to =
+    process.env.RESEND_NOTIFY_TO ||
+    process.env.EMAIL_TO_OPS ||
+    process.env.CONTACT_NOTIFY_TO ||
+    process.env.RESEND_FORWARD_TO ||
+    'hand@handprotocol.org';
   const variantLabel = VARIANT_LABELS[payload.variant] || payload.variant || 'Reciprocate';
 
   const res = await fetch('https://api.resend.com/emails', {
@@ -156,7 +167,66 @@ async function addToAudience(apiKey, audienceId, payload) {
   return { status: 'error' };
 }
 
-exports.handler = async (event) => {
+async function captureInCommandCenter(payload) {
+  const endpoint = process.env.COMMAND_CAPTURE_URL;
+  const captureKey = process.env.INBOX_CAPTURE_KEY;
+
+  if (!endpoint || !captureKey) {
+    console.warn('Command capture skipped: missing COMMAND_CAPTURE_URL or INBOX_CAPTURE_KEY');
+    return false;
+  }
+
+  const variantLabel = VARIANT_LABELS[payload.variant] || payload.variant || 'Reciprocate';
+  const signalLabels = (payload.signals || [])
+    .map((signal) => SIGNAL_LABELS[signal] || signal)
+    .join(', ') || 'none';
+  const variantRows = Object.entries(payload.variant_fields || {})
+    .map(([key, value]) => `${key}: ${value}`)
+    .join('\n') || '—';
+
+  const body = [
+    `Name: ${payload.name}`,
+    `Email: ${payload.email}`,
+    payload.location ? `Location: ${payload.location}` : null,
+    payload.role ? `Role: ${payload.role}` : null,
+    `Variant: ${variantLabel}`,
+    `Signals: ${signalLabels}`,
+    'Variant details:',
+    variantRows,
+    '',
+    'Story:',
+    payload.story,
+  ].filter(Boolean).join('\n');
+
+  try {
+    const res = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-hand-capture-key': captureKey,
+      },
+      body: JSON.stringify({
+        title: `Reciprocates intake: ${payload.name}`,
+        url: 'https://handprotocol.org/reciprocates/#intake',
+        body,
+        source: 'api',
+      }),
+    });
+
+    if (!res.ok) {
+      const data = await res.text();
+      console.error('Command capture failed', { status: res.status, data });
+      return false;
+    }
+
+    return true;
+  } catch (err) {
+    console.error('Command capture threw', err && err.message);
+    return false;
+  }
+}
+
+export const handler = async (event) => {
   if (event.httpMethod !== 'POST') {
     return json(405, { error: 'Method not allowed' });
   }
@@ -211,7 +281,9 @@ exports.handler = async (event) => {
     variant_fields: (payload.variant_fields && typeof payload.variant_fields === 'object') ? payload.variant_fields : {}
   };
 
-  // Always notify the human first — that's the brand promise.
+  // Persist to Command Center first, then notify the human. Both must
+  // succeed for the submission to count as complete.
+  const captured = await captureInCommandCenter(normalized);
   const notified = await sendNotification(apiKey, normalized);
 
   // Audience add is best-effort; the page still succeeds if the audience
@@ -222,7 +294,7 @@ exports.handler = async (event) => {
     audienceResult = await addToAudience(apiKey, audienceId, normalized);
   }
 
-  if (!notified && audienceResult.status === 'error') {
+  if (!captured || !notified) {
     return json(502, { error: 'Could not record your intake. Please email hand@handprotocol.org.' });
   }
 

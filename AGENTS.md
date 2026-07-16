@@ -22,6 +22,7 @@ handprotocol/
 ├── DESIGN.md                   # Visual system reference
 ├── AGENTS.md                   # This file
 ├── web/
+│   ├── index.html              # PRIMARY public surface. Foundation campaign landing page.
 │   ├── foundation-campaign/    # PRIMARY public surface. 501(c)(3) filing campaign.
 │   │   ├── index.html          # The main HAND landing page
 │   │   ├── style.css           # Brand stylesheet (canonical design tokens)
@@ -54,6 +55,7 @@ Static surfaces, no build step:
 ```bash
 cd web && python3 -m http.server 8000
 # Then visit:
+#   http://localhost:8000/
 #   http://localhost:8000/foundation-campaign/
 #   http://localhost:8000/discovery/
 #   http://localhost:8000/legacy/
@@ -100,7 +102,7 @@ For full detail, see `DESIGN.md`. Quick hits:
 
 ## Where new code goes
 
-- **A new marketing section / story** → inside `web/foundation-campaign/index.html`. New CSS in its `style.css`.
+- **A new marketing section / story** → inside `web/index.html`. New CSS in `web/foundation-campaign/style.css`.
 - **A new long-form research doc** → new `*.html` file in `web/discovery/`. Update `index.html` (hub cards + pager) and the sub-nav in all sibling docs to include it.
 - **A new archival item** → new `<article class="legacy-item">` in `web/legacy/index.html`.
 - **A new component used across surfaces** → primary CSS in `web/foundation-campaign/style.css` (the canonical brand stylesheet). Discovery and legacy extend from there.

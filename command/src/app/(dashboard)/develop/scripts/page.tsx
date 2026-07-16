@@ -88,7 +88,7 @@ export default async function ColdScriptsPage() {
             aria-labelledby={`script-${tpl.slug}`}
             className="panel overflow-hidden p-0"
           >
-            <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[rgba(245,239,225,0.06)] px-4 py-3">
+            <div className="flex flex-col gap-3 border-b border-[rgba(245,239,225,0.06)] px-4 py-3 sm:flex-row sm:items-start sm:justify-between">
               <div className="min-w-0 space-y-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="inline-flex items-center rounded-full border border-[rgba(217,119,6,0.4)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--amber-soft)]">
@@ -111,7 +111,7 @@ export default async function ColdScriptsPage() {
                   {tpl.updated ? ` · ${tpl.updated}` : ""}
                 </p>
               </div>
-              <CopyButton text={tpl.body} label="Copy script" />
+              <CopyButton text={tpl.body} label="Copy script" className="w-full sm:w-auto" />
             </div>
 
             {tpl.subjectOptions.length > 0 && (

@@ -4,6 +4,12 @@
   "cleanUrls": false,
   "trailingSlash": false,
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "giveth.handprotocol.org" }],
+      "destination": "https://giveth.io/project/handprotocol",
+      "permanent": true
+    },
     { "source": "/campaign", "destination": "/", "permanent": true },
     { "source": "/foundation-campaign", "destination": "/", "permanent": true },
     { "source": "/foundation-campaign/", "destination": "/", "permanent": true },

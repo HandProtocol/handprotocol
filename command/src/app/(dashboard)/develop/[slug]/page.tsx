@@ -70,7 +70,7 @@ export default async function BizLeadDetailPage({
           <ArrowLeft className="h-3.5 w-3.5" aria-hidden />
           Back to pipeline
         </Link>
-        <div className="flex items-start justify-between gap-4 flex-wrap">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="space-y-1">
             <h1 className="text-2xl font-medium tracking-tight">{lead.name}</h1>
             <p className="text-sm text-[var(--ink-dim)]">

@@ -18,7 +18,7 @@ function CopySecretButton({ value }: { value: string }) {
     <button
       type="button"
       onClick={() => navigator.clipboard?.writeText(value)}
-      className="inline-flex items-center gap-1.5 rounded-md border border-[rgba(245,239,225,0.1)] px-2 py-1 text-xs text-[var(--ink-dim)] transition-colors hover:border-[rgba(217,119,6,0.45)] hover:text-[var(--amber-soft)]"
+      className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-[rgba(245,239,225,0.1)] px-2 py-1 text-xs text-[var(--ink-dim)] transition-colors hover:border-[rgba(217,119,6,0.45)] hover:text-[var(--amber-soft)] sm:w-auto"
     >
       <Copy className="h-3 w-3" aria-hidden />
       Copy secret
@@ -38,7 +38,7 @@ export function ResendActionPanel() {
 
   return (
     <section aria-labelledby="actions-heading" className="panel p-5 space-y-4">
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2 id="actions-heading" className="display-eyebrow">
             OPERATIONS
@@ -63,7 +63,7 @@ export function ResendActionPanel() {
           <button
             type="submit"
             disabled={receivingPending}
-            className="mt-4 inline-flex items-center rounded-md bg-[var(--amber)] px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-[#b45309] disabled:cursor-not-allowed disabled:opacity-50"
+            className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-[var(--amber)] px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-[#b45309] disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
           >
             {receivingPending ? "Enabling..." : "Enable receiving"}
           </button>
@@ -90,7 +90,7 @@ export function ResendActionPanel() {
           <button
             type="submit"
             disabled={webhookPending}
-            className="mt-4 inline-flex items-center rounded-md bg-[var(--amber)] px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-[#b45309] disabled:cursor-not-allowed disabled:opacity-50"
+            className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-[var(--amber)] px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-[#b45309] disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
           >
             {webhookPending ? "Creating..." : "Create webhook"}
           </button>

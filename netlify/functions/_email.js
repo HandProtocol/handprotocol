@@ -12,7 +12,7 @@
 // Best-effort: never throws. Underscore prefix keeps Netlify from deploying
 // this helper as its own function endpoint.
 
-function escapeHtml(input) {
+export function escapeHtml(input) {
   return String(input == null ? '' : input)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -20,17 +20,38 @@ function escapeHtml(input) {
     .replace(/"/g, '&quot;');
 }
 
-async function sendEmail({ to, subject, html, text, replyTo } = {}) {
+function normalizeRecipients(input) {
+  const values = Array.isArray(input) ? input : [input];
+  return values
+    .flatMap((value) => String(value == null ? '' : value).split(','))
+    .map((value) => value.trim())
+    .filter(Boolean);
+}
+
+export async function sendEmail({ to, subject, html, text, replyTo } = {}) {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.EMAIL_FROM;
+  const from =
+    process.env.EMAIL_FROM ||
+    process.env.RESEND_NOTIFY_FROM ||
+    process.env.RESEND_FORWARD_FROM;
 
   if (!apiKey || !from) {
     return { ok: false, reason: 'email-unconfigured' };
   }
 
-  // `to` may be a string or array; default to EMAIL_TO_OPS when omitted.
-  const recipient = to == null ? process.env.EMAIL_TO_OPS : to;
-  if (!recipient || (Array.isArray(recipient) && recipient.length === 0)) {
+  const requestedRecipient = normalizeRecipients(to);
+
+  // `to` may be a string or array; default to the configured ops inbox when
+  // omitted or blank.
+  const recipient = requestedRecipient.length > 0
+    ? Array.from(new Set(requestedRecipient))
+    : normalizeRecipients(
+        process.env.EMAIL_TO_OPS ||
+        process.env.CONTACT_NOTIFY_TO ||
+        process.env.RESEND_NOTIFY_TO ||
+        process.env.RESEND_FORWARD_TO,
+      );
+  if (recipient.length === 0) {
     return { ok: false, reason: 'email-unconfigured' };
   }
 
@@ -63,5 +84,3 @@ async function sendEmail({ to, subject, html, text, replyTo } = {}) {
     return { ok: false, reason: 'email-network' };
   }
 }
-
-module.exports = { sendEmail, escapeHtml };

@@ -122,7 +122,7 @@ export default async function DashboardPage() {
           href="/feedback"
           className="panel group p-5 transition-colors hover:border-[rgba(217,119,6,0.35)] hover:bg-[rgba(217,119,6,0.04)]"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="display-eyebrow">Feedback waiting</p>
             <MessageSquareText className="h-4 w-4 text-[var(--amber-soft)]" />
           </div>
@@ -136,7 +136,7 @@ export default async function DashboardPage() {
           href="/projects"
           className="panel group p-5 transition-colors hover:border-[rgba(217,119,6,0.35)] hover:bg-[rgba(217,119,6,0.04)]"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="display-eyebrow">Projects moving</p>
             <ArrowRight className="h-4 w-4 text-[var(--amber-soft)]" />
           </div>
@@ -150,7 +150,7 @@ export default async function DashboardPage() {
           href="/reciprocates"
           className="panel group p-5 transition-colors hover:border-[rgba(217,119,6,0.35)] hover:bg-[rgba(217,119,6,0.04)]"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="display-eyebrow">Reciprocates active</p>
             <UsersRound className="h-4 w-4 text-[var(--amber-soft)]" />
           </div>
@@ -167,7 +167,7 @@ export default async function DashboardPage() {
           href="/public"
           className="panel group p-5 transition-colors hover:border-[rgba(217,119,6,0.35)] hover:bg-[rgba(217,119,6,0.04)]"
         >
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <p className="display-eyebrow">Public interest</p>
             <Radio className="h-4 w-4 text-[var(--amber-soft)]" />
           </div>
@@ -183,7 +183,7 @@ export default async function DashboardPage() {
           aria-labelledby="deadline-heading"
           className="panel p-5 space-y-4"
         >
-          <header className="flex items-center justify-between gap-4">
+          <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <h2 id="deadline-heading" className="display-eyebrow">
               <Calendar
                 className="mr-2 inline-block h-3 w-3 -mt-0.5"
@@ -246,7 +246,7 @@ export default async function DashboardPage() {
           <h2 id="funding-heading" className="display-eyebrow">
             Funding picture
           </h2>
-          <dl className="mt-4 grid grid-cols-2 gap-4">
+          <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <dt className="display-eyebrow">Active grants</dt>
               <dd className="mt-1 text-3xl font-medium">
@@ -275,7 +275,7 @@ export default async function DashboardPage() {
 
       <div className="grid gap-4 xl:grid-cols-3">
         <section aria-labelledby="feedback-heading" className="panel p-5">
-          <header className="flex items-center justify-between gap-4">
+          <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <h2 id="feedback-heading" className="display-eyebrow">
               Recent feedback
             </h2>
@@ -312,7 +312,7 @@ export default async function DashboardPage() {
         </section>
 
         <section aria-labelledby="projects-heading" className="panel p-5">
-          <header className="flex items-center justify-between gap-4">
+          <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <h2 id="projects-heading" className="display-eyebrow">
               Recent projects
             </h2>
@@ -358,7 +358,7 @@ export default async function DashboardPage() {
         </section>
 
         <section aria-labelledby="public-heading" className="panel p-5">
-          <header className="flex items-center justify-between gap-4">
+          <header className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
             <h2 id="public-heading" className="display-eyebrow">
               Public signals
             </h2>
