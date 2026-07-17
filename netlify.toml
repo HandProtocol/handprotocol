@@ -24,7 +24,7 @@
 # Host-aware gate for kitties.handprotocol.org. The function passes through
 # immediately for every other hostname using the root route.
 [[edge_functions]]
-  function = "kitties-auth"
+  function = "kitties-subdomain-auth"
   path = "/"
 
 [[edge_functions]]

@@ -33,6 +33,9 @@ export default async (request, context) => {
   const cookies = parseCookies(request.headers.get("Cookie") || "");
   const authCookie = cookies[COOKIE_NAME];
   if (authCookie && constantTimeEqual(authCookie, expectedToken)) {
+    if (kittyHost && url.pathname === "/") {
+      return context.rewrite("/kitties/game/index.html");
+    }
     return context.next();
   }
 
