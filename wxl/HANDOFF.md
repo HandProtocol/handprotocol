@@ -1,6 +1,6 @@
 # WXL:FOOD Handoff
 
-Last updated: 2026-07-16
+Last updated: 2026-07-17
 
 This is the working orientation document for `wxl/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on WXL:FOOD, its current behavior, what is real, what is illustrative, and what should be built next.
 
@@ -39,7 +39,7 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 | Main UI | `src/App.tsx` |
 | Styles | `src/styles.css` |
 | Data access | `src/lib/foodRepository.ts` |
-| Database migrations | `../command/supabase/migrations/024_wxl_food.sql`, `025_wxl_community_map_alerts.sql` |
+| Database migrations | `../command/supabase/migrations/024_wxl_food.sql` through `031_wxl_inventory.sql` |
 | Deployment notes | `DEPLOY.md` |
 
 ## Routes and entry states
@@ -75,6 +75,9 @@ Routing is currently implemented with `window.location.pathname` and query param
 - New password submission uses `updateUser`.
 - Password confirmation is checked in the browser.
 - The app subscribes to Supabase auth-state changes and uses the live session for write gating.
+- Session restoration has an explicit loading state, preventing the app from briefly presenting an authenticated member as anonymous.
+- The account control shows identity from Supabase user metadata or a readable email fallback.
+- Authenticated members can sign out from the account menu and immediately return to browse-only access.
 - Authentication errors and success notices are shown in the login card.
 
 ### Public request loading
@@ -89,7 +92,67 @@ Routing is currently implemented with `window.location.pathname` and query param
 - Persisted requests write to `command.food_requests`.
 - Authenticated members can submit a message attached to a persisted request.
 - Persisted messages write to `command.food_request_messages`.
+- Selecting a persisted request loads its saved messages and structured offers in chronological order.
+- Members can offer food, transportation, storage, or volunteer time with quantity, availability, transport, and contact-preference fields.
+- Request owners can accept or decline proposed offers. Offer acceptance moves an open request to `in_progress`.
+- Offer authors can withdraw their own proposed offers.
+- Request owners can start coordination, fulfill, close, or reopen their requests through owner-checked database functions.
+- Reply, supporter, and offer totals are maintained by database triggers and reloaded from database records.
+- Request status changes are written to an immutable history table.
+- Persisted request activity is clearly separated from illustrative fallback conversations.
+- The interface warns that request replies and offer details are public and prohibits sensitive contact or household information.
 - Anonymous visitors who try to create or reply receive the account prompt.
+
+### Rescue operations
+
+- The rescue board loads privacy-safe operational records through a dedicated database function. It does not substitute sample rescues when the database is empty or unavailable.
+- Authenticated members can submit a source, receiving group, food category, quantity, packaging, allergen, date-mark, handling, window, storage, vehicle, accessibility, and location record for coordinator review.
+- Public discovery contains only a neighborhood summary. Exact pickup instructions and other handling details are restricted to the creator, assigned Contributor, and administrators.
+- Administrators can approve or reject a submission only with a review note. Approval also requires an explicit partner-eligibility and handling-plan confirmation.
+- Claims are atomic, expire after at most two hours or at the pickup deadline, and can be released with an audit note.
+- Assigned Contributors record pickup and delivery checkpoints. The creator or an administrator records receiving acceptance.
+- Checkpoints require packaging, label, temperature-control, contamination, observed-quantity, and note evidence. Chilled food above 41 degrees Fahrenheit and hot food below 135 degrees Fahrenheit enter incident hold.
+- Administrators can resolve an incident hold as rejected or cancelled with a required disposition note.
+- Status changes, claim releases, checkpoints, and incident resolution are preserved in event history.
+- The workflow requires migration 028 and live role-boundary testing before production use. It is not authorization for real food movement.
+
+### Contributor readiness and Volunteer Command
+
+- Authenticated members can submit a private Contributor readiness file with contact, emergency contact, availability, service area, vehicle, capacity, lifting limit, temperature-control equipment, accessibility needs, and agreement acceptance.
+- Self-service changes return an approved file to `submitted`, clear earlier approval evidence, and pause claiming until a coordinator reviews the new capabilities.
+- Administrators have a coordinator-only review queue containing the private evidence needed for approval.
+- Approval requires current training, at least one run class, a decision note, and matching equipment for chilled, frozen, or hot handling.
+- Training and optional credential expiry dates are persisted. Rescue claiming rejects expired approval evidence.
+- Migration 029 replaces the rescue claim function. Only an approved Contributor with the matching run class and equipment can claim. Administrators do not bypass this operational requirement.
+- The Volunteer Command no longer displays a fake participant count or placeholder board.
+
+### Harvest runs and private dispatch
+
+- Harvest Runs is a working top-level workspace. The Overview route cards remain explicitly labeled sample patterns and link to this real board.
+- Administrators can create future multi-stop plans with public area, capacity, maximum item weight, temperature classes, allowed vehicles, public summary, private dispatch notes, and accessibility limits.
+- Stops are ordered and can represent a rescue pickup, rescue delivery, or staging hub. Rescue-linked stop windows must fit both the run window and the reviewed rescue window.
+- Exact stop instructions and route order are restricted to the assigned Contributor and administrators.
+- Assignment requires an approved Contributor whose training and credential remain valid through the run, matching run classes, vehicle, exact capacity unit and amount, lifting limit, and temperature-control equipment.
+- Coordinators must explicitly confirm schedule and service area. The database prevents a rescue from belonging to two active runs.
+- Assignment atomically reserves every linked open rescue for the Contributor. Administrators do not bypass operational eligibility.
+- Start check-in opens 30 minutes before the run and revalidates approval, training, credentials, run classes, vehicle, capacity, and lifting limit.
+- Stop outcomes are ordered, require observed quantity and evidence notes, and depend on rescue pickup or delivery safety checkpoints where linked.
+- A stop incident holds both the run and linked rescue. Administrator disposition can document cancellation or mark the incident stop skipped before resuming the run.
+- Runs complete only when every stop has a final completed or skipped outcome. Immutable events preserve creation, stop addition, assignment, start, outcomes, incidents, cancellation, and completion.
+
+### Accepted-delivery inventory
+
+- Inventory is an active coordinator-only workspace rather than an inactive navigation item.
+- A lot can be created only from a rescue in `accepted` status with a passing acceptance checkpoint and a positive observed quantity. The receiving form cannot override that quantity.
+- Each accepted rescue can create at most one inventory lot.
+- Lots preserve rescue source, description, category, allergens, date mark, unit, acceptance time, storage location, use-by deadline, and storage plan.
+- Temperature-controlled lots carry server-validated minimum or maximum storage limits. Condition checks compare measured temperature against the lot-specific range.
+- Current, reserved, and available quantities remain distinct. Allocation locks the lot row so simultaneous reservations cannot exceed available quantity.
+- Reservations name organizations or Reciprocate groups and keep handoff instructions private. Household names and sensitive household information are prohibited in the interface.
+- Fulfillment reduces physical stock and reserved stock in one transaction. Cancellation releases only the reservation and preserves any safety hold.
+- Failed packaging, contamination, storage-control, or temperature checks hold the entire lot. Hold release requires a newer passing check plus a coordinator disposition note.
+- Discards can use only unreserved on-hand quantity and require a reason.
+- An immutable ledger records receipt, reservation, release, distribution, discard, condition hold, and hold release with balances after every event.
 
 ### Source nominations
 
@@ -178,7 +241,7 @@ The top bar is a location breadcrumb, not a product slogan. Its desktop form is:
 The final segment updates from the active `View` state and currently supports:
 
 - Overview
-- Rescue opportunities
+- Rescue operations
 - Volunteer command
 - Community requests
 - Partner network
@@ -219,18 +282,34 @@ Recommended follow-up:
 
 ### Database and security baseline
 
-Migration `024_wxl_food.sql` defines:
+Migrations `024_wxl_food.sql` through `031_wxl_inventory.sql` define:
 
 - `command.food_partners`
 - `command.food_source_nominations`
 - `command.food_requests`
 - `command.food_request_messages`
 - `command.food_request_supporters`
+- `command.food_request_offers`
+- `command.food_request_status_history`
+- `command.food_rescues`
+- `command.food_rescue_checkpoints`
+- `command.food_rescue_events`
+- `command.food_contributors`
+- `command.food_contributor_review_events`
+- `command.food_harvest_runs`
+- `command.food_harvest_run_stops`
+- `command.food_harvest_run_events`
+- `command.food_inventory_lots`
+- `command.food_inventory_allocations`
+- `command.food_inventory_condition_checks`
+- `command.food_inventory_ledger`
 - `command.food_spots`
 - `command.food_alerts`
 - `command.food_engagement_events`
 - indexes for status, neighborhood, request messages, and review queues
 - row-level security for public reads, authenticated inserts, and administrative management
+- owner-checked database functions for offer decisions, withdrawals, and request status changes
+- database triggers that maintain request activity counts and status history
 
 The browser receives only the Supabase anonymous key. Never add a service-role key to WXL.
 
@@ -242,56 +321,48 @@ This section is load-bearing. The interface currently looks more functional than
 
 - Map coordinates and status colors. Initial directory-listed names, addresses, and center contact details are source-backed, while South Oak Baptist remains a community report.
 - Volunteer-node routes and anonymous household clusters
-- Rescue opportunities
+- Sample rescue patterns on the Overview only
 - Needs signals
 - Network metrics
 - Weekly chart and impact values
 - Harvest-run summaries
 - Initial community requests used as fallback content
-- Request conversation messages
+- Fallback request conversation messages
 - Verified-source count
-- Profile name, avatar, and role
+- Profile role and group membership
 - Dates and update times
 
 The map labels itself as illustrative, but the rest of the dashboard needs equally clear prototype or empty-state treatment until it is connected to real data.
 
 ### Controls that still produce only a notification or placeholder
 
-- `Post a rescue`, after authentication
 - `Build a basket`
-- Harvest-run board
-- Rescue cards and coordination queue
 - Impact report
-- Support request, after authentication
-- Offer food or help, after authentication
-- Request actions button
 - Search
-- Alert center
-- Harvest runs navigation
-- Inventory navigation
 - Impact reports navigation
 - Help link
 - Profile and settings control
 
 ### Views that are placeholders
 
-- Rescue opportunities view
-- Volunteer command view
+There are no remaining top-level placeholder views. Impact Reports still needs a dedicated view.
 
 The app should not claim these boards are ready until they contain functional workflows.
 
 ### Persistence gaps
 
-- Request messages are inserted but not loaded from the database.
-- The response count is incremented only in local React state. It is not updated transactionally in the database.
-- Supporting a persisted request inserts into `food_request_supporters`; sample fallback requests remain explicitly non-persistent.
-- Offering food or help has no data model or persisted workflow.
-- Rescue opportunities have no dedicated repository functions or confirmed data model.
-- Harvest runs, inventory, and impact reporting have no front-end repositories. Food alerts now have a focused notification repository and interface.
+- Migration `027_wxl_request_coordination.sql` must be deployed before structured offers, owner decisions, status history, and transactional counts are available in production.
+- Migration `028_wxl_rescue_operations.sql` must be deployed before rescue submission, review, claiming, private instructions, safety checkpoints, and event history are available in production.
+- Sample fallback request messages, offers, and support remain explicitly non-persistent.
+- Request owners can change status but cannot yet edit the request title, group, details, priority, or visibility from the interface.
+- Migration `029_wxl_contributor_readiness.sql` must be deployed before Contributor applications, coordinator approval, or eligibility-enforced claiming are available in production.
+- Migration `030_wxl_harvest_runs.sql` must be deployed before private route planning, eligibility-checked assignment, ordered stop outcomes, or completion history are available in production.
+- Migration `031_wxl_inventory.sql` must be deployed before accepted-rescue receiving, reservations, storage checks, distributions, discards, or ledger history are available in production.
+- Harvest-run assignment enforces capacity, lifting, vehicle, run class, equipment, and validity dates. Service-area and schedule fit require an explicit coordinator confirmation because those fields remain human-readable rather than normalized availability calendars.
+- Rescue notifications, overdue escalation, access-history auditing, retention, partial acceptance, and reassignment after incident review remain incomplete.
+- Auditable impact reporting has no front-end repository. Food alerts now have a focused notification repository and interface.
 - Source nominations are not loaded into a coordinator review queue in WXL.
-- Request status transitions are administrative in the migration but have no WXL interface.
-- There is no sign-out action.
-- There is no profile setup or account settings flow.
+- There is no profile setup or editable account settings flow.
 
 ## Important auth and database risks to verify
 
@@ -301,9 +372,9 @@ The app should not claim these boards are ready until they contain functional wo
    - `http://localhost:5173/app/?mode=recovery`
    Set the Supabase Site URL to `https://wxl.handprotocol.org`; leaving the default `http://localhost:3000` causes password-recovery links to open localhost when the callback is rejected or omitted.
 3. Test immediate signup login, browser password-save behavior, login, logout, reset request, recovery, and expired recovery links on the live domain.
-4. Confirm that every new auth account receives a matching `command.profiles` row. The food tables reference `command.profiles(id)`, while inserts use `auth.user.id`. Without a profile-creation trigger, valid authenticated inserts can fail with a foreign-key error.
+4. Apply migrations 026 through 031. Migration 031 adds accepted-rescue inventory custody and a transactional quantity ledger. Run the deployment verification queries before broad access.
 5. Confirm that the `command` schema is exposed through the Supabase API.
-6. Review whether public request messages should be readable by anyone. The current policy allows public reading when the parent request is public.
+6. Confirm the policy decision that request messages and structured offers are public when the parent request is public. The interface discloses this, but moderation and takedown controls are still required.
 7. Add abuse controls before broad access: rate limits, duplicate prevention, moderation status, report and takedown paths, and safe handling of contact details.
 8. Do not expose household-level location or sensitive need data on the public map.
 
@@ -312,31 +383,27 @@ The app should not claim these boards are ready until they contain functional wo
 ### P0: Make the existing promise honest and reliable
 
 1. Smoke-test the complete live authentication lifecycle.
-2. Add sign out, current-member identity, and a loading state while the Supabase session is being restored.
-3. Verify or add automatic `command.profiles` creation for new accounts.
-4. Replace fixed profile text such as `Koh's network` and `You` with the authenticated profile.
-5. Label all hard-coded metrics and activity as sample data, or replace them with honest empty states.
-6. Turn `Post a rescue` into a real form and persisted workflow. Decide first whether a rescue is a category of request or a separate entity with source, quantity, pickup window, storage needs, food-safety notes, and status.
-7. Remove or disable controls that do not have a real next screen or action.
-8. Add clear success, failure, retry, and offline states to every database mutation.
+2. Apply and verify migrations 026 through 031 in production.
+3. Label all hard-coded metrics and activity as sample data, or replace them with honest empty states.
+4. Add normalized Contributor availability calendars, time-off, and service-area matching to supplement coordinator confirmation.
+5. Remove or disable controls that do not have a real next screen or action.
+6. Add clear success, failure, retry, and offline states to every database mutation.
 
 ### P1: Complete the community coordination loop
 
-1. Load request messages for the selected request.
-2. Add real request support through `food_request_supporters`.
-3. Add an offer model that captures what is offered, quantity, availability, transport, and contact preference.
-4. Add request ownership and allow the coordinating group to edit, close, fulfill, or reopen its own requests under reviewed policies.
-5. Add rescue claiming and release so two groups do not act on the same food without knowing.
-6. Add a coordinator review queue for source nominations.
-7. Replace local counters with database-derived or transactionally maintained counts.
-8. Add pagination or incremental loading for requests and messages.
+1. Add editing for request title, group, detail, priority, and public visibility under owner-checked policies.
+2. Add moderation, reporting, and takedown paths for public requests, messages, and offers.
+3. Add rescue notifications, overdue escalation, incident reporting, and privacy-safe access history.
+4. Add a coordinator review queue for source nominations.
+5. Add pagination or incremental loading for requests, messages, and offers.
+6. Add private, consent-based contact handoff after an offer is accepted. Do not expose account email on the public board.
 
 ### P2: Build the operational boards
 
-1. Rescue board with source, food type, quantity, pickup deadline, location precision, storage constraints, and claim status.
-2. Volunteer board with skills, availability, vehicle capacity, accessibility needs, and assignment state.
-3. Harvest-run planning with stops, time windows, driver, capacity, route status, and completion notes.
-4. Inventory records with freshness, quantity, unit, storage condition, source, and expiration.
+1. Complete the rescue board with approved-partner records, reassignment, partial acceptance, and retention controls.
+2. Extend Volunteer Command with training sessions, agreement versions, document evidence, availability calendars, and assignment history.
+3. Extend harvest runs with notifications, overdue escalation, acknowledgement, reassignment, and offline-safe stop recording.
+4. Extend inventory with expiry automation, recall and quarantine workflows, stock transfer, cycle counts, and approved storage-location records.
 5. Notification center based on meaningful events, not decorative alerts.
 6. Impact reporting based only on completed and auditable activity.
 
@@ -383,7 +450,7 @@ The next milestone should be one complete coordination loop:
 7. Anonymous visitors can see only the public and privacy-safe parts.
 8. The completed activity contributes to impact totals through auditable database records.
 
-This milestone is more valuable than adding more dashboard sections because it proves the core coordination model end to end.
+The request and offer portions exist in migration 027. The reviewed rescue, claim, delivery-checkpoint, acceptance, and incident-hold portions exist in migration 028. Production deployment, live multi-account verification, Contributor eligibility, private contact handoff, notifications, retention controls, and auditable impact remain before this milestone is complete.
 
 ## Local development
 
@@ -407,7 +474,7 @@ Production build:
 npm run build
 ```
 
-The build was passing on 2026-07-16 after the auth and anonymous-access changes.
+The build and all 38 automated tests were passing on 2026-07-17 after the inventory changes.
 
 ## Deployment
 
@@ -439,10 +506,15 @@ Before calling the current auth and community flow production-ready, verify:
 - New password works for the next login.
 - Invalid and expired links show a useful recovery path.
 - New request persists and remains after refresh.
-- New request message persists and can be loaded after refresh once message loading is implemented.
+- New request message persists and loads after refresh.
+- Structured offer persists and loads after refresh.
+- Only the request owner or an administrator can accept or decline an offer.
+- Only the offer author can withdraw a proposed offer.
+- Accepting an offer moves an open request into progress and records status history.
+- Reply, supporter, and offer counts match their database records after refresh.
 - Source nomination persists with `nominated` status.
 - Row-level security blocks anonymous inserts.
-- Sign out removes write access once sign out is implemented.
+- Sign out removes write access and returns the member to public browsing.
 - Mobile layout works at 360px.
 - Dialog focus and screen-reader labels pass an accessibility check.
 
@@ -458,6 +530,68 @@ Before calling the current auth and community flow production-ready, verify:
   - Gated community requests, messages, support, offers, rescues, and source nominations using session state.
 - `src/styles.css`
   - Added spacing and secondary auth-action styles for password, reset, and account-switch controls.
+
+## Account readiness pass, 2026-07-17
+
+- Session restoration now exposes a visible loading state before write access is decided.
+- The account control uses the current Supabase member identity instead of fixed profile text.
+- Request creation and reply attribution use that member identity.
+- The account menu provides a working sign-out action.
+- `026_wxl_profile_readiness.sql` backfills missing `command.profiles` rows for older auth accounts.
+- `docs/DELIVERY-READINESS.md` defines operational safety gates, required evidence, release stages, and the next product milestones.
+- `npm test` passes 18 tests and `npm run build` completes successfully.
+
+## Request coordination pass, 2026-07-17
+
+- Persisted request messages now load from Supabase when a request is selected.
+- Structured food, transportation, storage, and volunteer offers persist to `command.food_request_offers`.
+- Request owners can accept or decline offers, and offer authors can withdraw proposed offers.
+- Request owners can move requests through open, in progress, fulfilled, and closed states.
+- Database triggers maintain reply, supporter, and offer totals and preserve immutable status history.
+- Public privacy guidance now appears beside request creation, replies, and offers.
+- Sample fallback activity remains labeled and cannot be mutated.
+- Migration `027_wxl_request_coordination.sql` contains the schema, row-level security, database functions, triggers, grants, and backfills.
+- `npm test` passes 23 tests and `npm run build` completes successfully.
+
+## Rescue operations pass, 2026-07-17
+
+- Replaced the rescue placeholder with a privacy-safe operational board and a complete submission form.
+- Added coordinator review, explicit safety confirmation, atomic claim and release, private assigned-run details, and pickup, delivery, and acceptance checkpoints.
+- Failed packaging, label, temperature-control, contamination, or temperature checks place a rescue on incident hold. Administrators can close the hold with an audited rejection or cancellation.
+- Relabeled Overview rescue content as sample patterns and routed its action into the real rescue workspace.
+- Migration `028_wxl_rescue_operations.sql` contains the schema, row-level security, privacy-safe and restricted functions, grants, validation, and event history.
+- Migration 028 has not been applied to production from this workspace. Contributor eligibility and a supervised operating rehearsal remain required before food moves.
+- `npm test` passes 29 tests and `npm run build` completes successfully.
+
+## Contributor readiness pass, 2026-07-17
+
+- Replaced the Volunteer Command placeholder with private readiness application and coordinator review workflows.
+- Added agreement acceptance, emergency contact, availability, service area, vehicle, capacity, lifting limit, accessibility needs, temperature-control capabilities, training dates, credential expiry, approval classes, and review notes.
+- Migration `029_wxl_contributor_readiness.sql` keeps these records private, preserves review history, and replaces rescue claiming with server-side operational eligibility checks.
+- Updating an approved readiness file requires another review. Expired training or credentials stop new claims automatically.
+- Open rescues link directly to Volunteer Command so claim requirements are discoverable.
+- Migration 029 has not been applied to production from this workspace. Live multi-account authorization and expiry tests remain required.
+- `npm test` passes 32 tests and `npm run build` completes successfully.
+
+## Harvest run pass, 2026-07-17
+
+- Activated Harvest Runs navigation and replaced the inactive route-board control with private dispatch operations.
+- Added reviewed multi-stop plans, rescue-linked pickup and delivery stops, staging hubs, exact capability assignment, private instructions, start revalidation, ordered stop evidence, cancellation, incident holds, and completion.
+- Migration `030_wxl_harvest_runs.sql` defines private run, stop, and event records plus restricted state-transition functions and row-level security.
+- Assignment reserves linked rescues atomically and prevents duplicate active-run use. Linked safety checkpoints remain the source of truth for pickup and delivery handling.
+- Overview route content is labeled as sample patterns and opens the real Harvest Runs workspace.
+- Migration 030 has not been applied to production from this workspace. Live database concurrency, expiry, privacy, incident, and multi-account tests remain required.
+- `npm test` passes 35 tests and `npm run build` completes successfully.
+
+## Inventory custody pass, 2026-07-17
+
+- Activated Inventory navigation and added a coordinator-only custody workspace.
+- Added accepted-rescue receiving, immutable provenance, lot-specific temperature bounds, storage checks, reservations, private handoffs, fulfillment, cancellation, holds, rechecks, disposition, and discard evidence.
+- Migration `031_wxl_inventory.sql` defines lots, allocations, condition checks, and an immutable quantity ledger with restricted transactional functions and row-level security.
+- Physical, reserved, and available quantities remain separate. Database row locks prevent over-allocation and every mutation records resulting balances.
+- Failed storage checks hold the lot. Cancelling a reservation cannot release the hold, and hold release requires a newer passing condition check.
+- Migration 031 has not been applied to production from this workspace. Live concurrency, expiry, privacy, and reconciliation tests remain required.
+- `npm test` passes 38 tests and `npm run build` completes successfully.
 
 ## Working conventions
 

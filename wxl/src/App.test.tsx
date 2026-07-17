@@ -30,6 +30,18 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.getByRole('dialog', { name: /Join the network/i })).toBeInTheDocument()
   })
 
+  it('gates structured request offers and explains that coordination details are public', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: /Community requests/i }))
+    expect(screen.getByText(/Replies and offer details are public/i)).toBeInTheDocument()
+    expect(screen.getByText(/Offers on sample requests are illustrative/i)).toBeInTheDocument()
+
+    await userEvent.click(screen.getByRole('button', { name: /Offer food or help/i }))
+    expect(screen.getByRole('dialog', { name: /Join the network/i })).toBeInTheDocument()
+  })
+
   it('opens the shared feedback experience from the navigation', async () => {
     window.history.replaceState({}, '', '/app/?mode=anonymous')
     render(<App />)
@@ -58,19 +70,19 @@ describe('WXL entry points and interaction gates', () => {
     document.documentElement.scrollTop = 240
     document.body.scrollTop = 240
 
-    await userEvent.click(screen.getByRole('button', { name: /Rescue opportunities/i }))
+    await userEvent.click(screen.getByRole('button', { name: /^Rescue operations$/i }))
 
     expect(document.documentElement.scrollTop).toBe(0)
     expect(document.body.scrollTop).toBe(0)
-    expect(screen.getByRole('heading', { name: 'Rescue opportunities' })).toBeInTheDocument()
-    expect(screen.getByLabelText('Current location')).toHaveTextContent('Directory/WXL:FOOD/Rescue opportunities')
+    expect(screen.getByRole('heading', { level: 1, name: 'Rescue operations' })).toBeInTheDocument()
+    expect(screen.getByLabelText('Current location')).toHaveTextContent('Directory/WXL:FOOD/Rescue operations')
   })
 
   it('returns to the overview from the WXL:FOOD title', async () => {
     window.history.replaceState({}, '', '/app/?mode=anonymous')
     render(<App />)
 
-    await userEvent.click(screen.getByRole('button', { name: /Rescue opportunities/i }))
+    await userEvent.click(screen.getByRole('button', { name: /^Rescue operations$/i }))
     await userEvent.click(screen.getByRole('button', { name: 'Go to WXL:FOOD overview' }))
 
     expect(screen.getByRole('heading', { name: 'Local food, coordinated.' })).toBeInTheDocument()
@@ -90,5 +102,44 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.getByText('Thursdays, 9 to 11 AM')).toBeInTheDocument()
     expect(screen.getAllByText(/One form, no ID/i).length).toBeGreaterThan(0)
     expect(screen.getByText('Community report')).toBeInTheDocument()
+  })
+
+  it('replaces the rescue placeholder with an honest database and account gate', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: /^Rescue operations$/i }))
+    expect(screen.getByText(/Rescue operations need the WXL database/i)).toBeInTheDocument()
+
+    await userEvent.click(screen.getByRole('button', { name: /Submit rescue/i }))
+    expect(screen.getByRole('dialog', { name: /Join the network/i })).toBeInTheDocument()
+  })
+
+  it('replaces the volunteer placeholder with the private readiness account gate', async () => {
+    window.history.pushState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: /^Volunteer command$/i }))
+
+    expect(screen.getByRole('heading', { level: 2, name: /Volunteer Command needs the WXL database/i })).toBeInTheDocument()
+    expect(screen.queryByText(/volunteer board is planned/i)).not.toBeInTheDocument()
+  })
+
+  it('opens the real harvest run workspace from navigation', async () => {
+    window.history.pushState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: /^Harvest runs$/i }))
+
+    expect(screen.getByRole('heading', { level: 2, name: /Harvest runs need the WXL database/i })).toBeInTheDocument()
+  })
+
+  it('opens the real inventory workspace from navigation', async () => {
+    window.history.pushState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: /^Inventory$/i }))
+
+    expect(screen.getByRole('heading', { level: 2, name: /Inventory needs the WXL database/i })).toBeInTheDocument()
   })
 })

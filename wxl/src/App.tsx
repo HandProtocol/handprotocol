@@ -1,16 +1,21 @@
 import { useEffect, useMemo, useState } from 'react'
+import type { User } from '@supabase/supabase-js'
 import {
   Activity, ArrowUp, ArrowUpRight, Bell, Boxes, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight,
   CircleHelp, Clock3, Droplets, Flame, HandHeart, Leaf, MapPin, Menu, MessageCircle,
   MousePointerClick, Package, Plus, Route, Search, Send, Settings, ShieldCheck, Truck, Users, Warehouse, X, Zap,
 } from 'lucide-react'
-import { addFoodRequestMessage, createFoodRequest, foodDb, foodDbConfigured, loadFoodAlerts, loadFoodRequests, loadFoodSpots, nominateFoodSource, supportFoodRequest, type FoodAlertRecord, type FoodSpotRecord } from './lib/foodRepository'
+import { addFoodRequestMessage, changeFoodRequestStatus, createFoodRequest, createFoodRequestOffer, decideFoodRequestOffer, foodDb, foodDbConfigured, loadFoodAlerts, loadFoodRequestMessages, loadFoodRequestOffers, loadFoodRequests, loadFoodSpots, nominateFoodSource, supportFoodRequest, withdrawFoodRequestOffer, type FoodAlertRecord, type FoodRequestMessageRecord, type FoodRequestOfferRecord, type FoodSpotRecord } from './lib/foodRepository'
 import { useEngagement } from './lib/engagement'
-import { createAccountAndSession, getRecoveryRedirectUrl } from './lib/auth'
+import { createAccountAndSession, getMemberIdentity, getRecoveryRedirectUrl } from './lib/auth'
 import { AddSpotModal, AlertCenter, FeedbackModal, flushFeedbackQueue, FoodHereModal } from './CommunityTools'
+import { RescueBoard } from './RescueBoard'
+import { ContributorBoard } from './ContributorBoard'
+import { HarvestRunBoard } from './HarvestRunBoard'
+import { InventoryBoard } from './InventoryBoard'
 
 type Status = 'plenty' | 'limited' | 'low' | 'volunteers' | 'transport'
-type View = 'command' | 'rescue' | 'volunteer' | 'community' | 'partners'
+type View = 'command' | 'rescue' | 'volunteer' | 'community' | 'partners' | 'harvest' | 'inventory'
 
 type FoodLocation = {
   id: string
@@ -31,10 +36,12 @@ type FoodLocation = {
 
 const viewLabels: Record<View, string> = {
   command: 'Overview',
-  rescue: 'Rescue opportunities',
+  rescue: 'Rescue operations',
   volunteer: 'Volunteer command',
   community: 'Community requests',
   partners: 'Partner network',
+  harvest: 'Harvest runs',
+  inventory: 'Inventory',
 }
 
 type FoodRequest = {
@@ -45,9 +52,11 @@ type FoodRequest = {
   category: string
   detail: string
   priority: 'urgent' | 'high' | 'medium' | 'low'
-  status: 'open' | 'in progress' | 'fulfilled'
+  status: 'open' | 'in progress' | 'fulfilled' | 'closed'
   responses: number
   supporters: number
+  offers: number
+  createdBy: string | null
   time: string
 }
 
@@ -86,17 +95,17 @@ const needs = [
 ]
 
 const initialRequests: FoodRequest[] = [
-  { id: 1, title: 'Infant formula for seven households', group: 'Rosewood Family Circle', neighborhood: 'Rosewood', category: 'Resource request', detail: 'We are coordinating a neighborhood pickup for seven households. Looking for unopened infant formula, any brand, plus a runner who can collect from a nearby store.', priority: 'urgent', status: 'open', responses: 4, supporters: 11, time: '18 min ago' },
-  { id: 2, title: 'Fresh greens for Thursday community dinner', group: 'Eastside Community Kitchen', neighborhood: 'East Austin', category: 'Resource request', detail: 'We are preparing 85 meals this Thursday and need around 25 lb of greens or other seasonal vegetables. Drop-off or a pickup offer both work.', priority: 'high', status: 'in progress', responses: 6, supporters: 8, time: '1 hr ago' },
-  { id: 3, title: 'Three pantry runners for Saturday morning', group: 'South Lamar Mutual Aid', neighborhood: 'South Lamar', category: 'Help needed', detail: 'We have food ready at two partner locations and need three people to help run a consolidated route between 9 AM and noon.', priority: 'medium', status: 'open', responses: 3, supporters: 6, time: '2 hr ago' },
-  { id: 4, title: 'Freezer space for rescued meals', group: 'Neighbors Table', neighborhood: 'Govalle', category: 'Storage request', detail: 'A local restaurant can donate 40 prepared meals tomorrow. We need temporary freezer space for 24 hours while households are matched.', priority: 'high', status: 'open', responses: 2, supporters: 5, time: '3 hr ago' },
-  { id: 5, title: 'Bulk rice for community pantry', group: 'East Cesar Chavez Pantry', neighborhood: 'East Cesar Chavez', category: 'Resource request', detail: 'The pantry is serving more families than usual and is looking for 50 lb of rice or a partner who can purchase it at wholesale.', priority: 'medium', status: 'fulfilled', responses: 9, supporters: 14, time: 'Yesterday' },
+  { id: 1, title: 'Infant formula for seven households', group: 'Rosewood Family Circle', neighborhood: 'Rosewood', category: 'Resource request', detail: 'We are coordinating a neighborhood pickup for seven households. Looking for unopened infant formula, any brand, plus a runner who can collect from a nearby store.', priority: 'urgent', status: 'open', responses: 4, supporters: 11, offers: 2, createdBy: null, time: '18 min ago' },
+  { id: 2, title: 'Fresh greens for Thursday community dinner', group: 'Eastside Community Kitchen', neighborhood: 'East Austin', category: 'Resource request', detail: 'We are preparing 85 meals this Thursday and need around 25 lb of greens or other seasonal vegetables. Drop-off or a pickup offer both work.', priority: 'high', status: 'in progress', responses: 6, supporters: 8, offers: 3, createdBy: null, time: '1 hr ago' },
+  { id: 3, title: 'Three pantry runners for Saturday morning', group: 'South Lamar Mutual Aid', neighborhood: 'South Lamar', category: 'Help needed', detail: 'We have food ready at two partner locations and need three people to help run a consolidated route between 9 AM and noon.', priority: 'medium', status: 'open', responses: 3, supporters: 6, offers: 1, createdBy: null, time: '2 hr ago' },
+  { id: 4, title: 'Freezer space for rescued meals', group: 'Neighbors Table', neighborhood: 'Govalle', category: 'Storage request', detail: 'A local restaurant can donate 40 prepared meals tomorrow. We need temporary freezer space for 24 hours while households are matched.', priority: 'high', status: 'open', responses: 2, supporters: 5, offers: 1, createdBy: null, time: '3 hr ago' },
+  { id: 5, title: 'Bulk rice for community pantry', group: 'East Cesar Chavez Pantry', neighborhood: 'East Cesar Chavez', category: 'Resource request', detail: 'The pantry is serving more families than usual and is looking for 50 lb of rice or a partner who can purchase it at wholesale.', priority: 'medium', status: 'fulfilled', responses: 9, supporters: 14, offers: 4, createdBy: null, time: 'Yesterday' },
 ]
 
 const initialMessages = [
   { id: 1, author: 'Maya R.', role: 'Rosewood Family Circle', message: 'Posting this here so we can coordinate one pickup instead of asking each household to make a separate trip.', time: '18 min ago', mine: false },
   { id: 2, author: 'Devon K.', role: 'Eastside Fridge', message: 'We have two unopened containers available today. I can check with our pantry partners for more.', time: '11 min ago', mine: false },
-  { id: 3, author: 'You', role: 'Network coordinator', message: 'I can add this to the 4:15 PM harvest run and look for the remaining five households.', time: '4 min ago', mine: true },
+  { id: 3, author: 'Sample coordinator', role: 'Network coordinator', message: 'I can add this to the 4:15 PM harvest run and look for the remaining five households.', time: '4 min ago', mine: false },
 ]
 
 function DashboardApp() {
@@ -108,7 +117,9 @@ function DashboardApp() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => localStorage.getItem('wxl:sidebar-collapsed') === '1')
   const [toast, setToast] = useState('')
   const [authPromptOpen, setAuthPromptOpen] = useState(false)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [member, setMember] = useState<User | null>(null)
+  const [authReady, setAuthReady] = useState(!foodDbConfigured)
+  const [accountOpen, setAccountOpen] = useState(false)
   const [requests, setRequests] = useState(initialRequests)
   const [spots, setSpots] = useState<FoodSpotRecord[]>([])
   const [alerts, setAlerts] = useState<FoodAlertRecord[]>([])
@@ -130,9 +141,11 @@ function DashboardApp() {
         category: request.category === 'help_needed' ? 'Help needed' : request.category === 'storage_request' ? 'Storage request' : 'Resource request',
         detail: request.detail,
         priority: request.priority,
-        status: request.status === 'in_progress' ? 'in progress' : request.status === 'fulfilled' ? 'fulfilled' : request.status === 'closed' ? 'fulfilled' : 'open',
+        status: request.status === 'in_progress' ? 'in progress' : request.status === 'fulfilled' ? 'fulfilled' : request.status === 'closed' ? 'closed' : 'open',
         responses: request.responses_count,
         supporters: request.supporters_count,
+        offers: request.offers_count ?? 0,
+        createdBy: request.created_by,
         time: new Date(request.created_at).toLocaleDateString(),
       })))
     })
@@ -177,8 +190,12 @@ function DashboardApp() {
 
   useEffect(() => {
     if (!foodDb) return
-    foodDb.auth.getSession().then(({ data }) => setIsAuthenticated(Boolean(data.session)))
-    const { data } = foodDb.auth.onAuthStateChange((_event, session) => setIsAuthenticated(Boolean(session)))
+    foodDb.auth.getSession().then(({ data }) => setMember(data.session?.user ?? null)).finally(() => setAuthReady(true))
+    const { data } = foodDb.auth.onAuthStateChange((_event, session) => {
+      setMember(session?.user ?? null)
+      setAuthReady(true)
+      if (!session) setAccountOpen(false)
+    })
     return () => data.subscription.unsubscribe()
   }, [])
 
@@ -189,7 +206,17 @@ function DashboardApp() {
 
   const visibleLocations = useMemo(() => mapFilter === 'all' ? mapLocations : mapLocations.filter((location) => location.status === mapFilter), [mapFilter, mapLocations])
   const notify = (message: string) => { setToast(message); window.setTimeout(() => setToast(''), 3000) }
-  const requireAuth = (action?: () => void) => { if (!isAuthenticated) setAuthPromptOpen(true); else action?.() }
+  const memberIdentity = useMemo(() => getMemberIdentity(member), [member])
+  const isAuthenticated = Boolean(member)
+  const requireAuth = (action?: () => void) => { if (!authReady || !isAuthenticated) setAuthPromptOpen(true); else action?.() }
+  const signOut = async () => {
+    if (!foodDb) return
+    const { error } = await foodDb.auth.signOut()
+    if (error) { notify(error.message); return }
+    setMember(null)
+    setAccountOpen(false)
+    notify('You are signed out. Public browsing remains open.')
+  }
   const toggleSidebar = () => setSidebarCollapsed((current) => { localStorage.setItem('wxl:sidebar-collapsed', current ? '0' : '1'); return !current })
 
   return (
@@ -198,20 +225,20 @@ function DashboardApp() {
         <SidebarHand />
         <div className="brand"><button className="brand-home" type="button" onClick={() => { setView('command'); setMenuOpen(false) }} aria-label="Go to WXL:FOOD overview"><span className="brand-mark" aria-hidden="true">X</span><span className="brand-copy"><strong>W<span>X</span>L:FOOD</strong><small>with xtra love</small></span></button><button className="mobile-close" onClick={() => setMenuOpen(false)} aria-label="Close navigation"><X size={18} /></button></div>
         <button className="sidebar-toggle" onClick={() => window.innerWidth <= 720 ? setMenuOpen((current) => !current) : toggleSidebar()} aria-label={menuOpen || !sidebarCollapsed ? 'Collapse navigation' : 'Expand navigation'}>{menuOpen || !sidebarCollapsed ? <ChevronLeft size={17} /> : <ChevronRight size={17} />}</button>
-        <div className="network-status"><span className="live-dot" /><span>Network live</span><span className="status-time">Austin · 2m</span></div>
+        <div className="network-status"><span className="live-dot" /><span>Public preview</span><span className="status-time">Austin</span></div>
         <nav className="primary-nav" aria-label="Main navigation">
           <p className="nav-label">Coordinate</p>
           <NavItem active={view === 'command'} icon={<Activity size={18} />} label="Overview" onClick={() => { setView('command'); setMenuOpen(false) }} />
-          <NavItem active={view === 'rescue'} icon={<Zap size={18} />} label="Rescue opportunities" count="7" onClick={() => { setView('rescue'); setMenuOpen(false) }} />
-          <NavItem active={view === 'volunteer'} icon={<Users size={18} />} label="Volunteer command" count="12" onClick={() => { setView('volunteer'); setMenuOpen(false) }} />
+          <NavItem active={view === 'rescue'} icon={<Zap size={18} />} label="Rescue operations" onClick={() => { setView('rescue'); setMenuOpen(false) }} />
+          <NavItem active={view === 'volunteer'} icon={<Users size={18} />} label="Volunteer command" onClick={() => { setView('volunteer'); setMenuOpen(false) }} />
           <NavItem active={view === 'community'} icon={<MessageCircle size={18} />} label="Community requests" count="18" onClick={() => { setView('community'); setMenuOpen(false) }} />
           <NavItem active={view === 'partners'} icon={<Warehouse size={18} />} label="Partner network" onClick={() => { setView('partners'); setMenuOpen(false) }} />
           <p className="nav-label second">Plan + measure</p>
-          <NavItem icon={<Route size={18} />} label="Harvest runs" />
-          <NavItem icon={<Boxes size={18} />} label="Inventory" />
+          <NavItem active={view === 'harvest'} icon={<Route size={18} />} label="Harvest runs" onClick={() => { setView('harvest'); setMenuOpen(false) }} />
+          <NavItem active={view === 'inventory'} icon={<Boxes size={18} />} label="Inventory" onClick={() => { setView('inventory'); setMenuOpen(false) }} />
           <NavItem icon={<ShieldCheck size={18} />} label="Impact reports" />
         </nav>
-        <div className="sidebar-bottom"><button className="help-link" onClick={() => setFeedbackOpen(true)}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div>{isAuthenticated ? <button className="profile"><span className="avatar">WX</span><span><strong>WXL member</strong><small>Community account</small></span><Settings size={16} /></button> : <a className="profile" href="/app/?mode=login"><span className="avatar">WX</span><span><strong>Browsing openly</strong><small>Sign in to coordinate</small></span><ArrowUpRight size={16} /></a>}</div>
+        <div className="sidebar-bottom"><button className="help-link" onClick={() => setFeedbackOpen(true)}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div>{!authReady ? <div className="profile profile-loading" role="status"><span className="avatar">··</span><span><strong>Checking session</strong><small>Restoring account access</small></span></div> : isAuthenticated ? <div className="account-control"><button className="profile" onClick={() => setAccountOpen((current) => !current)} aria-expanded={accountOpen} aria-controls="member-account-menu"><span className="avatar">{memberIdentity.initials}</span><span><strong>{memberIdentity.displayName}</strong><small>Community account</small></span><Settings size={16} /></button>{accountOpen && <div className="account-menu" id="member-account-menu"><p>{memberIdentity.email}</p><button type="button" onClick={() => void signOut()}>Sign out</button></div>}</div> : <a className="profile" href="/app/?mode=login"><span className="avatar">WX</span><span><strong>Browsing openly</strong><small>Sign in to coordinate</small></span><ArrowUpRight size={16} /></a>}</div>
       </aside>
       {menuOpen && <button className="sidebar-scrim" onClick={() => setMenuOpen(false)} aria-label="Close navigation" />}
 
@@ -220,7 +247,7 @@ function DashboardApp() {
         <AlertCenter alerts={alerts} open={alertsOpen} onClose={() => setAlertsOpen(false)} />
 
         <div className="page-wrap">
-          <div className="page-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Austin network / community preview</p><h1>{view === 'command' ? 'Local food, coordinated.' : view === 'rescue' ? 'Rescue opportunities' : view === 'volunteer' ? 'Volunteer command' : view === 'community' ? 'Community requests' : 'Partner network'}</h1><p className="lede">See where food is moving, where it is needed, and what can happen next.</p></div><button className="location-button"><MapPin size={16} /> Austin core <ChevronDown size={15} /></button></div>
+          <div className="page-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Austin network / community preview</p><h1>{view === 'command' ? 'Local food, coordinated.' : view === 'rescue' ? 'Rescue operations' : view === 'volunteer' ? 'Volunteer command' : view === 'community' ? 'Community requests' : view === 'harvest' ? 'Harvest runs' : view === 'inventory' ? 'Inventory' : 'Partner network'}</h1><p className="lede">See where food is moving, where it is needed, and what can happen next.</p></div><button className="location-button"><MapPin size={16} /> Austin core <ChevronDown size={15} /></button></div>
 
           {view === 'command' && <>
             <section className="map-overview panel" aria-labelledby="food-map-title">
@@ -248,12 +275,15 @@ function DashboardApp() {
               <Metric icon={<Truck size={19} />} label="Active harvest runs, sample" value="14" note="5 need a runner" tone="purple" />
               <Metric icon={<Clock3 size={19} />} label="Time-sensitive, sample" value="7" note="Rescues open today" tone="peach" />
             </section>
-            <section className="command-grid detail-grid"><aside className="side-stack panel"><PanelTitle eyebrow="Sample needs signal" title="Where help may be needed" action="See board" onAction={() => setView('volunteer')} />{needs.map((need) => <div className="need-item" key={need.label}><div className={`need-icon ${need.color}`}><Leaf size={17} /></div><div className="need-copy"><strong>{need.label}</strong><span>{need.count} nearby</span></div><span className="need-change">{need.change}</span></div>)}<div className="insight"><div className="insight-icon"><Zap size={16} /></div><p><strong>Sample coordination opportunity</strong> Seven anonymous household stops near Rosewood could share one neighborhood drop.</p><button onClick={() => notify('Basket planning is not live yet')}>Review the idea <ArrowUpRight size={14} /></button></div></aside><aside className="side-stack panel"><PanelTitle eyebrow="Sample route plan" title="Harvest runs" action="Volunteer board" onAction={() => setView('volunteer')} />{['Volunteer node → North cluster · 3 stops', 'Volunteer node → East cluster · 4 stops', 'Volunteer node → South cluster · 2 stops'].map((run) => <div className="run-item" key={run}><span className="run-icon"><Route size={15} /></span><span>{run}</span><ArrowUpRight size={14} /></div>)}</aside></section>
-            <section className="bottom-grid"><div className="panel rescue-panel"><PanelTitle eyebrow="Act before it is wasted" title="Rescue opportunities" action="View all 7" onAction={() => setView('rescue')} />{rescues.map((rescue) => <RescueRow key={rescue.title} rescue={rescue} onClick={() => notify(`${rescue.title} added to your coordination queue`)} />)}</div><div className="panel impact-panel"><PanelTitle eyebrow="Public goods layer" title="This week in the network" action="Impact report" onAction={() => notify('Impact report queued')} /><div className="impact-chart"><div className="chart-bars">{[40, 55, 44, 70, 64, 82, 91].map((height, i) => <span key={i} style={{ height: `${height}%` }} />)}</div><div className="chart-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Today</span></div></div><div className="impact-values"><div><strong>2,840</strong><span>meals coordinated</span></div><div><strong>418</strong><span>volunteer hours</span></div><div><strong>1.2k</strong><span>miles saved</span></div></div></div></section>
+            <section className="command-grid detail-grid"><aside className="side-stack panel"><PanelTitle eyebrow="Sample needs signal" title="Where help may be needed" action="See board" onAction={() => setView('volunteer')} />{needs.map((need) => <div className="need-item" key={need.label}><div className={`need-icon ${need.color}`}><Leaf size={17} /></div><div className="need-copy"><strong>{need.label}</strong><span>{need.count} nearby</span></div><span className="need-change">{need.change}</span></div>)}<div className="insight"><div className="insight-icon"><Zap size={16} /></div><p><strong>Sample coordination opportunity</strong> Seven anonymous household stops near Rosewood could share one neighborhood drop.</p><button onClick={() => notify('Basket planning is not live yet')}>Review the idea <ArrowUpRight size={14} /></button></div></aside><aside className="side-stack panel"><PanelTitle eyebrow="Sample route patterns" title="Example harvest runs" action="Open harvest runs" onAction={() => setView('harvest')} />{['Volunteer node → North cluster · 3 stops', 'Volunteer node → East cluster · 4 stops', 'Volunteer node → South cluster · 2 stops'].map((run) => <div className="run-item" key={run}><span className="run-icon"><Route size={15} /></span><span>{run}</span><ArrowUpRight size={14} /></div>)}</aside></section>
+            <section className="bottom-grid"><div className="panel rescue-panel"><PanelTitle eyebrow="Sample rescue patterns" title="Example opportunities" action="Open rescue operations" onAction={() => setView('rescue')} />{rescues.map((rescue) => <RescueRow key={rescue.title} rescue={rescue} onClick={() => setView('rescue')} />)}</div><div className="panel impact-panel"><PanelTitle eyebrow="Public goods layer" title="This week in the network" action="Impact report" onAction={() => notify('Impact report queued')} /><div className="impact-chart"><div className="chart-bars">{[40, 55, 44, 70, 64, 82, 91].map((height, i) => <span key={i} style={{ height: `${height}%` }} />)}</div><div className="chart-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Today</span></div></div><div className="impact-values"><div><strong>2,840</strong><span>meals coordinated</span></div><div><strong>418</strong><span>volunteer hours</span></div><div><strong>1.2k</strong><span>miles saved</span></div></div></div></section>
           </>}
-          {view === 'community' && <CommunityBoard requests={requests} setRequests={setRequests} notify={notify} dbConfigured={foodDbConfigured} canWrite={isAuthenticated} onAuthRequired={() => setAuthPromptOpen(true)} />}
+          {view === 'rescue' && <RescueBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} onContributorSetup={() => setView('volunteer')} />}
+          {view === 'community' && <CommunityBoard requests={requests} setRequests={setRequests} notify={notify} dbConfigured={foodDbConfigured} canWrite={isAuthenticated} memberId={member?.id ?? null} memberName={memberIdentity.displayName} onAuthRequired={() => setAuthPromptOpen(true)} />}
           {view === 'partners' && <SourceBoard notify={notify} dbConfigured={foodDbConfigured} canWrite={isAuthenticated} onAuthRequired={() => setAuthPromptOpen(true)} />}
-          {view !== 'command' && view !== 'community' && view !== 'partners' && <section className="view-placeholder panel"><div className="placeholder-icon"><Activity size={28} /></div><h2>{view === 'rescue' ? 'The rescue board is ready.' : 'The volunteer board is ready.'}</h2><p>This focused workspace will turn the command-center signal into a shared queue for local organizations, contributors, and neighbors.</p><button className="add-button" onClick={() => { setView('command'); notify('Back to command center') }}>Return to overview <ArrowUpRight size={16} /></button></section>}
+          {view === 'volunteer' && <ContributorBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} memberName={memberIdentity.displayName} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
+          {view === 'harvest' && <HarvestRunBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
+          {view === 'inventory' && <InventoryBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
         </div>
       </main>
       {toast && <div className="toast"><ShieldCheck size={17} /> {toast}</div>}
@@ -279,68 +309,190 @@ function Metric({ icon, label, value, note, tone }: { icon: React.ReactNode; lab
 function PanelTitle({ eyebrow, title, action, onAction }: { eyebrow: string; title: string; action: string; onAction: () => void }) { return <div className="panel-heading compact"><div><p className="eyebrow">{eyebrow}</p><h2>{title}</h2></div><button className="text-button" onClick={onAction}>{action} <ArrowUpRight size={14} /></button></div> }
 function RescueRow({ rescue, onClick }: { rescue: typeof rescues[number]; onClick: () => void }) { const Icon = rescue.icon; return <button className="rescue-row" onClick={onClick}><div className={`rescue-icon ${rescue.tone}`}><Icon size={18} /></div><div className="rescue-copy"><strong>{rescue.title}</strong><span>{rescue.source} · {rescue.window}</span></div><span className="match-count">{rescue.match}</span><ArrowUpRight size={16} /></button> }
 
-function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite, onAuthRequired }: { requests: FoodRequest[]; setRequests: React.Dispatch<React.SetStateAction<FoodRequest[]>>; notify: (message: string) => void; dbConfigured: boolean; canWrite: boolean; onAuthRequired: () => void }) {
+function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite, memberId, memberName, onAuthRequired }: { requests: FoodRequest[]; setRequests: React.Dispatch<React.SetStateAction<FoodRequest[]>>; notify: (message: string) => void; dbConfigured: boolean; canWrite: boolean; memberId: string | null; memberName: string; onAuthRequired: () => void }) {
   const [filter, setFilter] = useState<'all' | 'open' | 'urgent'>('all')
   const [selectedId, setSelectedId] = useState(requests[0].id)
+  const [messages, setMessages] = useState<FoodRequestMessageRecord[]>([])
+  const [offers, setOffers] = useState<FoodRequestOfferRecord[]>([])
+  const [activityState, setActivityState] = useState<'sample' | 'loading' | 'ready' | 'error'>('sample')
+  const [activityVersion, setActivityVersion] = useState(0)
   const [message, setMessage] = useState('')
   const [showCreate, setShowCreate] = useState(false)
+  const [showOffer, setShowOffer] = useState(false)
+  const [busy, setBusy] = useState(false)
   const [newTitle, setNewTitle] = useState('')
+  const [newGroup, setNewGroup] = useState(`${memberName}'s group`)
   const [newDetail, setNewDetail] = useState('')
   const [newNeighborhood, setNewNeighborhood] = useState('East Austin')
+  const [newCategory, setNewCategory] = useState<'resource_request' | 'help_needed' | 'storage_request' | 'transport_request'>('resource_request')
+  const [newPriority, setNewPriority] = useState<FoodRequest['priority']>('medium')
+  const [offerType, setOfferType] = useState<FoodRequestOfferRecord['offer_type']>('food')
+  const [offerItem, setOfferItem] = useState('')
+  const [offerQuantity, setOfferQuantity] = useState('')
+  const [offerUnit, setOfferUnit] = useState('lb')
+  const [offerAvailability, setOfferAvailability] = useState('')
+  const [offerTransport, setOfferTransport] = useState(false)
+  const [offerContact, setOfferContact] = useState<FoodRequestOfferRecord['contact_preference']>('in_app')
 
   const selectedRequest = requests.find((request) => request.id === selectedId) ?? requests[0]
+  const selectedIsPersisted = dbConfigured && typeof selectedRequest.id === 'string'
+  const ownsSelectedRequest = Boolean(memberId && selectedRequest.createdBy === memberId)
   const visibleRequests = requests.filter((request) => filter === 'all' || (filter === 'urgent' ? request.priority === 'urgent' : request.status === 'open'))
 
-  const sendMessage = () => {
+  useEffect(() => {
+    let current = true
+    if (!selectedIsPersisted) {
+      setMessages([])
+      setOffers([])
+      setActivityState('sample')
+      return () => { current = false }
+    }
+    setActivityState('loading')
+    setMessages([])
+    setOffers([])
+    void Promise.all([loadFoodRequestMessages(String(selectedRequest.id)), loadFoodRequestOffers(String(selectedRequest.id))]).then(([messageResult, offerResult]) => {
+      if (!current) return
+      if (messageResult.error || offerResult.error) {
+        setActivityState('error')
+        return
+      }
+      setMessages(messageResult.data ?? [])
+      setOffers(offerResult.data ?? [])
+      setActivityState('ready')
+    })
+    return () => { current = false }
+  }, [activityVersion, selectedIsPersisted, selectedRequest.id])
+
+  useEffect(() => {
+    if (!newGroup || newGroup.endsWith("'s group")) setNewGroup(`${memberName}'s group`)
+  }, [memberName])
+
+  const sendMessage = async () => {
     if (!message.trim()) return
     if (!canWrite) { onAuthRequired(); return }
-    setRequests((current) => current.map((request) => request.id === selectedId ? { ...request, responses: request.responses + 1 } : request))
-    if (dbConfigured && typeof selectedId === 'string') {
-      addFoodRequestMessage({ request_id: selectedId, message: message.trim(), author_name: 'You', author_role: 'Network coordinator' }).then(({ error }) => { if (error) notify(error.message) })
-    }
+    if (!selectedIsPersisted) { notify('Sample request replies are not persisted'); return }
+    setBusy(true)
+    const result = await addFoodRequestMessage({ request_id: String(selectedRequest.id), message: message.trim(), author_name: memberName, author_role: 'Community member' })
+    setBusy(false)
+    if (result.error || !result.data) { notify(result.error?.message ?? 'The reply could not be saved'); return }
+    setMessages((current) => [...current, result.data!])
+    setRequests((current) => current.map((request) => request.id === selectedRequest.id ? { ...request, responses: request.responses + 1 } : request))
     setMessage('')
-    notify('Your response was added to the request')
+    notify('Your response was saved')
   }
 
   const supportRequest = async () => {
     if (!canWrite) { onAuthRequired(); return }
-    if (!dbConfigured || typeof selectedRequest.id !== 'string') { notify('Sample request support is not persisted'); return }
-    const { error } = await supportFoodRequest(selectedRequest.id)
+    if (!selectedIsPersisted) { notify('Sample request support is not persisted'); return }
+    setBusy(true)
+    const { data, error } = await supportFoodRequest(String(selectedRequest.id))
+    setBusy(false)
     if (error) { notify(error.message); return }
-    setRequests((current) => current.map((request) => request.id === selectedRequest.id ? { ...request, supporters: request.supporters + 1 } : request))
-    notify('You are supporting this request')
+    setRequests((current) => current.map((request) => request.id === selectedRequest.id ? { ...request, supporters: data?.supporters_count ?? request.supporters } : request))
+    notify('Your support is recorded')
   }
 
-  const createRequest = () => {
-    if (!newTitle.trim() || !newDetail.trim()) return
+  const submitOffer = async () => {
+    if (!offerItem.trim() || !offerAvailability.trim() || (offerQuantity && !offerUnit.trim())) return
     if (!canWrite) { onAuthRequired(); return }
-    const next: FoodRequest = { id: Date.now(), title: newTitle.trim(), group: 'Koh\'s network', neighborhood: newNeighborhood, category: 'Resource request', detail: newDetail.trim(), priority: 'high', status: 'open', responses: 0, supporters: 1, time: 'just now' }
-    if (dbConfigured) {
-      createFoodRequest({ title: next.title, group_name: next.group, neighborhood: next.neighborhood, category: 'resource_request', detail: next.detail, priority: next.priority }).then(({ data, error }) => {
-        if (error) { notify(error.message); return }
-        const persisted = data ? { ...next, id: data.id } : next
-        setRequests((current) => [persisted, ...current])
-        setSelectedId(persisted.id)
-        notify('Community request posted')
-      })
-    } else {
-      setRequests((current) => [next, ...current])
-      setSelectedId(next.id)
-      notify('Community request posted')
+    if (!selectedIsPersisted) { notify('Sample request offers are not persisted'); return }
+    setBusy(true)
+    const { data, error } = await createFoodRequestOffer({
+      request_id: String(selectedRequest.id),
+      offer_type: offerType,
+      item_description: offerItem.trim(),
+      quantity: offerQuantity ? Number(offerQuantity) : undefined,
+      unit: offerQuantity ? offerUnit.trim() : undefined,
+      availability: offerAvailability.trim(),
+      can_transport: offerTransport,
+      contact_preference: offerContact,
+    })
+    setBusy(false)
+    if (error || !data) { notify(error?.message ?? 'The offer could not be saved'); return }
+    setOffers((current) => [...current, data])
+    setRequests((current) => current.map((request) => request.id === selectedRequest.id ? { ...request, offers: request.offers + 1 } : request))
+    setShowOffer(false)
+    setOfferItem('')
+    setOfferQuantity('')
+    setOfferAvailability('')
+    setOfferTransport(false)
+    notify('Your offer was sent to the coordinating group')
+  }
+
+  const decideOffer = async (offerId: string, decision: 'accepted' | 'declined') => {
+    setBusy(true)
+    const { data, error } = await decideFoodRequestOffer(offerId, decision)
+    setBusy(false)
+    if (error || !data) { notify(error?.message ?? 'The offer decision could not be saved'); return }
+    setOffers((current) => current.map((offer) => offer.id === offerId ? data : offer))
+    if (decision === 'accepted' && selectedRequest.status === 'open') {
+      setRequests((current) => current.map((request) => request.id === selectedRequest.id ? { ...request, status: 'in progress' } : request))
     }
+    notify(`Offer ${decision}`)
+  }
+
+  const withdrawOffer = async (offerId: string) => {
+    setBusy(true)
+    const { error } = await withdrawFoodRequestOffer(offerId)
+    setBusy(false)
+    if (error) { notify(error.message); return }
+    setOffers((current) => current.filter((offer) => offer.id !== offerId))
+    setRequests((current) => current.map((request) => request.id === selectedRequest.id ? { ...request, offers: Math.max(0, request.offers - 1) } : request))
+    notify('Offer withdrawn')
+  }
+
+  const updateStatus = async (status: 'open' | 'in_progress' | 'fulfilled' | 'closed') => {
+    if (!selectedIsPersisted) return
+    setBusy(true)
+    const { data, error } = await changeFoodRequestStatus(String(selectedRequest.id), status)
+    setBusy(false)
+    if (error || !data) { notify(error?.message ?? 'The request status could not be changed'); return }
+    const displayStatus: FoodRequest['status'] = data.status === 'in_progress' ? 'in progress' : data.status
+    setRequests((current) => current.map((request) => request.id === selectedRequest.id ? { ...request, status: displayStatus } : request))
+    notify(`Request marked ${displayStatus}`)
+  }
+
+  const createRequest = async () => {
+    if (!newTitle.trim() || !newGroup.trim() || !newDetail.trim()) return
+    if (!canWrite) { onAuthRequired(); return }
+    if (!dbConfigured) { notify('Connect WXL:FOOD to its database before posting'); return }
+    setBusy(true)
+    const { data, error } = await createFoodRequest({ title: newTitle.trim(), group_name: newGroup.trim(), neighborhood: newNeighborhood, category: newCategory, detail: newDetail.trim(), priority: newPriority })
+    setBusy(false)
+    if (error || !data) { notify(error?.message ?? 'The request could not be saved'); return }
+    const categoryLabel = newCategory === 'help_needed' ? 'Help needed' : newCategory === 'storage_request' ? 'Storage request' : newCategory === 'transport_request' ? 'Transport request' : 'Resource request'
+    const next: FoodRequest = { id: data.id, title: data.title, group: data.group_name, neighborhood: data.neighborhood, category: categoryLabel, detail: data.detail, priority: data.priority, status: 'open', responses: 0, supporters: 0, offers: 0, createdBy: data.created_by, time: 'just now' }
+    setRequests((current) => [next, ...current])
+    setSelectedId(next.id)
     setShowCreate(false)
     setNewTitle('')
     setNewDetail('')
+    notify('Community request posted')
   }
 
   return <>
-    <section className="community-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Shared neighborhood signal</p><h2>Community requests</h2><p>Groups can ask for food, storage, transport, or hands. Replies stay attached to the need.</p></div><button className="add-button" onClick={() => canWrite ? setShowCreate(true) : onAuthRequired()}><Plus size={17} /> New request</button></section>
+    <section className="community-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Shared neighborhood signal</p><h2>Community requests</h2><p>Groups can ask for food, storage, transport, or hands. Public replies and structured offers stay attached to the request.</p></div><button className="add-button" onClick={() => canWrite ? setShowCreate(true) : onAuthRequired()}><Plus size={17} /> New request</button></section>
     <section className="community-layout">
-      <div className="panel request-list"><div className="request-list-top"><div><p className="eyebrow">Live request board</p><h2>{requests.filter((request) => request.status !== 'fulfilled').length} open requests</h2></div><div className="request-filters">{(['all', 'open', 'urgent'] as const).map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item === 'all' ? 'All' : item === 'open' ? 'Open' : 'Urgent'}</button>)}</div></div><div className="request-cards">{visibleRequests.map((request) => <button className={`request-card ${selectedRequest.id === request.id ? 'selected' : ''}`} key={request.id} onClick={() => setSelectedId(request.id)}><div className="request-card-top"><div className={`request-type ${request.category === 'Help needed' ? 'peach' : 'blue'}`}>{request.category === 'Help needed' ? <HandHeart size={15} /> : <Package size={15} />}</div><div className="request-card-title"><strong>{request.title}</strong><span>{request.group} · {request.neighborhood}</span></div><span className={`priority ${request.priority}`}>{request.priority}</span></div><p>{request.detail}</p><div className="request-card-foot"><span className={`request-status ${request.status.replace(' ', '-')}`}><i /> {request.status}</span><span><MessageCircle size={13} /> {request.responses}</span><span><ArrowUp size={13} /> {request.supporters}</span><span className="request-time">{request.time}</span></div></button>)}{visibleRequests.length === 0 && <div className="empty-state">No requests match this filter.</div>}</div></div>
-      <aside className="panel dialogue-panel"><div className="dialogue-heading"><div><p className="eyebrow">Request dialogue</p><h2>{selectedRequest.title}</h2></div><button className="small-close" onClick={() => notify('Request actions are available from this conversation')}><ArrowUpRight size={16} /></button></div><div className="dialogue-meta"><span className="signal-pill volunteers"><i /> {selectedRequest.status}</span><span>{selectedRequest.group}</span><span>{selectedRequest.neighborhood}</span></div><div className="dialogue-summary"><Package size={16} /><span>{selectedRequest.detail}</span></div><div className="conversation"><div className="conversation-divider"><span>Today</span></div>{initialMessages.map((item) => <div className={`message ${item.mine ? 'mine' : ''}`} key={item.id}><div className="message-avatar">{item.mine ? 'YO' : item.author.split(' ').map((part) => part[0]).join('')}</div><div className="message-body"><div className="message-author"><strong>{item.author}</strong><span>{item.role}</span><time>{item.time}</time></div><p>{item.message}</p></div></div>)}</div><div className="offer-actions"><button onClick={supportRequest}><ArrowUp size={14} /> Support request</button><button onClick={() => canWrite ? notify('Structured offers are the next coordination workflow') : onAuthRequired()}><HandHeart size={14} /> Offer food or help</button></div><div className="message-compose"><textarea value={message} onChange={(event) => setMessage(event.target.value)} placeholder="Reply with what you can offer..." rows={2} /><button onClick={sendMessage} aria-label="Send response"><Send size={16} /></button></div><p className="dialogue-note"><CheckCircle2 size={13} /> Replies are visible to this request's coordinating group.</p></aside>
+      <div className="panel request-list"><div className="request-list-top"><div><p className="eyebrow">Community request board</p><h2>{requests.filter((request) => request.status !== 'fulfilled' && request.status !== 'closed').length} active requests</h2></div><div className="request-filters">{(['all', 'open', 'urgent'] as const).map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item === 'all' ? 'All' : item === 'open' ? 'Open' : 'Urgent'}</button>)}</div></div><div className="request-cards">{visibleRequests.map((request) => <button className={`request-card ${selectedRequest.id === request.id ? 'selected' : ''}`} key={request.id} onClick={() => setSelectedId(request.id)}><div className="request-card-top"><div className={`request-type ${request.category === 'Help needed' ? 'peach' : 'blue'}`}>{request.category === 'Help needed' ? <HandHeart size={15} /> : <Package size={15} />}</div><div className="request-card-title"><strong>{request.title}</strong><span>{request.group} · {request.neighborhood}</span></div><span className={`priority ${request.priority}`}>{request.priority}</span></div><p>{request.detail}</p><div className="request-card-foot"><span className={`request-status ${request.status.replace(' ', '-')}`}><i /> {request.status}</span><span title="Replies"><MessageCircle size={13} /> {request.responses}</span><span title="Offers"><HandHeart size={13} /> {request.offers}</span><span title="Supporters"><ArrowUp size={13} /> {request.supporters}</span><span className="request-time">{request.time}</span></div></button>)}{visibleRequests.length === 0 && <div className="empty-state">No requests match this filter.</div>}</div></div>
+      <aside className="panel dialogue-panel">
+        <div className="dialogue-heading"><div><p className="eyebrow">Request coordination</p><h2>{selectedRequest.title}</h2></div>{ownsSelectedRequest && <span className="owner-badge"><ShieldCheck size={13} /> Your request</span>}</div>
+        <div className="dialogue-meta"><span className="signal-pill volunteers"><i /> {selectedRequest.status}</span><span>{selectedRequest.group}</span><span>{selectedRequest.neighborhood}</span></div>
+        <div className="dialogue-summary"><Package size={16} /><span>{selectedRequest.detail}</span></div>
+        {ownsSelectedRequest && <div className="request-manage" aria-label="Request status actions">{selectedRequest.status === 'open' && <button disabled={busy} onClick={() => void updateStatus('in_progress')}>Start coordinating</button>}{selectedRequest.status === 'in progress' && <button disabled={busy} onClick={() => void updateStatus('fulfilled')}>Mark fulfilled</button>}{(selectedRequest.status === 'fulfilled' || selectedRequest.status === 'closed') && <button disabled={busy} onClick={() => void updateStatus('open')}>Reopen request</button>}{selectedRequest.status !== 'closed' && <button disabled={busy} onClick={() => void updateStatus('closed')}>Close</button>}</div>}
+        <div className="activity-section"><div className="activity-heading"><h3>Offers</h3><span>{selectedIsPersisted ? `${offers.length} current` : 'Sample request'}</span></div>{activityState === 'loading' && <p className="activity-state" role="status">Loading request activity…</p>}{activityState === 'error' && <div className="activity-state error">Request activity could not be loaded.<button onClick={() => setActivityVersion((current) => current + 1)}>Retry</button></div>}{activityState === 'sample' && <p className="activity-state">Offers on sample requests are illustrative and cannot be acted on.</p>}{activityState === 'ready' && offers.length === 0 && <p className="activity-state">No offers yet. Be the first to offer food, transport, storage, or volunteer time.</p>}{offers.map((offer) => <div className="structured-offer" key={offer.id}><div className="offer-title"><span>{offer.offer_type}</span><strong>{offer.item_description}</strong><em className={`offer-status ${offer.status}`}>{offer.status}</em></div><p>{offer.quantity ? `${offer.quantity} ${offer.unit} · ` : ''}{offer.availability}</p><small>{offer.can_transport ? 'Transport included' : 'Transport not included'} · {offer.contact_preference === 'email' ? 'Email follow-up requested' : 'Continue in public WXL messages'}</small>{offer.status === 'proposed' && ownsSelectedRequest && <div className="offer-decision"><button disabled={busy} onClick={() => void decideOffer(offer.id, 'accepted')}>Accept</button><button disabled={busy} onClick={() => void decideOffer(offer.id, 'declined')}>Decline</button></div>}{offer.status === 'proposed' && offer.created_by === memberId && <button className="withdraw-offer" disabled={busy} onClick={() => void withdrawOffer(offer.id)}>Withdraw your offer</button>}</div>)}</div>
+        <div className="offer-actions"><button disabled={busy} onClick={() => void supportRequest()}><ArrowUp size={14} /> Support request</button><button disabled={busy} onClick={() => canWrite ? selectedIsPersisted ? setShowOffer(true) : notify('Sample request offers are not persisted') : onAuthRequired()}><HandHeart size={14} /> Offer food or help</button></div>
+        <div className="activity-section conversation-section"><div className="activity-heading"><h3>Public conversation</h3><span>{selectedIsPersisted ? `${messages.length} replies` : 'Sample dialogue'}</span></div><div className="conversation">{activityState === 'ready' && messages.length === 0 && <p className="activity-state">No replies yet.</p>}{activityState === 'sample' && initialMessages.map((item) => <MessageItem key={item.id} author={item.author} role={item.role} message={item.message} time={item.time} mine={item.mine} />)}{messages.map((item) => <MessageItem key={item.id} author={item.author_name} role={item.author_role ?? 'Community member'} message={item.message} time={new Date(item.created_at).toLocaleString()} mine={item.created_by === memberId} />)}</div></div>
+        <div className="message-compose"><textarea value={message} onChange={(event) => setMessage(event.target.value)} placeholder="Share a public coordination update..." rows={2} /><button disabled={busy || !message.trim()} onClick={() => void sendMessage()} aria-label="Send response"><Send size={16} /></button></div><p className="dialogue-note"><ShieldCheck size={13} /> Replies and offer details are public. Do not include private addresses, phone numbers, household names, or sensitive information.</p>
+      </aside>
     </section>
-    {showCreate && <div className="modal-backdrop" onClick={() => setShowCreate(false)}><div className="create-modal" onClick={(event) => event.stopPropagation()}><div className="modal-title"><div><p className="eyebrow">Ask the network</p><h2>Post a community request</h2></div><button onClick={() => setShowCreate(false)}><X size={18} /></button></div><label>What does your group need?<input value={newTitle} onChange={(event) => setNewTitle(event.target.value)} placeholder="For example, 25 lb of greens for Thursday dinner" /></label><label>Neighborhood<select value={newNeighborhood} onChange={(event) => setNewNeighborhood(event.target.value)}><option>East Austin</option><option>Rosewood</option><option>Govalle</option><option>South Lamar</option><option>East Cesar Chavez</option></select></label><label>Context for contributors<textarea value={newDetail} onChange={(event) => setNewDetail(event.target.value)} placeholder="Share quantity, timing, storage, or pickup details..." rows={4} /></label><div className="modal-actions"><button className="cancel-button" onClick={() => setShowCreate(false)}>Cancel</button><button className="add-button" onClick={createRequest} disabled={!newTitle.trim() || !newDetail.trim()}>Post request <ArrowUpRight size={15} /></button></div></div></div>}
+    {showCreate && <div className="modal-backdrop" onClick={() => setShowCreate(false)}><div className="create-modal" role="dialog" aria-modal="true" aria-labelledby="create-request-title" onClick={(event) => event.stopPropagation()}><div className="modal-title"><div><p className="eyebrow">Ask the network</p><h2 id="create-request-title">Post a community request</h2></div><button onClick={() => setShowCreate(false)} aria-label="Close request form"><X size={18} /></button></div><label>Coordinating group<input value={newGroup} onChange={(event) => setNewGroup(event.target.value)} placeholder="Your group or project name" /></label><label>What does your group need?<input value={newTitle} onChange={(event) => setNewTitle(event.target.value)} placeholder="For example, 25 lb of greens for Thursday dinner" /></label><div className="form-row"><label>Request type<select value={newCategory} onChange={(event) => setNewCategory(event.target.value as typeof newCategory)}><option value="resource_request">Food or supplies</option><option value="help_needed">Volunteer help</option><option value="storage_request">Storage</option><option value="transport_request">Transportation</option></select></label><label>Priority<select value={newPriority} onChange={(event) => setNewPriority(event.target.value as FoodRequest['priority'])}><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="urgent">Urgent</option></select></label></div><label>Neighborhood<select value={newNeighborhood} onChange={(event) => setNewNeighborhood(event.target.value)}><option>East Austin</option><option>Rosewood</option><option>Govalle</option><option>South Lamar</option><option>East Cesar Chavez</option></select></label><label>Public context<textarea value={newDetail} onChange={(event) => setNewDetail(event.target.value)} placeholder="Share quantity, timing, storage, or pickup needs. Do not add a private address or household details." rows={4} /></label><p className="form-privacy"><ShieldCheck size={14} /> This request and its conversation are public.</p><div className="modal-actions"><button className="cancel-button" onClick={() => setShowCreate(false)}>Cancel</button><button className="add-button" onClick={() => void createRequest()} disabled={busy || !newTitle.trim() || !newGroup.trim() || !newDetail.trim()}>{busy ? 'Posting…' : 'Post request'} <ArrowUpRight size={15} /></button></div></div></div>}
+    {showOffer && <div className="modal-backdrop" onClick={() => setShowOffer(false)}><div className="create-modal offer-modal" role="dialog" aria-modal="true" aria-labelledby="offer-request-title" onClick={(event) => event.stopPropagation()}><div className="modal-title"><div><p className="eyebrow">Make a concrete offer</p><h2 id="offer-request-title">Offer food or help</h2></div><button onClick={() => setShowOffer(false)} aria-label="Close offer form"><X size={18} /></button></div><p className="modal-context">For {selectedRequest.title}</p><label>Offer type<select value={offerType} onChange={(event) => setOfferType(event.target.value as FoodRequestOfferRecord['offer_type'])}><option value="food">Food</option><option value="transport">Transportation</option><option value="storage">Storage</option><option value="volunteer">Volunteer time</option></select></label><label>What can you offer?<textarea value={offerItem} onChange={(event) => setOfferItem(event.target.value)} placeholder="Describe the food, vehicle, storage, or help you can provide" rows={3} /></label><div className="form-row"><label>Quantity, optional<input type="number" min="0.01" step="any" value={offerQuantity} onChange={(event) => setOfferQuantity(event.target.value)} placeholder="25" /></label><label>Unit{offerQuantity ? '' : ', optional'}<input value={offerUnit} onChange={(event) => setOfferUnit(event.target.value)} placeholder="lb, boxes, hours" /></label></div><label>Availability<input value={offerAvailability} onChange={(event) => setOfferAvailability(event.target.value)} placeholder="Thursday from 3 to 6 PM" /></label><label className="checkbox-label"><input type="checkbox" checked={offerTransport} onChange={(event) => setOfferTransport(event.target.checked)} /> I can transport this offer</label><label>Contact preference<select value={offerContact} onChange={(event) => setOfferContact(event.target.value as FoodRequestOfferRecord['contact_preference'])}><option value="in_app">Continue in public WXL messages</option><option value="email">Request email follow-up</option></select></label><p className="form-privacy"><ShieldCheck size={14} /> Offer details are public. Your email address is not shown or exchanged by this board.</p><div className="modal-actions"><button className="cancel-button" onClick={() => setShowOffer(false)}>Cancel</button><button className="add-button" onClick={() => void submitOffer()} disabled={busy || !offerItem.trim() || !offerAvailability.trim() || Boolean(offerQuantity && !offerUnit.trim())}>{busy ? 'Sending…' : 'Send offer'} <ArrowUpRight size={15} /></button></div></div></div>}
   </>
+}
+
+function MessageItem({ author, role, message, time, mine }: { author: string; role: string; message: string; time: string; mine: boolean }) {
+  const initials = author.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join('').toUpperCase()
+  return <div className={`message ${mine ? 'mine' : ''}`}><div className="message-avatar">{initials || 'WX'}</div><div className="message-body"><div className="message-author"><strong>{author}</strong><span>{role}</span><time>{time}</time></div><p>{message}</p></div></div>
 }
 
 function SourceBoard({ notify, dbConfigured, canWrite, onAuthRequired }: { notify: (message: string) => void; dbConfigured: boolean; canWrite: boolean; onAuthRequired: () => void }) {

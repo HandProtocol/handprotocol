@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createAccountAndSession, getRecoveryRedirectUrl } from './auth'
+import { createAccountAndSession, getMemberIdentity, getRecoveryRedirectUrl } from './auth'
 
 const credentials = { email: 'neighbor@example.org', password: 'community-food' }
 const user = { id: 'member-1' }
@@ -42,5 +42,19 @@ describe('createAccountAndSession', () => {
 
     expect(signInWithPassword).not.toHaveBeenCalled()
     expect(result.error).toBe(error)
+  })
+})
+
+describe('getMemberIdentity', () => {
+  it('prefers the member display name and creates readable initials', () => {
+    expect(getMemberIdentity({ email: 'neighbor@example.org', user_metadata: { display_name: 'Maya Rivera' } } as never)).toEqual({
+      displayName: 'Maya Rivera',
+      email: 'neighbor@example.org',
+      initials: 'MR',
+    })
+  })
+
+  it('uses a readable email prefix when profile metadata is absent', () => {
+    expect(getMemberIdentity({ email: 'eastside.kitchen@example.org', user_metadata: {} } as never).displayName).toBe('eastside kitchen')
   })
 })
