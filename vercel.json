@@ -14,9 +14,19 @@
     { "source": "/vision", "destination": "/discovery/skill-exchange-vision.html", "permanent": true },
     { "source": "/models", "destination": "/discovery/skill-exchange-models.html", "permanent": true },
     { "source": "/landscape", "destination": "/discovery/impact-org-landscape.html", "permanent": true },
-    { "source": "/mystichearts/demo", "destination": "/mystichearts/demo/", "permanent": true }
+    { "source": "/mystichearts/demo", "destination": "/mystichearts/demo/", "permanent": true },
+    { "source": "/kitties", "destination": "/kitties/game/", "permanent": true },
+    { "source": "/kitties/", "destination": "/kitties/game/", "permanent": true },
+    { "source": "/kitties/game", "destination": "/kitties/game/", "permanent": true },
+    { "source": "/games", "destination": "/kitties/game/", "permanent": true },
+    { "source": "/games/", "destination": "/kitties/game/", "permanent": true }
   ],
   "rewrites": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "kitties.handprotocol.org" }],
+      "destination": "/kitties/game/index.html"
+    },
     { "source": "/", "destination": "/foundation-campaign/index.html" }
   ],
   "headers": [

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#151126">
+  <meta name="description" content="Ride the Kitty Express, switch rails between KittyVerses, and defend the train from raccoon robbers.">
+  <title>Kitty Express</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23171225'/%3E%3Cpath d='M16 23 24 13l8 8 8-8 8 10v20c0 8-7 13-16 13s-16-5-16-13V23Z' fill='%23ffc857'/%3E%3Ccircle cx='26' cy='34' r='3' fill='%23171225'/%3E%3Ccircle cx='38' cy='34' r='3' fill='%23171225'/%3E%3C/svg%3E">
+  <link rel="manifest" href="/kitties/manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/kitties/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <script src="/kitties/game.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#game-ui">Skip to game controls</a>
+
+  <main id="game-shell" aria-label="Kitty Express game">
+    <canvas id="game-canvas" aria-label="A moving three dimensional view of the Kitty Express"></canvas>
+    <div id="world-wash" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="brand-lockup" aria-label="Kitty Express">
+        <span class="brand-mark">KX</span>
+        <span class="brand-name">Kitty Express</span>
+      </div>
+      <button class="icon-button" id="sound-button" type="button" aria-label="Turn music on" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6.5 9H3v6h3.5l4.5 4V5Zm4.5 4.2a4 4 0 0 1 0 5.6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>
+      </button>
+    </header>
+
+    <section id="intro" class="intro-panel" aria-labelledby="game-title">
+      <div class="intro-copy">
+        <p class="eyebrow">Next departure</p>
+        <h1 id="game-title">Kitty<br>Express</h1>
+        <p class="tagline">Nine lives. Three rails. One very important litter lever.</p>
+      </div>
+      <div class="intro-actions">
+        <button id="ride-button" class="primary-button" type="button">
+          <span>Ride as guest</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <p>No account or wallet needed</p>
+      </div>
+    </section>
+
+    <section id="game-ui" class="game-ui is-hidden" aria-label="Run controls">
+      <div class="hud" aria-live="polite">
+        <div class="hud-group">
+          <span class="hud-label">Route</span>
+          <strong id="distance-value">0 m</strong>
+        </div>
+        <div class="hud-center">
+          <span id="verse-dot" class="verse-dot"></span>
+          <span id="verse-name">Moonmeadow</span>
+        </div>
+        <div class="hearts" id="hearts" aria-label="Three hearts"><span>♥</span><span>♥</span><span>♥</span></div>
+      </div>
+
+      <div id="mission-card" class="mission-card">
+        <span class="mission-kicker">First route</span>
+        <span id="mission-copy">Follow the lantern rails</span>
+      </div>
+
+      <div id="junction-card" class="junction-card" role="status">
+        <span class="junction-label">Junction ahead</span>
+        <strong id="junction-title">Choose a KittyVerse</strong>
+        <div class="route-options">
+          <span id="left-route">← Candy Canyon</span>
+          <span id="right-route">Neon Harbor →</span>
+        </div>
+      </div>
+
+      <div id="tutorial" class="tutorial-bubble" role="status">
+        <span id="tutorial-icon">↔</span>
+        <strong id="tutorial-title">Switch rails</strong>
+        <span id="tutorial-copy">Swipe or tap a rail</span>
+      </div>
+
+      <div class="lane-controls" aria-label="Rail selection">
+        <button type="button" class="lane-button" data-lane="-1" aria-label="Move to left rail"><span>←</span></button>
+        <button type="button" class="lane-button active" data-lane="0" aria-label="Move to center rail"><span>•</span></button>
+        <button type="button" class="lane-button" data-lane="1" aria-label="Move to right rail"><span>→</span></button>
+      </div>
+
+      <button id="litter-lever" class="litter-lever" type="button" aria-label="Pull the emergency kitty litter lever">
+        <span class="lever-knob" aria-hidden="true"></span>
+        <span class="lever-copy"><small>Emergency</small><strong>Litter lever</strong></span>
+        <span id="lever-ready" class="lever-ready">Ready</span>
+      </button>
+
+      <button id="jump-button" class="jump-button" type="button" aria-label="Jump">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 14 6-6 6 6M12 8v11"/></svg>
+        <span>Jump</span>
+      </button>
+    </section>
+
+    <section id="result-panel" class="result-panel is-hidden" aria-labelledby="result-title">
+      <p class="eyebrow">Station reached</p>
+      <h2 id="result-title">Purrfect run</h2>
+      <dl>
+        <div><dt>Distance</dt><dd id="result-distance">0 m</dd></div>
+        <div><dt>Robbers bounced</dt><dd id="result-raccoons">0</dd></div>
+        <div><dt>KittyVerses</dt><dd id="result-verses">1</dd></div>
+      </dl>
+      <button id="again-button" class="primary-button" type="button">Ride again</button>
+      <p class="save-note">Guest progress is saved on this device.</p>
+    </section>
+
+    <div id="announcement" class="announcement" aria-live="assertive"></div>
+    <div id="rotate-note" class="rotate-note">Kitty Express rides best in portrait mode.</div>
+  </main>
+
+  <audio id="theme-music" src="/kitties/kitty-express.mp3" preload="metadata" loop></audio>
+  <noscript>Kitty Express needs JavaScript to run.</noscript>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "@handprotocol/kitty-express",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Kitty Express interactive web experience",
+  "scripts": {
+    "dev": "python3 -m http.server 8000 --directory .",
+    "check": "node --check game.js"
+  }
+}
