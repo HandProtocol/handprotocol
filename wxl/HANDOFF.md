@@ -13,7 +13,7 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 ## Product decisions made
 
 - Authentication uses email and password. Passwordless magic-link login was removed.
-- Account creation remains available through Supabase email signup.
+- Account creation uses Supabase email signup, creates a session immediately, and does not require email confirmation.
 - Password reset is required and implemented through a recovery email followed by a new-password screen.
 - Anonymous access is browse-only.
 - Anonymous visitors can view public requests and the prototype dashboard.
@@ -68,7 +68,8 @@ Routing is currently implemented with `window.location.pathname` and query param
 
 - Email and password login uses `signInWithPassword`.
 - Account creation uses `signUp`.
-- Account confirmation returns to `/app/?mode=login`.
+- Successful account creation returns an authenticated session and redirects directly to `/app/`.
+- Signup fields provide standard browser password-manager metadata. The browser decides whether to offer local password storage.
 - Password-reset email uses `resetPasswordForEmail`.
 - Recovery returns to `/app/?mode=recovery`.
 - New password submission uses `updateUser`.
@@ -97,9 +98,12 @@ Routing is currently implemented with `window.location.pathname` and query param
 - Anonymous visitors who try to nominate a source receive the account prompt.
 - Only verified nominations are publicly readable under the current row-level security policy.
 
-### East Austin map and community signals
+### Austin food-node map and community signals
 
-- The overview map now starts with current public-directory listings for East Austin and links to Central Texas Food Bank for current hours.
+- The Overview now opens on a schematic Austin food-node map before any sample metrics or activity cards.
+- The initial map set includes public-directory listings from the City of Austin and Central Texas Food Bank. Selecting a node shows its public address, known hours or access notes, a source link, and directions when the location is directory-listed.
+- South Oak Baptist food pantry is shown as a community report pending confirmation. The reported access is Thursdays from 9 to 11 AM, one form, and no ID requested. Its exact public location is intentionally not inferred.
+- A volunteer start node connects to three anonymous household clusters. These route lines communicate the delivery workflow without exposing private home locations.
 - Authenticated members can add a public food spot with produce and availability details. New spots are labeled as community pins until reviewed.
 - Authenticated members can publish a six-hour `FOOD IS HERE!` alert. Active alerts are public, appear in the top-right alert center, and arrive in other open sessions through Supabase Realtime.
 - Alert creation invokes `netlify/functions/food-alert.mjs`, which validates the Supabase session and sends a best-effort Resend operations email using HAND's existing environment-variable pattern.
@@ -116,8 +120,102 @@ Routing is currently implemented with `window.location.pathname` and query param
 
 ### Mobile navigation
 
-- Mobile keeps a compact icon rail visible on the left. The arrow or top menu button expands it into the labeled navigation drawer.
+- Mobile uses the full viewport width and opens the labeled navigation as a drawer from the top menu button.
+- The drawer closes from its close button, the shaded page area, or after choosing a destination.
 - Desktop navigation can also collapse and remembers its state locally.
+
+### Navigation and identity handoff, 2026-07-16
+
+This pass reworked the WXL navigation and wordmark together. The goal was to make the X visibly carry the meaning of "with xtra love," give the command interface a stronger sense of place, and connect WXL to the HAND Protocol visual family without turning the product UI into a copy of the campaign site.
+
+#### Visual source and adaptation
+
+The sidebar now adapts elements from the mobile menu on the HAND Protocol landing page in `../web/index.html` and `../web/foundation-campaign/style.css`:
+
+- The traced network-hand illustration is reproduced as inline SVG in WXL so it inherits local colors, scales cleanly, and does not add an asset request.
+- Teal hand lines, amber nodes, a softer coral outline, and restrained radial color fields echo the HAND menu artwork.
+- The small illuminated brand dot comes from the HAND navigation wordmark treatment.
+- The HAND menu's layered depth and motion inform the sidebar atmosphere. WXL keeps a solid product surface because the sidebar remains visible for long working sessions.
+- Motion is slow and low-amplitude. The global reduced-motion rule collapses these animations for people who request it.
+
+The source paths are intentionally local to WXL. Future changes to the HAND landing-page SVG will not automatically change the app. If the shared hand artwork evolves, compare both implementations deliberately before syncing them.
+
+#### X identity
+
+The X is now the signature WXL element:
+
+- The landing-page X uses coral, sits slightly larger than the W and L, and carries an intersection ring plus a small heart.
+- The command-center sidebar starts with a circular X mark rather than a generic W tile.
+- The X inside `WXL:FOOD` uses the same coral accent.
+- The small landing-header wordmark also accents the X.
+
+Keep the X treatment consistent anywhere a new WXL wordmark appears. Coral identifies the X. Amber is reserved for its smaller love or network signals. Do not return to an all-one-color `WXL` wordmark unless the context is strictly monochrome.
+
+#### Desktop navigation behavior
+
+- The expanded sidebar is 264px wide and groups destinations under `Coordinate` and `Plan + measure`.
+- Active destinations use a complete pale-green surface and full border. There is no colored side stripe.
+- Each destination has an icon container, label, and optional count.
+- The collapse control sits inside the sidebar header instead of floating over the content boundary.
+- Collapsed state is 76px wide, keeps destination icons accessible, exposes labels through native button titles, and remains stored in `localStorage` under `wxl:sidebar-collapsed`.
+- Decorative hand artwork is hidden in collapsed state so the icon rail stays legible.
+
+#### Mobile navigation behavior
+
+- The old permanent 56px rail was removed. At 360px and similar widths, the application now receives the full viewport.
+- The top-left menu button opens a drawer up to 300px wide, with a 40px edge allowance.
+- The drawer contains the same labels, status, feedback, interaction count, and account entry as desktop.
+- The drawer closes through the labeled close button, the shaded page scrim, or a destination selection.
+- The sidebar toggle used for desktop collapse is hidden on mobile.
+- The traced hand becomes slightly more visible in the mobile drawer, matching the source HAND menu more closely.
+
+#### Directory breadcrumb contract
+
+The top bar is a location breadcrumb, not a product slogan. Its desktop form is:
+
+`Directory / WXL:FOOD / Current page`
+
+The final segment updates from the active `View` state and currently supports:
+
+- Overview
+- Rescue opportunities
+- Volunteer command
+- Community requests
+- Partner network
+
+The labels are centralized in `viewLabels` near the top of `src/App.tsx`. Add new destinations there when extending the `View` union. On small screens, the leading `Directory /` segment is hidden to preserve room for alerts and the primary action, while `WXL:FOOD / Current page` remains visible when space allows.
+
+#### Implementation map
+
+| Concern | Location |
+|---|---|
+| Sidebar structure, dynamic breadcrumb, and view labels | `src/App.tsx` |
+| Inline traced-hand component | `SidebarHand` in `src/App.tsx` |
+| Sidebar, hand artwork, X treatment, and responsive drawer | `src/styles.css` |
+| Mobile drawer interaction test | `src/App.test.tsx` |
+| Public mobile behavior | `docs/LIVING-DOCS.md` |
+
+#### Accessibility and interaction notes
+
+- The decorative hand has `aria-hidden="true"`, and its SVG cannot receive focus.
+- The current destination exposes `aria-current="page"`.
+- Icon-only controls retain explicit accessible labels.
+- The landing-page visual letters are hidden from assistive technology, while the heading itself carries `aria-label="WXL"`.
+- The mobile scrim is an actual button labeled `Close navigation`, so keyboard and assistive-technology users can dismiss the drawer.
+- The drawer test changes `window.innerWidth` to 390px and opens navigation through the top-bar button.
+- The full WXL:FOOD sidebar title is a labeled button that returns to Overview and closes the mobile drawer.
+
+#### Verification and follow-up
+
+The current interface was checked at 1440 by 1000 and 390 by 844. `npm test` passes all 16 tests, and `npm run build` completes successfully.
+
+Recommended follow-up:
+
+1. Add Escape-key handling and return focus to the mobile menu button after the drawer closes.
+2. Add a focus trap while the mobile drawer is open.
+3. Replace native `title` tooltips in collapsed desktop mode with accessible styled tooltips only if the added complexity is justified.
+4. Revisit breadcrumb truncation when additional views are added.
+5. Keep the hand illustration decorative. It should never compete with destination labels or become a required cue for navigation.
 
 ### Database and security baseline
 
@@ -142,7 +240,8 @@ This section is load-bearing. The interface currently looks more functional than
 
 ### Dashboard data that is hard-coded
 
-- Map locations, coordinates, statuses, and inventory details
+- Map coordinates and status colors. Initial directory-listed names, addresses, and center contact details are source-backed, while South Oak Baptist remains a community report.
+- Volunteer-node routes and anonymous household clusters
 - Rescue opportunities
 - Needs signals
 - Network metrics
@@ -196,11 +295,12 @@ The app should not claim these boards are ready until they contain functional wo
 
 ## Important auth and database risks to verify
 
-1. Confirm that Supabase Email authentication is enabled and password login is allowed.
+1. Confirm that Supabase Email authentication is enabled, password login is allowed, and **Confirm email** is turned off.
 2. Add the production and local callback URLs to the Supabase redirect allowlist:
-   - `https://wxl.handprotocol.org/app/`
-   - `http://localhost:5173/app/`
-3. Test signup confirmation, login, logout, reset request, recovery, and expired recovery links on the live domain.
+   - `https://wxl.handprotocol.org/app/?mode=recovery`
+   - `http://localhost:5173/app/?mode=recovery`
+   Set the Supabase Site URL to `https://wxl.handprotocol.org`; leaving the default `http://localhost:3000` causes password-recovery links to open localhost when the callback is rejected or omitted.
+3. Test immediate signup login, browser password-save behavior, login, logout, reset request, recovery, and expired recovery links on the live domain.
 4. Confirm that every new auth account receives a matching `command.profiles` row. The food tables reference `command.profiles(id)`, while inserts use `auth.user.id`. Without a profile-creation trigger, valid authenticated inserts can fail with a foreign-key error.
 5. Confirm that the `command` schema is exposed through the Supabase API.
 6. Review whether public request messages should be readable by anyone. The current policy allows public reading when the parent request is public.
@@ -330,7 +430,8 @@ Before calling the current auth and community flow production-ready, verify:
 - Public request loading works without a session.
 - Anonymous write attempts open the account prompt.
 - Account creation works with a new address.
-- Confirmation returns to login.
+- Signup opens `/app/` with an active session and no email-confirmation step.
+- The browser can offer to save new signup credentials according to its local password-manager settings.
 - Email and password login reaches `/app/` with write access.
 - Refreshing `/app/` restores the session.
 - Password-reset email arrives.

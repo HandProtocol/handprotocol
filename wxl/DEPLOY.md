@@ -19,6 +19,20 @@ VITE_SUPABASE_ANON_KEY=<HAND anon key>
 
 The browser receives only the anon key. The service-role key stays in the HAND Command Center and is never added to WXL:FOOD.
 
+In the HAND Supabase dashboard, open **Authentication > Sign In / Providers > Email** and turn off **Confirm email**. WXL signup expects `signUp` to return a session immediately. The client then opens `/app/`; standard `username`, `new-password`, and form-submit metadata lets the member's browser offer to save the credentials locally.
+
+In **Authentication > URL Configuration**, set:
+
+```text
+Site URL: https://wxl.handprotocol.org
+Redirect URL: https://wxl.handprotocol.org/app/?mode=recovery
+Redirect URL: http://localhost:5173/app/?mode=recovery
+```
+
+The production recovery URL must appear exactly in the redirect allowlist. Otherwise Supabase can fall back to its default Site URL, which is commonly `http://localhost:3000`.
+
+If the recovery email template was customized, keep `{{ .ConfirmationURL }}` as the link target. A manually constructed link must use `{{ .RedirectTo }}`, not `{{ .SiteURL }}`, so the `redirectTo` value supplied by WXL is preserved.
+
 The `FOOD IS HERE!` operations email hook also reads these server-side values:
 
 ```text

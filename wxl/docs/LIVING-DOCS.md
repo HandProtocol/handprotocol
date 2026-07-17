@@ -48,7 +48,7 @@ Status labels used throughout this document:
 |---|---|---|
 | Public landing page | Live | Opens WXL:FOOD, login, or anonymous browsing. |
 | WaterDrop link | Live | Opens the WaterDrop river stewardship app. |
-| Email and password authentication | Live | Supports signup, login, password reset, and recovery. |
+| Email and password authentication | Live | Signup creates a session immediately, login uses email and password, and reset and recovery remain email-based. |
 | Public community requests | Live | Loads public requests from Supabase when configured. |
 | New community requests | Live | Authenticated members can post persisted requests. |
 | Request replies | Live | Authenticated members can add persisted messages. |
@@ -81,18 +81,26 @@ An authenticated account is required to:
 
 Write access always follows the active Supabase session. A query parameter does not grant write access.
 
-## East Austin food map
+New accounts do not require an email-confirmation step. A successful signup starts the member session and opens the command center. The signup fields use standard password-manager metadata so the browser can offer to save the password locally. Whether that prompt appears is controlled by the member's browser and password-manager settings.
 
-The map combines two kinds of listings.
+Password-reset emails return to `https://wxl.handprotocol.org/app/?mode=recovery`, where the member chooses a new password. The production callback must remain in the Supabase redirect allowlist.
+
+## Austin food-node and volunteer-route map
+
+The overview opens on the map before showing sample statistics. It combines public food locations, a schematic volunteer start node, and privacy-safe delivery clusters.
 
 ### Directory-listed locations
 
-Initial pantry and program locations come from public food-access directories, including the City of Austin and Central Texas Food Bank. A directory listing means the place appears in a recognized public source. It does not guarantee that food is available at this moment.
+Initial pantry and program locations come from public food-access directories, including the City of Austin and Central Texas Food Bank. The current set includes City neighborhood centers across Austin and a Food Bank partner listing. A directory listing means the place appears in a recognized public source. It does not guarantee that food is available at this moment.
 
 Always confirm hours and eligibility before traveling:
 
-- [City of Austin neighborhood centers](https://www.austintexas.gov/my-mm/services/get-help-neighborhood-centers)
+- [City of Austin neighborhood centers](https://www.austintexas.gov/services/get-help-neighborhood-centers)
 - [Central Texas Food Bank Find Food Now](https://www.centraltexasfoodbank.org/find-food-now)
+
+The selected-node panel exposes the source, public address, known center hours or access notes, and a directions link when the location is directory-listed.
+
+South Oak Baptist food pantry appears as a community report, not a verified directory listing. The report says the pantry is open Thursdays from 9 to 11 AM and uses one form without requiring ID. Its exact public location and current access details still require coordinator confirmation before WXL:FOOD treats it as verified.
 
 ### Community pins
 
@@ -106,7 +114,7 @@ Authenticated members can add a public food spot with:
 
 New submissions are labeled **Community pin** until a coordinator verifies them. Community submission does not imply endorsement or guaranteed availability.
 
-Private homes must not be added to the public map.
+Private homes must not be added to the public map. Public route lines end at anonymous neighborhood clusters. Exact household stops belong only in a future private, authenticated volunteer run.
 
 ## `FOOD IS HERE!` alerts
 
@@ -164,7 +172,7 @@ These events are intended for product learning, not advertising or cross-site tr
 
 ## Mobile experience
 
-On phones, WXL:FOOD keeps a compact icon rail visible along the left edge. The arrow or top menu button expands it into the full labeled navigation.
+On phones, WXL:FOOD uses the full screen width for coordination. The top menu button opens a labeled navigation drawer, and the close button or shaded page area dismisses it.
 
 Mobile product requirements:
 
@@ -352,6 +360,17 @@ When this document becomes HTML, preserve the headings and anchors so existing l
 
 ### 2026-07-16
 
+- Moved the food-node map to the opening position in Overview and moved sample statistics below it.
+- Expanded the public-source set with City neighborhood centers, added selected-node hours, access notes, source links, and directions.
+- Added a schematic volunteer node with routes to anonymous household clusters, keeping exact home locations off the public map.
+- Added South Oak Baptist as a clearly labeled community report pending public-source confirmation.
+- Made the sidebar WXL:FOOD title return to Overview.
+- Adapted the HAND Protocol landing-page menu's traced hand, network nodes, and brand-dot language into WXL navigation.
+- Changed the top location trail to `Directory / WXL:FOOD / Current page` with a view-aware final segment.
+- Made the X the signature WXL mark across the landing page and command-center navigation.
+- Replaced the mobile icon rail with a full-width layout and off-canvas navigation drawer.
+- Changed signup to create an immediate session without an email-confirmation step and added browser password-manager metadata.
+- Pinned password-reset callbacks to the WXL recovery screen and documented the required Supabase URL configuration.
 - Created the living documentation source.
 - Documented the East Austin food map and community-pin review state.
 - Documented `FOOD IS HERE!`, realtime alerts, expiry, and abuse controls.
