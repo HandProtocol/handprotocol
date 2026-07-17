@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 import type {
   CSSProperties,
   KeyboardEvent as ReactKeyboardEvent,
@@ -17,11 +18,6 @@ export interface SheetProps {
 }
 
 const PEEK_PX = 128;
-const CYCLE: Record<SheetDetent, SheetDetent> = {
-  peek: 'half',
-  half: 'full',
-  full: 'peek',
-};
 const ORDER: SheetDetent[] = ['peek', 'half', 'full'];
 
 /** Travel (px) past which a slow drag commits to the nearest detent. */
@@ -45,9 +41,11 @@ interface DragState {
  * translated on the Y axis so motion stays on transform (GPU-smooth); the
  * visible height for each detent is masked by translating the panel down.
  *
- * The grab handle is a real button: click/tap cycles peek -> half -> full ->
- * peek, pointer drag snaps by distance/velocity, and arrow keys step detents.
- * A scrim renders only at `full`; tapping it returns to `half`.
+ * The grab handle is a real button: click/tap or an upward pointer drag expands
+ * one or more detents, while a separate control collapses one detent. Keeping
+ * downward pulls out of the resize gesture avoids competing with mobile browser
+ * refresh gestures. Arrow keys continue to step through every detent. A scrim
+ * renders only at `full`; tapping it returns to `half`.
  */
 export function Sheet({ detent, onDetentChange, children, label }: SheetProps) {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -102,26 +100,18 @@ export function Sheet({ detent, onDetentChange, children, label }: SheetProps) {
     const drag = dragRef.current;
     if (!drag) return;
 
-    const releasedOffset = clamp(
-      drag.startOffset + (drag.lastY - drag.startY),
-      0,
-      maxOffset
-    );
+    const upwardTravel = Math.min(drag.lastY - drag.startY, 0);
+    const releasedOffset = clamp(drag.startOffset + upwardTravel, 0, maxOffset);
     const releasedVisible = panelHeight - releasedOffset;
-    const v = drag.velocity; // +down (smaller) / -up (larger)
+    const v = drag.velocity;
 
-    let target: SheetDetent;
-    if (Math.abs(v) >= COMMIT_VELOCITY) {
+    let target = detent;
+    if (v <= -COMMIT_VELOCITY) {
       const idx = ORDER.indexOf(detent);
-      if (v < 0 && idx < ORDER.length - 1) target = ORDER[idx + 1];
-      else if (v > 0 && idx > 0) target = ORDER[idx - 1];
-      else target = detent;
-    } else {
-      const travelled = Math.abs(drag.lastY - drag.startY);
-      target =
-        travelled >= COMMIT_DISTANCE
-          ? nearestDetent(releasedVisible, heightFor)
-          : detent;
+      if (idx < ORDER.length - 1) target = ORDER[idx + 1];
+    } else if (-upwardTravel >= COMMIT_DISTANCE) {
+      const nearest = nearestDetent(releasedVisible, heightFor);
+      if (ORDER.indexOf(nearest) > ORDER.indexOf(detent)) target = nearest;
     }
 
     if (target !== detent) onDetentChange(target);
@@ -150,7 +140,8 @@ export function Sheet({ detent, onDetentChange, children, label }: SheetProps) {
     if (dt > 0) drag.velocity = (e.clientY - drag.lastY) / dt;
     drag.lastY = e.clientY;
     drag.lastT = now;
-    setDragOffset(clamp(drag.startOffset + (e.clientY - drag.startY), 0, maxOffset));
+    const upwardTravel = Math.min(e.clientY - drag.startY, 0);
+    setDragOffset(clamp(drag.startOffset + upwardTravel, 0, maxOffset));
   };
 
   const endDrag = (e: ReactPointerEvent<HTMLButtonElement>) => {
@@ -159,13 +150,27 @@ export function Sheet({ detent, onDetentChange, children, label }: SheetProps) {
     e.currentTarget.releasePointerCapture?.(e.pointerId);
     const moved = Math.abs(drag.lastY - drag.startY);
     if (moved < TAP_SLOP) {
-      onDetentChange(CYCLE[detent]);
+      const idx = ORDER.indexOf(detent);
+      if (idx < ORDER.length - 1) onDetentChange(ORDER[idx + 1]);
     } else {
       commitFromDrag();
     }
     dragRef.current = null;
     setDragging(false);
     setDragOffset(null);
+  };
+
+  const cancelDrag = (e: ReactPointerEvent<HTMLButtonElement>) => {
+    const drag = dragRef.current;
+    if (!drag || e.pointerId !== drag.pointerId) return;
+    dragRef.current = null;
+    setDragging(false);
+    setDragOffset(null);
+  };
+
+  const collapse = () => {
+    const idx = ORDER.indexOf(detent);
+    if (idx > 0) onDetentChange(ORDER[idx - 1]);
   };
 
   const handleHandleKeyDown = (e: ReactKeyboardEvent<HTMLButtonElement>) => {
@@ -178,9 +183,16 @@ export function Sheet({ detent, onDetentChange, children, label }: SheetProps) {
       onDetentChange(ORDER[idx - 1]);
     } else if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      onDetentChange(CYCLE[detent]);
+      if (idx < ORDER.length - 1) onDetentChange(ORDER[idx + 1]);
     }
   };
+
+  const expandLabel =
+    detent === 'peek'
+      ? 'Expand panel to half height'
+      : detent === 'half'
+        ? 'Expand panel to full height'
+        : 'Panel fully expanded';
 
   const panelStyle: CSSProperties = {
     height: 'var(--wd-sheet-full)',
@@ -203,19 +215,37 @@ export function Sheet({ detent, onDetentChange, children, label }: SheetProps) {
         aria-label={label ?? 'Panel'}
         style={panelStyle}
       >
-        <button
-          type="button"
-          className="wd-sheet__handle"
-          aria-label="Resize panel"
-          aria-expanded={detent !== 'peek'}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={endDrag}
-          onPointerCancel={endDrag}
-          onKeyDown={handleHandleKeyDown}
-        >
-          <span className="wd-sheet__grip" aria-hidden="true" />
-        </button>
+        <div className="wd-sheet__toolbar">
+          <button
+            type="button"
+            className="wd-sheet__handle"
+            aria-label={expandLabel}
+            aria-expanded={detent !== 'peek'}
+            aria-disabled={detent === 'full'}
+            tabIndex={detent === 'full' ? -1 : 0}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={endDrag}
+            onPointerCancel={cancelDrag}
+            onKeyDown={handleHandleKeyDown}
+          >
+            <span className="wd-sheet__grip" aria-hidden="true" />
+          </button>
+          {detent !== 'peek' && (
+            <button
+              type="button"
+              className="wd-sheet__collapse"
+              aria-label={
+                detent === 'full'
+                  ? 'Collapse panel to half height'
+                  : 'Collapse panel to preview'
+              }
+              onClick={collapse}
+            >
+              <ChevronDown size={20} aria-hidden="true" />
+            </button>
+          )}
+        </div>
         <div className="wd-sheet__content">{children}</div>
       </div>
     </>

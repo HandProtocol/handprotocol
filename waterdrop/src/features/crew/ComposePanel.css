@@ -283,7 +283,7 @@
 }
 .wd-crew-compose__species-grid {
   display: grid;
-  grid-template-columns: 1fr 7.5rem;
+  grid-template-columns: minmax(0, 1fr) minmax(9rem, 0.7fr);
   gap: var(--s3);
 }
 .wd-crew-compose__species-foot {
@@ -291,6 +291,12 @@
   grid-template-columns: 1fr auto;
   align-items: end;
   gap: var(--s2);
+}
+
+@media (max-width: 379px) {
+  .wd-crew-compose__species-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── Water test ── */

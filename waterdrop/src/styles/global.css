@@ -14,6 +14,12 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+html,
+body,
+#root {
+  overscroll-behavior-y: none;
+}
+
 body {
   margin: 0;
   font-family: var(--font-ui);
@@ -24,7 +30,6 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   font-variant-numeric: tabular-nums;
-  overscroll-behavior: none;
 }
 
 #root {
