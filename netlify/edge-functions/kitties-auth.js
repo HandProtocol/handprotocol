@@ -10,11 +10,15 @@
 //   4. Cookie expires after 7 days, or invalidates if the env-var password is rotated.
 
 const COOKIE_NAME = "kitties_auth";
-const COOKIE_PATH = "/kitties";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7; // 7 days
 const TOKEN_NAMESPACE = "kitties-v1";
 
 export default async (request, context) => {
+  const url = new URL(request.url);
+  const kittyHost = url.hostname === "kitties.handprotocol.org";
+  const kittyPath = url.pathname === "/kitties" || url.pathname.startsWith("/kitties/");
+  if (!kittyHost && !kittyPath) return context.next();
+
   const expected = Netlify.env.get("KITTIES_PASSWORD");
 
   if (!expected) {
@@ -24,7 +28,6 @@ export default async (request, context) => {
     );
   }
 
-  const url = new URL(request.url);
   const expectedToken = await sha256(`${TOKEN_NAMESPACE}:${expected}`);
 
   const cookies = parseCookies(request.headers.get("Cookie") || "");
@@ -48,7 +51,7 @@ export default async (request, context) => {
         "Set-Cookie",
         [
           `${COOKIE_NAME}=${expectedToken}`,
-          `Path=${COOKIE_PATH}`,
+          `Path=${kittyHost ? "/" : "/kitties"}`,
           "HttpOnly",
           "Secure",
           "SameSite=Lax",

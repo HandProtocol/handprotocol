@@ -1,0 +1,11 @@
+{
+  "name": "Kitty Express",
+  "short_name": "Kitty Express",
+  "description": "Switch rails, cross KittyVerses, and protect the train.",
+  "start_url": "./game/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#171225",
+  "theme_color": "#171225",
+  "icons": []
+}

@@ -21,6 +21,12 @@
   function = "kitties-auth"
   path = "/kitties/*"
 
+# Host-aware gate for kitties.handprotocol.org. The function passes through
+# immediately for every other hostname using the root route.
+[[edge_functions]]
+  function = "kitties-auth"
+  path = "/"
+
 [[edge_functions]]
   function = "grants-auth"
   path = "/grants/*"
@@ -82,6 +88,19 @@
   from = "http://gofundme.handprotocol.org/*"
   to = "https://www.gofundme.com/f/help-hand-protocol-grow"
   status = 301
+  force = true
+
+# Serve Kitty Express at the root of its vanity subdomain.
+[[redirects]]
+  from = "https://kitties.handprotocol.org/"
+  to = "/kitties/game/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "http://kitties.handprotocol.org/"
+  to = "/kitties/game/index.html"
+  status = 200
   force = true
 
 # Root serves the foundation campaign as the canonical public surface.
@@ -294,7 +313,27 @@
 
 [[redirects]]
   from = "/kitties"
-  to = "/kitties/"
+  to = "/kitties/game/"
+  status = 301
+
+[[redirects]]
+  from = "/kitties/"
+  to = "/kitties/game/"
+  status = 301
+
+[[redirects]]
+  from = "/kitties/game"
+  to = "/kitties/game/"
+  status = 301
+
+[[redirects]]
+  from = "/games"
+  to = "/kitties/game/"
+  status = 301
+
+[[redirects]]
+  from = "/games/"
+  to = "/kitties/game/"
   status = 301
 
 # 404 fallback → branded compass page with radial sitemap (3D hand pointing to sections).
