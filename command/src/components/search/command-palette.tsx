@@ -112,8 +112,15 @@ export function CommandPalette() {
         setOpen((prev) => !prev);
       }
     }
+    function onOpenRequest() {
+      setOpen(true);
+    }
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    window.addEventListener("hand:command-search", onOpenRequest);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      window.removeEventListener("hand:command-search", onOpenRequest);
+    };
   }, []);
 
   // Reset and focus when the palette opens.

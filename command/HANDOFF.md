@@ -1,6 +1,23 @@
 # HAND Command Center Handoff
 
-Last updated: 2026-07-09
+Last updated: 2026-07-16
+
+## Release status
+
+The compact shell, five-item dashboard summary, and Kitty Express visit integration described below are present in the local worktree but are not published. The current branch also contains unrelated in-progress work and predates the live Kitty Express merges on `main`. Read `../web/kitties/HANDOFF.md` for the verified file map, Git-state warning, and safe publication sequence before preparing a release.
+
+## Current shell design
+
+The Command Center shell now uses a compact, Supabase-inspired operator layout:
+
+- A persistent 48px icon rail keeps the work canvas wide.
+- Desktop hover reveals the full labeled navigation. The rail control opens a pinned drawer for touch and deliberate use.
+- The sticky top bar identifies the HAND workspace, environment, branch, search, and notifications.
+- The dashboard opens with workspace health, connected operating areas, and a five-item definition-list summary backed by current query results, including recent Kitty Express views.
+- The desktop work canvas is capped at 1120px so the desk keeps the compact proportions of the mobile interface instead of spreading modules across a wide monitor.
+- Surfaces are flatter and closer to black, with thin neutral borders. Amber remains the HAND action color, while green is reserved for operational health.
+
+The shell lives in `src/app/(dashboard)/layout.tsx`, the responsive rail and drawer live in `src/components/mobile-rail.tsx`, and the new shell styling lives in `src/app/globals.css`.
 
 ## What this is now
 
@@ -34,6 +51,8 @@ Public visit activity is collected by:
 - `netlify/functions/visit.js`
 - Supabase table `command.public_visits`
 - Command route `/public`
+
+Kitty Express reports the canonical `/kitties/game/` path from both `handprotocol.org` and `kitties.handprotocol.org`, so game views roll up as one page in Command.
 
 Project demo visit activity is separate:
 

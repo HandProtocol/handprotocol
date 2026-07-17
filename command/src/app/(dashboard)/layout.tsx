@@ -8,6 +8,7 @@ import { MobileRail } from "@/components/mobile-rail";
 import { NotificationBell } from "@/components/notification-bell";
 import { Toaster } from "@/components/ui/sonner";
 import { CommandPalette } from "@/components/search/command-palette";
+import { CommandSearchTrigger } from "@/components/search/command-search-trigger";
 import { OnboardingFlow } from "@/components/onboarding/onboarding-flow";
 
 /*
@@ -59,12 +60,7 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="hud-surface relative flex min-h-screen">
-      <div className="hud-bracket hud-bracket-tl" />
-      <div className="hud-bracket hud-bracket-tr" />
-      <div className="hud-bracket hud-bracket-bl" />
-      <div className="hud-bracket hud-bracket-br" />
-
+    <div className="command-shell hud-surface relative flex min-h-screen">
       <Toaster />
       <CommandPalette />
       <OnboardingFlow
@@ -74,44 +70,26 @@ export default async function DashboardLayout({
         group={reciprocateGroup}
       />
 
-      {/* Sidebar (desktop only) */}
-      <aside className="sticky top-0 hidden h-screen w-72 flex-shrink-0 border-r border-[rgba(245,239,225,0.06)] bg-[rgba(7,9,15,0.85)] backdrop-blur-md lg:block">
-        <SidebarNav role={role} email={userEmail} />
-      </aside>
-
-      {/* Collapsed icon rail + expandable drawer (mobile only) */}
+      {/* Persistent icon rail with an expandable labeled drawer */}
       <MobileRail role={role} email={userEmail} />
 
       <main className="min-w-0 flex-1 overflow-x-hidden overflow-y-auto">
-        {/* Mobile header */}
-        <header className="flex h-16 items-center justify-between border-b border-[rgba(245,239,225,0.06)] px-4 lg:hidden">
-          <span className="text-sm font-medium tracking-tight">
-            HAND Command
-          </span>
-          <NotificationBell />
+        <header className="command-topbar">
+          <div className="command-crumbs" aria-label="Current workspace">
+            <strong>HAND Protocol</strong>
+            <span aria-hidden>/</span>
+            <span>Command Center</span>
+            <span aria-hidden>/</span>
+            <b>main</b>
+            <em>PRODUCTION</em>
+          </div>
+          <div className="command-topbar-actions">
+            <CommandSearchTrigger />
+            <NotificationBell />
+          </div>
         </header>
 
-        {/* Desktop top bar */}
-        <div className="hidden lg:flex h-14 items-center justify-between border-b border-[rgba(245,239,225,0.06)] px-6">
-          <div className="flex items-center gap-4 eyebrow">
-            <span>
-              Command <span className="amber">open</span>
-            </span>
-            <span aria-hidden className="text-[var(--ink-faint)]">
-              ·
-            </span>
-            <span>Dashboard, feedback, projects, Reciprocates</span>
-            <span aria-hidden className="text-[var(--ink-faint)]">
-              ·
-            </span>
-            <span>
-              Build <span className="amber">0.1.0</span>
-            </span>
-          </div>
-          <NotificationBell />
-        </div>
-
-        <div className="p-6 lg:p-8">{children}</div>
+        <div className="command-page">{children}</div>
 
         <div className="px-6 py-3 font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ink-faint)] opacity-60">
           markdown is canonical, supabase mirrors, git is the audit log

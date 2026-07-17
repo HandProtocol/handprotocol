@@ -4,8 +4,12 @@ import { differenceInDays, formatDistanceToNow, parseISO } from "date-fns";
 import {
   ArrowRight,
   Calendar,
+  CheckCircle2,
+  Database,
+  Gamepad2,
   MessageSquareText,
   Radio,
+  Server,
   UsersRound,
 } from "lucide-react";
 import { listBizLeads } from "@/lib/develop/queries";
@@ -66,6 +70,9 @@ export default async function DashboardPage() {
     (project) => project.status !== "passed" && project.status !== "closed",
   );
   const liveSites = projects.filter((project) => project.live_domain);
+  const kittyVisits = publicVisits.filter(
+    (visit) => visit.page_path === "/kitties/game/",
+  );
   const activeReciprocates = reciprocateGroups.filter(
     (group) =>
       group.activeGrantCount > 0 ||
@@ -98,84 +105,83 @@ export default async function DashboardPage() {
     .slice(0, 5);
 
   return (
-    <div className="space-y-8">
+    <div className="command-dashboard space-y-6">
       <Suspense fallback={null}>
         <InviteRedeemedToast />
       </Suspense>
 
-      <header className="space-y-2">
-        <p className="display-eyebrow">
-          <span className="amber">Home desk</span> for HAND operations
-        </p>
-        <h1 className="text-2xl font-medium tracking-tight">
-          What needs attention now
-        </h1>
-        <p className="max-w-2xl text-sm text-[var(--ink-dim)]">
-          Feedback, projects, funding deadlines, public interest, and
-          Reciprocate groups in one view. The dark operator surface stays, the
-          work is easier to read.
-        </p>
-      </header>
+      <section className="command-overview" aria-labelledby="command-title">
+        <div className="command-project">
+          <p className="display-eyebrow">Internal operating desk</p>
+          <h1 id="command-title">HAND Protocol</h1>
+          <p className="command-project-ref">command.handprotocol.org</p>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <Link
-          href="/feedback"
-          className="panel group p-5 transition-colors hover:border-[rgba(217,119,6,0.35)] hover:bg-[rgba(217,119,6,0.04)]"
-        >
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p className="display-eyebrow">Feedback waiting</p>
-            <MessageSquareText className="h-4 w-4 text-[var(--amber-soft)]" />
-          </div>
-          <p className="mt-4 text-3xl font-medium">{openPins.length}</p>
-          <p className="mt-1 text-xs text-[var(--ink-dim)]">
-            {pins.length} total notes captured
-          </p>
-        </Link>
+          <dl className="command-project-facts">
+            <div>
+              <dt><CheckCircle2 aria-hidden /> Status</dt>
+              <dd><span className="health-dot" /> Operational</dd>
+            </div>
+            <div>
+              <dt><Server aria-hidden /> Workspace</dt>
+              <dd>Production</dd>
+            </div>
+            <div>
+              <dt><Database aria-hidden /> Records</dt>
+              <dd>{grants.length + projects.length + pins.length}</dd>
+            </div>
+            <div>
+              <dt><Radio aria-hidden /> Recent signals</dt>
+              <dd>{publicVisits.length}</dd>
+            </div>
+          </dl>
+        </div>
 
-        <Link
-          href="/projects"
-          className="panel group p-5 transition-colors hover:border-[rgba(217,119,6,0.35)] hover:bg-[rgba(217,119,6,0.04)]"
-        >
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p className="display-eyebrow">Projects moving</p>
-            <ArrowRight className="h-4 w-4 text-[var(--amber-soft)]" />
+        <div className="command-topology" aria-label="Connected HAND operating areas">
+          <div className="topology-node">
+            <span className="topology-icon"><Database aria-hidden /></span>
+            <span><strong>Command database</strong><small>HAND operating record</small></span>
+            <b><span className="health-dot" /> Live</b>
           </div>
-          <p className="mt-4 text-3xl font-medium">{activeProjects.length}</p>
-          <p className="mt-1 text-xs text-[var(--ink-dim)]">
-            {liveSites.length} live site{liveSites.length === 1 ? "" : "s"}
-          </p>
-        </Link>
+          <span className="topology-label topology-label-grants">Grants</span>
+          <span className="topology-label topology-label-projects">Projects</span>
+          <span className="topology-label topology-label-feedback">Feedback</span>
+          <span className="topology-label topology-label-reciprocates">Reciprocates</span>
+        </div>
+      </section>
 
-        <Link
-          href="/reciprocates"
-          className="panel group p-5 transition-colors hover:border-[rgba(217,119,6,0.35)] hover:bg-[rgba(217,119,6,0.04)]"
-        >
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p className="display-eyebrow">Reciprocates active</p>
-            <UsersRound className="h-4 w-4 text-[var(--amber-soft)]" />
-          </div>
-          <p className="mt-4 text-3xl font-medium">
-            {activeReciprocates.length}
-          </p>
-          <p className="mt-1 text-xs text-[var(--ink-dim)]">
-            {reciprocateGroups.length} group
-            {reciprocateGroups.length === 1 ? "" : "s"} tracked
-          </p>
-        </Link>
-
-        <Link
-          href="/public"
-          className="panel group p-5 transition-colors hover:border-[rgba(217,119,6,0.35)] hover:bg-[rgba(217,119,6,0.04)]"
-        >
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p className="display-eyebrow">Public interest</p>
-            <Radio className="h-4 w-4 text-[var(--amber-soft)]" />
-          </div>
-          <p className="mt-4 text-3xl font-medium">{publicVisits.length}</p>
-          <p className="mt-1 text-xs text-[var(--ink-dim)]">
-            Recent high-value visits
-          </p>
-        </Link>
+      <section className="command-summary" aria-labelledby="summary-heading">
+        <div className="command-summary-heading">
+          <span className="summary-grip" aria-hidden>⠿</span>
+          <h2 id="summary-heading">Operating summary</h2>
+          <span>{openPins.length + activeProjects.length + upcoming.length} items need attention</span>
+        </div>
+        <dl>
+          <Link href="/feedback">
+            <dt><MessageSquareText aria-hidden /> Feedback</dt>
+            <dd>{openPins.length}</dd>
+            <small>{pins.length} captured</small>
+          </Link>
+          <Link href="/projects">
+            <dt><ArrowRight aria-hidden /> Projects</dt>
+            <dd>{activeProjects.length}</dd>
+            <small>{liveSites.length} live sites</small>
+          </Link>
+          <Link href="/reciprocates">
+            <dt><UsersRound aria-hidden /> Reciprocates</dt>
+            <dd>{activeReciprocates.length}</dd>
+            <small>{reciprocateGroups.length} groups tracked</small>
+          </Link>
+          <Link href="/public">
+            <dt><Radio aria-hidden /> Public interest</dt>
+            <dd>{publicVisits.length}</dd>
+            <small>recent signals</small>
+          </Link>
+          <Link href="/public">
+            <dt><Gamepad2 aria-hidden /> Kitty Express</dt>
+            <dd>{kittyVisits.length}</dd>
+            <small>recent game views</small>
+          </Link>
+        </dl>
       </section>
 
       <div className="grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">

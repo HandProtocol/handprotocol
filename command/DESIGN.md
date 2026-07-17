@@ -83,6 +83,14 @@ Body line length is capped at 65 to 75ch via `--container-doc: 720px`.
 
 ## Layout
 
+### Application shell
+
+The primary application shell uses a 48px persistent icon rail and a 44px sticky workspace bar. On desktop, hovering the rail reveals the full labeled navigation as a 248px flyout. The rail control opens the same navigation as a pinned drawer on touch devices and when the operator wants it to remain open. The main work canvas is capped at 1120px on desktop to preserve the compact mobile rhythm on larger monitors.
+
+The dashboard overview pairs compact workspace facts with a dotted connection field for Grants, Projects, Feedback, and Reciprocates. This is operational orientation, not decorative topology. Summary counts use a definition list instead of a hero-metric card pattern.
+
+Panel surfaces are flat near-black with 1px neutral borders and 7px radii. Green is limited to healthy connection state. Amber remains the action, focus, and active-navigation color.
+
 ### Spacing scale
 
 Modular 4-step. Used uniformly across the app.

@@ -46,8 +46,8 @@ export function SidebarNav({
   return (
     <div className="flex h-full flex-col">
       {/* Brand mark */}
-      <div className="flex h-16 items-center gap-3 px-5 border-b border-[rgba(245,239,225,0.06)]">
-        <div className="grid h-8 w-8 place-items-center rounded-md bg-[rgba(217,119,6,0.18)] border border-[rgba(217,119,6,0.35)]">
+      <div className="flex h-16 items-center gap-3 px-5 border-b border-[var(--line)]">
+        <div className="grid h-8 w-8 place-items-center rounded-md bg-[var(--amber-wash)] border border-[var(--amber-line)]">
           <span className="font-mono text-xs text-[var(--amber-soft)] font-semibold">
             H
           </span>
@@ -83,8 +83,8 @@ export function SidebarNav({
                   className={cn(
                     "group flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
                     active
-                      ? "bg-[rgba(217,119,6,0.1)] text-[var(--ink)]"
-                      : "text-[var(--ink-dim)] hover:bg-[rgba(245,239,225,0.04)] hover:text-[var(--ink)]",
+                      ? "bg-[var(--surface-active)] text-[var(--ink)]"
+                      : "text-[var(--ink-dim)] hover:bg-[var(--surface-hover)] hover:text-[var(--ink)]",
                   )}
                 >
                   <Icon className="h-4 w-4 shrink-0" aria-hidden />

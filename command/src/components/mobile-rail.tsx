@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronRight, X } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { navItems, isActivePath } from "@/components/nav-items";
@@ -19,9 +19,8 @@ import { SidebarNav } from "@/components/sidebar-nav";
     menu (the same SidebarNav the desktop uses) as a slide-over drawer, with
     pillar tags, cmd+K hint, and the account footer.
 
-  Desktop (lg+) hides this entirely and shows the full SidebarNav in the
-  static sidebar. The collapsed rail is in normal flow (a flex sibling of
-  <main>), so the content offsets beside it without manual padding.
+  The rail remains visible at every viewport width. Its labeled drawer is
+  available on desktop and mobile, keeping the main canvas wide and focused.
 */
 export function MobileRail({
   role,
@@ -32,16 +31,6 @@ export function MobileRail({
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  // Lock body scroll while the drawer is open.
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prev;
-    };
-  }, [open]);
 
   // Close the drawer on Escape.
   useEffect(() => {
@@ -58,7 +47,7 @@ export function MobileRail({
       {/* Collapsed icon rail */}
       <aside
         aria-label="Quick navigation"
-        className="sticky top-0 z-30 flex h-screen w-14 flex-shrink-0 flex-col border-r border-[rgba(245,239,225,0.06)] bg-[rgba(7,9,15,0.85)] backdrop-blur-md lg:hidden"
+        className="command-rail sticky top-0 z-[60] flex h-screen w-14 flex-shrink-0 flex-col"
       >
         <Link
           href="/dashboard"
@@ -106,45 +95,40 @@ export function MobileRail({
         <div className="border-t border-[rgba(245,239,225,0.06)] p-2">
           <button
             type="button"
-            onClick={() => setOpen(true)}
+            onClick={() => setOpen((current) => !current)}
             aria-label="Show all navigation"
             aria-expanded={open}
             className="grid h-10 w-10 place-items-center rounded-md text-[var(--ink-dim)] transition-colors hover:bg-[rgba(217,119,6,0.1)] hover:text-[var(--amber-soft)]"
           >
-            <ChevronRight className="h-5 w-5" aria-hidden />
+            <ChevronRight
+              className={cn("h-5 w-5 transition-transform", open && "rotate-180")}
+              aria-hidden
+            />
           </button>
         </div>
       </aside>
 
+      {/* Desktop hover flyout. Touch users keep the explicit drawer button. */}
+      <div className="command-hover-drawer" aria-label="Expanded navigation">
+        <SidebarNav role={role} email={email} />
+      </div>
+
       {/* Expanded drawer (full labeled menu) */}
       {open && (
         <div
-          role="dialog"
-          aria-modal="true"
-          aria-label="Navigation"
-          className="fixed inset-0 z-50 lg:hidden"
+          className="command-drawer-layer fixed inset-0 z-50 pointer-events-none"
         >
-          <button
-            type="button"
-            aria-label="Close navigation"
-            onClick={() => setOpen(false)}
-            className="absolute inset-0 bg-[rgba(7,9,15,0.7)] backdrop-blur-sm"
-          />
-          <div className="absolute inset-y-0 left-0 w-72 border-r border-[rgba(245,239,225,0.06)] bg-[var(--bg-2)] shadow-xl">
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              aria-label="Collapse navigation"
-              className="absolute right-3 top-4 z-10 inline-flex h-7 w-7 items-center justify-center rounded-md text-[var(--ink-dim)] hover:bg-[rgba(245,239,225,0.06)]"
-            >
-              <X className="h-4 w-4" aria-hidden />
-            </button>
+          <div aria-hidden className="absolute inset-0 bg-[rgba(7,9,15,0.28)]" />
+          <aside
+            aria-label="Expanded navigation"
+            className="command-drawer pointer-events-auto absolute inset-y-0 left-12 w-72"
+          >
             <SidebarNav
               role={role}
               email={email}
               onNavigate={() => setOpen(false)}
             />
-          </div>
+          </aside>
         </div>
       )}
     </>

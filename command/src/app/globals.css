@@ -8,13 +8,14 @@
 
 :root {
   /* Surface */
-  --bg: #07090f;
-  --bg-2: #0c1220;
+  --bg: #0d0f0e;
+  --bg-2: #111412;
+  --bg-3: #171a18;
 
   /* Ink */
-  --ink: #f5efe1;
-  --ink-dim: #8e8a7e;
-  --ink-faint: #4a4940;
+  --ink: #ededeb;
+  --ink-dim: #a2a6a2;
+  --ink-faint: #626662;
 
   /* Amber accent family */
   --amber: #d97706;
@@ -25,6 +26,13 @@
   --grid: rgba(217, 119, 6, 0.08);
   --hud: rgba(245, 239, 225, 0.18);
   --hud-strong: rgba(245, 239, 225, 0.55);
+  --line: rgba(237, 237, 235, 0.09);
+  --line-strong: rgba(237, 237, 235, 0.15);
+  --surface-hover: rgba(237, 237, 235, 0.045);
+  --surface-active: rgba(237, 237, 235, 0.075);
+  --amber-wash: rgba(217, 119, 6, 0.13);
+  --amber-line: rgba(217, 119, 6, 0.34);
+  --healthy: #3ecf8e;
 
   /* State colors */
   --danger: #dc2626;
@@ -54,7 +62,7 @@
   --color-danger: var(--danger);
 
   --font-sans: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  /* Mono + display both resolve to Inter — editorial feel, no AI-tech mono.
+  /* Mono + display both resolve to Inter. Editorial feel, no AI-tech mono.
      Code-block fallbacks still hit system mono via the .prose-hud rules. */
   --font-mono: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -117,8 +125,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(1200px 800px at 50% 50%, rgba(217, 119, 6, 0.1), transparent 60%),
-    radial-gradient(circle at 50% 50%, var(--bg-2) 0%, var(--bg) 70%);
+    radial-gradient(900px 620px at 58% 42%, rgba(62, 207, 142, 0.025), transparent 68%),
+    var(--bg);
   pointer-events: none;
   z-index: -1;
 }
@@ -133,7 +141,7 @@ body {
   background-size: 56px 56px;
   mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
   -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
-  opacity: 0.5;
+  opacity: 0;
   pointer-events: none;
   z-index: -1;
 }
@@ -199,9 +207,139 @@ body {
 
 /* Panel base for cards and HUD modules. */
 .panel {
-  background: color-mix(in oklab, var(--bg-2) 92%, transparent);
-  border: 1px solid rgba(245, 239, 225, 0.07);
-  border-radius: 10px;
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+}
+
+/* Supabase-inspired application shell. HAND amber remains the action color. */
+.command-shell { background: var(--bg); }
+.command-rail {
+  width: 48px;
+  border-right: 1px solid var(--line);
+  background: #0b0d0c;
+  backdrop-filter: none;
+}
+.command-rail > a { height: 44px; border-color: var(--line); }
+.command-rail > a span { width: 26px; height: 26px; border-radius: 5px; }
+.command-rail nav a { width: 34px; height: 34px; border-radius: 5px; }
+.command-rail nav svg { width: 17px; height: 17px; stroke-width: 1.6; }
+.command-drawer { overflow: hidden; overscroll-behavior: contain; touch-action: pan-y; background: #0f1210; border-right: 1px solid var(--line-strong); box-shadow: 18px 0 48px rgba(0, 0, 0, 0.42); }
+.command-drawer nav { overscroll-behavior: contain; }
+.command-hover-drawer {
+  position: fixed;
+  z-index: 29;
+  inset: 0 auto 0 48px;
+  width: 248px;
+  color: var(--ink);
+  background: #0f1210;
+  border-right: 1px solid var(--line-strong);
+  box-shadow: 18px 0 48px rgba(0, 0, 0, 0.36);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-8px);
+  transition: opacity 150ms ease, transform 150ms ease, visibility 150ms;
+}
+.command-rail:hover + .command-hover-drawer,
+.command-hover-drawer:hover,
+.command-hover-drawer:focus-within {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+.command-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(13, 15, 14, 0.94);
+  backdrop-filter: blur(12px);
+}
+.command-crumbs { display: flex; align-items: center; gap: 10px; min-width: 0; font-size: 12px; color: var(--ink-dim); }
+.command-crumbs strong, .command-crumbs b { color: var(--ink); font-weight: 550; white-space: nowrap; }
+.command-crumbs > span:not(:nth-child(2)):not(:nth-child(4)) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.command-crumbs em { color: var(--amber-soft); border: 1px solid var(--amber-line); border-radius: 999px; padding: 2px 7px; font: 500 8px var(--font-mono); font-style: normal; letter-spacing: .08em; }
+.command-topbar-actions { display: flex; align-items: center; gap: 8px; }
+.command-search { height: 28px; min-width: 174px; display: flex; align-items: center; gap: 7px; padding: 0 8px; color: var(--ink-dim); background: var(--bg-2); border: 1px solid var(--line-strong); border-radius: 6px; font-size: 11px; }
+.command-search svg { width: 14px; }
+.command-search span { flex: 1; text-align: left; }
+.command-search kbd { color: var(--ink-faint); font: 9px var(--font-mono); }
+.command-page { width: 100%; max-width: 1120px; margin: 0 auto; padding: 28px 22px 26px; }
+
+.command-overview { display: grid; grid-template-columns: minmax(300px, .9fr) minmax(400px, 1.1fr); gap: 28px; align-items: center; min-height: 300px; padding: 0 4px 24px; }
+.command-project h1 { margin: 7px 0 6px; font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 500; letter-spacing: -.035em; }
+.command-project-ref { color: var(--ink-dim); font: 11px var(--font-mono); }
+.command-project-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; max-width: 460px; margin-top: 24px; }
+.command-project-facts div { display: grid; grid-template-columns: 42px 1fr; grid-template-rows: auto auto; column-gap: 11px; }
+.command-project-facts div::before { content: ""; grid-row: 1 / 3; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg-2); }
+.command-project-facts dt { grid-column: 2; display: flex; align-items: center; gap: 6px; color: var(--ink-faint); font: 500 9px var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+.command-project-facts dt svg { position: absolute; width: 14px; margin-left: -38px; color: var(--ink-dim); }
+.command-project-facts dd { grid-column: 2; margin: 6px 0 0; color: var(--ink); font-size: 13px; }
+.health-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--healthy); box-shadow: 0 0 0 3px rgba(62,207,142,.1); }
+.command-topology { position: relative; min-height: 260px; border: 1px solid var(--line); border-radius: 7px; background-color: #0f1210; background-image: radial-gradient(rgba(237,237,235,.13) .7px, transparent .7px); background-size: 18px 18px; }
+.command-topology::before, .command-topology::after { content: ""; position: absolute; left: 50%; top: 50%; background: var(--line-strong); transform-origin: left center; }
+.command-topology::before { width: 64%; height: 1px; transform: rotate(27deg); }
+.command-topology::after { width: 64%; height: 1px; transform: rotate(153deg); }
+.topology-node { position: absolute; z-index: 2; left: 50%; top: 50%; width: min(300px, 62%); min-height: 86px; transform: translate(-50%, -50%); display: grid; grid-template-columns: 36px 1fr auto; align-items: center; gap: 12px; padding: 14px; background: #151816; border: 1px solid var(--line-strong); border-radius: 6px; box-shadow: 0 12px 32px rgba(0,0,0,.22); }
+.topology-icon { width: 32px; height: 32px; display: grid; place-items: center; color: var(--healthy); background: rgba(62,207,142,.08); border: 1px solid rgba(62,207,142,.28); border-radius: 6px; }
+.topology-icon svg { width: 17px; }
+.topology-node strong, .topology-node small { display: block; }
+.topology-node strong { font-size: 12px; font-weight: 550; }
+.topology-node small { margin-top: 4px; color: var(--ink-dim); font: 9px var(--font-mono); }
+.topology-node b { display: flex; align-items: center; gap: 7px; color: var(--ink-dim); font: 500 9px var(--font-mono); text-transform: uppercase; }
+.topology-label { position: absolute; z-index: 1; padding: 4px 7px; color: var(--ink-dim); background: #0f1210; border: 1px solid var(--line); border-radius: 4px; font: 9px var(--font-mono); }
+.topology-label-grants { top: 17%; left: 12%; }.topology-label-projects { top: 18%; right: 11%; }.topology-label-feedback { bottom: 17%; left: 12%; }.topology-label-reciprocates { right: 10%; bottom: 16%; }
+.command-summary { border-top: 1px solid var(--line); padding-top: 20px; }
+.command-summary-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.command-summary-heading h2 { font-size: 14px; font-weight: 500; }
+.command-summary-heading > span:last-child { color: var(--ink-dim); font-size: 12px; }
+.summary-grip { color: var(--ink-faint); }
+.command-summary dl { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 7px; overflow: hidden; }
+.command-summary dl a { min-height: 104px; padding: 14px; color: inherit; text-decoration: none; background: var(--bg-2); border-right: 1px solid var(--line); }
+.command-summary dl a:last-child { border-right: 0; }
+.command-summary dl a:hover { background: var(--surface-hover); }
+.command-summary dt { display: flex; align-items: center; gap: 7px; color: var(--ink-dim); font-size: 11px; }
+.command-summary dt svg { width: 15px; color: var(--healthy); }
+.command-summary dd { margin: 12px 0 2px; font-size: 21px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.command-dashboard { font-size: .94rem; }
+.command-dashboard .panel { padding: 1rem; }
+.command-summary small { color: var(--ink-faint); font: 9px var(--font-mono); text-transform: uppercase; letter-spacing: .06em; }
+
+@media (max-width: 960px) {
+  .command-hover-drawer { display: none; }
+  .command-overview { grid-template-columns: 1fr; gap: 28px; }
+  .command-topology { min-height: 300px; }
+  .command-summary dl { grid-template-columns: repeat(2, 1fr); }
+  .command-summary dl a:nth-child(even) { border-right: 0; }
+  .command-summary dl a:nth-child(-n+4) { border-bottom: 1px solid var(--line); }
+}
+@media (max-width: 640px) {
+  .command-topbar { padding-inline: 10px; }
+  .command-crumbs > span, .command-crumbs > b, .command-crumbs > em { display: none; }
+  .command-search { min-width: 30px; width: 30px; padding: 0; justify-content: center; }
+  .command-search span, .command-search kbd { display: none; }
+  .command-page { padding: 28px 14px; }
+  .command-overview { min-height: 0; padding-inline: 0; }
+  .command-project-facts { grid-template-columns: 1fr; }
+  .command-topology { min-height: 260px; }
+  .topology-node { width: 76%; grid-template-columns: 32px 1fr; }
+  .topology-node b { display: none; }
+  .topology-label { display: none; }
+  .command-summary-heading > span:last-child { margin-left: auto; font-size: 10px; }
+  .command-summary dl { grid-template-columns: 1fr; }
+  .command-summary dl a, .command-summary dl a:nth-child(2) { min-height: 104px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .command-summary dl a:last-child { border-bottom: 0; }
+}
+@media (hover: none), (pointer: coarse) {
+  .command-hover-drawer { display: none; }
 }
 
 /* Amber action ring used for primary buttons and focus states. */
