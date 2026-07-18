@@ -1,6 +1,6 @@
 # WXL:FOOD Handoff
 
-Last updated: 2026-07-17
+Last updated: 2026-07-18
 
 This is the working orientation document for `wxl/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on WXL:FOOD, its current behavior, what is real, what is illustrative, and what should be built next.
 
@@ -53,15 +53,26 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 | `/app/?mode=login&signup=1` | Account creation |
 | `/app/?mode=reset` | Request a password-reset email |
 | `/app/?mode=recovery` | Set a new password after following the recovery link |
+| `/app/?mode=anonymous&intent=food` | Public food-finding entry; opens the Austin food map |
+| `/app/?mode=anonymous&intent=request` | Public request entry; opens Community Requests |
+| `/app/?intent=contribute` | Contributor entry; opens Volunteer Command and preserves session-based write access |
 
 Routing is currently implemented with `window.location.pathname` and query parameters inside `App.tsx`. There is no router library.
+
+The landing page is intentionally food-only and role-first. It presents `I need food` and `I am a Contributor` as the two primary paths. Sign-in and community requests remain available, but they do not compete with the initial decision. Intent parameters select the first workspace only. Authentication continues to come exclusively from the Supabase session.
+
+The food intent opens an optional geolocation prompt before map exploration. Browser coordinates are used in memory to select the nearest verified listing and are not persisted or sent to Supabase. The choice is remembered only for the current browser tab through `sessionStorage`. Visitors can skip it and can reopen it from the map location control.
 
 ## What works now
 
 ### Landing and access
 
-- The landing page presents WXL and opens an access choice.
-- People can choose login or anonymous browsing.
+- The landing page is food-only and starts with two role paths: `I need food` and `I am a Contributor`.
+- The food path opens public map browsing. The Contributor path opens Volunteer Command. Community requests and sign-in remain secondary routes.
+- Food seekers receive an optional second-step location prompt. The browser asks for location access only after the visitor chooses `Use my location`.
+- A successful location lookup selects the nearest bundled verified listing. Skipping opens the complete Austin map.
+- Browser coordinates remain in memory for the nearest-listing calculation and are not persisted or sent to Supabase.
+- The location choice lasts only for the current tab. The command-center location control can reopen the prompt.
 - The SPA fallback works through Netlify and `public/_redirects`.
 
 ### Authentication
@@ -492,8 +503,12 @@ See `DEPLOY.md` for the concise deployment guide.
 
 Before calling the current auth and community flow production-ready, verify:
 
-- Landing access modal opens and closes with mouse and keyboard.
-- Anonymous browse opens the command center.
+- Both landing role paths open their intended workspace.
+- The food intent opens the optional location prompt.
+- Allowing location selects a nearby bundled listing on localhost and the production HTTPS origin.
+- Denying, timing out, or skipping location keeps the complete Austin map usable.
+- Reopening the location prompt from the command-center control works.
+- Anonymous food browsing opens the command center.
 - Public request loading works without a session.
 - Anonymous write attempts open the account prompt.
 - Account creation works with a new address.
@@ -592,6 +607,24 @@ Before calling the current auth and community flow production-ready, verify:
 - Failed storage checks hold the lot. Cancelling a reservation cannot release the hold, and hold release requires a newer passing condition check.
 - Migration 031 has not been applied to production from this workspace. Live concurrency, expiry, privacy, and reconciliation tests remain required.
 - `npm test` passes 38 tests and `npm run build` completes successfully.
+
+## Food-first onboarding and geolocation pass, 2026-07-18
+
+Implementation commit: `d9335850c` (`feat(wxl): add food-first onboarding and location step`).
+
+- Replaced the broad WXL splash and access modal with a focused `/W XTRA ♥` food entry.
+- Made `I need food` and `I am a Contributor` the two primary choices. The first opens Overview; the second opens Volunteer Command.
+- Added `intent=food`, `intent=request`, and `intent=contribute` initial-workspace routing. Intent never changes session-based write access.
+- Added optional geolocation after the food choice. Permission is requested only from the explicit `Use my location` button.
+- Calculates the nearest bundled verified public listing in browser memory, selects it on the schematic map, and reminds the visitor to confirm hours before traveling.
+- Added a skip path, permission-denial and failure messages, a loading state, and a reusable command-center location control.
+- Records the completed or skipped choice only in `sessionStorage` for the current tab. Coordinates are not stored in local storage, Supabase, account metadata, or engagement events.
+- Updated `docs/LIVING-DOCS.md`, page metadata, responsive styles, and interaction coverage.
+- `npm test` passes 42 tests and `npm run build` completes successfully. The existing Vite chunk-size warning remains non-blocking.
+
+Known geolocation limitation:
+
+- Nearest-listing comparison currently covers only bundled public-directory locations with local coordinates. Supabase community pins do not yet carry reviewed coordinates and are not candidates. Do not silently geocode private or unreviewed addresses. A future location expansion should add coordinator-reviewed coordinates to the public food-spot data model before including those records.
 
 ## Working conventions
 
