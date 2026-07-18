@@ -127,7 +127,42 @@ function DashboardApp() {
   const [addSpotOpen, setAddSpotOpen] = useState(false)
   const [foodHereOpen, setFoodHereOpen] = useState(false)
   const [feedbackOpen, setFeedbackOpen] = useState(false)
+  const [mobileHeaderVisible, setMobileHeaderVisible] = useState(true)
   const { clicks, variant } = useEngagement()
+
+  useEffect(() => {
+    let lastScrollY = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop)
+
+    const updateHeader = () => {
+      const currentScrollY = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop)
+      if (window.innerWidth > 720 || currentScrollY <= 16) {
+        setMobileHeaderVisible(true)
+      } else if (currentScrollY < lastScrollY - 4) {
+        setMobileHeaderVisible(true)
+      } else if (currentScrollY > lastScrollY + 6) {
+        setMobileHeaderVisible(false)
+      }
+      lastScrollY = currentScrollY
+    }
+
+    const resetHeader = () => {
+      lastScrollY = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop)
+      if (window.innerWidth > 720) setMobileHeaderVisible(true)
+    }
+
+    window.addEventListener('scroll', updateHeader, { passive: true })
+    window.addEventListener('resize', resetHeader)
+    window.addEventListener('focus', updateHeader)
+    return () => {
+      window.removeEventListener('scroll', updateHeader)
+      window.removeEventListener('resize', resetHeader)
+      window.removeEventListener('focus', updateHeader)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (menuOpen || alertsOpen) setMobileHeaderVisible(true)
+  }, [menuOpen, alertsOpen])
 
   useEffect(() => {
     if (!foodDbConfigured) return
@@ -243,7 +278,7 @@ function DashboardApp() {
       {menuOpen && <button className="sidebar-scrim" onClick={() => setMenuOpen(false)} aria-label="Close navigation" />}
 
       <main className="main-content">
-        <header className="topbar"><button className="menu-button" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu size={22} /></button><div className="breadcrumb" aria-label="Current location"><span className="breadcrumb-root">Directory</span><span>/</span><span>WXL:FOOD</span><span>/</span><strong>{viewLabels[view]}</strong></div><div className="top-actions"><div className="search"><Search size={17} /><input placeholder="Search places, food, or needs" aria-label="Search" /></div><button className="icon-button" onClick={() => setAlertsOpen((current) => !current)} aria-label={`${alerts.length} active food alerts`}><Bell size={18} />{alerts.length > 0 && <i />}</button>{variant === 'map_first' ? <><button className="add-button experiment-primary" onClick={() => requireAuth(() => setAddSpotOpen(true))}><Plus size={17} /> Add food spot</button><button className="food-here-button" onClick={() => requireAuth(() => setFoodHereOpen(true))}><Zap size={16} /> FOOD IS HERE!</button></> : <><button className="food-here-button experiment-primary" onClick={() => requireAuth(() => setFoodHereOpen(true))}><Zap size={16} /> FOOD IS HERE!</button><button className="add-button" onClick={() => requireAuth(() => setAddSpotOpen(true))}><Plus size={17} /> Add food spot</button></>}</div></header>
+        <header className={`topbar ${mobileHeaderVisible ? 'mobile-header-visible' : 'mobile-header-hidden'}`}><button className="menu-button" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu size={22} /></button><div className="breadcrumb" aria-label="Current location"><span className="breadcrumb-root">Directory</span><span>/</span><span>WXL:FOOD</span><span>/</span><strong>{viewLabels[view]}</strong></div><div className="top-actions"><div className="search"><Search size={17} /><input placeholder="Search places, food, or needs" aria-label="Search" /></div><button className="icon-button" onClick={() => setAlertsOpen((current) => !current)} aria-label={`${alerts.length} active food alerts`}><Bell size={18} />{alerts.length > 0 && <i />}</button>{variant === 'map_first' ? <><button className="add-button experiment-primary" onClick={() => requireAuth(() => setAddSpotOpen(true))}><Plus size={17} /> Add food spot</button><button className="food-here-button" onClick={() => requireAuth(() => setFoodHereOpen(true))}><Zap size={16} /> FOOD IS HERE!</button></> : <><button className="food-here-button experiment-primary" onClick={() => requireAuth(() => setFoodHereOpen(true))}><Zap size={16} /> FOOD IS HERE!</button><button className="add-button" onClick={() => requireAuth(() => setAddSpotOpen(true))}><Plus size={17} /> Add food spot</button></>}</div></header>
         <AlertCenter alerts={alerts} open={alertsOpen} onClose={() => setAlertsOpen(false)} />
 
         <div className="page-wrap">

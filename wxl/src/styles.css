@@ -238,7 +238,9 @@ button { border: 0; cursor: pointer; }
   .sidebar-toggle { display: none; }
   .sidebar.open .mobile-close { display: grid; }
   .sidebar-scrim { display: block; position: fixed; inset: 0; z-index: 29; width: 100%; height: 100%; padding: 0; background: #0b281d80; }
-  .topbar { padding-left: 12px; }
+  .topbar { position: sticky; z-index: 24; top: 0; padding-left: 12px; transition: transform .2s ease, box-shadow .2s ease; will-change: transform; }
+  .topbar.mobile-header-visible { transform: translateY(0); box-shadow: 0 8px 18px #183d2b12; }
+  .topbar.mobile-header-hidden { transform: translateY(-100%); box-shadow: none; pointer-events: none; }
   .top-actions .food-here-button { width: 36px; font-size: 0; padding: 0; }
   .top-actions .add-button { display: none; }
   .breadcrumb span:first-child, .breadcrumb span:nth-child(2) { display: none; }

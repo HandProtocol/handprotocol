@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it } from 'vitest'
 import App from './App'
@@ -60,6 +60,27 @@ describe('WXL entry points and interaction gates', () => {
     Object.defineProperty(window, 'innerWidth', { value: 390, configurable: true })
     window.history.replaceState({}, '', '/app/?mode=anonymous')
     const { container } = render(<App />)
+    await userEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
+    expect(container.querySelector('.sidebar')).toHaveClass('open')
+  })
+
+  it('restores the mobile header on upward scroll so its actions remain clickable', async () => {
+    Object.defineProperty(window, 'innerWidth', { value: 390, configurable: true })
+    Object.defineProperty(window, 'scrollY', { value: 0, writable: true, configurable: true })
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    const { container } = render(<App />)
+    const header = container.querySelector('.topbar')
+
+    expect(header).toHaveClass('mobile-header-visible')
+
+    window.scrollY = 180
+    fireEvent.scroll(window)
+    expect(header).toHaveClass('mobile-header-hidden')
+
+    window.scrollY = 120
+    fireEvent.scroll(window)
+    expect(header).toHaveClass('mobile-header-visible')
+
     await userEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
     expect(container.querySelector('.sidebar')).toHaveClass('open')
   })
