@@ -32,6 +32,8 @@ type FoodLocation = {
   x: number
   y: number
   verified: boolean
+  latitude?: number
+  longitude?: number
 }
 
 const viewLabels: Record<View, string> = {
@@ -72,13 +74,13 @@ const cityCentersUrl = 'https://www.austintexas.gov/services/get-help-neighborho
 const foodBankUrl = 'https://www.centraltexasfoodbank.org/find-food-now'
 
 const locations: FoodLocation[] = [
-  { id: 'east-austin-center', name: 'East Austin Neighborhood Center', type: 'Food pantry', area: 'East Austin', address: '211 Comal St, Austin, TX 78702', status: 'limited', detail: 'City neighborhood center. Call 512-972-6650 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 31, y: 49, verified: true },
-  { id: 'blackland-center', name: 'Blackland Neighborhood Center', type: 'Food pantry', area: 'Blackland', address: '2005 Salina St, Austin, TX 78722', status: 'limited', detail: 'City neighborhood center. Call 512-972-5790 before visiting.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 49, y: 25, verified: true },
-  { id: 'rosewood-center', name: 'Rosewood-Zaragosa Neighborhood Center', type: 'Food pantry', area: 'Rosewood', address: '2800 Webberville Rd, Austin, TX 78702', status: 'limited', detail: 'City neighborhood center. Call 512-972-6740 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 61, y: 43, verified: true },
-  { id: 'montopolis-center', name: 'Montopolis Community Center', type: 'Food pantry', area: 'Montopolis', address: '1200 Montopolis Dr, Austin, TX 78741', status: 'limited', detail: 'City community center. Call 512-972-6705 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 78, y: 69, verified: true },
-  { id: 'st-john-center', name: 'St. John Community Center', type: 'Food pantry', area: 'St. John', address: '7500 Blessing Ave, Austin, TX 78752', status: 'limited', detail: 'City community center. Call 512-972-5159 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 57, y: 11, verified: true },
-  { id: 'dove-springs-center', name: 'Dove Springs Neighborhood Center', type: 'Food pantry', area: 'Southeast Austin', address: '5811 Palo Blanco Ln, Austin, TX 78744', status: 'limited', detail: 'City neighborhood center. Call 512-972-6699 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 69, y: 88, verified: true },
-  { id: 'foundation-m-station', name: 'Foundation Communities, M Station', type: 'Food Bank partner', area: 'East Austin', address: '2918 E Martin Luther King Jr Blvd, Austin, TX 78702', status: 'limited', detail: 'Listed in the Central Texas Food Bank finder. Check the directory for current program details.', access: 'Program details and availability can change. Confirm before traveling.', sourceUrl: foodBankUrl, sourceLabel: 'Central Texas Food Bank', x: 71, y: 30, verified: true },
+  { id: 'east-austin-center', name: 'East Austin Neighborhood Center', type: 'Food pantry', area: 'East Austin', address: '211 Comal St, Austin, TX 78702', status: 'limited', detail: 'City neighborhood center. Call 512-972-6650 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 31, y: 49, verified: true, latitude: 30.259, longitude: -97.727 },
+  { id: 'blackland-center', name: 'Blackland Neighborhood Center', type: 'Food pantry', area: 'Blackland', address: '2005 Salina St, Austin, TX 78722', status: 'limited', detail: 'City neighborhood center. Call 512-972-5790 before visiting.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 49, y: 25, verified: true, latitude: 30.282, longitude: -97.722 },
+  { id: 'rosewood-center', name: 'Rosewood-Zaragosa Neighborhood Center', type: 'Food pantry', area: 'Rosewood', address: '2800 Webberville Rd, Austin, TX 78702', status: 'limited', detail: 'City neighborhood center. Call 512-972-6740 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 61, y: 43, verified: true, latitude: 30.269, longitude: -97.71 },
+  { id: 'montopolis-center', name: 'Montopolis Community Center', type: 'Food pantry', area: 'Montopolis', address: '1200 Montopolis Dr, Austin, TX 78741', status: 'limited', detail: 'City community center. Call 512-972-6705 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 78, y: 69, verified: true, latitude: 30.23, longitude: -97.7 },
+  { id: 'st-john-center', name: 'St. John Community Center', type: 'Food pantry', area: 'St. John', address: '7500 Blessing Ave, Austin, TX 78752', status: 'limited', detail: 'City community center. Call 512-972-5159 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 57, y: 11, verified: true, latitude: 30.333, longitude: -97.693 },
+  { id: 'dove-springs-center', name: 'Dove Springs Neighborhood Center', type: 'Food pantry', area: 'Southeast Austin', address: '5811 Palo Blanco Ln, Austin, TX 78744', status: 'limited', detail: 'City neighborhood center. Call 512-972-6699 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 69, y: 88, verified: true, latitude: 30.188, longitude: -97.741 },
+  { id: 'foundation-m-station', name: 'Foundation Communities, M Station', type: 'Food Bank partner', area: 'East Austin', address: '2918 E Martin Luther King Jr Blvd, Austin, TX 78702', status: 'limited', detail: 'Listed in the Central Texas Food Bank finder. Check the directory for current program details.', access: 'Program details and availability can change. Confirm before traveling.', sourceUrl: foodBankUrl, sourceLabel: 'Central Texas Food Bank', x: 71, y: 30, verified: true, latitude: 30.28, longitude: -97.706 },
   { id: 'south-oak-baptist', name: 'South Oak Baptist food pantry', type: 'Community-reported pantry', area: 'South Austin', address: 'South Austin, exact public location pending confirmation', status: 'limited', detail: 'Community report: one form, no ID requested. A coordinator still needs to confirm the public listing.', hours: 'Thursdays, 9 to 11 AM', access: 'One form, no ID, according to a community report. Confirm before traveling.', x: 32, y: 86, verified: false },
 ]
 
@@ -108,10 +110,26 @@ const initialMessages = [
   { id: 3, author: 'Sample coordinator', role: 'Network coordinator', message: 'I can add this to the 4:15 PM harvest run and look for the remaining five households.', time: '4 min ago', mine: false },
 ]
 
+function nearestListedLocation(latitude: number, longitude: number) {
+  const radians = (degrees: number) => degrees * Math.PI / 180
+  const distance = (location: FoodLocation) => {
+    const latitudeDelta = radians((location.latitude ?? latitude) - latitude)
+    const longitudeDelta = radians((location.longitude ?? longitude) - longitude)
+    const value = Math.sin(latitudeDelta / 2) ** 2 + Math.cos(radians(latitude)) * Math.cos(radians(location.latitude ?? latitude)) * Math.sin(longitudeDelta / 2) ** 2
+    return 2 * 3959 * Math.asin(Math.sqrt(value))
+  }
+  return locations.filter((location) => location.verified && location.latitude != null && location.longitude != null).sort((a, b) => distance(a) - distance(b))[0]
+}
+
 function DashboardApp() {
-  const [view, setView] = useState<View>('command')
+  const [view, setView] = useState<View>(() => {
+    const intent = new URLSearchParams(window.location.search).get('intent')
+    return intent === 'contribute' ? 'volunteer' : intent === 'request' ? 'community' : 'command'
+  })
   const [mapFilter, setMapFilter] = useState<'all' | Status>('all')
   const [selected, setSelected] = useState(locations[0])
+  const [locationLabel, setLocationLabel] = useState('Austin core')
+  const [locationPromptOpen, setLocationPromptOpen] = useState(() => new URLSearchParams(window.location.search).get('intent') === 'food' && sessionStorage.getItem('wxl:location-choice') !== 'complete')
   const [mapLocations, setMapLocations] = useState(locations)
   const [menuOpen, setMenuOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => localStorage.getItem('wxl:sidebar-collapsed') === '1')
@@ -253,6 +271,21 @@ function DashboardApp() {
     notify('You are signed out. Public browsing remains open.')
   }
   const toggleSidebar = () => setSidebarCollapsed((current) => { localStorage.setItem('wxl:sidebar-collapsed', current ? '0' : '1'); return !current })
+  const useVisitorLocation = (latitude: number, longitude: number) => {
+    const nearest = nearestListedLocation(latitude, longitude)
+    sessionStorage.setItem('wxl:location-choice', 'complete')
+    setLocationPromptOpen(false)
+    setMapFilter('all')
+    setView('command')
+    if (!nearest) { notify('Your location is available, but no nearby listing could be selected'); return }
+    setSelected(nearest)
+    setLocationLabel(`${nearest.area} nearby`)
+    notify(`${nearest.name} is the nearest listed food resource. Confirm hours before traveling.`)
+  }
+  const skipVisitorLocation = () => {
+    sessionStorage.setItem('wxl:location-choice', 'complete')
+    setLocationPromptOpen(false)
+  }
 
   return (
     <div className={`app-shell ${sidebarCollapsed ? 'sidebar-is-collapsed' : ''}`} data-experiment={variant}>
@@ -282,7 +315,7 @@ function DashboardApp() {
         <AlertCenter alerts={alerts} open={alertsOpen} onClose={() => setAlertsOpen(false)} />
 
         <div className="page-wrap">
-          <div className="page-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Austin network / community preview</p><h1>{view === 'command' ? 'Local food, coordinated.' : view === 'rescue' ? 'Rescue operations' : view === 'volunteer' ? 'Volunteer command' : view === 'community' ? 'Community requests' : view === 'harvest' ? 'Harvest runs' : view === 'inventory' ? 'Inventory' : 'Partner network'}</h1><p className="lede">See where food is moving, where it is needed, and what can happen next.</p></div><button className="location-button"><MapPin size={16} /> Austin core <ChevronDown size={15} /></button></div>
+          <div className="page-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Austin network / community preview</p><h1>{view === 'command' ? 'Local food, coordinated.' : view === 'rescue' ? 'Rescue operations' : view === 'volunteer' ? 'Volunteer command' : view === 'community' ? 'Community requests' : view === 'harvest' ? 'Harvest runs' : view === 'inventory' ? 'Inventory' : 'Partner network'}</h1><p className="lede">See where food is moving, where it is needed, and what can happen next.</p></div><button className="location-button" onClick={() => setLocationPromptOpen(true)}><MapPin size={16} /> {locationLabel} <ChevronDown size={15} /></button></div>
 
           {view === 'command' && <>
             <section className="map-overview panel" aria-labelledby="food-map-title">
@@ -323,6 +356,7 @@ function DashboardApp() {
       </main>
       {toast && <div className="toast"><ShieldCheck size={17} /> {toast}</div>}
       {authPromptOpen && <AuthPrompt onClose={() => setAuthPromptOpen(false)} />}
+      {locationPromptOpen && <LocationPrompt onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
       {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}
       {addSpotOpen && <AddSpotModal onClose={() => setAddSpotOpen(false)} notify={notify} onAdded={(spot) => {
         setSpots((current) => [spot, ...current])
@@ -560,9 +594,58 @@ function AuthPrompt({ onClose }: { onClose: () => void }) {
   return <div className="access-backdrop" role="dialog" aria-modal="true" aria-labelledby="auth-prompt-title" onClick={onClose}><div className="access-card" onClick={(event) => event.stopPropagation()}><button className="access-close" onClick={onClose} aria-label="Close sign-in prompt"><X size={17} /></button><span className="access-heart">♥</span><p className="eyebrow">Account needed</p><h2 id="auth-prompt-title">Join the network to take action.</h2><p>Anonymous browsing is open to everyone. Create an account or log in to post rescues, reply to requests, offer help, and nominate food sources.</p><div className="access-actions"><a className="access-login" href="/app/?mode=login">Log in <ArrowUpRight size={15} /></a><a className="access-anonymous" href="/app/?mode=login&signup=1">Create an account <ArrowUpRight size={15} /></a></div></div></div>
 }
 
+function LocationPrompt({ onLocated, onSkip }: { onLocated: (latitude: number, longitude: number) => void; onSkip: () => void }) {
+  const [state, setState] = useState<'idle' | 'locating' | 'error'>('idle')
+  const [error, setError] = useState('')
+  const requestLocation = () => {
+    if (!navigator.geolocation) { setState('error'); setError('Location sharing is not available in this browser. You can still use the full Austin map.'); return }
+    setState('locating')
+    setError('')
+    navigator.geolocation.getCurrentPosition(
+      (position) => onLocated(position.coords.latitude, position.coords.longitude),
+      (locationError) => {
+        setState('error')
+        setError(locationError.code === 1 ? 'Location access was not allowed. You can continue with the full Austin map.' : 'We could not find your location. You can try again or continue with the full Austin map.')
+      },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 },
+    )
+  }
+  return <div className="access-backdrop location-backdrop" role="dialog" aria-modal="true" aria-labelledby="location-prompt-title"><div className="access-card location-consent"><span className="location-consent-icon" aria-hidden="true"><MapPin size={23} /></span><p className="eyebrow">Find food nearby</p><h2 id="location-prompt-title">Share your location to find nearby food?</h2><p>WXL can use your current location to select the nearest verified listing on this map.</p><div className="location-privacy"><ShieldCheck size={16} /><span>Your location stays in this browser. WXL does not save it or attach it to an account.</span></div>{error && <p className="location-error" role="alert">{error}</p>}<div className="location-actions"><button className="location-allow" type="button" onClick={requestLocation} disabled={state === 'locating'}>{state === 'locating' ? 'Finding your location…' : 'Use my location'} <ArrowUpRight size={15} /></button><button className="location-skip" type="button" onClick={onSkip}>Not now, show all Austin food</button></div></div></div>
+}
+
 function LandingPage() {
-  const [accessOpen, setAccessOpen] = useState(false)
-  return <div className="landing-page"><header className="landing-nav"><a className="landing-brand" href="/" aria-label="WXL home"><span>W<span>X</span>L</span><small>with xtra love <span aria-hidden="true">♥</span></small></a><a className="landing-handoff" href="https://handprotocol.org" target="_blank" rel="noreferrer">A HAND Protocol project <ArrowUpRight size={14} /></a></header><main className="landing-main"><div className="landing-orbit orbit-one" /><div className="landing-orbit orbit-two" /><p className="landing-kicker"><span /> Local systems, held with care</p><h1 aria-label="WXL"><span aria-hidden="true">W</span><span className="landing-x" aria-hidden="true">X<i>♥</i></span><span aria-hidden="true">L</span></h1><div className="landing-submark"><span>/WITH XTRA LOVE</span><strong>♥</strong></div><p className="landing-copy">A coordination layer for the food already moving through our neighborhoods.</p><div className="landing-actions"><button className="landing-primary" onClick={() => setAccessOpen(true)}>Open WXL:FOOD <ArrowUpRight size={17} /></button><a className="landing-soon waterdrop-link" href="https://waterdrop.handprotocol.org" target="_blank" rel="noreferrer"><span>WaterDrop app</span><em>OPEN RIVER MAP</em></a></div><p className="landing-note">Local food intelligence, shared by the people who keep it alive.</p></main><footer className="landing-footer"><span>Austin, Texas</span><span>Part of <a href="https://handprotocol.org" target="_blank" rel="noreferrer">HAND Protocol</a></span><span>Built for neighbors, partners, and contributors</span></footer>{accessOpen && <div className="access-backdrop" role="dialog" aria-modal="true" aria-labelledby="access-title" onClick={() => setAccessOpen(false)}><div className="access-card" onClick={(event) => event.stopPropagation()}><button className="access-close" onClick={() => setAccessOpen(false)} aria-label="Close access prompt"><X size={17} /></button><span className="access-heart">♥</span><p className="eyebrow">Welcome to WXL:FOOD</p><h2 id="access-title">How would you like to enter?</h2><p>Public food information is available to everyone. A login will let you post, respond, nominate sources, and coordinate with a partner group.</p><div className="access-actions"><a className="access-login" href="/app/?mode=login">Log in <ArrowUpRight size={15} /></a><a className="access-anonymous" href="/app/?mode=anonymous">Browse anonymously <ArrowUpRight size={15} /></a></div><small>You can explore first and choose an account later.</small></div></div>}</div>
+  return <div className="landing-page food-entry-page">
+    <a className="landing-skip" href="#choose-a-path">Skip to your path</a>
+    <header className="landing-nav">
+      <a className="landing-brand" href="/" aria-label="W Xtra home"><span>/W XTRA <b aria-hidden="true">♥</b></span><small>WXL:FOOD · Austin</small></a>
+      <div className="landing-nav-actions"><a href="/app/?mode=login">Sign in</a><a className="landing-handoff" href="https://handprotocol.org" target="_blank" rel="noreferrer">HAND Protocol <ArrowUpRight size={14} /></a></div>
+    </header>
+    <main className="food-entry-main">
+      <section className="food-entry-intro" aria-labelledby="food-entry-title">
+        <p className="landing-kicker"><span /> Austin food support</p>
+        <h1 id="food-entry-title">Food, shared<br />with xtra love.</h1>
+        <p>Find food nearby, ask your community for what is needed, or help good food reach more neighbors.</p>
+        <div className="food-entry-proof"><ShieldCheck size={16} /><span>Public food information is open to everyone. You only need an account when you are ready to post or coordinate.</span></div>
+      </section>
+      <section className="entry-paths" id="choose-a-path" aria-labelledby="choose-path-title">
+        <div className="entry-paths-heading"><p className="landing-kicker"><span /> Start here</p><h2 id="choose-path-title">What brings you here today?</h2></div>
+        <div className="entry-path-list">
+          <a className="entry-path entry-path-food" href="/app/?mode=anonymous&intent=food">
+            <span className="entry-path-icon"><MapPin size={25} /></span>
+            <span className="entry-path-copy"><small>I need food</small><strong>Show me food nearby.</strong><span>See public food locations, hours, access notes, and community requests. No account needed to look.</span></span>
+            <span className="entry-path-action">Find food <ArrowUpRight size={18} /></span>
+          </a>
+          <a className="entry-path entry-path-contributor" href="/app/?intent=contribute">
+            <span className="entry-path-icon"><HandHeart size={25} /></span>
+            <span className="entry-path-copy"><small>I am a Contributor</small><strong>Put my time or resources to work.</strong><span>Offer food, drive a route, help with storage, or join a coordinated volunteer run.</span></span>
+            <span className="entry-path-action">Start contributing <ArrowUpRight size={18} /></span>
+          </a>
+        </div>
+        <p className="entry-request-note">Need something the map does not show? <a href="/app/?mode=anonymous&intent=request">View or make a community request</a>.</p>
+      </section>
+    </main>
+    <footer className="landing-footer"><span>Austin, Texas</span><span>Food support coordinated by neighbors and local groups</span><span>Part of <a href="https://handprotocol.org" target="_blank" rel="noreferrer">HAND Protocol</a></span></footer>
+  </div>
 }
 
 function LoginScreen() {

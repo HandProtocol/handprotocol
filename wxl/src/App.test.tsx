@@ -1,11 +1,12 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
 
 describe('WXL entry points and interaction gates', () => {
   beforeEach(() => {
     window.history.replaceState({}, '', '/')
+    sessionStorage.clear()
   })
 
   it('marks signup credentials for the browser password manager', () => {
@@ -18,9 +19,44 @@ describe('WXL entry points and interaction gates', () => {
 
   it('replaces the coming-soon card with the live WaterDrop app', () => {
     render(<App />)
-    const link = screen.getByRole('link', { name: /WaterDrop app/i })
-    expect(link).toHaveAttribute('href', 'https://waterdrop.handprotocol.org')
-    expect(screen.queryByText('COMING SOON')).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: /Food, shared with xtra love/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Show me food nearby/i })).toHaveAttribute('href', '/app/?mode=anonymous&intent=food')
+    expect(screen.getByRole('link', { name: /Put my time or resources to work/i })).toHaveAttribute('href', '/app/?intent=contribute')
+  })
+
+  it('routes each landing choice to the relevant workspace', () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=contribute')
+    const { unmount } = render(<App />)
+    expect(screen.getByRole('heading', { level: 1, name: 'Volunteer command' })).toBeInTheDocument()
+    unmount()
+
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=request')
+    render(<App />)
+    expect(screen.getByRole('heading', { level: 2, name: 'Community requests' })).toBeInTheDocument()
+  })
+
+  it('offers optional geolocation as the second food-finding step', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
+    const getCurrentPosition = vi.fn((success: PositionCallback) => success({ coords: { latitude: 30.333, longitude: -97.693 } } as GeolocationPosition))
+    Object.defineProperty(navigator, 'geolocation', { value: { getCurrentPosition }, configurable: true })
+    render(<App />)
+
+    expect(screen.getByRole('dialog', { name: /Share your location to find nearby food/i })).toBeInTheDocument()
+    expect(screen.getByText(/does not save it or attach it to an account/i)).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: /Use my location/i }))
+
+    expect(getCurrentPosition).toHaveBeenCalledOnce()
+    expect(screen.queryByRole('dialog', { name: /Share your location/i })).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /St. John nearby/i })).toBeInTheDocument()
+    expect(screen.getByText(/nearest listed food resource/i)).toBeInTheDocument()
+  })
+
+  it('lets food seekers skip location sharing', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
+    render(<App />)
+    await userEvent.click(screen.getByRole('button', { name: /Not now, show all Austin food/i }))
+    expect(screen.queryByRole('dialog', { name: /Share your location/i })).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Start with what is open/i })).toBeInTheDocument()
   })
 
   it('keeps public browsing open but gates FOOD IS HERE behind an account', async () => {

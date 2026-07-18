@@ -2,7 +2,7 @@
 title: WXL:FOOD Living Documentation
 description: Current product behavior, community workflows, safety boundaries, and development status for WXL:FOOD.
 status: living
-last_updated: 2026-07-17
+last_updated: 2026-07-18
 canonical_path: /docs/
 ---
 
@@ -47,7 +47,7 @@ Status labels used throughout this document:
 
 | Area | Status | Current behavior |
 |---|---|---|
-| Public landing page | Live | Opens WXL:FOOD, login, or anonymous browsing. |
+| Public landing page | Live | Starts with two direct paths: find food without an account, or open Contributor readiness. A community-request route and sign-in remain secondary choices. |
 | WaterDrop link | Live | Opens the WaterDrop river stewardship app. |
 | Email and password authentication | Live | Signup creates a session immediately, login uses email and password, reset and recovery remain email-based, and members can sign out. |
 | Member identity and profile readiness | Needs migration | The interface uses the active Supabase identity. Migration 026 backfills any missing profile rows required by food-record foreign keys. |
@@ -73,6 +73,10 @@ Status labels used throughout this document:
 ## Access and accounts
 
 Anyone can browse public food information and public community requests.
+
+The public entry asks one question before presenting product navigation: whether the visitor needs food or wants to contribute. The food path opens the public food map. The Contributor path opens Volunteer Command, where readiness and account requirements are explained in context. A secondary request path opens Community Requests. These routes use an `intent` query parameter only to choose the initial workspace. The parameter never grants write access.
+
+After choosing the food path, visitors are asked whether they want to share their current location. Sharing is optional. When allowed, WXL compares the browser location with the coordinates of its verified public listings and selects the nearest listing. The visitor's coordinates remain in browser memory for that calculation and are not written to Supabase, local storage, an account, or an engagement event. Skipping location sharing opens the complete Austin map. The location control in the command center can reopen the choice.
 
 An authenticated account is required to:
 
