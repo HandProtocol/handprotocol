@@ -135,6 +135,17 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.getByLabelText('Current location')).toHaveTextContent('Directory/WXL:FOOD/Rescue operations')
   })
 
+  it('opens the shared coordination protocol while keeping SMS deferred', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: /^Coordination protocol$/i }))
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Coordination protocol' })).toBeInTheDocument()
+    expect(screen.getByText(/SMS remains in the next scope/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Request food/i })).toBeInTheDocument()
+  })
+
   it('returns to the overview from the WXL:FOOD title', async () => {
     window.history.replaceState({}, '', '/app/?mode=anonymous')
     render(<App />)

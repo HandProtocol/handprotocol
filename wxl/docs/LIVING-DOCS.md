@@ -236,6 +236,8 @@ Primary tables:
 - `command.food_alerts`
 - `command.food_engagement_events`
 
+The unreleased coordination protocol in migrations 032 through 036 adds canonical needs, supplies, commitments, mandates, match evidence, private location containers, conversations, voice sessions, payments, donations, subsidies, potlucks, policy decisions, command receipts, and an outbox. The web application exposes these records through its Coordination protocol workspace when the separate API is configured. SMS remains in the next scope. These records are not a claim that automated matching or dispatch is live.
+
 Internal aggregate view:
 
 - `command.food_engagement_leaderboard`

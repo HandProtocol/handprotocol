@@ -13,9 +13,10 @@ import { RescueBoard } from './RescueBoard'
 import { ContributorBoard } from './ContributorBoard'
 import { HarvestRunBoard } from './HarvestRunBoard'
 import { InventoryBoard } from './InventoryBoard'
+import { ProtocolBoard } from './ProtocolBoard'
 
 type Status = 'plenty' | 'limited' | 'low' | 'volunteers' | 'transport'
-type View = 'command' | 'rescue' | 'volunteer' | 'community' | 'partners' | 'harvest' | 'inventory'
+type View = 'command' | 'protocol' | 'rescue' | 'volunteer' | 'community' | 'partners' | 'harvest' | 'inventory'
 
 type FoodLocation = {
   id: string
@@ -38,6 +39,7 @@ type FoodLocation = {
 
 const viewLabels: Record<View, string> = {
   command: 'Overview',
+  protocol: 'Coordination protocol',
   rescue: 'Rescue operations',
   volunteer: 'Volunteer command',
   community: 'Community requests',
@@ -297,6 +299,7 @@ function DashboardApp() {
         <nav className="primary-nav" aria-label="Main navigation">
           <p className="nav-label">Coordinate</p>
           <NavItem active={view === 'command'} icon={<Activity size={18} />} label="Overview" onClick={() => { setView('command'); setMenuOpen(false) }} />
+          <NavItem active={view === 'protocol'} icon={<HandHeart size={18} />} label="Coordination protocol" onClick={() => { setView('protocol'); setMenuOpen(false) }} />
           <NavItem active={view === 'rescue'} icon={<Zap size={18} />} label="Rescue operations" onClick={() => { setView('rescue'); setMenuOpen(false) }} />
           <NavItem active={view === 'volunteer'} icon={<Users size={18} />} label="Volunteer command" onClick={() => { setView('volunteer'); setMenuOpen(false) }} />
           <NavItem active={view === 'community'} icon={<MessageCircle size={18} />} label="Community requests" count="18" onClick={() => { setView('community'); setMenuOpen(false) }} />
@@ -315,7 +318,7 @@ function DashboardApp() {
         <AlertCenter alerts={alerts} open={alertsOpen} onClose={() => setAlertsOpen(false)} />
 
         <div className="page-wrap">
-          <div className="page-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Austin network / community preview</p><h1>{view === 'command' ? 'Local food, coordinated.' : view === 'rescue' ? 'Rescue operations' : view === 'volunteer' ? 'Volunteer command' : view === 'community' ? 'Community requests' : view === 'harvest' ? 'Harvest runs' : view === 'inventory' ? 'Inventory' : 'Partner network'}</h1><p className="lede">See where food is moving, where it is needed, and what can happen next.</p></div><button className="location-button" onClick={() => setLocationPromptOpen(true)}><MapPin size={16} /> {locationLabel} <ChevronDown size={15} /></button></div>
+          <div className="page-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Austin network / community preview</p><h1>{view === 'command' ? 'Local food, coordinated.' : view === 'protocol' ? 'Coordination protocol' : view === 'rescue' ? 'Rescue operations' : view === 'volunteer' ? 'Volunteer command' : view === 'community' ? 'Community requests' : view === 'harvest' ? 'Harvest runs' : view === 'inventory' ? 'Inventory' : 'Partner network'}</h1><p className="lede">See where food is moving, where it is needed, and what can happen next.</p></div><button className="location-button" onClick={() => setLocationPromptOpen(true)}><MapPin size={16} /> {locationLabel} <ChevronDown size={15} /></button></div>
 
           {view === 'command' && <>
             <section className="map-overview panel" aria-labelledby="food-map-title">
@@ -347,6 +350,7 @@ function DashboardApp() {
             <section className="bottom-grid"><div className="panel rescue-panel"><PanelTitle eyebrow="Sample rescue patterns" title="Example opportunities" action="Open rescue operations" onAction={() => setView('rescue')} />{rescues.map((rescue) => <RescueRow key={rescue.title} rescue={rescue} onClick={() => setView('rescue')} />)}</div><div className="panel impact-panel"><PanelTitle eyebrow="Public goods layer" title="This week in the network" action="Impact report" onAction={() => notify('Impact report queued')} /><div className="impact-chart"><div className="chart-bars">{[40, 55, 44, 70, 64, 82, 91].map((height, i) => <span key={i} style={{ height: `${height}%` }} />)}</div><div className="chart-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Today</span></div></div><div className="impact-values"><div><strong>2,840</strong><span>meals coordinated</span></div><div><strong>418</strong><span>volunteer hours</span></div><div><strong>1.2k</strong><span>miles saved</span></div></div></div></section>
           </>}
           {view === 'rescue' && <RescueBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} onContributorSetup={() => setView('volunteer')} />}
+          {view === 'protocol' && <ProtocolBoard canWrite={isAuthenticated} memberName={memberIdentity.displayName} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
           {view === 'community' && <CommunityBoard requests={requests} setRequests={setRequests} notify={notify} dbConfigured={foodDbConfigured} canWrite={isAuthenticated} memberId={member?.id ?? null} memberName={memberIdentity.displayName} onAuthRequired={() => setAuthPromptOpen(true)} />}
           {view === 'partners' && <SourceBoard notify={notify} dbConfigured={foodDbConfigured} canWrite={isAuthenticated} onAuthRequired={() => setAuthPromptOpen(true)} />}
           {view === 'volunteer' && <ContributorBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} memberName={memberIdentity.displayName} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}

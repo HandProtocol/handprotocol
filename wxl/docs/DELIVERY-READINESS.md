@@ -1,8 +1,8 @@
 # WXL:FOOD delivery readiness
 
-Last updated: 2026-07-17
+Last updated: 2026-07-18
 
-Status: operating plan. This document defines what must be true before WXL:FOOD coordinates real food pickup and delivery. It is not evidence that those gates have already passed.
+Status: operating plan. This document defines what must be true before WXL:FOOD coordinates real food pickup and delivery. It is not evidence that those gates have already passed. The protocol foundation is documented in `COORDINATION-PROTOCOL.md`.
 
 ## Release principle
 
@@ -13,7 +13,7 @@ WXL:FOOD should expand through controlled operating stages. A polished screen is
 3. **Partner pilot:** a small set of approved food sources, receiving groups, coordinators, and trained Contributors complete supervised runs.
 4. **Austin network:** more partners and volunteers join only after pilot incidents, waste, timing, and fulfillment data have been reviewed.
 
-The current production product is between Directory and Signals. Reviewed rescue, Contributor-readiness, private harvest-run, and accepted-inventory workflows exist in migrations 028 through 031, but they are not deployed or operationally approved. WXL:FOOD is not ready for unsupervised delivery dispatch.
+The current production product is between Directory and Signals. Migrations 024 through 036 are deployed and verified at the schema and privilege level, but the rescue, Contributor-readiness, harvest-run, inventory, and coordination workflows are not operationally approved. WXL:FOOD is not ready for unsupervised delivery dispatch.
 
 ## Public-health and food-safety gate
 
@@ -122,7 +122,7 @@ Each runbook needs an owner, backup owner, last-reviewed date, emergency contact
 Before the partner pilot, require evidence for all of the following:
 
 - production auth lifecycle smoke-tested, including signup, restore, reset, expired recovery, and sign out
-- migrations 024 through 031 applied and verified
+- migrations 024 through 036 applied and verified
 - row-level security tested for anonymous, member, coordinator, and administrator roles
 - server-side validation for every state transition
 - idempotency and duplicate prevention for claims, alerts, messages, and delivery completion
@@ -156,7 +156,7 @@ Do not publish household counts or maps at a precision that could identify recip
 
 ### Milestone 1: trustworthy accounts and requests
 
-- Deploy and verify migrations 026 and 027.
+- Complete live multi-role and retry verification for migrations 026 and 027.
 - Complete the live auth smoke test.
 - Verify request messages after refresh and all database-maintained activity counts.
 - Add request-owner editing and visibility controls. Status ownership is implemented in migration 027.
@@ -164,24 +164,24 @@ Do not publish household counts or maps at a precision that could identify recip
 
 ### Milestone 2: structured offers
 
-- Deploy and verify the persisted offer flow in migration 027.
+- Complete live multi-account verification for the persisted offer flow in migration 027.
 - Add request-changes negotiation without replacing the original offer history.
 - Add private, consent-based contact handoff after acceptance.
 - Notify only people connected to the request.
 
 ### Milestone 3: reviewed rescue pilot
 
-- Deploy and verify migration 028, which adds the rescue schema, server-validated transitions, coordinator review, conflict-safe claim and release, restricted run instructions, safety checkpoints, incident hold, and event history.
+- Complete supervised live verification for migration 028, which adds the rescue schema, server-validated transitions, coordinator review, conflict-safe claim and release, restricted run instructions, safety checkpoints, incident hold, and event history.
 - Replace the current review confirmation with durable partner permit, eligibility, category, and expiry records.
-- Deploy and verify migration 029, which adds private Contributor profiles, agreement acceptance, coordinator review, training and credential expiry, equipment-gated run classes, and claim authorization.
-- Deploy and verify migration 030, which adds private route plans, rescue-linked stops, exact capacity, lifting, vehicle, run-class and expiry checks, start revalidation, ordered outcomes, incident holds, and completion evidence.
+- Complete supervised live verification for migration 029, which adds private Contributor profiles, agreement acceptance, coordinator review, training and credential expiry, equipment-gated run classes, and claim authorization.
+- Complete supervised live verification for migration 030, which adds private route plans, rescue-linked stops, exact capacity, lifting, vehicle, run-class and expiry checks, start revalidation, ordered outcomes, incident holds, and completion evidence.
 - Add normalized availability calendars and service areas, acknowledgement deadlines, overdue escalation, notifications, and offline-safe stop recording.
 - Add notification, overdue escalation, reassignment, privacy-safe access history, retention, and partial-acceptance behavior.
 - Run tabletop tests before any food moves.
 
 ### Milestone 4: inventory and auditable impact
 
-- Deploy and verify migration 031, which creates lots only from accepted delivery checkpoints and tracks storage limits, condition checks, reservations, fulfilled distributions, holds, and discards in a quantity ledger.
+- Complete supervised live verification for migration 031, which creates lots only from accepted delivery checkpoints and tracks storage limits, condition checks, reservations, fulfilled distributions, holds, and discards in a quantity ledger.
 - Add approved storage-location records, transfers, cycle counts, recall quarantine, disposal authorization, and automatic expiry handling.
 - Derive impact only from accepted delivery and inventory records.
 - Replace all sample metrics and charts with honest empty or auditable states.

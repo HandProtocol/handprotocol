@@ -1,4 +1,4 @@
--- 020_public_visits.sql
+-- 023_public_visits.sql
 -- HAND Command Center, public-site visit tracking.
 -- High-value public pages use web/assets/visit-beacon.js, which fires once per
 -- browser session. The Netlify visit function writes here via service role so

@@ -538,6 +538,39 @@ button { border: 0; cursor: pointer; }
 .rescue-safety-banner { display: flex; align-items: flex-start; gap: 8px; color: #526c5c; background: #f1f6ee; border: 1px solid #d9e6d5; border-radius: 8px; padding: 11px 13px; margin: 0 0 18px; font-size: 10px; line-height: 1.5; }
 .rescue-safety-banner svg { flex-shrink: 0; color: #467b58; }
 .rescue-workspace { display: grid; grid-template-columns: minmax(320px, .8fr) minmax(430px, 1.2fr); gap: 18px; align-items: start; }
+
+.protocol-board { display: grid; gap: 16px; }
+.protocol-intro { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 22px; }
+.protocol-intro .eyebrow { display: flex; align-items: center; gap: 7px; color: #47765a; margin: 0 0 8px; }
+.protocol-intro h2 { font: 600 20px 'Space Grotesk'; margin: 0 0 7px; }
+.protocol-intro p:last-child { color: var(--muted); font-size: 12px; line-height: 1.55; margin: 0; max-width: 720px; }
+.protocol-refresh, .protocol-submit { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 40px; border-radius: 999px; padding: 0 16px; font-size: 11px; font-weight: 600; }
+.protocol-refresh { color: #315e47; background: #f5f8f3; border: 1px solid #cbdacb; white-space: nowrap; }
+.protocol-submit { color: #fff; background: #315e47; border: 1px solid #315e47; align-self: end; }
+.protocol-tabs { display: flex; gap: 4px; overflow-x: auto; padding: 4px; background: #eef3ed; border: 1px solid #dbe4d9; border-radius: 10px; }
+.protocol-tabs button { color: #6d7d73; background: transparent; border-radius: 7px; min-height: 38px; padding: 0 15px; white-space: nowrap; font-size: 11px; }
+.protocol-tabs button.active { color: #284f3b; background: #fffefa; box-shadow: 0 2px 7px #2c4f3514; font-weight: 600; }
+.protocol-notice { color: #8b463f; background: #fff2ee; border: 1px solid #e7c5bd; border-radius: 9px; padding: 12px 14px; font-size: 11px; }
+.protocol-loading { display: flex; align-items: center; gap: 8px; color: #60766a; font-size: 11px; margin: 0; }
+.protocol-loading svg { animation: spin .8s linear infinite; }
+.protocol-record-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.protocol-list { padding: 18px; }
+.protocol-list h3 { display: flex; align-items: center; gap: 8px; font: 600 14px 'Space Grotesk'; margin: 0 0 10px; }
+.protocol-list h3 svg { color: #4c7b5e; }
+.protocol-list h3 span { margin-left: auto; color: #789083; font: 10px 'DM Mono'; }
+.protocol-list > p { color: var(--muted); font-size: 11px; margin: 18px 0 5px; }
+.protocol-list > div { display: grid; gap: 3px; padding: 10px 0; border-bottom: 1px solid #ebefea; }
+.protocol-list > div:last-child { border-bottom: 0; }
+.protocol-list strong { font-size: 11px; font-weight: 600; }
+.protocol-list div span { color: var(--muted); font: 9px 'DM Mono'; text-transform: capitalize; }
+.protocol-form { padding: 22px; }
+.protocol-form h3 { font: 600 17px 'Space Grotesk'; margin: 0 0 18px; }
+.protocol-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.protocol-form label { display: grid; gap: 6px; color: #5e7066; font-size: 10px; font-weight: 600; }
+.protocol-form input, .protocol-form select { width: 100%; min-height: 42px; color: var(--ink); background: #fffefa; border: 1px solid #d8e1d5; border-radius: 7px; padding: 0 11px; font: 12px Inter, sans-serif; }
+.protocol-form input:focus, .protocol-form select:focus { border-color: #5e8d6d; outline: 2px solid #cfe1d2; outline-offset: 1px; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
 .rescue-queue, .rescue-detail { padding: 20px; }
 .rescue-queue-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid #e5ebe3; }
 .rescue-queue-heading h3 { color: #31483b; font: 600 17px 'Space Grotesk'; margin: 0; }
@@ -760,6 +793,7 @@ button { border: 0; cursor: pointer; }
 .inventory-modal { width: min(580px, 100%); }
 
 @media (max-width: 1000px) {
+  .protocol-record-grid { grid-template-columns: 1fr; }
   .rescue-workspace { grid-template-columns: 1fr; }
   .rescue-detail { position: static; }
   .contributor-layout { grid-template-columns: 1fr; }
@@ -768,6 +802,8 @@ button { border: 0; cursor: pointer; }
 }
 
 @media (max-width: 720px) {
+  .protocol-intro { display: grid; }
+  .protocol-form-grid { grid-template-columns: 1fr; }
   .rescue-heading { display: block; }
   .rescue-heading .add-button { margin-top: 14px; }
   .rescue-facts { grid-template-columns: 1fr; }

@@ -39,7 +39,7 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 | Main UI | `src/App.tsx` |
 | Styles | `src/styles.css` |
 | Data access | `src/lib/foodRepository.ts` |
-| Database migrations | `../command/supabase/migrations/024_wxl_food.sql` through `031_wxl_inventory.sql` |
+| Database migrations | `../command/supabase/migrations/024_wxl_food.sql` through `036_wxl_coordinator_gates.sql` |
 | Deployment notes | `DEPLOY.md` |
 
 ## Routes and entry states
@@ -64,6 +64,16 @@ The landing page is intentionally food-only and role-first. It presents `I need 
 The food intent opens an optional geolocation prompt before map exploration. Browser coordinates are used in memory to select the nearest verified listing and are not persisted or sent to Supabase. The choice is remembered only for the current browser tab through `sessionStorage`. Visitors can skip it and can reopen it from the map location control.
 
 ## What works now
+
+### Coordination protocol foundation
+
+- Migrations 024 and 025 have been restored from repository history, resolving the missing predecessors for public requests, the community map, alerts, and engagement records.
+- Migrations 026 through 036 were applied to the production HAND Supabase project on 2026-07-18. Migration history is baselined from 001 through 036, and the duplicate public-visits migration was renumbered from 020 to 023.
+- Migrations 032 through 036 define channel-independent participants, verification, consent, mandates, private locations, needs, supplies, match evidence, commitments, conversations, payments, donations, subsidies, potlucks, recognition, agent audits, coordinator gates, idempotent command receipts, and a transactional outbox.
+- Canonical operational tables reject direct authenticated writes. Lifecycle and commitment changes use security-definer commands with ownership, eligibility, quantity, mandate, and idempotency checks.
+- Exact locations are represented only as opaque ciphertext with separate, append-only precision-access evidence.
+- The Coordination API, OR-Tools worker, payment worker, potluck worker, retention worker, web workspace, remote MCP, A2A, Stripe reconciliation, and Twilio Voice adapter are implemented but not activated in production.
+- SMS is intentionally deferred to the next scope. See `docs/COORDINATION-PROTOCOL.md`.
 
 ### Landing and access
 
@@ -125,7 +135,7 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 - Checkpoints require packaging, label, temperature-control, contamination, observed-quantity, and note evidence. Chilled food above 41 degrees Fahrenheit and hot food below 135 degrees Fahrenheit enter incident hold.
 - Administrators can resolve an incident hold as rejected or cancelled with a required disposition note.
 - Status changes, claim releases, checkpoints, and incident resolution are preserved in event history.
-- The workflow requires migration 028 and live role-boundary testing before production use. It is not authorization for real food movement.
+- The workflow requires live role-boundary testing and operational approval before production use. Its deployed schema is not authorization for real food movement.
 
 ### Contributor readiness and Volunteer Command
 
@@ -293,7 +303,7 @@ Recommended follow-up:
 
 ### Database and security baseline
 
-Migrations `024_wxl_food.sql` through `031_wxl_inventory.sql` define:
+Migrations `024_wxl_food.sql` through `036_wxl_coordinator_gates.sql` define:
 
 - `command.food_partners`
 - `command.food_source_nominations`
@@ -362,13 +372,11 @@ The app should not claim these boards are ready until they contain functional wo
 
 ### Persistence gaps
 
-- Migration `027_wxl_request_coordination.sql` must be deployed before structured offers, owner decisions, status history, and transactional counts are available in production.
-- Migration `028_wxl_rescue_operations.sql` must be deployed before rescue submission, review, claiming, private instructions, safety checkpoints, and event history are available in production.
+- Migration `027_wxl_request_coordination.sql` is deployed. Structured offers, owner decisions, status history, and transactional counts still require live multi-account verification.
+- Migration `028_wxl_rescue_operations.sql` is deployed. Rescue submission, review, claiming, private instructions, safety checkpoints, and event history still require supervised operational verification.
 - Sample fallback request messages, offers, and support remain explicitly non-persistent.
 - Request owners can change status but cannot yet edit the request title, group, details, priority, or visibility from the interface.
-- Migration `029_wxl_contributor_readiness.sql` must be deployed before Contributor applications, coordinator approval, or eligibility-enforced claiming are available in production.
-- Migration `030_wxl_harvest_runs.sql` must be deployed before private route planning, eligibility-checked assignment, ordered stop outcomes, or completion history are available in production.
-- Migration `031_wxl_inventory.sql` must be deployed before accepted-rescue receiving, reservations, storage checks, distributions, discards, or ledger history are available in production.
+- Migrations `029_wxl_contributor_readiness.sql` through `031_wxl_inventory.sql` are deployed. Contributor approval, private routing, and inventory custody still require supervised multi-role, concurrency, expiry, privacy, and reconciliation verification.
 - Harvest-run assignment enforces capacity, lifting, vehicle, run class, equipment, and validity dates. Service-area and schedule fit require an explicit coordinator confirmation because those fields remain human-readable rather than normalized availability calendars.
 - Rescue notifications, overdue escalation, access-history auditing, retention, partial acceptance, and reassignment after incident review remain incomplete.
 - Auditable impact reporting has no front-end repository. Food alerts now have a focused notification repository and interface.
@@ -383,7 +391,7 @@ The app should not claim these boards are ready until they contain functional wo
    - `http://localhost:5173/app/?mode=recovery`
    Set the Supabase Site URL to `https://wxl.handprotocol.org`; leaving the default `http://localhost:3000` causes password-recovery links to open localhost when the callback is rejected or omitted.
 3. Test immediate signup login, browser password-save behavior, login, logout, reset request, recovery, and expired recovery links on the live domain.
-4. Apply migrations 026 through 031. Migration 031 adds accepted-rescue inventory custody and a transactional quantity ledger. Run the deployment verification queries before broad access.
+4. Migrations 026 through 036 are applied. Complete the remaining live multi-role, retry, concurrency, and operational verification before broad access.
 5. Confirm that the `command` schema is exposed through the Supabase API.
 6. Confirm the policy decision that request messages and structured offers are public when the parent request is public. The interface discloses this, but moderation and takedown controls are still required.
 7. Add abuse controls before broad access: rate limits, duplicate prevention, moderation status, report and takedown paths, and safe handling of contact details.
@@ -394,7 +402,7 @@ The app should not claim these boards are ready until they contain functional wo
 ### P0: Make the existing promise honest and reliable
 
 1. Smoke-test the complete live authentication lifecycle.
-2. Apply and verify migrations 026 through 031 in production.
+2. Complete live multi-role, retry, concurrency, and privacy verification for migrations 026 through 036.
 3. Label all hard-coded metrics and activity as sample data, or replace them with honest empty states.
 4. Add normalized Contributor availability calendars, time-off, and service-area matching to supplement coordinator confirmation.
 5. Remove or disable controls that do not have a real next screen or action.
@@ -575,7 +583,7 @@ Before calling the current auth and community flow production-ready, verify:
 - Failed packaging, label, temperature-control, contamination, or temperature checks place a rescue on incident hold. Administrators can close the hold with an audited rejection or cancellation.
 - Relabeled Overview rescue content as sample patterns and routed its action into the real rescue workspace.
 - Migration `028_wxl_rescue_operations.sql` contains the schema, row-level security, privacy-safe and restricted functions, grants, validation, and event history.
-- Migration 028 has not been applied to production from this workspace. Contributor eligibility and a supervised operating rehearsal remain required before food moves.
+- Migration 028 is applied to production. Contributor eligibility and a supervised operating rehearsal remain required before food moves.
 - `npm test` passes 29 tests and `npm run build` completes successfully.
 
 ## Contributor readiness pass, 2026-07-17
@@ -585,7 +593,7 @@ Before calling the current auth and community flow production-ready, verify:
 - Migration `029_wxl_contributor_readiness.sql` keeps these records private, preserves review history, and replaces rescue claiming with server-side operational eligibility checks.
 - Updating an approved readiness file requires another review. Expired training or credentials stop new claims automatically.
 - Open rescues link directly to Volunteer Command so claim requirements are discoverable.
-- Migration 029 has not been applied to production from this workspace. Live multi-account authorization and expiry tests remain required.
+- Migration 029 is applied to production. Live multi-account authorization and expiry tests remain required.
 - `npm test` passes 32 tests and `npm run build` completes successfully.
 
 ## Harvest run pass, 2026-07-17
@@ -595,7 +603,7 @@ Before calling the current auth and community flow production-ready, verify:
 - Migration `030_wxl_harvest_runs.sql` defines private run, stop, and event records plus restricted state-transition functions and row-level security.
 - Assignment reserves linked rescues atomically and prevents duplicate active-run use. Linked safety checkpoints remain the source of truth for pickup and delivery handling.
 - Overview route content is labeled as sample patterns and opens the real Harvest Runs workspace.
-- Migration 030 has not been applied to production from this workspace. Live database concurrency, expiry, privacy, incident, and multi-account tests remain required.
+- Migration 030 is applied to production. Live database concurrency, expiry, privacy, incident, and multi-account tests remain required.
 - `npm test` passes 35 tests and `npm run build` completes successfully.
 
 ## Inventory custody pass, 2026-07-17
@@ -605,7 +613,7 @@ Before calling the current auth and community flow production-ready, verify:
 - Migration `031_wxl_inventory.sql` defines lots, allocations, condition checks, and an immutable quantity ledger with restricted transactional functions and row-level security.
 - Physical, reserved, and available quantities remain separate. Database row locks prevent over-allocation and every mutation records resulting balances.
 - Failed storage checks hold the lot. Cancelling a reservation cannot release the hold, and hold release requires a newer passing condition check.
-- Migration 031 has not been applied to production from this workspace. Live concurrency, expiry, privacy, and reconciliation tests remain required.
+- Migration 031 is applied to production. Live concurrency, expiry, privacy, and reconciliation tests remain required.
 - `npm test` passes 38 tests and `npm run build` completes successfully.
 
 ## Food-first onboarding and geolocation pass, 2026-07-18
