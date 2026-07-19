@@ -74,6 +74,7 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 - Exact locations are represented only as opaque ciphertext with separate, append-only precision-access evidence.
 - The Coordination API, OR-Tools worker, payment worker, potluck worker, retention worker, web workspace, remote MCP, A2A, Stripe reconciliation, and Twilio Voice adapter are implemented but not activated in production.
 - SMS is intentionally deferred to the next scope. See `docs/COORDINATION-PROTOCOL.md`.
+- The navigation footer displays the seven-character Netlify commit reference as its build identifier. Local builds display `local`, and `VITE_BUILD_ID` may override the value for another build system.
 
 ### Landing and access
 

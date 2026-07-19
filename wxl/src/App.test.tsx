@@ -98,6 +98,8 @@ describe('WXL entry points and interaction gates', () => {
     const { container } = render(<App />)
     await userEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
     expect(container.querySelector('.sidebar')).toHaveClass('open')
+    expect(screen.getByRole('button', { name: 'Coordination protocol' })).toBeVisible()
+    expect(screen.getByTitle('Deployed build local')).toHaveTextContent('Buildlocal')
   })
 
   it('restores the mobile header on upward scroll so its actions remain clickable', async () => {

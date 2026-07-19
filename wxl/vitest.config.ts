@@ -1,6 +1,9 @@
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
+  define: {
+    __WXL_BUILD_ID__: JSON.stringify('local'),
+  },
   test: {
     environment: 'jsdom',
     setupFiles: './src/testSetup.ts',
