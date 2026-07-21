@@ -14,6 +14,7 @@ describe('WXL entry points and interaction gates', () => {
   beforeEach(() => {
     window.history.replaceState({}, '', '/')
     sessionStorage.clear()
+    localStorage.clear()
     Object.defineProperty(navigator, 'userAgent', { value: defaultUserAgent, configurable: true })
   })
 
@@ -86,10 +87,12 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.getByRole('heading', { name: /Tell us what is ready/i })).toBeInTheDocument()
     await userEvent.click(screen.getByRole('tab', { name: /I can deliver/i }))
     expect(screen.getByRole('heading', { name: /Choose a run that fits/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /Set up Contributor profile/i })).toHaveAttribute('href', '/app/?workspace=volunteer')
+    await userEvent.click(screen.getByRole('button', { name: /Set up Contributor profile/i }))
+    expect(screen.getByRole('dialog', { name: /Ready to help move food/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Sign in to continue/i })).toHaveAttribute('href', '/app/?mode=login&return=contribute')
   })
 
-  it('keeps all three public intents one tap away', async () => {
+  it('keeps all four public intents one tap away', async () => {
     window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
     sessionStorage.setItem('wxl:location-choice', 'complete')
     render(<App />)
@@ -98,17 +101,77 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.getByRole('heading', { name: /Community table patterns/i })).toBeInTheDocument()
     await userEvent.click(screen.getByRole('button', { name: 'Find food' }))
     expect(screen.getByRole('region', { name: /Food places near you/i })).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Requests' }))
+    expect(screen.getByRole('heading', { name: /Ask clearly. Help directly/i })).toBeInTheDocument()
+  })
+
+  it('opens community requests in simple mode instead of the dashboard', () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=request')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: /What would help/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /Ways to help now/i })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /^Inventory$/i })).not.toBeInTheDocument()
+  })
+
+  it('uses simple mode as the default app experience', () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    sessionStorage.setItem('wxl:location-choice', 'complete')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: /What can we help you find/i })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /^Inventory$/i })).not.toBeInTheDocument()
+  })
+
+  it('keeps a community request draft through the sign-in handoff', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=request')
+    const { unmount } = render(<App />)
+    await userEvent.type(screen.getByLabelText('Food or help needed'), 'Produce for Saturday dinner')
+    await userEvent.click(screen.getByRole('button', { name: /Review request/i }))
+    expect(sessionStorage.getItem('wxl:request-draft')).toContain('Produce for Saturday dinner')
+    unmount()
+
+    render(<App />)
+    expect(screen.getByLabelText('Food or help needed')).toHaveValue('Produce for Saturday dinner')
+  })
+
+  it('keeps advanced coordination behind an explicit display setting', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
+    sessionStorage.setItem('wxl:location-choice', 'complete')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: /Open account and display settings/i }))
+    expect(screen.getByText('Simple mode')).toBeInTheDocument()
+    const advancedLink = screen.getByRole('link', { name: /Turn on advanced workspace/i })
+    expect(advancedLink).toHaveAttribute('href', '/app/?mode=advanced')
+    expect(screen.getByText(/Coordination, routes, inventory, and reports/i)).toBeInTheDocument()
+    advancedLink.addEventListener('click', (event) => event.preventDefault())
+    await userEvent.click(advancedLink)
+    expect(localStorage.getItem('wxl:experience-mode')).toBe('advanced')
+  })
+
+  it('labels advanced mode and offers a direct return to simple mode', async () => {
+    localStorage.setItem('wxl:experience-mode', 'advanced')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
+    render(<App />)
+
+    expect(screen.getByText('Advanced workspace')).toBeInTheDocument()
+    const simpleLink = screen.getByRole('link', { name: /Use simple mode/i })
+    expect(simpleLink).toHaveAttribute('href', '/app/?mode=anonymous&intent=food')
+    simpleLink.addEventListener('click', (event) => event.preventDefault())
+    await userEvent.click(simpleLink)
+    expect(localStorage.getItem('wxl:experience-mode')).toBeNull()
   })
 
   it('keeps public browsing open but gates FOOD IS HERE behind an account', async () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
     await userEvent.click(screen.getByRole('button', { name: /FOOD IS HERE/i }))
     expect(screen.getByRole('dialog', { name: /Join the network/i })).toBeInTheDocument()
   })
 
   it('gates structured request offers and explains that coordination details are public', async () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     await userEvent.click(screen.getByRole('button', { name: /Community requests/i }))
@@ -120,14 +183,14 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('opens the shared feedback experience from the navigation', async () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
     await userEvent.click(screen.getByRole('button', { name: /Send feedback/i }))
     expect(screen.getByRole('dialog', { name: 'Send feedback' })).toBeInTheDocument()
   })
 
   it('links anonymous visitors from the profile card to sign in', () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     expect(screen.getByRole('link', { name: /Browsing openly/i })).toHaveAttribute('href', '/app/?mode=login')
@@ -135,7 +198,7 @@ describe('WXL entry points and interaction gates', () => {
 
   it('opens the mobile navigation drawer from the top bar', async () => {
     Object.defineProperty(window, 'innerWidth', { value: 390, configurable: true })
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     const { container } = render(<App />)
     await userEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
     expect(container.querySelector('.sidebar')).toHaveClass('open')
@@ -144,7 +207,7 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('keeps FOOD IS HERE visible on Overview and provides a dedicated workspace', async () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     expect(screen.getByRole('heading', { name: 'FOOD IS HERE!' })).toBeInTheDocument()
@@ -159,7 +222,7 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('includes the active food workspace in the main navigation', async () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     await userEvent.click(screen.getByRole('button', { name: /^Food available now$/i }))
@@ -188,7 +251,7 @@ describe('WXL entry points and interaction gates', () => {
   it('restores the mobile header on upward scroll so its actions remain clickable', async () => {
     Object.defineProperty(window, 'innerWidth', { value: 390, configurable: true })
     Object.defineProperty(window, 'scrollY', { value: 0, writable: true, configurable: true })
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     const { container } = render(<App />)
     const header = container.querySelector('.topbar')
 
@@ -207,7 +270,7 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('returns to the top when switching command-center views', async () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
     document.documentElement.scrollTop = 240
     document.body.scrollTop = 240
@@ -221,7 +284,7 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('opens the shared coordination protocol while keeping SMS deferred', async () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     await userEvent.click(screen.getByRole('button', { name: /^Coordination protocol$/i }))
@@ -232,7 +295,7 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('returns to the overview from the WXL:FOOD title', async () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     await userEvent.click(screen.getByRole('button', { name: /^Rescue operations$/i }))
@@ -243,7 +306,7 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('opens Overview with food nodes and anonymous volunteer routes before sample stats', async () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     const mapTitle = screen.getByRole('heading', { name: /Start with what is open/i })
@@ -258,7 +321,7 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('replaces the rescue placeholder with an honest database and account gate', async () => {
-    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     await userEvent.click(screen.getByRole('button', { name: /^Rescue operations$/i }))
@@ -269,7 +332,7 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('replaces the volunteer placeholder with the private readiness account gate', async () => {
-    window.history.pushState({}, '', '/app/?mode=anonymous')
+    window.history.pushState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     await userEvent.click(screen.getByRole('button', { name: /^Volunteer command$/i }))
@@ -279,7 +342,7 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('opens the real harvest run workspace from navigation', async () => {
-    window.history.pushState({}, '', '/app/?mode=anonymous')
+    window.history.pushState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     await userEvent.click(screen.getByRole('button', { name: /^Harvest runs$/i }))
@@ -288,7 +351,7 @@ describe('WXL entry points and interaction gates', () => {
   })
 
   it('opens the real inventory workspace from navigation', async () => {
-    window.history.pushState({}, '', '/app/?mode=anonymous')
+    window.history.pushState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     await userEvent.click(screen.getByRole('button', { name: /^Inventory$/i }))

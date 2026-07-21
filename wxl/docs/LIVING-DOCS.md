@@ -29,11 +29,12 @@ Food already moves through Austin every day. It moves through pantries, farms, c
 
 WXL:FOOD is intended to make that movement easier to see and coordinate without replacing the people and organizations who already hold it together.
 
-The public interface organizes the product around three immediate intents, with operational coordination available behind them:
+The public interface organizes the product around four immediate intents, with operational coordination available as an opt-in advanced workspace:
 
 1. Find public food resources on a map and compare nearby directory listings.
 2. Contribute food or open the delivery and Contributor workflows.
-3. Gather around a shared meal or open a community request to plan one.
+3. Gather around a shared meal.
+4. View, make, or answer a community request.
 
 ## Current product status
 
@@ -47,8 +48,9 @@ Status labels used throughout this document:
 | Area | Status | Current behavior |
 |---|---|---|
 | Public landing page | Live | Starts with three direct paths: find food, contribute food or delivery help, and gather around a shared table. |
-| Simple public app shell | Live | Uses persistent Find food, Contribute, and Gather navigation. The food view has map pins and a horizontally scrolling result shelf on phones. |
-| Gather experience | Prototype | Shows clearly labeled sample gathering patterns and opens the persisted Community Requests workflow for planning. It does not claim that sample gatherings are scheduled events. |
+| Simple public app shell | Live | Uses persistent Find food, Contribute, Gather, and Requests navigation. Everyday actions stay in this shell instead of opening coordinator tools without warning. |
+| Experience modes | Live | Simple mode is the default. Advanced workspace is an explicit, remembered setting for coordination, routes, inventory, and reporting, with a visible return to simple mode. |
+| Gather experience | Prototype | Shows clearly labeled sample gathering patterns and uses focused action sheets for joining or planning. It does not claim that sample gatherings are scheduled events. |
 | WaterDrop link | Live | Opens the WaterDrop river stewardship app. |
 | Email and password authentication | Live | Signup creates a session immediately, login uses email and password, reset and recovery remain email-based, and members can sign out. |
 | Member identity and profile readiness | Needs migration | The interface uses the active Supabase identity. Migration 026 backfills any missing profile rows required by food-record foreign keys. |
@@ -75,7 +77,9 @@ Status labels used throughout this document:
 
 Anyone can browse public food information and public community requests.
 
-The public entry presents three choices: find food, contribute, or gather. These paths open a simplified public interface with persistent mobile navigation. The food path opens an Austin map and nearby listing shelf. Contribute offers a short food draft that continues into the secure rescue form, plus a delivery path into Contributor readiness. Gather shows sample patterns and opens Community Requests for an actual post. Intent parameters select the public experience only and never grant write access.
+The public entry presents three starting choices: find food, contribute, or gather. These paths open a simplified public interface with persistent navigation for those three intents plus Requests. The food path opens an Austin map and nearby listing shelf. Contribute keeps food drafts, delivery-run previews, and Contributor setup prompts in the simple shell. Gather uses the same focused pattern for shared meals. Requests has a short privacy-aware composer and a readable list of open needs. Drafts survive the sign-in handoff in the current browser session. Intent parameters select the public experience only and never grant write access.
+
+Simple mode is the default, including at `/app/`. The account and display menu lets experienced coordinators turn on Advanced workspace. That preference is remembered in the browser. Advanced workspace labels itself clearly and includes a **Use simple mode** control that clears the preference. Legacy links with a specific `workspace` parameter still open the requested operational tool directly.
 
 After choosing the food path, visitors are asked whether they want to share their current location. Sharing is optional. When allowed, WXL compares the browser location with the coordinates of its verified public listings and selects the nearest listing. The visitor's coordinates remain in browser memory for that calculation and are not written to Supabase, local storage, an account, or an engagement event. Skipping location sharing opens the complete Austin map. The location control in the command center can reopen the choice.
 
@@ -94,7 +98,7 @@ An authenticated account is required to:
 
 Write access always follows the active Supabase session. A query parameter does not grant write access.
 
-New accounts do not require an email-confirmation step. A successful signup starts the member session and opens the command center. The signup fields use standard password-manager metadata so the browser can offer to save the password locally. Whether that prompt appears is controlled by the member's browser and password-manager settings.
+New accounts do not require an email-confirmation step. A successful signup starts the member session and returns to the relevant simple intent when one was provided, otherwise it opens Find food. The signup fields use standard password-manager metadata so the browser can offer to save the password locally. Whether that prompt appears is controlled by the member's browser and password-manager settings.
 
 Password-reset emails return to `https://wxl.handprotocol.org/app/?mode=recovery`, where the member chooses a new password. After a successful update, WXL ends the recovery session and opens the login page so the member can sign in with the new password. The production callback must remain in the Supabase redirect allowlist.
 
@@ -195,7 +199,7 @@ These events are intended for product learning, not advertising or cross-site tr
 
 ## Mobile experience
 
-On phones, the public experience uses a persistent bottom navigation for Find food, Contribute, and Gather. The interactive map supports touch panning and pinch zoom, and food results scroll horizontally beneath it. Operational workspaces retain the full-width coordination layout and labeled navigation drawer. Short landscape screens use a compact two-column drawer so every workspace and account control remains reachable.
+On phones, the public experience uses a persistent bottom navigation for Find food, Contribute, Gather, and Requests. The interactive map supports touch panning and pinch zoom, and food results scroll horizontally beneath it. The opt-in Advanced workspace retains the full-width coordination layout and labeled navigation drawer. Short landscape screens use a compact two-column drawer so every workspace and account control remains reachable.
 
 Mobile product requirements:
 
@@ -450,6 +454,14 @@ When product behavior changes:
 When this document becomes HTML, preserve the headings and anchors so existing links remain stable.
 
 ## Change log
+
+### 2026-07-21
+
+- Made the clean simple interface the default app experience.
+- Added Requests as a fourth simple-mode destination with a short composer and public need previews.
+- Kept contribution, delivery, and gathering details in focused action sheets instead of unexpectedly opening the dashboard.
+- Added a remembered Advanced workspace setting for coordinators and a clear return to simple mode.
+- Preserved food and request drafts across the sign-in handoff in the current browser session.
 
 ### 2026-07-18
 
