@@ -2,7 +2,7 @@
 title: WXL:FOOD Living Documentation
 description: Current product behavior, community workflows, safety boundaries, and development status for WXL:FOOD.
 status: living
-last_updated: 2026-07-17
+last_updated: 2026-07-21
 canonical_path: /docs/
 ---
 
@@ -29,12 +29,11 @@ Food already moves through Austin every day. It moves through pantries, farms, c
 
 WXL:FOOD is intended to make that movement easier to see and coordinate without replacing the people and organizations who already hold it together.
 
-The product currently supports four core activities:
+The public interface organizes the product around three immediate intents, with operational coordination available behind them:
 
-1. Find public food resources in East Austin.
-2. Share a public food spot and describe what is available.
-3. Publish or respond to a community request.
-4. Send a time-sensitive `FOOD IS HERE!` alert across the app.
+1. Find public food resources on a map and compare nearby directory listings.
+2. Contribute food or open the delivery and Contributor workflows.
+3. Gather around a shared meal or open a community request to plan one.
 
 ## Current product status
 
@@ -47,7 +46,9 @@ Status labels used throughout this document:
 
 | Area | Status | Current behavior |
 |---|---|---|
-| Public landing page | Live | Opens WXL:FOOD, login, or anonymous browsing. |
+| Public landing page | Live | Starts with three direct paths: find food, contribute food or delivery help, and gather around a shared table. |
+| Simple public app shell | Live | Uses persistent Find food, Contribute, and Gather navigation. The food view has map pins and a horizontally scrolling result shelf on phones. |
+| Gather experience | Prototype | Shows clearly labeled sample gathering patterns and opens the persisted Community Requests workflow for planning. It does not claim that sample gatherings are scheduled events. |
 | WaterDrop link | Live | Opens the WaterDrop river stewardship app. |
 | Email and password authentication | Live | Signup creates a session immediately, login uses email and password, reset and recovery remain email-based, and members can sign out. |
 | Member identity and profile readiness | Needs migration | The interface uses the active Supabase identity. Migration 026 backfills any missing profile rows required by food-record foreign keys. |
@@ -57,10 +58,10 @@ Status labels used throughout this document:
 | Request support | Live | Authenticated members can persist support for database-backed requests. |
 | Structured request offers | Needs migration | Members can offer food, transport, storage, or volunteer help. Request owners can accept or decline, and offer authors can withdraw. |
 | Request status and history | Needs migration | Request owners can start, fulfill, close, or reopen coordination. Every transition is preserved in database history. |
-| Austin food map | Live | Shows public-directory listings and links to current food-bank information. |
-| Community food pins | Needs migration | Authenticated members can submit public food spots and produce details. |
-| `FOOD IS HERE!` alerts | Needs migration | Authenticated members can send six-hour app-wide alerts. |
-| Alert email hook | Needs migration | A validated Netlify Function sends a best-effort Resend operations alert. |
+| Austin food map | Live | Uses an interactive OpenStreetMap base with pan, zoom, food markers, listing synchronization, and platform-aware navigation. |
+| Community food pins | Live | Authenticated members can submit public food spots and produce details. |
+| `FOOD IS HERE!` alerts | Live | Authenticated members can send six-hour app-wide alerts that appear on Overview, in the alert workspace, and in the alert center. |
+| Alert email hook | Live | A validated Netlify Function sends a best-effort operations alert through Resend or HAND's shared notification endpoint. |
 | Feedback | Live | Sends notes to HAND's shared feedback system and queues failures offline. |
 | A/B testing | Live | Assigns a stable CTA-order variant and records authenticated interactions. |
 | Interaction leaderboard | Needs migration | Provides an internal, admin-only aggregate view. |
@@ -73,6 +74,10 @@ Status labels used throughout this document:
 ## Access and accounts
 
 Anyone can browse public food information and public community requests.
+
+The public entry presents three choices: find food, contribute, or gather. These paths open a simplified public interface with persistent mobile navigation. The food path opens an Austin map and nearby listing shelf. Contribute offers a short food draft that continues into the secure rescue form, plus a delivery path into Contributor readiness. Gather shows sample patterns and opens Community Requests for an actual post. Intent parameters select the public experience only and never grant write access.
+
+After choosing the food path, visitors are asked whether they want to share their current location. Sharing is optional. When allowed, WXL compares the browser location with the coordinates of its verified public listings and selects the nearest listing. The visitor's coordinates remain in browser memory for that calculation and are not written to Supabase, local storage, an account, or an engagement event. Skipping location sharing opens the complete Austin map. The location control in the command center can reopen the choice.
 
 An authenticated account is required to:
 
@@ -91,13 +96,17 @@ Write access always follows the active Supabase session. A query parameter does 
 
 New accounts do not require an email-confirmation step. A successful signup starts the member session and opens the command center. The signup fields use standard password-manager metadata so the browser can offer to save the password locally. Whether that prompt appears is controlled by the member's browser and password-manager settings.
 
-Password-reset emails return to `https://wxl.handprotocol.org/app/?mode=recovery`, where the member chooses a new password. The production callback must remain in the Supabase redirect allowlist.
+Password-reset emails return to `https://wxl.handprotocol.org/app/?mode=recovery`, where the member chooses a new password. After a successful update, WXL ends the recovery session and opens the login page so the member can sign in with the new password. The production callback must remain in the Supabase redirect allowlist.
 
 The command center waits for Supabase session restoration before deciding whether write actions are available. Authenticated members see their current account identity and can sign out from the navigation account menu. Signing out keeps public browsing open and removes write access.
 
-## Austin food-node and volunteer-route map
+## Austin food map
 
-The overview opens on the map before showing sample statistics. It combines public food locations, a schematic volunteer start node, and privacy-safe delivery clusters.
+The public Find food experience uses a real interactive Austin map. Visitors can pan, zoom, select food markers, and move between a marker and its listing card. On phones, cards remain in a horizontal shelf below the map. On larger screens, the map and scrollable listing panel sit side by side.
+
+The map uses OpenStreetMap tiles through Leaflet and keeps the required OpenStreetMap contributor attribution visible. WXL does not prefetch maps for offline use. Only public listings with reviewed coordinates receive a marker. A listing without confirmed coordinates remains in the result shelf with its pending-location label.
+
+Each verified listing has a **Navigate** button. It opens Apple Maps on Apple devices and Google Maps on other platforms, using reviewed coordinates when available and the public address as a fallback.
 
 ### Directory-listed locations
 
@@ -108,7 +117,7 @@ Always confirm hours and eligibility before traveling:
 - [City of Austin neighborhood centers](https://www.austintexas.gov/services/get-help-neighborhood-centers)
 - [Central Texas Food Bank Find Food Now](https://www.centraltexasfoodbank.org/find-food-now)
 
-The selected-node panel exposes the source, public address, known center hours or access notes, and a directions link when the location is directory-listed.
+The selected listing card exposes the public source category, known center hours or access notes, and a navigation link when the location is directory-listed.
 
 South Oak Baptist food pantry appears as a community report, not a verified directory listing. The report says the pantry is open Thursdays from 9 to 11 AM and uses one form without requiring ID. Its exact public location and current access details still require coordinator confirmation before WXL:FOOD treats it as verified.
 
@@ -138,7 +147,7 @@ An alert includes:
 - A neighborhood
 - A six-hour expiration time
 
-Active alerts appear in the top-right alert center. Other open app sessions receive new alerts through Supabase Realtime.
+Active alerts appear at the top of Overview, in the dedicated Food available now workspace, and in the top-right alert center. Alerts linked to a public food spot can open that spot on the Overview map. Other open app sessions receive new alerts through Supabase Realtime, and open sessions remove alerts when their six-hour window ends.
 
 To limit abuse, one account can publish no more than five alerts in 15 minutes. Alerts must not include private household addresses, names of households receiving support, medical details, or other sensitive information.
 
@@ -186,7 +195,7 @@ These events are intended for product learning, not advertising or cross-site tr
 
 ## Mobile experience
 
-On phones, WXL:FOOD uses the full screen width for coordination. The top menu button opens a labeled navigation drawer, and the close button or shaded page area dismisses it.
+On phones, the public experience uses a persistent bottom navigation for Find food, Contribute, and Gather. The interactive map supports touch panning and pinch zoom, and food results scroll horizontally beneath it. Operational workspaces retain the full-width coordination layout and labeled navigation drawer. Short landscape screens use a compact two-column drawer so every workspace and account control remains reachable.
 
 Mobile product requirements:
 
@@ -231,6 +240,8 @@ Primary tables:
 - `command.food_spots`
 - `command.food_alerts`
 - `command.food_engagement_events`
+
+The unreleased coordination protocol in migrations 032 through 036 adds canonical needs, supplies, commitments, mandates, match evidence, private location containers, conversations, voice sessions, payments, donations, subsidies, potlucks, policy decisions, command receipts, and an outbox. The web application exposes these records through its Coordination protocol workspace when the separate API is configured. SMS remains in the next scope. These records are not a claim that automated matching or dispatch is live.
 
 Internal aggregate view:
 
@@ -439,6 +450,13 @@ When product behavior changes:
 When this document becomes HTML, preserve the headings and anchors so existing links remain stable.
 
 ## Change log
+
+### 2026-07-18
+
+- Added active `FOOD IS HERE!` posts to Overview and a dedicated Food available now workspace.
+- Linked the alert drawer and primary navigation to the full active-alert list.
+- Added map handoff for alerts tied to a public food spot and automatic expiry cleanup in open sessions.
+- Rebuilt the mobile landscape drawer as a compact, scrollable two-column layout.
 
 ### 2026-07-17
 

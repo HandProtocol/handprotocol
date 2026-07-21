@@ -21,6 +21,7 @@ type RescueBoardProps = {
   notify: (message: string) => void
   onAuthRequired: () => void
   onContributorSetup: () => void
+  initialOpen?: boolean
 }
 
 type RescueForm = Omit<CreateFoodRescueInput, 'quantity'> & { quantity: string }
@@ -76,14 +77,21 @@ function dateLabel(value: string) {
   return new Date(value).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })
 }
 
-export function RescueBoard({ dbConfigured, canWrite, notify, onAuthRequired, onContributorSetup }: RescueBoardProps) {
+export function RescueBoard({ dbConfigured, canWrite, notify, onAuthRequired, onContributorSetup, initialOpen = false }: RescueBoardProps) {
   const [rescues, setRescues] = useState<FoodRescueRecord[]>([])
   const [selectedId, setSelectedId] = useState<string | null>(null)
   const [privateDetail, setPrivateDetail] = useState<FoodRescuePrivateRecord | null>(null)
   const [loadState, setLoadState] = useState<'loading' | 'ready' | 'error'>(dbConfigured ? 'loading' : 'ready')
   const [busy, setBusy] = useState(false)
-  const [showCreate, setShowCreate] = useState(false)
-  const [form, setForm] = useState<RescueForm>(initialForm)
+  const [showCreate, setShowCreate] = useState(initialOpen)
+  const [form, setForm] = useState<RescueForm>(() => {
+    try {
+      const draft = JSON.parse(sessionStorage.getItem('wxl:food-draft') ?? '{}') as { description?: string; quantity?: string; neighborhood?: string }
+      return { ...initialForm, description: draft.description ?? '', quantity: draft.quantity?.replace(/[^0-9.]/g, '') ?? '', public_neighborhood: draft.neighborhood ?? 'East Austin' }
+    } catch {
+      return initialForm
+    }
+  })
   const [reviewNote, setReviewNote] = useState('')
   const [safetyConfirmed, setSafetyConfirmed] = useState(false)
   const [actionNote, setActionNote] = useState('')
@@ -151,6 +159,7 @@ export function RescueBoard({ dbConfigured, canWrite, notify, onAuthRequired, on
     setBusy(false)
     if (error || !data) { notify(error?.message ?? 'The rescue could not be submitted'); return }
     setShowCreate(false)
+    sessionStorage.removeItem('wxl:food-draft')
     setForm({ ...initialForm, pickup_window_start: futureLocal(1), pickup_window_end: futureLocal(3), delivery_window_start: futureLocal(2), delivery_window_end: futureLocal(5) })
     await refresh(data.id)
     notify('Rescue submitted for coordinator review')

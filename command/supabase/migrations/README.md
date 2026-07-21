@@ -4,6 +4,10 @@ Numbered SQL files apply in order. They are idempotent (every `create
 table` uses `if not exists`, every policy is dropped and recreated, every
 function uses `create or replace`) so they survive re-runs.
 
+Production migration history was baselined from 001 through 036 on
+2026-07-18. The public-visits migration uses version 023 so every migration
+has a unique version.
+
 ## Apply
 
 Three options. Pick whichever the operator's environment supports.
@@ -20,13 +24,15 @@ supabase db push
 ```
 
 The CLI reads the files in `supabase/migrations/` in numerical order and
-applies them via the project's pooler.
+applies them via the project's pooler. WXL:FOOD requires migrations 024
+through 036. Migrations 024 and 025 were restored from repository history and
+must be present before applying 026 or later.
 
 ### Option B: Supabase Dashboard SQL editor
 
-If `db push` cannot connect, paste each file into the dashboard SQL
-editor in order. The combined file at the bottom of this doc is a
-convenience copy of all migrations in one paste.
+If `db push` cannot connect, paste each numbered file into the dashboard SQL
+editor in order. `_combined.sql` predates the current WXL:FOOD protocol and
+must not be used as a substitute for migrations 024 through 036.
 
 Project URL: https://supabase.com/dashboard/project/vconmgerblqbworcqkvr/sql
 
@@ -88,3 +94,13 @@ select count(*) from command.grants;
 select count(*) from command.funders;
 select tablename from pg_tables where schemaname = 'command' order by tablename;
 ```
+
+After applying through migration 036 on a nonproduction branch, run:
+
+```bash
+psql "$DATABASE_URL" -f supabase/tests/food_protocol_acceptance.sql
+```
+
+This verifies direct-write boundaries, private-table boundaries, worker-only
+functions, and core lifecycle restrictions. Complete the live multi-role and
+retry matrix in `wxl/docs/DELIVERY-READINESS.md` before any lane advances.

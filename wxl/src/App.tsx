@@ -1,21 +1,26 @@
-import { useEffect, useMemo, useState } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react'
 import type { User } from '@supabase/supabase-js'
 import {
   Activity, ArrowUp, ArrowUpRight, Bell, Boxes, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight,
-  CircleHelp, Clock3, Droplets, Flame, HandHeart, Leaf, MapPin, Menu, MessageCircle,
-  MousePointerClick, Package, Plus, Route, Search, Send, Settings, ShieldCheck, Truck, Users, Warehouse, X, Zap,
+  CalendarDays, CircleHelp, Clock3, Droplets, Flame, HandHeart, Leaf, MapPin, Menu, MessageCircle,
+  MousePointerClick, Navigation, Package, Plus, Route, Search, Send, Settings, ShieldCheck, Truck, Users, Warehouse, X, Zap,
 } from 'lucide-react'
 import { addFoodRequestMessage, changeFoodRequestStatus, createFoodRequest, createFoodRequestOffer, decideFoodRequestOffer, foodDb, foodDbConfigured, loadFoodAlerts, loadFoodRequestMessages, loadFoodRequestOffers, loadFoodRequests, loadFoodSpots, nominateFoodSource, supportFoodRequest, withdrawFoodRequestOffer, type FoodAlertRecord, type FoodRequestMessageRecord, type FoodRequestOfferRecord, type FoodSpotRecord } from './lib/foodRepository'
 import { useEngagement } from './lib/engagement'
-import { createAccountAndSession, getMemberIdentity, getRecoveryRedirectUrl } from './lib/auth'
-import { AddSpotModal, AlertCenter, FeedbackModal, flushFeedbackQueue, FoodHereModal } from './CommunityTools'
+import { createAccountAndSession, getMemberIdentity, getRecoveryRedirectUrl, updatePasswordAndSignOut } from './lib/auth'
+import { AddSpotModal, AlertCenter, FeedbackModal, flushFeedbackQueue, FoodAlertsBoard, FoodAlertsOverview, FoodHereModal } from './CommunityTools'
 import { RescueBoard } from './RescueBoard'
 import { ContributorBoard } from './ContributorBoard'
 import { HarvestRunBoard } from './HarvestRunBoard'
 import { InventoryBoard } from './InventoryBoard'
+import { ProtocolBoard } from './ProtocolBoard'
+import type { FoodMapLocation } from './FoodMap'
+
+const FoodMap = lazy(() => import('./FoodMap').then((module) => ({ default: module.FoodMap })))
 
 type Status = 'plenty' | 'limited' | 'low' | 'volunteers' | 'transport'
-type View = 'command' | 'rescue' | 'volunteer' | 'community' | 'partners' | 'harvest' | 'inventory'
+type View = 'command' | 'alerts' | 'protocol' | 'rescue' | 'volunteer' | 'community' | 'partners' | 'harvest' | 'inventory'
+type ConsumerIntent = 'food' | 'contribute' | 'gather'
 
 type FoodLocation = {
   id: string
@@ -32,10 +37,14 @@ type FoodLocation = {
   x: number
   y: number
   verified: boolean
+  latitude?: number
+  longitude?: number
 }
 
 const viewLabels: Record<View, string> = {
   command: 'Overview',
+  alerts: 'Food available now',
+  protocol: 'Coordination protocol',
   rescue: 'Rescue operations',
   volunteer: 'Volunteer command',
   community: 'Community requests',
@@ -72,13 +81,13 @@ const cityCentersUrl = 'https://www.austintexas.gov/services/get-help-neighborho
 const foodBankUrl = 'https://www.centraltexasfoodbank.org/find-food-now'
 
 const locations: FoodLocation[] = [
-  { id: 'east-austin-center', name: 'East Austin Neighborhood Center', type: 'Food pantry', area: 'East Austin', address: '211 Comal St, Austin, TX 78702', status: 'limited', detail: 'City neighborhood center. Call 512-972-6650 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 31, y: 49, verified: true },
-  { id: 'blackland-center', name: 'Blackland Neighborhood Center', type: 'Food pantry', area: 'Blackland', address: '2005 Salina St, Austin, TX 78722', status: 'limited', detail: 'City neighborhood center. Call 512-972-5790 before visiting.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 49, y: 25, verified: true },
-  { id: 'rosewood-center', name: 'Rosewood-Zaragosa Neighborhood Center', type: 'Food pantry', area: 'Rosewood', address: '2800 Webberville Rd, Austin, TX 78702', status: 'limited', detail: 'City neighborhood center. Call 512-972-6740 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 61, y: 43, verified: true },
-  { id: 'montopolis-center', name: 'Montopolis Community Center', type: 'Food pantry', area: 'Montopolis', address: '1200 Montopolis Dr, Austin, TX 78741', status: 'limited', detail: 'City community center. Call 512-972-6705 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 78, y: 69, verified: true },
-  { id: 'st-john-center', name: 'St. John Community Center', type: 'Food pantry', area: 'St. John', address: '7500 Blessing Ave, Austin, TX 78752', status: 'limited', detail: 'City community center. Call 512-972-5159 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 57, y: 11, verified: true },
-  { id: 'dove-springs-center', name: 'Dove Springs Neighborhood Center', type: 'Food pantry', area: 'Southeast Austin', address: '5811 Palo Blanco Ln, Austin, TX 78744', status: 'limited', detail: 'City neighborhood center. Call 512-972-6699 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 69, y: 88, verified: true },
-  { id: 'foundation-m-station', name: 'Foundation Communities, M Station', type: 'Food Bank partner', area: 'East Austin', address: '2918 E Martin Luther King Jr Blvd, Austin, TX 78702', status: 'limited', detail: 'Listed in the Central Texas Food Bank finder. Check the directory for current program details.', access: 'Program details and availability can change. Confirm before traveling.', sourceUrl: foodBankUrl, sourceLabel: 'Central Texas Food Bank', x: 71, y: 30, verified: true },
+  { id: 'east-austin-center', name: 'East Austin Neighborhood Center', type: 'Food pantry', area: 'East Austin', address: '211 Comal St, Austin, TX 78702', status: 'limited', detail: 'City neighborhood center. Call 512-972-6650 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 31, y: 49, verified: true, latitude: 30.259, longitude: -97.727 },
+  { id: 'blackland-center', name: 'Blackland Neighborhood Center', type: 'Food pantry', area: 'Blackland', address: '2005 Salina St, Austin, TX 78722', status: 'limited', detail: 'City neighborhood center. Call 512-972-5790 before visiting.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 49, y: 25, verified: true, latitude: 30.282, longitude: -97.722 },
+  { id: 'rosewood-center', name: 'Rosewood-Zaragosa Neighborhood Center', type: 'Food pantry', area: 'Rosewood', address: '2800 Webberville Rd, Austin, TX 78702', status: 'limited', detail: 'City neighborhood center. Call 512-972-6740 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 61, y: 43, verified: true, latitude: 30.269, longitude: -97.71 },
+  { id: 'montopolis-center', name: 'Montopolis Community Center', type: 'Food pantry', area: 'Montopolis', address: '1200 Montopolis Dr, Austin, TX 78741', status: 'limited', detail: 'City community center. Call 512-972-6705 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 78, y: 69, verified: true, latitude: 30.23, longitude: -97.7 },
+  { id: 'st-john-center', name: 'St. John Community Center', type: 'Food pantry', area: 'St. John', address: '7500 Blessing Ave, Austin, TX 78752', status: 'limited', detail: 'City community center. Call 512-972-5159 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 57, y: 11, verified: true, latitude: 30.333, longitude: -97.693 },
+  { id: 'dove-springs-center', name: 'Dove Springs Neighborhood Center', type: 'Food pantry', area: 'Southeast Austin', address: '5811 Palo Blanco Ln, Austin, TX 78744', status: 'limited', detail: 'City neighborhood center. Call 512-972-6699 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 69, y: 88, verified: true, latitude: 30.188, longitude: -97.741 },
+  { id: 'foundation-m-station', name: 'Foundation Communities, M Station', type: 'Food Bank partner', area: 'East Austin', address: '2918 E Martin Luther King Jr Blvd, Austin, TX 78702', status: 'limited', detail: 'Listed in the Central Texas Food Bank finder. Check the directory for current program details.', access: 'Program details and availability can change. Confirm before traveling.', sourceUrl: foodBankUrl, sourceLabel: 'Central Texas Food Bank', x: 71, y: 30, verified: true, latitude: 30.28, longitude: -97.706 },
   { id: 'south-oak-baptist', name: 'South Oak Baptist food pantry', type: 'Community-reported pantry', area: 'South Austin', address: 'South Austin, exact public location pending confirmation', status: 'limited', detail: 'Community report: one form, no ID requested. A coordinator still needs to confirm the public listing.', hours: 'Thursdays, 9 to 11 AM', access: 'One form, no ID, according to a community report. Confirm before traveling.', x: 32, y: 86, verified: false },
 ]
 
@@ -108,10 +117,144 @@ const initialMessages = [
   { id: 3, author: 'Sample coordinator', role: 'Network coordinator', message: 'I can add this to the 4:15 PM harvest run and look for the remaining five households.', time: '4 min ago', mine: false },
 ]
 
+function nearestListedLocation(latitude: number, longitude: number) {
+  const radians = (degrees: number) => degrees * Math.PI / 180
+  const distance = (location: FoodLocation) => {
+    const latitudeDelta = radians((location.latitude ?? latitude) - latitude)
+    const longitudeDelta = radians((location.longitude ?? longitude) - longitude)
+    const value = Math.sin(latitudeDelta / 2) ** 2 + Math.cos(radians(latitude)) * Math.cos(radians(location.latitude ?? latitude)) * Math.sin(longitudeDelta / 2) ** 2
+    return 2 * 3959 * Math.asin(Math.sqrt(value))
+  }
+  return locations.filter((location) => location.verified && location.latitude != null && location.longitude != null).sort((a, b) => distance(a) - distance(b))[0]
+}
+
+const foodIcons = ['🥬', '🥕', '🍎', '🥖', '🥫', '🥦', '🍊', '🌽']
+
+function navigationUrl(location: FoodLocation) {
+  const destination = location.latitude != null && location.longitude != null
+    ? `${location.latitude},${location.longitude}`
+    : location.address
+  const isApplePlatform = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent)
+  return isApplePlatform
+    ? `https://maps.apple.com/?daddr=${encodeURIComponent(destination)}&dirflg=d`
+    : `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`
+}
+
+function SimpleExperience({ initialIntent }: { initialIntent: ConsumerIntent }) {
+  const [intent, setIntent] = useState<ConsumerIntent>(initialIntent)
+  const [selected, setSelected] = useState(locations[0])
+  const [query, setQuery] = useState('')
+  const [foodFilter, setFoodFilter] = useState<'all' | 'pantry' | 'community'>('all')
+  const [contribution, setContribution] = useState<'food' | 'delivery'>('food')
+  const [foodDraft, setFoodDraft] = useState({ description: '', quantity: '', availability: 'today', neighborhood: 'East Austin' })
+  const [locationPromptOpen, setLocationPromptOpen] = useState(() => initialIntent === 'food' && sessionStorage.getItem('wxl:location-choice') !== 'complete')
+  const [locationLabel, setLocationLabel] = useState('Austin')
+  const [visitorPosition, setVisitorPosition] = useState<{ latitude: number; longitude: number } | null>(null)
+
+  const visible = useMemo(() => locations.filter((location) => {
+    const matchesQuery = `${location.name} ${location.area} ${location.type}`.toLowerCase().includes(query.toLowerCase())
+    const matchesFilter = foodFilter === 'all' || (foodFilter === 'community' ? !location.verified : location.verified)
+    return matchesQuery && matchesFilter
+  }), [query, foodFilter])
+
+  const chooseIntent = (nextIntent: ConsumerIntent) => {
+    setIntent(nextIntent)
+    window.history.replaceState({}, '', `/app/?mode=anonymous&intent=${nextIntent}`)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+  }
+  const useVisitorLocation = (latitude: number, longitude: number) => {
+    const nearest = nearestListedLocation(latitude, longitude)
+    sessionStorage.setItem('wxl:location-choice', 'complete')
+    setLocationPromptOpen(false)
+    setVisitorPosition({ latitude, longitude })
+    if (nearest) {
+      setSelected(nearest)
+      setLocationLabel(`${nearest.area} nearby`)
+    }
+  }
+  const skipVisitorLocation = () => {
+    sessionStorage.setItem('wxl:location-choice', 'complete')
+    setLocationPromptOpen(false)
+  }
+  const selectFromMap = (mapLocation: FoodMapLocation) => {
+    const location = locations.find((item) => item.id === mapLocation.id)
+    if (!location) return
+    setSelected(location)
+    window.setTimeout(() => document.querySelector(`[data-food-location="${location.id}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }), 0)
+  }
+
+  return <div className="simple-app">
+    <header className="simple-header">
+      <a className="simple-brand" href="/" aria-label="WXL Food home"><span>WXL</span><b>FOOD</b></a>
+      <button className="simple-location" type="button" onClick={() => setLocationPromptOpen(true)}><MapPin size={15} /><span>{locationLabel}</span><ChevronDown size={14} /></button>
+      <a className="simple-account" href="/app/?mode=login" aria-label="Sign in"><span>WX</span></a>
+    </header>
+
+    <nav className="simple-tabs" aria-label="Choose what you want to do">
+      <button className={intent === 'food' ? 'active' : ''} aria-current={intent === 'food' ? 'page' : undefined} onClick={() => chooseIntent('food')}><Search size={17} /><span>Find food</span></button>
+      <button className={intent === 'contribute' ? 'active' : ''} aria-current={intent === 'contribute' ? 'page' : undefined} onClick={() => chooseIntent('contribute')}><HandHeart size={17} /><span>Contribute</span></button>
+      <button className={intent === 'gather' ? 'active' : ''} aria-current={intent === 'gather' ? 'page' : undefined} onClick={() => chooseIntent('gather')}><Users size={17} /><span>Gather</span></button>
+    </nav>
+
+    {intent === 'food' && <main className="finder-flow">
+      <section className="finder-copy">
+        <p className="simple-eyebrow">Food near you</p>
+        <h1>What can we help you find?</h1>
+        <label className="finder-search"><Search size={19} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search a neighborhood or food place" aria-label="Search food places" /></label>
+        <div className="finder-filters" aria-label="Food place filters">
+          <button className={foodFilter === 'all' ? 'active' : ''} onClick={() => setFoodFilter('all')}>All nearby</button>
+          <button className={foodFilter === 'pantry' ? 'active' : ''} onClick={() => setFoodFilter('pantry')}>Verified listings</button>
+          <button className={foodFilter === 'community' ? 'active' : ''} onClick={() => setFoodFilter('community')}>Community reports</button>
+        </div>
+      </section>
+      <section className="finder-map real-map-section" aria-label="Map of public food places in Austin">
+        <Suspense fallback={<div className="map-loading" role="status">Loading the Austin map…</div>}><FoodMap locations={visible.map((location) => ({ ...location, icon: foodIcons[Math.max(0, locations.findIndex((item) => item.id === location.id)) % foodIcons.length] }))} selectedId={selected.id} visitorPosition={visitorPosition} onSelect={selectFromMap} /></Suspense>
+        {visible.length === 0 && <p className="finder-empty">No listings match that search.</p>}
+        <div className="finder-map-note"><ShieldCheck size={13} /> Directory listings, confirm before traveling</div>
+      </section>
+      <section className="food-shelf" aria-label="Food places near you">
+        <div className="shelf-heading"><div><p className="simple-eyebrow">Nearby places</p><h2>{visible.length} places to check</h2></div><a href={foodBankUrl} target="_blank" rel="noreferrer">Full directory <ArrowUpRight size={14} /></a></div>
+        <div className="food-card-scroll">
+          {visible.map((location, index) => <article className={`food-result-card ${selected.id === location.id ? 'selected' : ''}`} data-food-location={location.id} key={location.id} onClick={() => setSelected(location)}>
+            <button type="button" aria-label={`Select ${location.name}`}><span className="food-result-visual" aria-hidden="true">{foodIcons[index % foodIcons.length]}</span><span className={`listing-state ${location.verified ? 'verified' : ''}`}>{location.verified ? 'Verified listing' : 'Community report'}</span><strong>{location.name}</strong><small>{location.type} · {location.area}</small></button>
+            <div className="food-result-detail"><Clock3 size={15} /><span>{location.hours ?? 'Check current hours before visiting'}</span></div>
+            {location.verified ? <a href={navigationUrl(location)} target="_blank" rel="noreferrer" aria-label={`Navigate to ${location.name}`}><span><Navigation size={14} /> Navigate</span><ArrowUpRight size={14} /></a> : <span className="confirm-note">Location awaiting confirmation</span>}
+          </article>)}
+        </div>
+      </section>
+    </main>}
+
+    {intent === 'contribute' && <main className="action-flow">
+      <section className="action-hero contribute-hero"><p className="simple-eyebrow">Contribute</p><h1>Share food. Move food.</h1><p>Choose the kind of help you can offer today. We will keep the next steps short and clear.</p></section>
+      <div className="action-switch" role="tablist" aria-label="Contribution type"><button role="tab" aria-selected={contribution === 'food'} className={contribution === 'food' ? 'active' : ''} onClick={() => setContribution('food')}><Package size={18} /> I have food</button><button role="tab" aria-selected={contribution === 'delivery'} className={contribution === 'delivery' ? 'active' : ''} onClick={() => setContribution('delivery')}><Truck size={18} /> I can deliver</button></div>
+      {contribution === 'food' ? <section className="quick-form"><div className="quick-form-heading"><span>🥬</span><div><p className="simple-eyebrow">Food submission</p><h2>Tell us what is ready</h2></div></div><label>What food do you have?<input value={foodDraft.description} onChange={(event) => setFoodDraft((current) => ({ ...current, description: event.target.value }))} placeholder="Tomatoes, bread, prepared meals" /></label><div className="quick-form-row"><label>How much?<input value={foodDraft.quantity} onChange={(event) => setFoodDraft((current) => ({ ...current, quantity: event.target.value }))} placeholder="About 20 lb" /></label><label>Ready until<select value={foodDraft.availability} onChange={(event) => setFoodDraft((current) => ({ ...current, availability: event.target.value }))}><option value="today">Later today</option><option value="tomorrow">Tomorrow</option><option value="week">This week</option></select></label></div><label>Pickup neighborhood<input value={foodDraft.neighborhood} onChange={(event) => setFoodDraft((current) => ({ ...current, neighborhood: event.target.value }))} placeholder="East Austin" /></label><p className="form-safety"><ShieldCheck size={15} /> Do not enter a private home address here. Exact pickup details are shared only during coordination.</p><a className="simple-primary" href="/app/?workspace=rescue&action=submit" onClick={() => sessionStorage.setItem('wxl:food-draft', JSON.stringify(foodDraft))}>Continue to secure review <ArrowUpRight size={17} /></a></section> : <section className="delivery-board"><div className="shelf-heading"><div><p className="simple-eyebrow">Delivery board</p><h2>Choose a run that fits</h2></div><span>Sample patterns</span></div>{rescues.map((rescue, index) => <article className="delivery-card" key={rescue.title}><span className="delivery-number">0{index + 1}</span><div><strong>{rescue.title}</strong><p>{rescue.source} · {rescue.window}</p><small><MapPin size={13} /> Austin route, private stops shown after assignment</small></div><a href="/app/?workspace=volunteer">View run <ChevronRight size={17} /></a></article>)}<a className="simple-primary" href="/app/?workspace=volunteer">Set up Contributor profile <ArrowUpRight size={17} /></a></section>}
+    </main>}
+
+    {intent === 'gather' && <main className="action-flow">
+      <section className="action-hero gather-hero"><p className="simple-eyebrow">Gather</p><h1>Share a table.</h1><p>Start a neighborhood meal, bring something to share, or help a local gathering come together.</p></section>
+      <section className="gather-list"><div className="shelf-heading"><div><p className="simple-eyebrow">Gathering ideas</p><h2>Community table patterns</h2></div><span>Sample patterns</span></div>
+        {[['THU 24', 'Eastside community supper', 'Govalle · 6:30 PM', 'Bring a dish or help set up'], ['SAT 26', 'Garden harvest potluck', 'Montopolis · 12:00 PM', 'Produce, plates, and extra hands welcome'], ['SUN 27', 'Neighbors table', 'Rosewood · 5:00 PM', 'A simple shared meal for all ages']].map(([date, title, meta, note]) => <article className="gather-card" key={title}><time>{date}</time><div><strong>{title}</strong><span>{meta}</span><p>{note}</p></div><a href="/app/?workspace=community&action=gather" aria-label={`Use ${title} as a gathering pattern`}><ChevronRight size={18} /></a></article>)}
+      </section>
+      <section className="host-card"><span className="host-icon"><CalendarDays size={23} /></span><div><p className="simple-eyebrow">Host something</p><h2>Bring people to the table.</h2><p>Post a time, a public neighborhood, and what would make the gathering work. Keep private addresses out of the public post.</p></div><a className="simple-primary" href="/app/?workspace=community&action=gather">Plan a gathering <ArrowUpRight size={17} /></a></section>
+    </main>}
+
+    <footer className="simple-footer"><span>WXL:FOOD · Austin</span><a href="/app/?workspace=command">Open coordinator view</a></footer>
+    {locationPromptOpen && <LocationPrompt onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
+  </div>
+}
+
 function DashboardApp() {
-  const [view, setView] = useState<View>('command')
+  const [view, setView] = useState<View>(() => {
+    const params = new URLSearchParams(window.location.search)
+    const workspace = params.get('workspace')
+    if (workspace && Object.keys(viewLabels).includes(workspace)) return workspace as View
+    return params.get('intent') === 'request' ? 'community' : 'command'
+  })
   const [mapFilter, setMapFilter] = useState<'all' | Status>('all')
   const [selected, setSelected] = useState(locations[0])
+  const [locationLabel, setLocationLabel] = useState('Austin core')
+  const [locationPromptOpen, setLocationPromptOpen] = useState(() => new URLSearchParams(window.location.search).get('intent') === 'food' && sessionStorage.getItem('wxl:location-choice') !== 'complete')
   const [mapLocations, setMapLocations] = useState(locations)
   const [menuOpen, setMenuOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => localStorage.getItem('wxl:sidebar-collapsed') === '1')
@@ -127,7 +270,49 @@ function DashboardApp() {
   const [addSpotOpen, setAddSpotOpen] = useState(false)
   const [foodHereOpen, setFoodHereOpen] = useState(false)
   const [feedbackOpen, setFeedbackOpen] = useState(false)
+  const [mobileHeaderVisible, setMobileHeaderVisible] = useState(true)
   const { clicks, variant } = useEngagement()
+
+  useEffect(() => {
+    let lastScrollY = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop)
+
+    const updateHeader = () => {
+      const currentScrollY = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop)
+      if (window.innerWidth > 720 || currentScrollY <= 16) {
+        setMobileHeaderVisible(true)
+      } else if (currentScrollY < lastScrollY - 4) {
+        setMobileHeaderVisible(true)
+      } else if (currentScrollY > lastScrollY + 6) {
+        setMobileHeaderVisible(false)
+      }
+      lastScrollY = currentScrollY
+    }
+
+    const resetHeader = () => {
+      lastScrollY = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop)
+      if (window.innerWidth > 720) setMobileHeaderVisible(true)
+    }
+
+    window.addEventListener('scroll', updateHeader, { passive: true })
+    window.addEventListener('resize', resetHeader)
+    window.addEventListener('focus', updateHeader)
+    return () => {
+      window.removeEventListener('scroll', updateHeader)
+      window.removeEventListener('resize', resetHeader)
+      window.removeEventListener('focus', updateHeader)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (menuOpen || alertsOpen) setMobileHeaderVisible(true)
+  }, [menuOpen, alertsOpen])
+
+  useEffect(() => {
+    const removeExpiredAlerts = () => setAlerts((current) => current.filter((alert) => new Date(alert.expires_at).getTime() > Date.now()))
+    removeExpiredAlerts()
+    const interval = window.setInterval(removeExpiredAlerts, 60_000)
+    return () => window.clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     if (!foodDbConfigured) return
@@ -218,6 +403,34 @@ function DashboardApp() {
     notify('You are signed out. Public browsing remains open.')
   }
   const toggleSidebar = () => setSidebarCollapsed((current) => { localStorage.setItem('wxl:sidebar-collapsed', current ? '0' : '1'); return !current })
+  const useVisitorLocation = (latitude: number, longitude: number) => {
+    const nearest = nearestListedLocation(latitude, longitude)
+    sessionStorage.setItem('wxl:location-choice', 'complete')
+    setLocationPromptOpen(false)
+    setMapFilter('all')
+    setView('command')
+    if (!nearest) { notify('Your location is available, but no nearby listing could be selected'); return }
+    setSelected(nearest)
+    setLocationLabel(`${nearest.area} nearby`)
+    notify(`${nearest.name} is the nearest listed food resource. Confirm hours before traveling.`)
+  }
+  const skipVisitorLocation = () => {
+    sessionStorage.setItem('wxl:location-choice', 'complete')
+    setLocationPromptOpen(false)
+  }
+  const openAlertsPage = () => {
+    setAlertsOpen(false)
+    setView('alerts')
+    setMenuOpen(false)
+  }
+  const showAlertSpot = (spotId: string) => {
+    const location = mapLocations.find((item) => item.id === spotId)
+    if (!location) { notify('This alert is linked to a food spot that is not currently public'); return }
+    setSelected(location)
+    setMapFilter('all')
+    setView('command')
+    window.setTimeout(() => document.getElementById('food-map-title')?.scrollIntoView?.({ behavior: 'smooth', block: 'start' }), 0)
+  }
 
   return (
     <div className={`app-shell ${sidebarCollapsed ? 'sidebar-is-collapsed' : ''}`} data-experiment={variant}>
@@ -229,6 +442,8 @@ function DashboardApp() {
         <nav className="primary-nav" aria-label="Main navigation">
           <p className="nav-label">Coordinate</p>
           <NavItem active={view === 'command'} icon={<Activity size={18} />} label="Overview" onClick={() => { setView('command'); setMenuOpen(false) }} />
+          <NavItem active={view === 'alerts'} icon={<Bell size={18} />} label="Food available now" count={alerts.length ? String(alerts.length) : undefined} onClick={openAlertsPage} />
+          <NavItem active={view === 'protocol'} icon={<HandHeart size={18} />} label="Coordination protocol" onClick={() => { setView('protocol'); setMenuOpen(false) }} />
           <NavItem active={view === 'rescue'} icon={<Zap size={18} />} label="Rescue operations" onClick={() => { setView('rescue'); setMenuOpen(false) }} />
           <NavItem active={view === 'volunteer'} icon={<Users size={18} />} label="Volunteer command" onClick={() => { setView('volunteer'); setMenuOpen(false) }} />
           <NavItem active={view === 'community'} icon={<MessageCircle size={18} />} label="Community requests" count="18" onClick={() => { setView('community'); setMenuOpen(false) }} />
@@ -238,18 +453,19 @@ function DashboardApp() {
           <NavItem active={view === 'inventory'} icon={<Boxes size={18} />} label="Inventory" onClick={() => { setView('inventory'); setMenuOpen(false) }} />
           <NavItem icon={<ShieldCheck size={18} />} label="Impact reports" />
         </nav>
-        <div className="sidebar-bottom"><button className="help-link" onClick={() => setFeedbackOpen(true)}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div>{!authReady ? <div className="profile profile-loading" role="status"><span className="avatar">··</span><span><strong>Checking session</strong><small>Restoring account access</small></span></div> : isAuthenticated ? <div className="account-control"><button className="profile" onClick={() => setAccountOpen((current) => !current)} aria-expanded={accountOpen} aria-controls="member-account-menu"><span className="avatar">{memberIdentity.initials}</span><span><strong>{memberIdentity.displayName}</strong><small>Community account</small></span><Settings size={16} /></button>{accountOpen && <div className="account-menu" id="member-account-menu"><p>{memberIdentity.email}</p><button type="button" onClick={() => void signOut()}>Sign out</button></div>}</div> : <a className="profile" href="/app/?mode=login"><span className="avatar">WX</span><span><strong>Browsing openly</strong><small>Sign in to coordinate</small></span><ArrowUpRight size={16} /></a>}</div>
+        <div className="sidebar-bottom"><button className="help-link" onClick={() => setFeedbackOpen(true)}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div>{!authReady ? <div className="profile profile-loading" role="status"><span className="avatar">··</span><span><strong>Checking session</strong><small>Restoring account access</small></span></div> : isAuthenticated ? <div className="account-control"><button className="profile" onClick={() => setAccountOpen((current) => !current)} aria-expanded={accountOpen} aria-controls="member-account-menu"><span className="avatar">{memberIdentity.initials}</span><span><strong>{memberIdentity.displayName}</strong><small>Community account</small></span><Settings size={16} /></button>{accountOpen && <div className="account-menu" id="member-account-menu"><p>{memberIdentity.email}</p><button type="button" onClick={() => void signOut()}>Sign out</button></div>}</div> : <a className="profile" href="/app/?mode=login"><span className="avatar">WX</span><span><strong>Browsing openly</strong><small>Sign in to coordinate</small></span><ArrowUpRight size={16} /></a>}<p className="build-stamp" title={`Deployed build ${__WXL_BUILD_ID__}`}><span>Build</span><code>{__WXL_BUILD_ID__}</code></p></div>
       </aside>
       {menuOpen && <button className="sidebar-scrim" onClick={() => setMenuOpen(false)} aria-label="Close navigation" />}
 
       <main className="main-content">
-        <header className="topbar"><button className="menu-button" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu size={22} /></button><div className="breadcrumb" aria-label="Current location"><span className="breadcrumb-root">Directory</span><span>/</span><span>WXL:FOOD</span><span>/</span><strong>{viewLabels[view]}</strong></div><div className="top-actions"><div className="search"><Search size={17} /><input placeholder="Search places, food, or needs" aria-label="Search" /></div><button className="icon-button" onClick={() => setAlertsOpen((current) => !current)} aria-label={`${alerts.length} active food alerts`}><Bell size={18} />{alerts.length > 0 && <i />}</button>{variant === 'map_first' ? <><button className="add-button experiment-primary" onClick={() => requireAuth(() => setAddSpotOpen(true))}><Plus size={17} /> Add food spot</button><button className="food-here-button" onClick={() => requireAuth(() => setFoodHereOpen(true))}><Zap size={16} /> FOOD IS HERE!</button></> : <><button className="food-here-button experiment-primary" onClick={() => requireAuth(() => setFoodHereOpen(true))}><Zap size={16} /> FOOD IS HERE!</button><button className="add-button" onClick={() => requireAuth(() => setAddSpotOpen(true))}><Plus size={17} /> Add food spot</button></>}</div></header>
-        <AlertCenter alerts={alerts} open={alertsOpen} onClose={() => setAlertsOpen(false)} />
+        <header className={`topbar ${mobileHeaderVisible ? 'mobile-header-visible' : 'mobile-header-hidden'}`}><button className="menu-button" onClick={() => setMenuOpen(true)} aria-label="Open navigation"><Menu size={22} /></button><div className="breadcrumb" aria-label="Current location"><span className="breadcrumb-root">Directory</span><span>/</span><span>WXL:FOOD</span><span>/</span><strong>{viewLabels[view]}</strong></div><div className="top-actions"><div className="search"><Search size={17} /><input placeholder="Search places, food, or needs" aria-label="Search" /></div><button className="icon-button" onClick={() => setAlertsOpen((current) => !current)} aria-label={`${alerts.length} active food alerts`}><Bell size={18} />{alerts.length > 0 && <i />}</button>{variant === 'map_first' ? <><button className="add-button experiment-primary" onClick={() => requireAuth(() => setAddSpotOpen(true))}><Plus size={17} /> Add food spot</button><button className="food-here-button" onClick={() => requireAuth(() => setFoodHereOpen(true))}><Zap size={16} /> FOOD IS HERE!</button></> : <><button className="food-here-button experiment-primary" onClick={() => requireAuth(() => setFoodHereOpen(true))}><Zap size={16} /> FOOD IS HERE!</button><button className="add-button" onClick={() => requireAuth(() => setAddSpotOpen(true))}><Plus size={17} /> Add food spot</button></>}</div></header>
+        <AlertCenter alerts={alerts} open={alertsOpen} onClose={() => setAlertsOpen(false)} onViewAll={openAlertsPage} />
 
         <div className="page-wrap">
-          <div className="page-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Austin network / community preview</p><h1>{view === 'command' ? 'Local food, coordinated.' : view === 'rescue' ? 'Rescue operations' : view === 'volunteer' ? 'Volunteer command' : view === 'community' ? 'Community requests' : view === 'harvest' ? 'Harvest runs' : view === 'inventory' ? 'Inventory' : 'Partner network'}</h1><p className="lede">See where food is moving, where it is needed, and what can happen next.</p></div><button className="location-button"><MapPin size={16} /> Austin core <ChevronDown size={15} /></button></div>
+          <div className="page-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Austin network / community preview</p><h1>{view === 'command' ? 'Local food, coordinated.' : view === 'alerts' ? 'Food available now' : view === 'protocol' ? 'Coordination protocol' : view === 'rescue' ? 'Rescue operations' : view === 'volunteer' ? 'Volunteer command' : view === 'community' ? 'Community requests' : view === 'harvest' ? 'Harvest runs' : view === 'inventory' ? 'Inventory' : 'Partner network'}</h1><p className="lede">See where food is moving, where it is needed, and what can happen next.</p></div><button className="location-button" onClick={() => setLocationPromptOpen(true)}><MapPin size={16} /> {locationLabel} <ChevronDown size={15} /></button></div>
 
           {view === 'command' && <>
+            <FoodAlertsOverview alerts={alerts} onViewAll={openAlertsPage} onShowSpot={showAlertSpot} />
             <section className="map-overview panel" aria-labelledby="food-map-title">
               <div className="panel-heading map-overview-heading"><div><p className="eyebrow">Food nodes and volunteer routes</p><h2 id="food-map-title">Start with what is open and where help can move</h2><p>Select a pantry node to see hours, access notes, public sources, and directions.</p></div><button className="text-button" onClick={() => requireAuth(() => setAddSpotOpen(true))}><Plus size={14} /> Add a food node</button></div>
               <div className="map-toolbar"><div className="segmented">{(['all', 'plenty', 'limited', 'low', 'volunteers', 'transport'] as const).map((filter) => <button key={filter} className={mapFilter === filter ? 'active' : ''} onClick={() => setMapFilter(filter)}>{filter === 'all' ? 'All food nodes' : statusMeta[filter].label}</button>)}</div><a className="map-control" href={foodBankUrl} target="_blank" rel="noreferrer">Search the food bank directory <ArrowUpRight size={14} /></a></div>
@@ -278,8 +494,10 @@ function DashboardApp() {
             <section className="command-grid detail-grid"><aside className="side-stack panel"><PanelTitle eyebrow="Sample needs signal" title="Where help may be needed" action="See board" onAction={() => setView('volunteer')} />{needs.map((need) => <div className="need-item" key={need.label}><div className={`need-icon ${need.color}`}><Leaf size={17} /></div><div className="need-copy"><strong>{need.label}</strong><span>{need.count} nearby</span></div><span className="need-change">{need.change}</span></div>)}<div className="insight"><div className="insight-icon"><Zap size={16} /></div><p><strong>Sample coordination opportunity</strong> Seven anonymous household stops near Rosewood could share one neighborhood drop.</p><button onClick={() => notify('Basket planning is not live yet')}>Review the idea <ArrowUpRight size={14} /></button></div></aside><aside className="side-stack panel"><PanelTitle eyebrow="Sample route patterns" title="Example harvest runs" action="Open harvest runs" onAction={() => setView('harvest')} />{['Volunteer node → North cluster · 3 stops', 'Volunteer node → East cluster · 4 stops', 'Volunteer node → South cluster · 2 stops'].map((run) => <div className="run-item" key={run}><span className="run-icon"><Route size={15} /></span><span>{run}</span><ArrowUpRight size={14} /></div>)}</aside></section>
             <section className="bottom-grid"><div className="panel rescue-panel"><PanelTitle eyebrow="Sample rescue patterns" title="Example opportunities" action="Open rescue operations" onAction={() => setView('rescue')} />{rescues.map((rescue) => <RescueRow key={rescue.title} rescue={rescue} onClick={() => setView('rescue')} />)}</div><div className="panel impact-panel"><PanelTitle eyebrow="Public goods layer" title="This week in the network" action="Impact report" onAction={() => notify('Impact report queued')} /><div className="impact-chart"><div className="chart-bars">{[40, 55, 44, 70, 64, 82, 91].map((height, i) => <span key={i} style={{ height: `${height}%` }} />)}</div><div className="chart-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Today</span></div></div><div className="impact-values"><div><strong>2,840</strong><span>meals coordinated</span></div><div><strong>418</strong><span>volunteer hours</span></div><div><strong>1.2k</strong><span>miles saved</span></div></div></div></section>
           </>}
-          {view === 'rescue' && <RescueBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} onContributorSetup={() => setView('volunteer')} />}
-          {view === 'community' && <CommunityBoard requests={requests} setRequests={setRequests} notify={notify} dbConfigured={foodDbConfigured} canWrite={isAuthenticated} memberId={member?.id ?? null} memberName={memberIdentity.displayName} onAuthRequired={() => setAuthPromptOpen(true)} />}
+          {view === 'alerts' && <FoodAlertsBoard alerts={alerts} onCreate={() => requireAuth(() => setFoodHereOpen(true))} onShowSpot={showAlertSpot} />}
+          {view === 'rescue' && <RescueBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} onContributorSetup={() => setView('volunteer')} initialOpen={new URLSearchParams(window.location.search).get('action') === 'submit'} />}
+          {view === 'protocol' && <ProtocolBoard canWrite={isAuthenticated} memberName={memberIdentity.displayName} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
+          {view === 'community' && <CommunityBoard requests={requests} setRequests={setRequests} notify={notify} dbConfigured={foodDbConfigured} canWrite={isAuthenticated} memberId={member?.id ?? null} memberName={memberIdentity.displayName} onAuthRequired={() => setAuthPromptOpen(true)} initialCreate={new URLSearchParams(window.location.search).get('action') === 'gather'} />}
           {view === 'partners' && <SourceBoard notify={notify} dbConfigured={foodDbConfigured} canWrite={isAuthenticated} onAuthRequired={() => setAuthPromptOpen(true)} />}
           {view === 'volunteer' && <ContributorBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} memberName={memberIdentity.displayName} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
           {view === 'harvest' && <HarvestRunBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
@@ -288,6 +506,7 @@ function DashboardApp() {
       </main>
       {toast && <div className="toast"><ShieldCheck size={17} /> {toast}</div>}
       {authPromptOpen && <AuthPrompt onClose={() => setAuthPromptOpen(false)} />}
+      {locationPromptOpen && <LocationPrompt onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
       {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}
       {addSpotOpen && <AddSpotModal onClose={() => setAddSpotOpen(false)} notify={notify} onAdded={(spot) => {
         setSpots((current) => [spot, ...current])
@@ -309,7 +528,7 @@ function Metric({ icon, label, value, note, tone }: { icon: React.ReactNode; lab
 function PanelTitle({ eyebrow, title, action, onAction }: { eyebrow: string; title: string; action: string; onAction: () => void }) { return <div className="panel-heading compact"><div><p className="eyebrow">{eyebrow}</p><h2>{title}</h2></div><button className="text-button" onClick={onAction}>{action} <ArrowUpRight size={14} /></button></div> }
 function RescueRow({ rescue, onClick }: { rescue: typeof rescues[number]; onClick: () => void }) { const Icon = rescue.icon; return <button className="rescue-row" onClick={onClick}><div className={`rescue-icon ${rescue.tone}`}><Icon size={18} /></div><div className="rescue-copy"><strong>{rescue.title}</strong><span>{rescue.source} · {rescue.window}</span></div><span className="match-count">{rescue.match}</span><ArrowUpRight size={16} /></button> }
 
-function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite, memberId, memberName, onAuthRequired }: { requests: FoodRequest[]; setRequests: React.Dispatch<React.SetStateAction<FoodRequest[]>>; notify: (message: string) => void; dbConfigured: boolean; canWrite: boolean; memberId: string | null; memberName: string; onAuthRequired: () => void }) {
+function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite, memberId, memberName, onAuthRequired, initialCreate = false }: { requests: FoodRequest[]; setRequests: React.Dispatch<React.SetStateAction<FoodRequest[]>>; notify: (message: string) => void; dbConfigured: boolean; canWrite: boolean; memberId: string | null; memberName: string; onAuthRequired: () => void; initialCreate?: boolean }) {
   const [filter, setFilter] = useState<'all' | 'open' | 'urgent'>('all')
   const [selectedId, setSelectedId] = useState(requests[0].id)
   const [messages, setMessages] = useState<FoodRequestMessageRecord[]>([])
@@ -317,12 +536,12 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
   const [activityState, setActivityState] = useState<'sample' | 'loading' | 'ready' | 'error'>('sample')
   const [activityVersion, setActivityVersion] = useState(0)
   const [message, setMessage] = useState('')
-  const [showCreate, setShowCreate] = useState(false)
+  const [showCreate, setShowCreate] = useState(initialCreate)
   const [showOffer, setShowOffer] = useState(false)
   const [busy, setBusy] = useState(false)
-  const [newTitle, setNewTitle] = useState('')
+  const [newTitle, setNewTitle] = useState(initialCreate ? 'Neighborhood community table' : '')
   const [newGroup, setNewGroup] = useState(`${memberName}'s group`)
-  const [newDetail, setNewDetail] = useState('')
+  const [newDetail, setNewDetail] = useState(initialCreate ? 'We are planning a shared meal and looking for food, setup help, and neighbors who want to join.' : '')
   const [newNeighborhood, setNewNeighborhood] = useState('East Austin')
   const [newCategory, setNewCategory] = useState<'resource_request' | 'help_needed' | 'storage_request' | 'transport_request'>('resource_request')
   const [newPriority, setNewPriority] = useState<FoodRequest['priority']>('medium')
@@ -525,9 +744,63 @@ function AuthPrompt({ onClose }: { onClose: () => void }) {
   return <div className="access-backdrop" role="dialog" aria-modal="true" aria-labelledby="auth-prompt-title" onClick={onClose}><div className="access-card" onClick={(event) => event.stopPropagation()}><button className="access-close" onClick={onClose} aria-label="Close sign-in prompt"><X size={17} /></button><span className="access-heart">♥</span><p className="eyebrow">Account needed</p><h2 id="auth-prompt-title">Join the network to take action.</h2><p>Anonymous browsing is open to everyone. Create an account or log in to post rescues, reply to requests, offer help, and nominate food sources.</p><div className="access-actions"><a className="access-login" href="/app/?mode=login">Log in <ArrowUpRight size={15} /></a><a className="access-anonymous" href="/app/?mode=login&signup=1">Create an account <ArrowUpRight size={15} /></a></div></div></div>
 }
 
+function LocationPrompt({ onLocated, onSkip }: { onLocated: (latitude: number, longitude: number) => void; onSkip: () => void }) {
+  const [state, setState] = useState<'idle' | 'locating' | 'error'>('idle')
+  const [error, setError] = useState('')
+  const requestLocation = () => {
+    if (!navigator.geolocation) { setState('error'); setError('Location sharing is not available in this browser. You can still use the full Austin map.'); return }
+    setState('locating')
+    setError('')
+    navigator.geolocation.getCurrentPosition(
+      (position) => onLocated(position.coords.latitude, position.coords.longitude),
+      (locationError) => {
+        setState('error')
+        setError(locationError.code === 1 ? 'Location access was not allowed. You can continue with the full Austin map.' : 'We could not find your location. You can try again or continue with the full Austin map.')
+      },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 },
+    )
+  }
+  return <div className="access-backdrop location-backdrop" role="dialog" aria-modal="true" aria-labelledby="location-prompt-title"><div className="access-card location-consent"><span className="location-consent-icon" aria-hidden="true"><MapPin size={23} /></span><p className="eyebrow">Find food nearby</p><h2 id="location-prompt-title">Share your location to find nearby food?</h2><p>WXL can use your current location to select the nearest verified listing on this map.</p><div className="location-privacy"><ShieldCheck size={16} /><span>Your location stays in this browser. WXL does not save it or attach it to an account.</span></div>{error && <p className="location-error" role="alert">{error}</p>}<div className="location-actions"><button className="location-allow" type="button" onClick={requestLocation} disabled={state === 'locating'}>{state === 'locating' ? 'Finding your location…' : 'Use my location'} <ArrowUpRight size={15} /></button><button className="location-skip" type="button" onClick={onSkip}>Not now, show all Austin food</button></div></div></div>
+}
+
 function LandingPage() {
-  const [accessOpen, setAccessOpen] = useState(false)
-  return <div className="landing-page"><header className="landing-nav"><a className="landing-brand" href="/" aria-label="WXL home"><span>W<span>X</span>L</span><small>with xtra love <span aria-hidden="true">♥</span></small></a><a className="landing-handoff" href="https://handprotocol.org" target="_blank" rel="noreferrer">A HAND Protocol project <ArrowUpRight size={14} /></a></header><main className="landing-main"><div className="landing-orbit orbit-one" /><div className="landing-orbit orbit-two" /><p className="landing-kicker"><span /> Local systems, held with care</p><h1 aria-label="WXL"><span aria-hidden="true">W</span><span className="landing-x" aria-hidden="true">X<i>♥</i></span><span aria-hidden="true">L</span></h1><div className="landing-submark"><span>/WITH XTRA LOVE</span><strong>♥</strong></div><p className="landing-copy">A coordination layer for the food already moving through our neighborhoods.</p><div className="landing-actions"><button className="landing-primary" onClick={() => setAccessOpen(true)}>Open WXL:FOOD <ArrowUpRight size={17} /></button><a className="landing-soon waterdrop-link" href="https://waterdrop.handprotocol.org" target="_blank" rel="noreferrer"><span>WaterDrop app</span><em>OPEN RIVER MAP</em></a></div><p className="landing-note">Local food intelligence, shared by the people who keep it alive.</p></main><footer className="landing-footer"><span>Austin, Texas</span><span>Part of <a href="https://handprotocol.org" target="_blank" rel="noreferrer">HAND Protocol</a></span><span>Built for neighbors, partners, and contributors</span></footer>{accessOpen && <div className="access-backdrop" role="dialog" aria-modal="true" aria-labelledby="access-title" onClick={() => setAccessOpen(false)}><div className="access-card" onClick={(event) => event.stopPropagation()}><button className="access-close" onClick={() => setAccessOpen(false)} aria-label="Close access prompt"><X size={17} /></button><span className="access-heart">♥</span><p className="eyebrow">Welcome to WXL:FOOD</p><h2 id="access-title">How would you like to enter?</h2><p>Public food information is available to everyone. A login will let you post, respond, nominate sources, and coordinate with a partner group.</p><div className="access-actions"><a className="access-login" href="/app/?mode=login">Log in <ArrowUpRight size={15} /></a><a className="access-anonymous" href="/app/?mode=anonymous">Browse anonymously <ArrowUpRight size={15} /></a></div><small>You can explore first and choose an account later.</small></div></div>}</div>
+  return <div className="landing-page food-entry-page">
+    <a className="landing-skip" href="#choose-a-path">Skip to your path</a>
+    <header className="landing-nav">
+      <a className="landing-brand" href="/" aria-label="W Xtra home"><span>/W XTRA <b aria-hidden="true">♥</b></span><small>WXL:FOOD · Austin</small></a>
+      <div className="landing-nav-actions"><a href="/app/?mode=login">Sign in</a><a className="landing-handoff" href="https://handprotocol.org" target="_blank" rel="noreferrer">HAND Protocol <ArrowUpRight size={14} /></a></div>
+    </header>
+    <main className="food-entry-main">
+      <section className="food-entry-intro" aria-labelledby="food-entry-title">
+        <p className="landing-kicker"><span /> Austin food support</p>
+        <h1 id="food-entry-title">Food, shared<br />with xtra love.</h1>
+        <p>Find food nearby, ask your community for what is needed, or help good food reach more neighbors.</p>
+        <div className="food-entry-proof"><ShieldCheck size={16} /><span>Public food information is open to everyone. You only need an account when you are ready to post or coordinate.</span></div>
+      </section>
+      <section className="entry-paths" id="choose-a-path" aria-labelledby="choose-path-title">
+        <div className="entry-paths-heading"><p className="landing-kicker"><span /> Start here</p><h2 id="choose-path-title">What brings you here today?</h2></div>
+        <div className="entry-path-list entry-path-list-three">
+          <a className="entry-path entry-path-food" href="/app/?mode=anonymous&intent=food">
+            <span className="entry-path-icon"><MapPin size={25} /></span>
+            <span className="entry-path-copy"><small>I need food</small><strong>Show me food nearby.</strong><span>See public food locations, hours, access notes, and community requests. No account needed to look.</span></span>
+            <span className="entry-path-action">Find food <ArrowUpRight size={18} /></span>
+          </a>
+          <a className="entry-path entry-path-contributor" href="/app/?intent=contribute">
+            <span className="entry-path-icon"><HandHeart size={25} /></span>
+            <span className="entry-path-copy"><small>I am a Contributor</small><strong>Put my time or resources to work.</strong><span>Offer food, drive a route, help with storage, or join a coordinated volunteer run.</span></span>
+            <span className="entry-path-action">Start contributing <ArrowUpRight size={18} /></span>
+          </a>
+          <a className="entry-path entry-path-gather" href="/app/?mode=anonymous&intent=gather">
+            <span className="entry-path-icon"><Users size={25} /></span>
+            <span className="entry-path-copy"><small>I want to gather</small><strong>Share a table.</strong><span>Find a community meal, bring something to share, or host a neighborhood table.</span></span>
+            <span className="entry-path-action">Gather together <ArrowUpRight size={18} /></span>
+          </a>
+        </div>
+        <p className="entry-request-note">Need something the map does not show? <a href="/app/?mode=anonymous&intent=request">View or make a community request</a>.</p>
+      </section>
+    </main>
+    <footer className="landing-footer"><span>Austin, Texas</span><span>Food support coordinated by neighbors and local groups</span><span>Part of <a href="https://handprotocol.org" target="_blank" rel="noreferrer">HAND Protocol</a></span></footer>
+  </div>
 }
 
 function LoginScreen() {
@@ -582,10 +855,10 @@ function LoginScreen() {
     if (newPassword !== confirmPassword) { setError('Your passwords do not match.'); return }
     if (!foodDb) { setError('Login is not configured on this deployment yet.'); return }
     setBusy(true)
-    const { error: authError } = await foodDb.auth.updateUser({ password: newPassword })
+    const { error: authError } = await updatePasswordAndSignOut(foodDb.auth, newPassword)
     setBusy(false)
     if (authError) setError(authError.message)
-    else setNotice('Your password has been updated. You can now continue to WXL:FOOD.')
+    else window.location.assign('/app/?mode=login')
   }
 
   const isRecovery = authMode === 'recovery'
@@ -600,8 +873,10 @@ function LoginScreen() {
 
 function App() {
   const mode = new URLSearchParams(window.location.search).get('mode')
+  const intent = new URLSearchParams(window.location.search).get('intent')
   const authMode = mode === 'login' || mode === 'reset' || mode === 'recovery'
-  return window.location.pathname.startsWith('/app') ? authMode ? <LoginScreen /> : <DashboardApp /> : <LandingPage />
+  const consumerIntent = intent === 'food' || intent === 'contribute' || intent === 'gather' ? intent : null
+  return window.location.pathname.startsWith('/app') ? authMode ? <LoginScreen /> : consumerIntent ? <SimpleExperience initialIntent={consumerIntent} /> : <DashboardApp /> : <LandingPage />
 }
 
 export default App

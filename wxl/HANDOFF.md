@@ -1,6 +1,6 @@
 # WXL:FOOD Handoff
 
-Last updated: 2026-07-17
+Last updated: 2026-07-18
 
 This is the working orientation document for `wxl/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on WXL:FOOD, its current behavior, what is real, what is illustrative, and what should be built next.
 
@@ -39,7 +39,7 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 | Main UI | `src/App.tsx` |
 | Styles | `src/styles.css` |
 | Data access | `src/lib/foodRepository.ts` |
-| Database migrations | `../command/supabase/migrations/024_wxl_food.sql` through `031_wxl_inventory.sql` |
+| Database migrations | `../command/supabase/migrations/024_wxl_food.sql` through `036_wxl_coordinator_gates.sql` |
 | Deployment notes | `DEPLOY.md` |
 
 ## Routes and entry states
@@ -53,15 +53,39 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 | `/app/?mode=login&signup=1` | Account creation |
 | `/app/?mode=reset` | Request a password-reset email |
 | `/app/?mode=recovery` | Set a new password after following the recovery link |
+| `/app/?mode=anonymous&intent=food` | Public food-finding entry; opens the simple map and nearby listing shelf |
+| `/app/?mode=anonymous&intent=request` | Public request entry; opens Community Requests |
+| `/app/?intent=contribute` | Contribution entry; opens food submission and delivery choices |
+| `/app/?mode=anonymous&intent=gather` | Gathering entry; opens sample table patterns and a path to plan a gathering |
+| `/app/?workspace=<name>` | Opens a named operational command-center workspace |
 
 Routing is currently implemented with `window.location.pathname` and query parameters inside `App.tsx`. There is no router library.
 
+The landing page is intentionally food-only and task-first. It presents find food, contribute, and gather as the three public paths. The simple app shell keeps those choices one tap away on mobile. Operational workspaces remain available through `workspace` parameters. Authentication continues to come exclusively from the Supabase session.
+
+The food intent opens an optional geolocation prompt before map exploration. Browser coordinates are used in memory to select the nearest verified listing and are not persisted or sent to Supabase. The choice is remembered only for the current browser tab through `sessionStorage`. Visitors can skip it and can reopen it from the map location control.
+
 ## What works now
+
+### Coordination protocol foundation
+
+- Migrations 024 and 025 have been restored from repository history, resolving the missing predecessors for public requests, the community map, alerts, and engagement records.
+- Migrations 026 through 036 were applied to the production HAND Supabase project on 2026-07-18. Migration history is baselined from 001 through 036, and the duplicate public-visits migration was renumbered from 020 to 023.
+- Migrations 032 through 036 define channel-independent participants, verification, consent, mandates, private locations, needs, supplies, match evidence, commitments, conversations, payments, donations, subsidies, potlucks, recognition, agent audits, coordinator gates, idempotent command receipts, and a transactional outbox.
+- Canonical operational tables reject direct authenticated writes. Lifecycle and commitment changes use security-definer commands with ownership, eligibility, quantity, mandate, and idempotency checks.
+- Exact locations are represented only as opaque ciphertext with separate, append-only precision-access evidence.
+- The Coordination API, OR-Tools worker, payment worker, potluck worker, retention worker, web workspace, remote MCP, A2A, Stripe reconciliation, and Twilio Voice adapter are implemented but not activated in production.
+- SMS is intentionally deferred to the next scope. See `docs/COORDINATION-PROTOCOL.md`.
+- The navigation footer displays the seven-character Netlify commit reference as its build identifier. Local builds display `local`, and `VITE_BUILD_ID` may override the value for another build system.
 
 ### Landing and access
 
-- The landing page presents WXL and opens an access choice.
-- People can choose login or anonymous browsing.
+- The landing page is food-only and starts with two role paths: `I need food` and `I am a Contributor`.
+- The food path opens public map browsing. The Contributor path opens Volunteer Command. Community requests and sign-in remain secondary routes.
+- Food seekers receive an optional second-step location prompt. The browser asks for location access only after the visitor chooses `Use my location`.
+- A successful location lookup selects the nearest bundled verified listing. Skipping opens the complete Austin map.
+- Browser coordinates remain in memory for the nearest-listing calculation and are not persisted or sent to Supabase.
+- The location choice lasts only for the current tab. The command-center location control can reopen the prompt.
 - The SPA fallback works through Netlify and `public/_redirects`.
 
 ### Authentication
@@ -73,6 +97,7 @@ Routing is currently implemented with `window.location.pathname` and query param
 - Password-reset email uses `resetPasswordForEmail`.
 - Recovery returns to `/app/?mode=recovery`.
 - New password submission uses `updateUser`.
+- A successful password update ends the recovery session and redirects to `/app/?mode=login` for a fresh login.
 - Password confirmation is checked in the browser.
 - The app subscribes to Supabase auth-state changes and uses the live session for write gating.
 - Session restoration has an explicit loading state, preventing the app from briefly presenting an authenticated member as anonymous.
@@ -114,7 +139,7 @@ Routing is currently implemented with `window.location.pathname` and query param
 - Checkpoints require packaging, label, temperature-control, contamination, observed-quantity, and note evidence. Chilled food above 41 degrees Fahrenheit and hot food below 135 degrees Fahrenheit enter incident hold.
 - Administrators can resolve an incident hold as rejected or cancelled with a required disposition note.
 - Status changes, claim releases, checkpoints, and incident resolution are preserved in event history.
-- The workflow requires migration 028 and live role-boundary testing before production use. It is not authorization for real food movement.
+- The workflow requires live role-boundary testing and operational approval before production use. Its deployed schema is not authorization for real food movement.
 
 ### Contributor readiness and Volunteer Command
 
@@ -168,7 +193,7 @@ Routing is currently implemented with `window.location.pathname` and query param
 - South Oak Baptist food pantry is shown as a community report pending confirmation. The reported access is Thursdays from 9 to 11 AM, one form, and no ID requested. Its exact public location is intentionally not inferred.
 - A volunteer start node connects to three anonymous household clusters. These route lines communicate the delivery workflow without exposing private home locations.
 - Authenticated members can add a public food spot with produce and availability details. New spots are labeled as community pins until reviewed.
-- Authenticated members can publish a six-hour `FOOD IS HERE!` alert. Active alerts are public, appear in the top-right alert center, and arrive in other open sessions through Supabase Realtime.
+- Authenticated members can publish a six-hour `FOOD IS HERE!` alert. Active alerts are public, appear on Overview, in the dedicated Food available now workspace, and in the top-right alert center. Alerts linked to a public food spot can open it on the map. Other open sessions receive inserts through Supabase Realtime and remove expired alerts without requiring a refresh.
 - Alert creation invokes `netlify/functions/food-alert.mjs`, which validates the Supabase session and sends a best-effort Resend operations email using HAND's existing environment-variable pattern.
 - Alert writes are limited to five per account per 15 minutes. Private home addresses and household details are explicitly prohibited in the interface.
 
@@ -178,13 +203,14 @@ Routing is currently implemented with `window.location.pathname` and query param
 - The command CTA runs a stable two-variant test, `map_first` or `rescue_first`, stored in local storage.
 - Click progress persists locally for every visitor. Authenticated interaction events batch to `command.food_engagement_events` every ten interactions.
 - Admins can query `command.food_engagement_leaderboard`; invoker row-level security keeps it internal.
-- Vitest covers landing links, anonymous write gates, feedback, the mobile navigation rail, and mocked database contracts. Run `npm test`.
+- Vitest covers landing links, anonymous write gates, FOOD IS HERE visibility and navigation, feedback, the mobile navigation drawer, and mocked database contracts. Run `npm test`.
 - `.github/workflows/wxl-ci.yml` runs tests and the production build for WXL pull requests, relevant pushes to `main`, and manual dispatches.
 
 ### Mobile navigation
 
 - Mobile uses the full viewport width and opens the labeled navigation as a drawer from the top menu button.
 - The drawer closes from its close button, the shaded page area, or after choosing a destination.
+- Short landscape screens use the drawer through 960px wide, with a scrollable compact two-column navigation layout.
 - Desktop navigation can also collapse and remembers its state locally.
 
 ### Navigation and identity handoff, 2026-07-16
@@ -226,11 +252,12 @@ Keep the X treatment consistent anywhere a new WXL wordmark appears. Coral ident
 #### Mobile navigation behavior
 
 - The old permanent 56px rail was removed. At 360px and similar widths, the application now receives the full viewport.
-- The top-left menu button opens a drawer up to 300px wide, with a 40px edge allowance.
+- The top-left menu button opens a drawer with an edge allowance, including on short landscape phone screens.
 - The drawer contains the same labels, status, feedback, interaction count, and account entry as desktop.
 - The drawer closes through the labeled close button, the shaded page scrim, or a destination selection.
 - The sidebar toggle used for desktop collapse is hidden on mobile.
-- The traced hand becomes slightly more visible in the mobile drawer, matching the source HAND menu more closely.
+- The drawer scrolls vertically when its contents exceed the available height.
+- Short landscape screens use two navigation columns and compact controls. Decorative hand artwork is hidden so destinations remain legible.
 
 #### Directory breadcrumb contract
 
@@ -282,7 +309,7 @@ Recommended follow-up:
 
 ### Database and security baseline
 
-Migrations `024_wxl_food.sql` through `031_wxl_inventory.sql` define:
+Migrations `024_wxl_food.sql` through `036_wxl_coordinator_gates.sql` define:
 
 - `command.food_partners`
 - `command.food_source_nominations`
@@ -351,13 +378,11 @@ The app should not claim these boards are ready until they contain functional wo
 
 ### Persistence gaps
 
-- Migration `027_wxl_request_coordination.sql` must be deployed before structured offers, owner decisions, status history, and transactional counts are available in production.
-- Migration `028_wxl_rescue_operations.sql` must be deployed before rescue submission, review, claiming, private instructions, safety checkpoints, and event history are available in production.
+- Migration `027_wxl_request_coordination.sql` is deployed. Structured offers, owner decisions, status history, and transactional counts still require live multi-account verification.
+- Migration `028_wxl_rescue_operations.sql` is deployed. Rescue submission, review, claiming, private instructions, safety checkpoints, and event history still require supervised operational verification.
 - Sample fallback request messages, offers, and support remain explicitly non-persistent.
 - Request owners can change status but cannot yet edit the request title, group, details, priority, or visibility from the interface.
-- Migration `029_wxl_contributor_readiness.sql` must be deployed before Contributor applications, coordinator approval, or eligibility-enforced claiming are available in production.
-- Migration `030_wxl_harvest_runs.sql` must be deployed before private route planning, eligibility-checked assignment, ordered stop outcomes, or completion history are available in production.
-- Migration `031_wxl_inventory.sql` must be deployed before accepted-rescue receiving, reservations, storage checks, distributions, discards, or ledger history are available in production.
+- Migrations `029_wxl_contributor_readiness.sql` through `031_wxl_inventory.sql` are deployed. Contributor approval, private routing, and inventory custody still require supervised multi-role, concurrency, expiry, privacy, and reconciliation verification.
 - Harvest-run assignment enforces capacity, lifting, vehicle, run class, equipment, and validity dates. Service-area and schedule fit require an explicit coordinator confirmation because those fields remain human-readable rather than normalized availability calendars.
 - Rescue notifications, overdue escalation, access-history auditing, retention, partial acceptance, and reassignment after incident review remain incomplete.
 - Auditable impact reporting has no front-end repository. Food alerts now have a focused notification repository and interface.
@@ -372,7 +397,7 @@ The app should not claim these boards are ready until they contain functional wo
    - `http://localhost:5173/app/?mode=recovery`
    Set the Supabase Site URL to `https://wxl.handprotocol.org`; leaving the default `http://localhost:3000` causes password-recovery links to open localhost when the callback is rejected or omitted.
 3. Test immediate signup login, browser password-save behavior, login, logout, reset request, recovery, and expired recovery links on the live domain.
-4. Apply migrations 026 through 031. Migration 031 adds accepted-rescue inventory custody and a transactional quantity ledger. Run the deployment verification queries before broad access.
+4. Migrations 026 through 036 are applied. Complete the remaining live multi-role, retry, concurrency, and operational verification before broad access.
 5. Confirm that the `command` schema is exposed through the Supabase API.
 6. Confirm the policy decision that request messages and structured offers are public when the parent request is public. The interface discloses this, but moderation and takedown controls are still required.
 7. Add abuse controls before broad access: rate limits, duplicate prevention, moderation status, report and takedown paths, and safe handling of contact details.
@@ -383,7 +408,7 @@ The app should not claim these boards are ready until they contain functional wo
 ### P0: Make the existing promise honest and reliable
 
 1. Smoke-test the complete live authentication lifecycle.
-2. Apply and verify migrations 026 through 031 in production.
+2. Complete live multi-role, retry, concurrency, and privacy verification for migrations 026 through 036.
 3. Label all hard-coded metrics and activity as sample data, or replace them with honest empty states.
 4. Add normalized Contributor availability calendars, time-off, and service-area matching to supplement coordinator confirmation.
 5. Remove or disable controls that do not have a real next screen or action.
@@ -492,8 +517,12 @@ See `DEPLOY.md` for the concise deployment guide.
 
 Before calling the current auth and community flow production-ready, verify:
 
-- Landing access modal opens and closes with mouse and keyboard.
-- Anonymous browse opens the command center.
+- Both landing role paths open their intended workspace.
+- The food intent opens the optional location prompt.
+- Allowing location selects a nearby bundled listing on localhost and the production HTTPS origin.
+- Denying, timing out, or skipping location keeps the complete Austin map usable.
+- Reopening the location prompt from the command-center control works.
+- Anonymous food browsing opens the command center.
 - Public request loading works without a session.
 - Anonymous write attempts open the account prompt.
 - Account creation works with a new address.
@@ -560,7 +589,7 @@ Before calling the current auth and community flow production-ready, verify:
 - Failed packaging, label, temperature-control, contamination, or temperature checks place a rescue on incident hold. Administrators can close the hold with an audited rejection or cancellation.
 - Relabeled Overview rescue content as sample patterns and routed its action into the real rescue workspace.
 - Migration `028_wxl_rescue_operations.sql` contains the schema, row-level security, privacy-safe and restricted functions, grants, validation, and event history.
-- Migration 028 has not been applied to production from this workspace. Contributor eligibility and a supervised operating rehearsal remain required before food moves.
+- Migration 028 is applied to production. Contributor eligibility and a supervised operating rehearsal remain required before food moves.
 - `npm test` passes 29 tests and `npm run build` completes successfully.
 
 ## Contributor readiness pass, 2026-07-17
@@ -570,7 +599,7 @@ Before calling the current auth and community flow production-ready, verify:
 - Migration `029_wxl_contributor_readiness.sql` keeps these records private, preserves review history, and replaces rescue claiming with server-side operational eligibility checks.
 - Updating an approved readiness file requires another review. Expired training or credentials stop new claims automatically.
 - Open rescues link directly to Volunteer Command so claim requirements are discoverable.
-- Migration 029 has not been applied to production from this workspace. Live multi-account authorization and expiry tests remain required.
+- Migration 029 is applied to production. Live multi-account authorization and expiry tests remain required.
 - `npm test` passes 32 tests and `npm run build` completes successfully.
 
 ## Harvest run pass, 2026-07-17
@@ -580,7 +609,7 @@ Before calling the current auth and community flow production-ready, verify:
 - Migration `030_wxl_harvest_runs.sql` defines private run, stop, and event records plus restricted state-transition functions and row-level security.
 - Assignment reserves linked rescues atomically and prevents duplicate active-run use. Linked safety checkpoints remain the source of truth for pickup and delivery handling.
 - Overview route content is labeled as sample patterns and opens the real Harvest Runs workspace.
-- Migration 030 has not been applied to production from this workspace. Live database concurrency, expiry, privacy, incident, and multi-account tests remain required.
+- Migration 030 is applied to production. Live database concurrency, expiry, privacy, incident, and multi-account tests remain required.
 - `npm test` passes 35 tests and `npm run build` completes successfully.
 
 ## Inventory custody pass, 2026-07-17
@@ -590,8 +619,48 @@ Before calling the current auth and community flow production-ready, verify:
 - Migration `031_wxl_inventory.sql` defines lots, allocations, condition checks, and an immutable quantity ledger with restricted transactional functions and row-level security.
 - Physical, reserved, and available quantities remain separate. Database row locks prevent over-allocation and every mutation records resulting balances.
 - Failed storage checks hold the lot. Cancelling a reservation cannot release the hold, and hold release requires a newer passing condition check.
-- Migration 031 has not been applied to production from this workspace. Live concurrency, expiry, privacy, and reconciliation tests remain required.
+- Migration 031 is applied to production. Live concurrency, expiry, privacy, and reconciliation tests remain required.
 - `npm test` passes 38 tests and `npm run build` completes successfully.
+
+## Food-first onboarding and geolocation pass, 2026-07-18
+
+Implementation commit: `d9335850c` (`feat(wxl): add food-first onboarding and location step`).
+
+- Replaced the broad WXL splash and access modal with a focused `/W XTRA ♥` food entry.
+- Made `I need food` and `I am a Contributor` the two primary choices. The first opens Overview; the second opens Volunteer Command.
+- Added `intent=food`, `intent=request`, and `intent=contribute` initial-workspace routing. Intent never changes session-based write access.
+- Added optional geolocation after the food choice. Permission is requested only from the explicit `Use my location` button.
+- Calculates the nearest bundled verified public listing in browser memory, selects it on the schematic map, and reminds the visitor to confirm hours before traveling.
+- Added a skip path, permission-denial and failure messages, a loading state, and a reusable command-center location control.
+- Records the completed or skipped choice only in `sessionStorage` for the current tab. Coordinates are not stored in local storage, Supabase, account metadata, or engagement events.
+- Updated `docs/LIVING-DOCS.md`, page metadata, responsive styles, and interaction coverage.
+- `npm test` passes 42 tests and `npm run build` completes successfully. The existing Vite chunk-size warning remains non-blocking.
+
+Known geolocation limitation:
+
+- Nearest-listing comparison currently covers only bundled public-directory locations with local coordinates. Supabase community pins do not yet carry reviewed coordinates and are not candidates. Do not silently geocode private or unreviewed addresses. A future location expansion should add coordinator-reviewed coordinates to the public food-spot data model before including those records.
+
+## Simple public interface pass, 2026-07-21
+
+- Added a mobile-first public shell with persistent Find food, Contribute, and Gather navigation.
+- Reworked food discovery into a schematic Austin map with food icons, search, verification filters, and a horizontal nearby-place shelf on phones. Desktop expands into a map-and-results split view.
+- Kept every directory location labeled as a listing that must be confirmed before travel. The interface does not present directory records as live inventory.
+- Added a short food-contribution draft that continues into the existing secure rescue submission form without putting a private address in the public step.
+- Added a delivery-style run picker using clearly labeled sample patterns and linked it to real Contributor readiness.
+- Added the tighter gathering label `Share a table`, clearly labeled gathering patterns as samples, and linked planning to the persisted Community Requests workflow.
+- Preserved the command center behind explicit `workspace` routes for coordinators and existing operational workflows.
+- Vitest covers all three public intents, geolocation, contribution-mode switching, and links into operational workflows.
+
+## Interactive public map pass, 2026-07-21
+
+- Replaced the schematic Find food canvas with a real Leaflet map using OpenStreetMap tiles.
+- Added pan, zoom, touch interaction, keyboard-focusable food markers, place tooltips, and synchronized marker and result-card selection.
+- Added an approximate visitor-location marker after explicit geolocation permission. Coordinates remain in memory and are not persisted.
+- Added a platform-aware `Navigate` action to verified listing cards. Apple devices open Apple Maps; other platforms open Google Maps. Reviewed coordinates are preferred over address text.
+- Listings without confirmed public coordinates remain visible in the result shelf but do not receive an inferred marker.
+- OpenStreetMap attribution remains visible. The app does not prefetch or offer offline tile downloads.
+- Added `leaflet` as a runtime dependency and `@types/leaflet` as a development dependency.
+- `npm test` passes 51 tests and `npm run build` completes successfully. Leaflet is loaded as a separate lazy chunk; the pre-existing main-bundle size warning remains non-blocking.
 
 ## Working conventions
 

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createAccountAndSession, getMemberIdentity, getRecoveryRedirectUrl } from './auth'
+import { createAccountAndSession, getMemberIdentity, getRecoveryRedirectUrl, updatePasswordAndSignOut } from './auth'
 
 const credentials = { email: 'neighbor@example.org', password: 'community-food' }
 const user = { id: 'member-1' }
@@ -41,6 +41,30 @@ describe('createAccountAndSession', () => {
     const result = await createAccountAndSession({ signUp, signInWithPassword } as never, credentials.email, credentials.password)
 
     expect(signInWithPassword).not.toHaveBeenCalled()
+    expect(result.error).toBe(error)
+  })
+})
+
+describe('updatePasswordAndSignOut', () => {
+  it('ends the recovery session after updating the password', async () => {
+    const updateUser = vi.fn().mockResolvedValue({ data: { user }, error: null })
+    const signOut = vi.fn().mockResolvedValue({ error: null })
+
+    const result = await updatePasswordAndSignOut({ updateUser, signOut } as never, 'new-community-food')
+
+    expect(updateUser).toHaveBeenCalledWith({ password: 'new-community-food' })
+    expect(signOut).toHaveBeenCalledWith({ scope: 'local' })
+    expect(result.error).toBeNull()
+  })
+
+  it('keeps the recovery session available when the password update fails', async () => {
+    const error = new Error('Password update failed')
+    const updateUser = vi.fn().mockResolvedValue({ data: { user: null }, error })
+    const signOut = vi.fn()
+
+    const result = await updatePasswordAndSignOut({ updateUser, signOut } as never, 'new-community-food')
+
+    expect(signOut).not.toHaveBeenCalled()
     expect(result.error).toBe(error)
   })
 })

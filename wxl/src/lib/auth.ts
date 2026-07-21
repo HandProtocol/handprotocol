@@ -2,6 +2,7 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 import type { User } from '@supabase/supabase-js'
 
 type PasswordAuth = Pick<SupabaseClient['auth'], 'signUp' | 'signInWithPassword'>
+type PasswordRecoveryAuth = Pick<SupabaseClient['auth'], 'updateUser' | 'signOut'>
 
 export function getRecoveryRedirectUrl(origin: string) {
   return new URL('/app/?mode=recovery', origin).toString()
@@ -14,6 +15,15 @@ export async function createAccountAndSession(auth: PasswordAuth, email: string,
   if (signup.error || signup.data.session) return signup
 
   return auth.signInWithPassword(credentials)
+}
+
+export async function updatePasswordAndSignOut(auth: PasswordRecoveryAuth, password: string) {
+  const result = await auth.updateUser({ password })
+
+  if (result.error) return result
+
+  await auth.signOut({ scope: 'local' })
+  return result
 }
 
 export function getMemberIdentity(user: User | null) {

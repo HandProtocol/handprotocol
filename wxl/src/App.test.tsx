@@ -1,11 +1,20 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
+import { FoodAlertsOverview } from './CommunityTools'
+
+vi.mock('./FoodMap', () => ({
+  FoodMap: ({ locations }: { locations: Array<{ id: string }> }) => <div aria-label="Interactive map of public food places in Austin" data-location-count={locations.length} />,
+}))
+
+const defaultUserAgent = navigator.userAgent
 
 describe('WXL entry points and interaction gates', () => {
   beforeEach(() => {
     window.history.replaceState({}, '', '/')
+    sessionStorage.clear()
+    Object.defineProperty(navigator, 'userAgent', { value: defaultUserAgent, configurable: true })
   })
 
   it('marks signup credentials for the browser password manager', () => {
@@ -18,9 +27,77 @@ describe('WXL entry points and interaction gates', () => {
 
   it('replaces the coming-soon card with the live WaterDrop app', () => {
     render(<App />)
-    const link = screen.getByRole('link', { name: /WaterDrop app/i })
-    expect(link).toHaveAttribute('href', 'https://waterdrop.handprotocol.org')
-    expect(screen.queryByText('COMING SOON')).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: /Food, shared with xtra love/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Show me food nearby/i })).toHaveAttribute('href', '/app/?mode=anonymous&intent=food')
+    expect(screen.getByRole('link', { name: /Put my time or resources to work/i })).toHaveAttribute('href', '/app/?intent=contribute')
+    expect(screen.getByRole('link', { name: /Share a table/i })).toHaveAttribute('href', '/app/?mode=anonymous&intent=gather')
+  })
+
+  it('routes each landing choice to the relevant workspace', () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=contribute')
+    const { unmount } = render(<App />)
+    expect(screen.getByRole('heading', { level: 1, name: 'Share food. Move food.' })).toBeInTheDocument()
+    unmount()
+
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=gather')
+    render(<App />)
+    expect(screen.getByRole('heading', { level: 1, name: 'Share a table.' })).toBeInTheDocument()
+  })
+
+  it('offers optional geolocation as the second food-finding step', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
+    const getCurrentPosition = vi.fn((success: PositionCallback) => success({ coords: { latitude: 30.333, longitude: -97.693 } } as GeolocationPosition))
+    Object.defineProperty(navigator, 'geolocation', { value: { getCurrentPosition }, configurable: true })
+    render(<App />)
+
+    expect(screen.getByRole('dialog', { name: /Share your location to find nearby food/i })).toBeInTheDocument()
+    expect(screen.getByText(/does not save it or attach it to an account/i)).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: /Use my location/i }))
+
+    expect(getCurrentPosition).toHaveBeenCalledOnce()
+    expect(screen.queryByRole('dialog', { name: /Share your location/i })).not.toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /St. John nearby/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Select St. John Community Center/i })).toBeInTheDocument()
+  })
+
+  it('lets food seekers skip location sharing', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
+    render(<App />)
+    await userEvent.click(screen.getByRole('button', { name: /Not now, show all Austin food/i }))
+    expect(screen.queryByRole('dialog', { name: /Share your location/i })).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /What can we help you find/i })).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: /Map of public food places/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Navigate to East Austin Neighborhood Center/i })).toHaveAttribute('href', expect.stringContaining('google.com/maps'))
+  })
+
+  it('opens Apple Maps from Navigate on Apple devices', () => {
+    Object.defineProperty(navigator, 'userAgent', { value: 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)', configurable: true })
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
+    sessionStorage.setItem('wxl:location-choice', 'complete')
+    render(<App />)
+
+    expect(screen.getByRole('link', { name: /Navigate to East Austin Neighborhood Center/i })).toHaveAttribute('href', expect.stringContaining('maps.apple.com'))
+  })
+
+  it('switches between food submission and delivery contribution paths', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=contribute')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: /Tell us what is ready/i })).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('tab', { name: /I can deliver/i }))
+    expect(screen.getByRole('heading', { name: /Choose a run that fits/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Set up Contributor profile/i })).toHaveAttribute('href', '/app/?workspace=volunteer')
+  })
+
+  it('keeps all three public intents one tap away', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
+    sessionStorage.setItem('wxl:location-choice', 'complete')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: 'Gather' }))
+    expect(screen.getByRole('heading', { name: /Community table patterns/i })).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: 'Find food' }))
+    expect(screen.getByRole('region', { name: /Food places near you/i })).toBeInTheDocument()
   })
 
   it('keeps public browsing open but gates FOOD IS HERE behind an account', async () => {
@@ -62,6 +139,71 @@ describe('WXL entry points and interaction gates', () => {
     const { container } = render(<App />)
     await userEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
     expect(container.querySelector('.sidebar')).toHaveClass('open')
+    expect(screen.getByRole('button', { name: 'Coordination protocol' })).toBeVisible()
+    expect(screen.getByTitle('Deployed build local')).toHaveTextContent('Buildlocal')
+  })
+
+  it('keeps FOOD IS HERE visible on Overview and provides a dedicated workspace', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { name: 'FOOD IS HERE!' })).toBeInTheDocument()
+    expect(screen.getByText(/No active FOOD IS HERE alerts right now/i)).toBeInTheDocument()
+
+    await userEvent.click(screen.getByRole('button', { name: 'View all alerts' }))
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Food available now' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Food available now' })).toBeInTheDocument()
+    expect(screen.getByText(/New alerts will appear here as soon as they are posted/i)).toBeInTheDocument()
+    expect(screen.getByLabelText('Current location')).toHaveTextContent('Directory/WXL:FOOD/Food available now')
+  })
+
+  it('includes the active food workspace in the main navigation', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: /^Food available now$/i }))
+    expect(screen.getByRole('heading', { level: 1, name: 'Food available now' })).toBeInTheDocument()
+  })
+
+  it('renders active FOOD IS HERE details and linked map actions on Overview', async () => {
+    const showSpot = vi.fn()
+    render(<FoodAlertsOverview alerts={[{
+      id: 'alert-1',
+      created_at: '2026-07-18T20:00:00.000Z',
+      spot_id: 'spot-1',
+      title: 'Fresh produce at the community fridge',
+      message: 'Tomatoes and greens are available while supplies last.',
+      neighborhood: 'East Austin',
+      expires_at: '2026-07-19T02:00:00.000Z',
+      created_by: 'member-1',
+    }]} onViewAll={vi.fn()} onShowSpot={showSpot} />)
+
+    expect(screen.getByText('Fresh produce at the community fridge')).toBeInTheDocument()
+    expect(screen.getByText(/Tomatoes and greens/i)).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: /Show food spot on map/i }))
+    expect(showSpot).toHaveBeenCalledWith('spot-1')
+  })
+
+  it('restores the mobile header on upward scroll so its actions remain clickable', async () => {
+    Object.defineProperty(window, 'innerWidth', { value: 390, configurable: true })
+    Object.defineProperty(window, 'scrollY', { value: 0, writable: true, configurable: true })
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    const { container } = render(<App />)
+    const header = container.querySelector('.topbar')
+
+    expect(header).toHaveClass('mobile-header-visible')
+
+    window.scrollY = 180
+    fireEvent.scroll(window)
+    expect(header).toHaveClass('mobile-header-hidden')
+
+    window.scrollY = 120
+    fireEvent.scroll(window)
+    expect(header).toHaveClass('mobile-header-visible')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Open navigation' }))
+    expect(container.querySelector('.sidebar')).toHaveClass('open')
   })
 
   it('returns to the top when switching command-center views', async () => {
@@ -76,6 +218,17 @@ describe('WXL entry points and interaction gates', () => {
     expect(document.body.scrollTop).toBe(0)
     expect(screen.getByRole('heading', { level: 1, name: 'Rescue operations' })).toBeInTheDocument()
     expect(screen.getByLabelText('Current location')).toHaveTextContent('Directory/WXL:FOOD/Rescue operations')
+  })
+
+  it('opens the shared coordination protocol while keeping SMS deferred', async () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: /^Coordination protocol$/i }))
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Coordination protocol' })).toBeInTheDocument()
+    expect(screen.getByText(/SMS remains in the next scope/i)).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Request food/i })).toBeInTheDocument()
   })
 
   it('returns to the overview from the WXL:FOOD title', async () => {
