@@ -76,7 +76,7 @@ Two grants we want to apply to gate on 501(c)(3) status and have submission wind
 
 ### Anticipated follow-up: "What kind of project is HAND?"
 
-A curated skill-and-resource pool for healers, impact-driven entrepreneurs, and grassroots organizations. Three flows: donate, exchange, receive. Plus a sovereignty-focused AI workstream — Sovereign Reciprocates — that builds custom open-source agent systems for each Reciprocate group, owned by the group itself. First Reciprocate-group product is Mystic Hearts (a healer marketplace, Next.js + Supabase) launching this year. Just submitted to Arcee AI's Trinity Builders Program for inference credits on 2026-05-17.
+A curated skill-and-resource pool for impact entrepreneurs, community-rooted small businesses, and grassroots organizations. Three flows: donate, exchange, receive. Plus a sovereignty-focused AI workstream, Sovereign Reciprocates, that builds custom open-source agent systems for each Reciprocate group, owned by the group itself. First Reciprocate-group product is Mystic Hearts (a practitioner marketplace, Next.js + Supabase) launching this year. Just submitted to Arcee AI's Trinity Builders Program for inference credits on 2026-05-17.
 
 ### Anticipated follow-up: "Expected revenue / scale?"
 

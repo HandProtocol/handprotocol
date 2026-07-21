@@ -30,7 +30,7 @@ f. **Direct the reader to the brief.** The [Director Prospect Brief](director-pr
 >
 > [Mutual connection] mentioned you might be the right person to talk to about something we're building. I'd appreciate your read.
 >
-> I'm the founder of HAND Protocol Foundation. We're incorporating as a 501(c)(3) in Austin this year. The work is long-term operational accompaniment for healers, impact entrepreneurs, and grassroots community organizations: the layer below the radar of the existing capacity-building ecosystem.
+> I'm the founder of HAND Protocol Foundation. We're incorporating as a 501(c)(3) in Austin this year. The work is long-term operational accompaniment for impact entrepreneurs, community-rooted small businesses, and grassroots community organizations: the layer below the radar of the existing capacity-building ecosystem.
 >
 > [Specific reason you'd want them on the board, drawn from their work. Two to three sentences. Reference a piece they wrote, a project they led, an alignment that's not obvious to a stranger.]
 >

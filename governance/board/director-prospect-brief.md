@@ -8,7 +8,7 @@
 
 ## What HAND is
 
-**HAND Protocol Foundation** is a regenerative-infrastructure nonprofit incorporating as a 501(c)(3) in Austin, Texas in 2026. We serve three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward. We call them **Reciprocates**. The lines between them are porous; many Reciprocates live in two of these worlds at once. We provide long-term branding, marketing, technology, design, and operational accompaniment. We don't build and bounce.
+**HAND Protocol Foundation** is a regenerative-infrastructure nonprofit incorporating as a 501(c)(3) in Austin, Texas in 2026. We serve impact entrepreneurs, community-rooted small businesses, and grassroots organizations. We call them **Reciprocates**. The lines between them are porous; many Reciprocates live in two of these worlds at once. We provide long-term branding, marketing, technology, design, and operational accompaniment. We don't build and bounce.
 
 Our distinctive innovation is **Sovereign Reciprocates**: custom open-source AI agent systems built for each Reciprocate group under eight sovereignty principles, owned by the group, portable, self-hostable, and the durable artifact of HAND's accompaniment.
 

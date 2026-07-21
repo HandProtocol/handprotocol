@@ -55,7 +55,7 @@ Hi Netlify team,
 
 We're requesting an upgrade to the Open Source Plan for the `handprotocol` project (project ID `0d46269a-789a-4e42-a00e-7f30e79c5869`).
 
-HAND Protocol Foundation is a pre-501(c)(3) public-good organization filing in Austin, TX. We run a curated skill-and-resource pool for healers, impact-driven entrepreneurs, and grassroots organizations. Everything we build is open source:
+HAND Protocol Foundation is a pre-501(c)(3) public-good organization filing in Austin, TX. We run a curated skill-and-resource pool for impact entrepreneurs, community-rooted small businesses, and grassroots organizations. Everything we build is open source:
 
 - Public repo: github.com/HandProtocol/handprotocol
 - Live site: https://handprotocol.org

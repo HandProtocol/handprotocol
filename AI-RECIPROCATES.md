@@ -10,7 +10,7 @@
 
 ## The gap, in one paragraph
 
-HAND's discovery work mapped the U.S. capacity-building ecosystem and found a specific shape of unmet need: a long-term, relational, infrastructure-building partner for the layer below the radar, solo healers, post-accelerator impact founders, 3-person harm-reduction collectives. Taproot, Catchafire, Bridgespan, and the new generation of trust-based funders all stop short of multi-year accompaniment with that population. Three structural reasons keep the gap unfilled: the economics don't parallelize, cross-audience focus is unfashionable to program officers, and the pre-501(c)(3) layer is invisible to most philanthropy. The first of those (accompaniment doesn't parallelize) is the problem this proposal addresses, and the longevity of HAND's accompaniment promise depends on solving it.
+HAND's discovery work mapped the U.S. capacity-building ecosystem and found a specific shape of unmet need: a long-term, relational, infrastructure-building partner for the layer below the radar, community-rooted small businesses, post-accelerator impact founders, and 3-person grassroots collectives. Taproot, Catchafire, Bridgespan, and the new generation of trust-based funders all stop short of multi-year accompaniment with that population. Three structural reasons keep the gap unfilled: the economics don't parallelize, cross-audience focus is unfashionable to program officers, and the pre-501(c)(3) layer is invisible to most philanthropy. The first of those (accompaniment doesn't parallelize) is the problem this proposal addresses, and the longevity of HAND's accompaniment promise depends on solving it.
 
 ## The proposal
 
@@ -45,7 +45,7 @@ HAND's accompaniment promise reads "we don't build and bounce." Operationally, t
 
 ## Why custom agents, not just a fine-tuned chat model
 
-Each Reciprocate group has a distinct operational shape: a harm-reduction collective tracks naloxone distribution and contact-tracing-style outreach; a healer practice tracks consent forms, session notes, and client follow-up; a food-sovereignty group tracks land-use cycles, volunteer schedules, and grant deliverables. A single chat model cannot serve these the way a small custom agent can, wired to the group's actual tools, with memory for their specific work, with reviewers who know the group's domain.
+Each Reciprocate group has a distinct operational shape: a food entrepreneur tracks sourcing, orders, and community distribution; a neighborhood business tracks inventory, customer follow-up, and local partnerships; a food-sovereignty group tracks land-use cycles, volunteer schedules, and grant deliverables. A single chat model cannot serve these the way a small custom agent can, wired to the group's actual tools, with memory for their specific work, with reviewers who know the group's domain.
 
 The fine-tune handles voice and domain fluency. The agent scaffolding handles workflow, tool use, scheduled tasks, and integrations. Together they are what makes the system *theirs*, not *ours*.
 

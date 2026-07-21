@@ -8,11 +8,11 @@
 
 ## Tagline
 
-**Regenerative infrastructure for those who heal, build, and serve.**
+**Regenerative infrastructure for entrepreneurs who build with purpose.**
 
 ## Mission
 
-HAND Protocol Foundation provides long-term branding, marketing, technology, design, and operational accompaniment to healers, impact entrepreneurs, and grassroots community organizations whose work serves the public benefit. We don't build and bounce.
+HAND Protocol Foundation provides long-term branding, marketing, technology, design, and operational accompaniment to impact entrepreneurs, community-rooted small businesses, and grassroots community organizations whose work serves the public benefit. We don't build and bounce.
 
 ## Vision
 
@@ -38,7 +38,7 @@ g. **Retire what doesn't serve.** Tools, programs, framings. The pivot away from
 
 ## One-paragraph description
 
-HAND Protocol Foundation, incorporating as a 501(c)(3) in Austin, Texas in 2026, operates a curated resource pool where skilled Contributors and three communities of Reciprocates (practitioners who heal, founders who build, and organizers who steward) match to meet mutual needs. Three flows: **Donate** (one-way gift of skill), **Exchange** (skill for skill), **Receive** (Reciprocate onboarding). The pool is denser when participants flow between roles; a single person can be both giver and receiver, and the lines between communities are porous. Within and through the pool, HAND provides long-term branding, marketing, technology, design, and operational accompaniment. The defining commitment is durability: HAND walks alongside Reciprocates for years, not just months, and offers Sovereign Reciprocates (optional open-source AI agent systems, owned by the group, available to Reciprocate groups who choose them) as one tool inside the pool. Founded in August 2024, currently raising $222,222 to file for federal exemption, and accompanying the first pilot cohort of three Reciprocate groups.
+HAND Protocol Foundation, incorporating as a 501(c)(3) in Austin, Texas in 2026, operates a curated resource pool where skilled Contributors and three communities of Reciprocates (impact entrepreneurs, community-rooted small businesses, and grassroots organizations) match to meet mutual needs. Three flows: **Donate** (one-way gift of skill), **Exchange** (skill for skill), **Receive** (Reciprocate onboarding). The pool is denser when participants flow between roles; a single person can be both giver and receiver, and the lines between communities are porous. Within and through the pool, HAND provides long-term branding, marketing, technology, design, and operational accompaniment. The defining commitment is durability: HAND walks alongside Reciprocates for years, not just months, and offers Sovereign Reciprocates (optional open-source AI agent systems, owned by the group, available to Reciprocate groups who choose them) as one tool inside the pool. Founded in August 2024, currently raising $222,222 to file for federal exemption, and accompanying the first pilot cohort of three Reciprocate groups.
 
 ## One-page description
 
@@ -48,9 +48,9 @@ HAND Protocol Foundation is a regenerative-infrastructure nonprofit incorporatin
 
 ### Who HAND serves
 
-HAND serves three communities of regenerative impact work, collectively called **Reciprocates**: practitioners who heal, founders who build, and organizers who steward. The lines between them are porous, and many Reciprocates live in two of these worlds at once.
+HAND serves three connected communities, collectively called **Reciprocates**: impact entrepreneurs, community-rooted small businesses, and grassroots organizations. The lines between them are porous, and many Reciprocates live in two of these worlds at once.
 
-- **Healers and wellness practitioners.** Solo or small-team bodyworkers, somatic practitioners, herbalists, indigenous and ancestral practice, harm-reduction-informed healing.
+- **Community-rooted small businesses.** Owner-operated or small-team restaurants, food producers, makers, trades, independent shops, and neighborhood services that create local jobs and meet everyday community needs.
 - **Impact entrepreneurs.** Post-accelerator mission-driven small ventures: B-corp-aspiring or B-corp-certified businesses, nonprofit pilots, hybrid for-profit/nonprofit structures.
 - **Grassroots community organizations.** Mutual aid networks, harm reduction collectives, food sovereignty groups, land stewardship projects.
 
@@ -92,11 +92,11 @@ Pre-incorporation, pilot pre-launch. The foundation campaign is currently raisin
 
 ### Origin
 
-HAND Protocol began in August 2024 as Web3 fundraising infrastructure for regenerative impact work. Three communities of that impact: practitioners who heal, founders who build, and organizers who steward. Over the next year, the founders learned that the people they were trying to support, bodyworkers and impact founders and harm reduction organizers and food sovereignty collectives, were not crypto-native, and that crypto was the wrong starting tool. In early 2026, HAND pivoted: the work shifted from a Web3 protocol to a curated resource pool, with long-term accompaniment as the core promise. The pivot demonstrated a posture HAND carries forward: retire tools that do not serve the people HAND works with. The same posture applies to AI.
+HAND Protocol began in August 2024 as Web3 fundraising infrastructure for regenerative impact work. Over the next year, the founders learned that the impact founders, small-business owners, and neighborhood organizers they were trying to support were not crypto-native, and that crypto was the wrong starting tool. In early 2026, HAND pivoted: the work shifted from a Web3 protocol to a curated resource pool, with long-term accompaniment as the core promise. The pivot demonstrated a posture HAND carries forward: retire tools that do not serve the people HAND works with. The same posture applies to AI.
 
 ### The gap HAND addresses
 
-HAND's discovery work, published openly at handprotocol.org/discovery, mapped the U.S. capacity-building ecosystem. Forty-plus organizations operate in the space. The pattern: Taproot scaled skills-based volunteering; Catchafire made it free; Bridgespan brought strategy rigor; a new generation of trust-based funders (Kataly, Solidaire, Borealis, Headwaters, NDN) built participatory grantmaking infrastructure. None built a long-term, relational, cross-audience operational partner for the layer below the radar: the solo healer running an LLC, the impact entrepreneur surviving the post-accelerator valley of death, the 3-person harm-reduction collective whose federal funding just disappeared. Three structural reasons keep the gap open: the economics don't parallelize, cross-audience focus is unfashionable to program officers, and the pre-501(c)(3) layer is invisible to most philanthropy. HAND was built to address these.
+HAND's discovery work, published openly at handprotocol.org/discovery, mapped the U.S. capacity-building ecosystem. Forty-plus organizations operate in the space. The pattern: Taproot scaled skills-based volunteering; Catchafire made it free; Bridgespan brought strategy rigor; a new generation of trust-based funders (Kataly, Solidaire, Borealis, Headwaters, NDN) built participatory grantmaking infrastructure. None built a long-term, relational, cross-audience operational partner for the layer below the radar: the community-rooted small business with no digital infrastructure, the impact entrepreneur surviving the post-accelerator valley of death, and the 3-person grassroots collective whose funding just disappeared. Three structural reasons keep the gap open: the economics don't parallelize, cross-audience focus is unfashionable to program officers, and the smallest layer is invisible to most philanthropy. HAND was built to address these.
 
 ### Theory of change
 

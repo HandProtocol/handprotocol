@@ -10,7 +10,7 @@ Three audiences read this site simultaneously, by design.
 
 **1. Donors and funders.** Individual supporters, foundations (especially Texas community foundations: Austin Community Foundation, St. David's Foundation, Hogg Foundation), trust-based philanthropy funders, and impact-aligned funders. Context: evaluating whether to support HAND's 501(c)(3) filing raise ($222,222 minimum). Reading on desktop or phone, often skimming. They want answers to: is this real? Who benefits? Where's the gap? How is HAND different from Taproot or Catchafire?
 
-**2. Prospective Reciprocates.** Healers and practitioners, impact entrepreneurs, and grassroots community organizations (harm reduction, mutual aid, food access, land stewardship). Context: discovering whether HAND can help them. Reading on phones in spare moments, often. Most are not crypto-native. They want answers to: what can I ask for? What's the commitment? Will you actually stay?
+**2. Prospective Reciprocates.** Impact entrepreneurs, community-rooted small businesses, and grassroots community organizations (food access, neighborhood services, cooperative ventures, land stewardship). Context: discovering whether HAND can help them. Reading on phones in spare moments, often. Most are not crypto-native. They want answers to: what can I ask for? What's the commitment? Will you actually stay?
 
 **3. Prospective Contributors.** Skilled professionals (web/dev, design, brand, marketing, legal, accounting) and tradespeople (roofers, electricians, bodyworkers, reiki practitioners) who might donate or exchange their time. Context: deciding whether to join the resource pool. They want answers to: how does this work? Will I be matched well? Is my time wasted?
 
@@ -18,7 +18,7 @@ Three audiences read this site simultaneously, by design.
 
 ## Product Purpose
 
-HAND Protocol (Holistic Approach to Nurture and Develop) is a regenerative-infrastructure nonprofit foundation, based in Austin, Texas, incorporating as a 501(c)(3) in 2026. Its core promise: long-term branding, marketing, web/dev, and one-on-one development support for Reciprocates (healers, impact entrepreneurs, grassroots community organizations), without abandoning anyone after the first delivery.
+HAND Protocol (Holistic Approach to Nurture and Develop) is a regenerative-infrastructure nonprofit foundation, based in Austin, Texas, incorporating as a 501(c)(3) in 2026. Its core promise: long-term branding, marketing, web/dev, and one-on-one development support for Reciprocates (impact entrepreneurs, community-rooted small businesses, and grassroots community organizations), without abandoning anyone after the first delivery.
 
 The public web presence (foundation campaign, discovery docs, legacy archive) exists to:
 
@@ -40,7 +40,7 @@ Three words: **earnest, evidence-based, relational**.
 - Honest about unknowns. Every long-form doc has an open-questions section that names what HAND hasn't figured out yet (tax mechanics for the exchange layer, scope-creep prevention, who pays for HAND itself).
 - Specific over abstract. Names actual people in the worked examples (Marcus the roofer, Anya the reiki practitioner, Río Verde Collective), actual peer organizations (Catchafire, Taproot, Bridgespan, Solidaire, Kataly, Hemera, NDN Collective), actual dollar amounts and dates.
 - Skeptical of itself. The discovery docs include skepticism checks ("Is HAND reinventing Taproot? No, but be precise about why"). Bridgespan-style aspirational rhetoric is rejected.
-- Relational and warm, but not soft. "We walk alongside Reciprocates" coexists with "the unit economics of a team that walks with a healer for three years need to be defensible."
+- Relational and warm, but not soft. "We walk alongside Reciprocates" coexists with "the unit economics of a team that supports a small business for three years need to be defensible."
 - Crypto-adjacent without being crypto-first. Web3 work is acknowledged as one of several tools, never as the identity. The crypto layer is opt-in for Contributors and Reciprocates, never required.
 
 **Emotional goals:**
@@ -63,7 +63,7 @@ Things HAND explicitly should NOT look or sound like.
 ## Design Principles
 
 1. **Prove, don't promise.** Specific dollar amounts, named peer organizations, real worked examples (Marcus, Anya, Río Verde) over aspirational claims. The discovery research docs lead with cited sources.
-2. **Plain English first.** A donor or a healer should understand any sentence without a glossary. Technical detail (IRS 501(c)(3) doctrine, quadratic-funding mechanism) is annotated inline with tooltips or links, not assumed.
+2. **Plain English first.** A donor or small-business owner should understand any sentence without a glossary. Technical detail (IRS 501(c)(3) doctrine, quadratic-funding mechanism) is annotated inline with tooltips or links, not assumed.
 3. **Walk alongside, on the page too.** Long-form reading is the primary medium. Cross-linked docs, persistent sub-nav, prev/next pagers; the information architecture itself reflects the accompaniment model.
 4. **Honest about unknowns.** Every long-form doc has an open-questions or honest-unknowns section. Funders trust organizations that name their gaps before being asked.
 5. **One family across surfaces.** Foundation campaign, discovery docs, and legacy archive share design tokens, typography, and motion. The legacy page is intentionally quieter and serif-italic to feel archival without breaking the family.
@@ -87,4 +87,4 @@ Things HAND explicitly should NOT look or sound like.
 - Many prospective Reciprocates read on phones in spare moments. Layouts must be readable at 360px wide with one thumb.
 - Many Reciprocates and Contributors are not crypto-native. The site cannot assume Web3 wallets, deep technical literacy, or desktop browsing.
 - Funders read fast and skim. Hero, lede, and section labels carry most of the weight; section subtitles do the rest.
-- Accessibility is mission-aligned, not just compliance. Healers and grassroots organizations serve disability communities; HAND's tooling should reflect that respect.
+- Accessibility is mission-aligned, not just compliance. Small businesses and grassroots organizations serve disability communities; HAND's tooling should reflect that respect.

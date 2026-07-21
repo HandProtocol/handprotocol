@@ -26,7 +26,7 @@ Funders are ranked by alignment with HAND's posture across three vectors:
 
 a. **Trust-based posture.** Multi-year unrestricted, relational, minimal reporting burden.
 
-b. **Mission alignment.** Capacity-building, accompaniment, grassroots, healers, impact entrepreneurs.
+b. **Mission alignment.** Capacity-building, accompaniment, grassroots organizations, community-rooted small businesses, impact entrepreneurs.
 
 c. **AI sovereignty alignment.** Open-source AI, group-owned data, responsible AI infrastructure.
 
@@ -81,7 +81,7 @@ Strong on two of three alignment vectors. Often more accessible than Tier 1.
 
 ### Hogg Foundation for Mental Health (Texas)
 
-- **Fit:** Mission alignment (high) for healer pillar. Texas-domiciled funder, ideal for Texas-domiciled HAND.
+- **Fit:** Limited after the audience refocus. Texas geographic alignment remains, but HAND would need a specific community-health or economic-mobility program fit.
 - **Access:** RFP-driven only. No unsolicited. Fluxx grants management system.
 - **Range:** $50K–$300K typical.
 - **Status:** Cold; monitoring RFPs.
@@ -91,7 +91,7 @@ Strong on two of three alignment vectors. Often more accessible than Tier 1.
 
 ### St. David's Foundation (Texas)
 
-- **Fit:** Mission alignment (moderate-high) for healer pillar; Central Texas geographic fit.
+- **Fit:** Moderate only where a community-rooted business or grassroots cohort advances a named Central Texas health-equity priority.
 - **Access:** Invitation-only; program officers will discuss eligibility.
 - **Range:** $50K–$500K+ typical, multi-year possible.
 - **Status:** Cold; identify program officers.
@@ -134,7 +134,7 @@ Strong on two of three alignment vectors. Often more accessible than Tier 1.
 
 ### Hemera Foundation
 
-- **Fit:** Mission alignment (high) for healer pillar; contemplative-practice support.
+- **Fit:** Legacy prospect from the earlier healer-centered narrative. Low priority unless a future program creates direct alignment.
 - **Access:** Mostly invitation; some RFP windows.
 - **Range:** $25K–$150K.
 - **Status:** Cold.

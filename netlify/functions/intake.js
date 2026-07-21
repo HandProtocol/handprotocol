@@ -16,8 +16,8 @@
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const VARIANT_LABELS = {
-  business: 'Impact-driven business / entrepreneur',
-  healer: 'Healer or practitioner',
+  business: 'Impact entrepreneur / social venture',
+  local_business: 'Community-rooted small business',
   grassroots: 'Grassroots organization'
 };
 

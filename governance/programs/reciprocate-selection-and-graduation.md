@@ -14,15 +14,15 @@ The protocol reflects HAND's defining commitment: long-term relational accompani
 
 ## Section 1. Reciprocate definition
 
-A **Reciprocate** is an individual practitioner or small organization HAND accompanies. HAND serves three communities of regenerative impact work: **practitioners who heal, founders who build, and organizers who steward**. The lines between them are porous; many Reciprocates live in two of these worlds at once.
+A **Reciprocate** is an individual founder, small business, or small organization HAND accompanies. HAND serves three connected communities: **impact entrepreneurs, community-rooted small businesses, and grassroots organizations**. The lines between them are porous; many Reciprocates live in two of these worlds at once.
 
-a. **Healers and wellness practitioners.** Solo or small-team. Bodyworkers, somatic practitioners, reiki and energy work, herbalists, indigenous and ancestral practice, harm-reduction-informed healing.
+a. **Community-rooted small businesses.** Owner-operated or small-team restaurants, food producers, makers, trades, independent shops, and neighborhood services that create local jobs and meet everyday community needs.
 
 b. **Impact entrepreneurs.** Mission-driven small ventures, often post-accelerator. B-corps, social enterprises, mission-aligned LLCs, hybrid for-profit/nonprofit structures.
 
 c. **Grassroots community organizations.** Mutual aid networks, harm reduction collectives, food sovereignty groups, land stewardship projects, often without formal 501(c)(3) status.
 
-The three segments share an operational shape: small, under-resourced for infrastructure, serving people who need them, vulnerable to abandonment by traditional capacity-building. The categories are illustrative, not exhaustive. A herbalist running a community apothecary lives across (a) and (c); a harm-reduction organizer whose work is also a healing practice lives across (a) and (c); a regenerative-agriculture entrepreneur stewarding a co-op lives across (b) and (c). If the work is in this spirit, it likely fits.
+The three segments share an operational shape: small, under-resourced for infrastructure, serving people who need them, vulnerable to abandonment by traditional capacity-building. The categories are illustrative, not exhaustive. A food entrepreneur building a neighborhood market lives across (a) and (b); a worker-owned service business lives across (a) and (c); a regenerative-agriculture entrepreneur stewarding a co-op lives across (b) and (c). If the work creates real community value, it likely fits.
 
 ## Section 2. Selection criteria
 
@@ -54,7 +54,7 @@ b. The Reciprocate is willing to engage HAND staff and Contributors in regular c
 
 c. The Reciprocate is reachable and responsive.
 
-d. The Reciprocate's principals are emotionally and practically present for the work (this matters in healer and grassroots segments especially, where founder availability shapes everything).
+d. The Reciprocate's principals are emotionally and practically present for the work (this matters in owner-operated business and grassroots segments especially, where founder availability shapes everything).
 
 ### Risk and capacity
 
