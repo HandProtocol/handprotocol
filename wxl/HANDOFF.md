@@ -53,13 +53,15 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 | `/app/?mode=login&signup=1` | Account creation |
 | `/app/?mode=reset` | Request a password-reset email |
 | `/app/?mode=recovery` | Set a new password after following the recovery link |
-| `/app/?mode=anonymous&intent=food` | Public food-finding entry; opens the Austin food map |
+| `/app/?mode=anonymous&intent=food` | Public food-finding entry; opens the simple map and nearby listing shelf |
 | `/app/?mode=anonymous&intent=request` | Public request entry; opens Community Requests |
-| `/app/?intent=contribute` | Contributor entry; opens Volunteer Command and preserves session-based write access |
+| `/app/?intent=contribute` | Contribution entry; opens food submission and delivery choices |
+| `/app/?mode=anonymous&intent=gather` | Gathering entry; opens sample table patterns and a path to plan a gathering |
+| `/app/?workspace=<name>` | Opens a named operational command-center workspace |
 
 Routing is currently implemented with `window.location.pathname` and query parameters inside `App.tsx`. There is no router library.
 
-The landing page is intentionally food-only and role-first. It presents `I need food` and `I am a Contributor` as the two primary paths. Sign-in and community requests remain available, but they do not compete with the initial decision. Intent parameters select the first workspace only. Authentication continues to come exclusively from the Supabase session.
+The landing page is intentionally food-only and task-first. It presents find food, contribute, and gather as the three public paths. The simple app shell keeps those choices one tap away on mobile. Operational workspaces remain available through `workspace` parameters. Authentication continues to come exclusively from the Supabase session.
 
 The food intent opens an optional geolocation prompt before map exploration. Browser coordinates are used in memory to select the nearest verified listing and are not persisted or sent to Supabase. The choice is remembered only for the current browser tab through `sessionStorage`. Visitors can skip it and can reopen it from the map location control.
 
@@ -95,6 +97,7 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 - Password-reset email uses `resetPasswordForEmail`.
 - Recovery returns to `/app/?mode=recovery`.
 - New password submission uses `updateUser`.
+- A successful password update ends the recovery session and redirects to `/app/?mode=login` for a fresh login.
 - Password confirmation is checked in the browser.
 - The app subscribes to Supabase auth-state changes and uses the live session for write gating.
 - Session restoration has an explicit loading state, preventing the app from briefly presenting an authenticated member as anonymous.
@@ -190,7 +193,7 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 - South Oak Baptist food pantry is shown as a community report pending confirmation. The reported access is Thursdays from 9 to 11 AM, one form, and no ID requested. Its exact public location is intentionally not inferred.
 - A volunteer start node connects to three anonymous household clusters. These route lines communicate the delivery workflow without exposing private home locations.
 - Authenticated members can add a public food spot with produce and availability details. New spots are labeled as community pins until reviewed.
-- Authenticated members can publish a six-hour `FOOD IS HERE!` alert. Active alerts are public, appear in the top-right alert center, and arrive in other open sessions through Supabase Realtime.
+- Authenticated members can publish a six-hour `FOOD IS HERE!` alert. Active alerts are public, appear on Overview, in the dedicated Food available now workspace, and in the top-right alert center. Alerts linked to a public food spot can open it on the map. Other open sessions receive inserts through Supabase Realtime and remove expired alerts without requiring a refresh.
 - Alert creation invokes `netlify/functions/food-alert.mjs`, which validates the Supabase session and sends a best-effort Resend operations email using HAND's existing environment-variable pattern.
 - Alert writes are limited to five per account per 15 minutes. Private home addresses and household details are explicitly prohibited in the interface.
 
@@ -200,13 +203,14 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 - The command CTA runs a stable two-variant test, `map_first` or `rescue_first`, stored in local storage.
 - Click progress persists locally for every visitor. Authenticated interaction events batch to `command.food_engagement_events` every ten interactions.
 - Admins can query `command.food_engagement_leaderboard`; invoker row-level security keeps it internal.
-- Vitest covers landing links, anonymous write gates, feedback, the mobile navigation rail, and mocked database contracts. Run `npm test`.
+- Vitest covers landing links, anonymous write gates, FOOD IS HERE visibility and navigation, feedback, the mobile navigation drawer, and mocked database contracts. Run `npm test`.
 - `.github/workflows/wxl-ci.yml` runs tests and the production build for WXL pull requests, relevant pushes to `main`, and manual dispatches.
 
 ### Mobile navigation
 
 - Mobile uses the full viewport width and opens the labeled navigation as a drawer from the top menu button.
 - The drawer closes from its close button, the shaded page area, or after choosing a destination.
+- Short landscape screens use the drawer through 960px wide, with a scrollable compact two-column navigation layout.
 - Desktop navigation can also collapse and remembers its state locally.
 
 ### Navigation and identity handoff, 2026-07-16
@@ -248,11 +252,12 @@ Keep the X treatment consistent anywhere a new WXL wordmark appears. Coral ident
 #### Mobile navigation behavior
 
 - The old permanent 56px rail was removed. At 360px and similar widths, the application now receives the full viewport.
-- The top-left menu button opens a drawer up to 300px wide, with a 40px edge allowance.
+- The top-left menu button opens a drawer with an edge allowance, including on short landscape phone screens.
 - The drawer contains the same labels, status, feedback, interaction count, and account entry as desktop.
 - The drawer closes through the labeled close button, the shaded page scrim, or a destination selection.
 - The sidebar toggle used for desktop collapse is hidden on mobile.
-- The traced hand becomes slightly more visible in the mobile drawer, matching the source HAND menu more closely.
+- The drawer scrolls vertically when its contents exceed the available height.
+- Short landscape screens use two navigation columns and compact controls. Decorative hand artwork is hidden so destinations remain legible.
 
 #### Directory breadcrumb contract
 
@@ -634,6 +639,28 @@ Implementation commit: `d9335850c` (`feat(wxl): add food-first onboarding and lo
 Known geolocation limitation:
 
 - Nearest-listing comparison currently covers only bundled public-directory locations with local coordinates. Supabase community pins do not yet carry reviewed coordinates and are not candidates. Do not silently geocode private or unreviewed addresses. A future location expansion should add coordinator-reviewed coordinates to the public food-spot data model before including those records.
+
+## Simple public interface pass, 2026-07-21
+
+- Added a mobile-first public shell with persistent Find food, Contribute, and Gather navigation.
+- Reworked food discovery into a schematic Austin map with food icons, search, verification filters, and a horizontal nearby-place shelf on phones. Desktop expands into a map-and-results split view.
+- Kept every directory location labeled as a listing that must be confirmed before travel. The interface does not present directory records as live inventory.
+- Added a short food-contribution draft that continues into the existing secure rescue submission form without putting a private address in the public step.
+- Added a delivery-style run picker using clearly labeled sample patterns and linked it to real Contributor readiness.
+- Added the tighter gathering label `Share a table`, clearly labeled gathering patterns as samples, and linked planning to the persisted Community Requests workflow.
+- Preserved the command center behind explicit `workspace` routes for coordinators and existing operational workflows.
+- Vitest covers all three public intents, geolocation, contribution-mode switching, and links into operational workflows.
+
+## Interactive public map pass, 2026-07-21
+
+- Replaced the schematic Find food canvas with a real Leaflet map using OpenStreetMap tiles.
+- Added pan, zoom, touch interaction, keyboard-focusable food markers, place tooltips, and synchronized marker and result-card selection.
+- Added an approximate visitor-location marker after explicit geolocation permission. Coordinates remain in memory and are not persisted.
+- Added a platform-aware `Navigate` action to verified listing cards. Apple devices open Apple Maps; other platforms open Google Maps. Reviewed coordinates are preferred over address text.
+- Listings without confirmed public coordinates remain visible in the result shelf but do not receive an inferred marker.
+- OpenStreetMap attribution remains visible. The app does not prefetch or offer offline tile downloads.
+- Added `leaflet` as a runtime dependency and `@types/leaflet` as a development dependency.
+- `npm test` passes 51 tests and `npm run build` completes successfully. Leaflet is loaded as a separate lazy chunk; the pre-existing main-bundle size warning remains non-blocking.
 
 ## Working conventions
 

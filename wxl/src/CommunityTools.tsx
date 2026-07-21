@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react'
-import { CheckCircle2, MapPin, ShieldCheck, X, Zap } from 'lucide-react'
+import { ArrowUpRight, CheckCircle2, Clock3, MapPin, ShieldCheck, X, Zap } from 'lucide-react'
 import {
   addFoodSpot,
   createFoodAlert,
@@ -110,11 +110,42 @@ export function FeedbackModal({ onClose }: { onClose: () => void }) {
   </div>
 }
 
-export function AlertCenter({ alerts, open, onClose }: { alerts: FoodAlertRecord[]; open: boolean; onClose: () => void }) {
+function alertExpiry(expiresAt: string) {
+  return new Date(expiresAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })
+}
+
+function FoodAlertCard({ alert, onShowSpot }: { alert: FoodAlertRecord; onShowSpot?: (spotId: string) => void }) {
+  return <article className="food-alert-card">
+    <span className="food-alert-card-icon"><Zap size={16} /></span>
+    <div className="food-alert-card-copy">
+      <div className="food-alert-card-title"><div><p>{alert.neighborhood}</p><h3>{alert.title}</h3></div><span><Clock3 size={13} /> Until {alertExpiry(alert.expires_at)}</span></div>
+      <p>{alert.message}</p>
+      {alert.spot_id && onShowSpot && <button type="button" onClick={() => onShowSpot(alert.spot_id!)}><MapPin size={14} /> Show food spot on map</button>}
+    </div>
+  </article>
+}
+
+export function FoodAlertsOverview({ alerts, onViewAll, onShowSpot }: { alerts: FoodAlertRecord[]; onViewAll: () => void; onShowSpot: (spotId: string) => void }) {
+  return <section className="panel food-alerts-overview" aria-labelledby="food-alerts-overview-title">
+    <div className="panel-heading food-alerts-heading"><div><p className="eyebrow"><span className="alert-live-dot" /> Food available now</p><h2 id="food-alerts-overview-title">FOOD IS HERE!</h2><p>Public, time-sensitive food signals. Confirm availability before traveling.</p></div><button className="text-button" type="button" onClick={onViewAll}>View all alerts <ArrowUpRight size={14} /></button></div>
+    {alerts.length ? <div className="food-alerts-preview-list" aria-live="polite">{alerts.slice(0, 3).map((alert) => <FoodAlertCard key={alert.id} alert={alert} onShowSpot={onShowSpot} />)}</div> : <p className="food-alerts-empty">No active FOOD IS HERE alerts right now. The food map below still shows public food locations.</p>}
+  </section>
+}
+
+export function FoodAlertsBoard({ alerts, onCreate, onShowSpot }: { alerts: FoodAlertRecord[]; onCreate: () => void; onShowSpot: (spotId: string) => void }) {
+  return <section className="food-alerts-page" aria-labelledby="food-alerts-page-title">
+    <div className="food-alerts-page-intro"><div><p className="eyebrow"><span className="alert-live-dot" /> Six-hour public signals</p><h2 id="food-alerts-page-title">Food available now</h2><p>These posts share time-sensitive public food availability. They expire after six hours. Confirm the details before traveling, and never use an alert to publish a private household location.</p></div><button className="food-here-button" type="button" onClick={onCreate}><Zap size={15} /> Publish FOOD IS HERE!</button></div>
+    {alerts.length ? <div className="food-alerts-page-list" aria-live="polite">{alerts.map((alert) => <FoodAlertCard key={alert.id} alert={alert} onShowSpot={onShowSpot} />)}</div> : <div className="panel food-alerts-page-empty"><Zap size={24} /><h3>No active alerts right now</h3><p>Public food locations remain available on Overview. New alerts will appear here as soon as they are posted.</p></div>}
+    <div className="food-alerts-safety"><ShieldCheck size={16} /><p><strong>Public signal, not a guarantee.</strong> Food can move quickly. Confirm availability before traveling when contact information is available.</p></div>
+  </section>
+}
+
+export function AlertCenter({ alerts, open, onClose, onViewAll }: { alerts: FoodAlertRecord[]; open: boolean; onClose: () => void; onViewAll: () => void }) {
   if (!open) return null
   return <aside className="alert-center" aria-label="Active food alerts">
     <div className="alert-center-title"><div><p className="eyebrow">Six-hour public signals</p><h2>FOOD IS HERE!</h2></div><button type="button" onClick={onClose} aria-label="Close food alerts"><X size={18} /></button></div>
-    {alerts.length ? alerts.map((alert) => <article key={alert.id}><span><Zap size={15} /></span><div><strong>{alert.title}</strong><p>{alert.message}</p><small>{alert.neighborhood} · active until {new Date(alert.expires_at).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}</small></div></article>) : <p className="alert-empty">No active alerts right now. Public food locations remain available on the map.</p>}
+    {alerts.length ? alerts.map((alert) => <article key={alert.id}><span><Zap size={15} /></span><div><strong>{alert.title}</strong><p>{alert.message}</p><small>{alert.neighborhood} · active until {alertExpiry(alert.expires_at)}</small></div></article>) : <p className="alert-empty">No active alerts right now. Public food locations remain available on the map.</p>}
+    <button className="alert-center-all" type="button" onClick={onViewAll}>Open food available now <ArrowUpRight size={14} /></button>
   </aside>
 }
 
