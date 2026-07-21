@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#070604">
+    <meta
+      name="description"
+      content="A spatial view of fatal and serious-injury crashes in Austin, built from City of Austin Vision Zero open data."
+    >
+    <meta property="og:title" content="ACCI | Austin Crash Context Interface">
+    <meta
+      property="og:description"
+      content="See where Austin's streets have caused the most serious harm."
+    >
+    <meta property="og:type" content="website">
+    <title>ACCI | Austin Crash Context Interface</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    >
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css"
+    >
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#controls">Skip to controls</a>
+
+    <main class="app-shell">
+      <div id="map" role="application" aria-label="Interactive three-dimensional map of severe crashes in Austin"></div>
+      <div class="scan-lines" aria-hidden="true"></div>
+      <div class="map-vignette" aria-hidden="true"></div>
+
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="ACCI home">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none">
+              <path d="M20 3 35 11.5v17L20 37 5 28.5v-17L20 3Z" />
+              <path d="m11 15 9-5 9 5v10l-9 5-9-5V15Z" />
+              <circle cx="20" cy="20" r="2.25" />
+            </svg>
+          </span>
+          <span>
+            <strong>ACCI</strong>
+            <small>Austin Crash Context Interface</small>
+          </span>
+        </a>
+
+        <div class="topbar__tools">
+          <nav class="hotspot-nav" aria-label="Explore crash locations">
+            <button id="hotspot-prev" type="button" aria-label="Previous top crash concentration" disabled>
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m12.5 4.5-5 5.5 5 5.5" /></svg>
+            </button>
+            <button class="hotspot-nav__rank" id="hotspot-next" type="button" aria-label="Next top crash concentration" disabled>
+              <span id="hotspot-position">Top harm sites</span>
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 4.5 5 5.5-5 5.5" /></svg>
+            </button>
+            <button id="random-target" type="button" aria-label="Target a random crash location" title="Target a random crash location" disabled>
+              <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <circle cx="10" cy="10" r="5.5" /><circle cx="10" cy="10" r="1.5" />
+                <path d="M10 1.5v3M10 15.5v3M1.5 10h3M15.5 10h3" />
+              </svg>
+            </button>
+          </nav>
+
+          <div class="topbar__status" aria-live="polite">
+            <span class="signal" aria-hidden="true"></span>
+            <span id="data-status">Connecting to Austin open data</span>
+          </div>
+        </div>
+
+        <form class="place-search" id="place-search" role="search" autocomplete="off">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <circle cx="8.5" cy="8.5" r="4.75" />
+            <path d="m12 12 4 4" />
+          </svg>
+          <label class="sr-only" for="place-query">Search Austin locations</label>
+          <input id="place-query" name="location" type="search" placeholder="Search Austin locations" aria-controls="search-results" aria-expanded="false">
+          <button type="submit">Find</button>
+          <ul class="search-results" id="search-results" hidden></ul>
+        </form>
+
+        <button class="icon-button mobile-toggle" id="mobile-toggle" type="button" aria-expanded="false" aria-controls="controls">
+          <span>Explore data</span>
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            <path d="M4 5h12M4 10h12M4 15h12M7 3v4M13 8v4M9 13v4" />
+          </svg>
+        </button>
+      </header>
+
+      <aside class="control-panel" id="controls" aria-label="Map controls">
+        <button class="controls-close" id="controls-close" type="button" aria-label="Close Explore Data panel">
+          <span>Close</span>
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" /></svg>
+        </button>
+        <div class="panel-heading">
+          <p class="eyebrow">A public-safety lens</p>
+          <h1>The street<br>remembers.</h1>
+          <p>
+            Each column gathers nearby fatal and serious-injury crashes. Height reflects the human cost recorded at that place.
+          </p>
+        </div>
+
+        <section class="stats" aria-label="Visible crash totals">
+          <div>
+            <span id="stat-crashes">...</span>
+            <small>severe crashes</small>
+          </div>
+          <div>
+            <span id="stat-lives">...</span>
+            <small>lives lost</small>
+          </div>
+          <div>
+            <span id="stat-injuries">...</span>
+            <small>serious injuries</small>
+          </div>
+        </section>
+
+        <section class="filter-group" aria-labelledby="year-label">
+          <div class="filter-label">
+            <span id="year-label">Time window</span>
+            <output id="year-output" for="year-range">2022 to present</output>
+          </div>
+          <input id="year-range" type="range" min="2022" max="2026" value="2022" step="1">
+          <div class="range-labels" aria-hidden="true"><span>2022</span><span>Now</span></div>
+        </section>
+
+        <fieldset class="filter-group">
+          <legend>People traveling by</legend>
+          <div class="segment-control" id="mode-filter">
+            <button class="active" type="button" data-mode="all" aria-pressed="true">All</button>
+            <button type="button" data-mode="walking" aria-pressed="false">Walk</button>
+            <button type="button" data-mode="bicycle" aria-pressed="false">Bike</button>
+            <button type="button" data-mode="motorcycle" aria-pressed="false">Moto</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="filter-group severity-filter">
+          <legend>Show</legend>
+          <label>
+            <input type="checkbox" id="show-fatal" checked>
+            <span class="legend-dot legend-dot--fatal"></span>
+            Fatal crashes
+          </label>
+          <label>
+            <input type="checkbox" id="show-serious" checked>
+            <span class="legend-dot legend-dot--serious"></span>
+            Serious-injury crashes
+          </label>
+        </fieldset>
+
+        <div class="view-actions">
+          <button id="reset-view" class="text-button" type="button">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4.5 7A6 6 0 1 1 4 12M4.5 7V3.5M4.5 7H8" /></svg>
+            Reset view
+          </button>
+          <button id="toggle-terrain" class="text-button active" type="button" aria-pressed="true">
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m2.5 14.5 4.4-5 3 3.2 3.4-5.2 4.2 7" /></svg>
+            Terrain on
+          </button>
+        </div>
+
+        <p class="interaction-hint"><span aria-hidden="true">↗</span> Drag to orbit. Scroll or pinch to zoom. Select a point for context.</p>
+      </aside>
+
+      <aside class="detail-card" id="detail-card" aria-label="Crash details" aria-live="polite" hidden>
+        <button class="detail-card__close" id="detail-close" type="button" aria-label="Close crash details">×</button>
+        <p class="eyebrow" id="detail-severity">Crash record</p>
+        <h2 id="detail-location">Austin, Texas</h2>
+        <dl>
+          <div><dt>Date</dt><dd id="detail-date"></dd></div>
+          <div><dt>People harmed</dt><dd id="detail-harm"></dd></div>
+          <div><dt>Posted speed</dt><dd id="detail-speed"></dd></div>
+          <div><dt>Units involved</dt><dd id="detail-mode"></dd></div>
+        </dl>
+        <a id="detail-source" href="#" target="_blank" rel="noreferrer">View source record <span aria-hidden="true">↗</span></a>
+      </aside>
+
+      <aside class="location-card" id="location-card" aria-label="Selected location crash summary" aria-live="polite" hidden>
+        <button class="location-card__close" id="location-close" type="button" aria-label="Clear selected location">×</button>
+        <p class="eyebrow" id="location-scope">At this location</p>
+        <h2 id="location-name">Selected Austin location</h2>
+        <p class="location-card__context" id="location-context">Austin, Texas</p>
+        <dl class="location-summary">
+          <div><dt>Severe crashes</dt><dd id="location-crashes">0</dd></div>
+          <div><dt>Lives lost</dt><dd id="location-deaths">0</dd></div>
+          <div><dt>Serious injuries</dt><dd id="location-injuries">0</dd></div>
+        </dl>
+        <p class="location-card__note" id="location-note">Crash locations within 80 meters of this point.</p>
+        <div class="location-card__actions">
+          <button id="show-nearby" type="button">Show accidents near location</button>
+          <button id="show-address" type="button" hidden>Return to this address</button>
+        </div>
+      </aside>
+
+      <div class="pin-prompt" id="pin-prompt" role="status" aria-live="polite" hidden>
+        <div class="pin-prompt__target" aria-hidden="true"><i></i></div>
+        <div>
+          <p id="pin-prompt-label">Locating this point</p>
+          <span id="pin-prompt-context">Double-click selection</span>
+        </div>
+        <button id="pin-confirm" type="button">Search this pin</button>
+        <span class="pin-prompt__countdown" id="pin-countdown" role="timer" aria-label="Closes in 5 seconds">5</span>
+      </div>
+
+      <div class="map-key" aria-hidden="true">
+        <span>LOWER HARM</span>
+        <i></i>
+        <span>HIGHER HARM</span>
+      </div>
+
+      <footer class="source-note" aria-label="Data source">
+        <button id="about-toggle" type="button" aria-expanded="false" aria-controls="about-panel">About this view</button>
+        <span>City of Austin Vision Zero data</span>
+      </footer>
+
+      <section class="about-panel" id="about-panel" hidden>
+        <button id="about-close" class="about-panel__close" type="button" aria-label="Close about panel">×</button>
+        <p class="eyebrow">How to read ACCI</p>
+        <h2>A map is a question, not a verdict.</h2>
+        <div class="about-grid">
+          <div>
+            <h3>What you are seeing</h3>
+            <p>
+              Crash records from the City of Austin Vision Zero crash-level dataset. ACCI includes crashes coded as fatal or suspected serious injury, within the selected years. Columns combine records in nearby map cells. Their height weights a death more heavily than a serious injury.
+            </p>
+          </div>
+          <div>
+            <h3>What the data cannot say</h3>
+            <p>
+              Reports can be delayed, revised, incomplete, or imprecisely located. A concentration shows where harm was recorded, not why it happened or who is at fault. Recent totals are especially likely to change.
+            </p>
+          </div>
+          <div>
+            <h3>Why this exists</h3>
+            <p>
+              Safety data can feel abstract in a spreadsheet. This experimental view makes spatial patterns legible while keeping individual records available for inspection.
+            </p>
+          </div>
+        </div>
+        <div class="about-links">
+          <a href="https://data.austintexas.gov/Transportation-and-Mobility/Austin-Crash-Report-Data-Crash-Level-Records/y2wy-tgr5" target="_blank" rel="noreferrer">Open the source dataset ↗</a>
+          <a href="https://www.austintexas.gov/transportation-public-works/programs/vision-zero" target="_blank" rel="noreferrer">Learn about Austin Vision Zero ↗</a>
+        </div>
+      </section>
+
+      <div class="loading-screen" id="loading-screen" role="status">
+        <div class="loader-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
+        <p>Reading Austin's street-safety record</p>
+        <span id="loading-detail">Opening the public dataset</span>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
