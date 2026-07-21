@@ -20,7 +20,7 @@ const FoodMap = lazy(() => import('./FoodMap').then((module) => ({ default: modu
 
 type Status = 'plenty' | 'limited' | 'low' | 'volunteers' | 'transport'
 type View = 'command' | 'alerts' | 'protocol' | 'rescue' | 'volunteer' | 'community' | 'partners' | 'harvest' | 'inventory'
-type ConsumerIntent = 'food' | 'contribute' | 'gather'
+type ConsumerIntent = 'food' | 'contribute' | 'gather' | 'request'
 
 type FoodLocation = {
   id: string
@@ -146,10 +146,27 @@ function SimpleExperience({ initialIntent }: { initialIntent: ConsumerIntent }) 
   const [query, setQuery] = useState('')
   const [foodFilter, setFoodFilter] = useState<'all' | 'pantry' | 'community'>('all')
   const [contribution, setContribution] = useState<'food' | 'delivery'>('food')
-  const [foodDraft, setFoodDraft] = useState({ description: '', quantity: '', availability: 'today', neighborhood: 'East Austin' })
+  const [foodDraft, setFoodDraft] = useState(() => {
+    try {
+      const saved = sessionStorage.getItem('wxl:food-draft')
+      return saved ? JSON.parse(saved) as { description: string; quantity: string; availability: string; neighborhood: string } : { description: '', quantity: '', availability: 'today', neighborhood: 'East Austin' }
+    } catch {
+      return { description: '', quantity: '', availability: 'today', neighborhood: 'East Austin' }
+    }
+  })
   const [locationPromptOpen, setLocationPromptOpen] = useState(() => initialIntent === 'food' && sessionStorage.getItem('wxl:location-choice') !== 'complete')
   const [locationLabel, setLocationLabel] = useState('Austin')
   const [visitorPosition, setVisitorPosition] = useState<{ latitude: number; longitude: number } | null>(null)
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false)
+  const [actionSheet, setActionSheet] = useState<{ eyebrow: string; title: string; copy: string } | null>(null)
+  const [requestDraft, setRequestDraft] = useState(() => {
+    try {
+      const saved = sessionStorage.getItem('wxl:request-draft')
+      return saved ? JSON.parse(saved) as { need: string; neighborhood: string; timing: string } : { need: '', neighborhood: 'East Austin', timing: 'Today' }
+    } catch {
+      return { need: '', neighborhood: 'East Austin', timing: 'Today' }
+    }
+  })
 
   const visible = useMemo(() => locations.filter((location) => {
     const matchesQuery = `${location.name} ${location.area} ${location.type}`.toLowerCase().includes(query.toLowerCase())
@@ -162,6 +179,10 @@ function SimpleExperience({ initialIntent }: { initialIntent: ConsumerIntent }) 
     window.history.replaceState({}, '', `/app/?mode=anonymous&intent=${nextIntent}`)
     document.documentElement.scrollTop = 0
     document.body.scrollTop = 0
+  }
+  const openSimpleAction = (eyebrow: string, title: string, copy: string) => setActionSheet({ eyebrow, title, copy })
+  const enableAdvancedMode = () => {
+    localStorage.setItem('wxl:experience-mode', 'advanced')
   }
   const useVisitorLocation = (latitude: number, longitude: number) => {
     const nearest = nearestListedLocation(latitude, longitude)
@@ -188,13 +209,14 @@ function SimpleExperience({ initialIntent }: { initialIntent: ConsumerIntent }) 
     <header className="simple-header">
       <a className="simple-brand" href="/" aria-label="WXL Food home"><span>WXL</span><b>FOOD</b></a>
       <button className="simple-location" type="button" onClick={() => setLocationPromptOpen(true)}><MapPin size={15} /><span>{locationLabel}</span><ChevronDown size={14} /></button>
-      <a className="simple-account" href="/app/?mode=login" aria-label="Sign in"><span>WX</span></a>
+      <div className="simple-account-wrap"><button className="simple-account" type="button" onClick={() => setAccountMenuOpen((current) => !current)} aria-label="Open account and display settings" aria-expanded={accountMenuOpen} aria-controls="simple-account-menu"><span>WX</span></button>{accountMenuOpen && <div className="simple-account-menu" id="simple-account-menu"><p className="simple-eyebrow">Your experience</p><strong>Simple mode</strong><span>Everyday food, contribution, and gathering steps stay focused here.</span><a href="/app/?mode=login">Sign in <ArrowUpRight size={14} /></a><a className="simple-advanced-link" href="/app/?mode=advanced" onClick={enableAdvancedMode}><Settings size={15} /><span><b>Turn on advanced workspace</b><small>Coordination, routes, inventory, and reports</small></span><ChevronRight size={15} /></a></div>}</div>
     </header>
 
     <nav className="simple-tabs" aria-label="Choose what you want to do">
       <button className={intent === 'food' ? 'active' : ''} aria-current={intent === 'food' ? 'page' : undefined} onClick={() => chooseIntent('food')}><Search size={17} /><span>Find food</span></button>
       <button className={intent === 'contribute' ? 'active' : ''} aria-current={intent === 'contribute' ? 'page' : undefined} onClick={() => chooseIntent('contribute')}><HandHeart size={17} /><span>Contribute</span></button>
       <button className={intent === 'gather' ? 'active' : ''} aria-current={intent === 'gather' ? 'page' : undefined} onClick={() => chooseIntent('gather')}><Users size={17} /><span>Gather</span></button>
+      <button className={intent === 'request' ? 'active' : ''} aria-current={intent === 'request' ? 'page' : undefined} onClick={() => chooseIntent('request')}><MessageCircle size={17} /><span>Requests</span></button>
     </nav>
 
     {intent === 'food' && <main className="finder-flow">
@@ -228,19 +250,26 @@ function SimpleExperience({ initialIntent }: { initialIntent: ConsumerIntent }) 
     {intent === 'contribute' && <main className="action-flow">
       <section className="action-hero contribute-hero"><p className="simple-eyebrow">Contribute</p><h1>Share food. Move food.</h1><p>Choose the kind of help you can offer today. We will keep the next steps short and clear.</p></section>
       <div className="action-switch" role="tablist" aria-label="Contribution type"><button role="tab" aria-selected={contribution === 'food'} className={contribution === 'food' ? 'active' : ''} onClick={() => setContribution('food')}><Package size={18} /> I have food</button><button role="tab" aria-selected={contribution === 'delivery'} className={contribution === 'delivery' ? 'active' : ''} onClick={() => setContribution('delivery')}><Truck size={18} /> I can deliver</button></div>
-      {contribution === 'food' ? <section className="quick-form"><div className="quick-form-heading"><span>🥬</span><div><p className="simple-eyebrow">Food submission</p><h2>Tell us what is ready</h2></div></div><label>What food do you have?<input value={foodDraft.description} onChange={(event) => setFoodDraft((current) => ({ ...current, description: event.target.value }))} placeholder="Tomatoes, bread, prepared meals" /></label><div className="quick-form-row"><label>How much?<input value={foodDraft.quantity} onChange={(event) => setFoodDraft((current) => ({ ...current, quantity: event.target.value }))} placeholder="About 20 lb" /></label><label>Ready until<select value={foodDraft.availability} onChange={(event) => setFoodDraft((current) => ({ ...current, availability: event.target.value }))}><option value="today">Later today</option><option value="tomorrow">Tomorrow</option><option value="week">This week</option></select></label></div><label>Pickup neighborhood<input value={foodDraft.neighborhood} onChange={(event) => setFoodDraft((current) => ({ ...current, neighborhood: event.target.value }))} placeholder="East Austin" /></label><p className="form-safety"><ShieldCheck size={15} /> Do not enter a private home address here. Exact pickup details are shared only during coordination.</p><a className="simple-primary" href="/app/?workspace=rescue&action=submit" onClick={() => sessionStorage.setItem('wxl:food-draft', JSON.stringify(foodDraft))}>Continue to secure review <ArrowUpRight size={17} /></a></section> : <section className="delivery-board"><div className="shelf-heading"><div><p className="simple-eyebrow">Delivery board</p><h2>Choose a run that fits</h2></div><span>Sample patterns</span></div>{rescues.map((rescue, index) => <article className="delivery-card" key={rescue.title}><span className="delivery-number">0{index + 1}</span><div><strong>{rescue.title}</strong><p>{rescue.source} · {rescue.window}</p><small><MapPin size={13} /> Austin route, private stops shown after assignment</small></div><a href="/app/?workspace=volunteer">View run <ChevronRight size={17} /></a></article>)}<a className="simple-primary" href="/app/?workspace=volunteer">Set up Contributor profile <ArrowUpRight size={17} /></a></section>}
+      {contribution === 'food' ? <section className="quick-form"><div className="quick-form-heading"><span>🥬</span><div><p className="simple-eyebrow">Food submission</p><h2>Tell us what is ready</h2></div></div><label>What food do you have?<input value={foodDraft.description} onChange={(event) => setFoodDraft((current) => ({ ...current, description: event.target.value }))} placeholder="Tomatoes, bread, prepared meals" /></label><div className="quick-form-row"><label>How much?<input value={foodDraft.quantity} onChange={(event) => setFoodDraft((current) => ({ ...current, quantity: event.target.value }))} placeholder="About 20 lb" /></label><label>Ready until<select value={foodDraft.availability} onChange={(event) => setFoodDraft((current) => ({ ...current, availability: event.target.value }))}><option value="today">Later today</option><option value="tomorrow">Tomorrow</option><option value="week">This week</option></select></label></div><label>Pickup neighborhood<input value={foodDraft.neighborhood} onChange={(event) => setFoodDraft((current) => ({ ...current, neighborhood: event.target.value }))} placeholder="East Austin" /></label><p className="form-safety"><ShieldCheck size={15} /> Do not enter a private home address here. Exact pickup details are shared only during coordination.</p><button className="simple-primary" type="button" disabled={!foodDraft.description.trim() || !foodDraft.quantity.trim()} onClick={() => { sessionStorage.setItem('wxl:food-draft', JSON.stringify(foodDraft)); openSimpleAction('Food review', 'Your food details are ready.', 'Sign in to send this to a coordinator. You will return to this clean flow with your draft still here.') }}>Review and continue <ArrowUpRight size={17} /></button></section> : <section className="delivery-board"><div className="shelf-heading"><div><p className="simple-eyebrow">Delivery board</p><h2>Choose a run that fits</h2></div><span>Sample patterns</span></div>{rescues.map((rescue, index) => <article className="delivery-card" key={rescue.title}><span className="delivery-number">0{index + 1}</span><div><strong>{rescue.title}</strong><p>{rescue.source} · {rescue.window}</p><small><MapPin size={13} /> Austin route, private stops shown after assignment</small></div><button type="button" onClick={() => openSimpleAction('Delivery run', rescue.title, `${rescue.source}. ${rescue.window}. Sign in to volunteer and receive private pickup details.`)}>View run <ChevronRight size={17} /></button></article>)}<button className="simple-primary" type="button" onClick={() => openSimpleAction('Contributor profile', 'Ready to help move food?', 'Sign in to share your availability, transportation, and preferred neighborhoods without leaving simple mode.')}>Set up Contributor profile <ArrowUpRight size={17} /></button></section>}
     </main>}
 
     {intent === 'gather' && <main className="action-flow">
       <section className="action-hero gather-hero"><p className="simple-eyebrow">Gather</p><h1>Share a table.</h1><p>Start a neighborhood meal, bring something to share, or help a local gathering come together.</p></section>
       <section className="gather-list"><div className="shelf-heading"><div><p className="simple-eyebrow">Gathering ideas</p><h2>Community table patterns</h2></div><span>Sample patterns</span></div>
-        {[['THU 24', 'Eastside community supper', 'Govalle · 6:30 PM', 'Bring a dish or help set up'], ['SAT 26', 'Garden harvest potluck', 'Montopolis · 12:00 PM', 'Produce, plates, and extra hands welcome'], ['SUN 27', 'Neighbors table', 'Rosewood · 5:00 PM', 'A simple shared meal for all ages']].map(([date, title, meta, note]) => <article className="gather-card" key={title}><time>{date}</time><div><strong>{title}</strong><span>{meta}</span><p>{note}</p></div><a href="/app/?workspace=community&action=gather" aria-label={`Use ${title} as a gathering pattern`}><ChevronRight size={18} /></a></article>)}
+        {[['THU 24', 'Eastside community supper', 'Govalle · 6:30 PM', 'Bring a dish or help set up'], ['SAT 26', 'Garden harvest potluck', 'Montopolis · 12:00 PM', 'Produce, plates, and extra hands welcome'], ['SUN 27', 'Neighbors table', 'Rosewood · 5:00 PM', 'A simple shared meal for all ages']].map(([date, title, meta, note]) => <article className="gather-card" key={title}><time>{date}</time><div><strong>{title}</strong><span>{meta}</span><p>{note}</p></div><button type="button" aria-label={`View ${title}`} onClick={() => openSimpleAction('Community gathering', title, `${meta}. ${note}. Sign in to join or ask the host a question.`)}><ChevronRight size={18} /></button></article>)}
       </section>
-      <section className="host-card"><span className="host-icon"><CalendarDays size={23} /></span><div><p className="simple-eyebrow">Host something</p><h2>Bring people to the table.</h2><p>Post a time, a public neighborhood, and what would make the gathering work. Keep private addresses out of the public post.</p></div><a className="simple-primary" href="/app/?workspace=community&action=gather">Plan a gathering <ArrowUpRight size={17} /></a></section>
+      <section className="host-card"><span className="host-icon"><CalendarDays size={23} /></span><div><p className="simple-eyebrow">Host something</p><h2>Bring people to the table.</h2><p>Post a time, a public neighborhood, and what would make the gathering work. Keep private addresses out of the public post.</p></div><button className="simple-primary" type="button" onClick={() => openSimpleAction('Host a gathering', 'Start with the simple details.', 'Sign in to choose a public neighborhood, time, and what neighbors can bring. Private addresses stay private.')}>Plan a gathering <ArrowUpRight size={17} /></button></section>
     </main>}
 
-    <footer className="simple-footer"><span>WXL:FOOD · Austin</span><a href="/app/?workspace=command">Open coordinator view</a></footer>
+    {intent === 'request' && <main className="action-flow request-flow">
+      <section className="action-hero request-hero"><p className="simple-eyebrow">Community requests</p><h1>Ask clearly. Help directly.</h1><p>See what neighbors need, offer what you can, or make a request in a few simple steps.</p></section>
+      <section className="quick-form request-composer"><div className="quick-form-heading"><span>💬</span><div><p className="simple-eyebrow">Make a request</p><h2>What would help?</h2></div></div><label>Food or help needed<input value={requestDraft.need} onChange={(event) => setRequestDraft((current) => ({ ...current, need: event.target.value }))} placeholder="Fresh produce for a community dinner" /></label><div className="quick-form-row"><label>Public neighborhood<input value={requestDraft.neighborhood} onChange={(event) => setRequestDraft((current) => ({ ...current, neighborhood: event.target.value }))} /></label><label>When is it needed?<select value={requestDraft.timing} onChange={(event) => setRequestDraft((current) => ({ ...current, timing: event.target.value }))}><option>Today</option><option>This week</option><option>Flexible</option></select></label></div><p className="form-safety"><ShieldCheck size={15} /> Requests are public. Keep names, home addresses, and private contact details out of the post.</p><button className="simple-primary" type="button" disabled={!requestDraft.need.trim()} onClick={() => { sessionStorage.setItem('wxl:request-draft', JSON.stringify(requestDraft)); openSimpleAction('Community request', 'Your request is ready to review.', 'Sign in to post it and coordinate replies. Your simple draft will stay in this browser.') }}>Review request <ArrowUpRight size={17} /></button></section>
+      <section className="simple-request-list"><div className="shelf-heading"><div><p className="simple-eyebrow">Open nearby</p><h2>Ways to help now</h2></div><span>Public preview</span></div>{initialRequests.filter((request) => request.status !== 'fulfilled').slice(0, 4).map((request) => <article className="simple-request-card" key={request.id}><div><span className={`simple-priority ${request.priority}`}>{request.priority}</span><small>{request.neighborhood}</small></div><h3>{request.title}</h3><p>{request.detail}</p><button type="button" onClick={() => openSimpleAction('Offer help', request.title, 'Sign in to offer food, transportation, storage, or volunteer time. The request stays open in simple mode.')}>Offer help <ArrowUpRight size={15} /></button></article>)}</section>
+    </main>}
+
+    <footer className="simple-footer"><span>WXL:FOOD · Austin</span><a href="/app/?mode=advanced" onClick={enableAdvancedMode}>Advanced workspace</a></footer>
     {locationPromptOpen && <LocationPrompt onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
+    {actionSheet && <div className="simple-sheet-backdrop" role="dialog" aria-modal="true" aria-labelledby="simple-sheet-title" onClick={() => setActionSheet(null)}><div className="simple-sheet" onClick={(event) => event.stopPropagation()}><button className="simple-sheet-close" type="button" onClick={() => setActionSheet(null)} aria-label="Close"><X size={18} /></button><p className="simple-eyebrow">{actionSheet.eyebrow}</p><h2 id="simple-sheet-title">{actionSheet.title}</h2><p>{actionSheet.copy}</p><a className="simple-primary" href={`/app/?mode=login&return=${encodeURIComponent(intent)}`}>Sign in to continue <ArrowUpRight size={16} /></a><button className="simple-sheet-secondary" type="button" onClick={() => setActionSheet(null)}>Keep browsing</button></div></div>}
   </div>
 }
 
@@ -402,6 +431,9 @@ function DashboardApp() {
     setAccountOpen(false)
     notify('You are signed out. Public browsing remains open.')
   }
+  const useSimpleMode = () => {
+    localStorage.removeItem('wxl:experience-mode')
+  }
   const toggleSidebar = () => setSidebarCollapsed((current) => { localStorage.setItem('wxl:sidebar-collapsed', current ? '0' : '1'); return !current })
   const useVisitorLocation = (latitude: number, longitude: number) => {
     const nearest = nearestListedLocation(latitude, longitude)
@@ -438,6 +470,7 @@ function DashboardApp() {
         <SidebarHand />
         <div className="brand"><button className="brand-home" type="button" onClick={() => { setView('command'); setMenuOpen(false) }} aria-label="Go to WXL:FOOD overview"><span className="brand-mark" aria-hidden="true">X</span><span className="brand-copy"><strong>W<span>X</span>L:FOOD</strong><small>with xtra love</small></span></button><button className="mobile-close" onClick={() => setMenuOpen(false)} aria-label="Close navigation"><X size={18} /></button></div>
         <button className="sidebar-toggle" onClick={() => window.innerWidth <= 720 ? setMenuOpen((current) => !current) : toggleSidebar()} aria-label={menuOpen || !sidebarCollapsed ? 'Collapse navigation' : 'Expand navigation'}>{menuOpen || !sidebarCollapsed ? <ChevronLeft size={17} /> : <ChevronRight size={17} />}</button>
+        <div className="advanced-mode-card"><Settings size={15} /><span><strong>Advanced workspace</strong><small>Coordinator tools and planning</small></span><a href="/app/?mode=anonymous&intent=food" onClick={useSimpleMode}>Use simple mode</a></div>
         <div className="network-status"><span className="live-dot" /><span>Public preview</span><span className="status-time">Austin</span></div>
         <nav className="primary-nav" aria-label="Main navigation">
           <p className="nav-label">Coordinate</p>
@@ -832,7 +865,13 @@ function LoginScreen() {
     setBusy(false)
     if (result.error) setError(result.error.message)
     else if (!result.data.session) setError('Your account was created, but WXL:FOOD could not log you in. Please try logging in.')
-    else window.location.assign('/app/')
+    else {
+      const returnIntent = new URLSearchParams(window.location.search).get('return')
+      const destination = returnIntent === 'food' || returnIntent === 'contribute' || returnIntent === 'gather' || returnIntent === 'request'
+        ? `/app/?intent=${returnIntent}`
+        : '/app/?intent=food'
+      window.location.assign(destination)
+    }
   }
 
   const sendReset = async (event: React.FormEvent) => {
@@ -867,16 +906,18 @@ function LoginScreen() {
     <p className="eyebrow">{isRecovery ? 'Choose a new password' : isReset ? 'Account recovery' : 'Enter the network'}</p>
     <h1>{isRecovery ? 'Set a new password.' : isReset ? 'Reset your password.' : authMode === 'signup' ? 'Create your account.' : 'Welcome back.'}</h1>
     {isRecovery ? <form onSubmit={updatePassword}><p className="login-copy">Choose a new password for your WXL:FOOD account.</p><label>New password<input type="password" name="new-password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} autoComplete="new-password" minLength={6} /></label><label className="login-field-spaced">Confirm new password<input type="password" name="confirm-password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} autoComplete="new-password" minLength={6} /></label>{error && <p className="login-error">{error}</p>}{notice && <p className="login-success"><CheckCircle2 size={20} /><span>{notice}</span></p>}<button className="login-submit" type="submit" disabled={busy || !newPassword || !confirmPassword}>{busy ? 'Updating password…' : 'Update password'} <ArrowUpRight size={15} /></button></form> : isReset ? <form onSubmit={sendReset}><p className="login-copy">Enter your email and we will send a secure link to choose a new password.</p><label>Email address<input type="email" name="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.org" autoComplete="email" required /></label>{error && <p className="login-error">{error}</p>}{notice && <p className="login-success"><CheckCircle2 size={20} /><span>{notice}</span></p>}<button className="login-submit" type="submit" disabled={busy || !email.trim()}>{busy ? 'Sending reset link…' : 'Send reset link'} <ArrowUpRight size={15} /></button><button className="login-switch" type="button" onClick={() => { setAuthMode('login'); setError(''); setNotice('') }}>Back to log in</button></form> : <form onSubmit={submitAuth}><p className="login-copy">{authMode === 'signup' ? 'Create an account with your email and a password. Your browser can offer to save it on this device.' : 'Log in with your email and password.'}</p><label>Email address<input type="email" name="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.org" autoComplete="username" required /></label><label className="login-field-spaced">Password<input type="password" name="password" value={password} onChange={(event) => setPassword(event.target.value)} autoComplete={authMode === 'signup' ? 'new-password' : 'current-password'} minLength={6} required /></label>{error && <p className="login-error">{error}</p>}{notice && <p className="login-success"><CheckCircle2 size={20} /><span>{notice}</span></p>}<button className="login-submit" type="submit" disabled={busy || !email.trim() || !password}>{busy ? 'Please wait…' : authMode === 'signup' ? 'Create account' : 'Log in'} <ArrowUpRight size={15} /></button>{authMode === 'login' && <button className="login-switch" type="button" onClick={() => { setAuthMode('reset'); setError(''); setNotice('') }}>Forgot password?</button>}<button className="login-switch" type="button" onClick={() => { setAuthMode(authMode === 'signup' ? 'login' : 'signup'); setError(''); setNotice('') }}>{authMode === 'signup' ? 'Already have an account? Log in' : 'New here? Create an account'}</button></form>}
-    {!isRecovery && <a className="login-anonymous" href="/app/?mode=anonymous">Browse anonymously <ArrowUpRight size={15} /></a>}
+    {!isRecovery && <a className="login-anonymous" href="/app/?mode=anonymous&intent=food">Browse anonymously <ArrowUpRight size={15} /></a>}
   </div></div>
 }
 
 function App() {
   const mode = new URLSearchParams(window.location.search).get('mode')
   const intent = new URLSearchParams(window.location.search).get('intent')
+  const workspace = new URLSearchParams(window.location.search).get('workspace')
   const authMode = mode === 'login' || mode === 'reset' || mode === 'recovery'
-  const consumerIntent = intent === 'food' || intent === 'contribute' || intent === 'gather' ? intent : null
-  return window.location.pathname.startsWith('/app') ? authMode ? <LoginScreen /> : consumerIntent ? <SimpleExperience initialIntent={consumerIntent} /> : <DashboardApp /> : <LandingPage />
+  const consumerIntent = intent === 'food' || intent === 'contribute' || intent === 'gather' || intent === 'request' ? intent : null
+  const advancedMode = mode === 'advanced' || Boolean(workspace) || (!consumerIntent && localStorage.getItem('wxl:experience-mode') === 'advanced')
+  return window.location.pathname.startsWith('/app') ? authMode ? <LoginScreen /> : advancedMode ? <DashboardApp /> : <SimpleExperience initialIntent={consumerIntent ?? 'food'} /> : <LandingPage />
 }
 
 export default App

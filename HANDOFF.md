@@ -17,6 +17,7 @@ HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, t
 4. **Audience and origin reframing.** Audience phrase is "three communities of regenerative impact work." Origin narrative is regenerative impact, not healing-aligned. AI is positioned as one tool inside the larger mission, not the centerpiece.
 5. **Brand voice sweep.** Zero em dashes across the project. See `AGENTS.md`.
 6. **Custom domain live on Netlify.** [handprotocol.org](https://handprotocol.org), auto-deploy on `main`. Resend mailing list integration in production. See `DEPLOY.md` for infrastructure.
+7. **WXL:FOOD simple and advanced modes.** The public WXL experience defaults to four clean paths: Find food, Contribute, Gather, and Requests. Coordinator dashboards are now an explicit Advanced workspace setting with a clear return to simple mode. See `wxl/docs/LIVING-DOCS.md`.
 
 ## Active surfaces
 
