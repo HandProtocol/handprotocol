@@ -69,7 +69,7 @@ Status labels used throughout this document:
 | Interaction leaderboard | Needs migration | Provides an internal, admin-only aggregate view. |
 | Rescue operations | Needs migration | Members submit rescues for coordinator review. Approved records support atomic claims, private assignment details, safety checkpoints, acceptance, incident hold, and audited resolution through migration 028. |
 | Volunteer Command | Needs migration | Members submit private readiness details. Coordinators approve training, equipment, and run classes. Migration 029 enforces that approval during rescue claims. |
-| Harvest runs | Needs migration | Coordinators plan private rescue-linked stops and assign one eligible Contributor. Assigned people record ordered outcomes, while safety checkpoints and incidents block unsafe completion. |
+| Harvest runs | Needs migration | Coordinators plan private food delivery, opt-in compost return, and compost drop-off stops, then assign one eligible Contributor. Assigned people record ordered outcomes, while safety checkpoints and incidents block unsafe completion. |
 | Inventory | Needs migration | Coordinators receive only accepted rescues, reserve and distribute quantities, record storage checks and holds, and preserve every balance in a ledger. |
 | Impact reports | Prototype | No complete auditable reporting view exists yet. |
 
@@ -77,7 +77,7 @@ Status labels used throughout this document:
 
 Anyone can browse public food information and public community requests.
 
-The public entry presents three starting choices: find food, contribute, or gather. These paths open a simplified public interface with persistent navigation for those three intents plus Requests. The food path opens an Austin map and nearby listing shelf. Contribute keeps food drafts, delivery-run previews, and Contributor setup prompts in the simple shell. Gather uses the same focused pattern for shared meals. Requests has a short privacy-aware composer and a readable list of open needs. Drafts survive the sign-in handoff in the current browser session. Intent parameters select the public experience only and never grant write access.
+The public entry presents three starting choices: find food, contribute, or gather. These paths open a simplified public interface with persistent navigation for those three intents plus Requests. The food path opens an Austin map and nearby listing shelf. Contribute keeps food drafts, delivery-run previews, compost-return guidance, and Contributor setup prompts in the simple shell. Gather uses the same focused pattern for shared meals. Requests has a short privacy-aware composer and a readable list of open needs. Drafts survive the sign-in handoff in the current browser session. Intent parameters select the public experience only and never grant write access.
 
 Simple mode is the default, including at `/app/`. The account and display menu lets experienced coordinators turn on Advanced workspace. That preference is remembered in the browser. Advanced workspace labels itself clearly and includes a **Use simple mode** control that clears the preference. Legacy links with a specific `workspace` parameter still open the requested operational tool directly.
 
@@ -290,6 +290,16 @@ Private multi-stop dispatch, exact capability assignment, rescue reservation, or
 ```text
 command/supabase/migrations/030_wxl_harvest_runs.sql
 ```
+
+Opt-in compost pickup during food delivery, separate compost drop-off stops, contamination outcomes, quantities, and private handoff evidence are defined in:
+
+```text
+command/supabase/migrations/037_wxl_compost_returns.sql
+command/supabase/migrations/038_wxl_compost_route_gate.sql
+command/supabase/migrations/039_wxl_compost_trigger_permissions.sql
+```
+
+Compost pickup is never inferred from a food delivery. A coordinator must opt the delivery stop in, record the expected sealed container or quantity, add private handling instructions, and plan a compost drop-off before the run ends. The assigned Contributor records whether compost was collected, unavailable, or rejected for contamination. Compost stays physically separate from food throughout the route.
 
 Accepted-rescue inventory, lot-specific storage limits, allocations, condition checks, holds, distributions, discards, and immutable quantity balances are defined in:
 

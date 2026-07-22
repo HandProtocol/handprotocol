@@ -469,12 +469,20 @@ button { border: 0; cursor: pointer; }
 .simple-primary:hover { background: var(--simple-green-dark); }
 .simple-primary:disabled { cursor: not-allowed; opacity: .48; }
 .delivery-board .shelf-heading, .gather-list .shelf-heading { padding: 0 0 14px; }
+.compost-loop { display: grid; grid-template-columns: auto 1fr; gap: 11px; align-items: start; margin-bottom: 4px; padding: 14px; color: #254c38; background: #edf7ef; border: 1px solid #cfe4d4; border-radius: 14px; }
+.compost-loop > span { display: grid; place-items: center; width: 34px; height: 34px; color: #36734f; background: #fff; border-radius: 50%; }
+.compost-loop strong { display: block; font: 700 13px/1.3 'Space Grotesk', sans-serif; }
+.compost-loop p { margin: 4px 0 0; color: #587063; font-size: 10px; line-height: 1.55; }
 .delivery-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; border-top: 1px solid #e9ece9; padding: 15px 0; }
 .delivery-number { color: #8c9890; font: 700 10px 'DM Mono', monospace; }
 .delivery-card strong, .gather-card strong { display: block; font: 700 14px/1.3 'Space Grotesk', sans-serif; }
 .delivery-card p { color: #66736b; margin: 4px 0; font-size: 10px; }
 .delivery-card small { display: flex; align-items: center; gap: 4px; color: #7a867e; font-size: 8px; }
 .delivery-card > button { display: flex; align-items: center; gap: 2px; color: var(--simple-green); background: transparent; font-size: 9px; font-weight: 800; }
+.compost-stop { margin-top: 8px; padding: 9px 10px; color: #28543d; background: #edf7ef; border: 1px solid #cfe4d4; border-radius: 9px; }
+.compost-stop strong, .compost-outcome legend, .compost-plan legend { display: flex; align-items: center; gap: 5px; color: #28543d; }
+.compost-stop p { margin: 4px 0; }
+.compost-plan, .compost-outcome { background: #f5faf6; border-color: #cfe4d4; }
 .gather-list { margin-top: 18px; }
 .gather-card { display: grid; grid-template-columns: 52px 1fr 36px; align-items: center; gap: 12px; border-top: 1px solid #e9ece9; padding: 15px 0; }
 .gather-card time { color: #865713; background: #fff1d9; border-radius: 10px; padding: 9px 5px; font: 800 9px/1.3 'DM Mono', monospace; text-align: center; }

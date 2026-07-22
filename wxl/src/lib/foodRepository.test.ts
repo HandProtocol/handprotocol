@@ -207,12 +207,36 @@ describe('food repository database contracts', () => {
     mocks.rpc.mockResolvedValue({ data: { id: 'stop-1', status: 'completed' }, error: null })
     const repository = await import('./foodRepository')
 
-    await repository.recordFoodHarvestStop('stop-1', 'completed', 38, 'Pickup checkpoint complete and crates secured')
-
-    expect(mocks.rpc).toHaveBeenCalledWith('record_food_harvest_stop', {
-      p_stop_id: 'stop-1', p_outcome: 'completed', p_observed_quantity: 38,
-      p_note: 'Pickup checkpoint complete and crates secured',
+    await repository.recordFoodHarvestStop('stop-1', 'completed', 38, 'Delivery checkpoint complete and crates secured', {
+      outcome: 'collected', collected_quantity: 2, note: 'Two sealed buckets accepted',
     })
+
+    expect(mocks.rpc).toHaveBeenCalledWith('record_food_harvest_stop_v2', {
+      p_stop_id: 'stop-1', p_outcome: 'completed', p_observed_quantity: 38,
+      p_note: 'Delivery checkpoint complete and crates secured',
+      p_compost_outcome: 'collected', p_collected_compost_quantity: 2,
+      p_compost_outcome_note: 'Two sealed buckets accepted',
+    })
+  })
+
+  it('adds compost-return evidence to a delivery stop', async () => {
+    mocks.rpc.mockResolvedValue({ data: { id: 'stop-1', compost_pickup_requested: true }, error: null })
+    const repository = await import('./foodRepository')
+
+    await repository.addFoodHarvestRunStop({
+      run_id: 'run-1', stop_order: 2, stop_type: 'delivery', rescue_id: 'rescue-1',
+      public_label: 'Delivery in Govalle', private_instructions: 'Call receiving coordinator',
+      window_start: '2026-07-22T18:00:00Z', window_end: '2026-07-22T19:00:00Z',
+      expected_quantity: 20, quantity_unit: 'lb', compost_pickup_requested: true,
+      expected_compost_quantity: 2, compost_quantity_unit: 'bucket',
+      compost_private_instructions: 'Collect two sealed green buckets by the side door',
+    })
+
+    expect(mocks.rpc).toHaveBeenCalledWith('add_food_harvest_run_stop_v2', expect.objectContaining({
+      p_stop_type: 'delivery', p_compost_pickup_requested: true,
+      p_expected_compost_quantity: 2, p_compost_quantity_unit: 'bucket',
+      p_compost_private_instructions: 'Collect two sealed green buckets by the side door',
+    }))
   })
 
   it('creates inventory only through the accepted-rescue receiving function', async () => {

@@ -1,6 +1,6 @@
 # WXL:FOOD Handoff
 
-Last updated: 2026-07-18
+Last updated: 2026-07-22
 
 This is the working orientation document for `wxl/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on WXL:FOOD, its current behavior, what is real, what is illustrative, and what should be built next.
 
@@ -39,7 +39,7 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 | Main UI | `src/App.tsx` |
 | Styles | `src/styles.css` |
 | Data access | `src/lib/foodRepository.ts` |
-| Database migrations | `../command/supabase/migrations/024_wxl_food.sql` through `036_wxl_coordinator_gates.sql` |
+| Database migrations | `../command/supabase/migrations/024_wxl_food.sql` through `039_wxl_compost_trigger_permissions.sql` |
 | Deployment notes | `DEPLOY.md` |
 
 ## Routes and entry states
@@ -70,7 +70,7 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 ### Coordination protocol foundation
 
 - Migrations 024 and 025 have been restored from repository history, resolving the missing predecessors for public requests, the community map, alerts, and engagement records.
-- Migrations 026 through 036 were applied to the production HAND Supabase project on 2026-07-18. Migration history is baselined from 001 through 036, and the duplicate public-visits migration was renumbered from 020 to 023.
+- Migrations 026 through 036 were applied to the production HAND Supabase project on 2026-07-18. Migrations 037 through 039 added compost returns, their destination gate, and restricted trigger permissions on 2026-07-22. Migration history now matches through 039, and the duplicate public-visits migration was renumbered from 020 to 023.
 - Migrations 032 through 036 define channel-independent participants, verification, consent, mandates, private locations, needs, supplies, match evidence, commitments, conversations, payments, donations, subsidies, potlucks, recognition, agent audits, coordinator gates, idempotent command receipts, and a transactional outbox.
 - Canonical operational tables reject direct authenticated writes. Lifecycle and commitment changes use security-definer commands with ownership, eligibility, quantity, mandate, and idempotency checks.
 - Exact locations are represented only as opaque ciphertext with separate, append-only precision-access evidence.
@@ -164,6 +164,9 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 - Stop outcomes are ordered, require observed quantity and evidence notes, and depend on rescue pickup or delivery safety checkpoints where linked.
 - A stop incident holds both the run and linked rescue. Administrator disposition can document cancellation or mark the incident stop skipped before resuming the run.
 - Runs complete only when every stop has a final completed or skipped outcome. Immutable events preserve creation, stop addition, assignment, start, outcomes, incidents, cancellation, and completion.
+- A delivery stop can opt into a sealed compost pickup. The plan records expected compost quantity, unit, and restricted handoff instructions.
+- The assigned Contributor records a compost outcome with quantity and contamination evidence before completing an opted-in delivery stop.
+- Compost drop-off is a distinct route-stop type, allowing the reverse leg to end at a planned compost destination while keeping compost physically separate from food.
 
 ### Accepted-delivery inventory
 
@@ -309,7 +312,7 @@ Recommended follow-up:
 
 ### Database and security baseline
 
-Migrations `024_wxl_food.sql` through `036_wxl_coordinator_gates.sql` define:
+Migrations `024_wxl_food.sql` through `039_wxl_compost_trigger_permissions.sql` define:
 
 - `command.food_partners`
 - `command.food_source_nominations`
@@ -397,7 +400,7 @@ The app should not claim these boards are ready until they contain functional wo
    - `http://localhost:5173/app/?mode=recovery`
    Set the Supabase Site URL to `https://wxl.handprotocol.org`; leaving the default `http://localhost:3000` causes password-recovery links to open localhost when the callback is rejected or omitted.
 3. Test immediate signup login, browser password-save behavior, login, logout, reset request, recovery, and expired recovery links on the live domain.
-4. Migrations 026 through 036 are applied. Complete the remaining live multi-role, retry, concurrency, and operational verification before broad access.
+4. Migrations 026 through 039 are applied. Complete the remaining live multi-role, retry, concurrency, and operational verification before broad access.
 5. Confirm that the `command` schema is exposed through the Supabase API.
 6. Confirm the policy decision that request messages and structured offers are public when the parent request is public. The interface discloses this, but moderation and takedown controls are still required.
 7. Add abuse controls before broad access: rate limits, duplicate prevention, moderation status, report and takedown paths, and safe handling of contact details.

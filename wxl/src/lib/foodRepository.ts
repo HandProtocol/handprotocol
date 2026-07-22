@@ -194,7 +194,7 @@ export type FoodHarvestRunRecord = {
 export type FoodHarvestStopRecord = {
   id: string
   stop_order: number
-  stop_type: 'pickup' | 'delivery' | 'hub'
+  stop_type: 'pickup' | 'delivery' | 'hub' | 'compost_dropoff'
   rescue_id: string | null
   public_label: string
   private_instructions: string
@@ -205,6 +205,13 @@ export type FoodHarvestStopRecord = {
   status: 'planned' | 'completed' | 'skipped' | 'incident_hold'
   observed_quantity: number | null
   completion_note: string | null
+  compost_pickup_requested: boolean
+  expected_compost_quantity: number | null
+  compost_quantity_unit: string | null
+  compost_private_instructions: string | null
+  compost_outcome: 'collected' | 'none_available' | 'rejected_contamination' | null
+  collected_compost_quantity: number | null
+  compost_outcome_note: string | null
   completed_at: string | null
 }
 
@@ -556,15 +563,20 @@ export async function createFoodHarvestRun(input: {
 export async function addFoodHarvestRunStop(input: {
   run_id: string; stop_order: number; stop_type: FoodHarvestStopRecord['stop_type']; rescue_id?: string
   public_label: string; private_instructions: string; window_start: string; window_end: string
-  expected_quantity: number; quantity_unit: string
+  expected_quantity: number; quantity_unit: string; compost_pickup_requested: boolean
+  expected_compost_quantity?: number; compost_quantity_unit?: string; compost_private_instructions?: string
 }) {
   if (!foodDb) return { data: null, error: new Error('WXL:FOOD database is not configured') }
-  const result = await foodDb.rpc('add_food_harvest_run_stop', {
+  const result = await foodDb.rpc('add_food_harvest_run_stop_v2', {
     p_run_id: input.run_id, p_stop_order: input.stop_order, p_stop_type: input.stop_type,
     p_rescue_id: input.rescue_id || null, p_public_label: input.public_label,
     p_private_instructions: input.private_instructions, p_window_start: input.window_start,
     p_window_end: input.window_end, p_expected_quantity: input.expected_quantity,
     p_quantity_unit: input.quantity_unit,
+    p_compost_pickup_requested: input.compost_pickup_requested,
+    p_expected_compost_quantity: input.compost_pickup_requested ? input.expected_compost_quantity : null,
+    p_compost_quantity_unit: input.compost_pickup_requested ? input.compost_quantity_unit : null,
+    p_compost_private_instructions: input.compost_pickup_requested ? input.compost_private_instructions : null,
   })
   return { data: result.data as FoodHarvestStopRecord | null, error: result.error }
 }
@@ -581,9 +593,16 @@ export async function startFoodHarvestRun(runId: string, note: string) {
   return { data: result.data as FoodHarvestRunRecord | null, error: result.error }
 }
 
-export async function recordFoodHarvestStop(stopId: string, outcome: FoodHarvestStopRecord['status'], observedQuantity: number, note: string) {
+export async function recordFoodHarvestStop(stopId: string, outcome: FoodHarvestStopRecord['status'], observedQuantity: number, note: string, compost?: {
+  outcome: NonNullable<FoodHarvestStopRecord['compost_outcome']>; collected_quantity: number; note: string
+}) {
   if (!foodDb) return { data: null, error: new Error('WXL:FOOD database is not configured') }
-  const result = await foodDb.rpc('record_food_harvest_stop', { p_stop_id: stopId, p_outcome: outcome, p_observed_quantity: observedQuantity, p_note: note })
+  const result = await foodDb.rpc('record_food_harvest_stop_v2', {
+    p_stop_id: stopId, p_outcome: outcome, p_observed_quantity: observedQuantity, p_note: note,
+    p_compost_outcome: compost?.outcome ?? null,
+    p_collected_compost_quantity: compost?.collected_quantity ?? null,
+    p_compost_outcome_note: compost?.note ?? null,
+  })
   return { data: result.data as FoodHarvestStopRecord | null, error: result.error }
 }
 

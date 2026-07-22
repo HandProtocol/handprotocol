@@ -37,7 +37,7 @@ describe('WXL entry points and interaction gates', () => {
   it('routes each landing choice to the relevant workspace', () => {
     window.history.replaceState({}, '', '/app/?mode=anonymous&intent=contribute')
     const { unmount } = render(<App />)
-    expect(screen.getByRole('heading', { level: 1, name: 'Share food. Move food.' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: 'Share food. Move food. Return nutrients.' })).toBeInTheDocument()
     unmount()
 
     window.history.replaceState({}, '', '/app/?mode=anonymous&intent=gather')
@@ -87,8 +87,10 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.getByRole('heading', { name: /Tell us what is ready/i })).toBeInTheDocument()
     await userEvent.click(screen.getByRole('tab', { name: /I can deliver/i }))
     expect(screen.getByRole('heading', { name: /Choose a run that fits/i })).toBeInTheDocument()
+    expect(screen.getByText(/Food out, compost back/i)).toBeInTheDocument()
+    expect(screen.getByText(/sealed compost pickup/i)).toBeInTheDocument()
     await userEvent.click(screen.getByRole('button', { name: /Set up Contributor profile/i }))
-    expect(screen.getByRole('dialog', { name: /Ready to help move food/i })).toBeInTheDocument()
+    expect(screen.getByRole('dialog', { name: /Ready to deliver food and return compost/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Sign in to continue/i })).toHaveAttribute('href', '/app/?mode=login&return=contribute')
   })
 
