@@ -2,7 +2,7 @@
 title: WXL:FOOD Living Documentation
 description: Current product behavior, community workflows, safety boundaries, and development status for WXL:FOOD.
 status: living
-last_updated: 2026-07-21
+last_updated: 2026-07-23
 canonical_path: /docs/
 ---
 
@@ -53,6 +53,7 @@ Status labels used throughout this document:
 | Gather experience | Prototype | Shows clearly labeled sample gathering patterns and uses focused action sheets for joining or planning. It does not claim that sample gatherings are scheduled events. |
 | WaterDrop link | Live | Opens the WaterDrop river stewardship app. |
 | Email and password authentication | Live | Signup creates a session immediately, login uses email and password, reset and recovery remain email-based, and members can sign out. |
+| Email-only updates | Live | Visitors can submit only an email to hear about platform progress and future offerings. This does not create an account or grant write access. |
 | Member identity and profile readiness | Needs migration | The interface uses the active Supabase identity. Migration 026 backfills any missing profile rows required by food-record foreign keys. |
 | Public community requests | Live | Loads public requests from Supabase when configured. |
 | New community requests | Live | Authenticated members can post persisted requests. |
@@ -76,6 +77,8 @@ Status labels used throughout this document:
 ## Access and accounts
 
 Anyone can browse public food information and public community requests.
+
+Visitors who only want to follow WXL can join the updates list with one email address. This email-only path does not create a Supabase account, ask for a password, or grant access to posting and coordination. Updates cover meaningful platform development and future offerings, and every message must include an unsubscribe option.
 
 The public entry presents three starting choices: find food, contribute, or gather. These paths open a simplified public interface with persistent navigation for those three intents plus Requests. The food path opens an Austin map and nearby listing shelf. Contribute keeps food drafts, delivery-run previews, compost-return guidance, and Contributor setup prompts in the simple shell. Gather uses the same focused pattern for shared meals. Requests has a short privacy-aware composer and a readable list of open needs. Drafts survive the sign-in handoff in the current browser session. Intent parameters select the public experience only and never grant write access.
 

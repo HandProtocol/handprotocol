@@ -26,12 +26,32 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.getByLabelText('Password')).toHaveAttribute('autocomplete', 'new-password')
   })
 
+  it('offers email-only updates without account credentials', async () => {
+    window.history.replaceState({}, '', '/app/?mode=login&updates=1')
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ status: 'subscribed' }), { status: 200 }))
+    vi.stubGlobal('fetch', fetchMock)
+    render(<App />)
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Get WXL updates.' })).toBeInTheDocument()
+    expect(screen.getByText(/does not create an account/i)).toBeInTheDocument()
+    expect(screen.queryByLabelText('Password')).not.toBeInTheDocument()
+
+    await userEvent.type(screen.getByLabelText('Email address'), 'neighbor@example.org')
+    await userEvent.click(screen.getByRole('button', { name: /Get email updates/i }))
+
+    expect(fetchMock).toHaveBeenCalledWith('/.netlify/functions/subscribe-updates', expect.objectContaining({
+      body: JSON.stringify({ email: 'neighbor@example.org', website: '' }),
+    }))
+    expect(await screen.findByText(/You are on the list/i)).toBeInTheDocument()
+  })
+
   it('replaces the coming-soon card with the live WaterDrop app', () => {
     render(<App />)
     expect(screen.getByRole('heading', { level: 1, name: /Food, shared with xtra love/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Show me food nearby/i })).toHaveAttribute('href', '/app/?mode=anonymous&intent=food')
     expect(screen.getByRole('link', { name: /Put my time or resources to work/i })).toHaveAttribute('href', '/app/?intent=contribute')
     expect(screen.getByRole('link', { name: /Share a table/i })).toHaveAttribute('href', '/app/?mode=anonymous&intent=gather')
+    expect(screen.getByRole('link', { name: /Get WXL updates/i })).toHaveAttribute('href', '/app/?mode=login&updates=1')
   })
 
   it('routes each landing choice to the relevant workspace', () => {
@@ -170,6 +190,7 @@ describe('WXL entry points and interaction gates', () => {
     render(<App />)
     await userEvent.click(screen.getByRole('button', { name: /FOOD IS HERE/i }))
     expect(screen.getByRole('dialog', { name: /Join the network/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Email me WXL updates/i })).toHaveAttribute('href', '/app/?mode=login&updates=1')
   })
 
   it('gates structured request offers and explains that coordination details are public', async () => {

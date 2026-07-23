@@ -4,8 +4,23 @@ import type { User } from '@supabase/supabase-js'
 type PasswordAuth = Pick<SupabaseClient['auth'], 'signUp' | 'signInWithPassword'>
 type PasswordRecoveryAuth = Pick<SupabaseClient['auth'], 'updateUser' | 'signOut'>
 
+type AuthScreenMode = 'login' | 'signup'
+
 export function getRecoveryRedirectUrl(origin: string) {
   return new URL('/app/?mode=recovery', origin).toString()
+}
+
+export function getAuthErrorMessage(error: { code?: string; message?: string }, mode: AuthScreenMode) {
+  const requiresEmailConfirmation = error.code === 'email_not_confirmed'
+    || /confirm[^\n]*email|email[^\n]*confirm/i.test(error.message ?? '')
+
+  if (requiresEmailConfirmation) {
+    return mode === 'signup'
+      ? 'We could not finish creating your account. Please try again or contact WXL:FOOD.'
+      : 'We could not log you in with that email and password.'
+  }
+
+  return error.message || (mode === 'signup' ? 'We could not create your account.' : 'We could not log you in.')
 }
 
 export async function createAccountAndSession(auth: PasswordAuth, email: string, password: string) {

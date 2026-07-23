@@ -104,6 +104,7 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 - The account control shows identity from Supabase user metadata or a readable email fallback.
 - Authenticated members can sign out from the account menu and immediately return to browse-only access.
 - Authentication errors and success notices are shown in the login card.
+- Visitors can join the WXL email updates list with only an email address. This does not create a Supabase account or grant write access.
 
 ### Public request loading
 

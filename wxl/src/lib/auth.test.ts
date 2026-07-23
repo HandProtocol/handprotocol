@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createAccountAndSession, getMemberIdentity, getRecoveryRedirectUrl, updatePasswordAndSignOut } from './auth'
+import { createAccountAndSession, getAuthErrorMessage, getMemberIdentity, getRecoveryRedirectUrl, updatePasswordAndSignOut } from './auth'
 
 const credentials = { email: 'neighbor@example.org', password: 'community-food' }
 const user = { id: 'member-1' }
@@ -42,6 +42,25 @@ describe('createAccountAndSession', () => {
 
     expect(signInWithPassword).not.toHaveBeenCalled()
     expect(result.error).toBe(error)
+  })
+})
+
+describe('getAuthErrorMessage', () => {
+  it('does not expose email-confirmation requirements during signup', () => {
+    const message = getAuthErrorMessage({ code: 'email_not_confirmed', message: 'Email not confirmed' }, 'signup')
+
+    expect(message).toBe('We could not finish creating your account. Please try again or contact WXL:FOOD.')
+    expect(message.toLowerCase()).not.toContain('confirm')
+  })
+
+  it('removes confirmation instructions returned as plain provider text', () => {
+    const message = getAuthErrorMessage({ message: 'Confirm your email before logging in' }, 'login')
+
+    expect(message).toBe('We could not log you in with that email and password.')
+  })
+
+  it('preserves other provider errors', () => {
+    expect(getAuthErrorMessage({ message: 'Invalid login credentials' }, 'login')).toBe('Invalid login credentials')
   })
 })
 
