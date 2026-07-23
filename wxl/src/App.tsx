@@ -9,7 +9,8 @@ import { addFoodRequestMessage, changeFoodRequestStatus, createFoodRequest, crea
 import { useEngagement } from './lib/engagement'
 import { createAccountAndSession, getAuthErrorMessage, getMemberIdentity, getRecoveryRedirectUrl, updatePasswordAndSignOut } from './lib/auth'
 import { isValidUpdatesEmail, subscribeForUpdates } from './lib/updates'
-import { AddSpotModal, AlertCenter, FeedbackModal, flushFeedbackQueue, FoodAlertsBoard, FoodAlertsOverview, FoodHereModal } from './CommunityTools'
+import { AddSpotModal, AlertCenter, FoodAlertsBoard, FoodAlertsOverview, FoodHereModal } from './CommunityTools'
+import { CommunityContactWidget, openCommunityContact } from './CommunityContactWidget'
 import { RescueBoard } from './RescueBoard'
 import { ContributorBoard } from './ContributorBoard'
 import { HarvestRunBoard } from './HarvestRunBoard'
@@ -311,7 +312,6 @@ function DashboardApp() {
   const [alertsOpen, setAlertsOpen] = useState(false)
   const [addSpotOpen, setAddSpotOpen] = useState(false)
   const [foodHereOpen, setFoodHereOpen] = useState(false)
-  const [feedbackOpen, setFeedbackOpen] = useState(false)
   const [mobileHeaderVisible, setMobileHeaderVisible] = useState(true)
   const { clicks, variant } = useEngagement()
 
@@ -376,14 +376,6 @@ function DashboardApp() {
         time: new Date(request.created_at).toLocaleDateString(),
       })))
     })
-  }, [])
-
-  useEffect(() => {
-    const flush = () => { void flushFeedbackQueue() }
-    window.addEventListener('online', flush)
-    window.addEventListener('focus', flush)
-    flush()
-    return () => { window.removeEventListener('online', flush); window.removeEventListener('focus', flush) }
   }, [])
 
   useEffect(() => {
@@ -499,7 +491,7 @@ function DashboardApp() {
           <NavItem active={view === 'inventory'} icon={<Boxes size={18} />} label="Inventory" onClick={() => { setView('inventory'); setMenuOpen(false) }} />
           <NavItem icon={<ShieldCheck size={18} />} label="Impact reports" />
         </nav>
-        <div className="sidebar-bottom"><button className="help-link" onClick={() => setFeedbackOpen(true)}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div>{!authReady ? <div className="profile profile-loading" role="status"><span className="avatar">··</span><span><strong>Checking session</strong><small>Restoring account access</small></span></div> : isAuthenticated ? <div className="account-control"><button className="profile" onClick={() => setAccountOpen((current) => !current)} aria-expanded={accountOpen} aria-controls="member-account-menu"><span className="avatar">{memberIdentity.initials}</span><span><strong>{memberIdentity.displayName}</strong><small>Community account</small></span><Settings size={16} /></button>{accountOpen && <div className="account-menu" id="member-account-menu"><p>{memberIdentity.email}</p><button type="button" onClick={() => void signOut()}>Sign out</button></div>}</div> : <a className="profile" href="/app/?mode=login"><span className="avatar">WX</span><span><strong>Browsing openly</strong><small>Sign in to coordinate</small></span><ArrowUpRight size={16} /></a>}<p className="build-stamp" title={`Deployed build ${__WXL_BUILD_ID__}`}><span>Build</span><code>{__WXL_BUILD_ID__}</code></p></div>
+        <div className="sidebar-bottom"><button className="help-link" onClick={() => openCommunityContact('feedback')}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div>{!authReady ? <div className="profile profile-loading" role="status"><span className="avatar">··</span><span><strong>Checking session</strong><small>Restoring account access</small></span></div> : isAuthenticated ? <div className="account-control"><button className="profile" onClick={() => setAccountOpen((current) => !current)} aria-expanded={accountOpen} aria-controls="member-account-menu"><span className="avatar">{memberIdentity.initials}</span><span><strong>{memberIdentity.displayName}</strong><small>Community account</small></span><Settings size={16} /></button>{accountOpen && <div className="account-menu" id="member-account-menu"><p>{memberIdentity.email}</p><button type="button" onClick={() => void signOut()}>Sign out</button></div>}</div> : <a className="profile" href="/app/?mode=login"><span className="avatar">WX</span><span><strong>Browsing openly</strong><small>Sign in to coordinate</small></span><ArrowUpRight size={16} /></a>}<p className="build-stamp" title={`Deployed build ${__WXL_BUILD_ID__}`}><span>Build</span><code>{__WXL_BUILD_ID__}</code></p></div>
       </aside>
       {menuOpen && <button className="sidebar-scrim" onClick={() => setMenuOpen(false)} aria-label="Close navigation" />}
 
@@ -553,7 +545,6 @@ function DashboardApp() {
       {toast && <div className="toast"><ShieldCheck size={17} /> {toast}</div>}
       {authPromptOpen && <AuthPrompt onClose={() => setAuthPromptOpen(false)} />}
       {locationPromptOpen && <LocationPrompt onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
-      {feedbackOpen && <FeedbackModal onClose={() => setFeedbackOpen(false)} />}
       {addSpotOpen && <AddSpotModal onClose={() => setAddSpotOpen(false)} notify={notify} onAdded={(spot) => {
         setSpots((current) => [spot, ...current])
         const location = { id: spot.id, name: spot.name, type: spot.spot_type, area: spot.neighborhood, address: spot.address, status: 'plenty' as Status, detail: `${spot.produce}${spot.availability ? ` · ${spot.availability}` : ''}`, x: 50, y: 50, verified: false }
@@ -953,7 +944,8 @@ function App() {
   const authMode = mode === 'login' || mode === 'reset' || mode === 'recovery'
   const consumerIntent = intent === 'food' || intent === 'contribute' || intent === 'gather' || intent === 'request' ? intent : null
   const advancedMode = mode === 'advanced' || Boolean(workspace) || (!consumerIntent && localStorage.getItem('wxl:experience-mode') === 'advanced')
-  return window.location.pathname.startsWith('/app') ? authMode ? <LoginScreen /> : advancedMode ? <DashboardApp /> : <SimpleExperience initialIntent={consumerIntent ?? 'food'} /> : <LandingPage />
+  const page = window.location.pathname.startsWith('/app') ? authMode ? <LoginScreen /> : advancedMode ? <DashboardApp /> : <SimpleExperience initialIntent={consumerIntent ?? 'food'} /> : <LandingPage />
+  return <>{page}<CommunityContactWidget /></>
 }
 
 export default App

@@ -46,6 +46,8 @@ WXL_RESEND_AUDIENCE_ID
 
 The email-only WXL updates form uses `RESEND_API_KEY` and `WXL_RESEND_AUDIENCE_ID` to add contacts to a Resend audience without creating Supabase accounts. If `WXL_RESEND_AUDIENCE_ID` is absent, it falls back to `RESEND_AUDIENCE_ID`. Use a WXL-specific audience when available so platform updates and future offerings can be managed separately. Audience emails must retain Resend's unsubscribe link.
 
+The feedback panel posts to `https://handprotocol.org/.netlify/functions/feedback` by default. That HAND site function writes the durable Command Center record and sends the operations notification. Keep `EMAIL_TO_OPS=handprotocol@gmail.com` on the HAND Netlify site. `VITE_FEEDBACK_ENDPOINT` may override the shared endpoint for local or staging tests.
+
 If WXL does not have its own Resend variables, the function forwards the authenticated alert to HAND's shared feedback endpoint. That endpoint provides the existing Command Center, Telegram, and Resend notification fan-out without exposing a key to WXL.
 
 ## Routing
