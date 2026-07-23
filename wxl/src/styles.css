@@ -241,14 +241,41 @@ button { border: 0; cursor: pointer; }
 .food-alerts-safety p { margin: 0; }
 .tool-modal { max-height: calc(100vh - 32px); overflow-y: auto; }
 .tool-intro { color: #66786e; font-size: 11px; line-height: 1.55; margin: -9px 0 18px; }
-.feedback-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-.feedback-tags button { color: #5d7265; background: #f0f4ee; border: 1px solid #d9e2d8; border-radius: 99px; padding: 6px 10px; font-size: 10px; }
-.feedback-tags button.active { color: #fff; background: #2d6b50; border-color: #2d6b50; }
-.full-button { width: 100%; margin-top: 7px; }
-.tool-success { padding: 12px 0 5px; text-align: center; color: #4f835e; }
-.tool-success h3 { color: #2b4736; font: 600 20px 'Space Grotesk'; margin: 11px 0 5px; }
-.tool-success p { color: #708178; font-size: 11px; margin: 0 0 20px; }
 .food-here-mark { display: inline-flex; align-items: center; gap: 8px; color: #875617; background: #fbf1db; border: 1px solid #ecd9b0; border-radius: 6px; padding: 8px 10px; margin: -8px 0 17px; font: 10px 'DM Mono'; text-transform: uppercase; }
+.contact-widget { position: fixed; z-index: 900; right: 18px; bottom: max(18px, env(safe-area-inset-bottom)); color: #263b30; font-family: 'DM Sans', Inter, sans-serif; }
+.contact-launcher { position: relative; width: 56px; height: 56px; display: grid; place-items: center; color: #fff; background: #d97706; border: 1px solid #b45309; border-radius: 50%; box-shadow: 0 12px 30px #10271d3d; transition: transform .18s ease, background .18s ease; }
+.contact-launcher:hover { background: #b45309; transform: translateY(-2px); }
+.contact-launcher.open { color: #edf5eb; background: #244f3a; border-color: #193c2c; }
+.contact-launcher > span { position: absolute; top: 4px; right: 3px; width: 11px; height: 11px; background: #ef9877; border: 2px solid #fff; border-radius: 50%; }
+.contact-panel { position: absolute; right: 0; bottom: 68px; width: min(400px, calc(100vw - 24px)); max-height: min(680px, calc(100dvh - 104px)); overflow-y: auto; color: #263b30; background: #fffefa; border: 1px solid #d6e2d5; border-radius: 16px; box-shadow: 0 22px 60px #10271d42; }
+.contact-panel-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 20px 20px 15px; }
+.contact-panel-header p { color: #7b8b80; margin: 0 0 4px; font: 700 9px 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
+.contact-panel-header h2 { margin: 0; font: 700 23px/1.1 'Space Grotesk', sans-serif; letter-spacing: -.035em; }
+.contact-close { width: 36px; height: 36px; flex: 0 0 auto; display: grid; place-items: center; color: #65766c; background: #f1f4ef; border-radius: 50%; }
+.contact-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin: 0 20px; padding: 4px; background: #eef3ec; border-radius: 10px; }
+.contact-tabs button { min-height: 42px; display: flex; align-items: center; justify-content: center; gap: 7px; color: #617369; background: transparent; border-radius: 7px; font-size: 11px; font-weight: 700; }
+.contact-tabs button.active { color: #fff; background: #2d6b50; }
+.contact-panel-body { padding: 18px 20px 21px; }
+.contact-intro { color: #66786e; margin: 0 0 17px; font-size: 12px; line-height: 1.6; }
+.contact-panel-body label { display: block; color: #50665a; margin-bottom: 14px; font-size: 11px; font-weight: 700; }
+.contact-panel-body input, .contact-panel-body textarea { display: block; width: 100%; color: #263b30; background: #fbfcf9; border: 1px solid #d7e1d8; border-radius: 7px; outline: 0; margin-top: 7px; padding: 11px; font: 400 12px 'DM Sans', Inter, sans-serif; }
+.contact-panel-body textarea { min-height: 104px; resize: vertical; }
+.contact-panel-body input:focus, .contact-panel-body textarea:focus { border-color: #74a27c; box-shadow: 0 0 0 3px #74a27c20; }
+.contact-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 15px; }
+.contact-tags button { min-height: 32px; color: #5d7265; background: #f0f4ee; border: 1px solid #d9e2d8; border-radius: 999px; padding: 5px 10px; font-size: 10px; font-weight: 700; }
+.contact-tags button.active { color: #fff; background: #2d6b50; border-color: #2d6b50; }
+.contact-privacy { color: #718278; margin: 0 0 14px; font-size: 10px; line-height: 1.5; }
+.contact-status { display: flex; align-items: flex-start; gap: 7px; color: #4b805d; background: #eaf3e8; border: 1px solid #d6e6d3; border-radius: 7px; padding: 10px; margin: 0 0 12px; font-size: 10px; line-height: 1.5; }
+.contact-status svg { flex: 0 0 auto; }
+.contact-status.error { color: #a84d42; background: #fcece7; border-color: #f1d2ca; }
+.contact-submit { width: 100%; min-height: 45px; display: flex; align-items: center; justify-content: space-between; color: #fff; background: #2d6b50; border-radius: 8px; padding: 0 13px; font-size: 11px; font-weight: 700; }
+.contact-submit:disabled { cursor: not-allowed; opacity: .48; }
+.contact-feedback-done { display: grid; justify-items: center; color: #4f835e; padding: 12px 5px 4px; text-align: center; }
+.contact-feedback-done h3 { color: #2b4736; margin: 10px 0 5px; font: 700 19px 'Space Grotesk', sans-serif; }
+.contact-feedback-done p { max-width: 290px; color: #708178; margin: 0; font-size: 11px; line-height: 1.55; }
+.contact-feedback-done button { color: #2d6b50; background: transparent; margin-top: 17px; padding: 6px; font-size: 10px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.contact-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.contact-widget :is(button, input, textarea):focus-visible { outline: 3px solid #d97706; outline-offset: 3px; }
 .waterdrop-link { cursor: pointer; }
 .waterdrop-link:hover { color: #edf5e9; background: #ffffff12; border-color: #b9d5be55; }
 .breadcrumb-root { color: #48725d; font: 9px 'DM Mono'; letter-spacing: .08em; text-transform: uppercase; }
@@ -303,6 +330,12 @@ button { border: 0; cursor: pointer; }
   .food-alerts-heading, .food-alerts-page-intro { display: grid; align-items: start; }
   .food-alerts-heading .text-button { margin-top: 4px; }
   .food-alerts-page-intro .food-here-button { width: max-content; }
+}
+
+@media (max-width: 759px) {
+  .contact-widget { right: 14px; bottom: max(92px, calc(78px + env(safe-area-inset-bottom))); }
+  .contact-launcher { width: 52px; height: 52px; }
+  .contact-panel { bottom: 64px; max-height: calc(100dvh - 174px); border-radius: 14px; }
 }
 
 @media (max-height: 520px) and (orientation: landscape) and (max-width: 960px) {

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
 import { FoodAlertsOverview } from './CommunityTools'
 
@@ -16,6 +16,10 @@ describe('WXL entry points and interaction gates', () => {
     sessionStorage.clear()
     localStorage.clear()
     Object.defineProperty(navigator, 'userAgent', { value: defaultUserAgent, configurable: true })
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
   })
 
   it('marks signup credentials for the browser password manager', () => {
@@ -41,6 +45,25 @@ describe('WXL entry points and interaction gates', () => {
 
     expect(fetchMock).toHaveBeenCalledWith('/.netlify/functions/subscribe-updates', expect.objectContaining({
       body: JSON.stringify({ email: 'neighbor@example.org', website: '' }),
+    }))
+    expect(await screen.findByText(/You are on the list/i)).toBeInTheDocument()
+  })
+
+  it('opens the bottom-right alerts panel and joins the updates audience', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ status: 'subscribed' }), { status: 200 }))
+    vi.stubGlobal('fetch', fetchMock)
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: 'Open alerts and feedback' }))
+    expect(screen.getByRole('dialog', { name: 'Get WXL alerts' })).toBeInTheDocument()
+    expect(screen.getByRole('tab', { name: /Get alerts/i })).toHaveAttribute('aria-selected', 'true')
+    expect(screen.getByRole('tab', { name: /Feedback/i })).toBeInTheDocument()
+
+    await userEvent.type(screen.getByLabelText('Email address'), 'alerts@example.org')
+    await userEvent.click(screen.getByRole('button', { name: /Get email alerts/i }))
+
+    expect(fetchMock).toHaveBeenCalledWith('/.netlify/functions/subscribe-updates', expect.objectContaining({
+      body: JSON.stringify({ email: 'alerts@example.org', website: '' }),
     }))
     expect(await screen.findByText(/You are on the list/i)).toBeInTheDocument()
   })
@@ -205,11 +228,25 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.getByRole('dialog', { name: /Join the network/i })).toBeInTheDocument()
   })
 
-  it('opens the shared feedback experience from the navigation', async () => {
+  it('sends feedback from the shared widget to HAND Command Center and email', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ status: 'synced', email: 'sent' }), { status: 200 }))
+    vi.stubGlobal('fetch', fetchMock)
     window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
     await userEvent.click(screen.getByRole('button', { name: /Send feedback/i }))
     expect(screen.getByRole('dialog', { name: 'Send feedback' })).toBeInTheDocument()
+    await userEvent.type(screen.getByLabelText('Your feedback'), 'The food map needs a clearer hours filter.')
+    await userEvent.type(screen.getByLabelText('Your name, optional'), 'Austin neighbor')
+    await userEvent.click(screen.getByRole('button', { name: /Send to HAND Protocol/i }))
+
+    const feedbackCall = fetchMock.mock.calls.find(([url]) => url === 'https://handprotocol.org/.netlify/functions/feedback')
+    expect(feedbackCall).toBeTruthy()
+    expect(JSON.parse(String(feedbackCall?.[1]?.body))).toEqual(expect.objectContaining({
+      text: 'The food map needs a clearer hours filter.',
+      name: 'Austin neighbor',
+      source: 'WXL:FOOD',
+    }))
+    expect(await screen.findByText(/Your note reached HAND/i)).toBeInTheDocument()
   })
 
   it('links anonymous visitors from the profile card to sign in', () => {

@@ -1,114 +1,11 @@
 import { useState, type FormEvent } from 'react'
-import { ArrowUpRight, CheckCircle2, Clock3, MapPin, ShieldCheck, X, Zap } from 'lucide-react'
+import { ArrowUpRight, Clock3, MapPin, ShieldCheck, X, Zap } from 'lucide-react'
 import {
   addFoodSpot,
   createFoodAlert,
   type FoodAlertRecord,
   type FoodSpotRecord,
 } from './lib/foodRepository'
-
-const feedbackEndpoint = '/.netlify/functions/feedback'
-const feedbackQueueKey = 'wxl:feedback-queue'
-const feedbackTags = ['Map', 'Food source', 'Request', 'Volunteer', 'Accessibility']
-
-type FeedbackEntry = {
-  text: string
-  path: string
-  title: string
-  name: string
-  tags: string[]
-  source: string
-  scroll: number
-  ua: string
-  vw: number
-  vh: number
-  ts: number
-}
-
-function readFeedbackQueue(): FeedbackEntry[] {
-  try {
-    const stored = JSON.parse(localStorage.getItem(feedbackQueueKey) ?? '[]')
-    return Array.isArray(stored) ? stored : []
-  } catch {
-    return []
-  }
-}
-
-function saveFeedbackQueue(entries: FeedbackEntry[]) {
-  localStorage.setItem(feedbackQueueKey, JSON.stringify(entries))
-}
-
-async function sendFeedback(entry: FeedbackEntry) {
-  const response = await fetch(feedbackEndpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(entry),
-  })
-  if (!response.ok) throw new Error('Feedback could not be synced')
-}
-
-export async function flushFeedbackQueue() {
-  const queue = readFeedbackQueue()
-  if (!queue.length || !navigator.onLine) return
-
-  const remaining: FeedbackEntry[] = []
-  for (const entry of queue) {
-    try {
-      await sendFeedback(entry)
-    } catch {
-      remaining.push(entry)
-    }
-  }
-  saveFeedbackQueue(remaining)
-}
-
-export function FeedbackModal({ onClose }: { onClose: () => void }) {
-  const [note, setNote] = useState('')
-  const [name, setName] = useState('')
-  const [tags, setTags] = useState<string[]>([])
-  const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'queued'>('idle')
-
-  const submit = async (event: FormEvent) => {
-    event.preventDefault()
-    if (!note.trim()) return
-    const documentHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight, 1)
-    const entry: FeedbackEntry = {
-      text: note.trim(),
-      path: `${window.location.pathname}${window.location.search}`,
-      title: document.title,
-      name: name.trim(),
-      tags,
-      source: 'WXL:FOOD',
-      scroll: Math.min(100, Math.round(((window.scrollY + window.innerHeight) / documentHeight) * 100)),
-      ua: navigator.userAgent.slice(0, 200),
-      vw: window.innerWidth,
-      vh: window.innerHeight,
-      ts: Date.now(),
-    }
-
-    setStatus('sending')
-    try {
-      await sendFeedback(entry)
-      setStatus('sent')
-    } catch {
-      saveFeedbackQueue([...readFeedbackQueue(), entry])
-      setStatus('queued')
-    }
-  }
-
-  return <div className="modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose() }}>
-    <form className="create-modal tool-modal" role="dialog" aria-modal="true" aria-labelledby="feedback-title" onSubmit={submit}>
-      <div className="modal-title"><div><p className="eyebrow">Help shape WXL</p><h2 id="feedback-title">Send feedback</h2></div><button type="button" onClick={onClose} aria-label="Close feedback"><X size={18} /></button></div>
-      {status === 'sent' || status === 'queued' ? <div className="tool-success" role="status"><CheckCircle2 size={28} /><h3>Thank you for the note.</h3><p>{status === 'sent' ? 'It was sent to the HAND review queue.' : 'It is saved on this device and will retry when the feedback service is available.'}</p><button className="add-button full-button" type="button" onClick={onClose}>Close</button></div> : <>
-        <p className="tool-intro">Share what worked, what felt unclear, or what the network still needs. A name is optional.</p>
-        <div className="feedback-tags" aria-label="Feedback topics">{feedbackTags.map((tag) => <button key={tag} type="button" className={tags.includes(tag) ? 'active' : ''} aria-pressed={tags.includes(tag)} onClick={() => setTags((current) => current.includes(tag) ? current.filter((item) => item !== tag) : [...current, tag])}>{tag}</button>)}</div>
-        <label>Your note<textarea value={note} onChange={(event) => setNote(event.target.value)} rows={5} placeholder="Tell us what you noticed..." autoFocus required /></label>
-        <label>Your name, optional<input value={name} onChange={(event) => setName(event.target.value)} autoComplete="name" placeholder="How should we credit you?" /></label>
-        <button className="add-button full-button" type="submit" disabled={status === 'sending' || !note.trim()}>{status === 'sending' ? 'Sending...' : 'Send feedback'}</button>
-      </>}
-    </form>
-  </div>
-}
 
 function alertExpiry(expiresAt: string) {
   return new Date(expiresAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })

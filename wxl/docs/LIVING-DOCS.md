@@ -65,7 +65,7 @@ Status labels used throughout this document:
 | Community food pins | Live | Authenticated members can submit public food spots and produce details. |
 | `FOOD IS HERE!` alerts | Live | Authenticated members can send six-hour app-wide alerts that appear on Overview, in the alert workspace, and in the alert center. |
 | Alert email hook | Live | A validated Netlify Function sends a best-effort operations alert through Resend or HAND's shared notification endpoint. |
-| Feedback | Live | Sends notes to HAND's shared feedback system and queues failures offline. |
+| Alerts and feedback widget | Live | A bottom-right bell opens email-alert signup and feedback panels on every WXL surface. Alerts join the WXL Resend audience. Feedback enters HAND Command Center and the operations email inbox, with offline retry. |
 | A/B testing | Live | Assigns a stable CTA-order variant and records authenticated interactions. |
 | Interaction leaderboard | Needs migration | Provides an internal, admin-only aggregate view. |
 | Rescue operations | Needs migration | Members submit rescues for coordinator review. Approved records support atomic claims, private assignment details, safety checkpoints, acceptance, incident hold, and audited resolution through migration 028. |
@@ -79,6 +79,8 @@ Status labels used throughout this document:
 Anyone can browse public food information and public community requests.
 
 Visitors who only want to follow WXL can join the updates list with one email address. This email-only path does not create a Supabase account, ask for a password, or grant access to posting and coordination. Updates cover meaningful platform development and future offerings, and every message must include an unsubscribe option.
+
+The bottom-right bell keeps this signup available throughout WXL. Its second panel accepts public product feedback without requiring an account. Feedback is sent to HAND Command Center and the HAND operations inbox. If the shared feedback service cannot be reached, the note stays in the current browser and retries after reconnection or focus.
 
 The public entry presents three starting choices: find food, contribute, or gather. These paths open a simplified public interface with persistent navigation for those three intents plus Requests. The food path opens an Austin map and nearby listing shelf. Contribute keeps food drafts, delivery-run previews, compost-return guidance, and Contributor setup prompts in the simple shell. Gather uses the same focused pattern for shared meals. Requests has a short privacy-aware composer and a readable list of open needs. Drafts survive the sign-in handoff in the current browser session. Intent parameters select the public experience only and never grant write access.
 

@@ -203,7 +203,10 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 
 ### Feedback, experiments, and testing
 
-- The sidebar feedback flow posts to HAND's shared feedback endpoint, so notes continue into Command Center, Telegram, and Resend. Failed notes queue locally and retry on focus or reconnection.
+- A persistent bottom-right bell opens two panels on every WXL surface: email alerts and feedback.
+- Email alerts join the dedicated WXL Resend audience without creating an account.
+- Feedback posts to HAND's shared feedback endpoint, so notes continue into Command Center, Telegram, and the Resend operations inbox at `handprotocol@gmail.com`.
+- The advanced-workspace sidebar opens the same shared feedback panel. Failed notes queue locally and retry on focus or reconnection.
 - The command CTA runs a stable two-variant test, `map_first` or `rescue_first`, stored in local storage.
 - Click progress persists locally for every visitor. Authenticated interaction events batch to `command.food_engagement_events` every ten interactions.
 - Admins can query `command.food_engagement_leaderboard`; invoker row-level security keeps it internal.
