@@ -6,7 +6,9 @@ function uses `create or replace`) so they survive re-runs.
 
 Production migration history was baselined from 001 through 036 on
 2026-07-18. The public-visits migration uses version 023 so every migration
-has a unique version.
+has a unique version. Migrations 037 through 039 add the compost-return leg to
+WXL delivery routes, require a later compost destination before assignment,
+and restrict the trigger function from direct client execution.
 
 ## Apply
 
@@ -25,7 +27,7 @@ supabase db push
 
 The CLI reads the files in `supabase/migrations/` in numerical order and
 applies them via the project's pooler. WXL:FOOD requires migrations 024
-through 036. Migrations 024 and 025 were restored from repository history and
+through 039. Migrations 024 and 025 were restored from repository history and
 must be present before applying 026 or later.
 
 ### Option B: Supabase Dashboard SQL editor

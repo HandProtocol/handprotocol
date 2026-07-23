@@ -10,7 +10,7 @@
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const AUDIENCE_LABELS = {
-  healer: 'Healer or community builder',
+  business: 'Entrepreneur or small-business owner',
   contributor: 'Contributor or supporter',
   builder: 'Builder, collaborator, or partner',
   curious: 'Curious / following along'

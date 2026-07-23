@@ -26,7 +26,7 @@ The corporation is organized **exclusively for charitable, educational, and scie
 
 Within the scope of those purposes, the specific charitable activities of the corporation include:
 
-a. **Operating a curated resource pool of skilled professionals and tradespeople ("Contributors") who donate, exchange, or receive time and skill in support of three communities of regenerative impact work: practitioners who heal, founders who build, and organizers who steward (collectively, "Reciprocates"). The pool is designed so that everyone involved can benefit if they choose to; participation is voluntary in both directions and the lines between giver and receiver are porous.**
+a. **Operating a curated resource pool of skilled professionals and tradespeople ("Contributors") who donate, exchange, or receive time and skill in support of impact entrepreneurs, community-rooted small businesses, and grassroots organizations (collectively, "Reciprocates"). The pool is designed so that everyone involved can benefit if they choose to; participation is voluntary in both directions and the lines between giver and receiver are porous.**
 
 b. Providing long-term branding, marketing, technology, design, and operational accompaniment, free of charge or below-market, to Reciprocates whose work serves the public benefit.
 

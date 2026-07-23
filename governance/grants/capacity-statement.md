@@ -92,7 +92,7 @@ All published in this repository under [`../`](../).
 
 ### First Reciprocate cohort
 
-- Three Reciprocate groups, one from each audience segment (healer, impact entrepreneur, grassroots).
+- Three Reciprocate groups, one from each audience segment (community-rooted small business, impact entrepreneur, grassroots organization).
 - Onboarding through Q4 2026 and Q1 2027.
 - Three-year engagement commitment from each side.
 

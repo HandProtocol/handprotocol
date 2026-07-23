@@ -59,7 +59,7 @@ hand@handprotocol.org
 
 ### What does your company do?
 
-HAND Protocol Foundation is a curated skill-and-resource pool for healers, impact-driven entrepreneurs, and grassroots organizations. We coordinate three flows — donate, exchange, receive — and build open-source AI agent systems (Sovereign Reciprocates) that let each Reciprocate group own their own infrastructure rather than depend on platform-owned tooling.
+HAND Protocol Foundation is a curated skill-and-resource pool for impact entrepreneurs, community-rooted small businesses, and grassroots organizations. We coordinate three flows: donate, exchange, receive. We also build open-source AI agent systems (Sovereign Reciprocates) that let each Reciprocate group own their own infrastructure rather than depend on platform-owned tooling.
 
 ### Company age
 

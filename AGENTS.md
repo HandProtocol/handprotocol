@@ -77,8 +77,8 @@ These are bans, not preferences. The impeccable audit already removed all violat
 
 - **HAND Protocol**, full name. "HAND" alone is acceptable after first use.
 - **HAND** = Holistic Approach to Nurture and Develop.
-- **Reciprocates**, the people and organizations HAND serves (healers, impact entrepreneurs, grassroots organizations). Capitalize as a defined role.
-- **Reciprocate groups**, collective Reciprocates (a 3-person harm-reduction collective, a healing practice, a food-sovereignty group). Use the plural form when the unit of accompaniment is a small org or collective rather than an individual.
+- **Reciprocates**, the people and organizations HAND serves (impact entrepreneurs, community-rooted small businesses, grassroots organizations). Capitalize as a defined role.
+- **Reciprocate groups**, collective Reciprocates (a worker-owned venture, a neighborhood business, a 3-person food-sovereignty group). Use the plural form when the unit of accompaniment is a small org or collective rather than an individual.
 - **Contributors**, skilled professionals and tradespeople who give or exchange time into the resource pool.
 - **The pool** / **resource pool**, the curated skill-exchange marketplace HAND operates.
 - **Donate / Exchange / Receive**, the three flows of the pool.

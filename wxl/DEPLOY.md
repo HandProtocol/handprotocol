@@ -39,9 +39,12 @@ The `FOOD IS HERE!` operations email hook also reads these server-side values:
 RESEND_API_KEY
 EMAIL_FROM
 EMAIL_TO_OPS
+WXL_RESEND_AUDIENCE_ID
 ```
 
 `EMAIL_FROM` should use the existing verified `handprotocol.org` domain, for example `WXL:FOOD <alerts@handprotocol.org>`. The function falls back to HAND's existing `RESEND_NOTIFY_FROM`, `RESEND_NOTIFY_TO`, and `RESEND_FORWARD_TO` names when present. Do not add a Resend key to any `VITE_` variable.
+
+The email-only WXL updates form uses `RESEND_API_KEY` and `WXL_RESEND_AUDIENCE_ID` to add contacts to a Resend audience without creating Supabase accounts. If `WXL_RESEND_AUDIENCE_ID` is absent, it falls back to `RESEND_AUDIENCE_ID`. Use a WXL-specific audience when available so platform updates and future offerings can be managed separately. Audience emails must retain Resend's unsubscribe link.
 
 If WXL does not have its own Resend variables, the function forwards the authenticated alert to HAND's shared feedback endpoint. That endpoint provides the existing Command Center, Telegram, and Resend notification fan-out without exposing a key to WXL.
 

@@ -7,14 +7,14 @@
 
 ## Orient in one paragraph
 
-HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, to operate a long-term, relational accompaniment model for three communities of regenerative impact work: healers and practitioners, impact entrepreneurs, and grassroots organizations. The repository contains the public website, the governance package, the AI workstream proposal, and the working documents that explain the work in plain English. The site is live at [handprotocol.org](https://handprotocol.org), auto-deployed from `main` to Netlify. The filing raise is open with a $222,222 first goal.
+HAND Protocol Foundation is preparing to file as a 501(c)(3) in Austin, Texas, to operate a long-term, relational accompaniment model for impact entrepreneurs, community-rooted small businesses, and grassroots organizations. The repository contains the public website, the governance package, the AI workstream proposal, and the working documents that explain the work in plain English. The site is live at [handprotocol.org](https://handprotocol.org), auto-deployed from `main` to Netlify. The filing raise is open with a $222,222 first goal.
 
 ## What just shipped (recent past, in order)
 
 1. **Governance package and `/governance/` route.** Articles, Bylaws, 8 policies (including the data-sovereignty-and-AI policy), compliance calendar, board prospect brief, grants kit. See `governance/` for sources and `web/governance/` for the public page.
 2. **Sovereign Reciprocates, the AI workstream.** Custom open-source agent systems built per Reciprocate or Reciprocate group, owned by the group. Eight sovereignty principles, a six-dimension evaluation framework, and a draft McGovern LOI. Public page at `/sovereign-reciprocates/`. Source docs: `AI-RECIPROCATES.md`, `AI-EVAL-FRAMEWORK.md`, `funding/mcgovern-letter.md`.
 3. **Angel-number tier ladder.** Foundation tiers $22,777 / $77,444 / $222,222 (heritage 777 thread). Sovereign Reciprocates tiers $11,113 / $99,777 / $333,223 (anchored angels with asymmetric tails). Contributor pledge ladder $222 → $7,777+. Single source of truth: see "Active funding ladder" below.
-4. **Audience and origin reframing.** Audience phrase is "three communities of regenerative impact work." Origin narrative is regenerative impact, not healing-aligned. AI is positioned as one tool inside the larger mission, not the centerpiece.
+4. **Audience and origin reframing.** The audience is impact entrepreneurs, community-rooted small businesses, and grassroots organizations. Origin narrative is regenerative impact and durable local enterprise. AI is positioned as one tool inside the larger mission, not the centerpiece.
 5. **Brand voice sweep.** Zero em dashes across the project. See `AGENTS.md`.
 6. **Custom domain live on Netlify.** [handprotocol.org](https://handprotocol.org), auto-deploy on `main`. Resend mailing list integration in production. See `DEPLOY.md` for infrastructure.
 7. **WXL:FOOD simple and advanced modes.** The public WXL experience defaults to four clean paths: Find food, Contribute, Gather, and Requests. Coordinator dashboards are now an explicit Advanced workspace setting with a clear return to simple mode. See `wxl/docs/LIVING-DOCS.md`.
@@ -88,7 +88,7 @@ These are not aesthetic preferences. Each one is load-bearing.
 3. **Prove, do not promise.** Specific dollar amounts, named peer organizations, real worked examples. Aspirational rhetoric is rejected. See `PRODUCT.md`.
 4. **Honest about unknowns.** Every long-form doc has an open-questions or honest-unknowns section. Funders trust orgs that name their gaps before being asked.
 5. **Walk alongside, on the page too.** Long-form reading is the primary medium. Cross-link generously. Information architecture reflects the accompaniment model.
-6. **Plain English first.** A donor or a healer should understand any sentence without a glossary. Technical detail is annotated inline with tooltips or links.
+6. **Plain English first.** A donor or small-business owner should understand any sentence without a glossary. Technical detail is annotated inline with tooltips or links.
 7. **One family across surfaces.** Foundation, discovery, sovereign-reciprocates, and governance share design tokens, typography, and motion via `web/discovery/style.css`. Per-page overrides live in their own folder if needed.
 
 ## Repo, deploy, contact

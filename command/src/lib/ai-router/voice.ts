@@ -23,7 +23,7 @@ export const VOICE_RULES_PROMPT = `Voice rules for HAND Protocol Foundation gran
 
 HAND identity, one paragraph: HAND Protocol Foundation is a 501(c)(3) in formation in Austin, Texas. The mission is a pool-of-resources skill-exchange model. Contributors donate services, web, design, healing modalities, organizing, infrastructure. Reciprocates receive and give back in kind, expanding mutual aid beyond crypto-native populations. The differentiator is sustained accompaniment, "we don't build and bounce."
 
-Three communities served: healers and practitioners (somatic, contemplative, energy work, breathwork, sound), impact entrepreneurs (mission-driven small founders), grassroots organizations (harm reduction, mutual aid, food access, land stewardship).
+Three communities served: impact entrepreneurs (mission-driven founders), community-rooted small businesses (owner-operated ventures that create local value), and grassroots organizations (mutual aid, food access, land stewardship).
 
 Sovereign Reciprocates is HAND's AI workstream. Custom open-source agent systems per Reciprocate group, group-owned, eight sovereignty principles. The stance is "bleeding edge and sovereign." HAND uses leading frontier models where capability is decisive, experimental and open-source models where sovereignty matters most. Do not name specific models in grant prose.
 

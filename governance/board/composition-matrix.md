@@ -38,7 +38,7 @@ The target reflects research that small-org effectiveness peaks at 5-7 active di
 | **Programs / direct service** | Reciprocate-side understanding; trauma-informed practice | Target: 1-2 directors with direct service experience |
 | **AI / technology** | Sovereign Reciprocates oversight, open-source AI fluency | Target: 1 director with AI ethics or technical background |
 | **Communications / branding** | Voice fidelity, public representation, donor communications | Desired: 1 director with communications background |
-| **Lived experience as Reciprocate** | Embodied knowledge of what the program serves | Target: 1-2 directors with lived experience in healer / impact-entrepreneur / grassroots community work |
+| **Lived experience as Reciprocate** | Embodied knowledge of what the program serves | Target: 1-2 directors with lived experience in community-rooted small business / impact-entrepreneur / grassroots community work |
 | **Operations / HR / management** | As HAND scales to first hires | Desired: 1 director with operations background |
 | **Strategy / theory of change** | Mission discipline, evaluation rigor | Target: distributed across multiple directors |
 
@@ -67,7 +67,7 @@ A small founding board cannot have networks covering everything HAND needs. Recr
 | **Texas community foundation ecosystem** | Hogg, St. David's, Austin CF, Greater Houston CF, Communities Foundation of TX |
 | **Trust-based philanthropy** | Solidaire, Kataly, Hemera networks |
 | **AI-for-social-good funders** | McGovern, Mozilla, Ford, Google.org |
-| **Healing-justice practitioner networks** | Generative Somatics, Black Healing Justice, healers' guilds |
+| **Local small-business networks** | Chambers, merchant associations, cooperative and Main Street networks |
 | **Impact entrepreneur ecosystem** | Echoing Green, Halcyon, B Lab, MIT Solve |
 | **Grassroots organizing networks** | Movement-aligned funders, mutual-aid networks |
 | **Tech-for-good** | Code for America alumni, civic tech, ethical AI community |

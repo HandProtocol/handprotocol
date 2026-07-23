@@ -81,7 +81,7 @@ Three concrete deliverables, all open-sourced, all citing Arcee/Trinity.
 
 ### 1. Sovereign Reciprocate agent prototypes (×3)
 
-Three pilot Reciprocate groups — healers, impact-driven business, grassroots
+Three pilot Reciprocate groups, a community-rooted small business, an impact-driven venture, and a grassroots
 collective — each get a custom Trinity-Large-Thinking agent harness covering:
 
 - Intake (multi-turn conversation with new participants)
@@ -152,7 +152,7 @@ Sovereign Reciprocates — Open-Source Agent Systems for Community Resource Pool
 ### What are you building?
 
     HAND Protocol is filing as a 501(c)(3) public charity in Austin, Texas. Our
-    mission is a curated skill-and-resource pool for healers, impact-driven
+    mission is a curated skill-and-resource pool for community-rooted small businesses, impact-driven
     entrepreneurs, and grassroots organizations.
 
     The Sovereign Reciprocates workstream gives each Reciprocate group its own
@@ -178,7 +178,7 @@ Sovereign Reciprocates — Open-Source Agent Systems for Community Resource Pool
        extraction patterns. We'll publish aggregate results against
        Trinity-Large-Thinking as the open-weights baseline; individual
        practitioner sessions stay private unless that practitioner opts in.
-    3. **Direct service** to three pilot communities in Austin (healers,
+    3. **Direct service** to three pilot communities in Austin (local small businesses,
        impact-driven business, grassroots collective) via Mystic Hearts and
        two adjacent prototypes. These are real users, not synthetic load.
 

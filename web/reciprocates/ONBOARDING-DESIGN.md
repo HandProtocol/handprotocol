@@ -8,7 +8,7 @@ Authored 2026-05-19. Register: brand. Implementer should also read `PRODUCT.md`,
 
 ## 1. Premise
 
-The current Reciprocates page (`web/reciprocates/index.html`) opens with three "who fits" cards (business / healer / grassroots), a "what HAND can actually do" block, and an intake card with variant tabs over a shared form. The form posts to `netlify/functions/intake.js` which sends a Resend notification email and adds the contact to a Resend audience.
+The current Reciprocates page (`web/reciprocates/index.html`) opens with three "who fits" cards (impact entrepreneur / local business / grassroots), a "what HAND can actually do" block, and an intake card with variant tabs over a shared form. The form posts to `netlify/functions/intake.js` which sends a Resend notification email and adds the contact to a Resend audience.
 
 This works for people who know what they want to say. It fails everyone else: the field-by-field interrogation is a high cognitive cost for someone whose work is hard to summarize in a single sentence. We need a second on-ramp that meets that person where they are.
 
@@ -53,10 +53,10 @@ The mode picker disappears once a mode is chosen; the "Switch to [other]" link t
 
 Two orthogonal axes. Don't conflate them.
 
-- **Variant** (business / healer / grassroots) = who the user is. Form mode asks up front; chat mode infers from the conversation.
+- **Variant** (business / local_business / grassroots) = who the user is. Form mode asks up front; chat mode infers from the conversation.
 - **Mode** (form / chat) = how they want to engage.
 
-This means there is no "chat for healers" or "form for businesses". One chat works for all three variants; one form has all three variant panels.
+This means there is no separate chat for entrepreneurs or form for local businesses. One chat works for all three variants; one form has all three variant panels.
 
 ## 3. Mode-switcher UX
 
@@ -258,7 +258,7 @@ System prompt is owned by `netlify/functions/intake-chat.js`. The high-level ins
 1. Voice matches `PRODUCT.md` Brand Personality: earnest, evidence-based, relational; plain English; specific over abstract; warm but not soft.
 2. Ask one or two questions per turn, never a battery.
 3. Listen first. If the user said something rich, reflect a phrase back before asking the next question. ("Peer support for new moms — beautiful. Is the work in-person, app-based, or both?")
-4. Infer variant (business / healer / grassroots) from the first two turns. Don't ask "which category are you" head-on.
+4. Infer variant (business / local_business / grassroots) from the first two turns. Don't ask "which category are you" head-on.
 5. Cover the schema (see §7) but adapt order to what the user volunteered. If they led with the legal structure, don't ask about it again.
 6. If the user goes off-topic, follow them for one turn, then gently return.
 7. Never close a sale. The assistant's job is intake, not pitch.
@@ -284,7 +284,7 @@ The existing form works. It is dense. Polish, don't rebuild.
 │   │    may not have an LLC. May or may not have a site.               │    │
 │   ╰───────────────────────────────────────────────────────────────────╯    │
 │   ╭───────────────────────────────────────────────────────────────────╮    │
-│   │ ○  Healer or practitioner                                         │    │
+│   │ ○  Community-rooted small business                                │    │
 │   │    Bodywork, energy work, doula, somatic, plant medicine.         │    │
 │   ╰───────────────────────────────────────────────────────────────────╯    │
 │   ╭───────────────────────────────────────────────────────────────────╮    │
@@ -467,7 +467,7 @@ create table projects (
   id                   uuid primary key default gen_random_uuid(),
   created_at           timestamptz not null default now(),
   source               text not null check (source in ('form','chat')),
-  variant              text not null check (variant in ('business','healer','grassroots')),
+  variant              text not null check (variant in ('business','local_business','grassroots')),
   name                 text not null,
   email                text not null,
   location             text,

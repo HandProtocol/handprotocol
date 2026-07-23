@@ -1,8 +1,8 @@
 # HAND Protocol
 
-> Regenerative infrastructure for those who heal, build, and serve.
+> Regenerative infrastructure for entrepreneurs who build with purpose.
 
-**HAND Protocol** (Holistic Approach to Nurture and Develop) is a nonprofit foundation incorporating as a 501(c)(3) in Austin, Texas in 2026. We provide long-term branding, marketing, web/dev, and one-on-one development support for **Reciprocates**, healers, impact entrepreneurs, and grassroots community organizations doing work that matters. We don't build and bounce.
+**HAND Protocol** (Holistic Approach to Nurture and Develop) is a nonprofit foundation incorporating as a 501(c)(3) in Austin, Texas in 2026. We provide long-term branding, marketing, web/dev, and one-on-one development support for **Reciprocates**, impact entrepreneurs, community-rooted small businesses, and grassroots community organizations doing work that matters. We don't build and bounce.
 
 This monorepo holds the public web presence (foundation campaign + discovery research + legacy archive) and earlier Web3 tooling preserved as source history.
 

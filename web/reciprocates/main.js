@@ -53,10 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ---- Variant tabs ---- */
-  const VARIANTS = ['business', 'healer', 'grassroots'];
+  const VARIANTS = ['business', 'local_business', 'grassroots'];
   const VARIANT_GROUP_LABELS = {
     business: 'About the business',
-    healer: 'About the practice',
+    local_business: 'About the business',
     grassroots: 'About the organization'
   };
 

@@ -12,7 +12,7 @@
 
 ### Past, present, and planned activities
 
-**HAND Protocol Foundation** (the "Organization") was incorporated as a Texas nonprofit corporation in 2026 to operate a curated resource pool through which skilled Contributors and three communities of regenerative impact work (practitioners who heal, founders who build, and organizers who steward, collectively "Reciprocates") match to meet mutual needs, with long-term branding, marketing, technology, design, and operational accompaniment provided to Reciprocates as the core service. The Organization operates primarily in Austin, Texas, and serves participants nationally through web-based engagement and selected in-person work.
+**HAND Protocol Foundation** (the "Organization") was incorporated as a Texas nonprofit corporation in 2026 to operate a curated resource pool through which skilled Contributors and three communities of community-rooted enterprise (impact entrepreneurs, community-rooted small businesses, and grassroots organizations, collectively "Reciprocates") match to meet mutual needs, with long-term branding, marketing, technology, design, and operational accompaniment provided to Reciprocates as the core service. The Organization operates primarily in Austin, Texas, and serves participants nationally through web-based engagement and selected in-person work.
 
 The Organization's activities are organized into two integrated programs.
 
@@ -20,15 +20,15 @@ The Organization's activities are organized into two integrated programs.
 
 **Purpose.** To address a documented gap in the U.S. capacity-building ecosystem: small organizations and individual practitioners doing socially significant work who fall through the gaps of existing capacity-building infrastructure. They are too small for institutional capacity-building (such as Bridgespan), too pre-revenue for many foundation funding cycles, too relationally specific for project-bounded pro bono services (such as Taproot Foundation or Catchafire), and too operationally fragile to thrive on short-term volunteer help.
 
-**Population served.** The Organization serves three communities of regenerative impact work, collectively referred to as **Reciprocates**:
+**Population served.** The Organization serves three connected communities of community-rooted enterprise, collectively referred to as **Reciprocates**:
 
-a. **Healers and wellness practitioners.** Solo or small-team bodyworkers, somatic therapists, herbalists, indigenous and ancestral practitioners, harm-reduction-informed healers.
+a. **Community-rooted small businesses.** Owner-operated or small-team restaurants, food producers, makers, trades, independent shops, and neighborhood services that create local jobs and meet everyday community needs.
 
 b. **Impact entrepreneurs.** Founders of mission-driven small ventures, typically post-accelerator, in social enterprise, B-corp, nonprofit pilot, or hybrid structures.
 
 c. **Grassroots community organizations.** Mutual aid networks, harm reduction collectives, food sovereignty groups, land stewardship projects, often serving populations systematically failed by institutions.
 
-The lines between these communities are porous; many Reciprocates live in two of these worlds at once (a herbalist running a community apothecary; a harm-reduction organizer whose work is also a healing practice; a regenerative-agriculture entrepreneur stewarding a co-op).
+The lines between these communities are porous; many Reciprocates live in two of these worlds at once (a food entrepreneur building a neighborhood market; a worker-owned service business; a regenerative-agriculture entrepreneur stewarding a co-op).
 
 **The resource pool and the three flows.** The primary operating mechanism is a curated resource pool of volunteer skilled professionals and tradespeople ("**Contributors**"). Contributors and Reciprocates participate through three named flows:
 

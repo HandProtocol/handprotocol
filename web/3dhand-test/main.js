@@ -20,7 +20,7 @@ const POSE_DATA = {
   },
   receive: {
     label: 'Receive',
-    sub: 'Healers, builders, organizers receive long-arc support. Not a grant cycle. A pool of resources.',
+    sub: 'Impact entrepreneurs, small businesses, and organizers receive long-arc support. Not a grant cycle. A pool of resources.',
   },
   together: {
     label: 'Together',
