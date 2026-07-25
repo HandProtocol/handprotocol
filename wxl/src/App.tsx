@@ -17,6 +17,7 @@ import { HarvestRunBoard } from './HarvestRunBoard'
 import { InventoryBoard } from './InventoryBoard'
 import { ProtocolBoard } from './ProtocolBoard'
 import type { FoodMapLocation } from './FoodMap'
+import { useDialogMotion, type DialogMotionControls } from './useDialogMotion'
 
 const FoodMap = lazy(() => import('./FoodMap').then((module) => ({ default: module.FoodMap })))
 
@@ -157,6 +158,7 @@ function SimpleExperience({ initialIntent }: { initialIntent: ConsumerIntent }) 
     }
   })
   const [locationPromptOpen, setLocationPromptOpen] = useState(() => initialIntent === 'food' && sessionStorage.getItem('wxl:location-choice') !== 'complete')
+  const locationDialogMotion = useDialogMotion(() => setLocationPromptOpen(false))
   const [locationLabel, setLocationLabel] = useState('Austin')
   const [visitorPosition, setVisitorPosition] = useState<{ latitude: number; longitude: number } | null>(null)
   const [accountMenuOpen, setAccountMenuOpen] = useState(false)
@@ -282,7 +284,7 @@ function SimpleExperience({ initialIntent }: { initialIntent: ConsumerIntent }) 
     </main>}
 
     <footer className="simple-footer"><span>WXL:FOOD · Austin</span><a href="/app/?mode=advanced" onClick={enableAdvancedMode}>Advanced workspace</a></footer>
-    {locationPromptOpen && <LocationPrompt onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
+    {locationPromptOpen && <LocationPrompt motion={locationDialogMotion} onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
     {actionSheet && <div className="simple-sheet-backdrop" role="dialog" aria-modal="true" aria-labelledby="simple-sheet-title" onClick={() => setActionSheet(null)}><div className="simple-sheet" onClick={(event) => event.stopPropagation()}><button className="simple-sheet-close" type="button" onClick={() => setActionSheet(null)} aria-label="Close"><X size={18} /></button><p className="simple-eyebrow">{actionSheet.eyebrow}</p><h2 id="simple-sheet-title">{actionSheet.title}</h2><p>{actionSheet.copy}</p>{!authReady ? <button className="simple-primary" type="button" disabled>Checking your account…</button> : member ? <a className="simple-primary" href={actionSheet.advancedHref}>Open secure next step <ArrowUpRight size={16} /></a> : <a className="simple-primary" href={`/app/?mode=login&return=${encodeURIComponent(intent)}`}>Sign in to continue <ArrowUpRight size={16} /></a>}<button className="simple-sheet-secondary" type="button" onClick={() => setActionSheet(null)}>Keep browsing</button></div></div>}
   </div>
 }
@@ -298,11 +300,13 @@ function DashboardApp() {
   const [selected, setSelected] = useState(locations[0])
   const [locationLabel, setLocationLabel] = useState('Austin core')
   const [locationPromptOpen, setLocationPromptOpen] = useState(() => new URLSearchParams(window.location.search).get('intent') === 'food' && sessionStorage.getItem('wxl:location-choice') !== 'complete')
+  const locationDialogMotion = useDialogMotion(() => setLocationPromptOpen(false))
   const [mapLocations, setMapLocations] = useState(locations)
   const [menuOpen, setMenuOpen] = useState(false)
   const [sidebarCollapsed, setSidebarCollapsed] = useState(() => localStorage.getItem('wxl:sidebar-collapsed') === '1')
   const [toast, setToast] = useState('')
   const [authPromptOpen, setAuthPromptOpen] = useState(false)
+  const authDialogMotion = useDialogMotion(() => setAuthPromptOpen(false))
   const [member, setMember] = useState<User | null>(null)
   const [authReady, setAuthReady] = useState(!foodDbConfigured)
   const [accountOpen, setAccountOpen] = useState(false)
@@ -312,6 +316,8 @@ function DashboardApp() {
   const [alertsOpen, setAlertsOpen] = useState(false)
   const [addSpotOpen, setAddSpotOpen] = useState(false)
   const [foodHereOpen, setFoodHereOpen] = useState(false)
+  const addSpotDialogMotion = useDialogMotion(() => setAddSpotOpen(false))
+  const foodHereDialogMotion = useDialogMotion(() => setFoodHereOpen(false))
   const [mobileHeaderVisible, setMobileHeaderVisible] = useState(true)
   const { clicks, variant } = useEngagement()
 
@@ -543,15 +549,15 @@ function DashboardApp() {
         </div>
       </main>
       {toast && <div className="toast"><ShieldCheck size={17} /> {toast}</div>}
-      {authPromptOpen && <AuthPrompt onClose={() => setAuthPromptOpen(false)} />}
-      {locationPromptOpen && <LocationPrompt onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
-      {addSpotOpen && <AddSpotModal onClose={() => setAddSpotOpen(false)} notify={notify} onAdded={(spot) => {
+      {authPromptOpen && <AuthPrompt motion={authDialogMotion} />}
+      {locationPromptOpen && <LocationPrompt motion={locationDialogMotion} onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
+      {addSpotOpen && <AddSpotModal motion={addSpotDialogMotion} notify={notify} onAdded={(spot) => {
         setSpots((current) => [spot, ...current])
         const location = { id: spot.id, name: spot.name, type: spot.spot_type, area: spot.neighborhood, address: spot.address, status: 'plenty' as Status, detail: `${spot.produce}${spot.availability ? ` · ${spot.availability}` : ''}`, x: 50, y: 50, verified: false }
         setMapLocations((current) => [...current, location])
         setSelected(location)
       }} />}
-      {foodHereOpen && <FoodHereModal spots={spots} onClose={() => setFoodHereOpen(false)} notify={notify} onCreated={(alert) => setAlerts((current) => [alert, ...current.filter((item) => item.id !== alert.id)])} />}
+      {foodHereOpen && <FoodHereModal motion={foodHereDialogMotion} spots={spots} notify={notify} onCreated={(alert) => setAlerts((current) => [alert, ...current.filter((item) => item.id !== alert.id)])} />}
     </div>
   )
 }
@@ -575,6 +581,8 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
   const [message, setMessage] = useState('')
   const [showCreate, setShowCreate] = useState(initialCreate)
   const [showOffer, setShowOffer] = useState(false)
+  const createDialogMotion = useDialogMotion(() => setShowCreate(false))
+  const offerDialogMotion = useDialogMotion(() => setShowOffer(false))
   const [busy, setBusy] = useState(false)
   const [newTitle, setNewTitle] = useState(initialCreate ? 'Neighborhood community table' : '')
   const [newGroup, setNewGroup] = useState(`${memberName}'s group`)
@@ -667,11 +675,13 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
     if (error || !data) { notify(error?.message ?? 'The offer could not be saved'); return }
     setOffers((current) => [...current, data])
     setRequests((current) => current.map((request) => request.id === selectedRequest.id ? { ...request, offers: request.offers + 1 } : request))
-    setShowOffer(false)
-    setOfferItem('')
-    setOfferQuantity('')
-    setOfferAvailability('')
-    setOfferTransport(false)
+    offerDialogMotion.requestClose(() => {
+      setShowOffer(false)
+      setOfferItem('')
+      setOfferQuantity('')
+      setOfferAvailability('')
+      setOfferTransport(false)
+    })
     notify('Your offer was sent to the coordinating group')
   }
 
@@ -720,9 +730,11 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
     const next: FoodRequest = { id: data.id, title: data.title, group: data.group_name, neighborhood: data.neighborhood, category: categoryLabel, detail: data.detail, priority: data.priority, status: 'open', responses: 0, supporters: 0, offers: 0, createdBy: data.created_by, time: 'just now' }
     setRequests((current) => [next, ...current])
     setSelectedId(next.id)
-    setShowCreate(false)
-    setNewTitle('')
-    setNewDetail('')
+    createDialogMotion.requestClose(() => {
+      setShowCreate(false)
+      setNewTitle('')
+      setNewDetail('')
+    })
     notify('Community request posted')
   }
 
@@ -741,8 +753,8 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
         <div className="message-compose"><textarea value={message} onChange={(event) => setMessage(event.target.value)} placeholder="Share a public coordination update..." rows={2} /><button disabled={busy || !message.trim()} onClick={() => void sendMessage()} aria-label="Send response"><Send size={16} /></button></div><p className="dialogue-note"><ShieldCheck size={13} /> Replies and offer details are public. Do not include private addresses, phone numbers, household names, or sensitive information.</p>
       </aside>
     </section>
-    {showCreate && <div className="modal-backdrop" onClick={() => setShowCreate(false)}><div className="create-modal" role="dialog" aria-modal="true" aria-labelledby="create-request-title" onClick={(event) => event.stopPropagation()}><div className="modal-title"><div><p className="eyebrow">Ask the network</p><h2 id="create-request-title">Post a community request</h2></div><button onClick={() => setShowCreate(false)} aria-label="Close request form"><X size={18} /></button></div><label>Coordinating group<input value={newGroup} onChange={(event) => setNewGroup(event.target.value)} placeholder="Your group or project name" /></label><label>What does your group need?<input value={newTitle} onChange={(event) => setNewTitle(event.target.value)} placeholder="For example, 25 lb of greens for Thursday dinner" /></label><div className="form-row"><label>Request type<select value={newCategory} onChange={(event) => setNewCategory(event.target.value as typeof newCategory)}><option value="resource_request">Food or supplies</option><option value="help_needed">Volunteer help</option><option value="storage_request">Storage</option><option value="transport_request">Transportation</option></select></label><label>Priority<select value={newPriority} onChange={(event) => setNewPriority(event.target.value as FoodRequest['priority'])}><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="urgent">Urgent</option></select></label></div><label>Neighborhood<select value={newNeighborhood} onChange={(event) => setNewNeighborhood(event.target.value)}><option>East Austin</option><option>Rosewood</option><option>Govalle</option><option>South Lamar</option><option>East Cesar Chavez</option></select></label><label>Public context<textarea value={newDetail} onChange={(event) => setNewDetail(event.target.value)} placeholder="Share quantity, timing, storage, or pickup needs. Do not add a private address or household details." rows={4} /></label><p className="form-privacy"><ShieldCheck size={14} /> This request and its conversation are public.</p><div className="modal-actions"><button className="cancel-button" onClick={() => setShowCreate(false)}>Cancel</button><button className="add-button" onClick={() => void createRequest()} disabled={busy || !newTitle.trim() || !newGroup.trim() || !newDetail.trim()}>{busy ? 'Posting…' : 'Post request'} <ArrowUpRight size={15} /></button></div></div></div>}
-    {showOffer && <div className="modal-backdrop" onClick={() => setShowOffer(false)}><div className="create-modal offer-modal" role="dialog" aria-modal="true" aria-labelledby="offer-request-title" onClick={(event) => event.stopPropagation()}><div className="modal-title"><div><p className="eyebrow">Make a concrete offer</p><h2 id="offer-request-title">Offer food or help</h2></div><button onClick={() => setShowOffer(false)} aria-label="Close offer form"><X size={18} /></button></div><p className="modal-context">For {selectedRequest.title}</p><label>Offer type<select value={offerType} onChange={(event) => setOfferType(event.target.value as FoodRequestOfferRecord['offer_type'])}><option value="food">Food</option><option value="transport">Transportation</option><option value="storage">Storage</option><option value="volunteer">Volunteer time</option></select></label><label>What can you offer?<textarea value={offerItem} onChange={(event) => setOfferItem(event.target.value)} placeholder="Describe the food, vehicle, storage, or help you can provide" rows={3} /></label><div className="form-row"><label>Quantity, optional<input type="number" min="0.01" step="any" value={offerQuantity} onChange={(event) => setOfferQuantity(event.target.value)} placeholder="25" /></label><label>Unit{offerQuantity ? '' : ', optional'}<input value={offerUnit} onChange={(event) => setOfferUnit(event.target.value)} placeholder="lb, boxes, hours" /></label></div><label>Availability<input value={offerAvailability} onChange={(event) => setOfferAvailability(event.target.value)} placeholder="Thursday from 3 to 6 PM" /></label><label className="checkbox-label"><input type="checkbox" checked={offerTransport} onChange={(event) => setOfferTransport(event.target.checked)} /> I can transport this offer</label><label>Contact preference<select value={offerContact} onChange={(event) => setOfferContact(event.target.value as FoodRequestOfferRecord['contact_preference'])}><option value="in_app">Continue in public WXL messages</option><option value="email">Request email follow-up</option></select></label><p className="form-privacy"><ShieldCheck size={14} /> Offer details are public. Your email address is not shown or exchanged by this board.</p><div className="modal-actions"><button className="cancel-button" onClick={() => setShowOffer(false)}>Cancel</button><button className="add-button" onClick={() => void submitOffer()} disabled={busy || !offerItem.trim() || !offerAvailability.trim() || Boolean(offerQuantity && !offerUnit.trim())}>{busy ? 'Sending…' : 'Send offer'} <ArrowUpRight size={15} /></button></div></div></div>}
+    {showCreate && <div className="modal-backdrop" data-dialog-state={createDialogMotion.state} onTransitionEnd={createDialogMotion.onTransitionEnd} onClick={() => createDialogMotion.requestClose()}><div className="create-modal" role="dialog" aria-modal="true" aria-labelledby="create-request-title" onClick={(event) => event.stopPropagation()}><div className="modal-title"><div><p className="eyebrow">Ask the network</p><h2 id="create-request-title">Post a community request</h2></div><button onClick={() => createDialogMotion.requestClose()} aria-label="Close request form"><X size={18} /></button></div><label>Coordinating group<input value={newGroup} onChange={(event) => setNewGroup(event.target.value)} placeholder="Your group or project name" /></label><label>What does your group need?<input value={newTitle} onChange={(event) => setNewTitle(event.target.value)} placeholder="For example, 25 lb of greens for Thursday dinner" /></label><div className="form-row"><label>Request type<select value={newCategory} onChange={(event) => setNewCategory(event.target.value as typeof newCategory)}><option value="resource_request">Food or supplies</option><option value="help_needed">Volunteer help</option><option value="storage_request">Storage</option><option value="transport_request">Transportation</option></select></label><label>Priority<select value={newPriority} onChange={(event) => setNewPriority(event.target.value as FoodRequest['priority'])}><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="urgent">Urgent</option></select></label></div><label>Neighborhood<select value={newNeighborhood} onChange={(event) => setNewNeighborhood(event.target.value)}><option>East Austin</option><option>Rosewood</option><option>Govalle</option><option>South Lamar</option><option>East Cesar Chavez</option></select></label><label>Public context<textarea value={newDetail} onChange={(event) => setNewDetail(event.target.value)} placeholder="Share quantity, timing, storage, or pickup needs. Do not add a private address or household details." rows={4} /></label><p className="form-privacy"><ShieldCheck size={14} /> This request and its conversation are public.</p><div className="modal-actions"><button className="cancel-button" onClick={() => createDialogMotion.requestClose()}>Cancel</button><button className="add-button" onClick={() => void createRequest()} disabled={busy || !newTitle.trim() || !newGroup.trim() || !newDetail.trim()}>{busy ? 'Posting…' : 'Post request'} <ArrowUpRight size={15} /></button></div></div></div>}
+    {showOffer && <div className="modal-backdrop" data-dialog-state={offerDialogMotion.state} onTransitionEnd={offerDialogMotion.onTransitionEnd} onClick={() => offerDialogMotion.requestClose()}><div className="create-modal offer-modal" role="dialog" aria-modal="true" aria-labelledby="offer-request-title" onClick={(event) => event.stopPropagation()}><div className="modal-title"><div><p className="eyebrow">Make a concrete offer</p><h2 id="offer-request-title">Offer food or help</h2></div><button onClick={() => offerDialogMotion.requestClose()} aria-label="Close offer form"><X size={18} /></button></div><p className="modal-context">For {selectedRequest.title}</p><label>Offer type<select value={offerType} onChange={(event) => setOfferType(event.target.value as FoodRequestOfferRecord['offer_type'])}><option value="food">Food</option><option value="transport">Transportation</option><option value="storage">Storage</option><option value="volunteer">Volunteer time</option></select></label><label>What can you offer?<textarea value={offerItem} onChange={(event) => setOfferItem(event.target.value)} placeholder="Describe the food, vehicle, storage, or help you can provide" rows={3} /></label><div className="form-row"><label>Quantity, optional<input type="number" min="0.01" step="any" value={offerQuantity} onChange={(event) => setOfferQuantity(event.target.value)} placeholder="25" /></label><label>Unit{offerQuantity ? '' : ', optional'}<input value={offerUnit} onChange={(event) => setOfferUnit(event.target.value)} placeholder="lb, boxes, hours" /></label></div><label>Availability<input value={offerAvailability} onChange={(event) => setOfferAvailability(event.target.value)} placeholder="Thursday from 3 to 6 PM" /></label><label className="checkbox-label"><input type="checkbox" checked={offerTransport} onChange={(event) => setOfferTransport(event.target.checked)} /> I can transport this offer</label><label>Contact preference<select value={offerContact} onChange={(event) => setOfferContact(event.target.value as FoodRequestOfferRecord['contact_preference'])}><option value="in_app">Continue in public WXL messages</option><option value="email">Request email follow-up</option></select></label><p className="form-privacy"><ShieldCheck size={14} /> Offer details are public. Your email address is not shown or exchanged by this board.</p><div className="modal-actions"><button className="cancel-button" onClick={() => offerDialogMotion.requestClose()}>Cancel</button><button className="add-button" onClick={() => void submitOffer()} disabled={busy || !offerItem.trim() || !offerAvailability.trim() || Boolean(offerQuantity && !offerUnit.trim())}>{busy ? 'Sending…' : 'Send offer'} <ArrowUpRight size={15} /></button></div></div></div>}
   </>
 }
 
@@ -777,11 +789,11 @@ function SourceBoard({ notify, dbConfigured, canWrite, onAuthRequired }: { notif
   return <><section className="community-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Community-vetted source registry</p><h2>Partner network</h2><p>Nominate a local food source. WXL:FOOD reviews it before it becomes part of the public map.</p></div><div className="source-count"><strong>42</strong><span>verified sources</span></div></section><section className="source-layout"><div className="panel source-intro"><div className="source-illustration"><Warehouse size={28} /><span /><span /><span /></div><p className="eyebrow">How the registry works</p><h2>People closest to the work keep the map honest.</h2><p>Anyone in the network can nominate a pantry, fridge, farm, kitchen, church, school program, market, or mutual-aid group. A coordinator confirms the source, its hours, and what it can actually offer.</p><div className="source-steps"><div><b>01</b><span>Nominate a source</span></div><div><b>02</b><span>Verify the details</span></div><div><b>03</b><span>Connect it to requests</span></div></div></div><div className="panel nomination-form"><p className="eyebrow">Add to the network</p><h2>Nominate a food source</h2><label>Organization or place<input value={sourceName} onChange={(event) => setSourceName(event.target.value)} placeholder="Eastside Community Fridge" /></label><label>Source type<select value={sourceType} onChange={(event) => setSourceType(event.target.value)}><option>Food pantry</option><option>Community refrigerator</option><option>Farm or garden</option><option>Community kitchen</option><option>Restaurant or bakery</option><option>Mutual-aid group</option><option>School or university program</option></select></label><label>Neighborhood<select value={neighborhood} onChange={(event) => setNeighborhood(event.target.value)}><option>East Austin</option><option>Rosewood</option><option>Govalle</option><option>South Lamar</option><option>East Cesar Chavez</option></select></label><label>What should we know?<textarea value={notes} onChange={(event) => setNotes(event.target.value)} placeholder="Share what they provide, when they are open, and who to contact..." rows={4} /></label><button className="add-button" onClick={submitNomination} disabled={!sourceName.trim() || !notes.trim()}><Plus size={16} /> Submit nomination</button>{nominated.length > 0 && <p className="nomination-success"><CheckCircle2 size={14} /> {nominated[0]} is in the review queue.</p>}</div></section></>
 }
 
-function AuthPrompt({ onClose }: { onClose: () => void }) {
-  return <div className="access-backdrop" role="dialog" aria-modal="true" aria-labelledby="auth-prompt-title" onClick={onClose}><div className="access-card" onClick={(event) => event.stopPropagation()}><button className="access-close" onClick={onClose} aria-label="Close sign-in prompt"><X size={17} /></button><span className="access-heart">♥</span><p className="eyebrow">Account needed</p><h2 id="auth-prompt-title">Join the network to take action.</h2><p>Anonymous browsing is open to everyone. Create an account or log in to post rescues, reply to requests, offer help, and nominate food sources.</p><div className="access-actions"><a className="access-login" href="/app/?mode=login">Log in <ArrowUpRight size={15} /></a><a className="access-anonymous" href="/app/?mode=login&signup=1">Create an account <ArrowUpRight size={15} /></a><a className="access-updates" href="/app/?mode=login&updates=1">Email me WXL updates <ArrowUpRight size={15} /></a></div><small>Updates do not create an account or unlock posting.</small></div></div>
+function AuthPrompt({ motion }: { motion: DialogMotionControls }) {
+  return <div className="access-backdrop" data-dialog-state={motion.state} onTransitionEnd={motion.onTransitionEnd} role="dialog" aria-modal="true" aria-labelledby="auth-prompt-title" onClick={() => motion.requestClose()}><div className="access-card" onClick={(event) => event.stopPropagation()}><button className="access-close" onClick={() => motion.requestClose()} aria-label="Close sign-in prompt"><X size={17} /></button><span className="access-heart">♥</span><p className="eyebrow">Account needed</p><h2 id="auth-prompt-title">Join the network to take action.</h2><p>Anonymous browsing is open to everyone. Create an account or log in to post rescues, reply to requests, offer help, and nominate food sources.</p><div className="access-actions"><a className="access-login" href="/app/?mode=login">Log in <ArrowUpRight size={15} /></a><a className="access-anonymous" href="/app/?mode=login&signup=1">Create an account <ArrowUpRight size={15} /></a><a className="access-updates" href="/app/?mode=login&updates=1">Email me WXL updates <ArrowUpRight size={15} /></a></div><small>Updates do not create an account or unlock posting.</small></div></div>
 }
 
-function LocationPrompt({ onLocated, onSkip }: { onLocated: (latitude: number, longitude: number) => void; onSkip: () => void }) {
+function LocationPrompt({ motion, onLocated, onSkip }: { motion: DialogMotionControls; onLocated: (latitude: number, longitude: number) => void; onSkip: () => void }) {
   const [state, setState] = useState<'idle' | 'locating' | 'error'>('idle')
   const [error, setError] = useState('')
   const requestLocation = () => {
@@ -789,7 +801,7 @@ function LocationPrompt({ onLocated, onSkip }: { onLocated: (latitude: number, l
     setState('locating')
     setError('')
     navigator.geolocation.getCurrentPosition(
-      (position) => onLocated(position.coords.latitude, position.coords.longitude),
+      (position) => motion.requestClose(() => onLocated(position.coords.latitude, position.coords.longitude)),
       (locationError) => {
         setState('error')
         setError(locationError.code === 1 ? 'Location access was not allowed. You can continue with the full Austin map.' : 'We could not find your location. You can try again or continue with the full Austin map.')
@@ -797,7 +809,7 @@ function LocationPrompt({ onLocated, onSkip }: { onLocated: (latitude: number, l
       { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 },
     )
   }
-  return <div className="access-backdrop location-backdrop" role="dialog" aria-modal="true" aria-labelledby="location-prompt-title"><div className="access-card location-consent"><span className="location-consent-icon" aria-hidden="true"><MapPin size={23} /></span><p className="eyebrow">Find food nearby</p><h2 id="location-prompt-title">Share your location to find nearby food?</h2><p>WXL can use your current location to select the nearest verified listing on this map.</p><div className="location-privacy"><ShieldCheck size={16} /><span>Your location stays in this browser. WXL does not save it or attach it to an account.</span></div>{error && <p className="location-error" role="alert">{error}</p>}<div className="location-actions"><button className="location-allow" type="button" onClick={requestLocation} disabled={state === 'locating'}>{state === 'locating' ? 'Finding your location…' : 'Use my location'} <ArrowUpRight size={15} /></button><button className="location-skip" type="button" onClick={onSkip}>Not now, show all Austin food</button></div></div></div>
+  return <div className="access-backdrop location-backdrop" data-dialog-state={motion.state} onTransitionEnd={motion.onTransitionEnd} role="dialog" aria-modal="true" aria-labelledby="location-prompt-title"><div className="access-card location-consent"><span className="location-consent-icon" aria-hidden="true"><MapPin size={23} /></span><p className="eyebrow">Find food nearby</p><h2 id="location-prompt-title">Share your location to find nearby food?</h2><p>WXL can use your current location to select the nearest verified listing on this map.</p><div className="location-privacy"><ShieldCheck size={16} /><span>Your location stays in this browser. WXL does not save it or attach it to an account.</span></div>{error && <p className="location-error" role="alert">{error}</p>}<div className="location-actions"><button className="location-allow" type="button" onClick={requestLocation} disabled={state === 'locating'}>{state === 'locating' ? 'Finding your location…' : 'Use my location'} <ArrowUpRight size={15} /></button><button className="location-skip" type="button" onClick={() => motion.requestClose(onSkip)}>Not now, show all Austin food</button></div></div></div>
 }
 
 function LandingPage() {

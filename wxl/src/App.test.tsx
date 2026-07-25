@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
@@ -9,6 +9,12 @@ vi.mock('./FoodMap', () => ({
 }))
 
 const defaultUserAgent = navigator.userAgent
+
+function dispatchOpacityTransitionEnd(element: HTMLElement) {
+  const event = new Event('transitionend', { bubbles: true })
+  Object.defineProperty(event, 'propertyName', { value: 'opacity' })
+  fireEvent(element, event)
+}
 
 describe('WXL entry points and interaction gates', () => {
   beforeEach(() => {
@@ -99,7 +105,7 @@ describe('WXL entry points and interaction gates', () => {
     await userEvent.click(screen.getByRole('button', { name: /Use my location/i }))
 
     expect(getCurrentPosition).toHaveBeenCalledOnce()
-    expect(screen.queryByRole('dialog', { name: /Share your location/i })).not.toBeInTheDocument()
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: /Share your location/i })).not.toBeInTheDocument())
     expect(screen.getByRole('button', { name: /St. John nearby/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: /Select St. John Community Center/i })).toBeInTheDocument()
   })
@@ -108,7 +114,7 @@ describe('WXL entry points and interaction gates', () => {
     window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
     render(<App />)
     await userEvent.click(screen.getByRole('button', { name: /Not now, show all Austin food/i }))
-    expect(screen.queryByRole('dialog', { name: /Share your location/i })).not.toBeInTheDocument()
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: /Share your location/i })).not.toBeInTheDocument())
     expect(screen.getByRole('heading', { name: /What can we help you find/i })).toBeInTheDocument()
     expect(screen.getByRole('region', { name: /Map of public food places/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Navigate to East Austin Neighborhood Center/i })).toHaveAttribute('href', expect.stringContaining('google.com/maps'))
@@ -214,6 +220,19 @@ describe('WXL entry points and interaction gates', () => {
     await userEvent.click(screen.getByRole('button', { name: /FOOD IS HERE/i }))
     expect(screen.getByRole('dialog', { name: /Join the network/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Email me WXL updates/i })).toHaveAttribute('href', '/app/?mode=login&updates=1')
+  })
+
+  it('keeps the account prompt mounted until its opacity transition finishes', async () => {
+    window.history.replaceState({}, '', '/app/?mode=advanced')
+    render(<App />)
+    await userEvent.click(screen.getByRole('button', { name: /FOOD IS HERE/i }))
+
+    const dialog = screen.getByRole('dialog', { name: /Join the network/i })
+    await userEvent.click(screen.getByRole('button', { name: /Close sign-in prompt/i }))
+    expect(dialog).toHaveAttribute('data-dialog-state', 'closing')
+
+    dispatchOpacityTransitionEnd(dialog)
+    expect(screen.queryByRole('dialog', { name: /Join the network/i })).not.toBeInTheDocument()
   })
 
   it('gates structured request offers and explains that coordination details are public', async () => {
