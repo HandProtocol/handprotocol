@@ -48,6 +48,8 @@ export function FoodMap({ locations, selectedId, visitorPosition, onSelect }: Fo
       zoom: 11,
       zoomControl: false,
       attributionControl: true,
+      scrollWheelZoom: false,
+      trackResize: false,
     })
     L.control.zoom({ position: 'topright' }).addTo(map)
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -57,12 +59,24 @@ export function FoodMap({ locations, selectedId, visitorPosition, onSelect }: Fo
     markerLayerRef.current = L.layerGroup().addTo(map)
     mapRef.current = map
 
-    const resize = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(() => map.invalidateSize({ pan: false }))
+    let resizeFrame = 0
+    let previousWidth = containerRef.current.clientWidth
+    let previousHeight = containerRef.current.clientHeight
+    const resize = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(([entry]) => {
+      const width = Math.round(entry.contentRect.width)
+      const height = Math.round(entry.contentRect.height)
+      if (width === previousWidth && height === previousHeight) return
+      previousWidth = width
+      previousHeight = height
+      window.cancelAnimationFrame(resizeFrame)
+      resizeFrame = window.requestAnimationFrame(() => map.invalidateSize({ pan: false, debounceMoveend: true }))
+    })
     resize?.observe(containerRef.current)
     window.setTimeout(() => map.invalidateSize({ pan: false }), 0)
 
     return () => {
       resize?.disconnect()
+      window.cancelAnimationFrame(resizeFrame)
       map.remove()
       markerRefs.current.clear()
       markerLayerRef.current = null

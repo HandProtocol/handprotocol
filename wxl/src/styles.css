@@ -429,6 +429,7 @@ button { border: 0; cursor: pointer; }
   --simple-green-dark: #174a30;
   --simple-warm: #f7f4ec;
   min-height: 100svh;
+  overflow-x: clip;
   color: var(--simple-ink);
   background: #fff;
   font-family: 'DM Sans', Inter, sans-serif;
@@ -464,12 +465,13 @@ button { border: 0; cursor: pointer; }
 .simple-account-menu > .simple-advanced-link small { color: #68766d; margin-top: 2px; font-size: 8px; line-height: 1.35; }
 .simple-tabs {
   position: fixed;
-  z-index: 38;
-  inset: auto 12px 12px;
+  z-index: 100;
+  inset: auto 12px max(12px, env(safe-area-inset-bottom));
   height: 68px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   align-items: center;
+  isolation: isolate;
   padding: 5px;
   background: #fff;
   border: 1px solid #e0e5e1;
@@ -479,7 +481,7 @@ button { border: 0; cursor: pointer; }
 .simple-tabs button { height: 56px; display: grid; place-items: center; align-content: center; gap: 4px; color: #758179; background: transparent; border-radius: 14px; font-size: 10px; font-weight: 700; }
 .simple-tabs button.active { color: #fff; background: var(--simple-green); }
 .simple-eyebrow { color: #68776e; margin: 0 0 6px; font: 700 9px 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
-.finder-flow { padding-bottom: 108px; }
+.finder-flow { padding-bottom: calc(108px + env(safe-area-inset-bottom)); }
 .finder-copy { padding: 30px 16px 18px; }
 .finder-copy h1, .action-hero h1 { max-width: 680px; color: var(--simple-ink); margin: 0; font: 700 clamp(30px, 8vw, 52px)/1.02 'Space Grotesk', sans-serif; letter-spacing: -.055em; }
 .finder-search { height: 50px; display: flex; align-items: center; gap: 10px; margin-top: 21px; padding: 0 15px; background: #f3f4f1; border: 1px solid #e4e7e3; border-radius: 14px; }
@@ -489,7 +491,16 @@ button { border: 0; cursor: pointer; }
 .finder-filters::-webkit-scrollbar, .food-card-scroll::-webkit-scrollbar { display: none; }
 .finder-filters button { min-height: 38px; flex: 0 0 auto; color: #526159; background: #fff; border: 1px solid #dfe4df; border-radius: 999px; padding: 0 14px; font-size: 11px; font-weight: 700; }
 .finder-filters button.active { color: #fff; background: var(--simple-ink); border-color: var(--simple-ink); }
-.finder-map { position: relative; height: clamp(320px, 48vh, 560px); overflow: hidden; background: #edf0e8; border-block: 1px solid #dfe4dc; }
+.finder-map {
+  position: relative;
+  z-index: 0;
+  height: clamp(320px, 48vh, 560px);
+  height: clamp(320px, 48svh, 560px);
+  contain: layout paint;
+  overflow: hidden;
+  background: #edf0e8;
+  border-block: 1px solid #dfe4dc;
+}
 .real-map-section { isolation: isolate; background: #e7ece4; }
 .real-food-map-wrap, .real-food-map { position: absolute; inset: 0; }
 .real-food-map { z-index: 1; font-family: 'DM Sans', Inter, sans-serif; }
@@ -579,7 +590,7 @@ button { border: 0; cursor: pointer; }
 .gather-card > button { width: 36px; height: 36px; display: grid; place-items: center; color: var(--simple-green); background: #edf4e9; border-radius: 50%; }
 .host-card { display: grid; gap: 13px; margin-top: 14px; background: var(--simple-warm); }
 .host-card p:not(.simple-eyebrow) { color: var(--simple-muted); margin: 8px 0 0; font-size: 11px; line-height: 1.55; }
-.simple-footer { display: flex; justify-content: space-between; gap: 16px; color: #738078; border-top: 1px solid #e7eae7; padding: 24px 16px 104px; font: 600 9px 'DM Mono', monospace; }
+.simple-footer { display: flex; justify-content: space-between; gap: 16px; color: #738078; border-top: 1px solid #e7eae7; padding: 24px 16px calc(104px + env(safe-area-inset-bottom)); font: 600 9px 'DM Mono', monospace; }
 .simple-footer a { color: var(--simple-green); font: inherit; text-decoration: underline; }
 .request-hero { background: #eef3f6; }
 .request-composer { margin-top: 18px; }
@@ -628,6 +639,23 @@ button { border: 0; cursor: pointer; }
 }
 
 @media (max-width: 759px) {
+  .simple-tabs::before {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: -13px;
+    right: -13px;
+    left: -13px;
+    height: calc(94px + env(safe-area-inset-bottom));
+    background: #fff;
+    border-top: 1px solid #e8ebe8;
+    box-shadow: 0 -10px 28px #16271d0a;
+  }
+  .simple-tabs button { position: relative; z-index: 1; }
+  .simple-app .finder-map .real-food-map.leaflet-touch-drag,
+  .simple-app .finder-map .real-food-map.leaflet-touch-drag.leaflet-touch-zoom {
+    touch-action: pan-y;
+  }
   .entry-path-list-three { grid-template-columns: 1fr; }
   .food-entry-main { padding-top: 34px; }
   .food-entry-intro h1 { font-size: clamp(2.75rem, 11vw, 3.4rem); line-height: .94; letter-spacing: -.055em; }
