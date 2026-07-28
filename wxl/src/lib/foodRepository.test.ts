@@ -265,4 +265,61 @@ describe('food repository database contracts', () => {
       p_note: 'Cooler thermometer and packaging checked',
     })
   })
+
+  it('logs a food drop-off under the authenticated profile', async () => {
+    mocks.getUser.mockResolvedValue({ data: { user: { id: 'member-1' } } })
+    const single = vi.fn().mockResolvedValue({ data: { id: 'dropoff-1', public_location: false }, error: null })
+    const select = vi.fn().mockReturnValue({ single })
+    const insert = vi.fn().mockReturnValue({ select })
+    mocks.from.mockReturnValue({ insert })
+    const repository = await import('./foodRepository')
+
+    const result = await repository.createFoodDropoff({
+      destination_name: 'Eastside Community Fridge',
+      address: '1710 E 2nd St, Austin, TX',
+      neighborhood: 'East Austin',
+      latitude: 30.258,
+      longitude: -97.72,
+      note: 'Left two produce boxes with the site coordinator.',
+      quantity: 2,
+      quantity_unit: 'boxes',
+      dropped_off_at: '2026-07-28T14:00:00Z',
+      public_location: false,
+    })
+
+    expect(mocks.from).toHaveBeenCalledWith('food_dropoffs')
+    expect(insert).toHaveBeenCalledWith(expect.objectContaining({
+      destination_name: 'Eastside Community Fridge',
+      created_by: 'member-1',
+      quantity: 2,
+      quantity_unit: 'boxes',
+      public_location: false,
+    }))
+    expect(result.data).toEqual({ id: 'dropoff-1', public_location: false })
+  })
+
+  it('loads the privacy-scoped drop-off feed and recognition board', async () => {
+    mocks.rpc
+      .mockResolvedValueOnce({ data: [{ id: 'dropoff-1' }], error: null })
+      .mockResolvedValueOnce({ data: [{ rank: 1, profile_id: 'member-1', dropoff_count: 3 }], error: null })
+    const repository = await import('./foodRepository')
+
+    const dropoffs = await repository.loadFoodDropoffs(true)
+    const leaders = await repository.loadFoodDropoffLeaderboard(false)
+
+    expect(mocks.rpc).toHaveBeenNthCalledWith(1, 'list_food_dropoffs', { p_public_only: true })
+    expect(mocks.rpc).toHaveBeenNthCalledWith(2, 'list_food_dropoff_leaderboard', { p_public_only: false })
+    expect(dropoffs.data).toEqual([{ id: 'dropoff-1' }])
+    expect(leaders.data).toEqual([{ rank: 1, profile_id: 'member-1', dropoff_count: 3 }])
+  })
+
+  it('updates public leaderboard consent through the member-scoped function', async () => {
+    mocks.rpc.mockResolvedValue({ data: true, error: null })
+    const repository = await import('./foodRepository')
+
+    const result = await repository.setFoodDropoffLeaderboardPublic(true)
+
+    expect(mocks.rpc).toHaveBeenCalledWith('set_food_dropoff_leaderboard_public', { p_public: true })
+    expect(result.data).toBe(true)
+  })
 })

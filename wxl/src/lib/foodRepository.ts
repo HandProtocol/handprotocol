@@ -68,6 +68,37 @@ export type FoodAlertRecord = {
   created_by: string
 }
 
+export type FoodDropoffRecord = {
+  id: string
+  created_at: string
+  dropped_off_at: string
+  destination_name: string
+  address: string | null
+  neighborhood: string
+  latitude: number | null
+  longitude: number | null
+  note: string
+  quantity: number | null
+  quantity_unit: 'lb' | 'boxes' | 'bags' | 'meals' | 'items' | null
+  public_location: boolean
+  created_by: string
+  contributor_name: string
+}
+
+export type FoodDropoffInput = Pick<FoodDropoffRecord,
+  'destination_name' | 'address' | 'neighborhood' | 'latitude' | 'longitude' |
+  'note' | 'quantity' | 'quantity_unit' | 'public_location'> & {
+  dropped_off_at: string
+}
+
+export type FoodDropoffLeaderboardRecord = {
+  rank: number
+  profile_id: string
+  display_name: string
+  dropoff_count: number
+  latest_dropoff_at: string
+}
+
 export type FoodRescueRecord = {
   id: string
   created_at: string
@@ -400,6 +431,47 @@ export async function createFoodAlert(input: { spot_id?: string; title: string; 
     })
   }
   return { data: result.data as FoodAlertRecord | null, error: result.error }
+}
+
+export async function loadFoodDropoffs(publicOnly: boolean) {
+  if (!foodDb) return { data: null, error: null }
+  const result = await foodDb.rpc('list_food_dropoffs', { p_public_only: publicOnly })
+  return { data: (result.data ?? []) as FoodDropoffRecord[], error: result.error }
+}
+
+export async function createFoodDropoff(input: FoodDropoffInput) {
+  if (!foodDb) return { data: null, error: new Error('WXL:FOOD database is not configured') }
+  const { data: auth } = await foodDb.auth.getUser()
+  if (!auth.user) return { data: null, error: new Error('Sign in to log a food drop-off') }
+  const result = await foodDb.from('food_dropoffs').insert({
+    ...input,
+    address: input.address || null,
+    latitude: input.latitude ?? null,
+    longitude: input.longitude ?? null,
+    quantity: input.quantity ?? null,
+    quantity_unit: input.quantity_unit ?? null,
+    created_by: auth.user.id,
+  }).select().single()
+  return { data: result.data as FoodDropoffRecord | null, error: result.error }
+}
+
+export async function loadFoodDropoffLeaderboard(publicOnly: boolean) {
+  if (!foodDb) return { data: null, error: null }
+  const result = await foodDb.rpc('list_food_dropoff_leaderboard', { p_public_only: publicOnly })
+  return { data: (result.data ?? []) as FoodDropoffLeaderboardRecord[], error: result.error }
+}
+
+export async function loadFoodDropoffPreferences() {
+  if (!foodDb) return { data: false, error: null }
+  const result = await foodDb.rpc('get_food_dropoff_preferences')
+  const record = Array.isArray(result.data) ? result.data[0] : result.data
+  return { data: Boolean(record?.public_leaderboard), error: result.error }
+}
+
+export async function setFoodDropoffLeaderboardPublic(isPublic: boolean) {
+  if (!foodDb) return { data: null, error: new Error('WXL:FOOD database is not configured') }
+  const result = await foodDb.rpc('set_food_dropoff_leaderboard_public', { p_public: isPublic })
+  return { data: Boolean(result.data), error: result.error }
 }
 
 export async function loadFoodRescues() {

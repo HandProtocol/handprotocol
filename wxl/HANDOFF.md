@@ -39,7 +39,7 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 | Main UI | `src/App.tsx` |
 | Styles | `src/styles.css` |
 | Data access | `src/lib/foodRepository.ts` |
-| Database migrations | `../command/supabase/migrations/024_wxl_food.sql` through `039_wxl_compost_trigger_permissions.sql` |
+| Database migrations | `../command/supabase/migrations/024_wxl_food.sql` through `040_wxl_food_dropoffs.sql` |
 | Deployment notes | `DEPLOY.md` |
 
 ## Routes and entry states
@@ -70,7 +70,7 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 ### Coordination protocol foundation
 
 - Migrations 024 and 025 have been restored from repository history, resolving the missing predecessors for public requests, the community map, alerts, and engagement records.
-- Migrations 026 through 036 were applied to the production HAND Supabase project on 2026-07-18. Migrations 037 through 039 added compost returns, their destination gate, and restricted trigger permissions on 2026-07-22. Migration history now matches through 039, and the duplicate public-visits migration was renumbered from 020 to 023.
+- Migrations 026 through 036 were applied to the production HAND Supabase project on 2026-07-18. Migrations 037 through 039 added compost returns, their destination gate, and restricted trigger permissions on 2026-07-22. Migration 040 added community-site drop-offs and privacy-scoped recognition on 2026-07-28. Migration history now matches through 040, and the duplicate public-visits migration was renumbered from 020 to 023.
 - Migrations 032 through 036 define channel-independent participants, verification, consent, mandates, private locations, needs, supplies, match evidence, commitments, conversations, payments, donations, subsidies, potlucks, recognition, agent audits, coordinator gates, idempotent command receipts, and a transactional outbox.
 - Canonical operational tables reject direct authenticated writes. Lifecycle and commitment changes use security-definer commands with ownership, eligibility, quantity, mandate, and idempotency checks.
 - Exact locations are represented only as opaque ciphertext with separate, append-only precision-access evidence.
@@ -201,6 +201,15 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 - Alert creation invokes `netlify/functions/food-alert.mjs`, which validates the Supabase session and sends a best-effort Resend operations email using HAND's existing environment-variable pattern.
 - Alert writes are limited to five per account per 15 minutes. Private home addresses and household details are explicitly prohibited in the interface.
 
+### Community drop-offs and recognition
+
+- The Advanced workspace includes a Drop-off log at `?mode=advanced&workspace=dropoffs`.
+- Authenticated members can record a completed food drop-off using a community-site address, a map pin, or both. Records include a neighborhood, completion time, short note, optional amount, and internal or public visibility.
+- Every submission requires confirmation that the destination is community-facing and not a home. Household addresses and private delivery instructions remain prohibited.
+- Signed-in members can view the complete internal feed and completed-drop recognition board. Anonymous visitors and members using Public view see only records explicitly marked public.
+- Public recognition is a separate Contributor-controlled opt-in that defaults off. A public drop-off does not expose its Contributor's name unless that Contributor also enables public recognition.
+- Migration 040 adds `command.food_dropoffs`, `command.food_dropoff_preferences`, privacy-scoped feed and leaderboard functions, row-level security, and member-owned writes.
+
 ### Feedback, experiments, and testing
 
 - A persistent bottom-right bell opens two panels on every WXL surface: email alerts and feedback.
@@ -316,7 +325,7 @@ Recommended follow-up:
 
 ### Database and security baseline
 
-Migrations `024_wxl_food.sql` through `039_wxl_compost_trigger_permissions.sql` define:
+Migrations `024_wxl_food.sql` through `040_wxl_food_dropoffs.sql` define:
 
 - `command.food_partners`
 - `command.food_source_nominations`
@@ -340,6 +349,8 @@ Migrations `024_wxl_food.sql` through `039_wxl_compost_trigger_permissions.sql` 
 - `command.food_spots`
 - `command.food_alerts`
 - `command.food_engagement_events`
+- `command.food_dropoffs`
+- `command.food_dropoff_preferences`
 - indexes for status, neighborhood, request messages, and review queues
 - row-level security for public reads, authenticated inserts, and administrative management
 - owner-checked database functions for offer decisions, withdrawals, and request status changes

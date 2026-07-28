@@ -16,13 +16,14 @@ import { ContributorBoard } from './ContributorBoard'
 import { HarvestRunBoard } from './HarvestRunBoard'
 import { InventoryBoard } from './InventoryBoard'
 import { ProtocolBoard } from './ProtocolBoard'
+import { DropoffBoard } from './DropoffBoard'
 import type { FoodMapLocation } from './FoodMap'
 import { useDialogMotion, type DialogMotionControls } from './useDialogMotion'
 
 const FoodMap = lazy(() => import('./FoodMap').then((module) => ({ default: module.FoodMap })))
 
 type Status = 'plenty' | 'limited' | 'low' | 'volunteers' | 'transport'
-type View = 'command' | 'alerts' | 'protocol' | 'rescue' | 'volunteer' | 'community' | 'partners' | 'harvest' | 'inventory'
+type View = 'command' | 'alerts' | 'protocol' | 'rescue' | 'volunteer' | 'community' | 'partners' | 'harvest' | 'inventory' | 'dropoffs'
 type ConsumerIntent = 'food' | 'contribute' | 'gather' | 'request'
 
 type FoodLocation = {
@@ -54,6 +55,7 @@ const viewLabels: Record<View, string> = {
   partners: 'Partner network',
   harvest: 'Harvest runs',
   inventory: 'Inventory',
+  dropoffs: 'Drop-off log',
 }
 
 type FoodRequest = {
@@ -495,6 +497,7 @@ function DashboardApp() {
           <p className="nav-label second">Plan + measure</p>
           <NavItem active={view === 'harvest'} icon={<Route size={18} />} label="Harvest runs" onClick={() => { setView('harvest'); setMenuOpen(false) }} />
           <NavItem active={view === 'inventory'} icon={<Boxes size={18} />} label="Inventory" onClick={() => { setView('inventory'); setMenuOpen(false) }} />
+          <NavItem active={view === 'dropoffs'} icon={<MapPin size={18} />} label="Drop-off log" onClick={() => { setView('dropoffs'); setMenuOpen(false) }} />
           <NavItem icon={<ShieldCheck size={18} />} label="Impact reports" />
         </nav>
         <div className="sidebar-bottom"><button className="help-link" onClick={() => openCommunityContact('feedback')}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div>{!authReady ? <div className="profile profile-loading" role="status"><span className="avatar">··</span><span><strong>Checking session</strong><small>Restoring account access</small></span></div> : isAuthenticated ? <div className="account-control"><button className="profile" onClick={() => setAccountOpen((current) => !current)} aria-expanded={accountOpen} aria-controls="member-account-menu"><span className="avatar">{memberIdentity.initials}</span><span><strong>{memberIdentity.displayName}</strong><small>Community account</small></span><Settings size={16} /></button>{accountOpen && <div className="account-menu" id="member-account-menu"><p>{memberIdentity.email}</p><button type="button" onClick={() => void signOut()}>Sign out</button></div>}</div> : <a className="profile" href="/app/?mode=login"><span className="avatar">WX</span><span><strong>Browsing openly</strong><small>Sign in to coordinate</small></span><ArrowUpRight size={16} /></a>}<p className="build-stamp" title={`Deployed build ${__WXL_BUILD_ID__}`}><span>Build</span><code>{__WXL_BUILD_ID__}</code></p></div>
@@ -506,7 +509,7 @@ function DashboardApp() {
         <AlertCenter alerts={alerts} open={alertsOpen} onClose={() => setAlertsOpen(false)} onViewAll={openAlertsPage} />
 
         <div className="page-wrap">
-          <div className="page-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Austin network / community preview</p><h1>{view === 'command' ? 'Local food, coordinated.' : view === 'alerts' ? 'Food available now' : view === 'protocol' ? 'Coordination protocol' : view === 'rescue' ? 'Rescue operations' : view === 'volunteer' ? 'Volunteer command' : view === 'community' ? 'Community requests' : view === 'harvest' ? 'Harvest runs' : view === 'inventory' ? 'Inventory' : 'Partner network'}</h1><p className="lede">See where food is moving, where it is needed, and what can happen next.</p></div><button className="location-button" onClick={() => setLocationPromptOpen(true)}><MapPin size={16} /> {locationLabel} <ChevronDown size={15} /></button></div>
+          <div className="page-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Austin network / community preview</p><h1>{view === 'command' ? 'Local food, coordinated.' : viewLabels[view]}</h1><p className="lede">See where food is moving, where it is needed, and what can happen next.</p></div><button className="location-button" onClick={() => setLocationPromptOpen(true)}><MapPin size={16} /> {locationLabel} <ChevronDown size={15} /></button></div>
 
           {view === 'command' && <>
             <FoodAlertsOverview alerts={alerts} onViewAll={openAlertsPage} onShowSpot={showAlertSpot} />
@@ -546,6 +549,7 @@ function DashboardApp() {
           {view === 'volunteer' && <ContributorBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} memberName={memberIdentity.displayName} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
           {view === 'harvest' && <HarvestRunBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
           {view === 'inventory' && <InventoryBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
+          {view === 'dropoffs' && <DropoffBoard dbConfigured={foodDbConfigured} canWrite={isAuthenticated} memberId={member?.id ?? null} notify={notify} onAuthRequired={() => setAuthPromptOpen(true)} />}
         </div>
       </main>
       {toast && <div className="toast"><ShieldCheck size={17} /> {toast}</div>}

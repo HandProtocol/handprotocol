@@ -421,6 +421,104 @@ button { border: 0; cursor: pointer; }
   }
 }
 
+/* Community food drop-offs */
+.dropoff-workspace { display: grid; gap: 14px; }
+.dropoff-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; }
+.dropoff-heading h2 { color: #293e32; font: 600 22px/1.1 'Space Grotesk'; margin: 5px 0; }
+.dropoff-heading p:not(.eyebrow) { max-width: 680px; color: #65776c; font-size: 11px; line-height: 1.6; margin: 0; }
+.primary-action { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 40px; color: #fff; background: #2d6b50; border: 1px solid #285f47; border-radius: 7px; padding: 9px 13px; font-size: 10px; font-weight: 600; }
+.primary-action:disabled { cursor: not-allowed; opacity: .5; }
+.dropoff-privacy-note { display: flex; align-items: flex-start; gap: 9px; color: #51665a; background: #f3f7f1; border: 1px solid #dbe6d8; border-radius: 9px; padding: 12px 14px; }
+.dropoff-privacy-note svg { flex: 0 0 auto; color: #3e7657; }
+.dropoff-privacy-note p { font-size: 10px; line-height: 1.55; margin: 0; }
+.dropoff-privacy-note strong { color: #354e40; }
+.dropoff-form { padding: 19px; }
+.dropoff-form-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.dropoff-form-heading h2 { color: #30483a; font: 600 20px 'Space Grotesk'; margin: 3px 0 0; }
+.dropoff-form-heading > span { color: #718178; background: #f3f6f1; border: 1px solid #e0e7dd; border-radius: 99px; padding: 5px 8px; font: 8px 'DM Mono'; text-transform: uppercase; }
+.dropoff-form-grid { display: grid; grid-template-columns: minmax(300px, .9fr) minmax(360px, 1.1fr); gap: 18px; align-items: start; }
+.dropoff-fields { display: grid; gap: 11px; }
+.dropoff-fields label { position: relative; display: grid; gap: 6px; color: #50655a; font-size: 10px; font-weight: 600; }
+.dropoff-fields input, .dropoff-fields select, .dropoff-fields textarea { width: 100%; color: var(--ink); background: #fffefa; border: 1px solid #d5dfd5; border-radius: 6px; outline: 0; padding: 10px; font: 400 11px 'DM Sans'; }
+.dropoff-fields textarea { min-height: 82px; resize: vertical; }
+.dropoff-fields input:focus, .dropoff-fields select:focus, .dropoff-fields textarea:focus { border-color: #6e9e79; box-shadow: 0 0 0 3px #6e9e791c; }
+.dropoff-fields label > small { position: absolute; right: 8px; bottom: 8px; color: #8d9991; font-size: 8px; font-weight: 400; }
+.dropoff-fields .quick-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.dropoff-fields .check-row { display: flex; align-items: flex-start; gap: 9px; background: #f7f9f5; border: 1px solid #e0e7dd; border-radius: 8px; padding: 11px; }
+.dropoff-fields .check-row input { flex: 0 0 auto; width: 17px; height: 17px; margin-top: 1px; padding: 0; }
+.dropoff-fields .check-row span { display: grid; gap: 3px; }
+.dropoff-fields .check-row strong { color: #40584a; font-size: 10px; }
+.dropoff-fields .check-row small { position: static; color: #76857c; font-size: 9px; font-weight: 400; line-height: 1.45; }
+.dropoff-fields .safety-confirm { background: #fbf5e8; border-color: #eadcb9; }
+.dropoff-map-wrap { overflow: hidden; background: #eef3ec; border: 1px solid #d9e3d7; border-radius: 10px; }
+.dropoff-map { height: 370px; background: #e7eee5; cursor: crosshair; }
+.dropoff-map-wrap > p { display: flex; align-items: center; gap: 5px; color: #6e7e75; padding: 9px 11px; font-size: 9px; margin: 0; }
+.dropoff-marker-shell { background: transparent; border: 0; }
+.dropoff-marker { display: grid; place-items: center; width: 36px; height: 36px; color: #fff; background: #c8664e; border: 3px solid #fff; border-radius: 50% 50% 50% 8px; box-shadow: 0 4px 12px #183d2b40; font: 16px Georgia, serif; transform: rotate(-45deg); }
+.dropoff-marker::first-letter { transform: rotate(45deg); }
+.dropoff-marker.draft { color: #2b6047; background: #e6f0df; border-color: #2d6b50; font: 700 19px 'DM Sans'; }
+.pin-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
+.pin-actions button, .empty-state button { display: inline-flex; align-items: center; gap: 5px; min-height: 36px; color: #3d614c; background: #f3f7f1; border: 1px solid #d8e4d5; border-radius: 6px; padding: 8px 10px; font-size: 9px; font-weight: 600; }
+.pin-coordinates { display: flex; align-items: center; gap: 5px; color: #3f7657; font: 8px 'DM Mono'; margin: 9px 0 0; }
+.dropoff-form .form-error { color: #93483e; background: #faece8; border: 1px solid #eacfc8; border-radius: 7px; padding: 10px; font-size: 10px; margin: 13px 0 0; }
+.dropoff-form .form-actions { display: flex; justify-content: flex-end; border-top: 1px solid #e5eae3; margin-top: 16px; padding-top: 14px; }
+.dropoff-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.segmented-control { display: flex; gap: 3px; background: #e9eee7; border: 1px solid #dce4d9; border-radius: 8px; padding: 3px; }
+.segmented-control button { display: inline-flex; align-items: center; gap: 5px; min-height: 34px; color: #687970; background: transparent; border-radius: 5px; padding: 7px 10px; font-size: 9px; }
+.segmented-control button.active { color: #315e47; background: #fffefa; box-shadow: 0 1px 4px #2f51371a; font-weight: 600; }
+.leaderboard-consent { display: flex; align-items: center; gap: 7px; color: #53685c; font-size: 9px; font-weight: 600; }
+.leaderboard-consent input { width: 16px; height: 16px; }
+.dropoff-layout { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: 14px; align-items: start; }
+.dropoff-feed, .leaderboard { padding: 17px; }
+.dropoff-feed .panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 5px; }
+.dropoff-feed .panel-heading h2, .leaderboard h2 { color: #30483a; font: 600 18px 'Space Grotesk'; margin: 3px 0 0; }
+.dropoff-feed .panel-heading > span { color: #7d8b83; font: 8px 'DM Mono'; text-transform: uppercase; }
+.dropoff-entry { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; border-top: 1px solid #e7ebe5; padding: 14px 0; }
+.dropoff-entry-pin { display: grid; place-items: center; align-self: start; width: 30px; height: 30px; color: #3f7657; background: #e8f2e5; border-radius: 8px; }
+.dropoff-entry-title { display: flex; align-items: flex-start; justify-content: space-between; gap: 9px; }
+.dropoff-entry h3 { color: #354d3f; font: 600 12px 'Space Grotesk'; margin: 1px 0 0; }
+.dropoff-entry-meta { color: #79877f !important; font-size: 9px !important; margin: 3px 0 7px !important; }
+.dropoff-entry p { color: #5f7167; font-size: 10px; line-height: 1.5; margin: 0; }
+.visibility-badge { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; color: #6e7d75; background: #f0f3ef; border: 1px solid #e0e5de; border-radius: 99px; padding: 4px 6px; font: 7px 'DM Mono'; text-transform: uppercase; }
+.visibility-badge.public { color: #367052; background: #e8f3e7; border-color: #cee0cb; }
+.dropoff-entry-footer { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 11px; color: #88948c; margin-top: 9px; font-size: 8px; }
+.dropoff-entry-footer strong { margin-left: auto; color: #315f49; font: 600 9px 'DM Mono'; }
+.dropoff-empty, .leaderboard-empty { display: grid; justify-items: center; gap: 7px; color: #78877e; padding: 38px 12px; text-align: center; }
+.dropoff-empty p, .leaderboard-empty p { font-size: 10px; margin: 0; }
+.leaderboard-heading { display: flex; align-items: center; gap: 10px; }
+.leaderboard-heading > span { display: grid; place-items: center; width: 34px; height: 34px; color: #8b682c; background: #fbf1da; border: 1px solid #ead9ae; border-radius: 9px; }
+.leaderboard-summary { color: #6f7f76; border-bottom: 1px solid #e5eae3; padding: 12px 0; font-size: 9px; line-height: 1.5; margin: 0; }
+.leaderboard ol { list-style: none; padding: 0; margin: 0; }
+.leaderboard li { display: grid; grid-template-columns: 28px minmax(0, 1fr) auto; gap: 8px; align-items: center; border-bottom: 1px solid #e9ede7; padding: 11px 0; }
+.leader-rank { display: grid; place-items: center; width: 25px; height: 25px; color: #617168; background: #eef2ec; border-radius: 50%; font: 600 9px 'DM Mono'; }
+.leader-rank.rank-1 { color: #725217; background: #f8e8b9; }
+.leader-rank.rank-2 { color: #5e6762; background: #e6eae7; }
+.leader-rank.rank-3 { color: #794d35; background: #f0d8c8; }
+.leader-name { display: grid; gap: 3px; min-width: 0; }
+.leader-name strong { overflow: hidden; color: #3d5547; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.leader-name small { color: #87938c; font-size: 7px; }
+.leader-count { display: grid; justify-items: end; color: #315f49; font: 600 13px 'DM Mono'; }
+.leader-count small { color: #8a968f; font-size: 7px; font-weight: 400; text-transform: uppercase; }
+.leaderboard-footnote { color: #7b8981; background: #f5f7f3; border: 1px solid #e5e9e2; border-radius: 7px; padding: 9px; font-size: 8px; line-height: 1.5; margin: 13px 0 0; }
+
+@media (max-width: 1000px) {
+  .dropoff-form-grid, .dropoff-layout { grid-template-columns: 1fr; }
+  .dropoff-map { height: 330px; }
+}
+
+@media (max-width: 720px) {
+  .dropoff-heading { align-items: stretch; flex-direction: column; }
+  .dropoff-heading .primary-action { width: 100%; }
+  .dropoff-form { padding: 14px; }
+  .dropoff-form-heading { align-items: flex-start; flex-direction: column; }
+  .dropoff-form-grid { grid-template-columns: minmax(0, 1fr); }
+  .dropoff-fields .quick-form-row { grid-template-columns: 1fr; }
+  .dropoff-map { height: 290px; }
+  .dropoff-toolbar { align-items: stretch; flex-direction: column; }
+  .segmented-control button { flex: 1; justify-content: center; min-height: 44px; }
+  .leaderboard-consent { min-height: 44px; }
+}
+
 /* Simple public food experience */
 .simple-app {
   --simple-ink: #17251d;

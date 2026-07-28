@@ -2,7 +2,7 @@
 title: WXL:FOOD Living Documentation
 description: Current product behavior, community workflows, safety boundaries, and development status for WXL:FOOD.
 status: living
-last_updated: 2026-07-23
+last_updated: 2026-07-28
 canonical_path: /docs/
 ---
 
@@ -42,6 +42,7 @@ Status labels used throughout this document:
 
 - **Live:** Implemented and connected to the current production architecture.
 - **Needs migration:** Implemented in code, but requires the latest database migration before production use.
+- **Ready to deploy:** Implemented and connected to the production database, but the current application files still need deployment.
 - **Prototype:** Visible for evaluation, but not yet a complete persisted workflow.
 - **Planned:** Documented direction, not yet implemented.
 
@@ -68,6 +69,8 @@ Status labels used throughout this document:
 | Alerts and feedback widget | Live | A bottom-right bell opens email-alert signup and feedback panels on every WXL surface. Alerts join the WXL Resend audience. Feedback enters HAND Command Center and the operations email inbox, with offline retry. |
 | A/B testing | Live | Assigns a stable CTA-order variant and records authenticated interactions. |
 | Interaction leaderboard | Needs migration | Provides an internal, admin-only aggregate view. |
+| Food drop-off log | Ready to deploy | Members can record a completed food drop-off by community-site address, map pin, or both, with a short note, optional amount, and internal or public visibility. Migration 040 is applied. |
+| Drop-off recognition board | Ready to deploy | Signed-in members can see the internal completed-drop count. Each Contributor separately chooses whether their name can appear on the public board. Migration 040 is applied. |
 | Rescue operations | Needs migration | Members submit rescues for coordinator review. Approved records support atomic claims, private assignment details, safety checkpoints, acceptance, incident hold, and audited resolution through migration 028. |
 | Volunteer Command | Needs migration | Members submit private readiness details. Coordinators approve training, equipment, and run classes. Migration 029 enforces that approval during rescue claims. |
 | Harvest runs | Needs migration | Coordinators plan private food delivery, opt-in compost return, and compost drop-off stops, then assign one eligible Contributor. Assigned people record ordered outcomes, while safety checkpoints and incidents block unsafe completion. |
@@ -100,6 +103,9 @@ An authenticated account is required to:
 - Accept or decline an offer on a request you created
 - Change the status of a request you created
 - Nominate a food source
+- Log a completed food drop-off
+- View the internal drop-off recognition board
+- Choose whether your name appears on its public version
 
 Write access always follows the active Supabase session. A query parameter does not grant write access.
 
@@ -143,6 +149,19 @@ Authenticated members can add a public food spot with:
 New submissions are labeled **Community pin** until a coordinator verifies them. Community submission does not imply endorsement or guaranteed availability.
 
 Private homes must not be added to the public map. Public route lines end at anonymous neighborhood clusters. Exact household stops belong only in a future private, authenticated volunteer run.
+
+## Food drop-offs and recognition
+
+The Advanced workspace includes a persisted drop-off log for completed food movement. A member can identify a community-facing destination by street address, map pin, or both. The record also includes its neighborhood, completion time, a short note, and an optional amount and unit.
+
+Drop-off visibility is chosen per record:
+
+- **Internal** is the default and is visible only to signed-in members.
+- **Public** exposes the destination, address or pin, note, amount, and date without an account.
+
+Every submission requires the member to confirm that the destination is a community-facing site, not a private home. Household addresses, household names, private contact details, and private delivery instructions remain prohibited even when the record is internal. Assigned delivery-run tools remain the correct place for exact household stops.
+
+The recognition board ranks Contributors by completed drop-off count. Signed-in members can view the complete internal board. Public recognition is a separate, reversible account choice and is off by default. The public board includes only Contributors who opt in. Public map records from a non-opted-in Contributor use the generic name `WXL Contributor`.
 
 ## `FOOD IS HERE!` alerts
 
@@ -249,6 +268,8 @@ Primary tables:
 - `command.food_spots`
 - `command.food_alerts`
 - `command.food_engagement_events`
+- `command.food_dropoffs`
+- `command.food_dropoff_preferences`
 
 The unreleased coordination protocol in migrations 032 through 036 adds canonical needs, supplies, commitments, mandates, match evidence, private location containers, conversations, voice sessions, payments, donations, subsidies, potlucks, policy decisions, command receipts, and an outbox. The web application exposes these records through its Coordination protocol workspace when the separate API is configured. SMS remains in the next scope. These records are not a claim that automated matching or dispatch is live.
 
@@ -260,6 +281,12 @@ The community-map, alert, experiment, and leaderboard structures are defined in:
 
 ```text
 command/supabase/migrations/025_wxl_community_map_alerts.sql
+```
+
+Community-site drop-offs, privacy-scoped feed functions, and opt-in recognition are defined in:
+
+```text
+command/supabase/migrations/040_wxl_food_dropoffs.sql
 ```
 
 Profile readiness for WXL foreign keys is defined in:

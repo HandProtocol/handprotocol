@@ -437,4 +437,16 @@ describe('WXL entry points and interaction gates', () => {
 
     expect(screen.getByRole('heading', { level: 2, name: /Inventory needs the WXL database/i })).toBeInTheDocument()
   })
+
+  it('opens the drop-off log with its privacy boundary and database gate', async () => {
+    window.history.pushState({}, '', '/app/?mode=advanced')
+    render(<App />)
+
+    await userEvent.click(screen.getByRole('button', { name: /^Drop-off log$/i }))
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Drop-off log' })).toBeInTheDocument()
+    expect(screen.getByText(/Do not enter a home/i)).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: /Database connection required/i })).toBeInTheDocument()
+    expect(screen.getByLabelText('Current location')).toHaveTextContent('Directory/WXL:FOOD/Drop-off log')
+  })
 })
