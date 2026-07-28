@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WXLove Architecture: Interactive Map</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Inter',sans-serif;
+    background:#020617;
+    color:#e2e8f0;
+    min-height:100vh;
+    padding:clamp(1rem, 2vw, 2rem);
+  }
+  .container { max-width:1560px; margin:0 auto; }
+  header { margin-bottom:1.5rem; }
+  .header-row { display:flex; align-items:center; gap:.75rem; margin-bottom:.35rem; flex-wrap:wrap; }
+  .pulse-dot { width:11px; height:11px; border-radius:50%; background:#ef9877; animation:pulse 2s infinite; flex-shrink:0; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.45} }
+  h1 { font-size:1.55rem; font-weight:700; letter-spacing:-0.02em; font-family:'JetBrains Mono',monospace; }
+  h1 .x { color:#ef9877; }
+  .subtitle { color:#b7c1d1; font-size:.85rem; margin-left:1.6rem; font-family:'JetBrains Mono',monospace; }
+  .toolbar { display:flex; gap:.5rem; margin-top:1rem; flex-wrap:wrap; }
+  .toolbar button {
+    font-family:'JetBrains Mono',monospace;
+    font-size:.78rem;
+    letter-spacing:.02em;
+    padding:.6rem 1rem;
+    border-radius:999px;
+    min-height:44px;
+    border:1px solid #1e293b;
+    background:rgba(15,23,42,.6);
+    color:#b7c1d1;
+    cursor:pointer;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .toolbar button:hover { border-color:#334155; color:#e2e8f0; }
+  .toolbar button.active { border-color:#ef9877; color:#ef9877; background:rgba(239,151,119,.08); }
+  .toolbar button:active { transform:scale(.97); }
+  .toolbar button:focus-visible, .node:focus-visible rect, .node:focus-visible ellipse {
+    outline:2px solid #f8b49b;
+    outline-offset:3px;
+  }
+  .diagram-guide {
+    color:#b7c1d1;
+    font-size:.8rem;
+    line-height:1.5;
+    margin-top:.75rem;
+  }
+  .route-summary {
+    display:none;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:.45rem;
+    margin-top:1rem;
+    padding:.85rem 1rem;
+    border:1px solid rgba(239,152,119,.45);
+    border-radius:.75rem;
+    background:rgba(239,152,119,.06);
+  }
+  .route-summary.visible { display:flex; }
+  .route-summary__label {
+    width:100%;
+    color:#f8b49b;
+    font-family:'JetBrains Mono',monospace;
+    font-size:.7rem;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+  }
+  .route-summary__step {
+    color:#f1f5f9;
+    font-size:.78rem;
+    font-weight:600;
+    line-height:1.3;
+    padding:.4rem .65rem;
+    border:1px solid #475569;
+    border-radius:999px;
+    background:#0f172a;
+  }
+  .route-summary__arrow { color:#ef9877; font-size:.9rem; }
+  .layout { display:grid; grid-template-columns:minmax(0, 1fr) 360px; gap:1.25rem; margin-top:1.25rem; align-items:start; }
+  .diagram-shell {
+    background:rgba(15,23,42,.5);
+    border-radius:1rem;
+    border:1px solid #1e293b;
+    padding:1rem;
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+    touch-action:pan-x pan-y;
+  }
+  svg { width:max(100%, 1180px); display:block; }
+  .node { cursor:pointer; transition:opacity .2s ease; }
+  .node rect, .node ellipse { transition:filter .15s ease, stroke-width .15s ease; }
+  .node:hover rect, .node:hover ellipse { filter:brightness(1.25); }
+  .node.dim { opacity:.22; }
+  .node.route-dim { opacity:.14; }
+  .node.route-active rect, .node.route-active ellipse {
+    filter:brightness(1.18) drop-shadow(0 0 6px rgba(239,152,119,.45));
+    stroke:#ef9877;
+    stroke-width:2.6;
+  }
+  .node.selected rect, .node.selected ellipse { stroke-width:3; }
+  .flow-line { transition:opacity .2s ease; }
+  .flow-line.dim { opacity:.08; }
+  .route-line {
+    fill:none;
+    stroke:#ef9877;
+    stroke-width:3;
+    stroke-linecap:round;
+    opacity:.95;
+    filter:drop-shadow(0 0 4px rgba(239,152,119,.55));
+    pointer-events:none;
+  }
+  .layer-label { font-family:'JetBrains Mono',monospace; fill:#8a97ab; font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; }
+
+  .panel {
+    background:rgba(15,23,42,.6);
+    border:1px solid #1e293b;
+    border-radius:1rem;
+    padding:1.25rem;
+    position:sticky;
+    top:1.75rem;
+    min-height:420px;
+  }
+  .panel-empty { color:#b7c1d1; font-size:.9rem; line-height:1.65; font-family:'JetBrains Mono',monospace; }
+  .panel-eyebrow { font-family:'JetBrains Mono',monospace; font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.4rem; }
+  .panel h2 { font-size:1.2rem; margin-bottom:.2rem; font-weight:700; }
+  .panel .path { font-family:'JetBrains Mono',monospace; font-size:.75rem; color:#94a3b8; margin-bottom:1rem; word-break:break-all; }
+  .panel-route { color:#f8b49b; font-size:.78rem; font-weight:600; margin:-.35rem 0 1rem; }
+  .status-chip { display:inline-block; font-family:'JetBrains Mono',monospace; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; padding:.3rem .6rem; border-radius:999px; margin-bottom:1rem; }
+  .status-live { background:rgba(52,211,153,.12); color:#34d399; border:1px solid rgba(52,211,153,.35); }
+  .status-needs-migration { background:rgba(251,191,36,.12); color:#fbbf24; border:1px solid rgba(251,191,36,.35); }
+  .status-built-inactive { background:rgba(167,139,250,.12); color:#a78bfa; border:1px solid rgba(167,139,250,.35); }
+  .status-deferred { background:rgba(148,163,184,.1); color:#b7c1d1; border:1px solid rgba(148,163,184,.3); }
+  .panel p { font-size:.95rem; line-height:1.65; color:#dbe3ee; margin-bottom:.85rem; }
+  .panel ul { list-style:none; font-size:.88rem; color:#c4cedd; line-height:1.7; }
+  .panel li { margin-bottom:.15rem; }
+  .panel li::before { content:"› "; color:#ef9877; }
+
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:1rem; margin-top:1.5rem; }
+  .card { background:rgba(15,23,42,.5); border-radius:.75rem; border:1px solid #1e293b; padding:1.1rem; }
+  .card-header { display:flex; align-items:center; gap:.5rem; margin-bottom:.6rem; }
+  .card-dot { width:8px; height:8px; border-radius:50%; }
+  .card h3 { font-size:.9rem; font-weight:600; }
+  .card ul { list-style:none; color:#c4cedd; font-size:.8rem; line-height:1.65; }
+  .card li::before { content:"• "; }
+
+  footer { text-align:center; margin-top:1.75rem; color:#94a3b8; font-size:.75rem; line-height:1.6; font-family:'JetBrains Mono',monospace; }
+  @media (max-width:1700px) {
+    .layout { grid-template-columns:1fr; }
+    .panel { position:static; min-height:auto; }
+  }
+  @media (max-width:640px) {
+    body { padding:.75rem; }
+    h1 { font-size:1.3rem; }
+    .subtitle { margin-left:0; display:block; margin-top:.4rem; font-size:.8rem; }
+    .toolbar {
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      margin-inline:-.75rem;
+      padding:0 .75rem .5rem;
+      scrollbar-width:thin;
+      scroll-snap-type:x proximity;
+    }
+    .toolbar button { flex:0 0 auto; font-size:.74rem; padding:.55rem .8rem; scroll-snap-align:start; }
+    .panel { position:static; min-height:auto; }
+    .diagram-shell { padding:.75rem; }
+    .diagram-guide { font-size:.76rem; }
+    .route-summary { padding:.75rem; gap:.35rem; }
+    .route-summary__step { font-size:.72rem; padding:.35rem .55rem; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="header-row">
+      <div class="pulse-dot"></div>
+      <h1>W<span class="x">X</span>Love Architecture</h1>
+    </div>
+    <p class="subtitle">interactive system map · public app → coordination protocol → data layer · click a node for detail</p>
+    <div class="toolbar">
+      <button type="button" data-filter="all" class="active" aria-pressed="true">All layers</button>
+      <button type="button" data-filter="client" aria-pressed="false">Client</button>
+      <button type="button" data-filter="function" aria-pressed="false">Netlify Functions</button>
+      <button type="button" data-filter="active-data" aria-pressed="false">Active data (command.food_*)</button>
+      <button type="button" data-filter="protocol" aria-pressed="false">Coordination protocol (built, gated)</button>
+      <button type="button" data-filter="services" aria-pressed="false">Services (built, not activated)</button>
+      <button type="button" data-filter="external" aria-pressed="false">External</button>
+    </div>
+    <p class="diagram-guide">The map stays at a readable scale. Scroll horizontally to follow every layer, then select a node for details below the map on smaller screens.</p>
+    <div class="route-summary" id="route-summary" aria-live="polite"></div>
+  </header>
+
+  <div class="layout">
+    <div class="diagram-shell" role="region" aria-label="Scrollable WXLove system architecture map" tabindex="0">
+      <svg viewBox="0 0 1180 900" role="img" aria-labelledby="diagram-title diagram-description">
+        <title id="diagram-title">WXLove system architecture</title>
+        <desc id="diagram-description">Interactive map from the public client through Netlify functions, active data, the gated coordination protocol, inactive services, and external dependencies.</desc>
+        <defs>
+          <marker id="arrow" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+            <polygon points="0 0, 9 3.5, 0 7" fill="#475569" />
+          </marker>
+          <marker id="arrow-gated" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+            <polygon points="0 0, 9 3.5, 0 7" fill="#a78bfa" />
+          </marker>
+          <marker id="arrow-route" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+            <polygon points="0 0, 9 3.5, 0 7" fill="#ef9877" />
+          </marker>
+          <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+            <path d="M 36 0 L 0 0 0 36" fill="none" stroke="#0f172a" stroke-width="0.6"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid)" />
+
+        <!-- ===================== LAYER LABELS ===================== -->
+        <text x="24" y="34" class="layer-label">Client · public + advanced workspace</text>
+        <text x="24" y="184" class="layer-label">Netlify functions</text>
+        <text x="24" y="300" class="layer-label">Active data · command schema (live / needs migration)</text>
+        <text x="24" y="560" class="layer-label">Coordination protocol · built, gated (migrations 032–036)</text>
+        <text x="24" y="740" class="layer-label">Services · built, not activated in production</text>
+        <text x="24" y="860" class="layer-label">External</text>
+
+        <!-- ===================== FLOW LINES (drawn first, behind nodes) ===================== -->
+        <g id="flows">
+          <!-- client -> functions -->
+          <line class="flow-line" data-layers="client,function" x1="150" y1="150" x2="150" y2="205" stroke="#475569" stroke-width="1.7" marker-end="url(#arrow)"/>
+          <line class="flow-line" data-layers="client,function" x1="330" y1="150" x2="330" y2="205" stroke="#475569" stroke-width="1.7" marker-end="url(#arrow)"/>
+          <!-- client -> active data (direct supabase-js reads/writes) -->
+          <path class="flow-line" data-layers="client,active-data" d="M 520 150 C 520 220, 500 260, 470 320" fill="none" stroke="#475569" stroke-width="1.7" marker-end="url(#arrow)"/>
+          <!-- functions -> resend -->
+          <line class="flow-line" data-layers="function,external" x1="150" y1="255" x2="150" y2="855" stroke="#475569" stroke-width="1.3" stroke-dasharray="3,4" marker-end="url(#arrow)"/>
+          <!-- functions -> active data (food-alert reads the row it validates) -->
+          <path class="flow-line" data-layers="function,active-data" d="M 330 255 C 330 285, 380 300, 430 320" fill="none" stroke="#475569" stroke-width="1.7" marker-end="url(#arrow)"/>
+          <!-- active data -> protocol (shared schema, protocol reads participants/needs alongside food_*) -->
+          <path class="flow-line dim" data-layers="active-data,protocol" d="M 600 470 C 600 500, 600 520, 600 555" fill="none" stroke="#a78bfa" stroke-width="1.6" stroke-dasharray="4,4" marker-end="url(#arrow-gated)"/>
+          <!-- protocol -> services -->
+          <path class="flow-line dim" data-layers="protocol,services" d="M 300 700 C 300 715, 300 725, 300 735" fill="none" stroke="#a78bfa" stroke-width="1.6" stroke-dasharray="4,4" marker-end="url(#arrow-gated)"/>
+          <path class="flow-line dim" data-layers="protocol,services" d="M 620 700 C 620 715, 620 725, 620 735" fill="none" stroke="#a78bfa" stroke-width="1.6" stroke-dasharray="4,4" marker-end="url(#arrow-gated)"/>
+          <path class="flow-line dim" data-layers="protocol,services" d="M 900 700 C 900 715, 900 725, 900 735" fill="none" stroke="#a78bfa" stroke-width="1.6" stroke-dasharray="4,4" marker-end="url(#arrow-gated)"/>
+          <!-- services -> external (stripe, twilio) -->
+          <line class="flow-line dim" data-layers="services,external" x1="620" y1="800" x2="620" y2="855" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="3,4" marker-end="url(#arrow-gated)"/>
+          <line class="flow-line dim" data-layers="services,external" x1="900" y1="800" x2="900" y2="855" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="3,4" marker-end="url(#arrow-gated)"/>
+        </g>
+        <g id="route-highlight" aria-hidden="true"></g>
+
+        <!-- ===================== CLIENT LAYER ===================== -->
+        <g id="nodes-client">
+          <g class="node" data-layer="client" data-id="client-simple">
+            <rect x="80" y="46" width="140" height="100" rx="8" fill="rgba(40,90,70,0.32)" stroke="#5fb08a" stroke-width="1.8"/>
+            <text x="150" y="72" text-anchor="middle" fill="#e2e8f0" font-size="12.5" font-weight="700" font-family="Inter">Simple shell</text>
+            <text x="150" y="90" text-anchor="middle" fill="#b7c1d1" font-size="10">Find food · Contribute</text>
+            <text x="150" y="103" text-anchor="middle" fill="#b7c1d1" font-size="10">Gather · Requests</text>
+            <text x="150" y="124" text-anchor="middle" fill="#5fb08a" font-size="9" font-family="JetBrains Mono">LIVE</text>
+          </g>
+          <g class="node" data-layer="client" data-id="client-advanced">
+            <rect x="260" y="46" width="140" height="100" rx="8" fill="rgba(75,134,189,0.28)" stroke="#4b86bd" stroke-width="1.8"/>
+            <text x="330" y="72" text-anchor="middle" fill="#e2e8f0" font-size="12.5" font-weight="700" font-family="Inter">Advanced workspace</text>
+            <text x="330" y="90" text-anchor="middle" fill="#b7c1d1" font-size="10">Rescue Ops · Volunteer</text>
+            <text x="330" y="103" text-anchor="middle" fill="#b7c1d1" font-size="10">Harvest Runs · Inventory</text>
+            <text x="330" y="124" text-anchor="middle" fill="#5fb08a" font-size="9" font-family="JetBrains Mono">LIVE</text>
+          </g>
+          <g class="node" data-layer="client" data-id="client-map">
+            <rect x="440" y="46" width="140" height="100" rx="8" fill="rgba(75,134,189,0.28)" stroke="#4b86bd" stroke-width="1.8"/>
+            <text x="510" y="72" text-anchor="middle" fill="#e2e8f0" font-size="12.5" font-weight="700" font-family="Inter">Austin food map</text>
+            <text x="510" y="90" text-anchor="middle" fill="#b7c1d1" font-size="10">Leaflet + OSM tiles</text>
+            <text x="510" y="103" text-anchor="middle" fill="#b7c1d1" font-size="10">directory + community pins</text>
+            <text x="510" y="124" text-anchor="middle" fill="#5fb08a" font-size="9" font-family="JetBrains Mono">LIVE</text>
+          </g>
+          <g class="node" data-layer="client" data-id="client-auth">
+            <rect x="620" y="46" width="140" height="100" rx="8" fill="rgba(137,91,181,0.26)" stroke="#895bb5" stroke-width="1.8"/>
+            <text x="690" y="72" text-anchor="middle" fill="#e2e8f0" font-size="12.5" font-weight="700" font-family="Inter">Auth</text>
+            <text x="690" y="90" text-anchor="middle" fill="#b7c1d1" font-size="10">Email + password</text>
+            <text x="690" y="103" text-anchor="middle" fill="#b7c1d1" font-size="10">reset · recovery</text>
+            <text x="690" y="124" text-anchor="middle" fill="#5fb08a" font-size="9" font-family="JetBrains Mono">LIVE</text>
+          </g>
+          <g class="node" data-layer="client" data-id="client-protocol-board">
+            <rect x="800" y="46" width="140" height="100" rx="8" fill="rgba(167,139,250,0.18)" stroke="#a78bfa" stroke-width="1.8" stroke-dasharray="4,3"/>
+            <text x="870" y="72" text-anchor="middle" fill="#e2e8f0" font-size="12.5" font-weight="700" font-family="Inter">ProtocolBoard.tsx</text>
+            <text x="870" y="90" text-anchor="middle" fill="#b7c1d1" font-size="10">needs · supplies</text>
+            <text x="870" y="103" text-anchor="middle" fill="#b7c1d1" font-size="10">match runs · potlucks</text>
+            <text x="870" y="124" text-anchor="middle" fill="#a78bfa" font-size="9" font-family="JetBrains Mono">NEEDS API CONFIG</text>
+          </g>
+        </g>
+
+        <!-- ===================== NETLIFY FUNCTIONS ===================== -->
+        <g id="nodes-function">
+          <g class="node" data-layer="function" data-id="fn-alert">
+            <rect x="80" y="205" width="140" height="50" rx="6" fill="rgba(120,53,15,0.28)" stroke="#fbbf24" stroke-width="1.8"/>
+            <text x="150" y="226" text-anchor="middle" fill="white" font-size="12" font-weight="600">food-alert.mjs</text>
+            <text x="150" y="242" text-anchor="middle" fill="#b7c1d1" font-size="9.5">validates session, emails</text>
+          </g>
+          <g class="node" data-layer="function" data-id="fn-subscribe">
+            <rect x="260" y="205" width="140" height="50" rx="6" fill="rgba(120,53,15,0.28)" stroke="#fbbf24" stroke-width="1.8"/>
+            <text x="330" y="226" text-anchor="middle" fill="white" font-size="12" font-weight="600">subscribe / feedback</text>
+            <text x="330" y="242" text-anchor="middle" fill="#b7c1d1" font-size="9.5">Resend audience + shared inbox</text>
+          </g>
+        </g>
+
+        <!-- ===================== ACTIVE DATA (command.food_*) ===================== -->
+        <g id="nodes-active-data">
+          <rect x="60" y="308" width="1080" height="230" rx="10" fill="rgba(75,134,189,0.08)" stroke="#4b86bd" stroke-width="1.3" stroke-dasharray="8,4"/>
+          <text x="76" y="326" fill="#4b86bd" font-size="10.5" font-weight="600" font-family="JetBrains Mono">Supabase · command schema (browser anon key only)</text>
+
+          <g class="node" data-layer="active-data" data-id="data-requests">
+            <rect x="90" y="340" width="150" height="56" rx="6" fill="rgba(40,90,70,0.3)" stroke="#5fb08a" stroke-width="1.8"/>
+            <text x="165" y="360" text-anchor="middle" fill="white" font-size="11.5" font-weight="600">food_requests</text>
+            <text x="165" y="374" text-anchor="middle" fill="#b7c1d1" font-size="9">+ messages, supporters,</text>
+            <text x="165" y="386" text-anchor="middle" fill="#b7c1d1" font-size="9">offers, status_history</text>
+          </g>
+          <g class="node" data-layer="active-data" data-id="data-rescues">
+            <rect x="260" y="340" width="150" height="56" rx="6" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" stroke-width="1.8"/>
+            <text x="335" y="360" text-anchor="middle" fill="white" font-size="11.5" font-weight="600">food_rescues</text>
+            <text x="335" y="374" text-anchor="middle" fill="#b7c1d1" font-size="9">checkpoints, events,</text>
+            <text x="335" y="386" text-anchor="middle" fill="#b7c1d1" font-size="9">incident hold</text>
+          </g>
+          <g class="node" data-layer="active-data" data-id="data-contributors">
+            <rect x="430" y="340" width="150" height="56" rx="6" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" stroke-width="1.8"/>
+            <text x="505" y="360" text-anchor="middle" fill="white" font-size="11.5" font-weight="600">food_contributors</text>
+            <text x="505" y="374" text-anchor="middle" fill="#b7c1d1" font-size="9">private readiness,</text>
+            <text x="505" y="386" text-anchor="middle" fill="#b7c1d1" font-size="9">review events</text>
+          </g>
+          <g class="node" data-layer="active-data" data-id="data-harvest">
+            <rect x="600" y="340" width="150" height="56" rx="6" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" stroke-width="1.8"/>
+            <text x="675" y="360" text-anchor="middle" fill="white" font-size="11.5" font-weight="600">food_harvest_runs</text>
+            <text x="675" y="374" text-anchor="middle" fill="#b7c1d1" font-size="9">stops, events,</text>
+            <text x="675" y="386" text-anchor="middle" fill="#b7c1d1" font-size="9">compost returns</text>
+          </g>
+          <g class="node" data-layer="active-data" data-id="data-inventory">
+            <rect x="770" y="340" width="150" height="56" rx="6" fill="rgba(251,191,36,0.15)" stroke="#fbbf24" stroke-width="1.8"/>
+            <text x="845" y="360" text-anchor="middle" fill="white" font-size="11.5" font-weight="600">food_inventory_lots</text>
+            <text x="845" y="374" text-anchor="middle" fill="#b7c1d1" font-size="9">allocations, condition</text>
+            <text x="845" y="386" text-anchor="middle" fill="#b7c1d1" font-size="9">checks, ledger</text>
+          </g>
+          <g class="node" data-layer="active-data" data-id="data-spots">
+            <rect x="940" y="340" width="150" height="56" rx="6" fill="rgba(40,90,70,0.3)" stroke="#5fb08a" stroke-width="1.8"/>
+            <text x="1015" y="360" text-anchor="middle" fill="white" font-size="11.5" font-weight="600">food_spots · alerts</text>
+            <text x="1015" y="374" text-anchor="middle" fill="#b7c1d1" font-size="9">community pins,</text>
+            <text x="1015" y="386" text-anchor="middle" fill="#b7c1d1" font-size="9">FOOD IS HERE! (6h TTL)</text>
+          </g>
+
+          <g class="node" data-layer="active-data" data-id="data-partners">
+            <rect x="90" y="415" width="150" height="50" rx="6" fill="rgba(148,163,184,0.12)" stroke="#b7c1d1" stroke-width="1.6"/>
+            <text x="165" y="435" text-anchor="middle" fill="white" font-size="11" font-weight="600">food_partners</text>
+            <text x="165" y="450" text-anchor="middle" fill="#b7c1d1" font-size="9">source nominations</text>
+          </g>
+          <g class="node" data-layer="active-data" data-id="data-engagement">
+            <rect x="260" y="415" width="150" height="50" rx="6" fill="rgba(148,163,184,0.12)" stroke="#b7c1d1" stroke-width="1.6"/>
+            <text x="335" y="435" text-anchor="middle" fill="white" font-size="11" font-weight="600">food_engagement_events</text>
+            <text x="335" y="450" text-anchor="middle" fill="#b7c1d1" font-size="9">admin-only leaderboard</text>
+          </g>
+
+          <text x="90" y="500" fill="#5fb08a" font-size="9" font-family="JetBrains Mono">■ live</text>
+          <text x="150" y="500" fill="#fbbf24" font-size="9" font-family="JetBrains Mono">■ needs live multi-role verification</text>
+          <text x="420" y="500" fill="#b7c1d1" font-size="9" font-family="JetBrains Mono">■ internal / support tables</text>
+        </g>
+
+        <!-- ===================== COORDINATION PROTOCOL (gated) ===================== -->
+        <g id="nodes-protocol">
+          <rect x="60" y="558" width="1080" height="140" rx="10" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="1.3" stroke-dasharray="8,4"/>
+          <text x="76" y="576" fill="#a78bfa" font-size="10.5" font-weight="600" font-family="JetBrains Mono">Migrations 032–036 · channel-independent protocol, deployed, activation gated</text>
+
+          <g class="node" data-layer="protocol" data-id="proto-participants">
+            <rect x="90" y="590" width="160" height="56" rx="6" fill="rgba(167,139,250,0.14)" stroke="#a78bfa" stroke-width="1.7"/>
+            <text x="170" y="610" text-anchor="middle" fill="white" font-size="11" font-weight="600">participants</text>
+            <text x="170" y="624" text-anchor="middle" fill="#b7c1d1" font-size="9">trust tiers, consent,</text>
+            <text x="170" y="636" text-anchor="middle" fill="#b7c1d1" font-size="9">agent mandates</text>
+          </g>
+          <g class="node" data-layer="protocol" data-id="proto-needs">
+            <rect x="270" y="590" width="160" height="56" rx="6" fill="rgba(167,139,250,0.14)" stroke="#a78bfa" stroke-width="1.7"/>
+            <text x="350" y="610" text-anchor="middle" fill="white" font-size="11" font-weight="600">needs · supplies</text>
+            <text x="350" y="624" text-anchor="middle" fill="#b7c1d1" font-size="9">3 lanes: aid, market,</text>
+            <text x="350" y="636" text-anchor="middle" fill="#b7c1d1" font-size="9">potluck</text>
+          </g>
+          <g class="node" data-layer="protocol" data-id="proto-match">
+            <rect x="450" y="590" width="160" height="56" rx="6" fill="rgba(167,139,250,0.14)" stroke="#a78bfa" stroke-width="1.7"/>
+            <text x="530" y="610" text-anchor="middle" fill="white" font-size="11" font-weight="600">match_runs</text>
+            <text x="530" y="624" text-anchor="middle" fill="#b7c1d1" font-size="9">replayable, scored,</text>
+            <text x="530" y="636" text-anchor="middle" fill="#b7c1d1" font-size="9">explanation codes</text>
+          </g>
+          <g class="node" data-layer="protocol" data-id="proto-commitments">
+            <rect x="630" y="590" width="160" height="56" rx="6" fill="rgba(167,139,250,0.14)" stroke="#a78bfa" stroke-width="1.7"/>
+            <text x="710" y="610" text-anchor="middle" fill="white" font-size="11" font-weight="600">commitments</text>
+            <text x="710" y="624" text-anchor="middle" fill="#b7c1d1" font-size="9">atomic qty checks,</text>
+            <text x="710" y="636" text-anchor="middle" fill="#b7c1d1" font-size="9">outbox, receipts</text>
+          </g>
+          <g class="node" data-layer="protocol" data-id="proto-potlucks">
+            <rect x="810" y="590" width="160" height="56" rx="6" fill="rgba(167,139,250,0.14)" stroke="#a78bfa" stroke-width="1.7"/>
+            <text x="890" y="610" text-anchor="middle" fill="white" font-size="11" font-weight="600">potlucks</text>
+            <text x="890" y="624" text-anchor="middle" fill="#b7c1d1" font-size="9">venues, RSVPs,</text>
+            <text x="890" y="636" text-anchor="middle" fill="#b7c1d1" font-size="9">timed address release</text>
+          </g>
+          <g class="node" data-layer="protocol" data-id="proto-payments">
+            <rect x="990" y="590" width="130" height="56" rx="6" fill="rgba(167,139,250,0.14)" stroke="#a78bfa" stroke-width="1.7"/>
+            <text x="1055" y="610" text-anchor="middle" fill="white" font-size="10.5" font-weight="600">payments</text>
+            <text x="1055" y="624" text-anchor="middle" fill="#b7c1d1" font-size="8.5">donations,</text>
+            <text x="1055" y="636" text-anchor="middle" fill="#b7c1d1" font-size="8.5">subsidies</text>
+          </g>
+        </g>
+
+        <!-- ===================== SERVICES (built, not activated) ===================== -->
+        <g id="nodes-services">
+          <g class="node" data-layer="services" data-id="svc-api">
+            <rect x="200" y="740" width="200" height="60" rx="8" fill="rgba(167,139,250,0.12)" stroke="#a78bfa" stroke-width="1.8" stroke-dasharray="4,3"/>
+            <text x="300" y="762" text-anchor="middle" fill="white" font-size="12" font-weight="700">Coordination API</text>
+            <text x="300" y="778" text-anchor="middle" fill="#b7c1d1" font-size="9.5">TS · REST, MCP, A2A,</text>
+            <text x="300" y="791" text-anchor="middle" fill="#b7c1d1" font-size="9.5">Stripe + Twilio webhooks</text>
+          </g>
+          <g class="node" data-layer="services" data-id="svc-worker">
+            <rect x="520" y="740" width="200" height="60" rx="8" fill="rgba(167,139,250,0.12)" stroke="#a78bfa" stroke-width="1.8" stroke-dasharray="4,3"/>
+            <text x="620" y="762" text-anchor="middle" fill="white" font-size="12" font-weight="700">Matching worker</text>
+            <text x="620" y="778" text-anchor="middle" fill="#b7c1d1" font-size="9.5">Python · OR-Tools</text>
+            <text x="620" y="791" text-anchor="middle" fill="#b7c1d1" font-size="9.5">min-cost + vehicle routing</text>
+          </g>
+          <g class="node" data-layer="services" data-id="svc-other">
+            <rect x="800" y="740" width="200" height="60" rx="8" fill="rgba(167,139,250,0.12)" stroke="#a78bfa" stroke-width="1.8" stroke-dasharray="4,3"/>
+            <text x="900" y="762" text-anchor="middle" fill="white" font-size="12" font-weight="700">Payment · potluck · retention</text>
+            <text x="900" y="778" text-anchor="middle" fill="#b7c1d1" font-size="9.5">supervised workers,</text>
+            <text x="900" y="791" text-anchor="middle" fill="#b7c1d1" font-size="9.5">not running in production</text>
+          </g>
+        </g>
+
+        <!-- ===================== EXTERNAL ===================== -->
+        <g id="nodes-external">
+          <g class="node" data-layer="external" data-id="ext-resend">
+            <rect x="80" y="815" width="140" height="50" rx="6" fill="rgba(30,41,59,0.55)" stroke="#b7c1d1" stroke-width="1.7"/>
+            <text x="150" y="836" text-anchor="middle" fill="white" font-size="11" font-weight="600">Resend</text>
+            <text x="150" y="850" text-anchor="middle" fill="#b7c1d1" font-size="9">operations + audience email</text>
+          </g>
+          <g class="node" data-layer="external" data-id="ext-osm">
+            <rect x="260" y="815" width="140" height="50" rx="6" fill="rgba(30,41,59,0.55)" stroke="#b7c1d1" stroke-width="1.7"/>
+            <text x="330" y="836" text-anchor="middle" fill="white" font-size="11" font-weight="600">OpenStreetMap</text>
+            <text x="330" y="850" text-anchor="middle" fill="#b7c1d1" font-size="9">tile source, Leaflet</text>
+          </g>
+          <g class="node" data-layer="external" data-id="ext-stripe">
+            <rect x="540" y="815" width="140" height="50" rx="6" fill="rgba(30,41,59,0.4)" stroke="#8a97ab" stroke-width="1.6" stroke-dasharray="3,3"/>
+            <text x="610" y="836" text-anchor="middle" fill="#cbd5e1" font-size="11" font-weight="600">Stripe</text>
+            <text x="610" y="850" text-anchor="middle" fill="#8a97ab" font-size="9">test-mode only, not live</text>
+          </g>
+          <g class="node" data-layer="external" data-id="ext-twilio">
+            <rect x="820" y="815" width="140" height="50" rx="6" fill="rgba(30,41,59,0.4)" stroke="#8a97ab" stroke-width="1.6" stroke-dasharray="3,3"/>
+            <text x="890" y="836" text-anchor="middle" fill="#cbd5e1" font-size="11" font-weight="600">Twilio Voice</text>
+            <text x="890" y="850" text-anchor="middle" fill="#8a97ab" font-size="9">no production number yet</text>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <aside class="panel" id="panel" aria-live="polite">
+      <div class="panel-empty">
+        Select any node in the diagram to see what it is, its status, and what still needs to happen before it is trusted with real food or real people.<br><br>
+        Use the layer filters above to isolate one part of the system at a time.
+      </div>
+    </aside>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-header"><div class="card-dot" style="background:#5fb08a"></div><h3>What's actually live</h3></div>
+      <ul>
+        <li>Public map, requests, alerts, auth</li>
+        <li>Rescue submission + coordinator review</li>
+        <li>Contributor readiness + harvest runs</li>
+        <li>Inventory custody + immutable ledger</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-dot" style="background:#fbbf24"></div><h3>Built, needs live verification</h3></div>
+      <ul>
+        <li>Multi-role, retry, concurrency tests</li>
+        <li>Austin Public Health classification</li>
+        <li>Contributor rehearsal before food moves</li>
+        <li>Notifications, escalation, retention</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-dot" style="background:#a78bfa"></div><h3>Built, deliberately not activated</h3></div>
+      <ul>
+        <li>Full coordination protocol (3 lanes)</li>
+        <li>OR-Tools matching worker</li>
+        <li>Payment, potluck, retention workers</li>
+        <li>SMS (explicitly deferred)</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>WXLove (formerly WXL:FOOD) · architecture reflects repo state as documented in wxl/HANDOFF.md, docs/LIVING-DOCS.md, docs/COORDINATION-PROTOCOL.md as of 2026-07-25 · authored directly, no model cost</footer>
+</div>
+
+<script>
+const DATA = {
+  "client-simple": {
+    eyebrow: "Client · Live", status: "status-live",
+    title: "Simple public shell",
+    path: "wxl/src/App.tsx",
+    desc: "Mobile-first default experience. Four persistent destinations: Find food, Contribute, Gather, Requests. This is what most visitors see; Advanced workspace is opt-in and remembered per browser.",
+    bullets: ["Geolocation prompt is optional, in-memory only", "Drafts survive the sign-in handoff", "Anonymous write attempts open an account prompt"]
+  },
+  "client-advanced": {
+    eyebrow: "Client · Live", status: "status-live",
+    title: "Advanced workspace",
+    path: "wxl/src/{RescueBoard,HarvestRunBoard,InventoryBoard,ContributorBoard}.tsx",
+    desc: "Coordinator-facing operational boards. Explicit opt-in setting, not the default. Each board is a real persisted workflow, not a mockup.",
+    bullets: ["Rescue Ops: submission, review, claim, checkpoints", "Volunteer Command: readiness + training approval", "Harvest Runs: multi-stop dispatch", "Inventory: lot custody + ledger"]
+  },
+  "client-map": {
+    eyebrow: "Client · Live", status: "status-live",
+    title: "Austin food map",
+    path: "wxl/src/FoodMap.tsx",
+    desc: "Real Leaflet map over OpenStreetMap tiles. Directory-listed locations (City of Austin, Central Texas Food Bank) plus reviewed community pins.",
+    bullets: ["Only reviewed coordinates get a marker", "Navigate button opens Apple/Google Maps by platform", "No offline tile caching"]
+  },
+  "client-auth": {
+    eyebrow: "Client · Live", status: "status-live",
+    title: "Authentication",
+    path: "wxl/src/lib/auth.ts",
+    desc: "Email + password via Supabase Auth. No magic links. Signup starts a session immediately, no email confirmation step required.",
+    bullets: ["Password reset via recovery email", "Session drives all write-gating, never a query param", "Redirect allowlist must include /app/?mode=recovery"]
+  },
+  "client-protocol-board": {
+    eyebrow: "Client · Needs API config", status: "status-needs-migration",
+    title: "Coordination protocol workspace",
+    path: "wxl/src/ProtocolBoard.tsx",
+    desc: "Exposes the deeper protocol (needs, supplies, matching requests, commitments, potlucks) to the web app when the separate Coordination API is configured. Not the default experience.",
+    bullets: ["Depends on services layer being reachable", "Distinct from the simple Requests flow"]
+  },
+  "fn-alert": {
+    eyebrow: "Netlify Function · Live", status: "status-live",
+    title: "food-alert.mjs",
+    path: "netlify/functions/food-alert.mjs",
+    desc: "Validates the Supabase access token, re-reads the newly created alert through the authenticated API, then sends a best-effort Resend email. Falls back to HAND's shared feedback endpoint if WXL-specific Resend vars are missing.",
+    bullets: ["Rate limited: 5 alerts / account / 15 min", "Database remains source of truth; email is additive"]
+  },
+  "fn-subscribe": {
+    eyebrow: "Netlify Function · Live", status: "status-live",
+    title: "subscribe · feedback",
+    path: "netlify/functions/{subscribe,feedback}.js",
+    desc: "Email-only updates list (no account created) and the shared feedback widget that fans out to HAND Command Center, Telegram, and Resend.",
+    bullets: ["Offline feedback queues locally, retries on reconnect"]
+  },
+  "data-requests": {
+    eyebrow: "Supabase · Live", status: "status-live",
+    title: "command.food_requests",
+    path: "command/supabase/migrations/024, 027",
+    desc: "Community requests with structured offers, owner-checked accept/decline, and immutable status history. The most complete coordination loop in the product today.",
+    bullets: ["Reply/supporter/offer counts maintained by triggers", "Public replies, explicit privacy warning shown in UI"]
+  },
+  "data-rescues": {
+    eyebrow: "Supabase · Needs live verification", status: "status-needs-migration",
+    title: "command.food_rescues",
+    path: "command/supabase/migrations/028",
+    desc: "Coordinator-reviewed rescue submissions with atomic claims, safety checkpoints, and incident hold. Schema and RLS are deployed; supervised multi-role rehearsal is still required before real food moves.",
+    bullets: ["Chilled food >41°F or hot food <135°F triggers incident hold", "Claims expire after 2h or the pickup deadline"]
+  },
+  "data-contributors": {
+    eyebrow: "Supabase · Needs live verification", status: "status-needs-migration",
+    title: "command.food_contributors",
+    path: "command/supabase/migrations/029",
+    desc: "Private Contributor readiness: training, equipment, run classes, expiry. Rescue claiming is server-enforced against this table, coordinators cannot bypass it.",
+    bullets: ["Self-service edits return to submitted, pausing claiming"]
+  },
+  "data-harvest": {
+    eyebrow: "Supabase · Needs live verification", status: "status-needs-migration",
+    title: "command.food_harvest_runs",
+    path: "command/supabase/migrations/030, 037-039",
+    desc: "Multi-stop private dispatch plans with exact capability matching (vehicle, lifting limit, temperature control). Compost pickup is opt-in per stop, never inferred.",
+    bullets: ["Start check-in revalidates eligibility 30 min before run", "A rescue cannot belong to two active runs"]
+  },
+  "data-inventory": {
+    eyebrow: "Supabase · Needs live verification", status: "status-needs-migration",
+    title: "command.food_inventory_lots",
+    path: "command/supabase/migrations/031",
+    desc: "Accepted-rescue custody: lot-specific storage limits, row-locked allocations, immutable quantity ledger. A lot can only be created from an already-accepted rescue.",
+    bullets: ["Failed condition checks hold the whole lot", "Discards require a reason and use only unreserved stock"]
+  },
+  "data-spots": {
+    eyebrow: "Supabase · Live", status: "status-live",
+    title: "command.food_spots · food_alerts",
+    path: "command/supabase/migrations/025",
+    desc: "Community-submitted public food pins and time-limited FOOD IS HERE! alerts. Realtime inserts/expirations push to open sessions.",
+    bullets: ["No private household addresses permitted"]
+  },
+  "data-partners": {
+    eyebrow: "Supabase · Live (internal)", status: "status-live",
+    title: "command.food_partners",
+    path: "command/supabase/migrations/024",
+    desc: "Source nominations from members. Only verified nominations are publicly readable; no coordinator review queue exists in the UI yet.",
+    bullets: []
+  },
+  "data-engagement": {
+    eyebrow: "Supabase · Live (internal)", status: "status-live",
+    title: "command.food_engagement_events",
+    path: "command/supabase/migrations/025",
+    desc: "A/B test variant tracking and interaction batching. Feeds an admin-only leaderboard view, invoker RLS.",
+    bullets: []
+  },
+  "proto-participants": {
+    eyebrow: "Protocol · Built, gated", status: "status-built-inactive",
+    title: "participants",
+    path: "command/supabase/migrations/032-036",
+    desc: "Tiered trust, verification evidence, consented contact channels, and agent mandates. Part of the channel-independent coordination layer that is deployed but not clientfacing by default.",
+    bullets: ["Exact locations stored as opaque ciphertext only"]
+  },
+  "proto-needs": {
+    eyebrow: "Protocol · Built, gated", status: "status-built-inactive",
+    title: "needs · supplies",
+    path: "command/supabase/migrations/032-036",
+    desc: "Canonical needs and supplies spanning three separately-governed lanes: charitable aid, paid marketplace, noncommercial potlucks. One lane's readiness gate does not block another.",
+    bullets: []
+  },
+  "proto-match": {
+    eyebrow: "Protocol · Built, gated", status: "status-built-inactive",
+    title: "match_runs",
+    path: "command/supabase/migrations/032-036",
+    desc: "Replayable match runs with candidate hard-rule results, score components, and explanation codes. Designed to run in shadow mode before ever committing a match automatically.",
+    bullets: []
+  },
+  "proto-commitments": {
+    eyebrow: "Protocol · Built, gated", status: "status-built-inactive",
+    title: "commitments",
+    path: "command/supabase/migrations/032-036",
+    desc: "Atomic supply-quantity checks, idempotent command receipts, and a transactional outbox. Deterministic policy decisions cannot be overridden by model text.",
+    bullets: []
+  },
+  "proto-potlucks": {
+    eyebrow: "Protocol · Built, gated", status: "status-built-inactive",
+    title: "potlucks",
+    path: "command/supabase/migrations/032-036",
+    desc: "Venues, menus, invitations, RSVPs, assignments, capacity, and timed address release. Lowest regulatory risk lane, no food-safety chain-of-custody required.",
+    bullets: []
+  },
+  "proto-payments": {
+    eyebrow: "Protocol · Built, gated", status: "status-built-inactive",
+    title: "payments · donations · subsidies",
+    path: "command/supabase/migrations/032-036",
+    desc: "Separate commercial-order, Stripe-transfer, donation, and subsidy accounting kept apart from charitable-aid records.",
+    bullets: []
+  },
+  "svc-api": {
+    eyebrow: "Service · Built, not activated", status: "status-built-inactive",
+    title: "Coordination API",
+    path: "wxl/services/coordination-api/",
+    desc: "TypeScript service exposing scoped REST resources, remote MCP, A2A task history, OAuth protected-resource metadata, and signed Stripe/Twilio webhook intake.",
+    bullets: ["No external agent gets commit/payment/location authority pre-certification"]
+  },
+  "svc-worker": {
+    eyebrow: "Service · Built, not activated", status: "status-built-inactive",
+    title: "Matching worker",
+    path: "wxl/services/matching-worker/",
+    desc: "Python + OR-Tools for hard-filtered min-cost allocation and capacity-aware vehicle routing. Recommended next step: run in shadow mode against a nonproduction Supabase branch to gather comparison data before any live matching.",
+    bullets: []
+  },
+  "svc-other": {
+    eyebrow: "Service · Built, not activated", status: "status-built-inactive",
+    title: "Payment · potluck · retention workers",
+    path: "wxl/services/",
+    desc: "Supervised workers for Stripe reconciliation, potluck planning, and data retention. None are running against production yet.",
+    bullets: []
+  },
+  "ext-resend": {
+    eyebrow: "External", status: "status-deferred",
+    title: "Resend",
+    path: "n/a",
+    desc: "Operations and audience email delivery, shared with the rest of HAND Protocol's Netlify functions.",
+    bullets: []
+  },
+  "ext-osm": {
+    eyebrow: "External", status: "status-deferred",
+    title: "OpenStreetMap",
+    path: "n/a",
+    desc: "Tile source for the Leaflet map. Attribution required and preserved.",
+    bullets: []
+  },
+  "ext-stripe": {
+    eyebrow: "External · Deferred", status: "status-deferred",
+    title: "Stripe",
+    path: "n/a",
+    desc: "Wired for signed webhook intake in the Coordination API, but no live-mode account onboarding has happened. Test mode only.",
+    bullets: []
+  },
+  "ext-twilio": {
+    eyebrow: "External · Deferred", status: "status-deferred",
+    title: "Twilio Voice",
+    path: "n/a",
+    desc: "Voice adapter exists with English/Spanish prompts and coordinator transfer, but there is no production phone number or verified consent record yet. SMS is a separate, explicitly deferred scope.",
+    bullets: []
+  }
+};
+
+const ROUTES = {
+  publicMap: {
+    label: "Find food route",
+    nodes: ["client-simple", "client-map", "data-spots", "data-partners", "ext-osm"]
+  },
+  alerts: {
+    label: "Food alert route",
+    nodes: ["client-simple", "fn-alert", "data-spots", "ext-resend"]
+  },
+  community: {
+    label: "Community request route",
+    nodes: ["client-simple", "client-auth", "data-requests", "data-engagement"]
+  },
+  rescue: {
+    label: "Rescue operations route",
+    nodes: ["client-advanced", "client-auth", "data-contributors", "data-rescues", "data-harvest", "data-inventory"]
+  },
+  updates: {
+    label: "Updates and feedback route",
+    nodes: ["client-simple", "fn-subscribe", "ext-resend"]
+  },
+  coordination: {
+    label: "Matching and commitment route",
+    nodes: ["client-protocol-board", "proto-participants", "proto-needs", "proto-match", "proto-commitments", "svc-api", "svc-worker"]
+  },
+  potluck: {
+    label: "Potluck coordination route",
+    nodes: ["client-protocol-board", "proto-participants", "proto-needs", "proto-potlucks", "svc-api", "svc-other"]
+  },
+  payment: {
+    label: "Payment coordination route",
+    nodes: ["client-protocol-board", "proto-participants", "proto-needs", "proto-match", "proto-commitments", "proto-payments", "svc-api", "svc-other", "ext-stripe"]
+  },
+  voice: {
+    label: "Voice coordination route",
+    nodes: ["client-protocol-board", "proto-participants", "proto-needs", "svc-api", "ext-twilio"]
+  }
+};
+
+const NODE_ROUTES = {
+  "client-simple": "publicMap",
+  "client-map": "publicMap",
+  "data-spots": "publicMap",
+  "data-partners": "publicMap",
+  "ext-osm": "publicMap",
+  "fn-alert": "alerts",
+  "ext-resend": "alerts",
+  "client-auth": "community",
+  "data-requests": "community",
+  "data-engagement": "community",
+  "client-advanced": "rescue",
+  "data-contributors": "rescue",
+  "data-rescues": "rescue",
+  "data-harvest": "rescue",
+  "data-inventory": "rescue",
+  "fn-subscribe": "updates",
+  "client-protocol-board": "coordination",
+  "proto-participants": "coordination",
+  "proto-needs": "coordination",
+  "proto-match": "coordination",
+  "proto-commitments": "coordination",
+  "svc-api": "coordination",
+  "svc-worker": "coordination",
+  "proto-potlucks": "potluck",
+  "svc-other": "potluck",
+  "proto-payments": "payment",
+  "ext-stripe": "payment",
+  "ext-twilio": "voice"
+};
+
+const panel = document.getElementById('panel');
+const nodes = document.querySelectorAll('.node');
+const flows = document.querySelectorAll('.flow-line');
+const buttons = document.querySelectorAll('.toolbar button');
+const routeLayer = document.getElementById('route-highlight');
+const routeSummary = document.getElementById('route-summary');
+const initialPanel = panel.innerHTML;
+
+function renderPanel(id, route) {
+  const d = DATA[id];
+  if (!d) return;
+  panel.innerHTML = `
+    <div class="panel-eyebrow" style="color:${statusColor(d.status)}">${d.eyebrow}</div>
+    <h2>${d.title}</h2>
+    <div class="path">${d.path}</div>
+    <span class="status-chip ${d.status}">${d.status.replace('status-','').replace('-',' ')}</span>
+    ${route ? `<div class="panel-route">Highlighted route: ${route.label}</div>` : ''}
+    <p>${d.desc}</p>
+    ${d.bullets.length ? `<ul>${d.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>` : ''}
+  `;
+}
+function statusColor(cls) {
+  return {
+    'status-live':'#34d399',
+    'status-needs-migration':'#fbbf24',
+    'status-built-inactive':'#a78bfa',
+    'status-deferred':'#b7c1d1'
+  }[cls] || '#b7c1d1';
+}
+
+function setFilter(filter) {
+  activeFilter = filter;
+  buttons.forEach(button => {
+    const isActive = button.dataset.filter === filter;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-pressed', String(isActive));
+  });
+  applyFilter();
+}
+
+function renderRouteSummary(route) {
+  routeSummary.innerHTML = `
+    <div class="route-summary__label">${route.label}</div>
+    ${route.nodes.map((id, index) => {
+      const title = DATA[id]?.title || id;
+      const arrow = index ? '<span class="route-summary__arrow" aria-hidden="true">→</span>' : '';
+      return `${arrow}<span class="route-summary__step">${title}</span>`;
+    }).join('')}
+  `;
+  routeSummary.classList.add('visible');
+}
+
+function drawRoute(route) {
+  routeLayer.replaceChildren();
+  const routeNodes = route.nodes
+    .map(id => document.querySelector(`.node[data-id="${id}"]`))
+    .filter(Boolean);
+
+  for (let index = 0; index < routeNodes.length - 1; index += 1) {
+    const from = routeNodes[index].getBBox();
+    const to = routeNodes[index + 1].getBBox();
+    const x1 = from.x + from.width / 2;
+    const y1 = from.y + from.height / 2;
+    const x2 = to.x + to.width / 2;
+    const y2 = to.y + to.height / 2;
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    const sameRow = Math.abs(y2 - y1) < 40;
+    const curve = sameRow
+      ? `M ${x1} ${y1} C ${(x1 + x2) / 2} ${y1}, ${(x1 + x2) / 2} ${y2}, ${x2} ${y2}`
+      : `M ${x1} ${y1} C ${x1} ${(y1 + y2) / 2}, ${x2} ${(y1 + y2) / 2}, ${x2} ${y2}`;
+    path.setAttribute('d', curve);
+    path.setAttribute('class', 'route-line');
+    path.setAttribute('marker-end', 'url(#arrow-route)');
+    routeLayer.appendChild(path);
+  }
+}
+
+function highlightRoute(id) {
+  const route = ROUTES[NODE_ROUTES[id]];
+  if (!route) return null;
+  const routeIds = new Set(route.nodes);
+  nodes.forEach(node => {
+    node.classList.toggle('route-active', routeIds.has(node.dataset.id));
+    node.classList.toggle('route-dim', !routeIds.has(node.dataset.id));
+  });
+  flows.forEach(flow => flow.classList.add('dim'));
+  drawRoute(route);
+  renderRouteSummary(route);
+  return route;
+}
+
+function clearRoute() {
+  nodes.forEach(node => node.classList.remove('route-active', 'route-dim', 'selected'));
+  routeLayer.replaceChildren();
+  routeSummary.replaceChildren();
+  routeSummary.classList.remove('visible');
+  panel.innerHTML = initialPanel;
+}
+
+nodes.forEach(n => {
+  const details = DATA[n.dataset.id];
+  n.setAttribute('tabindex', '0');
+  n.setAttribute('role', 'button');
+  n.setAttribute('aria-label', details ? `${details.title}: show details` : 'Show node details');
+
+  const selectNode = () => {
+    setFilter('all');
+    nodes.forEach(x => x.classList.remove('selected'));
+    n.classList.add('selected');
+    const route = highlightRoute(n.dataset.id);
+    renderPanel(n.dataset.id, route);
+  };
+
+  n.addEventListener('click', selectNode);
+  n.addEventListener('keydown', event => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      selectNode();
+    }
+  });
+});
+
+let activeFilter = 'all';
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    clearRoute();
+    setFilter(btn.dataset.filter);
+  });
+});
+
+function applyFilter() {
+  nodes.forEach(n => {
+    const layer = n.dataset.layer;
+    const show = activeFilter === 'all' || layer === activeFilter;
+    n.classList.toggle('dim', !show);
+  });
+  flows.forEach(f => {
+    const layers = (f.dataset.layers || '').split(',');
+    const wasIntentionallyDim = f.dataset.baseDim === '1';
+    if (activeFilter === 'all') {
+      f.classList.toggle('dim', wasIntentionallyDim);
+    } else {
+      f.classList.toggle('dim', !layers.includes(activeFilter));
+    }
+  });
+}
+
+// Preserve the initial gated-flow emphasis when the full map is visible.
+document.querySelectorAll('.flow-line.dim').forEach(f => f.dataset.baseDim = '1');
+</script>
+</body>
+</html>
