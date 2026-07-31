@@ -555,7 +555,7 @@ button { border: 0; cursor: pointer; }
 .simple-account-menu { position: absolute; z-index: 45; top: calc(100% + 11px); right: 0; width: min(310px, calc(100vw - 32px)); display: grid; color: var(--simple-ink); background: #fff; border: 1px solid #dfe4df; border-radius: 16px; padding: 16px; box-shadow: 0 18px 48px #17271e2b; }
 .simple-account-menu > strong { font: 700 18px 'Space Grotesk', sans-serif; }
 .simple-account-menu > span { color: var(--simple-muted); margin-top: 5px; font-size: 11px; line-height: 1.5; }
-.simple-account-menu > a { display: flex; align-items: center; justify-content: space-between; color: var(--simple-green); border-block: 1px solid #e8ece8; margin-top: 14px; padding: 12px 1px; font-size: 11px; font-weight: 800; text-decoration: none; }
+.simple-account-menu > a, .simple-feedback-link { display: flex; align-items: center; justify-content: space-between; width: 100%; color: var(--simple-green); background: transparent; border-block: 1px solid #e8ece8; margin-top: 14px; padding: 12px 1px; font-size: 11px; font-weight: 800; text-decoration: none; text-align: left; }
 .simple-account-menu > .simple-advanced-link { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 9px; color: var(--simple-ink); background: #f5f7f3; border: 0; border-radius: 11px; margin-top: 11px; padding: 11px; text-align: left; }
 .simple-account-menu > .simple-advanced-link > svg:first-child { color: var(--simple-green); }
 .simple-account-menu > .simple-advanced-link span, .simple-account-menu > .simple-advanced-link b, .simple-account-menu > .simple-advanced-link small { display: block; }
@@ -831,12 +831,16 @@ button { border: 0; cursor: pointer; }
   margin-top: 5px;
 }
 .landing-nav-actions { display: flex; align-items: center; gap: 22px; }
-.landing-nav-actions > a {
+.landing-nav-actions > a, .landing-feedback {
   color: #315d48;
+  background: transparent;
+  border: 0;
+  padding: 0;
   font: 600 11px 'DM Sans', sans-serif;
   text-decoration: none;
 }
 .landing-nav-actions > a:first-child { text-decoration: underline; text-underline-offset: 4px; }
+.landing-feedback { text-decoration: underline; text-underline-offset: 4px; }
 .food-entry-page .landing-handoff { color: #61776a; font-family: 'DM Mono', monospace; font-size: 9px; font-weight: 400; }
 .food-entry-main {
   position: relative;

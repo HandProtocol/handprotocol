@@ -1,14 +1,132 @@
 # WXL:FOOD Handoff
 
-Last updated: 2026-07-22
+Last updated: 2026-07-27
 
 This is the working orientation document for `wxl/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on WXL:FOOD, its current behavior, what is real, what is illustrative, and what should be built next.
 
 Public-facing product behavior and safety boundaries are maintained in `docs/LIVING-DOCS.md`. Keep it current when a feature promise or workflow changes. It is intended to become the source for a future HTML documentation page.
 
+## Public mobile command-bar base, promoted 2026-07-29
+
+The command-bar concept is now the public Find food interface on viewports up to 759px. It fills the available phone viewport with the real Leaflet map, keeps Menu, search, and Locate at the top, and couples the floating List control to the adaptive sheet. The public version has no prototype evaluator.
+
+Menu includes Find food, Contribute, Gather, Requests, account state, and an explicit Advanced mode entry. Contribute, Gather, and Requests currently hand off to their existing focused mobile layouts. Future passes can migrate them into the shared shell without rebuilding the mobile navigation foundation.
+
+The unlinked, read-only comparison lab remains available at `/app/?mode=map-lab` for continued evaluation and regression checks.
+
+The lab compares three control-placement variants around the same Leaflet map, public data, search, filters, adaptive sheet, geolocation behavior, and session state:
+
+- `rail`: separate Menu, wide search, and a right-side Locate and List rail.
+- `command-bar`: Menu, search, and Locate share one top surface; List remains a lower-right pill.
+- `dock`: search stays at the top; Menu, Locate, and List share a compact dock above the sheet.
+
+Use the collapsible Prototype tooling panel to switch variants. Selection is written to the URL as `variant=<name>`. Save a local favorite to make that variant the default when no URL variant is present.
+
+The lab reads bundled directory locations plus live public community pins when available. Failed live reads fall back to bundled records. Geolocation remains in browser memory and is never sent to Supabase. The active auth session is displayed, but every lab action is read-only. Existing workflow links are handoffs only, and no lab control calls a write API or records engagement.
+
+Implementation details and the full evaluation handoff are in `../plans/002-wxl-mobile-map-lab.md`.
+
+Verification:
+
+```text
+npm test
+npm run build
+git diff --check
+```
+
+Current automated baseline is 82 passing tests across 8 files and a successful build. The existing large main-chunk advisory is non-blocking. Continue evaluation at 360 by 800, 390 by 844, 430 by 932, 844 by 390, and the desktop phone-frame view. Also check 200 percent text zoom, reduced motion, touch panning, sheet dragging, focus containment, and on-screen keyboard behavior.
+
+On 2026-07-29, the command bar became the preferred lab direction. It is now the default when there is no URL variant or saved favorite. Menu has a visible label, and the floating List control follows the adaptive sheet continuously during drag and detent movement. The comparison dock is also coupled to the sheet. No extra action was added; further evaluation should determine whether a real task is missing before adding another control.
+
 ## Orient in one paragraph
 
 WXL:FOOD is a local food coordination app for Austin. It is intended to help neighbors, community groups, food sources, volunteers, and coordinators see available food, publish needs, offer help, nominate sources, and organize rescue and harvest activity. The current app is a Vite, React, and TypeScript prototype with a polished landing page and command-center interface. It uses the HAND Supabase project for authentication and a small set of persisted workflows. Much of the dashboard is still illustrative. The immediate product task is to turn the strongest prototype flows into honest, complete, persisted workflows without implying that placeholder data is live network activity.
+
+## WXLove prototype checkpoint, 2026-07-26
+
+The user is exploring `WXLove` as the public name for WXL:FOOD and asked for a prototype, a theme-reasoning pass, an interactive architecture diagram, and a record of OpenRouter credit use. This is still exploration. The application has not been renamed, the live domain remains `wxl.handprotocol.org`, and no product behavior or database identifier changed.
+
+### Artifacts created
+
+- `docs/WXLOVE-THEME-OPTIMIZATION.md`: draft theme decision. It keeps forest green as the working UI color, coral as the wordmark and heart signature, and HAND amber as a limited family marker. It retains DM Sans, Space Grotesk, DM Mono, and the existing motion tokens.
+- `public/architecture/index.html`: standalone interactive architecture map, published at `/architecture/`. It shows the client, Netlify functions, active `command.food_*` data, the built but gated coordination protocol, inactive services, and external dependencies. Nodes open a detail panel and toolbar controls filter by layer. The page is intentionally reachable only by direct URL and is not linked from the landing page or app navigation.
+- `docs/WXLOVE-SESSION-CREDITS-AND-ACCOMPLISHMENTS.md`: full model-attempt and cost record.
+- `../.hermes/plans/2026-07-25_wxlove-rebrand-and-coordination-redesign.md`: proposed rebrand and coordination-redesign plan. It is a planning artifact, not approval to execute the rename.
+
+The architecture map was approved for standalone publication on 2026-07-27. The theme decision, session record, and rebrand plan remain review artifacts and should not be published as product changes without explicit approval.
+
+### Model and budget outcome
+
+- Two theme subagents accidentally ran on the session default model and produced closely convergent recommendations.
+- The intended `anthropic/claude-fable-5` OpenRouter call failed before generation with HTTP 402 because its default 128,000-token allowance exceeded available credits. It produced no theme output.
+- The session record estimates total spend below the requested $4.20 cap, but exact billing was not queried and must not be presented as certified.
+- Hermes delegation configuration was returned to its default state. No Fable model remains pinned.
+- Do not retry Fable 5 or another expensive OpenRouter model without an explicit token ceiling and a verified cost estimate.
+
+### Diagram visibility pass and verification
+
+The desktop and mobile visibility pass is complete:
+
+- Secondary text was brightened to `#b7c1d1`.
+- Filter controls were enlarged and given a 44px minimum touch target.
+- The SVG now stays at its native 1,180px coordinate width instead of shrinking its smallest labels below readable size.
+- At typical desktop widths, the detail panel moves below the diagram so the complete map fits the browser instead of being cropped beside a fixed panel.
+- Mobile uses one aligned content column, a horizontally scrolling filter rail, a wrapped route summary, and a horizontally scrollable full-scale map.
+- Momentum scrolling and pan gestures were enabled on the diagram shell.
+- Detail-panel type, summary-card type, footer text, and muted metadata were enlarged or strengthened.
+- Nodes now support keyboard focus plus Enter and Space activation.
+- Filter buttons expose their selected state through `aria-pressed`.
+- The SVG has an accessible title and description, and the scrollable map is labeled as a region.
+- Reduced-motion preferences stop the pulsing indicator and collapse transitions.
+- The duplicated flow-filter loop was removed while preserving the default dim state for gated flows.
+- Selecting any node now highlights its complete functional route. Related nodes receive a coral outline, unrelated nodes dim, a continuous SVG path connects every step, and a responsive summary lists the route in order.
+- Selecting a layer filter clears the route state and returns the map to layer-isolation mode.
+
+Verified in headless Chrome at 1,440 by 1,100 and 390 by 844:
+
+- Mouse node selection populated the expected detail record.
+- Keyboard node selection populated the expected detail record.
+- The Client filter marked itself pressed and dimmed 23 non-client nodes.
+- The desktop diagram fit its 1,380px content region without horizontal overflow.
+- The desktop and mobile detail panel remained in normal document flow below the map.
+- The mobile diagram retained full-size text inside a 364px horizontal viewport.
+- The mobile filter rail stayed on one line and scrolled horizontally.
+- All 28 nodes produced a visible route summary, highlighted the selected node, and drew one fewer route segment than route steps.
+- Layer filtering cleared route highlighting cleanly.
+- No browser console or page errors occurred.
+- Inline JavaScript parsed successfully.
+- All 28 visual node IDs matched all 28 data records.
+- Every visual layer matched a filter.
+- `git diff --check` passed.
+
+Keep this as a standalone documentation prototype. Do not apply its dark technical palette to the WXLove product.
+
+## Current desktop checkpoint, 2026-07-25
+
+The shared centered-dialog motion plan is complete and pushed to `main` in commit `5fa66ebfb` (`feat(wxl): add shared dialog motion`).
+
+- `src/useDialogMotion.ts` now holds dialogs in the tree through their exit transition and provides a 300 ms safety fallback.
+- Centered `.modal-backdrop` and `.access-backdrop` surfaces use a 250 ms strong ease-out treatment.
+- Cards enter and exit with opacity plus `translateY(8px) scale(0.97)`.
+- Reduced motion uses 150 ms opacity-only transitions with no transform.
+- Successful asynchronous form flows defer cleanup and any loading-state refresh that would otherwise interrupt exit.
+- The simple action sheet, alert center, feedback panel, navigation drawer, and toast were deliberately excluded.
+- `npm test` passes 72 tests across 7 files.
+- `npm run build` passes. The existing Vite large-chunk advisory remains non-blocking.
+- `git diff --check` passed before commit.
+- The implementation received a motion review with no blocking findings.
+
+The completed implementation plan remains at `../plans/001-wxl-shared-dialog-motion.md`, marked `DONE`. Do not reopen or broaden it for unrelated desktop polish.
+
+### Recommended fresh-session start
+
+Start the next desktop pass in a new context. Read this file, the root `AGENTS.md`, `PRODUCT.md`, and `DESIGN.md`, then run:
+
+```text
+$find-animation-opportunities audit wxl desktop Advanced workspace only. Treat plans/001-wxl-shared-dialog-motion.md as completed. Exclude centered dialogs unless a regression is found. Prioritize navigation, workspace transitions, data-state changes, and interaction feedback. Produce recommendations only.
+```
+
+After reviewing those recommendations, choose one bounded target and use `$improve-animations plan <target>`. Execute only the selected plan. This sequence is preferred because the previous context was dominated by the completed dialog implementation and no longer improves the next discovery pass.
 
 ## Product decisions made
 
@@ -47,13 +165,13 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 | Route | Current behavior |
 |---|---|
 | `/` | WXL landing page |
-| `/app/` | Command center; write access follows the active Supabase session |
-| `/app/?mode=anonymous` | Explicit browse entry; a valid Supabase session still determines write access |
+| `/app/` | Default public app; phones open the command-bar food map, while larger screens retain the existing public layout |
+| `/app/?mode=anonymous` | Explicit browse entry; phones open the command-bar food map and a valid Supabase session still determines write access |
 | `/app/?mode=login` | Email and password login |
 | `/app/?mode=login&signup=1` | Account creation |
 | `/app/?mode=reset` | Request a password-reset email |
 | `/app/?mode=recovery` | Set a new password after following the recovery link |
-| `/app/?mode=anonymous&intent=food` | Public food-finding entry; opens the simple map and nearby listing shelf |
+| `/app/?mode=anonymous&intent=food` | Public food-finding entry; phones open the command-bar map and adaptive result sheet |
 | `/app/?mode=anonymous&intent=request` | Public request entry; opens Community Requests |
 | `/app/?intent=contribute` | Contribution entry; opens food submission and delivery choices |
 | `/app/?mode=anonymous&intent=gather` | Gathering entry; opens sample table patterns and a path to plan a gathering |
@@ -61,9 +179,9 @@ WXL:FOOD is a local food coordination app for Austin. It is intended to help nei
 
 Routing is currently implemented with `window.location.pathname` and query parameters inside `App.tsx`. There is no router library.
 
-The landing page is intentionally food-only and task-first. It presents find food, contribute, and gather as the three public paths. The simple app shell keeps those choices one tap away on mobile. Operational workspaces remain available through `workspace` parameters. Authentication continues to come exclusively from the Supabase session.
+The landing page is intentionally food-only and task-first. It presents find food, contribute, and gather as the three public paths. On phones, the command-bar map Menu keeps those choices, Requests, account state, and Advanced mode reachable. Contribute, Gather, and Requests currently use their existing focused mobile layouts while they are migrated into the shared shell. Operational workspaces remain available through `workspace` parameters. Authentication continues to come exclusively from the Supabase session.
 
-The food intent opens an optional geolocation prompt before map exploration. Browser coordinates are used in memory to select the nearest verified listing and are not persisted or sent to Supabase. The choice is remembered only for the current browser tab through `sessionStorage`. Visitors can skip it and can reopen it from the map location control.
+On phones, the food intent opens the complete Austin map without an interruption. Geolocation is requested only after the visitor presses Locate. Browser coordinates remain in memory, center the map, and sort results by distance; they are not persisted or sent to Supabase. Larger screens retain the existing optional location prompt.
 
 ## What works now
 
@@ -82,10 +200,10 @@ The food intent opens an optional geolocation prompt before map exploration. Bro
 
 - The landing page is food-only and starts with two role paths: `I need food` and `I am a Contributor`.
 - The food path opens public map browsing. The Contributor path opens Volunteer Command. Community requests and sign-in remain secondary routes.
-- Food seekers receive an optional second-step location prompt. The browser asks for location access only after the visitor chooses `Use my location`.
-- A successful location lookup selects the nearest bundled verified listing. Skipping opens the complete Austin map.
+- Phone visitors receive the complete Austin map immediately. The browser asks for location access only after the visitor presses Locate.
+- A successful phone lookup centers the map and sorts public listings by distance. Denial or timeout leaves the complete Austin map usable.
 - Browser coordinates remain in memory for the nearest-listing calculation and are not persisted or sent to Supabase.
-- The location choice lasts only for the current tab. The command-center location control can reopen the prompt.
+- Larger screens retain the existing prompt and current-tab choice. The phone shell does not persist a location choice.
 - The SPA fallback works through Netlify and `public/_redirects`.
 
 ### Authentication
@@ -517,7 +635,7 @@ Production build:
 npm run build
 ```
 
-The build and all 38 automated tests were passing on 2026-07-17 after the inventory changes.
+The build and all 72 automated tests were passing on 2026-07-25 after the shared dialog-motion changes.
 
 ## Deployment
 
@@ -536,10 +654,10 @@ See `DEPLOY.md` for the concise deployment guide.
 Before calling the current auth and community flow production-ready, verify:
 
 - Both landing role paths open their intended workspace.
-- The food intent opens the optional location prompt.
-- Allowing location selects a nearby bundled listing on localhost and the production HTTPS origin.
-- Denying, timing out, or skipping location keeps the complete Austin map usable.
-- Reopening the location prompt from the command-center control works.
+- On phones, the food intent opens the command-bar map without a location prompt.
+- Pressing Locate requests permission and sorts mapped public listings by distance.
+- Denying or timing out keeps the complete Austin map usable.
+- On larger screens, the existing optional location prompt and reopen control still work.
 - Anonymous food browsing opens the command center.
 - Public request loading works without a session.
 - Anonymous write attempts open the account prompt.
@@ -679,6 +797,19 @@ Known geolocation limitation:
 - OpenStreetMap attribution remains visible. The app does not prefetch or offer offline tile downloads.
 - Added `leaflet` as a runtime dependency and `@types/leaflet` as a development dependency.
 - `npm test` passes 51 tests and `npm run build` completes successfully. Leaflet is loaded as a separate lazy chunk; the pre-existing main-bundle size warning remains non-blocking.
+
+## Shared dialog motion pass, 2026-07-25
+
+Implementation commit: `5fa66ebfb` (`feat(wxl): add shared dialog motion`).
+
+- Added one shared React presence hook for centered dialogs instead of duplicating timers and close-state logic.
+- Applied the same 250 ms entry and exit language across account, location, community, rescue, harvest-run, and inventory dialogs.
+- Kept dialogs mounted until the backdrop opacity transition completes, with an idempotent close request and fallback timer.
+- Preserved successful asynchronous cleanup after exit so forms do not visually reset during dismissal.
+- Added focused hook tests and an account-prompt integration assertion.
+- Added a reduced-motion path that removes transform while preserving a short opacity transition.
+- Kept sheets, drawers, alerts, feedback, and toasts outside the change.
+- `npm test` passes 72 tests and `npm run build` completes successfully.
 
 ## Working conventions
 
