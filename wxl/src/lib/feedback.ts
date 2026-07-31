@@ -73,6 +73,23 @@ async function postFeedback(entry: FeedbackEntry) {
   }
 }
 
+export function notifyWxlAccountSignup(email: string) {
+  return postFeedback({
+    text: `Email: ${email.trim().toLowerCase()}`,
+    path: '/app/?mode=login&signup=1',
+    title: 'New WXL account signup',
+    name: '',
+    tags: ['wxl', 'account-signup', 'signup'],
+    source: 'WXL:FOOD Account Signup',
+    scroll: 0,
+    ua: navigator.userAgent.slice(0, 200),
+    vw: window.innerWidth,
+    vh: window.innerHeight,
+    ts: Date.now(),
+    website: '',
+  })
+}
+
 export function getRememberedFeedbackName() {
   try {
     return localStorage.getItem(rememberedNameKey) ?? ''

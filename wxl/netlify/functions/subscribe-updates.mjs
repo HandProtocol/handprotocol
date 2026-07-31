@@ -1,10 +1,33 @@
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const handFeedbackEndpoint = process.env.HAND_FEEDBACK_ENDPOINT || 'https://handprotocol.org/.netlify/functions/feedback'
 
 const json = (statusCode, body) => ({
   statusCode,
   headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
   body: JSON.stringify(body),
 })
+
+async function notifyHandOfUpdatesSignup(email) {
+  try {
+    const response = await fetch(handFeedbackEndpoint, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        source: 'WXL:FOOD Email Updates',
+        title: 'New WXL email-updates signup',
+        path: '/app/?mode=login&updates=1',
+        text: `Email: ${email}`,
+        tags: ['wxl', 'email-updates', 'signup'],
+        name: '',
+        website: '',
+        ts: Date.now(),
+      }),
+    })
+    return response.ok
+  } catch {
+    return false
+  }
+}
 
 export async function handler(event) {
   if (event.httpMethod === 'OPTIONS') return json(204, {})
@@ -46,6 +69,8 @@ export async function handler(event) {
 
     if (response.ok) {
       console.info('[wxl-updates] Subscriber added', { id: data.id })
+      const notified = await notifyHandOfUpdatesSignup(email)
+      if (!notified) console.warn('[wxl-updates] HAND notification failed')
       return json(200, { status: 'subscribed' })
     }
 

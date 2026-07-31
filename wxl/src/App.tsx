@@ -9,6 +9,7 @@ import { addFoodRequestMessage, changeFoodRequestStatus, createFoodRequest, crea
 import { useEngagement } from './lib/engagement'
 import { createAccountAndSession, getAuthErrorMessage, getMemberIdentity, getRecoveryRedirectUrl, updatePasswordAndSignOut } from './lib/auth'
 import { isValidUpdatesEmail, subscribeForUpdates } from './lib/updates'
+import { notifyWxlAccountSignup } from './lib/feedback'
 import { AddSpotModal, AlertCenter, FoodAlertsBoard, FoodAlertsOverview, FoodHereModal } from './CommunityTools'
 import { CommunityContactWidget, openCommunityContact } from './CommunityContactWidget'
 import { RescueBoard } from './RescueBoard'
@@ -19,31 +20,22 @@ import { ProtocolBoard } from './ProtocolBoard'
 import { DropoffBoard } from './DropoffBoard'
 import type { FoodMapLocation } from './FoodMap'
 import { useDialogMotion, type DialogMotionControls } from './useDialogMotion'
+import {
+  foodBankUrl,
+  foodIcons,
+  foodSpotToLocation,
+  locations,
+  navigationUrl,
+  nearestListedLocation,
+  type FoodLocation,
+  type FoodStatus as Status,
+} from './foodLocations'
 
 const FoodMap = lazy(() => import('./FoodMap').then((module) => ({ default: module.FoodMap })))
+const MapLab = lazy(() => import('./map-lab/MapLab').then((module) => ({ default: module.MapLab })))
 
-type Status = 'plenty' | 'limited' | 'low' | 'volunteers' | 'transport'
 type View = 'command' | 'alerts' | 'protocol' | 'rescue' | 'volunteer' | 'community' | 'partners' | 'harvest' | 'inventory' | 'dropoffs'
 type ConsumerIntent = 'food' | 'contribute' | 'gather' | 'request'
-
-type FoodLocation = {
-  id: string
-  name: string
-  type: string
-  area: string
-  address: string
-  status: Status
-  detail: string
-  hours?: string
-  access?: string
-  sourceUrl?: string
-  sourceLabel?: string
-  x: number
-  y: number
-  verified: boolean
-  latitude?: number
-  longitude?: number
-}
 
 const viewLabels: Record<View, string> = {
   command: 'Overview',
@@ -82,19 +74,6 @@ const statusMeta: Record<Status, { label: string; color: string; className: stri
   transport: { label: 'Transport available', color: '#895bb5', className: 'transport' },
 }
 
-const cityCentersUrl = 'https://www.austintexas.gov/services/get-help-neighborhood-centers'
-const foodBankUrl = 'https://www.centraltexasfoodbank.org/find-food-now'
-
-const locations: FoodLocation[] = [
-  { id: 'east-austin-center', name: 'East Austin Neighborhood Center', type: 'Food pantry', area: 'East Austin', address: '211 Comal St, Austin, TX 78702', status: 'limited', detail: 'City neighborhood center. Call 512-972-6650 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 31, y: 49, verified: true, latitude: 30.259, longitude: -97.727 },
-  { id: 'blackland-center', name: 'Blackland Neighborhood Center', type: 'Food pantry', area: 'Blackland', address: '2005 Salina St, Austin, TX 78722', status: 'limited', detail: 'City neighborhood center. Call 512-972-5790 before visiting.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 49, y: 25, verified: true, latitude: 30.282, longitude: -97.722 },
-  { id: 'rosewood-center', name: 'Rosewood-Zaragosa Neighborhood Center', type: 'Food pantry', area: 'Rosewood', address: '2800 Webberville Rd, Austin, TX 78702', status: 'limited', detail: 'City neighborhood center. Call 512-972-6740 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 61, y: 43, verified: true, latitude: 30.269, longitude: -97.71 },
-  { id: 'montopolis-center', name: 'Montopolis Community Center', type: 'Food pantry', area: 'Montopolis', address: '1200 Montopolis Dr, Austin, TX 78741', status: 'limited', detail: 'City community center. Call 512-972-6705 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 78, y: 69, verified: true, latitude: 30.23, longitude: -97.7 },
-  { id: 'st-john-center', name: 'St. John Community Center', type: 'Food pantry', area: 'St. John', address: '7500 Blessing Ave, Austin, TX 78752', status: 'limited', detail: 'City community center. Call 512-972-5159 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 57, y: 11, verified: true, latitude: 30.333, longitude: -97.693 },
-  { id: 'dove-springs-center', name: 'Dove Springs Neighborhood Center', type: 'Food pantry', area: 'Southeast Austin', address: '5811 Palo Blanco Ln, Austin, TX 78744', status: 'limited', detail: 'City neighborhood center. Call 512-972-6699 to confirm current pantry availability.', hours: 'Center hours: Mon to Thu, 7:30 AM to 5 PM; Fri, 8 AM to noon', access: 'Food pantry and other food help. Call before traveling.', sourceUrl: cityCentersUrl, sourceLabel: 'City of Austin', x: 69, y: 88, verified: true, latitude: 30.188, longitude: -97.741 },
-  { id: 'foundation-m-station', name: 'Foundation Communities, M Station', type: 'Food Bank partner', area: 'East Austin', address: '2918 E Martin Luther King Jr Blvd, Austin, TX 78702', status: 'limited', detail: 'Listed in the Central Texas Food Bank finder. Check the directory for current program details.', access: 'Program details and availability can change. Confirm before traveling.', sourceUrl: foodBankUrl, sourceLabel: 'Central Texas Food Bank', x: 71, y: 30, verified: true, latitude: 30.28, longitude: -97.706 },
-  { id: 'south-oak-baptist', name: 'South Oak Baptist food pantry', type: 'Community-reported pantry', area: 'South Austin', address: 'South Austin, exact public location pending confirmation', status: 'limited', detail: 'Community report: one form, no ID requested. A coordinator still needs to confirm the public listing.', hours: 'Thursdays, 9 to 11 AM', access: 'One form, no ID, according to a community report. Confirm before traveling.', x: 32, y: 86, verified: false },
-]
 
 const rescues = [
   { title: '120 prepared sandwiches', source: 'East Austin Deli', window: 'Pickup by 6:30 PM', match: '3 nearby partners', icon: Package, tone: 'peach' },
@@ -121,29 +100,6 @@ const initialMessages = [
   { id: 2, author: 'Devon K.', role: 'Eastside Fridge', message: 'We have two unopened containers available today. I can check with our pantry partners for more.', time: '11 min ago', mine: false },
   { id: 3, author: 'Sample coordinator', role: 'Network coordinator', message: 'I can add this to the 4:15 PM harvest run and look for the remaining five households.', time: '4 min ago', mine: false },
 ]
-
-function nearestListedLocation(latitude: number, longitude: number) {
-  const radians = (degrees: number) => degrees * Math.PI / 180
-  const distance = (location: FoodLocation) => {
-    const latitudeDelta = radians((location.latitude ?? latitude) - latitude)
-    const longitudeDelta = radians((location.longitude ?? longitude) - longitude)
-    const value = Math.sin(latitudeDelta / 2) ** 2 + Math.cos(radians(latitude)) * Math.cos(radians(location.latitude ?? latitude)) * Math.sin(longitudeDelta / 2) ** 2
-    return 2 * 3959 * Math.asin(Math.sqrt(value))
-  }
-  return locations.filter((location) => location.verified && location.latitude != null && location.longitude != null).sort((a, b) => distance(a) - distance(b))[0]
-}
-
-const foodIcons = ['🥬', '🥕', '🍎', '🥖', '🥫', '🥦', '🍊', '🌽']
-
-function navigationUrl(location: FoodLocation) {
-  const destination = location.latitude != null && location.longitude != null
-    ? `${location.latitude},${location.longitude}`
-    : location.address
-  const isApplePlatform = /iPad|iPhone|iPod|Macintosh/i.test(navigator.userAgent)
-  return isApplePlatform
-    ? `https://maps.apple.com/?daddr=${encodeURIComponent(destination)}&dirflg=d`
-    : `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`
-}
 
 function SimpleExperience({ initialIntent }: { initialIntent: ConsumerIntent }) {
   const [intent, setIntent] = useState<ConsumerIntent>(initialIntent)
@@ -227,7 +183,7 @@ function SimpleExperience({ initialIntent }: { initialIntent: ConsumerIntent }) 
     <header className="simple-header">
       <a className="simple-brand" href="/" aria-label="WXL Food home"><span>WXL</span><b>FOOD</b></a>
       <button className="simple-location" type="button" onClick={() => setLocationPromptOpen(true)}><MapPin size={15} /><span>{locationLabel}</span><ChevronDown size={14} /></button>
-      <div className="simple-account-wrap"><button className="simple-account" type="button" onClick={() => setAccountMenuOpen((current) => !current)} aria-label="Open account and display settings" aria-expanded={accountMenuOpen} aria-controls="simple-account-menu"><span>{member ? getMemberIdentity(member).initials : 'WX'}</span></button>{accountMenuOpen && <div className="simple-account-menu" id="simple-account-menu"><p className="simple-eyebrow">Your experience</p><strong>Simple mode</strong><span>{member ? `Signed in as ${getMemberIdentity(member).displayName}. Everyday steps stay focused here.` : 'Everyday food, contribution, and gathering steps stay focused here.'}</span>{authReady && !member && <a href="/app/?mode=login">Sign in <ArrowUpRight size={14} /></a>}<a className="simple-advanced-link" href="/app/?mode=advanced" onClick={enableAdvancedMode}><Settings size={15} /><span><b>Turn on advanced workspace</b><small>Coordination, routes, inventory, and reports</small></span><ChevronRight size={15} /></a></div>}</div>
+      <div className="simple-account-wrap"><button className="simple-account" type="button" onClick={() => setAccountMenuOpen((current) => !current)} aria-label="Open account and display settings" aria-expanded={accountMenuOpen} aria-controls="simple-account-menu"><span>{member ? getMemberIdentity(member).initials : 'WX'}</span></button>{accountMenuOpen && <div className="simple-account-menu" id="simple-account-menu"><p className="simple-eyebrow">Your experience</p><strong>Simple mode</strong><span>{member ? `Signed in as ${getMemberIdentity(member).displayName}. Everyday steps stay focused here.` : 'Everyday food, contribution, and gathering steps stay focused here.'}</span>{authReady && !member && <a href="/app/?mode=login">Sign in <ArrowUpRight size={14} /></a>}<button className="simple-feedback-link" type="button" onClick={() => { setAccountMenuOpen(false); openCommunityContact('feedback') }}>Send feedback <ArrowUpRight size={14} /></button><a className="simple-advanced-link" href="/app/?mode=advanced" onClick={enableAdvancedMode}><Settings size={15} /><span><b>Turn on advanced workspace</b><small>Coordination, routes, inventory, and reports</small></span><ChevronRight size={15} /></a></div>}</div>
     </header>
 
     <nav className="simple-tabs" aria-label="Choose what you want to do">
@@ -392,18 +348,7 @@ function DashboardApp() {
       const loadedSpots = spotResult.data ?? []
       setSpots(loadedSpots)
       setAlerts(alertResult.data ?? [])
-      setMapLocations([...locations, ...loadedSpots.map((spot, index) => ({
-        id: spot.id,
-        name: spot.name,
-        type: spot.spot_type,
-        area: spot.neighborhood,
-        address: spot.address,
-        status: 'plenty' as Status,
-        detail: `${spot.produce}${spot.availability ? ` · ${spot.availability}` : ''}`,
-        x: 34 + (index * 13) % 48,
-        y: 36 + (index * 17) % 42,
-        verified: spot.status === 'verified',
-      }))])
+      setMapLocations([...locations, ...loadedSpots.map(foodSpotToLocation)])
     })
     if (!foodDb) return
     const db = foodDb
@@ -821,7 +766,7 @@ function LandingPage() {
     <a className="landing-skip" href="#choose-a-path">Skip to your path</a>
     <header className="landing-nav">
       <a className="landing-brand" href="/" aria-label="W Xtra home"><span>/W XTRA <b aria-hidden="true">♥</b></span><small>WXL:FOOD · Austin</small></a>
-      <div className="landing-nav-actions"><a href="/app/?mode=login">Sign in</a><a className="landing-handoff" href="https://handprotocol.org" target="_blank" rel="noreferrer">HAND Protocol <ArrowUpRight size={14} /></a></div>
+      <div className="landing-nav-actions"><button className="landing-feedback" type="button" onClick={() => openCommunityContact('feedback')}>Feedback</button><a href="/app/?mode=login">Sign in</a><a className="landing-handoff" href="https://handprotocol.org" target="_blank" rel="noreferrer">HAND Protocol <ArrowUpRight size={14} /></a></div>
     </header>
     <main className="food-entry-main">
       <section className="food-entry-intro" aria-labelledby="food-entry-title">
@@ -888,6 +833,7 @@ function LoginScreen() {
     if (result.error) setError(getAuthErrorMessage(result.error, authMode === 'signup' ? 'signup' : 'login'))
     else if (!result.data.session) setError('Your account was created, but WXL:FOOD could not log you in. Please try logging in.')
     else {
+      if (authMode === 'signup') void notifyWxlAccountSignup(email)
       const returnIntent = new URLSearchParams(window.location.search).get('return')
       const destination = returnIntent === 'food' || returnIntent === 'contribute' || returnIntent === 'gather' || returnIntent === 'request'
         ? `/app/?intent=${returnIntent}`
@@ -953,15 +899,50 @@ function LoginScreen() {
   </div></div>
 }
 
+function useMobileViewport() {
+  const query = '(max-width: 759px)'
+  const [mobile, setMobile] = useState(() => typeof window.matchMedia === 'function'
+    ? window.matchMedia(query).matches
+    : window.innerWidth <= 759)
+
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') {
+      const update = () => setMobile(window.innerWidth <= 759)
+      window.addEventListener('resize', update)
+      return () => window.removeEventListener('resize', update)
+    }
+    const media = window.matchMedia(query)
+    const update = (event: MediaQueryListEvent) => setMobile(event.matches)
+    setMobile(media.matches)
+    media.addEventListener('change', update)
+    return () => media.removeEventListener('change', update)
+  }, [])
+
+  return mobile
+}
+
 function App() {
+  const mobileViewport = useMobileViewport()
   const mode = new URLSearchParams(window.location.search).get('mode')
   const intent = new URLSearchParams(window.location.search).get('intent')
   const workspace = new URLSearchParams(window.location.search).get('workspace')
   const authMode = mode === 'login' || mode === 'reset' || mode === 'recovery'
   const consumerIntent = intent === 'food' || intent === 'contribute' || intent === 'gather' || intent === 'request' ? intent : null
   const advancedMode = mode === 'advanced' || Boolean(workspace) || (!consumerIntent && localStorage.getItem('wxl:experience-mode') === 'advanced')
-  const page = window.location.pathname.startsWith('/app') ? authMode ? <LoginScreen /> : advancedMode ? <DashboardApp /> : <SimpleExperience initialIntent={consumerIntent ?? 'food'} /> : <LandingPage />
-  return <>{page}<CommunityContactWidget /></>
+  const isMapLab = window.location.pathname.startsWith('/app') && mode === 'map-lab'
+  const isMobileMap = window.location.pathname.startsWith('/app')
+    && mobileViewport
+    && !authMode
+    && !advancedMode
+    && (consumerIntent === null || consumerIntent === 'food')
+  const page = isMapLab
+    ? <Suspense fallback={<div className="map-lab-loading" role="status">Loading map lab…</div>}><MapLab /></Suspense>
+    : isMobileMap
+      ? <Suspense fallback={<div className="map-lab-loading" role="status">Loading food map…</div>}><MapLab product /></Suspense>
+    : window.location.pathname.startsWith('/app')
+      ? authMode ? <LoginScreen /> : advancedMode ? <DashboardApp /> : <SimpleExperience initialIntent={consumerIntent ?? 'food'} />
+      : <LandingPage />
+  return <>{page}{!isMapLab && <CommunityContactWidget showLauncher={!mobileViewport} />}</>
 }
 
 export default App

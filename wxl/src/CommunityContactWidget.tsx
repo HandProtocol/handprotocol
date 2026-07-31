@@ -13,7 +13,7 @@ export function openCommunityContact(panel: ContactPanel = 'alerts') {
   window.dispatchEvent(new CustomEvent<ContactPanel>(contactEvent, { detail: panel }))
 }
 
-export function CommunityContactWidget() {
+export function CommunityContactWidget({ showLauncher = true }: { showLauncher?: boolean }) {
   const [open, setOpen] = useState(false)
   const [panel, setPanel] = useState<ContactPanel>('alerts')
   const [email, setEmail] = useState('')
@@ -138,9 +138,9 @@ export function CommunityContactWidget() {
         </>}
       </form>}
     </section>}
-    <button ref={launcherRef} className={`contact-launcher ${open ? 'open' : ''}`} type="button" aria-label={open ? 'Close alerts and feedback' : 'Open alerts and feedback'} aria-expanded={open} onClick={() => setOpen((current) => !current)}>
+    {showLauncher && <button ref={launcherRef} className={`contact-launcher ${open ? 'open' : ''}`} type="button" aria-label={open ? 'Close alerts and feedback' : 'Open alerts and feedback'} aria-expanded={open} onClick={() => setOpen((current) => !current)}>
       {open ? <X size={23} /> : <Bell size={23} />}
       {!open && <span aria-hidden="true" />}
-    </button>
+    </button>}
   </div>
 }

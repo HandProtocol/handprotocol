@@ -10,7 +10,9 @@ describe('email updates signup function', () => {
   it('adds a normalized email to the configured Resend audience', async () => {
     vi.stubEnv('RESEND_API_KEY', 'resend-key')
     vi.stubEnv('WXL_RESEND_AUDIENCE_ID', 'wxl-audience')
-    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ id: 'contact-1' }), { status: 200 }))
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce(new Response(JSON.stringify({ id: 'contact-1' }), { status: 200 }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ status: 'synced' }), { status: 200 }))
     vi.stubGlobal('fetch', fetchMock)
 
     const response = await handler({
@@ -22,6 +24,9 @@ describe('email updates signup function', () => {
     expect(JSON.parse(response.body).status).toBe('subscribed')
     expect(fetchMock).toHaveBeenCalledWith('https://api.resend.com/audiences/wxl-audience/contacts', expect.objectContaining({
       body: JSON.stringify({ email: 'neighbor@example.org', unsubscribed: false }),
+    }))
+    expect(fetchMock).toHaveBeenCalledWith('https://handprotocol.org/.netlify/functions/feedback', expect.objectContaining({
+      body: expect.stringContaining('neighbor@example.org'),
     }))
   })
 

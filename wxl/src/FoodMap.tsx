@@ -17,6 +17,13 @@ type FoodMapProps = {
   selectedId: string
   visitorPosition?: { latitude: number; longitude: number } | null
   onSelect: (location: FoodMapLocation) => void
+  bottomInset?: number
+  viewportCommand?: {
+    id: number
+    latitude: number
+    longitude: number
+    zoom?: number
+  } | null
 }
 
 const AUSTIN_CENTER: L.LatLngExpression = [30.2672, -97.7431]
@@ -31,7 +38,12 @@ function markerIcon(icon: string, selected: boolean) {
   })
 }
 
-export function FoodMap({ locations, selectedId, visitorPosition, onSelect }: FoodMapProps) {
+function centerWithBottomInset(map: L.Map, latitude: number, longitude: number, zoom: number, bottomInset: number) {
+  const selectedPoint = map.project([latitude, longitude], zoom)
+  return map.unproject(selectedPoint.add([0, Math.round(bottomInset / 2)]), zoom)
+}
+
+export function FoodMap({ locations, selectedId, visitorPosition, onSelect, bottomInset = 0, viewportCommand }: FoodMapProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mapRef = useRef<L.Map | null>(null)
   const markerLayerRef = useRef<L.LayerGroup | null>(null)
@@ -125,10 +137,21 @@ export function FoodMap({ locations, selectedId, visitorPosition, onSelect }: Fo
     const selected = locations.find((location) => location.id === selectedId)
     if (!map || !selected || selected.latitude == null || selected.longitude == null) return
     const canAnimate = typeof window.matchMedia === 'function' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (canAnimate) map.flyTo([selected.latitude, selected.longitude], Math.max(map.getZoom(), 13), { animate: true, duration: .45 })
-    else map.setView([selected.latitude, selected.longitude], Math.max(map.getZoom(), 13), { animate: false })
+    const zoom = Math.max(map.getZoom(), 13)
+    const center = centerWithBottomInset(map, selected.latitude, selected.longitude, zoom, bottomInset)
+    if (canAnimate) map.flyTo(center, zoom, { animate: true, duration: .45 })
+    else map.setView(center, zoom, { animate: false })
     markerRefs.current.get(selected.id)?.openTooltip()
-  }, [locations, selectedId])
+  }, [bottomInset, locations, selectedId])
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !viewportCommand) return
+    const canAnimate = typeof window.matchMedia === 'function' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const zoom = viewportCommand.zoom ?? Math.max(map.getZoom(), 13)
+    const center = centerWithBottomInset(map, viewportCommand.latitude, viewportCommand.longitude, zoom, bottomInset)
+    map.setView(center, zoom, { animate: canAnimate })
+  }, [bottomInset, viewportCommand])
 
   useEffect(() => {
     const map = mapRef.current

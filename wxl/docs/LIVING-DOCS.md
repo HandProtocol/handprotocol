@@ -2,7 +2,7 @@
 title: WXL:FOOD Living Documentation
 description: Current product behavior, community workflows, safety boundaries, and development status for WXL:FOOD.
 status: living
-last_updated: 2026-07-28
+last_updated: 2026-07-29
 canonical_path: /docs/
 ---
 
@@ -49,8 +49,8 @@ Status labels used throughout this document:
 | Area | Status | Current behavior |
 |---|---|---|
 | Public landing page | Live | Starts with three direct paths: find food, contribute food or delivery help, and gather around a shared table. |
-| Simple public app shell | Live | Uses persistent Find food, Contribute, Gather, and Requests navigation. Everyday actions stay in this shell instead of opening coordinator tools without warning. |
-| Experience modes | Live | Simple mode is the default. Advanced workspace is an explicit, remembered setting for coordination, routes, inventory, and reporting, with a visible return to simple mode. |
+| Public app shell | Live | Phones use a full-screen command-bar map as the Find food base. Its menu keeps Find food, Contribute, Gather, Requests, account state, and Advanced mode reachable. Other intents retain their focused mobile layouts while they are migrated into the shell. |
+| Experience modes | Live | The public interface is the default. Advanced mode is an explicit, remembered entry to coordination, routes, inventory, and reporting, with a visible return to the public interface. |
 | Gather experience | Prototype | Shows clearly labeled sample gathering patterns and uses focused action sheets for joining or planning. It does not claim that sample gatherings are scheduled events. |
 | WaterDrop link | Live | Opens the WaterDrop river stewardship app. |
 | Email and password authentication | Live | Signup creates a session immediately, login uses email and password, reset and recovery remain email-based, and members can sign out. |
@@ -81,15 +81,15 @@ Status labels used throughout this document:
 
 Anyone can browse public food information and public community requests.
 
-Visitors who only want to follow WXL can join the updates list with one email address. This email-only path does not create a Supabase account, ask for a password, or grant access to posting and coordination. Updates cover meaningful platform development and future offerings, and every message must include an unsubscribe option.
+Visitors who only want to follow WXL can join the updates list with one email address. This email-only path does not create a Supabase account, ask for a password, or grant access to posting and coordination. Updates cover meaningful platform development and future offerings, and every message must include an unsubscribe option. Each new updates signup sends a best-effort notice through HAND's existing operations-email path.
 
 The bottom-right bell keeps this signup available throughout WXL. Its second panel accepts public product feedback without requiring an account. Feedback is sent to HAND Command Center and the HAND operations inbox. If the shared feedback service cannot be reached, the note stays in the current browser and retries after reconnection or focus.
 
-The public entry presents three starting choices: find food, contribute, or gather. These paths open a simplified public interface with persistent navigation for those three intents plus Requests. The food path opens an Austin map and nearby listing shelf. Contribute keeps food drafts, delivery-run previews, compost-return guidance, and Contributor setup prompts in the simple shell. Gather uses the same focused pattern for shared meals. Requests has a short privacy-aware composer and a readable list of open needs. Drafts survive the sign-in handoff in the current browser session. Intent parameters select the public experience only and never grant write access.
+The public entry presents three starting choices: find food, contribute, or gather. On phones, Find food opens the full-screen command-bar map. Its Menu sheet keeps Find food, Contribute, Gather, Requests, account state, and Advanced mode reachable without permanently consuming map space. Contribute keeps food drafts, delivery-run previews, compost-return guidance, and Contributor setup prompts in its focused mobile layout. Gather uses the same focused pattern for shared meals. Requests has a short privacy-aware composer and a readable list of open needs. These remaining intents will move into the shared mobile shell incrementally. Drafts survive the sign-in handoff in the current browser session. Intent parameters select the public experience only and never grant write access.
 
-Simple mode is the default, including at `/app/`. The account and display menu lets experienced coordinators turn on Advanced workspace. That preference is remembered in the browser. Advanced workspace labels itself clearly and includes a **Use simple mode** control that clears the preference. Legacy links with a specific `workspace` parameter still open the requested operational tool directly.
+The public interface is the default, including at `/app/`. The mobile Menu includes an explicit **Advanced mode** entry for coordination, routes, inventory, and reports. The advanced interface labels itself clearly and includes a **Use simple mode** control that clears the remembered advanced preference. Legacy links with a specific `workspace` parameter still open the requested operational tool directly.
 
-After choosing the food path, visitors are asked whether they want to share their current location. Sharing is optional. When allowed, WXL compares the browser location with the coordinates of its verified public listings and selects the nearest listing. The visitor's coordinates remain in browser memory for that calculation and are not written to Supabase, local storage, an account, or an engagement event. Skipping location sharing opens the complete Austin map. The location control in the command center can reopen the choice.
+Location sharing remains optional. On phones, WXL asks only after the visitor presses Locate in the command bar. When allowed, WXL centers the map and sorts matching listings by distance. The visitor's coordinates remain in browser memory for that calculation and are not written to Supabase, local storage, an account, or an engagement event. Denial, timeout, or ignoring Locate leaves the complete Austin map available.
 
 An authenticated account is required to:
 
@@ -109,7 +109,7 @@ An authenticated account is required to:
 
 Write access always follows the active Supabase session. A query parameter does not grant write access.
 
-New accounts do not require an email-confirmation step. A successful signup starts the member session and returns to the relevant simple intent when one was provided, otherwise it opens Find food. The signup fields use standard password-manager metadata so the browser can offer to save the password locally. Whether that prompt appears is controlled by the member's browser and password-manager settings.
+New accounts do not require an email-confirmation step. A successful signup starts the member session, sends a best-effort notice through HAND's existing operations-email path, and returns to the relevant simple intent when one was provided, otherwise it opens Find food. The signup fields use standard password-manager metadata so the browser can offer to save the password locally. Whether that prompt appears is controlled by the member's browser and password-manager settings.
 
 Password-reset emails return to `https://wxl.handprotocol.org/app/?mode=recovery`, where the member chooses a new password. After a successful update, WXL ends the recovery session and opens the login page so the member can sign in with the new password. The production callback must remain in the Supabase redirect allowlist.
 
@@ -117,7 +117,7 @@ The command center waits for Supabase session restoration before deciding whethe
 
 ## Austin food map
 
-The public Find food experience uses a real interactive Austin map. Visitors can pan, zoom, select food markers, and move between a marker and its listing card. On phones, cards remain in a horizontal shelf below the map. On larger screens, the map and scrollable listing panel sit side by side.
+The public Find food experience uses a real interactive Austin map. Visitors can pan, zoom, select food markers, and move between a marker and its listing details. On phones, a full-screen command bar provides Menu, search, and Locate. A floating List control follows the adaptive result sheet as it moves between peek, half, and full detents. Selecting a marker opens its place details at peek. The map remains interactive in place and list modes. On larger screens, the existing map and scrollable listing panel remain side by side.
 
 The map uses OpenStreetMap tiles through Leaflet and keeps the required OpenStreetMap contributor attribution visible. WXL does not prefetch maps for offline use. Only public listings with reviewed coordinates receive a marker. A listing without confirmed coordinates remains in the result shelf with its pending-location label.
 
@@ -223,7 +223,7 @@ These events are intended for product learning, not advertising or cross-site tr
 
 ## Mobile experience
 
-On phones, the public experience uses a persistent bottom navigation for Find food, Contribute, Gather, and Requests. The interactive map supports touch panning and pinch zoom, and food results scroll horizontally beneath it. The opt-in Advanced workspace retains the full-width coordination layout and labeled navigation drawer. Short landscape screens use a compact two-column drawer so every workspace and account control remains reachable.
+On phones, Find food uses the full-screen command-bar shell. Menu opens a modal adaptive sheet containing Find food, Contribute, Gather, Requests, account state, and Advanced mode. Search and map results use a nonmodal sheet so touch panning and pinch zoom remain available. The floating List control tracks the sheet continuously. The opt-in Advanced mode retains the full-width coordination layout and labeled navigation drawer. Short landscape screens use a compact two-column drawer so every workspace and account control remains reachable.
 
 Mobile product requirements:
 
@@ -496,6 +496,12 @@ When product behavior changes:
 When this document becomes HTML, preserve the headings and anchors so existing links remain stable.
 
 ## Change log
+
+### 2026-07-25
+
+- Added a shared entry and exit treatment for centered dialogs across account, location, community, rescue, harvest-run, and inventory workflows.
+- Kept dialogs mounted until exit motion completes so asynchronous success and cleanup states do not interrupt dismissal.
+- Added a reduced-motion path with short opacity-only transitions.
 
 ### 2026-07-21
 

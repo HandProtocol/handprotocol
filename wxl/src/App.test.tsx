@@ -5,7 +5,9 @@ import App from './App'
 import { FoodAlertsOverview } from './CommunityTools'
 
 vi.mock('./FoodMap', () => ({
-  FoodMap: ({ locations }: { locations: Array<{ id: string }> }) => <div aria-label="Interactive map of public food places in Austin" data-location-count={locations.length} />,
+  FoodMap: ({ locations, onSelect, bottomInset }: { locations: Array<{ id: string; name: string; area: string }>; onSelect?: (location: { id: string; name: string; area: string }) => void; bottomInset?: number }) => <div aria-label="Interactive map of public food places in Austin" data-location-count={locations.length} data-bottom-inset={bottomInset}>
+    {onSelect && locations.map((location) => <button key={location.id} type="button" onClick={() => onSelect(location)}>Map marker: {location.name}</button>)}
+  </div>,
 }))
 
 const defaultUserAgent = navigator.userAgent
@@ -19,6 +21,7 @@ function dispatchOpacityTransitionEnd(element: HTMLElement) {
 describe('WXL entry points and interaction gates', () => {
   beforeEach(() => {
     window.history.replaceState({}, '', '/')
+    Object.defineProperty(window, 'innerWidth', { value: 1024, configurable: true })
     sessionStorage.clear()
     localStorage.clear()
     Object.defineProperty(navigator, 'userAgent', { value: defaultUserAgent, configurable: true })
@@ -34,6 +37,82 @@ describe('WXL entry points and interaction gates', () => {
 
     expect(screen.getByLabelText('Email address')).toHaveAttribute('autocomplete', 'username')
     expect(screen.getByLabelText('Password')).toHaveAttribute('autocomplete', 'new-password')
+  })
+
+  it('isolates the hidden map lab and lazy-loads its prototype tooling', async () => {
+    window.history.replaceState({}, '', '/app/?mode=map-lab')
+    render(<App />)
+
+    expect(await screen.findByRole('complementary', { name: 'Map lab evaluator' })).toBeInTheDocument()
+    expect(screen.getByText('Command bar')).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Open alerts and feedback' })).not.toBeInTheDocument()
+    expect(screen.getByLabelText('Interactive map of public food places in Austin')).toHaveAttribute('data-bottom-inset')
+  })
+
+  it('switches map lab variants through the URL and stores a favorite locally', async () => {
+    window.history.replaceState({}, '', '/app/?mode=map-lab')
+    render(<App />)
+
+    await userEvent.click(await screen.findByRole('button', { name: /Prototype tooling/i }))
+    await userEvent.click(screen.getByRole('button', { name: 'Command bar' }))
+    expect(window.location.search).toContain('mode=map-lab')
+    expect(window.location.search).toContain('variant=command-bar')
+
+    await userEvent.click(screen.getByRole('button', { name: /Save as favorite/i }))
+    expect(localStorage.getItem('wxl:map-lab-favorite')).toBe('command-bar')
+    expect(screen.getByRole('button', { name: /Current favorite/i })).toBeInTheDocument()
+  })
+
+  it('moves the shared lab sheet between search, place, and modal menu content', async () => {
+    window.history.replaceState({}, '', '/app/?mode=map-lab&variant=rail')
+    render(<App />)
+
+    const search = await screen.findByRole('searchbox', { name: 'Search food places' })
+    await userEvent.type(search, 'St. John')
+    expect(screen.getByRole('heading', { name: '1 places to check' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Map marker: St. John Community Center/i })).toBeInTheDocument()
+
+    await userEvent.click(screen.getByRole('button', { name: /Map marker: St. John Community Center/i }))
+    expect(screen.getByRole('region', { name: 'Selected food place' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'St. John Community Center' })).toBeInTheDocument()
+
+    const menuTrigger = screen.getByRole('button', { name: 'Menu' })
+    await userEvent.click(menuTrigger)
+    expect(screen.getByRole('dialog', { name: 'WXL map menu' })).toHaveAttribute('aria-modal', 'true')
+    expect(screen.getByText(/prototype is read-only/i)).toBeInTheDocument()
+    expect(document.querySelector('.map-lab-map-layer')).toHaveAttribute('aria-hidden', 'true')
+    fireEvent.keyDown(document, { key: 'Escape' })
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'WXL map menu' })).not.toBeInTheDocument())
+    await waitFor(() => expect(menuTrigger).toHaveFocus())
+  })
+
+  it('keeps the complete map usable when lab geolocation is denied', async () => {
+    window.history.replaceState({}, '', '/app/?mode=map-lab&variant=rail')
+    const getCurrentPosition = vi.fn((_success: PositionCallback, error: PositionErrorCallback) => error({ code: 1 } as GeolocationPositionError))
+    Object.defineProperty(navigator, 'geolocation', { value: { getCurrentPosition }, configurable: true })
+    render(<App />)
+
+    await userEvent.click(await screen.findByRole('button', { name: 'Locate' }))
+    expect(getCurrentPosition).toHaveBeenCalledOnce()
+    expect(screen.getByRole('status')).toHaveTextContent(/Location access was not allowed/i)
+    expect(screen.getByLabelText('Interactive map of public food places in Austin')).toHaveAttribute('data-location-count', '8')
+  })
+
+  it('uses the command-bar map as the public mobile food interface', async () => {
+    Object.defineProperty(window, 'innerWidth', { value: 390, configurable: true })
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
+    render(<App />)
+
+    expect(await screen.findByRole('region', { name: 'Food place results' })).toBeInTheDocument()
+    expect(screen.queryByRole('complementary', { name: 'Map lab evaluator' })).not.toBeInTheDocument()
+    expect(screen.queryByText(/Prototype tooling/i)).not.toBeInTheDocument()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Menu' }))
+    const advancedMode = screen.getByRole('link', { name: /Advanced mode/i })
+    expect(advancedMode).toHaveAttribute('href', '/app/?mode=advanced')
+    expect(screen.getByText(/Public browsing is open/i)).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: /Alerts and feedback/i }))
+    expect(await screen.findByRole('dialog', { name: 'Get WXL alerts' })).toBeInTheDocument()
   })
 
   it('offers email-only updates without account credentials', async () => {
