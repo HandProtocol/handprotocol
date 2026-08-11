@@ -58,16 +58,21 @@ alter table command.food_spots enable row level security;
 alter table command.food_alerts enable row level security;
 alter table command.food_engagement_events enable row level security;
 
+drop policy if exists food_spots_public_read on command.food_spots;
 create policy food_spots_public_read on command.food_spots
   for select using (status in ('community', 'verified'));
+drop policy if exists food_spots_authenticated_insert on command.food_spots;
 create policy food_spots_authenticated_insert on command.food_spots
   for insert with check (auth.uid() is not null and created_by = auth.uid() and status = 'community');
+drop policy if exists food_spots_owner_update on command.food_spots;
 create policy food_spots_owner_update on command.food_spots
   for update using (created_by = auth.uid() or command.current_role() = 'admin')
   with check ((created_by = auth.uid() and status = 'community') or command.current_role() = 'admin');
 
+drop policy if exists food_alerts_active_public_read on command.food_alerts;
 create policy food_alerts_active_public_read on command.food_alerts
   for select using (expires_at > now());
+drop policy if exists food_alerts_authenticated_insert on command.food_alerts;
 create policy food_alerts_authenticated_insert on command.food_alerts
   for insert with check (
     auth.uid() is not null
@@ -76,8 +81,10 @@ create policy food_alerts_authenticated_insert on command.food_alerts
     and command.can_post_food_alert(auth.uid())
   );
 
+drop policy if exists food_engagement_own_insert on command.food_engagement_events;
 create policy food_engagement_own_insert on command.food_engagement_events
   for insert with check (auth.uid() is not null and user_id = auth.uid());
+drop policy if exists food_engagement_admin_read on command.food_engagement_events;
 create policy food_engagement_admin_read on command.food_engagement_events
   for select using (command.current_role() = 'admin');
 

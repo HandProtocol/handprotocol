@@ -7,6 +7,33 @@ const json = (statusCode, body) => ({
   body: JSON.stringify(body),
 })
 
+// Best-effort limiter: state lives only in a warm function instance, so this
+// slows abuse rather than guaranteeing a global ceiling.
+const RATE_WINDOW_MS = 60_000
+const RATE_LIMIT = 5
+const rateBuckets = new Map()
+
+export function resetRateLimitBuckets() {
+  rateBuckets.clear()
+}
+
+function rateLimited(key) {
+  const now = Date.now()
+  if (rateBuckets.size > 500) {
+    for (const [bucketKey, stamps] of rateBuckets) {
+      if (!stamps.some((ts) => now - ts < RATE_WINDOW_MS)) rateBuckets.delete(bucketKey)
+    }
+  }
+  const recent = (rateBuckets.get(key) ?? []).filter((ts) => now - ts < RATE_WINDOW_MS)
+  if (recent.length >= RATE_LIMIT) {
+    rateBuckets.set(key, recent)
+    return true
+  }
+  recent.push(now)
+  rateBuckets.set(key, recent)
+  return false
+}
+
 async function notifyHandOfUpdatesSignup(email) {
   try {
     const response = await fetch(handFeedbackEndpoint, {
@@ -32,6 +59,9 @@ async function notifyHandOfUpdatesSignup(email) {
 export async function handler(event) {
   if (event.httpMethod === 'OPTIONS') return json(204, {})
   if (event.httpMethod !== 'POST') return json(405, { error: 'Method not allowed' })
+
+  const clientIp = event.headers?.['x-nf-client-connection-ip'] || event.headers?.['client-ip'] || 'unknown'
+  if (rateLimited(`ip:${clientIp}`)) return json(429, { error: 'Too many signup attempts. Try again in a minute.' })
 
   let body
   try {

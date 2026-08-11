@@ -1,5 +1,9 @@
-import { afterEach, describe, expect, it, vi } from 'vitest'
-import { handler } from '../netlify/functions/subscribe-updates.mjs'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { handler, resetRateLimitBuckets } from '../netlify/functions/subscribe-updates.mjs'
+
+beforeEach(() => {
+  resetRateLimitBuckets()
+})
 
 afterEach(() => {
   vi.unstubAllEnvs()
@@ -55,5 +59,19 @@ describe('email updates signup function', () => {
 
     expect(response.statusCode).toBe(200)
     expect(JSON.parse(response.body).status).toBe('already_subscribed')
+  })
+
+  it('rate limits repeated signup attempts from one address', async () => {
+    const fetchMock = vi.fn()
+    vi.stubGlobal('fetch', fetchMock)
+
+    const request = { httpMethod: 'POST', headers: { 'x-nf-client-connection-ip': '203.0.113.9' }, body: JSON.stringify({ email: 'invalid' }) }
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      const allowed = await handler(request)
+      expect(allowed.statusCode).toBe(422)
+    }
+    const blocked = await handler(request)
+    expect(blocked.statusCode).toBe(429)
+    expect(fetchMock).not.toHaveBeenCalled()
   })
 })

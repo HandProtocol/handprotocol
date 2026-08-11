@@ -437,10 +437,13 @@ alter table command.food_harvest_runs enable row level security;
 alter table command.food_harvest_run_stops enable row level security;
 alter table command.food_harvest_run_events enable row level security;
 
+drop policy if exists food_harvest_runs_private_read on command.food_harvest_runs;
 create policy food_harvest_runs_private_read on command.food_harvest_runs for select
   using (assigned_to = auth.uid() or command.current_role() = 'admin');
+drop policy if exists food_harvest_stops_private_read on command.food_harvest_run_stops;
 create policy food_harvest_stops_private_read on command.food_harvest_run_stops for select
   using (exists (select 1 from command.food_harvest_runs as run where run.id = run_id and (run.assigned_to = auth.uid() or command.current_role() = 'admin')));
+drop policy if exists food_harvest_events_private_read on command.food_harvest_run_events;
 create policy food_harvest_events_private_read on command.food_harvest_run_events for select
   using (exists (select 1 from command.food_harvest_runs as run where run.id = run_id and (run.assigned_to = auth.uid() or command.current_role() = 'admin')));
 

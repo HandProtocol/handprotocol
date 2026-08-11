@@ -336,8 +336,10 @@ $$;
 alter table command.food_contributors enable row level security;
 alter table command.food_contributor_review_events enable row level security;
 
+drop policy if exists food_contributors_private_read on command.food_contributors;
 create policy food_contributors_private_read on command.food_contributors
   for select using (profile_id = auth.uid() or command.current_role() = 'admin');
+drop policy if exists food_contributor_events_private_read on command.food_contributor_review_events;
 create policy food_contributor_events_private_read on command.food_contributor_review_events
   for select using (contributor_id = auth.uid() or command.current_role() = 'admin');
 

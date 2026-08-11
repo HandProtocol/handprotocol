@@ -78,6 +78,7 @@ Apply these migrations to the HAND Supabase project in order, then add `command`
 ../command/supabase/migrations/038_wxl_compost_route_gate.sql
 ../command/supabase/migrations/039_wxl_compost_trigger_permissions.sql
 ../command/supabase/migrations/040_wxl_food_dropoffs.sql
+../command/supabase/migrations/041_wxl_hardening.sql
 ```
 
 After migration 026, verify that no auth account is missing the profile row required by WXL food-record foreign keys:

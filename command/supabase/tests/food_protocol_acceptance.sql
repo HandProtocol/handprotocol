@@ -1,4 +1,4 @@
-/* Run after migrations 024 through 036 on a nonproduction database. */
+/* Run after migrations 024 through 041 on a nonproduction database. */
 begin;
 
 do $$

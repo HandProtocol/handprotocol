@@ -9,7 +9,15 @@ Production migration history was baselined from 001 through 036 on
 has a unique version. Migrations 037 through 039 add the compost-return leg to
 WXL delivery routes, require a later compost destination before assignment,
 and restrict the trigger function from direct client execution. Migration 040
-adds community-site food drop-offs and privacy-scoped recognition.
+adds community-site food drop-offs and privacy-scoped recognition. Migration
+041 hardens the coordination protocol: real worker-caller verification
+(`command.is_food_worker_caller()` replacing the always-true `current_user`
+checks), a Stripe reconciliation restructure so event evidence survives
+processing failures, participant-scoped select policies for the match and
+mandate tables, and request-hash idempotency comparison across all receipt
+commands. Applied to production 2026-08-11 and validated by replaying
+001 through 041 (then 024 through 041 a second time) on a clean Supabase
+Postgres image plus the acceptance SQL and worker-guard behavior tests.
 
 ## Apply
 
@@ -28,7 +36,7 @@ supabase db push
 
 The CLI reads the files in `supabase/migrations/` in numerical order and
 applies them via the project's pooler. WXL:FOOD requires migrations 024
-through 040. Migrations 024 and 025 were restored from repository history and
+through 041. Migrations 024 and 025 were restored from repository history and
 must be present before applying 026 or later.
 
 ### Option B: Supabase Dashboard SQL editor
@@ -98,7 +106,7 @@ select count(*) from command.funders;
 select tablename from pg_tables where schemaname = 'command' order by tablename;
 ```
 
-After applying through migration 036 on a nonproduction branch, run:
+After applying through migration 041 on a nonproduction branch, run:
 
 ```bash
 psql "$DATABASE_URL" -f supabase/tests/food_protocol_acceptance.sql

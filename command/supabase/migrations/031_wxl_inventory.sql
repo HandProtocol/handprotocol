@@ -374,9 +374,13 @@ alter table command.food_inventory_allocations enable row level security;
 alter table command.food_inventory_condition_checks enable row level security;
 alter table command.food_inventory_ledger enable row level security;
 
+drop policy if exists food_inventory_lots_admin_read on command.food_inventory_lots;
 create policy food_inventory_lots_admin_read on command.food_inventory_lots for select using (command.current_role() = 'admin');
+drop policy if exists food_inventory_allocations_admin_read on command.food_inventory_allocations;
 create policy food_inventory_allocations_admin_read on command.food_inventory_allocations for select using (command.current_role() = 'admin');
+drop policy if exists food_inventory_checks_admin_read on command.food_inventory_condition_checks;
 create policy food_inventory_checks_admin_read on command.food_inventory_condition_checks for select using (command.current_role() = 'admin');
+drop policy if exists food_inventory_ledger_admin_read on command.food_inventory_ledger;
 create policy food_inventory_ledger_admin_read on command.food_inventory_ledger for select using (command.current_role() = 'admin');
 
 grant select on command.food_inventory_lots, command.food_inventory_allocations, command.food_inventory_condition_checks, command.food_inventory_ledger to authenticated;

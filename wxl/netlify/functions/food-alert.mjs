@@ -4,6 +4,33 @@ const json = (statusCode, body) => ({
   body: JSON.stringify(body),
 })
 
+// Best-effort limiter: state lives only in a warm function instance, so this
+// slows abuse rather than guaranteeing a global ceiling.
+const RATE_WINDOW_MS = 60_000
+const RATE_LIMIT = 5
+const rateBuckets = new Map()
+
+export function resetRateLimitBuckets() {
+  rateBuckets.clear()
+}
+
+function rateLimited(key) {
+  const now = Date.now()
+  if (rateBuckets.size > 500) {
+    for (const [bucketKey, stamps] of rateBuckets) {
+      if (!stamps.some((ts) => now - ts < RATE_WINDOW_MS)) rateBuckets.delete(bucketKey)
+    }
+  }
+  const recent = (rateBuckets.get(key) ?? []).filter((ts) => now - ts < RATE_WINDOW_MS)
+  if (recent.length >= RATE_LIMIT) {
+    rateBuckets.set(key, recent)
+    return true
+  }
+  recent.push(now)
+  rateBuckets.set(key, recent)
+  return false
+}
+
 async function forwardToHand(alert) {
   const endpoint = process.env.HAND_FEEDBACK_ENDPOINT || 'https://handprotocol.org/.netlify/functions/feedback'
   try {
@@ -40,17 +67,21 @@ export async function handler(event) {
     headers: { apikey: anonKey, authorization: `Bearer ${token}` },
   })
   if (!userResponse.ok) return json(401, { error: 'Invalid session' })
+  const user = await userResponse.json().catch(() => null)
+  if (!user?.id) return json(401, { error: 'Invalid session' })
+  if (rateLimited(`user:${user.id}`)) return json(429, { error: 'Too many notification requests. Try again in a minute.' })
 
   let body
   try { body = JSON.parse(event.body || '{}') } catch { return json(400, { error: 'Invalid JSON' }) }
   if (!body.alert_id) return json(400, { error: 'Missing alert id' })
 
-  const alertResponse = await fetch(`${supabaseUrl.replace(/\/$/, '')}/rest/v1/food_alerts?id=eq.${encodeURIComponent(body.alert_id)}&select=title,message,neighborhood,expires_at`, {
+  const alertResponse = await fetch(`${supabaseUrl.replace(/\/$/, '')}/rest/v1/food_alerts?id=eq.${encodeURIComponent(body.alert_id)}&select=title,message,neighborhood,expires_at,created_by`, {
     headers: { apikey: anonKey, authorization: `Bearer ${token}`, 'accept-profile': 'command' },
   })
   const alerts = alertResponse.ok ? await alertResponse.json() : []
   const alert = alerts[0]
   if (!alert) return json(404, { error: 'Alert not found' })
+  if (alert.created_by !== user.id) return json(403, { error: 'Only the alert author can send this notification' })
 
   const apiKey = process.env.RESEND_API_KEY
   const to = process.env.EMAIL_TO_OPS || process.env.RESEND_NOTIFY_TO || process.env.RESEND_FORWARD_TO
