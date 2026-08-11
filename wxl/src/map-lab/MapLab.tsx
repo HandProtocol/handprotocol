@@ -1,5 +1,4 @@
 import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
-import type { User } from '@supabase/supabase-js'
 import {
   ArrowUpRight,
   Bell,
@@ -21,18 +20,27 @@ import {
   X,
 } from 'lucide-react'
 import { animate, motion, useDragControls, useMotionValue, useReducedMotion } from 'motion/react'
-import { foodDb, foodDbConfigured, loadFoodSpots } from '../lib/foodRepository'
+import type { User } from '@supabase/supabase-js'
+import { foodDbConfigured, loadFoodSpots, type FoodAlertRecord } from '../lib/foodRepository'
 import { getMemberIdentity } from '../lib/auth'
+import { useFoodAlerts } from '../lib/useFoodAlerts'
 import {
   distanceMiles,
   foodIcons,
+  foodListingFilters,
   foodSpotToLocation,
   locations as bundledLocations,
+  matchesListingFilter,
   navigationUrl,
+  type FoodListingFilter,
   type FoodLocation,
 } from '../foodLocations'
 import type { FoodMapLocation } from '../FoodMap'
 import { openCommunityContact } from '../CommunityContactWidget'
+import { AppLink } from '../router'
+import { LanguageToggle, useI18n, type MessageKey } from '../i18n'
+import { FoodAlertBanner } from '../FoodAlertBanner'
+import { useAuth } from '../AuthProvider'
 import './map-lab.css'
 
 const FoodMap = lazy(() => import('../FoodMap').then((module) => ({ default: module.FoodMap })))
@@ -103,18 +111,19 @@ function MapControl({
 }
 
 export function MapLab({ product = false }: { product?: boolean }) {
+  const { t } = useI18n()
+  const { member, authReady } = useAuth()
   const [variant, setVariant] = useState<MapLabVariant>(() => product ? 'command-bar' : initialVariant())
   const [favorite, setFavorite] = useState(() => localStorage.getItem('wxl:map-lab-favorite'))
   const [evaluatorOpen, setEvaluatorOpen] = useState(false)
   const [sheetMode, setSheetMode] = useState<SheetMode>('list')
   const [detent, setDetent] = useState<SheetDetent>('peek')
   const [query, setQuery] = useState('')
-  const [filter, setFilter] = useState<'all' | 'verified' | 'community'>('all')
+  const [filter, setFilter] = useState<FoodListingFilter>('all')
   const [allLocations, setAllLocations] = useState<FoodLocation[]>(bundledLocations)
   const [selectedId, setSelectedId] = useState(bundledLocations[0].id)
-  const [readStatus, setReadStatus] = useState(foodDbConfigured ? 'Checking community listings…' : 'Showing the bundled Austin directory.')
-  const [member, setMember] = useState<User | null>(null)
-  const [authReady, setAuthReady] = useState(!foodDbConfigured)
+  const [readStatus, setReadStatus] = useState(() => foodDbConfigured ? 'checking' : 'bundled')
+  const { alerts } = useFoodAlerts('map-lab')
   const [visitorPosition, setVisitorPosition] = useState<{ latitude: number; longitude: number } | null>(null)
   const [locationStatus, setLocationStatus] = useState('')
   const [viewportCommand, setViewportCommand] = useState<{ id: number; latitude: number; longitude: number; zoom: number } | null>(null)
@@ -129,17 +138,17 @@ export function MapLab({ product = false }: { product?: boolean }) {
   const searchRef = useRef<HTMLInputElement>(null)
 
   const selected = allLocations.find((location) => location.id === selectedId) ?? allLocations[0]
+  const alertSpotIds = useMemo(() => new Set(alerts.map((alert) => alert.spot_id).filter((id): id is string => Boolean(id))), [alerts])
   const visibleLocations = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
     const filtered = allLocations.filter((location) => {
       const matchesQuery = !normalizedQuery || `${location.name} ${location.area} ${location.type}`.toLowerCase().includes(normalizedQuery)
-      const matchesFilter = filter === 'all' || (filter === 'verified' ? location.verified : !location.verified)
-      return matchesQuery && matchesFilter
+      return matchesQuery && matchesListingFilter(location, filter, alertSpotIds)
     })
     return visitorPosition
       ? [...filtered].sort((a, b) => distanceMiles(a, visitorPosition.latitude, visitorPosition.longitude) - distanceMiles(b, visitorPosition.latitude, visitorPosition.longitude))
       : filtered
-  }, [allLocations, filter, query, visitorPosition])
+  }, [allLocations, filter, query, visitorPosition, alertSpotIds])
 
   const mapLocations = useMemo(() => allLocations.map((location, index) => ({
     ...location,
@@ -192,27 +201,23 @@ export function MapLab({ product = false }: { product?: boolean }) {
     void loadFoodSpots().then(({ data, error }) => {
       if (!active) return
       if (error) {
-        setReadStatus('Live community listings are unavailable. Showing the bundled Austin directory.')
+        setReadStatus('unavailable')
         return
       }
       const live = data ?? []
       setAllLocations([...bundledLocations, ...live.map(foodSpotToLocation)])
-      setReadStatus(live.length ? `${live.length} live community ${live.length === 1 ? 'listing' : 'listings'} added.` : 'No live community listings right now. Showing the bundled Austin directory.')
+      setReadStatus(live.length ? `live:${live.length}` : 'nolive')
     }).catch(() => {
-      if (active) setReadStatus('Live community listings are unavailable. Showing the bundled Austin directory.')
+      if (active) setReadStatus('unavailable')
     })
     return () => { active = false }
   }, [])
 
-  useEffect(() => {
-    if (!foodDb) return
-    foodDb.auth.getSession().then(({ data }) => setMember(data.session?.user ?? null)).finally(() => setAuthReady(true))
-    const { data } = foodDb.auth.onAuthStateChange((_event, session) => {
-      setMember(session?.user ?? null)
-      setAuthReady(true)
-    })
-    return () => data.subscription.unsubscribe()
-  }, [])
+  const readStatusMessage = readStatus === 'checking' ? t('map.checkingListings')
+    : readStatus === 'unavailable' ? t('map.liveUnavailable')
+    : readStatus === 'nolive' ? t('map.noLive')
+    : readStatus.startsWith('live:') ? t('map.liveAdded', { count: readStatus.slice(5) })
+    : t('map.bundledDirectory')
 
   useEffect(() => {
     const background = backgroundRef.current
@@ -281,12 +286,20 @@ export function MapLab({ product = false }: { product?: boolean }) {
     window.history.replaceState({}, '', `${window.location.pathname}?${params.toString()}`)
   }
 
-  const menuControl = <MapControl className="map-lab-menu-control" label="Menu" icon={<Menu size={19} />} onClick={(trigger) => openSheet('menu', 'half', trigger)} />
-  const locateControl = <MapControl label="Locate" icon={<LocateFixed size={19} />} onClick={() => locate()} />
-  const listControl = <MapControl label="List" icon={<List size={19} />} onClick={() => openSheet('list', 'half')} />
+  const showAlertOnMap = (alert: FoodAlertRecord) => {
+    if (!alert.spot_id) return
+    const location = allLocations.find((item) => item.id === alert.spot_id)
+    if (!location) return
+    selectLocation(location)
+    if (location.latitude != null && location.longitude != null) setViewportCommand({ id: Date.now(), latitude: location.latitude, longitude: location.longitude, zoom: 14 })
+  }
+
+  const menuControl = <MapControl className="map-lab-menu-control" label={t('map.menu')} icon={<Menu size={19} />} onClick={(trigger) => openSheet('menu', 'half', trigger)} />
+  const locateControl = <MapControl label={t('map.locate')} icon={<LocateFixed size={19} />} onClick={() => locate()} />
+  const listControl = <MapControl label={t('map.list')} icon={<List size={19} />} onClick={() => openSheet('list', 'half')} />
   const search = <label className="map-lab-search">
     <Search size={19} aria-hidden="true" />
-    <span className="sr-only">Search food places</span>
+    <span className="sr-only">{t('map.searchLabel')}</span>
     <input
       ref={searchRef}
       type="search"
@@ -297,9 +310,9 @@ export function MapLab({ product = false }: { product?: boolean }) {
         settle('half')
       }}
       onFocus={() => openSheet('list', 'half')}
-      placeholder="Search food, area, or type"
+      placeholder={t('map.searchPlaceholder')}
     />
-    {query && <button type="button" onClick={() => setQuery('')} aria-label="Clear search"><X size={17} /></button>}
+    {query && <button type="button" onClick={() => setQuery('')} aria-label={t('map.clearSearch')}><X size={17} /></button>}
   </label>
 
   const bottomInset = Math.max(0, metrics.sheetHeight - metrics.offsets[detent])
@@ -311,7 +324,7 @@ export function MapLab({ product = false }: { product?: boolean }) {
     '--map-lab-bottom-inset': `${bottomInset}px`,
   } as React.CSSProperties}>
     <div ref={backgroundRef} className="map-lab-map-layer" aria-hidden={sheetMode === 'menu' ? 'true' : undefined}>
-      <Suspense fallback={<div className="map-lab-map-loading" role="status">Loading the Austin map…</div>}>
+      <Suspense fallback={<div className="map-lab-map-loading" role="status">{t('map.loading')}</div>}>
         <FoodMap
           locations={mapLocations}
           selectedId={selectedId}
@@ -326,6 +339,7 @@ export function MapLab({ product = false }: { product?: boolean }) {
         {variant === 'rail' && <><div className="map-lab-rail-top">{menuControl}{search}</div><div className="map-lab-side-controls">{locateControl}{listControl}</div></>}
         {variant === 'command-bar' && <><div className="map-lab-command">{menuControl}{search}{locateControl}</div><motion.div className="map-lab-list-pill" style={{ y: sheetY }}>{listControl}</motion.div></>}
         {variant === 'dock' && <><div className="map-lab-dock-search">{search}</div><motion.div className="map-lab-dock" style={{ y: sheetY }}>{menuControl}{locateControl}{listControl}</motion.div></>}
+        <div className="map-lab-alert-banner"><FoodAlertBanner alerts={alerts} onShow={showAlertOnMap} /></div>
       </div>
     </div>
 
@@ -384,7 +398,7 @@ export function MapLab({ product = false }: { product?: boolean }) {
           setFilter={setFilter}
           onSelect={selectLocation}
           visitorPosition={visitorPosition}
-          readStatus={readStatus}
+          readStatus={readStatusMessage}
           locationStatus={locationStatus}
         />}
         {sheetMode === 'menu' && <MenuContent member={member} authReady={authReady} onClose={dismissMenu} product={product} />}
@@ -414,16 +428,24 @@ export function MapLab({ product = false }: { product?: boolean }) {
 }
 
 function PlaceContent({ location, distance }: { location: FoodLocation; distance: number | null }) {
+  const { t } = useI18n()
   return <article className="map-lab-place">
     <p className="map-lab-eyebrow"><MapPin size={14} /> {location.area}{distance != null && Number.isFinite(distance) ? ` · ${distance.toFixed(1)} mi` : ''}</p>
-    <div className="map-lab-place-heading"><div><span className={`map-lab-state ${location.verified ? 'verified' : ''}`}>{location.verified ? 'Verified listing' : 'Community report'}</span><h1>{location.name}</h1></div><span className="map-lab-place-icon" aria-hidden="true">{foodIcons[Math.max(0, bundledLocations.findIndex((item) => item.id === location.id)) % foodIcons.length]}</span></div>
+    <div className="map-lab-place-heading"><div><span className={`map-lab-state ${location.verified ? 'verified' : ''}`}>{location.verified ? t('common.verifiedListing') : t('common.communityReport')}</span><h1>{location.name}</h1></div><span className="map-lab-place-icon" aria-hidden="true">{foodIcons[Math.max(0, bundledLocations.findIndex((item) => item.id === location.id)) % foodIcons.length]}</span></div>
     <p className="map-lab-address">{location.address}</p>
     <dl className="map-lab-place-facts">
-      <div><dt><Clock3 size={16} /> Hours</dt><dd>{location.hours ?? 'Check current hours before visiting.'}</dd></div>
-      <div><dt><ShieldCheck size={16} /> Access</dt><dd>{location.access ?? location.detail}</dd></div>
+      <div><dt><Clock3 size={16} /> {t('common.hours')}</dt><dd>{location.hours ?? `${t('common.checkHours')}.`}</dd></div>
+      <div><dt><ShieldCheck size={16} /> {t('common.access')}</dt><dd>{location.access ?? location.detail}</dd></div>
     </dl>
-    {location.verified ? <a className="map-lab-primary" href={navigationUrl(location)} target="_blank" rel="noreferrer"><span><Navigation size={17} /> Navigate</span><ArrowUpRight size={17} /></a> : <p className="map-lab-quiet">This location is awaiting public confirmation. Review its notes before traveling.</p>}
+    {location.verified ? <a className="map-lab-primary" href={navigationUrl(location)} target="_blank" rel="noreferrer"><span><Navigation size={17} /> {t('common.navigate')}</span><ArrowUpRight size={17} /></a> : <p className="map-lab-quiet">{t('map.awaitingConfirmation')}</p>}
   </article>
+}
+
+const listFilterLabelKeys: Record<FoodListingFilter, MessageKey> = {
+  all: 'filters.all',
+  verified: 'filters.verified',
+  community: 'filters.community',
+  alerts: 'filters.alerts',
 }
 
 function ListContent({
@@ -438,17 +460,18 @@ function ListContent({
 }: {
   locations: FoodLocation[]
   selectedId: string
-  filter: 'all' | 'verified' | 'community'
-  setFilter: (filter: 'all' | 'verified' | 'community') => void
+  filter: FoodListingFilter
+  setFilter: (filter: FoodListingFilter) => void
   onSelect: (location: FoodLocation) => void
   visitorPosition: { latitude: number; longitude: number } | null
   readStatus: string
   locationStatus: string
 }) {
+  const { t } = useI18n()
   return <div className="map-lab-list">
-    <div className="map-lab-list-heading"><div><p className="map-lab-eyebrow">Austin food directory</p><h1>{locations.length} places to check</h1></div><span>{visitorPosition ? 'Nearest first' : 'Directory order'}</span></div>
+    <div className="map-lab-list-heading"><div><p className="map-lab-eyebrow">{t('map.directory')}</p><h1>{t('map.placesToCheck', { count: locations.length })}</h1></div><span>{visitorPosition ? t('map.nearestFirst') : t('map.directoryOrder')}</span></div>
     <div className="map-lab-filters" aria-label="Filter food places">
-      {(['all', 'verified', 'community'] as const).map((item) => <button key={item} type="button" className={filter === item ? 'active' : ''} aria-pressed={filter === item} onClick={() => setFilter(item)}>{item === 'all' ? 'All places' : item === 'verified' ? 'Verified' : 'Community reports'}</button>)}
+      {foodListingFilters.map((item) => <button key={item} type="button" className={filter === item ? 'active' : ''} aria-pressed={filter === item} onClick={() => setFilter(item)}>{t(listFilterLabelKeys[item])}</button>)}
     </div>
     <p className="map-lab-status" role="status">{locationStatus || readStatus}</p>
     <div className="map-lab-results">
@@ -457,30 +480,31 @@ function ListContent({
         <span><b>{location.name}</b><small>{location.type} · {location.area}{visitorPosition && Number.isFinite(distanceMiles(location, visitorPosition.latitude, visitorPosition.longitude)) ? ` · ${distanceMiles(location, visitorPosition.latitude, visitorPosition.longitude).toFixed(1)} mi` : ''}</small></span>
         <ArrowUpRight size={16} />
       </button>)}
-      {!locations.length && <p className="map-lab-empty">No places match this search and filter.</p>}
+      {!locations.length && <p className="map-lab-empty">{t('map.noMatches')}</p>}
     </div>
   </div>
 }
 
 function MenuContent({ member, authReady, onClose, product }: { member: User | null; authReady: boolean; onClose: () => void; product: boolean }) {
+  const { t } = useI18n()
   const identity = member ? getMemberIdentity(member) : null
   const items = [
-    { label: 'Find food', detail: 'Public map and directory', href: '/app/?mode=anonymous&intent=food', icon: MapPin },
-    { label: 'Contribute', detail: 'Share or move food', href: '/app/?intent=contribute', icon: Crosshair },
-    { label: 'Gather', detail: 'Community tables', href: '/app/?mode=anonymous&intent=gather', icon: UserRound },
-    { label: 'Requests', detail: 'Ask or offer help', href: '/app/?mode=anonymous&intent=request', icon: List },
+    { label: t('map.menuFind'), detail: t('map.menuFindDetail'), href: '/app/?mode=anonymous&intent=food', icon: MapPin },
+    { label: t('map.menuContribute'), detail: t('map.menuContributeDetail'), href: '/app/?mode=anonymous&intent=contribute', icon: Crosshair },
+    { label: t('map.menuGather'), detail: t('map.menuGatherDetail'), href: '/app/?mode=anonymous&intent=gather', icon: UserRound },
+    { label: t('map.menuRequests'), detail: t('map.menuRequestsDetail'), href: '/app/?mode=anonymous&intent=request', icon: List },
   ]
   return <div className="map-lab-menu">
-    <div className="map-lab-menu-heading"><div><p className="map-lab-eyebrow">WXL:FOOD</p><h1>Choose a path</h1></div><button type="button" onClick={onClose} aria-label="Close menu"><X size={19} /></button></div>
+    <div className="map-lab-menu-heading"><div><p className="map-lab-eyebrow">WXL:FOOD</p><h1>{t('map.choosePath')}</h1></div><div className="map-lab-menu-tools"><LanguageToggle /><button type="button" onClick={onClose} aria-label={t('common.close')}><X size={19} /></button></div></div>
     <nav aria-label="Map lab preview links">
-      {items.map(({ label, detail, href, icon: Icon }) => <a key={label} href={href}><Icon size={19} /><span><b>{label}</b><small>{detail}</small></span><ArrowUpRight size={16} /></a>)}
+      {items.map(({ label, detail, href, icon: Icon }) => <AppLink key={label} href={href} onNavigate={onClose}><Icon size={19} /><span><b>{label}</b><small>{detail}</small></span><ArrowUpRight size={16} /></AppLink>)}
     </nav>
-    <div className="map-lab-account"><UserRound size={19} /><span><b>{!authReady ? 'Checking account…' : identity?.displayName ?? 'Browsing openly'}</b><small>{identity ? identity.email : 'Sign in only when you are ready to coordinate'}</small></span>{!member && authReady && <a href="/app/?mode=login">Sign in</a>}</div>
+    <div className="map-lab-account"><UserRound size={19} /><span><b>{!authReady ? t('map.checkingAccount') : identity?.displayName ?? t('map.browsingOpenly')}</b><small>{identity ? identity.email : t('map.signInWhenReady')}</small></span>{!member && authReady && <AppLink href="/app/?mode=login">{t('common.signIn')}</AppLink>}</div>
     {product && <button className="map-lab-contact" type="button" onClick={() => {
       onClose()
       window.setTimeout(() => openCommunityContact('alerts'), 300)
-    }}><Bell size={18} /><span><b>Alerts and feedback</b><small>Updates, ideas, issues, and accessibility notes</small></span><ArrowUpRight size={16} /></button>}
-    <a className="map-lab-advanced" href="/app/?mode=advanced"><Settings size={18} /><span><b>Advanced mode</b><small>Coordination, routes, inventory, and reports</small></span><ArrowUpRight size={16} /></a>
-    <p className="map-lab-read-only"><ShieldCheck size={15} /> {product ? 'Public browsing is open. Sign in only when you are ready to coordinate.' : 'This prototype is read-only. Links hand off to existing live flows.'}</p>
+    }}><Bell size={18} /><span><b>{t('map.alertsFeedback')}</b><small>{t('map.alertsFeedbackDetail')}</small></span><ArrowUpRight size={16} /></button>}
+    <AppLink className="map-lab-advanced" href="/app/?mode=advanced" onClick={() => localStorage.setItem('wxl:experience-mode', 'advanced')}><Settings size={18} /><span><b>{t('map.advanced')}</b><small>{t('map.advancedDetail')}</small></span><ArrowUpRight size={16} /></AppLink>
+    <p className="map-lab-read-only"><ShieldCheck size={15} /> {product ? t('map.publicBrowsing') : 'This prototype is read-only. Links hand off to existing live flows.'}</p>
   </div>
 }

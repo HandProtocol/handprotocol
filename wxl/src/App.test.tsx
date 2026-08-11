@@ -463,16 +463,18 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.getByLabelText('Current location')).toHaveTextContent('Directory/WXL:FOOD/Overview')
   })
 
-  it('opens Overview with food nodes and anonymous volunteer routes before sample stats', async () => {
+  it('opens Overview with the real Austin map before the live network summary', async () => {
     window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
 
     const mapTitle = screen.getByRole('heading', { name: /Start with what is open/i })
-    const sampleSummary = screen.getByLabelText('Sample network summary')
-    expect(mapTitle.compareDocumentPosition(sampleSummary) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
-    expect(screen.getByLabelText('North route, 3 private household stops')).toBeInTheDocument()
+    const summary = screen.getByLabelText('Network summary')
+    expect(mapTitle.compareDocumentPosition(summary) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+    expect(screen.queryByLabelText(/North route/)).not.toBeInTheDocument()
+    expect(screen.getByText('Active FOOD IS HERE alerts')).toBeInTheDocument()
+    expect(screen.getByText('Food places on the map')).toBeInTheDocument()
 
-    await userEvent.click(screen.getByRole('button', { name: 'Select South Oak Baptist food pantry' }))
+    await userEvent.click(await screen.findByRole('button', { name: 'Map marker: South Oak Baptist food pantry' }))
     expect(screen.getByText('Thursdays, 9 to 11 AM')).toBeInTheDocument()
     expect(screen.getAllByText(/One form, no ID/i).length).toBeGreaterThan(0)
     expect(screen.getByText('Community report')).toBeInTheDocument()

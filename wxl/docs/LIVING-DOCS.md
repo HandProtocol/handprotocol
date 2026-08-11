@@ -2,7 +2,7 @@
 title: WXL:FOOD Living Documentation
 description: Current product behavior, community workflows, safety boundaries, and development status for WXL:FOOD.
 status: living
-last_updated: 2026-07-29
+last_updated: 2026-08-11
 canonical_path: /docs/
 ---
 
@@ -115,9 +115,13 @@ Password-reset emails return to `https://wxl.handprotocol.org/app/?mode=recovery
 
 The command center waits for Supabase session restoration before deciding whether write actions are available. Authenticated members see their current account identity and can sign out from the navigation account menu. Signing out keeps public browsing open and removes write access.
 
+## Languages
+
+WXL:FOOD serves Austin in English and Spanish. The landing page, the simple experience, the mobile map, and sign-in follow the visitor's browser language and offer a persistent globe toggle. The coordinator dashboard currently remains English.
+
 ## Austin food map
 
-The public Find food experience uses a real interactive Austin map. Visitors can pan, zoom, select food markers, and move between a marker and its listing details. On phones, a full-screen command bar provides Menu, search, and Locate. A floating List control follows the adaptive result sheet as it moves between peek, half, and full detents. Selecting a marker opens its place details at peek. The map remains interactive in place and list modes. On larger screens, the existing map and scrollable listing panel remain side by side.
+The public Find food experience uses a real interactive Austin map. It shows the bundled public directory plus live community-submitted spots, and every food-finding surface shares one filter vocabulary: All, Verified, Community reports, and Food here now. Visitors can pan, zoom, select food markers, and move between a marker and its listing details. On phones, a full-screen command bar provides Menu, search, and Locate. A floating List control follows the adaptive result sheet as it moves between peek, half, and full detents. Selecting a marker opens its place details at peek. The map remains interactive in place and list modes. On larger screens, the existing map and scrollable listing panel remain side by side.
 
 The map uses OpenStreetMap tiles through Leaflet and keeps the required OpenStreetMap contributor attribution visible. WXL does not prefetch maps for offline use. Only public listings with reviewed coordinates receive a marker. A listing without confirmed coordinates remains in the result shelf with its pending-location label.
 
@@ -175,7 +179,7 @@ An alert includes:
 - A neighborhood
 - A six-hour expiration time
 
-Active alerts appear at the top of Overview, in the dedicated Food available now workspace, and in the top-right alert center. Alerts linked to a public food spot can open that spot on the Overview map. Other open app sessions receive new alerts through Supabase Realtime, and open sessions remove alerts when their six-hour window ends.
+Active alerts appear to everyone, not only coordinators: anonymous food seekers see a countdown banner on the simple Find food page and on the mobile map, alongside the top of Overview, the dedicated Food available now workspace, and the top-right alert center. Alerts linked to a public food spot can open that spot on the map. Other open app sessions receive new alerts through Supabase Realtime, and open sessions remove alerts when their six-hour window ends.
 
 To limit abuse, one account can publish no more than five alerts in 15 minutes. Alerts must not include private household addresses, names of households receiving support, medical details, or other sensitive information.
 
@@ -496,6 +500,14 @@ When product behavior changes:
 When this document becomes HTML, preserve the headings and anchors so existing links remain stable.
 
 ## Change log
+
+### 2026-08-11
+
+- Brought live community food spots and FOOD IS HERE alerts to the anonymous simple finder and mobile map, with a countdown banner toward each alert's six-hour expiry.
+- Added Spanish across the landing page, simple experience, mobile map, and sign-in, with browser-language detection and a persistent toggle.
+- Replaced the Overview schematic map with the real Austin map and replaced sample summary numbers with live counts.
+- Unified the food filters everywhere to All, Verified, Community reports, and Food here now.
+- Added client-side routing: the back button and deep links work without full page reloads.
 
 ### 2026-07-25
 

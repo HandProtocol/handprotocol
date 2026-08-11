@@ -1364,3 +1364,35 @@ button { border: 0; cursor: pointer; }
   .detail-intro > p { margin-top: 10px; }
   .detail-grid { grid-template-columns: 1fr; }
 }
+
+/* Language toggle (EN/ES) */
+.language-toggle { display: inline-flex; align-items: center; gap: 5px; min-height: 32px; color: #40584a; background: #f3f7f1; border: 1px solid #d8e4d5; border-radius: 999px; padding: 5px 11px; font: 700 10px 'DM Mono', monospace; letter-spacing: .06em; cursor: pointer; }
+.language-toggle:hover { border-color: #74a27c; }
+.simple-header-tools { display: inline-flex; align-items: center; gap: 8px; justify-self: end; }
+.landing-nav-actions .language-toggle { min-height: 34px; }
+.login-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+
+/* FOOD IS HERE public banner */
+.food-alert-banner { display: flex; align-items: center; gap: 11px; width: 100%; text-align: left; color: #2b4437; background: linear-gradient(120deg, #fdf1e4, #f2f8ef); border: 1px solid #e3ad7c; border-radius: 11px; padding: 11px 13px; margin: 0 0 14px; }
+button.food-alert-banner { cursor: pointer; }
+.food-alert-banner-flag { display: grid; place-items: center; width: 34px; height: 34px; flex-shrink: 0; color: #fff; background: #c8664e; border-radius: 50%; animation: alert-flag-pulse 2.2s infinite; }
+.food-alert-banner-copy { display: grid; gap: 1px; min-width: 0; }
+.food-alert-banner-copy b { font: 700 10px 'DM Mono', monospace; letter-spacing: .09em; color: #b0532f; }
+.food-alert-banner-copy > span { font-size: 12px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.food-alert-banner-copy small { color: #76857c; font-size: 9px; }
+.food-alert-banner-meta { display: grid; gap: 2px; margin-left: auto; text-align: right; flex-shrink: 0; }
+.food-alert-banner-count { display: inline-flex; align-items: center; justify-content: flex-end; gap: 4px; font-size: 10px; font-weight: 700; color: #8a5a2e; }
+.food-alert-banner-meta small { color: #76857c; font-size: 9px; }
+.food-alert-banner-cta { color: #2d6b50; font-weight: 700; }
+@keyframes alert-flag-pulse { 0%, 100% { box-shadow: 0 0 0 0 #c8664e44; } 50% { box-shadow: 0 0 0 7px #c8664e00; } }
+@media (prefers-reduced-motion: reduce) { .food-alert-banner-flag { animation: none; } }
+.finder-flow > .food-alert-banner { margin: 14px 16px 0; width: auto; }
+
+/* Overview real map */
+.overview-real-map { padding: 0; overflow: hidden; background: #e9f0e6; }
+.overview-real-map .map-loading { display: grid; place-items: center; height: 100%; min-height: 430px; color: #6e7e75; font-size: 11px; }
+.overview-real-map .real-food-map-wrap { height: 100%; }
+.overview-real-map .real-food-map { height: 100%; min-height: 500px; }
+
+.impact-sample-note { display: flex; align-items: center; gap: 5px; color: #76857c; font-size: 9px; margin: 10px 0 0; }
+.listing-state.alerting { color: #b0532f; background: #fdeada; }

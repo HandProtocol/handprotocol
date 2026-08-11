@@ -8,6 +8,22 @@
 - Build command: `npm run build`
 - Publish directory: `dist`
 
+## How deploys actually happen
+
+The `wxl-food` Netlify site is **not linked to the GitHub repository** (verified 2026-08-11: `build_settings.repo_url` is empty). Pushing to `main` does not deploy WXL. Every production deploy is a CLI publish:
+
+```bash
+cd wxl
+npm ci && npm run build
+netlify deploy --prod --site 56ee91bf-bf15-472d-8c1c-d6c30af05d6c --dir dist --message "<what shipped> (<commit>)"
+```
+
+Deploy from a clean checkout of `main`, not a working tree with unrelated changes. Security headers ship via `public/_headers` (copied into `dist`), because `[[headers]]` in `netlify.toml` is not applied on CLI `--dir` deploys. Verify after deploying:
+
+```bash
+curl -sI https://wxl.handprotocol.org/ | grep -i content-security-policy
+```
+
 ## Environment
 
 Set these variables on the WXL:FOOD Netlify site:

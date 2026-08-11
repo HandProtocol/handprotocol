@@ -1,10 +1,21 @@
 # WXL:FOOD Handoff
 
-Last updated: 2026-07-27
+Last updated: 2026-08-11
 
 This is the working orientation document for `wxl/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on WXL:FOOD, its current behavior, what is real, what is illustrative, and what should be built next.
 
 Public-facing product behavior and safety boundaries are maintained in `docs/LIVING-DOCS.md`. Keep it current when a feature promise or workflow changes. It is intended to become the source for a future HTML documentation page.
+
+## One live food-finding loop, 2026-08-11
+
+Plan `plans/003-wxl-food-network-upgrade.md` Phase 1 landed:
+
+- **Live data everywhere.** The simple finder, the mobile map, and the dashboard Overview all load `food_spots` and merge them with the bundled directory. The Overview schematic CSS map is retired; the real Leaflet map is the only map.
+- **Alerts reach food seekers.** FOOD IS HERE alerts render as a countdown banner on the simple finder and the mobile map (realtime inserts included), not just the coordinator dashboard. `src/lib/useFoodAlerts.ts` is the one subscription path; `src/FoodAlertBanner.tsx` is the public signal.
+- **Bilingual EN/ES.** `src/i18n.tsx` holds the full string catalog, browser-language detection, and the persisted globe toggle (`wxl:lang`). Landing, simple experience, mobile map, prompts, and core login run in both languages. The coordinator dashboard remains English for now.
+- **Real router.** `src/router.tsx` provides history-based navigation with working back button and no full page loads; the URL contract (`/app`, `?mode=`, `?intent=`, `?workspace=`) is preserved and dashboard views deep-link via `?workspace=`. `src/AuthProvider.tsx` replaced the three duplicated session effects. `App.tsx` is a thin route shell; the six embedded components moved to their own files.
+- **Honest Overview.** The network summary shows live counts (active alerts, mapped places, open requests, public drop-offs). Dead controls removed: Impact reports nav item, unbound topbar search, basket/impact-report toast buttons. The sidebar request badge and Partner network verified count are computed, not literals.
+- **One vocabulary.** All three food-finding surfaces share the same filter set: All · Verified · Community reports · Food here now.
 
 ## Public mobile command-bar base, promoted 2026-07-29
 
@@ -337,7 +348,7 @@ On phones, the food intent opens the complete Austin map without an interruption
 - The command CTA runs a stable two-variant test, `map_first` or `rescue_first`, stored in local storage.
 - Click progress persists locally for every visitor. Authenticated interaction events batch to `command.food_engagement_events` every ten interactions.
 - Admins can query `command.food_engagement_leaderboard`; invoker row-level security keeps it internal.
-- Vitest covers landing links, anonymous write gates, FOOD IS HERE visibility and navigation, feedback, the mobile navigation drawer, and mocked database contracts. Run `npm test`.
+- Vitest covers landing links, anonymous write gates, FOOD IS HERE visibility and navigation, feedback, the mobile navigation drawer, client-side routing with the back button, Spanish detection and the language toggle, live consumer alerts, and mocked database contracts. Run `npm test`.
 - `.github/workflows/wxl-ci.yml` runs tests and the production build for WXL pull requests, relevant pushes to `main`, and manual dispatches.
 
 ### Mobile navigation

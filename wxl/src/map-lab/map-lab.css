@@ -820,3 +820,8 @@
     border-color: #203129;
   }
 }
+
+/* FOOD IS HERE banner overlay on the mobile map */
+.map-lab-alert-banner { position: absolute; z-index: 6; inset: 74px 12px auto; pointer-events: none; }
+.map-lab-alert-banner .food-alert-banner { pointer-events: auto; margin: 0; box-shadow: 0 10px 30px #183d2b2e; }
+.map-lab-menu-tools { display: inline-flex; align-items: center; gap: 8px; }

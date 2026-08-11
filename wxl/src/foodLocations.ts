@@ -37,6 +37,17 @@ export const locations: FoodLocation[] = [
 
 export const foodIcons = ['🥬', '🥕', '🍎', '🥖', '🥫', '🥦', '🍊', '🌽']
 
+/** One shared filter vocabulary across the simple finder, mobile map, and dashboard. */
+export type FoodListingFilter = 'all' | 'verified' | 'community' | 'alerts'
+export const foodListingFilters: readonly FoodListingFilter[] = ['all', 'verified', 'community', 'alerts']
+
+export function matchesListingFilter(location: FoodLocation, filter: FoodListingFilter, alertSpotIds: ReadonlySet<string>) {
+  if (filter === 'verified') return location.verified
+  if (filter === 'community') return !location.verified
+  if (filter === 'alerts') return alertSpotIds.has(location.id)
+  return true
+}
+
 export function distanceMiles(location: Pick<FoodLocation, 'latitude' | 'longitude'>, latitude: number, longitude: number) {
   if (location.latitude == null || location.longitude == null) return Number.POSITIVE_INFINITY
   const radians = (degrees: number) => degrees * Math.PI / 180
