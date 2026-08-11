@@ -117,9 +117,14 @@
   status = 301
 
 [[redirects]]
-  from = "/legacy"
-  to = "/legacy/"
-  status = 301
+from = "/legacy"
+to = "/legacy/"
+status = 301
+
+[[redirects]]
+from = "/threehandshealing"
+to = "/threehandshealing/"
+status = 301
 
 [[redirects]]
   from = "/foundation-campaign"
