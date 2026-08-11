@@ -275,9 +275,13 @@
 .map-lab-sheet-handle-zone {
   position: relative;
   z-index: 2;
+  width: 100%;
   min-height: 52px;
   display: grid;
   place-items: start center;
+  background: transparent;
+  border: 0;
+  padding: 0;
   touch-action: none;
   cursor: grab;
 }
@@ -294,27 +298,24 @@
   border-radius: 999px;
 }
 
-.map-lab-detents {
+.map-lab-map-pill {
   position: absolute;
-  top: 20px;
-  display: flex;
-  gap: 2px;
-}
-
-.map-lab-detents button {
-  min-width: 44px;
-  min-height: 30px;
-  color: #77837c;
-  background: transparent;
-  border-radius: 999px;
-  font-size: 8px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-.map-lab-detents button[aria-pressed='true'] {
+  z-index: 3;
+  top: 12px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
   color: var(--lab-green);
   background: #edf3eb;
+  border: 1px solid #d3e1d2;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 14px #10251a1f;
 }
 
 .map-lab-sheet-scroll {

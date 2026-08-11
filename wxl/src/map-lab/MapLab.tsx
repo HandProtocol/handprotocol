@@ -10,6 +10,7 @@ import {
   Heart,
   List,
   LocateFixed,
+  Map as MapIcon,
   MapPin,
   Menu,
   Navigation,
@@ -47,7 +48,7 @@ const FoodMap = lazy(() => import('../FoodMap').then((module) => ({ default: mod
 
 export type MapLabVariant = 'rail' | 'command-bar' | 'dock'
 export type SheetMode = 'place' | 'list' | 'menu'
-export type SheetDetent = 'peek' | 'half' | 'full'
+export type SheetDetent = 'peek' | 'full'
 
 type ViewportMetrics = {
   height: number
@@ -75,8 +76,7 @@ function getViewportMetrics(): ViewportMetrics {
     top,
     sheetHeight,
     offsets: {
-      peek: Math.max(0, sheetHeight - 116),
-      half: Math.max(0, sheetHeight - Math.round(height * .48)),
+      peek: Math.max(0, sheetHeight - 132),
       full: 0,
     },
   }
@@ -89,9 +89,15 @@ function initialVariant(): MapLabVariant {
   return favorite === 'rail' || favorite === 'command-bar' || favorite === 'dock' ? favorite : 'command-bar'
 }
 
-function nearestDetent(projected: number, offsets: Record<SheetDetent, number>): SheetDetent {
-  return (Object.entries(offsets) as Array<[SheetDetent, number]>)
-    .reduce((best, candidate) => Math.abs(candidate[1] - projected) < Math.abs(best[1] - projected) ? candidate : best)[0]
+// A committed fling always travels end-to-end; only a slow release falls back
+// to whichever state the sheet is physically closest to.
+const FLING_VELOCITY = 420
+
+function resolveDetent(position: number, velocity: number, offsets: Record<SheetDetent, number>): SheetDetent {
+  if (velocity <= -FLING_VELOCITY) return 'full'
+  if (velocity >= FLING_VELOCITY) return 'peek'
+  const projected = position + velocity * .25
+  return projected < (offsets.peek + offsets.full) / 2 ? 'full' : 'peek'
 }
 
 function MapControl({
@@ -136,6 +142,10 @@ export function MapLab({ product = false }: { product?: boolean }) {
   const evaluatorRef = useRef<HTMLElement>(null)
   const menuTriggerRef = useRef<HTMLButtonElement | null>(null)
   const searchRef = useRef<HTMLInputElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const historyEntryRef = useRef(false)
+  const draggingRef = useRef(false)
+  const pullStartRef = useRef<{ y: number; id: number } | null>(null)
 
   const selected = allLocations.find((location) => location.id === selectedId) ?? allLocations[0]
   const alertSpotIds = useMemo(() => new Set(alerts.map((alert) => alert.spot_id).filter((id): id is string => Boolean(id))), [alerts])
@@ -167,17 +177,57 @@ export function MapLab({ product = false }: { product?: boolean }) {
       : { duration: .25, ease: [.23, 1, .32, 1] })
   }
 
+  // Expanding pushes one history entry so the system back gesture collapses
+  // the sheet instead of leaving the page; collapsing through the UI unwinds
+  // that entry so history stays balanced.
+  const releaseHistoryEntry = () => {
+    if (!historyEntryRef.current) return
+    historyEntryRef.current = false
+    window.history.back()
+  }
+
+  const setDetentWithHistory = (next: SheetDetent, velocity = 0, fromDrag = false) => {
+    if (next === 'full' && !historyEntryRef.current) {
+      window.history.pushState({ wxlSheet: 'full' }, '')
+      historyEntryRef.current = true
+    }
+    if (next === 'peek') releaseHistoryEntry()
+    settle(next, velocity, fromDrag)
+  }
+
   const openSheet = (mode: SheetMode, nextDetent: SheetDetent, trigger?: HTMLButtonElement) => {
     if (mode === 'menu' && trigger) menuTriggerRef.current = trigger
     setSheetMode(mode)
-    settle(nextDetent)
+    setDetentWithHistory(nextDetent)
   }
 
-  const dismissMenu = () => {
+  const dismissMenu = (unwindHistory = true) => {
     setSheetMode('list')
+    if (unwindHistory) releaseHistoryEntry()
+    else historyEntryRef.current = false
     settle('peek')
     window.setTimeout(() => menuTriggerRef.current?.focus(), reducedMotion ? 0 : 250)
   }
+
+  const dismissMenuRef = useRef(dismissMenu)
+  const settleRef = useRef(settle)
+  const sheetModeRef = useRef(sheetMode)
+  useEffect(() => {
+    dismissMenuRef.current = dismissMenu
+    settleRef.current = settle
+    sheetModeRef.current = sheetMode
+  })
+
+  useEffect(() => {
+    const onPopState = () => {
+      if (!historyEntryRef.current) return
+      historyEntryRef.current = false
+      if (sheetModeRef.current === 'menu') dismissMenuRef.current(false)
+      else settleRef.current('peek')
+    }
+    window.addEventListener('popstate', onPopState)
+    return () => window.removeEventListener('popstate', onPopState)
+  }, [])
 
   useEffect(() => {
     const update = () => {
@@ -257,7 +307,7 @@ export function MapLab({ product = false }: { product?: boolean }) {
   const selectLocation = (mapLocation: FoodMapLocation | FoodLocation) => {
     setSelectedId(mapLocation.id)
     setSheetMode('place')
-    settle('peek')
+    setDetentWithHistory('peek')
   }
 
   const locate = () => {
@@ -294,9 +344,9 @@ export function MapLab({ product = false }: { product?: boolean }) {
     if (location.latitude != null && location.longitude != null) setViewportCommand({ id: Date.now(), latitude: location.latitude, longitude: location.longitude, zoom: 14 })
   }
 
-  const menuControl = <MapControl className="map-lab-menu-control" label={t('map.menu')} icon={<Menu size={19} />} onClick={(trigger) => openSheet('menu', 'half', trigger)} />
+  const menuControl = <MapControl className="map-lab-menu-control" label={t('map.menu')} icon={<Menu size={19} />} onClick={(trigger) => openSheet('menu', 'full', trigger)} />
   const locateControl = <MapControl label={t('map.locate')} icon={<LocateFixed size={19} />} onClick={() => locate()} />
-  const listControl = <MapControl label={t('map.list')} icon={<List size={19} />} onClick={() => openSheet('list', 'half')} />
+  const listControl = <MapControl label={t('map.list')} icon={<List size={19} />} onClick={() => openSheet('list', 'full')} />
   const search = <label className="map-lab-search">
     <Search size={19} aria-hidden="true" />
     <span className="sr-only">{t('map.searchLabel')}</span>
@@ -307,9 +357,9 @@ export function MapLab({ product = false }: { product?: boolean }) {
       onChange={(event) => {
         setQuery(event.target.value)
         setSheetMode('list')
-        settle('half')
+        setDetentWithHistory('full')
       }}
-      onFocus={() => openSheet('list', 'half')}
+      onFocus={() => openSheet('list', 'full')}
       placeholder={t('map.searchPlaceholder')}
     />
     {query && <button type="button" onClick={() => setQuery('')} aria-label={t('map.clearSearch')}><X size={17} /></button>}
@@ -347,7 +397,7 @@ export function MapLab({ product = false }: { product?: boolean }) {
       className="map-lab-scrim"
       type="button"
       aria-label="Close menu"
-      onClick={dismissMenu}
+      onClick={() => dismissMenu()}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: reducedMotion ? .15 : .25 }}
@@ -355,41 +405,73 @@ export function MapLab({ product = false }: { product?: boolean }) {
 
     <motion.section
       ref={sheetRef}
-      className={`map-lab-sheet mode-${sheetMode}`}
+      className={`map-lab-sheet mode-${sheetMode} detent-${detent}`}
       style={{ y: sheetY, height: metrics.sheetHeight }}
       drag={reducedMotion ? false : 'y'}
       dragControls={dragControls}
       dragListener={false}
       dragConstraints={{ top: 0, bottom: metrics.offsets.peek }}
       dragElastic={0}
+      onDragStart={() => { draggingRef.current = true }}
       onDragEnd={(_event, info) => {
-        const projected = sheetY.get() + info.velocity.y * .18
-        const next = nearestDetent(projected, metrics.offsets)
-        settle(next, info.velocity.y, true)
+        window.setTimeout(() => { draggingRef.current = false }, 0)
+        const next = resolveDetent(sheetY.get(), info.velocity.y, metrics.offsets)
+        if (next === 'peek' && sheetMode === 'menu') { dismissMenu(); return }
+        setDetentWithHistory(next, info.velocity.y, true)
       }}
+      onPointerDown={(event) => {
+        if (reducedMotion) return
+        if (detent !== 'full') {
+          // Collapsed: a vertical pan anywhere on the sheet moves the sheet.
+          dragControls.start(event, { snapToCursor: false, distanceThreshold: 10 })
+          return
+        }
+        // Expanded: the list owns the gesture until a pull-down from its top.
+        pullStartRef.current = { y: event.clientY, id: event.pointerId }
+      }}
+      onPointerMove={(event) => {
+        const start = pullStartRef.current
+        if (!start || event.pointerId !== start.id || detent !== 'full') return
+        const dy = event.clientY - start.y
+        if (dy < -4) { pullStartRef.current = null; return }
+        if (dy > 12 && (scrollRef.current?.scrollTop ?? 0) <= 0) {
+          pullStartRef.current = null
+          dragControls.start(event, { snapToCursor: false })
+        }
+      }}
+      onPointerUp={() => { pullStartRef.current = null }}
+      onPointerCancel={() => { pullStartRef.current = null }}
       role={sheetMode === 'menu' ? 'dialog' : 'region'}
       aria-modal={sheetMode === 'menu' ? 'true' : undefined}
       aria-label={sheetMode === 'menu' ? 'WXL map menu' : sheetMode === 'place' ? 'Selected food place' : 'Food place results'}
     >
-      <div
+      <button
+        type="button"
         className="map-lab-sheet-handle-zone"
-        onPointerDown={(event) => {
-          if (!reducedMotion) dragControls.start(event, { snapToCursor: false, distanceThreshold: 10 })
+        aria-expanded={detent === 'full'}
+        aria-label={detent === 'full' ? t('map.collapseList') : t('map.expandList')}
+        onClick={() => {
+          if (draggingRef.current) return
+          if (detent === 'full' && sheetMode === 'menu') { dismissMenu(); return }
+          setDetentWithHistory(detent === 'full' ? 'peek' : 'full')
         }}
       >
         <span className="map-lab-sheet-handle" aria-hidden="true" />
-        <div className="map-lab-detents" aria-label="Sheet size">
-          {(['peek', 'half', 'full'] as SheetDetent[]).map((item) => <button
-            key={item}
-            type="button"
-            aria-label={`${item[0].toUpperCase()}${item.slice(1)} sheet`}
-            aria-pressed={detent === item}
-            onClick={() => settle(item)}
-          >{item}</button>)}
-        </div>
-      </div>
+      </button>
 
-      <div className="map-lab-sheet-scroll">
+      {detent === 'full' && sheetMode !== 'menu' && <button className="map-lab-map-pill" type="button" onClick={() => setDetentWithHistory('peek')}>
+        <MapIcon size={15} aria-hidden="true" /> {t('map.backToMap')}
+      </button>}
+
+      <div
+        ref={scrollRef}
+        className="map-lab-sheet-scroll"
+        onClick={(event) => {
+          if (detent !== 'peek' || draggingRef.current || sheetMode === 'menu') return
+          if ((event.target as Element).closest('button, a, input, select, textarea')) return
+          setDetentWithHistory('full')
+        }}
+      >
         {sheetMode === 'place' && selected && <PlaceContent location={selected} distance={visitorPosition ? distanceMiles(selected, visitorPosition.latitude, visitorPosition.longitude) : null} />}
         {sheetMode === 'list' && <ListContent
           locations={visibleLocations}
@@ -401,7 +483,7 @@ export function MapLab({ product = false }: { product?: boolean }) {
           readStatus={readStatusMessage}
           locationStatus={locationStatus}
         />}
-        {sheetMode === 'menu' && <MenuContent member={member} authReady={authReady} onClose={dismissMenu} product={product} />}
+        {sheetMode === 'menu' && <MenuContent member={member} authReady={authReady} onClose={dismissMenu} onNavigate={() => dismissMenu(false)} product={product} />}
       </div>
     </motion.section>
 
@@ -485,7 +567,7 @@ function ListContent({
   </div>
 }
 
-function MenuContent({ member, authReady, onClose, product }: { member: User | null; authReady: boolean; onClose: () => void; product: boolean }) {
+function MenuContent({ member, authReady, onClose, onNavigate, product }: { member: User | null; authReady: boolean; onClose: () => void; onNavigate: () => void; product: boolean }) {
   const { t } = useI18n()
   const identity = member ? getMemberIdentity(member) : null
   const items = [
@@ -497,14 +579,14 @@ function MenuContent({ member, authReady, onClose, product }: { member: User | n
   return <div className="map-lab-menu">
     <div className="map-lab-menu-heading"><div><p className="map-lab-eyebrow">WXL:FOOD</p><h1>{t('map.choosePath')}</h1></div><div className="map-lab-menu-tools"><LanguageToggle /><button type="button" onClick={onClose} aria-label={t('common.close')}><X size={19} /></button></div></div>
     <nav aria-label="Map lab preview links">
-      {items.map(({ label, detail, href, icon: Icon }) => <AppLink key={label} href={href} onNavigate={onClose}><Icon size={19} /><span><b>{label}</b><small>{detail}</small></span><ArrowUpRight size={16} /></AppLink>)}
+      {items.map(({ label, detail, href, icon: Icon }) => <AppLink key={label} href={href} onNavigate={onNavigate}><Icon size={19} /><span><b>{label}</b><small>{detail}</small></span><ArrowUpRight size={16} /></AppLink>)}
     </nav>
     <div className="map-lab-account"><UserRound size={19} /><span><b>{!authReady ? t('map.checkingAccount') : identity?.displayName ?? t('map.browsingOpenly')}</b><small>{identity ? identity.email : t('map.signInWhenReady')}</small></span>{!member && authReady && <AppLink href="/app/?mode=login">{t('common.signIn')}</AppLink>}</div>
     {product && <button className="map-lab-contact" type="button" onClick={() => {
       onClose()
       window.setTimeout(() => openCommunityContact('alerts'), 300)
     }}><Bell size={18} /><span><b>{t('map.alertsFeedback')}</b><small>{t('map.alertsFeedbackDetail')}</small></span><ArrowUpRight size={16} /></button>}
-    <AppLink className="map-lab-advanced" href="/app/?mode=advanced" onClick={() => localStorage.setItem('wxl:experience-mode', 'advanced')}><Settings size={18} /><span><b>{t('map.advanced')}</b><small>{t('map.advancedDetail')}</small></span><ArrowUpRight size={16} /></AppLink>
+    <AppLink className="map-lab-advanced" href="/app/?mode=advanced" onClick={() => localStorage.setItem('wxl:experience-mode', 'advanced')} onNavigate={onNavigate}><Settings size={18} /><span><b>{t('map.advanced')}</b><small>{t('map.advancedDetail')}</small></span><ArrowUpRight size={16} /></AppLink>
     <p className="map-lab-read-only"><ShieldCheck size={15} /> {product ? t('map.publicBrowsing') : 'This prototype is read-only. Links hand off to existing live flows.'}</p>
   </div>
 }

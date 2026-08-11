@@ -86,6 +86,27 @@ describe('WXL entry points and interaction gates', () => {
     await waitFor(() => expect(menuTrigger).toHaveFocus())
   })
 
+  it('uses a two-state sheet: tap expands, the Map pill and the back gesture collapse', async () => {
+    window.history.replaceState({}, '', '/app/?mode=map-lab&variant=command-bar')
+    render(<App />)
+
+    const handle = await screen.findByRole('button', { name: 'Expand the list' })
+    expect(handle).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.queryByRole('button', { name: /Peek sheet|Half sheet|Full sheet/ })).not.toBeInTheDocument()
+
+    await userEvent.click(handle)
+    expect(screen.getByRole('button', { name: 'Back to the map' })).toHaveAttribute('aria-expanded', 'true')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Map' }))
+    expect(screen.getByRole('button', { name: 'Expand the list' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Map' })).not.toBeInTheDocument()
+
+    await userEvent.click(screen.getByRole('button', { name: 'Expand the list' }))
+    expect(screen.getByRole('button', { name: 'Back to the map' })).toBeInTheDocument()
+    window.history.back()
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Expand the list' })).toBeInTheDocument())
+  })
+
   it('keeps the complete map usable when lab geolocation is denied', async () => {
     window.history.replaceState({}, '', '/app/?mode=map-lab&variant=rail')
     const getCurrentPosition = vi.fn((_success: PositionCallback, error: PositionErrorCallback) => error({ code: 1 } as GeolocationPositionError))
