@@ -13,7 +13,7 @@ WXL:FOOD should expand through controlled operating stages. A polished screen is
 3. **Partner pilot:** a small set of approved food sources, receiving groups, coordinators, and trained Contributors complete supervised runs.
 4. **Austin network:** more partners and volunteers join only after pilot incidents, waste, timing, and fulfillment data have been reviewed.
 
-The current production product is between Directory and Signals. Migrations 024 through 036 are deployed and verified at the schema and privilege level, but the rescue, Contributor-readiness, harvest-run, inventory, and coordination workflows are not operationally approved. WXL:FOOD is not ready for unsupervised delivery dispatch.
+The current production product is between Directory and Signals. Migrations 024 through 040 are deployed and verified at the schema and privilege level, but the rescue, Contributor-readiness, harvest-run, inventory, and coordination workflows are not operationally approved. WXL:FOOD is not ready for unsupervised delivery dispatch.
 
 ## Public-health and food-safety gate
 
@@ -122,7 +122,7 @@ Each runbook needs an owner, backup owner, last-reviewed date, emergency contact
 Before the partner pilot, require evidence for all of the following:
 
 - production auth lifecycle smoke-tested, including signup, restore, reset, expired recovery, and sign out
-- migrations 024 through 036 applied and verified
+- migrations 024 through 040 applied and verified
 - row-level security tested for anonymous, member, coordinator, and administrator roles
 - server-side validation for every state transition
 - idempotency and duplicate prevention for claims, alerts, messages, and delivery completion

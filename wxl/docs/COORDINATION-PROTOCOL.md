@@ -77,4 +77,4 @@ Exceptional states are `expired`, `cancelled`, `failed`, `disputed`, and `incide
 
 ## Next engineering slice
 
-Migrations 024 through 036 are present in production, and migration history is baselined through 036. Apply them to a nonproduction Supabase branch for destructive, retry, and adversarial acceptance tests, then start the matching worker in shadow mode. Configure Stripe test mode and Twilio Voice only in a supervised environment. SMS registration and implementation remain the next engineering scope.
+Migrations 024 through 040 are present in production, and migration history is baselined through 040. Apply them to a nonproduction Supabase branch for destructive, retry, and adversarial acceptance tests, then start the matching worker in shadow mode. Configure Stripe test mode and Twilio Voice only in a supervised environment. SMS registration and implementation remain the next engineering scope.
