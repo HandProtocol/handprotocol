@@ -7,6 +7,7 @@ import {
   type FoodSpotRecord,
 } from './lib/foodRepository'
 import type { DialogMotionControls } from './useDialogMotion'
+import { MapPinPicker, type PinPosition } from './MapPinPicker'
 
 function alertExpiry(expiresAt: string) {
   return new Date(expiresAt).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })
@@ -54,16 +55,16 @@ export function AddSpotModal({ motion, notify, onAdded }: { motion: DialogMotion
   const [address, setAddress] = useState('')
   const [produce, setProduce] = useState('')
   const [availability, setAvailability] = useState('')
-  const [latitude, setLatitude] = useState('30.2672')
-  const [longitude, setLongitude] = useState('-97.7431')
+  const [pin, setPin] = useState<PinPosition | null>(null)
   const [busy, setBusy] = useState(false)
 
   const submit = async (event: FormEvent) => {
     event.preventDefault()
+    if (!pin) { notify('Place the map pin on the public pickup location first'); return }
     setBusy(true)
     const { data, error } = await addFoodSpot({
       name: name.trim(), spot_type: spotType, neighborhood, address: address.trim(),
-      latitude: Number(latitude), longitude: Number(longitude), produce: produce.trim(),
+      latitude: pin.latitude, longitude: pin.longitude, produce: produce.trim(),
       availability: availability.trim() || null,
     })
     setBusy(false)
@@ -73,7 +74,7 @@ export function AddSpotModal({ motion, notify, onAdded }: { motion: DialogMotion
     motion.requestClose()
   }
 
-  return <div className="modal-backdrop" data-dialog-state={motion.state} onTransitionEnd={motion.onTransitionEnd} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) motion.requestClose() }}><form className="create-modal tool-modal" role="dialog" aria-modal="true" aria-labelledby="add-spot-title" onSubmit={submit}><div className="modal-title"><div><p className="eyebrow">Community map</p><h2 id="add-spot-title">Add a food spot</h2></div><button type="button" onClick={() => motion.requestClose()} aria-label="Close food spot form"><X size={18} /></button></div><p className="tool-intro">New spots are public community pins until a coordinator reviews their source and details.</p><label>Place or organization<input value={name} onChange={(event) => setName(event.target.value)} placeholder="Eastside Community Fridge" required /></label><div className="form-row"><label>Spot type<select value={spotType} onChange={(event) => setSpotType(event.target.value)}><option>Community food spot</option><option>Food pantry</option><option>Community refrigerator</option><option>Farm or garden</option><option>Community kitchen</option></select></label><label>Neighborhood<input value={neighborhood} onChange={(event) => setNeighborhood(event.target.value)} required /></label></div><label>Public address<input value={address} onChange={(event) => setAddress(event.target.value)} placeholder="Use only a location intended for public sharing" required /></label><label>Food available<input value={produce} onChange={(event) => setProduce(event.target.value)} placeholder="Tomatoes, greens, shelf-stable meals" required /></label><label>Availability, optional<input value={availability} onChange={(event) => setAvailability(event.target.value)} placeholder="Today until 6 PM" /></label><div className="form-row"><label>Latitude<input type="number" step="any" value={latitude} onChange={(event) => setLatitude(event.target.value)} required /></label><label>Longitude<input type="number" step="any" value={longitude} onChange={(event) => setLongitude(event.target.value)} required /></label></div><p className="form-privacy"><ShieldCheck size={14} /> Add only public pickup locations. Do not publish a private home address or household information.</p><div className="modal-actions"><button className="cancel-button" type="button" onClick={() => motion.requestClose()}>Cancel</button><button className="add-button" type="submit" disabled={busy || !name.trim() || !address.trim() || !produce.trim() || !Number.isFinite(Number(latitude)) || !Number.isFinite(Number(longitude))}>{busy ? 'Adding...' : 'Add food spot'} <MapPin size={15} /></button></div></form></div>
+  return <div className="modal-backdrop" data-dialog-state={motion.state} onTransitionEnd={motion.onTransitionEnd} role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) motion.requestClose() }}><form className="create-modal tool-modal" role="dialog" aria-modal="true" aria-labelledby="add-spot-title" onSubmit={submit}><div className="modal-title"><div><p className="eyebrow">Community map</p><h2 id="add-spot-title">Add a food spot</h2></div><button type="button" onClick={() => motion.requestClose()} aria-label="Close food spot form"><X size={18} /></button></div><p className="tool-intro">New spots are public community pins until a coordinator reviews their source and details.</p><label>Place or organization<input value={name} onChange={(event) => setName(event.target.value)} placeholder="Eastside Community Fridge" required /></label><div className="form-row"><label>Spot type<select value={spotType} onChange={(event) => setSpotType(event.target.value)}><option>Community food spot</option><option>Food pantry</option><option>Community refrigerator</option><option>Farm or garden</option><option>Community kitchen</option></select></label><label>Neighborhood<input value={neighborhood} onChange={(event) => setNeighborhood(event.target.value)} required /></label></div><label>Public address<input value={address} onChange={(event) => setAddress(event.target.value)} placeholder="Use only a location intended for public sharing" required /></label><label>Food available<input value={produce} onChange={(event) => setProduce(event.target.value)} placeholder="Tomatoes, greens, shelf-stable meals" required /></label><label>Availability, optional<input value={availability} onChange={(event) => setAvailability(event.target.value)} placeholder="Today until 6 PM" /></label><div className="pin-picker-field"><span className="pin-picker-label">Map location</span><MapPinPicker pin={pin} onPin={setPin} hint={pin ? 'Pin placed. Select the map again to move it.' : 'Select the map to pin the public pickup location.'} /></div><p className="form-privacy"><ShieldCheck size={14} /> Add only public pickup locations. Do not publish a private home address or household information.</p><div className="modal-actions"><button className="cancel-button" type="button" onClick={() => motion.requestClose()}>Cancel</button><button className="add-button" type="submit" disabled={busy || !name.trim() || !address.trim() || !produce.trim() || !pin}>{busy ? 'Adding...' : 'Add food spot'} <MapPin size={15} /></button></div></form></div>
 }
 
 export function FoodHereModal({ spots, motion, notify, onCreated }: { spots: FoodSpotRecord[]; motion: DialogMotionControls; notify: (message: string) => void; onCreated: (alert: FoodAlertRecord) => void }) {

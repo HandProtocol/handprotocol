@@ -48,6 +48,7 @@ export function FoodMap({ locations, selectedId, visitorPosition, onSelect, bott
   const mapRef = useRef<L.Map | null>(null)
   const markerLayerRef = useRef<L.LayerGroup | null>(null)
   const markerRefs = useRef(new Map<string, L.Marker>())
+  const visitorMarkerRef = useRef<L.Marker | null>(null)
   const initialBoundsSet = useRef(false)
   const onSelectRef = useRef(onSelect)
 
@@ -156,7 +157,10 @@ export function FoodMap({ locations, selectedId, visitorPosition, onSelect, bott
   useEffect(() => {
     const map = mapRef.current
     const layer = markerLayerRef.current
-    if (!map || !layer || !visitorPosition) return
+    if (!map || !layer) return
+    visitorMarkerRef.current?.remove()
+    visitorMarkerRef.current = null
+    if (!visitorPosition) return
     const marker = L.marker([visitorPosition.latitude, visitorPosition.longitude], {
       icon: L.divIcon({ className: 'visitor-location-marker', html: '<span aria-hidden="true"></span>', iconSize: [22, 22], iconAnchor: [11, 11] }),
       title: 'Your approximate location',
@@ -164,6 +168,7 @@ export function FoodMap({ locations, selectedId, visitorPosition, onSelect, bott
       keyboard: true,
     }).bindTooltip('Your approximate location')
     marker.addTo(layer)
+    visitorMarkerRef.current = marker
   }, [locations, selectedId, visitorPosition])
 
   const mappedCount = locations.filter((location) => location.latitude != null && location.longitude != null).length

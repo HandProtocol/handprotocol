@@ -457,6 +457,9 @@ button { border: 0; cursor: pointer; }
 .dropoff-marker { display: grid; place-items: center; width: 36px; height: 36px; color: #fff; background: #c8664e; border: 3px solid #fff; border-radius: 50% 50% 50% 8px; box-shadow: 0 4px 12px #183d2b40; font: 16px Georgia, serif; transform: rotate(-45deg); }
 .dropoff-marker::first-letter { transform: rotate(45deg); }
 .dropoff-marker.draft { color: #2b6047; background: #e6f0df; border-color: #2d6b50; font: 700 19px 'DM Sans'; }
+.pin-picker-field { margin-bottom: 15px; }
+.pin-picker-label { display: block; color: #50665a; font-size: 11px; font-weight: 600; margin-bottom: 7px; }
+.pin-picker .dropoff-map { height: 240px; }
 .pin-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 9px; }
 .pin-actions button, .empty-state button { display: inline-flex; align-items: center; gap: 5px; min-height: 36px; color: #3d614c; background: #f3f7f1; border: 1px solid #d8e4d5; border-radius: 6px; padding: 8px 10px; font-size: 9px; font-weight: 600; }
 .pin-coordinates { display: flex; align-items: center; gap: 5px; color: #3f7657; font: 8px 'DM Mono'; margin: 9px 0 0; }

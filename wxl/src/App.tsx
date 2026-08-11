@@ -355,7 +355,7 @@ function DashboardApp() {
     const channel = db.channel('wxl-food-alerts').on('postgres_changes', { event: 'INSERT', schema: 'command', table: 'food_alerts' }, (payload) => {
       const alert = payload.new as FoodAlertRecord
       setAlerts((current) => [alert, ...current.filter((item) => item.id !== alert.id)])
-      setToast(`FOOD IS HERE: ${alert.title}`)
+      notify(`FOOD IS HERE: ${alert.title}`)
     }).subscribe()
     return () => { void db.removeChannel(channel) }
   }, [])
@@ -502,7 +502,7 @@ function DashboardApp() {
       {locationPromptOpen && <LocationPrompt motion={locationDialogMotion} onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
       {addSpotOpen && <AddSpotModal motion={addSpotDialogMotion} notify={notify} onAdded={(spot) => {
         setSpots((current) => [spot, ...current])
-        const location = { id: spot.id, name: spot.name, type: spot.spot_type, area: spot.neighborhood, address: spot.address, status: 'plenty' as Status, detail: `${spot.produce}${spot.availability ? ` · ${spot.availability}` : ''}`, x: 50, y: 50, verified: false }
+        const location = foodSpotToLocation(spot, mapLocations.length)
         setMapLocations((current) => [...current, location])
         setSelected(location)
       }} />}
@@ -520,9 +520,9 @@ function Metric({ icon, label, value, note, tone }: { icon: React.ReactNode; lab
 function PanelTitle({ eyebrow, title, action, onAction }: { eyebrow: string; title: string; action: string; onAction: () => void }) { return <div className="panel-heading compact"><div><p className="eyebrow">{eyebrow}</p><h2>{title}</h2></div><button className="text-button" onClick={onAction}>{action} <ArrowUpRight size={14} /></button></div> }
 function RescueRow({ rescue, onClick }: { rescue: typeof rescues[number]; onClick: () => void }) { const Icon = rescue.icon; return <button className="rescue-row" onClick={onClick}><div className={`rescue-icon ${rescue.tone}`}><Icon size={18} /></div><div className="rescue-copy"><strong>{rescue.title}</strong><span>{rescue.source} · {rescue.window}</span></div><span className="match-count">{rescue.match}</span><ArrowUpRight size={16} /></button> }
 
-function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite, memberId, memberName, onAuthRequired, initialCreate = false }: { requests: FoodRequest[]; setRequests: React.Dispatch<React.SetStateAction<FoodRequest[]>>; notify: (message: string) => void; dbConfigured: boolean; canWrite: boolean; memberId: string | null; memberName: string; onAuthRequired: () => void; initialCreate?: boolean }) {
+export function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite, memberId, memberName, onAuthRequired, initialCreate = false }: { requests: FoodRequest[]; setRequests: React.Dispatch<React.SetStateAction<FoodRequest[]>>; notify: (message: string) => void; dbConfigured: boolean; canWrite: boolean; memberId: string | null; memberName: string; onAuthRequired: () => void; initialCreate?: boolean }) {
   const [filter, setFilter] = useState<'all' | 'open' | 'urgent'>('all')
-  const [selectedId, setSelectedId] = useState(requests[0].id)
+  const [selectedId, setSelectedId] = useState<FoodRequest['id']>(() => requests[0]?.id ?? '')
   const [messages, setMessages] = useState<FoodRequestMessageRecord[]>([])
   const [offers, setOffers] = useState<FoodRequestOfferRecord[]>([])
   const [activityState, setActivityState] = useState<'sample' | 'loading' | 'ready' | 'error'>('sample')
@@ -547,14 +547,14 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
   const [offerTransport, setOfferTransport] = useState(false)
   const [offerContact, setOfferContact] = useState<FoodRequestOfferRecord['contact_preference']>('in_app')
 
-  const selectedRequest = requests.find((request) => request.id === selectedId) ?? requests[0]
-  const selectedIsPersisted = dbConfigured && typeof selectedRequest.id === 'string'
-  const ownsSelectedRequest = Boolean(memberId && selectedRequest.createdBy === memberId)
+  const selectedRequest: FoodRequest | undefined = requests.find((request) => request.id === selectedId) ?? requests[0]
+  const selectedIsPersisted = dbConfigured && typeof selectedRequest?.id === 'string'
+  const ownsSelectedRequest = Boolean(memberId && selectedRequest?.createdBy === memberId)
   const visibleRequests = requests.filter((request) => filter === 'all' || (filter === 'urgent' ? request.priority === 'urgent' : request.status === 'open'))
 
   useEffect(() => {
     let current = true
-    if (!selectedIsPersisted) {
+    if (!selectedIsPersisted || !selectedRequest) {
       setMessages([])
       setOffers([])
       setActivityState('sample')
@@ -574,7 +574,7 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
       setActivityState('ready')
     })
     return () => { current = false }
-  }, [activityVersion, selectedIsPersisted, selectedRequest.id])
+  }, [activityVersion, selectedIsPersisted, selectedRequest?.id])
 
   useEffect(() => {
     if (!newGroup || newGroup.endsWith("'s group")) setNewGroup(`${memberName}'s group`)
@@ -583,7 +583,7 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
   const sendMessage = async () => {
     if (!message.trim()) return
     if (!canWrite) { onAuthRequired(); return }
-    if (!selectedIsPersisted) { notify('Sample request replies are not persisted'); return }
+    if (!selectedIsPersisted || !selectedRequest) { notify('Sample request replies are not persisted'); return }
     setBusy(true)
     const result = await addFoodRequestMessage({ request_id: String(selectedRequest.id), message: message.trim(), author_name: memberName, author_role: 'Community member' })
     setBusy(false)
@@ -596,7 +596,7 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
 
   const supportRequest = async () => {
     if (!canWrite) { onAuthRequired(); return }
-    if (!selectedIsPersisted) { notify('Sample request support is not persisted'); return }
+    if (!selectedIsPersisted || !selectedRequest) { notify('Sample request support is not persisted'); return }
     setBusy(true)
     const { data, error } = await supportFoodRequest(String(selectedRequest.id))
     setBusy(false)
@@ -608,7 +608,7 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
   const submitOffer = async () => {
     if (!offerItem.trim() || !offerAvailability.trim() || (offerQuantity && !offerUnit.trim())) return
     if (!canWrite) { onAuthRequired(); return }
-    if (!selectedIsPersisted) { notify('Sample request offers are not persisted'); return }
+    if (!selectedIsPersisted || !selectedRequest) { notify('Sample request offers are not persisted'); return }
     setBusy(true)
     const { data, error } = await createFoodRequestOffer({
       request_id: String(selectedRequest.id),
@@ -635,6 +635,7 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
   }
 
   const decideOffer = async (offerId: string, decision: 'accepted' | 'declined') => {
+    if (!selectedRequest) return
     setBusy(true)
     const { data, error } = await decideFoodRequestOffer(offerId, decision)
     setBusy(false)
@@ -647,6 +648,7 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
   }
 
   const withdrawOffer = async (offerId: string) => {
+    if (!selectedRequest) return
     setBusy(true)
     const { error } = await withdrawFoodRequestOffer(offerId)
     setBusy(false)
@@ -657,7 +659,7 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
   }
 
   const updateStatus = async (status: 'open' | 'in_progress' | 'fulfilled' | 'closed') => {
-    if (!selectedIsPersisted) return
+    if (!selectedIsPersisted || !selectedRequest) return
     setBusy(true)
     const { data, error } = await changeFoodRequestStatus(String(selectedRequest.id), status)
     setBusy(false)
@@ -690,8 +692,8 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
   return <>
     <section className="community-heading"><div><p className="eyebrow"><span className="eyebrow-pulse" /> Shared neighborhood signal</p><h2>Community requests</h2><p>Groups can ask for food, storage, transport, or hands. Public replies and structured offers stay attached to the request.</p></div><button className="add-button" onClick={() => canWrite ? setShowCreate(true) : onAuthRequired()}><Plus size={17} /> New request</button></section>
     <section className="community-layout">
-      <div className="panel request-list"><div className="request-list-top"><div><p className="eyebrow">Community request board</p><h2>{requests.filter((request) => request.status !== 'fulfilled' && request.status !== 'closed').length} active requests</h2></div><div className="request-filters">{(['all', 'open', 'urgent'] as const).map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item === 'all' ? 'All' : item === 'open' ? 'Open' : 'Urgent'}</button>)}</div></div><div className="request-cards">{visibleRequests.map((request) => <button className={`request-card ${selectedRequest.id === request.id ? 'selected' : ''}`} key={request.id} onClick={() => setSelectedId(request.id)}><div className="request-card-top"><div className={`request-type ${request.category === 'Help needed' ? 'peach' : 'blue'}`}>{request.category === 'Help needed' ? <HandHeart size={15} /> : <Package size={15} />}</div><div className="request-card-title"><strong>{request.title}</strong><span>{request.group} · {request.neighborhood}</span></div><span className={`priority ${request.priority}`}>{request.priority}</span></div><p>{request.detail}</p><div className="request-card-foot"><span className={`request-status ${request.status.replace(' ', '-')}`}><i /> {request.status}</span><span title="Replies"><MessageCircle size={13} /> {request.responses}</span><span title="Offers"><HandHeart size={13} /> {request.offers}</span><span title="Supporters"><ArrowUp size={13} /> {request.supporters}</span><span className="request-time">{request.time}</span></div></button>)}{visibleRequests.length === 0 && <div className="empty-state">No requests match this filter.</div>}</div></div>
-      <aside className="panel dialogue-panel">
+      <div className="panel request-list"><div className="request-list-top"><div><p className="eyebrow">Community request board</p><h2>{requests.filter((request) => request.status !== 'fulfilled' && request.status !== 'closed').length} active requests</h2></div><div className="request-filters">{(['all', 'open', 'urgent'] as const).map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item === 'all' ? 'All' : item === 'open' ? 'Open' : 'Urgent'}</button>)}</div></div><div className="request-cards">{visibleRequests.map((request) => <button className={`request-card ${selectedRequest?.id === request.id ? 'selected' : ''}`} key={request.id} onClick={() => setSelectedId(request.id)}><div className="request-card-top"><div className={`request-type ${request.category === 'Help needed' ? 'peach' : 'blue'}`}>{request.category === 'Help needed' ? <HandHeart size={15} /> : <Package size={15} />}</div><div className="request-card-title"><strong>{request.title}</strong><span>{request.group} · {request.neighborhood}</span></div><span className={`priority ${request.priority}`}>{request.priority}</span></div><p>{request.detail}</p><div className="request-card-foot"><span className={`request-status ${request.status.replace(' ', '-')}`}><i /> {request.status}</span><span title="Replies"><MessageCircle size={13} /> {request.responses}</span><span title="Offers"><HandHeart size={13} /> {request.offers}</span><span title="Supporters"><ArrowUp size={13} /> {request.supporters}</span><span className="request-time">{request.time}</span></div></button>)}{visibleRequests.length === 0 && <div className="empty-state">No requests match this filter.</div>}</div></div>
+      {selectedRequest ? <aside className="panel dialogue-panel">
         <div className="dialogue-heading"><div><p className="eyebrow">Request coordination</p><h2>{selectedRequest.title}</h2></div>{ownsSelectedRequest && <span className="owner-badge"><ShieldCheck size={13} /> Your request</span>}</div>
         <div className="dialogue-meta"><span className="signal-pill volunteers"><i /> {selectedRequest.status}</span><span>{selectedRequest.group}</span><span>{selectedRequest.neighborhood}</span></div>
         <div className="dialogue-summary"><Package size={16} /><span>{selectedRequest.detail}</span></div>
@@ -700,10 +702,10 @@ function CommunityBoard({ requests, setRequests, notify, dbConfigured, canWrite,
         <div className="offer-actions"><button disabled={busy} onClick={() => void supportRequest()}><ArrowUp size={14} /> Support request</button><button disabled={busy} onClick={() => canWrite ? selectedIsPersisted ? setShowOffer(true) : notify('Sample request offers are not persisted') : onAuthRequired()}><HandHeart size={14} /> Offer food or help</button></div>
         <div className="activity-section conversation-section"><div className="activity-heading"><h3>Public conversation</h3><span>{selectedIsPersisted ? `${messages.length} replies` : 'Sample dialogue'}</span></div><div className="conversation">{activityState === 'ready' && messages.length === 0 && <p className="activity-state">No replies yet.</p>}{activityState === 'sample' && initialMessages.map((item) => <MessageItem key={item.id} author={item.author} role={item.role} message={item.message} time={item.time} mine={item.mine} />)}{messages.map((item) => <MessageItem key={item.id} author={item.author_name} role={item.author_role ?? 'Community member'} message={item.message} time={new Date(item.created_at).toLocaleString()} mine={item.created_by === memberId} />)}</div></div>
         <div className="message-compose"><textarea value={message} onChange={(event) => setMessage(event.target.value)} placeholder="Share a public coordination update..." rows={2} /><button disabled={busy || !message.trim()} onClick={() => void sendMessage()} aria-label="Send response"><Send size={16} /></button></div><p className="dialogue-note"><ShieldCheck size={13} /> Replies and offer details are public. Do not include private addresses, phone numbers, household names, or sensitive information.</p>
-      </aside>
+      </aside> : <aside className="panel dialogue-panel"><div className="empty-state">No community requests yet. Post the first request to start coordinating.</div></aside>}
     </section>
     {showCreate && <div className="modal-backdrop" data-dialog-state={createDialogMotion.state} onTransitionEnd={createDialogMotion.onTransitionEnd} onClick={() => createDialogMotion.requestClose()}><div className="create-modal" role="dialog" aria-modal="true" aria-labelledby="create-request-title" onClick={(event) => event.stopPropagation()}><div className="modal-title"><div><p className="eyebrow">Ask the network</p><h2 id="create-request-title">Post a community request</h2></div><button onClick={() => createDialogMotion.requestClose()} aria-label="Close request form"><X size={18} /></button></div><label>Coordinating group<input value={newGroup} onChange={(event) => setNewGroup(event.target.value)} placeholder="Your group or project name" /></label><label>What does your group need?<input value={newTitle} onChange={(event) => setNewTitle(event.target.value)} placeholder="For example, 25 lb of greens for Thursday dinner" /></label><div className="form-row"><label>Request type<select value={newCategory} onChange={(event) => setNewCategory(event.target.value as typeof newCategory)}><option value="resource_request">Food or supplies</option><option value="help_needed">Volunteer help</option><option value="storage_request">Storage</option><option value="transport_request">Transportation</option></select></label><label>Priority<select value={newPriority} onChange={(event) => setNewPriority(event.target.value as FoodRequest['priority'])}><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option><option value="urgent">Urgent</option></select></label></div><label>Neighborhood<select value={newNeighborhood} onChange={(event) => setNewNeighborhood(event.target.value)}><option>East Austin</option><option>Rosewood</option><option>Govalle</option><option>South Lamar</option><option>East Cesar Chavez</option></select></label><label>Public context<textarea value={newDetail} onChange={(event) => setNewDetail(event.target.value)} placeholder="Share quantity, timing, storage, or pickup needs. Do not add a private address or household details." rows={4} /></label><p className="form-privacy"><ShieldCheck size={14} /> This request and its conversation are public.</p><div className="modal-actions"><button className="cancel-button" onClick={() => createDialogMotion.requestClose()}>Cancel</button><button className="add-button" onClick={() => void createRequest()} disabled={busy || !newTitle.trim() || !newGroup.trim() || !newDetail.trim()}>{busy ? 'Posting…' : 'Post request'} <ArrowUpRight size={15} /></button></div></div></div>}
-    {showOffer && <div className="modal-backdrop" data-dialog-state={offerDialogMotion.state} onTransitionEnd={offerDialogMotion.onTransitionEnd} onClick={() => offerDialogMotion.requestClose()}><div className="create-modal offer-modal" role="dialog" aria-modal="true" aria-labelledby="offer-request-title" onClick={(event) => event.stopPropagation()}><div className="modal-title"><div><p className="eyebrow">Make a concrete offer</p><h2 id="offer-request-title">Offer food or help</h2></div><button onClick={() => offerDialogMotion.requestClose()} aria-label="Close offer form"><X size={18} /></button></div><p className="modal-context">For {selectedRequest.title}</p><label>Offer type<select value={offerType} onChange={(event) => setOfferType(event.target.value as FoodRequestOfferRecord['offer_type'])}><option value="food">Food</option><option value="transport">Transportation</option><option value="storage">Storage</option><option value="volunteer">Volunteer time</option></select></label><label>What can you offer?<textarea value={offerItem} onChange={(event) => setOfferItem(event.target.value)} placeholder="Describe the food, vehicle, storage, or help you can provide" rows={3} /></label><div className="form-row"><label>Quantity, optional<input type="number" min="0.01" step="any" value={offerQuantity} onChange={(event) => setOfferQuantity(event.target.value)} placeholder="25" /></label><label>Unit{offerQuantity ? '' : ', optional'}<input value={offerUnit} onChange={(event) => setOfferUnit(event.target.value)} placeholder="lb, boxes, hours" /></label></div><label>Availability<input value={offerAvailability} onChange={(event) => setOfferAvailability(event.target.value)} placeholder="Thursday from 3 to 6 PM" /></label><label className="checkbox-label"><input type="checkbox" checked={offerTransport} onChange={(event) => setOfferTransport(event.target.checked)} /> I can transport this offer</label><label>Contact preference<select value={offerContact} onChange={(event) => setOfferContact(event.target.value as FoodRequestOfferRecord['contact_preference'])}><option value="in_app">Continue in public WXL messages</option><option value="email">Request email follow-up</option></select></label><p className="form-privacy"><ShieldCheck size={14} /> Offer details are public. Your email address is not shown or exchanged by this board.</p><div className="modal-actions"><button className="cancel-button" onClick={() => offerDialogMotion.requestClose()}>Cancel</button><button className="add-button" onClick={() => void submitOffer()} disabled={busy || !offerItem.trim() || !offerAvailability.trim() || Boolean(offerQuantity && !offerUnit.trim())}>{busy ? 'Sending…' : 'Send offer'} <ArrowUpRight size={15} /></button></div></div></div>}
+    {showOffer && selectedRequest && <div className="modal-backdrop" data-dialog-state={offerDialogMotion.state} onTransitionEnd={offerDialogMotion.onTransitionEnd} onClick={() => offerDialogMotion.requestClose()}><div className="create-modal offer-modal" role="dialog" aria-modal="true" aria-labelledby="offer-request-title" onClick={(event) => event.stopPropagation()}><div className="modal-title"><div><p className="eyebrow">Make a concrete offer</p><h2 id="offer-request-title">Offer food or help</h2></div><button onClick={() => offerDialogMotion.requestClose()} aria-label="Close offer form"><X size={18} /></button></div><p className="modal-context">For {selectedRequest.title}</p><label>Offer type<select value={offerType} onChange={(event) => setOfferType(event.target.value as FoodRequestOfferRecord['offer_type'])}><option value="food">Food</option><option value="transport">Transportation</option><option value="storage">Storage</option><option value="volunteer">Volunteer time</option></select></label><label>What can you offer?<textarea value={offerItem} onChange={(event) => setOfferItem(event.target.value)} placeholder="Describe the food, vehicle, storage, or help you can provide" rows={3} /></label><div className="form-row"><label>Quantity, optional<input type="number" min="0.01" step="any" value={offerQuantity} onChange={(event) => setOfferQuantity(event.target.value)} placeholder="25" /></label><label>Unit{offerQuantity ? '' : ', optional'}<input value={offerUnit} onChange={(event) => setOfferUnit(event.target.value)} placeholder="lb, boxes, hours" /></label></div><label>Availability<input value={offerAvailability} onChange={(event) => setOfferAvailability(event.target.value)} placeholder="Thursday from 3 to 6 PM" /></label><label className="checkbox-label"><input type="checkbox" checked={offerTransport} onChange={(event) => setOfferTransport(event.target.checked)} /> I can transport this offer</label><label>Contact preference<select value={offerContact} onChange={(event) => setOfferContact(event.target.value as FoodRequestOfferRecord['contact_preference'])}><option value="in_app">Continue in public WXL messages</option><option value="email">Request email follow-up</option></select></label><p className="form-privacy"><ShieldCheck size={14} /> Offer details are public. Your email address is not shown or exchanged by this board.</p><div className="modal-actions"><button className="cancel-button" onClick={() => offerDialogMotion.requestClose()}>Cancel</button><button className="add-button" onClick={() => void submitOffer()} disabled={busy || !offerItem.trim() || !offerAvailability.trim() || Boolean(offerQuantity && !offerUnit.trim())}>{busy ? 'Sending…' : 'Send offer'} <ArrowUpRight size={15} /></button></div></div></div>}
   </>
 }
 
@@ -783,7 +785,7 @@ function LandingPage() {
             <span className="entry-path-copy"><small>I need food</small><strong>Show me food nearby.</strong><span>See public food locations, hours, access notes, and community requests. No account needed to look.</span></span>
             <span className="entry-path-action">Find food <ArrowUpRight size={18} /></span>
           </a>
-          <a className="entry-path entry-path-contributor" href="/app/?intent=contribute">
+          <a className="entry-path entry-path-contributor" href="/app/?mode=anonymous&intent=contribute">
             <span className="entry-path-icon"><HandHeart size={25} /></span>
             <span className="entry-path-copy"><small>I am a Contributor</small><strong>Put my time or resources to work.</strong><span>Offer food, drive a route, help with storage, or join a coordinated volunteer run.</span></span>
             <span className="entry-path-action">Start contributing <ArrowUpRight size={18} /></span>

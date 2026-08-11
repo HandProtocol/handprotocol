@@ -157,7 +157,7 @@ describe('WXL entry points and interaction gates', () => {
     render(<App />)
     expect(screen.getByRole('heading', { level: 1, name: /Food, shared with xtra love/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /Show me food nearby/i })).toHaveAttribute('href', '/app/?mode=anonymous&intent=food')
-    expect(screen.getByRole('link', { name: /Put my time or resources to work/i })).toHaveAttribute('href', '/app/?intent=contribute')
+    expect(screen.getByRole('link', { name: /Put my time or resources to work/i })).toHaveAttribute('href', '/app/?mode=anonymous&intent=contribute')
     expect(screen.getByRole('link', { name: /Share a table/i })).toHaveAttribute('href', '/app/?mode=anonymous&intent=gather')
     expect(screen.getByRole('link', { name: /Get WXL updates/i })).toHaveAttribute('href', '/app/?mode=login&updates=1')
   })
