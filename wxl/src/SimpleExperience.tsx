@@ -44,7 +44,7 @@ export function SimpleExperience({ initialIntent }: { initialIntent: ConsumerInt
     }
   })
   const [locationPromptOpen, setLocationPromptOpen] = useState(() => initialIntent === 'food' && sessionStorage.getItem('wxl:location-choice') !== 'complete')
-  const locationDialogMotion = useDialogMotion(() => setLocationPromptOpen(false))
+  const locationDialogMotion = useDialogMotion(() => setLocationPromptOpen(false), locationPromptOpen)
   const [locationLabel, setLocationLabel] = useState('Austin')
   const [visitorPosition, setVisitorPosition] = useState<{ latitude: number; longitude: number } | null>(null)
   const [accountMenuOpen, setAccountMenuOpen] = useState(false)

@@ -1,6 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+/* Fonts load from index.html via preconnect + <link> so this stylesheet never blocks rendering on Google Fonts. */
 
-:root { font-family: 'DM Sans', sans-serif; color: #26332d; background: #f5f6f1; font-synthesis: none; --ink: #26332d; --muted: #718078; --line: #dfe5dd; --paper: #fffefa; --forest: #285a46; --pale-green: #eaf3eb; --blue: #4b86bd; --purple: #895bb5; --peach: #bd6b4e; --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --duration-dialog: 250ms; --duration-reduced-motion: 150ms; }
+:root { font-family: 'DM Sans', sans-serif; color: #26332d; background: #f5f6f1; font-synthesis: none; --ink: #26332d; --muted: #718078; --line: #dfe5dd; --paper: #fffefa; --forest: #285a46; --pale-green: #eaf3eb; --blue: #4b86bd; --purple: #895bb5; --peach: #bd6b4e; --color-danger: #c0392b; --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --duration-dialog: 250ms; --duration-reduced-motion: 150ms; }
+
+:focus-visible { outline: 2px solid #2d6b50; outline-offset: 2px; }
+.sidebar :focus-visible, .simple-tabs :focus-visible { outline-color: #cfe6d3; }
 * { box-sizing: border-box; }
 body { margin: 0; min-width: 320px; background: #f5f6f1; }
 button, input { font: inherit; }

@@ -314,6 +314,19 @@ describe('WXL entry points and interaction gates', () => {
     expect(screen.queryByRole('dialog', { name: /Join the network/i })).not.toBeInTheDocument()
   })
 
+  it('closes dialogs with the Escape key', async () => {
+    window.history.replaceState({}, '', '/app/?mode=advanced')
+    render(<App />)
+    await userEvent.click(screen.getByRole('button', { name: /FOOD IS HERE/i }))
+
+    const dialog = screen.getByRole('dialog', { name: /Join the network/i })
+    await userEvent.keyboard('{Escape}')
+    expect(dialog).toHaveAttribute('data-dialog-state', 'closing')
+
+    dispatchOpacityTransitionEnd(dialog)
+    expect(screen.queryByRole('dialog', { name: /Join the network/i })).not.toBeInTheDocument()
+  })
+
   it('gates structured request offers and explains that coordination details are public', async () => {
     window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)

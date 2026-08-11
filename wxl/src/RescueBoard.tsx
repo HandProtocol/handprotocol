@@ -85,7 +85,7 @@ export function RescueBoard({ dbConfigured, canWrite, notify, onAuthRequired, on
   const [loadState, setLoadState] = useState<'loading' | 'ready' | 'error'>(dbConfigured ? 'loading' : 'ready')
   const [busy, setBusy] = useState(false)
   const [showCreate, setShowCreate] = useState(initialOpen)
-  const createDialogMotion = useDialogMotion(() => setShowCreate(false))
+  const createDialogMotion = useDialogMotion(() => setShowCreate(false), showCreate)
   const [form, setForm] = useState<RescueForm>(() => {
     try {
       const draft = JSON.parse(sessionStorage.getItem('wxl:food-draft') ?? '{}') as { description?: string; quantity?: string; neighborhood?: string }
@@ -98,7 +98,7 @@ export function RescueBoard({ dbConfigured, canWrite, notify, onAuthRequired, on
   const [safetyConfirmed, setSafetyConfirmed] = useState(false)
   const [actionNote, setActionNote] = useState('')
   const [checkpointStage, setCheckpointStage] = useState<'pickup' | 'delivery' | 'acceptance' | null>(null)
-  const checkpointDialogMotion = useDialogMotion(() => setCheckpointStage(null))
+  const checkpointDialogMotion = useDialogMotion(() => setCheckpointStage(null), checkpointStage !== null)
   const [packagingOk, setPackagingOk] = useState<CheckAnswer>('')
   const [labelOk, setLabelOk] = useState<CheckAnswer>('')
   const [temperatureMaintained, setTemperatureMaintained] = useState<CheckAnswer>('')
