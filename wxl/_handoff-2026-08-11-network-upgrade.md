@@ -2,6 +2,15 @@
 
 Date: 2026-08-11
 Mission: execute `plans/003-wxl-food-network-upgrade.md` phase by phase, starting at Phase 0.
+
+## EXECUTION STATUS (updated 2026-08-11, end of first execution session)
+
+- **Phase 0: DONE and deployed.** Branch landed on main; CI workflow live and green; FOOD-SOURCE-AGENT.md written; all six frontend bugs fixed with regression tests; migration `041_wxl_hardening.sql` applied to production (recorded in `supabase_migrations.schema_migrations`) and validated by replaying 001→041 on a clean Supabase Postgres image + acceptance SQL + nine behavior tests; food-alert author check + per-member rate limit; subscribe-updates per-IP rate limit; CSP/HSTS/XFO/nosniff/Referrer-Policy live.
+- **Phase 1: DONE and deployed.** Live spots on all surfaces; FOOD IS HERE countdown banner for seekers (simple + mobile map, realtime); full EN/ES (`src/i18n.tsx`, `wxl:lang`); real router (`src/router.tsx`) + AuthProvider + App.tsx split; honest Overview (real Leaflet map, live counts, dead controls removed); unified filters. Tests 82 → 100.
+- **Phase 5: STARTED.** Non-blocking fonts, global :focus-visible, Escape on all dialogs (`useDialogMotion` active param), `--color-danger` token. Remaining: WXLOVE theme tokens, button/empty-state/modal consolidation, dialog focus traps, ≤720px type sizes.
+- **Phases 2, 3, 4: NOT STARTED.** Resume at Phase 2 (notifications, moderation, Gather on `food_events`, nominations read-back, `food_partners` directory). Phase 3 facts below still current.
+- **Deploy gotcha discovered:** the `wxl-food` Netlify site is NOT repo-linked — every deploy is a manual CLI publish from a clean clone of main (see `DEPLOY.md` "How deploys actually happen"; headers ship via `public/_headers`, and fast-forward the LOCAL main ref before cloning `file:///`).
+- Commits: `c5bc9ecd0`, `b92b2dce4`, `81cbfa15b`, `dd9bf24d6`, `a39c15029`, `538ec5e65` — all on main, all deployed. Artifact updated in place.
 Prior session: full-stack review of WXL (frontend, migrations 024–040, Netlify functions, coordination-api, matching-worker, all docs). Findings are baked in below — do not redo the review.
 Shareable review+plan artifact (update in place via its URL): https://claude.ai/code/artifact/4d71fbef-8803-445b-ba0c-1d4917e253d2
 
