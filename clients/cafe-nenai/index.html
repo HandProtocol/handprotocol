@@ -47,8 +47,14 @@ setTimeout(function(){if(!r.classList.contains("motion-ready"))r.classList.remov
 <div class="hero hero--tall">
   <img src="/img/site/hero-empanadas.webp" alt="Freshly baked empanadas with chimichurri at Cafe Nena'i" fetchpriority="high" width="2048" height="1365">
   <div style="position:relative;z-index:2;text-align:center">
-    <h1 class="hero__title">Cafe Nena'i</h1>
-    <p class="hero__sub">South American bakery &amp; coffee · East Austin</p>
+    <p class="hero__script" aria-hidden="true"><span class="first-letter">W</span>elcome</p>
+    <h1 class="hero__title"><span class="sr-only">Welcome to </span>Cafe Nena'i</h1>
+    <div class="hero__rule" aria-hidden="true">
+      <span class="line line--left"></span><span class="line line--right"></span>
+      <span class="arrow arrow--left"></span><span class="arrow arrow--right"></span>
+      <span class="star">&#10043;</span>
+    </div>
+    <p class="hero__sub">South American Cafe</p>
   </div>
   <a class="hero__scroll" href="#who" aria-label="Scroll down">⌄</a>
 </div>
