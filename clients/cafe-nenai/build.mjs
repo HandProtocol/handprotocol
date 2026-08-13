@@ -3,13 +3,25 @@
 // Reads data/site.json + data/menu.json, writes the whole site to the project root.
 // Run: node build.mjs
 
-import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { readFileSync, writeFileSync, mkdirSync, rmSync, existsSync, readdirSync, cpSync } from 'node:fs';
+import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 const site = JSON.parse(readFileSync(join(ROOT, 'data/site.json'), 'utf8'));
 const menu = JSON.parse(readFileSync(join(ROOT, 'data/menu.json'), 'utf8'));
+
+/* Two build targets from one source:
+ *   node build.mjs
+ *     → this folder, rooted at /, for the real cafenenai.com domain.
+ *   BASE=/cafenenai OUT=../../web/cafenenai SITE_URL=... NOINDEX=1 node build.mjs
+ *     → a preview living under a path on handprotocol.org.
+ * Every internal URL is absolute, so the subpath build just rewrites the
+ * leading slash at write time rather than threading a prefix through templates. */
+const BASE = (process.env.BASE || '').replace(/\/+$/, '');
+const OUT = process.env.OUT ? resolve(ROOT, process.env.OUT) : ROOT;
+const NOINDEX = process.env.NOINDEX === '1';
+if (process.env.SITE_URL) site.url = process.env.SITE_URL.replace(/\/+$/, '');
 
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -38,7 +50,8 @@ function head({ title, desc, path, image, jsonld }) {
 <meta property="og:url" content="${canon}">
 <meta property="og:image" content="${img}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#c59d5f">
+<meta name="theme-color" content="#c59d5f">${NOINDEX ? `
+<meta name="robots" content="noindex, nofollow">` : ''}
 <link rel="icon" href="/img/site/logo-icon.png" type="image/png">
 <link rel="apple-touch-icon" href="/img/site/logo-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -168,10 +181,17 @@ function tagReveal(html) {
   return before + mid + after;
 }
 
+// Generated markup never contains BASE already, so a flat prefix on every
+// root-relative href/src is safe. Protocol-relative "//" is left alone.
+function rebase(html) {
+  if (!BASE) return html;
+  return html.replace(/\b(href|src)="\/(?!\/)/g, `$1="${BASE}/`);
+}
+
 function write(path, html) {
-  const out = join(ROOT, path);
+  const out = join(OUT, path);
   mkdirSync(dirname(out), { recursive: true });
-  writeFileSync(out, tagReveal(html));
+  writeFileSync(out, rebase(tagReveal(html)));
   pages.push(path);
 }
 const pages = [];
@@ -776,12 +796,24 @@ write('404.html', page({
 
 const urls = pages.filter(p => p !== '404.html')
   .map(p => `${site.url}/${p.replace(/index\.html$/, '')}`);
-writeFileSync(join(ROOT, 'sitemap.xml'),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
-  urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n') + `\n</urlset>\n`);
 
-writeFileSync(join(ROOT, 'robots.txt'),
-  `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`);
+if (NOINDEX) {
+  // A preview copy must never compete with the real site in search results.
+  writeFileSync(join(OUT, 'robots.txt'), `User-agent: *\nDisallow: /\n`);
+} else {
+  writeFileSync(join(OUT, 'sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
+    urls.map(u => `  <url><loc>${u}</loc></url>`).join('\n') + `\n</urlset>\n`);
+  writeFileSync(join(OUT, 'robots.txt'),
+    `User-agent: *\nAllow: /\n\nSitemap: ${site.url}/sitemap.xml\n`);
+}
 
-console.log(`Built ${pages.length} pages + sitemap (${urls.length} urls)`);
+// Static assets live beside the source; mirror them when building elsewhere.
+if (OUT !== ROOT) {
+  for (const dir of ['assets', 'img']) {
+    cpSync(join(ROOT, dir), join(OUT, dir), { recursive: true });
+  }
+}
+
+console.log(`Built ${pages.length} pages${NOINDEX ? ' (noindex preview)' : ' + sitemap'} → ${OUT}${BASE ? `  base=${BASE}` : ''}`);
 for (const s of menu.sections) console.log(`  ${s.title}: ${s.items.length} item pages`);

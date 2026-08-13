@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Client site previews. These are working copies of sites that will launch on
+# their own domains; indexing them here would compete with the real thing.
+Disallow: /cafenenai/
+
 Sitemap: https://handprotocol.org/sitemap.xml
