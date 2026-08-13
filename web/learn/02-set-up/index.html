@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 02 · Set up your workspace — HAND Learn</title>
+  <meta name="description" content="Install the Claude desktop app, sign in, create your first project folder, and take the interface tour.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/learn/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body data-lesson="02-set-up">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/learn/" class="nav__logo">
+        <img src="/assets/logo.png" alt="" width="30" height="30" decoding="async">
+        <span>HAND<span class="nav__logo-suffix">·learn</span></span>
+      </a>
+      <div class="nav__right">
+        <a class="nav__link" href="/learn/">Course home</a>
+        <a class="nav__link" href="/learn/review/">My review list</a>
+        <span class="nav__account" data-account-chip></span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="lesson-header container container--doc">
+      <div class="lesson-header__crumbs">
+        <a href="/learn/">HAND Learn</a> <span>/</span> <span>Module 02 of 08</span>
+      </div>
+      <h1>Set up your workspace</h1>
+      <div class="lesson-header__meta">
+        <span>⏱ About 45 minutes</span>
+        <span>🛠 You'll install real software today</span>
+        <span class="lesson-status" data-lesson-status></span>
+      </div>
+    </header>
+
+    <article class="lesson container container--doc">
+
+      <section data-pin id="before-you-start">
+        <h2>Before you start: the account</h2>
+        <p>
+          Claude Code needs a <strong>Claude account with a paid plan</strong> — it's
+          included in the <strong>Pro</strong> plan and up. The free plan doesn't include
+          Claude Code.
+        </p>
+        <ol>
+          <li>Go to <a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a>
+            and create an account (or sign in) — email or Google sign-in both work.</li>
+          <li>If you're not on a paid plan yet, upgrade to <strong>Pro</strong> at
+            <a href="https://claude.ai/pricing" target="_blank" rel="noopener">claude.ai/pricing</a>.
+            Pro is plenty for this course.</li>
+        </ol>
+        <div class="callout">
+          <span class="callout__label">Cost a problem?</span>
+          <p>If the subscription is a real barrier for you right now, tell your HAND
+          contact or press "I'm stuck" and say so. HAND exists to remove exactly this
+          kind of obstacle — we'd rather help than lose you at step one.</p>
+        </div>
+      </section>
+
+      <section data-pin id="install">
+        <h2>Install the Claude desktop app</h2>
+        <p>The desktop app is one download — Claude Code lives inside it.</p>
+        <h3>On a Mac (macOS 13 or newer)</h3>
+        <ol>
+          <li>Download: <a href="https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect" rel="noopener">Claude for macOS</a>
+            (works on both Intel and Apple Silicon).</li>
+          <li>Open the downloaded <code>.dmg</code> file and drag <strong>Claude</strong>
+            into your <strong>Applications</strong> folder.</li>
+          <li>Open Claude from Applications. If macOS asks "are you sure you want to open
+            this?", click Open — it's the normal check for downloaded apps.</li>
+        </ol>
+        <h3>On Windows (Windows 10 or 11)</h3>
+        <ol>
+          <li>Download: <a href="https://claude.ai/api/desktop/win32/x64/setup/latest/redirect" rel="noopener">Claude for Windows</a>
+            (most PCs — if you have a newer ARM laptop, use
+            <a href="https://claude.ai/api/desktop/win32/arm64/setup/latest/redirect" rel="noopener">this version</a> instead).</li>
+          <li>Run the installer and follow the prompts.</li>
+          <li><strong>One extra step on Windows:</strong> install
+            <a href="https://git-scm.com/downloads/win" target="_blank" rel="noopener">Git for Windows</a>
+            (a free helper tool Claude Code relies on). Accept all the default options in
+            its installer — you never have to touch it again. Then restart the Claude app.</li>
+        </ol>
+        <p>
+          When the app opens, <strong>sign in with your Claude account</strong> — it will
+          pop open your browser to confirm, then bring you back.
+        </p>
+      </section>
+
+      <section data-pin id="find-code-tab">
+        <h2>Find the Code tab</h2>
+        <p>
+          At the top of the Claude app you'll see tabs — <strong>Chat</strong>,
+          <strong>Cowork</strong>, and <strong>Code</strong>. Chat is the familiar
+          chatbot. <strong>Click Code.</strong> That's where this entire course happens.
+        </p>
+        <p>The first time in, Code asks two setup questions:</p>
+        <ul>
+          <li><strong>Where should Claude work?</strong> Choose <strong>Local</strong> —
+            meaning "on this computer." (The other options — Cloud, SSH — are for later
+            in your journey.)</li>
+          <li><strong>Which folder?</strong> That's our next step ↓</li>
+        </ul>
+      </section>
+
+      <section data-pin id="project-folder">
+        <h2>Make your practice folder</h2>
+        <p>
+          Claude Code always works inside <strong>one folder you choose</strong> — its
+          workshop for the session. It reads and changes things in that folder, not all
+          over your computer. Let's make a practice one:
+        </p>
+        <ol>
+          <li>On your Desktop, create a new folder (right-click → New Folder) and name it
+            <code>claude-practice</code>. Lowercase with a dash, no spaces — some tools are
+            fussy about spaces in names, so this habit prevents weird problems later.</li>
+          <li>Back in the Claude app, click <strong>Select folder</strong> and choose the
+            <code>claude-practice</code> folder you just made.</li>
+        </ol>
+        <div class="callout callout--teal">
+          <span class="callout__label">Habit worth keeping</span>
+          <p>One project = one folder. When you start your real app in Module 05, it gets
+          its own fresh folder. Never point Claude at your whole Desktop or Documents —
+          keep its workshop tidy and contained.</p>
+        </div>
+      </section>
+
+      <section data-pin id="interface-tour">
+        <h2>The 90-second interface tour</h2>
+        <p>You don't need to memorize this — just know what exists, so nothing surprises you:</p>
+        <ul>
+          <li><strong>The prompt box</strong> (bottom) — where you type instructions to
+            Claude. Press Enter to send.</li>
+          <li><strong>The conversation</strong> (center) — Claude narrates what it's doing
+            as it works: reading files, proposing changes, running commands.</li>
+          <li><strong>The mode selector</strong> (next to the send button) — controls how
+            much Claude asks before acting. It should say <strong>Manual</strong> right
+            now: Claude asks before every change. Leave it there for now; Module 04
+            explains the other modes.</li>
+          <li><strong>The model dropdown</strong> — which Claude brain to use. The default
+            is fine; don't overthink it.</li>
+          <li><strong>The sidebar</strong> (left) — your sessions. The <strong>+</strong>
+            button starts a new one. You can run several in parallel someday; one at a
+            time is right for now.</li>
+          <li><strong>The stop button</strong> (square, appears while Claude works) —
+            interrupts immediately. You are always allowed to press it.</li>
+        </ul>
+        <p>Two power panes you'll meet later in the course:</p>
+        <ul>
+          <li><strong>Diff viewer</strong> — click the little change stats (like
+            <code>+12 −1</code>) to see exactly what changed in a file, green for added,
+            red for removed.</li>
+          <li><strong>Browser pane</strong> — the desktop app can show your app running
+            <em>inside</em> the Claude window, and Claude can see it too. This becomes
+            magic in Module 06.</li>
+        </ul>
+      </section>
+
+      <section data-pin id="hello-claude">
+        <h2>Say hello</h2>
+        <p>
+          Let's confirm everything works. Copy this into the prompt box and press Enter:
+        </p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>Hi! I'm brand new to Claude Code and this is my practice folder. In one short paragraph: introduce yourself and tell me what you can see in this folder right now.</pre>
+        </div>
+        <p>
+          Claude will look around (the folder is empty — it will say so) and introduce
+          itself. That's it: you just directed an AI on your own computer. If instead you
+          hit an error or something looks broken, that's a perfect first use of the
+          <strong>I'm stuck</strong> button.
+        </p>
+      </section>
+
+      <div class="checkpoint" data-checkpoint>
+        <div class="checkpoint__head">
+          <p class="eyebrow eyebrow--accent">Checkpoint</p>
+          <h2>Workspace check</h2>
+          <p>Everything below should be literally true on your computer before moving on.</p>
+        </div>
+        <div class="checkpoint__body">
+          <div class="check-list">
+            <label><input type="checkbox"> The Claude desktop app is installed and I'm signed in</label>
+            <label><input type="checkbox"> I'm on a plan that includes Claude Code (Pro or up)</label>
+            <label><input type="checkbox"> I found the <strong>Code</strong> tab and chose <strong>Local</strong></label>
+            <label><input type="checkbox"> I made a <code>claude-practice</code> folder and selected it</label>
+            <label><input type="checkbox"> Claude answered my hello message</label>
+          </div>
+          <div class="quiz-q" data-correct="a">
+            <p class="quiz-q__text">Bonus check: what does <strong>Manual</strong> mode mean?</p>
+            <label><input type="radio" name="q1" value="a"> Claude asks my permission before every file change or command</label>
+            <label><input type="radio" name="q1" value="b"> I have to write the code manually</label>
+            <label><input type="radio" name="q1" value="c"> Claude is offline</label>
+            <p class="quiz-q__why">Manual = maximum training wheels: see everything, approve everything. Exactly right for now.</p>
+          </div>
+          <div class="checkpoint__actions">
+            <button class="btn btn--primary" data-check type="button">Complete Module 02</button>
+            <span class="checkpoint__result"></span>
+          </div>
+          <div class="lesson-done" data-lesson-done>✓ Module complete — saved to your progress.</div>
+        </div>
+      </div>
+
+      <nav class="lesson-nav">
+        <a href="/learn/01-what-is-claude-code/" class="lesson-nav--prev">
+          <span class="lesson-nav__dir">← Previous</span>
+          <span class="lesson-nav__title">Module 01 · What is Claude Code?</span>
+        </a>
+        <a href="/learn/03-first-conversation/" class="lesson-nav--next">
+          <span class="lesson-nav__dir">Next →</span>
+          <span class="lesson-nav__title">Module 03 · Your first conversation</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <button class="stuck-fab" data-stuck-fab type="button">
+    <span class="stuck-fab__dot" aria-hidden="true"></span> I'm stuck
+  </button>
+
+  <div class="modal-backdrop" data-stuck-modal>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="I'm stuck">
+      <h3>Stuck? That's normal. Let's fix it.</h3>
+      <p data-stuck-intro>
+        Installs are the #1 place people get stuck — you're in good company. Tell us
+        what's happening (which step, what you see on screen) and a real person at HAND
+        will reach out.
+      </p>
+      <div class="field">
+        <textarea maxlength="2000" placeholder="What's going on? Plain words are perfect."></textarea>
+      </div>
+      <p data-stuck-done style="display:none">
+        💛 Got it — a real person has been pinged with your note and where you are in the
+        course. They'll reach out soon.
+      </p>
+      <div class="modal__actions">
+        <button class="btn btn--quiet" data-stuck-cancel type="button">Close</button>
+        <button class="btn btn--primary" data-stuck-send type="button">Send to a human</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>HAND Protocol · Austin, TX · <a href="/">handprotocol.org</a></span>
+      <span><a href="/learn/review/">My review list</a></span>
+    </div>
+  </footer>
+
+  <script src="/learn/learn.js" defer></script>
+</body>
+</html>

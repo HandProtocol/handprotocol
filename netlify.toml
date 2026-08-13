@@ -341,6 +341,22 @@ status = 301
   to = "/kitties/game/"
   status = 301
 
+# HAND Learn — the Claude Code course for technical newbies (web/learn/).
+[[redirects]]
+  from = "/learn"
+  to = "/learn/"
+  status = 301
+
+[[redirects]]
+  from = "/course"
+  to = "/learn/"
+  status = 301
+
+[[redirects]]
+  from = "/claude-code"
+  to = "/learn/"
+  status = 301
+
 # 404 fallback → branded compass page with radial sitemap (3D hand pointing to sections).
 # Serves /404.html with HTTP 404. The previous rule pointed at /foundation-campaign/, which
 # broke relative CSS/JS paths because the browser kept the original (missing) URL as base.

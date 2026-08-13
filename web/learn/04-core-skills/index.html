@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 04 · The skills that matter — HAND Learn</title>
+  <meta name="description" content="How to ask well, when to start fresh, plan mode, permission modes, and the handful of slash commands worth knowing.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/learn/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body data-lesson="04-core-skills">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/learn/" class="nav__logo">
+        <img src="/assets/logo.png" alt="" width="30" height="30" decoding="async">
+        <span>HAND<span class="nav__logo-suffix">·learn</span></span>
+      </a>
+      <div class="nav__right">
+        <a class="nav__link" href="/learn/">Course home</a>
+        <a class="nav__link" href="/learn/review/">My review list</a>
+        <span class="nav__account" data-account-chip></span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="lesson-header container container--doc">
+      <div class="lesson-header__crumbs">
+        <a href="/learn/">HAND Learn</a> <span>/</span> <span>Module 04 of 08</span>
+      </div>
+      <h1>The skills that matter</h1>
+      <div class="lesson-header__meta">
+        <span>⏱ About 40 minutes</span>
+        <span>🛠 The module people pin the most — that's fine</span>
+        <span class="lesson-status" data-lesson-status></span>
+      </div>
+    </header>
+
+    <article class="lesson container container--doc">
+
+      <p style="font-size:1.0625rem">
+        You know the motions. This module is technique — the small set of habits that
+        separates "fighting with the AI" from "flowing with it." There are only five.
+      </p>
+
+      <section data-pin id="be-specific">
+        <h2>Skill 1 · Be specific about the outcome</h2>
+        <p>
+          Claude can't read your mind, but it's phenomenal at reading your words — so
+          spend your effort on the words. Describe <strong>what the result should look
+          like</strong>, not just that you want one.
+        </p>
+        <div class="table-scroll">
+        <table class="term-table">
+          <tr><th>Vague (coin flip)</th><th>Specific (works)</th></tr>
+          <tr><td>"Make it better"</td><td>"Make the headline bigger and change the background to a soft cream"</td></tr>
+          <tr><td>"Add a contact thing"</td><td>"Add a contact section at the bottom with my email and Instagram, centered"</td></tr>
+          <tr><td>"It's broken, fix it"</td><td>"When I click the menu button on my phone, nothing opens. It should show the links."</td></tr>
+          <tr><td>"Make it professional"</td><td>"Calmer colors, more space between sections, fewer exclamation marks"</td></tr>
+        </table>
+        </div>
+        <p>
+          A useful trick: describe it like you're texting a friend who's good at this
+          stuff. You'd naturally include <em>where</em>, <em>what</em>, and <em>what it
+          should end up like</em>. That's the whole skill.
+        </p>
+      </section>
+
+      <section data-pin id="small-steps">
+        <h2>Skill 2 · One thing at a time</h2>
+        <p>
+          Big requests ("build my whole site with a gallery, a shop, a blog, and a
+          newsletter") make big messes — for humans too. Small requests get built,
+          checked, and confirmed in a tight loop:
+        </p>
+        <ul>
+          <li>Ask for <strong>one change</strong>.</li>
+          <li>Look at the result.</li>
+          <li>Then the next one.</li>
+        </ul>
+        <p>
+          Ten small rounds beat one giant round every single time — faster overall, and
+          when something goes wrong you know exactly which step caused it.
+        </p>
+      </section>
+
+      <section data-pin id="fresh-sessions">
+        <h2>Skill 3 · Keep sessions fresh</h2>
+        <p>
+          Everything in your conversation — every message, file change, and explanation —
+          piles up in Claude's short-term memory (its <strong>context</strong>). A long,
+          winding session makes Claude slower, more forgetful, and burns through your
+          plan's usage faster.
+        </p>
+        <p>The fix is one habit: <strong>new task, new session</strong>. Two ways to do it:</p>
+        <ul>
+          <li>Type <code>/clear</code> in the prompt box — wipes the conversation and
+            starts fresh in the same folder.</li>
+          <li>Or click <strong>+</strong> in the sidebar for a new session.</li>
+        </ul>
+        <p>
+          "But won't it forget what we were doing?" Yes — that's the point. Files stay on
+          disk; only the chat memory resets. If you want continuity, end a session by
+          asking Claude to <em>write a note to its future self</em>:
+        </p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code — end of a work session</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>Before we stop: create or update a file called NOTES.md summarizing what we did today, what's left to do, and anything a fresh session should know. Keep it under 20 lines.</pre>
+        </div>
+        <p>
+          Then a new session can start with <em>"Read NOTES.md and let's continue."</em>
+          Related commands, for when you see them mentioned: <code>/compact</code>
+          squeezes a long conversation down without fully clearing it, and
+          <code>/usage</code> shows how much of your allowance the session is using.
+        </p>
+      </section>
+
+      <section data-pin id="plan-mode">
+        <h2>Skill 4 · Plan mode for anything big</h2>
+        <p>
+          For a small tweak, just ask. For anything that feels big — "restructure my
+          whole page," "add a photo gallery" — use <strong>plan mode</strong>: Claude
+          researches and <strong>proposes a plan without touching your files</strong>.
+          You read the plan in plain English, adjust it, and only then let it build.
+        </p>
+        <ul>
+          <li><strong>How to enter it:</strong> click the mode selector (next to the send
+            button) and choose <strong>Plan</strong> — or just type <code>/plan</code>
+            followed by your request.</li>
+          <li><strong>What you'll see:</strong> a written plan and a question — roughly
+            "want me to go ahead?" You can say yes, or "change step 3 first," or "no,
+            let's think differently."</li>
+        </ul>
+        <p>
+          Measure twice, cut once — except the measuring is free and takes ninety
+          seconds.
+        </p>
+      </section>
+
+      <section data-pin id="permission-modes">
+        <h2>Skill 5 · Know your permission modes</h2>
+        <p>The mode selector next to the send button has a few settings. The ones that matter:</p>
+        <div class="table-scroll">
+        <table class="term-table">
+          <tr><th>Mode</th><th>What it means</th><th>When</th></tr>
+          <tr><td>Manual</td><td>Asks before every change. You review each diff.</td><td>Now, and whenever you're unsure</td></tr>
+          <tr><td>Accept edits</td><td>File edits happen without asking; commands still ask.</td><td>Later, mid-flow, when reviewing every diff gets tedious</td></tr>
+          <tr><td>Plan</td><td>Read-only: explores and proposes, changes nothing.</td><td>Before anything big</td></tr>
+        </table>
+        </div>
+        <div class="callout callout--rose">
+          <span class="callout__label">One warning</span>
+          <p>You may also see a "bypass permissions" style option that skips all asking.
+          Leave it alone — it's for experts running Claude in sealed-off environments.
+          You lose your training wheels <em>and</em> your brakes.</p>
+        </div>
+      </section>
+
+      <section data-pin id="slash-commands">
+        <h2>Your slash-command pocket reference</h2>
+        <p>
+          Type <code>/</code> in the prompt box and a menu appears. These six cover 95%
+          of what you'll ever need — pin this section.
+        </p>
+        <div class="table-scroll">
+        <table class="term-table">
+          <tr><th>Command</th><th>What it does</th></tr>
+          <tr><td><code>/clear</code></td><td>Fresh conversation, empty memory. Use between tasks.</td></tr>
+          <tr><td><code>/plan</code></td><td>Enter plan mode — propose before building.</td></tr>
+          <tr><td><code>/init</code></td><td>Creates CLAUDE.md — a project memory file Claude reads every session (Module 08).</td></tr>
+          <tr><td><code>/usage</code></td><td>How much of your plan's allowance this session is using.</td></tr>
+          <tr><td><code>/resume</code></td><td>Reopen a past conversation you cleared.</td></tr>
+          <tr><td><code>/help</code></td><td>Lists everything else.</td></tr>
+        </table>
+        </div>
+      </section>
+
+      <section data-pin id="when-weird">
+        <h2>When things feel weird</h2>
+        <p>A short decision guide for the moments something's off:</p>
+        <ul>
+          <li><strong>Claude is doing something you didn't want</strong> → press the stop
+            button. Then say what you actually wanted. No harm done.</li>
+          <li><strong>The result looks wrong</strong> → describe the gap: "I expected X,
+            I'm seeing Y." That sentence is 90% of debugging (Module 06 goes deeper).</li>
+          <li><strong>Claude seems confused or is going in circles</strong> →
+            <code>/clear</code> and re-ask with fresher, more specific words. A fresh
+            session with a good prompt beats a long session with a tired one.</li>
+          <li><strong>You're confused</strong> → ask Claude to explain, pin the section
+            of this course that's fuzzy, or press <strong>I'm stuck</strong>. All three
+            are winning moves.</li>
+        </ul>
+      </section>
+
+      <div class="checkpoint" data-checkpoint>
+        <div class="checkpoint__head">
+          <p class="eyebrow eyebrow--accent">Checkpoint</p>
+          <h2>Technique check</h2>
+        </div>
+        <div class="checkpoint__body">
+          <div class="quiz-q" data-correct="b">
+            <p class="quiz-q__text">1 · Which request will get the best result?</p>
+            <label><input type="radio" name="q1" value="a"> "Make my page cooler"</label>
+            <label><input type="radio" name="q1" value="b"> "Make the photos bigger and put them in two columns on desktop"</label>
+            <label><input type="radio" name="q1" value="c"> "Do whatever a professional would do"</label>
+            <p class="quiz-q__why">Specific outcome, specific place. Claude is only as good as the target you give it.</p>
+          </div>
+          <div class="quiz-q" data-correct="a">
+            <p class="quiz-q__text">2 · You finished fixing the menu and now want to add a gallery. Best move?</p>
+            <label><input type="radio" name="q2" value="a"> <code>/clear</code>, then ask for the gallery in a fresh session</label>
+            <label><input type="radio" name="q2" value="b"> Keep the same session going forever — more memory is better</label>
+            <label><input type="radio" name="q2" value="c"> Reinstall the app between tasks</label>
+            <p class="quiz-q__why">New task, new session. Files stay; only the chat memory resets — keeping Claude sharp and your usage low.</p>
+          </div>
+          <div class="quiz-q" data-correct="c">
+            <p class="quiz-q__text">3 · You want to add a whole new photo-gallery section — a big change. First move?</p>
+            <label><input type="radio" name="q3" value="a"> Ask it to just build everything and hope</label>
+            <label><input type="radio" name="q3" value="b"> Learn JavaScript first</label>
+            <label><input type="radio" name="q3" value="c"> Plan mode: get a proposal, read it, then approve</label>
+            <p class="quiz-q__why">Plan mode explores without touching files. Review the approach before any building starts.</p>
+          </div>
+          <div class="quiz-q" data-correct="b">
+            <p class="quiz-q__text">4 · Claude is mid-task doing something that looks wrong. You should…</p>
+            <label><input type="radio" name="q4" value="a"> Let it finish — interrupting is rude</label>
+            <label><input type="radio" name="q4" value="b"> Press stop, then say what you expected instead</label>
+            <label><input type="radio" name="q4" value="c"> Close your laptop</label>
+            <p class="quiz-q__why">The stop button is always allowed. Interrupt early, redirect clearly.</p>
+          </div>
+          <div class="checkpoint__actions">
+            <button class="btn btn--primary" data-check type="button">Complete Module 04</button>
+            <span class="checkpoint__result"></span>
+          </div>
+          <div class="lesson-done" data-lesson-done>✓ Module complete — saved to your progress. Foundation done — time to build.</div>
+        </div>
+      </div>
+
+      <nav class="lesson-nav">
+        <a href="/learn/03-first-conversation/" class="lesson-nav--prev">
+          <span class="lesson-nav__dir">← Previous</span>
+          <span class="lesson-nav__title">Module 03 · Your first conversation</span>
+        </a>
+        <a href="/learn/05-plan-your-app/" class="lesson-nav--next">
+          <span class="lesson-nav__dir">Next →</span>
+          <span class="lesson-nav__title">Module 05 · Plan your app</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <button class="stuck-fab" data-stuck-fab type="button">
+    <span class="stuck-fab__dot" aria-hidden="true"></span> I'm stuck
+  </button>
+
+  <div class="modal-backdrop" data-stuck-modal>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="I'm stuck">
+      <h3>Stuck? That's normal. Let's fix it.</h3>
+      <p data-stuck-intro>
+        Tell us what's happening in your own words — what you tried, what you expected,
+        what you saw instead. A real person at HAND gets this immediately and will reach
+        out.
+      </p>
+      <div class="field">
+        <textarea maxlength="2000" placeholder="What's going on? Plain words are perfect."></textarea>
+      </div>
+      <p data-stuck-done style="display:none">
+        💛 Got it — a real person has been pinged with your note and where you are in the
+        course. They'll reach out soon.
+      </p>
+      <div class="modal__actions">
+        <button class="btn btn--quiet" data-stuck-cancel type="button">Close</button>
+        <button class="btn btn--primary" data-stuck-send type="button">Send to a human</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>HAND Protocol · Austin, TX · <a href="/">handprotocol.org</a></span>
+      <span><a href="/learn/review/">My review list</a></span>
+    </div>
+  </footer>
+
+  <script src="/learn/learn.js" defer></script>
+</body>
+</html>

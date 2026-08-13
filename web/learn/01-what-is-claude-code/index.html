@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 01 · What is Claude Code? — HAND Learn</title>
+  <meta name="description" content="Plain-language answers: what Claude Code is, what it can and can't do, and why it's safe to let it work.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/learn/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body data-lesson="01-what-is-claude-code">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/learn/" class="nav__logo">
+        <img src="/assets/logo.png" alt="" width="30" height="30" decoding="async">
+        <span>HAND<span class="nav__logo-suffix">·learn</span></span>
+      </a>
+      <div class="nav__right">
+        <a class="nav__link" href="/learn/">Course home</a>
+        <a class="nav__link" href="/learn/review/">My review list</a>
+        <span class="nav__account" data-account-chip></span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="lesson-header container container--doc">
+      <div class="lesson-header__crumbs">
+        <a href="/learn/">HAND Learn</a> <span>/</span> <span>Module 01 of 08</span>
+      </div>
+      <h1>What is Claude Code?</h1>
+      <div class="lesson-header__meta">
+        <span>⏱ About 25 minutes</span>
+        <span>🛠 Reading only — install comes next module</span>
+        <span class="lesson-status" data-lesson-status></span>
+      </div>
+    </header>
+
+    <article class="lesson container container--doc">
+
+      <section data-pin id="chatbot-vs-claude-code">
+        <h2>Claude the chatbot vs. Claude Code</h2>
+        <p>
+          You may have used <strong>Claude</strong> (or ChatGPT) as a chatbot: you type a
+          question, it types an answer. Helpful — but everything it "makes" is trapped in
+          the chat window. If it writes you a recipe app, it hands you a wall of text and
+          wishes you luck.
+        </p>
+        <p>
+          <strong>Claude Code is different in one enormous way: it can actually do
+          things on your computer.</strong> It can create files, edit them, organize
+          folders, run programs, and check its own work. When Claude Code builds you a
+          recipe app, the app <em>exists</em> — real files, on your machine, that open in
+          your browser.
+        </p>
+        <p>A decent mental model:</p>
+        <ul>
+          <li><strong>Chatbot Claude</strong> is a brilliant friend on the phone. Great
+            advice, but you have to do everything yourself.</li>
+          <li><strong>Claude Code</strong> is that same friend sitting at your keyboard,
+            hands on the keys, asking "want me to just do it?" — while you watch and
+            stay in charge.</li>
+        </ul>
+      </section>
+
+      <section data-pin id="what-it-can-do">
+        <h2>What it can do</h2>
+        <ul>
+          <li><strong>Create and edit files</strong> — web pages, documents, images'
+            layouts, whole project folders.</li>
+          <li><strong>Run commands</strong> — the technical chores programmers do in a
+            terminal, like starting a test server or installing a tool. You don't need to
+            know the commands; Claude does.</li>
+          <li><strong>Build working software</strong> — websites, small apps, tools,
+            games. It writes the code, you describe the result you want.</li>
+          <li><strong>Fix its own mistakes</strong> — show it an error and it will
+            usually diagnose and repair it.</li>
+          <li><strong>Explain anything</strong> — every file, every step, at whatever
+            level you ask for. "Explain that like I've never coded" is a completely
+            legitimate instruction, and you'll use it a lot.</li>
+        </ul>
+        <p>
+          People call this kind of tool <strong>"agentic"</strong> — a fancy word meaning
+          it doesn't just answer, it <em>takes a goal and works toward it in steps</em>:
+          reading files, making changes, checking results, adjusting. You'll watch it
+          narrate as it goes.
+        </p>
+      </section>
+
+      <section data-pin id="what-it-cant-do">
+        <h2>What it can't do (and where it struggles)</h2>
+        <p>Being honest about the edges will save you frustration:</p>
+        <ul>
+          <li><strong>It can't read your mind.</strong> Vague ask, vague result. "Make it
+            better" gets you a coin flip; "make the headline bigger and the background
+            cream" gets you exactly that. Module 04 trains this muscle.</li>
+          <li><strong>It can be confidently wrong.</strong> Sometimes it will say "done!"
+            and the thing is not quite right. That's why you always <em>look</em> at the
+            result — the course builds this habit early.</li>
+          <li><strong>It forgets between sessions.</strong> Each new conversation starts
+            fresh. There are simple tools for continuity (a notes file called
+            <code>CLAUDE.md</code> — Module 08), but assume a new session knows nothing.</li>
+          <li><strong>Usage has limits.</strong> Paid plans include a generous allowance
+            that refills on a schedule. Long, rambling sessions use it faster — another
+            reason the tidy habits in Module 04 matter.</li>
+        </ul>
+        <blockquote class="pullquote">
+          Treat Claude Code like a talented, fast, slightly overconfident collaborator —
+          not an oracle. Trust, then verify.
+        </blockquote>
+      </section>
+
+      <section data-pin id="safety-model">
+        <h2>Why it's safe to let it work: permissions</h2>
+        <p>
+          "An AI that can change files on my computer" sounds scary until you see the
+          safety model. By default, <strong>Claude Code asks before it touches
+          anything</strong>:
+        </p>
+        <ul>
+          <li>When it wants to edit a file, it <strong>pauses and shows you exactly what
+            it wants to change</strong> — old version and new version side by side (this
+            view is called a <strong>diff</strong>; additions show green, removals show
+            red). Nothing happens until you press <strong>Accept</strong>.</li>
+          <li>When it wants to run a command, it shows the command and waits for your
+            OK.</li>
+          <li>If you press <strong>Reject</strong>, nothing changes, and Claude asks how
+            you'd like to proceed instead.</li>
+          <li>There's always a <strong>stop button</strong> to interrupt it mid-task.</li>
+        </ul>
+        <p>
+          Later, when you trust the flow, you can loosen this (a mode that auto-accepts
+          routine file edits). For this course we start in the default
+          <strong>Manual</strong> mode, where you see and approve everything. Best
+          training wheels ever invented.
+        </p>
+      </section>
+
+      <section data-pin id="words-youll-hear">
+        <h2>Ten words you'll hear constantly</h2>
+        <p>Skim these now; pin this section and come back whenever one shows up.</p>
+        <div class="table-scroll">
+        <table class="term-table">
+          <tr><th>Word</th><th>Plain meaning</th></tr>
+          <tr><td>File</td><td>A single document on your computer — a page, an image, a list of code.</td></tr>
+          <tr><td>Folder</td><td>A container for files. Your app will live in one folder.</td></tr>
+          <tr><td>Project</td><td>The folder holding everything for one thing you're building.</td></tr>
+          <tr><td>Code</td><td>Text written in a language computers follow. You'll read a little, write almost none.</td></tr>
+          <tr><td>Session</td><td>One conversation with Claude Code. New session = fresh memory.</td></tr>
+          <tr><td>Prompt</td><td>What you type to Claude — your instruction or question.</td></tr>
+          <tr><td>Diff</td><td>The before/after view of a change Claude wants to make. Green added, red removed.</td></tr>
+          <tr><td>Terminal</td><td>The text window where commands run. Claude drives it so you don't have to.</td></tr>
+          <tr><td>Context</td><td>Everything Claude currently "has in its head" this session. It fills up; Module 04 covers keeping it tidy.</td></tr>
+          <tr><td>Deploy</td><td>Putting your app on the internet so anyone can visit it. Module 07.</td></tr>
+        </table>
+        </div>
+      </section>
+
+      <div class="checkpoint" data-checkpoint>
+        <div class="checkpoint__head">
+          <p class="eyebrow eyebrow--accent">Checkpoint</p>
+          <h2>Quick check — no grades, no tricks</h2>
+          <p>Wrong answers just highlight what to reread. Retry as often as you like.</p>
+        </div>
+        <div class="checkpoint__body">
+          <div class="quiz-q" data-correct="b">
+            <p class="quiz-q__text">1 · What's the big difference between chatbot Claude and Claude Code?</p>
+            <label><input type="radio" name="q1" value="a"> Claude Code is smarter</label>
+            <label><input type="radio" name="q1" value="b"> Claude Code can actually create and change files and run programs on your computer</label>
+            <label><input type="radio" name="q1" value="c"> Claude Code is free and the chatbot isn't</label>
+            <p class="quiz-q__why">Same brain, different hands: Claude Code acts on your computer instead of only chatting.</p>
+          </div>
+          <div class="quiz-q" data-correct="c">
+            <p class="quiz-q__text">2 · Claude Code wants to edit one of your files. What happens by default?</p>
+            <label><input type="radio" name="q2" value="a"> It edits the file immediately — that's the point</label>
+            <label><input type="radio" name="q2" value="b"> It refuses — AIs can't edit files</label>
+            <label><input type="radio" name="q2" value="c"> It pauses and shows you the exact change; nothing happens until you accept</label>
+            <p class="quiz-q__why">Default (Manual) mode shows a diff and waits for your Accept. You stay in charge.</p>
+          </div>
+          <div class="quiz-q" data-correct="b">
+            <p class="quiz-q__text">3 · Claude says "Done!" — what's the healthy habit?</p>
+            <label><input type="radio" name="q3" value="a"> Trust it; checking would be rude</label>
+            <label><input type="radio" name="q3" value="b"> Look at the actual result — it's fast, talented, and occasionally confidently wrong</label>
+            <label><input type="radio" name="q3" value="c"> Delete everything and start over just in case</label>
+            <p class="quiz-q__why">Trust, then verify. Looking at results is the single habit that separates people who thrive with AI tools.</p>
+          </div>
+          <div class="checkpoint__actions">
+            <button class="btn btn--primary" data-check type="button">Check my answers</button>
+            <span class="checkpoint__result"></span>
+          </div>
+          <div class="lesson-done" data-lesson-done>✓ Module complete — saved to your progress.</div>
+        </div>
+      </div>
+
+      <nav class="lesson-nav">
+        <a href="/learn/00-welcome/" class="lesson-nav--prev">
+          <span class="lesson-nav__dir">← Previous</span>
+          <span class="lesson-nav__title">Module 00 · Welcome</span>
+        </a>
+        <a href="/learn/02-set-up/" class="lesson-nav--next">
+          <span class="lesson-nav__dir">Next →</span>
+          <span class="lesson-nav__title">Module 02 · Set up your workspace</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <button class="stuck-fab" data-stuck-fab type="button">
+    <span class="stuck-fab__dot" aria-hidden="true"></span> I'm stuck
+  </button>
+
+  <div class="modal-backdrop" data-stuck-modal>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="I'm stuck">
+      <h3>Stuck? That's normal. Let's fix it.</h3>
+      <p data-stuck-intro>
+        Tell us what's happening in your own words — what you tried, what you expected,
+        what you saw instead. A real person at HAND gets this immediately and will reach
+        out.
+      </p>
+      <div class="field">
+        <textarea maxlength="2000" placeholder="What's going on? Plain words are perfect."></textarea>
+      </div>
+      <p data-stuck-done style="display:none">
+        💛 Got it — a real person has been pinged with your note and where you are in the
+        course. They'll reach out soon.
+      </p>
+      <div class="modal__actions">
+        <button class="btn btn--quiet" data-stuck-cancel type="button">Close</button>
+        <button class="btn btn--primary" data-stuck-send type="button">Send to a human</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>HAND Protocol · Austin, TX · <a href="/">handprotocol.org</a></span>
+      <span><a href="/learn/review/">My review list</a></span>
+    </div>
+  </footer>
+
+  <script src="/learn/learn.js" defer></script>
+</body>
+</html>

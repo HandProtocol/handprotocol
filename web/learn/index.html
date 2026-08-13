@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HAND Learn — Build your first app with Claude Code</title>
+  <meta name="description" content="A free, human-backed course for technical newbies: learn Claude Code from zero and build a real app you can put online. Your progress saves, and a real person at HAND has your back.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/learn/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/learn/" class="nav__logo">
+        <img src="/assets/logo.png" alt="" width="30" height="30" decoding="async">
+        <span>HAND<span class="nav__logo-suffix">·learn</span></span>
+      </a>
+      <div class="nav__right">
+        <a class="nav__link" href="/learn/review/">My review list</a>
+        <a class="nav__link" href="/" title="HAND Protocol main site">handprotocol.org</a>
+        <span class="nav__account" data-account-chip></span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="hero container">
+      <p class="eyebrow eyebrow--accent">A HAND Protocol course · Free</p>
+      <h1 class="hero__title" style="margin-top:14px">Build your first app with <em>Claude&nbsp;Code</em></h1>
+      <p class="hero__lede">
+        You don't need to be a programmer. If you can describe what you want in plain
+        English, Claude Code can build it with you — and this course teaches you how to
+        work with it, from installing the app to putting something real on the internet.
+      </p>
+      <div class="hero__meta">
+        <span>📚 9 modules</span>
+        <span>⏱ ~45–60 min each</span>
+        <span>🧑‍🤝‍🧑 A real human has your back</span>
+        <span>📌 Pin anything to review later</span>
+      </div>
+    </header>
+
+    <section class="container auth-wrap" id="join">
+      <div>
+        <p class="eyebrow">How this course works</p>
+        <h2 style="margin:8px 0 18px; letter-spacing:-0.022em">Made to be walked through — or walked alone</h2>
+        <p style="color:var(--color-text-secondary); font-size:1.0313rem; line-height:1.75; margin-bottom:14px">
+          <strong>Guided:</strong> a HAND human walks the course with you — on a call, in
+          person, or over messages. They can see where you are and where you got stuck,
+          so you never have to explain from scratch.
+        </p>
+        <p style="color:var(--color-text-secondary); font-size:1.0313rem; line-height:1.75; margin-bottom:14px">
+          <strong>Self-serve:</strong> everything is written so you can do it alone, at
+          your own pace. Your progress saves automatically. And on every lesson there's an
+          <strong>"I'm stuck"</strong> button — press it and a real person at HAND gets a
+          ping and reaches out.
+        </p>
+        <p style="color:var(--color-text-secondary); font-size:1.0313rem; line-height:1.75">
+          <strong>Pin for review:</strong> next to every section there's a little pin.
+          Not 100% sure about something? Pin it, add a note about what feels fuzzy, and
+          it lands on your personal review list to revisit — with a human, or on your own.
+        </p>
+        <blockquote class="pullquote">Nobody builds alone. That's the whole point of HAND.</blockquote>
+      </div>
+
+      <div class="auth-card" data-auth-card>
+        <div class="auth-card__forms">
+          <div class="auth-card__tabs" role="tablist">
+            <button class="auth-card__tab is-active" data-auth-tab="signup" type="button">Create account</button>
+            <button class="auth-card__tab" data-auth-tab="login" type="button">Sign in</button>
+          </div>
+
+          <form data-auth-panel="signup" data-signup-form novalidate>
+            <div class="form-error" role="alert"></div>
+            <div class="field">
+              <label for="su-name">Your name</label>
+              <input id="su-name" name="name" type="text" autocomplete="name" required maxlength="80" placeholder="What should we call you?">
+            </div>
+            <div class="field">
+              <label for="su-email">Email</label>
+              <input id="su-email" name="email" type="email" autocomplete="email" required maxlength="160" placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="su-pass">Choose a passcode</label>
+              <input id="su-pass" name="passcode" type="password" autocomplete="new-password" required minlength="6" placeholder="At least 6 characters">
+              <p class="field__hint">Just for this course — don't reuse an important password.</p>
+            </div>
+            <div class="field">
+              <label for="su-mode">How are you taking the course?</label>
+              <select id="su-mode" name="mode">
+                <option value="guided">With a HAND guide (someone is helping me)</option>
+                <option value="solo">On my own, at my own pace</option>
+              </select>
+            </div>
+            <div class="hp" aria-hidden="true">
+              <label>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+            </div>
+            <button class="btn btn--primary" type="submit" style="width:100%">Start learning — it's free</button>
+            <p class="field__hint" style="margin-top:10px">
+              We use this to save your progress and to know when you need a hand.
+              No spam, ever.
+            </p>
+          </form>
+
+          <form data-auth-panel="login" data-login-form style="display:none" novalidate>
+            <div class="form-error" role="alert"></div>
+            <div class="field">
+              <label for="li-email">Email</label>
+              <input id="li-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="li-pass">Passcode</label>
+              <input id="li-pass" name="passcode" type="password" autocomplete="current-password" required>
+            </div>
+            <button class="btn btn--primary" type="submit" style="width:100%">Sign in</button>
+            <p class="field__hint" style="margin-top:10px">
+              Forgot your passcode? Press "I'm stuck" on any lesson or email
+              <a href="mailto:team@handprotocol.org">team@handprotocol.org</a> — a human will sort you out.
+            </p>
+          </form>
+        </div>
+
+        <div class="auth-card__signed">
+          <p class="eyebrow eyebrow--accent">Signed in</p>
+          <h3 style="margin:8px 0 6px">Welcome back, <span data-signed-name>friend</span> 👋</h3>
+          <p style="font-size:0.9063rem; color:var(--color-text-secondary); margin-bottom:18px" data-signed-mode></p>
+          <a class="btn btn--primary" data-resume-link href="/learn/00-welcome/" style="width:100%">Start the course →</a>
+          <button class="btn btn--quiet" data-signout type="button" style="width:100%; margin-top:8px">Sign out</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="modules container" id="modules">
+      <div class="modules__head">
+        <p class="eyebrow">The course</p>
+        <h2>Nine modules, one real app at the end</h2>
+        <div class="course-progress" data-course-progress>
+          <div class="course-progress__bar"><div class="course-progress__fill"></div></div>
+          <span data-progress-label>0 of 9 modules complete</span>
+        </div>
+      </div>
+
+      <div class="module-list">
+        <a class="module-card" data-lesson="00-welcome" href="/learn/00-welcome/">
+          <span class="module-card__num">00</span>
+          <span>
+            <span class="module-card__title">Welcome &amp; how this works</span>
+            <span class="module-card__desc">What you'll build, how progress and pins work, and how to get help when you need it.</span>
+          </span>
+          <span class="module-card__state"></span>
+        </a>
+        <a class="module-card" data-lesson="01-what-is-claude-code" href="/learn/01-what-is-claude-code/">
+          <span class="module-card__num">01</span>
+          <span>
+            <span class="module-card__title">What is Claude Code?</span>
+            <span class="module-card__desc">Plain-language answers: what it is, what it can and can't do, and why it's safe to let it work.</span>
+          </span>
+          <span class="module-card__state"></span>
+        </a>
+        <a class="module-card" data-lesson="02-set-up" href="/learn/02-set-up/">
+          <span class="module-card__num">02</span>
+          <span>
+            <span class="module-card__title">Set up your workspace</span>
+            <span class="module-card__desc">Install the Claude desktop app, sign in, make your first project folder, and take the interface tour.</span>
+          </span>
+          <span class="module-card__state"></span>
+        </a>
+        <a class="module-card" data-lesson="03-first-conversation" href="/learn/03-first-conversation/">
+          <span class="module-card__num">03</span>
+          <span>
+            <span class="module-card__title">Your first conversation</span>
+            <span class="module-card__desc">Give Claude its first real jobs, understand permission prompts, and make your first web page.</span>
+          </span>
+          <span class="module-card__state"></span>
+        </a>
+        <a class="module-card" data-lesson="04-core-skills" href="/learn/04-core-skills/">
+          <span class="module-card__num">04</span>
+          <span>
+            <span class="module-card__title">The skills that matter</span>
+            <span class="module-card__desc">How to ask well, when to start fresh, plan mode, and the handful of slash commands worth knowing.</span>
+          </span>
+          <span class="module-card__state"></span>
+        </a>
+        <a class="module-card" data-lesson="05-plan-your-app" href="/learn/05-plan-your-app/">
+          <span class="module-card__num">05</span>
+          <span>
+            <span class="module-card__title">Plan your app</span>
+            <span class="module-card__desc">Pick a project you actually care about, write a one-page brief with Claude, and scaffold version one.</span>
+          </span>
+          <span class="module-card__state"></span>
+        </a>
+        <a class="module-card" data-lesson="06-build-and-iterate" href="/learn/06-build-and-iterate/">
+          <span class="module-card__num">06</span>
+          <span>
+            <span class="module-card__title">Build and iterate</span>
+            <span class="module-card__desc">The build loop: look, describe, let Claude work, check. Plus what to do when something breaks.</span>
+          </span>
+          <span class="module-card__state"></span>
+        </a>
+        <a class="module-card" data-lesson="07-put-it-online" href="/learn/07-put-it-online/">
+          <span class="module-card__num">07</span>
+          <span>
+            <span class="module-card__title">Put it online</span>
+            <span class="module-card__desc">Deploy your app to a real URL for free, and share it with someone who'll cheer.</span>
+          </span>
+          <span class="module-card__state"></span>
+        </a>
+        <a class="module-card" data-lesson="08-level-up" href="/learn/08-level-up/">
+          <span class="module-card__num">08</span>
+          <span>
+            <span class="module-card__title">Level up &amp; graduate</span>
+            <span class="module-card__desc">Habits that make you dangerous: git, CLAUDE.md, memory — and where to go from here with HAND.</span>
+          </span>
+          <span class="module-card__state"></span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>HAND Protocol · Austin, TX · <a href="/">handprotocol.org</a></span>
+      <span><a href="/learn/review/">My review list</a> · <a href="/learn/coach/">Coach view</a></span>
+    </div>
+  </footer>
+
+  <script src="/learn/learn.js" defer></script>
+</body>
+</html>

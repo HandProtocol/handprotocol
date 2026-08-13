@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 05 · Plan your app — HAND Learn</title>
+  <meta name="description" content="Pick a project you care about, write a one-page brief with Claude, and scaffold version one.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/learn/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body data-lesson="05-plan-your-app">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/learn/" class="nav__logo">
+        <img src="/assets/logo.png" alt="" width="30" height="30" decoding="async">
+        <span>HAND<span class="nav__logo-suffix">·learn</span></span>
+      </a>
+      <div class="nav__right">
+        <a class="nav__link" href="/learn/">Course home</a>
+        <a class="nav__link" href="/learn/review/">My review list</a>
+        <span class="nav__account" data-account-chip></span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="lesson-header container container--doc">
+      <div class="lesson-header__crumbs">
+        <a href="/learn/">HAND Learn</a> <span>/</span> <span>Module 05 of 08</span>
+      </div>
+      <h1>Plan your app</h1>
+      <div class="lesson-header__meta">
+        <span>⏱ About 60 minutes</span>
+        <span>🛠 By the end, version one of YOUR app exists</span>
+        <span class="lesson-status" data-lesson-status></span>
+      </div>
+    </header>
+
+    <article class="lesson container container--doc">
+
+      <p style="font-size:1.0625rem">
+        Practice is over. From here to the end of the course, you're building
+        <strong>your</strong> thing — something you'd want to exist even if this course
+        didn't. That caring is fuel; you'll debug longer and polish harder for a project
+        that's real to you.
+      </p>
+
+      <section data-pin id="pick-project">
+        <h2>Pick your project</h2>
+        <p>
+          Three proven tracks — or bring your own idea. The one rule for this course:
+          keep it a <strong>website-shaped project</strong> (pages people look at and
+          click around — no accounts, no payments, no database yet). That keeps Module 07's
+          "put it online" step one drag-and-drop.
+        </p>
+        <h3>Track A · A page for you</h3>
+        <p>A personal site: who you are, what you make or do, how to reach you. The
+        classic first project because you already know everything about the subject.</p>
+        <h3>Track B · A page for someone you love</h3>
+        <p>Your cousin's food truck, your friend's braiding studio, your neighborhood
+        group. Menu or services, hours, location, photos, a "message us" link. Warning:
+        this one tends to make someone cry (the good kind) in Module 07.</p>
+        <h3>Track C · A tiny useful tool</h3>
+        <p>A little machine that solves one small real problem: a tip splitter, a
+        camping packing list, a "which chore is whose" wheel, a countdown to a date you
+        care about. Slightly more ambitious — the app <em>does</em> something.</p>
+        <div class="callout">
+          <span class="callout__label">Choosing paralysis?</span>
+          <p>Take Track A. You can build B and C after the course — the skills transfer
+          completely. Do not spend three days choosing; spend twenty minutes building
+          and you'll know more about what you want than any amount of deliberating.</p>
+        </div>
+      </section>
+
+      <section data-pin id="new-folder">
+        <h2>Give it a home</h2>
+        <p>
+          One project, one folder — remember? Make a fresh folder on your Desktop named
+          after your project, lowercase-with-dashes: <code>rosas-tacos</code>,
+          <code>my-site</code>, <code>trip-splitter</code>. In the Claude app, start a
+          <strong>new session</strong> (the + in the sidebar) and <strong>Select
+          folder</strong> → your new folder. Your practice folder retires with honor.
+        </p>
+      </section>
+
+      <section data-pin id="write-brief">
+        <h2>Write the brief — with Claude interviewing you</h2>
+        <p>
+          Professionals never build from a blank stare; they build from a
+          <strong>brief</strong> — one page saying who it's for, what it must do, and how
+          it should feel. Here's the trick: you don't have to write it. You answer
+          questions; Claude writes it. Copy this in:
+        </p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>I'm a beginner building my first real website with you, and I want to start with a proper brief. Interview me one question at a time (5–7 questions total) about: who it's for, what it needs to show or do, the 3–4 sections it should have, and the mood/style (I might name sites or brands whose look I like). Then write the finished brief to a file called BRIEF.md. Keep it under one page and in plain language.</pre>
+        </div>
+        <p>
+          Answer honestly and briefly — bullet-point answers are fine. When it's done,
+          Claude will ask permission to create <code>BRIEF.md</code>. Read it before you
+          accept: <strong>this is your project's north star</strong>, and it's the first
+          document you ever spec'd. If a line is wrong, say so — "actually, the hours
+          section matters more than the gallery" — and let it revise.
+        </p>
+      </section>
+
+      <section data-pin id="scaffold">
+        <h2>Scaffold version one — in plan mode</h2>
+        <p>
+          A whole site is a big change, and you know what we do with big changes: plan
+          mode first. Copy this in:
+        </p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>/plan Read BRIEF.md and propose how you'd build version 1 of this site. Requirements: plain HTML/CSS/JavaScript files only (no frameworks, no build tools), it must work by just opening index.html in a browser, it must look good on a phone, and use placeholder text/images anywhere I haven't given you real content. Tell me what files you'll create and what each section will contain.</pre>
+        </div>
+        <p>
+          Read the plan like a client, because you are one. Does it match your brief?
+          Anything missing or extra? Push back freely — "skip the testimonials section,
+          add a map instead." When the plan looks right, tell Claude to go ahead, and
+          approve its changes as they come.
+        </p>
+        <div class="callout callout--teal">
+          <span class="callout__label">Why "no frameworks"?</span>
+          <p>Those requirements in the prompt keep your project simple: files you can
+          open directly, host anywhere free, and understand with Claude's help. When
+          you outgrow them — that's a great problem, for after graduation.</p>
+        </div>
+      </section>
+
+      <section data-pin id="first-look">
+        <h2>First look</h2>
+        <p>
+          When Claude finishes, open your project folder and double-click
+          <code>index.html</code>. There it is — version one of your actual thing.
+          Parts will be wrong. Placeholder photos will be goofy. The color might be off.
+          <strong>Perfect.</strong> Wrong-but-existing is infinitely ahead of
+          perfect-but-imaginary, and all of Module 06 is about closing the gap.
+        </p>
+        <p>One more small ritual before the checkpoint — the session note habit from Module 04:</p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>Create NOTES.md: summarize what we built today, and list the top 5 things I said I wanted (from BRIEF.md) that aren't in version 1 yet. Under 20 lines.</pre>
+        </div>
+      </section>
+
+      <div class="checkpoint" data-checkpoint>
+        <div class="checkpoint__head">
+          <p class="eyebrow eyebrow--accent">Checkpoint</p>
+          <h2>Version one exists</h2>
+        </div>
+        <div class="checkpoint__body">
+          <div class="check-list">
+            <label><input type="checkbox"> I picked a project (A, B, C, or my own) and made it a fresh folder</label>
+            <label><input type="checkbox"> <code>BRIEF.md</code> exists and actually reflects what I want</label>
+            <label><input type="checkbox"> I used plan mode and adjusted the plan before approving it</label>
+            <label><input type="checkbox"> <code>index.html</code> opens in my browser and version 1 is real</label>
+            <label><input type="checkbox"> <code>NOTES.md</code> lists what's still missing</label>
+          </div>
+          <div class="checkpoint__actions">
+            <button class="btn btn--primary" data-check type="button">Complete Module 05</button>
+            <span class="checkpoint__result"></span>
+          </div>
+          <div class="lesson-done" data-lesson-done>✓ Module complete — you have an app. Now we make it good.</div>
+        </div>
+      </div>
+
+      <nav class="lesson-nav">
+        <a href="/learn/04-core-skills/" class="lesson-nav--prev">
+          <span class="lesson-nav__dir">← Previous</span>
+          <span class="lesson-nav__title">Module 04 · The skills that matter</span>
+        </a>
+        <a href="/learn/06-build-and-iterate/" class="lesson-nav--next">
+          <span class="lesson-nav__dir">Next →</span>
+          <span class="lesson-nav__title">Module 06 · Build and iterate</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <button class="stuck-fab" data-stuck-fab type="button">
+    <span class="stuck-fab__dot" aria-hidden="true"></span> I'm stuck
+  </button>
+
+  <div class="modal-backdrop" data-stuck-modal>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="I'm stuck">
+      <h3>Stuck? That's normal. Let's fix it.</h3>
+      <p data-stuck-intro>
+        Tell us what's happening in your own words — what you tried, what you expected,
+        what you saw instead. A real person at HAND gets this immediately and will reach
+        out.
+      </p>
+      <div class="field">
+        <textarea maxlength="2000" placeholder="What's going on? Plain words are perfect."></textarea>
+      </div>
+      <p data-stuck-done style="display:none">
+        💛 Got it — a real person has been pinged with your note and where you are in the
+        course. They'll reach out soon.
+      </p>
+      <div class="modal__actions">
+        <button class="btn btn--quiet" data-stuck-cancel type="button">Close</button>
+        <button class="btn btn--primary" data-stuck-send type="button">Send to a human</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>HAND Protocol · Austin, TX · <a href="/">handprotocol.org</a></span>
+      <span><a href="/learn/review/">My review list</a></span>
+    </div>
+  </footer>
+
+  <script src="/learn/learn.js" defer></script>
+</body>
+</html>

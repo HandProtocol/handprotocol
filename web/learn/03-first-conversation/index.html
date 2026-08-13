@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 03 · Your first conversation — HAND Learn</title>
+  <meta name="description" content="Give Claude its first real jobs, understand permission prompts and diffs, and make your first web page.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/learn/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body data-lesson="03-first-conversation">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/learn/" class="nav__logo">
+        <img src="/assets/logo.png" alt="" width="30" height="30" decoding="async">
+        <span>HAND<span class="nav__logo-suffix">·learn</span></span>
+      </a>
+      <div class="nav__right">
+        <a class="nav__link" href="/learn/">Course home</a>
+        <a class="nav__link" href="/learn/review/">My review list</a>
+        <span class="nav__account" data-account-chip></span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="lesson-header container container--doc">
+      <div class="lesson-header__crumbs">
+        <a href="/learn/">HAND Learn</a> <span>/</span> <span>Module 03 of 08</span>
+      </div>
+      <h1>Your first conversation</h1>
+      <div class="lesson-header__meta">
+        <span>⏱ About 45 minutes</span>
+        <span>🛠 Hands on keyboard — you'll make a real web page</span>
+        <span class="lesson-status" data-lesson-status></span>
+      </div>
+    </header>
+
+    <article class="lesson container container--doc">
+
+      <p style="font-size:1.0625rem">
+        Open the Claude app, go to the <strong>Code</strong> tab, and select your
+        <code>claude-practice</code> folder from Module 02. Today you build your first
+        page, watch the permission system in action, and — on purpose — tell Claude "no."
+      </p>
+
+      <section data-pin id="first-file">
+        <h2>Job one: make a page</h2>
+        <p>Copy this in exactly as it is (there's a copy button):</p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>Create a file called hello.html — a simple, cheerful web page that says "I made this with my own hands (and Claude's)". Give it a soft cream background, one big friendly headline, and today's date. Keep everything in this one file.</pre>
+        </div>
+        <p>Now <strong>watch what happens</strong>, because this is the core rhythm of everything:</p>
+        <ol>
+          <li>Claude thinks for a moment and announces what it's going to do.</li>
+          <li>It <strong>pauses and asks permission</strong> to create the file, showing
+            you the content it wants to write. This is the permission prompt from
+            Module 01, live.</li>
+          <li>Read it — you'll be surprised how much of it makes sense. Then press
+            <strong>Accept</strong>.</li>
+          <li>Claude confirms, and <code>hello.html</code> now exists in your folder.
+            Not in a chat window. On your computer.</li>
+        </ol>
+        <p>
+          <strong>Look at your creation:</strong> open the <code>claude-practice</code>
+          folder on your Desktop and double-click <code>hello.html</code> — it opens in
+          your web browser. That's a real web page and you just shipped it to an audience
+          of one. It counts.
+        </p>
+      </section>
+
+      <section data-pin id="iterate">
+        <h2>Job two: change it</h2>
+        <p>
+          Nobody gets things perfect the first time — with Claude Code, you're never
+          supposed to. Building happens in small rounds of <em>describe → build → look →
+          adjust</em>. Try one:
+        </p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>Nice! Now make the headline much bigger, add my name under it (my name is ____), and put a warm orange line under the headline.</pre>
+        </div>
+        <p>
+          (Fill in your name before you send it.) This time Claude <em>edits</em> the
+          existing file, and the permission prompt shows a <strong>diff</strong>: red
+          lines are what's being removed, green lines are what's being added. You don't
+          need to understand every symbol — the shape of it tells the story.
+        </p>
+        <p>
+          Accept, then <strong>refresh the page in your browser</strong> (the circular
+          arrow, or Ctrl+R / Cmd+R). Your change is live. This
+          <em>edit-accept-refresh</em> loop is exactly how you'll build your real app.
+        </p>
+      </section>
+
+      <section data-pin id="say-no">
+        <h2>Job three: say no (on purpose)</h2>
+        <p>
+          The Accept button gets all the attention, but the <strong>Reject</strong>
+          button is where your power lives. Let's use it deliberately, so the first time
+          is calm and not mid-crisis:
+        </p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>Change the page's background to bright neon green.</pre>
+        </div>
+        <p>
+          When the permission prompt appears — <strong>press Reject</strong>. Notice
+          two things: your file is completely untouched (refresh the browser and check),
+          and Claude doesn't sulk. It asks how you'd like to proceed instead. Tell it:
+        </p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>Let's keep the cream background. Sorry, I was testing the reject button — you passed.</pre>
+        </div>
+        <div class="callout">
+          <span class="callout__label">Remember this feeling</span>
+          <p>Nothing happened until you allowed it. You can reject any change, stop any
+          task (the square stop button), and nothing breaks. Claude Code moves fast, but
+          <strong>you hold the keys</strong>.</p>
+        </div>
+      </section>
+
+      <section data-pin id="ask-questions">
+        <h2>Job four: make it teach you</h2>
+        <p>
+          Claude Code isn't just labor — it's the most patient tutor you'll ever have.
+          After any change, you're allowed to ask what just happened:
+        </p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>Open hello.html and walk me through it like I've never seen code: what are the main parts of this file, and what does each one do? Keep it short and friendly.</pre>
+        </div>
+        <p>
+          You never need to feel dumb asking. It has no eyebrows to raise. The learners
+          who grow fastest are the ones who ask "explain that" constantly — make it a
+          reflex.
+        </p>
+      </section>
+
+      <section data-pin id="what-just-happened">
+        <h2>What just happened, zoomed out</h2>
+        <p>In one sitting you used every fundamental motion of Claude Code:</p>
+        <ul>
+          <li><strong>Described an outcome</strong> in plain English → Claude created a file.</li>
+          <li><strong>Reviewed a diff</strong> and accepted an edit.</li>
+          <li><strong>Rejected a change</strong> and redirected — staying in charge.</li>
+          <li><strong>Asked for an explanation</strong> — turning work into learning.</li>
+        </ul>
+        <p>
+          Everything from here on — the whole app you'll build — is these four motions,
+          repeated with more interesting material.
+        </p>
+      </section>
+
+      <div class="checkpoint" data-checkpoint>
+        <div class="checkpoint__head">
+          <p class="eyebrow eyebrow--accent">Checkpoint</p>
+          <h2>Did the reps</h2>
+        </div>
+        <div class="checkpoint__body">
+          <div class="check-list">
+            <label><input type="checkbox"> <code>hello.html</code> exists and opens in my browser</label>
+            <label><input type="checkbox"> I accepted an edit after reading its diff</label>
+            <label><input type="checkbox"> I rejected a change on purpose and the file stayed untouched</label>
+            <label><input type="checkbox"> I asked Claude to explain the file to me</label>
+          </div>
+          <div class="quiz-q" data-correct="c">
+            <p class="quiz-q__text">In a diff, what do the green and red lines mean?</p>
+            <label><input type="radio" name="q1" value="a"> Green is code that works, red is code with errors</label>
+            <label><input type="radio" name="q1" value="b"> Green is Claude's code, red is my code</label>
+            <label><input type="radio" name="q1" value="c"> Green is being added, red is being removed</label>
+            <p class="quiz-q__why">A diff is a before/after: red = taken out, green = put in. Reading the shape of diffs gets comfortable fast.</p>
+          </div>
+          <div class="checkpoint__actions">
+            <button class="btn btn--primary" data-check type="button">Complete Module 03</button>
+            <span class="checkpoint__result"></span>
+          </div>
+          <div class="lesson-done" data-lesson-done>✓ Module complete — saved to your progress.</div>
+        </div>
+      </div>
+
+      <nav class="lesson-nav">
+        <a href="/learn/02-set-up/" class="lesson-nav--prev">
+          <span class="lesson-nav__dir">← Previous</span>
+          <span class="lesson-nav__title">Module 02 · Set up your workspace</span>
+        </a>
+        <a href="/learn/04-core-skills/" class="lesson-nav--next">
+          <span class="lesson-nav__dir">Next →</span>
+          <span class="lesson-nav__title">Module 04 · The skills that matter</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <button class="stuck-fab" data-stuck-fab type="button">
+    <span class="stuck-fab__dot" aria-hidden="true"></span> I'm stuck
+  </button>
+
+  <div class="modal-backdrop" data-stuck-modal>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="I'm stuck">
+      <h3>Stuck? That's normal. Let's fix it.</h3>
+      <p data-stuck-intro>
+        Tell us what's happening in your own words — what you tried, what you expected,
+        what you saw instead. A real person at HAND gets this immediately and will reach
+        out.
+      </p>
+      <div class="field">
+        <textarea maxlength="2000" placeholder="What's going on? Plain words are perfect."></textarea>
+      </div>
+      <p data-stuck-done style="display:none">
+        💛 Got it — a real person has been pinged with your note and where you are in the
+        course. They'll reach out soon.
+      </p>
+      <div class="modal__actions">
+        <button class="btn btn--quiet" data-stuck-cancel type="button">Close</button>
+        <button class="btn btn--primary" data-stuck-send type="button">Send to a human</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>HAND Protocol · Austin, TX · <a href="/">handprotocol.org</a></span>
+      <span><a href="/learn/review/">My review list</a></span>
+    </div>
+  </footer>
+
+  <script src="/learn/learn.js" defer></script>
+</body>
+</html>

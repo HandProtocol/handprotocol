@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coach view — HAND Learn</title>
+  <meta name="description" content="HAND-side view of course learners: where they are, who's stuck, and what they've pinned.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/learn/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body data-page="coach">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/learn/" class="nav__logo">
+        <img src="/assets/logo.png" alt="" width="30" height="30" decoding="async">
+        <span>HAND<span class="nav__logo-suffix">·learn</span></span>
+      </a>
+      <div class="nav__right">
+        <a class="nav__link" href="/learn/">Course home</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" data-coach>
+    <header class="lesson-header container">
+      <div class="lesson-header__crumbs">
+        <a href="/learn/">HAND Learn</a> <span>/</span> <span>Coach view</span>
+      </div>
+      <h1>Coach view</h1>
+      <div class="lesson-header__meta">
+        <span>🧑‍🏫 Who's where, who's stuck, who needs a nudge</span>
+      </div>
+    </header>
+
+    <div class="container">
+      <form data-coach-form style="max-width:380px; margin:20px 0 60px">
+        <div class="form-error" role="alert"></div>
+        <div class="field">
+          <label for="coach-pass">Coach password</label>
+          <input id="coach-pass" name="password" type="password" autocomplete="current-password" required>
+          <p class="field__hint">Same operator credentials as the demos portfolio, unless a
+          dedicated LEARN_COACH_PASSWORD is set.</p>
+        </div>
+        <button class="btn btn--primary" type="submit">Open dashboard</button>
+      </form>
+
+      <div data-coach-dash style="display:none">
+        <div class="coach-summary" data-coach-summary></div>
+
+        <p class="eyebrow" style="margin:26px 0 12px">Learners</p>
+        <div data-coach-learners></div>
+
+        <p class="eyebrow" style="margin:34px 0 4px">Recent activity</p>
+        <div class="event-feed" data-coach-events></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>HAND Protocol · Austin, TX · <a href="/">handprotocol.org</a></span>
+      <span>Internal — do not share this page</span>
+    </div>
+  </footer>
+
+  <script src="/learn/learn.js" defer></script>
+</body>
+</html>

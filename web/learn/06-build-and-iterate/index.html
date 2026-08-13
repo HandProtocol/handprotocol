@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 06 · Build and iterate — HAND Learn</title>
+  <meta name="description" content="The build loop: look, describe, let Claude work, check. Plus what to do when something breaks.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/learn/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body data-lesson="06-build-and-iterate">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/learn/" class="nav__logo">
+        <img src="/assets/logo.png" alt="" width="30" height="30" decoding="async">
+        <span>HAND<span class="nav__logo-suffix">·learn</span></span>
+      </a>
+      <div class="nav__right">
+        <a class="nav__link" href="/learn/">Course home</a>
+        <a class="nav__link" href="/learn/review/">My review list</a>
+        <span class="nav__account" data-account-chip></span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="lesson-header container container--doc">
+      <div class="lesson-header__crumbs">
+        <a href="/learn/">HAND Learn</a> <span>/</span> <span>Module 06 of 08</span>
+      </div>
+      <h1>Build and iterate</h1>
+      <div class="lesson-header__meta">
+        <span>⏱ 60+ minutes — the fun kind that disappears</span>
+        <span>🛠 Your app gets good today</span>
+        <span class="lesson-status" data-lesson-status></span>
+      </div>
+    </header>
+
+    <article class="lesson container container--doc">
+
+      <section data-pin id="the-loop">
+        <h2>The loop</h2>
+        <p>Everything in this module is one loop, run many times:</p>
+        <ol>
+          <li><strong>Look</strong> at your app in the browser.</li>
+          <li><strong>Describe</strong> one change — specific, one thing at a time.</li>
+          <li><strong>Let Claude work</strong> — review, accept.</li>
+          <li><strong>Refresh and check.</strong> Then back to 1.</li>
+        </ol>
+        <p>
+          Open <code>NOTES.md</code> from last module — your top-5 missing things.
+          That's today's menu. Work down it one loop at a time, and add new wishes to
+          the list as you spot them (ask Claude to keep NOTES.md updated as you go).
+        </p>
+        <div class="callout callout--teal">
+          <span class="callout__label">Desktop superpower</span>
+          <p>Try asking Claude to <em>open the site in its browser pane and look at it</em> —
+          the desktop app can show your page inside the Claude window, and Claude can see
+          it too: "Open index.html in the browser and tell me what looks off." Now
+          you're two sets of eyes on the same screen.</p>
+        </div>
+      </section>
+
+      <section data-pin id="content-pass">
+        <h2>Pass 1 · Real content</h2>
+        <p>
+          Placeholder text is where first projects go to die — replace it early. Real
+          words, real hours, real menu, your actual story. Content prompts that work:
+        </p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code — then edit the details</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>Replace the placeholder text in the About section with this (tidy up my grammar but keep my voice): ___paste your rough words here___</pre>
+        </div>
+        <p>
+          For photos: drop image files into your project folder (make a subfolder called
+          <code>images</code>), then tell Claude — "I added images/tacos1.jpg and
+          images/truck.jpg — use them in the gallery." You can also paste screenshots
+          directly into the prompt box when you want Claude to <em>see</em> something.
+        </p>
+      </section>
+
+      <section data-pin id="style-pass">
+        <h2>Pass 2 · Make it feel right</h2>
+        <p>
+          You don't need design vocabulary — you need references and mood words. Claude
+          translates:
+        </p>
+        <ul>
+          <li>"Warmer and friendlier — like a neighborhood coffee shop, not a bank."</li>
+          <li>"I love how stripe.com feels — calm, lots of white space. Move mine that direction."</li>
+          <li>"The headline font feels stiff. Show me two friendlier options."</li>
+          <li>"Everything's cramped. Give the sections more room to breathe."</li>
+        </ul>
+        <p>
+          Ask for <strong>options</strong> when you're unsure: "show me this section two
+          ways" costs nothing and teaches you your own taste fast.
+        </p>
+      </section>
+
+      <section data-pin id="phone-pass">
+        <h2>Pass 3 · The phone check</h2>
+        <p>
+          Most of your visitors will be on phones. Two ways to check without owning a
+          device lab:
+        </p>
+        <div class="prompt-card">
+          <div class="prompt-card__bar">
+            <span class="prompt-card__label">Copy into Claude Code</span>
+            <button class="prompt-card__copy" type="button">Copy</button>
+          </div>
+          <pre>Check the whole site at phone size: is anything cut off, cramped, overlapping, or too small to tap? Fix what you find and give me a short list of what changed.</pre>
+        </div>
+        <p>
+          And the honest test: open the site on <em>your</em> phone. (Quick way: put the
+          project folder in a cloud drive, or just wait — Module 07 gives it a real URL
+          you can open anywhere.)
+        </p>
+      </section>
+
+      <section data-pin id="when-broken">
+        <h2>When something breaks — the debugging script</h2>
+        <p>
+          Something <em>will</em> break. This is not a sign you're failing; it's a sign
+          you're building. The skill is reporting it well. Claude can't see your screen
+          (unless you show it), so "it doesn't work" gives it nothing. Use this
+          three-line script every time:
+        </p>
+        <div class="callout">
+          <span class="callout__label">The magic three lines</span>
+          <p>
+            1 · What I did: <em>"I clicked the Menu button on my phone-sized window."</em><br>
+            2 · What I expected: <em>"The list of links should drop down."</em><br>
+            3 · What happened instead: <em>"Nothing happened at all."</em>
+          </p>
+        </div>
+        <p>Level it up further:</p>
+        <ul>
+          <li><strong>Paste a screenshot</strong> of the broken thing straight into the
+            prompt box. A picture is worth a thousand descriptions.</li>
+          <li><strong>Copy any error text</strong> word-for-word, no matter how
+            unreadable it looks to you — it's usually a map for Claude.</li>
+          <li><strong>Let Claude investigate:</strong> "look at the page yourself in the
+            browser pane and figure out why the button does nothing."</li>
+        </ul>
+        <p>
+          If three rounds of fixing haven't fixed it: <code>/clear</code>, then in a
+          fresh session, re-describe the bug with the three-line script. And if
+          <em>that</em> fails — that's precisely what the <strong>I'm stuck</strong>
+          button is for. No heroics required.
+        </p>
+      </section>
+
+      <section data-pin id="show-someone">
+        <h2>Show a human</h2>
+        <p>
+          Before the checkpoint: show your app to one person — over a shoulder or a
+          screenshot. Watch where they get confused; ask what they'd tap first. You'll
+          get your next three NOTES.md items instantly. (If you're in guided mode, your
+          HAND guide is an excellent victim.)
+        </p>
+      </section>
+
+      <div class="checkpoint" data-checkpoint>
+        <div class="checkpoint__head">
+          <p class="eyebrow eyebrow--accent">Checkpoint</p>
+          <h2>Iteration reps</h2>
+        </div>
+        <div class="checkpoint__body">
+          <div class="check-list">
+            <label><input type="checkbox"> I ran the loop at least 5 times (5 described changes, accepted, checked)</label>
+            <label><input type="checkbox"> The placeholder text is gone — my app has real content</label>
+            <label><input type="checkbox"> I did the phone-size check and fixed what it found</label>
+            <label><input type="checkbox"> Something broke and I got it fixed (or flagged it with I'm stuck)</label>
+            <label><input type="checkbox"> One real human has seen it</label>
+          </div>
+          <div class="quiz-q" data-correct="b">
+            <p class="quiz-q__text">Your gallery images aren't showing. Which bug report gets it fixed fastest?</p>
+            <label><input type="radio" name="q1" value="a"> "The site is broken"</label>
+            <label><input type="radio" name="q1" value="b"> "I added 3 photos to images/ and told you to use them. I expected them in the gallery — instead I see gray boxes with a broken-image icon. Screenshot attached."</label>
+            <label><input type="radio" name="q1" value="c"> Silently giving up and never speaking of it again</label>
+            <p class="quiz-q__why">Did / expected / instead — plus a screenshot. That's a professional bug report; most people never learn it.</p>
+          </div>
+          <div class="checkpoint__actions">
+            <button class="btn btn--primary" data-check type="button">Complete Module 06</button>
+            <span class="checkpoint__result"></span>
+          </div>
+          <div class="lesson-done" data-lesson-done>✓ Module complete — your app is real and good. Next: the internet.</div>
+        </div>
+      </div>
+
+      <nav class="lesson-nav">
+        <a href="/learn/05-plan-your-app/" class="lesson-nav--prev">
+          <span class="lesson-nav__dir">← Previous</span>
+          <span class="lesson-nav__title">Module 05 · Plan your app</span>
+        </a>
+        <a href="/learn/07-put-it-online/" class="lesson-nav--next">
+          <span class="lesson-nav__dir">Next →</span>
+          <span class="lesson-nav__title">Module 07 · Put it online</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <button class="stuck-fab" data-stuck-fab type="button">
+    <span class="stuck-fab__dot" aria-hidden="true"></span> I'm stuck
+  </button>
+
+  <div class="modal-backdrop" data-stuck-modal>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="I'm stuck">
+      <h3>Stuck? That's normal. Let's fix it.</h3>
+      <p data-stuck-intro>
+        Debugging is where everyone earns their stripes — and where help matters most.
+        Use the three-line script if you can: what you did, what you expected, what
+        happened instead. A real person at HAND will reach out.
+      </p>
+      <div class="field">
+        <textarea maxlength="2000" placeholder="What's going on? Plain words are perfect."></textarea>
+      </div>
+      <p data-stuck-done style="display:none">
+        💛 Got it — a real person has been pinged with your note and where you are in the
+        course. They'll reach out soon.
+      </p>
+      <div class="modal__actions">
+        <button class="btn btn--quiet" data-stuck-cancel type="button">Close</button>
+        <button class="btn btn--primary" data-stuck-send type="button">Send to a human</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>HAND Protocol · Austin, TX · <a href="/">handprotocol.org</a></span>
+      <span><a href="/learn/review/">My review list</a></span>
+    </div>
+  </footer>
+
+  <script src="/learn/learn.js" defer></script>
+</body>
+</html>

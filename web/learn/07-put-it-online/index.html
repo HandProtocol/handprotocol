@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 07 · Put it online — HAND Learn</title>
+  <meta name="description" content="Deploy your app to a real URL for free, and share it with someone who'll cheer.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/learn/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body data-lesson="07-put-it-online">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/learn/" class="nav__logo">
+        <img src="/assets/logo.png" alt="" width="30" height="30" decoding="async">
+        <span>HAND<span class="nav__logo-suffix">·learn</span></span>
+      </a>
+      <div class="nav__right">
+        <a class="nav__link" href="/learn/">Course home</a>
+        <a class="nav__link" href="/learn/review/">My review list</a>
+        <span class="nav__account" data-account-chip></span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="lesson-header container container--doc">
+      <div class="lesson-header__crumbs">
+        <a href="/learn/">HAND Learn</a> <span>/</span> <span>Module 07 of 08</span>
+      </div>
+      <h1>Put it online</h1>
+      <div class="lesson-header__meta">
+        <span>⏱ About 30 minutes</span>
+        <span>🛠 Ends with a URL you can text to your mom</span>
+        <span class="lesson-status" data-lesson-status></span>
+      </div>
+    </header>
+
+    <article class="lesson container container--doc">
+
+      <section data-pin id="what-deploying-is">
+        <h2>What "deploying" actually means</h2>
+        <p>
+          Right now your app lives only on your computer — when your laptop sleeps, your
+          app is unreachable. <strong>Deploying</strong> just means copying your files to
+          a computer that's always on and connected (a <em>server</em>), which hands them
+          to anyone who visits your address.
+        </p>
+        <p>
+          For website-shaped projects like yours, companies host this <strong>for
+          free</strong> — genuinely free, because sites like yours cost them almost
+          nothing to serve. We'll use Netlify, the same host handprotocol.org runs on.
+        </p>
+      </section>
+
+      <section data-pin id="netlify-account">
+        <h2>Step 1 · Make a free Netlify account</h2>
+        <ol>
+          <li>Go to <a href="https://app.netlify.com/signup" target="_blank" rel="noopener">app.netlify.com/signup</a>.</li>
+          <li>Sign up with your email (no credit card, free tier is real and permanent).</li>
+          <li>If it asks onboarding questions, pick whatever's closest to "personal project" — it doesn't matter.</li>
+        </ol>
+        <div class="callout">
+          <span class="callout__label">Why account first?</span>
+          <p>You can technically drag-and-drop without an account, but anonymous sites
+          get locked behind a password until claimed. Making the account first skips
+          that headache entirely.</p>
+        </div>
+      </section>
+
+      <section data-pin id="the-drop">
+        <h2>Step 2 · The drop</h2>
+        <p>This is the part people don't believe until they do it:</p>
+        <ol>
+          <li>Go to <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">app.netlify.com/drop</a> (signed in).</li>
+          <li>Open your Desktop so you can see your project folder.</li>
+          <li><strong>Drag the whole project folder onto the drop zone</strong> in the browser.</li>
+          <li>Wait about fifteen seconds.</li>
+        </ol>
+        <p>
+          That's it. Netlify gives you a live URL (something like
+          <code>wonderful-otter-123abc.netlify.app</code>) — <strong>your app is on the
+          internet</strong>. Open the link on your phone right now. Different device,
+          different network, same app. That's not a simulation; that's the real web, and
+          you're on it.
+        </p>
+        <p>
+          You can rename the ugly random address: in Netlify, open your site →
+          <strong>Site configuration → Change site name</strong> → pick something like
+          <code>rosas-tacos.netlify.app</code>.
+        </p>
+      </section>
+
+      <section data-pin id="updating">
+        <h2>Step 3 · Updating your live site</h2>
+        <p>
+          Your site is a <em>copy</em> of your files — editing with Claude doesn't change
+          the live version until you re-deploy. The update loop:
+        </p>
+        <ol>
+          <li>Make changes with Claude, check them locally (the loop you know).</li>
+          <li>In Netlify: open your site → <strong>Deploys</strong> tab → drag your
+            project folder onto it again.</li>
+        </ol>
+        <p>
+          Yes, professionals automate this (Claude can help you set that up after
+          graduation — ask it about "connecting a GitHub repo to Netlify"). Drag-and-drop
+          is honest work and it's plenty for now.
+        </p>
+      </section>
+
+      <section data-pin id="domains">
+        <h2>A word on custom domains</h2>
+        <p>
+          Want <code>rosastacos.com</code> instead of <code>.netlify.app</code>? That's a
+          <strong>domain</strong> — the one part of this that costs money (usually
+          $10–20/year). It's optional, it can wait, and when you're ready, Claude can
+          walk you through buying one and connecting it to Netlify in about twenty
+          minutes. Don't let a domain block your launch today.
+        </p>
+      </section>
+
+      <section data-pin id="share-it">
+        <h2>Step 4 · Share it (non-optional)</h2>
+        <p>
+          Send the link to one person who will be happy for you. If you built Track B,
+          send it to the person it's for — and maybe have a camera ready. This step is
+          in the course because <em>shipping to a real audience</em> is the actual
+          finish line of building, and because you've earned a little celebration.
+        </p>
+        <blockquote class="pullquote">
+          A month ago this was "I'm not technical." Today it's a URL.
+        </blockquote>
+      </section>
+
+      <div class="checkpoint" data-checkpoint>
+        <div class="checkpoint__head">
+          <p class="eyebrow eyebrow--accent">Checkpoint</p>
+          <h2>Launch confirmed</h2>
+        </div>
+        <div class="checkpoint__body">
+          <div class="check-list">
+            <label><input type="checkbox"> I have a Netlify account</label>
+            <label><input type="checkbox"> My app is live at a real URL</label>
+            <label><input type="checkbox"> I opened it on my phone and it works</label>
+            <label><input type="checkbox"> I renamed the site to something I don't have to apologize for</label>
+            <label><input type="checkbox"> I sent the link to at least one human</label>
+          </div>
+          <div class="checkpoint__actions">
+            <button class="btn btn--primary" data-check type="button">Complete Module 07 🚀</button>
+            <span class="checkpoint__result"></span>
+          </div>
+          <div class="lesson-done" data-lesson-done>✓ Module complete — you are live on the internet. One module to go.</div>
+        </div>
+      </div>
+
+      <nav class="lesson-nav">
+        <a href="/learn/06-build-and-iterate/" class="lesson-nav--prev">
+          <span class="lesson-nav__dir">← Previous</span>
+          <span class="lesson-nav__title">Module 06 · Build and iterate</span>
+        </a>
+        <a href="/learn/08-level-up/" class="lesson-nav--next">
+          <span class="lesson-nav__dir">Next →</span>
+          <span class="lesson-nav__title">Module 08 · Level up &amp; graduate</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+
+  <button class="stuck-fab" data-stuck-fab type="button">
+    <span class="stuck-fab__dot" aria-hidden="true"></span> I'm stuck
+  </button>
+
+  <div class="modal-backdrop" data-stuck-modal>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="I'm stuck">
+      <h3>Stuck? That's normal. Let's fix it.</h3>
+      <p data-stuck-intro>
+        So close to launch — don't stall here. Tell us which step and what you're seeing,
+        and a real person at HAND will get you over the line.
+      </p>
+      <div class="field">
+        <textarea maxlength="2000" placeholder="What's going on? Plain words are perfect."></textarea>
+      </div>
+      <p data-stuck-done style="display:none">
+        💛 Got it — a real person has been pinged with your note and where you are in the
+        course. They'll reach out soon.
+      </p>
+      <div class="modal__actions">
+        <button class="btn btn--quiet" data-stuck-cancel type="button">Close</button>
+        <button class="btn btn--primary" data-stuck-send type="button">Send to a human</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>HAND Protocol · Austin, TX · <a href="/">handprotocol.org</a></span>
+      <span><a href="/learn/review/">My review list</a></span>
+    </div>
+  </footer>
+
+  <script src="/learn/learn.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My review list — HAND Learn</title>
+  <meta name="description" content="Everything you've pinned for review across the course, in one place.">
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&family=Source+Serif+4:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/learn/style.css">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <meta name="theme-color" content="#D97706">
+</head>
+<body data-page="review">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="nav">
+    <div class="nav__inner container">
+      <a href="/learn/" class="nav__logo">
+        <img src="/assets/logo.png" alt="" width="30" height="30" decoding="async">
+        <span>HAND<span class="nav__logo-suffix">·learn</span></span>
+      </a>
+      <div class="nav__right">
+        <a class="nav__link" href="/learn/">Course home</a>
+        <span class="nav__account" data-account-chip></span>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="lesson-header container container--doc">
+      <div class="lesson-header__crumbs">
+        <a href="/learn/">HAND Learn</a> <span>/</span> <span>My review list</span>
+      </div>
+      <h1>My review list</h1>
+      <div class="lesson-header__meta">
+        <span>📌 Everything you pinned, in one place</span>
+      </div>
+    </header>
+
+    <div class="container container--doc">
+      <p style="color:var(--color-text-secondary); font-size:1.0313rem; line-height:1.75; margin-top:10px">
+        These are the sections you pinned while learning — the "I sort of get it" list.
+        Revisit them on your own, or bring this page to your HAND guide and work through
+        it together. Click any title to jump straight back to that section. When one
+        finally clicks, hit <strong>Reviewed it ✓</strong> and enjoy the tiny victory.
+      </p>
+      <div class="pin-list" data-pin-list></div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner container">
+      <span>HAND Protocol · Austin, TX · <a href="/">handprotocol.org</a></span>
+      <span><a href="/learn/">Course home</a></span>
+    </div>
+  </footer>
+
+  <script src="/learn/learn.js" defer></script>
+</body>
+</html>
