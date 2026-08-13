@@ -138,7 +138,10 @@ a:hover { color: var(--color-accent-action-hover); }
 
 /* ------------------------------------------------------------------ hero -- */
 
-.hero { padding: 72px 0 48px; }
+/* NOTE: sections that share a class with .container must use padding-top/
+   -bottom longhand — the `padding: X 0 Y` shorthand would zero out the
+   container's 24px side padding (these rules come later in the cascade). */
+.hero { padding-top: 72px; padding-bottom: 48px; }
 .hero__title {
   font-size: clamp(2.1rem, 5vw, 3.25rem);
   line-height: 1.08; letter-spacing: -0.03em; font-weight: 800;
@@ -216,7 +219,7 @@ a:hover { color: var(--color-accent-action-hover); }
 
 /* ------------------------------------------------------------ module map -- */
 
-.modules { padding: 40px 0 80px; }
+.modules { padding-top: 40px; padding-bottom: 80px; }
 .modules__head { margin-bottom: 26px; }
 .modules__head h2 {
   font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.022em; margin-top: 6px;
@@ -274,7 +277,7 @@ a:hover { color: var(--color-accent-action-hover); }
 
 /* --------------------------------------------------------------- lessons -- */
 
-.lesson-header { padding: 52px 0 8px; }
+.lesson-header { padding-top: 52px; padding-bottom: 8px; }
 .lesson-header__crumbs {
   display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
   font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-text-muted);
@@ -296,7 +299,7 @@ a:hover { color: var(--color-accent-action-hover); }
 .lesson-status--complete { background: var(--color-teal-light); color: var(--color-teal-dark); }
 .lesson-status--stuck { background: var(--color-rose-light); color: var(--color-rose); }
 
-.lesson { padding: 26px 0 60px; }
+.lesson { padding-top: 26px; padding-bottom: 60px; }
 .lesson section { margin-bottom: 44px; position: relative; }
 .lesson h2 {
   font-size: clamp(1.35rem, 2.6vw, 1.75rem); letter-spacing: -0.02em;
@@ -632,8 +635,15 @@ a:hover { color: var(--color-accent-action-hover); }
   .lesson-nav { flex-direction: column; }
   .lesson-nav a { max-width: none; }
   .lesson-nav a.lesson-nav--next { text-align: left; }
-  .hero { padding: 48px 0 36px; }
+  .hero { padding-top: 48px; padding-bottom: 36px; }
   .auth-card { position: static; }
+  /* Cramped nav: keep links on one line, tighten gaps, drop the
+     handprotocol.org escape hatch (the logo already links out of a lesson). */
+  .nav__inner { gap: 10px; }
+  .nav__right { gap: 10px; }
+  .nav__link { font-size: 0.8125rem; white-space: nowrap; }
+  .nav__link[href="/"] { display: none; }
+  .nav__account { max-width: 40vw; overflow: hidden; }
 }
 
 @media (prefers-reduced-motion: reduce) {
