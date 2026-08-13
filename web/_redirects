@@ -69,5 +69,10 @@ http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protoc
 /bucket-of-doom         /mosquitos/                            301
 /bucket-styles          /mosquitos/styles/                     301
 
+# HAND Learn — Claude Code course (web/learn/)
+/learn                  /learn/                                301
+/course                 /learn/                                301
+/claude-code            /learn/                                301
+
 # 404 fallback — branded compass page with radial sitemap (keep last; matches anything else)
 /*                      /404.html                              404
