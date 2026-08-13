@@ -62,3 +62,8 @@ biz/*/photos/
 
 # Claude Code local settings (machine-specific)
 .claude/settings.local.json
+
+# Client rebuild source material (site mirrors, raw scrape JSON, reference
+# screenshots). Large, and may contain markup from compromised origin sites.
+# Only the built client site under clients/<name>/ is committed.
+clients/.source/

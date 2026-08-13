@@ -1,0 +1,122 @@
+{
+  "name": "Cafe Nena'i",
+  "wordmark": "CAFE NENAÍ",
+  "tagline": "Austin's first South American bakery and cafe",
+  "description": "Cafe Nena'i is a South American coffee shop and bakery in East Austin — Paraguayan and Argentine roots, Cuban espresso, Venezuelan arepas. Exposed brick, antique chandeliers and outdoor seating.",
+  "url": "https://www.cafenenai.com",
+  "order_url": "https://my-site-108321-109773.square.site/s/order",
+  "address": {
+    "street": "1700 Montopolis Dr, Suite A",
+    "city": "Austin",
+    "state": "Texas",
+    "zip": "78741",
+    "maps": "https://www.google.com/maps/dir/?api=1&destination=1700+Montopolis+Dr+Suite+A+Austin+TX+78741"
+  },
+  "phone": "(512) 840-9066",
+  "phone_href": "+15128409066",
+  "email": "cafenenai@gmail.com",
+  "social": {
+    "instagram": "https://www.instagram.com/CAFENENAI/",
+    "facebook": "https://www.facebook.com/cafenenai/"
+  },
+  "hours": [
+    { "day": "Monday", "time": "Closed", "closed": true },
+    { "day": "Tuesday", "time": "8:00 am – 2:00 pm" },
+    { "day": "Wednesday", "time": "8:00 am – 2:00 pm" },
+    { "day": "Thursday", "time": "8:00 am – 2:00 pm" },
+    { "day": "Friday", "time": "8:00 am – 2:00 pm" },
+    { "day": "Saturday", "time": "8:00 am – 2:00 pm" },
+    { "day": "Sunday", "time": "8:00 am – 2:00 pm" }
+  ],
+  "home": {
+    "who_kicker": "Who is",
+    "who_title": "Nena'i",
+    "who_body": [
+      "Cafe Nena'i is a coffee shop and bakery located on the East side of Austin, Texas. A modern Latin American homemade menu complements this coffee spot with its exposed-brick walls, antique chandeliers and outdoor seating. It's the cutest place to stop by on your way to anywhere.",
+      "Cafe Nena'i is a South American coffee shop that was born from a mother and daughter dream. It started off with Paraguayan and Argentine roots then expanded to hold a menu with a variety of national influences including (but not limited to) Cuba and Venezuela. Miami brought its own influence and continues to be considered a second home to our founder."
+    ],
+    "story": "Nena'i in the Guaraní language means little girl. It was a nickname given to one of our founders when she was growing up in Paraguay — walking by Abuela's house, playing on the farm lands, swimming freely in the rivers and loving life fully. Nena'i is the soul of our cafe. It represents the dreams in every little girl's heart, the love of our world and the vast possibilities of anyone from anywhere and in any walks of life.",
+    "menu_intro": "Gladys Benitez and Elena Sanguinetti have created a menu using their Latin American background. Cafe Nena'i has a come-and-go service throughout for food and drinks. \"Taking inspirations from around the world, all the delicacies on the menu are foods we love to make, but most importantly foods we like to eat.\"",
+    "menu_intro_2": "Our menu is designed to allow people to come in and taste a bit of South America. We have mostly foods from Paraguay and Argentina, but we also serve specialty Cuban espresso drinks and Venezuelan arepas. We have fresh juices and we like to test out new flavors once in a while."
+  },
+  "about": {
+    "heading": "Mom and daughter team",
+    "hero": "bola-de-fraile-patio.webp",
+    "hero_title": "Women Power",
+    "founders": [
+      {
+        "name": "Gladys Benitez",
+        "img": "founder-gladys.webp",
+        "bio": "Gladys Benitez, a lifestyle blogger and University of Texas graduate, is the mastermind behind all things marketing and branding at the cafe. She was born and raised in Miami Beach, and describes growing up there like a melting pot of cultures — particularly those of Latin America. Growing up with a love for food, salsa and traveling, she took on the challenge to open a coffee shop after learning that it was her mother's all-time dream. Gladys always wanted to build a business and made it her goal to make the cafe a fun place for all her customers. She now co-owns the cafe and lives in Austin, Texas."
+      },
+      {
+        "name": "Elena Sanguinetti",
+        "img": "founder-elena.webp",
+        "bio": "Elena Sanguinetti is the master behind the taste of everything in the cafe. Born and raised in Paraguay, she brings recipes straight from her motherland. At a young age she ventured to New York and finally Miami Beach. A couple more transitions led her to Austin, Texas. And now she co-owns the cafe with her daughter and shares her delicious treats in East Austin. Nena'i was her nickname growing up in Paraguay, and it continues to be representative of the cafe and all it means to be a driven little girl from any and all parts of the world."
+      }
+    ],
+    "quote": "When looking for the right place to start our business, we decided to look for a small space where we could grow alongside the area. East Riverside was a bit of an untouched location and we found this cute spot with an amazing window that let in lots of good light. We wanted to make it our little project and fill it with tons of love representing the love we have for each other. My mom and I are a team and we hope to express that in all our efforts to making this cafe a success."
+  },
+  "press": [
+    {
+      "slug": "kut-austins-npr-station-interviews-food-critic-on-cafe-nenai",
+      "title": "KUT — Austin's NPR Station interviews food critic on Cafe Nena'i",
+      "date": "2017-09-26",
+      "outlet": "KUT 90.5",
+      "body": [
+        "KUT interviews Austin American-Statesman critic Matthew Odam on the South American offerings at Cafe Nena'i, on the eve of the Austin American-Statesman publishing the works on a two-page review.",
+        "Thank you to all of our supporters who continue to spread the word about our East Austin cafe!"
+      ],
+      "link": "http://kut.org/post/restaurant-review-cafe-nenai",
+      "link_label": "Hear the interview on KUT 90.5"
+    },
+    {
+      "slug": "statesman-food-critic-matthew-odam-falls-for-cafe-nenai",
+      "title": "Statesman food critic Matthew Odam falls for Cafe Nena'i",
+      "date": "2017-09-26",
+      "outlet": "Austin American-Statesman",
+      "body": [
+        "Cafe Nena'i hosts Matthew Odam, Statesman food critic — and he loves it. A stellar review featured in the Statesman and on KUT Radio.",
+        "Thanks again to everyone who supports us and continues to spread the word about our cafe."
+      ],
+      "link": "http://www.mystatesman.com/entertainment/dining/cafe-nena-offers-window-into-wonders-south-american-pastries/MthgfpnankyKSDpaeJa0HJ/2017/",
+      "link_label": "Read the Statesman dining review"
+    },
+    {
+      "slug": "tribeza-magazine-talks-spotlight-on-cafe-nenai-as-austins-hidden-gem",
+      "title": "Tribeza Magazine spotlights Cafe Nena'i as Austin's hidden gem",
+      "date": "2017-05-12",
+      "outlet": "Tribeza",
+      "body": [
+        "The Tribeza Talk section of the May 2017 issue put their binoculars on Cafe Nena'i as a hidden gem in Austin, Texas: \"Get a taste of South America in South Austin.\"",
+        "Thanks again to everyone who supports us and continues to spread the word about our cafe."
+      ],
+      "link": "http://tribeza.com/tribeza-talk-may-2017/",
+      "link_label": "Read the Tribeza Talk feature"
+    },
+    {
+      "slug": "austin-american-statesman-newspaper-austin360eats-introduces-cafe-nenai-to-its-readers",
+      "title": "Statesman newspaper #Austin360Eats prints Cafe Nena'i",
+      "date": "2017-04-06",
+      "outlet": "Austin American-Statesman",
+      "body": [
+        "Instagram gets us noticed and picked up by the Austin American-Statesman newspaper as a new Latin American cafe and bakery that serves sweet and savory treats.",
+        "Social media is very powerful — so don't forget to follow us on Instagram @cafenenai."
+      ],
+      "link": "http://www.statesman.com/",
+      "link_label": "Austin American-Statesman"
+    },
+    {
+      "slug": "eater-austin-introduces-cafe-nenai-to-the-austin-foodie-community",
+      "title": "Eater Austin introduces Cafe Nena'i to the Austin foodie community",
+      "date": "2017-04-06",
+      "outlet": "Eater Austin",
+      "body": [
+        "Getting noticed by Eater Austin our third week into business was a wonderful way to finish our first month.",
+        "Thank you to everyone who supports us and continues to spread the word!"
+      ],
+      "link": "http://austin.eater.com/2017/3/31/15140330/cafe-nena-latin-american-cafe-open-austin",
+      "link_label": "Read the Eater Austin story"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+# Standalone client production site (HAND "graduate to production" step).
+# Deployed as its OWN Netlify site, decoupled from the handprotocol repo's
+# git auto-deploy. Update with:
+#   node clients/cafe-nenai/build.mjs
+#   netlify deploy --prod --dir clients/cafe-nenai --site <site-id>
+# This local toml pins the publish dir to this folder and carries NO functions
+# or edge functions, so a deploy from inside the monorepo never inherits the
+# root netlify.toml (publish="web", the HAND site config).
+[build]
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# The old WordPress site's URLs, so nothing that's already indexed 404s.
+[[redirects]]
+  from = "/frontpage/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/category/press/*"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/category/blog/*"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/category/*"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/tag/*"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/author/*"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/2017/*"
+  to = "/news/"
+  status = 301
+
+# Kill every WordPress surface — this site has no PHP, no admin, no XML-RPC.
+[[redirects]]
+  from = "/wp-admin/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/wp-login.php"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/wp-content/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/wp-includes/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/wp-json/*"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/xmlrpc.php"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/feed/*"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/comments/*"
+  to = "/news/"
+  status = 301
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
