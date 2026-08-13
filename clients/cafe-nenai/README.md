@@ -67,9 +67,33 @@ build.mjs           generator — writes all 56 pages
 
 ## Build
 
+Two targets from one source.
+
+**The real site** — root-relative, for cafenenai.com when the domain moves:
+
 ```bash
-node build.mjs        # regenerates every page + sitemap.xml + robots.txt
+node build.mjs        # regenerates every page + sitemap.xml + robots.txt, in place
 ```
+
+**The preview** — same site rooted at a subpath of handprotocol.org, so the
+owner can review it before any DNS changes:
+
+```bash
+BASE=/cafenenai OUT=../../web/cafenenai \
+SITE_URL=https://handprotocol.org/cafenenai NOINDEX=1 node build.mjs
+```
+
+Live at <https://handprotocol.org/cafenenai/>. Every internal URL is absolute,
+so the subpath build just rewrites the leading slash at write time — no prefix
+threading through the templates.
+
+The preview is `noindex, nofollow` and `/cafenenai/` is disallowed in
+`web/robots.txt` (a robots.txt *inside* the subdirectory would do nothing —
+only the root one is honoured). That matters because the same content will
+later live on cafenenai.com and must not compete with itself in search.
+
+Rerun the preview build after any content change, or handprotocol.org will
+drift from `clients/cafe-nenai/`.
 
 56 pages: home, full menu, 4 category pages, **41 individual item pages**,
 about, contact, news index, 5 press pages, 404.
