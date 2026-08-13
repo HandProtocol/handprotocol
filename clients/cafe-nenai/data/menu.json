@@ -1,0 +1,86 @@
+{
+  "_note": "Source: Cafe Nena'i Square online store (my-site-108321-109773.square.site), scraped 2026-08-10. Square's flat 'Items' bucket has been re-filed into the four real menu sections; display names cleaned of catalog typos (originals kept in square_name). Prices verbatim.",
+  "order_url": "https://my-site-108321-109773.square.site/s/order",
+  "sections": [
+    {
+      "slug": "savory",
+      "title": "Savory",
+      "subtitle": "Empanadas, sandwiches & Paraguayan classics",
+      "blurb": "Recipes straight from Elena's motherland — hand-folded empanadas, chipa pulled warm from the oven, and pressed sandwiches on thin miga bread.",
+      "hero": "hero-empanadas.webp",
+      "items": [
+        { "slug": "empanada-de-carne", "name": "Empanada de Carne", "square_name": "Empanada De Carne", "desc": "Beef, egg, peppers filled empanada", "price": "$5.95 – $6.15", "img": "empanada-de-carne.webp", "stock": "low" },
+        { "slug": "empanada-de-pollo", "name": "Empanada de Pollo", "square_name": "Empanada De Pollo", "desc": "Chicken, eggs, peppers filled empanada", "price": "$5.95 – $6.15", "img": "empanada-de-pollo.webp", "stock": "low" },
+        { "slug": "empanada-de-jamon-y-queso", "name": "Empanada de Jamón y Queso", "square_name": "Empanada De Jamón Y Queso", "desc": "Ham, cheese filled empanada", "price": "$5.95 – $6.15", "img": "empanada-de-jamon-y-queso.webp", "stock": "low" },
+        { "slug": "empanada-de-espinaca", "name": "Empanada de Espinaca", "square_name": "Empanada De  Espinaca", "desc": "Spinach and cheese empanada", "price": "$5.95 – $6.15", "img": "empanada-de-espinaca.webp", "stock": "low", "tag": "Vegetarian" },
+        { "slug": "mixto-caliente", "name": "Mixto Caliente", "square_name": "Mixto Caliente", "desc": "Melted ham and cheese sandwich with thin miga bread", "price": "$6.50", "img": "mixto-caliente.webp", "stock": "low" },
+        { "slug": "arepa", "name": "Arepa", "square_name": "Arepa my", "desc": "Cooked Venezuelan-style corn dough sandwich, split and filled with eggs, ham and cheese", "price": "$7.00", "img": "arepa-my.webp" },
+        { "slug": "ham-and-cheese-croissant", "name": "Ham & Cheese Croissant", "square_name": "Ham And Cheese Croissant", "desc": "As stated — warm pressed", "price": "$6.50", "img": "ham-and-cheese-croissant.webp", "stock": "low" },
+        { "slug": "chipa", "name": "Chipa", "square_name": "Chipa-Paraguay Traditional", "desc": "Paraguayan cheese bread — a traditional staple", "price": "$4.50", "img": "chipa-paraguay-traditional.webp" },
+        { "slug": "chipa-soo", "name": "Chipa So'o", "square_name": "Chipa so’o", "desc": "Chipa filled with seasoned beef", "price": "$6.00", "img": "chipa-soo.webp", "stock": "low" },
+        { "slug": "chipa-guazu", "name": "Chipa Guazú", "square_name": "Chipaguazu .Paraguay Traditional", "desc": "Corn soufflé with melted cheese — Paraguayan traditional", "price": "$5.00", "img": "chipaguazu-paraguay-traditional.webp", "stock": "out" },
+        { "slug": "tortillon-de-papa", "name": "Tortillón de Papa", "square_name": "Tortillon De Papa (potatoe, onion , eggs,)", "desc": "Potato, onion and egg tortilla", "price": "$6.50", "stock": "low" },
+        { "slug": "vori-vori", "name": "Vori Vori", "square_name": "Vori vori", "desc": "Traditional Paraguayan chicken soup with corn dumplings", "price": "$14.00" },
+        { "slug": "sandwich-de-milanesa", "name": "Sandwich de Milanesa", "square_name": "Sandwich De Milanesa", "desc": "Breaded cutlet sandwich", "price": "$12.00", "stock": "out" }
+      ]
+    },
+    {
+      "slug": "sweets",
+      "title": "Sweets & Pastries",
+      "subtitle": "Facturas, tortas & dulce de leche",
+      "blurb": "The bakery case: Argentine facturas, guayaba tarts, alfajores rolled in coconut, and bolas de fraile still warm under powdered sugar.",
+      "hero": "bola-de-fraile-patio.webp",
+      "items": [
+        { "slug": "alfajor", "name": "Alfajor", "square_name": "Alfajor", "desc": "Cookie sandwich with dulce de leche, rolled in coconut flakes", "price": "$4.25", "img": "alfajor.webp" },
+        { "slug": "pastafrola", "name": "Pastafrola", "square_name": "Pastafrola", "desc": "Guayaba tart", "price": "$4.50", "img": "pastafrola.webp" },
+        { "slug": "factura-de-guayaba-y-queso", "name": "Factura de Guayaba y Queso", "square_name": "Factura de Guayaba y Queso", "desc": "Guava and cheese stuffed puff pastry, warmed up — Miami style", "price": "$4.95", "img": "factura-de-guayaba-y-queso.webp" },
+        { "slug": "medialuna-de-nutella", "name": "Medialuna de Nutella", "square_name": "Medialuna De Nutella", "desc": "Nutella-filled mini croissant, warmed up", "price": "$3.50", "img": "medialuna-de-nutella.webp" },
+        { "slug": "sandwich-de-nutella", "name": "Sandwich de Nutella", "square_name": "Sandwich De Nutella", "desc": "Warm Nutella sandwich", "price": "$6.25", "img": "sandwich-de-nutella.webp", "stock": "low" },
+        { "slug": "torta-de-miel-negra", "name": "Torta de Miel Negra", "square_name": "Torta De Miel Negra", "desc": "Black honey cake", "price": "$4.25", "img": "torta-de-miel-negra.webp" },
+        { "slug": "torta-de-mandarina", "name": "Torta de Mandarina", "square_name": "Torta De Mandarina", "desc": "Mandarin cake", "price": "$4.25", "img": "torta-de-mandarina.webp" },
+        { "slug": "bollo", "name": "Bollo", "square_name": "Bollo", "desc": "Dulce de leche filled doughnut — the bola de fraile", "price": "$4.50", "stock": "low" },
+        { "slug": "arroz-con-leche", "name": "Arroz con Leche", "square_name": "Arroz Con Leche", "desc": "Rice, milk, cinnamon", "price": "$4.00", "img": "arroz-con-leche.webp" }
+      ]
+    },
+    {
+      "slug": "coffee",
+      "title": "Coffee, Tea & Mate",
+      "subtitle": "Cuban espresso & Paraguayan yerba mate",
+      "blurb": "Cuban-style espresso whipped with sugar, and mate cocido brought over from Paraguay. Ask for it hot or iced.",
+      "hero": "counter.webp",
+      "items": [
+        { "slug": "cafecito", "name": "Cafecito", "square_name": "Cafecito", "desc": "Shot of Cuban-style espresso with whipped sugar", "price": "$3.00", "img": "cafecito.webp" },
+        { "slug": "cortadito", "name": "Cortadito", "square_name": "Cortadito", "desc": "Double shot of espresso with equal parts milk and whipped sugar — very sweet and strong", "price": "$4.80 – $5.00", "img": "cortadito.webp", "tag": "Recommended" },
+        { "slug": "colada", "name": "Colada", "square_name": "Colada", "desc": "Multiple shots of espresso whipped in sugar — Cuban style, made for sharing", "price": "$5.00", "img": "colada.webp" },
+        { "slug": "cafe-con-leche", "name": "Café con Leche", "square_name": "Cafe Con Leche .", "desc": "Latin-style espresso and milk latte with sugar. Hot or iced", "price": "$0.70 – $6.00", "img": "cafe-con-leche.webp" },
+        { "slug": "mate-cocido-con-leche", "name": "Mate Cocido con Leche", "square_name": "Mate Cocido  Con Leche", "desc": "Yerba mate from Paraguay, slightly sweetened, with warm milk", "price": "$4.10 – $5.50", "img": "mate-cocido-con-leche.webp" },
+        { "slug": "cappuccino", "name": "Cappuccino", "square_name": "Cappuccino", "desc": "Two shots of espresso with milk, topped with foam", "price": "$4.80 – $5.90", "img": "cappuccino.webp", "stock": "low" },
+        { "slug": "mocha", "name": "Mocha", "square_name": "Mocha", "desc": "Double shot of espresso latte with chocolate", "price": "$5.00 – $6.00", "img": "mocha.webp" },
+        { "slug": "americano", "name": "Americano", "square_name": "Americano", "desc": "One shot of espresso in water for small, double shot for large", "price": "$3.00 – $4.50", "img": "americano.webp" },
+        { "slug": "double-espresso", "name": "Double Espresso", "square_name": "Double Espresso", "desc": "As stated", "price": "$5.00 – $6.00", "img": "double-espresso.webp" },
+        { "slug": "cold-brew", "name": "Cold Brew", "square_name": "Cold Brew", "desc": "Slow-steeped, served over ice", "price": "$4.00 – $4.80" },
+        { "slug": "matcha", "name": "Matcha", "square_name": "Matcha", "desc": "Stone-ground green tea latte", "price": "$4.75 – $6.00" },
+        { "slug": "hot-chocolate", "name": "Hot Chocolate", "square_name": "Hot Chocolate", "desc": "As stated", "price": "$4.00 – $4.55", "img": "hot-chocolate.webp" },
+        { "slug": "te", "name": "Té", "square_name": "Te", "desc": "Assortment of tea selections", "price": "$3.50 – $4.75", "img": "te.webp" },
+        { "slug": "almond-milk", "name": "Almond Milk", "square_name": "Almond Milk", "desc": "Add to any café con leche, cortadito or mocha", "price": "$0.80", "addon": true }
+      ]
+    },
+    {
+      "slug": "drinks",
+      "title": "Drinks & Refrescos",
+      "subtitle": "Juices, sodas & mineral water",
+      "blurb": "Fresh juice, Brazilian guaraná, and the mineral water everyone in Austin already drinks.",
+      "hero": "alfajor-juice.webp",
+      "items": [
+        { "slug": "jugo-de-durazno", "name": "Jugo de Durazno", "square_name": "Jugo De Durazno", "desc": "Peach juice", "price": "$6.00 – $7.00", "img": "jugo-de-durazno.webp", "stock": "low" },
+        { "slug": "guarana-soda", "name": "Guaraná Soda", "square_name": "Guarana Soda", "desc": "Brazilian soda", "price": "$3.00", "img": "guarana-soda.webp" },
+        { "slug": "san-pellegrino-limonata", "name": "San Pellegrino Limonata", "square_name": "San Pellegrino limonata", "desc": "As stated", "price": "$3.00", "img": "san-pellegrino-limonata.webp", "stock": "low" },
+        { "slug": "topo-chico", "name": "Topo Chico", "square_name": "Topi Chico", "desc": "Carbonated mineral water", "price": "$3.00", "img": "topi-chico.webp", "stock": "low" },
+        { "slug": "water", "name": "Water", "square_name": "Water", "desc": "Bottled water", "price": "$2.00" }
+      ]
+    }
+  ],
+  "extras": [
+    { "name": "Gift Card", "desc": "Give the cafe. Redeemable in store and online.", "price": "$25.00 – $50.00" }
+  ]
+}
