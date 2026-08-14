@@ -38,7 +38,11 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+html {
+  scroll-behavior: smooth; scroll-padding-top: 90px;
+  /* Stop iOS/Android from inflating text in landscape. */
+  -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+}
 
 body {
   font-family: var(--font-sans);
@@ -96,7 +100,11 @@ a:hover { color: var(--color-accent-action-hover); }
   padding-left: 2px;
 }
 .nav__right { display: flex; align-items: center; gap: 14px; min-width: 0; }
-.nav__link { font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary); }
+.nav__link {
+  font-size: 0.875rem; font-weight: 500; color: var(--color-text-secondary);
+  /* Vertical padding widens the tap target without changing the 64px bar. */
+  padding: 12px 2px;
+}
 .nav__link:hover { color: var(--color-text); }
 .nav__account {
   display: none; align-items: center; gap: 8px;
@@ -637,13 +645,21 @@ a:hover { color: var(--color-accent-action-hover); }
   .lesson-nav a.lesson-nav--next { text-align: left; }
   .hero { padding-top: 48px; padding-bottom: 36px; }
   .auth-card { position: static; }
-  /* Cramped nav: keep links on one line, tighten gaps, drop the
-     handprotocol.org escape hatch (the logo already links out of a lesson). */
+  /* Cramped nav: keep links on one line, tighten gaps, drop links the logo
+     already covers (it goes to /learn/) — handprotocol.org + Course home. */
   .nav__inner { gap: 10px; }
   .nav__right { gap: 10px; }
   .nav__link { font-size: 0.8125rem; white-space: nowrap; }
-  .nav__link[href="/"] { display: none; }
+  .nav__link[href="/"], .nav__link[href="/learn/"] { display: none; }
   .nav__account { max-width: 40vw; overflow: hidden; }
+  /* Form controls at 16px so iOS doesn't zoom the page on focus. */
+  .field input, .field select, .field textarea,
+  .pin-note input, .modal textarea { font-size: 1rem; }
+  /* Comfortable thumb targets for the touch-first interactions. */
+  .prompt-card__copy { padding: 9px 14px; }
+  .pin-btn { width: 40px; height: 40px; }
+  .footer a { display: inline-block; padding: 8px 2px; }
+  .lesson-header__crumbs a { padding: 10px 2px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
