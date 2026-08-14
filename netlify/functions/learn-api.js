@@ -254,6 +254,16 @@ async function actionSignup(body) {
     ],
   });
   await sendEmail({
+    to: process.env.EMAIL_TO_OPS || 'hand@handprotocol.org',
+    replyTo: email,
+    subject: `New HAND Learn signup: ${name}`,
+    text:
+      `${name} <${email}> just joined HAND Learn.\n\n` +
+      `Mode: ${mode === 'guided' ? 'guided (with a HAND human)' : 'solo self-serve'}\n` +
+      `Course: Build your first app with Claude Code\n` +
+      `Coach dashboard: https://handprotocol.org/learn/coach/\n`,
+  });
+  await sendEmail({
     to: email,
     subject: 'Welcome to HAND Learn — your Claude Code course',
     text:
