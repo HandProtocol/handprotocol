@@ -7,6 +7,8 @@
 //   RESEND_API_KEY      — Resend API key with audience write access
 //   RESEND_AUDIENCE_ID  — UUID of the audience to add contacts to
 
+const { sendEmail } = require('./_email.js');
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const AUDIENCE_LABELS = {
@@ -94,6 +96,14 @@ exports.handler = async (event) => {
 
     if (res.ok) {
       console.log('Subscribed contact', { email, audience, id: data.id });
+      await sendEmail({
+        to: process.env.EMAIL_TO_OPS || 'hand@handprotocol.org',
+        replyTo: email,
+        subject: `New mailing-list signup: ${name}`,
+        text:
+          `${name} <${email}> just joined the HAND mailing list.\n\n` +
+          `They are: ${AUDIENCE_LABELS[audience]}\n`,
+      });
       return json(200, { status: 'subscribed' });
     }
 
