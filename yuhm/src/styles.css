@@ -1543,3 +1543,10 @@ button.food-alert-banner { cursor: pointer; }
   .entry-world-banner { flex-wrap: wrap; }
   .entry-world-action { margin-left: 84px; }
 }
+
+/* Landing hero CTA into the living world (the default app at /app/). */
+.hero-cta-row { margin-top: 24px; }
+.hero-world-cta { display: inline-flex; align-items: center; gap: 9px; min-height: 54px; padding: 14px 27px; background: #2d6b50; color: #fff8e8; border-radius: 17px; font: 600 17px/1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: .01em; text-decoration: none; box-shadow: 0 4px 0 #1f4a37, 0 10px 22px #2d6b5040; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out); }
+.hero-world-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #1f4a37, 0 14px 26px #2d6b5045; }
+.hero-world-cta:active { transform: translateY(1px); box-shadow: 0 2px 0 #1f4a37; }
+@media (prefers-reduced-motion: reduce) { .hero-world-cta { transition: none; } }

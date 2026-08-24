@@ -178,6 +178,7 @@ export function DiscoverPanel({ progress, onOpen, poolShareTaken, layer = 'all' 
         <AppLink href="/app/?mode=anonymous&intent=gather">{w('world.more.gather')}</AppLink>
         <AppLink href="/app/?mode=anonymous&intent=request">{w('world.more.requests')}</AppLink>
         <AppLink href="/app/?mode=login">{w('world.more.signIn')}</AppLink>
+        <AppLink href="/app/?mode=advanced">{w('world.more.advanced')}</AppLink>
       </div>
     </section>
   </div>

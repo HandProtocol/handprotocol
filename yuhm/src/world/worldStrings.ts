@@ -85,6 +85,7 @@ const en = {
   'world.more.gather': 'Gather',
   'world.more.requests': 'Requests',
   'world.more.signIn': 'Sign in',
+  'world.more.advanced': 'Command center',
 
   // Spot card
   'world.spot.offers': 'Available or needed',
@@ -233,6 +234,7 @@ const es: Record<WorldKey, string> = {
   'world.more.gather': 'Reunirse',
   'world.more.requests': 'Solicitudes',
   'world.more.signIn': 'Iniciar sesión',
+  'world.more.advanced': 'Centro de mando',
 
   'world.spot.offers': 'Disponible o necesario',
   'world.spot.people': 'Quién está aquí',

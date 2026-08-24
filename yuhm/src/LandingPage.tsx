@@ -197,10 +197,18 @@ export function LandingPage() {
               >{t('landing.intro')}</motion.p>
               <FlowStrip animate={animate} />
               <motion.div
+                className="hero-cta-row"
+                initial={animate ? { opacity: 0, y: 18 } : false}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ ...springy, delay: 0.92 }}
+              >
+                <AppLink className="hero-world-cta" href="/app/">{t('landing.world.action')} <ArrowUpRight size={19} /></AppLink>
+              </motion.div>
+              <motion.div
                 className="food-entry-proof"
                 initial={animate ? { opacity: 0, y: 16 } : false}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ ...springy, delay: 1.05 }}
+                transition={{ ...springy, delay: 1.1 }}
               ><ShieldCheck size={16} /><span>{t('landing.proof')}</span></motion.div>
             </div>
             <div className="hero-illustration">

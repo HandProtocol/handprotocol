@@ -99,11 +99,15 @@ describe('living-map world experience', () => {
     expect(within(panel).getByRole('link', { name: 'Find food' })).toHaveAttribute('href', '/app/?mode=anonymous&intent=food')
   })
 
-  it('keeps the advanced dashboard preference ahead of the world default', async () => {
+  it('opens the world at /app/ even with a saved advanced preference, dashboard stays explicit', async () => {
     window.history.replaceState({}, '', '/app/')
     localStorage.setItem('yuhm:experience-mode', 'advanced')
     render(<App />)
 
+    expect(await screen.findByRole('heading', { name: 'Find your local yuhm.' })).toBeInTheDocument()
+
+    window.history.replaceState({}, '', '/app/?mode=advanced')
+    window.dispatchEvent(new PopStateEvent('popstate'))
     expect(await screen.findByRole('button', { name: /^Rescue operations$/i })).toBeInTheDocument()
   })
 

@@ -44,11 +44,12 @@ function AppRoutes() {
   const workspace = params.get('workspace')
   const authMode = mode === 'login' || mode === 'reset' || mode === 'recovery'
   const consumerIntent = intent === 'food' || intent === 'contribute' || intent === 'gather' || intent === 'request' ? intent : null
-  const advancedMode = mode === 'advanced' || Boolean(workspace) || (!consumerIntent && mode !== 'world' && localStorage.getItem('yuhm:experience-mode') === 'advanced')
+  const advancedMode = mode === 'advanced' || Boolean(workspace)
   const isMapLab = path.startsWith('/app') && mode === 'map-lab'
   // The living world is the default app experience: bare /app/ and the anonymous
-  // entry open it on every viewport. Focused intents, auth, map-lab, and the
-  // advanced dashboard keep their existing routes.
+  // entry always open it, on every viewport. The dashboard is explicit only
+  // (mode=advanced or workspace=); focused intents, auth, and map-lab keep
+  // their existing routes.
   const isWorld = path.startsWith('/app')
     && !isMapLab
     && (mode === 'world' || (!authMode && !advancedMode && !consumerIntent))
