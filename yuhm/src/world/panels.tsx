@@ -1,10 +1,11 @@
 import type { ReactNode } from 'react'
 import { ArrowLeft, ArrowUpRight, Bike, CalendarClock, Check, HandHeart, Leaf, MapPin, Navigation, Sparkles, Users } from 'lucide-react'
+import { AppLink } from '../router'
 import { useWorldText } from './worldStrings'
 import {
-  journeySteps, missionsAtSpot, personById, poolAtSpot, spotById,
+  journeySteps, layerKinds, missionsAtSpot, personById, poolAtSpot, spotById,
   worldMissions, worldPools, worldRuns, worldSpots,
-  type MissionKind, type SpotKind, type WorldMission, type WorldPool, type WorldRun, type WorldSpot,
+  type MissionKind, type SpotKind, type WorldLayer, type WorldMission, type WorldPool, type WorldRun, type WorldSpot,
 } from './worldData'
 
 export type MissionProgress = Record<string, 'joined' | 'done'>
@@ -79,25 +80,33 @@ type OpenPanel = (panel: WorldPanelState) => void
 
 /* ---------------- Discover ---------------- */
 
-export function DiscoverPanel({ progress, onOpen, poolShareTaken }: { progress: MissionProgress; onOpen: OpenPanel; poolShareTaken: boolean }) {
+export function DiscoverPanel({ progress, onOpen, poolShareTaken, layer = 'all' }: { progress: MissionProgress; onOpen: OpenPanel; poolShareTaken: boolean; layer?: WorldLayer }) {
   const w = useWorldText()
   const pool = worldPools[0]
   const run = worldRuns[0]
-  const sampleSpots = worldSpots.filter((spot) => spot.sample)
-  const directory = worldSpots.filter((spot) => !spot.sample)
+  const kinds = layer === 'all' ? null : layerKinds[layer]
+  const inLens = (spot: WorldSpot | undefined) => !kinds || (spot != null && kinds.includes(spot.kind))
+  const sampleSpots = worldSpots.filter((spot) => spot.sample && inLens(spot))
+  const directory = worldSpots.filter((spot) => !spot.sample && inLens(spot))
+  const lensMissions = worldMissions.filter((mission) => inLens(spotById(mission.spotId)))
+  const showPool = !kinds || inLens(spotById(pool.spotId))
+  const showRun = layer === 'all' || layer === 'move'
 
   return <div className="world-panel-body">
     <header className="world-discover-head">
       <Kicker>{w('world.discover.hello')}</Kicker>
       <h2>Eastside Circle</h2>
-      <p className="world-note">{w('world.sampleNote')}</p>
+      {layer === 'all'
+        ? <p className="world-note">{w('world.sampleNote')}</p>
+        : <p className="world-note world-lens-note">{w(`world.lens.${layer}`)}</p>}
     </header>
 
     <section className="world-block" aria-label={w('world.discover.missions')}>
       <div className="world-block-head"><h3>{w('world.discover.missions')}</h3><SampleTag /></div>
-      <p className="world-block-copy">{w('world.discover.missionsCopy')}</p>
+      {lensMissions.length === 0 && <p className="world-block-copy">{w('world.lens.emptyMissions')}</p>}
+      {layer === 'all' && <p className="world-block-copy">{w('world.discover.missionsCopy')}</p>}
       <ul className="world-mission-list" role="list">
-        {worldMissions.map((mission) => {
+        {lensMissions.map((mission) => {
           const state = progress[mission.id]
           return <li key={mission.id}>
             <button type="button" className={`world-mission-row mk-${mission.kind}${state ? ` is-${state}` : ''}`} onClick={() => onOpen({ kind: 'mission', id: mission.id })}>
@@ -115,22 +124,22 @@ export function DiscoverPanel({ progress, onOpen, poolShareTaken }: { progress: 
       </ul>
     </section>
 
-    <section className="world-duo">
-      <button type="button" className="world-pool-card" onClick={() => onOpen({ kind: 'pool', id: pool.id })}>
+    {(showPool || showRun) && <section className={showPool && showRun ? 'world-duo' : 'world-duo single'}>
+      {showPool && <button type="button" className="world-pool-card" onClick={() => onOpen({ kind: 'pool', id: pool.id })}>
         <Kicker>{w('world.discover.pool')}</Kicker>
         <strong>{pool.title}</strong>
         <PoolDots pool={pool} extraShare={poolShareTaken} />
         <small>{w('world.pool.closes', { when: pool.closes })}</small>
-      </button>
-      <button type="button" className="world-run-card" onClick={() => onOpen({ kind: 'run', id: run.id })}>
+      </button>}
+      {showRun && <button type="button" className="world-run-card" onClick={() => onOpen({ kind: 'run', id: run.id })}>
         <Kicker>{w('world.discover.run')}</Kicker>
         <strong>{run.title}</strong>
         <span className="world-run-meta"><Bike size={14} /> {personById(run.courierId)?.name} · {run.window}</span>
         <small>{w('world.run.saved', { miles: run.distanceMiles, trips: run.savedTrips })}</small>
-      </button>
-    </section>
+      </button>}
+    </section>}
 
-    <section className="world-block" aria-label={w('world.discover.spots')}>
+    {sampleSpots.length > 0 && <section className="world-block" aria-label={w('world.discover.spots')}>
       <div className="world-block-head"><h3>{w('world.discover.spots')}</h3><SampleTag /></div>
       <ul className="world-spot-list" role="list">
         {sampleSpots.map((spot) => <li key={spot.id}>
@@ -141,9 +150,9 @@ export function DiscoverPanel({ progress, onOpen, poolShareTaken }: { progress: 
           </button>
         </li>)}
       </ul>
-    </section>
+    </section>}
 
-    <section className="world-block" aria-label={w('world.discover.directory')}>
+    {directory.length > 0 && <section className="world-block" aria-label={w('world.discover.directory')}>
       <div className="world-block-head"><h3>{w('world.discover.directory')}</h3></div>
       <p className="world-block-copy">{w('world.discover.directoryCopy')}</p>
       <ul className="world-spot-list" role="list">
@@ -154,11 +163,23 @@ export function DiscoverPanel({ progress, onOpen, poolShareTaken }: { progress: 
           </button>
         </li>)}
       </ul>
-    </section>
+    </section>}
 
     <button type="button" className="world-pulse-link" onClick={() => onOpen({ kind: 'pulse' })}>
       <span className="world-pulse-dot" aria-hidden="true" />{w('world.discover.seePulse')} <ArrowUpRight size={15} />
     </button>
+
+    <section className="world-block world-more" aria-label={w('world.more.title')}>
+      <h3>{w('world.more.title')}</h3>
+      <p className="world-block-copy">{w('world.more.copy')}</p>
+      <div className="world-more-links">
+        <AppLink href="/app/?mode=anonymous&intent=food">{w('world.more.find')}</AppLink>
+        <AppLink href="/app/?mode=anonymous&intent=contribute">{w('world.more.contribute')}</AppLink>
+        <AppLink href="/app/?mode=anonymous&intent=gather">{w('world.more.gather')}</AppLink>
+        <AppLink href="/app/?mode=anonymous&intent=request">{w('world.more.requests')}</AppLink>
+        <AppLink href="/app/?mode=login">{w('world.more.signIn')}</AppLink>
+      </div>
+    </section>
   </div>
 }
 

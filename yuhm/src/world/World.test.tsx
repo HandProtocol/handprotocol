@@ -74,6 +74,39 @@ describe('living-map world experience', () => {
     expect(screen.queryByText('Count me in')).not.toBeInTheDocument()
   })
 
+  it('opens from bare /app/ as the default experience and filters through lenses', async () => {
+    window.history.replaceState({}, '', '/app/')
+    localStorage.setItem('yuhm:world-intro', JSON.stringify({ role: 'eat' }))
+    render(<App />)
+
+    const panel = await screen.findByRole('complementary', { name: 'Eastside Circle' })
+    expect(within(panel).getByText('Open invitations')).toBeInTheDocument()
+
+    // The Grow lens narrows the panel to farms and gardens.
+    await userEvent.click(screen.getByRole('button', { name: 'Grow' }))
+    expect(within(panel).getByText(/The Grow lens/)).toBeInTheDocument()
+    expect(within(panel).getByText('Blue Heron Community Garden')).toBeInTheDocument()
+    expect(within(panel).queryByText('East Austin Neighborhood Center')).not.toBeInTheDocument()
+    expect(within(panel).queryByText('Rescue the bakery surplus')).not.toBeInTheDocument()
+
+    // The Commons lens is the real public directory.
+    await userEvent.click(screen.getByRole('button', { name: 'Commons' }))
+    expect(within(panel).getByText(/The Commons lens/)).toBeInTheDocument()
+    expect(within(panel).getByText('East Austin Neighborhood Center')).toBeInTheDocument()
+    expect(within(panel).queryByText('Blue Heron Community Garden')).not.toBeInTheDocument()
+
+    // The focused flows stay one tap away.
+    expect(within(panel).getByRole('link', { name: 'Find food' })).toHaveAttribute('href', '/app/?mode=anonymous&intent=food')
+  })
+
+  it('keeps the advanced dashboard preference ahead of the world default', async () => {
+    window.history.replaceState({}, '', '/app/')
+    localStorage.setItem('yuhm:experience-mode', 'advanced')
+    render(<App />)
+
+    expect(await screen.findByRole('button', { name: /^Rescue operations$/i })).toBeInTheDocument()
+  })
+
   it('runs the onboarding in Spanish', async () => {
     localStorage.setItem('yuhm:lang', 'es')
     render(<App />)

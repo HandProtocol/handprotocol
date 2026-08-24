@@ -265,13 +265,20 @@ describe('yuhm entry points and interaction gates', () => {
     expect(screen.queryByRole('button', { name: /^Inventory$/i })).not.toBeInTheDocument()
   })
 
-  it('uses simple mode as the default app experience', () => {
+  it('uses the living world as the default app experience', async () => {
     window.history.replaceState({}, '', '/app/?mode=anonymous')
+    render(<App />)
+
+    expect(await screen.findByRole('heading', { name: 'Find your local yuhm.' })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /^Inventory$/i })).not.toBeInTheDocument()
+  })
+
+  it('keeps the focused finder at intent=food as the classic zero-friction path', () => {
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
     sessionStorage.setItem('yuhm:location-choice', 'complete')
     render(<App />)
 
     expect(screen.getByRole('heading', { name: /What can we help you find/i })).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: /^Inventory$/i })).not.toBeInTheDocument()
   })
 
   it('keeps a community request draft through the sign-in handoff', async () => {

@@ -284,6 +284,19 @@
 .world-spot-copy small { display: block; font-size: 11px; color: var(--w-muted); }
 .world-live { font: 500 8.5px/1.4 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: #a63c1e; background: #e9654518; border-radius: 999px; padding: 3px 8px; }
 
+.world-duo.single { grid-template-columns: 1fr; }
+.world-lens-note { color: var(--w-green-deep); font-weight: 500; }
+
+.world-more { padding-top: 6px; border-top: 1.5px dashed var(--w-line); }
+.world-more-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.world-more-links a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: 9px 15px;
+  background: var(--w-paper); color: var(--w-green-deep); border: 1.5px solid var(--w-line);
+  border-radius: 999px; font-weight: 600; font-size: 13px; text-decoration: none;
+  transition: transform .2s var(--w-ease), background .2s;
+}
+.world-more-links a:hover { transform: translateY(-1px); background: #fff; border-color: #d8c69c; }
+
 .world-pulse-link { display: inline-flex; align-items: center; gap: 8px; align-self: stretch; justify-content: center; min-height: 48px; padding: 10px 16px; background: var(--w-oat); border: 1.5px dashed #d8c69c; border-radius: 16px; color: var(--w-green-deep); font-weight: 600; font-size: 13.5px; }
 .world-pulse-link:hover { background: var(--w-oat-deep); }
 .world-pulse-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--w-coral); animation: pulse-dot 2.4s ease-in-out infinite; }

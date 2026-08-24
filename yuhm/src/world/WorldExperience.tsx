@@ -12,24 +12,14 @@ import {
 import { GratitudeOverlay, ProfilePanel, PulsePanel, WorldOnboarding, roleMissions, type WorldRole } from './views'
 import { useWorldText } from './worldStrings'
 import {
-  circleName, spotById, worldMissions, worldPools, worldRuns, worldSpots,
-  type SpotKind, type WorldMission,
+  circleName, layerKinds, spotById, worldMissions, worldPools, worldRuns, worldSpots,
+  type WorldLayer, type WorldMission,
 } from './worldData'
 import './world.css'
 
 const INTRO_KEY = 'yuhm:world-intro'
 const PROGRESS_KEY = 'yuhm:world-progress'
 const SHARE_KEY = 'yuhm:world-pool-share'
-
-type WorldLayer = 'all' | 'grow' | 'make' | 'share' | 'move' | 'commons'
-
-const layerKinds: Record<Exclude<WorldLayer, 'all'>, SpotKind[]> = {
-  grow: ['farm', 'garden'],
-  make: ['kitchen', 'market'],
-  share: ['table', 'drop'],
-  move: ['farm', 'market', 'kitchen', 'drop'],
-  commons: ['pantry'],
-}
 
 function useMobileViewport() {
   const query = '(max-width: 759px)'
@@ -73,6 +63,7 @@ export function WorldExperience() {
   const [progress, setProgress] = useState<MissionProgress>(readProgress)
   const [shareTaken, setShareTaken] = useState(() => sessionStorage.getItem(SHARE_KEY) === 'yes')
   const [layer, setLayer] = useState<WorldLayer>('all')
+  const [fitNonce, setFitNonce] = useState(0)
   const [detent, setDetent] = useState<SheetDetent>('half')
   const [bottomInset, setBottomInset] = useState(0)
   const [visitorPosition, setVisitorPosition] = useState<{ latitude: number; longitude: number } | null>(null)
@@ -87,6 +78,14 @@ export function WorldExperience() {
   const openPanel = useCallback((next: WorldPanelState) => {
     setPanel(next)
     if (next.kind !== 'discover') setDetent('half')
+  }, [])
+
+  // Choosing a lens is a discovery gesture: the panel returns to the filtered
+  // discover view and the camera refits to what the lens shows.
+  const chooseLayer = useCallback((next: WorldLayer) => {
+    setLayer(next)
+    setPanel({ kind: 'discover' })
+    setFitNonce((current) => current + 1)
   }, [])
 
   const selectedSpotId = useMemo(() => {
@@ -202,7 +201,7 @@ export function WorldExperience() {
       case 'profile':
         return <ProfilePanel role={intro?.role ?? 'eat'} progress={progress} onReplay={replayIntro} onBack={() => openPanel({ kind: 'discover' })} />
       default:
-        return <DiscoverPanel progress={progress} onOpen={openPanel} poolShareTaken={shareTaken} />
+        return <DiscoverPanel progress={progress} onOpen={openPanel} poolShareTaken={shareTaken} layer={layer} />
     }
   })()
 
@@ -247,6 +246,7 @@ export function WorldExperience() {
           waveNonce={wave.nonce}
           wavePath={wave.path}
           visitorPosition={visitorPosition}
+          fitTrigger={fitNonce}
           bottomInset={mobile ? bottomInset : 0}
         />
         <div className="world-layers" role="group" aria-label={w('world.layers.label')}>
@@ -255,10 +255,10 @@ export function WorldExperience() {
             type="button"
             className={layer === candidate.id ? 'active' : ''}
             aria-pressed={layer === candidate.id}
-            onClick={() => setLayer(candidate.id)}
+            onClick={() => chooseLayer(candidate.id)}
           >{candidate.label}</button>)}
         </div>
-        <p className="world-map-note">{w('world.sampleNote')} <AppLink href="/app/">{w('world.standardMap')}</AppLink></p>
+        <p className="world-map-note">{w('world.sampleNote')} <AppLink href="/app/?mode=anonymous&intent=food">{w('world.standardMap')}</AppLink></p>
       </div>
 
       <WorldSheet

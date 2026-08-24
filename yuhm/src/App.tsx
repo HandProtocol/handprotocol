@@ -44,15 +44,20 @@ function AppRoutes() {
   const workspace = params.get('workspace')
   const authMode = mode === 'login' || mode === 'reset' || mode === 'recovery'
   const consumerIntent = intent === 'food' || intent === 'contribute' || intent === 'gather' || intent === 'request' ? intent : null
-  const advancedMode = mode === 'advanced' || Boolean(workspace) || (!consumerIntent && localStorage.getItem('yuhm:experience-mode') === 'advanced')
+  const advancedMode = mode === 'advanced' || Boolean(workspace) || (!consumerIntent && mode !== 'world' && localStorage.getItem('yuhm:experience-mode') === 'advanced')
   const isMapLab = path.startsWith('/app') && mode === 'map-lab'
-  const isWorld = path.startsWith('/app') && mode === 'world'
+  // The living world is the default app experience: bare /app/ and the anonymous
+  // entry open it on every viewport. Focused intents, auth, map-lab, and the
+  // advanced dashboard keep their existing routes.
+  const isWorld = path.startsWith('/app')
+    && !isMapLab
+    && (mode === 'world' || (!authMode && !advancedMode && !consumerIntent))
   const isMobileMap = path.startsWith('/app')
     && mobileViewport
     && !authMode
     && !advancedMode
     && !isWorld
-    && (consumerIntent === null || consumerIntent === 'food')
+    && consumerIntent === 'food'
   const page = isWorld
     ? <Suspense fallback={<div className="map-lab-loading" role="status">Loading the living map…</div>}><WorldExperience /></Suspense>
     : isMapLab

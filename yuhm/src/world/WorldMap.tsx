@@ -18,6 +18,8 @@ type WorldMapProps = {
   waveNonce: number
   wavePath: LatLng[] | null
   visitorPosition?: { latitude: number; longitude: number } | null
+  /** Increment to refit the camera to the current spot set (lens changes). */
+  fitTrigger?: number
   bottomInset?: number
 }
 
@@ -78,7 +80,7 @@ function withBottomInset(map: L.Map, latitude: number, longitude: number, zoom: 
   return map.unproject(point.add([0, Math.round(bottomInset / 2)]), zoom)
 }
 
-export function WorldMap({ spots, selectedId, onSelect, routeStops, compostStops, waveNonce, wavePath, visitorPosition, bottomInset = 0 }: WorldMapProps) {
+export function WorldMap({ spots, selectedId, onSelect, routeStops, compostStops, waveNonce, wavePath, visitorPosition, fitTrigger = 0, bottomInset = 0 }: WorldMapProps) {
   const reduceMotion = usePrefersReducedMotion()
   const containerRef = useRef<HTMLDivElement | null>(null)
   const mapRef = useRef<L.Map | null>(null)
@@ -208,6 +210,19 @@ export function WorldMap({ spots, selectedId, onSelect, routeStops, compostStops
       L.polyline(curveThrough(compostStops), { className: 'yuhm-compost-line', interactive: false }).addTo(layer)
     }
   }, [bottomInset, compostStops, routeStops])
+
+  const lastFitTrigger = useRef(0)
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || fitTrigger === lastFitTrigger.current) return
+    lastFitTrigger.current = fitTrigger
+    if (spots.length === 0) return
+    map.fitBounds(spots.map((spot) => [spot.latitude, spot.longitude] as L.LatLngTuple), {
+      padding: [48, 48],
+      paddingBottomRight: [48, 48 + bottomInset],
+      maxZoom: 14,
+    })
+  }, [bottomInset, fitTrigger, spots])
 
   const visitorMarkerRef = useRef<L.Marker | null>(null)
   useEffect(() => {

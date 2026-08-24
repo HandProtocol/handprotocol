@@ -260,6 +260,17 @@ export const basePulse = {
   newConnections: 12,
 }
 
+/** Map lenses: each layer chip shows one slice of the circle. */
+export type WorldLayer = 'all' | 'grow' | 'make' | 'share' | 'move' | 'commons'
+
+export const layerKinds: Record<Exclude<WorldLayer, 'all'>, SpotKind[]> = {
+  grow: ['farm', 'garden'],
+  make: ['kitchen', 'market'],
+  share: ['table', 'drop'],
+  move: ['farm', 'market', 'kitchen', 'drop'],
+  commons: ['pantry'],
+}
+
 export const circleCenter: [number, number] = [30.263, -97.708]
 export const circleRadiusMeters = 2300
 export const circleName = 'Eastside Circle'

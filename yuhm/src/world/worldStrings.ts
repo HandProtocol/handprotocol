@@ -15,7 +15,7 @@ const en = {
   'world.back': 'Back',
   'world.close': 'Close',
   'world.openMap': 'Back to the map',
-  'world.standardMap': 'Standard map',
+  'world.standardMap': 'Classic food finder',
   'world.mapLabel': 'Living map of the Eastside Circle',
   'world.pulseButton': 'Yuhm Pulse',
   'world.profileButton': 'Your presence',
@@ -30,6 +30,12 @@ const en = {
   'world.layers.share': 'Share',
   'world.layers.move': 'Move',
   'world.layers.commons': 'Commons',
+  'world.lens.grow': 'The Grow lens: farms and gardens raising food inside the circle.',
+  'world.lens.make': 'The Make lens: kitchens and markets turning food into meals.',
+  'world.lens.share': 'The Share lens: tables and shelves where food reaches neighbors.',
+  'world.lens.move': 'The Move lens: the routes and couriers keeping food flowing.',
+  'world.lens.commons': 'The Commons lens: the real public food directory, open to everyone.',
+  'world.lens.emptyMissions': 'No open invitations under this lens right now.',
 
   // Onboarding
   'world.intro.kicker': 'Welcome to the yuhm world',
@@ -70,6 +76,15 @@ const en = {
   'world.discover.directory': 'Public food directory',
   'world.discover.directoryCopy': 'Real listings. Confirm hours before traveling.',
   'world.discover.seePulse': 'See the Yuhm Pulse',
+
+  // Focused-flow handoffs
+  'world.more.title': 'More ways to take part',
+  'world.more.copy': 'The focused yuhm flows, outside the demo world.',
+  'world.more.find': 'Find food',
+  'world.more.contribute': 'Contribute',
+  'world.more.gather': 'Gather',
+  'world.more.requests': 'Requests',
+  'world.more.signIn': 'Sign in',
 
   // Spot card
   'world.spot.offers': 'Available or needed',
@@ -152,7 +167,7 @@ const es: Record<WorldKey, string> = {
   'world.back': 'Atrás',
   'world.close': 'Cerrar',
   'world.openMap': 'Volver al mapa',
-  'world.standardMap': 'Mapa estándar',
+  'world.standardMap': 'Buscador clásico de comida',
   'world.mapLabel': 'Mapa vivo del Círculo del Este',
   'world.pulseButton': 'Pulso Yuhm',
   'world.profileButton': 'Tu presencia',
@@ -166,6 +181,12 @@ const es: Record<WorldKey, string> = {
   'world.layers.share': 'Compartir',
   'world.layers.move': 'Mover',
   'world.layers.commons': 'Comunes',
+  'world.lens.grow': 'Lente Cultivar: granjas y huertos que crían comida dentro del círculo.',
+  'world.lens.make': 'Lente Cocinar: cocinas y mercados que convierten comida en platos.',
+  'world.lens.share': 'Lente Compartir: mesas y estantes donde la comida llega a los vecinos.',
+  'world.lens.move': 'Lente Mover: las rutas y mensajeros que mantienen la comida en movimiento.',
+  'world.lens.commons': 'Lente Comunes: el directorio público real de comida, abierto a todos.',
+  'world.lens.emptyMissions': 'No hay invitaciones abiertas bajo esta lente por ahora.',
 
   'world.intro.kicker': 'Bienvenido al mundo yuhm',
   'world.intro.title': 'Encuentra tu yuhm local.',
@@ -204,6 +225,14 @@ const es: Record<WorldKey, string> = {
   'world.discover.directory': 'Directorio público de comida',
   'world.discover.directoryCopy': 'Listados reales. Confirma horarios antes de viajar.',
   'world.discover.seePulse': 'Ver el Pulso Yuhm',
+
+  'world.more.title': 'Más formas de participar',
+  'world.more.copy': 'Los flujos enfocados de yuhm, fuera del mundo de demostración.',
+  'world.more.find': 'Buscar comida',
+  'world.more.contribute': 'Contribuir',
+  'world.more.gather': 'Reunirse',
+  'world.more.requests': 'Solicitudes',
+  'world.more.signIn': 'Iniciar sesión',
 
   'world.spot.offers': 'Disponible o necesario',
   'world.spot.people': 'Quién está aquí',

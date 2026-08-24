@@ -8,17 +8,18 @@ This is the working orientation document for `yuhm/`. Read it before changing th
 
 Public-facing product behavior and safety boundaries are maintained in `docs/LIVING-DOCS.md`. Keep it current when a feature promise or workflow changes. It is intended to become the source for a future HTML documentation page.
 
-## Living-map world experience, 2026-08-24
+## Living-map world experience, 2026-08-24 (now the default app)
 
-A new immersive "cooperative living world" surface at `/app/?mode=world`, linked from a dashed banner on the landing page. It presents yuhm as a living neighborhood food ecosystem rather than pins on a map, while keeping the standard app untouched at its existing routes.
+An immersive "cooperative living world" surface that is now the **default app experience**: bare `/app/` and `/app/?mode=anonymous` open it on every viewport (`mode=world` is an explicit alias that also overrides a saved advanced preference). It presents yuhm as a living neighborhood food ecosystem rather than pins on a map. The focused flows keep their URLs: `intent=food` still opens the zero-friction classic finder (command-bar map on phones), `intent=contribute/gather/request` are unchanged, auth modes are unchanged, and `mode=advanced`/`workspace=` (or the persisted `yuhm:experience-mode`) still open the dashboard. The world links back out through a "More ways to take part" block (Find food, Contribute, Gather, Requests, Sign in) and a "Classic food finder" note on the map. Note: successful login redirects to `/app/`, so signed-in members without the advanced preference now land in the world.
 
 - **Where it lives.** Everything is in `src/world/`: `WorldExperience.tsx` (shell, routing between panels), `WorldMap.tsx` (Leaflet living map), `WorldSheet.tsx` (draggable mobile sheet, docked desktop panel), `panels.tsx` (discover, spot, mission, pool, run), `views.tsx` (onboarding, pulse, profile, gratitude), `worldData.ts` (sample world), `worldStrings.ts` (bilingual EN/ES chrome copy), `world.css` (scoped tokens from the yuhm palette: cacao `#493128`, garden green `#52734D`, tomato coral `#E96545`, sweet corn `#F2C14E`, herb mint `#A9C98B`, warm oat `#FFF3DC`). The chunk lazy-loads; `App.tsx` routes `mode=world` ahead of the mobile map.
 - **Honesty boundary (load-bearing).** The world merges two data kinds: the real public directory listings from `foodLocations.ts` (rendered activity-free, with verified/community labels, confirm-hours note, and a real directions link) and an invented sample circle ("Eastside Circle": six invented spots, six invented neighbors, missions, one pool, one run). Every sample record carries `sample: true` and the interface labels it Sample; the map carries a persistent "Demo world" note. Do not attach sample activity to real listings and do not present the demo loop as live network movement.
 - **The loop.** Onboarding (find your yuhm, pick a role, on-device-only location choice, circle reveal with one first invitation) leads into Discover, Join, Coordinate, Complete, a gratitude overlay with a thank-you note and a wave of light along the route, and a regenerate nudge (compost return). Progress is sessionStorage-only (`yuhm:world-progress`), the intro choice is localStorage (`yuhm:world-intro`), and mission completion locally bumps the Yuhm Pulse view. Nothing writes to Supabase.
 - **Resonance system.** Pulse rings on active spots, a dashed circle halo around the neighborhood, flowing coral route dashes, a soil-dotted compost return leg, and a corn wave sweep on completion; all Leaflet vector layers are guarded by `L.Browser.svg` (jsdom lacks vector rendering) and every animation collapses under `prefers-reduced-motion`.
+- **Lenses do real work.** The layer chips (Everything, Grow, Make, Share, Move, Commons) refit the camera to the lens's spots, filter the discover panel's missions and spot lists, and explain themselves with a lens line. Move previews the Saturday run route; Commons becomes the real public directory view with no sample missions. Lens definitions live in `worldData.ts` (`layerKinds`).
 - **Terminology.** Yuhm Circle, Yuhm Spot, Yuhm Pool, Yuhm Run, Yuhm Drop, Yuhm Commons, Yuhm Pulse are introduced on this surface only.
 - **Tests.** `src/world/World.test.tsx` covers the full loop, the skip path, the real-listing honesty boundary, and Spanish onboarding. Suite is 105 tests. Note: a populated `.env.local` flips `foodDbConfigured` and breaks App.test's database-gate assertions; run `VITE_SUPABASE_URL= VITE_SUPABASE_ANON_KEY= npm test` when one is present.
-- **Open follow-ups.** Sample world data (spot names, mission stories) is English-only; the sheet drag could add a focus trap; promotion to a default experience is a deliberate future decision, not implied.
+- **Open follow-ups.** Sample world data (spot names, mission stories) is English-only; the sheet drag could add a focus trap; consider whether signed-in members should get a member-shaped default instead of the world.
 
 ## Playful landing pass ("yuhmmy"), 2026-08-24
 
@@ -203,8 +204,9 @@ After reviewing those recommendations, choose one bounded target and use `$impro
 | Route | Current behavior |
 |---|---|
 | `/` | yuhm landing page |
-| `/app/` | Default public app; phones open the command-bar food map, while larger screens retain the existing public layout |
-| `/app/?mode=anonymous` | Explicit browse entry; phones open the command-bar food map and a valid Supabase session still determines write access |
+| `/app/` | The living-map world experience on every viewport (a saved advanced preference opens the dashboard instead) |
+| `/app/?mode=anonymous` | Same living-map world; a valid Supabase session still determines write access on other surfaces |
+| `/app/?mode=world` | Explicit world entry; also overrides a saved advanced preference |
 | `/app/?mode=login` | Email and password login |
 | `/app/?mode=login&signup=1` | Account creation |
 | `/app/?mode=reset` | Request a password-reset email |
