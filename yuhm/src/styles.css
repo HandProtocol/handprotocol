@@ -1528,3 +1528,18 @@ button.food-alert-banner { cursor: pointer; }
 @media (max-width: 480px) {
   .food-entry-page .landing-brand small { display: none; }
 }
+
+/* Living-map entry banner on the landing (routes to /app/?mode=world). */
+.entry-world-banner { display: flex; align-items: center; gap: 20px; margin-top: 20px; padding: 20px 24px; background: #fff3dc; border: 2px dashed #e0b95c; border-radius: 22px; text-decoration: none; color: #43302a; transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out); }
+.entry-world-banner:hover { transform: translateY(-3px); box-shadow: 0 14px 30px #4931281f; }
+.entry-world-art { flex-shrink: 0; display: grid; place-items: center; }
+.entry-world-bowl { width: 64px; height: 54px; }
+.entry-world-copy { min-width: 0; }
+.entry-world-copy small { display: block; font: 500 9.5px 'DM Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: #8a5f16; margin-bottom: 4px; }
+.entry-world-copy strong { display: block; font: 600 20px/1.2 'Baloo 2', 'DM Sans', sans-serif; color: #43302a; }
+.entry-world-copy > span { display: block; font-size: 13px; color: #6b5b49; margin-top: 4px; line-height: 1.5; max-width: 56ch; }
+.entry-world-action { margin-left: auto; flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 600; color: #2d6b50; }
+@media (max-width: 700px) {
+  .entry-world-banner { flex-wrap: wrap; }
+  .entry-world-action { margin-left: 84px; }
+}

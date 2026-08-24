@@ -240,6 +240,17 @@ export function LandingPage() {
               <EntryPathCard href="/app/?mode=anonymous&intent=contribute" variant="entry-path-contributor" icon={<HandHeart size={25} />} base="landing.contribute" index={1} reduce={reduce} />
               <EntryPathCard href="/app/?mode=anonymous&intent=gather" variant="entry-path-gather" icon={<Users size={25} />} base="landing.gather" index={2} reduce={reduce} />
             </div>
+            <Reveal delay={0.1} reduce={reduce}>
+              <AppLink className="entry-world-banner" href="/app/?mode=world">
+                <span className="entry-world-art" aria-hidden="true"><BowlMark className="entry-world-bowl" /></span>
+                <span className="entry-world-copy">
+                  <small>{t('landing.world.kicker')}</small>
+                  <strong>{t('landing.world.title')}</strong>
+                  <span>{t('landing.world.copy')}</span>
+                </span>
+                <span className="entry-world-action">{t('landing.world.action')} <ArrowUpRight size={18} /></span>
+              </AppLink>
+            </Reveal>
             <Reveal delay={0.15} reduce={reduce}>
               <p className="entry-request-note">{t('landing.requestNote')} <AppLink href="/app/?mode=anonymous&intent=request">{t('landing.requestLink')}</AppLink>.</p>
               <p className="entry-updates-note">{t('landing.updatesNote')} <AppLink href="/app/?mode=login&updates=1">{t('landing.updatesLink')}</AppLink>. {t('landing.updatesNoAccount')}</p>

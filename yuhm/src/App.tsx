@@ -9,6 +9,7 @@ import { SimpleExperience } from './SimpleExperience'
 import { DashboardApp } from './DashboardApp'
 
 const MapLab = lazy(() => import('./map-lab/MapLab').then((module) => ({ default: module.MapLab })))
+const WorldExperience = lazy(() => import('./world/WorldExperience').then((module) => ({ default: module.WorldExperience })))
 
 // Re-exported so tests and callers keep a single import point.
 export { CommunityBoard } from './CommunityBoard'
@@ -45,12 +46,16 @@ function AppRoutes() {
   const consumerIntent = intent === 'food' || intent === 'contribute' || intent === 'gather' || intent === 'request' ? intent : null
   const advancedMode = mode === 'advanced' || Boolean(workspace) || (!consumerIntent && localStorage.getItem('yuhm:experience-mode') === 'advanced')
   const isMapLab = path.startsWith('/app') && mode === 'map-lab'
+  const isWorld = path.startsWith('/app') && mode === 'world'
   const isMobileMap = path.startsWith('/app')
     && mobileViewport
     && !authMode
     && !advancedMode
+    && !isWorld
     && (consumerIntent === null || consumerIntent === 'food')
-  const page = isMapLab
+  const page = isWorld
+    ? <Suspense fallback={<div className="map-lab-loading" role="status">Loading the living map…</div>}><WorldExperience /></Suspense>
+    : isMapLab
     ? <Suspense fallback={<div className="map-lab-loading" role="status">Loading map lab…</div>}><MapLab /></Suspense>
     : isMobileMap
       ? <Suspense fallback={<div className="map-lab-loading" role="status">Loading food map…</div>}><MapLab product /></Suspense>
