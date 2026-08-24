@@ -1399,3 +1399,132 @@ button.food-alert-banner { cursor: pointer; }
 
 .impact-sample-note { display: flex; align-items: center; gap: 5px; color: #76857c; font-size: 9px; margin: 10px 0 0; }
 .listing-state.alerting { color: #b0532f; background: #fdeada; }
+
+/* ============================================================
+   Landing v2 — the yuhmmy pass (2026-08-24)
+   Rounded Baloo display, logo bowl mark, meadow band, springs.
+   ============================================================ */
+.food-entry-page { background: #fbf6ea; }
+.food-entry-page::before { background: radial-gradient(circle at 76% 14%, #f9e3bd 0, #fbf6ea 42%, transparent 70%); }
+
+/* Brand lockup: animated-capable bowl mark + rounded wordmark */
+.food-entry-page .landing-brand { display: flex; align-items: center; gap: 11px; }
+.yuhm-mark { width: 46px; height: auto; flex: 0 0 auto; transition: transform .4s cubic-bezier(.34, 1.8, .4, 1); }
+.food-entry-page .landing-brand:hover .yuhm-mark { transform: rotate(-7deg) scale(1.08); }
+.yuhm-brand-copy { display: block; }
+.food-entry-page .landing-brand .yuhm-word { display: block; color: #4a332a; font: 800 24px/1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: .004em; }
+.food-entry-page .landing-brand small { margin-top: 3px; }
+.ymark-pop { transform-box: fill-box; transform-origin: 50% 50%; }
+
+/* Hero grid: copy left, floating bowl illustration right */
+.food-entry-main { width: 100%; padding-bottom: clamp(28px, 4vw, 48px); }
+.food-entry-wrap { width: min(1180px, calc(100% - 64px)); margin: 0 auto; }
+.food-entry-intro { max-width: none; }
+.food-entry-grid { display: grid; grid-template-columns: minmax(0, 1.04fr) minmax(0, .96fr); gap: clamp(18px, 4vw, 54px); align-items: center; }
+.food-entry-copy-col { max-width: 620px; }
+.food-entry-intro h1 {
+  max-width: none;
+  font-family: 'Baloo 2', 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  color: #46312a;
+  letter-spacing: -.015em;
+  line-height: .98;
+  font-size: clamp(3.2rem, 6.4vw, 6rem);
+}
+.title-word { display: inline-block; margin-right: .22em; }
+.title-word:last-child { margin-right: 0; }
+.title-circled { position: relative; display: inline-block; padding: 0 .1em; }
+.title-scribble { position: absolute; left: -7%; top: -16%; width: 114%; height: 138%; pointer-events: none; overflow: visible; }
+.food-entry-intro > p:not(.landing-kicker) { color: #5d5348; }
+
+/* Grow → Pool → Move → Share */
+.flow-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; margin: 26px 0 0; }
+.flow-step { display: inline-flex; align-items: center; gap: 8px; color: #4a332a; font: 600 17px/1.2 'Baloo 2', 'DM Sans', sans-serif; }
+.flow-step i { width: 11px; height: 11px; border-radius: 50%; flex: 0 0 auto; }
+.flow-link { width: 38px; height: 15px; color: #a3bc82; flex: 0 0 auto; }
+.flow-link path { stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; stroke-dasharray: 5 6; }
+
+/* Hero illustration + floating stickers */
+.hero-illustration { position: relative; min-height: clamp(320px, 30vw, 430px); pointer-events: none; }
+.hero-blob { position: absolute; inset: 7% 5% 5%; background: #f6e8c9; border-radius: 54% 46% 58% 42% / 50% 56% 44% 50%; }
+.floaty { position: absolute; line-height: 0; }
+.floaty svg { width: 100%; height: auto; }
+.floaty-bowl { left: 13%; top: 14%; width: 74%; filter: drop-shadow(0 18px 22px #4c633321); }
+.floaty-sun { right: 10%; top: -4%; width: clamp(44px, 4.6vw, 62px); }
+.floaty-tomato { left: -1%; top: 4%; width: clamp(56px, 6.4vw, 86px); }
+.floaty-carrot { right: -2%; top: 22%; width: clamp(52px, 6vw, 80px); }
+.floaty-corn { right: -1%; bottom: 0; width: clamp(56px, 6.4vw, 86px); }
+.floaty-sprout { left: 4%; bottom: 6%; width: clamp(44px, 5vw, 66px); }
+
+/* Rolling hills into the meadow band */
+.landing-hills { position: relative; margin-top: clamp(40px, 7vw, 84px); line-height: 0; overflow: hidden; }
+.landing-hills svg { width: 106%; margin-left: -3%; height: clamp(80px, 12vw, 175px); }
+.entry-band { background: #e3edcc; padding: clamp(14px, 2vw, 26px) 0 clamp(58px, 7vw, 88px); }
+
+/* Entry paths on the meadow */
+.entry-paths { margin-top: 0; }
+.entry-path-list-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.entry-paths-heading { display: block; margin-bottom: 28px; }
+.entry-paths-heading h2 { margin-top: 10px; }
+.entry-paths-heading h2 { font-family: 'Baloo 2', 'Space Grotesk', sans-serif; font-weight: 700; color: #46312a; letter-spacing: -.01em; }
+.entry-band .landing-kicker { color: #5c6b44; }
+.entry-band .landing-kicker span { background: #e2603f; box-shadow: 0 0 0 5px #e2603f1f; }
+.entry-path-wrap { display: grid; }
+.entry-path-wrap .entry-path { height: 100%; }
+.entry-path {
+  border-radius: 26px;
+  border-color: #ccdcba;
+  background: #fffdf6;
+  box-shadow: 0 14px 34px #4c633314;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.entry-path:hover { transform: none; border-color: #a9c489; box-shadow: 0 24px 48px #4c63331f; }
+.entry-path-food { background: #f2f8e8; border-color: #c4d8ae; }
+.entry-path-icon { width: 56px; height: 56px; border-radius: 46% 54% 52% 48% / 54% 46% 56% 44%; }
+.entry-path-food .entry-path-icon { background: #5c7d45; color: #fdfbf2; }
+.entry-path-contributor .entry-path-icon { background: #e2603f; color: #fff4ec; }
+.entry-path-gather .entry-path-icon { background: #f0b429; color: #4a332a; }
+.entry-path-copy strong { font-family: 'Baloo 2', 'Space Grotesk', sans-serif; font-weight: 600; color: #43302a; letter-spacing: -.008em; }
+.entry-path-copy small { color: #647252; }
+.entry-path-copy > span { color: #5d6650; }
+.entry-path-action { color: #55763f; }
+.entry-band .entry-request-note, .entry-band .entry-updates-note { color: #5c6b49; }
+.entry-band .entry-request-note a, .entry-band .entry-updates-note a { color: #3f5d2c; }
+.entry-updates-note { margin: 8px 4px 0; font-size: 12px; text-align: left; }
+
+/* Only-when-motion loops */
+@media (prefers-reduced-motion: no-preference) {
+  .flow-link path { animation: yuhm-flow 1.5s linear infinite; }
+  .landing-hills svg { animation: yuhm-hill-drift 26s ease-in-out infinite alternate; }
+  .hero-blob { animation: yuhm-blob 12s ease-in-out infinite; }
+}
+@keyframes yuhm-flow { to { stroke-dashoffset: -22; } }
+@keyframes yuhm-hill-drift { from { transform: translateX(-16px); } to { transform: translateX(16px); } }
+@keyframes yuhm-blob {
+  0%, 100% { border-radius: 54% 46% 58% 42% / 50% 56% 44% 50%; }
+  50% { border-radius: 46% 54% 44% 56% / 58% 46% 54% 42%; }
+}
+
+@media (max-width: 980px) {
+  .food-entry-grid { grid-template-columns: 1fr; gap: 6px; }
+  .food-entry-copy-col { max-width: 640px; }
+  .hero-illustration { min-height: 300px; max-width: 500px; width: 100%; margin: 26px auto 0; }
+}
+@media (max-width: 760px) {
+  .food-entry-main { width: 100%; padding-bottom: clamp(28px, 4vw, 48px); }
+  .food-entry-wrap { width: calc(100% - 32px); }
+  .food-entry-intro h1 { font-size: clamp(2.9rem, 12.5vw, 4.1rem); }
+  .yuhm-mark { width: 38px; }
+  .food-entry-page .landing-brand .yuhm-word { font-size: 21px; }
+  .flow-step { font-size: 15px; }
+  .flow-link { width: 26px; }
+  .hero-illustration { min-height: 250px; margin-top: 20px; }
+  .floaty-corn { right: 2%; bottom: -3%; }
+  .landing-nav-actions > a, .landing-feedback { white-space: nowrap; }
+  .entry-path-list-three { grid-template-columns: 1fr; }
+  .entry-path-list-three .entry-path { border-radius: 20px; }
+  .entry-path-list-three .entry-path-icon { border-radius: 46% 54% 52% 48% / 54% 46% 56% 44%; }
+}
+@media (max-width: 480px) {
+  .food-entry-page .landing-brand small { display: none; }
+}

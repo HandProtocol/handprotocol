@@ -8,6 +8,19 @@ This is the working orientation document for `yuhm/`. Read it before changing th
 
 Public-facing product behavior and safety boundaries are maintained in `docs/LIVING-DOCS.md`. Keep it current when a feature promise or workflow changes. It is intended to become the source for a future HTML documentation page.
 
+## Playful landing pass ("yuhmmy"), 2026-08-24
+
+The public landing (`src/LandingPage.tsx`) was rebuilt around the new yuhm brand direction, with spring animations via the already-installed `motion` package:
+
+- **Brand assets.** `yuhm-logo.png` and `yuhm-playful-ref.png` at this directory root are the reference images (the logo PNG has a baked-in checkerboard, do not embed it). The bowl-network mark was recreated as an animatable inline SVG in `src/LandingDecor.tsx` (`BowlMark`), alongside sticker-style produce SVGs, the rolling-hills divider, and two environment-safe hooks (`usePrefersReducedMotion`, `useInViewOnce` — both guard for jsdom, which lacks `matchMedia` and `IntersectionObserver`; do NOT stub `matchMedia` in `testSetup.ts`, the app's viewport hook falls back to `innerWidth` and a stub breaks the mobile-map test).
+- **Type.** `Baloo 2` (added to `index.html` fonts) carries landing display type; the wordmark is brown `#4a332a`. Dashboard typography untouched.
+- **Motion.** Hero choreography: headline words spring in, a tomato-coral scribble encircles the last title line, the bowl mark draws itself and its nodes pop, produce stickers spring-scatter then idle-bob with cursor parallax; path cards spring in on scroll and wiggle their icon chips on hover. Everything gates on `prefers-reduced-motion` (fade-free static render).
+- **Layout.** Hero is a two-column grid (copy left, illustration right); an SVG hills divider leads into a sage `entry-band` holding the three path cards (now a true 3-across via `.entry-path-list-three` override — the base `.entry-path-list` 2-column rule used to win). Landing v2 styles live at the end of `src/styles.css`; note the nav `.brand-mark` name was already taken by the dashboard, the landing uses `.yuhm-mark`.
+- **i18n.** New `landing.flow.*` keys (Grow · Pool · Move · Share strip) in EN and ES.
+- `PRODUCT.md` and `DESIGN.md` at this root were derived from repo docs for design-tool context.
+
+Verification: 101 tests, build clean. Deploy remains manual CLI (`DEPLOY.md`).
+
 ## One live food-finding loop, 2026-08-11
 
 Plan `plans/003-wxl-food-network-upgrade.md` Phase 1 landed:
