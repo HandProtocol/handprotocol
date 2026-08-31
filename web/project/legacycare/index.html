@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title data-es="Legacy Care LLC · Cuidado en el hogar para adultos mayores · Cuidado en el que puede confiar">Legacy Care LLC · In-Home Care for Seniors · Care You Can Count On</title>
+<meta name="description" data-es="Legacy Care LLC brinda cuidado en el hogar compasivo y confiable para adultos mayores: compañía, cuidado personal, comidas, recordatorios de medicamentos, transporte, apoyo para demencia y relevo para familias. Consulta gratis: 817-565-0648." content="Legacy Care LLC provides compassionate, reliable in-home care for seniors: companion care, personal care, meals, medication reminders, transportation, dementia support, and respite for families. Free consultation: 817-565-0648.">
+<link rel="canonical" href="https://handprotocol.org/project/legacycare/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Legacy Care LLC · Care You Can Count On">
+<meta property="og:description" content="Compassionate, reliable in-home care so your loved one can remain safe, comfortable, and independent at home. Free consultation: 817-565-0648.">
+<meta property="og:image" content="https://handprotocol.org/project/legacycare/img/og.jpg">
+<meta property="og:url" content="https://handprotocol.org/project/legacycare/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0f3a86">
+
+<link rel="icon" type="image/webp" href="img/mark.webp">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Allura&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/hero.webp" fetchpriority="high">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "additionalType": "https://schema.org/HomeAndConstructionBusiness",
+  "name": "Legacy Care LLC",
+  "alternateName": "Legacy Care In-Home Care Services",
+  "description": "Compassionate, reliable in-home care for seniors: companion care, personal care, meal preparation, medication reminders, transportation, dementia and Alzheimer's support, and respite care for family caregivers.",
+  "telephone": "+1-817-565-0648",
+  "email": "trustlegacycare@gmail.com",
+  "url": "https://handprotocol.org/project/legacycare/",
+  "image": "https://handprotocol.org/project/legacycare/img/og.jpg",
+  "logo": "https://handprotocol.org/project/legacycare/img/logo.webp",
+  "founder": { "@type": "Person", "name": "Emma Patton" },
+  "slogan": "Compassion. Dignity. Legacy.",
+  "priceRange": "$$",
+  "knowsAbout": ["Companion care", "Personal care", "Bathing assistance", "Meal preparation", "Light housekeeping", "Medication reminders", "Transportation to appointments", "Grocery shopping", "Mobility assistance", "Dementia and Alzheimer's support", "Respite care"]
+}
+</script>
+
+<style>
+  :root{
+    /* Palette sampled from the Legacy Care logo: two blues, kept honest, on a
+       blue-tinted white. OKLCH throughout. */
+    --paper:      oklch(0.992 0.004 250);
+    --paper-2:    oklch(0.975 0.010 248);
+    --sky-pale:   oklch(0.958 0.022 245);
+    --sky-light:  oklch(0.926 0.040 245);
+    --sky:        oklch(0.760 0.095 250);
+    --sky-deep:   oklch(0.660 0.125 252);
+    --blue:       oklch(0.520 0.170 258);
+    --blue-text:  oklch(0.450 0.165 258);
+    --navy:       oklch(0.320 0.125 262);
+    --navy-deep:  oklch(0.255 0.095 262);
+    --ink:        oklch(0.260 0.045 262);
+    --ink-2:      oklch(0.420 0.040 260);
+    --ink-3:      oklch(0.540 0.032 258);
+    --on-navy:    oklch(0.985 0.006 250);
+    --on-navy-2:  oklch(0.880 0.035 248);
+    --gold:       oklch(0.860 0.140 88);
+    --gold-deep:  oklch(0.760 0.150 80);
+    --line:       oklch(0.900 0.018 248);
+    --line-navy:  oklch(0.420 0.100 260);
+
+    --font-body: 'Rubik', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-script: 'Allura', 'Brush Script MT', cursive;
+
+    --maxw: 1180px;
+    --pad: clamp(1.1rem, 4vw, 2.75rem);
+    --r-sm: 10px; --r-md: 16px; --r-lg: 24px; --r-xl: 32px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --shadow-soft: 0 18px 50px -24px oklch(0.32 0.12 262 / 0.35);
+    --shadow-lift: 0 10px 28px -14px oklch(0.32 0.12 262 / 0.40);
+
+    /* Type scale, ratio ~1.3, sized up for readers who are 50+ */
+    --t-label: 0.8125rem;
+    --t-body:  clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+    --t-lead:  clamp(1.2rem, 1.05rem + 0.75vw, 1.5rem);
+    --t-h3:    clamp(1.3rem, 1.15rem + 0.8vw, 1.7rem);
+    --t-h2:    clamp(1.9rem, 1.4rem + 2.2vw, 3rem);
+    --t-h1:    clamp(2.5rem, 1.6rem + 4.2vw, 4.6rem);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--font-body);font-size:var(--t-body);line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;
+  }
+  img{display:block;max-width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3{font-weight:800;line-height:1.05;letter-spacing:-0.02em;color:var(--navy-deep);text-wrap:balance}
+  h3{font-weight:700;letter-spacing:-0.01em}
+  p{text-wrap:pretty}
+  ::selection{background:var(--sky);color:var(--navy-deep)}
+  :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+  .script{font-family:var(--font-script);font-weight:400;letter-spacing:0;line-height:1;color:var(--blue)}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:0.55rem;
+    font-size:var(--t-label);font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-text);
+  }
+  .eyebrow svg{width:1.05em;height:1.05em;flex:none}
+  .lead{font-size:var(--t-lead);line-height:1.5;color:var(--ink-2);font-weight:400}
+  .measure{max-width:62ch}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:0.6rem;
+    min-height:3.25rem;padding:0.85rem 1.5rem;border-radius:999px;
+    font-weight:700;font-size:1.0625rem;line-height:1;letter-spacing:0.005em;white-space:nowrap;
+    border:2px solid transparent;cursor:pointer;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease), background-color .2s, color .2s, border-color .2s;
+  }
+  .btn svg{width:1.2em;height:1.2em;flex:none}
+  .btn--primary{background:var(--navy);color:var(--on-navy);box-shadow:var(--shadow-lift)}
+  .btn--primary:hover{background:var(--navy-deep);transform:translateY(-2px)}
+  .btn--ghost{background:transparent;color:var(--navy);border-color:var(--navy)}
+  .btn--ghost:hover{background:var(--navy);color:var(--on-navy)}
+  .btn--light{background:var(--paper);color:var(--navy);box-shadow:var(--shadow-lift)}
+  .btn--light:hover{background:var(--sky-pale);transform:translateY(-2px)}
+  .btn--outline-light{background:transparent;color:var(--on-navy);border-color:oklch(0.985 0.006 250 / 0.55)}
+  .btn--outline-light:hover{background:oklch(0.985 0.006 250 / 0.12);border-color:var(--on-navy)}
+  .btn:active{transform:translateY(0)}
+  .btn--lg{min-height:3.75rem;padding:1rem 1.9rem;font-size:1.15rem}
+
+  /* Skip link */
+  .skip{position:absolute;left:-999px;top:0;z-index:300;background:var(--navy);color:var(--on-navy);padding:0.75rem 1.2rem;border-radius:0 0 var(--r-sm) 0;font-weight:700}
+  .skip:focus{left:0}
+
+  /* ─────────── Nav ─────────── */
+  .nav{
+    position:sticky;top:0;z-index:100;
+    background:oklch(0.992 0.004 250 / 0.88);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav__row{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4.5rem}
+  .brand{display:flex;align-items:center;gap:0.7rem;min-width:0}
+  .brand__mark{width:2.6rem;height:2.6rem;flex:none}
+  .brand__name{display:flex;flex-direction:column;line-height:1.05}
+  .brand__legacy{font-weight:800;font-size:1.2rem;letter-spacing:0.02em;color:var(--navy-deep);text-transform:uppercase}
+  .brand__care{font-size:0.72rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-text)}
+  .nav__links{display:flex;gap:clamp(1rem,2.4vw,2rem);font-weight:600;font-size:1rem;color:var(--ink-2)}
+  .nav__links a{position:relative;padding:0.4rem 0;transition:color .2s}
+  .nav__links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+  .nav__links a:hover{color:var(--navy-deep)}
+  .nav__links a:hover::after{transform:scaleX(1)}
+  .nav__actions{display:flex;align-items:center;gap:0.6rem}
+  .nav .btn{min-height:2.75rem;padding:0.6rem 1.1rem;font-size:0.95rem}
+  .lang-toggle{
+    display:inline-flex;align-items:center;gap:0.4em;min-height:2.75rem;padding:0.5em 0.9em;
+    font-family:inherit;font-weight:700;font-size:0.9rem;border:2px solid var(--line);border-radius:999px;
+    background:transparent;color:var(--ink-2);cursor:pointer;white-space:nowrap;transition:border-color .2s,color .2s,background-color .2s;
+  }
+  .lang-toggle:hover{border-color:var(--sky-deep);color:var(--navy-deep);background:var(--sky-pale)}
+  .lang-toggle svg{width:1.1em;height:1.1em;flex:none}
+  @media (max-width: 900px){.nav__links{display:none}}
+  @media (max-width: 560px){
+    .nav .btn .btn-txt{display:none}
+    .nav .btn{padding:0.6rem 0.8rem;min-width:2.75rem}
+    .lang-toggle .lang-label{display:none}
+    .lang-toggle{padding:0.5em 0.7em}
+  }
+
+  /* ─────────── Hero ─────────── */
+  .hero{padding:clamp(1rem,2.5vw,1.75rem) 0 clamp(3rem,6vw,5rem);position:relative}
+  .hero__panel{
+    position:relative;overflow:hidden;
+    background:var(--sky-light);border-radius:var(--r-xl);
+    padding:clamp(1.6rem,4.5vw,4rem) clamp(1.4rem,4.5vw,4rem);
+    display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:center;
+  }
+  /* hand-drawn hearts, echoing the flyer, kept faint */
+  .hero__hearts{position:absolute;inset:0;pointer-events:none;color:var(--sky);opacity:0.5}
+  .hero__hearts svg{position:absolute;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .hero__hearts .h1{width:74px;right:38%;top:6%;transform:rotate(-14deg)}
+  .hero__hearts .h2{width:38px;left:3%;bottom:14%;transform:rotate(12deg)}
+  .hero__hearts .h3{width:52px;right:4%;bottom:8%;transform:rotate(-6deg)}
+  .hero__copy{position:relative;z-index:1;display:flex;flex-direction:column;gap:1.4rem}
+  .hero h1{font-size:var(--t-h1);color:var(--navy-deep)}
+  .hero h1 .script{display:block;font-size:1.32em;margin-top:0.05em;padding-left:0.06em;color:var(--blue)}
+  .hero .lead{max-width:34ch}
+  .hero__cta{display:flex;flex-wrap:wrap;gap:0.8rem;align-items:center}
+  .hero__free{
+    display:inline-flex;align-items:center;gap:0.5rem;font-size:0.95rem;font-weight:600;color:var(--navy-deep);
+  }
+  .hero__free b{background:var(--gold);color:var(--navy-deep);border-radius:999px;padding:0.2rem 0.6rem;font-size:0.78rem;font-weight:800;letter-spacing:0.08em;text-transform:uppercase}
+  .why{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0.6rem 1.2rem;
+    padding-top:1.4rem;margin-top:0.2rem;border-top:1px solid oklch(0.32 0.12 262 / 0.14);
+    font-size:1rem;font-weight:500;color:var(--ink);list-style:none;
+  }
+  .why li{display:flex;align-items:flex-start;gap:0.55rem;line-height:1.35}
+  .why svg{width:1.3rem;height:1.3rem;flex:none;color:var(--blue);margin-top:0.05rem}
+  .hero__media{position:relative;z-index:1}
+  .hero__photo{
+    aspect-ratio:6/5.2;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-soft);
+    background:var(--sky);
+  }
+  .hero__photo img{width:100%;height:100%;object-fit:cover;object-position:47% 30%}
+  .badge{
+    position:absolute;right:-0.6rem;bottom:-1.1rem;width:8.6rem;height:8.6rem;border-radius:50%;
+    background:var(--navy);color:var(--on-navy);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+    padding:1rem;box-shadow:var(--shadow-lift);border:5px solid var(--sky-light);
+    font-weight:600;font-size:0.82rem;line-height:1.2;
+  }
+  .badge svg{width:1.4rem;height:1.4rem;color:var(--gold);margin-bottom:0.25rem}
+  .badge em{font-style:normal;color:var(--gold);font-weight:800;font-size:1.1rem;display:block}
+  @media (max-width: 860px){
+    .hero__panel{grid-template-columns:1fr;padding-bottom:clamp(2rem,6vw,3rem)}
+    .hero__media{order:-1;margin:-0.2rem -0.2rem 0.4rem}
+    .hero__photo{aspect-ratio:16/10}
+    .badge{right:0.6rem;bottom:-0.9rem;width:7.4rem;height:7.4rem;font-size:0.74rem}
+    .hero__hearts .h1{right:6%;top:4%;width:56px;color:oklch(0.99 0.004 250);opacity:0.9}
+  }
+  @media (max-width: 480px){
+    .why{grid-template-columns:1fr}
+    .hero .lead{max-width:none}
+  }
+
+  /* ─────────── Section scaffolding ─────────── */
+  section{padding:clamp(3rem,7vw,6rem) 0}
+  .sec-head{display:flex;flex-direction:column;gap:0.9rem;margin-bottom:clamp(1.8rem,4vw,3rem)}
+  .sec-head h2{font-size:var(--t-h2);max-width:20ch}
+  .sec-head .lead{max-width:52ch}
+
+  /* ─────────── Services ─────────── */
+  .services{padding-top:0}
+  .svc{
+    background:var(--navy);color:var(--on-navy);border-radius:var(--r-xl);
+    padding:clamp(1.6rem,4.5vw,3.5rem);
+    display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,0.85fr);gap:clamp(1.8rem,4vw,3.5rem);
+    position:relative;overflow:hidden;
+  }
+  .svc::before{
+    content:"";position:absolute;inset:auto -10% -30% auto;width:60%;aspect-ratio:1;border-radius:50%;
+    background:radial-gradient(closest-side, oklch(0.52 0.17 258 / 0.55), transparent 72%);pointer-events:none;
+  }
+  .svc__list{
+    list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(1rem,3vw,2.2rem);
+    position:relative;z-index:1;
+  }
+  .svc__item{
+    display:grid;grid-template-columns:3rem 1fr;gap:0.4rem 0.9rem;align-items:start;
+    padding:1.05rem 0;border-bottom:1px solid var(--line-navy);
+  }
+  .svc__item:nth-last-child(-n+2){border-bottom:0}
+  .svc__icon{
+    width:3rem;height:3rem;border-radius:50%;background:var(--on-navy);color:var(--navy);
+    display:grid;place-items:center;grid-row:span 2;
+  }
+  .svc__icon svg{width:1.45rem;height:1.45rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .svc__name{font-weight:700;font-size:1.1rem;line-height:1.25;color:var(--on-navy);padding-top:0.35rem}
+  .svc__desc{font-size:0.98rem;line-height:1.45;color:var(--on-navy-2);grid-column:2}
+  .svc__side{display:flex;flex-direction:column;gap:1.2rem;position:relative;z-index:1}
+  .svc__photos{position:relative;aspect-ratio:1/1.05}
+  .svc__photos figure{position:absolute;border-radius:var(--r-lg);overflow:hidden;box-shadow:0 22px 50px -20px oklch(0.15 0.06 262 / 0.7);border:4px solid var(--navy)}
+  .svc__photos img{width:100%;height:100%;object-fit:cover}
+  .svc__photos .p1{left:0;top:0;width:76%;aspect-ratio:4/3.3}
+  .svc__photos .p2{right:0;bottom:0;width:56%;aspect-ratio:1}
+  .svc__foot{
+    margin-top:auto;background:oklch(0.985 0.006 250 / 0.08);border:1px solid var(--line-navy);border-radius:var(--r-md);
+    padding:1.2rem 1.3rem;display:flex;flex-direction:column;gap:0.75rem;
+  }
+  .svc__foot p{color:var(--on-navy-2);font-size:1rem;line-height:1.45}
+  .svc__foot .call{display:inline-flex;align-items:center;gap:0.55rem;color:var(--on-navy);font-weight:800;font-size:1.35rem;letter-spacing:0.01em;font-variant-numeric:tabular-nums}
+  .svc__foot .call svg{width:1.2rem;height:1.2rem;color:var(--gold)}
+  .svc__foot .call:hover{color:var(--gold)}
+  @media (max-width: 960px){
+    .svc{grid-template-columns:1fr}
+    .svc__side{flex-direction:row;align-items:stretch}
+    .svc__photos{flex:1 1 46%;aspect-ratio:1/0.95}
+    .svc__foot{flex:1 1 54%}
+  }
+  @media (max-width: 700px){
+    .svc__list{grid-template-columns:1fr}
+    .svc__item:nth-last-child(2){border-bottom:1px solid var(--line-navy)}
+    .svc__side{flex-direction:column}
+    .svc__photos{aspect-ratio:16/11}
+    .svc__photos .p1{width:66%;aspect-ratio:4/3}
+    .svc__photos .p2{width:44%}
+  }
+
+  /* ─────────── About: note from Emma ─────────── */
+  .about{background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about__grid{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:clamp(2rem,5vw,5rem);align-items:start}
+  .about__media{position:sticky;top:6rem;display:flex;flex-direction:column;gap:1rem}
+  .about__photo{border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-soft);aspect-ratio:4/3.2}
+  .about__photo img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+  .about__caption{font-size:0.95rem;color:var(--ink-3);display:flex;gap:0.5rem;align-items:flex-start;line-height:1.4}
+  .about__caption svg{width:1.1rem;height:1.1rem;flex:none;color:var(--sky-deep);margin-top:0.15rem}
+  .mission{
+    background:var(--sky-light);border-radius:var(--r-md);padding:1.3rem 1.4rem;
+    display:flex;flex-direction:column;gap:0.4rem;
+  }
+  .mission .eyebrow{font-size:0.75rem}
+  .mission p{font-weight:600;color:var(--navy-deep);font-size:1.1rem;line-height:1.4}
+  .letter{display:flex;flex-direction:column;gap:1.1rem}
+  .letter h2{font-size:var(--t-h2);margin-bottom:0.4rem}
+  .letter p{color:var(--ink-2);line-height:1.68;max-width:62ch}
+  .letter p:first-of-type{font-size:var(--t-lead);color:var(--ink);line-height:1.45;font-weight:500}
+  .letter__sig{margin-top:0.8rem;display:flex;flex-direction:column;gap:0.15rem}
+  .letter__sig .script{font-size:3.1rem;color:var(--navy);line-height:1}
+  .letter__sig span{font-size:0.95rem;color:var(--ink-3);font-weight:500}
+  @media (max-width: 860px){
+    .about__grid{grid-template-columns:1fr}
+    .about__media{position:static;display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+    .about__photo{aspect-ratio:auto;min-height:220px}
+    .about__caption{grid-column:1/-1}
+  }
+  @media (max-width: 600px){
+    .about__media{grid-template-columns:1fr}
+    .about__photo{aspect-ratio:16/10;min-height:0}
+  }
+
+  /* ─────────── How it works ─────────── */
+  .steps{list-style:none;counter-reset:step;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.2rem,3vw,2.5rem)}
+  .steps li{counter-increment:step;display:flex;flex-direction:column;gap:0.8rem;padding-top:1.2rem;border-top:3px solid var(--sky-light);position:relative}
+  .steps li::before{
+    content:counter(step, decimal-leading-zero);position:absolute;top:-1.1rem;left:0;
+    background:var(--paper);padding-right:0.6rem;
+    font-weight:800;font-size:1.05rem;letter-spacing:0.06em;color:var(--blue-text);font-variant-numeric:tabular-nums;
+  }
+  .steps h3{font-size:var(--t-h3)}
+  .steps p{color:var(--ink-2);line-height:1.55;font-size:1.02rem}
+  .steps .btn{align-self:flex-start;margin-top:0.3rem}
+  @media (max-width: 760px){
+    .steps{grid-template-columns:1fr;gap:2rem}
+  }
+
+  /* Spotlights: the two services that deserve a paragraph */
+  .spot{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.4rem;margin-top:clamp(2.5rem,5vw,4rem)}
+  .spot article{
+    border-radius:var(--r-lg);padding:clamp(1.5rem,3.5vw,2.4rem);display:flex;flex-direction:column;gap:0.8rem;
+    border:1px solid var(--line);background:var(--paper);
+  }
+  .spot article.spot--tint{background:var(--sky-pale);border-color:transparent}
+  .spot .eyebrow{font-size:0.75rem}
+  .spot h3{font-size:var(--t-h3);max-width:18ch}
+  .spot p{color:var(--ink-2);line-height:1.6;max-width:50ch}
+  @media (max-width: 760px){.spot{grid-template-columns:1fr}}
+
+  /* ─────────── Contact ─────────── */
+  .contact{padding-top:0}
+  .contact__panel{
+    position:relative;overflow:hidden;border-radius:var(--r-xl);
+    background:var(--navy);color:var(--on-navy);
+    display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr);
+  }
+  .contact__copy{padding:clamp(2rem,5vw,4rem);display:flex;flex-direction:column;gap:1.3rem;position:relative;z-index:1}
+  .contact__copy .script{font-size:clamp(2.6rem,2rem+3.2vw,4.4rem);color:var(--on-navy);line-height:1.02;text-wrap:balance}
+  .contact__copy .eyebrow{color:var(--sky)}
+  .contact__copy p{color:var(--on-navy-2);max-width:44ch;line-height:1.55}
+  .contact__phone{
+    display:inline-flex;align-items:center;gap:0.7rem;color:var(--on-navy);
+    font-weight:800;font-size:clamp(1.7rem,1.3rem+1.8vw,2.6rem);letter-spacing:0.01em;font-variant-numeric:tabular-nums;line-height:1;
+    transition:color .2s;
+  }
+  .contact__phone svg{width:0.9em;height:0.9em;color:var(--gold)}
+  .contact__phone:hover{color:var(--gold)}
+  .contact__actions{display:flex;flex-wrap:wrap;gap:0.75rem}
+  .contact__meta{display:flex;flex-direction:column;gap:0.5rem;padding-top:1.2rem;border-top:1px solid var(--line-navy);font-size:0.98rem;color:var(--on-navy-2)}
+  .contact__meta a{color:var(--on-navy);font-weight:600;text-decoration:underline;text-decoration-color:oklch(0.985 0.006 250 / 0.35);text-underline-offset:0.2em}
+  .contact__meta a:hover{text-decoration-color:var(--gold)}
+  .contact__meta div{display:flex;gap:0.55rem;align-items:flex-start}
+  .contact__meta svg{width:1.15rem;height:1.15rem;flex:none;color:var(--sky);margin-top:0.2rem}
+  .contact__photo{position:relative;min-height:320px}
+  .contact__photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:74% 40%}
+  .contact__photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, var(--navy) 0%, oklch(0.32 0.125 262 / 0) 26%)}
+  @media (max-width: 860px){
+    .contact__panel{grid-template-columns:1fr}
+    .contact__photo{order:-1;min-height:240px;aspect-ratio:16/9}
+    .contact__photo::after{background:linear-gradient(180deg, oklch(0.32 0.125 262 / 0) 60%, var(--navy) 100%)}
+  }
+
+  /* ─────────── Footer ─────────── */
+  footer{padding:clamp(2.5rem,5vw,4rem) 0 clamp(6rem,10vw,3rem);border-top:1px solid var(--line)}
+  .foot__badges{
+    display:flex;flex-wrap:wrap;justify-content:center;gap:0.8rem 2.2rem;
+    font-size:0.95rem;font-weight:600;color:var(--ink-2);margin-bottom:clamp(2rem,4vw,3rem);
+  }
+  .foot__badges span{display:inline-flex;align-items:center;gap:0.5rem}
+  .foot__badges svg{width:1.25rem;height:1.25rem;color:var(--blue)}
+  .foot__grid{display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:center}
+  .foot__logo{width:150px}
+  .foot__tag{font-size:0.8rem;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-text);margin-top:0.4rem;text-align:center}
+  .foot__contact{display:flex;flex-direction:column;gap:0.35rem;font-size:1rem;color:var(--ink-2)}
+  .foot__contact a{font-weight:700;color:var(--navy-deep)}
+  .foot__contact a:hover{color:var(--blue)}
+  .foot__legal{font-size:0.85rem;color:var(--ink-3);text-align:right;line-height:1.6}
+  .foot__legal a{text-decoration:underline;text-underline-offset:0.2em;color:var(--ink-2)}
+  .foot__legal a:hover{color:var(--navy-deep)}
+  @media (max-width: 760px){
+    .foot__grid{grid-template-columns:1fr;text-align:center;justify-items:center}
+    .foot__legal{text-align:center}
+  }
+
+  /* ─────────── Mobile call bar ─────────── */
+  .callbar{display:none}
+  @media (max-width: 760px){
+    .callbar{
+      display:block;position:fixed;left:0;right:0;bottom:0;z-index:90;
+      padding:0.6rem var(--pad) calc(0.6rem + env(safe-area-inset-bottom));
+      background:oklch(0.992 0.004 250 / 0.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+      border-top:1px solid var(--line);
+    }
+    .callbar .btn{width:100%;min-height:3.4rem;font-size:1.1rem}
+  }
+
+  /* ─────────── Reveal ─────────── */
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s var(--ease), transform .7s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal[data-delay="1"]{transition-delay:.08s}
+  .reveal[data-delay="2"]{transition-delay:.16s}
+  .reveal[data-delay="3"]{transition-delay:.24s}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .btn,.nav__links a::after{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main"><span data-es="Saltar al contenido">Skip to content</span></a>
+
+<header class="nav">
+  <div class="wrap nav__row">
+    <a class="brand" href="#top" aria-label="Legacy Care LLC, home">
+      <img class="brand__mark" src="img/mark.webp" width="66" height="67" alt="">
+      <span class="brand__name">
+        <span class="brand__legacy">Legacy Care</span>
+        <span class="brand__care" data-es="Cuidado en el hogar">In-home care</span>
+      </span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#services" data-es="Servicios">Services</a>
+      <a href="#about" data-es="Nosotros">About</a>
+      <a href="#how" data-es="Cómo empezar">How it works</a>
+      <a href="#contact" data-es="Contacto">Contact</a>
+    </nav>
+    <div class="nav__actions">
+      <button class="lang-toggle" type="button" data-lang-to="es" aria-label="Ver en español" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="lang-label">Español</span>
+      </button>
+      <a class="btn btn--primary" href="tel:+18175650648">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg>
+        <span class="btn-txt">817-565-0648</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero__panel">
+        <div class="hero__hearts" aria-hidden="true">
+          <svg class="h1" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <svg class="h2" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <svg class="h3" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </div>
+
+        <div class="hero__copy">
+          <span class="eyebrow reveal in">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <span data-es="Cuidado en el hogar para adultos mayores">In-home care for seniors</span>
+          </span>
+          <h1 id="hero-title" class="reveal in" data-delay="1">
+            <span data-es="Cuidado en el que puede">Care you can</span>
+            <span class="script" data-es="confiar.">count on.</span>
+          </h1>
+          <p class="lead reveal in" data-delay="2" data-es="Cuidado en el hogar, compasivo y confiable, para que su ser querido se mantenga seguro, cómodo e independiente en casa.">Compassionate, reliable in-home care so your loved one can remain safe, comfortable, and independent at home.</p>
+          <div class="hero__cta reveal in" data-delay="3">
+            <a class="btn btn--primary btn--lg" href="tel:+18175650648">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg>
+              <span data-es="Llame al 817-565-0648">Call 817-565-0648</span>
+            </a>
+            <a class="btn btn--ghost btn--lg" href="#services" data-es="Ver servicios">See our services</a>
+          </div>
+          <p class="hero__free reveal in" data-delay="3"><b data-es="Gratis">Free</b><span data-es="consulta en casa, sin compromiso.">in-home consultation, no obligation.</span></p>
+          <ul class="why reveal in" data-delay="3" aria-label="Why families choose Legacy Care">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.3 2.3 4.7-5"/></svg><span data-es="Cuidadores compasivos y de confianza">Compassionate, trusted caregivers</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.3 2.3 4.7-5"/></svg><span data-es="Planes de cuidado personalizados">Personalized care plans</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.3 2.3 4.7-5"/></svg><span data-es="Servicio confiable y flexible">Reliable, flexible scheduling</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m8.5 12.5 2.3 2.3 4.7-5"/></svg><span data-es="Tranquilidad para su familia">Peace of mind for your family</span></li>
+          </ul>
+        </div>
+
+        <div class="hero__media reveal in" data-delay="1">
+          <div class="hero__photo">
+            <img src="img/hero.webp" width="1343" height="680" alt="A Legacy Care caregiver in a blue polo sitting beside a smiling older woman on her living-room couch, holding her hands" fetchpriority="high" decoding="async">
+          </div>
+          <div class="badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+            <span data-es="Enriqueciendo">Enriching</span>
+            <em data-es="vidas">lives</em>
+            <span data-es="cada día">every day</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERVICES ═══════════ -->
+  <section class="services" id="services" aria-labelledby="svc-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-es="Nuestros servicios">Our services</span>
+        <h2 id="svc-title" data-es="Ayuda con lo de todos los días, para que su casa siga siendo su hogar.">Help with the everyday, so home can stay home.</h2>
+        <p class="lead" data-es="Desde unas horas a la semana hasta un apoyo más completo. Cada plan se arma alrededor de la persona, sus rutinas y sus preferencias.">From a few hours a week to more comprehensive support. Every plan is built around the person, their routines, and their preferences.</p>
+      </div>
+
+      <div class="svc reveal">
+        <ul class="svc__list">
+          <li class="svc__item">
+            <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            <span class="svc__name" data-es="Compañía">Companion care</span>
+            <span class="svc__desc" data-es="Conversación, compañía y alguien con quien compartir el día.">Conversation, company, and someone to share the day with.</span>
+          </li>
+          <li class="svc__item">
+            <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6 6.5 3.5a1.5 1.5 0 0 0-1-.5C4.7 3 4 3.7 4 4.5V17a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/><path d="M10 5 8 7M2 12h20M7 19v2M17 19v2"/></svg></span>
+            <span class="svc__name" data-es="Cuidado personal y ayuda con el baño">Personal care &amp; bathing assistance</span>
+            <span class="svc__desc" data-es="Ayuda respetuosa con el baño, el vestido y el aseo personal.">Respectful help with bathing, dressing, and grooming.</span>
+          </li>
+          <li class="svc__item">
+            <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2M7 2v20M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg></span>
+            <span class="svc__name" data-es="Preparación de comidas">Meal preparation</span>
+            <span class="svc__desc" data-es="Comidas caseras a su gusto y según sus necesidades alimenticias.">Home-cooked meals that fit their tastes and any dietary needs.</span>
+          </li>
+          <li class="svc__item">
+            <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/><path d="M9 21v-6h6v6"/></svg></span>
+            <span class="svc__name" data-es="Limpieza ligera y lavandería">Light housekeeping &amp; laundry</span>
+            <span class="svc__desc" data-es="Cuartos ordenados, trastes limpios, sábanas frescas.">Tidy rooms, clean dishes, fresh sheets.</span>
+          </li>
+          <li class="svc__item">
+            <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg></span>
+            <span class="svc__name" data-es="Recordatorios de medicamentos">Medication reminders</span>
+            <span class="svc__desc" data-es="El medicamento correcto a la hora correcta, siempre.">The right medication at the right time, every time.</span>
+          </li>
+          <li class="svc__item">
+            <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></span>
+            <span class="svc__name" data-es="Transporte a citas">Transportation to appointments</span>
+            <span class="svc__desc" data-es="Un viaje seguro al doctor, a la farmacia o a la iglesia.">A safe ride to the doctor, the pharmacy, or church.</span>
+          </li>
+          <li class="svc__item">
+            <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg></span>
+            <span class="svc__name" data-es="Compras y mandados">Grocery shopping &amp; errands</span>
+            <span class="svc__desc" data-es="La lista se cumple y la despensa se mantiene surtida.">The list gets done and the pantry stays stocked.</span>
+          </li>
+          <li class="svc__item">
+            <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="13" cy="4" r="2"/><path d="m8 22 2.5-7M14 22l-2-5.5-3-2 1.5-5.5 3.5 1 2 3"/><path d="M10.5 9 8 11l-1.5 4"/></svg></span>
+            <span class="svc__name" data-es="Ayuda con la movilidad">Mobility assistance</span>
+            <span class="svc__desc" data-es="Un brazo firme para caminar, levantarse y moverse por la casa.">A steady arm for walking, standing, and getting around the house.</span>
+          </li>
+          <li class="svc__item">
+            <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4.5a3 3 0 0 0-5.7 1.3A3 3 0 0 0 5 11.5a3.5 3.5 0 0 0 1.5 6.3A3 3 0 0 0 12 19.5M12 4.5a3 3 0 0 1 5.7 1.3A3 3 0 0 1 19 11.5a3.5 3.5 0 0 1-1.5 6.3A3 3 0 0 1 12 19.5M12 4.5v15"/></svg></span>
+            <span class="svc__name" data-es="Apoyo para demencia y Alzheimer">Dementia &amp; Alzheimer's support</span>
+            <span class="svc__desc" data-es="Cuidado paciente y constante que mantiene las rutinas familiares.">Patient, consistent care that keeps familiar routines in place.</span>
+          </li>
+          <li class="svc__item">
+            <span class="svc__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 13.5c1.4-1.3 3.5-3 3.5-5a2.5 2.5 0 0 0-5 0 2.5 2.5 0 0 0-5 0c0 2 2.1 3.7 3.5 5l1.5 1.4Z" transform="translate(1.5 -1)"/><path d="M4 19c3 2.2 13 2.2 16 0M4 19v-3M20 19v-3"/></svg></span>
+            <span class="svc__name" data-es="Relevo para cuidadores familiares">Respite care for family caregivers</span>
+            <span class="svc__desc" data-es="Descanso para usted, con alguien de confianza a cargo.">Rest for you, with someone trusted looking after them.</span>
+          </li>
+        </ul>
+
+        <div class="svc__side">
+          <div class="svc__photos">
+            <figure class="p1"><img src="img/meal.webp" width="809" height="699" loading="lazy" decoding="async" alt="A caregiver handing a plate of fresh food to a smiling older woman at her kitchen table"></figure>
+            <figure class="p2"><img src="img/hands.webp" width="685" height="621" loading="lazy" decoding="async" alt="A younger pair of hands gently holding an older pair of hands"></figure>
+          </div>
+          <div class="svc__foot">
+            <p data-es="¿No sabe qué necesita todavía? Llámenos. Platicamos de cómo es un buen día para su ser querido y lo resolvemos juntos.">Not sure what you need yet? Call us. We'll talk about what a good day looks like for your loved one and figure it out together.</p>
+            <a class="call" href="tel:+18175650648"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg>817-565-0648</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ABOUT: a note from Emma ═══════════ -->
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="wrap about__grid">
+      <div class="about__media reveal">
+        <div class="about__photo">
+          <img src="img/walk.webp" width="850" height="657" loading="lazy" decoding="async" alt="A caregiver walking arm in arm with an older woman using a cane along a garden path">
+        </div>
+        <div class="mission">
+          <span class="eyebrow" data-es="Nuestra misión">Our mission</span>
+          <p data-es="Enriquecer vidas, preservar la independencia y brindar un cuidado en el hogar excepcional en el que las familias puedan confiar.">To enrich lives, preserve independence, and provide exceptional in-home care that families can trust.</p>
+        </div>
+        <p class="about__caption">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-es="Al servicio de nuestra comunidad local y áreas cercanas. Estamos aquí cuando más nos necesita.">Serving our local community and surrounding areas. We're here when you need us most.</span>
+        </p>
+      </div>
+
+      <div class="letter reveal" data-delay="1">
+        <span class="eyebrow" data-es="Una nota de la dueña">A note from the owner</span>
+        <h2 id="about-title" data-es="Bienvenidos a Legacy Care.">Welcome to Legacy Care.</h2>
+        <p data-es="Gracias por tomarse el tiempo de conocer quiénes somos.">Thank you for taking the time to learn more about who we are.</p>
+        <p data-es="Fundé Legacy Care porque creo que todos merecen envejecer con dignidad, respeto y compasión en la comodidad de su propio hogar. Mi meta es brindar un cuidado confiable y personalizado que permita a los clientes mantener su independencia y dé tranquilidad a sus familias.">I started Legacy Care because I believe everyone deserves to age with dignity, respect, and compassion in the comfort of their own home. My goal is to provide dependable, personalized care that allows clients to remain independent while giving families peace of mind.</p>
+        <p data-es="Como cuidadora, tengo experiencia atendiendo a adultos mayores con una amplia variedad de necesidades: compañía, cuidado personal, ayuda con la movilidad, apoyo para demencia, preparación de comidas, recordatorios de medicamentos, limpieza ligera, transporte y más. Cada cliente es único, y creo que el cuidado siempre debe adaptarse a sus necesidades, preferencias y rutinas.">As a caregiver, I have experience caring for seniors with a wide range of needs: companionship, personal care, mobility assistance, dementia support, meal preparation, medication reminders, light housekeeping, transportation, and more. Every client is unique, and I believe care should always be tailored to their individual needs, preferences, and routines.</p>
+        <p data-es="En Legacy Care usted es más que un cliente; pasa a ser parte de nuestra familia. Me esfuerzo por construir relaciones significativas basadas en la confianza, la amabilidad, la honestidad y el respeto. Ya sea que usted o su ser querido necesite unas horas de ayuda a la semana o un apoyo más completo, mi compromiso es brindar un cuidado confiable y compasivo con el que pueda contar.">At Legacy Care, you're more than a client; you become part of our family. I strive to build meaningful relationships based on trust, kindness, honesty, and respect. Whether you or your loved one needs a few hours of assistance each week or more comprehensive support, my commitment is to provide dependable, compassionate care you can count on.</p>
+        <p data-es="Gracias por considerar a Legacy Care. Sería un honor cuidar de usted o de su ser querido y ayudar a que cada día sea más seguro, más feliz y más cómodo. Espero conocerlos pronto a usted y a su familia.">Thank you for considering Legacy Care. It would be an honor to care for you or your loved one and help make each day safer, happier, and more comfortable. I look forward to meeting you and your family.</p>
+        <p class="letter__sig">
+          <span class="script" aria-hidden="true">Emma Patton</span>
+          <span data-es="Emma Patton, dueña, Legacy Care LLC">Emma Patton, Owner, Legacy Care LLC</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ HOW IT WORKS ═══════════ -->
+  <section id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-es="Cómo empezar">How it works</span>
+        <h2 id="how-title" data-es="Empezar es sencillo.">Getting started is simple.</h2>
+      </div>
+      <ol class="steps">
+        <li class="reveal">
+          <h3 data-es="Llame para una consulta gratis">Call for a free consultation</h3>
+          <p data-es="Platicamos de su ser querido: cómo es un buen día para él o ella, y en qué momentos una mano extra haría la diferencia.">We talk about your loved one: what a good day looks like for them, and where an extra pair of hands would make the difference.</p>
+          <a class="btn btn--ghost" href="tel:+18175650648" data-es="Llamar al 817-565-0648">Call 817-565-0648</a>
+        </li>
+        <li class="reveal" data-delay="1">
+          <h3 data-es="Armamos un plan de cuidado personalizado">We build a personalized care plan</h3>
+          <p data-es="Horarios, rutinas, preferencias. Unas horas a la semana o un apoyo más completo; el plan se arma alrededor de la persona, no al revés.">Hours, routines, preferences. A few hours a week or more comprehensive support; the plan is built around the person, not the other way around.</p>
+        </li>
+        <li class="reveal" data-delay="2">
+          <h3 data-es="El cuidado empieza en casa">Care begins at home</h3>
+          <p data-es="Un cuidador de confianza, con un horario en el que puede contar. Ajustamos el plan conforme cambian las necesidades.">A trusted caregiver, on a schedule you can rely on. We adjust the plan as needs change.</p>
+        </li>
+      </ol>
+
+      <div class="spot">
+        <article class="spot--tint reveal">
+          <span class="eyebrow" data-es="Cuidado especializado">Specialized care</span>
+          <h3 data-es="Apoyo para demencia y Alzheimer">Dementia &amp; Alzheimer's support</h3>
+          <p data-es="Las rutinas familiares importan más cuando la memoria falla. Ofrecemos un cuidado paciente y constante en un entorno que ya conocen, con el mismo rostro de confianza, y mantenemos a la familia al tanto.">Familiar routines matter most when memory is failing. We provide patient, consistent care in surroundings they already know, from the same trusted face, and keep the family in the loop.</p>
+        </article>
+        <article class="reveal" data-delay="1">
+          <span class="eyebrow" data-es="Para la familia">For the family</span>
+          <h3 data-es="Relevo para cuidadores familiares">Respite for family caregivers</h3>
+          <p data-es="Cuidar a alguien que ama es un trabajo de tiempo completo. Tome una tarde, un fin de semana o una semana sabiendo que hay alguien de confianza a cargo. Regresará con más para dar.">Caring for someone you love is a full-time job. Take an afternoon, a weekend, or a week knowing someone trusted is looking after them. You'll come back with more to give.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTACT ═══════════ -->
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <div class="contact__panel reveal">
+        <div class="contact__copy">
+          <span class="eyebrow" data-es="Hablemos">Let's talk</span>
+          <h2 id="contact-title" class="script" data-es="Porque el hogar es donde el cuidado se siente mejor.">Because home is where care feels best.</h2>
+          <p data-es="Llámenos hoy para una consulta gratis en casa. Sin compromiso: solo una conversación honesta sobre lo que necesita su familia.">Call us today for a free in-home consultation. No obligation, just an honest conversation about what your family needs.</p>
+          <a class="contact__phone" href="tel:+18175650648">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg>
+            817-565-0648
+          </a>
+          <div class="contact__actions">
+            <a class="btn btn--light" href="sms:+18175650648">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span data-es="Envíenos un mensaje">Text us</span>
+            </a>
+            <a class="btn btn--outline-light" href="mailto:trustlegacycare@gmail.com?subject=Free%20consultation%20request">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <span data-es="Escríbanos">Email us</span>
+            </a>
+          </div>
+          <div class="contact__meta">
+            <div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              <a href="mailto:trustlegacycare@gmail.com">trustlegacycare@gmail.com</a>
+            </div>
+            <div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span data-es="Al servicio de nuestra comunidad local y áreas cercanas.">Serving our local community and surrounding areas.</span>
+            </div>
+          </div>
+        </div>
+        <div class="contact__photo">
+          <img src="img/hero.webp" width="1343" height="680" loading="lazy" decoding="async" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot__badges reveal">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg><span data-es="Cuidado confiable y de confianza">Trusted &amp; reliable care</span></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span data-es="Apoyo personalizado">Personalized support</span></span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"/><path d="M12 17.5c1-.9 2.5-2.1 2.5-3.5a1.75 1.75 0 0 0-3.5 0 1.75 1.75 0 0 0-3.5 0c0 1.4 1.5 2.6 2.5 3.5l1 .9Z" transform="translate(1 -1)"/></svg><span data-es="Cuidado en la comodidad de su hogar">Care in the comfort of home</span></span>
+    </div>
+    <div class="foot__grid">
+      <div>
+        <img class="foot__logo" src="img/logo.webp" width="805" height="1054" loading="lazy" decoding="async" alt="Legacy Care LLC. Compassion. Dignity. Legacy.">
+      </div>
+      <div class="foot__contact">
+        <a href="tel:+18175650648">817-565-0648</a>
+        <a href="mailto:trustlegacycare@gmail.com">trustlegacycare@gmail.com</a>
+      </div>
+      <p class="foot__legal">
+        &copy; 2026 Legacy Care LLC.<br>
+        <span data-es="Un sitio web gratuito creado por">A free website built by</span> <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<div class="callbar" aria-hidden="false">
+  <a class="btn btn--primary" href="tel:+18175650648">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"/></svg>
+    <span data-es="Llame al 817-565-0648">Call 817-565-0648</span>
+  </a>
+</div>
+
+<script>
+  // Reveal on scroll (honors reduced motion; hero elements are pre-marked .in)
+  (function(){
+    var els=document.querySelectorAll('.reveal:not(.in)');
+    if(!('IntersectionObserver' in window)||window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      els.forEach(function(e){e.classList.add('in')});return;
+    }
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
+    },{threshold:0.1,rootMargin:'0px 0px -6% 0px'});
+    els.forEach(function(e){io.observe(e);});
+  })();
+
+  // Bilingual EN/ES: auto-detects Spanish browsers, remembers the manual choice.
+  (function(){
+    var KEY="hand-lang";
+    var nodes=[].slice.call(document.querySelectorAll("[data-es]"));
+    nodes.forEach(function(n){n.__en=(n.tagName==="META")?n.getAttribute("content"):n.innerHTML;});
+    function setToggles(es){
+      [].forEach.call(document.querySelectorAll(".lang-toggle"),function(b){
+        b.setAttribute("data-lang-to",es?"en":"es");
+        b.setAttribute("aria-pressed",es?"true":"false");
+        b.setAttribute("aria-label",es?"View in English":"Ver en español");
+        var l=b.querySelector(".lang-label"); if(l) l.textContent=es?"English":"Español";
+      });
+    }
+    function apply(lang){
+      var es=lang==="es";
+      nodes.forEach(function(n){
+        var v=es?n.getAttribute("data-es"):n.__en; if(v==null) return;
+        if(n.tagName==="META") n.setAttribute("content",v); else n.innerHTML=v;
+      });
+      document.documentElement.lang=es?"es":"en";
+      setToggles(es);
+    }
+    var stored=null; try{stored=localStorage.getItem(KEY);}catch(e){}
+    var nav=(navigator.language||navigator.userLanguage||"").toLowerCase();
+    apply(stored||(nav.indexOf("es")===0?"es":"en"));
+    document.addEventListener("click",function(e){
+      var b=e.target.closest&&e.target.closest(".lang-toggle"); if(!b) return;
+      e.preventDefault();
+      var to=b.getAttribute("data-lang-to")||"es"; apply(to);
+      try{localStorage.setItem(KEY,to);}catch(e2){}
+    });
+  })();
+</script>
+</body>
+</html>
