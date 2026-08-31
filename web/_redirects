@@ -74,5 +74,9 @@ http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protoc
 /course                 /learn/                                301
 /claude-code            /learn/                                301
 
+# Legacy Care LLC — free client site (web/project/legacycare/)
+/project/legacycare     /project/legacycare/                   301
+/legacycare             /project/legacycare/                   301
+
 # 404 fallback — branded compass page with radial sitemap (keep last; matches anything else)
 /*                      /404.html                              404
