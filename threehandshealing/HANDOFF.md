@@ -2,8 +2,20 @@
 
 Client website for Maria's healing practice (EFT/Tapping, Candace Silvers
 Energy Healing, bodywork, Qi Gong, Systemic Family Constellations, intuitive
-emotional release). **Status: design preview LIVE on handprotocol.org; copy
-phase in progress — blocked on Maria's answers to a 16-question info sheet.**
+emotional release). **Status (2026-09-01): design preview LIVE; a 17-style
+design portfolio is LIVE at https://handprotocol.org/threehandshealing/styles/
+(noindex) waiting for Maria's picks; copy phase blocked on her answers to a
+16-question info sheet.**
+
+## Start here (cold session)
+
+1. Read this file. Then `design-portfolio-brief.md` if you touch any style page.
+2. Two things are waiting on Maria: **style picks** (she hearts styles in the
+   gallery → "Send picks to koH" → `command.feedback_pins` row tagged
+   🧭 picks · 🎨 style + Telegram 🎯 Inspector) and the **16-question info
+   sheet** answers. Check /pins before doing anything else.
+3. Nothing here is a production client site yet — it is all HAND-hosted
+   preview. Do not delete the other styles until Maria has chosen.
 
 ## Orient in one paragraph
 
@@ -22,6 +34,11 @@ published as a private artifact. Nothing on the live page has changed yet.
 |---|---|---|
 | Design-preview site | `web/threehandshealing/` (index.html, style.css, script.js, assets/, vendor/) | On `main` (commit `d27db55cd`), auto-deployed, live |
 | Live URL | https://handprotocol.org/threehandshealing/ | 200 · in `web/sitemap.xml` (prio 0.8) · **no noindex** |
+| **Style portfolio (gallery)** | `web/threehandshealing/styles/` → https://handprotocol.org/threehandshealing/styles/ | On `main` (`a45ec8426`, landed 2026-09-01, Netlify deploy `6a96f993…` ready) · noindex meta + `X-Robots-Tag` · not in sitemap |
+| 14 style pages | `web/threehandshealing/styles/<slug>/` → `…/styles/<slug>/` | same commit; each standalone (html+css+js, ≤40 KB) |
+| Portfolio brief | `threehandshealing/design-portfolio-brief.md` | on `main` (`99d26cb8f`) — source of truth for copy rules + hard requirements |
+| Review tools | `threehandshealing/tools/` (`validate.mjs`, `shot.mjs`, `thumbs.mjs`, README) | on `main` |
+| Design studio (preview-only) | `web/threehandshealing/studio.css` + `studio.js` | on `main` (same commit) — delete at launch |
 | Routing | `netlify.toml` L125, `web/_redirects` L14, `vercel.json` L12 — all just `/threehandshealing` → `/threehandshealing/` 301 | committed |
 | Maria's copy (verbatim) | `threehandshealing/copy-from-maria-2026-08-16.md` | untracked (this session) |
 | Internal copy deck / gap map | `threehandshealing/copy-deck.md` | untracked (this session) |
@@ -96,13 +113,16 @@ switcher. **Delete all three at launch** — the base site never references them
   `style.css` line 8 `.path>*{position:relative}` overrides the path-card
   number's absolute positioning, so "01/02/03" sit inline above the h3.
 
-## Design-style portfolio (added 2026-09-01, uncommitted)
+## Design-style portfolio (shipped 2026-09-01)
 
 Maria asked (via koH) to see many more directions before choosing. Built as a
 gallery of **17 styles** — the 3 originals + **14 new standalone one-page
-sites** — at `web/threehandshealing/styles/`. Will be live at
-https://handprotocol.org/threehandshealing/styles/ once `web/` is committed to
-`main` (noindex meta + `X-Robots-Tag` header; not in the sitemap).
+sites** — at `web/threehandshealing/styles/`, **LIVE** at
+https://handprotocol.org/threehandshealing/styles/ (noindex meta +
+`X-Robots-Tag: noindex, nofollow` header verified live; not in the sitemap).
+Deep link per style: `…/styles/#cathedral` opens the viewer; `…/styles/cathedral/`
+is the standalone page. `/styles` and `/styles/<slug>` without a slash 301
+correctly.
 
 | Path | What |
 |---|---|
@@ -118,9 +138,45 @@ Copy decisions baked into all 14 (reversible in the brief): H1 = "Feel good in y
 
 Also in this pass: `web/threehandshealing/index.html` switcher gained a "+ 14 more styles" link (styled in `studio.css`, preview-only); `netlify.toml` / `web/_redirects` / `vercel.json` got the `/threehandshealing/styles` trailing-slash rule; `netlify.toml` got the `X-Robots-Tag: noindex` header for `styles/*`. The shared `_portfolio.js` had one bug (stylesheet path) fixed mid-build.
 
-**To ship:** commit `web/threehandshealing/` (incl. `styles/`), the three routing files, and `threehandshealing/` docs on `main` → auto-deploy; verify https://handprotocol.org/threehandshealing/styles/ returns 200 with the noindex header. Then text Maria the gallery link. When she sends picks, they arrive on the /pins kanban tagged 🧭 picks · 🎨 style.
+**Shipped:** `main` `62a5aa9ce → 99d26cb8f` (two commits: `a45ec8426` site + routing, `99d26cb8f` workspace docs), Netlify production deploy `6a96f99369df4e00095da9b9` state `ready`; live checks: gallery 200 + noindex header, style page 200 + noindex, `_portfolio.css` + `_shots/*.webp` 200, both trailing-slash redirects 301. **Live QA:** see "Live QA results" below. **Next:** text Maria the gallery link; her picks arrive on the /pins kanban tagged 🧭 picks · 🎨 style (one row from the automated ship check is labelled "koH QA test — ignore").
 
 **Next after picks:** fold the chosen direction(s) into the real build (the copy-slotting steps below still apply), delete the other 13 + the gallery, and drop `_portfolio.js` from the survivor.
+
+## Live QA results (2026-09-01, post-deploy)
+
+Workflow: 16 live probes (14 styles + gallery + preview root) under real headers
++ a gallery end-to-end run + one independent refuter per flagged issue (22
+agents, 0 errors). Probe script: `tools/`-style Playwright (`liveqa.mjs`, in the
+session scratchpad — not kept; `tools/shot.mjs` covers the same ground locally).
+
+- **All 14 styles + gallery: 0 blockers.** Every page: 200, `X-Robots-Tag:
+  noindex, nofollow` + meta noindex, CSP header present, zero console/page
+  errors, zero failed requests, zero CSP violations, all Google Fonts families
+  loaded, all images loaded, pill present, all six anchors present, no
+  horizontal overflow at 390/1440. Live screenshots pixel-identical to the
+  pre-deploy shots except sub-visible animation-phase deltas (Cathedral glow,
+  Bloom blob morph).
+- **Gallery e2e (live):** 17 cards · filter Wild=7 · viewer opens Cathedral in
+  an iframe (`cathedral/index.html`, pill hidden inside) · Phone mode = 390px
+  frame · ♡ pick → tray → `localStorage` → the standalone Tide page's pill shows
+  "Picked" + "Send my 2 picks" · deep link `#zine` opens the viewer · **tray
+  send → feedback fn 200 → "Sent ✓"** (row on /pins named "koH QA test", note
+  "TEST — automated ship check, ignore" — delete or ignore it).
+- **Fixed after QA (second commit, see session log):** (1) preview root on
+  mobile — the switcher, now carrying Studio + the "+ 14 more styles" link,
+  wrapped into a 6-row capsule over the hero CTAs → single scrollable row
+  (`studio.css`); (2) preview root desktop — "Body · Emotion · Energy" caption
+  overlapped the lede's last line (pre-existing since 8/11) → caption moved to
+  the empty right side at ≥761px (`style.css`); (3) Retro — Shrikhand H1 wrapped
+  5 vs 7 lines nondeterministically because `max-width` was in `ch` measured
+  before the font landed → `8.8em` (6/6 cold loads = 5 lines); (4) Pulse's
+  `* {border-radius:0 !important}` squared the shared pill → `_portfolio.css`
+  hardens the pill radius with `!important`.
+- **Left as designed:** fine print / eyebrows at 12–14.7px on Linen, Bloom,
+  Terra, Meridian, Prism, Stellar, Pulse, gallery footer, preview root (the
+  probe's ≥15px rule is stricter than the styles' own choices; body copy is
+  ≥16px everywhere). Photo watermarks (proofs). The bottom pill covers ~40px
+  of content on phones — inherent to a fixed pill; content scrolls beneath it.
 
 ## Blocked on Maria — the 16 questions (sheet Q-numbers)
 
@@ -172,11 +228,12 @@ device; "Copy my answers" assembles one numbered plain-text message.
 
 ## Repo hygiene
 
-- Everything new this session lives in `threehandshealing/` and is
-  **untracked**. Current checkout branch is `agent/cafe-nenai-rebuild`
-  (unrelated). Commit `threehandshealing/` as its own docs commit — do not
-  fold it into the Cafe Nena'i branch. `wxl/_handoff-2026-08-11` already
-  warns that threehandshealing files belong to a separate workstream.
+- Everything for this client is now on `main` (`a45ec8426` + `99d26cb8f`).
+  The same two commits also sit on the checkout's current branch
+  (`agent/yuhm-network`, as `ebed74125` + `095b2b331`) so a later merge of
+  that branch is clean. Land further changes on `main` via the
+  worktree + cherry-pick + HTTPS-push recipe (memory
+  `machine-git-push-via-gh-https`), staging by explicit path only.
 - Another Claude session may share this checkout — stage by path.
 - The info-sheet artifact redeploys from the same file path in the
   originating conversation; from any other session pass the artifact URL as
@@ -193,7 +250,7 @@ device; "Copy my answers" assembles one numbered plain-text message.
   faces (DM Sans / DM Serif Display inlined as data URIs, site palette, light
   + dark, print), verified in headless Chrome at 900px/390px, published as a
   private artifact (v1-sixteen-questions).
-- 2026-09-01 — Design-style portfolio: 14 new standalone styles + gallery at `web/threehandshealing/styles/` (14 parallel builders from `design-portfolio-brief.md`, each screenshot-verified; all pass `tools/validate.mjs`), picks→feedback fn, routing + noindex header, switcher bridge link. Uncommitted.
+- 2026-09-01 — Design-style portfolio: 14 new standalone styles + gallery at `web/threehandshealing/styles/` (14 parallel builders from `design-portfolio-brief.md`, each screenshot-verified; all pass `tools/validate.mjs`), picks→feedback fn, routing + noindex header, switcher bridge link. **Shipped to `main` + verified live**; post-deploy QA workflow over all 17 URLs (results in "Live QA results"); four fixes landed in a follow-up commit (preview switcher mobile, preview caption overlap, Retro H1 wrap, Pulse pill radius).
 - 2026-08-23 — Design studio built on the preview (studio.css/studio.js,
   uncommitted): type packs, energy-flare toggles, copy-suggestion mode wired
   to command.feedback_pins via the existing feedback fn, shareable
