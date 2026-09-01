@@ -1,0 +1,269 @@
+/* Three Hands Healing — Ink. Sumi-e, wabi-sabi. Rice paper, one brush, an ensō, a seal. */
+:root{
+  --paper:#EEEBE4;
+  --sumi:#1B1B1B;
+  --ash:#8C8A84;
+  --ash-text:#5B5955;
+  --vermilion:#C8362B;
+  --serif:"Noto Serif Display","Iowan Old Style","Times New Roman",serif;
+  --sans:"Zen Kaku Gothic New","Hiragino Sans","Helvetica Neue",Arial,sans-serif;
+  --wrap:72rem;
+  --pad:clamp(1.5rem,6vw,6rem);
+  --sec:clamp(6rem,12vw,11rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  position:relative;margin:0;background:var(--paper);color:var(--sumi);
+  font:400 1.0625rem/1.85 var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+/* rice-paper grain */
+body::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+img{max-width:100%;height:auto}
+p{margin:0 0 1.25em}
+h1,h2,h3{font-weight:200;margin:0}
+.defs{position:absolute;width:0;height:0;overflow:hidden}
+.skip{position:absolute;left:1rem;top:-4rem;padding:.6rem 1rem;background:var(--sumi);color:var(--paper);font-size:.875rem;z-index:20}
+.skip:focus{top:1rem}
+:focus-visible{outline:2px solid var(--sumi);outline-offset:5px}
+.wrap{max-width:var(--wrap);margin:0 auto}
+
+/* ---------- type ---------- */
+.eyebrow{
+  font:500 .6875rem/1 var(--sans);letter-spacing:.34em;text-transform:uppercase;
+  color:var(--ash-text);margin:0 0 1.5rem;
+}
+h1{
+  font:200 clamp(1.3rem,.7rem + 2.2vw,2.55rem)/1.32 var(--serif);
+  letter-spacing:.02em;text-wrap:balance;margin:0 0 .9em;
+}
+h2{
+  font:200 clamp(1.8rem,1.25rem + 1.7vw,2.7rem)/1.22 var(--serif);
+  letter-spacing:.045em;text-wrap:balance;margin:0 0 1.6rem;
+}
+h3{font:300 1.55rem/1.25 var(--serif);letter-spacing:.06em;margin:0 0 1rem}
+.amp{font-style:italic;font-weight:200}
+.lede{
+  font:italic 300 clamp(1.05rem,.95rem + .45vw,1.3rem)/1.5 var(--serif);
+  color:var(--ash-text);margin:0 auto;max-width:24ch;text-wrap:balance;
+}
+.small{font-size:.9375rem;color:var(--ash-text);margin:0 0 .35rem;letter-spacing:.01em}
+
+/* text links: a short line under tracked caps */
+.link{
+  display:inline-block;color:var(--sumi);text-decoration:none;
+  font:500 .75rem/1 var(--sans);letter-spacing:.28em;text-transform:uppercase;
+  padding:.4rem 0 .55rem;border-bottom:1px solid var(--sumi);
+  transition:border-color .25s ease,color .25s ease;
+}
+.link:hover{border-color:var(--ash)}
+.link--quiet{color:var(--ash-text);border-color:transparent}
+.link--quiet:hover{color:var(--sumi);border-color:var(--ash)}
+
+/* vertical margin labels */
+.vlabel{
+  position:absolute;left:clamp(.75rem,2vw,2.4rem);top:var(--sec);margin:0;
+  writing-mode:vertical-rl;white-space:nowrap;
+  font:500 .6875rem/1 var(--sans);letter-spacing:.36em;text-transform:uppercase;
+  color:var(--ash-text);pointer-events:none;
+}
+.vlabel--right{left:auto;right:clamp(.75rem,2vw,2.4rem)}
+
+/* hanko */
+.hanko{display:block}
+.hanko--sm{width:2.25rem;height:2.25rem}
+.hanko--lg{width:7.5rem;height:7.5rem}
+
+/* ---------- header ---------- */
+.top{
+  position:absolute;top:0;left:0;right:0;z-index:5;
+  display:flex;justify-content:space-between;align-items:center;gap:1.5rem;
+  padding:1.6rem var(--pad);
+}
+.brand{display:inline-flex;align-items:center;gap:1rem;color:var(--sumi);text-decoration:none}
+.brand__name{font:300 1rem/1 var(--serif);letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
+.nav{display:flex;flex-wrap:wrap;gap:clamp(1.1rem,2.6vw,2.6rem);font:500 .75rem/1 var(--sans);letter-spacing:.24em;text-transform:uppercase}
+.nav a{color:var(--sumi);text-decoration:none;padding:.4rem 0 .45rem;border-bottom:1px solid transparent;transition:border-color .25s ease}
+.nav a:hover{border-color:var(--ash)}
+.nav__cta{border-bottom-color:var(--sumi)!important}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;min-height:100svh;
+  display:grid;place-items:center;align-content:center;gap:2rem;
+  padding:7rem var(--pad) 4rem;
+}
+.hero__stage{
+  position:relative;width:min(640px,84vw,70vh);aspect-ratio:1;
+  display:grid;place-items:center;
+}
+.enso{position:absolute;inset:0;width:100%;height:100%;color:var(--sumi);overflow:visible}
+.enso__ink{fill:currentColor;fill-opacity:.96}
+.enso__draw{stroke-dasharray:1536 1900;stroke-dashoffset:0}
+.hero__text{position:relative;text-align:center;padding:0 9%;max-width:100%}
+.hero__text .eyebrow{margin-bottom:1.1rem}
+.hero__actions{display:flex;align-items:center;gap:1.4rem;flex-wrap:wrap;justify-content:center}
+.hero__sep{width:4px;height:4px;border-radius:50%;background:var(--ash)}
+
+/* orchestrated load: the ensō is brushed, then the words settle */
+.js:not(.is-ready) .enso__draw{stroke-dashoffset:1536}
+.js:not(.is-ready) .hero__text,.js:not(.is-ready) .hero__actions{opacity:0}
+.is-ready .enso__draw{animation:enso-draw 1.6s cubic-bezier(.5,.02,.25,1) .25s both}
+.is-ready .hero__text{animation:settle 1s ease 1.55s both}
+.is-ready .hero__actions{animation:settle 1s ease 1.95s both}
+@keyframes enso-draw{from{stroke-dashoffset:1536}to{stroke-dashoffset:0}}
+@keyframes settle{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ---------- intro ---------- */
+.intro{padding:2rem var(--pad) var(--sec)}
+.intro__wrap{max-width:40rem;margin:0 auto}
+.intro p{
+  font:300 clamp(1.15rem,1rem + .5vw,1.4rem)/1.7 var(--serif);
+  letter-spacing:.01em;margin:0;
+}
+
+/* ---------- validation ---------- */
+.alone{position:relative;padding:var(--sec) var(--pad);text-align:center}
+.alone__wrap{max-width:37rem;margin:0 auto}
+.rule{display:block;width:9rem;height:10px;margin:0 auto 2.5rem;color:var(--ash)}
+.alone p{text-align:left}
+.alone p:last-child{margin-bottom:0}
+
+/* ---------- practices ---------- */
+.practices{position:relative;padding:var(--sec) var(--pad)}
+.practices__head{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;
+  gap:clamp(2rem,6vw,7rem);align-items:end;
+}
+.practices__intro{max-width:36rem}
+.practices__intro p:last-child{margin-bottom:0}
+.print{margin:0;position:relative}
+.print img{
+  display:block;width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) contrast(1.25) brightness(1.03);mix-blend-mode:multiply;
+}
+.practices__print{width:clamp(14rem,22vw,19rem)}
+.practices__print img{aspect-ratio:4/5;object-position:50% 88%}
+.print figcaption{
+  margin-top:.9rem;font:500 .6875rem/1.5 var(--sans);letter-spacing:.28em;text-transform:uppercase;color:var(--ash-text);
+}
+.pillars{
+  display:grid;grid-template-columns:minmax(0,1fr) 1px minmax(0,1fr);
+  gap:clamp(2rem,5vw,5.5rem);margin-top:clamp(4rem,8vw,7rem);
+}
+.pillars__rule{background:var(--ash);opacity:.55}
+.pillar h3{max-width:19ch}
+.pillar > p{margin-bottom:0}
+.modalities{list-style:none;padding:0;margin:2.25rem 0 0}
+.modalities li{position:relative;padding-left:1.6rem;margin:0 0 1.35rem;font-size:1rem;line-height:1.75}
+.modalities li:last-child{margin-bottom:0}
+.modalities li::before{
+  content:"";position:absolute;left:0;top:.66em;width:7px;height:7px;
+  background:var(--sumi);border-radius:46% 54% 50% 48% / 52% 48% 55% 45%;
+}
+.modalities b{display:block;font-weight:500}
+.modalities span{color:var(--ash-text)}
+.closing{
+  max-width:38rem;margin:clamp(4rem,8vw,7rem) auto 0;text-align:center;
+  font:italic 300 clamp(1.15rem,1rem + .5vw,1.4rem)/1.6 var(--serif);
+}
+
+/* ---------- session ---------- */
+.session{position:relative;padding:var(--sec) var(--pad)}
+.session__head{max-width:36rem}
+.session__note{color:var(--ash-text);margin:0}
+.steps{
+  list-style:none;padding:0;margin:clamp(3.5rem,7vw,6rem) 0 0;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(2rem,5vw,5rem);
+}
+.step{max-width:22rem}
+.dash{display:block;width:6.5rem;height:10px;color:var(--sumi)}
+.step__num{
+  display:flex;align-items:baseline;gap:.9rem;margin:1.5rem 0 .6rem;
+  font:300 .95rem/1 var(--serif);letter-spacing:.2em;color:var(--ash-text);
+}
+.step__kanji{font:400 1.2rem/1 var(--sans);color:var(--sumi);letter-spacing:0}
+.step h3{margin-bottom:.6rem}
+.step p:last-child{margin:0;color:var(--ash-text)}
+
+/* ---------- about ---------- */
+.about{position:relative;padding:var(--sec) 0;overflow:hidden}
+.about__grid{
+  display:grid;grid-template-columns:minmax(0,44%) minmax(0,1fr);
+  gap:clamp(2.5rem,7vw,8rem);align-items:center;
+}
+.about__print{height:clamp(24rem,72vh,44rem);width:100%}
+.about__print img{object-position:50% 18%}
+.about__text{max-width:34rem;padding-right:var(--pad)}
+.about__text p:last-child{margin-bottom:0}
+
+/* ---------- book ---------- */
+.book{position:relative;padding:var(--sec) var(--pad) clamp(6rem,12vw,10rem);text-align:center}
+.book__wrap{max-width:34rem;margin:0 auto}
+.book__body{margin-bottom:0}
+.hanko-btn{
+  display:inline-grid;justify-items:center;gap:1.4rem;
+  margin:3rem 0 3.25rem;padding:1rem;background:none;border:0;cursor:pointer;
+  color:var(--sumi);font:500 .75rem/1 var(--sans);letter-spacing:.3em;text-transform:uppercase;
+}
+.hanko-btn .hanko{transition:transform .3s cubic-bezier(.3,.7,.3,1)}
+.hanko-btn:hover .hanko{transform:translateY(2px) rotate(-2deg)}
+.hanko-btn:active .hanko{transform:translateY(3px) scale(.985)}
+.hanko-btn__label{padding-bottom:.55rem;border-bottom:1px solid var(--sumi)}
+
+/* ---------- footer ---------- */
+.foot{padding:4rem var(--pad) 3rem;border-top:1px solid rgba(140,138,132,.45)}
+.foot__grid{
+  max-width:var(--wrap);margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);
+  gap:3rem;font-size:.9375rem;line-height:1.7;color:var(--ash-text);
+}
+.foot__name{font:300 1rem/1 var(--serif);letter-spacing:.2em;text-transform:uppercase;color:var(--sumi);margin:0 0 .9rem}
+.foot__line{margin:0}
+.foot__disc{margin:0 0 1.25rem;max-width:44rem}
+.foot__copy{margin:0;font-size:.8125rem;letter-spacing:.06em}
+
+/* ---------- responsive ---------- */
+@media (max-width:860px){
+  .practices__head{grid-template-columns:1fr;align-items:start}
+  .practices__print{width:clamp(12rem,42vw,16rem)}
+  .pillars{grid-template-columns:1fr;gap:3.5rem}
+  .pillars__rule{width:5rem;height:1px}
+  .steps{grid-template-columns:1fr;gap:3rem}
+  .about__grid{grid-template-columns:1fr;gap:3rem}
+  .about__print{height:clamp(20rem,80vw,30rem);width:min(100%,32rem)}
+  .about__text{padding:0 var(--pad)}
+  .foot__grid{grid-template-columns:1fr;gap:2rem}
+}
+@media (max-width:640px){
+  :root{--pad:1.5rem}
+  .top{flex-direction:column;align-items:flex-start;gap:1.1rem;padding:1.25rem var(--pad)}
+  .brand__name{font-size:.8125rem;letter-spacing:.18em}
+  .nav{width:100%;justify-content:space-between;flex-wrap:nowrap;gap:.5rem;font-size:.6875rem;letter-spacing:.12em}
+  .hero{padding:8.5rem .5rem 3rem;gap:1.5rem}
+  .hero__stage{width:min(96vw,62vh)}
+  .hero__text{padding:0 8%}
+  .hero__text .eyebrow{font-size:.6rem;letter-spacing:.22em;margin-bottom:.8rem}
+  .hero__actions{flex-direction:column;gap:1.4rem}
+  .hero__sep{display:none}
+  .vlabel{left:.55rem;font-size:.625rem;letter-spacing:.3em}
+  .vlabel--right{right:.55rem}
+  .hero .vlabel{top:auto;bottom:6rem}
+  .intro{padding-top:1rem}
+  .rule{width:7rem}
+  .modalities li{padding-left:1.4rem}
+  .hanko--lg{width:6.5rem;height:6.5rem}
+}
+
+/* ---------- reduced motion: the finished ensō, nothing moves ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js:not(.is-ready) .enso__draw,.is-ready .enso__draw{animation:none;stroke-dashoffset:0}
+  .js:not(.is-ready) .hero__text,.js:not(.is-ready) .hero__actions,
+  .is-ready .hero__text,.is-ready .hero__actions{animation:none;opacity:1;transform:none}
+  .hanko-btn .hanko,.link,.nav a{transition:none}
+  .hanko-btn:hover .hanko,.hanko-btn:active .hanko{transform:none}
+}

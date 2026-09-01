@@ -1,0 +1,556 @@
+/* ==========================================================================
+   Three Hands Healing — "Zine"
+   Collage scrapbook, made by hand. Kraft ground, paper scraps on a grid,
+   masking tape, polaroids, one red marker, one blue pen.
+   Rule: paper sits square on the grid; only photos, tape and stickies tilt.
+   ========================================================================== */
+
+:root {
+  --kraft: #D9C4A1;
+  --paper: #FAF7F0;
+  --white: #FFFFFF;
+  --sticky: #FBEFC0;
+  --tape: rgba(255, 235, 150, .85);
+  --marker: #D1342F;
+  --pencil: #4B4A47;
+  --pen: #2B4C9B;
+  --rule: rgba(75, 74, 71, .28);
+
+  --shadow-sheet: 0 1px 2px rgba(60, 40, 20, .14), 0 18px 30px -18px rgba(60, 40, 20, .5);
+  --shadow-photo: 0 2px 3px rgba(0, 0, 0, .14), 0 18px 28px -14px rgba(60, 40, 20, .6);
+  --shadow-photo-up: 0 4px 6px rgba(0, 0, 0, .12), 0 26px 34px -14px rgba(60, 40, 20, .55);
+
+  --f-display: 'Anton', Impact, 'Arial Narrow', sans-serif;
+  --f-hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+  --f-type: 'Special Elite', 'Courier New', Courier, monospace;
+  --f-body: 'Nunito', 'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --wrap: 1180px;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body {
+  margin: 0;
+  background: var(--kraft);
+  color: var(--pencil);
+  font: 400 1.0625rem/1.65 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+/* Paper grain over everything, cheap: a tiled SVG noise, fixed. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='260'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .32 0 0 0 0 .24 0 0 0 0 .12 0 0 0 .16 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+.hdr, main, .ftr { position: relative; z-index: 1; }
+
+img { max-width: 100%; height: auto; }
+p { margin: 0 0 1.1em; }
+p:last-child { margin-bottom: 0; }
+h1, h2, h3 { margin: 0; }
+a { color: var(--pen); }
+:focus-visible { outline: 3px solid var(--pen); outline-offset: 3px; }
+
+.wrap { width: min(var(--wrap), 100% - 3rem); margin-inline: auto; }
+section { scroll-margin-top: 84px; }
+
+.skip {
+  position: absolute; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--paper); color: var(--pencil); font-family: var(--f-type);
+  padding: .6rem 1rem; border: 2px solid var(--marker);
+}
+.skip:focus { top: 1rem; }
+
+/* --------------------------------------------------------------------------
+   Reusable materials
+   -------------------------------------------------------------------------- */
+
+/* Typewriter labels */
+.eyebrow {
+  font-family: var(--f-type);
+  font-size: .95rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  margin: 0 0 1.1rem;
+}
+.small { font-family: var(--f-type); font-size: .95rem; line-height: 1.7; }
+
+/* Handwriting — short lines only */
+.hand { font-family: var(--f-hand); font-weight: 600; font-size: 1.5rem; line-height: 1.15; }
+.hand--pen { color: var(--pen); }
+.sign { margin-top: 1.25rem; font-size: 1.8rem; }
+
+/* A sheet of paper, sitting square on the grid */
+.sheet {
+  position: relative;
+  background: var(--paper);
+  box-shadow: var(--shadow-sheet);
+  padding: 2.5rem;
+}
+
+/* Masking tape (translucent, multiplies over whatever it holds) */
+.tape {
+  position: absolute;
+  z-index: 3;
+  width: 86px;
+  height: 26px;
+  background: var(--tape);
+  mix-blend-mode: multiply;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+  clip-path: polygon(0 14%, 2% 0, 98% 6%, 100% 16%, 99% 86%, 97% 100%, 3% 95%, 0 82%);
+  pointer-events: none;
+}
+.tape--tl { top: -12px; left: -24px; transform: rotate(-8deg); }
+.tape--tr { top: -12px; right: -24px; transform: rotate(7deg); }
+.tape--br { bottom: -12px; right: -24px; transform: rotate(-9deg); }
+.tape--tc { top: -13px; left: 50%; transform: translateX(-50%) rotate(-3deg); }
+.tape--pl { top: -6px; left: -30px; transform: rotate(-40deg); }
+.tape--pr { top: -6px; right: -30px; transform: rotate(40deg); }
+
+/* Cut-out headline: each word is its own strip of white paper */
+.cut {
+  font-family: var(--f-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: .012em;
+  line-height: 1.42;
+  margin: 0;
+}
+.cut--h1 { font-size: clamp(2.35rem, 4.6vw, 4.15rem); }
+.cut--h2 { font-size: clamp(1.85rem, 3.3vw, 2.85rem); }
+.cut--center { text-align: center; }
+.cut .w {
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+  background: var(--paper);
+  color: var(--pencil);
+  padding: .14em .2em .1em;
+  margin: 0 .06em;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 5px 10px -6px rgba(60, 40, 20, .55);
+  transform: rotate(var(--r, 0deg));
+}
+.cut .w:nth-child(3n + 1) { --r: -1.5deg; }
+.cut .w:nth-child(3n + 2) { --r: 1.1deg; }
+.cut .w:nth-child(3n) { --r: -.5deg; }
+.cut .w:nth-child(5n) { --r: 1.7deg; }
+.cut .w--red { color: var(--marker); }
+.band .cut .w { background: var(--white); }
+
+/* Buttons: paper with a marker-drawn border */
+.btn {
+  display: inline-block;
+  font-family: var(--f-type);
+  font-size: 1.05rem;
+  line-height: 1.2;
+  color: var(--pencil);
+  background: var(--paper);
+  text-decoration: none;
+  padding: .7rem 1.35rem .6rem;
+  border: 2.5px solid var(--marker);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .06), 0 10px 16px -12px rgba(60, 40, 20, .7);
+  cursor: pointer;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.btn:hover { transform: translateY(-2px) rotate(-.6deg); box-shadow: 0 3px 0 rgba(0, 0, 0, .06), 0 16px 22px -12px rgba(60, 40, 20, .7); }
+.btn:active { transform: translateY(0); }
+.btn--marker { color: var(--marker); }
+.btn--sm { font-size: .95rem; padding: .5rem 1rem .42rem; border-width: 2px; }
+.btn--big { font-size: 1.55rem; padding: .85rem 2.3rem .7rem; border-width: 3px; margin: 1.6rem 0 1.5rem; }
+
+.link {
+  font-family: var(--f-type);
+  color: var(--pen);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+.link:hover { color: var(--marker); text-decoration-color: var(--marker); }
+
+/* Polaroids: white frame, thick bottom, tilted; lift + straighten on hover */
+.polaroid {
+  position: relative;
+  margin: 0;
+  width: var(--w, 280px);
+  background: var(--white);
+  padding: 10px 10px 8px;
+  box-shadow: var(--shadow-photo);
+  transform: rotate(var(--r, 0deg));
+  transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.polaroid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--ar, 3 / 4);
+  object-fit: cover;
+  object-position: var(--pos, 50% 22%);
+  background: #d8d3c8;
+}
+.polaroid figcaption {
+  font-family: var(--f-hand);
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 1.1;
+  color: var(--pencil);
+  text-align: center;
+  padding: .7rem .2rem .45rem;
+}
+.polaroid:hover { transform: rotate(0deg) translateY(-4px); box-shadow: var(--shadow-photo-up); }
+
+/* Hand-drawn marks: drawn with stroke-dashoffset when scrolled into view */
+.mk { position: relative; display: inline-block; }
+.mark {
+  position: absolute;
+  overflow: visible;
+  pointer-events: none;
+  fill: none;
+  stroke: var(--marker);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mark path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1s cubic-bezier(.45, 0, .25, 1); }
+.mark path + path { transition-delay: .85s; transition-duration: .35s; }
+.is-drawn .mark path { stroke-dashoffset: 0; }
+.mark--circle { left: -.42em; top: -.3em; width: calc(100% + .84em); height: calc(100% + .52em); stroke-width: 2.6; }
+.mark--under { left: -.08em; bottom: -.34em; width: calc(100% + .16em); height: .55em; }
+.mark--arrow { stroke: var(--pen); stroke-width: 2.4; width: 112px; height: 66px; }
+
+/* Rubber stamp of the brand mark */
+.stamp {
+  position: absolute;
+  width: 88px;
+  height: 88px;
+  color: var(--marker);
+  opacity: .78;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+.stamp svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Scroll reveal (translate composes with the rotate on stickies/notes) */
+.js .reveal { opacity: 0; translate: 0 14px; transition: opacity .6s ease, translate .75s var(--ease); }
+.js .reveal.is-in { opacity: 1; translate: 0 0; }
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--kraft);
+  box-shadow: 0 1px 0 var(--rule), 0 10px 22px -16px rgba(60, 40, 20, .55);
+}
+.hdr__in { display: flex; align-items: center; gap: 1.5rem; min-height: 68px; padding-block: .55rem; }
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  color: var(--pencil);
+  text-decoration: none;
+  font-family: var(--f-type);
+  font-size: 1.05rem;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.brand svg { width: 34px; height: 34px; fill: none; stroke: var(--marker); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+.nav { margin-left: auto; display: flex; gap: 1.5rem; font-family: var(--f-type); font-size: 1rem; }
+.nav a { color: var(--pencil); text-decoration: none; padding: .25rem .05rem; border-bottom: 2px solid transparent; }
+.nav a:hover { color: var(--pen); border-color: var(--pen); }
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+.hero { padding: 2.75rem 0 5.5rem; }
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, .95fr);
+  gap: 3rem;
+  align-items: start;
+}
+.hero__sheet { padding: 2.6rem 2.75rem 2.5rem; }
+.hero__sheet .eyebrow { margin-bottom: 1.4rem; }
+.hero__lede { font-size: clamp(1.6rem, 2.2vw, 1.95rem); margin: 1.5rem 0 1.7rem; max-width: 24ch; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.6rem; padding-right: 96px; }
+.hero__sheet .stamp { right: 18px; bottom: 14px; transform: rotate(-12deg); }
+
+/* headline strips stick on one by one after fonts arrive */
+.js:not(.is-loaded) .hero .cut .w { opacity: 0; transform: translateY(-12px) rotate(calc(var(--r, 0deg) - 4deg)); }
+.js.is-loaded .hero .cut .w {
+  transition: opacity .35s ease, transform .6s var(--ease);
+  transition-delay: calc(var(--i, 0) * 55ms);
+}
+
+.hero__pics { position: relative; min-height: 640px; }
+.polaroid--a { position: absolute; left: 2%; top: 6px; --w: min(300px, 60%); --pos: 50% 15%; z-index: 1; }
+.polaroid--b { position: absolute; right: 0; top: 318px; --w: min(252px, 54%); --ar: 1 / 1; --pos: 28% 45%; z-index: 2; }
+.polaroid--b:hover { z-index: 4; }
+.hero__note { position: absolute; left: 0; top: 486px; margin: 0; font-size: 1.85rem; white-space: nowrap; transform: rotate(-5deg); }
+.hero__note .mark--arrow { left: calc(100% - 4px); top: -2px; }
+
+.intro { max-width: 760px; margin: 3.75rem auto 0; padding: 2.4rem 2.6rem 2.1rem; font-size: 1.125rem; }
+.intro .sign { margin-top: 1rem; }
+
+/* --------------------------------------------------------------------------
+   Torn paper bands (validation, session)
+   -------------------------------------------------------------------------- */
+.band { position: relative; background: var(--paper); padding: 5.5rem 0; margin: 2.25rem 0; }
+.band::before, .band::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  height: 28px;
+  background: var(--paper);
+  pointer-events: none;
+}
+.band::before {
+  top: -27px;
+  filter: drop-shadow(0 -1px 0 rgba(75, 74, 71, .22));
+  clip-path: polygon(0.0% 24px,2.3% 3px,4.5% 23px,6.8% 12px,9.1% 8px,11.4% 19px,13.6% 18px,15.9% 10px,18.2% 20px,20.5% 23px,22.7% 15px,25.0% 18px,27.3% 20px,29.5% 21px,31.8% 8px,34.1% 14px,36.4% 19px,38.6% 18px,40.9% 7px,43.2% 18px,45.5% 13px,47.7% 26px,50.0% 21px,52.3% 6px,54.5% 17px,56.8% 23px,59.1% 18px,61.4% 20px,63.6% 16px,65.9% 23px,68.2% 26px,70.5% 11px,72.7% 10px,75.0% 24px,77.3% 10px,79.5% 6px,81.8% 13px,84.1% 12px,86.4% 9px,88.6% 27px,90.9% 15px,93.2% 19px,95.5% 25px,97.7% 4px,100.0% 9px,100% 100%,0 100%);
+}
+.band::after {
+  bottom: -27px;
+  filter: drop-shadow(0 2px 1px rgba(60, 40, 20, .28));
+  clip-path: polygon(0 0,100% 0,100.0% 23px,97.7% 22px,95.5% 13px,93.2% 23px,90.9% 7px,88.6% 20px,86.4% 6px,84.1% 8px,81.8% 13px,79.5% 18px,77.3% 17px,75.0% 9px,72.7% 19px,70.5% 9px,68.2% 13px,65.9% 4px,63.6% 10px,61.4% 11px,59.1% 14px,56.8% 11px,54.5% 8px,52.3% 6px,50.0% 15px,47.7% 2px,45.5% 20px,43.2% 11px,40.9% 10px,38.6% 18px,36.4% 16px,34.1% 14px,31.8% 19px,29.5% 16px,27.3% 18px,25.0% 14px,22.7% 5px,20.5% 7px,18.2% 17px,15.9% 17px,13.6% 21px,11.4% 5px,9.1% 21px,6.8% 13px,4.5% 14px,2.3% 13px,0.0% 24px);
+}
+
+/* Validation: the band is the typed card */
+.alone__in { max-width: 760px; margin-inline: auto; }
+.typed-h {
+  font-family: var(--f-type);
+  font-weight: 400;
+  font-size: clamp(1.65rem, 3vw, 2.4rem);
+  line-height: 1.4;
+  margin: 0 0 1.5rem;
+}
+.alone p { font-size: 1.125rem; }
+
+/* --------------------------------------------------------------------------
+   Practices
+   -------------------------------------------------------------------------- */
+.practices { padding: 3.5rem 0 5rem; }
+.practices .cut--h2 { margin-bottom: 2rem; }
+.sheet--intro { max-width: 860px; padding: 2.25rem 2.6rem; font-size: 1.125rem; }
+
+.pillars {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-top: 3rem;
+}
+.pillar { padding: 2.9rem 2.25rem 2.25rem; }
+.pillar h3 { font-family: var(--f-type); font-weight: 400; font-size: 1.3rem; line-height: 1.35; color: var(--pen); margin: 0 0 .8rem; }
+.pin {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, #ff9d94 0, var(--marker) 48%, #8c1f1a 100%);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, .32);
+}
+.pillars__amp { align-self: center; font-size: 3.4rem; color: var(--marker); line-height: 1; padding: 0 .2rem; }
+
+.modal-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 2.5rem;
+  align-items: start;
+  margin-top: 3rem;
+}
+.modal { padding: 2.25rem 2.6rem 2.4rem; }
+.mods { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1.35rem 2.2rem; }
+.mods li { display: flex; gap: .9rem; align-items: flex-start; }
+.mods b { display: block; font-size: 1.6rem; line-height: 1; color: var(--pen); margin-bottom: .3rem; }
+.mods p { margin: 0; font-size: 1rem; }
+.tick {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin-top: .3rem;
+  border: 2px solid var(--pencil);
+  border-radius: 3px 7px 4px 6px / 6px 3px 7px 4px;
+  transform: rotate(-3deg);
+}
+.mods li:nth-child(even) .tick { transform: rotate(2deg); }
+.polaroid--c { justify-self: end; margin-top: 1.25rem; --w: 280px; --pos: 50% 28%; }
+
+.closing { max-width: 640px; margin: 3.25rem auto 0; text-align: center; font-size: 1.125rem; font-style: italic; }
+
+/* --------------------------------------------------------------------------
+   Session (band): three sticky notes
+   -------------------------------------------------------------------------- */
+.session__line { text-align: center; font-family: var(--f-type); margin: 1.4rem 0 0; }
+.steps {
+  list-style: none;
+  margin: 3.25rem auto 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.25rem;
+  max-width: 1020px;
+}
+.sticky {
+  position: relative;
+  background: var(--sticky);
+  padding: 2.4rem 1.8rem 2rem;
+  min-height: 262px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .1), 0 16px 24px -16px rgba(60, 40, 20, .7);
+  transform: rotate(var(--r, 0deg));
+}
+.sticky__n { display: block; font-family: var(--f-display); font-size: 3.2rem; line-height: 1; color: var(--marker); }
+.sticky h3 { font-family: var(--f-hand); font-weight: 700; font-size: 2.15rem; line-height: 1; margin: .55rem 0 .7rem; }
+.sticky p { margin: 0; }
+
+/* --------------------------------------------------------------------------
+   About: a letter with a polaroid clipped on
+   -------------------------------------------------------------------------- */
+.about { padding: 3.5rem 0 5rem; }
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+  max-width: 1040px;
+  margin-inline: auto;
+}
+.letter { padding: 3rem 3.4rem 2.75rem; font-size: 1.0625rem; }
+.letter .cut--h2 { margin: 0 0 1.6rem; }
+.polaroid--d { --w: 300px; --ar: 1 / 1; --pos: 15% 50%; margin: 2.75rem 0 0 -3rem; z-index: 2; }
+.clip {
+  position: absolute;
+  top: -24px;
+  left: 28px;
+  width: 30px;
+  height: 70px;
+  fill: none;
+  stroke: #6b6a66;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  transform: rotate(8deg);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .3));
+  z-index: 3;
+}
+
+/* --------------------------------------------------------------------------
+   Book: a note taped at an angle
+   -------------------------------------------------------------------------- */
+.book { padding: 3.5rem 0 6.5rem; }
+.book__in { position: relative; max-width: 640px; margin-inline: auto; }
+.note { padding: 3rem 3rem 2.6rem; text-align: center; transform: rotate(-1.5deg); }
+.note__body { font-size: 1.125rem; max-width: 34ch; margin: 1.4rem auto 0; }
+.note .small { margin: 0; }
+.book__note {
+  position: absolute;
+  left: -196px;
+  top: 54%;
+  margin: 0;
+  font-size: 1.9rem;
+  white-space: nowrap;
+  transform: rotate(-6deg);
+}
+.book__note .mark--arrow { left: calc(100% - 6px); top: -24px; }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.ftr { padding: 3rem 0 4.5rem; border-top: 2px dashed var(--rule); }
+.ftr__in { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1.75rem 3.5rem; align-items: start; }
+.ftr__brand { display: flex; align-items: center; gap: 1rem; font-family: var(--f-type); }
+.ftr__brand div { display: flex; flex-direction: column; gap: .15rem; }
+.ftr__brand b { font-weight: 400; font-size: 1.1rem; }
+.stamp--ftr { position: static; width: 56px; height: 56px; transform: rotate(-8deg); flex: 0 0 auto; }
+.ftr__disc { margin: 0; max-width: 62ch; font-size: 1rem; }
+.ftr__copy { grid-column: 1 / -1; margin: 0; font-family: var(--f-type); font-size: .95rem; }
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 1120px) {
+  .book__note { display: none; }
+  .hero__grid { gap: 2rem; }
+}
+
+@media (max-width: 900px) {
+  .hero__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero__pics { min-height: 0; height: 560px; max-width: 520px; }
+  .polaroid--a { --w: min(300px, 58%); }
+  .polaroid--b { top: 250px; --w: min(252px, 54%); }
+  .hero__note { top: 456px; }
+  .about__grid { grid-template-columns: 1fr; }
+  .polaroid--d { margin: -1.5rem auto 0; --w: 280px; }
+  .pillars { grid-template-columns: 1fr; gap: 1.25rem; }
+  .pillars__amp { justify-self: center; font-size: 2.8rem; }
+  .modal-row { grid-template-columns: 1fr; gap: 2.5rem; }
+  .polaroid--c { justify-self: center; margin-top: 1rem; --w: 260px; }
+}
+
+@media (max-width: 760px) {
+  .steps { grid-template-columns: 1fr; max-width: 440px; gap: 2rem; }
+  .sticky { min-height: 0; }
+  .mods { grid-template-columns: 1fr; gap: 1.2rem; }
+}
+
+@media (max-width: 720px) {
+  section { scroll-margin-top: 112px; }
+  .hdr__in { flex-wrap: wrap; gap: .35rem .5rem; min-height: 0; padding-block: .65rem .55rem; }
+  .brand { font-size: .9rem; letter-spacing: 0; gap: .4rem; }
+  .brand svg { width: 26px; height: 26px; }
+  .btn--sm { margin-left: auto; font-size: .85rem; padding: .42rem .6rem .34rem; }
+  .nav { order: 3; flex-basis: 100%; margin-left: 0; gap: 1.25rem; font-size: .95rem; padding-top: .2rem; }
+
+  .hero { padding: 1.75rem 0 4rem; }
+  .sheet, .hero__sheet, .intro, .sheet--intro, .pillar, .modal, .letter { padding: 1.75rem 1.4rem 1.6rem; }
+  .actions { padding-right: 0; }
+  .hero__sheet .stamp { width: 64px; height: 64px; right: 10px; bottom: 10px; opacity: .6; }
+  .hero__lede { max-width: none; }
+  .hero__pics { height: 565px; }
+  .polaroid--a { --w: 60%; }
+  .polaroid--b { top: 300px; --w: 54%; }
+  .hero__note { top: 476px; font-size: 1.7rem; }
+  .hero__note .mark--arrow { width: 96px; height: 56px; }
+  .intro { margin-top: 2.75rem; font-size: 1.0625rem; }
+
+  .band { padding: 4rem 0; margin: 1.75rem 0; }
+  .practices, .about { padding: 2.5rem 0 3.5rem; }
+  .book { padding: 2.5rem 0 4.5rem; }
+  .note { padding: 2.25rem 1.4rem 2rem; transform: rotate(-1deg); }
+  .btn--big { font-size: 1.35rem; padding: .8rem 1.8rem .65rem; }
+  .sticky { transform: rotate(calc(var(--r, 0deg) * .5)); padding: 2rem 1.5rem 1.7rem; }
+  .letter .cut--h2 { margin-bottom: 1.25rem; }
+  .letter { padding-bottom: 3.9rem; }
+  .polaroid--d { margin-top: -2.25rem; }
+  .small__sep, .small__br { display: none; }
+  .small__l { display: block; }
+  .tape { width: 72px; height: 22px; }
+  .tape--tl { left: -16px; }
+  .tape--tr, .tape--br { right: -16px; }
+  .tape--pl { left: -24px; }
+  .tape--pr { right: -24px; }
+  .ftr__in { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion: marks pre-drawn, strips already stuck, nothing lifts
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; translate: none; transition: none; }
+  .mark path { stroke-dashoffset: 0; transition: none; }
+  .js:not(.is-loaded) .hero .cut .w { opacity: 1; transform: rotate(var(--r, 0deg)); }
+  .js.is-loaded .hero .cut .w { transition: none; }
+  .polaroid, .btn { transition: none; }
+  .polaroid:hover { transform: rotate(var(--r, 0deg)); box-shadow: var(--shadow-photo); }
+  .btn:hover { transform: none; }
+}

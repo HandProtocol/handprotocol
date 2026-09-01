@@ -1,0 +1,383 @@
+/* ==========================================================================
+   Three Hands Healing — TERRA
+   Texas Hill Country earth: limestone, cedar, dry winter grass, terracotta,
+   a huge sky. Poster type (Fraunces 900 / opsz 144) on clay ground, a giant
+   ochre sun rising on a 1px cedar horizon that every heading sits on.
+   ========================================================================== */
+
+:root {
+  --terracotta: #B5573A;
+  --terracotta-deep: #97452D;
+  --ochre: #D9A441;
+  --clay: #E7CBAF;
+  --clay-deep: #DDBB9A;
+  --cedar: #2F2A24;
+  --sage: #8A9A7B;
+  --sky: #DCE6EA;
+  --bone: #FFFCF8;
+
+  --ink: var(--cedar);
+  --ink-soft: #5A4F43;
+  --line: var(--cedar);
+  --accent: var(--ochre);
+  --focus: var(--cedar);
+
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --body: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --gutter: clamp(20px, 4vw, 56px);
+  --band: clamp(4.5rem, 9vw, 8rem);
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  --hz-drop: -0.17em; /* pulls a heading's baseline down onto its horizon line */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; background: var(--clay); }
+body {
+  margin: 0;
+  background: var(--clay);
+  color: var(--ink);
+  font: 400 17px/1.6 var(--body);
+  overflow-x: clip;
+}
+@media (min-width: 900px) { body { font-size: 18px; } }
+img { max-width: 100%; height: auto; display: block; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+h1, h2, h3, h4 { margin: 0; font-weight: 900; }
+
+.wrap { width: min(100% - 2 * var(--gutter), 1400px); margin-inline: auto; }
+
+.skip {
+  position: absolute; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--cedar); color: var(--clay); padding: .7rem 1rem; border-radius: .5rem;
+  font: 600 .9rem var(--body); text-decoration: none;
+}
+.skip:focus { top: 1rem; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; border-radius: 2px; }
+
+/* Fine grain over everything — fixed, tiled, multiplied. */
+.grain {
+  position: fixed; inset: 0; z-index: 60; pointer-events: none;
+  opacity: .075; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 280px 280px;
+}
+
+/* --------------------------------------------------------------------------
+   Type
+   -------------------------------------------------------------------------- */
+.display, h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-variation-settings: "opsz" 144;
+  letter-spacing: -.035em;
+  line-height: .9;
+}
+h1 { font-size: clamp(2.85rem, 7.7vw, 7.7rem); letter-spacing: -.045em; text-wrap: balance; }
+h2 { font-size: clamp(2.35rem, 5.2vw, 4.9rem); text-wrap: balance; }
+h3 { font-size: clamp(1.7rem, 2.6vw, 2.35rem); letter-spacing: -.025em; line-height: .95; }
+h4 { font-family: var(--display); font-size: 1.3rem; font-variation-settings: "opsz" 48; letter-spacing: -.02em; line-height: 1.05; }
+
+.eyebrow {
+  font: 600 .76rem/1.3 var(--body);
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-soft); margin-bottom: 1rem;
+}
+.lede {
+  font: 500 clamp(1.15rem, 1.55vw, 1.5rem)/1.35 var(--body);
+  letter-spacing: -.01em; max-width: 26ch;
+}
+.small { font-size: .9rem; line-height: 1.5; color: var(--ink-soft); }
+
+/* --------------------------------------------------------------------------
+   Buttons + links
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  background: var(--terracotta); color: #fff;
+  font: 600 .95rem/1 var(--body); letter-spacing: .02em;
+  padding: 1.05rem 1.6rem; border-radius: .55rem; border: 0; cursor: pointer;
+  text-decoration: none; white-space: nowrap;
+  transition: background .25s var(--ease), transform .25s var(--ease);
+}
+.btn:hover { background: var(--terracotta-deep); transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+.btn--sm { padding: .8rem 1.1rem; font-size: .85rem; }
+.btn--lg { padding: 1.3rem 2.2rem; font-size: 1.05rem; }
+
+.arrow {
+  display: inline-flex; align-items: center; gap: .45rem;
+  color: var(--ink); font-weight: 600; text-decoration: none;
+  padding: .5rem 0; border-bottom: 2px solid transparent;
+  transition: border-color .25s var(--ease);
+}
+.arrow:hover { border-color: var(--ink); }
+.arrow span { transition: transform .3s var(--ease); }
+.arrow:hover span { transform: translateY(3px); }
+
+/* --------------------------------------------------------------------------
+   Header
+   -------------------------------------------------------------------------- */
+.head {
+  position: sticky; top: 0; z-index: 40;
+  background: var(--sky);
+  transition: background .35s var(--ease), box-shadow .35s var(--ease);
+}
+.head.is-scrolled {
+  background: color-mix(in srgb, var(--clay) 86%, transparent);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2); backdrop-filter: blur(10px) saturate(1.2);
+  box-shadow: 0 1px 0 0 rgba(47, 42, 36, .18);
+}
+.head__row { display: flex; align-items: center; gap: 1.5rem; height: 72px; }
+.brand {
+  display: inline-flex; align-items: center; gap: .6rem;
+  color: inherit; text-decoration: none;
+  font-family: var(--display); font-weight: 900; font-size: 1.15rem; letter-spacing: -.02em;
+  font-variation-settings: "opsz" 24;
+}
+.brand svg { width: 34px; height: 34px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linejoin: round; }
+.nav { margin-left: auto; display: flex; gap: clamp(.9rem, 2vw, 2rem); }
+.nav a {
+  color: inherit; text-decoration: none; font-weight: 500; font-size: .95rem;
+  padding: .45rem 0; border-bottom: 2px solid transparent;
+  transition: border-color .25s var(--ease);
+}
+.nav a:hover { border-color: var(--ink); }
+
+/* --------------------------------------------------------------------------
+   Horizon motif — the 1px line every heading sits on
+   -------------------------------------------------------------------------- */
+.horizon { height: 1px; background: var(--line); }
+
+.hz {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+.hz h2 { position: relative; z-index: 1; margin-bottom: var(--hz-drop); padding-right: 1.5rem; }
+.hz .eyebrow { position: relative; z-index: 1; }
+
+.hz--photo { display: grid; grid-template-columns: 1fr minmax(240px, 30%); gap: clamp(1.5rem, 4vw, 4rem); align-items: end; }
+.hz__photo { margin: 0; align-self: end; }
+.hz__photo img {
+  width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 50% 30%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent 100%), linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, #000 62%, transparent 100%), linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-composite: intersect;
+}
+.hz__photo--tall img { aspect-ratio: 4 / 5; object-position: 20% 35%; }
+
+/* Smaller echo of the hero sun, sitting on the Book horizon */
+.hz--sun { overflow: visible; }
+.hz__sunclip { position: absolute; left: 0; right: 0; bottom: 0; top: calc(-1 * var(--band)); overflow: hidden; z-index: 0; pointer-events: none; }
+.hz__sun {
+  position: absolute; right: 6%; bottom: 0;
+  width: clamp(180px, 26vw, 380px); aspect-ratio: 1; border-radius: 50%;
+  background: var(--ochre); transform: translateY(50%);
+}
+
+/* --------------------------------------------------------------------------
+   Hero
+   -------------------------------------------------------------------------- */
+.hero { position: relative; }
+.sky { position: relative; background: var(--sky); }
+.sun-layer { position: absolute; inset: 0; overflow: hidden; }
+.sun-rise { position: absolute; inset: 0; }
+.sun {
+  position: absolute; left: 58%; bottom: 0;
+  width: 74vw; aspect-ratio: 1; border-radius: 50%;
+  background: var(--ochre);
+  margin-left: -37vw; margin-bottom: calc(-37vw - 150px);
+  will-change: transform;
+}
+.sky__inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr minmax(260px, 27vw);
+  gap: clamp(1.5rem, 3vw, 3rem); align-items: end;
+  padding-top: clamp(1.5rem, 4vw, 3rem);
+}
+.hero__title { margin-bottom: var(--hz-drop); position: relative; z-index: 2; }
+.hero__photo { margin: 0; align-self: end; position: relative; z-index: 1; }
+.hero__photo img {
+  width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 50% 40%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 58%, transparent 100%), linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to bottom, #000 58%, transparent 100%), linear-gradient(to right, transparent, #000 14%, #000 86%, transparent);
+  mask-composite: intersect;
+}
+
+.ground {
+  display: grid; grid-template-columns: 1.15fr .85fr;
+  gap: clamp(2rem, 5vw, 6rem);
+  padding-block: clamp(2rem, 4vw, 3.25rem) clamp(3rem, 6vw, 5rem);
+}
+.hero__lead { display: grid; gap: 1.6rem; align-content: start; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.75rem; }
+.hero__intro { max-width: 46ch; }
+.hero__intro p:not(.eyebrow) { color: var(--ink-soft); }
+
+/* Load orchestration (only when JS is present; static under reduced motion) */
+.js:not(.is-ready) .sun-rise { transform: translateY(130px); }
+.js .sun-rise { transition: transform 1.7s var(--ease); }
+.js:not(.is-ready) .hero__title { opacity: 0; transform: translateY(22px); }
+.js .hero__title { transition: opacity .9s var(--ease) .15s, transform 1s var(--ease) .15s; }
+.js:not(.is-ready) .hero__photo { opacity: 0; transform: translateY(14px); }
+.js .hero__photo { transition: opacity 1s var(--ease) .45s, transform 1.1s var(--ease) .45s; }
+
+/* --------------------------------------------------------------------------
+   Bands
+   -------------------------------------------------------------------------- */
+.band { padding-block: var(--band); }
+.band--terra {
+  background: var(--terracotta); color: var(--bone);
+  --ink: var(--bone); --ink-soft: var(--bone); --line: rgba(231, 203, 175, .75); --focus: var(--bone);
+}
+.band--terra h2 { color: #EED9C4; }
+.band--cedar {
+  background: var(--cedar); color: var(--clay);
+  --ink: var(--clay); --ink-soft: #C9B79E; --line: var(--ochre); --focus: var(--ochre);
+}
+.band--cedar h2 { color: var(--ochre); }
+.band--cedar .eyebrow { color: var(--ochre); }
+
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 4vw, 4rem); }
+.cols p { max-width: 58ch; font-size: clamp(1.02rem, 1.3vw, 1.2rem); line-height: 1.6; }
+
+/* --------------------------------------------------------------------------
+   Practices — pillars + modalities
+   -------------------------------------------------------------------------- */
+.practices { padding-top: var(--band); }
+.practices .intro { max-width: 62ch; font-size: clamp(1.05rem, 1.4vw, 1.3rem); line-height: 1.55; margin-bottom: clamp(3rem, 6vw, 5rem); }
+
+.pillars { border-top: 1px solid var(--line); }
+.pillar { padding-block: clamp(3rem, 6vw, 5rem); }
+.pillar--clay { background: var(--clay); }
+.pillar--sage { background: var(--sage); }
+.pillar__grid { display: grid; grid-template-columns: minmax(260px, 34%) 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.pillar__lead h3 { margin-bottom: 1.1rem; max-width: 14ch; }
+.pillar__lead p:not(.eyebrow) { max-width: 40ch; }
+.pillar--sage { --ink-soft: #3C3A30; }
+
+.mods { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); }
+.mod h4 { margin-bottom: .6rem; }
+.mod p { font-size: 1rem; line-height: 1.55; color: var(--ink-soft); }
+
+/* A tiny sunrise: half-disc on a short horizon */
+.tick {
+  display: block; position: relative;
+  width: 26px; height: 13px; margin: 0 0 1rem 10px;
+  background: var(--ochre); border-radius: 26px 26px 0 0;
+}
+.tick::after { content: ""; position: absolute; left: -10px; right: -18px; bottom: -1px; height: 1px; background: var(--cedar); }
+.pillar--clay .tick { background: var(--terracotta); }
+
+.closing {
+  font-family: var(--display); font-weight: 400; font-style: italic;
+  font-variation-settings: "opsz" 72; font-size: clamp(1.45rem, 2.4vw, 2.2rem);
+  line-height: 1.25; letter-spacing: -.01em; max-width: 30ch;
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+}
+
+/* --------------------------------------------------------------------------
+   Session — three stones
+   -------------------------------------------------------------------------- */
+.session { padding-block: 0 var(--band); }
+.stones { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 2vw, 1.5rem); counter-reset: step; }
+.stone {
+  position: relative; min-height: clamp(280px, 26vw, 360px);
+  padding: clamp(1.5rem, 2.6vw, 2.25rem);
+  display: flex; flex-direction: column; gap: .75rem; justify-content: flex-end;
+}
+.stone--terra { background: var(--terracotta); color: #fff; border-radius: 3.5rem 5.5rem 3rem 6rem / 4.5rem 3rem 5.5rem 3.5rem; }
+.stone--ochre { background: var(--ochre); color: var(--cedar); border-radius: 6rem 3rem 5rem 3.5rem / 3rem 5rem 3.5rem 6rem; }
+.stone--sage { background: var(--sage); color: var(--cedar); border-radius: 4rem 6rem 3.5rem 3rem / 6rem 3.5rem 4rem 5rem; }
+.stone__n {
+  position: absolute; top: clamp(1.25rem, 2.4vw, 2rem); left: clamp(1.75rem, 3vw, 2.5rem);
+  font-family: var(--display); font-weight: 900; font-variation-settings: "opsz" 144;
+  font-size: clamp(3.5rem, 5.5vw, 5.5rem); line-height: 1; letter-spacing: -.05em;
+}
+.stone h3 { font-size: clamp(1.9rem, 2.8vw, 2.6rem); }
+.stone p { max-width: 26ch; line-height: 1.5; }
+.stone--terra p { color: #fff; }
+
+/* --------------------------------------------------------------------------
+   About / Book / Footer
+   -------------------------------------------------------------------------- */
+.about .hz--photo { grid-template-columns: 1fr minmax(240px, 26%); }
+
+.book { position: relative; padding-block: var(--band); }
+.book__body { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 6rem); align-items: start; }
+.book .lede { max-width: 30ch; }
+.book__cta { display: grid; gap: 1.25rem; justify-items: start; }
+.book__cta .small { margin: 0; }
+
+.foot { padding-block: clamp(3rem, 5vw, 4rem); border-top: 1px solid rgba(217, 164, 65, .35); }
+.foot__grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 2rem 4rem; align-items: start; }
+.foot .brand { color: var(--clay); }
+.foot__line { margin-top: .9rem; color: var(--ochre); font-weight: 500; }
+.foot__disc { font-size: .92rem; line-height: 1.55; color: var(--ink-soft); max-width: 62ch; }
+.foot__copy { grid-column: 1 / -1; font-size: .85rem; color: var(--ink-soft); padding-top: 1.25rem; border-top: 1px solid rgba(231, 203, 175, .15); }
+
+/* --------------------------------------------------------------------------
+   Reveals
+   -------------------------------------------------------------------------- */
+.js [data-reveal]:not(.in) { opacity: 0; transform: translateY(18px); }
+.js [data-reveal] { transition: opacity .8s var(--ease), transform .9s var(--ease); }
+
+/* --------------------------------------------------------------------------
+   Responsive
+   -------------------------------------------------------------------------- */
+@media (max-width: 1100px) {
+  .pillar__grid { grid-template-columns: 1fr; gap: 2rem; }
+  .mods { gap: 1.5rem; }
+}
+@media (max-width: 900px) {
+  .hz--photo, .about .hz--photo { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hz__photo { width: min(100%, 420px); }
+  .hz__photo--tall { width: min(100%, 300px); }
+  .hz--photo > div { order: -1; }
+  .hz--photo h2 { margin-bottom: 0; }
+  .cols, .book__body, .foot__grid { grid-template-columns: 1fr; }
+  .stones { grid-template-columns: 1fr; }
+  .stone { min-height: 0; padding: 2rem 1.75rem 1.75rem; }
+  .stone__n { position: static; margin-bottom: .25rem; }
+  .stone p { max-width: 42ch; }
+  .mods { grid-template-columns: 1fr; gap: 1.75rem; }
+  .hz__sun { right: 0; width: clamp(180px, 46vw, 300px); }
+}
+@media (max-width: 760px) {
+  .head__row { height: 60px; gap: .75rem; }
+  .brand span { display: none; }
+  .brand svg { width: 32px; height: 32px; }
+  .nav { gap: .9rem; }
+  .nav a { font-size: .85rem; }
+  .btn--sm { padding: .7rem .85rem; font-size: .78rem; }
+
+  .sky__inner { grid-template-columns: 1fr; gap: .5rem; padding-top: 1.25rem; }
+  .hero__title { margin-bottom: 0; margin-top: .25rem; }
+  .hero__photo { width: min(100%, 360px); margin: .75rem auto 0; }
+  .sun { left: 50%; width: 260vw; margin-left: -130vw; margin-bottom: calc(-130vw - 140px); }
+  .ground { grid-template-columns: 1fr; gap: 2rem; }
+  .lede { max-width: 22ch; }
+  .actions { gap: .9rem 1.25rem; }
+  .actions .btn { flex: 1 1 100%; }
+}
+@media (max-width: 420px) {
+  .nav { gap: .7rem; }
+  .btn--sm { padding: .65rem .7rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion — everything static
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .js:not(.is-ready) .sun-rise, .js:not(.is-ready) .hero__title, .js:not(.is-ready) .hero__photo { opacity: 1; transform: none; }
+  .js [data-reveal]:not(.in) { opacity: 1; transform: none; }
+  .sun { transform: none !important; }
+}

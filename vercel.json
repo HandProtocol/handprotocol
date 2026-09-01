@@ -10,6 +10,7 @@
     { "source": "/discovery", "destination": "/discovery/", "permanent": true },
     { "source": "/legacy", "destination": "/legacy/", "permanent": true },
     { "source": "/threehandshealing", "destination": "/threehandshealing/", "permanent": true },
+    { "source": "/threehandshealing/styles", "destination": "/threehandshealing/styles/", "permanent": true },
     { "source": "/raise", "destination": "/#tiers", "permanent": true },
     { "source": "/crypto", "destination": "/donate-crypto/", "permanent": true },
     { "source": "/vision", "destination": "/discovery/skill-exchange-vision.html", "permanent": true },
