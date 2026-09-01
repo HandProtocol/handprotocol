@@ -48,7 +48,7 @@ html[data-flare~="thread"] :is(.testimonials,.breath) h2::after{left:50%;transfo
 @keyframes fx-thread{50%{background-position:100% 0}}
 
 /* --- Studio panel ---------------------------------------------- */
-@media (max-width:760px){.design-switcher{flex-wrap:wrap;justify-content:center}}
+@media (max-width:760px){.design-switcher{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:calc(100% - 1.5rem);padding:.3rem .4rem;gap:.15rem}.design-switcher::-webkit-scrollbar{display:none}.design-switcher button,.design-switcher__more,.studio-sep{flex:0 0 auto;white-space:nowrap}}
 .studio-sep{width:1px;height:1.2rem;margin:0 .2rem;background:rgba(255,255,255,.2)}
 .studio-card{position:fixed;z-index:41;bottom:4.6rem;left:50%;width:min(420px,calc(100vw - 1.5rem));padding:1.05rem 1.15rem 1.2rem;border:1px solid rgba(255,255,255,.14);border-radius:1.15rem;background:rgba(22,29,23,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#eef0e6;font-family:var(--sans);box-shadow:0 18px 50px rgba(12,18,13,.45);opacity:0;visibility:hidden;transform:translateX(-50%) translateY(10px);transition:opacity .25s var(--ease),transform .25s var(--ease),visibility .25s}
 .studio-card.is-open{opacity:1;visibility:visible;transform:translateX(-50%)}
