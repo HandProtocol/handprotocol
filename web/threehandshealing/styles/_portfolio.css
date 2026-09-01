@@ -16,3 +16,4 @@
 @keyframes thh-pop{0%{transform:scale(.6)}60%{transform:scale(1.35)}100%{transform:scale(1)}}
 @media (max-width:480px){.thh-pill{font-size:12px;gap:.1rem}.thh-pill__name{display:none}}
 @media (prefers-reduced-motion:reduce){.thh-pill,.thh-pill__heart{transition:none;animation:none}}
+.thh-pill,.thh-pill a,.thh-pill button{border-radius:999px!important}
