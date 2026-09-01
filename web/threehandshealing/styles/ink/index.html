@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en" data-style="ink">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#EEEBE4">
+<meta name="description" content="Three Hands Healing — EFT, energy healing, bodywork, Qi Gong and Family Constellations with Maria. Online or in person in Texas.">
+<title>Three Hands Healing — Ink</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Display:ital,wght@0,200;0,300;1,200;1,300&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="ink" x="-8%" y="-8%" width="116%" height="116%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.034" numOctaves="3" seed="11" result="edge"/>
+      <feDisplacementMap in="SourceGraphic" in2="edge" scale="8" xChannelSelector="R" yChannelSelector="G" result="rough"/>
+      <feGaussianBlur in="rough" stdDeviation="0.6" result="soft"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.11" numOctaves="3" seed="3" result="grain"/>
+      <feColorMatrix in="grain" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1.7 0.2" result="grainA"/>
+      <feComposite in="soft" in2="grainA" operator="in"/>
+    </filter>
+    <filter id="stamp" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="5" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="brush" x="-4%" y="-60%" width="108%" height="220%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06 0.4" numOctaves="2" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <symbol id="mark" viewBox="0 0 48 48">
+      <path d="M24 6c8 0 14 5 14 12 0 8-7 10-14 24C17 28 10 26 10 18 10 11 16 6 24 6Z"/><path d="M11 31c4-7 11-7 15-4 4 4 2 10-9 13-6 1-10-4-6-9Z"/><path d="M37 31c-4-7-11-7-15-4-4 4-2 10 9 13 6 1 10-4 6-9Z"/>
+    </symbol>
+    <symbol id="hanko" viewBox="0 0 48 48">
+      <rect x="1.5" y="1.5" width="45" height="45" fill="#C8362B" filter="url(#stamp)"/>
+      <use href="#mark" x="8" y="8" width="32" height="32" fill="none" stroke="#EEEBE4" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <a class="brand" href="#top" aria-label="Three Hands Healing — back to top">
+    <svg class="hanko hanko--sm" aria-hidden="true" focusable="false"><use href="#hanko"/></svg>
+    <span class="brand__name">Three Hands Healing</span>
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="#practices">Practices</a>
+    <a href="#session">Sessions</a>
+    <a href="#about">About</a>
+    <a class="nav__cta" href="#book">Book a session</a>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <p class="vlabel" aria-hidden="true">Body · Mind · Spirit</p>
+    <div class="hero__stage">
+      <svg class="enso" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+        <defs>
+          <mask id="enso-draw" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="600">
+            <circle class="enso__draw" cx="300" cy="300" r="262" fill="none" stroke="#fff" stroke-width="76" transform="rotate(140 300 300)"/>
+          </mask>
+        </defs>
+        <path class="enso__ink" mask="url(#enso-draw)" filter="url(#ink)" d="M94.7 472.3L87.2 464.8L79.9 457.1L73.0 449.0L66.3 440.6L60.0 432.0L54.7 422.6L50.0 413.0L45.7 403.2L41.8 393.2L38.2 383.0L35.1 372.8L32.4 362.4L30.1 351.9L28.3 341.3L26.8 330.6L25.8 319.9L25.2 309.2L25.0 298.5L25.3 287.7L26.0 277.0L27.1 266.3L28.7 255.7L30.6 245.1L33.0 234.6L35.8 224.3L39.1 214.0L42.7 203.9L46.7 194.0L51.2 184.2L56.0 174.6L61.2 165.2L66.7 156.0L72.6 147.1L78.9 138.4L85.5 130.0L92.5 121.9L99.7 114.0L107.2 106.4L115.1 99.2L123.2 92.3L131.6 85.7L140.2 79.4L149.1 73.5L158.1 67.9L167.4 62.8L176.9 57.9L186.5 53.5L196.3 49.5L206.3 45.8L216.3 42.5L226.5 39.7L236.8 37.2L247.2 35.1L257.6 33.5L268.1 32.2L278.6 31.4L289.1 31.0L299.6 30.9L310.1 31.3L320.6 32.1L331.1 33.2L341.4 34.8L351.7 36.8L361.9 39.2L372.1 41.9L382.1 45.0L391.9 48.6L401.6 52.4L411.2 56.7L420.6 61.3L429.8 66.3L438.8 71.6L447.6 77.2L456.1 83.2L464.5 89.5L472.6 96.1L480.4 103.0L488.0 110.2L495.2 117.7L502.2 125.4L508.9 133.5L515.3 141.7L521.4 150.2L527.1 159.0L532.5 167.9L537.5 177.1L542.2 186.4L546.5 196.0L550.5 205.6L554.1 215.5L557.3 225.4L560.1 235.5L562.5 245.7L564.5 256.0L566.2 266.4L567.4 276.8L568.2 287.3L568.6 297.7L568.6 308.3L568.2 318.8L567.3 329.2L566.1 339.7L564.4 350.1L562.4 360.4L559.9 370.6L557.0 380.7L553.7 390.7L550.0 400.6L545.8 410.3L541.2 419.7L536.3 429.0L530.9 438.1L525.2 446.9L519.2 455.5L512.8 463.9L506.1 472.0L499.1 479.8L491.8 487.3L484.2 494.5L476.3 501.4L468.2 508.0L459.8 514.2L451.1 520.1L442.3 525.6L433.2 530.8L424.0 535.6L414.6 540.0L405.0 544.0L395.3 547.6L385.4 550.9L375.4 553.7L365.4 556.2L355.3 558.2L345.1 559.8L334.8 561.0L324.6 561.8L314.3 562.2L304.0 562.2L293.8 561.8L283.6 561.0L273.4 559.8L263.3 558.2L253.4 556.2L243.5 553.8L233.7 551.0L224.0 547.8L214.5 544.3L205.2 540.4L196.0 536.2L187.0 531.6L187.4 530.8L196.5 535.0L205.8 538.9L215.2 542.3L224.8 545.5L234.4 548.2L244.2 550.6L254.0 552.6L263.9 554.1L273.9 555.3L283.9 556.2L293.9 556.6L303.9 556.6L314.0 556.2L324.0 555.4L333.9 554.3L343.8 552.7L353.7 550.7L363.4 548.4L373.0 545.7L382.6 542.5L392.0 539.1L401.2 535.2L410.3 531.0L419.2 526.4L427.8 521.4L436.3 516.2L444.6 510.5L452.6 504.6L460.4 498.4L467.9 491.8L475.2 485.0L482.1 477.8L488.8 470.4L495.1 462.8L501.1 454.9L506.9 446.8L512.2 438.5L517.3 429.9L521.9 421.2L526.3 412.3L530.2 403.3L533.8 394.1L537.2 384.8L540.2 375.5L542.8 366.0L545.1 356.4L547.0 346.8L548.5 337.0L549.6 327.3L550.3 317.5L550.6 307.7L550.6 297.9L550.1 288.1L549.3 278.4L548.1 268.7L546.5 259.0L544.6 249.4L542.3 240.0L539.6 230.6L536.6 221.3L533.2 212.2L529.4 203.2L525.3 194.3L520.9 185.7L516.2 177.2L511.1 168.9L505.8 160.8L500.1 152.9L494.1 145.3L487.8 137.9L481.3 130.7L474.5 123.8L467.5 117.1L460.2 110.7L452.6 104.7L444.9 98.9L436.9 93.4L428.7 88.2L420.3 83.3L411.8 78.7L403.1 74.5L394.2 70.6L385.2 67.0L376.0 63.8L366.7 61.0L357.4 58.5L347.9 56.3L338.3 54.5L328.7 53.1L319.1 52.1L309.4 51.4L299.7 51.1L289.9 51.2L280.2 51.6L270.5 52.4L260.8 53.6L251.2 55.2L241.6 57.1L232.1 59.5L222.7 62.1L213.4 65.2L204.2 68.6L195.2 72.4L186.3 76.5L177.6 81.0L169.0 85.8L160.7 90.9L152.5 96.4L144.6 102.2L136.9 108.4L129.4 114.8L122.2 121.5L115.3 128.5L108.7 135.8L102.3 143.3L96.2 151.1L90.5 159.1L85.1 167.4L80.0 175.8L75.3 184.5L70.9 193.3L66.8 202.4L63.2 211.5L59.9 220.9L56.9 230.3L54.4 239.9L52.2 249.5L50.5 259.2L49.1 269.0L48.1 278.8L47.5 288.7L47.3 298.6L47.5 308.5L48.1 318.3L49.1 328.1L50.5 337.9L52.3 347.6L54.5 357.2L57.0 366.8L59.9 376.2L63.2 385.4L66.9 394.6L70.9 403.6L75.2 412.4L79.7 421.1L83.8 430.1L88.3 439.0L93.1 447.7L98.3 456.2L103.9 464.6Z"/>
+      </svg>
+      <div class="hero__text">
+        <p class="eyebrow">Three Hands Healing · Texas</p>
+        <h1 id="hero-title">Feel good in your body,<br>at peace in your mind,<br>aligned in your life.</h1>
+        <p class="lede">Wherever you are right now is the perfect place to start.</p>
+      </div>
+    </div>
+    <div class="hero__actions">
+      <a class="link" href="#book">Book a session</a>
+      <span class="hero__sep" aria-hidden="true"></span>
+      <a class="link link--quiet" href="#practices">How we work together</a>
+    </div>
+  </section>
+
+  <section class="intro" aria-label="Welcome">
+    <div class="intro__wrap">
+      <p>Welcome—I'm Maria. I am here to help you feel good in your body, at peace in your mind, and aligned in your life, relationships, and career. My mission is simple: to share the powerful, transformative tools that changed my own life so you can move beyond pain, step past invisible blocks, and fully reclaim your life's vitality. You don't have to navigate this alone—wherever you are right now is the perfect place to start.</p>
+    </div>
+  </section>
+
+  <section class="alone" id="alone" aria-labelledby="alone-title">
+    <p class="vlabel" aria-hidden="true">Not alone</p>
+    <div class="alone__wrap">
+      <svg class="rule" viewBox="0 0 320 10" aria-hidden="true" focusable="false"><path d="M2 5.5C40 3 90 6.5 140 4.8S230 3.6 318 5.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" filter="url(#brush)"/></svg>
+      <h2 id="alone-title">You don't have to navigate this alone.</h2>
+      <p>It is so hard to blossom into who you are meant to be when you are navigating illness, destructive behavioral patterns, or invisible blocks. I have been there—and I am living proof that we can grow through our deepest challenges to find ourselves again in greater joy, strength, and purpose.</p>
+      <p>Healing is a journey, and it is my absolute honor to walk alongside you, however that looks for you.</p>
+    </div>
+  </section>
+
+  <section class="practices" id="practices" aria-labelledby="practices-title">
+    <p class="vlabel" aria-hidden="true">How we work</p>
+    <div class="wrap">
+      <div class="practices__head">
+        <div class="practices__intro">
+          <h2 id="practices-title">How we work together.</h2>
+          <p>True, lasting healing begins with absolute safety. First and foremost, I meet you right where you are with nonjudgmental presence, compassion, and deep listening. Together, we look at what is holding you back today—and where you want to expand in the future. From there, we weave together a tailored combination of root-cause modalities.</p>
+        </div>
+        <figure class="print practices__print">
+          <img src="../../assets/image6.jpeg" alt="Maria standing in a dry meadow, demonstrating EFT tapping on the side of her hand" width="654" height="968" loading="lazy" decoding="async">
+          <figcaption>EFT · tapping the side of the hand</figcaption>
+        </figure>
+      </div>
+
+      <div class="pillars">
+        <article class="pillar" aria-labelledby="pillar-body">
+          <h3 id="pillar-body">For the body <span class="amp">&amp;</span> physical energy</h3>
+          <p>Support for people living with pain, tension, or illness, through targeted bodywork, Candace Silvers Energy Healing, and supportive Qi Gong practices.</p>
+          <ul class="modalities">
+            <li><b>Bodywork</b><span>Attentive, targeted work with the body to ease tension and bring back ease of movement.</span></li>
+            <li><b>Candace Silvers Energy Healing</b><span>A quiet, hands-on energy practice for rest, grounding, and integration. Nothing to perform, nothing to prove.</span></li>
+            <li><b>Qi Gong</b><span>Slow, supportive movement and breath practices you can take home with you.</span></li>
+          </ul>
+        </article>
+        <div class="pillars__rule" aria-hidden="true"></div>
+        <article class="pillar" aria-labelledby="pillar-mind">
+          <h3 id="pillar-mind">For the mind, behavior <span class="amp">&amp;</span> emotions</h3>
+          <p>Because the mind touches every area of our health, relationships, and purpose, we work with Emotional Freedom Technique (EFT/Tapping), Systemic Family Constellations, and intuitive emotional release exercises.</p>
+          <ul class="modalities">
+            <li><b>EFT / Tapping</b><span>Gentle fingertip tapping on acupressure points while giving voice to what you are feeling. Simple to learn, surprisingly powerful.</span></li>
+            <li><b>Systemic Family Constellations</b><span>A way of seeing the hidden loyalties and patterns we inherit, so what has been carried can finally be set down.</span></li>
+            <li><b>Intuitive emotional release</b><span>Guided exercises for letting what has been held move through and out, at your own pace.</span></li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="closing">Guided by empathic and intuitive gifts, I offer a grounded partnership to help you clear the root causes of suffering and step into lasting wholeness.</p>
+    </div>
+  </section>
+
+  <section class="session" id="session" aria-labelledby="session-title">
+    <p class="vlabel" aria-hidden="true">A session</p>
+    <div class="wrap">
+      <div class="session__head">
+        <h2 id="session-title">What a session feels like.</h2>
+        <p class="session__note">Sessions are offered online and in person.</p>
+      </div>
+      <ol class="steps">
+        <li class="step">
+          <svg class="dash" viewBox="0 0 120 10" aria-hidden="true" focusable="false"><path d="M3 5.6C30 3.4 62 6.8 117 4.4" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" filter="url(#brush)"/></svg>
+          <p class="step__num"><span class="step__kanji" lang="ja" aria-hidden="true">一</span><span class="step__arabic">1</span></p>
+          <h3>Arrive</h3>
+          <p>Talk about what is happening and what support you are looking for.</p>
+        </li>
+        <li class="step">
+          <svg class="dash" viewBox="0 0 120 10" aria-hidden="true" focusable="false"><path d="M4 4.6C36 6.6 70 3.2 116 5.8" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" filter="url(#brush)"/></svg>
+          <p class="step__num"><span class="step__kanji" lang="ja" aria-hidden="true">二</span><span class="step__arabic">2</span></p>
+          <h3>Experience</h3>
+          <p>Explore a practice together at a comfortable pace.</p>
+        </li>
+        <li class="step">
+          <svg class="dash" viewBox="0 0 120 10" aria-hidden="true" focusable="false"><path d="M3 5.2C40 3 80 7 117 5" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" filter="url(#brush)"/></svg>
+          <p class="step__num"><span class="step__kanji" lang="ja" aria-hidden="true">三</span><span class="step__arabic">3</span></p>
+          <h3>Integrate</h3>
+          <p>Talk about what came up and what might be useful afterward.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <p class="vlabel vlabel--right" aria-hidden="true">Maria</p>
+    <div class="about__grid">
+      <figure class="print about__print">
+        <img src="../../assets/image10.jpeg" alt="Maria in an indigo floral kimono, looking up toward the light through the trees" width="640" height="964" loading="lazy" decoding="async">
+      </figure>
+      <div class="about__text">
+        <p class="eyebrow">Meet Maria</p>
+        <h2 id="about-title">A guide, not a pedestal.</h2>
+        <p>Every tool and modality I share in my practice comes from a place of deep personal experience. I know what it feels like to seek answers, which is why I've devoted my life to mastering the practices that continuously restore health, peace, and joy in my own body, relationships, and career.</p>
+        <p>My practice is a space of true partnership. Guided by empathic intuition and powerful energy and behavioral modalities, I am here to hold a safe container where your pain is met with understanding, and your potential is given room to bloom.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="book" id="book" aria-labelledby="book-title">
+    <p class="vlabel" aria-hidden="true">Begin</p>
+    <div class="book__wrap">
+      <h2 id="book-title">Begin where you are.</h2>
+      <p class="book__body">Choose a practice, find a time, and we will take it from there. No account needed.</p>
+      <button class="hanko-btn" type="button">
+        <svg class="hanko hanko--lg" aria-hidden="true" focusable="false"><use href="#hanko"/></svg>
+        <span class="hanko-btn__label">Book a session</span>
+      </button>
+      <p class="small">Online or in person · Sessions in Texas</p>
+      <p class="small">Booking and contact details will be added at launch</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot__grid">
+    <div class="foot__brand">
+      <p class="foot__name">Three Hands Healing</p>
+      <p class="foot__line">Support for a happier, healthier life.</p>
+    </div>
+    <div class="foot__legal">
+      <p class="foot__disc">Three Hands Healing offers complementary wellness support and is not a substitute for medical, mental-health, or emergency care. If you need urgent help, contact local emergency services or a qualified health professional.</p>
+      <p class="foot__copy">© 2026 Three Hands Healing</p>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+<script src="../_portfolio.js" defer></script>
+</body>
+</html>

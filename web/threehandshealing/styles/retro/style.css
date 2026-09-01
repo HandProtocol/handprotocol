@@ -1,0 +1,220 @@
+/* Three Hands Healing — Retro (seventies wellness poster) */
+:root{
+  --mustard:#E3A82B; --orange:#C8501F; --avocado:#6B7F3A; --avocado-deep:#586A2E;
+  --cream:#F8E9C9; --cocoa:#4A2C1A; --sky:#9EC5C2;
+  --ray-a:#E9B23A; --ray-b:#E39C2C;
+  --display:'Shrikhand','Cooper Black',Georgia,serif;
+  --body:'Josefin Sans','Futura','Trebuchet MS',sans-serif;
+  --stripes:linear-gradient(to bottom,var(--orange) 0 33.34%,var(--mustard) 33.34% 66.67%,var(--avocado) 66.67% 100%);
+  --wrap:74rem; --gutter:clamp(1.25rem,4vw,3rem);
+  --h1:clamp(2.55rem,5.3vw,4.7rem);
+  --h2:clamp(1.95rem,3.5vw,3rem);
+  --pad:clamp(4rem,8vw,6.5rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:6rem;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--cream);color:var(--cocoa);font:400 1.125rem/1.65 var(--body);overflow-x:clip}
+img{max-width:100%;display:block}
+h1,h2,h3,p,ul,ol,figure{margin:0}
+a{color:inherit}
+svg{display:block}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--cocoa);outline-offset:4px}
+.book :focus-visible,.foot :focus-visible{outline-color:var(--cream)}
+.skip{position:absolute;left:1rem;top:-4rem;z-index:50;padding:.8rem 1rem .6rem;background:var(--cocoa);color:var(--cream);font:600 .85rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-radius:999px}
+.skip:focus{top:1rem}
+
+/* type */
+.eyebrow{font:600 .78rem/1.3 var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--orange);margin:0 0 1rem}
+h1{font:400 var(--h1)/1.04 var(--display);color:var(--cocoa);letter-spacing:.005em;text-wrap:balance;margin:.25rem 0 1.5rem;max-width:12.5ch}
+.hi{color:var(--orange)}
+h2{font:400 var(--h2)/1.08 var(--display);letter-spacing:.005em;text-wrap:balance;margin:0 0 1.25rem}
+.lede{font-size:clamp(1.15rem,1.5vw,1.4rem);line-height:1.45;max-width:26ch;margin:0 0 2.25rem}
+p+p{margin-top:1.1em}
+
+/* buttons: printed pills with a hard cocoa shadow */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:3.3rem;padding:1rem 1.5rem .8rem;font:600 .92rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--cocoa);background:var(--mustard);border:3px solid var(--cocoa);border-radius:999px;box-shadow:5px 5px 0 var(--cocoa);text-decoration:none;white-space:nowrap;transition:translate .15s ease,box-shadow .15s ease}
+.btn:hover{translate:2px 2px;box-shadow:3px 3px 0 var(--cocoa)}
+.btn:active{translate:5px 5px;box-shadow:0 0 0 var(--cocoa)}
+.btn--ghost{background:transparent}
+.btn--sm{min-height:2.7rem;padding:.75rem 1.15rem .55rem;font-size:.76rem;box-shadow:3px 3px 0 var(--cocoa)}
+.btn--sm:hover{translate:1px 1px;box-shadow:2px 2px 0 var(--cocoa)}
+.btn--lg{min-height:3.8rem;padding:1.25rem 2.4rem 1rem;font-size:1rem}
+.actions{display:flex;flex-wrap:wrap;gap:1.1rem 1rem;align-items:center}
+
+/* stripes + plinths */
+.stripes{height:18px;background:var(--stripes)}
+.stripes--thin{height:12px}
+.plinth{height:18px;background:var(--stripes);margin-inline:-12px}
+
+/* header */
+.site-head{position:sticky;top:0;z-index:20;background:var(--cream)}
+.site-head__row{display:flex;align-items:center;gap:1.25rem 1.75rem;flex-wrap:wrap;max-width:var(--wrap);margin:0 auto;padding:.85rem var(--gutter)}
+.brand{display:inline-flex;align-items:center;gap:.7rem;font:600 .78rem/1.15 var(--body);letter-spacing:.2em;text-transform:uppercase;color:var(--cocoa);text-decoration:none}
+.brand svg{width:36px;height:36px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round;flex:none}
+.site-nav{display:flex;gap:1.75rem;margin-inline-start:auto}
+.site-nav a{font:600 .82rem/1 var(--body);letter-spacing:.16em;text-transform:uppercase;text-decoration:none;padding:.45rem 0 .3rem;border-bottom:3px solid transparent;transition:border-color .15s}
+.site-nav a:hover{border-color:var(--orange)}
+
+/* hero */
+.hero{overflow:hidden;background:var(--cream)}
+.hero__inner{max-width:var(--wrap);margin:0 auto;padding:clamp(2.25rem,5vw,4rem) var(--gutter) clamp(3rem,6vw,4.5rem);display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,.88fr);gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.hero__copy{position:relative;z-index:2}
+.hero__figure{position:relative;justify-self:center;width:min(100%,500px);margin-block:1rem 2.25rem}
+.sun{position:absolute;left:50%;top:44%;width:158%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;z-index:0;
+  background:repeating-radial-gradient(circle at 50% 50%,transparent 0 40px,rgba(74,44,26,.075) 40px 42px),
+             repeating-conic-gradient(from 0deg at 50% 50%,var(--ray-a) 0 7.5deg,var(--ray-b) 7.5deg 15deg);
+  -webkit-mask:radial-gradient(circle at 50% 50%,#000 32%,transparent 70%);mask:radial-gradient(circle at 50% 50%,#000 32%,transparent 70%);
+  animation:spin 120s linear infinite;will-change:transform}
+@keyframes spin{to{rotate:360deg}}
+.arch-wrap{position:relative;z-index:1}
+.arch{aspect-ratio:5/6;border:6px solid var(--cocoa);border-radius:999px 999px 0 0;overflow:hidden;background:var(--cocoa)}
+.arch img{width:100%;height:100%;object-fit:cover}
+.arch--hero img{object-position:45% 50%}
+.arch--about img{object-position:12% 40%}
+.arch--book img{object-position:50% 92%}
+.badge{position:absolute;z-index:3;left:-2.75rem;bottom:-.75rem;width:9.5rem;aspect-ratio:1;filter:drop-shadow(4px 4px 0 var(--cocoa))}
+.badge__ring{width:100%;height:100%;animation:spin 30s linear infinite}
+.badge__disc{fill:var(--cream);stroke:var(--cocoa);stroke-width:3}
+.badge__text{font:600 11.2px var(--body);letter-spacing:1.2px;text-transform:uppercase;fill:var(--cocoa)}
+.badge__mark{position:absolute;inset:0;margin:auto;width:38%;height:38%;fill:none;stroke:var(--orange);stroke-width:2.8;stroke-linejoin:round;stroke-linecap:round}
+
+/* load choreography */
+.js .hero__copy>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.js .hero__copy>:nth-child(2){animation-delay:.08s}
+.js .hero__copy>:nth-child(3){animation-delay:.16s}
+.js .hero__copy>:nth-child(4){animation-delay:.24s}
+.js .hero__figure .arch-wrap{animation:rise .8s .12s cubic-bezier(.2,.7,.2,1) both}
+.js .sun{animation:spin 120s linear infinite,fade 1.2s .2s ease both}
+.js .badge{animation:pop .6s .55s cubic-bezier(.3,1.4,.4,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;scale:.6}to{opacity:1;scale:1}}
+
+/* scroll reveals */
+.js [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--d,0)*90ms)}
+.js [data-reveal].is-in{opacity:1;transform:none}
+
+/* intro */
+.intro__inner{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter) var(--pad);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.2fr);gap:1.5rem 3rem;align-items:start}
+.intro__inner::before{content:"";grid-column:1/-1;height:3px;background:var(--cocoa);margin-bottom:1.5rem}
+.intro__text{font-size:clamp(1.15rem,1.5vw,1.35rem);line-height:1.55;max-width:58ch}
+
+/* validation */
+.alone{background:var(--mustard);color:var(--cocoa)}
+.alone__inner{max-width:50rem;margin:0 auto;padding:var(--pad) var(--gutter);text-align:center}
+.alone .eyebrow{color:var(--cocoa)}
+.alone h2{margin-bottom:1.5rem}
+.alone p{font-size:clamp(1.1rem,1.4vw,1.25rem);line-height:1.6}
+.glyph{width:2.25rem;height:2.25rem;margin:0 auto 1.25rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.glyph--cream{stroke:var(--cream)}
+
+/* practices */
+.practices__inner{max-width:var(--wrap);margin:0 auto;padding:var(--pad) var(--gutter)}
+.section-head{max-width:58ch}
+.section-head p:not(.eyebrow){font-size:clamp(1.1rem,1.4vw,1.25rem);line-height:1.6}
+.section-head--center{margin:0 auto;text-align:center}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3.5rem);margin-top:3.5rem;align-items:stretch}
+.pillar-wrap{display:flex;flex-direction:column}
+.pillar{flex:1}
+.pillar-wrap{--pc:var(--avocado)}
+.pillar-wrap:nth-child(2){--pc:var(--orange)}
+.pillar{border:5px solid var(--cocoa);border-radius:999px 999px 0 0;overflow:hidden;background:var(--cream)}
+.pillar__cap{background:var(--pc);color:var(--cream);text-align:center;padding:29% 2rem 1.75rem}
+.pillar__cap .glyph{margin-bottom:.75rem}
+.pillar__cap h3{font:400 clamp(1.5rem,2.1vw,1.9rem)/1.1 var(--display);text-wrap:balance}
+.pillar__body{padding:1.9rem clamp(1.25rem,3vw,2.5rem) 2.4rem}
+.pillar__body>p{line-height:1.6}
+.mods{list-style:none;padding:0;margin:1.6rem 0 0;display:grid;gap:1.15rem;border-top:3px solid var(--cocoa);padding-top:1.5rem}
+.mods li{display:grid;grid-template-columns:1.5rem 1fr;gap:.85rem;align-items:start}
+.mods svg{width:1.5rem;height:1.5rem;margin-top:.1rem;fill:none;stroke:var(--pc);stroke-width:2;stroke-linecap:round}
+.mods b{display:block;font-weight:600;letter-spacing:.03em;margin-bottom:.15rem}
+.mods p{font-size:1rem;line-height:1.55}
+.pillar-wrap .plinth{margin-inline:-10px}
+.closing{margin:3.75rem auto 0;max-width:44ch;text-align:center;font-size:clamp(1.15rem,1.5vw,1.35rem);line-height:1.5}
+
+/* session */
+.session{background:var(--sky)}
+.session__inner{max-width:var(--wrap);margin:0 auto;padding:var(--pad) var(--gutter)}
+.steps{list-style:none;padding:0;margin:3.5rem auto 0;max-width:62rem;display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem 2rem}
+.step{display:flex;flex-direction:column;align-items:center;text-align:center}
+.step--1{--sc:var(--orange);--st:var(--cream)}
+.step--2{--sc:var(--mustard);--st:var(--cocoa)}
+.step--3{--sc:var(--avocado);--st:var(--cream)}
+.step__vis{display:flex;flex-direction:column;align-items:center}
+.step__disc{width:clamp(9rem,14vw,12rem);aspect-ratio:1;border-radius:50%;border:4px solid var(--cocoa);background:var(--sc);color:var(--st);display:grid;place-items:center;box-shadow:8px 8px 0 var(--cocoa)}
+.step__disc span{font:600 clamp(3.2rem,5vw,4.6rem)/1 var(--body);padding-top:.18em}
+.step__plinth{width:7.5rem;height:18px;background:var(--stripes);margin:1.75rem 0 0}
+.step__txt{margin-top:1.4rem}
+.step h3{font:600 1rem/1.2 var(--body);letter-spacing:.22em;text-transform:uppercase;margin:0 0 .6rem}
+.step p{max-width:24ch;line-height:1.55}
+
+/* about */
+.about__inner{max-width:var(--wrap);margin:0 auto;padding:var(--pad) var(--gutter);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2.5rem,6vw,5.5rem);align-items:center}
+.arch-wrap--about{width:min(100%,420px);justify-self:center}
+.underline{width:9rem;height:18px;background:var(--stripes);margin:1.5rem 0 1.75rem}
+.about__copy p:not(.eyebrow){line-height:1.6}
+
+/* book */
+.book{background:var(--avocado-deep);color:var(--cream);text-align:center}
+.book__inner{max-width:42rem;margin:0 auto;padding:var(--pad) var(--gutter)}
+.arch-wrap--book{width:12.5rem;margin:0 auto 2.5rem}
+.arch--book{aspect-ratio:4/5}
+.book .eyebrow{color:var(--mustard)}
+.book h2{color:var(--cream)}
+.book__lede{font-size:clamp(1.1rem,1.4vw,1.25rem);line-height:1.55;max-width:38ch;margin:0 auto 2.25rem}
+.book .btn{margin-bottom:2.25rem}
+.small{font-size:1rem;letter-spacing:.03em;line-height:1.5;text-wrap:balance}
+.small+.small{margin-top:.3rem}
+
+/* footer */
+.foot{background:var(--cocoa);color:var(--cream)}
+.foot__inner{max-width:var(--wrap);margin:0 auto;padding:3.25rem var(--gutter) 2.75rem;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:2rem 4rem;align-items:start}
+.foot__mark{width:44px;height:44px;fill:none;stroke:var(--mustard);stroke-width:2.4;stroke-linejoin:round;stroke-linecap:round;margin-bottom:1rem}
+.foot__name{font:600 .85rem/1.2 var(--body);letter-spacing:.22em;text-transform:uppercase}
+.foot__tag{margin-top:.5rem;font-size:1rem}
+.foot small{display:block;font-size:1rem;line-height:1.55;max-width:62ch}
+.foot__copy{margin-top:1.25rem;font-size:.85rem;letter-spacing:.08em}
+
+/* responsive */
+@media (min-width:1000px){.hero__inner{min-height:calc(100svh - 5.6rem)}}
+@media (max-width:900px){
+  .hero__inner{grid-template-columns:1fr;gap:1.5rem}
+  .hero__figure{width:min(100%,460px);margin-block:1.5rem 1rem}
+  h1{max-width:none}
+  .about__inner{grid-template-columns:1fr}
+  .arch-wrap--about{width:min(100%,380px);justify-self:start}
+  .foot__inner{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .pillars{grid-template-columns:1fr;gap:2.75rem}
+  .pillar__cap{padding-top:22%}
+  .intro__inner{grid-template-columns:1fr;gap:.5rem}
+  .steps{grid-template-columns:1fr;gap:2rem;max-width:34rem}
+  .step{flex-direction:row;align-items:center;text-align:left;gap:1.4rem}
+  .step__disc{width:6.25rem;box-shadow:5px 5px 0 var(--cocoa)}
+  .step__disc span{font-size:2.4rem}
+  .step__plinth{width:5.5rem;margin-top:1.1rem}
+  .step__txt{margin-top:0}
+  .step p{max-width:none}
+}
+@media (max-width:720px){
+  .site-nav{order:3;flex-basis:100%;margin:0;gap:1.4rem;padding-top:.15rem}
+  .site-head__row{gap:.75rem 1rem;padding-block:.75rem}
+  .btn--sm{margin-inline-start:auto}
+  html{scroll-padding-top:7.5rem}
+}
+@media (max-width:480px){
+  .badge{width:7.25rem;left:-.5rem;bottom:-.5rem}
+  .sun{width:150%}
+  .plinth{margin-inline:-8px}
+  .actions .btn{width:100%}
+}
+
+/* reduced motion: rays and badge hold still, reveals are instant */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js [data-reveal]{opacity:1;transform:none}
+  .js .hero__copy>*,.js .arch-wrap,.js .badge,.js .sun{opacity:1;transform:none;scale:1}
+}

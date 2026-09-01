@@ -12,6 +12,7 @@ http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protoc
 /cafenenai              /cafenenai/                301
 /legacy                 /legacy/                   301
 /threehandshealing      /threehandshealing/         301
+/threehandshealing/styles /threehandshealing/styles/  301
 /foundation-campaign    /                          301
 /foundation-campaign/   /                          301
 /raise                  /#tiers                    301
