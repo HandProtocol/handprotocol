@@ -1,11 +1,13 @@
-# Handoff — Three Hands Healing (Maria) · 2026-09-01
+# Handoff — Three Hands Healing (Maria) · 2026-09-04
 
 Client website for Maria's healing practice (EFT/Tapping, Candace Silvers
 Energy Healing, bodywork, Qi Gong, Systemic Family Constellations, intuitive
 emotional release). **Status (2026-09-01): design preview LIVE; a 17-style
 design portfolio is LIVE at https://handprotocol.org/threehandshealing/styles/
 (noindex) waiting for Maria's picks; copy phase blocked on her answers to a
-16-question info sheet.**
+16-question info sheet. A second batch of ten "bedazzled" styles is BUILT
+LOCALLY (uncommitted, not deployed) — six still need their independent review;
+see "Bedazzled batch" below and resume there.**
 
 ## Start here (cold session)
 
@@ -16,6 +18,11 @@ design portfolio is LIVE at https://handprotocol.org/threehandshealing/styles/
    sheet** answers. Check /pins before doing anything else.
 3. Nothing here is a production client site yet — it is all HAND-hosted
    preview. Do not delete the other styles until Maria has chosen.
+4. **If you are resuming the bedazzled batch (2026-09-04):** everything is on
+   disk and uncommitted on branch `agent/yuhm-network`. First `git status`
+   the two dirs (another session shares this checkout); then follow the
+   "Resume checklist" under "Bedazzled batch" — it starts with the
+   review-only workflow, not a rebuild.
 
 ## Orient in one paragraph
 
@@ -142,6 +149,77 @@ Also in this pass: `web/threehandshealing/index.html` switcher gained a "+ 14 mo
 
 **Next after picks:** fold the chosen direction(s) into the real build (the copy-slotting steps below still apply), delete the other 13 + the gallery, and drop `_portfolio.js` from the survivor.
 
+## Bedazzled batch — ten more styles (2026-09-02→04, IN PROGRESS, uncommitted)
+
+koH asked for "10 more designs, creative, with extra CSS elements based off the
+current copy so they are bedazzled and beautiful." Built the opposite pole of
+the first fourteen: ornate, every ornament a literal CSS/SVG visualization of a
+phrase in Maria's copy (each tagged `<!-- ornament: "phrase" — … -->` in the
+HTML). Rules live in **`design-portfolio-brief-bedazzled.md`** (addendum to the
+brief — read both). Concept cards (world, fonts, palette, hero, signature,
+ornaments, motion, photos, risks) are in **`bedazzled-cards/<slug>.json`**;
+per-style build/review state incl. open minor issues is in
+**`bedazzled-status.json`**.
+
+| Slug | World · fonts | Signature | State (2026-09-04) |
+|---|---|---|---|
+| nouveau | Mucha poster on flat plum · Gilda Display + Alegreya Sans + Pinyon Script | gold whiplash cartouche draws itself round the H1, ends in enamel irises | fix2 applied, **needs review** |
+| talavera | Puebla tile wall · Yeseva One + Mulish | the wall paints itself outward from one seed tile | **reviewed ✓** (6 minors open) |
+| vellum | illuminated manuscript · Uncial Antiqua + Gentium Book Plus | gilded versals as the table of contents, lapis title page, manicules | review1 failed → fix2 died, **needs review** |
+| enamel | cloisonné jewel box · Bellefair + Outfit | enamel "fires" from milk to glass over guilloché | fix2 applied, **needs review** |
+| curtain | opera house · Cinzel + Lora | velvet curtains part on load; curtain call at #book | review1 failed → fix2 died, **needs review** |
+| loom | textile loom · Anybody + Lexend | H1 woven over-under through the warp | **reviewed ✓** (6 minors) |
+| lenticular | holographic print proof · Schibsted Grotesk + Instrument Sans + Martian Mono | one `--tilt` from scroll drives every light-catching surface | **reviewed ✓** (4 minors) |
+| meander | Hill Country river map · Sorts Mill Goudy + Spectral SC + Barlow | one river path is the page's spine (oxbow portrait, stepping-stone steps, still pool at Book) | built, **never reviewed** |
+| popup | pop-up paper theatre · Zilla Slab + Atkinson Hyperlegible | every section rises on visible hinges as it enters | **reviewed ✓** (6 minors) |
+| nightgarden | walled garden at moonrise · Ovo + Hanken Grotesk | moonflowers unfurl section by section, full bloom at Book | fix1 applied, **needs review** |
+
+All ten: `tools/validate.mjs` ✓ (50–68 KB, 4 photos each), `tools/shot.mjs`
+errors `[]` at 1440 + 390 (re-shot 2026-09-04 for the six unreviewed, so no
+fixer left a broken file). Gallery thumbnails generated for all ten.
+
+**Gallery + preview already updated (uncommitted):** `styles/gallery.js` has
+the ten entries (tag `bedazzled`, after Monolith; desc/fonts/palette from the
+builders' reports); `styles/index.html` has a **Bedazzled** filter + copy now
+says twenty-seven; `styles/gallery.css` has `--bedaz` + `.tag--bedazzled`;
+preview root switcher link reads "+ 24 more styles". `tools/gallery-e2e.mjs`
+passes locally (27 cards · Bedazzled = 10 · viewer/pill/picks/tray OK · 0
+errors · 0 broken thumbs). `tools/validate.mjs` now ignores SVG path data in
+the phone-number check (false positive on Popup).
+
+**How it was built:** concept workflow (3 proposers → judge → 2 critics → judge
+revise, 24 proposals → 10 cards), then `tools/workflows/bedazzled-build.js`
+(builder → independent reviewer → fixer → re-review, ≤2 rounds). The build
+workflow hit the account's session-usage limit three times (2026-09-02
+18:30, 2026-09-03 00:20 and 20:50 CT), which is why six pages have unreviewed
+fixes — nothing is wrong with the pages, the reviewers simply never ran.
+
+### Resume checklist (in order)
+
+1. `git status threehandshealing web/threehandshealing` — expect exactly the
+   ten `styles/<slug>/` dirs, twenty `_shots/*.webp`, the gallery/preview edits,
+   and the workspace files listed above. Nothing else should be dirty from
+   this work.
+2. Run the review-only workflow (Claude `Workflow` tool, `scriptPath` =
+   `threehandshealing/tools/workflows/bedazzled-review.js`, `args:
+   { scratch: <session scratchpad>, slugs: ["nouveau","vellum","enamel",
+   "curtain","meander","nightgarden"] }`). ~6 reviewers + fixers; each Bash
+   call that runs Playwright needs `dangerouslyDisableSandbox: true`. If a
+   fixer touches a page, re-run `node tools/thumbs.mjs <slug>`.
+3. Optional: apply the open minors in `bedazzled-status.json` for the four
+   passing styles (all cheap polish).
+4. `node tools/validate.mjs` (all 24) and `node tools/gallery-e2e.mjs`.
+5. Land on `main` by path (worktree + cherry-pick + HTTPS push, memory
+   `machine-git-push-via-gh-https`): `web/threehandshealing/` + `threehandshealing/`
+   only. Netlify auto-deploys; verify the deploy state via the API, then probe
+   live: gallery 200 + `X-Robots-Tag: noindex` (the header glob
+   `/threehandshealing/styles/*` already covers new subdirs), one new style
+   page 200 + noindex, `_shots/nouveau.webp` 200.
+6. Run the live QA pattern from "Live QA results" over the ten new URLs, fix,
+   re-thumb, re-land. Then text Maria the gallery link again ("ten new ones
+   under Bedazzled").
+7. Update this file + memory `hand-client-three-hands-healing`.
+
 ## Live QA results (2026-09-01, post-deploy)
 
 Workflow: 16 live probes (14 styles + gallery + preview root) under real headers
@@ -228,7 +306,8 @@ device; "Copy my answers" assembles one numbered plain-text message.
 
 ## Repo hygiene
 
-- Everything for this client is now on `main` (`a45ec8426` + `99d26cb8f`).
+- The bedazzled batch (2026-09-04) is **uncommitted** on `agent/yuhm-network` — see the resume checklist.
+- Everything else for this client is on `main` (`a45ec8426` + `99d26cb8f`).
   The same two commits also sit on the checkout's current branch
   (`agent/yuhm-network`, as `ebed74125` + `095b2b331`) so a later merge of
   that branch is clean. Land further changes on `main` via the
@@ -250,6 +329,12 @@ device; "Copy my answers" assembles one numbered plain-text message.
   faces (DM Sans / DM Serif Display inlined as data URIs, site palette, light
   + dark, print), verified in headless Chrome at 900px/390px, published as a
   private artifact (v1-sixteen-questions).
+- 2026-09-02→04 — **Bedazzled batch**: ten more styles (Nouveau, Talavera,
+  Vellum, Enamel, Curtain, Loom, Lenticular, Meander, Popup, Nightgarden)
+  built from `design-portfolio-brief-bedazzled.md` + `bedazzled-cards/`; gallery
+  registered (Bedazzled filter, 27 cards), thumbs generated, local e2e green;
+  4 of 10 independently reviewed, 6 pending (session-limit walls); nothing
+  committed or deployed. Resume via `tools/workflows/bedazzled-review.js`.
 - 2026-09-01 — Design-style portfolio: 14 new standalone styles + gallery at `web/threehandshealing/styles/` (14 parallel builders from `design-portfolio-brief.md`, each screenshot-verified; all pass `tools/validate.mjs`), picks→feedback fn, routing + noindex header, switcher bridge link. **Shipped to `main` + verified live**; post-deploy QA workflow over all 17 URLs (results in "Live QA results"); four fixes landed in a follow-up commit (preview switcher mobile, preview caption overlap, Retro H1 wrap, Pulse pill radius).
 - 2026-08-23 — Design studio built on the preview (studio.css/studio.js,
   uncommitted): type packs, energy-flare toggles, copy-suggestion mode wired

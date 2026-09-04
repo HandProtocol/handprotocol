@@ -1,0 +1,48 @@
+{
+  "slug": "vellum",
+  "name": "Vellum",
+  "world": "An illuminated manuscript opened to a lapis title page: gold-leaf versals standing before miniatures, vermilion rubrics, pricking and ruling, catchwords at the foot of each folio, manicules in the margins. Every section is a folio; the scribe's devices are the ornaments.",
+  "fonts": "Uncial Antiqua (versals, eyebrows and catchwords, ≥28px only) + Gentium Book Plus (headings and body)",
+  "palette": [
+    "#efe3c6",
+    "#2a1f14",
+    "#c9971c",
+    "#1f3f8f",
+    "#a52a2a"
+  ],
+  "hero": "Folio 1r. The first viewport is a lapis title panel filling the left ~60% (#1f3f8f with a white pen-work vine scroll via SVG <pattern> at 0.18), holding the H1 in Gentium Book Plus, ivory, one clause per line. Its initial F is built like the real thing: a 220px miniature square (image3, Maria at the arch, masked to the square with a 1px gold inner rule) with the gilded F — inline SVG <text>, fill url(#goldGradient), 1px umber stroke, no text-shadow on clipped text — standing in front and overlapping the square's left edge. Right: the parchment margin with a double-ruled page frame, a column of pricking holes, and three pen-drawn manicules pointing at the three clauses. The lede is a vermilion rubric line under the panel.",
+  "signature": "Historiated initials as the table of contents: each section opens with a gilded versal standing before a miniature — the F before Maria at the arch, the H holding the three hands between its stems, the W before 'When you are ready' with image2 — an illuminated book with lapis title page, catchwords and manicules that you scroll through.",
+  "ornaments": [
+    {
+      "phrase": "three hands",
+      "element": "Three manicules (pointing hands, SVG, umber line with a vermilion cuff) in the hero margin, one per H1 clause, drawn on load; and the historiated H at #practices with the brand mark gilded (SVG linearGradient stroke) between its stems on a vermilion ground dotted with white pen-flourishes."
+    },
+    {
+      "phrase": "walk alongside you",
+      "element": "Catchwords: at the foot of every section, in Uncial vermilion, the first word of the next section (as scribes wrote to carry the reader across the page turn) with a pen flourish — the manuscript walks you forward; each catchword is a link to that section."
+    },
+    {
+      "phrase": "How we work together",
+      "element": "The two pillars as a diptych of facing folios: one set of ruling lines (repeating-linear-gradient, umber at .12) runs unbroken across both cards from a shared column of pricking holes in the gutter — ruled together."
+    },
+    {
+      "phrase": "where you want to expand in the future",
+      "element": "Acanthus marginalia: a flat gold-and-lapis pen scroll (SVG, leaves only, no flowers) revealed outward into the margin by mask-position as the practices intro scrolls in — the ornament expands into the empty space; under 900px it runs along the section top."
+    },
+    {
+      "phrase": "Arrive / Experience / Integrate",
+      "element": "Vermilion rubric numerals I, II, III in Uncial with SVG pen flourishes, each step a ruled block; a thin ruled journey line runs down the left with three gold milestone dots."
+    },
+    {
+      "phrase": "lasting wholeness",
+      "element": "A line-filler: the closing sentence's last short line is completed by a gold-and-vermilion decorative bar (repeating-linear-gradient lozenges in a 1px umber rule) that grows to the margin on scroll-in — the line, and the word, made whole."
+    },
+    {
+      "phrase": "every tool I share, I have needed myself",
+      "element": "A nota bene mark in the #about margin: the medieval N.B. trefoil in vermilion with a hairline tie to that heading, drawn with stroke-dasharray on enter."
+    }
+  ],
+  "motion": "Load: the lapis panel is present at 0s; page ruling draws (border-image inset from 0), the gilded F catches light once (gradient sweep), the manicules draw in 0.9s. Scroll: each versal gilds as it enters (mask-position reveal), catchwords ink in, the acanthus expands, the line-filler grows. Reduced motion: all gilded, all drawn.",
+  "photos": "image3 in the hero miniature square; image9 as a full-width miniature strip at #about with a ruled gold frame; image6 EFT as a small square miniature in the modality panel; image2 in the miniature beside the 'W' initial at #book. Photos get filter: sepia(.15) and a 1px gold inner border. 4 photos.",
+  "risk": "Uncial only ≥28px (versals, eyebrows, catchwords); glosses dropped. Body Gentium Book Plus 17–18px umber on parchment (AA); ivory on lapis 7.6:1. Gold versals always carry the 1px umber stroke (gold alone is 2.08:1). Initials use inline SVG text + float/shape-outside; under 700px the initial stacks above the heading. No seal, no three squares, no knotwork, no roots (those devices left to other cards or dropped). Distinct from Cathedral (parchment and lapis, no black, no arches) and from Nouveau (now a plum poster). Gentium replaces Cardo to step away from Linen's Garamond mood."
+}

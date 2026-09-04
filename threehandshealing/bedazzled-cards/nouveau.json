@@ -1,0 +1,44 @@
+{
+  "slug": "nouveau",
+  "name": "Nouveau",
+  "world": "A Mucha poster for a healer, printed the way Mucha printed: a flat matte plum field (Job / Zodiac), ecru only inside panels and ribbons, gold as edging and line, teal and plum in the enamel accents. Whiplash lines, irises, peacock eyes; everything curls, nothing is straight, and only one thing on the page grows.",
+  "fonts": "Gilda Display (display) + Alegreya Sans (body) + Pinyon Script (single-word accents ≥28px only, in ecru or ink)",
+  "palette": [
+    "#5e3552",
+    "#2f2a2a",
+    "#b8892e",
+    "#4d7d76",
+    "#ecdfc4"
+  ],
+  "hero": "Full-height poster on the flat plum field. Right: image10 (looking up, kimono) in a tall rectangular ecru panel with a scalloped gold-enamel edge (border-image from an SVG scallop); behind her head a plain thin gilt ring (no rays, no glow) carrying the three-hands mark 12 times around its rim via <use rotate()>. Left: the H1 in Gilda Display, ecru on plum, inside a single-stroke gold whiplash cartouche that draws itself on load, its three stem ends opening into flat-enamel irises at the corners; the H1 words rise from 0.3s in parallel with the draw so the headline reads by ~1s. The lede sits on an ecru ribbon (clip-path polygon) curling under the cartouche; CTAs are ecru enamel pills with a gold hairline. A printed Nouveau border (SVG <pattern> of circles-and-dots, gold at 60%) frames the whole page like the poster's edge.",
+  "signature": "The self-drawing whiplash cartouche on a flat plum field: one continuous gold stroke traces the Nouveau frame around the H1 and ends in three flat-enamel irises — the only thing on the page that grows, so it reads as a poster, never a garden.",
+  "ornaments": [
+    {
+      "phrase": "blossom into who you are meant to be",
+      "element": "Hero cartouche: one SVG path (≤40 cubic segments), stroke #b8892e 1.75px, stroke-dashoffset 100%→0 over 2.2s; three iris heads (three overlapping ellipses each, flat teal/plum/ecru fills, no gradients) scale 0→1 from the stem tips, staggered 0.3s. Nothing else on the page blooms."
+    },
+    {
+      "phrase": "three hands",
+      "element": "The gilt ring behind the portrait: a 2px SVG circle whose rim carries the brand mark 12 times (<use> with rotate(30n)); reused small as the ring around every section eyebrow."
+    },
+    {
+      "phrase": "healing is a journey",
+      "element": "Session steps: one continuous whiplash stem (SVG) runs down the left of the three numbered steps and each step's number hangs from it inside a peacock-eye medallion (radial-gradient teal→plum→gold, gold rim) — one stem, three eyes, drawn top-to-bottom on scroll-in."
+    },
+    {
+      "phrase": "grounded partnership",
+      "element": "The two pillars as a Mucha diptych: two ecru panels with scalloped gold edges standing under one shared gilt ring that arcs behind both (a single SVG arc, drawn once on enter) — the pair held by one line."
+    },
+    {
+      "phrase": "empathic and intuitive gifts",
+      "element": "A fan of three peacock feathers behind the closing line: each feather an SVG shaft with barbs from a repeating-linear-gradient masked to the vane shape and an eye of stacked radial-gradients (teal, plum, gold); the fan spreads from 0° to ±18° once on scroll-in, then holds."
+    },
+    {
+      "phrase": "a tailored combination",
+      "element": "Iris capitals: each of the six unnumbered modality names opens with a Gilda capital wrapped by a small flat-enamel iris in its own colour (six different colourways, one SVG <symbol> recoloured with currentColor) — six tailored, no two alike."
+    }
+  ],
+  "motion": "Load (one GSAP timeline ≈2.4s): the plum field is already there; the ring fades in with a 6° settle, the cartouche draws over 2.2s while the H1 words rise from 0.3s; the irises open last. Scroll: the step stem draws, the diptych arc draws, the peacock fan spreads — each once. No loops. Reduced motion: everything rendered at its final drawn state.",
+  "photos": "image10 hero in the scalloped ecru panel; image2 in #about inside a whiplash-edged ecru panel; image6 for the EFT card cropped into a peacock-eye oval; image8 as a small ring-framed vignette beside the pull quote. No duotone — the flat plum surround makes the true-colour photos read as the painted centre. 4 photos.",
+  "risk": "Bloom distance: flat enamel fills, no watercolour, nothing but the load cartouche draws. Vellum distance: plum field, ecru only inside panels, no versals, knotwork or seals. Curtain/Prism distance: matte muted plum, no pleats, gilt swags or neon. Ring is a plain 2px circle (no rays, no halo glow) so it is not Halo or Retro. Density: strokes 1.5–2px, one gold value, cartouche 24px clear of type; mobile cartouche simplifies to top/bottom curls and the ring scales to 80vw. Contrast: body #2f2a2a on ecru panels (AA); ecru on plum 7.5:1 for display; gold is strokes only; Pinyon ≥28px in ecru or ink, never gold."
+}

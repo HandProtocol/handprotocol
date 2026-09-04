@@ -1,0 +1,48 @@
+{
+  "slug": "loom",
+  "name": "Loom",
+  "world": "Maria's sessions as a textile: a denim-and-linen loom where every one of her sentences is a weft thread shuttled through vertical warp threads. Warm denim from the kimono, madder red, copper from her hair, undyed linen and flax — everything on the page is warp, weft, knot or selvedge.",
+  "fonts": "Anybody (display, variable wdth + wght) + Lexend (body)",
+  "palette": [
+    "#f3eee3",
+    "#2b3a5c",
+    "#b8622f",
+    "#a9505f",
+    "#c9b48a"
+  ],
+  "hero": "A full-viewport warp: ~44 vertical 1px denim threads on desktop (one repeating-linear-gradient element with a slight SVG sag overlay), 18–20 threads at ≈20px pitch under 600px, dimmed to 30% where they cross text. They drop from the top on load; then the H1 (Anybody, ≥40px desktop) arrives as three weft lines shuttling in from alternating sides, each word visibly passing over and under the threads (two text copies, the rear aria-hidden, offset repeating-linear-gradient masks so alternate 6px stripes show text or thread). Under 600px the H1 is a single clean copy over a faded warp. image2 (Maria reaching out) sits right, revealed stripe by stripe through a warp mask as the weft completes; lede and CTAs are a woven label with a selvedge edge.",
+  "signature": "The over-under woven headline: 'weave together a tailored combination' made literal — Maria's sentences shuttled through the warp on load, her portrait finishing weaving itself as you scroll. Literal weaving lives only on this card.",
+  "ornaments": [
+    {
+      "phrase": "weave together a tailored combination",
+      "element": "The woven-text technique: dual text layers with alternating stripe masks; repeated on the #practices heading, where the two pillar names cross as a two-colour tartan (denim + copper stripes)."
+    },
+    {
+      "phrase": "true partnership",
+      "element": "Two parallel SVG paths (denim + madder) run the page height in the left gutter and twist into a two-ply cord at each section boundary (stroke-dasharray drawn on ScrollTrigger); on mobile they run along each section's top edge."
+    },
+    {
+      "phrase": "lasting wholeness",
+      "element": "A selvedge under the pillar cards — the self-finished edge that stops cloth unravelling: a fringe of repeating-linear-gradient strands (3px each) with a bound selvedge bar above it; the six modality chips hang from the fringe as woven labels."
+    },
+    {
+      "phrase": "invisible blocks",
+      "element": "Knots in the warp inside #alone: three SVG loop-knots on three threads untie (GSAP attr tween to a straight path) as the validation heading enters — the block was a knot, now a clean thread."
+    },
+    {
+      "phrase": "Arrive / Experience / Integrate",
+      "element": "A CSS shuttle (rounded rect with a spool gradient) travels across the three numbered steps on a scrubbed ScrollTrigger, leaving a copper weft line behind (scaleX 0→1 per step); step numbers are stitched with a dashed underline."
+    },
+    {
+      "phrase": "three hands",
+      "element": "Brand mark redrawn as three interlaced loop stitches (drawn on load), reused as a small stitch icon before every H2."
+    },
+    {
+      "phrase": "where you want to expand",
+      "element": "Anybody's wdth axis as a one-shot enter tween on single-line headings only: wdth 80→110 over 500ms then hold, min-height reserved so nothing reflows; never scrubbed."
+    }
+  ],
+  "motion": "Load: warp threads drop (scaleY, 20ms stagger), the three H1 weft lines shuttle in over 1.2s with the over/under visible, the portrait mask fills. Scroll: gutter cord twists per section, knots untie, shuttle crosses the steps, headings expand once. Reduced motion: everything fully woven and static, headings at full width.",
+  "photos": "image2 (hero, woven mask), image6 (EFT chip as a fringed swatch), image9 (about, woven label), image8 (book, banded by warp stripes). 4 photos.",
+  "risk": "Mobile legibility: ≤20 threads under 600px, threads at 30% alpha over text, single-copy H1; the over/under illusion only at ≥40px. Duplicate text aria-hidden with one readable H1; stripe masks in vw; warp is one element; fringe is gradients not DOM. Palette moved to warm denim #2b3a5c + madder so it no longer twins Talavera; no roots (Popup owns them). Distinct from Linen (kinetic, denim-dominant, dense); name kept for set stability — 'Weft' is the fallback if gallery adjacency to Linen bothers Maria. Body Lexend 17px denim on linen (AA)."
+}

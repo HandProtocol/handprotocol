@@ -31,7 +31,7 @@ for (const slug of slugs) {
   if (photos.size > 5) issues.push(`photos: ${photos.size} (>5): ${[...photos].join(',')}`)
   if (/DM\+Serif\+Display|DM\+Sans/.test(html)) issues.push('uses baseline DM fonts')
   if (/testimonial/i.test(all)) issues.push('mentions testimonials')
-  if (/\b\d{3}[-. ]\d{3}[-. ]\d{4}\b/.test(all)) issues.push('phone-number-like string')
+  if (/\b\d{3}[-. ]\d{3}[-. ]\d{4}\b/.test(all.replace(/\s(?:d|points|viewBox)="[^"]*"/g, ' ').replace(/\bpath\([^)]*\)/g, ''))) issues.push('phone-number-like string')  // ignore SVG path data
   if (/[\w.+-]+@[\w-]+\.[a-z]{2,}/i.test(all.replace(/@keyframes|@media|@import|@font-face|@supports|@layer|@property|@container/g, ''))) issues.push('email-like string')
   if (/\$\s?\d/.test(all)) issues.push('price-like string')
   if (bytes > 75_000) issues.push(`size ${(bytes/1024).toFixed(0)} KB (>70 KB)`)

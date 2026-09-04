@@ -1,0 +1,44 @@
+{
+  "slug": "enamel",
+  "name": "Enamel",
+  "world": "Cloisonné and Fabergé: rose-gold wires holding pools of glossy enamel, engine-turned guilloché under translucent colour, cabochon gems with a single specular highlight. Deep emerald and rose gold — a jewel box, precise and luminous, where colour is fired into glass.",
+  "fonts": "Bellefair (display) + Outfit (body)",
+  "palette": [
+    "#0f4d3a",
+    "#f6f1e8",
+    "#d7a084",
+    "#a8203a",
+    "#1c3f8a"
+  ],
+  "hero": "Deep emerald guilloché ground rendered once as a static three-layer background (repeating-radial-gradients offset 6px, blended) — it never moves; over it one translucent gloss element (white .18→0) that parallaxes hero-only at 0.3×. Centre: a 560px (82vw mobile) jewel-egg — an oval with rose-gold cloisonné wire (border 3px + inset ring via box-shadow), already open. image5 (pool blue at the arch door) appears through the firing: three milky enamel layers (emerald, sapphire, ruby at .9 with blur 8px) clear to glass over 1.4s, leaving a 60° specular sheen. One large cabochon in a four-prong bezel sits at the egg's crown. H1 in Bellefair, ivory, rose-gold hairline underlines; lede in Outfit.",
+  "signature": "The firing: enamel that clears from milk to glass — the egg on load, and each section's cloisonné cells as they enter — over engine-turned gold that catches light once per section (a single background-position sweep), the safe container already open and staying open.",
+  "ornaments": [
+    {
+      "phrase": "a safe container",
+      "element": "The jewel-egg: oval, rose-gold wire (border 3px #d7a084 + box-shadow inset 0 0 0 1px #0f4d3a, 0 0 0 2px #d7a084), photo revealed by three enamel layers tweening opacity .9→.12 and blur 8→0px; the egg never parts or hinges."
+    },
+    {
+      "phrase": "tapping on acupressure points · rest, grounding, and integration · ease of movement · movement and breath · hidden loyalties and patterns · move through and out",
+      "element": "Six unnumbered cabochon markers, one per modality blurb: 40px circles, radial-gradient(circle at 35% 30%, #fff8, stone 30%, darker 100%) — ruby, sapphire, emerald, amber, amethyst, moonstone — in 2px rose-gold bezels with a four-prong SVG setting."
+    },
+    {
+      "phrase": "three hands",
+      "element": "Cloisonné pendant: the brand mark with a 3px rose-gold SVG stroke as the wire, each hand-cell filled with a different enamel under one shared gloss path; used in the nav and as section dividers hung on a gold chain (repeating-linear-gradient dashes)."
+    },
+    {
+      "phrase": "tapping on acupressure points",
+      "element": "A bracelet of nine gems on a rose-gold wire under the EFT card: nine cabochons lighting in the tapping sequence (box-shadow 0 0 12px stone colour, 120ms stagger) on scroll-in; hover/focus shows each point's name in Outfit."
+    },
+    {
+      "phrase": "living proof",
+      "element": "A chipped cell that heals: on the #alone panel one enamel cell shows a chip (a clip-path notch exposing the copper ground); on scroll-in the cell re-fills (mask-position) and the gloss returns — fired again, whole, and the phrase sits beside it."
+    },
+    {
+      "phrase": "grounded partnership",
+      "element": "One wire, two cells: a single continuous rose-gold SVG path outlines both pillar cards as two cells of one cloisonné plaque (drawn once on enter), Body filled warm enamel, Mind cool enamel — a pair held by one wire, not a rope."
+    }
+  ],
+  "motion": "Load: guilloché present, egg fires clear (1.4s), the crown cabochon glints once, H1 underlines extend. Scroll: per-section one-shot guilloché sweep, cells fire clear, bracelet lights, chip heals, plaque wire draws; gloss parallax hero-only, off under 700px. Reduced motion: everything fired and lit, gloss static.",
+  "photos": "image5 inside the egg (pool blue reads as enamel); image1 in #about within a rose-gold oval cartouche; image6 EFT square with a bezel; image8 as a small oval cameo beside the pull quote under an emerald multiply overlay at .25. 4 photos.",
+  "risk": "No moiré: the guilloché is static; only one gloss layer moves, transform-only, hero-only. Ivory on emerald 8.6:1; rose gold on emerald 4.3:1 so it may carry text ≥24px, otherwise wires, rules and display. No parting reveal (Curtain owns that), no orbiting gems (single crown bezel), no sparkles, no opals, no rope. Distinct from Cathedral (saturated jewel green, no black, no arches) and from Nightgarden (bright emerald vs green-black). ≤30 gem divs total; egg capped at 82vw."
+}

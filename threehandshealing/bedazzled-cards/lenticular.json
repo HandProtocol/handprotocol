@@ -1,0 +1,44 @@
+{
+  "slug": "lenticular",
+  "name": "Lenticular",
+  "world": "A holographic print proof on pearl-grey cardstock: chrome foil-stamped type, an oil-slick iridescence that only shifts when you tilt the sheet, lenticular lens ridges, crop marks and one black ink. Cool, still, precise — a printed object that catches light, not a screen effect.",
+  "fonts": "Schibsted Grotesk (display, 700–800) + Instrument Sans (body) + Martian Mono (micro-labels and numerals)",
+  "palette": [
+    "#e6e8ec",
+    "#14161c",
+    "#b9bec8",
+    "#2fb3a6",
+    "#c94b9a"
+  ],
+  "hero": "The proof sheet: crop marks at the four corners; the H1 in Schibsted Grotesk 800 as chrome foil — linear-gradient(180deg,#fff,#9aa3b5 45%,#fff 50%,#5f6b82 55%,#dfe4ee) with background-clip:text — stacked over an ink #14161c copy offset 1px down-right so every letter keeps a dark edge at any tilt; behind it a broad diagonal oil-slick band (conic-gradient teal→magenta→gold at ≤35% saturation over the grey) rotated by --tilt. image11 at right in a chrome-rimmed rounded card under a lens-ridge overlay (repeating-linear-gradient 3px ridges, white 10%) with a specular band that slides with --tilt. Lede in ink Instrument Sans; the eyebrow 'Three Hands Healing · Texas' in Martian Mono like a press mark; CTA a chrome pill with ink text.",
+  "signature": "The tilt: one registered @property --tilt (−12°→12°), lerped from scroll position, drives every light-catching surface at once — the chrome H1 sheen, the oil-slick bands, the seal, the lens ridges — so the whole sheet catches light as you scroll, like tilting a real holographic print; nothing moves unless you do.",
+  "ornaments": [
+    {
+      "phrase": "living proof",
+      "element": "A holographic authenticity seal beside the #alone heading: 120px conic iridescent disc turned by --tilt, starburst edge via a repeating-radial mask, an SVG textPath ring reading 'living proof · living proof' in ink, embossed with paired light/dark shadows."
+    },
+    {
+      "phrase": "Arrive / Experience / Integrate",
+      "element": "Three lenticular cards: each step's numeral panel is a real lenticular — two interleaved layers (the numeral / a simple pictogram) under 6px stripe masks and a ridge overlay — that snaps between its two states at --tilt thresholds with ±3° hysteresis, never a continuous phase; the title and description are always printed plain in Instrument Sans beneath."
+    },
+    {
+      "phrase": "weave together a tailored combination",
+      "element": "A crossword interlock: the six unnumbered modality names set in Schibsted 700 in a CSS grid, sharing letters where they cross; hover/focus lights a name's cells with the oil-slick gradient and each name links to its blurb below — woven by letters, not ribbon."
+    },
+    {
+      "phrase": "three hands",
+      "element": "The brand mark foil-stamped: SVG stroke url(#chrome) with a specular moved by --tilt through gradientTransform, embossed with paired shadows; in nav, dividers and footer."
+    },
+    {
+      "phrase": "aligned in your life",
+      "element": "Registration: each H2 enters as three misregistered plates (cyan, magenta, yellow multiply copies offset 6px) that snap into perfect registration as it scrolls in, once — printed in register, aligned."
+    },
+    {
+      "phrase": "online or in person · Texas",
+      "element": "A chrome-foil Texas outline (SVG) stamped at #book with the tilt specular, the small-print lines set beside it in Martian Mono."
+    }
+  ],
+  "motion": "Load: the sheet is static; one --tilt sweep (−12°→4°, 1.2s) makes the chrome and slick catch light once. Scroll: --tilt lerps (0.06) with scroll position; lenticulars snap with hysteresis; H2 plates register once; nothing loops. Reduced motion: --tilt fixed, lenticulars show the numeral, plates in register.",
+  "photos": "image11 in the hero chrome card; image10 in #about inside a mirror-chrome frame; image6 on the EFT chip under lens ridges; image7 as a wide chrome-framed strip at #book. Photos kept true colour; no ridges over faces beyond 10% white. 4 photos.",
+  "risk": "Contrast: chrome only on display ≥40px over an ink under-copy; body ink on pearl-grey 12:1; slick teal/magenta never carry text. Lenticular stripes ≥6px, ridges 3px at 10% (4px pitch under 600px) — no moiré, no continuous scrub. Distance from Halo (no pastel field, frosted cards or rotating blob), Prism (no violet, no cursor aura — scroll only), Meridian (no grid; crop marks only in the hero corners), Zine (no stickers, tape or peel). Tone: slow lerp, saturation capped at 35%, nothing flashes — a still print that catches light. Replaces Foil."
+}

@@ -1,0 +1,52 @@
+{
+  "slug": "meander",
+  "name": "Meander",
+  "world": "A surveyor's map of a slow river through the Hill Country: near-white chart paper, sienna contour ink, one hydrographic blue for the river, oxbows, reed banks, stepping stones, a legend, a dragonfly in copper. Healing is a journey; the river is the page's spine and the visitor walks its bank.",
+  "fonts": "Sorts Mill Goudy (display; italic for river names) + Spectral SC (map labels, eyebrows, legend) + Barlow (body)",
+  "palette": [
+    "#f7f5ef",
+    "#2a2a26",
+    "#b57b3c",
+    "#2b6fae",
+    "#c8663b"
+  ],
+  "hero": "Chart-paper ground with sienna contour lines from three layered repeating-radial-gradients, masked to fade toward the copy. A hydrographic-blue SVG river enters top-left along a gentle S reach, loops an oxbow around image5 (Maria at the door, pool blue behind) and exits the bottom of the viewport. The lede 'Wherever you are right now is the perfect place to start.' is set in ink on an SVG <textPath> along the gentle upstream reach (not the oxbow, which holds the photo alone), with a visually-hidden plain copy; the H1 sits on the bank in Sorts Mill Goudy roman; a 'you are here' pin marks the river's entry.",
+  "signature": "The river as the whole page's spine: one continuous SVG path (absolute, full document height, computed from section offsets and drawn by scroll) that the two pillars join as tributaries, that the three session steps cross as stepping stones, and that ends in a still pool around the Book CTA.",
+  "ornaments": [
+    {
+      "phrase": "healing is a journey",
+      "element": "Full-page SVG river path, stroke-dashoffset scrubbed to scroll, hydrographic blue with a 2px lighter inner stroke for the current; recomputed from section offsets on load and debounced resize."
+    },
+    {
+      "phrase": "wherever you are right now is the perfect place to start",
+      "element": "The lede on an SVG <textPath> along the gentle S reach in ink at ≥18px, plus a 'you are here' map pin (CSS teardrop + ring) at the river's entry point."
+    },
+    {
+      "phrase": "walk alongside you",
+      "element": "Two sets of SVG footprints along the bank at #alone, appearing pair by pair on scroll, one set half a step ahead of the other."
+    },
+    {
+      "phrase": "How we work together",
+      "element": "The two pillars as two tributaries whose SVG paths merge into the main river at a drawn confluence — two streams become one; the six modalities are cattails and reeds (thin stem div + rounded pill head) planted along both banks."
+    },
+    {
+      "phrase": "Arrive / Experience / Integrate",
+      "element": "Three numbered stepping stones crossing the river: elliptical divs with a radial stone gradient and two one-shot expanding ripple rings (box-shadow) as each reveals."
+    },
+    {
+      "phrase": "let what has been held move through and out",
+      "element": "A CSS dandelion clock on the bank of the Intuitive Release card (24 pappus seeds: 1px stem + radial-gradient puff, rotated around a centre) whose seeds detach on reveal and drift downstream along a copy of the river segment via offset-path, fading out; under 700px they drift straight up inside the card's own padding and fade within 600ms."
+    },
+    {
+      "phrase": "online or in person · Texas",
+      "element": "A map legend box in #book: contour key, scale bar and a 48px SVG Texas outline with the river marked, set in Spectral SC; a bluebonnet cluster (SVG) at the foot of the about photo."
+    },
+    {
+      "phrase": "three hands",
+      "element": "Brand mark as a compass rose whose three points are the three hand-leaves; a CSS dragonfly (thin body + four translucent gradient wings, copper) alights on the Book CTA on hover/focus."
+    }
+  ],
+  "motion": "Load: contour lines fade in outward from the pool, the river draws through the hero, the lede appears along it word by word. Scroll: the river keeps drawing, footprints appear, stones ripple, seeds drift. Reduced motion: map fully drawn, clock shown half-scattered as a still composition.",
+  "photos": "image5 in the hero oxbow (pool blue echoes the river); image9 on the bank in #about with the bluebonnet cluster; image6 in the EFT reed card; image2 at #book on the far bank. Colour kept true with a 1px map-ink outline. 4 photos.",
+  "risk": "Palette is now survey-map, not Gateway's cream/green/sage/terracotta: chart white, sienna contours, one hydrographic blue, copper only for the dragonfly; Sorts Mill Goudy + Spectral SC + Barlow replaces the templated Playfair + Source Sans. Text colours: ink only for body and the textPath lede; blue for labels ≥18px; sienna, copper and reeds never carry text. Tide owns water: no waves, no breath loop, no dark teal fills — the only water is a stroke. The document-height SVG follows content via JS, never hard-coded heights."
+}
