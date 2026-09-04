@@ -456,3 +456,12 @@ status = 301
   for = "*.js"
   [headers.values]
     Cache-Control = "public, max-age=86400"
+
+# Three Hands Healing style portfolio is a moving client preview: the gallery's
+# js/css/thumbs change between visits, so browsers must revalidate instead of
+# holding the day-long *.js/*.css cache above (seen 2026-09-04: fresh HTML said
+# twenty-seven styles, cached gallery.js still rendered seventeen).
+[[headers]]
+  for = "/threehandshealing/styles/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
