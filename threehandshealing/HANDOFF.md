@@ -5,9 +5,9 @@ Energy Healing, bodywork, Qi Gong, Systemic Family Constellations, intuitive
 emotional release). **Status (2026-09-01): design preview LIVE; a 17-style
 design portfolio is LIVE at https://handprotocol.org/threehandshealing/styles/
 (noindex) waiting for Maria's picks; copy phase blocked on her answers to a
-16-question info sheet. A second batch of ten "bedazzled" styles is built and
-**all ten independently reviewed (2026-09-04)**; landing on `main` + deploy +
-live QA is the step in flight — see "Bedazzled batch" → "Landing checklist".**
+16-question info sheet. A second batch of ten "bedazzled" styles is
+**LIVE in the same gallery since 2026-09-04** (27 cards, Bedazzled filter),
+reviewed + live-QA'd — see "Bedazzled batch". Next human step: text Maria.**
 
 ## Start here (cold session)
 
@@ -18,11 +18,11 @@ live QA is the step in flight — see "Bedazzled batch" → "Landing checklist".
    sheet** answers. Check /pins before doing anything else.
 3. Nothing here is a production client site yet — it is all HAND-hosted
    preview. Do not delete the other styles until Maria has chosen.
-4. **If you are resuming the bedazzled batch (2026-09-04):** all ten pages are
-   reviewed and committed on branch `agent/yuhm-network`; check the "Landing
-   checklist" under "Bedazzled batch" for what is verified live and what is
-   not. koH asked (2026-09-04) to stop using the multi-agent `Workflow`
-   ("ultracode") runs for this client — review directly with the tools.
+4. **Bedazzled batch is done and live** (2026-09-04, `main` `8eed885e7`). koH
+   asked that day to stop using the multi-agent `Workflow` ("ultracode") runs
+   — review directly with the tools in `tools/`. Two structural Talavera
+   minors remain open in `bedazzled-status.json`; nothing else is pending on
+   our side.
 
 ## Orient in one paragraph
 
@@ -149,7 +149,7 @@ Also in this pass: `web/threehandshealing/index.html` switcher gained a "+ 14 mo
 
 **Next after picks:** fold the chosen direction(s) into the real build (the copy-slotting steps below still apply), delete the other 13 + the gallery, and drop `_portfolio.js` from the survivor.
 
-## Bedazzled batch — ten more styles (2026-09-02→04, ALL REVIEWED 2026-09-04)
+## Bedazzled batch — ten more styles (2026-09-02→04, LIVE 2026-09-04)
 
 koH asked for "10 more designs, creative, with extra CSS elements based off the
 current copy so they are bedazzled and beautiful." Built the opposite pole of
@@ -208,18 +208,20 @@ directly in-session with the tools. **The two workflow scripts stay in
 
 - [x] All ten reviewed; `validate.mjs` ✓ ×24; `gallery-e2e.mjs` green (27
       cards · Bedazzled 10 · viewer/pill/picks/tray OK · 0 errors · 0 broken thumbs).
-- [x] Committed on `agent/yuhm-network` (batch commit `d94d1d0c7` + the
-      review/minors commit that follows it).
-- [ ] Landed on `main` by path (worktree + cherry-pick of both commits + HTTPS
-      push, memory `machine-git-push-via-gh-https`) — **see the session log
-      entry below for the SHAs once done; if the log has no "landed" line,
-      check `git log origin/main -- web/threehandshealing/styles/nouveau`.**
-- [ ] Netlify production deploy `ready` for that SHA (API, not assumption).
-- [ ] Live probes: gallery 200 + `X-Robots-Tag: noindex, nofollow`, all ten new
-      style pages 200 + noindex + 0 console errors + 0 failed requests + no
-      horizontal overflow at 1440/390, `_shots/nouveau.webp` 200.
+- [x] Committed on `agent/yuhm-network` (`d94d1d0c7` batch + `558f7c3cf`
+      review/minors).
+- [x] Landed on `main` as `3e3e1e5b3` + `8eed885e7` (worktree + cherry-pick +
+      HTTPS push; `origin/main == 8eed885e7` asserted).
+- [x] Netlify production deploy `6a9b099bece7730008d7e9ad` state `ready` for
+      `8eed885e7` (API).
+- [x] Live probes (real headers, 1440 + 390): gallery + all ten new pages 200,
+      `X-Robots-Tag: noindex, nofollow` + meta noindex, 0 console/page errors,
+      0 failed requests, no horizontal overflow, pill + six anchors present,
+      all fonts loaded; `_shots/nouveau.webp` 200 (+ noindex header);
+      `/styles/meander` → 301 to the slash form.
+- [x] Live gallery e2e: 27 cards · Bedazzled 10 · viewer Nouveau (nouveau/index.html, pill hidden=True) · → Talavera · pick→tray 'Talavera' · broken thumbs [] · errors [].
 - [ ] Text Maria the gallery link again ("ten new ones under Bedazzled").
-- [ ] Update memory `hand-client-three-hands-healing`.
+- [x] Memory `hand-client-three-hands-healing` updated.
 
 ## Live QA results (2026-09-01, post-deploy)
 
@@ -307,8 +309,9 @@ device; "Copy my answers" assembles one numbered plain-text message.
 
 ## Repo hygiene
 
-- The bedazzled batch is committed on `agent/yuhm-network` (`d94d1d0c7` +
-  the 2026-09-04 review commit); landing on `main` per the Landing checklist.
+- The bedazzled batch is on `main` (`3e3e1e5b3` + `8eed885e7`, 2026-09-04)
+  and on `agent/yuhm-network` as `d94d1d0c7` + `558f7c3cf`, so a later merge of
+  that branch is clean.
 - Everything else for this client is on `main` (`a45ec8426` + `99d26cb8f`).
   The same two commits also sit on the checkout's current branch
   (`agent/yuhm-network`, as `ebed74125` + `095b2b331`) so a later merge of
@@ -339,7 +342,9 @@ device; "Copy my answers" assembles one numbered plain-text message.
   applied on Loom (6), Lenticular (4), Popup (6) with no regressions; 4 of
   Talavera's 6 applied (2 structural left open in `bedazzled-status.json`).
   Thumbs regenerated for the seven touched pages; validate ×24 ✓; gallery e2e
-  green. Landing + deploy + live QA: see "Landing checklist".
+  green. **Landed on `main` (`3e3e1e5b3` + `8eed885e7`), Netlify deploy
+  `6a9b099b…` ready, 22/22 live probes clean, live gallery e2e green** — see
+  "Landing checklist".
 - 2026-09-02→04 — **Bedazzled batch**: ten more styles (Nouveau, Talavera,
   Vellum, Enamel, Curtain, Loom, Lenticular, Meander, Popup, Nightgarden)
   built from `design-portfolio-brief-bedazzled.md` + `bedazzled-cards/`; gallery
