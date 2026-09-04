@@ -66,8 +66,15 @@
   const wovenHero = document.querySelector('.woven--hero');
   const alignThreads = () => {
     if (!hero || !wovenHero) return;
-    const dx = wovenHero.getBoundingClientRect().left - 14 - hero.getBoundingClientRect().left;
-    wovenHero.style.setProperty('--wx', `${20 - dx}px`);
+    const wr = wovenHero.getBoundingClientRect();
+    const dx = wr.left - 14 - hero.getBoundingClientRect().left;
+    wovenHero.style.setProperty('--wx', `${19 - dx}px`);
+    /* park the last shuttle just past the end of the third weft line */
+    const last = wovenHero.querySelector('.woven__front .weft:last-child');
+    if (last) {
+      const r = document.createRange(); r.selectNodeContents(last);
+      wovenHero.style.setProperty('--park', `${Math.round(r.getBoundingClientRect().right - wr.left)}px`);
+    }
   };
   alignThreads();
 
@@ -78,6 +85,8 @@
     setP(1);
     buildCord();
     window.addEventListener('resize', () => { alignThreads(); buildCord(); });
+    window.addEventListener('load', () => { alignThreads(); buildCord(); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { alignThreads(); buildCord(); });
     return;
   }
 
@@ -138,6 +147,6 @@
   let rt;
   window.addEventListener('resize', () => { clearTimeout(rt); alignThreads(); rt = setTimeout(buildCord, 150); });
   buildCord();
-  window.addEventListener('load', buildCord);
+  window.addEventListener('load', () => { alignThreads(); buildCord(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { alignThreads(); buildCord(); });
 })();

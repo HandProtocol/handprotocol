@@ -39,12 +39,9 @@
     revealables.forEach((el) => io.observe(el));
   }
 
-  /* ---- "set down what has been carried": tap toggles the drape on touch ---- */
+  /* ---- "set down what has been carried": tap toggles the drape on touch (ornamental; hover elsewhere, no tab stop) ---- */
   d.querySelectorAll('.chip--drape').forEach((chip) => {
     chip.addEventListener('click', () => chip.classList.toggle('is-down'));
-    chip.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); chip.classList.toggle('is-down'); }
-    });
   });
 
   /* ---- the spotlight: eases toward whichever heading is crossing the middle ---- */

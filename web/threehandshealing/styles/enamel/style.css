@@ -62,9 +62,9 @@ a { color: inherit; }
   overflow: hidden;
   background-color: var(--em);
   background-image:
-    repeating-radial-gradient(circle at 50% 42%, rgba(255,255,255,.055) 0 1px, transparent 1px 4px),
-    repeating-radial-gradient(circle at calc(50% + 6px) 42%, rgba(0,0,0,.13) 0 1px, transparent 1px 4px),
-    repeating-radial-gradient(circle at 50% calc(42% + 6px), rgba(255,255,255,.04) 0 1px, transparent 1px 4px),
+    repeating-radial-gradient(circle at 50% 42%, rgba(255,255,255,.035) 0 1px, transparent 1px 4px),
+    repeating-radial-gradient(circle at calc(50% + 6px) 42%, rgba(0,0,0,.08) 0 1px, transparent 1px 4px),
+    repeating-radial-gradient(circle at 50% calc(42% + 6px), rgba(255,255,255,.025) 0 1px, transparent 1px 4px),
     radial-gradient(120% 90% at 50% 0%, var(--em-light) 0%, var(--em) 48%, var(--em-deep) 100%);
 }
 /* light catches the engine-turning once per section (transform only, below the cells) */
@@ -110,7 +110,9 @@ h2 { font-size: clamp(2rem, 3.6vw, 3rem); line-height: 1.12; }
 .gem {
   --stone: var(--ruby); --deep: #4a0b19;
   display: inline-block; width: 40px; height: 40px; border-radius: 50%; position: relative; flex: none;
-  background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.85) 0, rgba(255,255,255,.35) 10%, var(--stone) 30%, var(--deep) 100%);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,.85) 0, rgba(255,255,255,.35) 10%, transparent 30%),
+    radial-gradient(circle at 35% 30%, var(--stone) 0 30%, var(--deep) 100%);
   box-shadow: 0 0 0 2px var(--rose), 0 0 0 3px rgba(168,107,78,.45), inset 0 -8px 12px rgba(0,0,0,.35), 0 6px 14px -6px rgba(0,0,0,.6);
 }
 .gem::after {
@@ -224,7 +226,7 @@ html.js:not(.rm) .cell:not(.in) .cell__fire { opacity: .92; filter: blur(6px); }
 /* ---- Intro ---- */
 .intro { padding: 40px 0 72px; }
 .cell--intro { max-width: 860px; margin: 0 auto; text-align: center; }
-.intro__text { font-size: 1.2rem; line-height: 1.65; }
+.intro__text { font-size: 1.2rem; line-height: 1.65; text-wrap: balance; text-wrap: pretty; }
 .intro__salute { font-family: var(--display); font-style: normal; font-size: 1.7rem; display: block; margin-bottom: 8px; color: var(--ruby); }
 
 /* ---- Sections ---- */
@@ -241,9 +243,9 @@ html.js:not(.rm) .cell:not(.in) .cell__fire { opacity: .92; filter: blur(6px); }
 /* engine-turned copper: the same 4px ring field as the ground, cut into the metal the enamel is fired onto */
 .proof__copper { position: absolute; inset: 0;
   background:
-    repeating-radial-gradient(circle at 50% 50%, rgba(255,236,214,.6) 0 1px, transparent 1px 4px),
-    repeating-radial-gradient(circle at calc(50% + 6px) 50%, rgba(60,20,8,.5) 0 1px, transparent 1px 4px),
-    repeating-radial-gradient(circle at 50% calc(50% + 6px), rgba(255,236,214,.35) 0 1px, transparent 1px 4px),
+    repeating-radial-gradient(circle at 38% 30%, rgba(255,236,214,.5) 0 1px, transparent 1px 4px),
+    repeating-radial-gradient(circle at calc(38% + 9px) 30%, rgba(60,20,8,.45) 0 1px, transparent 1px 4px),
+    repeating-radial-gradient(circle at 38% calc(30% + 9px), rgba(255,236,214,.3) 0 1px, transparent 1px 4px),
     radial-gradient(circle at 35% 30%, #d99a74 0, var(--copper) 45%, #7e4a2f 100%); }
 /* translucent ruby: the engraving reads through the glass */
 .proof__enamel { position: absolute; inset: 0;
@@ -251,17 +253,17 @@ html.js:not(.rm) .cell:not(.in) .cell__fire { opacity: .92; filter: blur(6px); }
   clip-path: polygon(0 0, 38% 0, 47% 0, 60% 0, 74% 0, 100% 0, 100% 100%, 0 100%); transition: clip-path 1.4s var(--ease); }
 html.js:not(.rm) .alone:not(.lit) .proof__enamel { clip-path: polygon(0 0, 38% 0, 47% 21%, 60% 11%, 74% 27%, 100% 0, 100% 100%, 0 100%); }
 /* the trace of the repair: a rose-gold hairline along the old chip edge, always there once healed */
-.proof__scar { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 1; opacity: .85; transition: opacity .6s var(--ease) 1.1s; }
+.proof__scar { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 1; opacity: .35; transition: opacity .6s var(--ease) 1.1s; }
 .proof__scar path { fill: none; stroke: var(--rose-hi); stroke-width: 1.25; stroke-linejoin: round; stroke-linecap: round; }
 html.js:not(.rm) .alone:not(.lit) .proof__scar { opacity: 0; }
 .proof__cell::after { content: ""; position: absolute; inset: 9px; border-radius: 50%; border: 1px solid rgba(241,201,174,.6); pointer-events: none; z-index: 2; }
-.proof__gloss { position: absolute; inset: 0; border-radius: 50%; z-index: 2; background: linear-gradient(160deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.1) 40%, rgba(255,255,255,0) 60%); opacity: 1; transition: opacity .8s var(--ease) 1.2s; }
+.proof__gloss { position: absolute; inset: 0; border-radius: 50%; z-index: 2; background: linear-gradient(160deg, rgba(255,255,255,.68) 0%, rgba(255,255,255,.16) 42%, rgba(255,255,255,0) 62%); opacity: 1; transition: opacity .8s var(--ease) 1.2s; }
 html.js:not(.rm) .alone:not(.lit) .proof__gloss { opacity: 0; }
 .proof__cap { font-family: var(--display); font-size: 1.7rem; line-height: 1.15; color: var(--rose-hi); margin-top: 20px; letter-spacing: .04em; display: inline-block; padding: 6px 22px; border-radius: 999px; background: radial-gradient(55% 90% at 50% 50%, rgba(10,58,43,.6), transparent 100%); }
 .quote { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); align-items: center; margin: clamp(56px, 7vw, 88px) auto 0; max-width: 860px; }
 .cameo { position: relative; width: 150px; height: 190px; margin: 0 auto; border-radius: 50%; overflow: hidden; border: 3px solid var(--rose);
   box-shadow: inset 0 0 0 1px var(--em-deep), 0 0 0 5px var(--em), 0 0 0 6px var(--rose), 0 24px 40px -20px rgba(0,0,0,.8); }
-.cameo img { width: 100%; height: 100%; object-fit: cover; object-position: 52% 30%; }
+.cameo img { width: 100%; height: 100%; object-fit: cover; object-position: 52% 40%; }
 .cameo__tint { position: absolute; inset: 0; background: var(--em); mix-blend-mode: multiply; opacity: .25; }
 .cameo::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: linear-gradient(170deg, rgba(255,255,255,.35), rgba(255,255,255,0) 40%); pointer-events: none; }
 .quote__text { margin: 0; font-family: var(--display); font-size: clamp(1.5rem, 2.4vw, 2rem); line-height: 1.3; color: var(--ivory); padding: 12px 24px; border-radius: 40px; background: radial-gradient(55% 80% at 50% 50%, rgba(10,58,43,.6), transparent 100%); }
@@ -316,7 +318,7 @@ html.js:not(.rm) .eft.in .bead .gem { animation: light .6s var(--ease) 1 both; a
 .bracelet li:first-child .bead:hover .bead__tip, .bracelet li:first-child .bead:focus-visible .bead__tip, .bracelet li:first-child .bead.is-open .bead__tip { transform: translate(0, 0); }
 .bracelet li:last-child .bead__tip { left: auto; right: 0; transform: translate(0, 6px); }
 .bracelet li:last-child .bead:hover .bead__tip, .bracelet li:last-child .bead:focus-visible .bead__tip, .bracelet li:last-child .bead.is-open .bead__tip { transform: translate(0, 0); }
-.closing { font-family: var(--display); font-size: clamp(1.4rem, 2.2vw, 1.9rem); line-height: 1.35; text-align: center; max-width: 30em; margin: 0 auto; color: var(--ivory); padding: 12px 24px; border-radius: 40px; background: radial-gradient(55% 80% at 50% 50%, rgba(10,58,43,.6), transparent 100%); }
+.closing { font-family: var(--display); font-size: clamp(1.4rem, 2.2vw, 1.9rem); line-height: 1.35; text-align: center; max-width: 30em; margin: 0 auto; color: var(--ivory); padding: 12px 24px; border-radius: 40px; background: radial-gradient(55% 80% at 50% 50%, rgba(10,58,43,.6), transparent 100%); text-wrap: balance; text-wrap: pretty; }
 
 /* ---- #session: three medallions on one chain ---- */
 .steps { list-style: none; margin: 0; padding: 40px 0 0; position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 3vw, 40px); counter-reset: step; }
@@ -355,7 +357,7 @@ html.js:not(.rm) .cell--about:not(.in) .bloom__fire { opacity: .92; }
 .book__gem::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.95), rgba(255,255,255,0) 40%); opacity: 0; }
 html.js:not(.rm) .cell--book.in .book__gem::before { animation: glint 1.2s ease-out 1 both .6s; }
 .cell--book h2 { margin-bottom: 16px; }
-.book__body { font-size: 1.15rem; margin-bottom: 30px; }
+.book__body { font-size: 1.15rem; margin: 0 auto 30px; max-width: 36ch; text-wrap: balance; text-wrap: pretty; }
 .book__fine { font-size: 1rem; color: var(--ink-soft) !important; margin: 0; }
 .cell--book .btn { margin-bottom: 26px; }
 

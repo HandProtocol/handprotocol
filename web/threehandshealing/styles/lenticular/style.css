@@ -70,11 +70,11 @@ a { color: inherit; }
   position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
   padding: .95rem 1.75rem; border-radius: 999px; overflow: hidden;
   font: 600 16px/1 var(--f-body); color: var(--ink); text-decoration: none; letter-spacing: .01em;
-  background: linear-gradient(180deg, #fbfcfd 0%, #cfd4dd 46%, #eceef2 52%, #a7aebc 100%);
+  /* the chrome specular is the top background layer, under the label, so "Book a session" stays ink at any tilt */
+  background: linear-gradient(100deg, transparent 32%, rgba(255, 255, 255, .6) 50%, transparent 68%) var(--spec-pos) 0 / 240% 100% no-repeat, linear-gradient(180deg, #fbfcfd 0%, #cfd4dd 46%, #eceef2 52%, #a7aebc 100%);
   box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(20, 22, 28, .25), 0 1px 0 rgba(20, 22, 28, .4), 0 10px 22px -12px rgba(20, 22, 28, .6);
   transition: transform .25s ease, box-shadow .25s ease;
 }
-.btn::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(100deg, transparent 32%, rgba(255, 255, 255, .6) 50%, transparent 68%); background-size: 240% 100%; background-position-x: var(--spec-pos); }
 .btn:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(20, 22, 28, .25), 0 1px 0 rgba(20, 22, 28, .4), 0 14px 26px -12px rgba(20, 22, 28, .7); }
 .btn:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--pearl), 0 0 0 5px var(--ink); }
 .btn--sm { padding: .65rem 1.15rem; font-size: 15px; }
@@ -179,7 +179,7 @@ a { color: inherit; }
 
 /* ---------- #alone ---------- */
 .alone__grid { display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: clamp(32px, 6vw, 96px); align-items: start; }
-.alone .prose { font-size: clamp(17px, 1.3vw, 19px); max-width: 62ch; }
+.alone .prose { font-size: clamp(17px, 1.3vw, 19px); max-width: 68ch; }
 .alone__side { display: flex; flex-direction: column; align-items: center; gap: 26px; padding-top: 8px; }
 
 .seal { position: relative; width: 168px; height: 168px; transform: rotate(calc(var(--tilt) * .5)); filter: drop-shadow(-1px -1px 0 #fff) drop-shadow(1px 1px 0 rgba(20, 22, 28, .35)) drop-shadow(0 14px 22px rgba(20, 22, 28, .2)); }
@@ -196,7 +196,7 @@ a { color: inherit; }
 .blind { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 168px; border-radius: 4px; }
 .blind i { display: block; aspect-ratio: 1; border-radius: 3px; background: var(--pearl); box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 rgba(20, 22, 28, .28), 0 0 0 1px rgba(20, 22, 28, .08); }
 .blind__cap { grid-column: 1 / -1; margin-top: 4px; text-align: center; font-size: 11px; letter-spacing: .16em; color: rgba(20, 22, 28, .55); text-shadow: 0 1px 0 #fff; }
-.blind__spec { position: absolute; inset: -4px; pointer-events: none; background: linear-gradient(100deg, transparent 36%, rgba(255, 255, 255, .75) 50%, transparent 64%); background-size: 260% 100%; background-position-x: calc(50% + var(--tn) * 3.6%); mix-blend-mode: screen; }
+.blind__spec { position: absolute; inset: -4px; pointer-events: none; background: linear-gradient(100deg, transparent 36%, rgba(255, 255, 255, .55) 50%, transparent 64%); background-size: 260% 100%; background-position-x: calc(50% + var(--tn) * 3.6%); mix-blend-mode: screen; -webkit-mask: radial-gradient(ellipse at 50% 45%, #000 40%, transparent 78%); mask: radial-gradient(ellipse at 50% 45%, #000 40%, transparent 78%); }
 
 /* ---------- rules: two hairlines walking side by side ---------- */
 .rule { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--pad); display: flex; align-items: center; gap: 20px; }
@@ -284,7 +284,7 @@ a { color: inherit; }
 .texas { width: min(240px, 60%); height: auto; overflow: visible; margin-bottom: 10px; filter: drop-shadow(-1px -1px 0 #fff) drop-shadow(1px 1px 0 rgba(20, 22, 28, .3)) drop-shadow(0 14px 22px rgba(20, 22, 28, .22)); }
 .texas__ink { fill: var(--ink); transform: translate(1px, 1px); }
 .texas__foil { fill: url(#chrome); stroke: rgba(20, 22, 28, .5); stroke-width: .5; stroke-linejoin: round; }
-.book__fine { color: var(--ink-70); font-size: 14px; letter-spacing: .06em; line-height: 1.5; }
+.book__fine { color: var(--ink-70); font-size: 16px; text-transform: none; letter-spacing: .04em; line-height: 1.5; }
 
 /* ---------- footer ---------- */
 .foot { background: var(--ink); color: var(--pearl); padding: clamp(48px, 6vw, 72px) var(--pad) 128px; }
