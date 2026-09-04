@@ -111,7 +111,7 @@
         pts.push({ x: cx - rx - 24, y: cy + ry + 54 });
         return;
       }
-      if (mob && !m.hasAttribute('data-keep')) p.x = GUTTER_X + 3 * Math.sin(n * 0.8);
+      if (mob && !m.hasAttribute('data-keep')) p.x = GUTTER_X + 10 * Math.sin(n * 0.8);
       n++;
       pts.push(p);
       if (kind === 'reach-end') reachEnd = pts.length - 1;
@@ -143,9 +143,15 @@
       var card = d.querySelector('[data-trib="' + k + '"]'), path = tribPaths[k];
       if (!card || !path) return;
       var cr = card.getBoundingClientRect();
-      var sx = cr.left + window.scrollX + cr.width * (mob ? 0.22 : (k === 'a' ? 0.66 : 0.34));
+      if (mob) {
+        /* under 860 the stream slips out from beneath the card's left edge and curls down into the gutter river */
+        var mx = cr.left + window.scrollX + 2, my = cr.top + window.scrollY + cr.height * 0.5, me = pointNearY(my + 52);
+        path.setAttribute('d', 'M' + f(mx) + ' ' + f(my) + 'C' + f(mx - 16) + ' ' + f(my + 4) + ' ' + f(me.x + 8) + ' ' + f(me.y - 30) + ' ' + f(me.x) + ' ' + f(me.y));
+        return;
+      }
+      var sx = cr.left + window.scrollX + cr.width * (k === 'a' ? 0.66 : 0.34);
       var sy = cr.top + window.scrollY + cr.height - 1;
-      var e = (!mob && confPt) ? confPt : pointNearY(sy + 30);
+      var e = confPt || pointNearY(sy + 30);
       var dir = sx > e.x ? 1 : -1;
       path.setAttribute('d', 'M' + f(sx) + ' ' + f(sy) + 'C' + f(sx) + ' ' + f(sy + 70) + ' ' + f(e.x + dir * 42) + ' ' + f(e.y - 56) + ' ' + f(e.x) + ' ' + f(e.y));
     });

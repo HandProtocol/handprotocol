@@ -156,6 +156,9 @@ main { position: relative; }
 .photo-card.hinged::before { border-top-color: rgba(51, 64, 77, .5); bottom: 3px; }
 .photo-card .hinge-strip { left: 14px; right: 14px; border-radius: 0 0 3px 3px; }
 
+/* non-interactive ornaments never catch the cursor; only the pull-tabs (.pulltab, .carry__tab, .strip__tab) stay live */
+.dolls, .blocks, .qi, .carry svg, .slot, .ways, .path__fold, .walker, .mtn, .hero__fold, .blades, .flag, .bigmark, .weave, .taps { pointer-events: none; }
+
 /* ---------- hero ---------- */
 .hero { --hills-h: 280px; --card-lift: 40px; }
 .hero__spread { padding-top: clamp(2rem, 5vh, 4rem); padding-bottom: calc(var(--hills-h) - 30px); min-height: calc(100svh - 70px); align-items: start; }
@@ -172,7 +175,8 @@ main { position: relative; }
 .hero__foot:nth-child(3) { width: 34px; }
 /* the stage is a grid item, so its negative margin really does lower the card into the hills (a flex child's would not shrink the row) */
 .hero__stage { position: relative; z-index: 2; display: flex; justify-content: center; align-items: flex-end; align-self: end; margin-bottom: calc(var(--card-lift) + 30px - var(--hills-h)); }
-.hero__card { width: min(380px, 84%); margin: 0; }
+/* sized so the card's top lands ~230px into a 900px viewport while its bottom hinge stays tucked in the front hill (a taller negative margin would leave the hinge floating over the hills) */
+.hero__card { width: min(422px, 92%); margin: 0; }
 
 .photo-card {
   position: relative; margin: 0; padding: 8px; border-radius: 18px;
@@ -216,7 +220,8 @@ main { position: relative; }
 .doll--kraft { fill: var(--kraft); }
 .doll-shadow { fill: rgba(51, 64, 77, .14); }
 .fold-line { stroke: rgba(51, 64, 77, .4); stroke-width: 1; stroke-dasharray: 4 4; }
-.blocks { display: flex; gap: 1.6rem; align-items: flex-end; height: 86px; margin: 1.2rem 0 1.4rem 4px; perspective: 600px; }
+/* the well keeps a fixed height: the blocks fold flat inside it, so the paragraph below never moves under the reader */
+.blocks { display: flex; gap: 1.6rem; align-items: flex-end; height: 64px; margin: 1.2rem 0 2rem 4px; perspective: 600px; }
 .blk { position: relative; display: block; width: 52px; height: 44px; }
 .blk--tall { height: 58px; }
 .blk--wide { width: 68px; }
@@ -316,6 +321,7 @@ main { position: relative; }
 .about__spread { align-items: center; }
 .about__fig { display: flex; justify-content: center; }
 .photo-card--about { width: min(360px, 85%); }
+.about__copy .prose { margin-top: 1rem; }
 .mtn { position: relative; height: 240px; overflow: hidden; }
 .mtn svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .mtn__l--1 { fill: #d9dfe7; }
@@ -374,6 +380,9 @@ html:not(.motion) .mtn__draw { stroke-dashoffset: 0; }
   .hero__spread { grid-template-columns: 1.15fr .85fr; grid-template-rows: 1fr; }
   .steps { grid-template-columns: repeat(3, 1fr); column-gap: 2rem; }
   .practices .spread:first-child { padding-bottom: 2.2rem; }
+  /* the pillars are a pair: both cards share a bottom edge so their hinge strips sit on the same fold */
+  .pillars { align-items: stretch; }
+  .pillar { display: flex; flex-direction: column; }
   .about__fig { order: 0; }
 }
 @media (max-width: 959px) {
@@ -391,12 +400,14 @@ html:not(.motion) .mtn__draw { stroke-dashoffset: 0; }
   .nav a:not(.tab) { padding: .8rem 0; border-bottom: 1px solid var(--fold); font-size: 1.05rem; }
   .nav .tab { margin-top: .8rem; align-self: flex-start; }
   .hero { --hills-h: 190px; --card-lift: 44px; }
-  .hero__spread { min-height: 0; padding-bottom: calc(var(--hills-h) - 40px); }
+  /* a tighter hero stack on phones: the photo card starts near y=560 so Maria's face sits above the fixed gallery pill at load */
+  .hero__spread { min-height: 0; padding-top: 2rem; row-gap: .6rem; padding-bottom: calc(var(--hills-h) - 40px); }
   .hero__copy { padding-bottom: 0; }
-  .hero__stage { margin-top: 1.2rem; margin-bottom: calc(var(--card-lift) + 40px - var(--hills-h)); }
+  .hero__cta { margin-top: 1.4rem; }
+  .hero__fold { margin-top: 1.6rem; }
+  .hero__stage { margin-top: .4rem; margin-bottom: calc(var(--card-lift) + 40px - var(--hills-h)); }
   .hero__card { width: min(250px, 68%); }
   .flag { left: 8%; height: 48px; bottom: 32%; }
-  .blocks { height: 80px; }
   .roots { height: 150px; }
   .roots__soil { grid-template-columns: 1fr; column-gap: 0; }
   .roots__svg--r { display: none; }

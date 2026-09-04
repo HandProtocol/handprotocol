@@ -88,7 +88,7 @@ h2 { font-size: clamp(1.9rem, 1.15rem + 2.1vw, 2.9rem); color: var(--ink); }
 }
 .btn:hover { background: var(--wine); border-color: var(--wine); transform: translateY(-2px); box-shadow: inset 0 0 0 1px var(--gilt), inset 0 0 0 2px var(--wine), 0 14px 28px -12px rgba(42,12,21,.6); }
 .link {
-  font: 600 .76rem/1 var(--caps); letter-spacing: .2em; text-transform: uppercase; text-decoration: none;
+  font: 600 .8rem/1 var(--caps); letter-spacing: .2em; text-transform: uppercase; text-decoration: none;
   color: var(--crimson); border-bottom: 1px solid var(--gilt); padding-bottom: .45rem;
   transition: color .25s ease, border-color .25s ease;
 }
@@ -149,7 +149,7 @@ h2 { font-size: clamp(1.9rem, 1.15rem + 2.1vw, 2.9rem); color: var(--ink); }
 .nav a { font: 500 1rem/1 var(--display); text-decoration: none; color: var(--ivory); padding: .5rem 0; position: relative; }
 .nav a:not(.nav__cta)::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--gilt); transform: scaleX(0); transform-origin: left; transition: transform .3s var(--ease); }
 .nav a:not(.nav__cta):hover::after { transform: scaleX(1); }
-.nav__cta { font: 600 .74rem/1 var(--caps) !important; letter-spacing: .18em; text-transform: uppercase; color: var(--wine) !important; background: var(--gilt); padding: .8rem 1.2rem .75rem !important; box-shadow: inset 0 0 0 1px var(--wine), inset 0 0 0 2px var(--gilt); transition: background .25s ease; }
+.nav__cta { font: 600 .8rem/1 var(--caps) !important; letter-spacing: .18em; text-transform: uppercase; color: var(--wine) !important; background: var(--gilt); padding: .8rem 1.2rem .75rem !important; box-shadow: inset 0 0 0 1px var(--wine), inset 0 0 0 2px var(--gilt); transition: background .25s ease; }
 .nav__cta:hover { background: var(--gilt-2); }
 .menu-btn { display: none; }
 
@@ -255,6 +255,8 @@ h2 { font-size: clamp(1.9rem, 1.15rem + 2.1vw, 2.9rem); color: var(--ink); }
   animation: iris 1.5s var(--ease) 1.5s both;
 }
 .hero .beam { left: 78%; width: 60%; }
+/* the hero's footlights come up once the curtain has parted: the stage is lit before you step onto it */
+.hero .footlights--hero { animation: fadein 1.4s ease 2.2s both; }
 .stage__pic img { width: 100%; height: 100%; object-fit: cover; object-position: 52% 32%; }
 .hero__curtain { z-index: 3; }
 .hero .curtain__panel--l { animation: partL 1.4s var(--ease) .8s both; }
@@ -326,7 +328,7 @@ h2 { font-size: clamp(1.9rem, 1.15rem + 2.1vw, 2.9rem); color: var(--ink); }
 .box__stage { position: relative; height: 150px; margin-top: -60px; background: linear-gradient(to bottom, #3a1020, var(--wine) 40%, var(--wine-2)); }
 .box__stage .footlights { height: 110px; }
 
-.pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); margin-top: clamp(2.5rem, 5vw, 4rem); }
+.pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(1.5rem, 3vw, 2.5rem); margin-top: clamp(2.5rem, 5vw, 4rem); align-items: start; /* each seat hugs its own chips */ }
 .seat {
   background: var(--ivory-2); border: 1px solid var(--gilt);
   box-shadow: 0 0 0 5px var(--ivory-2), 0 0 0 6px var(--gilt), 0 26px 40px -30px rgba(42,12,21,.6);
@@ -416,18 +418,20 @@ h2 { font-size: clamp(1.9rem, 1.15rem + 2.1vw, 2.9rem); color: var(--ink); }
 /* ---------- meet Maria (#about) ---------- */
 .about { padding-top: calc(var(--sec) - 2rem); }
 .about__grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 6vw, 5rem); align-items: center; }
-/* the portrait stays put; the plinth itself sinks through the floor line until only its gilt cap remains — no void opens above her */
-.pedestal { position: relative; --plinth-h: 150px; --p: 0; }
+/* the figure's box never changes height: the portrait and the plinth both descend by --sink (transform only, never layout),
+   the plinth clipped at the floor line until only its gilt cap remains — so the copy beside her never moves while she sinks */
+.pedestal { position: relative; --plinth-h: 150px; --p: 0; --sink: calc((var(--plinth-h) - 14px) * var(--p)); }
 .pedestal__frame {
   position: relative; width: min(100%, 360px); margin: 0 auto; aspect-ratio: 2 / 3; overflow: hidden;
   border: 1px solid var(--gilt); box-shadow: 0 0 0 5px var(--ivory-2), 0 0 0 6px var(--gilt), 0 30px 50px -28px rgba(42,12,21,.7);
+  transform: translateY(var(--sink));
 }
 .pedestal__frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
 .plinth {
   position: relative; width: min(100%, 420px); margin: 8px auto 0; overflow: hidden;
-  height: calc(14px + (var(--plinth-h) - 14px) * (1 - var(--p)));
+  height: var(--plinth-h);
 }
-.plinth > span { position: absolute; display: block; }
+.plinth > span { position: absolute; display: block; transform: translateY(var(--sink)); }
 .plinth__cap { top: 0; left: 4px; right: 4px; height: 14px; background: linear-gradient(to bottom, var(--gilt-2), var(--gilt) 55%, var(--gilt-3)); box-shadow: 0 3px 6px rgba(42,12,21,.3); }
 .plinth__flutes { top: 14px; left: 14px; right: 14px; height: calc(var(--plinth-h) - 26px); background:
   linear-gradient(to bottom, rgba(0,0,0,.08), transparent 20%),
@@ -445,7 +449,14 @@ h2 { font-size: clamp(1.9rem, 1.15rem + 2.1vw, 2.9rem); color: var(--ink); }
 /* ---------- curtain call (#book) ---------- */
 /* the section is the darkened house: the stage pins at its top, the runway below is the scroll the curtains need */
 .call { position: relative; z-index: 1; background: linear-gradient(to bottom, var(--wine-2), #0f0308); }
-.call.is-live { height: 180vh; } /* the runway the curtains need; only when the script is driving them */
+/* the runway the curtains need (only when the script is driving them) is painted as the house's dim lower drape, footlights along its foot, so it never reads as void */
+.call.is-live { height: 180vh; background-image: linear-gradient(to bottom, rgba(26,6,12,.62), rgba(15,3,8,.9)), var(--sheen), var(--pleat); }
+.call.is-live::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 160px; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(circle 3px at 50% calc(100% - 10px), #fff3c8 0 2px, rgba(255,230,160,.6) 3px, transparent 4px) 0 0 / 12.5% 100% repeat-x,
+    radial-gradient(ellipse 80px 160px at 50% 100%, rgba(255,205,110,.42), rgba(255,175,80,.14) 42%, transparent 72%) 0 0 / 12.5% 100% repeat-x;
+}
 .call__stage {
   position: sticky; top: var(--head-h);
   height: min(80vh, calc(100vh - var(--head-h)));
@@ -573,6 +584,7 @@ h2 { font-size: clamp(1.9rem, 1.15rem + 2.1vw, 2.9rem); color: var(--ink); }
   .brand__mark { width: 26px; height: 26px; }
   .brand__name { font-size: .72rem; letter-spacing: .1em; }
   .menu-btn { padding: .6rem .7rem; letter-spacing: .16em; }
+  .hero__eyebrow { letter-spacing: .18em; font-size: .7rem; white-space: nowrap; }
   .hero__title { font-size: 1.65rem; text-wrap: pretty; }
   .hero__title br { display: inline; } /* each clause owns its line */
   .hero__lede { font-size: 1.05rem; margin-top: .9rem; }

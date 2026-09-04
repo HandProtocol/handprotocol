@@ -47,11 +47,9 @@
   gsap.fromTo('.piece', { opacity: 0, x: (i) => [0, -4, 4][i], y: (i) => [-4, 3, 3][i] },
     { opacity: 1, x: 0, y: 0, duration: .8, stagger: .15, ease: 'power2.out', immediateRender: true, scrollTrigger: once('.bigmark', 'top 85%') });
 
-  /* invisible blocks: they stand up as the paragraph arrives, then fold flat onto their dotted footprints once you have read past them */
+  /* invisible blocks: they stand up as the paragraph arrives, then fold flat onto their dotted footprints once you have read past them (the well keeps its height, so nothing below moves under the reader) */
   gsap.fromTo('.block', HINGE, { ...UP, stagger: .08, immediateRender: true, scrollTrigger: once('.blocks') });
   gsap.to('.block', { rotateX: 90, opacity: .5, transformOrigin: '50% 100%', duration: .6, stagger: .08, ease: 'power2.in', overwrite: 'auto', scrollTrigger: once('.blocks', 'bottom 22%') });
-  /* …and the well they stood in closes with them, so only the footprints stay between the paragraphs */
-  gsap.to('.blocks', { height: 24, marginTop: 8, marginBottom: 32, duration: .7, ease: 'power2.inOut', scrollTrigger: once('.blocks', 'bottom 22%'), onComplete: () => ScrollTrigger.refresh() });
 
   /* root-cause modalities: the cover slides up with the scroll (or with the tab) */
   const roots = document.querySelector('.roots');

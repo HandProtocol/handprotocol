@@ -131,7 +131,8 @@ a { color: var(--cobalt); }
 .cartouche { grid-column: 1 / 5; grid-row: 1 / 6; align-self: center; margin: 0 20px 0 clamp(20px, 2.8cqw, 44px); --pad: clamp(1.6rem, 2.6cqw, 2.6rem); }
 .js .cartouche { animation: rise .9s var(--ease) .4s both; }
 @keyframes rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
-.hero__title { font-size: clamp(2rem, .6rem + 2.6vw, 2.85rem); line-height: 1.08; margin-bottom: 1rem; }
+.hero__title { font-size: clamp(2rem, .6rem + 2.6vw, 2.6rem); line-height: 1.08; margin-bottom: 1rem; }
+.hero__title .l { display: inline; }
 .brush { position: relative; white-space: nowrap; }
 .brush::after { content: ""; position: absolute; left: -.06em; right: -.06em; bottom: -.08em; height: .42em; z-index: -1; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M3 12C40 3 80 17 120 9S180 15 197 8' fill='none' stroke='%23e5b431' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E") 0 0 / 100% 100% no-repeat; opacity: .85; }
 .js .brush::after { animation: brush 1.1s var(--ease) 1.3s both; }
@@ -140,7 +141,7 @@ a { color: var(--cobalt); }
 .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem 1.6rem; margin-top: 1.6rem; }
 
 .mural { position: relative; grid-column: 6 / 10; grid-row: 2 / 5; margin: 0; overflow: hidden; border: 2px solid var(--grout); }
-.mural img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 42%; }
+.mural img { width: 100%; height: 100%; object-fit: cover; object-position: 46% 42%; }
 .mural::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,.34), rgba(255,255,255,0) 42%); pointer-events: none; }
 .mural::after { content: ""; position: absolute; inset: -2px; pointer-events: none; background:
   repeating-linear-gradient(90deg, var(--grout) 0 2px, transparent 2px calc(var(--t) - 2px), var(--grout) calc(var(--t) - 2px) var(--t)),
@@ -208,6 +209,7 @@ a { color: var(--cobalt); }
 .mod dt { display: flex; flex-direction: column; align-items: center; gap: 1.1rem; }
 .mod__name { font: 400 1.3rem/1.15 var(--display); color: var(--cobalt); text-wrap: balance; }
 .mod dd { margin: .7rem 0 0; font-size: 1rem; max-width: 34ch; }
+.mod dd, .step p, .pillar__lede { text-wrap: pretty; }
 .mtile { position: relative; display: block; width: 160px; height: 160px; flex: none; background-color: var(--tile); border: 3px solid var(--cobalt); box-shadow: 0 0 0 3px var(--grout), 0 0 0 4.5px var(--cobalt); overflow: hidden; transition: transform .5s var(--ease); }
 .mod:hover .mtile { transform: rotate(-2deg) scale(1.03); }
 .mtile--waves { background: var(--gloss),
@@ -239,7 +241,7 @@ a { color: var(--cobalt); }
 /* ---------- Session: the tiled floor ---------- */
 .session { background: linear-gradient(var(--grout), var(--tile)); }
 .floor { position: relative; padding: clamp(2rem, 4vw, 3rem) clamp(1rem, 3vw, 2.5rem); border: 3px solid var(--cobalt); box-shadow: inset 0 0 0 3px var(--tile), inset 0 0 0 4.5px var(--cobalt);
-  background: repeating-linear-gradient(90deg, var(--grout) 0 3px, transparent 3px 56px), repeating-linear-gradient(0deg, var(--grout) 0 3px, transparent 3px 56px), radial-gradient(circle, var(--cobalt) 0 3px, transparent 3.5px) -28px -28px / 56px 56px, linear-gradient(135deg, rgba(255,255,255,.45), rgba(255,255,255,0) 60%), var(--turq-2); }
+  background: repeating-linear-gradient(90deg, var(--grout) 0 3px, transparent 3px 56px), repeating-linear-gradient(0deg, var(--grout) 0 3px, transparent 3px 56px), radial-gradient(circle, var(--cobalt) 0 3px, transparent 3.5px) 0 0 / 56px 56px, linear-gradient(135deg, rgba(255,255,255,.45), rgba(255,255,255,0) 60%), var(--turq-2); }
 .steps { position: relative; list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); counter-reset: step; }
 .steps::before { content: ""; position: absolute; left: 12%; right: 12%; top: calc(2rem + 36px); border-top: 5px dotted var(--cobalt); z-index: 0; }
 .step { position: relative; z-index: 1; background: var(--tile); border: 2px solid var(--cobalt); box-shadow: inset 0 0 0 4px var(--tile), inset 0 0 0 5.5px var(--turq); padding: 2rem 1.4rem 1.8rem; text-align: center; overflow: hidden; }
@@ -290,6 +292,7 @@ a { color: var(--cobalt); }
 
 /* ---------- Responsive ---------- */
 @media (min-width: 960px) {
+  .hero__title .l { display: block; } /* each of Maria's three clauses owns a line of the cartouche */
   .hero { min-height: 0; }
   .tile:nth-child(-n+18) { position: absolute; visibility: hidden; pointer-events: none; }
 }

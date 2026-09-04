@@ -109,12 +109,13 @@ main{position:relative;z-index:1;overflow-x:clip}
 .rose__n{fill:var(--ink);stroke:none;font:500 16px var(--label)}
 .reach{display:none;position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
 .reach__text{font:italic 21px var(--display);fill:var(--ink);letter-spacing:.02em}
-.pin{position:absolute;left:4%;top:7.6%;width:0;height:0;pointer-events:none}
+.pin{position:absolute;left:max(4%,60px);top:7.6%;width:0;height:0;pointer-events:none}
 .pin__drop{position:absolute;left:-9px;top:-22px;width:18px;height:18px;background:var(--blue);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 0 2px var(--paper),0 0 0 3px var(--blue)}
 .pin__drop::after{content:'';position:absolute;left:5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--paper)}
 .pin__label{position:absolute;left:-34px;top:-50px;white-space:nowrap;font:italic 1rem var(--display);color:var(--ink)}
 .rw-entry{left:-2%;top:9.5%}
-.rw-r0{left:4%;top:7.6%}
+.rw-lobe{display:none}
+.rw-r0{left:max(4%,60px);top:7.6%}
 .rw-r1{left:14%;top:12.5%}
 .rw-r2{left:25%;top:7%}
 .rw-r3{left:36%;top:13%}
@@ -200,6 +201,7 @@ main{position:relative;z-index:1;overflow-x:clip}
 .closing{font:italic 1.4rem/1.5 var(--display);max-width:30em}
 
 /* ornament: dandelion clock — 24 pappus seeds on 1px stems around a centre; the marked third drift off downstream on reveal */
+.mod--release dd{padding-right:76px}
 .clock{position:absolute;right:-30px;bottom:-4px;width:96px;height:96px;pointer-events:none}
 .clock__stem{position:absolute;left:50%;top:50%;width:1.5px;height:60px;margin-left:-.75px;background:var(--sienna);transform-origin:50% 0;transform:rotate(-8deg)}
 .clock__head{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--sienna-d)}
@@ -211,7 +213,7 @@ main{position:relative;z-index:1;overflow-x:clip}
 /* ---------- session ---------- */
 .session{padding-bottom:150px}
 .rw-s1{left:20%;top:12%}
-.rw-s2{left:24%;top:68%}
+.rw-s2{left:16%;top:56%}
 .crossing{position:relative;margin-top:60px}
 .maplabel--cross{left:-2px;top:-34px}
 .steps{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:64px;margin:0;padding:0;list-style:none}
@@ -229,7 +231,7 @@ main{position:relative;z-index:1;overflow-x:clip}
 .rw-sx2{top:44px}
 .rw-s3{left:calc(100% + 34px);top:34%}
 .rw-s4{left:88%;top:calc(100% + 96px)}
-.rw-fb{display:none}
+.rw-fb,.rw-fbt{display:none}
 
 /* ---------- about ---------- */
 .about{padding-top:150px}
@@ -289,6 +291,9 @@ main{position:relative;z-index:1;overflow-x:clip}
   .js .hero__lede{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
 }
 @media (max-width:1180px) and (min-width:861px){
+  .rw-r1{top:10.5%}.rw-r2{top:8%}.rw-r3{top:11%}.rw-r4{top:8.5%}
+  .reach__text{font-size:19px}
+  .pin__label{left:-12px}
   .hero__title{font-size:clamp(2.2rem,4vw,3.4rem)}
   .hero__copy{width:48%}
   .isle{width:36%}
@@ -311,11 +316,12 @@ main{position:relative;z-index:1;overflow-x:clip}
   .hero{min-height:0;padding:96px var(--pad) 56px var(--gutter)}
   .corner{display:none}
   .contour{transform-origin:50% 60%}
-  .contour--a{background:repeating-radial-gradient(ellipse 70% 40% at 60% 66%,transparent 0 22px,rgba(181,123,60,.26) 22px 23.2px);-webkit-mask:linear-gradient(0deg,#000 40%,transparent 75%);mask:linear-gradient(0deg,#000 40%,transparent 75%)}
+  .contour--a{background:repeating-radial-gradient(ellipse 70% 40% at 60% 66%,transparent 0 22px,rgba(181,123,60,.26) 22px 23.2px);-webkit-mask:linear-gradient(0deg,#000 18%,transparent 46%);mask:linear-gradient(0deg,#000 18%,transparent 46%)}
   .contour--b{display:none}
   .rose{width:72px;height:72px;right:14px;top:12px;bottom:auto}
   .rose__n{font-size:20px}
-  .pin{left:22px;top:26px}
+  .pin,.rw-entry,.rw-r0{left:22px}
+  .pin{top:26px}
   .pin__label{left:18px;top:-14px}
   .rw-entry{top:-14px}
   .rw-r0{top:26px}
@@ -323,19 +329,22 @@ main{position:relative;z-index:1;overflow-x:clip}
   .rw-r2{top:42%}
   .rw-r3{top:58%}
   .rw-r4{top:74%}
-  .rw-ox{top:90%}
-  .rw-exit{top:100%}
+  .rw-ox{top:calc(100% - 56px)}
+  .rw-exit{display:none}
+  .rw-lobe{display:block;left:36%}
+  .rw-lobe--isle{top:calc(100% + 14px)}
   .hero__copy{position:static;width:auto;max-width:none}
   .hero .eyebrow{letter-spacing:.05em;gap:10px}
   .hero .eyebrow__tick{width:18px}
-  .hero__title{margin:12px 0 18px;font-size:clamp(2.25rem,9.4vw,2.9rem)}
+  .hero__title{margin:12px 0 18px;font-size:clamp(2rem,9.4vw,2.9rem)}
   .hero__lede{font-size:1.2rem;margin-bottom:22px}
   .hero__cta{gap:20px}
   .isle{position:relative;right:auto;top:auto;width:100%;max-width:400px;margin:40px 0 0}
   .isle img{border-radius:48% 52% 50% 50%/42% 42% 58% 58%;object-position:44% 40%}
   .isle__sand{inset:-16px}
   .maplabel--oxbow{display:none}
-  .intro{padding:64px 0 40px}
+  .intro{padding:96px 0 40px}
+  .rw-i1{top:84px}
   .intro__text{font-size:1.125rem}
   .intro__salute{font-size:1.4rem}
   .sec{padding:64px 0}
@@ -359,8 +368,8 @@ main{position:relative;z-index:1;overflow-x:clip}
   .block--closing{margin-top:80px}
   .closing{font-size:1.25rem}
   .session{padding-bottom:64px}
-  .crossing{margin-top:44px}
-  .maplabel--cross{left:-12px;top:-38px}
+  .crossing{margin-top:64px}
+  .maplabel--cross{left:-12px;top:-36px}
   .steps{grid-template-columns:1fr;gap:34px}
   .step{text-align:left;min-height:56px}
   .step p{margin-inline:0;max-width:none}
@@ -371,7 +380,9 @@ main{position:relative;z-index:1;overflow-x:clip}
   .about{padding-top:64px}
   .rw-ab1{top:20px}
   .about__grid{grid-template-columns:1fr;gap:40px}
-  .rw-ab2{top:96%}
+  .rw-ab2{top:calc(100% + 8px)}
+  .rw-lobe--bank{top:calc(100% + 64px)}
+  .rw-fbt{display:block;left:0;top:-8px}
   .bank{grid-column:1;max-width:400px}
   .bank img{aspect-ratio:1/1;object-position:22% 30%}
   .bluebonnet{left:-14px;bottom:-10px;width:96px;height:110px}
@@ -381,7 +392,7 @@ main{position:relative;z-index:1;overflow-x:clip}
   .rw-fb{display:block;left:0;top:calc(100% + 10px)}
   .farbank{width:min(280px,100%);margin:0 auto}
   .lake{padding:52px 24px 44px;border-radius:44%/22%}
-  .rw-pool{left:30%;top:-16px}
+  .rw-pool{left:36%;top:-16px}
   .maplabel--pool{left:auto;right:5%;top:-42px}
   .lake h2{font-size:clamp(1.6rem,6.6vw,2rem)}
   .btn--lg{padding:14px 30px;font-size:1.05rem}
@@ -394,6 +405,7 @@ main{position:relative;z-index:1;overflow-x:clip}
 }
 @media (max-width:420px){
   .hero{padding-top:104px}
+  .hero__title{font-size:clamp(1.8rem,7.9vw,2.5rem)}
   .hero__cta{flex-direction:column;align-items:flex-start;gap:18px}
   .lake{padding:48px 18px 40px}
 }
