@@ -184,6 +184,14 @@ a live viewport (hero card present, nav → #book lands on the reopened
 curtain-call card, CTA visible at every scroll position of the runway) and
 Nouveau re-shot at 6 s to see the finished cartouche + irises.
 
+**Cache rule (learned 2026-09-04):** `styles/index.html` references
+`gallery.js?v=YYYYMMDD` and `gallery.css?v=YYYYMMDD` — **bump the `?v=` whenever
+you edit either file.** The site's global `*.js`/`*.css` header is a 24-hour
+browser cache, so after the batch landed, browsers that had seen the gallery
+before kept the 17-entry `gallery.js` while the fresh HTML said twenty-seven.
+`netlify.toml` (+ `vercel.json` mirror) now also sends
+`Cache-Control: public, max-age=0, must-revalidate` for `/threehandshealing/styles/*`.
+
 **Gallery + preview (committed with the batch):** `styles/gallery.js` has
 the ten entries (tag `bedazzled`, after Monolith; desc/fonts/palette from the
 builders' reports); `styles/index.html` has a **Bedazzled** filter + copy now
