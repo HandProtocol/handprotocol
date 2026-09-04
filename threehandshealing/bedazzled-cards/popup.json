@@ -1,0 +1,56 @@
+{
+  "slug": "popup",
+  "name": "Popup",
+  "world": "A pop-up paper theatre: white card-stock pages inside a kraft cover, dusty-rose and slate card layers, visible hinges, fold lines and pull-tabs. Cut-paper Hill Country hills rise on folds; every element stands up as its page is reached. Engineered and keepsake-quiet — an adult's pop-up book, not a toy.",
+  "fonts": "Zilla Slab (display, 600, H1/H2 only) + Atkinson Hyperlegible (body)",
+  "palette": [
+    "#f6f3ee",
+    "#33404d",
+    "#d19a95",
+    "#7c8fa6",
+    "#c9a577"
+  ],
+  "hero": "The book is already open (kraft cover edges visible at the page's outer margin with a real fold line down the gutter). On load a paper stage rises on staggered hinges: five layered cut-paper hills (clip-path polygons in slate, rose and card white, gentle parallax), paper meadow blades along the fold, and image2 (Maria reaching out) as a photo die-cut into a rounded card with an 8px kraft paper edge (padded wrapper + one drop-shadow) rising on a bottom hinge (rotateX 90→0, 700ms power2.out). The H1 words stand up one line at a time on small hinges; the lede is on a paper banner held by two tabs; CTAs are paper tabs with a fold shadow.",
+  "signature": "The pop-up mechanism: every section is a page whose elements rise on visible hinges with a fold line and paper shadow as it enters — a book the visitor scrolls open, gently, one page at a time, with honest pull-tabs that scrub with the scroll.",
+  "ornaments": [
+    {
+      "phrase": "root-cause modalities",
+      "element": "A pull-tab under the two pillar cards: scrolling (or dragging the tab) scrubs a card that slides up to reveal cut-paper roots (SVG cut lines with a paper-shadow filter on a static group) running beneath both pillars — the only roots in the batch."
+    },
+    {
+      "phrase": "invisible blocks",
+      "element": "Grey card boxes with dotted fold lines standing in the validation paragraph that fold flat (rotateX 0→90, transform-origin bottom) and slide into the gutter once scrolled past."
+    },
+    {
+      "phrase": "You don't have to navigate this alone",
+      "element": "Two abstract paper-doll figures (circle + trapezoid, rose and slate) rising side by side on one shared hinge beside the validation heading — one fold, two figures."
+    },
+    {
+      "phrase": "Arrive / Experience / Integrate",
+      "element": "Three numbered paper figures on flag-sticks that step along a folded paper path (each on its own hinge) as a scroll-scrubbed pull-tab strip moves — the sequence is a mechanism."
+    },
+    {
+      "phrase": "set down what has been carried",
+      "element": "Family Constellations card: a paper figure with a kraft bundle on its back; a small pull-tab (scrubbed on enter, or draggable) slides the bundle off to rest on the card's fold line."
+    },
+    {
+      "phrase": "three hands",
+      "element": "The brand mark as three interlocking slot-and-tab card pieces (SVG with visible slots) at each page corner and in the nav."
+    },
+    {
+      "phrase": "grow through our deepest challenges",
+      "element": "A cut-paper mountain range in #about (slate and rose layers) with a dotted paper path rising over it; the dashes draw with scroll (stroke-dashoffset)."
+    },
+    {
+      "phrase": "a safe container",
+      "element": "The book itself: every page carries the kraft cover edge and gutter fold as a frame, and the #book page adds a paper 'pocket' (a clip-path flap with a fold shadow) that holds the CTA."
+    },
+    {
+      "phrase": "when you are ready, the next step is simple",
+      "element": "The Book CTA as a paper tab with a real fold shadow and a press-down active state (translateY 2px, shadow shrinks)."
+    }
+  ],
+  "motion": "Load: page already open; hills rise on hinges (700ms, 80ms stagger), then the photo card, then the H1 lines — total ≈1.8s, power2 easing, nothing bouncy. Scroll: per-page hinge rises play once, pull-tabs scrub, the mountain path draws, hills parallax gently. Reduced motion: everything pre-risen, flat shadows.",
+  "photos": "image2 (hero, rounded card with kraft edge), image6 (EFT chip as a small card on a hinge), image10 (about, looking up, card with kraft edge), image7 (back-cover panorama in a card frame). Photos are cut as card shapes only — never as silhouettes of Maria. 4 photos.",
+  "risk": "Feasibility: no background removal — photos are die-cut as card shapes with a kraft edge; the paper figures are abstract shapes, never Maria. Tone: Zilla Slab 600 at H1/H2 only, slate ink, hinge timings ≥600ms with power2 easing — a keepsake, not a nursery. Zine distance: white card ground (kraft only as cover edges), engineered mechanics, no tape or marker; Pulse distance: dusty rose/slate/kraft, no poster contrast. No cover-open on load (Curtain owns the reveal), no flowers (Nouveau/Nightgarden own blossom). 3D transforms capped at 12 hinged elements per viewport, single drop-shadow filters, layers as gradients/clip-path."
+}

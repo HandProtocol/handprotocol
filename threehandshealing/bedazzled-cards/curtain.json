@@ -1,0 +1,48 @@
+{
+  "slug": "curtain",
+  "name": "Curtain",
+  "world": "An opera house at the moment the house lights dim, then the programme in your lap: crimson velvet and a gilt valance frame the hero, and after that the page is ivory programme card — act titles, footlights, a spotlight that finds you. Velvet and gilt as the frame, never the field; no stone, no candle.",
+  "fonts": "Cinzel (act titles, eyebrows and wordmark only) + Lora (H1 in italic display, all body)",
+  "palette": [
+    "#f2e8d8",
+    "#2a0c15",
+    "#8c1d2f",
+    "#d4a853",
+    "#4a6b7a"
+  ],
+  "hero": "Full-viewport pleated curtains: two panels of repeating-linear-gradient(90deg, #8c1d2f 0 28px, #5e1020 28px 40px) with a soft-light sheen and a gilt valance of scalloped swags (half-ellipse border-radius). The H1 — Lora italic, gold — appears on an ivory act-title card over the closed curtain at 0.4s, so the headline is readable before anything moves; then the panels part behind it (translateX with a slight scaleX for gathered folds, 0.8→2.2s) revealing image8 (hands on heart, eyes closed) under a spotlight iris on a deep wine stage, footlights glowing along the bottom edge. The title card stays as the left panel of the hero.",
+  "signature": "The curtains: they part on load behind the already-visible headline, and the page becomes ivory programme card until the curtain call at #book — the only pinned moment (desktop, ≤80vh) — where they close and reopen on the CTA alone in the spotlight: 'when you are ready, the next step is simple'.",
+  "ornaments": [
+    {
+      "phrase": "a guide, not a pedestal",
+      "element": "In #about a fluted marble pedestal (repeating-linear-gradient flutes, gilt cap) carrying Maria's portrait sinks into the stage floor on an unpinned scrub (translateY clipped at the floor line) until she stands level with the reader; 'pedestal' is struck through and 'guide' underlined in gold."
+    },
+    {
+      "phrase": "deep listening",
+      "element": "#practices framed as a theatre box — the seat you take to listen: a gilt balcony rail (SVG scalloped path with repeated balusters) across the bottom, velvet swags tied back with gold cord (CSS pill + tassel) on both sides; the two pillars are the box's paired seats."
+    },
+    {
+      "phrase": "Arrive / Experience / Integrate",
+      "element": "Three ivory programme pages numbered Act I, II, III in Cinzel that page-turn open (transform-origin left, rotateY −90→0 with a shadow gradient) as each step enters."
+    },
+    {
+      "phrase": "absolute safety",
+      "element": "Footlights: a row of warm radial-gradient glows along the bottom of the #practices stage that brighten (opacity .3→1) as the section enters — the stage is lit before you step onto it."
+    },
+    {
+      "phrase": "meet you right where you are",
+      "element": "The spotlight: a fixed radial-gradient element whose centre eases (lerped) toward whichever heading is crossing the viewport centre, so the light finds the reader; static under reduced motion."
+    },
+    {
+      "phrase": "three hands",
+      "element": "The mark inside a gilt cartouche of two mirrored SVG scroll flourishes drawn with stroke-dasharray — the divider between acts."
+    },
+    {
+      "phrase": "set down what has been carried",
+      "element": "Family Constellations chip: on hover/focus a small velvet drape drops over its shadow (pseudo-element rotateX from the top edge) — the weight set down behind the curtain."
+    }
+  ],
+  "motion": "Load: title card at 0.4s, house lights dim (600ms), curtains part (1.4s power2.inOut), spotlight iris opens. Scroll: sections flow as normal programme pages (no full-viewport chapters, no pins) — pedestal sinks, pages turn, footlights warm; one pinned curtain call at #book on desktop only (≤80vh), static half-drapes under 900px. Reduced motion: curtains open, no pin, spotlight static.",
+  "photos": "image8 (hero, in the spotlight), image1 (about, on the pedestal — the red door echoes the velvet), image6 (programme photo on the EFT chip), image3 (book, curtain call). 4 photos.",
+  "risk": "Thumbnail reads light: ivory programme card is the dominant surface after the hero; velvet is frame only. Cathedral distance: crimson and ivory, no black, stone, arches, candlelight or hairlines; Monolith distance: no chapters, no chapter rail, one short pin. H1 in Lora italic (not all-caps Cinzel) and visible at 0.4s. Body text lives only on ivory (AA); gold #d4a853 on wine is 8.2:1 for display. Pedestal ornament lives only here."
+}

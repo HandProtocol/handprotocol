@@ -1,0 +1,44 @@
+{
+  "slug": "talavera",
+  "name": "Talavera",
+  "world": "A Puebla tile wall in the Texas sun: cobalt and marigold glaze on white with a soft turquoise second glaze, every tile a hand-painted pattern with grout lines and a glossy highlight. Joyful, folk, generous — a kitchen wall in a healer's home, not earth and dust.",
+  "fonts": "Yeseva One (display) + Mulish (body)",
+  "palette": [
+    "#f6f1e4",
+    "#123a8a",
+    "#1f4aa3",
+    "#e5b431",
+    "#5fb3b3"
+  ],
+  "hero": "The wall: a full-bleed grid of 120px CSS tiles (≈8×6 desktop, 3×7 mobile), each a single div with ≤4 background layers — radial-gradient petals, conic quarter-fans, a 2px cobalt border, a glossy top-left highlight. image7 (arms flung wide) fills a 6×4 landscape 'mural' at right so both outstretched arms stay in frame, its edges cut by the grout. Left: the H1 in Yeseva One inside a white tile cartouche with a scalloped cobalt border-image (SVG data URI), visible from 0.4s while the wall keeps painting behind it. At load a single marigold tile exists at the centre; the rest of the wall paints itself outward from it.",
+  "signature": "The wall that grows from one tile: 'wherever you are right now is the perfect place to start' — one tile exists, and the whole wall paints outward from it (distance-staggered scale/opacity), the seed tile keeping its marigold glaze and a tiny three-hands mark forever.",
+  "ornaments": [
+    {
+      "phrase": "wherever you are right now is the perfect place to start",
+      "element": "Hero tile grid where each tile carries --d (grid distance from the seed tile); GSAP scales tiles 0→1 with delay --d × 90ms; the seed tile has a marigold radial glaze and the brand mark painted in cobalt."
+    },
+    {
+      "phrase": "tapping on acupressure points · rest, grounding, and integration · ease of movement · movement and breath · hidden loyalties and patterns · move through and out",
+      "element": "Six distinct 160px tile patterns, one per unnumbered modality card, each derived from its own blurb phrase and drawn only with gradients: nine dots on a hand outline (tapping); concentric rings (rest and grounding); interlocking waves via repeating-radial (ease of movement); a spiral from conic + mask (movement and breath); a star of eight (hidden loyalties and patterns); falling teardrops (move through and out). Arranged as a 3×2 azulejo panel sharing one grout."
+    },
+    {
+      "phrase": "let what has been held move through and out",
+      "element": "A papel-picado banner across the validation section: nine pennants (clip-path polygons) each perforated by a CSS mask of repeating cut-out shapes in marigold, cobalt and turquoise — 'perforated paper', the cut-outs are what has been let go and the wind moves through them; sways 2° once on scroll-in, then holds."
+    },
+    {
+      "phrase": "joy, strength, and purpose",
+      "element": "A talavera 'sol' tile beside the words: a cobalt sun face (two arc eyes, a smile) ringed by 16 lobed marigold rays (repeating-conic + a scalloped radial mask, not plain rays); it turns 22.5° once on scroll-in and its cheeks gain a turquoise glaze dot."
+    },
+    {
+      "phrase": "Arrive / Experience / Integrate",
+      "element": "Three numbered path tiles set into a tiled floor strip and joined by a dotted cobalt grout line; 1-2-3 painted in Yeseva inside scalloped white cartouches, each tile 'glazing' (highlight sweep) in sequence on scroll."
+    },
+    {
+      "phrase": "three hands",
+      "element": "A round talavera plate medallion: a cobalt rim of 24 petal lobes (repeating-conic + radial mask) with the brand mark painted at the centre under a marigold glaze highlight; used in nav, footer and #book."
+    }
+  ],
+  "motion": "Load: the seed tile drops in with a small bounce, the wall paints outward (≈1.6s) while the H1 cartouche is already up at 0.4s. Scroll: banner sways once, sol turns, floor tiles glaze in order. Any feTurbulence brush edge is applied to a static group and revealed with an animated clip-path, never re-filtered per frame. Reduced motion: full wall painted, nothing sways.",
+  "photos": "image7 as the landscape hero mural (joy, both arms in frame); image11 in #about as a framed tile portrait with a scalloped border; image6 EFT cropped square inside the EFT tile card; image9 at #book as a small tile behind the CTA. Photos get a 1px glossy top edge to match the glaze. 4 photos.",
+  "risk": "Distinct from Terra (no terracotta, no ochre ground, no sunrise) and Retro (the sol is one folk tile with a face and lobes, not a ray world): cobalt/white/marigold/turquoise glaze only. Palette no longer twins Loom (Loom moved to denim + madder; Talavera's dark is true cobalt #123a8a, green dropped for turquoise). 48 patterned tiles = many gradients — one shared class, ≤4 layers per tile, 21 tiles under 700px. Cobalt #123a8a on white is 9.2:1; marigold and turquoise are never text colours. Roots are not used here (reserved for Popup)."
+}

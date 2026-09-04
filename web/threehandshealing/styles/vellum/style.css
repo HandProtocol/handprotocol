@@ -1,0 +1,553 @@
+/* Three Hands Healing — Vellum.
+   An illuminated manuscript opened to a lapis title page: gold-leaf versals
+   before miniatures, vermilion rubrics, pricking and ruling, catchwords at the
+   foot of every folio, manicules in the margin. Every section is a folio. */
+
+:root {
+  --parchment: #efe3c6;
+  --plate: #f6ecd8;
+  --umber: #2a1f14;
+  --umber-2: #4a3a28;
+  --gold: #c9971c;
+  --gold-hi: #f0d37a;
+  --gold-lo: #8f6a10;
+  --gold-text: #e6b93e;
+  --lapis: #1f3f8f;
+  --lapis-2: #17306f;
+  --verm: #a52a2a;
+  --verm-2: #8a1f1f;
+  --ivory: #f7efdc;
+  --rule: rgba(42, 31, 20, .13);
+  --rule-2: rgba(42, 31, 20, .32);
+  --lh: 28px;
+  --pad: clamp(20px, 5vw, 72px);
+  --head-h: 64px;
+  --mini: 220px;
+  --uncial: 'Uncial Antiqua', 'Gentium Book Plus', Georgia, serif;
+  --serif: 'Gentium Book Plus', 'Gentium Plus', Georgia, 'Times New Roman', serif;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 17.5px;
+  line-height: var(--lh);
+  color: var(--umber);
+  background:
+    radial-gradient(70% 45% at 18% 8%, rgba(140, 100, 40, .08), transparent 60%),
+    radial-gradient(55% 50% at 92% 92%, rgba(140, 100, 40, .09), transparent 60%),
+    radial-gradient(40% 30% at 70% 40%, rgba(255, 250, 235, .35), transparent 60%),
+    var(--parchment);
+  overflow-x: hidden;
+}
+img { max-width: 100%; height: auto; display: block; }
+svg { display: block; }
+h1, h2, h3, p, dl, dd, dt, figure, ol { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--lapis); outline-offset: 3px; }
+.hero__panel :focus-visible, .foot :focus-visible { outline-color: var(--gold-hi); }
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.hero__margin, .hero__panel::after, .versal, .dropcap, .nb, .linefiller, .strip__corner, .colophon__end, .diptych__gutter, .step__num { pointer-events: none; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; padding: 8px 14px; background: var(--umber); color: var(--ivory); border-radius: 2px; font-weight: 700; }
+.skip:focus { top: 12px; }
+
+/* ── the gilded mark ───────────────────────────────────────────── */
+.mark-under { fill: none; stroke: var(--umber); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+.mark-gold { fill: none; stroke: url(#gold); stroke-width: 2.4; stroke-linejoin: round; stroke-linecap: round; }
+
+/* ── type ──────────────────────────────────────────────────────── */
+.rubric {
+  font-family: var(--uncial);
+  font-size: 28px;
+  line-height: 1.25;
+  color: var(--verm);
+  letter-spacing: .01em;
+  margin-bottom: 14px;
+}
+.rubric--gold { color: var(--gold-text); }
+h1, h2, h3 { font-family: var(--serif); font-weight: 400; letter-spacing: -.005em; }
+h2 { font-size: clamp(30px, 3.2vw, 42px); line-height: 1.15; text-wrap: balance; }
+.rubric, .hero__lede { text-wrap: balance; }
+h3 { font-size: 24px; line-height: var(--lh); font-weight: 700; }
+.prose p + p { margin-top: var(--lh); }
+.prose { max-width: 66ch; }
+.prose em { font-style: italic; }
+.block + .block { margin-top: clamp(32px, 4vw, 48px); }
+
+/* ── buttons ───────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  background: var(--verm);
+  color: var(--ivory);
+  font-weight: 700;
+  font-size: 17.5px;
+  line-height: 24px;
+  text-decoration: none;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(240, 211, 122, .9), inset 0 0 0 3px var(--verm), 0 1px 0 var(--gold-lo);
+  transition: background .25s var(--ease), transform .25s var(--ease);
+}
+.btn:hover { background: var(--verm-2); transform: translateY(-1px); }
+.btn--sm { padding: 8px 18px; font-size: 16px; line-height: 22px; }
+.link {
+  display: inline-block;
+  padding: 12px 2px;
+  font-weight: 700;
+  text-decoration: none;
+  background: linear-gradient(var(--gold), var(--gold)) no-repeat 0 100% / 100% 2px;
+  transition: background-size .3s var(--ease);
+}
+.link:hover { background-size: 100% 6px; }
+
+/* ── header ────────────────────────────────────────────────────── */
+.site-head {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--head-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0 var(--pad);
+  background: rgba(239, 227, 198, .94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--rule-2);
+  box-shadow: 0 1px 0 var(--gold), 0 2px 0 rgba(255, 255, 255, .5);
+}
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand__mark { width: 34px; height: 34px; }
+.brand__name { font-weight: 700; font-size: 19px; font-variant: small-caps; letter-spacing: .06em; }
+.nav { display: flex; align-items: center; gap: clamp(18px, 2.4vw, 36px); }
+.nav a:not(.btn) {
+  text-decoration: none;
+  font-size: 17px;
+  padding: 6px 0;
+  background: linear-gradient(var(--gold), var(--gold)) no-repeat 0 100% / 0 2px;
+  transition: background-size .3s var(--ease);
+}
+.nav a:not(.btn):hover { background-size: 100% 2px; }
+.menu-btn {
+  display: none;
+  font: 700 16px/1 var(--serif);
+  color: var(--umber);
+  background: none;
+  border: 1px solid var(--rule-2);
+  padding: 9px 14px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+/* ── folio scaffolding ─────────────────────────────────────────── */
+.sec { position: relative; padding: clamp(60px, 7vw, 100px) 0; }
+.sec + .sec { border-top: 1px solid var(--rule-2); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55); }
+.folio { position: relative; max-width: 1180px; margin: 0 auto; padding: 0 var(--pad); }
+/* pricking holes down the leaf's edge — every 28px, the ruling's pitch */
+.folio::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: radial-gradient(circle at 3px 3px, rgba(42, 31, 20, .38) 0 1.2px, transparent 1.9px) 0 0 / 6px var(--lh) repeat-y;
+  pointer-events: none;
+}
+.folio-num {
+  position: absolute;
+  top: -34px;
+  right: var(--pad);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--umber-2);
+  letter-spacing: .04em;
+  pointer-events: none;
+}
+.head { position: relative; }
+.head__row { display: flex; align-items: flex-start; gap: 26px; }
+.head__row h2 { flex: 1 1 0; max-width: 20ch; padding-top: 6px; }
+/* marginalia anchored to a line of text by script (--y); only the wide leaf has an outer margin */
+.marginalia { display: none; position: absolute; top: var(--y, 300px); pointer-events: none; overflow: visible; }
+.head__note { margin-top: 12px; font-style: italic; color: var(--umber-2); }
+.ruled {
+  background-image: repeating-linear-gradient(to bottom, transparent 0 calc(var(--lh) - 1px), var(--rule) calc(var(--lh) - 1px) var(--lh));
+  background-size: 100% var(--lh);
+  background-position: 0 -6px;
+}
+
+/* ── versals (illuminated initials) ───────────────────────────── */
+.versal { width: 120px; height: 120px; flex: 0 0 auto; }
+.versal__t { font-family: var(--uncial); font-weight: 400; }
+.versal__t--gold { fill: url(#gold); stroke: var(--umber); stroke-width: 1.2px; }
+.versal__t--hero { font-size: 236px; }
+.dropcap { float: left; width: 84px; height: 84px; margin: 4px 14px 0 0; }
+.dropcap--hero, .dropcap--book { display: none; }
+/* the gilding sweep: masked until the versal enters, then revealed left to right */
+.js .versal.reveal, .js .dropcap.reveal {
+  -webkit-mask-image: linear-gradient(105deg, #000 42%, transparent 58%);
+  mask-image: linear-gradient(105deg, #000 42%, transparent 58%);
+  -webkit-mask-size: 260% 100%;
+  mask-size: 260% 100%;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  transition: mask-position 1s var(--ease), -webkit-mask-position 1s var(--ease);
+}
+.js .versal.reveal.is-in, .js .dropcap.reveal.is-in { -webkit-mask-position: 0 0; mask-position: 0 0; }
+
+/* ── miniatures ────────────────────────────────────────────────── */
+.miniature { position: relative; overflow: hidden; background: var(--lapis-2); }
+.miniature img { width: 100%; height: 100%; object-fit: cover; filter: sepia(.15) saturate(1.05); }
+.miniature::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid var(--gold-hi);
+  box-shadow: 0 0 0 1px rgba(42, 31, 20, .35);
+  pointer-events: none;
+}
+.miniature--hero { width: var(--mini); height: var(--mini); box-shadow: 0 0 0 1px var(--gold), 0 18px 40px rgba(0, 0, 0, .35); }
+/* image3 is full-length: zoom in so head and shoulders fill the square, the red door still at her side */
+.miniature--hero img { object-position: 50% 16%; transform: scale(1.55); transform-origin: 44% 19%; }
+
+/* ── hero: folio 1r, the lapis title page ──────────────────────── */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 62fr) minmax(0, 38fr);
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-height: max(calc(100svh - var(--head-h)), 760px);
+  position: relative;
+}
+.hero__panel {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  position: relative;
+  background: linear-gradient(160deg, #26499e, var(--lapis) 45%, var(--lapis-2));
+  color: var(--ivory);
+  padding: clamp(36px, 4.4vw, 64px) clamp(24px, 4vw, 56px) clamp(100px, 11vw, 150px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: inset -1px 0 0 rgba(240, 211, 122, .5);
+}
+.hero__panel::after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(240, 211, 122, .42); pointer-events: none; }
+.hero__vine { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .18; pointer-events: none; }
+.hero__eyebrow { position: relative; margin-bottom: clamp(24px, 3vw, 40px); }
+/* the historiated F: miniature at the left, the versal standing before its right edge, its arms reaching the word — "F|eel" */
+.hero__body { position: relative; display: flex; align-items: flex-start; gap: 0; }
+.initial { position: relative; flex: 0 0 auto; }
+.initial--hero { width: calc(var(--mini) + 106px); height: calc(var(--mini) + 34px); }
+.initial--hero .miniature { position: absolute; left: 0; top: 0; }
+.versal--hero { position: absolute; left: calc(var(--mini) - 62px); top: 0; width: calc((var(--mini) + 34px) * 170 / 230); height: calc(var(--mini) + 34px); overflow: visible; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .35)); }
+.sheen { animation: sheen 1.4s var(--ease) .7s 1 both; }
+@keyframes sheen { from { transform: translateX(0); } to { transform: translateX(360px); } }
+.hero__title { font-size: clamp(26px, 2.8vw, 40px); line-height: 1.18; color: var(--ivory); flex: 1 1 0; min-width: 0; padding: 2px 0 0 4px; }
+.hero__line { display: block; position: relative; }
+.hero__line + .hero__line { margin-top: .12em; }
+.js .hero__line { animation: rise .9s var(--ease) both; }
+.js .hero__line:nth-child(2) { animation-delay: .12s; }
+.js .hero__line:nth-child(3) { animation-delay: .24s; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* manicules: pen-drawn hands in the parchment margin, one per clause, pointing back at it */
+.manicule { position: absolute; left: calc(100% + clamp(24px, 4vw, 56px) + 34px); top: .02em; width: 1.95em; height: 1.19em; overflow: visible; }
+.m-cuff { fill: var(--verm); }
+.m-skin { fill: var(--plate); }
+.m-fill { opacity: 0; animation: ink .5s var(--ease) forwards; animation-delay: calc(var(--d) + .6s); }
+.m-line { fill: none; stroke: var(--umber); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw .9s var(--ease) forwards; animation-delay: var(--d); }
+.hero__line:nth-child(1) .manicule { --d: .5s; }
+.hero__line:nth-child(2) .manicule { --d: .75s; }
+.hero__line:nth-child(3) .manicule { --d: 1s; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes ink { to { opacity: 1; } }
+
+/* the ruled margin: page frame drawn on load, pricking, folio number, a sprig */
+.hero__margin { grid-column: 2; grid-row: 1 / 3; position: relative; min-height: 420px; }
+.hero__margin::before { content: ""; position: absolute; left: 31px; top: 37px; right: 37px; bottom: 37px; background: repeating-linear-gradient(to bottom, transparent 0 calc(var(--lh) - 1px), rgba(42, 31, 20, .1) calc(var(--lh) - 1px) var(--lh)); background-position: 0 100%; pointer-events: none; }
+.page-frame { position: absolute; overflow: visible; }
+.page-frame rect { fill: none; stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s var(--ease) .15s forwards; }
+.page-frame--outer { left: 22px; top: 28px; width: calc(100% - 50px); height: calc(100% - 56px); }
+.page-frame--outer rect { stroke: var(--umber-2); }
+.page-frame--inner { left: 29px; top: 35px; width: calc(100% - 64px); height: calc(100% - 70px); }
+.page-frame--inner rect { stroke: var(--gold); animation-delay: .45s; }
+.pricking { position: absolute; top: 28px; bottom: 28px; right: 11px; width: 6px; background: radial-gradient(circle at 3px 3px, rgba(42, 31, 20, .5) 0 1.3px, transparent 2px) 0 0 / 6px var(--lh) repeat-y; }
+.hero__margin .folio-num { position: absolute; top: 48px; right: 52px; }
+.sprig { width: 84px; height: 112px; flex: 0 0 auto; overflow: visible; }
+.sprig__stem { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.4s var(--ease) .9s forwards; }
+.sprig use, .sprig g { opacity: 0; animation: ink .8s var(--ease) 1.6s forwards; }
+
+/* the foot of folio 1r is written on the margin's ruled lines, under the manicules */
+.hero__foot { grid-column: 2; grid-row: 2; position: relative; z-index: 1; align-self: end; padding: 0 76px 52px 64px; }
+.hero__lede { font-size: 22px; line-height: var(--lh); color: var(--verm); font-style: italic; max-width: 30ch; }
+.pilcrow { font-style: normal; font-weight: 700; margin-right: .35em; color: var(--verm); }
+.hero__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; margin-top: 22px; }
+
+/* ── catchwords: the next folio's first word at the foot, carried across the turn ── */
+.catchword-row { display: flex; justify-content: flex-end; margin-top: clamp(36px, 4vw, 56px); }
+.catchword-row--hero { justify-content: space-between; align-items: flex-end; margin-top: 20px; }
+.catchword { display: inline-flex; flex-direction: column; align-items: flex-end; text-decoration: none; font-family: var(--uncial); font-size: 30px; line-height: 1.1; color: var(--verm); }
+.catchword span { padding: 2px 6px 0; transition: color .3s var(--ease); }
+.catchword:hover span { color: var(--verm-2); }
+.catchword__flourish { width: 112px; height: 16px; overflow: visible; }
+.catchword__flourish path { fill: none; stroke: var(--gold); stroke-width: 1.6; stroke-linecap: round; }
+.js .catchword { opacity: 0; transform: translateY(6px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.js .catchword.is-in { opacity: 1; transform: none; }
+.js .catchword__flourish path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.1s var(--ease) .3s; }
+.js .catchword.is-in .catchword__flourish path { stroke-dashoffset: 0; }
+
+/* ── intro: folio 1v ───────────────────────────────────────────── */
+.prose--intro { max-width: 70ch; font-size: 19px; line-height: 30px; }
+
+/* ── alone / practices ─────────────────────────────────────────── */
+.practices .folio { padding-top: 0; }
+.acanthus { width: min(44%, 520px); height: auto; position: absolute; right: var(--pad); top: 236px; pointer-events: none; overflow: visible; }
+.js .acanthus {
+  -webkit-mask-image: linear-gradient(90deg, #000 44%, transparent 56%);
+  mask-image: linear-gradient(90deg, #000 44%, transparent 56%);
+  -webkit-mask-size: 240% 100%;
+  mask-size: 240% 100%;
+  -webkit-mask-position: 100% 0;
+  mask-position: 100% 0;
+  transition: mask-position 1.6s var(--ease) .1s, -webkit-mask-position 1.6s var(--ease) .1s;
+}
+.js .acanthus.is-in { -webkit-mask-position: 0 0; mask-position: 0 0; }
+
+/* the diptych: two facing folios ruled together, pricked down the gutter */
+.diptych {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 72px;
+  margin-top: clamp(40px, 5vw, 64px);
+  padding: 0 0 var(--lh);
+  border-top: 1px solid var(--rule-2);
+  border-bottom: 1px solid var(--rule-2);
+}
+.diptych__gutter {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 3px 3px, rgba(42, 31, 20, .5) 0 1.3px, transparent 2px) 0 -3px / 6px var(--lh) repeat-y;
+  pointer-events: none;
+}
+.pillar { padding-top: var(--lh); }
+.pillar__title { font-size: 24px; line-height: var(--lh); color: var(--lapis); }
+.pillar--mind .pillar__title { color: var(--verm); }
+.pillar__title::before { content: "¶ "; color: var(--gold-lo); font-weight: 400; }
+.pillar__lede { margin-top: var(--lh); font-style: italic; }
+.mods { margin-top: var(--lh); }
+.mods > div { padding: 0 0 var(--lh); }
+.mods > div::after { content: ""; display: block; clear: both; }
+.mods dt { font-weight: 700; font-size: 20px; line-height: var(--lh); }
+.mods dt::before { content: "◆"; font-size: 9px; vertical-align: .3em; margin-right: .6em; color: var(--gold-lo); }
+.mods dd { margin: 0; }
+.miniature--eft { float: right; width: 136px; height: 136px; margin: 4px 0 var(--lh) 22px; outline: 1px dotted var(--gold-lo); outline-offset: 4px; }
+.miniature--eft img { object-position: 50% 42%; }
+.miniature--eft::after { inset: 5px; }
+
+/* line-filler: the last short line of the closing sentence completed to the margin */
+.closing { font-size: 20px; line-height: 32px; font-style: italic; max-width: 100%; }
+.linefiller {
+  display: inline-block;
+  vertical-align: middle;
+  height: 12px;
+  width: 0;
+  margin-left: 12px;
+  border-top: 1px solid var(--umber);
+  border-bottom: 1px solid var(--umber);
+  background:
+    repeating-linear-gradient(45deg, var(--gold) 0 4px, transparent 4px 8px),
+    repeating-linear-gradient(-45deg, var(--verm) 0 4px, transparent 4px 8px);
+  background-size: 12px 12px;
+  transition: width 1.4s var(--ease) .15s;
+}
+.closing.is-in .linefiller, .no-js .linefiller { width: var(--fill, 0px); }
+
+/* ── session: the journey line, the rubric numerals ────────────── */
+.steps { list-style: none; padding: 0; position: relative; margin-top: clamp(36px, 4vw, 56px); }
+.steps::before { content: ""; position: absolute; left: 7px; top: var(--lh); bottom: var(--lh); width: 1px; background: var(--umber-2); opacity: .55; }
+.step { position: relative; display: grid; grid-template-columns: 132px 1fr; gap: 24px; padding: var(--lh) 0 var(--lh) 36px; border-top: 1px solid var(--rule-2); }
+.step:last-child { border-bottom: 1px solid var(--rule-2); }
+.step::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(var(--lh) + 12px);
+  width: 15px;
+  height: 15px;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, var(--gold-hi), var(--gold) 55%, var(--gold-lo));
+  box-shadow: 0 0 0 1px var(--umber);
+}
+.step__num { font-family: var(--uncial); font-size: 34px; line-height: 40px; color: var(--verm); }
+.step__num svg { width: 48px; height: 10px; margin-top: 2px; overflow: visible; }
+.step__num path { fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linecap: round; }
+.step__body h3 { line-height: 40px; }
+.step__body p { max-width: 52ch; }
+
+/* ── about: the strip, the nota bene ───────────────────────────── */
+.strip { margin-bottom: clamp(40px, 5vw, 64px); }
+.strip__frame, .book__frame { position: relative; }
+.strip__frame { padding: 8px; border: 1px solid var(--umber-2); background: var(--plate); box-shadow: inset 0 0 0 4px var(--plate), inset 0 0 0 5px var(--gold); }
+.strip__frame img { width: 100%; aspect-ratio: 21 / 9; object-fit: cover; object-position: 50% 35%; filter: sepia(.15) saturate(1.05); }
+.strip__corner { position: absolute; width: 11px; height: 11px; transform: rotate(45deg); background: linear-gradient(135deg, var(--gold-hi), var(--gold) 55%, var(--gold-lo)); box-shadow: 0 0 0 1px var(--umber); z-index: 1; }
+.strip__corner:nth-child(1) { left: -6px; top: -6px; }
+.strip__corner:nth-child(2) { right: -6px; top: -6px; }
+.strip__corner:nth-child(3) { left: -6px; bottom: -6px; }
+.strip__corner:nth-child(4) { right: -6px; bottom: -6px; }
+/* the nota bene sits in the outer margin at the end of the heading row; its hairline is drawn from the trefoil back to the heading */
+.nb-wrap { display: flex; align-items: center; gap: 10px; flex: 1 1 0; min-width: 150px; align-self: flex-start; height: 72px; margin-top: -4px; pointer-events: none; }
+.nb__line { flex: 1 1 auto; height: 0; border-top: 1px solid var(--umber); opacity: .75; transform: scaleX(0); transform-origin: 100% 50%; transition: transform 1.2s var(--ease) .6s; }
+.nb-wrap.is-in .nb__line { transform: none; }
+/* without script the drawn marginalia are simply finished */
+html:not(.js) .nb__line, html:not(.js) .nb g[fill], html:not(.js) .marginalia--bloom use, html:not(.js) .bloom__bud, html:not(.js) .bloom__flower { opacity: 1; transform: none; }
+html:not(.js) .nb__ring circle, html:not(.js) .nb__ring path, html:not(.js) .bloom__stem { stroke-dashoffset: 0; }
+.nb { width: 52px; height: 72px; flex: 0 0 auto; overflow: visible; }
+.nb__ring circle, .nb__ring path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1s var(--ease); }
+.nb-wrap.is-in .nb__ring circle, .nb-wrap.is-in .nb__ring path { stroke-dashoffset: 0; }
+.nb g[fill] { opacity: 0; transition: opacity .6s var(--ease) .8s; }
+.nb-wrap.is-in .nb g[fill] { opacity: 1; }
+
+/* ── book: folio 4r ────────────────────────────────────────────── */
+.book { padding-bottom: clamp(72px, 8vw, 110px); }
+.book__frame { padding: clamp(28px, 4vw, 56px) clamp(24px, 4vw, 56px) clamp(24px, 3vw, 40px); border: 1px solid var(--umber-2); background: var(--plate); box-shadow: inset 0 0 0 5px var(--plate), inset 0 0 0 6px var(--gold), 0 24px 50px -30px rgba(42, 31, 20, .35); }
+/* the historiated W: miniature at the left, the W before its right edge, "W|hen" joined at the top of the letter */
+.book__grid { display: grid; grid-template-columns: auto 1fr; gap: 24px 0; align-items: start; }
+.initial--book { width: calc(var(--mini) + 104px); height: calc(var(--mini) * 1.27); }
+.miniature--book { position: absolute; left: 0; top: 0; width: var(--mini); height: calc(var(--mini) * 1.27); box-shadow: 0 0 0 1px var(--gold), 0 14px 30px rgba(42, 31, 20, .28); }
+.miniature--book img { object-position: 56% 62%; }
+.versal--book { position: absolute; left: calc(var(--mini) - 74px); top: 14px; width: calc((var(--mini) + 20px) * 170 / 230); height: calc(var(--mini) + 20px); overflow: visible; filter: drop-shadow(0 6px 10px rgba(42, 31, 20, .3)); }
+.book__copy { padding: 30px 0 0 6px; }
+.book__copy h2 { max-width: 24ch; }
+.book__body { margin-top: 18px; max-width: 46ch; font-size: 19px; line-height: 30px; }
+.book__copy .btn { margin-top: 26px; }
+.colophon { margin-top: clamp(32px, 4vw, 48px); padding-top: 20px; border-top: 1px solid var(--rule-2); text-align: center; font-style: italic; font-size: 16px; line-height: 26px; color: var(--umber-2); }
+.colophon__end { display: block; width: 9px; height: 9px; margin: 14px auto 0; transform: rotate(45deg); background: linear-gradient(135deg, var(--gold-hi), var(--gold) 55%, var(--gold-lo)); box-shadow: 0 0 0 1px var(--umber); }
+
+/* ── footer: the back board, lapis ────────────────────────────── */
+.foot { background: linear-gradient(160deg, #23459a, var(--lapis) 40%, var(--lapis-2)); color: var(--ivory); padding: 56px var(--pad) 104px; text-align: center; box-shadow: inset 0 1px 0 var(--gold), inset 0 2px 0 rgba(255, 255, 255, .18); }
+.brand--foot { justify-content: center; }
+.foot .brand__mark { width: 40px; height: 40px; }
+.foot .mark-under { stroke: var(--lapis-2); }
+.foot__tag { margin-top: 12px; font-style: italic; font-size: 19px; }
+.foot__disc { max-width: 62ch; margin: 22px auto 0; font-size: 16px; line-height: 26px; color: rgba(247, 239, 220, .92); }
+.foot__meta { margin-top: 22px; font-size: 16px; font-variant: small-caps; letter-spacing: .08em; }
+
+/* ── responsive ────────────────────────────────────────────────── */
+@media (min-width: 1200px) {
+  /* the wide leaf has an outer margin: the "living proof" manicule and the blossoming vine live there */
+  .marginalia { display: block; }
+  .marginalia--proof { left: calc(var(--pad) + 66ch + 30px); width: 72px; height: 44px; transform: translateY(-50%); }
+  .marginalia--bloom { left: calc(var(--pad) + 66ch + 150px); width: 120px; height: 250px; transform: translateY(calc(-100% + 14px)); }
+  .js .pm-line path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .9s var(--ease); }
+  .js .pm-fill { opacity: 0; transition: opacity .5s var(--ease) .6s; }
+  .marginalia.is-in .pm-line path { stroke-dashoffset: 0; }
+  .marginalia.is-in .pm-fill { opacity: 1; }
+  .bloom__stem { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.6s var(--ease) .1s; }
+  .marginalia--bloom use, .bloom__bud { opacity: 0; transition: opacity .7s var(--ease) 1.1s; }
+  .bloom__flower { opacity: 0; transform: scale(.4); transform-origin: 62px 24px; transition: opacity .6s var(--ease) 1.5s, transform .9s var(--ease) 1.5s; }
+  .marginalia--bloom.is-in .bloom__stem { stroke-dashoffset: 0; }
+  .marginalia--bloom.is-in use, .marginalia--bloom.is-in .bloom__bud, .marginalia--bloom.is-in .bloom__flower { opacity: 1; transform: none; }
+}
+@media (max-width: 1399px) {
+  :root { --mini: 200px; }
+}
+@media (max-width: 1199px) {
+  /* the miniature stacks above the heading and the versal becomes a drop cap inside it, so "F|eel" stays one word */
+  .hero { min-height: calc(100svh - var(--head-h)); grid-template-rows: 1fr auto; }
+  .hero__panel { grid-row: 1; padding-bottom: clamp(40px, 4.4vw, 64px); }
+  .hero__body { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .hero__title { width: 100%; flex: 0 0 auto; padding: 0; }
+  .versal--hero { display: none; }
+  .versal--book { display: block; } /* the book's W keeps its miniature join down to 900px */
+  .initial--hero { width: var(--mini); height: var(--mini); }
+  .initial--hero .miniature { position: static; }
+  /* a three-line drop cap: all three clauses sit beside the F, "eel" at its arm */
+  .hero__title .dropcap--hero { display: block; width: 2.36em; height: 3.54em; margin: 0 .2em 0 0; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, .35)); }
+  .hero__foot { grid-column: 2; grid-row: 2; align-self: end; padding: 0 64px 48px 60px; }
+  .hero__lede { max-width: 24ch; }
+}
+@media (max-width: 1099px) {
+  .acanthus { position: static; width: 100%; max-width: 620px; margin: 0 0 26px; }
+}
+@media (max-width: 899px) {
+  :root { --mini: 176px; }
+  .menu-btn { display: inline-block; }
+  .nav { position: absolute; left: 0; right: 0; top: var(--head-h); flex-direction: column; align-items: stretch; gap: 0; background: var(--parchment); border-bottom: 1px solid var(--rule-2); box-shadow: 0 1px 0 var(--gold), 0 18px 30px -20px rgba(42, 31, 20, .5); padding: 8px var(--pad) 18px; display: none; }
+  .nav.is-open { display: flex; }
+  .nav a:not(.btn) { padding: 12px 0; border-bottom: 1px solid var(--rule); background: none; }
+  .nav .btn { margin-top: 14px; text-align: center; }
+  .hero { grid-template-columns: 1fr; grid-template-rows: auto auto; min-height: 0; }
+  .hero__panel { grid-column: 1; padding-top: 44px; padding-bottom: 44px; box-shadow: inset 0 -1px 0 rgba(240, 211, 122, .5); }
+  .hero__margin { display: none; }
+  .hero__foot { grid-column: 1; grid-row: 2; padding: clamp(28px, 3vw, 40px) clamp(24px, 4vw, 56px) 0; }
+  .hero__lede { font-size: clamp(20px, 3vw, 22px); line-height: 1.4; max-width: 30ch; }
+  .catchword-row--hero { margin-top: 20px; margin-bottom: 8px; }
+  .sprig { width: 60px; height: 80px; }
+  .nb-wrap { flex: 1 0 100%; height: 56px; margin-top: 4px; }
+  .nb { width: 40px; height: 56px; }
+  .head__row { flex-wrap: wrap; }
+  .manicule { position: static; display: inline-block; vertical-align: middle; width: 38px; height: 24px; margin-left: 8px; }
+  .m-skin { fill: var(--lapis-2); }
+  .m-line { stroke: var(--ivory); stroke-width: 2; }
+  .hero__body { gap: 22px; }
+  .diptych { grid-template-columns: 1fr; gap: 0; }
+  .diptych__gutter { display: none; }
+  .pillar + .pillar { border-top: 1px solid var(--rule-2); }
+  .step { grid-template-columns: 96px 1fr; gap: 16px; padding-left: 28px; }
+  .strip__frame img { aspect-ratio: 16 / 9; object-position: 30% 35%; }
+  /* the book: miniature above, the W a drop cap inside the heading — "W|hen" */
+  .book__grid { grid-template-columns: 1fr; justify-items: start; }
+  .versal--book { display: none; }
+  .initial--book { width: var(--mini); height: calc(var(--mini) * 1.27); }
+  .miniature--book { position: static; }
+  .book__copy { padding: 0; }
+  .book__copy .dropcap--book { display: block; width: 2.3em; height: 2.3em; margin: .06em .22em 0 0; filter: drop-shadow(0 4px 6px rgba(42, 31, 20, .3)); }
+}
+@media (max-width: 699px) {
+  :root { --mini: 168px; }
+  .hero__body { gap: 22px; }
+  /* section headings keep their versal on the first line: a 72px square beside a two-line h2 — "Y|ou don't have to / navigate this alone." */
+  .head__row { gap: 14px; }
+  .head__row h2 { max-width: none; padding-top: 2px; }
+  .versal { width: 72px; height: 72px; }
+  .dropcap { width: 64px; height: 64px; margin: 2px 10px 0 0; }
+  .step { grid-template-columns: 1fr; gap: 6px; padding-left: 26px; }
+  .step__num { font-size: 30px; }
+  .miniature--eft { width: 112px; height: 112px; margin: 4px 0 14px 16px; }
+  .strip__frame img { aspect-ratio: 3 / 2; object-position: 22% 35%; }
+  .closing { font-size: 19px; line-height: 30px; }
+  .catchword { font-size: 28px; }
+  .colophon { text-align: left; }
+  .colophon__end { margin-left: 0; }
+  .foot { text-align: left; padding-bottom: 112px; }
+  .brand--foot { justify-content: flex-start; }
+  .foot__disc { margin-left: 0; }
+}
+@media (max-width: 430px) {
+  :root { --mini: 150px; }
+  .hero__title { font-size: 25px; }
+  .manicule { width: 34px; height: 21px; margin-left: 6px; }
+  .book__frame { padding-left: 18px; padding-right: 18px; }
+  .brand__name { font-size: 17px; }
+  .rubric { font-size: 28px; }
+  .folio-num { right: var(--pad); }
+}
+
+/* ── reduced motion: everything gilded, everything drawn ───────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .hero__line, .js .catchword, .m-fill, .pm-fill, .sprig use, .sprig g, .nb g[fill], .nb__line, .marginalia--bloom use, .bloom__bud, .bloom__flower { opacity: 1 !important; transform: none !important; }
+  .m-line, .pm-line path, .page-frame rect, .sprig__stem, .bloom__stem, .catchword__flourish path, .nb__ring circle, .nb__ring path { stroke-dashoffset: 0 !important; }
+  .js .versal.reveal, .js .dropcap.reveal, .js .acanthus { -webkit-mask-image: none !important; mask-image: none !important; }
+  .linefiller { width: var(--fill, 0px) !important; }
+  .sheen { display: none; }
+}

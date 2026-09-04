@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en" data-style="meander">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three Hands Healing — Meander</title>
+  <meta name="description" content="Three Hands Healing — EFT, energy healing, bodywork, Qi Gong and Family Constellations with Maria. Online or in person in Texas.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f7f5ef">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&family=Spectral+SC:ital,wght@0,400;0,500;1,400&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- shared symbol: reed and cattail cluster, planted along the banks -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="reeds" viewBox="0 0 60 80">
+      <g class="rd-leaf"><path d="M16 80C5 68 2 54 7 40c7 9 10 24 9 40z"/><path d="M44 80c10-12 14-26 9-40-7 9-10 24-9 40z"/></g>
+      <g class="rd-stem"><path d="M10 80C12 60 7 42 13 20"/><path d="M23 80C21 56 27 40 25 14"/><path d="M37 80C39 60 34 44 40 26"/><path d="M50 80C48 62 54 48 52 32"/></g>
+      <g class="rd-head"><rect x="22" y="6" width="6" height="17" rx="3"/><rect x="49.5" y="26" width="5" height="13" rx="2.5"/></g>
+    </symbol>
+  </svg>
+
+  <!-- ornament: "healing is a journey" — the river: one document-height SVG path computed from waypoints in every section and drawn by scroll; a sienna floodplain shows the whole route, the hydrographic-blue water arrives as you go, a paler inner current rides it, two tributaries join at a confluence, and it ends in the still pool -->
+  <svg class="river" id="river" aria-hidden="true" focusable="false">
+    <path class="river__bank"/>
+    <path class="river__trib" data-trib-path="a" pathLength="1"/>
+    <path class="river__trib" data-trib-path="b" pathLength="1"/>
+    <path class="river__water"/>
+    <path class="river__current"/>
+    <circle class="river__end" r="5"/>
+  </svg>
+
+  <header class="site-head">
+    <a class="brand" href="#top" aria-label="Three Hands Healing — back to top">
+      <!-- ornament: "three hands" — brand mark as a compass rose: the three hand-leaves are its needle, cardinal ticks cross the ring -->
+      <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
+        <circle class="mk-ring" cx="24" cy="24" r="21"/>
+        <path class="mk-ticks" d="M24 0v6M24 42v6M0 24h6M42 24h6M7 7l4.2 4.2M36.8 36.8l4.2 4.2M41 7l-4.2 4.2M11.2 36.8L7 41"/>
+        <g class="mk-leaves"><path d="M24 6c8 0 14 5 14 12 0 8-7 10-14 24C17 28 10 26 10 18 10 11 16 6 24 6Z"/><path d="M11 31c4-7 11-7 15-4 4 4 2 10-9 13-6 1-10-4-6-9Z"/><path d="M37 31c-4-7-11-7-15-4-4 4-2 10 9 13 6 1 10-4 6-9Z"/></g>
+      </svg>
+      <span class="brand__name">Three Hands Healing</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-menu><span class="menu-btn__bars" aria-hidden="true"></span>Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#practices">Practices</a>
+      <a href="#session">Sessions</a>
+      <a href="#about">About</a>
+      <a class="btn btn--sm" href="#book">Book a session</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <!-- ornament: "wherever you are right now is the perfect place to start" — the survey sheet's neatline corners: this page is a map, and you are on it -->
+      <i class="corner corner--tl" aria-hidden="true"></i><i class="corner corner--tr" aria-hidden="true"></i><i class="corner corner--bl" aria-hidden="true"></i><i class="corner corner--br" aria-hidden="true"></i>
+
+      <!-- ornament: "grow through our deepest challenges" — chart-paper ground: sienna contour lines from three layered repeating-radial-gradients, the land rising around the river, masked to fade toward the copy -->
+      <span class="contour contour--a" aria-hidden="true"></span>
+      <span class="contour contour--b" aria-hidden="true"></span>
+      <span class="contour contour--c" aria-hidden="true"></span>
+
+      <!-- ornament: "three hands" — the sheet's compass rose, the three hand-leaves at its heart -->
+      <svg class="rose" viewBox="0 0 200 200" aria-hidden="true">
+        <circle cx="100" cy="100" r="96" class="rose__ring"/>
+        <circle cx="100" cy="100" r="86" class="rose__ticks"/>
+        <circle cx="100" cy="100" r="66" class="rose__inner"/>
+        <path class="rose__diag" d="M42 42l46 52 70 64-52-46zM158 42l-46 52-70 64 52-46z"/>
+        <path class="rose__star" d="M100 8l6 86-6 98-6-98zM8 100l86-6 98 6-98 6z"/>
+        <path class="rose__starfill" d="M100 8l6 86-6 6zM192 100l-86 6-6-6zM100 192l-6-86 6-6zM8 100l86-6 6 6z"/>
+        <g class="rose__leaves" transform="translate(100 100) scale(1.35) translate(-24 -24)"><path d="M24 6c8 0 14 5 14 12 0 8-7 10-14 24C17 28 10 26 10 18 10 11 16 6 24 6Z"/><path d="M11 31c4-7 11-7 15-4 4 4 2 10-9 13-6 1-10-4-6-9Z"/><path d="M37 31c-4-7-11-7-15-4-4 4-2 10 9 13 6 1 10-4 6-9Z"/></g>
+        <text class="rose__n" x="100" y="30" text-anchor="middle">N</text>
+      </svg>
+
+      <!-- ornament: "wherever you are right now is the perfect place to start" — the lede set along the river's upstream reach on an SVG textPath (river names are italic on a map), arriving word by word as the water does; a plain copy follows for screen readers -->
+      <svg class="reach" aria-hidden="true" focusable="false">
+        <defs><path id="reach-path" d="M0 0"/></defs>
+        <text class="reach__text" dy="-13"><textPath href="#reach-path" startOffset="13%"><tspan class="w" style="--i:0">Wherever</tspan> <tspan class="w" style="--i:1">you</tspan> <tspan class="w" style="--i:2">are</tspan> <tspan class="w" style="--i:3">right</tspan> <tspan class="w" style="--i:4">now</tspan> <tspan class="w" style="--i:5">is</tspan> <tspan class="w" style="--i:6">the</tspan> <tspan class="w" style="--i:7">perfect</tspan> <tspan class="w" style="--i:8">place</tspan> <tspan class="w" style="--i:9">to</tspan> <tspan class="w" style="--i:10">start.</tspan></textPath></text>
+      </svg>
+
+      <!-- ornament: "wherever you are right now" — the 'you are here' pin where the river enters the sheet -->
+      <span class="pin" aria-hidden="true"><i class="pin__drop"></i><span class="pin__label">you are here</span></span>
+
+      <!-- river waypoints (zero-size, read by script.js) -->
+      <i class="rw rw-entry" data-rw="entry"></i>
+      <i class="rw rw-r0" data-rw></i>
+      <i class="rw rw-r1" data-rw></i>
+      <i class="rw rw-r2" data-rw></i>
+      <i class="rw rw-r3" data-rw></i>
+      <i class="rw rw-r4" data-rw="reach-end"></i>
+      <i class="rw rw-ox" data-rw="oxbow"></i>
+      <i class="rw rw-exit" data-rw></i>
+
+      <div class="hero__copy">
+        <p class="eyebrow"><span class="eyebrow__tick" aria-hidden="true"></span>Three Hands Healing · Texas</p>
+        <h1 id="hero-title" class="hero__title"><span class="l" style="--i:0">Feel good in your body,</span> <span class="l" style="--i:1">at peace in your mind,</span> <span class="l" style="--i:2">aligned in your life.</span></h1>
+        <p class="hero__lede">Wherever you are right now is the perfect place to start.</p>
+        <div class="hero__cta">
+          <!-- ornament: "empathic and intuitive gifts" / "three hands" — a copper dragonfly that alights on the Book CTA on hover or focus -->
+          <a class="btn" href="#book">Book a session<span class="dfly" aria-hidden="true"><i class="dfly__w dfly__w--1"></i><i class="dfly__w dfly__w--2"></i><i class="dfly__w dfly__w--3"></i><i class="dfly__w dfly__w--4"></i><i class="dfly__body"></i></span></a>
+          <a class="link-wave" href="#practices">How we work together</a>
+        </div>
+      </div>
+
+      <!-- ornament: "meet you right where you are" — the oxbow: the river loops around Maria at the door; a stippled sandbar rings the island -->
+      <figure class="isle" data-isle>
+        <span class="isle__sand" aria-hidden="true"></span>
+        <img src="../../assets/image5.jpeg" alt="Maria at a red arched door in a pale limestone wall, one hand on the door, pool-blue water behind her" width="1210" height="814" fetchpriority="high" decoding="async">
+      </figure>
+      <span class="maplabel maplabel--oxbow" aria-hidden="true">Oxbow</span>
+    </section>
+
+    <section class="intro" aria-label="Welcome">
+      <i class="rw rw-i1" data-rw></i>
+      <i class="rw rw-i2" data-rw></i>
+      <div class="wrap">
+        <p class="intro__text col-r"><em class="intro__salute">Welcome—I’m Maria.</em> I am here to help you feel good in your body, at peace in your mind, and aligned in your life, relationships, and career. My mission is simple: to share the powerful, transformative tools that changed my own life so you can move beyond pain, step past invisible blocks, and fully reclaim your life’s vitality. You don’t have to navigate this alone—wherever you are right now is the perfect place to start.</p>
+      </div>
+    </section>
+
+    <section class="sec alone" id="alone" aria-labelledby="alone-title">
+      <i class="rw rw-a1" data-rw></i>
+      <i class="rw rw-a2" data-rw></i>
+      <i class="rw rw-a3" data-rw></i>
+      <i class="rw rw-a4" data-rw></i>
+      <div class="wrap">
+        <div class="col-r">
+          <header class="sec-head">
+            <p class="eyebrow"><span class="eyebrow__tick" aria-hidden="true"></span>Before we begin</p>
+            <h2 id="alone-title">You don’t have to navigate this alone.</h2>
+          </header>
+          <div class="prose">
+            <p>It is so hard to blossom into who you are meant to be when you are navigating illness, destructive behavioral patterns, or invisible blocks. I have been there—and I am living proof that we can grow through our deepest challenges to find ourselves again in greater joy, strength, and purpose.</p>
+            <p>Healing is a journey, and it is my absolute honor to walk alongside you, however that looks for you.</p>
+          </div>
+        </div>
+        <!-- ornament: "walk alongside you" — two sets of footprints down the bank, one half a step ahead of the other, appearing pair by pair on scroll -->
+        <div class="trail-strip">
+          <svg class="trail" data-reveal viewBox="0 0 120 640" aria-hidden="true" focusable="false">
+            <defs><symbol id="foot" viewBox="-8 -10 16 20"><ellipse cx="0" cy="-2.4" rx="3.2" ry="5"/><circle cx="-2.2" cy="5" r="1.35"/><circle cx="0.2" cy="6" r="1.3"/><circle cx="2.4" cy="5.1" r="1.1"/></symbol></defs>
+            <g class="trail__a">
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:0" transform="translate(30 30) rotate(8)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:1" transform="translate(52 78) rotate(-8)"/>
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:2" transform="translate(30 130) rotate(8)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:3" transform="translate(52 178) rotate(-8)"/>
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:4" transform="translate(30 230) rotate(8)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:5" transform="translate(52 278) rotate(-8)"/>
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:6" transform="translate(30 330) rotate(8)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:7" transform="translate(52 378) rotate(-8)"/>
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:8" transform="translate(30 430) rotate(8)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:9" transform="translate(52 478) rotate(-8)"/>
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:10" transform="translate(30 530) rotate(8)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:11" transform="translate(52 578) rotate(-8)"/>
+            </g>
+            <g class="trail__b">
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:1" transform="translate(84 54) rotate(10)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:2" transform="translate(104 102) rotate(-6)"/>
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:3" transform="translate(84 154) rotate(10)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:4" transform="translate(104 202) rotate(-6)"/>
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:5" transform="translate(84 254) rotate(10)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:6" transform="translate(104 302) rotate(-6)"/>
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:7" transform="translate(84 354) rotate(10)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:8" transform="translate(104 402) rotate(-6)"/>
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:9" transform="translate(84 454) rotate(10)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:10" transform="translate(104 502) rotate(-6)"/>
+              <use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:11" transform="translate(84 554) rotate(10)"/><use href="#foot" class="fp" width="24" height="30" x="-12" y="-15" style="--i:12" transform="translate(104 602) rotate(-6)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec practices" id="practices" aria-labelledby="practices-title">
+      <div class="wrap">
+        <div class="block">
+          <i class="rw rw-p1" data-rw></i>
+          <i class="rw rw-p2" data-rw></i>
+          <i class="rw rw-p3" data-rw></i>
+          <i class="rw rw-p3b" data-rw></i>
+          <header class="sec-head col-l">
+            <p class="eyebrow"><span class="eyebrow__tick" aria-hidden="true"></span>Two pillars · Six practices</p>
+            <h2 id="practices-title">How we work together.</h2>
+          </header>
+          <div class="prose col-l">
+            <p>True, lasting healing begins with absolute safety. First and foremost, I meet you right where you are with nonjudgmental presence, compassion, and deep listening. Together, we look at what is holding you back today—and where you want to expand in the future. From there, we weave together a tailored combination of root-cause modalities.</p>
+          </div>
+        </div>
+
+        <!-- ornament: "How we work together" / "weave together a tailored combination" — the two pillars are two tributaries that join the river at a drawn confluence, two streams becoming one; the six modalities are cattails and reeds planted along both banks -->
+        <div class="pillars" data-reveal>
+          <i class="rw rw-p4" data-rw></i>
+          <article class="pillar pillar--body" data-trib="a">
+            <p class="pillar__kicker">Pillar one</p>
+            <h3 class="pillar__title">For the body &amp; physical energy</h3>
+            <p class="pillar__lede">Support for people living with pain, tension, or illness, through targeted bodywork, Candace Silvers Energy Healing, and supportive Qi Gong practices.</p>
+            <dl class="mods">
+              <div class="mod"><dt>Bodywork</dt><dd>Attentive, targeted work with the body to ease tension and bring back ease of movement.</dd></div>
+              <div class="mod"><dt>Candace Silvers Energy Healing</dt><dd>A quiet, hands-on energy practice for rest, grounding, and integration. Nothing to perform, nothing to prove.</dd></div>
+              <div class="mod"><dt>Qi Gong</dt><dd>Slow, supportive movement and breath practices you can take home with you.</dd></div>
+            </dl>
+            <!-- ornament: "root-cause modalities" — reeds rooted on the near bank -->
+            <svg class="reeds reeds--a" aria-hidden="true"><use href="#reeds"/></svg>
+          </article>
+          <article class="pillar pillar--mind" data-trib="b">
+            <p class="pillar__kicker">Pillar two</p>
+            <h3 class="pillar__title">For the mind, behavior &amp; emotions</h3>
+            <p class="pillar__lede">Because the mind touches every area of our health, relationships, and purpose, we work with Emotional Freedom Technique (EFT/Tapping), Systemic Family Constellations, and intuitive emotional release exercises.</p>
+            <dl class="mods">
+              <div class="mod mod--eft"><dt>EFT / Tapping</dt><dd class="dd--photo"><span>Gentle fingertip tapping on acupressure points while giving voice to what you are feeling. Simple to learn, surprisingly powerful.</span><img class="mod__photo" src="../../assets/image6.jpeg" alt="Maria in a dry meadow demonstrating EFT tapping on the side of her hand" width="654" height="968" loading="lazy" decoding="async"></dd></div>
+              <div class="mod"><dt>Systemic Family Constellations</dt><dd>A way of seeing the hidden loyalties and patterns we inherit, so what has been carried can finally be set down.</dd></div>
+              <div class="mod mod--release"><dt>Intuitive emotional release</dt><dd>Guided exercises for letting what has been held move through and out, at your own pace.</dd></div>
+            </dl>
+            <!-- ornament: "let what has been held move through and out" — a dandelion clock on the bank; on reveal a third of its seeds detach and drift downstream, fading -->
+            <span class="clock" data-reveal aria-hidden="true"><i class="clock__stem"></i><i class="clock__head"></i><i class="seed" style="--a:0"></i><i class="seed" style="--a:1"></i><i class="seed drift" style="--a:2;--d:0"></i><i class="seed" style="--a:3"></i><i class="seed drift" style="--a:4;--d:1"></i><i class="seed" style="--a:5"></i><i class="seed" style="--a:6"></i><i class="seed drift" style="--a:7;--d:2"></i><i class="seed" style="--a:8"></i><i class="seed drift" style="--a:9;--d:3"></i><i class="seed" style="--a:10"></i><i class="seed" style="--a:11"></i><i class="seed drift" style="--a:12;--d:4"></i><i class="seed" style="--a:13"></i><i class="seed" style="--a:14"></i><i class="seed drift" style="--a:15;--d:5"></i><i class="seed" style="--a:16"></i><i class="seed drift" style="--a:17;--d:6"></i><i class="seed" style="--a:18"></i><i class="seed" style="--a:19"></i><i class="seed drift" style="--a:20;--d:7"></i><i class="seed" style="--a:21"></i><i class="seed drift" style="--a:22;--d:8"></i><i class="seed" style="--a:23"></i></span>
+            <svg class="reeds reeds--b" aria-hidden="true"><use href="#reeds"/></svg>
+          </article>
+          <i class="rw rw-conf" data-rw="conf"></i>
+          <span class="maplabel maplabel--conf" aria-hidden="true">Confluence</span>
+        </div>
+
+        <div class="block block--closing">
+          <i class="rw rw-p5" data-rw></i>
+          <p class="closing col-r">Guided by empathic and intuitive gifts, I offer a grounded partnership to help you clear the root causes of suffering and step into lasting wholeness.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec session" id="session" aria-labelledby="session-title">
+      <div class="wrap">
+        <div class="block">
+          <i class="rw rw-s1" data-rw></i>
+          <i class="rw rw-s2" data-rw></i>
+          <header class="sec-head col-r">
+            <p class="eyebrow"><span class="eyebrow__tick" aria-hidden="true"></span>Sessions</p>
+            <h2 id="session-title">What a session feels like.</h2>
+            <p class="sec-head__note">Sessions are offered online and in person.</p>
+          </header>
+        </div>
+        <!-- ornament: "Arrive / Experience / Integrate" — three numbered stepping stones where the river is crossed, each sending out two one-shot ripple rings as it reveals -->
+        <div class="crossing">
+          <span class="maplabel maplabel--cross" aria-hidden="true">The Crossing</span>
+        <ol class="steps" role="list">
+          <li class="step" data-reveal style="--i:0"><span class="stone" aria-hidden="true"><i class="rw" data-rw="stone" data-keep></i><b class="stone__n">1</b></span><h3>Arrive</h3><p>Talk about what is happening and what support you are looking for.</p></li>
+          <li class="step" data-reveal style="--i:1"><i class="rw rw-sx rw-sx1" data-rw></i><span class="stone" aria-hidden="true"><i class="rw" data-rw="stone" data-keep></i><b class="stone__n">2</b></span><h3>Experience</h3><p>Explore a practice together at a comfortable pace.</p></li>
+          <li class="step" data-reveal style="--i:2"><i class="rw rw-sx rw-sx2" data-rw></i><span class="stone" aria-hidden="true"><i class="rw" data-rw="stone" data-keep></i><b class="stone__n">3</b></span><h3>Integrate</h3><p>Talk about what came up and what might be useful afterward.</p></li>
+        </ol>
+          <i class="rw rw-s3" data-rw></i>
+          <i class="rw rw-s4" data-rw></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec about" id="about" aria-labelledby="about-title">
+      <i class="rw rw-ab1" data-rw></i>
+      <div class="wrap about__grid">
+        <i class="rw rw-ab2" data-rw></i>
+        <div class="about__copy">
+          <p class="eyebrow"><span class="eyebrow__tick" aria-hidden="true"></span>Meet Maria</p>
+          <h2 id="about-title">Every tool I share, I have needed myself.</h2>
+          <div class="prose">
+            <p>Every tool and modality I share in my practice comes from a place of deep personal experience. I know what it feels like to seek answers, which is why I’ve devoted my life to mastering the practices that continuously restore health, peace, and joy in my own body, relationships, and career.</p>
+            <p>My practice is a space of true partnership. Guided by empathic intuition and powerful energy and behavioral modalities, I am here to hold a safe container where your pain is met with understanding, and your potential is given room to bloom.</p>
+          </div>
+        </div>
+        <figure class="bank">
+          <img src="../../assets/image9.jpeg" alt="Maria in an indigo floral kimono standing beside green shrubs, looking calmly at the camera" width="1218" height="808" loading="lazy" decoding="async">
+          <!-- ornament: "your potential is given room to bloom" / "Texas" — a bluebonnet cluster at the foot of the far bank -->
+          <svg class="bluebonnet" data-reveal viewBox="0 0 96 110" aria-hidden="true">
+            <g class="bb-stem"><path d="M24 108C26 86 22 70 30 50M48 108C47 84 46 66 48 40M72 108C70 88 72 70 64 54"/></g>
+            <g class="bb-leaf"><path d="M30 92c-9-2-15-9-16-18 8 2 14 8 16 18zM52 82c9-3 13-11 13-20-8 3-13 10-13 20zM68 96c-8-1-13-6-14-14 7 1 12 6 14 14z"/></g>
+            <g class="bb-bloom">
+              <circle cx="27" cy="48" r="4.4"/><circle cx="33" cy="42" r="4"/><circle cx="26" cy="38" r="3.8"/><circle cx="32" cy="32" r="3.4"/><circle cx="27" cy="27" r="3"/>
+              <circle cx="46" cy="40" r="4.6"/><circle cx="53" cy="34" r="4.2"/><circle cx="45" cy="29" r="3.9"/><circle cx="52" cy="23" r="3.5"/><circle cx="47" cy="17" r="3"/><circle cx="51" cy="11" r="2.5"/>
+              <circle cx="69" cy="54" r="4.2"/><circle cx="63" cy="48" r="3.9"/><circle cx="70" cy="43" r="3.6"/><circle cx="65" cy="37" r="3.2"/><circle cx="69" cy="32" r="2.8"/>
+            </g>
+            <g class="bb-mid"><circle cx="30" cy="45" r="1.6"/><circle cx="29" cy="35" r="1.4"/><circle cx="49" cy="37" r="1.7"/><circle cx="49" cy="26" r="1.5"/><circle cx="66" cy="51" r="1.6"/><circle cx="67" cy="40" r="1.4"/></g>
+            <g class="bb-tip"><circle cx="27" cy="22" r="2.3"/><circle cx="49" cy="6.5" r="2.2"/><circle cx="68" cy="27" r="2.1"/></g>
+          </svg>
+          <svg class="reeds reeds--c" aria-hidden="true"><use href="#reeds"/></svg>
+        </figure>
+      </div>
+    </section>
+
+    <section class="sec book" id="book" aria-labelledby="book-title">
+      <div class="wrap">
+        <div class="book__row">
+          <figure class="farbank">
+            <i class="rw rw-fb" data-rw></i>
+            <img src="../../assets/image2.jpeg" alt="Maria under a stone arch, reaching one open hand toward you" width="642" height="970" loading="lazy" decoding="async">
+          </figure>
+          <!-- ornament: "when you are ready, the next step is simple" / "begin where you are" — the river ends in a still pool ringed with depth contours; the Book CTA sits in its centre -->
+          <div class="lake">
+            <i class="rw rw-pool" data-rw="pool" data-keep></i>
+            <span class="maplabel maplabel--pool" aria-hidden="true">Still pool</span>
+            <p class="eyebrow eyebrow--center"><span class="eyebrow__tick" aria-hidden="true"></span>Begin where you are</p>
+            <h2 id="book-title">When you are ready, the next step is simple.</h2>
+            <p class="book__body">Choose a practice, find a time, and we will take it from there. No account needed.</p>
+            <a class="btn btn--lg" href="#book">Book a session<span class="dfly" aria-hidden="true"><i class="dfly__w dfly__w--1"></i><i class="dfly__w dfly__w--2"></i><i class="dfly__w dfly__w--3"></i><i class="dfly__w dfly__w--4"></i><i class="dfly__body"></i></span></a>
+            <p class="book__fine">Online or in person · Sessions in Texas</p>
+            <p class="book__fine">Booking and contact details will be added at launch</p>
+          </div>
+          <!-- ornament: "online or in person · Texas" — the map legend: pin, river, stone, scale bar, and a Texas outline with the river marked -->
+          <aside class="legend" aria-label="Map legend">
+            <p class="legend__title">Legend</p>
+            <ul class="legend__list" role="list">
+              <li><svg viewBox="0 0 44 26" aria-hidden="true"><path class="lg-pin" d="M22 3c4.6 0 8 3.4 8 7.6 0 5.4-8 12.4-8 12.4s-8-7-8-12.4C14 6.4 17.4 3 22 3z"/><circle class="lg-pin-dot" cx="22" cy="10.8" r="2.8"/></svg><span>wherever you are</span></li>
+              <li><svg viewBox="0 0 44 26" aria-hidden="true"><path class="lg-river" d="M3 15c6-9 11-9 17-2s11 7 17 0l4-4"/></svg><span>healing is a journey</span></li>
+              <li><svg viewBox="0 0 44 26" aria-hidden="true"><ellipse class="lg-stone" cx="22" cy="13" rx="13" ry="8.5"/></svg><span>Arrive · Experience · Integrate</span></li>
+              <li><svg viewBox="0 0 44 26" aria-hidden="true"><g class="lg-scale"><rect x="2" y="10" width="10" height="6"/><rect x="12" y="10" width="10" height="6" class="lg-scale--open"/><rect x="22" y="10" width="10" height="6"/><rect x="32" y="10" width="10" height="6" class="lg-scale--open"/></g></svg><span>at your own pace</span></li>
+              <li><svg class="lg-tx" viewBox="0 0 100 100" aria-hidden="true"><path class="lg-tx__land" d="M28 4h20v29c6-2 12 2 18 0s12 3 18 0l4 3v14l-2 10-4 8c-6 4-12 10-18 16s-8 8-12 13c-4-5-8-11-12-17-4-4-8-8-10-10-3 4-7 8-11 5-5-7-9-15-15-21v-8h24z"/><path class="lg-tx__river" d="M50 54c3 4 8 5 10 10s6 8 10 9"/></svg><span>online or in person · Texas</span></li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <a class="brand brand--foot" href="#top">
+      <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true">
+        <circle class="mk-ring" cx="24" cy="24" r="21"/>
+        <path class="mk-ticks" d="M24 0v6M24 42v6M0 24h6M42 24h6M7 7l4.2 4.2M36.8 36.8l4.2 4.2M41 7l-4.2 4.2M11.2 36.8L7 41"/>
+        <g class="mk-leaves"><path d="M24 6c8 0 14 5 14 12 0 8-7 10-14 24C17 28 10 26 10 18 10 11 16 6 24 6Z"/><path d="M11 31c4-7 11-7 15-4 4 4 2 10-9 13-6 1-10-4-6-9Z"/><path d="M37 31c-4-7-11-7-15-4-4 4-2 10 9 13 6 1 10-4 6-9Z"/></g>
+      </svg>
+      <span class="brand__name">Three Hands Healing</span>
+    </a>
+    <p class="foot__tag">Support for a happier, healthier life.</p>
+    <p class="foot__disc">Three Hands Healing offers complementary wellness support and is not a substitute for medical, mental-health, or emergency care. If you need urgent help, contact local emergency services or a qualified health professional.</p>
+    <p class="foot__meta">© 2026 Three Hands Healing</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script src="../_portfolio.js" defer></script>
+</body>
+</html>

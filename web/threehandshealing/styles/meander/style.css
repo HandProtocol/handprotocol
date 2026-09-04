@@ -1,0 +1,408 @@
+/* Three Hands Healing — Meander
+   A surveyor's map of a slow Hill Country river: chart paper, sienna contour ink,
+   one hydrographic blue for the water, copper only for the dragonfly. */
+:root{
+  --paper:#f7f5ef;--plate:#fcfbf7;--ink:#2a2a26;--ink-2:#4b4b45;
+  --sienna:#b57b3c;--sienna-d:#8a5a2a;--blue:#2b6fae;--blue-d:#235c90;--blue-l:#9fc3e6;--pool:#e3ecf6;--copper:#c8663b;
+  --display:'Sorts Mill Goudy',Georgia,'Times New Roman',serif;
+  --label:'Spectral SC','Sorts Mill Goudy',Georgia,serif;
+  --body:'Barlow','Helvetica Neue',Arial,sans-serif;
+  --head:68px;--wrap:1180px;--pad:24px;--gutter:24px;--gap:128px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;position:relative;min-height:100vh;color:var(--ink);
+  font:400 1.0625rem/1.6 var(--body);overflow-wrap:break-word;
+  background-color:var(--paper);
+  background-image:linear-gradient(rgba(181,123,60,.085) 1px,transparent 1px),linear-gradient(90deg,rgba(181,123,60,.085) 1px,transparent 1px);
+  background-size:96px 96px;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;color:var(--ink);text-wrap:balance}
+p{margin:0}
+main{position:relative;z-index:1;overflow-x:clip}
+.skip{position:absolute;left:12px;top:-64px;z-index:100;background:var(--ink);color:var(--paper);padding:10px 16px;font:500 1rem var(--label);letter-spacing:.06em;text-decoration:none}
+.skip:focus{top:12px}
+:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.rw{position:absolute;width:0;height:0;pointer-events:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
+.col-r{margin-left:42%}
+.col-l{max-width:56%}
+.block{position:relative}
+.prose{max-width:38em}
+.prose p+p{margin-top:1em}
+.eyebrow{display:flex;align-items:center;gap:12px;font:500 1rem/1.4 var(--label);letter-spacing:.1em;color:var(--ink)}
+.eyebrow__tick{width:26px;height:2px;background:var(--blue);border-radius:1px;flex:none}
+.eyebrow--center{justify-content:center}
+.sec{position:relative;padding:96px 0}
+.sec-head{margin-bottom:28px}
+.sec-head h2{margin-top:14px;font-size:clamp(1.9rem,3vw,2.75rem);line-height:1.1}
+.sec-head__note{margin-top:14px;font:italic 1.15rem var(--display);color:var(--ink-2)}
+.maplabel{position:absolute;font:italic 1.15rem var(--display);letter-spacing:.05em;color:var(--ink);pointer-events:none;white-space:nowrap}
+.maplabel::before{content:'';display:inline-block;width:18px;height:1px;background:var(--ink);vertical-align:middle;margin-right:8px;opacity:.6}
+
+/* ---------- the river ---------- */
+.river{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.river__bank{stroke:rgba(181,123,60,.14);stroke-width:26}
+.river__water{stroke:var(--blue);stroke-width:8;transition:stroke-dashoffset .8s var(--ease)}
+.river__current{stroke:var(--blue-l);stroke-width:2;transition:stroke-dashoffset .8s var(--ease)}
+.river.is-arriving .river__water,.river.is-arriving .river__current{transition:none}
+.river__trib{stroke:var(--blue);stroke-width:5;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s var(--ease) .2s}
+.river.tribs-in .river__trib{stroke-dashoffset:0}
+.river__end{fill:var(--blue);stroke:var(--paper);stroke-width:2}
+
+/* ---------- header ---------- */
+.site-head{position:sticky;top:0;z-index:20;height:var(--head);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 var(--pad);background:rgba(247,245,239,.9);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid rgba(181,123,60,.55);box-shadow:0 3px 0 -2px rgba(181,123,60,.28)}
+.brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font:400 1.3rem var(--display)}
+.brand__mark{width:38px;height:38px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.mk-ring{stroke:var(--sienna);stroke-width:1.2}
+.mk-ticks{stroke:var(--sienna);stroke-width:1.3}
+.mk-leaves{stroke:var(--blue)}
+.nav{display:flex;align-items:center;gap:30px}
+.nav a{font:500 1.05rem var(--label);letter-spacing:.06em;text-decoration:none;color:var(--ink)}
+.nav a:not(.btn):hover{color:var(--blue-d);text-decoration:underline wavy var(--blue);text-underline-offset:6px;text-decoration-thickness:1px}
+.menu-btn{display:none}
+
+/* ---------- buttons ---------- */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:13px 28px;border-radius:999px;background:var(--blue);color:var(--paper);font:500 1.05rem var(--label);letter-spacing:.08em;text-decoration:none;box-shadow:0 0 0 3px var(--paper),0 0 0 4px var(--blue);transition:background .25s,box-shadow .25s,transform .25s}
+.btn:hover{background:var(--blue-d);box-shadow:0 0 0 3px var(--paper),0 0 0 4px var(--blue-d);transform:translateY(-1px)}
+.btn--sm{padding:9px 20px;font-size:1rem}
+.btn--lg{padding:16px 36px;font-size:1.15rem}
+.link-wave{font:500 1.05rem var(--label);letter-spacing:.06em;color:var(--ink);text-decoration:underline wavy var(--blue);text-underline-offset:7px;text-decoration-thickness:1px}
+.link-wave:hover{color:var(--blue-d)}
+
+/* ornament: dragonfly — thin copper body, four translucent gradient wings; alights on hover/focus */
+.dfly{position:absolute;right:16px;top:-30px;width:46px;height:34px;opacity:0;transform:translate(16px,-20px) rotate(-28deg);transition:opacity .35s ease,transform .55s var(--ease);pointer-events:none}
+.btn:hover .dfly,.btn:focus-visible .dfly{opacity:1;transform:none}
+.dfly__body{position:absolute;left:50%;top:6px;width:2px;height:26px;margin-left:-1px;background:var(--copper);border-radius:2px}
+.dfly__body::before{content:'';position:absolute;top:-4px;left:-2px;width:6px;height:6px;border-radius:50%;background:var(--copper)}
+.dfly__w{position:absolute;top:9px;width:19px;height:7px;border-radius:50%;border:1px solid rgba(200,102,59,.75);background:linear-gradient(90deg,rgba(200,102,59,.38),rgba(200,102,59,.06))}
+.dfly__w--1{left:3px;transform:rotate(-14deg)}
+.dfly__w--2{right:3px;transform:rotate(14deg) scaleX(-1)}
+.dfly__w--3{left:5px;top:16px;transform:rotate(-32deg)}
+.dfly__w--4{right:5px;top:16px;transform:rotate(32deg) scaleX(-1)}
+.btn:hover .dfly__w,.btn:focus-visible .dfly__w{animation:flutter .3s ease-in-out .3s 4}
+@keyframes flutter{50%{scale:.5 1}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:calc(100vh - var(--head));overflow-x:clip}
+.corner{position:absolute;width:22px;height:22px;border:0 solid rgba(181,123,60,.75);pointer-events:none}
+.corner--tl{left:16px;top:16px;border-width:1px 0 0 1px}
+.corner--tr{right:16px;top:16px;border-width:1px 1px 0 0}
+.corner--bl{left:16px;bottom:16px;border-width:0 0 1px 1px}
+.corner--br{right:16px;bottom:16px;border-width:0 1px 1px 0}
+.contour{position:absolute;inset:0;pointer-events:none;transform-origin:72% 44%}
+.contour--a{background:repeating-radial-gradient(ellipse 62% 48% at 72% 44%,transparent 0 24px,rgba(181,123,60,.28) 24px 25.2px);-webkit-mask:radial-gradient(ellipse 50% 62% at 20% 50%,transparent 0 34%,#000 82%);mask:radial-gradient(ellipse 50% 62% at 20% 50%,transparent 0 34%,#000 82%)}
+.contour--b{background:repeating-radial-gradient(circle at 101% 104%,transparent 0 38px,rgba(181,123,60,.2) 38px 39.2px);-webkit-mask:linear-gradient(90deg,transparent 34%,#000 78%);mask:linear-gradient(90deg,transparent 34%,#000 78%)}
+.contour--c{background:repeating-radial-gradient(circle at 4% 110%,transparent 0 30px,rgba(181,123,60,.17) 30px 31.2px);-webkit-mask:linear-gradient(0deg,#000 0,transparent 40%);mask:linear-gradient(0deg,#000 0,transparent 40%)}
+.rose{position:absolute;right:3%;bottom:4%;width:150px;height:150px;pointer-events:none;fill:none;stroke:var(--sienna);stroke-width:1.2}
+.rose__ring{stroke-width:1}
+.rose__ticks{stroke-dasharray:1.4 5.4;stroke-width:7;opacity:.6}
+.rose__inner{stroke-width:.8;opacity:.75}
+.rose__diag{stroke-width:.9;fill:rgba(247,245,239,.9);opacity:.8}
+.rose__star{fill:rgba(247,245,239,.95)}
+.rose__starfill{fill:var(--sienna);stroke:none;opacity:.85}
+.rose__leaves{stroke:var(--blue);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.rose__n{fill:var(--ink);stroke:none;font:500 16px var(--label)}
+.reach{display:none;position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.reach__text{font:italic 21px var(--display);fill:var(--ink);letter-spacing:.02em}
+.pin{position:absolute;left:4%;top:7.6%;width:0;height:0;pointer-events:none}
+.pin__drop{position:absolute;left:-9px;top:-22px;width:18px;height:18px;background:var(--blue);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 0 0 2px var(--paper),0 0 0 3px var(--blue)}
+.pin__drop::after{content:'';position:absolute;left:5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--paper)}
+.pin__label{position:absolute;left:-34px;top:-50px;white-space:nowrap;font:italic 1rem var(--display);color:var(--ink)}
+.rw-entry{left:-2%;top:9.5%}
+.rw-r0{left:4%;top:7.6%}
+.rw-r1{left:14%;top:12.5%}
+.rw-r2{left:25%;top:7%}
+.rw-r3{left:36%;top:13%}
+.rw-r4{left:47%;top:8%}
+.rw-ox{left:60%;top:50%}
+.rw-exit{left:46%;top:100%}
+.hero__copy{position:absolute;left:6%;top:21%;width:46%;max-width:680px}
+.hero__title{margin:16px 0 28px;font-size:clamp(2.5rem,4.4vw,4rem);line-height:1.06;letter-spacing:-.005em}
+.hero__title .l{display:block}
+.hero__lede{font:italic 1.3rem/1.5 var(--display);margin:0 0 26px}
+.hero__cta{display:flex;align-items:center;gap:30px;flex-wrap:wrap}
+.isle{position:absolute;right:7%;top:22%;width:38%;max-width:560px;margin:0}
+.isle img{width:100%;aspect-ratio:1210/814;object-fit:cover;object-position:46% 44%;border-radius:50%;box-shadow:0 0 0 1px var(--ink),0 0 0 6px var(--paper),0 0 0 7px rgba(42,42,38,.35)}
+/* stippled sandbar around the island */
+.isle__sand{position:absolute;inset:-28px;border-radius:50%;background:radial-gradient(circle,rgba(181,123,60,.7) .9px,transparent 1.5px) 0 0/6px 6px;-webkit-mask:radial-gradient(closest-side,transparent 0 88%,#000 90%);mask:radial-gradient(closest-side,transparent 0 88%,#000 90%);pointer-events:none}
+.maplabel--oxbow{left:63%;top:74%}
+
+/* arrival: contours rise, the water draws, the lede arrives word by word, the copy settles, the pin drops */
+.js .contour{opacity:0;transform:scale(.94)}
+.js .hero__title .l,.js .hero__copy .eyebrow,.js .hero__cta,.js .isle{opacity:0;transform:translateY(14px)}
+.js .reach .w{opacity:0}
+.js .pin{opacity:0;transform:translateY(-14px)}
+.ready .contour{opacity:1;transform:none;transition:opacity 1.9s ease .2s,transform 2.2s var(--ease) .1s}
+.ready .reach .w{opacity:1;transition:opacity .55s ease calc(.45s + var(--i)*.11s)}
+.ready .hero__copy .eyebrow{opacity:1;transform:none;transition:opacity .7s var(--ease) .8s,transform .7s var(--ease) .8s}
+.ready .hero__title .l{opacity:1;transform:none;transition:opacity .8s var(--ease) calc(1s + var(--i)*.16s),transform .8s var(--ease) calc(1s + var(--i)*.16s)}
+.ready .hero__cta{opacity:1;transform:none;transition:opacity .7s var(--ease) 1.7s,transform .7s var(--ease) 1.7s}
+.ready .isle{opacity:1;transform:none;transition:opacity 1s var(--ease) 1.1s,transform 1s var(--ease) 1.1s}
+.ready .pin{opacity:1;transform:none;transition:opacity .5s var(--ease) 1.5s,transform .6s var(--ease) 1.5s}
+
+/* ---------- intro ---------- */
+.intro{position:relative;padding:112px 0 72px}
+.intro__text{font:400 1.25rem/1.65 var(--body);max-width:34em}
+.intro__salute{font:italic 1.55rem var(--display)}
+.rw-i1{left:31%;top:26%}
+.rw-i2{left:19%;top:80%}
+
+/* ---------- alone ---------- */
+.alone{padding-bottom:128px}
+.rw-a1{left:23%;top:10%}
+.rw-a2{left:27%;top:48%}
+.rw-a3{left:20%;top:86%}
+.rw-a4{left:46%;top:calc(100% - 12px)}
+.trail-strip{display:contents}
+.trail{position:absolute;left:5.5%;top:8%;width:112px;height:auto;pointer-events:none}
+.trail__a .fp{fill:rgba(181,123,60,.66)}
+.trail__b .fp{fill:rgba(42,42,38,.34)}
+.js .fp{opacity:0;transition:opacity .45s ease calc(var(--i)*.2s)}
+.js .trail.in .fp{opacity:1}
+
+/* ---------- practices ---------- */
+.rw-p1{left:72%;top:2%}
+.rw-p2{left:81%;top:36%}
+.rw-p3{left:75%;top:74%}
+.rw-p3b{left:53%;top:calc(100% + 22px)}
+.pillars{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);margin-top:72px}
+.rw-p4{left:50%;top:30%}
+.rw-conf{left:50%;top:calc(100% + 64px)}
+.maplabel--conf{left:50%;top:calc(100% + 46px);margin-left:34px}
+.pillar{position:relative;background:var(--plate);border:1px solid rgba(42,42,38,.32);outline:1px solid rgba(181,123,60,.45);outline-offset:4px;padding:36px 36px 40px;border-radius:2px}
+.pillar__kicker{font:500 1.125rem var(--label);letter-spacing:.12em;color:var(--blue)}
+.pillar__title{margin:8px 0 12px;font-size:1.75rem;line-height:1.15}
+.pillar__lede{color:var(--ink-2)}
+.mods{margin:26px 0 0;padding:0}
+.mod{padding-top:18px;margin-top:18px;border-top:1px dashed rgba(181,123,60,.55)}
+.mod dt{position:relative;padding-left:30px;font:400 1.3rem/1.2 var(--display)}
+/* ornament: cattail (odd) and reed (even) bullets — the six modalities planted along the banks, unnumbered */
+.mod dt::before{content:'';position:absolute;left:9px;top:-3px;width:2px;height:31px;background:var(--sienna);border-radius:1px}
+.mod dt::after{content:'';position:absolute;left:6px;top:-5px;width:8px;height:16px;border-radius:4px;background:var(--sienna-d)}
+.mod:nth-child(even) dt::after{left:7px;top:-9px;width:0;height:0;border-radius:0;background:none;border-style:solid;border-width:0 3px 24px 3px;border-color:transparent transparent var(--sienna) transparent}
+.mod dd{margin:8px 0 0 30px;color:var(--ink-2)}
+.dd--photo{display:grid;grid-template-columns:1fr 124px;gap:18px;align-items:start}
+.mod__photo{width:124px;aspect-ratio:4/5;object-fit:cover;object-position:50% 28%;border-radius:50%/44% 44% 56% 56%;box-shadow:0 0 0 1px var(--ink),0 0 0 4px var(--plate)}
+.reeds{position:absolute;width:56px;height:74px;pointer-events:none}
+.rd-stem{fill:none;stroke:var(--sienna);stroke-width:1.6;stroke-linecap:round}
+.rd-head{fill:var(--sienna-d)}
+.rd-leaf{fill:rgba(181,123,60,.4)}
+.reeds--a{left:-30px;bottom:-12px}
+.reeds--b{right:-24px;bottom:-12px;transform:scaleX(-1)}
+.reeds--c{right:-6px;bottom:-16px;width:48px;height:64px}
+.block--closing{margin-top:132px}
+.rw-p5{left:24%;top:30%}
+.closing{font:italic 1.4rem/1.5 var(--display);max-width:30em}
+
+/* ornament: dandelion clock — 24 pappus seeds on 1px stems around a centre; the marked third drift off downstream on reveal */
+.clock{position:absolute;right:-30px;bottom:-4px;width:96px;height:96px;pointer-events:none}
+.clock__stem{position:absolute;left:50%;top:50%;width:1.5px;height:60px;margin-left:-.75px;background:var(--sienna);transform-origin:50% 0;transform:rotate(-8deg)}
+.clock__head{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--sienna-d)}
+.seed{position:absolute;left:50%;top:50%;width:1px;height:32px;margin:-32px 0 0 -.5px;background:rgba(181,123,60,.75);transform-origin:50% 100%;transform:rotate(calc(var(--a)*15deg))}
+.seed::after{content:'';position:absolute;left:-5px;top:-6px;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle,rgba(181,123,60,.85) 0,rgba(181,123,60,.35) 45%,rgba(181,123,60,0) 72%)}
+.js .clock.in .seed.drift{animation:drift 3.6s cubic-bezier(.35,.55,.4,1) calc(.2s + var(--d)*.17s) forwards}
+@keyframes drift{0%{translate:0 0;rotate:0deg;opacity:1}100%{translate:130px 84px;rotate:38deg;opacity:0}}
+
+/* ---------- session ---------- */
+.session{padding-bottom:150px}
+.rw-s1{left:20%;top:12%}
+.rw-s2{left:24%;top:68%}
+.crossing{position:relative;margin-top:60px}
+.maplabel--cross{left:-2px;top:-34px}
+.steps{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:64px;margin:0;padding:0;list-style:none}
+.step{position:relative;text-align:center}
+.stone{position:relative;display:block;width:78px;height:54px;margin:0 auto 22px;border-radius:50%;background:radial-gradient(ellipse at 38% 32%,#ece6da 0,#d1c8b6 46%,#a89e8b 100%);box-shadow:0 0 0 1px rgba(42,42,38,.75),inset 0 -5px 7px rgba(42,42,38,.14)}
+.stone__n{position:absolute;inset:0;display:grid;place-items:center;font:500 1.3rem var(--label);color:var(--ink)}
+.stone .rw{left:50%;top:50%}
+.stone::before,.stone::after{content:'';position:absolute;inset:-7px;border-radius:50%;border:1px solid rgba(43,111,174,.75);opacity:0;pointer-events:none}
+.js .step.in .stone::before{animation:ripple 1.7s ease-out calc(var(--i)*.28s) 1}
+.js .step.in .stone::after{animation:ripple 1.7s ease-out calc(.4s + var(--i)*.28s) 1}
+@keyframes ripple{0%{transform:scale(1);opacity:.85}100%{transform:scale(2,2.2);opacity:0}}
+.step h3{font-size:1.55rem}
+.step p{margin-top:8px;color:var(--ink-2);max-width:20em;margin-inline:auto}
+.rw-sx{left:-32px;top:8px}
+.rw-sx2{top:44px}
+.rw-s3{left:calc(100% + 34px);top:34%}
+.rw-s4{left:88%;top:calc(100% + 96px)}
+.rw-fb{display:none}
+
+/* ---------- about ---------- */
+.about{padding-top:150px}
+.rw-ab1{left:50%;top:110px}
+.about__grid{position:relative;display:grid;grid-template-columns:1fr var(--gap) 1fr;align-items:center}
+.rw-ab2{left:50%;top:94%}
+.about__copy{grid-column:1}
+.bank{grid-column:3;position:relative;margin:0}
+.bank img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:18% 40%;border-radius:46% 54% 50% 50%/40% 40% 60% 60%;box-shadow:0 0 0 1px var(--ink),0 0 0 6px var(--paper),0 0 0 7px rgba(42,42,38,.35)}
+.bluebonnet{position:absolute;left:-22px;bottom:-12px;width:112px;height:128px;pointer-events:none}
+.bb-stem{fill:none;stroke:var(--sienna);stroke-width:1.6;stroke-linecap:round}
+.bb-leaf{fill:rgba(181,123,60,.45)}
+.bb-bloom{fill:var(--blue)}
+.bb-mid{fill:var(--blue-l)}
+.bb-tip{fill:var(--paper);stroke:var(--blue);stroke-width:.8}
+.js .bluebonnet .bb-bloom circle,.js .bluebonnet .bb-tip circle,.js .bluebonnet .bb-mid circle{opacity:0;transition:opacity .5s ease}
+.js .bluebonnet.in .bb-bloom circle,.js .bluebonnet.in .bb-mid circle{opacity:1;transition-delay:.2s}
+.js .bluebonnet.in .bb-tip circle{opacity:1;transition-delay:.7s}
+
+/* ---------- book ---------- */
+.book{padding:96px 0 128px}
+.book__row{display:grid;grid-template-columns:.85fr 1.6fr .85fr;gap:44px;align-items:center}
+.farbank{position:relative;margin:0}
+.farbank img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 40%;border-radius:50% 50% 48% 52%/58% 58% 42% 42%;box-shadow:0 0 0 1px var(--ink),0 0 0 6px var(--paper),0 0 0 7px rgba(42,42,38,.35)}
+.lake{position:relative;text-align:center;padding:68px 48px 60px;border-radius:50%/44%;background:radial-gradient(ellipse at 50% 42%,#ecf2f9 0,var(--pool) 58%,#d4e2f0 100%);box-shadow:0 0 0 1px rgba(43,111,174,.6),0 0 0 8px var(--paper),0 0 0 9px rgba(43,111,174,.32),0 0 0 17px var(--paper),0 0 0 18px rgba(43,111,174,.16)}
+.rw-pool{left:50%;top:-18px}
+.maplabel--pool{left:12%;top:-52px}
+.lake h2{margin-top:12px;font-size:clamp(1.8rem,2.6vw,2.4rem);line-height:1.12}
+.book__body{margin:16px auto 30px;max-width:28em}
+.book__fine{font-size:1rem;color:var(--ink-2)}
+.book__fine:first-of-type{margin-top:28px}
+.legend{background:var(--plate);border:1px solid rgba(42,42,38,.38);outline:1px solid rgba(181,123,60,.5);outline-offset:3px;padding:22px 22px 18px}
+.legend__title{font:500 1rem var(--label);letter-spacing:.16em;border-bottom:1px solid rgba(42,42,38,.32);padding-bottom:8px;margin-bottom:12px}
+.legend__list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.legend__list li{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:center;font-size:1rem;line-height:1.35}
+.legend svg{width:44px;height:26px;fill:none;stroke:var(--ink);stroke-width:1.3;stroke-linecap:round}
+.lg-pin{fill:var(--blue);stroke:none}
+.lg-pin-dot{fill:var(--paper);stroke:none}
+.lg-river{stroke:var(--blue);stroke-width:2.6}
+.lg-stone{fill:#d5cdbd;stroke:var(--ink)}
+.lg-scale rect{stroke:var(--ink);fill:var(--ink)}
+.lg-scale .lg-scale--open{fill:var(--plate)}
+.legend svg.lg-tx{width:52px;height:52px}
+.lg-tx__land{fill:rgba(181,123,60,.16);stroke:var(--ink);stroke-width:1.5;stroke-linejoin:round}
+.lg-tx__river{stroke:var(--blue);stroke-width:2.2}
+
+/* ---------- footer ---------- */
+.foot{position:relative;z-index:1;text-align:center;padding:60px var(--pad) 116px;border-top:1px solid rgba(181,123,60,.6);box-shadow:inset 0 3px 0 -2px rgba(181,123,60,.3)}
+.brand--foot{justify-content:center}
+.foot__tag{margin-top:12px;font:italic 1.25rem var(--display)}
+.foot__disc{max-width:44em;margin:20px auto 0;font-size:1rem;color:var(--ink-2)}
+.foot__meta{margin-top:20px;font:500 1rem var(--label);letter-spacing:.1em}
+
+/* ---------- desktop-only: the lede lives on the river ---------- */
+@media (min-width:861px){
+  .js .reach{display:block}
+  .js .hero__lede{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
+}
+@media (max-width:1180px) and (min-width:861px){
+  .hero__title{font-size:clamp(2.2rem,4vw,3.4rem)}
+  .hero__copy{width:48%}
+  .isle{width:36%}
+  :root{--gap:96px}
+}
+
+/* ---------- mobile: the river runs down the left gutter ---------- */
+@media (max-width:860px){
+  :root{--gutter:54px;--pad:18px;--head:60px;--gap:48px}
+  .wrap{padding-left:var(--gutter);padding-right:var(--pad)}
+  .col-r{margin-left:0}
+  .col-l{max-width:none}
+  .site-head{padding:0 var(--pad)}
+  .brand{font-size:1.15rem}
+  .brand__mark{width:32px;height:32px}
+  .menu-btn{display:inline-flex;align-items:center;gap:10px;background:none;border:1px solid rgba(42,42,38,.4);border-radius:999px;padding:8px 16px;font:500 1rem var(--label);letter-spacing:.08em;color:var(--ink);cursor:pointer}
+  .menu-btn__bars{width:18px;height:2px;background:var(--ink);box-shadow:0 -5px 0 var(--ink),0 5px 0 var(--ink);border-radius:1px}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:flex-start;gap:18px;padding:18px var(--pad) 24px var(--gutter);background:var(--paper);border-bottom:1px solid rgba(181,123,60,.55);box-shadow:0 12px 30px rgba(42,42,38,.12)}
+  .site-head.is-open .nav{display:flex}
+  .hero{min-height:0;padding:96px var(--pad) 56px var(--gutter)}
+  .corner{display:none}
+  .contour{transform-origin:50% 60%}
+  .contour--a{background:repeating-radial-gradient(ellipse 70% 40% at 60% 66%,transparent 0 22px,rgba(181,123,60,.26) 22px 23.2px);-webkit-mask:linear-gradient(0deg,#000 40%,transparent 75%);mask:linear-gradient(0deg,#000 40%,transparent 75%)}
+  .contour--b{display:none}
+  .rose{width:72px;height:72px;right:14px;top:12px;bottom:auto}
+  .rose__n{font-size:20px}
+  .pin{left:22px;top:26px}
+  .pin__label{left:18px;top:-14px}
+  .rw-entry{top:-14px}
+  .rw-r0{top:26px}
+  .rw-r1{top:24%}
+  .rw-r2{top:42%}
+  .rw-r3{top:58%}
+  .rw-r4{top:74%}
+  .rw-ox{top:90%}
+  .rw-exit{top:100%}
+  .hero__copy{position:static;width:auto;max-width:none}
+  .hero .eyebrow{letter-spacing:.05em;gap:10px}
+  .hero .eyebrow__tick{width:18px}
+  .hero__title{margin:12px 0 18px;font-size:clamp(2.25rem,9.4vw,2.9rem)}
+  .hero__lede{font-size:1.2rem;margin-bottom:22px}
+  .hero__cta{gap:20px}
+  .isle{position:relative;right:auto;top:auto;width:100%;max-width:400px;margin:40px 0 0}
+  .isle img{border-radius:48% 52% 50% 50%/42% 42% 58% 58%;object-position:44% 40%}
+  .isle__sand{inset:-16px}
+  .maplabel--oxbow{display:none}
+  .intro{padding:64px 0 40px}
+  .intro__text{font-size:1.125rem}
+  .intro__salute{font-size:1.4rem}
+  .sec{padding:64px 0}
+  .sec-head h2{font-size:clamp(1.7rem,7vw,2.2rem)}
+  .alone{padding-bottom:64px}
+  .trail-strip{display:block;position:relative;height:92px;margin-top:28px;overflow:hidden}
+  .trail{position:absolute;left:0;top:88px;width:88px;height:470px;transform:rotate(-90deg);transform-origin:0 0}
+  .pillars{grid-template-columns:1fr;gap:56px;margin-top:40px}
+  .pillar{padding:24px 20px 28px}
+  .pillar__title{font-size:1.5rem}
+  .dd--photo{grid-template-columns:1fr 92px;gap:14px}
+  .mod__photo{width:92px}
+  .reeds--a{display:none}
+  .reeds--b{right:-14px}
+  .clock{right:14px;bottom:-42px;width:80px;height:80px}
+  .mod--release dd{padding-right:0;padding-bottom:0}
+  .pillar--mind{padding-bottom:44px}
+  .seed{height:26px;margin-top:-26px}
+  .rw-conf{left:0;top:calc(100% + 24px)}
+  .maplabel--conf{left:0;top:calc(100% + 26px);margin-left:0}
+  .block--closing{margin-top:80px}
+  .closing{font-size:1.25rem}
+  .session{padding-bottom:64px}
+  .crossing{margin-top:44px}
+  .maplabel--cross{left:-12px;top:-38px}
+  .steps{grid-template-columns:1fr;gap:34px}
+  .step{text-align:left;min-height:56px}
+  .step p{margin-inline:0;max-width:none}
+  .stone{position:absolute;left:calc(22px - 24px - var(--gutter));top:-2px;width:48px;height:34px;margin:0}
+  .stone__n{font-size:1.1rem}
+  .rw-sx,.rw-s3{display:none}
+  .rw-s4{top:calc(100% + 36px)}
+  .about{padding-top:64px}
+  .rw-ab1{top:20px}
+  .about__grid{grid-template-columns:1fr;gap:40px}
+  .rw-ab2{top:96%}
+  .bank{grid-column:1;max-width:400px}
+  .bank img{aspect-ratio:1/1;object-position:22% 30%}
+  .bluebonnet{left:-14px;bottom:-10px;width:96px;height:110px}
+  .reeds--c{display:none}
+  .book{padding:64px 0 120px}
+  .book__row{grid-template-columns:1fr;gap:104px}
+  .rw-fb{display:block;left:0;top:calc(100% + 10px)}
+  .farbank{width:min(280px,100%);margin:0 auto}
+  .lake{padding:52px 24px 44px;border-radius:44%/22%}
+  .rw-pool{left:30%;top:-16px}
+  .maplabel--pool{left:auto;right:5%;top:-42px}
+  .lake h2{font-size:clamp(1.6rem,6.6vw,2rem)}
+  .btn--lg{padding:14px 30px;font-size:1.05rem}
+  .legend{max-width:360px;margin:0 auto}
+  .foot{padding:48px var(--pad) 112px var(--gutter)}
+}
+@media (max-width:700px){
+  .js .clock.in .seed.drift{animation:drift-up .6s ease-out calc(var(--d)*.06s) forwards}
+  @keyframes drift-up{to{translate:0 -30px;opacity:0}}
+}
+@media (max-width:420px){
+  .hero{padding-top:104px}
+  .hero__cta{flex-direction:column;align-items:flex-start;gap:18px}
+  .lake{padding:48px 18px 40px}
+}
+
+/* ---------- reduced motion: the map fully drawn, everything at rest ---------- */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .contour,.js .hero__title .l,.js .hero__copy .eyebrow,.js .hero__cta,.js .isle,.js .reach .w,.js .pin,.js .fp,.js .bluebonnet circle{opacity:1!important;transform:none!important}
+  .seed.drift{translate:64px 42px;rotate:20deg;opacity:.45}
+  .river__water,.river__current,.river__trib{stroke-dashoffset:0!important}
+}

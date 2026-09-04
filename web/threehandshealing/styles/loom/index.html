@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en" data-style="loom">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three Hands Healing — Loom</title>
+  <meta name="description" content="Three Hands Healing — EFT, energy healing, bodywork, Qi Gong and Family Constellations with Maria. Online or in person in Texas.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f3eee3">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anybody:wdth,wght@80..120,500..800&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- sprite: the stitch mark + the warp's sag filter -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="sag" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.003 0.018" numOctaves="1" seed="7" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+      </filter>
+      <!-- ornament: "three hands" — the brand mark redrawn as three interlaced loop stitches -->
+      <symbol id="stitch" viewBox="0 0 48 48">
+        <g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path pathLength="1" d="M24 27C13 21 9 8 18 5c7-3 12 6 6 22Z"/>
+          <path pathLength="1" d="M24 27C13 21 9 8 18 5c7-3 12 6 6 22Z" transform="rotate(120 24 24)"/>
+          <path pathLength="1" d="M24 27C13 21 9 8 18 5c7-3 12 6 6 22Z" transform="rotate(240 24 24)"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="site-head">
+    <div class="wrap site-head__inner">
+      <a class="brand" href="#top" aria-label="Three Hands Healing — back to top">
+        <!-- ornament: "three hands" — the loop-stitch mark, drawn on load -->
+        <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#stitch"/></svg>
+        <span class="brand__name">Three Hands Healing</span>
+      </a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-menu><span class="menu-btn__stitch" aria-hidden="true"></span>Menu</button>
+      <nav class="nav" id="nav" aria-label="Main">
+        <a href="#practices">Practices</a>
+        <a href="#session">Sessions</a>
+        <a href="#about">About</a>
+        <a class="btn btn--nav" href="#book">Book a session</a>
+      </nav>
+    </div>
+    <!-- ornament: "weave together a tailored combination" — the warp beam: the bar the threads hang from, one heddle eye per thread -->
+    <div class="beam" aria-hidden="true"></div>
+  </header>
+
+  <main id="main">
+
+    <!-- ornament: "true partnership" — two threads, denim and madder, run the left gutter and twist into a two-ply cord at every section boundary (desktop; built and drawn in script.js) -->
+    <svg class="cord" aria-hidden="true" focusable="false" width="28" viewBox="0 0 28 100" preserveAspectRatio="none"><path class="cord__a" d=""/><path class="cord__b" d=""/></svg>
+
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <!-- ornament: "weave together a tailored combination" — the warp: vertical denim threads, dropped from the beam on load -->
+      <div class="warp" aria-hidden="true"></div>
+      <div class="wrap hero__grid">
+        <div class="hero__weft">
+          <p class="eyebrow hero__eyebrow">Three Hands Healing · Texas</p>
+          <!-- ornament: "weave together a tailored combination" — the woven headline: a rear copy under the warp, the real H1 above it masked in 6px stripes, so every line passes over and under the threads -->
+          <div class="woven woven--hero">
+            <p class="woven__rear" aria-hidden="true"><span class="weft weft--l">Feel good in your body,</span> <span class="weft weft--r">at peace in your mind,</span> <span class="weft weft--l">aligned in your life.</span></p>
+            <h1 id="hero-title" class="woven__front"><span class="weft weft--l">Feel good in your body,</span> <span class="weft weft--r">at peace in your mind,</span> <span class="weft weft--l">aligned in your life.</span></h1>
+            <!-- ornament: "Arrive / Experience / Integrate" (the shuttle) — three shuttles carry the weft lines in from alternating sides; the last one parks on the right selvedge -->
+            <div class="shuttles" aria-hidden="true"><i class="shuttle shuttle--l"></i><i class="shuttle shuttle--r"></i><i class="shuttle shuttle--l"></i></div>
+          </div>
+          <!-- ornament: "wherever you are right now is the perfect place to start" — the woven label: lede and CTAs sewn on a cloth tag with a selvedge edge -->
+          <div class="label hero__label">
+            <p class="hero__lede">Wherever you are right now is the perfect place to start.</p>
+            <div class="hero__cta">
+              <a class="btn" href="#book">Book a session</a>
+              <a class="link" href="#practices">How we work together</a>
+            </div>
+          </div>
+        </div>
+        <!-- portrait: revealed thread by thread through a warp mask as the weft completes -->
+        <figure class="hero__portrait">
+          <img src="../../assets/image2.jpeg" alt="Maria under a pale stone arch, reaching one open hand toward you" width="642" height="970" fetchpriority="high" decoding="async">
+        </figure>
+      </div>
+    </section>
+
+    <section class="intro" aria-label="Welcome">
+      <div class="wrap intro__wrap">
+        <svg class="stitch" aria-hidden="true"><use href="#stitch"/></svg>
+        <p class="intro__text"><em class="intro__salute">Welcome—I’m Maria.</em> I am here to help you feel good in your body, at peace in your mind, and aligned in your life, relationships, and career. My mission is simple: to share the powerful, transformative tools that changed my own life so you can move beyond pain, step past invisible blocks, and fully reclaim your life’s vitality. You don’t have to navigate this alone—wherever you are right now is the perfect place to start.</p>
+      </div>
+    </section>
+
+    <section class="sec alone" id="alone" aria-labelledby="alone-title">
+      <div class="wrap alone__grid">
+        <!-- ornament: "invisible blocks" — three knots in three warp threads untie into clean thread as the heading enters -->
+        <svg class="knots" viewBox="0 0 160 320" aria-hidden="true" focusable="false">
+          <path class="knot" d="M24 0C24 30 24 50 24 66C24 88 62 92 62 70C62 48 24 52 24 74C24 98 24 200 24 320" data-straight="M24 0C24 30 24 50 24 66C24 70 24 70 24 70C24 70 24 72 24 74C24 98 24 200 24 320"/>
+          <path class="knot" d="M72 0C72 100 72 130 72 146C72 168 110 172 110 150C110 128 72 132 72 154C72 178 72 260 72 320" data-straight="M72 0C72 100 72 130 72 146C72 150 72 150 72 150C72 150 72 152 72 154C72 178 72 260 72 320"/>
+          <path class="knot" d="M120 0C120 180 120 210 120 226C120 248 158 252 158 230C158 208 120 212 120 234C120 258 120 300 120 320" data-straight="M120 0C120 180 120 210 120 226C120 230 120 230 120 230C120 230 120 232 120 234C120 258 120 300 120 320"/>
+        </svg>
+        <svg class="knots knots--h" viewBox="0 0 320 88" aria-hidden="true" focusable="false">
+          <path class="knot" d="M0 16C30 16 50 16 66 16C88 16 92 36 70 36C48 36 52 16 74 16C98 16 200 16 320 16" data-straight="M0 16C30 16 50 16 66 16C70 16 70 16 70 16C70 16 72 16 74 16C98 16 200 16 320 16"/>
+          <path class="knot" d="M0 40C100 40 130 40 146 40C168 40 172 60 150 60C128 60 132 40 154 40C178 40 260 40 320 40" data-straight="M0 40C100 40 130 40 146 40C150 40 150 40 150 40C150 40 152 40 154 40C178 40 260 40 320 40"/>
+          <path class="knot" d="M0 64C180 64 210 64 226 64C248 64 252 84 230 84C208 84 212 64 234 64C258 64 300 64 320 64" data-straight="M0 64C180 64 210 64 226 64C230 64 230 64 230 64C230 64 232 64 234 64C258 64 300 64 320 64"/>
+        </svg>
+        <div class="alone__copy">
+          <header class="sec-head">
+            <svg class="stitch" aria-hidden="true"><use href="#stitch"/></svg>
+            <p class="eyebrow">Before we begin</p>
+            <h2 id="alone-title">You don’t have to navigate this alone.</h2>
+          </header>
+          <div class="prose">
+            <p>It is so hard to blossom into who you are meant to be when you are navigating illness, destructive behavioral patterns, or invisible blocks. I have been there—and I am living proof that we can grow through our deepest challenges to find ourselves again in greater joy, strength, and purpose.</p>
+            <p>Healing is a journey, and it is my absolute honor to walk alongside you, however that looks for you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec practices" id="practices" aria-labelledby="practices-title">
+      <div class="wrap">
+        <header class="sec-head sec-head--center">
+          <svg class="stitch" aria-hidden="true"><use href="#stitch"/></svg>
+          <p class="eyebrow">Two pillars · Six practices</p>
+          <!-- ornament: "weave together a tailored combination" — the heading woven through a denim-and-copper warp; "where you want to expand" — it widens once as it enters -->
+          <div class="woven woven--h2">
+            <span class="woven__warp" aria-hidden="true"></span>
+            <p class="woven__rear expand" aria-hidden="true">How we work together.</p>
+            <h2 id="practices-title" class="woven__front expand">How we work together.</h2>
+          </div>
+        </header>
+        <div class="prose measure center">
+          <p>True, lasting healing begins with absolute safety. First and foremost, I meet you right where you are with nonjudgmental presence, compassion, and deep listening. Together, we look at what is holding you back today—and where you want to expand in the future. From there, we weave together a tailored combination of root-cause modalities.</p>
+        </div>
+
+        <!-- ornament: "body & physical energy" × "mind, behavior & emotions" — the tartan: copper weft (body) crossing denim warp (mind) where the pair meets -->
+        <div class="tartan" aria-hidden="true"></div>
+
+        <div class="pillars">
+          <article class="pillar pillar--body">
+            <!-- ornament: "a safe container" — the pillar as a stitched cloth pocket -->
+            <div class="pillar__cloth">
+              <h3 class="pillar__title">For the body &amp; physical energy</h3>
+              <p class="pillar__lede">Support for people living with pain, tension, or illness, through targeted bodywork, Candace Silvers Energy Healing, and supportive Qi Gong practices.</p>
+            </div>
+            <!-- ornament: "lasting wholeness" — the selvedge: a bound edge and a flax fringe that keep the cloth from unravelling; the practices hang from it as woven labels -->
+            <div class="selvedge" aria-hidden="true"></div>
+            <div class="fringe" aria-hidden="true"></div>
+            <dl class="chips">
+              <div class="chip"><dt>Bodywork</dt><dd>Attentive, targeted work with the body to ease tension and bring back ease of movement.</dd></div>
+              <div class="chip"><dt>Candace Silvers Energy Healing</dt><dd>A quiet, hands-on energy practice for rest, grounding, and integration. Nothing to perform, nothing to prove.</dd></div>
+              <div class="chip"><dt>Qi Gong</dt><dd>Slow, supportive movement and breath practices you can take home with you.</dd></div>
+            </dl>
+          </article>
+
+          <article class="pillar pillar--mind">
+            <!-- ornament: "a safe container" — the pillar as a stitched cloth pocket -->
+            <div class="pillar__cloth">
+              <h3 class="pillar__title">For the mind, behavior &amp; emotions</h3>
+              <p class="pillar__lede">Because the mind touches every area of our health, relationships, and purpose, we work with Emotional Freedom Technique (EFT/Tapping), Systemic Family Constellations, and intuitive emotional release exercises.</p>
+            </div>
+            <!-- ornament: "lasting wholeness" — the selvedge and fringe -->
+            <div class="selvedge" aria-hidden="true"></div>
+            <div class="fringe" aria-hidden="true"></div>
+            <dl class="chips">
+              <div class="chip chip--swatch">
+                <dt>EFT / Tapping</dt>
+                <dd>
+                  <!-- ornament: "tapping on acupressure points" — a fringed cloth swatch of Maria showing the tapping point -->
+                  <figure class="swatch"><img src="../../assets/image6.jpeg" alt="Maria in a dry meadow, demonstrating EFT tapping on the side of her hand" width="654" height="968" loading="lazy" decoding="async"></figure>
+                  Gentle fingertip tapping on acupressure points while giving voice to what you are feeling. Simple to learn, surprisingly powerful.
+                </dd>
+              </div>
+              <div class="chip"><dt>Systemic Family Constellations</dt><dd>A way of seeing the hidden loyalties and patterns we inherit, so what has been carried can finally be set down.</dd></div>
+              <div class="chip"><dt>Intuitive emotional release</dt><dd>Guided exercises for letting what has been held move through and out, at your own pace.</dd></div>
+            </dl>
+          </article>
+        </div>
+
+        <p class="closing"><svg class="stitch stitch--inline" aria-hidden="true"><use href="#stitch"/></svg>Guided by empathic and intuitive gifts, I offer a grounded partnership to help you clear the root causes of suffering and step into lasting wholeness.</p>
+      </div>
+    </section>
+
+    <section class="sec session" id="session" aria-labelledby="session-title">
+      <div class="wrap">
+        <header class="sec-head sec-head--center">
+          <svg class="stitch" aria-hidden="true"><use href="#stitch"/></svg>
+          <p class="eyebrow">Sessions</p>
+          <h2 id="session-title" class="expand">What a session feels like.</h2>
+          <p class="sec-head__note">Sessions are offered online and in person.</p>
+        </header>
+        <div class="loom-steps">
+          <!-- ornament: "Arrive / Experience / Integrate" — the shuttle crosses the three steps on scroll and leaves a copper weft behind it; each number is stitched with a dashed underline -->
+          <div class="track" aria-hidden="true"><i class="track__weft"></i><i class="shuttle shuttle--steps"></i></div>
+          <ol class="steps" role="list">
+            <li class="step"><span class="step__num" aria-hidden="true">1</span><h3>Arrive</h3><p>Talk about what is happening and what support you are looking for.</p></li>
+            <li class="step"><span class="step__num" aria-hidden="true">2</span><h3>Experience</h3><p>Explore a practice together at a comfortable pace.</p></li>
+            <li class="step"><span class="step__num" aria-hidden="true">3</span><h3>Integrate</h3><p>Talk about what came up and what might be useful afterward.</p></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec about" id="about" aria-labelledby="about-title">
+      <div class="wrap about__grid">
+        <!-- ornament: "a guide, not a pedestal" — the portrait sewn in as a woven care label: selvedge edge, stitched border, a tag hanging from a thread -->
+        <figure class="cloth-label about__photo">
+          <img src="../../assets/image9.jpeg" alt="Maria in an indigo floral kimono beside green shrubs, looking calmly into the lens" width="1218" height="808" loading="lazy" decoding="async">
+          <figcaption class="cloth-label__tag"><svg class="stitch stitch--tag" aria-hidden="true"><use href="#stitch"/></svg>Three Hands Healing</figcaption>
+        </figure>
+        <div class="about__copy">
+          <header class="sec-head">
+            <svg class="stitch" aria-hidden="true"><use href="#stitch"/></svg>
+            <p class="eyebrow">Meet Maria</p>
+            <h2 id="about-title">A guide, <span class="nowrap">not a pedestal.</span></h2>
+          </header>
+          <div class="prose">
+            <p>Every tool and modality I share in my practice comes from a place of deep personal experience. I know what it feels like to seek answers, which is why I’ve devoted my life to mastering the practices that continuously restore health, peace, and joy in my own body, relationships, and career.</p>
+            <p>My practice is a space of true partnership. Guided by empathic intuition and powerful energy and behavioral modalities, I am here to hold a safe container where your pain is met with understanding, and your potential is given room to bloom.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec book" id="book" aria-labelledby="book-title">
+      <div class="wrap">
+        <!-- ornament: "step into lasting wholeness" — the finished cloth: the closing portrait held between warp threads, bound by a selvedge on each side -->
+        <figure class="banded">
+          <img src="../../assets/image8.jpeg" alt="Maria in the meadow, eyes closed, both hands resting on her heart" width="1218" height="808" loading="lazy" decoding="async">
+          <span class="banded__warp" aria-hidden="true"></span>
+        </figure>
+        <div class="book__inner">
+          <svg class="stitch" aria-hidden="true"><use href="#stitch"/></svg>
+          <p class="eyebrow">The next step</p>
+          <h2 id="book-title" class="expand">Begin where <span class="nowrap">you are.</span></h2>
+          <p class="book__body">Choose a practice, find a time, and we will take it from there. No account needed.</p>
+          <a class="btn btn--big" href="#book">Book a session</a>
+          <p class="book__fine">Online or in person · Sessions in Texas</p>
+          <p class="book__fine">Booking and contact details will be added at launch</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <!-- ornament: "healing is a journey" — the hem: where the cloth ends, bound with a flax selvedge and fringed -->
+    <div class="hem" aria-hidden="true"></div>
+    <div class="wrap foot__inner">
+      <a class="brand brand--foot" href="#top">
+        <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#stitch"/></svg>
+        <span class="brand__name">Three Hands Healing</span>
+      </a>
+      <p class="foot__tag">Support for a happier, healthier life.</p>
+      <p class="foot__disc">Three Hands Healing offers complementary wellness support and is not a substitute for medical, mental-health, or emergency care. If you need urgent help, contact local emergency services or a qualified health professional.</p>
+      <p class="foot__meta">© 2026 Three Hands Healing</p>
+    </div>
+  </footer>
+
+  <script src="../../vendor/gsap.min.js" defer></script>
+  <script src="../../vendor/ScrollTrigger.min.js" defer></script>
+  <script src="script.js" defer></script>
+  <script src="../_portfolio.js" defer></script>
+</body>
+</html>

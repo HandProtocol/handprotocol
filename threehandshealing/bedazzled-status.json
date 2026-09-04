@@ -1,0 +1,1008 @@
+[
+ {
+  "slug": "nouveau",
+  "name": "Nouveau",
+  "state": "needs-independent-review",
+  "note": "review2 died (fix2 applied, unreviewed)",
+  "fonts": "Gilda Display (display) + Alegreya Sans (body) + Pinyon Script (single-word accents, ≥28px)",
+  "palette": [
+   "#5e3552",
+   "#2f2a2a",
+   "#b8892e",
+   "#4d7d76",
+   "#ecdfc4"
+  ],
+  "desc": "A Mucha poster: flat plum, a gold whiplash cartouche that draws itself, enamel irises and peacock eyes.",
+  "signature": "The self-drawing whiplash cartouche on a flat plum field: one continuous gold stroke traces the Nouveau frame around the H1 and ends in three flat-enamel irises — the only thing on the page that grows, so it reads as a poster, never a garden.",
+  "ornaments": [
+   {
+    "phrase": "absolute safety",
+    "element": "Printed Nouveau border (SVG circles-and-dots, gold at 60%) fixed around the whole page like the poster's edge"
+   },
+   {
+    "phrase": "blossom into who you are meant to be",
+    "element": "Hero cartouche: one gold whiplash path (stroke-dashoffset draw, 2.2s) around the H1 ending in three flat-enamel irises that scale open from the stem tips, staggered; on mobile it simplifies to top/bottom curls with two irises"
+   },
+   {
+    "phrase": "wherever you are right now is the perfect place to start",
+    "element": "The lede printed on an ecru ribbon (clip-path polygon, gold edge) curling under the cartouche"
+   },
+   {
+    "phrase": "three hands",
+    "element": "Gilt ring behind the hero portrait carrying the brand mark 12 times via <use rotate(30n)>; reused small above every section eyebrow and around the pull-quote vignette"
+   },
+   {
+    "phrase": "walk alongside you",
+    "element": "Two gold whiplash stems running side by side and crossing once, the mark between them, closing #alone"
+   },
+   {
+    "phrase": "grounded partnership",
+    "element": "The two pillars as a Mucha diptych under one shared gilt arc drawn once on enter; when stacked, a short whiplash stem joins the pair through the gap"
+   },
+   {
+    "phrase": "a tailored combination",
+    "element": "Six iris capitals: each modality name opens with a Gilda capital wrapped by a flat-enamel iris in its own colourway (one <symbol>, currentColor), breaking through a masked gap in the hairline rule"
+   },
+   {
+    "phrase": "tapping on acupressure points",
+    "element": "The EFT photo cropped into a peacock-eye oval ringed in gold, teal and plum enamel"
+   },
+   {
+    "phrase": "empathic and intuitive gifts",
+    "element": "A fan of three peacock feathers (widened barbed vanes, enlarged stacked-gradient eyes) that spreads to ±18° once on scroll-in and holds"
+   },
+   {
+    "phrase": "healing is a journey",
+    "element": "One continuous whiplash stem drawn top-to-bottom beside the three numbered steps, threading three peacock-eye medallions that carry the numbers"
+   },
+   {
+    "phrase": "a safe container",
+    "element": "The about portrait held in a whiplash-edged ecru panel with a gold tendril curling from each of its four corners"
+   },
+   {
+    "phrase": "where you want to expand",
+    "element": "Gold tendrils (56px, 44px on mobile) reaching out from two diagonal corners of every one of the six plain body-copy panels"
+   }
+  ],
+  "validate": "✓ nouveau     54 KB · photos 4 · files index.html,script.js,style.css",
+  "open_minor_issues": [],
+  "builder_left_out": "Reviewer's fixes applied as specified with these judgment calls: peacock eye set to rx 28 / ry 44 on a vane widened to control points −12/92 (rather than 30/44 on −4/84) so the eye stays inside the vane; the iris-capital rule is masked where the iris passes through (Nouveau flower-breaks-the-border) rather than only shifted; the plain-panel Nouveau edge is the reused #tendril at two diagonal corners, not a scallop border-image, to keep the plain/scallop hierarchy. There are six plain panels (three step panels), not five. Note the hero-ring header overlap the reviewer measured at 39px was already 64px on my machine; the fix lands the ring 20px below the header regardless. No GSAP used; nothing committed."
+ },
+ {
+  "slug": "talavera",
+  "name": "Talavera",
+  "state": "reviewed-pass",
+  "note": "independent review passed; only minor polish left",
+  "fonts": "Yeseva One (display) + Mulish (body)",
+  "palette": [
+   "#f6f1e4",
+   "#123a8a",
+   "#1f4aa3",
+   "#e5b431",
+   "#5fb3b3"
+  ],
+  "desc": "A Puebla tile wall in the Texas sun: cobalt, marigold and turquoise glaze, and a wall that paints itself from one tile.",
+  "signature": "The wall that grows from one tile: a single marigold seed tile with the three-hands mark exists at load, and the whole Puebla tile wall paints itself outward from it, distance-staggered — the seed now stays exposed in its own row at every width.",
+  "ornaments": [
+   {
+    "phrase": "wherever you are right now is the perfect place to start",
+    "element": "Hero tile wall: 63 CSS-gradient tiles each carrying --d (grid distance from the seed); the seed drops in first with a marigold glaze + cobalt three-hands mark and the wall paints outward from it. On tablet/mobile the seed is re-placed (grid-area) into the one exposed wall row beneath the mural so it is never hidden."
+   },
+   {
+    "phrase": "a safe container / absolute safety",
+    "element": "The H1 cartouche: a white tile plate with a scalloped cobalt-and-marigold rim (radial-gradient scallops) holding the words on the wall; the same plate frames the about portrait and the booking card."
+   },
+   {
+    "phrase": "aligned in your life",
+    "element": "A hand-painted marigold brush stroke (SVG data-URI) drawn once under the last line of the H1 via animated clip-path; the line now wraps freely on mobile and clears the rim."
+   },
+   {
+    "phrase": "joy, strength, and purpose / where you want to expand",
+    "element": "The mural: image7 (arms flung wide) set into the wall as a tile panel whose seams are cut by the grout overlay — 4x3 desktop, 5x3 tablet, 3x3 mobile — with her face always inside a whole tile and both hands in frame."
+   },
+   {
+    "phrase": "three hands",
+    "element": "The round talavera plate medallion (SVG symbol): 24-lobe cobalt rim, turquoise dotted ring, brand mark under a marigold glaze highlight; used in the nav, the intro divider, on the booking plate's rim and in the footer. The dotted header/footer trim echoes its rim."
+   },
+   {
+    "phrase": "meet you right where you are",
+    "element": "Every eyebrow starts with one small painted tile diamond (marigold glaze, cobalt edge, white inner ring)."
+   },
+   {
+    "phrase": "let what has been held move through and out",
+    "element": "Papel picado banner over #alone: pennants clip-path-cut with scalloped hems and perforated by a CSS mask of holes and a medallion cut-out, in marigold/cobalt/turquoise; whole pennants now meet both edges at every width (12 on desktop, 5 on mobile); sways once on scroll-in."
+   },
+   {
+    "phrase": "joy, strength, and purpose",
+    "element": "The sol tile: a cobalt sun face ringed by sixteen lobed marigold rays inside a white corner-fan tile; turns 22.5° once on scroll-in and its cheeks gain a turquoise glaze dot."
+   },
+   {
+    "phrase": "weave together a tailored combination / root-cause modalities",
+    "element": "One azulejo panel: the two pillars are its two cobalt header tiles and the six unnumbered modalities its 3x2 field, all sharing one cobalt grout."
+   },
+   {
+    "phrase": "body & physical energy / mind, behavior & emotions",
+    "element": "The pair: each pillar header tile carries one painted glaze medallion — marigold for the body, turquoise for the mind."
+   },
+   {
+    "phrase": "ease of movement",
+    "element": "Bodywork tile: interlocking waves, two offset arcades of turquoise arcs."
+   },
+   {
+    "phrase": "rest, grounding, and integration",
+    "element": "Energy Healing tile: concentric cobalt and turquoise rings settling around a marigold centre."
+   },
+   {
+    "phrase": "movement and breath",
+    "element": "Qi Gong tile: a true spiral built from two half-sets of ring gradients joined at the centre line."
+   },
+   {
+    "phrase": "tapping on acupressure points",
+    "element": "EFT tile: image6 cropped to the tapping hands with a painted hand tile and nine marigold points set into its corner."
+   },
+   {
+    "phrase": "hidden loyalties and patterns",
+    "element": "Family Constellations tile: a star of eight in cobalt over a turquoise star, the family pattern seen whole."
+   },
+   {
+    "phrase": "move through and out",
+    "element": "Intuitive emotional release tile: four falling turquoise teardrops on a dotted ground."
+   },
+   {
+    "phrase": "healing is a journey / grounded partnership",
+    "element": "The session floor: a turquoise tiled floor strip with a dotted cobalt grout line joining the three path tiles."
+   },
+   {
+    "phrase": "Arrive / Experience / Integrate",
+    "element": "1-2-3 painted in Yeseva inside scalloped white cartouches; each path tile glazes (a highlight sweep) in sequence on scroll."
+   },
+   {
+    "phrase": "a safe container",
+    "element": "Maria's about portrait framed as a scalloped tile cartouche with a glossy top edge."
+   },
+   {
+    "phrase": "begin where you are / when you are ready, the next step is simple",
+    "element": "The booking wall: cobalt tiles with white glaze motifs; the booking card as a white scalloped plate with the three-hands medallion on its rim, and a small tile of Maria (image9, her face centred) leaning fully clear of the plate's corner on desktop — hidden under 960px."
+   }
+  ],
+  "validate": "✓ talavera    58 KB · photos 4 · files index.html,script.js,style.css",
+  "open_minor_issues": [
+   {
+    "severity": "minor",
+    "where": "#session floor strip — style.css:242 (.floor background), visible in desktop-full y≈3980–4330 and mobile-full y≈6100–6560",
+    "what": "The cobalt 'dot at every grout intersection' layer is painted underneath the two cream grout-line layers and is positioned exactly on the intersections, so all that survives is an L-shaped 3px speck at each crossing. They read as dirt/rendering artifacts along the right edge of the floor and beside the step tiles rather than as a painted dot pattern.",
+    "fix": "Either list the radial-gradient dot layer FIRST in the background stack so it paints over the grout lines, or move it to cell centres (`radial-gradient(circle, var(--cobalt) 0 3px, transparent 3.5px) 0 0 / 56px 56px`, dropping the -28px offset) so every dot sits cleanly inside a tile."
+   },
+   {
+    "severity": "minor",
+    "where": "Hero H1 at 960–1440 px — style.css:134-135 (.hero__title clamp + .brush nowrap); desktop.png and lap1024.png",
+    "what": "The verbatim H1 breaks as 'Feel good in your / body, at peace / in your mind, / aligned in your life.' (and at 1024: '…at peace in / your mind,'). The three clauses of Maria's line get split mid-phrase ('your / body'), which weakens the thesis line inside the cartouche.",
+    "fix": "Wrap the three clauses in `<span class=\"l\">` and set `.l{display:block}` at ≥960px (keep the `.brush` span inside the third), and lower the clamp max to ~2.6rem so 'Feel good in your body,' fits one line of the cartouche at 1440."
+   },
+   {
+    "severity": "minor",
+    "where": "#practices modality blurbs — desktop-full y≈2780–2900 (Bodywork) and y≈3390–3470 (EFT / Tapping); style.css:210 (.mod dd)",
+    "what": "Orphaned single words on the last line: 'movement.' and 'powerful.' sit alone under 34ch-wide blurbs at 1440.",
+    "fix": "Add `text-wrap: pretty;` to `.mod dd`, `.step p` and `.pillar__lede` (or nudge `.mod dd` max-width to 36ch)."
+   },
+   {
+    "severity": "minor",
+    "where": "Mobile hero 390 px — style.css:331-339 (.cartouche grid-row 1/4, .mural grid-row 4/7); mobile.png",
+    "what": "The signature 'wall that grows from one tile' is nearly invisible on mobile: the cartouche covers rows 1–3, the mural rows 4–6, so the wall shows only as ~25px slivers around the cartouche plus a single tile row below the mural. The seed tile and the outward paint are below the first viewport (behind the fixed pill).",
+    "fix": "Let one full tile row breathe above the cartouche on mobile (e.g. `.cartouche{grid-row:2/5}` and mural `5/8` with an 8-row wall, or shrink the cartouche padding/eyebrow so it fits rows 2–3) and re-seat the seed in that top exposed row (`.tile.seed{grid-area:1/2}`) so the first viewport shows the seed and the wall painting outward from it."
+   },
+   {
+    "severity": "minor",
+    "where": "Hero mural at 1440 — style.css:143 (.mural img object-position 50% 42%); desktop.png x≈1100–1130",
+    "what": "The vertical grout line of the mural's 4×3 grid runs through the right edge of Maria's hat brim and along her jaw/necklace; her face is intact but pressed against the seam.",
+    "fix": "Shift `object-position` to about `46% 42%` (and re-check 390 px, where `50% 0` + scale(1.08) should keep her head in the centre tile) so her face sits centred inside one tile with the seams cutting kimono and meadow instead."
+   },
+   {
+    "severity": "minor",
+    "where": "Wall paint order at ≤959 px — style.css:304 and 338 (.tile.seed re-seated with grid-area) vs the inline --d values in index.html:57-65",
+    "what": "When the seed is relocated on tablet/mobile, every other tile keeps its desktop-relative --d, so the staggered paint no longer radiates from the visible seed (it radiates from where the seed used to be). Barely perceptible because most of the wall is covered, but it contradicts the card's mechanic.",
+    "fix": "Either keep the seed in its HTML position on those breakpoints (choose which columns/rows to expose around it instead of moving it), or set per-breakpoint delays with a tiny JS pass that recomputes --d from the seed's rendered grid position on load/resize."
+   }
+  ],
+  "builder_left_out": "All seven reviewer issues fixed and confirmed in the fix1 shots: mobile H1 at 1.8rem with the brush line wrapping normally and clearing the rim; mobile mural is now a 3x3 square at rows 4/7 (cartouche rows 1/4) with the image scaled 1.08 from the top so both grout seams clear her hat and chin, her face sits in the middle tile and the fixed pill lands on her midriff, not her head — the seed tile is re-placed into the exposed row 7 (row 4 on tablet, where the mural is now 5x3 with the same clear seams, verified at 768px); #book plate capped at 600px inside a 980px inner so the 270px 4:5 tile of Maria (face centred) is fully visible and tucked only under the plate's rim, hidden below 960px; h2→prose gap 1rem in #alone/#about; desktop hero ends exactly on the 5th grout line; small print at 16px; pennants sized from the container so whole pennants meet both edges (5 on mobile, 12 on desktop). No redesign; no GSAP used (vanilla CSS/JS). Nothing committed."
+ },
+ {
+  "slug": "vellum",
+  "name": "Vellum",
+  "state": "needs-independent-review",
+  "note": "fix2 + review2 died after review1 failed",
+  "fonts": "Uncial Antiqua (display: versals, rubrics, catchwords, ≥28px) + Gentium Book Plus (headings and body)",
+  "palette": [
+   "#efe3c6",
+   "#2a1f14",
+   "#c9971c",
+   "#1f3f8f",
+   "#a52a2a"
+  ],
+  "desc": "Illuminated manuscript: lapis title page, gilded versals before miniatures, vermilion rubrics and catchwords.",
+  "signature": "Historiated initials as the table of contents: each folio opens with a gilded versal standing before a miniature and joined to its word — the F at Maria's arch, the H holding the three hands, the W before her open hand — in an illuminated book with a lapis title page, manicules, and catchwords that walk you to the next leaf.",
+  "ornaments": [
+   {
+    "phrase": "three hands",
+    "element": "Historiated F: the gilded versal (inline SVG text, gold gradient, umber stroke, one-time sheen) standing before the right edge of the image3 miniature, its arm running into 'eel' on the H1's first line; under 1200px it becomes a three-line gilded drop cap inside the H1 so 'F|eel' stays one word."
+   },
+   {
+    "phrase": "three hands",
+    "element": "Three pen-drawn manicules (umber line, vermilion cuff) in the parchment margin, one pointing at each H1 clause, drawn on load; inline beside each clause on small leaves."
+   },
+   {
+    "phrase": "blossom into who you are meant to be",
+    "element": "White pen-work vine scroll (SVG pattern at .18) across the lapis title page."
+   },
+   {
+    "phrase": "wherever you are right now is the perfect place to start",
+    "element": "The folio ruled and pricked before the first word: double page frame drawn on load, a column of pricking holes, bottom-anchored ruling — and the lede, CTAs and catchword are now written on those ruled lines beneath the manicules."
+   },
+   {
+    "phrase": "begin where you are",
+    "element": "The rubricator's vermilion ¶ marking the lede."
+   },
+   {
+    "phrase": "grow through our deepest challenges",
+    "element": "A gold-and-lapis sprig growing up from the foot rule of folio 1r (drawn stem, leaves inking in), at the left of the hero catchword row."
+   },
+   {
+    "phrase": "walk alongside you",
+    "element": "Catchwords at the foot of every folio: the next section's first word in vermilion Uncial with a gold pen flourish that draws as it enters; each is a link to that section (hero catchword sits at the far right of the margin, clear of the portfolio pill)."
+   },
+   {
+    "phrase": "living proof",
+    "element": "A marginal manicule in the outer margin of folio 2r, script-anchored to the very words 'living proof', drawn as it enters (≥1200px)."
+   },
+   {
+    "phrase": "blossom into who you are meant to be",
+    "element": "A marginal vine climbing from that line up beside the 'You don't have to navigate this alone' heading, leaves and gold berries inking in and a five-petal gold blossom with a vermilion heart opening at the top (≥1200px)."
+   },
+   {
+    "phrase": "where you want to expand in the future",
+    "element": "Acanthus marginalia: a gold-and-lapis pen scroll of leaves unrolled outward into the margin by mask-position as the practices intro scrolls in; along the section top under 1100px."
+   },
+   {
+    "phrase": "three hands",
+    "element": "The historiated H at #practices: the brand mark gilded between the H's stems on a vermilion ground dotted with white pen-flourishes."
+   },
+   {
+    "phrase": "How we work together",
+    "element": "The two pillars as a diptych of facing folios: one set of ruling lines runs unbroken across both from a shared column of pricking holes in the gutter."
+   },
+   {
+    "phrase": "tapping on acupressure points",
+    "element": "The EFT miniature (image6) inside a pricked dotted-gold border beside the EFT entry."
+   },
+   {
+    "phrase": "lasting wholeness",
+    "element": "A line-filler: the closing sentence's last short line completed to the margin by a gold-and-vermilion lozenge bar measured by script and grown on scroll-in."
+   },
+   {
+    "phrase": "healing is a journey",
+    "element": "A thin ruled journey line down the left of the three steps with a gold lozenge milestone at each."
+   },
+   {
+    "phrase": "Arrive / Experience / Integrate",
+    "element": "Vermilion Uncial numerals I, II, III with gold pen flourishes, each step a ruled block."
+   },
+   {
+    "phrase": "a safe container",
+    "element": "The full-width image9 miniature held in a double-ruled gold frame with lozenges at the four corners."
+   },
+   {
+    "phrase": "every tool I share, I have needed myself",
+    "element": "A nota bene trefoil in the outer margin at the end of the heading row, tied to the heading by a hairline drawn from the trefoil back toward it as it enters; wraps beneath the heading on narrow leaves."
+   },
+   {
+    "phrase": "when you are ready, the next step is simple",
+    "element": "The historiated W: the gilded W standing before the right edge of the image2 miniature (Maria's open hand) with 'hen you are ready' joined at its top; a drop cap inside the heading under 900px."
+   },
+   {
+    "phrase": "online or in person · Texas",
+    "element": "The scribe's colophon: the small print set centered under a rule and closed by a gold lozenge."
+   }
+  ],
+  "validate": "✓ vellum      66 KB · photos 4 · files index.html,script.js,style.css",
+  "open_minor_issues": [],
+  "builder_left_out": "Kept the 66ch prose measure rather than a two-column setting; the new margin devices (living-proof manicule, blossom vine) only exist at ≥1200px where the outer margin exists. The desktop versal-before-miniature joins hold down to 1200px (hero) and 900px (book); below that the same gilded letter is a drop cap inside the heading rather than a smaller side-by-side initial. No Uncial glosses added (risk note: Uncial ≥28px only). The reviewer-observed partial manicule in full-page captures turned out to be a Chromium capture quirk with the shared hero animation rules, fixed by giving the marginal manicule its own transition-based classes; on-screen state was always complete."
+ },
+ {
+  "slug": "enamel",
+  "name": "Enamel",
+  "state": "needs-independent-review",
+  "note": "review2 died (fix2 applied, unreviewed)",
+  "fonts": "Bellefair (display) + Outfit (body)",
+  "palette": [
+   "#0f4d3a",
+   "#f6f1e8",
+   "#d7a084",
+   "#a8203a",
+   "#1c3f8a"
+  ],
+  "desc": "Fabergé jewel box: emerald guilloché, rose-gold wire, and every photo fired into an enamel egg or cameo.",
+  "signature": "The firing: enamel that clears from milk to glass — the jewel-egg on load and each section's cloisonné cells as they enter — over engine-turned rose-gold guilloché that catches light once per section, the safe container already open and staying open.",
+  "ornaments": [
+   {
+    "phrase": "three hands",
+    "element": "Cloisonné pendant: the brand mark as rose-gold SVG wire holding ruby, sapphire and emerald cells under one shared gloss; in the nav, on every chain divider and in the footer."
+   },
+   {
+    "phrase": "weave together a tailored combination",
+    "element": "Engine-turned guilloché ground: three static offset repeating-radial-gradients woven into moiré under every section, with a one-shot 60° light sweep per section that now fades in/out (opacity 0 at rest) so no edge is ever visible."
+   },
+   {
+    "phrase": "Feel good in your body / at peace in your mind / aligned in your life",
+    "element": "Three rose-gold hairlines that extend beneath the three H1 lines on arrival."
+   },
+   {
+    "phrase": "a safe container",
+    "element": "The jewel-egg: oval in 3px rose-gold cloisonné wire plus inset ring, crown ruby cabochon in a four-prong bezel; image5 revealed through three milky enamel layers clearing to glass with a specular sheen."
+   },
+   {
+    "phrase": "living proof",
+    "element": "A chipped ruby enamel cell over engine-turned copper that refills on scroll-in, gloss returning, with a rose-gold hairline scar left along the old chip edge; the caption now sits on a radial plate."
+   },
+   {
+    "phrase": "walk alongside you",
+    "element": "Oval cameo of image8 in a rose-gold bezel under an emerald multiply tint beside the pull quote, which now sits on a radial plate."
+   },
+   {
+    "phrase": "grounded partnership",
+    "element": "One wire, two cells: a single continuous rose-gold SVG path outlines both pillar cards as one cloisonné plaque, drawn once on enter; Body in warm enamel, Mind in cool; the divider follows the first cell's real height when stacked."
+   },
+   {
+    "phrase": "tapping on acupressure points · rest, grounding, and integration · ease of movement · movement and breath · hidden loyalties and patterns · move through and out",
+    "element": "Six unnumbered cabochons — emerald, moonstone, amber, ruby, sapphire, amethyst — one per modality, radial highlight in 2px rose-gold bezels with four prongs."
+   },
+   {
+    "phrase": "tapping on acupressure points",
+    "element": "Bracelet of nine gems on a rose-gold wire under the EFT card, lighting in tapping order with a 120ms stagger on scroll-in; hover/focus/tap shows each point's name; 24px stones on mobile so each has clear wire either side."
+   },
+   {
+    "phrase": "Arrive / Experience / Integrate",
+    "element": "Three numbered enamel medallions (I, II, III) strung on one rose-gold dashed chain, each firing clear as the sequence enters."
+   },
+   {
+    "phrase": "a guide, not a pedestal",
+    "element": "The portrait (image1) in a rose-gold oval cartouche hung from a bail — a locket, not a plinth."
+   },
+   {
+    "phrase": "your potential is given room to bloom",
+    "element": "Cloisonné rosette: five overlapping enamel petals (ruby, sapphire, amber, amethyst, jade) in rose-gold wire around a ruby cabochon in a four-prong bezel, 130px desktop / 100px mobile, firing clear as #about enters and now clearing the cartouche when stacked."
+   },
+   {
+    "phrase": "when you are ready, the next step is simple",
+    "element": "One large ruby cabochon in a four-prong bezel set above the invitation, glinting once as #book enters."
+   }
+  ],
+  "validate": "✓ enamel      60 KB · photos 4 · files index.html,script.js,style.css",
+  "open_minor_issues": [],
+  "builder_left_out": "All reviewer issues addressed: (major) the guilloché sweep pseudo-element is now opacity 0 at rest with opacity keyframed in/out, so the seam at the top-right of every section on mobile and the faint desktop seam are gone (verified in crops of #session, #about, hero/intro at 390px); (minor) bloom rebuilt as a 130/100px overlapping rosette with a ruby cabochon centre and .cell--about gets 44px top margin at ≤900px so it clears the cartouche; (minor) bracelet gems 24px with -4px prongs and no padding at ≤760px — ~9px of clear wire between stones; (minor) .quote__text and .proof__cap now sit on the same radial plate as .sec-head/.closing. Flag for Maria: the EFT cell keeps builder-authored copy not from the brief — the H3 \"Tapping on acupressure points.\", the note \"Nine gentle points, in order. Hover or tap a gem to see the point.\" and the nine point names (Side of hand, Eyebrow, Side of eye, Under eye, Under nose, Chin, Collarbone, Under arm, Top of head — standard EFT sequence). Kept because the card prescribes the interaction; wording and point list need her confirmation. No hero video (the egg carries the hero); image4/7/9/10/11 unused (4-photo budget). Nothing committed."
+ },
+ {
+  "slug": "curtain",
+  "name": "Curtain",
+  "state": "needs-independent-review",
+  "note": "fix2 + review2 died after review1 failed",
+  "fonts": "Cinzel (act titles, eyebrows, wordmark) + Lora (H1/H2 italic display, all body)",
+  "palette": [
+   "#f2e8d8",
+   "#2a0c15",
+   "#8c1d2f",
+   "#d4a853",
+   "#4a6b7a"
+  ],
+  "desc": "Opera house: crimson velvet and gilt frame the hero, then ivory programme card with footlights and a spotlight.",
+  "signature": "Pleated velvet curtains that part on load behind the already-visible act-title card, then close and reopen at the curtain call (#book) on the CTA alone in the spotlight.",
+  "ornaments": [
+   {
+    "phrase": "when you are ready, the next step is simple",
+    "element": "Two pleated velvet panels (repeating-linear-gradient pleats + sheen + fold) that part on arrival behind the headline card and close/reopen at the pinned curtain call on desktop"
+   },
+   {
+    "phrase": "absolute safety",
+    "element": "Gilt valance of scalloped velvet swags with gold fringe, rod and rosettes over the hero, the box and the curtain call"
+   },
+   {
+    "phrase": "absolute safety",
+    "element": "Footlights: a row of warm radial-gradient lamps along the hero stage, the box stage and the curtain call that brighten as the section enters"
+   },
+   {
+    "phrase": "meet you right where you are",
+    "element": "The spotlight: a fixed radial-gradient pool of light that eases toward whichever heading is crossing the viewport centre; static under reduced motion"
+   },
+   {
+    "phrase": "meet you right where you are",
+    "element": "The iris: the hero and curtain-call photos are true circles (aspect 1, radial mask feather) opened with an animated clip-path circle under a blurred, screen-blended cone of light"
+   },
+   {
+    "phrase": "wherever you are right now is the perfect place to start",
+    "element": "The act-title programme card: ivory, double gilt rule, four SVG corner scrolls, visible at 0.4s before the curtain moves"
+   },
+   {
+    "phrase": "three hands",
+    "element": "The mark inside a gilt cartouche of two mirrored SVG scroll flourishes drawn with stroke-dasharray as it enters: the divider between acts"
+   },
+   {
+    "phrase": "living proof",
+    "element": "A crimson wax seal pressed into the prologue with the mark inside a ring of the words 'Living proof'"
+   },
+   {
+    "phrase": "deep listening",
+    "element": "#practices as a theatre box: tied-back velvet drapes with gold cord and tassel both sides, a small valance above, and a gilt balustraded rail across the front that now runs drape to drape"
+   },
+   {
+    "phrase": "body & physical energy / mind, behavior & emotions",
+    "element": "The two pillars as the box's paired velvet-backed seats, 'Seat one' and 'Seat two'"
+   },
+   {
+    "phrase": "set down what has been carried",
+    "element": "Family Constellations chip: on hover/focus/tap a small velvet drape drops (rotateX from the top edge) over the chip's carried shadow"
+   },
+   {
+    "phrase": "tapping on acupressure points",
+    "element": "A gilt-ringed cameo of Maria tapping on the EFT chip"
+   },
+   {
+    "phrase": "online or in person · Texas",
+    "element": "An 'Admit one' ticket torn at a dashed perforation under the sessions heading"
+   },
+   {
+    "phrase": "Arrive / Experience / Integrate",
+    "element": "Three ivory programme pages, Act I · II · III in Cinzel, that page-turn open (rotateY from the left edge with a shade gradient) as each enters"
+   },
+   {
+    "phrase": "a guide, not a pedestal",
+    "element": "A fluted marble plinth with gilt cap and base under Maria's portrait that sinks through the stage floor line on scroll until only its cap remains and she stands level with the reader; 'pedestal' struck through, 'guide' underlined in gold"
+   }
+  ],
+  "validate": "✓ curtain     60 KB · photos 4 · files index.html,script.js,style.css",
+  "open_minor_issues": [],
+  "builder_left_out": "The separate .iris spans and the pedestal well/rise wrappers were removed (the figure itself is now the iris; the plinth shrinks in place, so the about section gets ~136 px shorter as it sinks — the shift happens while the section bottom is below the viewport). No hairline gilt ring on the iris edge: the radial feather reads cleaner against the wine stage."
+ },
+ {
+  "slug": "loom",
+  "name": "Loom",
+  "state": "reviewed-pass",
+  "note": "independent review passed; only minor polish left",
+  "fonts": "Anybody (display, variable wdth+wght) + Lexend (body)",
+  "palette": [
+   "#f3eee3",
+   "#2b3a5c",
+   "#b8622f",
+   "#a9505f",
+   "#c9b48a"
+  ],
+  "desc": "Denim-and-linen loom: her words shuttled through the warp, knots that untie, a shuttle that leaves copper weft behind.",
+  "signature": "The over-under woven headline: Maria's three sentences shuttled through a denim warp on load, each word visibly passing over and under 2px flax threads, with her portrait weaving itself in thread by thread and one shuttle left parked on the right selvedge.",
+  "ornaments": [
+   {
+    "phrase": "weave together a tailored combination",
+    "element": "The woven headline: rear copy under the warp, real H1 masked in 6px stripes above, a 2px flax thread layer between them aligned to the warp pitch (script.js) so 'over' segments read as pale thread on madder; the warp beam in the header; repeated on the #practices H2 through a denim+copper warp"
+   },
+   {
+    "phrase": "Arrive / Experience / Integrate (the shuttle)",
+    "element": "Three shuttles carry the weft lines in from alternating sides on load; the third parks on the right selvedge of the last line and stays (also shown static under reduced motion)"
+   },
+   {
+    "phrase": "wherever you are right now is the perfect place to start",
+    "element": "The woven label: lede and CTAs sewn on a cloth tag with a selvedge edge and dashed stitching"
+   },
+   {
+    "phrase": "true partnership",
+    "element": "Two SVG threads (denim + madder) run the left gutter and twist into a two-ply cord at every section boundary, drawn on scroll; on mobile a twisted cord runs each section's top edge"
+   },
+   {
+    "phrase": "invisible blocks",
+    "element": "Three knots in three warp threads untie into clean thread as #alone enters (GSAP attr tween); compact 3-row horizontal version on mobile"
+   },
+   {
+    "phrase": "body & physical energy × mind, behavior & emotions",
+    "element": "The tartan: copper weft crossing denim warp where the pair meets, above the pillars"
+   },
+   {
+    "phrase": "a safe container",
+    "element": "Each pillar as a stitched cloth pocket (bound top edge, dashed inner seam)"
+   },
+   {
+    "phrase": "lasting wholeness",
+    "element": "Selvedge bar + flax fringe under each pillar; the six modality chips hang from the fringe on single threads"
+   },
+   {
+    "phrase": "tapping on acupressure points",
+    "element": "EFT chip carries a fringed cloth swatch of Maria showing the tapping point"
+   },
+   {
+    "phrase": "Arrive / Experience / Integrate",
+    "element": "A shuttle crosses the three numbered steps on a scrubbed ScrollTrigger leaving a copper weft behind; numbers stitched with dashed underlines (vertical on mobile)"
+   },
+   {
+    "phrase": "a guide, not a pedestal",
+    "element": "About portrait sewn in as a woven care label with a tag hanging from a thread"
+   },
+   {
+    "phrase": "step into lasting wholeness",
+    "element": "Book portrait held between warp threads and bound by selvedges on both sides; the warp is masked off her face so it reads as cloth grain, not bars"
+   },
+   {
+    "phrase": "three hands",
+    "element": "Brand mark redrawn as three interlaced loop stitches, drawn on load, reused as the stitch icon before every H2"
+   },
+   {
+    "phrase": "where you want to expand",
+    "element": "Anybody wdth axis expands 80→110 once as single-line headings enter"
+   },
+   {
+    "phrase": "healing is a journey",
+    "element": "The footer hem: flax selvedge and fringe where the cloth ends"
+   }
+  ],
+  "validate": "✓ loom        53 KB · photos 4 · files index.html,script.js,style.css",
+  "open_minor_issues": [
+   {
+    "severity": "minor",
+    "where": "mobile ≤999px, intro → #alone boundary (style.css:162 .intro padding-bottom 0; style.css:180 .sec::before stripe)",
+    "what": "The denim/madder cord stripe that marks the top of #alone sits ~17px under the intro's last line ('…perfect place to start.'), so it reads as an underline of the intro rather than a section boundary; every other boundary has a full section's padding above it.",
+    "fix": "Give .intro a bottom padding at ≤999px (e.g. `@media (max-width:999px){ .intro{ padding-bottom: clamp(48px, 10vw, 72px); } }`) so the stripe has the same breathing room as the other section tops."
+   },
+   {
+    "severity": "minor",
+    "where": "desktop hero load choreography, portrait weave (style.css:353-355 @keyframes weave, script.js ready())",
+    "what": "For the first ~1 s of the reveal the portrait is a set of thin image slivers between wide linen stripes — mid-load it reads as bars across Maria's face (see 1.5 s frame) before it fills to the finished cloth.",
+    "fix": "Start the weave with the image already dominant and let the gaps close instead: `from { --s: 12px }` with a faster ease (e.g. cubic-bezier(.2,.8,.2,1)) and/or shorten to 1.1 s, so the 'thread-by-thread' reveal never shows more linen than photo over her face."
+   },
+   {
+    "severity": "minor",
+    "where": "desktop #alone at rest, .knots (index.html:100-104, style.css:191-199)",
+    "what": "Once the three knots have untied, the ornament is three bare 320px vertical hairlines (denim/madder/copper) beside the heading — the 'clean thread' payoff is invisible and the lines look like leftover rules.",
+    "fix": "Keep a trace of the story after the untie: end each path with a small tidy loop or a knot-sized dot where the knot was (e.g. tween to a 3px circle instead of a perfectly straight segment), or cap the lines at the heading's height and give them the dashed stitch treatment used elsewhere so they read as warp, not rules."
+   },
+   {
+    "severity": "minor",
+    "where": "desktop 1440, hero parked shuttle (style.css:346-350, 363; .shuttles inset:0 of .woven)",
+    "what": "The parked shuttle sits at the right edge of the text column (~x 833), ~140px past the end of 'aligned in your life.', floating in the gap between headline and portrait rather than resting on the line's selvedge.",
+    "fix": "Size .woven--hero to its content (`width: max-content` / `justify-self: start` on the grid item, keep max-width 100%) so `left: calc(100% + 6px)` lands the shuttle just past the last weft line — or position it in script.js from the third .weft's getBoundingClientRect().right."
+   },
+   {
+    "severity": "minor",
+    "where": "desktop 1440, #session → #about (style.css:169 .sec padding var(--space); about grid align-items:center)",
+    "what": "About 300px of empty linen between the three steps and the about photo (two 128px paddings plus the centred photo's offset) — the loosest gap on the page and the plainest stretch in an otherwise dense weave.",
+    "fix": "Set `.about { padding-top: calc(var(--space) * .6) }` and/or `align-items: start` on .about__grid at ≥900px, or run the cord's twist into a small woven divider so the gap carries the world."
+   },
+   {
+    "severity": "minor",
+    "where": "desktop ≥900 hero H1 (style.css:128 stripe mask, :130 flax threads)",
+    "what": "In the 'under' stripes the 1px denim + 2px flax threads notch the letter edges every 6px; at 1× it reads as a woven texture (readable, AA), but a client zooming in could read the notches as aliasing.",
+    "fix": "Optional: make the under-thread read unmistakably as thread — widen the flax thread to 3px and/or use a 8px/8px stripe cadence so each crossing is clearly a strand, not a jag."
+   }
+  ],
+  "builder_left_out": "Fixed all 8 issues. Major: script.js adds html.is-woven on the hero label's animationend (2.8 s safety timeout) and style.css commits warp/weft/eyebrow/label/portrait/brand-mark/shuttles as static rules after every media block; verified via Playwright that resizing 1440→800→1440 leaves clip-path:none and the harness full-page shot now shows the H1. Minors: 2px flax thread layer (.woven--hero::before, JS-aligned to the warp pitch) makes the over/under legible at 1x; single-copy H1 + --warp-alpha .45 under 900 px; compact mobile knots (viewBox 320×88, rows 16/40/64, 16px grid gap); 'you are.' nowrap + text-wrap:balance; --muted #4e586c (5.5:1 on linen-2, 6.2:1 on linen) and .book__fine in ink; banded warp at .38 alpha with a radial mask off her face; portrait column clamp(260px,28vw,400px) filling the viewport height (aspect 10/17, object-fit cover), text block nudged above center, third shuttle parks on the right selvedge. Also fixed a 1000 px wrap of the first weft line by tying --t-h1 to 4vw (min 40px) with nowrap wefts at ≥900. Not changed: the ~150 px of unwoven warp above the eyebrow that remains from center alignment against the full-height portrait — the composition now reads balanced rather than left-heavy; no further redesign attempted."
+ },
+ {
+  "slug": "lenticular",
+  "name": "Lenticular",
+  "state": "reviewed-pass",
+  "note": "independent review passed; only minor polish left",
+  "fonts": "Schibsted Grotesk (display 700–800) + Instrument Sans (body) + Martian Mono (micro-labels, numerals)",
+  "palette": [
+   "#e6e8ec",
+   "#14161c",
+   "#b9bec8",
+   "#2fb3a6",
+   "#c94b9a"
+  ],
+  "desc": "Holographic proof sheet: chrome-foil type on pearl grey, oil-slick bands and lenticular cards that catch light as you scroll.",
+  "signature": "One registered --tilt (−12°→12°), lerped from scroll, turns every light-catching surface at once — the chrome H1 sheen, the oil-slick bands, the seal, the lens ridges, and now the foil rules and foil-edged plates — so the whole sheet catches light as you scroll, like tilting a real holographic print.",
+  "ornaments": [
+   {
+    "phrase": "wherever you are right now is the perfect place to start",
+    "element": "Crop marks at the four corners of the hero and the #book sheet"
+   },
+   {
+    "phrase": "feel good in your body / at peace in your mind / aligned in your life",
+    "element": "Broad diagonal oil-slick band (teal · magenta · gold, ≤35% sat) behind the hero, swung by --tilt"
+   },
+   {
+    "phrase": "meet you right where you are",
+    "element": "Hero portrait under a lenticular lens: chrome rim, 3px ridges, a specular that slides with --tilt"
+   },
+   {
+    "phrase": "three hands",
+    "element": "Brand mark foil-stamped: ink under-stroke + chrome stroke via url(#chrome) whose gradientTransform turns with --tilt; in nav, rules, seal, footer"
+   },
+   {
+    "phrase": "aligned in your life",
+    "element": "Each H2 enters as three misregistered CMY multiply plates that snap into register once"
+   },
+   {
+    "phrase": "living proof",
+    "element": "Holographic authenticity seal beside #alone: starburst-clipped conic iridescent disc turned by --tilt, SVG textPath ring, embossed"
+   },
+   {
+    "phrase": "invisible blocks",
+    "element": "Eight blind-embossed pearl-on-pearl blocks (2px emboss) with a letterpress 'Invisible blocks' caption; the sheen reveals them as --tilt changes"
+   },
+   {
+    "phrase": "walk alongside you",
+    "element": "Section dividers: two chrome/slick foil rules running side by side with the three hands between them, the specular sliding along them with --tilt"
+   },
+   {
+    "phrase": "weave together a tailored combination",
+    "element": "Crossword interlock of the six unnumbered modality names sharing letters; hover/focus lights a word with the slick gradient; each links to its blurb"
+   },
+   {
+    "phrase": "tapping on acupressure points",
+    "element": "EFT chip: the tapping photo under lens ridges with nine chrome points stamped along its edge"
+   },
+   {
+    "phrase": "grounded partnership",
+    "element": "The two pillars on one foil-edged plate (2px --foil-grad border tied to --tilt) with a foil seam between them"
+   },
+   {
+    "phrase": "where you want to expand",
+    "element": "Registration crosshair on each pillar plate"
+   },
+   {
+    "phrase": "lasting wholeness",
+    "element": "The closing italic line sits on a short foil rule"
+   },
+   {
+    "phrase": "Arrive / Experience / Integrate",
+    "element": "Three foil-edged lenticular cards: numeral / pictogram under 4px stripe masks and ridges, snapping at --tilt thresholds with ±3° hysteresis; off-state ghost at 5%; the snapped state tints the panel with the slick gradient at 25% multiply"
+   },
+   {
+    "phrase": "a safe container",
+    "element": "About portrait in a mirror-chrome bevelled frame with an ink hairline and the tilt specular"
+   },
+   {
+    "phrase": "joy, strength, and purpose",
+    "element": "Wide chrome-framed strip of the arms-flung-wide meadow photo at #book"
+   },
+   {
+    "phrase": "begin where you are",
+    "element": "A second, fainter (45%) oil-slick band behind #book so the sheet closes the way it opened"
+   },
+   {
+    "phrase": "online or in person · Texas",
+    "element": "Chrome-foil Texas outline (SVG, url(#chrome) with the tilt specular) beside the small print"
+   },
+   {
+    "phrase": "deep listening / meet you right where you are",
+    "element": "Every section eyebrow sits on a small foil dash (34×4px --foil-grad with the specular)"
+   }
+  ],
+  "validate": "✓ lenticular  57 KB · photos 4 · files index.html,script.js,style.css",
+  "open_minor_issues": [
+   {
+    "severity": "minor",
+    "where": "style.css:77 `.btn::after` (hero + nav + #book CTAs, both viewports)",
+    "what": "The chrome specular is an ::after overlay painted ABOVE the button label, so as --tilt moves the 60%-white band crosses the 'Book a session' text. In the review shot the letter cores stay ink (lum 23) but edge pixels on 'ssion' lift to ~49; at tilt extremes the band centre lands on 3–4 letters and greys them. The bar says ornaments never sit on top of text.",
+    "fix": "Move the sheen under the label: add `z-index:0` to `.btn::after` and wrap/position the label with `position:relative; z-index:1` (or fold the specular into the `.btn` background-image list as the top layer, positioned with var(--spec-pos), and drop ::after)."
+   },
+   {
+    "severity": "minor",
+    "where": "style.css:199 `.blind__spec` — #alone side column (desktop x≈1140–1312, mobile x≈118–272)",
+    "what": "The 'invisible blocks' sheen is a screen-blended white band clipped by the element's rectangle, so it renders as a hard-edged lighter panel (lum 239 vs 230 outside) behind the blocks and caption instead of a light pass over the emboss.",
+    "fix": "Feather it: add `-webkit-mask/mask: radial-gradient(ellipse at 50% 45%, #000 40%, transparent 78%)` to `.blind__spec` (or mask it to the block grid with `repeating-linear-gradient` cells), and drop its alpha to ~.55 so the band never exceeds the surrounding pearl at its edges."
+   },
+   {
+    "severity": "minor",
+    "where": "style.css:287 `.book__fine` — #book small print",
+    "what": "'Online or in person · Sessions in Texas' / 'Booking and contact details will be added at launch' are set at 14 px uppercase mono; the batch bar asks for ≥16 px on copy (this is the only real copy on the page under 16 px).",
+    "fix": "Set `.book__fine { font-size: 15px }` desktop / keep letter-spacing .06em, or drop the uppercase transform and set 16 px so the lines still read as press marks without going below the body floor."
+   },
+   {
+    "severity": "minor",
+    "where": "index.html:91 `.alone__grid` at 1440 px",
+    "what": "Copy is capped at 62ch while the side column is a fixed 190 px, leaving a ~250 px empty channel between the prose and the seal/blocks; the section reads slightly unbalanced next to the tighter #practices and #about layouts.",
+    "fix": "Either raise `.alone .prose` to `max-width: 68ch` or change the grid to `minmax(0, 66ch) 190px` with `justify-content: space-between` so the seal column sits flush with the wrap edge and the void closes."
+   }
+  ],
+  "builder_left_out": "Fixes applied per the review: (major) foil carried through the middle — chrome/slick .rule dividers, 2px --foil-grad edges on .pillars and .step (+ foil seam and foil lent edge), 25% slick tint on the snapped .lent state (verified by forcing is-b), a 45% slick band behind #book, foil rules under the closing line and all section eyebrows — all angled/specular-positioned by --tilt so it stays one signature. (minor) lent off-state ghost .16→.05 with 8px stripe pitch; blind emboss deepened to 2px + 'Invisible blocks' letterpress caption; .book__fine 14px/.06em; hero slug removed, figcaption now 'Maria · Texas · scroll to tilt', pillar labels 'Pillar one · Body' / 'Pillar two · Mind'; H1 foil whites lowered to #eef0f4, ink offset 2px, 0.5px ink text-stroke on the foil layer. Consciously left out: no new photos (still 4), no border-image (used the padding-box/border-box gradient trick to keep radii clean), kept the blind__spec sheen rather than folding the blocks into the seal so the 'invisible blocks' ornament stays its own trace. Nothing committed."
+ },
+ {
+  "slug": "meander",
+  "name": "Meander",
+  "state": "needs-independent-review",
+  "note": "never reviewed (build finished; every reviewer/fixer died)",
+  "fonts": "Sorts Mill Goudy (display; italic for the river-name lede and map labels) + Spectral SC (eyebrows, nav, kickers, legend, stone numbers) + Barlow (body)",
+  "palette": [
+   "#f7f5ef",
+   "#2a2a26",
+   "#b57b3c",
+   "#2b6fae",
+   "#c8663b"
+  ],
+  "desc": "Survey map: chart paper, sienna contours, and one blue river that winds the whole page to a still pool.",
+  "signature": "One continuous hydrographic-blue SVG river runs the full height of the page — computed from zero-size waypoints in every section (chord-scaled spline, rebuilt on resize/font/image load) and drawn by scroll — carrying the lede on a textPath, looping an oxbow around Maria, taking the two pillars in as tributaries at a confluence, being crossed on three numbered stepping stones, and ending in the still pool that holds the Book CTA.",
+  "ornaments": [
+   {
+    "phrase": "healing is a journey",
+    "element": "Document-height SVG river: sienna floodplain wash shows the whole route, blue water + paler inner current draw by scroll (monotonic), 2.6 s arrival draw through the hero, end dot in the pool"
+   },
+   {
+    "phrase": "wherever you are right now is the perfect place to start",
+    "element": "Lede set on an SVG textPath along the upstream reach (Sorts Mill Goudy italic 21 px, dy -13), arriving word by word; plain sr-only copy on desktop, visible paragraph on mobile"
+   },
+   {
+    "phrase": "wherever you are right now",
+    "element": "'you are here' CSS teardrop pin with paper ring at the river's entry, dropping in on arrival; survey-sheet neatline corner ticks"
+   },
+   {
+    "phrase": "grow through our deepest challenges",
+    "element": "Chart-paper contour lines from three layered repeating-radial-gradients, masked to fade toward the copy, scaling/fading in on load"
+   },
+   {
+    "phrase": "three hands",
+    "element": "Compass rose (ring, tick ring, four-point star, N) with the three hand-leaves as its needle — large in the hero corner, small as the brand mark"
+   },
+   {
+    "phrase": "meet you right where you are",
+    "element": "The oxbow: river loops 3/4 around the elliptical image5 island, ringed by a stippled sandbar, with an italic 'Oxbow' map label"
+   },
+   {
+    "phrase": "walk alongside you",
+    "element": "Two sets of SVG footprints (sienna + ink) down the bank at #alone, one half a step ahead, revealed pair by pair; rotated into a horizontal strip below the prose on mobile"
+   },
+   {
+    "phrase": "How we work together / weave together a tailored combination",
+    "element": "Two tributary paths emerge from beneath each pillar card and merge into the main river at a drawn 'Confluence' (per-card joins on mobile), drawing in on reveal"
+   },
+   {
+    "phrase": "root-cause modalities",
+    "element": "Cattail (odd) and tapered-reed (even) CSS bullets on the six unnumbered modalities, plus SVG reed clusters at the card corners and the about photo"
+   },
+   {
+    "phrase": "let what has been held move through and out",
+    "element": "CSS dandelion clock (24 stem+puff seeds) at the mind pillar's corner; nine marked seeds detach and drift down-right fading on reveal (straight up, 600 ms under 700 px; still half-scattered under reduced motion)"
+   },
+   {
+    "phrase": "Arrive / Experience / Integrate",
+    "element": "Three numbered elliptical stepping stones with radial stone gradient where the river runs horizontally ('The Crossing'); each sends two one-shot expanding ripple rings on reveal; stacked on the gutter river on mobile"
+   },
+   {
+    "phrase": "your potential is given room to bloom / Texas",
+    "element": "SVG bluebonnet cluster (blue blooms, pale-blue mids, white tips) growing in at the foot of the about photo"
+   },
+   {
+    "phrase": "when you are ready, the next step is simple / begin where you are",
+    "element": "The river ends in a still pool: pale-blue elliptical plate ringed by depth-contour box-shadows, holding the Book CTA, labelled 'Still pool'"
+   },
+   {
+    "phrase": "online or in person · Texas",
+    "element": "Map legend box (pin, river, stone, scale bar, Texas outline with the river marked) in Spectral SC/Barlow"
+   },
+   {
+    "phrase": "empathic and intuitive gifts",
+    "element": "Copper CSS dragonfly (2 px body, four translucent gradient wings) alights on the Book CTA on hover/focus with a brief wing flutter"
+   }
+  ],
+  "validate": "✓ meander     63 KB · photos 4 · files index.html,script.js,style.css",
+  "open_minor_issues": [],
+  "builder_left_out": "No hero video (a survey map has no film). The dandelion seeds drift on a fixed down-right translate rather than along an offset-path copy of the river segment, so they never cross text. The current has no looping dash drift — the only motion is the one arrival draw, scroll draw, reveals, and the hover dragonfly. The river scrub is monotonic (never un-draws when scrolling up) so a tired visitor is never chased. No spot heights or elevation numbers on the contours (would read as invented data). The 'Oxbow' label and neatline corners are hidden on mobile where the river runs straight down the left gutter."
+ },
+ {
+  "slug": "popup",
+  "name": "Popup",
+  "state": "reviewed-pass",
+  "note": "independent review passed; only minor polish left",
+  "fonts": "Zilla Slab (display, 600, H1/H2 only) + Atkinson Hyperlegible (body)",
+  "palette": [
+   "#f6f3ee",
+   "#33404d",
+   "#d19a95",
+   "#7c8fa6",
+   "#c9a577"
+  ],
+  "desc": "Pop-up paper theatre: kraft covers, cut-paper hills, and every card rising on a visible hinge with a pull-tab.",
+  "signature": "The pop-up mechanism: every card rises on a hinge that stays visible at rest — a dashed fold line, a kraft hinge strip with two slits and a paper shadow — so the book reads as engineered paper even in a static thumbnail, and pull-tabs scrub the roots, the bundle and the walkers with the scroll.",
+  "ornaments": [
+   {
+    "phrase": "healing is a journey",
+    "element": "Signature: every .hinged card (welcome note, both pillars, three steps, about photo card) keeps its hinge visible at rest — dashed fold line, 6px kraft hinge strip with two slits, offset paper shadow"
+   },
+   {
+    "phrase": "three hands",
+    "element": "Brand mark as three interlocking slot-and-tab card pieces in the nav, page corners and footer"
+   },
+   {
+    "phrase": "three hands",
+    "element": "The mark at page scale on the welcome spread; the three pieces slide into their slots on arrival"
+   },
+   {
+    "phrase": "a safe container",
+    "element": "The book itself: kraft cover edges, gutter fold and a stitched binding thread down every spread"
+   },
+   {
+    "phrase": "Feel good in your body / at peace in your mind / aligned in your life",
+    "element": "The three H1 lines stand up one at a time on small hinges"
+   },
+   {
+    "phrase": "wherever you are right now is the perfect place to start",
+    "element": "The lede on a paper banner held down by two kraft tabs"
+   },
+   {
+    "phrase": "wherever you are right now is the perfect place to start",
+    "element": "A small paper flag planted on the near hill: you are here"
+   },
+   {
+    "phrase": "when you are ready, the next step is simple",
+    "element": "CTAs as paper tabs with a fold shadow and a press-down active state (hero and Book)"
+   },
+   {
+    "phrase": "begin where you are",
+    "element": "New: a dashed fold line under the hero CTAs with a kraft pull-tab at the page's start and three dotted footprints"
+   },
+   {
+    "phrase": "online or in person · Texas",
+    "element": "Five layered cut-paper Hill Country hills rising on staggered hinges with gentle parallax"
+   },
+   {
+    "phrase": "grounded partnership",
+    "element": "A fringe of thin paper meadow blades cut along the base fold"
+   },
+   {
+    "phrase": "You don't have to navigate this alone",
+    "element": "Two paper-doll figures, rose and slate, rising side by side on one shared hinge"
+   },
+   {
+    "phrase": "invisible blocks",
+    "element": "Grey card boxes with dotted fold lines that stand in the paragraph, then fold flat onto their footprints as their well closes"
+   },
+   {
+    "phrase": "weave together a tailored combination",
+    "element": "A woven paper strip threaded through two slits along the top of each pillar card"
+   },
+   {
+    "phrase": "body & physical energy",
+    "element": "A rose paper figure in a Qi Gong stance inside three cut-paper arcs of breath"
+   },
+   {
+    "phrase": "tapping on acupressure points",
+    "element": "The EFT photo as a small card on its own hinge with three tap points on its kraft edge"
+   },
+   {
+    "phrase": "set down what has been carried",
+    "element": "A paper figure with a kraft bundle; a pull-tab scrubbed by the scroll slides the bundle off onto the fold line"
+   },
+   {
+    "phrase": "let what has been held move through and out",
+    "element": "Three paper strips sliding out of a slot inside the card"
+   },
+   {
+    "phrase": "root-cause modalities",
+    "element": "A pull-tab under the pillars slides a card up to reveal cut-paper roots (single slice-fit set on mobile)"
+   },
+   {
+    "phrase": "online or in person · Texas",
+    "element": "Two cut-paper stand-ups on one fold: the stone arch with its red door and a paper laptop"
+   },
+   {
+    "phrase": "Arrive / Experience / Integrate",
+    "element": "Three numbered paper figures on flag-sticks stepping along a folded paper path as the strip is pulled"
+   },
+   {
+    "phrase": "grow through our deepest challenges",
+    "element": "A cut-paper mountain range with a dotted paper path that draws itself over the ridge"
+   },
+   {
+    "phrase": "a safe container",
+    "element": "A paper pocket (clip-path flap, two stitched lines, slot shadow on the card) that holds the booking card"
+   }
+  ],
+  "validate": "✓ popup       63 KB · photos 4 · files index.html,script.js,style.css",
+  "open_minor_issues": [
+   {
+    "severity": "minor",
+    "where": "#alone, script.js:52-54 — the 'invisible blocks' fold, both viewports",
+    "what": "When the blocks fold flat the .blocks well also animates from 86px to 24px height (plus margins), shifting the 'Healing is a journey…' paragraph and everything below it up by ~60px at the exact moment the visitor is reading it (trigger fires at 'bottom 22%', so the next paragraph is mid-viewport). A one-time content jump under the reader is the kind of thing the bar says a tired visitor must not feel.",
+    "fix": "Drop the height/margin tween on .blocks (script.js:54) and keep the well at a fixed height; let the blocks fold onto their footprints inside the same box. If the empty well looks too tall afterwards, reduce .blocks height to ~64px in CSS so the layout never changes on scroll."
+   },
+   {
+    "severity": "minor",
+    "where": "#about — h2 'Every tool I share, I have needed myself.' → body; desktop d3/d4 slice y≈1052→1088, mobile m4 y≈795→813",
+    "what": "There is no gap between the About heading and its first paragraph (h2 margin 0, .prose has no top margin); on mobile the heading reads cramped against the body — the only section where this happens.",
+    "fix": "Add `.about__copy .prose { margin-top: 1rem; }` (or a `margin-bottom: .9rem` on #about-title) so it matches the rhythm of the other section heads."
+   },
+   {
+    "severity": "minor",
+    "where": "#practices .pillars — desktop (d2 slice): left card ends at y≈630, right at y≈690",
+    "what": "The two pillar cards are a pair but the left card is ~60px shorter, so its hinge strip floats higher than its partner's; the pair reads slightly uneven on the spread.",
+    "fix": "Give `.pillars { align-items: stretch; }` and make `.pillar { display:flex; flex-direction:column; }` so both cards share a bottom edge and their hinges align on the same fold; leave mobile stacking as is."
+   },
+   {
+    "severity": "minor",
+    "where": "style.css — non-interactive ornaments (.dolls, .blocks, .qi, .carry svg, .slot, .ways, .walker, .path__fold, .mtn, .hero__fold, .blades, .flag, .bigmark, .weave)",
+    "what": "The bedazzled bar asks every non-interactive ornament to be aria-hidden AND pointer-events:none; they are all aria-hidden but only .hills, .corner, .hinge-strip, .pocket__flap and the pseudo-elements set pointer-events:none, so hover/drag over the figures can still catch the cursor (e.g. the EFT chip taps, the slot strips beside 'Intuitive emotional release').",
+    "fix": "Add one rule: `.dolls, .blocks, .qi, .carry svg, .slot, .ways, .path__fold, .walker, .mtn, .hero__fold, .blades, .flag, .bigmark, .weave, .taps { pointer-events: none; }` (keep `.pulltab`, `.carry__tab` and `.strip__tab` interactive as intended)."
+   },
+   {
+    "severity": "minor",
+    "where": "Hero, desktop 1440×900 first viewport — right page above the photo card (x≈750–1400, y≈80–290)",
+    "what": "The top of the right-hand page is empty paper for ~200px above the photo card; the left page is rich (H1, banner, tabs, fold line, footprints) but the right page only starts at the card, so the first viewport feels lighter on the right than the world deserves.",
+    "fix": "Either lift the card ~60px (reduce `--card-lift`/the negative margin on .hero__stage so the card top lands near y≈230) or plant one more small cut-paper stand-up on that page — e.g. a second paper flag or a slate paper cloud on a hinge near the corner mark — traced to 'where you want to expand'. Keep it under the 12-hinge cap."
+   },
+   {
+    "severity": "minor",
+    "where": "Hero, mobile 390×844 first viewport (popup-mobile.png) — photo card top at y≈625, portfolio pill at y≈790–830",
+    "what": "At the initial mobile scroll position the fixed gallery pill sits directly over Maria's face in the hero photo card (the card is only partly below the fold). Not a CTA and it clears on scroll, but it is the first thing a phone visitor sees.",
+    "fix": "Tighten the mobile hero so the card starts above ~y=560 (e.g. `.hero__fold { margin-top: 1.6rem }` and `.hero__stage { margin-top: .4rem }` at ≤959px) so her face sits above the pill, or push the card fully below the fold — either is fine as long as the face is not under the pill at load."
+   }
+  ],
+  "builder_left_out": "No hinge strip on the pocket card (its bottom is inside the pocket, so it got a slot shadow instead); the hero still keeps ~80px of quiet page above the eyebrow on desktop rather than filling it with more ornament."
+ },
+ {
+  "slug": "nightgarden",
+  "name": "Nightgarden",
+  "state": "needs-independent-review",
+  "note": "review1/fix2/review2 died after fix1",
+  "fonts": "Ovo (display) + Hanken Grotesk (body)",
+  "palette": [
+   "#0e1a15",
+   "#f2efe6",
+   "#b8c4d6",
+   "#e6a9b8",
+   "#d9c27a"
+  ],
+  "desc": "Walled garden at moonrise: green-black, silvered Maria, moonflowers unfurling on scroll, a paper lantern that turns per step.",
+  "signature": "Moonflowers opening on scroll: five-petal SVG groups whose petals scale and unfurl from the throat as each section arrives, from three on stems in the hero garden bed to the 320 px bloom that frames the Book CTA.",
+  "ornaments": [
+   {
+    "phrase": "blossom into who you are meant to be",
+    "element": "Three moonflowers on drawn stems in the hero garden bed, opening on arrival; two more on sprout stems at #alone (now tucked under the throat), opening on reveal"
+   },
+   {
+    "phrase": "your potential is given room to bloom",
+    "element": "Two moonflowers at the edge of the #about portrait; the 320 px fully-open moonflower framing the Book CTA on the flagstone"
+   },
+   {
+    "phrase": "at peace in your mind",
+    "element": "The low moon rising 40 px behind layered foliage silhouettes and two leaf sprigs on load, leaving a still silver moon-path on the ground"
+   },
+   {
+    "phrase": "wherever you are right now is the perfect place to start",
+    "element": "The lede set on the coping stone of the garden wall, one running-bond course beneath it"
+   },
+   {
+    "phrase": "absolute safety",
+    "element": "The walled garden: running-bond stone wall pattern with coping across the top and down both sides of #practices; the two pillars sit inside it"
+   },
+   {
+    "phrase": "grow through our deepest challenges",
+    "element": "Night-jasmine vine on the fixed left rail (>=1300 px, constrained to the side margin) drawn upward with the scroll, leaves and pink stars set on it; below 1300 px a short horizontal jasmine run drawn along the #practices and #session section tops on reveal"
+   },
+   {
+    "phrase": "walk alongside you",
+    "element": "Four stepping stones on the garden path leading from #alone down to the walled garden"
+   },
+   {
+    "phrase": "tapping on acupressure points",
+    "element": "Nine fireflies over image6 in the EFT card, lighting once in tapping order on reveal, then holding"
+   },
+   {
+    "phrase": "weave together a tailored combination",
+    "element": "Jasmine-star bullets on the six modalities that turn and grow on hover"
+   },
+   {
+    "phrase": "Arrive / Experience / Integrate",
+    "element": "A paper lantern with three numbered panels, now with vertical bamboo ribs, top/bottom bamboo rings and a vertical highlight; it turns to the step at the viewport centre in both directions, numerals staying lit once reached"
+   },
+   {
+    "phrase": "when you are ready, the next step is simple",
+    "element": "The lantern's light pooling ahead on the #book flagstone, reaching the CTA as the section enters"
+   },
+   {
+    "phrase": "begin where you are",
+    "element": "The flagstone under the Book button, the one step lit before you take it"
+   },
+   {
+    "phrase": "three hands",
+    "element": "Brand mark in lunar silver with a moonflower-white inner stroke; dividers of three jasmine stars on a hairline stem at #alone, #session (>=1300 px) and the footer"
+   }
+  ],
+  "validate": "✓ nightgarden  68 KB · photos 4 · files index.html,script.js,style.css",
+  "open_minor_issues": [],
+  "builder_left_out": "Fixed every reviewer item. Stacked hero now from 900 px down (photo full-width with vertical mask, text below, bed left / moon right), so the 680-1024 band never puts the headline over her face; the two-column hero survives only >=901 px where the H1 starts past the photo's masked edge (verified at 1024: H1 x=438, face ~x 200-320). Vine rail moved to >=1300 px and capped at the side margin minus 12 px, stem meander pulled in; at 1300 the vine is 78 px wide and the practices lead text starts at x=90. Lantern observer uses a centre band (rootMargin -45%/-45%, threshold 0) and turns in both directions, plus turns back when a step leaves the band downward so a jump to top does not strand it on III. Also: #alone h2 margin-bottom 1.2rem, sprout overlap -38%, pillars align-items:start, caption/fine print/footer copy to 16 px. Did not add the 900-1024 hero padding tweak (not needed after the stacked change) and did not touch the 'Sessions' divider above 1300 px, only swapped it for the vinelet below. Total code 68 KB, right under the ~70 KB budget, so I added no further ornament. Nothing committed."
+ }
+]

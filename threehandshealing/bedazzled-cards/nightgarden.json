@@ -1,0 +1,52 @@
+{
+  "slug": "nightgarden",
+  "name": "Nightgarden",
+  "world": "A walled garden after dark at moonrise: moonflowers unfurl white, night jasmine climbs the wall, a low moon sits behind the foliage, a paper lantern hangs on the path. Peace in the mind is the quiet after the sun goes. Green-black, moonflower white, lunar silver, jasmine pink, lantern ochre — no stars, no sky, a garden.",
+  "fonts": "Ovo (display) + Hanken Grotesk (body)",
+  "palette": [
+    "#0e1a15",
+    "#f2efe6",
+    "#b8c4d6",
+    "#e6a9b8",
+    "#d9c27a"
+  ],
+  "hero": "A low full moon (radial-gradient disc with a soft-light crater speckle) half-hidden behind layered foliage silhouettes (radial-gradient leaf blobs in two darker greens) at the lower right — behind leaves, never behind Maria. image8 (eyes closed, hands on heart) at left, silvered (mix-blend-mode: luminosity over a green-black plate at .85 so some warmth survives), its edge feathered into the foliage with a mask. Three moonflowers (SVG trumpets: five fused petals with a pale radial throat) open along the bottom edge under the H1 in Ovo, moonflower white; the lede in Hanken Grotesk on the stone coping of the garden wall.",
+  "signature": "Moonflowers opening on scroll: five-petal SVG groups whose petals scale from the throat and unfurl (rotate from a shared origin, staggered) as each section arrives — 'your potential is given room to bloom' — the garden dark at the top of the page and in full white bloom by the Book CTA, which the largest flower frames.",
+  "ornaments": [
+    {
+      "phrase": "blossom into who you are meant to be",
+      "element": "Moonflower SVGs at #alone, #about and #book (≤8 groups): petals scale(.2→1) + rotate from the throat on reveal, a soft box-shadow glow under the SVG only while opening, then still; the #book bloom is 320px and frames the CTA."
+    },
+    {
+      "phrase": "tapping on acupressure points",
+      "element": "Nine fireflies at the nine tapping points over image6 in the EFT card: 6px dots with layered box-shadow glow that light once in the tapping sequence on reveal, then hold — the only points of light on the page, and only inside that card."
+    },
+    {
+      "phrase": "Arrive / Experience / Integrate",
+      "element": "A paper lantern at #session (rounded rectangle, rib lines from a repeating-linear-gradient at .12, inner glow via inset box-shadow in ochre, bamboo frame) with three numbered panels; it turns (rotateY, 3D, once per step on scroll) to bring each panel to the front."
+    },
+    {
+      "phrase": "when you are ready, the next step is simple",
+      "element": "The lantern's light pools ahead on the #book flagstone: a warm radial-gradient on the ground that reaches the CTA as the section enters, the step lit before you take it."
+    },
+    {
+      "phrase": "absolute safety",
+      "element": "The walled garden: a low stone wall (repeating-linear-gradient courses with mortar lines, a coping stone top) runs across the top of #practices and down both sides on desktop; the two pillars sit inside the walled bed."
+    },
+    {
+      "phrase": "grow through our deepest challenges",
+      "element": "Night-jasmine vine climbing the wall on the left rail: SVG stem drawn upward with the scroll (stroke-dashoffset), small five-point star flowers in jasmine pink popping open as the stem passes; runs along section tops on mobile."
+    },
+    {
+      "phrase": "at peace in your mind",
+      "element": "The moon rises 40px behind the foliage on load while the leaves darken, and leaves a still moon-path (a faint silver radial on the ground) that stays — the quiet after the sun goes."
+    },
+    {
+      "phrase": "three hands",
+      "element": "Brand mark in lunar silver with a 1px moonflower-white inner stroke; section dividers are three jasmine stars on a hairline stem."
+    }
+  ],
+  "motion": "Load: moon rises 40px while foliage darkens (1.2s), the three hero moonflowers open (1.6s, staggered). Scroll: vine climbs, flowers open, lantern turns, fireflies light once, the light pool reaches the CTA. Nothing loops. Reduced motion: moon up, flowers open, lantern showing all three panels stacked, fireflies lit.",
+  "photos": "image8 hero in silver luminosity; image6 in the EFT firefly card; image11 in #about with a soft radial mask so her face is the lit centre; image9 small at #book beside the lantern. Moonlight treatment throughout, never fully saturated. 4 photos.",
+  "risk": "Stellar distance: no stars, no dots-of-light field, no lines between points — the sky is one moon behind foliage, and the only lit points are the nine fireflies inside the EFT card. Halo distance: no glow behind the portrait; glow belongs to the lantern and the opening flowers only. Enamel distance: green-black #0e1a15 vs saturated emerald. Blossom is shared only with Nouveau (irises) in this batch. Body moonflower white 17px on green-black (≈16:1); pink and ochre for accents ≥18px. Foliage is gradients, not DOM; moonflowers ≤8 SVG groups. Replaces Mycelium."
+}

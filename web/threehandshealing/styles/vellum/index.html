@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en" data-style="vellum">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three Hands Healing — Vellum</title>
+  <meta name="description" content="Three Hands Healing — EFT, energy healing, bodywork, Qi Gong and Family Constellations with Maria. Online or in person in Texas.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#efe3c6">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400;1,700&family=Uncial+Antiqua&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Shared scribe's palette: the gold-leaf gradient, the versal ground, the acanthus leaf. -->
+  <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f6df8e"/>
+        <stop offset=".38" stop-color="#c9971c"/>
+        <stop offset=".62" stop-color="#eec95a"/>
+        <stop offset="1" stop-color="#8f6a10"/>
+      </linearGradient>
+      <linearGradient id="sheen" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#fff" stop-opacity=".8"/>
+        <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+      </linearGradient>
+      <symbol id="ground" viewBox="0 0 120 120">
+        <rect x="3" y="3" width="114" height="114" fill="currentColor"/>
+        <rect x="9" y="9" width="102" height="102" fill="none" stroke="url(#gold)" stroke-width="1.4"/>
+        <g fill="none" stroke="#fff" stroke-width="1" opacity=".55" stroke-linecap="round">
+          <path d="M15 15c9 2 11 11 6 17M105 15c-9 2-11 11-6 17M15 105c9-2 11-11 6-17M105 105c-9-2-11-11-6-17"/>
+          <path d="M14 60c4-7 4-7 9 0-5 7-5 7-9 0M106 60c-4-7-4-7-9 0 5 7 5 7 9 0M60 14c-7 4-7 4 0 9 7-5 7-5 0-9M60 106c-7-4-7-4 0-9 7 5 7 5 0 9"/>
+        </g>
+        <g fill="#fff" opacity=".5"><circle cx="32" cy="13" r="1.3"/><circle cx="88" cy="13" r="1.3"/><circle cx="13" cy="32" r="1.3"/><circle cx="13" cy="88" r="1.3"/><circle cx="107" cy="32" r="1.3"/><circle cx="107" cy="88" r="1.3"/><circle cx="32" cy="107" r="1.3"/><circle cx="88" cy="107" r="1.3"/></g>
+      </symbol>
+      <symbol id="leaf" viewBox="0 0 40 24">
+        <path d="M1 12C7 2 21-2 37 4c-7 4-9 10-3 16C22 25 8 21 1 12Z" fill="#1f3f8f" stroke="url(#gold)" stroke-width="1.4"/>
+        <path d="M3 12c10-2 20-4 30-5" fill="none" stroke="#f0d37a" stroke-width="1"/>
+      </symbol>
+      <symbol id="mark" viewBox="0 0 48 48">
+        <path d="M24 6c8 0 14 5 14 12 0 8-7 10-14 24C17 28 10 26 10 18 10 11 16 6 24 6Z"/><path d="M11 31c4-7 11-7 15-4 4 4 2 10-9 13-6 1-10-4-6-9Z"/><path d="M37 31c-4-7-11-7-15-4-4 4-2 10 9 13 6 1 10-4 6-9Z"/>
+      </symbol>
+      <symbol id="manicule" viewBox="0 0 72 44">
+        <path class="m-fill m-cuff" d="M54 8l16-3v34l-16-3z"/>
+        <path class="m-fill m-skin" d="M54 11c-10-2-20-1-26 2-8 2-16 3-22 3-4 0-4 6 0 6h22c-4 3-4 7 0 7-4 3-3 7 1 7-2 3 0 6 4 5 9-1 16-4 21-7z"/>
+        <path class="m-line" pathLength="1" d="M54 11c-10-2-20-1-26 2-8 2-16 3-22 3-4 0-4 6 0 6h22c-4 3-4 7 0 7-4 3-3 7 1 7-2 3 0 6 4 5 9-1 16-4 21-7z"/>
+        <path class="m-line" pathLength="1" d="M30 13c2-6 10-8 12-3M28 22h8M28 29h7M29 36h5"/>
+        <path class="m-line" pathLength="1" d="M54 8l16-3v34l-16-3zM57 10v27"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <header class="site-head">
+    <a class="brand" href="#top" aria-label="Three Hands Healing — back to top">
+      <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#mark" class="mark-under"/><use href="#mark" class="mark-gold"/></svg>
+      <span class="brand__name">Three Hands Healing</span>
+    </a>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-menu>Menu</button>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="#practices">Practices</a>
+      <a href="#session">Sessions</a>
+      <a href="#about">About</a>
+      <a class="btn btn--sm" href="#book">Book a session</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ═══ Folio 1r — the lapis title page ═══ -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__panel">
+        <!-- ornament: "blossom into who you are meant to be" — white pen-work vine scroll across the lapis title page -->
+        <svg class="hero__vine" aria-hidden="true" focusable="false">
+          <defs>
+            <pattern id="vine" width="96" height="96" patternUnits="userSpaceOnUse">
+              <g fill="none" stroke="#fff" stroke-width="1.1" stroke-linecap="round">
+                <path d="M6 88c22-4 32-22 26-42S14 22 22 12c8-9 27 0 31 19s21 31 37 21"/>
+                <path d="M42 30c6-9 15-9 17 0-6 5-12 5-17 0zM60 62c-6-9-15-9-17 0 6 5 12 5 17 0zM26 66c-8-2-12 4-8 10 6-1 9-5 8-10z"/>
+                <path d="M70 84c6-10 16-8 20 0"/>
+              </g>
+              <g fill="#fff"><circle cx="82" cy="20" r="1.6"/><circle cx="12" cy="52" r="1.6"/><circle cx="90" cy="60" r="1.2"/><circle cx="52" cy="90" r="1.2"/></g>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#vine)"/>
+        </svg>
+
+        <p class="rubric rubric--gold hero__eyebrow">Body · Mind · Spirit</p>
+
+        <div class="hero__body">
+          <!-- ornament: "three hands" (the brand) / the historiated F — gilded versal standing before the miniature of Maria at the arch -->
+          <div class="initial initial--hero">
+            <figure class="miniature miniature--hero">
+              <img src="../../assets/image3.jpeg" alt="Maria leaning against a pale limestone archway, a red door open behind her" width="646" height="968" fetchpriority="high" decoding="async">
+            </figure>
+            <svg class="versal versal--hero" viewBox="0 0 170 230" aria-hidden="true" focusable="false">
+              <defs><clipPath id="clipF"><text class="versal__t versal__t--hero" x="4" y="192">F</text></clipPath></defs>
+              <text class="versal__t versal__t--hero versal__t--gold" x="4" y="192">F</text>
+              <g clip-path="url(#clipF)"><g class="sheen"><rect x="-140" y="-30" width="80" height="290" fill="url(#sheen)" transform="skewX(-16)"/></g></g>
+            </svg>
+          </div>
+
+          <h1 id="hero-title" class="hero__title">
+            <!-- the same gilded F as a drop cap under 1200px, so "F|eel" stays one word when the miniature sits above -->
+            <svg class="dropcap dropcap--hero" viewBox="0 0 64 96" aria-hidden="true" focusable="false"><text class="versal__t versal__t--gold" x="33" y="72" text-anchor="middle" font-size="92">F</text></svg>
+            <!-- ornament: "three hands" — three pen-drawn manicules in the margin, one pointing at each clause, drawn on load -->
+            <span class="hero__line"><span class="sr">F</span>eel good in your body,<svg class="manicule" aria-hidden="true" focusable="false"><use href="#manicule"/></svg></span>
+            <span class="hero__line">at peace in your mind,<svg class="manicule" aria-hidden="true" focusable="false"><use href="#manicule"/></svg></span>
+            <span class="hero__line">aligned in your life.<svg class="manicule" aria-hidden="true" focusable="false"><use href="#manicule"/></svg></span>
+          </h1>
+        </div>
+      </div>
+
+      <aside class="hero__margin" aria-hidden="true">
+        <!-- ornament: "wherever you are right now is the perfect place to start" — the folio ruled and pricked before the first word: a double-ruled page frame and a column of pricking holes -->
+        <svg class="page-frame page-frame--outer" focusable="false"><rect x="0" y="0" width="100%" height="100%" pathLength="1"/></svg>
+        <svg class="page-frame page-frame--inner" focusable="false"><rect x="0" y="0" width="100%" height="100%" pathLength="1"/></svg>
+        <span class="pricking"></span>
+        <span class="folio-num">fol. 1r</span>
+      </aside>
+
+      <!-- the lede, the CTAs and the catchword are written on the margin's ruled lines (≥1200px); under the panel on smaller leaves -->
+      <div class="hero__foot">
+        <!-- ornament: "begin where you are" — the rubricator's ¶ marks the place to begin -->
+        <p class="hero__lede"><span class="pilcrow" aria-hidden="true">¶</span>Wherever you are right now is the perfect place to start.</p>
+        <div class="hero__cta">
+          <a class="btn" href="#book">Book a session</a>
+          <a class="link" href="#practices">How we work together</a>
+        </div>
+        <p class="catchword-row catchword-row--hero">
+        <!-- ornament: "grow through our deepest challenges" — a marginal sprig growing up from the frame's foot rule -->
+        <svg class="sprig" viewBox="0 0 90 120" aria-hidden="true" focusable="false">
+          <path class="sprig__stem" pathLength="1" d="M45 118C44 92 48 70 40 46 34 30 44 18 52 6" fill="none" stroke="url(#gold)" stroke-width="2"/>
+          <use href="#leaf" width="34" height="20" x="8" y="66" transform="rotate(-38 25 76)"/>
+          <use href="#leaf" width="34" height="20" x="46" y="44" transform="rotate(150 63 54)"/>
+          <use href="#leaf" width="30" height="18" x="10" y="26" transform="rotate(-52 25 35)"/>
+          <g fill="url(#gold)" stroke="#2a1f14" stroke-width=".8"><circle cx="54" cy="6" r="4"/><circle cx="66" cy="28" r="3"/><circle cx="24" cy="94" r="3"/></g>
+        </svg>
+        <!-- ornament: "walk alongside you" — catchword: the next folio's first word written at the foot to carry you across the page turn -->
+        <a class="catchword" href="#welcome" data-reveal aria-label="Next: Welcome"><span>Welcome</span><svg class="catchword__flourish" viewBox="0 0 112 16" aria-hidden="true" focusable="false"><path pathLength="1" d="M2 10c8-12 14 8 22 0s14-10 22 0 14 8 22 0 14-10 22 0 12 8 18 2"/></svg></a></p>
+      </div>
+    </section>
+
+    <!-- ═══ Folio 1v — the welcome ═══ -->
+    <section class="sec intro" id="welcome" aria-label="Welcome">
+      <div class="folio">
+        <span class="folio-num" aria-hidden="true">fol. 1v</span>
+        <div class="block prose prose--intro">
+          <svg class="dropcap" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><text class="versal__t versal__t--gold" x="48" y="78" text-anchor="middle" font-size="80">W</text></svg>
+          <p><span class="sr">W</span>elcome—I’m Maria. I am here to help you feel good in your body, at peace in your mind, and aligned in your life, relationships, and career. My mission is simple: to share the powerful, transformative tools that changed my own life so you can move beyond pain, step past invisible blocks, and fully reclaim your life’s vitality. You don’t have to navigate this alone—wherever you are right now is the perfect place to start.</p>
+        </div>
+        <!-- ornament: "walk alongside you" — catchword -->
+        <p class="catchword-row"><a class="catchword" href="#alone" data-reveal aria-label="Next: You don’t have to navigate this alone"><span>You</span><svg class="catchword__flourish" viewBox="0 0 112 16" aria-hidden="true" focusable="false"><path pathLength="1" d="M2 10c8-12 14 8 22 0s14-10 22 0 14 8 22 0 14-10 22 0 12 8 18 2"/></svg></a></p>
+      </div>
+    </section>
+
+    <!-- ═══ Folio 2r — validation ═══ -->
+    <section class="sec alone" id="alone" aria-labelledby="alone-title">
+      <div class="folio">
+        <span class="folio-num" aria-hidden="true">fol. 2r</span>
+        <header class="block head">
+          <p class="rubric">Before we begin</p>
+          <div class="head__row">
+            <svg class="versal reveal" data-reveal viewBox="0 0 120 120" aria-hidden="true" focusable="false"><use href="#ground" width="120" height="120" style="color:#1f3f8f"/><text class="versal__t versal__t--gold" x="60" y="96" text-anchor="middle" font-size="92">Y</text></svg>
+            <h2 id="alone-title"><span class="sr">Y</span>ou don’t have to navigate this alone.</h2>
+          </div>
+        </header>
+        <div class="block prose">
+          <p>It is so hard to <span id="blossom-line">blossom into who you are meant to be</span> when you are navigating illness, destructive behavioral patterns, or invisible blocks. I have been there—and I am <span id="living-proof">living proof</span> that we can grow through our deepest challenges to find ourselves again in greater joy, strength, and purpose.</p>
+          <p>Healing is a journey, and it is my absolute honor to walk alongside you, however that looks for you.</p>
+        </div>
+        <!-- ornament: "living proof" — a marginal manicule in the outer margin, pointing at the very words (≥1200px) -->
+        <svg class="marginalia marginalia--proof" data-anchor="#living-proof" data-reveal viewBox="0 0 72 44" aria-hidden="true" focusable="false">
+          <path class="pm-fill" fill="#a52a2a" d="M54 8l16-3v34l-16-3z"/>
+          <path class="pm-fill" fill="#f6ecd8" d="M54 11c-10-2-20-1-26 2-8 2-16 3-22 3-4 0-4 6 0 6h22c-4 3-4 7 0 7-4 3-3 7 1 7-2 3 0 6 4 5 9-1 16-4 21-7z"/>
+          <g class="pm-line" fill="none" stroke="#2a1f14" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+            <path pathLength="1" d="M54 11c-10-2-20-1-26 2-8 2-16 3-22 3-4 0-4 6 0 6h22c-4 3-4 7 0 7-4 3-3 7 1 7-2 3 0 6 4 5 9-1 16-4 21-7z"/>
+            <path pathLength="1" d="M30 13c2-6 10-8 12-3M28 22h8M28 29h7M29 36h5"/>
+            <path pathLength="1" d="M54 8l16-3v34l-16-3zM57 10v27"/>
+          </g>
+        </svg>
+        <!-- ornament: "blossom into who you are meant to be" — a marginal vine climbing from that line up beside the heading, opening into a gold blossom at the top (≥1200px) -->
+        <svg class="marginalia marginalia--bloom" data-anchor="#blossom-line" data-reveal viewBox="0 0 120 250" aria-hidden="true" focusable="false">
+          <path class="bloom__stem" pathLength="1" d="M60 248C58 210 70 180 56 150 44 124 62 100 54 74 48 56 58 44 62 30" fill="none" stroke="url(#gold)" stroke-width="2.2" stroke-linecap="round"/>
+          <use href="#leaf" width="40" height="24" x="16" y="196" transform="rotate(-36 36 208)"/>
+          <use href="#leaf" width="40" height="24" x="66" y="162" transform="rotate(148 86 174)"/>
+          <use href="#leaf" width="38" height="22" x="14" y="122" transform="rotate(-40 33 133)"/>
+          <use href="#leaf" width="36" height="22" x="62" y="88" transform="rotate(150 80 99)"/>
+          <g class="bloom__bud" fill="url(#gold)" stroke="#2a1f14" stroke-width=".9"><circle cx="30" cy="164" r="3.4"/><circle cx="88" cy="128" r="3.4"/><circle cx="26" cy="100" r="3"/></g>
+          <g class="bloom__flower" stroke="#2a1f14" stroke-width=".9" stroke-linejoin="round">
+            <g fill="url(#gold)"><ellipse cx="62" cy="10" rx="6.5" ry="12"/><ellipse cx="62" cy="10" rx="6.5" ry="12" transform="rotate(72 62 24)"/><ellipse cx="62" cy="10" rx="6.5" ry="12" transform="rotate(144 62 24)"/><ellipse cx="62" cy="10" rx="6.5" ry="12" transform="rotate(216 62 24)"/><ellipse cx="62" cy="10" rx="6.5" ry="12" transform="rotate(288 62 24)"/></g>
+            <circle cx="62" cy="24" r="5" fill="#a52a2a"/>
+          </g>
+        </svg>
+        <!-- ornament: "walk alongside you" — catchword -->
+        <p class="catchword-row"><a class="catchword" href="#practices" data-reveal aria-label="Next: How we work together"><span>How</span><svg class="catchword__flourish" viewBox="0 0 112 16" aria-hidden="true" focusable="false"><path pathLength="1" d="M2 10c8-12 14 8 22 0s14-10 22 0 14 8 22 0 14-10 22 0 12 8 18 2"/></svg></a></p>
+      </div>
+    </section>
+
+    <!-- ═══ Folio 2v — how we work together ═══ -->
+    <section class="sec practices" id="practices" aria-labelledby="practices-title">
+      <div class="folio">
+        <span class="folio-num" aria-hidden="true">fol. 2v</span>
+        <!-- ornament: "where you want to expand in the future" — acanthus marginalia, a gold-and-lapis pen scroll of leaves that unrolls outward into the margin as the intro scrolls in -->
+        <svg class="acanthus reveal" data-reveal viewBox="0 0 600 120" aria-hidden="true" focusable="false">
+          <path d="M0 60C50 6 110 114 170 60S290 6 350 60s120 54 180 0 60-30 70 0" fill="none" stroke="url(#gold)" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M60 46c-12-14-8-32 6-38M240 46c-12-14-8-32 6-38M420 74c12 14 8 32-6 38M540 46c-12-14-8-32 6-38" fill="none" stroke="url(#gold)" stroke-width="1.4"/>
+          <use href="#leaf" width="44" height="26" x="24" y="28" transform="rotate(-34 46 41)"/>
+          <use href="#leaf" width="44" height="26" x="96" y="70" transform="rotate(158 118 83)"/>
+          <use href="#leaf" width="44" height="26" x="196" y="24" transform="rotate(-30 218 37)"/>
+          <use href="#leaf" width="44" height="26" x="278" y="72" transform="rotate(160 300 85)"/>
+          <use href="#leaf" width="44" height="26" x="378" y="30" transform="rotate(-28 400 43)"/>
+          <use href="#leaf" width="44" height="26" x="456" y="72" transform="rotate(156 478 85)"/>
+          <use href="#leaf" width="40" height="24" x="536" y="30" transform="rotate(-36 556 42)"/>
+          <g fill="url(#gold)" stroke="#2a1f14" stroke-width=".8"><circle cx="66" cy="8" r="4.5"/><circle cx="246" cy="8" r="4.5"/><circle cx="414" cy="112" r="4.5"/><circle cx="546" cy="8" r="4.5"/><circle cx="150" cy="104" r="3"/><circle cx="330" cy="104" r="3"/><circle cx="500" cy="18" r="3"/></g>
+        </svg>
+
+        <header class="block head">
+          <p class="rubric">Two pillars · Six practices</p>
+          <div class="head__row">
+            <!-- ornament: "three hands" — the historiated H: the brand mark gilded between its stems on a vermilion ground dotted with white pen-flourishes -->
+            <svg class="versal versal--h reveal" data-reveal viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+              <use href="#ground" width="120" height="120" style="color:#a52a2a"/>
+              <g fill="url(#gold)" stroke="#2a1f14" stroke-width="1.6" stroke-linejoin="round">
+                <path d="M22 18q10-4 20 0v84q-10 4-20 0z"/>
+                <path d="M78 18q10-4 20 0v84q-10 4-20 0z"/>
+                <path d="M40 74h40v13H40z"/>
+                <path d="M16 18h32M16 102h32M72 18h32M72 102h32" fill="none" stroke-width="2.4"/>
+              </g>
+              <g transform="translate(43 28) scale(.72)" fill="none" stroke-linejoin="round" stroke-linecap="round"><use href="#mark" width="48" height="48" stroke="#2a1f14" stroke-width="5.2"/><use href="#mark" width="48" height="48" stroke="url(#gold)" stroke-width="2.6"/></g>
+            </svg>
+            <h2 id="practices-title"><span class="sr">H</span>ow we work together.</h2>
+          </div>
+        </header>
+        <div class="block prose">
+          <p>True, lasting healing begins with absolute safety. First and foremost, I meet you right where you are with nonjudgmental presence, compassion, and deep listening. Together, we look at what is holding you back today—and where you want to expand in the future. From there, we weave together a tailored combination of root-cause modalities.</p>
+        </div>
+
+        <!-- ornament: "How we work together" — the two pillars as a diptych of facing folios: one set of ruling lines runs unbroken across both, from a shared column of pricking holes in the gutter -->
+        <div class="diptych ruled">
+          <span class="diptych__gutter" aria-hidden="true"></span>
+          <article class="pillar pillar--body">
+            <h3 class="pillar__title">For the body &amp; physical energy</h3>
+            <p class="pillar__lede">Support for people living with pain, tension, or illness, through targeted bodywork, Candace Silvers Energy Healing, and supportive Qi Gong practices.</p>
+            <dl class="mods">
+              <div><dt>Bodywork</dt><dd>Attentive, targeted work with the body to ease tension and bring back ease of movement.</dd></div>
+              <div><dt>Candace Silvers Energy Healing</dt><dd>A quiet, hands-on energy practice for rest, grounding, and integration. Nothing to perform, nothing to prove.</dd></div>
+              <div><dt>Qi Gong</dt><dd>Slow, supportive movement and breath practices you can take home with you.</dd></div>
+            </dl>
+          </article>
+          <article class="pillar pillar--mind">
+            <h3 class="pillar__title">For the mind, behavior &amp; emotions</h3>
+            <p class="pillar__lede">Because the mind touches every area of our health, relationships, and purpose, we work with Emotional Freedom Technique (EFT/Tapping), Systemic Family Constellations, and intuitive emotional release exercises.</p>
+            <dl class="mods">
+              <div>
+                <!-- ornament: "tapping on acupressure points" — the EFT miniature inside a pricked (dotted) gold border -->
+                <figure class="miniature miniature--eft"><img src="../../assets/image6.jpeg" alt="Maria in a dry meadow, demonstrating EFT tapping on the side of her hand" width="654" height="968" loading="lazy" decoding="async"></figure>
+                <dt>EFT / Tapping</dt><dd>Gentle fingertip tapping on acupressure points while giving voice to what you are feeling. Simple to learn, surprisingly powerful.</dd>
+              </div>
+              <div><dt>Systemic Family Constellations</dt><dd>A way of seeing the hidden loyalties and patterns we inherit, so what has been carried can finally be set down.</dd></div>
+              <div><dt>Intuitive emotional release</dt><dd>Guided exercises for letting what has been held move through and out, at your own pace.</dd></div>
+            </dl>
+          </article>
+        </div>
+
+        <!-- ornament: "lasting wholeness" — a line-filler: the closing sentence's last short line is completed to the margin by a gold-and-vermilion lozenge bar; the line, and the word, made whole -->
+        <p class="block closing" data-reveal data-linefill><span class="closing__text">Guided by empathic and intuitive gifts, I offer a grounded partnership to help you clear the root causes of suffering and step into lasting wholeness.</span><span class="linefiller" aria-hidden="true"></span></p>
+
+        <!-- ornament: "walk alongside you" — catchword -->
+        <p class="catchword-row"><a class="catchword" href="#session" data-reveal aria-label="Next: What a session feels like"><span>What</span><svg class="catchword__flourish" viewBox="0 0 112 16" aria-hidden="true" focusable="false"><path pathLength="1" d="M2 10c8-12 14 8 22 0s14-10 22 0 14 8 22 0 14-10 22 0 12 8 18 2"/></svg></a></p>
+      </div>
+    </section>
+
+    <!-- ═══ Folio 3r — what a session feels like ═══ -->
+    <section class="sec session" id="session" aria-labelledby="session-title">
+      <div class="folio">
+        <span class="folio-num" aria-hidden="true">fol. 3r</span>
+        <header class="block head">
+          <p class="rubric">Sessions</p>
+          <div class="head__row">
+            <svg class="versal reveal" data-reveal viewBox="0 0 120 120" aria-hidden="true" focusable="false"><use href="#ground" width="120" height="120" style="color:#1f3f8f"/><text class="versal__t versal__t--gold" x="60" y="96" text-anchor="middle" font-size="92">W</text></svg>
+            <h2 id="session-title"><span class="sr">W</span>hat a session feels like.</h2>
+          </div>
+          <p class="head__note">Sessions are offered online and in person.</p>
+        </header>
+
+        <!-- ornament: "healing is a journey" — a thin ruled journey line runs down the left of the three steps with a gold milestone at each -->
+        <ol class="block steps">
+          <!-- ornament: "Arrive / Experience / Integrate" — vermilion rubric numerals I, II, III in Uncial with pen flourishes, each step a ruled block -->
+          <li class="step ruled">
+            <span class="step__num" aria-hidden="true">I<svg viewBox="0 0 48 10" focusable="false"><path pathLength="1" d="M2 6c6-8 12 4 18 0s10-6 16 0 8 2 10 0"/></svg></span>
+            <div class="step__body"><h3>Arrive</h3><p>Talk about what is happening and what support you are looking for.</p></div>
+          </li>
+          <li class="step ruled">
+            <span class="step__num" aria-hidden="true">II<svg viewBox="0 0 48 10" focusable="false"><path pathLength="1" d="M2 6c6-8 12 4 18 0s10-6 16 0 8 2 10 0"/></svg></span>
+            <div class="step__body"><h3>Experience</h3><p>Explore a practice together at a comfortable pace.</p></div>
+          </li>
+          <li class="step ruled">
+            <span class="step__num" aria-hidden="true">III<svg viewBox="0 0 48 10" focusable="false"><path pathLength="1" d="M2 6c6-8 12 4 18 0s10-6 16 0 8 2 10 0"/></svg></span>
+            <div class="step__body"><h3>Integrate</h3><p>Talk about what came up and what might be useful afterward.</p></div>
+          </li>
+        </ol>
+
+        <!-- ornament: "walk alongside you" — catchword -->
+        <p class="catchword-row"><a class="catchword" href="#about" data-reveal aria-label="Next: Every tool I share, I have needed myself"><span>Every</span><svg class="catchword__flourish" viewBox="0 0 112 16" aria-hidden="true" focusable="false"><path pathLength="1" d="M2 10c8-12 14 8 22 0s14-10 22 0 14 8 22 0 14-10 22 0 12 8 18 2"/></svg></a></p>
+      </div>
+    </section>
+
+    <!-- ═══ Folio 3v — about Maria ═══ -->
+    <section class="sec about" id="about" aria-labelledby="about-title">
+      <div class="folio">
+        <span class="folio-num" aria-hidden="true">fol. 3v</span>
+        <!-- ornament: "a safe container" — the full-width miniature held inside a double-ruled gold frame with lozenges at the corners -->
+        <figure class="strip">
+          <div class="strip__frame">
+            <span class="strip__corner" aria-hidden="true"></span><span class="strip__corner" aria-hidden="true"></span><span class="strip__corner" aria-hidden="true"></span><span class="strip__corner" aria-hidden="true"></span>
+            <img src="../../assets/image9.jpeg" alt="Maria in an indigo floral kimono beside green shrubs, a calm direct look" width="1218" height="808" loading="lazy" decoding="async">
+          </div>
+        </figure>
+        <header class="block head head--nb">
+          <p class="rubric">Meet Maria</p>
+          <div class="head__row">
+            <svg class="versal reveal" data-reveal viewBox="0 0 120 120" aria-hidden="true" focusable="false"><use href="#ground" width="120" height="120" style="color:#a52a2a"/><text class="versal__t versal__t--gold" x="60" y="96" text-anchor="middle" font-size="92">E</text></svg>
+            <h2 id="about-title"><span class="sr">E</span>very tool I share, I have needed myself.</h2>
+            <!-- ornament: "every tool I share, I have needed myself" — a nota bene trefoil in the outer margin, tied to the heading by a hairline drawn toward it as it enters -->
+            <span class="nb-wrap" data-reveal aria-hidden="true">
+              <span class="nb__line"></span>
+              <svg class="nb" viewBox="0 0 52 72" focusable="false">
+                <g class="nb__ring" fill="none" stroke="#a52a2a" stroke-width="1.6"><circle pathLength="1" cx="26" cy="20" r="9"/><circle pathLength="1" cx="15" cy="37" r="9"/><circle pathLength="1" cx="37" cy="37" r="9"/><path pathLength="1" d="M26 46v16M19 62h14"/></g>
+                <g fill="url(#gold)" stroke="#2a1f14" stroke-width=".8"><circle cx="26" cy="20" r="2.4"/><circle cx="15" cy="37" r="2.4"/><circle cx="37" cy="37" r="2.4"/></g>
+              </svg>
+            </span>
+          </div>
+        </header>
+        <div class="block prose">
+          <p>Every tool and modality I share in my practice comes from a place of deep personal experience. I know what it feels like to seek answers, which is why I’ve devoted my life to mastering the practices that continuously restore health, peace, and joy in my own body, relationships, and career.</p>
+          <p>My practice is a space of true partnership. Guided by empathic intuition and powerful energy and behavioral modalities, I am here to hold a safe container where your pain is met with understanding, and your potential is given room to bloom.</p>
+        </div>
+        <!-- ornament: "walk alongside you" — catchword -->
+        <p class="catchword-row"><a class="catchword" href="#book" data-reveal aria-label="Next: When you are ready, the next step is simple"><span>When</span><svg class="catchword__flourish" viewBox="0 0 112 16" aria-hidden="true" focusable="false"><path pathLength="1" d="M2 10c8-12 14 8 22 0s14-10 22 0 14 8 22 0 14-10 22 0 12 8 18 2"/></svg></a></p>
+      </div>
+    </section>
+
+    <!-- ═══ Folio 4r — book ═══ -->
+    <section class="sec book" id="book" aria-labelledby="book-title">
+      <div class="folio">
+        <span class="folio-num" aria-hidden="true">fol. 4r</span>
+        <div class="book__frame">
+          <span class="strip__corner" aria-hidden="true"></span><span class="strip__corner" aria-hidden="true"></span><span class="strip__corner" aria-hidden="true"></span><span class="strip__corner" aria-hidden="true"></span>
+          <p class="rubric">Begin where you are</p>
+          <div class="book__grid">
+            <!-- ornament: "when you are ready, the next step is simple" — the historiated W: Maria's open hand, reaching toward you, in the miniature the versal stands before -->
+            <div class="initial initial--book">
+              <figure class="miniature miniature--book"><img src="../../assets/image2.jpeg" alt="Maria under a stone arch, reaching one open hand toward you" width="642" height="970" loading="lazy" decoding="async"></figure>
+              <svg class="versal versal--hero versal--book reveal" data-reveal viewBox="0 0 170 230" aria-hidden="true" focusable="false"><text class="versal__t versal__t--hero versal__t--gold" x="0" y="192">W</text></svg>
+            </div>
+            <div class="book__copy">
+              <h2 id="book-title"><svg class="dropcap dropcap--book" viewBox="0 0 96 96" aria-hidden="true" focusable="false"><text class="versal__t versal__t--gold" x="48" y="78" text-anchor="middle" font-size="76">W</text></svg><span class="sr">W</span>hen you are ready, the next step is simple.</h2>
+              <p class="book__body">Choose a practice, find a time, and we will take it from there. No account needed.</p>
+              <a class="btn" href="#book">Book a session</a>
+            </div>
+          </div>
+          <!-- ornament: "online or in person · Texas" — the scribe's colophon: the small print set centered as a colophon, closed by a gold lozenge -->
+          <div class="colophon">
+            <p>Online or in person · Sessions in Texas</p>
+            <p>Booking and contact details will be added at launch</p>
+            <span class="colophon__end" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <a class="brand brand--foot" href="#top">
+      <svg class="brand__mark" viewBox="0 0 48 48" aria-hidden="true"><use href="#mark" class="mark-under"/><use href="#mark" class="mark-gold"/></svg>
+      <span class="brand__name">Three Hands Healing</span>
+    </a>
+    <p class="foot__tag">Support for a happier, healthier life.</p>
+    <p class="foot__disc">Three Hands Healing offers complementary wellness support and is not a substitute for medical, mental-health, or emergency care. If you need urgent help, contact local emergency services or a qualified health professional.</p>
+    <p class="foot__meta">© 2026 Three Hands Healing</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script src="../_portfolio.js" defer></script>
+</body>
+</html>
