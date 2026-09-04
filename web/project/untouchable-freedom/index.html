@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="Design style portfolio for Untouchable Freedom Collective: seven directions for Hannah to compare and pick from.">
+    <meta name="theme-color" content="#f4f3f0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="gallery.css">
+    <title>Untouchable Freedom — Design styles</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#grid">Skip to the styles</a>
+
+    <header class="masthead">
+      <a class="brand" href="https://untouchable-freedom-collective.myshopify.com/" target="_blank" rel="noopener" aria-label="Untouchable Freedom Collective, current store (opens in a new tab)">
+        <img class="brand__mark" src="assets/cover-sm.webp" alt="" width="28" height="36">
+        <span>Untouchable Freedom <i>Collective</i></span>
+      </a>
+      <div class="masthead__title">
+        <p class="eyebrow">Design portfolio · for Hannah</p>
+        <h1>Seven ways your shop could feel.</h1>
+        <p class="lede">Same words, same cover, seven different worlds. Open any of them, scroll all the way down, try the phone view, and <b>heart the ones that feel like you</b>. When you're done, send your picks to koH from the bar at the bottom.</p>
+      </div>
+      <div class="masthead__tools">
+        <div class="filters" role="group" aria-label="Filter styles">
+          <button type="button" data-filter="all" aria-pressed="true">All <span data-count="all"></span></button>
+          <button type="button" data-filter="faithful" aria-pressed="false">Faithful <span data-count="faithful"></span></button>
+          <button type="button" data-filter="calm" aria-pressed="false">Calm <span data-count="calm"></span></button>
+          <button type="button" data-filter="bold" aria-pressed="false">Bold <span data-count="bold"></span></button>
+        </div>
+        <div class="masthead__links">
+          <a class="current" href="https://untouchable-freedom-collective.myshopify.com/" target="_blank" rel="noopener">Current store ↗</a>
+          <button type="button" class="surprise" data-surprise>✦ Surprise me</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <ul class="grid" id="grid" data-grid aria-label="Design styles"></ul>
+      <p class="grid__empty" data-empty hidden>Nothing in this filter yet.</p>
+      <section class="howto" aria-labelledby="howto-title">
+        <h2 id="howto-title">How to look at these</h2>
+        <ol>
+          <li><b>Scroll each one all the way down.</b> The first screen is the mood; the rest is how the shop actually reads.</li>
+          <li><b>Try it on your phone.</b> Every card has a phone view, and most of your visitors will arrive from a phone.</li>
+          <li><b>Pick more than one.</b> Two or three favourites tell koH what you love. A mix is normal ("the feel of Marble with the warmth of Ember").</li>
+          <li><b>The buttons are real.</b> Add to cart goes to your Shopify cart and the email box goes to your Shopify customer list, so your checkout keeps working whichever design you choose.</li>
+          <li><b>The words are yours.</b> Every line is from your current store and your journal's table of contents. Only the design is being decided here.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>Preview only, not indexed. The cover and inside pages are from your journal; the three landscape photos are the Shopify theme's stock images and would be swapped for your own. Prepared by koH for Hannah · <a href="https://untouchable-freedom-collective.myshopify.com/" target="_blank" rel="noopener">Your current store</a></p>
+    </footer>
+
+    <!-- Picks tray -->
+    <div class="tray" data-tray hidden>
+      <div class="tray__inner">
+        <p class="tray__summary"><b data-tray-count>0</b> <span data-tray-label>picks</span>: <span data-tray-names></span></p>
+        <form class="tray__form" data-tray-form>
+          <label class="sr-only" for="tray-name">Your name</label>
+          <input id="tray-name" type="text" name="name" placeholder="Your name" value="Hannah" autocomplete="name">
+          <label class="sr-only" for="tray-note">A note for koH</label>
+          <input id="tray-note" type="text" name="note" placeholder="A note for koH (optional)">
+          <button type="submit" class="tray__send">Send picks to koH</button>
+          <button type="button" class="tray__clear" data-tray-clear>Clear</button>
+        </form>
+        <p class="tray__status" role="status" aria-live="polite" data-tray-status></p>
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="viewer" data-viewer hidden role="dialog" aria-modal="true" aria-labelledby="viewer-title">
+      <div class="viewer__bar">
+        <button type="button" class="viewer__btn" data-viewer-close aria-label="Close">← All styles</button>
+        <div class="viewer__title"><span class="viewer__num" data-viewer-num></span><h2 id="viewer-title" data-viewer-name></h2><span class="tag" data-viewer-tag></span></div>
+        <div class="viewer__device" role="group" aria-label="Preview size">
+          <button type="button" data-device="desktop" aria-pressed="true">Desktop</button>
+          <button type="button" data-device="phone" aria-pressed="false">Phone</button>
+        </div>
+        <div class="viewer__actions">
+          <button type="button" class="viewer__btn viewer__pick" data-viewer-pick aria-pressed="false"><span class="heart" aria-hidden="true"></span><span data-viewer-pick-label>Pick this</span></button>
+          <a class="viewer__btn" data-viewer-open href="#" target="_blank" rel="noopener">Open full page ↗</a>
+          <button type="button" class="viewer__btn viewer__nav" data-viewer-prev aria-label="Previous style">‹</button>
+          <button type="button" class="viewer__btn viewer__nav" data-viewer-next aria-label="Next style">›</button>
+        </div>
+      </div>
+      <div class="viewer__stage" data-viewer-stage>
+        <div class="viewer__frame"><iframe title="Style preview" data-viewer-frame loading="lazy" allow="autoplay"></iframe></div>
+      </div>
+    </div>
+
+    <script src="gallery.js" defer></script>
+  </body>
+</html>
