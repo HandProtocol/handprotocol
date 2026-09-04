@@ -5,9 +5,11 @@ store, **Untouchable Freedom Collective**, selling *Untouchable Freedom*, a
 181-page guided journal at $27.00:
 https://untouchable-freedom-collective.myshopify.com/
 
-**Status (2026-09-02): a 7-style design portfolio is built at
-`web/project/untouchable-freedom/` for Hannah to pick from. See "Where things
-are" for the live URL and deploy state.**
+**Status (2026-09-03): the 7-style design portfolio is LIVE at
+https://handprotocol.org/project/untouchable-freedom/ (noindex, also reachable
+at /untouchable-freedom). Landed on `main` as `887ee2756`, Netlify deploy
+`6a9a1d0f` ready, every URL, redirect, header, thumbnail, and the live viewer
+verified 2026-09-03. Waiting on Hannah's picks.**
 
 ## Start here (cold session)
 
