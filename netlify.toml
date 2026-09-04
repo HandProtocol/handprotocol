@@ -131,6 +131,17 @@ from = "/threehandshealing/styles"
 to = "/threehandshealing/styles/"
 status = 301
 
+# Untouchable Freedom (Hannah) design portfolio, client preview
+[[redirects]]
+from = "/project/untouchable-freedom"
+to = "/project/untouchable-freedom/"
+status = 301
+
+[[redirects]]
+from = "/untouchable-freedom"
+to = "/project/untouchable-freedom/"
+status = 301
+
 [[redirects]]
   from = "/foundation-campaign"
   to = "/"
@@ -385,6 +396,12 @@ status = 301
 # Three Hands Healing design-style portfolio — client preview, keep out of search.
 [[headers]]
   for = "/threehandshealing/styles/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Untouchable Freedom design portfolio (Hannah), client preview, keep out of search.
+[[headers]]
+  for = "/project/untouchable-freedom/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
