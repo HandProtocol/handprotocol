@@ -4,13 +4,13 @@
    localStorage["thh-style-picks"] and sent through the site's feedback fn. */
 (() => {
   const STYLES = [
-    { slug: "gateway", name: "Gateway", tag: "original", href: "../?design=gateway",
+    { slug: "gateway", name: "Gateway", tag: "original", href: "original/?design=gateway",
       desc: "The first direction: a calm video hero, ivory and forest green, an editorial serif.",
       fonts: "DM Serif Display + DM Sans", colors: ["#f4efe4", "#344c3d", "#94a58d", "#a66148", "#c78b35"] },
-    { slug: "meadow", name: "Meadow", tag: "original", href: "../?design=meadow",
+    { slug: "meadow", name: "Meadow", tag: "original", href: "original/?design=meadow",
       desc: "Same bones, warmer: meadow photography leads and the palette lifts toward sun and grass.",
       fonts: "DM Serif Display + DM Sans", colors: ["#f4efe4", "#4a5a3a", "#b3b56a", "#c78b35", "#2d3329"] },
-    { slug: "forest", name: "Forest", tag: "original", href: "../?design=forest",
+    { slug: "forest", name: "Forest", tag: "original", href: "original/?design=forest",
       desc: "Same bones, deeper: shaded greens, the archway portraits, a quieter mood.",
       fonts: "DM Serif Display + DM Sans", colors: ["#e9e0d1", "#2d3329", "#344c3d", "#94a58d", "#a66148"] },
 
@@ -103,9 +103,7 @@
     renderPicks();
   };
   const byName = (slug) => STYLES.find((s) => s.slug === slug);
-  const publicUrl = (s) => s.href.startsWith("../")
-    ? `https://handprotocol.org/threehandshealing/${s.href.slice(3)}`
-    : `https://handprotocol.org/threehandshealing/styles/${s.slug}/`;
+  const publicUrl = (s) => `https://handprotocol.org/threehandshealing/styles/${s.href}`;
   const pad = (n) => String(n + 1).padStart(2, "0");
   const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
@@ -192,7 +190,7 @@
     vTag.className = `tag tag--${s.tag}`;
     vOpen.href = s.href;
     /* Directory URLs are fine on Netlify; index.html keeps file:// previews working too. */
-    frame.src = s.href.startsWith("../") ? s.href : `${s.slug}/index.html`;
+    frame.src = s.tag === "original" ? s.href.replace("original/?", "original/index.html?") : `${s.slug}/index.html`;
     vPick.setAttribute("aria-pressed", String(isPicked(slug)));
     vPickLabel.textContent = isPicked(slug) ? "Picked" : "Pick this";
     viewer.hidden = false;

@@ -29,9 +29,9 @@ local/untracked (`threehandshealing/*.zip` is gitignored); these are web copies 
 
 | File | Orig | Content | Used by |
 |---|---|---|---|
-| maria-arch-laughing.jpg (+ -700) | DQ6A6168 | portrait · laughing under the limestone arch, red door behind | **cathedral hero** |
-| maria-arch-red-door.jpg (+ -700) | DQ6A6144 | portrait · standing barefoot in the open red door | **cathedral about** |
-| maria-arch-open-hand.jpg (+ -700) | DQ6A6119 | portrait · under the wide arch, one open hand reaching to camera | **cathedral book** |
+| maria-arch-laughing.jpg (+ -700) | DQ6A6168 | portrait · laughing under the limestone arch, red door behind | **main site + cathedral hero** |
+| maria-arch-red-door.jpg (+ -700) | DQ6A6144 | portrait · standing barefoot in the open red door | **main site + cathedral about** |
+| maria-arch-open-hand.jpg (+ -700) | DQ6A6119 | portrait · under the wide arch, one open hand reaching to camera | **main site + cathedral book** |
 | maria-arch-leaning.jpg | DQ6A6081 | portrait · full-length, leaning in the arch, red door open | free — future pages |
 | maria-eft-tapping.jpg | DQ6A5902 | portrait · black tank, demonstrating EFT tapping on the side of the hand | free — EFT / funnel |
 | maria-arch-door-hand.jpg | DQ6A6007 | landscape · close at the arch door, hand on the door edge, pool behind | free — headers |
@@ -42,7 +42,7 @@ local/untracked (`threehandshealing/*.zip` is gitignored); these are web copies 
 
 The proofs `image1–11.jpeg` above map onto these (image1≈red-door, image2≈open-hand,
 image3≈leaning, image5≈door-hand, image6≈eft-tapping, image7≈arms-wide, image9≈forest,
-image11≈meadow-smile); the other 26 styles still reference the proofs until Maria picks.
+image11≈meadow-smile); the other 26 styles (incl. `styles/original/`, the former root) still reference the proofs.
 
 ## Brand kit (2026-09-04) — `brand/`
 

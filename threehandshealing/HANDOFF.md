@@ -9,7 +9,11 @@ design portfolio is LIVE at https://handprotocol.org/threehandshealing/styles/
 **LIVE in the same gallery since 2026-09-04** (27 cards, Bedazzled filter),
 reviewed + live-QA'd — see "Bedazzled batch". **2026-09-04 (late): Maria's
 licensed photos + brand kit arrived; Cathedral rebuilt on the kit** — see
-"Brand kit + licensed photos". Next human step: text Maria.**
+"Brand kit + licensed photos". **2026-09-05: Cathedral IS the main site** —
+`web/threehandshealing/index.html` is now the Cathedral build (brand kit,
+licensed photos, indexable); the old three-direction preview moved to
+`styles/original/`. Next layer is planned, not built: `plan-eft-and-ghl-funnel.md`
+(EFT "what to expect" page + GoHighLevel funnel). Next human step: text Maria.**
 
 ## Start here (cold session)
 
@@ -18,8 +22,9 @@ licensed photos + brand kit arrived; Cathedral rebuilt on the kit** — see
    gallery → "Send picks to koH" → `command.feedback_pins` row tagged
    🧭 picks · 🎨 style + Telegram 🎯 Inspector) and the **16-question info
    sheet** answers. Check /pins before doing anything else.
-3. Nothing here is a production client site yet — it is all HAND-hosted
-   preview. Do not delete the other styles until Maria has chosen.
+3. The root is now the real design (Cathedral) but still HAND-hosted with
+   placeholder booking/contact — not yet a production client site. The other
+   26 styles stay in the gallery until koH says to prune them.
 4. **Bedazzled batch is done and live** (2026-09-04, `main` `8eed885e7`). koH
    asked that day to stop using the multi-agent `Workflow` ("ultracode") runs
    — review directly with the tools in `tools/`. Two structural Talavera
@@ -41,8 +46,9 @@ published as a private artifact. Nothing on the live page has changed yet.
 
 | What | Path / URL | State |
 |---|---|---|
-| Design-preview site | `web/threehandshealing/` (index.html, style.css, script.js, assets/, vendor/) | On `main` (commit `d27db55cd`), auto-deployed, live |
-| Live URL | https://handprotocol.org/threehandshealing/ | 200 · in `web/sitemap.xml` (prio 0.8) · **no noindex** |
+| **Main site (Cathedral)** | `web/threehandshealing/` (index.html, style.css, script.js, assets/) | Since 2026-09-05 — copy of `styles/cathedral/` with root-relative asset paths, no portfolio pill, no noindex, canonical + OG + favicon. Live URL https://handprotocol.org/threehandshealing/ · in `web/sitemap.xml` (prio 0.8, lastmod 2026-09-05) |
+| Original 3-direction preview | `web/threehandshealing/styles/original/` (index.html, style.css, script.js, studio.css, studio.js, vendor/) | Moved here 2026-09-05 (was the root); asset paths rewritten to `../../assets/`; noindex meta + the `styles/*` header; gallery "Originals" cards point at `original/?design=…` |
+| EFT page + GHL funnel plan | `threehandshealing/plan-eft-and-ghl-funnel.md` | Proposal 2026-09-05, awaiting koH confirm + Maria's Q6–Q9 answers |
 | **Style portfolio (gallery)** | `web/threehandshealing/styles/` → https://handprotocol.org/threehandshealing/styles/ | On `main` (`a45ec8426`, landed 2026-09-01, Netlify deploy `6a96f993…` ready) · noindex meta + `X-Robots-Tag` · not in sitemap |
 | 14 style pages | `web/threehandshealing/styles/<slug>/` → `…/styles/<slug>/` | same commit; each standalone (html+css+js, ≤40 KB) |
 | Portfolio brief | `threehandshealing/design-portfolio-brief.md` | on `main` (`99d26cb8f`) — source of truth for copy rules + hard requirements |
@@ -377,7 +383,41 @@ device; "Copy my answers" assembles one numbered plain-text message.
   originating conversation; from any other session pass the artifact URL as
   `url` or you'll fork a second artifact.
 
+## Cathedral promoted to the main site (2026-09-05)
+
+koH: "Cathedral is looking like the right design. Let's make it our main site."
+Done in one pass, verified, landed on `main`:
+
+- `git mv` of the old root (index.html, style.css, script.js, studio.css,
+  studio.js, vendor/) → `styles/original/`; `"assets/` → `"../../assets/` in the
+  HTML + CSS, the "+ 24 more styles" link → `../`, noindex meta added, title
+  "Original preview (Gateway / Meadow / Forest)". The gallery's three
+  "Originals" cards now use `href: "original/?design=<slug>"`; `gallery.js`
+  viewer/public-URL logic no longer keys off a `../` prefix (that broke the
+  `#gateway` deep link in the viewer — `frame.src` was `gateway/index.html`);
+  `?v=20260905b` bumped on gallery.js/css.
+- Root = `styles/cathedral/{index.html,style.css,script.js}` with
+  `../../assets/` → `assets/`, the `_portfolio.js` include and the noindex meta
+  removed, a real `<title>`, canonical, favicon (`assets/brand/thh-icon-gold.svg`),
+  Open Graph + twitter card (og:image = the hero photo). `styles/cathedral/`
+  itself is unchanged and still in the gallery.
+- Checks: `tools/shot.mjs` on the root and on `original` → errors `[]` at
+  1440 + 390, no horizontal overflow; `gallery-e2e.mjs` green (27 cards ·
+  Bedazzled 10 · viewer · pick → tray · 0 errors); a request-failure probe on
+  root / `original/?design=meadow` / `styles/#gateway` → 0 failed requests,
+  0 broken images, viewer frame `original/index.html?design=gateway`.
+- Still placeholder on the main site: Book CTA (`href="#book"`, fine print
+  "Booking and contact details will be added at launch"), no contact, no
+  prices, our six modality blurbs. These are the info-sheet answers + the
+  GHL calendar (see the plan).
+
 ## Session log
+
+- 2026-09-05 — **Cathedral promoted to the main site**; old preview →
+  `styles/original/`; gallery originals repointed + viewer bug fixed;
+  `plan-eft-and-ghl-funnel.md` written (EFT "what to expect" page structure,
+  funnel stages as GHL objects, Option A = static site + GHL embeds, wording
+  flag "EFT / Tapping sessions" not "therapy", 6 asks for Maria, build order).
 
 - 2026-09-04 (evening) — **Brand kit + licensed photos received; Cathedral
   rebuilt on the kit** (palette, Montserrat + STIX Two Text, real mark/badge,
