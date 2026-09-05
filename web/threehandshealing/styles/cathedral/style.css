@@ -1,25 +1,34 @@
 /* Three Hands Healing — Cathedral
-   Candlelit stone, dark luxury. One motif: the arch. One line weight: a gold hairline. */
+   Candlelit stone, dark luxury, set in the brand kit (THH Logo Draft 1, June 2025):
+   gold #D8C971 on the brand teals, Montserrat + STIX Two Text, the real hands-and-flame mark.
+   One motif: the arch. One line weight: a gold hairline. */
 
 :root {
-  --soot: #0E0C0A;
-  --gold: #C9A46A;
-  --bone: #E9E2D6;
-  --ox: #5A2A26;
-  --smoke: #2A2522;
-  --ink: #CFC6B8;          /* reading text on soot, ~9:1 */
-  --bone-2: #B4AA9C;       /* captions on soot, ~7:1 */
-  --gold-35: rgba(201, 164, 106, .35);
-  --gold-6: rgba(201, 164, 106, .6);
-  --display: "Bodoni Moda", "Bodoni 72", "Didot", "Playfair Display", Georgia, serif;
-  --body: "Jost", "Futura", "Avenir Next", "Helvetica Neue", system-ui, sans-serif;
-  --measure: 60ch;
+  /* brand kit — main */
+  --gold: #D8C971;
+  --teal: #169999;
+  /* brand kit — secondary */
+  --teal-2: #15B7B3;
+  --aqua: #2BE2D8;
+  --deep: #117575;
+  /* the cathedral's stone: the brand's deep teal taken down to candlelight */
+  --soot: #082625;
+  --smoke: #0D3A39;
+  --bone: #ECEBE3;
+  --ink: #CBD3CD;          /* reading text on soot, ~11:1 */
+  --bone-2: #A6BAB6;       /* captions on soot, ~7.5:1 */
+  --paper: #F4F5F0;        /* text on the deep-teal block, ~5:1 */
+  --gold-35: rgba(216, 201, 113, .35);
+  --gold-6: rgba(216, 201, 113, .6);
+  --display: "STIX Two Text", "Times New Roman", "Tinos", Georgia, serif;
+  --body: "Montserrat", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --measure: 58ch;
   --wrap: 64rem;
   --gutter: clamp(1.5rem, 4vw, 4rem);
   --arch-w: clamp(230px, 24vw, 340px);
   --arch-h: clamp(340px, min(52vh, 36vw), 512px);
   --sec: clamp(5rem, 9vw, 8.5rem);
-  --head-h: 4.1rem;
+  --head-h: 4.4rem;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -28,7 +37,7 @@ body {
   margin: 0;
   background: var(--soot);
   color: var(--bone);
-  font: 400 1.0625rem/1.75 var(--body);
+  font: 400 1rem/1.8 var(--body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -37,14 +46,13 @@ figure { margin: 0; }
 p { margin: 0; }
 a { color: inherit; }
 [id] { scroll-margin-top: calc(var(--head-h) + 1.5rem); }
-:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+:focus-visible { outline: 2px solid var(--aqua); outline-offset: 4px; }
 
 h1, h2, h3 {
   font-family: var(--display);
   font-weight: 400;
-  font-variation-settings: "opsz" 96;
-  line-height: 1.08;
-  letter-spacing: -.005em;
+  line-height: 1.1;
+  letter-spacing: -.01em;
   margin: 0;
   text-wrap: balance;
 }
@@ -52,15 +60,22 @@ h1, h2, h3 {
 .skip {
   position: absolute; left: 1rem; top: -4rem; z-index: 100;
   background: var(--gold); color: var(--soot);
-  padding: .6rem 1rem; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
+  padding: .6rem 1rem; font-size: .78rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; text-decoration: none;
 }
 .skip:focus { top: 1rem; }
 
 /* ---------- shared vocabulary ---------- */
 .eyebrow {
-  font: 400 .75rem/1.5 var(--body);
-  letter-spacing: .32em;
+  font: 500 .72rem/1.5 var(--body);
+  letter-spacing: .3em;
   text-transform: uppercase;
+  color: var(--gold);
+  margin: 0;
+}
+/* the brand kit's taglines are set in STIX Two Text semibold, lowercase */
+.tagline {
+  font: 600 1.05rem/1.4 var(--display);
+  letter-spacing: .06em;
   color: var(--gold);
   margin: 0;
 }
@@ -74,22 +89,22 @@ h1, h2, h3 {
 .center { text-align: center; }
 .sec-head { text-align: center; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
 .sec-head h2 { font-size: clamp(2rem, 3.4vw, 3rem); margin-top: 1rem; }
-.sec-head__note { margin-top: 1.25rem; font-weight: 300; font-size: 1.1rem; color: var(--bone-2); }
+.sec-head__note { margin-top: 1.25rem; font-size: 1.05rem; color: var(--bone-2); }
 .prose { color: var(--ink); }
 .prose p + p { margin-top: 1.35rem; }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
-  font: 400 .78rem/1 var(--body); letter-spacing: .26em; text-transform: uppercase; text-decoration: none;
+  font: 500 .74rem/1 var(--body); letter-spacing: .24em; text-transform: uppercase; text-decoration: none;
   color: var(--bone); background: transparent; border: 1px solid var(--gold);
   padding: 1.05rem 2.1rem 1rem; cursor: pointer;
   transition: background .3s ease, color .3s ease, border-color .3s ease;
 }
-.btn:hover { background: rgba(201, 164, 106, .12); }
+.btn:hover { background: rgba(216, 201, 113, .12); }
 .btn--gold { background: var(--gold); color: var(--soot); border-color: var(--gold); }
-.btn--gold:hover { background: #D9B980; border-color: #D9B980; }
+.btn--gold:hover { background: #E4D88A; border-color: #E4D88A; }
 .link {
-  font: 400 .78rem/1 var(--body); letter-spacing: .26em; text-transform: uppercase; text-decoration: none;
+  font: 500 .74rem/1 var(--body); letter-spacing: .24em; text-transform: uppercase; text-decoration: none;
   color: var(--bone-2); border-bottom: 1px solid var(--gold-6); padding-bottom: .4rem;
   transition: color .25s ease, border-color .25s ease;
 }
@@ -112,21 +127,21 @@ h1, h2, h3 {
 .arch img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 28%; }
 .arch--sm { width: clamp(150px, 14vw, 180px); height: clamp(225px, 21vw, 270px); }
 
-/* ---------- header ---------- */
+/* ---------- header: the horizontal lockup from the kit, gold on the stone ---------- */
 .site-head {
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
   min-height: var(--head-h); padding: .8rem var(--gutter);
-  background: rgba(14, 12, 10, .86);
+  background: rgba(8, 38, 37, .86);
   -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--gold-35);
 }
-.brand { display: inline-flex; align-items: center; gap: .75rem; text-decoration: none; color: var(--bone); }
-.brand__mark { width: 30px; height: 30px; flex: none; fill: none; stroke: var(--gold); stroke-width: 1.5; stroke-linejoin: round; }
-.brand__name { font: italic 400 1.2rem/1 var(--display); font-variation-settings: "opsz" 24; letter-spacing: .01em; white-space: nowrap; }
+.brand { display: inline-flex; align-items: center; gap: .85rem; text-decoration: none; color: var(--gold); }
+.brand__mark { width: 42px; height: auto; flex: none; fill: currentColor; }
+.brand__word { height: 12px; width: auto; flex: none; fill: currentColor; }
 .nav { display: flex; align-items: center; gap: clamp(1.25rem, 3vw, 2.5rem); }
 .nav a {
-  font: 400 .72rem/1 var(--body); letter-spacing: .26em; text-transform: uppercase; text-decoration: none;
+  font: 500 .7rem/1 var(--body); letter-spacing: .24em; text-transform: uppercase; text-decoration: none;
   color: var(--bone-2); padding: .45rem 0 .4rem; border-bottom: 1px solid transparent;
   transition: color .25s ease, border-color .25s ease;
 }
@@ -156,8 +171,8 @@ h1, h2, h3 {
 }
 .hero__eyebrow { grid-area: eye; text-align: center; margin-bottom: 1.3rem; }
 .hero__eyebrow .plumb { height: 1.9rem; margin-bottom: .8rem; }
-.hero__title { display: contents; font-size: clamp(2.4rem, 3.9vw, 3.5rem); }
-.hero__l1, .hero__l2 { line-height: 1.05; max-width: 12ch; padding-bottom: clamp(1.5rem, 2.6vw, 2.25rem); }
+.hero__title { display: contents; font-size: clamp(2.4rem, 3.8vw, 3.4rem); }
+.hero__l1, .hero__l2 { line-height: 1.08; max-width: 12ch; padding-bottom: clamp(1.5rem, 2.6vw, 2.25rem); }
 .hero__l1 { grid-area: l1; justify-self: end; text-align: right; }
 .hero__l2 { grid-area: l2; justify-self: start; text-align: left; }
 .hero__l3 { grid-area: l3; text-align: center; font-style: italic; margin-top: 1.75rem; }
@@ -165,14 +180,14 @@ h1, h2, h3 {
 .arch-frame--hero::after { left: -100vw; right: -100vw; }
 .arch-frame--hero .glow {
   position: absolute; inset: -30% -70% -20%; z-index: -1; pointer-events: none;
-  background: radial-gradient(ellipse 52% 58% at 50% 62%, rgba(201, 164, 106, .3), rgba(201, 164, 106, .08) 45%, transparent 72%);
+  background: radial-gradient(ellipse 52% 58% at 50% 62%, rgba(216, 201, 113, .3), rgba(216, 201, 113, .08) 45%, transparent 72%);
   opacity: .85;
   animation: candle 6s ease-in-out infinite alternate;
 }
 @keyframes candle { from { opacity: .8; } to { opacity: .9; } }
 .hero__lede {
   grid-area: lede; text-align: center; margin-top: 1.25rem;
-  font: 300 clamp(1.15rem, 1.6vw, 1.35rem)/1.5 var(--body); color: var(--bone-2);
+  font: 400 clamp(1.1rem, 1.5vw, 1.25rem)/1.55 var(--body); color: var(--bone-2);
 }
 .hero__cta {
   grid-area: cta; margin-top: 2.1rem;
@@ -182,12 +197,12 @@ h1, h2, h3 {
 /* ---------- intro ---------- */
 .intro { padding: calc(var(--sec) * .85) var(--gutter) calc(var(--sec) * .45); overflow-x: clip; }
 .intro__text {
-  max-width: 46ch; margin: 0 auto; text-align: center;
-  font: 300 clamp(1.15rem, 1.5vw, 1.3rem)/1.7 var(--body); color: var(--ink);
+  max-width: 48ch; margin: 0 auto; text-align: center;
+  font: 400 clamp(1.08rem, 1.4vw, 1.2rem)/1.75 var(--body); color: var(--ink);
 }
 .intro__salute {
   display: block; margin-bottom: 1.4rem;
-  font: italic 400 clamp(1.9rem, 2.8vw, 2.5rem)/1.2 var(--display); font-variation-settings: "opsz" 96; color: var(--bone);
+  font: italic 400 clamp(1.9rem, 2.8vw, 2.5rem)/1.2 var(--display); color: var(--bone);
 }
 
 /* ---------- practices ---------- */
@@ -205,11 +220,11 @@ h1, h2, h3 {
 .mods { margin: 2rem 0 0; padding: 0; }
 .mods > div { border-top: 1px solid var(--gold-35); padding: 1.3rem 0; }
 .mods > div:last-child { border-bottom: 1px solid var(--gold-35); }
-.mods dt { font: 400 1.05rem/1.4 var(--body); letter-spacing: .02em; color: var(--bone); margin: 0; }
-.mods dd { margin: .35rem 0 0; font-size: 1rem; line-height: 1.65; color: var(--bone-2); }
+.mods dt { font: 500 1rem/1.4 var(--body); letter-spacing: .01em; color: var(--bone); margin: 0; }
+.mods dd { margin: .35rem 0 0; font-size: .97rem; line-height: 1.7; color: var(--bone-2); }
 .closing {
   max-width: 40ch; margin: clamp(3.5rem, 6vw, 5rem) auto 0; text-align: center;
-  font: italic 400 clamp(1.35rem, 2vw, 1.7rem)/1.45 var(--display); font-variation-settings: "opsz" 96; text-wrap: balance;
+  font: italic 400 clamp(1.35rem, 2vw, 1.7rem)/1.45 var(--display); text-wrap: balance;
 }
 
 /* ---------- session: three niches on one plinth ---------- */
@@ -227,10 +242,10 @@ h1, h2, h3 {
   display: flex; flex-direction: column; align-items: center; text-align: center;
 }
 .niche.arch-frame::after { display: none; }
-.niche__num { font: 400 clamp(2.4rem, 3.4vw, 3rem)/1 var(--display); font-variation-settings: "opsz" 96; color: var(--gold); }
+.niche__num { font: 400 clamp(2.4rem, 3.4vw, 3rem)/1 var(--display); color: var(--gold); }
 .niche__num::after { content: ""; display: block; width: 1.5rem; height: 1px; background: var(--gold-6); margin: 1.25rem auto 1.5rem; }
 .niche h3 { font-size: clamp(1.5rem, 2vw, 1.85rem); margin-bottom: .75rem; }
-.niche p { max-width: 22ch; font-size: 1rem; line-height: 1.65; color: var(--bone-2); }
+.niche p { max-width: 22ch; font-size: .97rem; line-height: 1.7; color: var(--bone-2); }
 
 /* ---------- about ---------- */
 .about__grid {
@@ -240,36 +255,52 @@ h1, h2, h3 {
 .about__arch { justify-self: center; }
 .about__copy h2 { font-size: clamp(2rem, 3.2vw, 2.8rem); margin: 1rem 0 1.75rem; }
 
-/* ---------- book: the one deep block ---------- */
+/* ---------- book: the one deep block — the kit's deep teal, its mark repeated like the pattern page ---------- */
 .book {
-  background: var(--ox); color: var(--bone); text-align: center; overflow-x: clip;
+  --icon-tile: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 153.67 147.77%22 fill=%22%232BE2D8%22%3E%3Cpath fill-rule=%22nonzero%22 d=%22M 76.84 55.62 C 73.41 49.85 71.86 43.97 72.21 38.15 C 72.81 28.28 75.19 19.14 76.91 13.60 C 78.57 19.14 80.86 28.29 81.46 38.15 C 81.81 43.97 80.26 49.84 76.84 55.62 M 76.84 141.99 C 37.65 141.99 5.77 110.11 5.77 70.93 C 5.77 44.54 20.23 20.56 43.56 8.15 C 44.30 10.18 45.19 12.31 46.40 14.94 C 46.75 15.69 47.10 16.43 47.45 17.18 C 49.78 22.15 51.98 26.84 52.17 32.16 L 52.14 34.01 L 52.06 34.69 C 51.89 38.04 49.89 40.88 48.04 43.28 C 46.14 45.62 44.02 47.97 41.97 50.24 C 35.16 57.79 28.11 65.58 26.45 76.07 C 24.63 89.08 28.99 107.24 34.02 117.72 C 35.61 120.93 37.32 122.72 39.09 123.04 C 40.20 123.23 41.28 122.85 42.30 121.88 L 42.35 121.83 C 43.84 120.09 43.80 117.78 43.77 115.92 L 43.77 115.82 C 43.67 113.34 43.33 110.86 43 108.48 L 42.84 107.36 C 42.74 106.62 42.64 105.87 42.54 105.14 C 41.90 100.49 41.30 96.11 42 91.62 C 42.59 88.14 43.88 84.64 45.75 81.44 C 45.99 82.02 46.25 82.61 46.52 83.21 C 48.68 88.07 49.16 92.09 49.54 95.33 C 49.90 98.41 50.19 100.84 51.91 102.48 C 52.98 103.52 54.58 103.73 56.09 103.02 C 59.36 101.49 62.57 95.45 62.06 88.38 C 61.41 79.29 62.46 77.98 66.57 74.41 C 69.01 72.31 73.02 68.84 76.84 64.10 C 80.66 68.85 84.66 72.31 87.09 74.41 C 91.21 77.98 92.27 79.29 91.61 88.38 C 91.10 95.45 94.32 101.49 97.58 103.02 C 99.10 103.74 100.66 103.54 101.77 102.48 C 103.48 100.84 103.77 98.41 104.13 95.33 C 104.52 92.09 104.99 88.07 107.16 83.21 C 107.43 82.59 107.69 82 107.93 81.44 C 109.80 84.64 111.08 88.14 111.67 91.62 C 112.38 96.10 111.77 100.49 111.13 105.13 C 111.03 105.87 110.93 106.61 110.83 107.36 L 110.68 108.48 C 110.34 110.87 110 113.34 109.90 115.84 L 109.89 115.92 C 109.87 117.78 109.83 120.09 111.32 121.83 L 111.38 121.88 C 112.39 122.85 113.48 123.23 114.59 123.04 C 116.35 122.72 118.05 120.93 119.66 117.71 C 124.68 107.24 129.04 89.08 127.21 76.05 C 125.56 65.58 118.52 57.78 111.70 50.24 C 109.64 47.97 107.52 45.62 105.64 43.29 C 103.78 40.88 101.78 38.04 101.60 34.64 L 101.53 34.08 L 101.50 32.20 C 101.69 26.84 103.89 22.14 106.23 17.18 C 106.57 16.43 106.92 15.69 107.27 14.94 C 108.48 12.31 109.38 10.18 110.11 8.15 C 133.44 20.56 147.90 44.54 147.90 70.93 C 147.90 110.11 116.02 141.99 76.84 141.99 M 108 1.79 L 107.32 1.48 L 105.95 5.43 C 104.93 8.46 103.55 11.45 102.21 14.35 C 100.28 18.54 98.27 22.88 97.27 27.57 C 96.85 29.87 96.70 31.79 96.79 33.59 L 96.81 34.40 L 96.94 35.50 C 97.01 36.14 97.10 36.94 97.23 37.44 C 97.98 40.80 100.01 43.75 101.91 46.21 C 103.81 48.56 105.92 50.90 107.96 53.16 C 115.49 61.50 123.27 70.12 122.88 81.92 C 122.77 92.12 120.55 102.95 116.46 113.20 C 116 114.27 115.41 115.57 114.70 116.75 C 114.70 116.54 114.71 116.33 114.71 116.12 L 114.71 116 C 114.87 113.06 115.30 110.07 115.72 107.18 C 116.38 102.61 117.06 97.88 116.73 93.08 C 116.48 90.37 115.88 87.68 114.95 85.09 C 113.71 81.69 112.05 78.56 110.02 75.80 C 111.94 69.48 111.57 64.86 108.81 60.41 L 107.53 58.35 L 103.41 60.91 L 104.68 62.97 C 107.38 67.30 106.88 71.91 102.72 81.23 C 100.26 86.77 99.71 91.38 99.31 94.76 C 99.17 95.94 99.04 97.07 98.84 97.89 C 97.78 96.59 96.11 93.53 96.45 88.73 C 97.20 78.39 95.72 75.46 90.27 70.74 C 87.92 68.71 83.60 64.98 79.82 60.02 C 84.57 52.81 86.76 45.36 86.30 37.86 C 85.25 20.47 79.46 5.85 79.21 5.23 L 77.52 1 L 76.42 1.12 L 74.72 5.20 C 74.46 5.82 68.43 20.42 67.37 37.86 C 66.91 45.36 69.09 52.81 73.85 60.02 C 70.07 64.98 65.75 68.71 63.40 70.75 C 57.95 75.46 56.48 78.39 57.22 88.73 C 57.56 93.53 55.89 96.58 54.82 97.89 C 54.63 97.07 54.50 95.94 54.36 94.76 C 53.96 91.38 53.41 86.77 50.95 81.23 C 46.79 71.91 46.30 67.30 48.98 62.97 L 50.27 60.91 L 46.14 58.35 L 44.86 60.41 C 42.14 64.80 41.76 69.56 43.65 75.80 C 41.61 78.56 39.96 81.68 38.72 85.09 C 37.79 87.68 37.19 90.37 36.94 93.09 C 36.61 97.88 37.29 102.61 37.95 107.18 C 38.37 110.07 38.80 113.06 38.96 115.97 L 38.96 116.12 C 38.96 116.33 38.97 116.54 38.97 116.75 C 38.27 115.58 37.68 114.27 37.22 113.21 C 33.12 102.95 30.90 92.12 30.79 81.90 C 30.40 70.12 38.18 61.50 45.71 53.16 C 47.75 50.90 49.86 48.56 51.77 46.20 C 53.66 43.75 55.69 40.80 56.43 37.47 C 56.57 36.94 56.66 36.14 56.73 35.50 L 56.87 34.33 L 56.88 33.61 C 56.97 31.79 56.82 29.87 56.40 27.55 C 55.40 22.89 53.39 18.54 51.46 14.35 C 50.12 11.45 48.74 8.46 47.73 5.44 L 46.41 1.46 L 45.72 1.77 C 18.55 14.04 1 41.19 1 70.93 C 1 112.75 35.02 146.77 76.84 146.77 C 118.65 146.77 152.67 112.75 152.67 70.93 C 152.67 41.21 135.14 14.07 108 1.79%22/%3E%3C/svg%3E");
+  position: relative; isolation: isolate;
+  background: var(--deep); color: var(--paper); text-align: center; overflow-x: clip;
   padding: var(--sec) var(--gutter);
   border-top: 1px solid var(--gold-35); border-bottom: 1px solid var(--gold-35);
 }
+.book::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .08;
+  background-image: var(--icon-tile), var(--icon-tile);
+  background-size: 128px 124px, 128px 124px;
+  background-position: 0 0, 96px 96px;
+  background-repeat: repeat;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.35), #000 40%, #000 60%, rgba(0,0,0,.35));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.35), #000 40%, #000 60%, rgba(0,0,0,.35));
+}
 .book__inner { display: flex; flex-direction: column; align-items: center; }
-.book__eyebrow { margin-top: 2.75rem; }
-.book h2 { font-size: clamp(2rem, 3.4vw, 3rem); max-width: 18ch; margin: 1rem auto 1.5rem; }
-.book__body { font: 300 1.2rem/1.6 var(--body); max-width: 40ch; margin-bottom: 2.25rem; }
-.book__fine { font-size: 1rem; color: rgba(233, 226, 214, .74); margin-top: .3rem; }
+.book .arch { background: #0E5F5F; }
+.book__eyebrow { margin-top: 2.75rem; color: var(--paper); }
+.book h2 { font-size: clamp(2rem, 3.4vw, 3rem); max-width: 18ch; margin: 1rem auto 1.5rem; color: var(--gold); }
+.book__body { font: 400 1.15rem/1.65 var(--body); max-width: 40ch; margin-bottom: 2.25rem; }
+.book__fine { font-size: 1rem; color: var(--paper); margin-top: .3rem; }
 .book .btn--gold + .book__fine { margin-top: 2.5rem; }
 
-/* ---------- footer ---------- */
+/* ---------- footer: the kit's badge in gold, its second tagline beneath ---------- */
 .foot { padding: clamp(4rem, 8vw, 6rem) var(--gutter) 3rem; text-align: center; overflow-x: clip; }
-.brand--foot { flex-direction: column; gap: 1rem; }
-.foot__tag { margin-top: 1.1rem; font: 300 1.1rem/1.5 var(--body); color: var(--ink); }
-.foot__disc { max-width: var(--measure); margin: 2.5rem auto 0; font-size: 1rem; line-height: 1.7; color: var(--bone-2); }
-.foot__meta { margin-top: 2.5rem; font: 400 .72rem/1 var(--body); letter-spacing: .26em; text-transform: uppercase; color: var(--bone-2); }
+.brand--foot { display: inline-flex; color: var(--gold); }
+.foot__badge { width: clamp(150px, 16vw, 184px); height: auto; }
+.foot__tag { margin-top: 1.5rem; }
+.foot__disc { max-width: var(--measure); margin: 2.5rem auto 0; font-size: .97rem; line-height: 1.75; color: var(--bone-2); }
+.foot__meta { margin-top: 2.5rem; font: 500 .7rem/1 var(--body); letter-spacing: .24em; text-transform: uppercase; color: var(--bone-2); }
 
 /* ---------- responsive ---------- */
 @media (max-width: 1100px) {
-  .hero__title { font-size: clamp(2.1rem, 3.6vw, 3.2rem); }
+  .hero__title { font-size: clamp(2.1rem, 3.5vw, 3.1rem); }
 }
 @media (max-width: 860px) {
-  :root { --arch-w: min(240px, 62vw); --arch-h: calc(var(--arch-w) * 1.5); }
+  :root { --arch-w: min(240px, 62vw); --arch-h: calc(var(--arch-w) * 1.5); --head-h: 4rem; }
 
+  .brand { gap: .65rem; }
+  .brand__mark { width: 34px; }
+  .brand__word { height: 10px; }
   .menu-btn {
     display: inline-block; cursor: pointer;
-    font: 400 .72rem/1 var(--body); letter-spacing: .26em; text-transform: uppercase;
+    font: 500 .7rem/1 var(--body); letter-spacing: .24em; text-transform: uppercase;
     background: none; color: var(--bone); border: 1px solid var(--gold-6); padding: .65rem .9rem .6rem;
   }
   .nav {
@@ -285,8 +316,8 @@ h1, h2, h3 {
   .hero__stage { display: flex; flex-direction: column; align-items: center; }
   .hero__eyebrow { order: 0; margin-bottom: 1.5rem; }
   .hero__arch { order: 1; }
-  .hero__title { display: block; order: 2; text-align: center; margin-top: 2.25rem; font-size: clamp(2rem, 9vw, 2.6rem); }
-  .hero__l1, .hero__l2, .hero__l3 { display: block; max-width: none; padding: 0; margin: 0; text-align: center; line-height: 1.12; }
+  .hero__title { display: block; order: 2; text-align: center; margin-top: 2.25rem; font-size: clamp(2rem, 8.6vw, 2.5rem); }
+  .hero__l1, .hero__l2, .hero__l3 { display: block; max-width: none; padding: 0; margin: 0; text-align: center; line-height: 1.14; }
   .hero__lede { order: 3; margin-top: 1.25rem; }
   .hero__cta { order: 4; flex-direction: column; gap: 1.4rem; }
 

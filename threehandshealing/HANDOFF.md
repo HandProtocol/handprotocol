@@ -7,7 +7,9 @@ design portfolio is LIVE at https://handprotocol.org/threehandshealing/styles/
 (noindex) waiting for Maria's picks; copy phase blocked on her answers to a
 16-question info sheet. A second batch of ten "bedazzled" styles is
 **LIVE in the same gallery since 2026-09-04** (27 cards, Bedazzled filter),
-reviewed + live-QA'd — see "Bedazzled batch". Next human step: text Maria.**
+reviewed + live-QA'd — see "Bedazzled batch". **2026-09-04 (late): Maria's
+licensed photos + brand kit arrived; Cathedral rebuilt on the kit** — see
+"Brand kit + licensed photos". Next human step: text Maria.**
 
 ## Start here (cold session)
 
@@ -231,6 +233,50 @@ directly in-session with the tools. **The two workflow scripts stay in
 - [ ] Text Maria the gallery link again ("ten new ones under Bedazzled").
 - [x] Memory `hand-client-three-hands-healing` updated.
 
+## Brand kit + licensed photos (2026-09-04, evening)
+
+koH dropped two client files into `threehandshealing/`: **`THH Logo Draft 1.pdf`**
+(Illustrator brand kit, 9 pages) and **`clientDownloads-8Z3NsBxP4.zip`** (ten
+licensed, unwatermarked finals from Aneta Hayne, 241 MB). Instruction: use the
+kit to make the **Cathedral** style the right colors/logos; keep unused photos
+for future pages (funnel etc.).
+
+**Where things landed**
+
+| What | Path |
+|---|---|
+| Brand PDF (source of truth) | `threehandshealing/brand/THH-Logo-Draft-1.pdf` (committed) |
+| Vector logos, extracted | `web/threehandshealing/assets/brand/thh-{icon,wordmark,horizontal,stacked,badge,badge2}{,-gold,-teal}.svg` |
+| Web photos (1600 px) + `-700` variants | `web/threehandshealing/assets/photos/maria-*.jpg` — table in `assets/README.md` |
+| Raw zip | stays local, untracked (`threehandshealing/*.zip` gitignored); re-derive with ffmpeg if needed |
+| Brief addendum | `design-portfolio-brief.md` → "Addendum 2026-09-04" |
+
+**Brand facts (from the PDF, exact):** main gold `#D8C971` + teal `#169999`;
+secondary `#15B7B3`, `#2BE2D8`, deep `#117575`. Fonts embedded: Montserrat
+(wordmark/labels) + STIX Two Text (taglines, semibold lowercase). Two tagline
+drafts: "embrace transformative evolution" and "getting healthier and happier".
+Mark = two hands cupping a flame inside a circle; Badge 1 (open arc + ring text)
+and Badge 2 (double ring); pattern page = icon half-dropped on teal.
+
+**Cathedral rebuild** (`web/threehandshealing/styles/cathedral/`): same
+structure and arch motif, re-keyed to the kit — ground `#082625` (brand deep
+teal taken down to candlelight), cards `#0D3A39`, Book block `#117575` with the
+icon pattern at 8 %, gold hairlines/eyebrows/buttons `#D8C971`, focus ring aqua;
+STIX Two Text display + Montserrat body; header = horizontal lockup (inline icon
++ vector wordmark), footer = Badge 1 in gold + "getting healthier and happier";
+hero eyebrow = "embrace transformative evolution" (replaces "Body · Mind ·
+Spirit"; the brief's "Support for a happier, healthier life." footer line is
+replaced by the kit tagline — both reversible). Photos: hero = laughing under
+the arch (DQ6A6168), about = standing in the red door (DQ6A6144), book = open
+hand (DQ6A6119); `srcset` 700/1066 w. Contrast checked: body ≥ 11:1 on the
+ground, ≥ 5:1 on the deep-teal block (eyebrow there is near-white, h2 gold at
+3.3:1 large-text). `validate.mjs` ✓ (40 KB, 3 photos), `shot.mjs` errors `[]`
+at 1440 + 390, thumbs regenerated, `gallery.js` card updated + `?v=20260905`.
+
+**Not done / decide later:** the other 26 styles + the preview root still use
+the watermarked proofs and the old three-leaf mark — re-skin only the style(s)
+Maria picks. `assets/README.md` maps proofs → finals.
+
 ## Live QA results (2026-09-01, post-deploy)
 
 Workflow: 16 live probes (14 styles + gallery + preview root) under real headers
@@ -333,6 +379,11 @@ device; "Copy my answers" assembles one numbered plain-text message.
 
 ## Session log
 
+- 2026-09-04 (evening) — **Brand kit + licensed photos received; Cathedral
+  rebuilt on the kit** (palette, Montserrat + STIX Two Text, real mark/badge,
+  taglines, three licensed photos). Assets filed under `assets/brand/` and
+  `assets/photos/`, PDF under `threehandshealing/brand/`, README + brief
+  addendum written. See "Brand kit + licensed photos".
 - 2026-08-11 — design preview built + shipped (`d27db55cd`), 3 directions,
   EFT hero video, Aneta Hayne proofs, all owner fields placeholdered.
 - 2026-08-16 — Maria's four copy blocks received. Copy audit against the

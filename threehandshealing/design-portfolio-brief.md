@@ -240,3 +240,19 @@ When done, reply with: the slug, the files written, the fonts used, the
 palette (hex), the signature element in one sentence, the screenshot JSON
 (errors must be empty), and anything you consciously left out. Keep it under
 200 words. Do not commit anything.
+
+## Addendum 2026-09-04 — licensed finals + brand kit
+
+Maria delivered her **licensed, unwatermarked photos** and a **brand kit**. New
+builds (and any style Maria picks) should use them instead of the proofs:
+
+- Photos: `../../assets/photos/maria-*.jpg` (ten finals, 1600 px; table in
+  `web/threehandshealing/assets/README.md`). `tools/validate.mjs` counts both
+  `imageN.jpeg` proofs and `photos/*.jpg` toward the ≤5 limit.
+- Brand: `../../assets/brand/thh-{icon,wordmark,horizontal,stacked,badge,badge2}.svg`
+  (+ `-gold`/`-teal`). Palette gold `#D8C971` · teal `#169999` · `#15B7B3` ·
+  `#2BE2D8` · `#117575`. Type Montserrat + STIX Two Text. Taglines "embrace
+  transformative evolution" / "getting healthier and happier". Source PDF:
+  `threehandshealing/brand/THH-Logo-Draft-1.pdf`.
+- **Cathedral** is the first style rebuilt on the kit (2026-09-04) — use it as the
+  reference for how the palette, mark, and taglines sit together.
