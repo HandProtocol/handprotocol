@@ -5,57 +5,32 @@ Status: **proposal, not built.** Cathedral became the main site on 2026-09-05
 EFT page and the booking/CRM funnel behind it. koH to confirm the shape, then
 build.
 
-## 0. Field facts — her live domain (added 2026-09-05, after koH sent the link)
+## 0. Production domain — 3handshealing.com
 
-koH sent **https://www.3handshealing.com/**. Inspected live; this changes §5–§7.
+koH confirmed 2026-09-05: **the production domain is `3handshealing.com`**
+(numeral 3). The brand name still spells out **"Three Hands Healing"** — that
+is what the wordmark says and what site copy should use; the numeral is the
+domain only. This is the target for the graduation step in §8.
 
-| Fact | Detail |
-|---|---|
-| Domain | **3handshealing.com** (numeral 3). Wordmark on the page reads "THREE HANDS HEALING" spelled out — keep spelling out the brand name, the numeral is the domain only |
-| Registrar | Namecheap · registered 2025-04-07 · expires 2027-04-07 · nameservers `dns1/dns2.registrar-servers.com` (Namecheap BasicDNS) |
-| Apex DNS | `3handshealing.com` is a **CNAME to `dq7zj2scxld31.cloudfront.net`** (systeme.io's CDN); `www` the same |
-| What is live | A **systeme.io "Full Website Coming Soon" squeeze page** — "Join My List", first name + email, "Keep Me Posted". Footer "© Copyright 2025" |
-| Platform | **systeme.io, free plan** (the "Powered by systeme.io" badge only shows on free) |
-| Her list | Already exists in systeme.io — **do not orphan it** |
-| Logo | Same mark as the brand kit (hands + flame in a circle), teal, plus the Montserrat wordmark — confirms our extracted `assets/brand/thh-*.svg` match what she actually uses |
-| Portrait | A casual snapshot, not the Aneta Hayne finals — our site is already better here |
-| Email | **No MX records, and an apex CNAME makes MX impossible.** There is no `maria@3handshealing.com` today; her contact address is personal. Fixing that means restructuring DNS (see below) |
+Parked facts, noted while checking the domain, **not driving this plan** (koH:
+"don't worry about DNS or systeme.io"):
 
-### What this changes
-
-1. **She is already on a funnel platform, and it does the job.** systeme.io now
-   ships a **native booking calendar** (2-way Google Calendar sync, Zoom/Meet
-   links, paid bookings, automated reminders, no cap on event types **on the
-   free plan**) plus email automations and SMS marketing. That is the whole
-   §4 funnel. Tiers: Free (2,000 contacts) · Startup $17 · Webinar $47 ·
-   Unlimited $97.
-2. **So GoHighLevel is no longer the default.** Recommend **staying on
-   systeme.io** and embedding *its* form + calendar into our Cathedral pages.
-   She keeps her list, pays $0–$17 instead of $97, and there is no migration.
-   Revisit GHL only if she later wants the things systeme.io does not do well:
-   missed-call text-back, two-way SMS conversations, a real sales pipeline,
-   and reputation/review management. For a solo practice at launch, that is
-   not worth $97/mo.
-3. **DNS plan.** To put our site on her domain: move DNS to Netlify (zone
-   first, per the client-graduation pattern), point apex + `www` at the Netlify
-   site, and keep systeme.io only as the backend (forms/calendar/email), or on
-   a `go.` / `book.` subdomain if she wants its pages too. Moving off the apex
-   CNAME also makes a real mailbox possible — add MX + SPF/DKIM/DMARC at the
-   same time.
-4. **Two accounts to get access to**, not one: her Namecheap login (or she
-   delegates the nameserver change) and her systeme.io account.
-
-The rest of this document stands, with "GHL" read as "her funnel platform".
-Where it says GoHighLevel embeds, read systeme.io embeds unless she moves.
+- The domain currently serves a **systeme.io "coming soon" squeeze page with an
+  email opt-in on it**. The one thing that must survive the migration: **she has
+  a list there — do not orphan it.** Export or forward before repointing.
+- Registrar is Namecheap. The apex is CNAME'd, so there is no mailbox on the
+  domain today. Whoever does the DNS cutover at launch should read this
+  paragraph and nothing more.
+- The logo on that page is the same mark as the brand kit, which confirms the
+  vectors in `assets/brand/thh-*.svg`.
 
 ## 1. Recommendation in three lines
 
 - **Static site stays the brand home** (our Cathedral design, our SEO, her
-  domain `3handshealing.com`). **Her funnel platform is the backend**: calendar,
-  forms, CRM, email/SMS automations. We embed its widgets into our pages; we do
-  not build the public pages in a funnel builder (we would lose the design, and
-  the site already exists). **That platform is systeme.io, which she already
-  uses** — see §0. GoHighLevel stays on the shelf as an upgrade path.
+  domain `3handshealing.com`). **GoHighLevel (GHL) is the backend**: calendar,
+  forms, CRM pipeline, email/SMS automations, review requests. We embed GHL
+  widgets into our pages; we do not build the public pages in GHL's builder (we
+  would lose the design, and the site already exists).
 - **One new page, `/eft/`** ("EFT & Tapping — what to expect"),
   built in the Cathedral system, using the reserved photo
   `maria-eft-tapping.jpg`. It is both the SEO landing page for "EFT tapping
@@ -154,8 +129,8 @@ specific pages only.
 
 1. Confirm the wording: "EFT / Tapping sessions", not "therapy" (unless licensed — Q3/Q4).
 2. FAQ facts: session length(s), price(s), online/in-person, city, cancellation (Q6–Q9).
-3. ~~Her domain name~~ — **answered: `3handshealing.com`** (Namecheap). Need either her Namecheap login or her agreement to change nameservers to Netlify.
-4. ~~Does she have a GHL account?~~ — **answered: she is on systeme.io (free), with a live list.** Need access as a user. Confirm she is happy to stay there (recommended) and get a business phone number for the calendar.
+3. ~~Her domain name~~ — **answered: `3handshealing.com`.** Need her registrar access, or her agreement to change nameservers, when we cut over.
+4. GHL: does she already have an account? If not, is the Starter tier acceptable? Business phone number for the calendar + missed-call text-back. (She has an existing email list on another platform — plan to import it, not abandon it.)
 5. Approve the tap-along lead magnet idea and record it (a 5-minute phone video is enough; we edit).
 6. Check the tapping-point diagram.
 
@@ -164,5 +139,5 @@ specific pages only.
 1. `/eft/` page in the Cathedral system, placeholders where Q6–Q9 are missing (≈1 session).
 2. GHL: pipeline, EFT calendar, opt-in form, 5-email nurture, booking reminders, follow-up + review request (≈1 session; copy drafted here first for Maria's OK).
 3. Embed form + calendar; CSP; live QA; swap the root's Book placeholder for the calendar.
-4. `3handshealing.com` → Netlify DNS zone (created first, nameservers changed at Namecheap so propagation overlaps the build) → graduate to `clients/three-hands-healing/` per the pattern. Retire or repoint the systeme.io squeeze page so the list keeps working. Add MX + SPF/DKIM/DMARC once the apex is no longer a CNAME.
+4. `3handshealing.com` → Netlify DNS zone created first so propagation overlaps the build → graduate to `clients/three-hands-healing/` per the client pattern. Export her existing email list before repointing.
 5. Later: energy-healing and bodywork pages on the same template; Spanish toggle if her clientele needs it.
