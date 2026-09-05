@@ -49,7 +49,7 @@ published as a private artifact. Nothing on the live page has changed yet.
 | **Main site (Cathedral)** | `web/threehandshealing/` (index.html, style.css, script.js, assets/) | Since 2026-09-05 — copy of `styles/cathedral/` with root-relative asset paths, no portfolio pill, no noindex, canonical + OG + favicon. Live URL https://handprotocol.org/threehandshealing/ · in `web/sitemap.xml` (prio 0.8, lastmod 2026-09-05) |
 | Original 3-direction preview | `web/threehandshealing/styles/original/` (index.html, style.css, script.js, studio.css, studio.js, vendor/) | Moved here 2026-09-05 (was the root); asset paths rewritten to `../../assets/`; noindex meta + the `styles/*` header; gallery "Originals" cards point at `original/?design=…` |
 | EFT page + funnel plan | `threehandshealing/plan-eft-and-ghl-funnel.md` | Proposal 2026-09-05, awaiting koH confirm + Maria's Q6–Q9 answers. **§0 holds the live-domain findings — read it first** |
-| **Her real domain** | https://www.3handshealing.com/ | Namecheap, apex CNAME'd to systeme.io; a "coming soon" squeeze page with her email list on it. Not ours, not touched |
+| **Production domain** | `3handshealing.com` (live now: a systeme.io "coming soon" page with her email list — not ours, not touched) | Confirmed by koH 2026-09-05; target for the graduation step |
 | **Style portfolio (gallery)** | `web/threehandshealing/styles/` → https://handprotocol.org/threehandshealing/styles/ | On `main` (`a45ec8426`, landed 2026-09-01, Netlify deploy `6a96f993…` ready) · noindex meta + `X-Robots-Tag` · not in sitemap |
 | 14 style pages | `web/threehandshealing/styles/<slug>/` → `…/styles/<slug>/` | same commit; each standalone (html+css+js, ≤40 KB) |
 | Portfolio brief | `threehandshealing/design-portfolio-brief.md` | on `main` (`99d26cb8f`) — source of truth for copy rules + hard requirements |
@@ -412,34 +412,29 @@ Done in one pass, verified, landed on `main`:
   prices, our six modality blurbs. These are the info-sheet answers + the
   GHL calendar (see the plan).
 
-## Her live domain — 3handshealing.com (found 2026-09-05)
+## Production domain — 3handshealing.com
 
-koH sent the link. It is **not** a site we built and we have not touched it.
+koH confirmed 2026-09-05: **the production domain is `3handshealing.com`**
+(numeral 3). Copy still spells the brand out as **"Three Hands Healing"**; the
+numeral is the domain only. This is the target for the graduation step
+(`clients/three-hands-healing/` on its own Netlify site).
 
-- **3handshealing.com** (numeral 3; the wordmark still spells out "THREE HANDS
-  HEALING" — keep spelling the brand out in copy). Namecheap, registered
-  2025-04-07, expires 2027-04-07, on Namecheap BasicDNS.
-- Apex + `www` are a **CNAME to systeme.io's CloudFront**. Consequence: **no MX
-  is possible**, so there is no `@3handshealing.com` mailbox today.
-- What is live: a **systeme.io free-plan "Full Website Coming Soon" squeeze
-  page** — logo, a casual portrait, "Join My List" (first name + email).
-  **Her email list already lives in systeme.io — do not orphan it.**
-- The logo there is the same mark as the brand kit, which independently
-  confirms our extracted `assets/brand/thh-*.svg`.
-- **Biggest consequence: systeme.io already covers the funnel**, including a
-  native booking calendar (Google Calendar 2-way sync, Zoom/Meet links, paid
-  bookings, reminders, free tier) and SMS. So the GoHighLevel plan is
-  downgraded to an upgrade path; recommend embedding systeme.io's form +
-  calendar in our Cathedral pages instead. Details in
-  `plan-eft-and-ghl-funnel.md` §0.
+Parked, deliberately not pursued (koH: "don't worry about DNS or systeme.io"):
+the domain currently serves a **systeme.io "coming soon" page carrying an email
+opt-in**, so **she has a list there — export it before repointing, do not
+orphan it.** Registrar is Namecheap and the apex is CNAME'd (no mailbox on the
+domain today); that is a cutover-day detail, not a now problem. The logo on
+that page is the same mark as the brand kit, which confirms our
+`assets/brand/thh-*.svg`.
 
 ## Session log
 
-- 2026-09-05 (later) — koH sent **https://www.3handshealing.com/**. Inspected
-  live (headless render, DNS/RDAP): systeme.io free-plan squeeze page, her list
-  already there, Namecheap domain, apex CNAME so no email. Verified systeme.io
-  now ships a booking calendar + SMS → **GHL demoted from default to upgrade
-  path** in the plan (§0 added). Docs only; nothing built.
+- 2026-09-05 (later) — koH answered the open "her domain" question:
+  **`3handshealing.com`**, for the production site. Recorded as plan §0. A
+  detour into its DNS and the systeme.io page it currently serves was parked at
+  koH's direction; the one carried-forward fact is that **her email list lives
+  on that page and must be exported before cutover**. **GoHighLevel remains the
+  funnel plan.** Docs only; nothing built.
 - 2026-09-05 — **Cathedral promoted to the main site**; old preview →
   `styles/original/`; gallery originals repointed + viewer bug fixed;
   `plan-eft-and-ghl-funnel.md` written (EFT "what to expect" page structure,
