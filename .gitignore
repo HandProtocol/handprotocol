@@ -67,3 +67,6 @@ biz/*/photos/
 # screenshots). Large, and may contain markup from compromised origin sites.
 # Only the built client site under clients/<name>/ is committed.
 clients/.source/
+
+# Three Hands Healing: raw client photo drops (240 MB) stay local; web-sized copies live in web/threehandshealing/assets/photos
+threehandshealing/*.zip

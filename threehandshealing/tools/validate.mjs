@@ -27,7 +27,7 @@ for (const slug of slugs) {
   const norm = (t) => t.replace(/<br\s*\/?>/gi, ' ').replace(/<[^>]+>/g, '').replace(/&nbsp;/g, ' ').replace(/(&#8212;|&mdash;)/g, '—').replace(/[’‘]/g, "'").replace(/\s+/g, ' ')
   const text = norm(all)
   for (const v of VERBATIM) if (!text.includes(v)) issues.push(`copy missing: "${v.slice(0, 40)}…"`)
-  const photos = new Set([...all.matchAll(/assets\/(image\d+\.jpeg)/g)].map(m => m[1]))
+  const photos = new Set([...all.matchAll(/assets\/(?:photos\/)?([\w-]+?)(?:-\d{3,4})?\.(?:jpe?g|webp)/g)].map(m => m[1]))  // proofs imageN.jpeg or licensed finals photos/<name>[-700].jpg
   if (photos.size > 5) issues.push(`photos: ${photos.size} (>5): ${[...photos].join(',')}`)
   if (/DM\+Serif\+Display|DM\+Sans/.test(html)) issues.push('uses baseline DM fonts')
   if (/testimonial/i.test(all)) issues.push('mentions testimonials')
