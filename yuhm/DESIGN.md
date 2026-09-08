@@ -3,6 +3,12 @@
 Derived from `src/styles.css` (live code) and `docs/WXLOVE-THEME-OPTIMIZATION.md` (token
 decision). The landing/public entry is the **brand** surface; the dashboard is **product**.
 
+**2026-09-08:** the sign-in screen, the food finder (`SimpleExperience`), the guest sign-in sheet, and
+the finder's location dialog now wear the brand theme too (oat ground `#fbf6ea`/`#fffdf6`, cacao ink
+`#46312a`, garden-green actions `#2d6b50` with the hero-CTA offset shadow, Baloo 2 display). A person
+sees one yuhm from the landing through signing in and into the task. Only the coordinator dashboard
+(`mode=advanced`) keeps the product theme below. The shared lockup is `src/YuhmBrand.tsx`.
+
 ## Color
 
 | Token | Value | Role |
@@ -22,7 +28,8 @@ Landing is warm cream with forest structure; coral is precious. Dot-grid texture
 
 ## Typography
 
-- **Space Grotesk** — display: h1 (clamp 3.5–7.5rem, -.07em tracking, .9 line), card titles.
+- **Baloo 2** — display on brand surfaces (landing, world, sign-in, finder): rounded, 700–800 weight, near-zero tracking.
+- **Space Grotesk** — display on the dashboard: h1 (clamp 3.5–7.5rem, -.07em tracking, .9 line), card titles.
 - **DM Sans** — body/UI.
 - **DM Mono** — eyebrows/kickers/metadata, uppercase, wide tracking, 9–10px.
 

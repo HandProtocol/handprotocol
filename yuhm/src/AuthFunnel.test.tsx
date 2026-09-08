@@ -39,16 +39,19 @@ import App from './App'
 
 const invalidCredentials = { code: 'invalid_credentials', message: 'Invalid login credentials' }
 
+function resetHarness() {
+  authState.signedIn = false
+  mockDb.auth.signInWithPassword.mockReset()
+  mockDb.auth.signUp.mockReset()
+  mockDb.auth.signOut.mockClear()
+  localStorage.clear()
+  sessionStorage.clear()
+  Object.defineProperty(window, 'innerWidth', { value: 1024, configurable: true })
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('{}', { status: 200 })))
+}
+
 describe('onboarding funnel: sign in once, land on the task', () => {
-  beforeEach(() => {
-    authState.signedIn = false
-    mockDb.auth.signInWithPassword.mockReset()
-    mockDb.auth.signUp.mockReset()
-    localStorage.clear()
-    sessionStorage.clear()
-    Object.defineProperty(window, 'innerWidth', { value: 1024, configurable: true })
-    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('{}', { status: 200 })))
-  })
+  beforeEach(resetHarness)
 
   afterEach(() => {
     vi.unstubAllGlobals()
@@ -145,5 +148,53 @@ describe('onboarding funnel: sign in once, land on the task', () => {
     await userEvent.click(screen.getByRole('button', { name: /Continue/ }))
 
     await waitFor(() => expect(window.location.search).toBe('?intent=contribute'))
+  })
+})
+
+describe('sign in is one tap from the top of every pre-login surface', () => {
+  beforeEach(resetHarness)
+  afterEach(() => { vi.unstubAllGlobals() })
+
+  it('offers Sign in at the top of the living world and brings the person back to it', async () => {
+    localStorage.setItem('yuhm:world-intro', JSON.stringify({ role: 'eat' }))
+    window.history.replaceState({}, '', '/app/')
+    render(<App />)
+
+    const links = await screen.findAllByRole('link', { name: /^Sign in$/ })
+    expect(links.some((link) => link.closest('.world-topbar'))).toBe(true)
+    for (const link of links) expect(link).toHaveAttribute('href', '/app/?mode=login&return=%2Fapp%2F%3Fmode%3Dworld')
+  })
+
+  it('offers Sign in in the finder header and returns to the same screen afterwards', async () => {
+    sessionStorage.setItem('yuhm:location-choice', 'complete')
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
+    render(<App />)
+
+    expect(await screen.findByRole('link', { name: /^Sign in/ })).toHaveAttribute('href', '/app/?mode=login&return=%2Fapp%2F%3Fmode%3Danonymous%26intent%3Dfood')
+    expect(screen.queryByRole('button', { name: 'Open account and display settings' })).not.toBeInTheDocument()
+  })
+
+  it('gives a signed-in member an account menu with sign out instead of a Sign in button', async () => {
+    authState.signedIn = true
+    sessionStorage.setItem('yuhm:location-choice', 'complete')
+    window.history.replaceState({}, '', '/app/?mode=anonymous&intent=food')
+    render(<App />)
+
+    const account = await screen.findByRole('button', { name: 'Open account and display settings' })
+    expect(account).toHaveTextContent('N')
+    expect(screen.queryByRole('link', { name: /^Sign in/ })).not.toBeInTheDocument()
+    await userEvent.click(account)
+    await userEvent.click(screen.getByRole('button', { name: 'Sign out' }))
+    expect(mockDb.auth.signOut).toHaveBeenCalledTimes(1)
+  })
+
+  it('sends the dashboard account prompt back to the same workspace after signing in', async () => {
+    window.history.replaceState({}, '', '/app/?mode=advanced&workspace=community')
+    render(<App />)
+
+    await userEvent.click(await screen.findByRole('button', { name: /FOOD IS HERE/i }))
+    const dialog = screen.getByRole('dialog', { name: /Join the network/i })
+    expect(within(dialog).getByRole('link', { name: /Sign in or create an account/i })).toHaveAttribute('href', '/app/?mode=login&return=%2Fapp%2F%3Fmode%3Dadvanced%26workspace%3Dcommunity')
+    expect(within(dialog).queryByRole('link', { name: /^Create an account/i })).not.toBeInTheDocument()
   })
 })

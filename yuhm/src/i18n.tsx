@@ -7,6 +7,7 @@ const en = {
   // Shared
   'brand.tagline': 'the om in yum',
   'common.signIn': 'Sign in',
+  'common.signOut': 'Sign out',
   'common.feedback': 'Feedback',
   'common.navigate': 'Navigate',
   'common.hours': 'Hours',
@@ -242,7 +243,7 @@ const en = {
   'login.forgot': 'Forgot password?',
   'login.updatesSwitch': 'Skip the account. Get email updates',
   'login.browseAnonymously': 'Browse as a guest',
-  'login.continueCopy': 'One step for everyone: your email and a password. New here? That creates your account. Already a member? It signs you in.',
+  'login.continueCopy': 'Your email and a password. New here? That creates your account. Already a member? It signs you in.',
   'login.signupCopy': 'Create an account with your email and a password. Your browser can offer to save it on this device.',
   'login.existingAccount': 'That email already has a yuhm account. Check your password or reset it.',
   'login.notConfigured': 'Sign-in is not set up on this deployment yet. You can still browse as a guest.',
@@ -254,6 +255,7 @@ export type MessageKey = keyof typeof en
 const es: Record<MessageKey, string> = {
   'brand.tagline': 'el om en el ñam',
   'common.signIn': 'Iniciar sesión',
+  'common.signOut': 'Cerrar sesión',
   'common.feedback': 'Comentarios',
   'common.navigate': 'Cómo llegar',
   'common.hours': 'Horario',
@@ -482,7 +484,7 @@ const es: Record<MessageKey, string> = {
   'login.forgot': '¿Olvidaste tu contraseña?',
   'login.updatesSwitch': 'Sin cuenta. Recibir noticias por correo',
   'login.browseAnonymously': 'Mirar como invitado',
-  'login.continueCopy': 'Un solo paso para todos: tu correo y una contraseña. ¿Nuevo aquí? Así se crea tu cuenta. ¿Ya eres miembro? Así entras.',
+  'login.continueCopy': 'Tu correo y una contraseña. ¿Nuevo aquí? Así se crea tu cuenta. ¿Ya eres miembro? Así entras.',
   'login.signupCopy': 'Crea una cuenta con tu correo y una contraseña. Tu navegador puede ofrecer guardarla en este dispositivo.',
   'login.existingAccount': 'Ese correo ya tiene una cuenta de yuhm. Revisa tu contraseña o restablécela.',
   'login.notConfigured': 'El inicio de sesión aún no está configurado en este sitio. Puedes seguir mirando como invitado.',
