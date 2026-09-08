@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react'
 import { ArrowUpRight, CalendarDays, ChevronDown, ChevronRight, Clock3, HandHeart, Leaf, MapPin, MessageCircle, Navigation, Package, Search, Settings, ShieldCheck, Truck, Users, X } from 'lucide-react'
-import { foodDbConfigured, loadFoodSpots, type FoodAlertRecord, type FoodSpotRecord } from './lib/foodRepository'
-import { getMemberIdentity } from './lib/auth'
+import { foodDb, foodDbConfigured, loadFoodSpots, type FoodAlertRecord, type FoodSpotRecord } from './lib/foodRepository'
+import { getMemberIdentity, signInHref } from './lib/auth'
 import { useFoodAlerts } from './lib/useFoodAlerts'
 import { openCommunityContact } from './CommunityContactWidget'
 import type { FoodMapLocation } from './FoodMap'
@@ -14,6 +14,7 @@ import { FoodAlertBanner } from './FoodAlertBanner'
 import { LocationPrompt } from './prompts'
 import { useAuth } from './AuthProvider'
 import { EmailContinueForm } from './AuthForm'
+import { YuhmBrand } from './YuhmBrand'
 
 const FoodMap = lazy(() => import('./FoodMap').then((module) => ({ default: module.FoodMap })))
 
@@ -26,7 +27,7 @@ const filterLabelKeys: Record<FoodListingFilter, MessageKey> = {
 
 export function SimpleExperience({ initialIntent }: { initialIntent: ConsumerIntent }) {
   const { t } = useI18n()
-  const { params, navigate } = useRoute()
+  const { path, params, navigate } = useRoute()
   const { member, authReady } = useAuth()
   const routeIntent = params.get('intent')
   const intent: ConsumerIntent = routeIntent === 'food' || routeIntent === 'contribute' || routeIntent === 'gather' || routeIntent === 'request' ? routeIntent : initialIntent
@@ -76,6 +77,12 @@ export function SimpleExperience({ initialIntent }: { initialIntent: ConsumerInt
     return matchesQuery && matchesListingFilter(location, foodFilter, alertSpotIds)
   }), [allLocations, query, foodFilter, alertSpotIds])
 
+  // Signing in from this screen brings the person straight back to it.
+  const herePath = `${path}${params.toString() ? `?${params.toString()}` : ''}`
+  const signOut = async () => {
+    setAccountMenuOpen(false)
+    await foodDb?.auth.signOut()
+  }
   const chooseIntent = (nextIntent: ConsumerIntent) => {
     navigate(`/app/?mode=anonymous&intent=${nextIntent}`)
   }
@@ -122,9 +129,9 @@ export function SimpleExperience({ initialIntent }: { initialIntent: ConsumerInt
 
   return <div className="simple-app">
     <header className="simple-header">
-      <a className="simple-brand" href="/" aria-label="yuhm Food home"><span>yuhm</span><b>FOOD</b></a>
+      <YuhmBrand />
       <button className="simple-location" type="button" onClick={() => setLocationPromptOpen(true)}><MapPin size={15} /><span>{locationLabel}</span><ChevronDown size={14} /></button>
-      <div className="simple-header-tools"><LanguageToggle className="simple-language" /><div className="simple-account-wrap"><button className="simple-account" type="button" onClick={() => setAccountMenuOpen((current) => !current)} aria-label={t('simple.account.label')} aria-expanded={accountMenuOpen} aria-controls="simple-account-menu"><span>{member ? getMemberIdentity(member).initials : 'WX'}</span></button>{accountMenuOpen && <div className="simple-account-menu" id="simple-account-menu"><p className="simple-eyebrow">{t('simple.account.eyebrow')}</p><strong>{t('simple.account.simpleMode')}</strong><span>{member ? t('simple.account.signedInAs', { name: getMemberIdentity(member).displayName }) : t('simple.account.anonymous')}</span>{authReady && !member && <AppLink href="/app/?mode=login">{t('common.signIn')} <ArrowUpRight size={14} /></AppLink>}<button className="simple-feedback-link" type="button" onClick={() => { setAccountMenuOpen(false); openCommunityContact('feedback') }}>{t('simple.account.sendFeedback')} <ArrowUpRight size={14} /></button><AppLink className="simple-advanced-link" href="/app/?mode=advanced" onClick={enableAdvancedMode}><Settings size={15} /><span><b>{t('simple.account.advanced')}</b><small>{t('simple.account.advancedDetail')}</small></span><ChevronRight size={15} /></AppLink></div>}</div></div>
+      <div className="simple-header-tools"><LanguageToggle className="simple-language" />{authReady && !member && <AppLink className="simple-signin" href={signInHref(herePath)}>{t('common.signIn')} <ArrowUpRight size={15} /></AppLink>}{member && <div className="simple-account-wrap"><button className="simple-account" type="button" onClick={() => setAccountMenuOpen((current) => !current)} aria-label={t('simple.account.label')} aria-expanded={accountMenuOpen} aria-controls="simple-account-menu"><span>{getMemberIdentity(member).initials}</span></button>{accountMenuOpen && <div className="simple-account-menu" id="simple-account-menu"><p className="simple-eyebrow">{t('simple.account.eyebrow')}</p><strong>{getMemberIdentity(member).displayName}</strong><span>{t('simple.account.signedInAs', { name: getMemberIdentity(member).email || getMemberIdentity(member).displayName })}</span><button className="simple-feedback-link" type="button" onClick={() => { setAccountMenuOpen(false); openCommunityContact('feedback') }}>{t('simple.account.sendFeedback')} <ArrowUpRight size={14} /></button><AppLink className="simple-advanced-link" href="/app/?mode=advanced" onClick={enableAdvancedMode}><Settings size={15} /><span><b>{t('simple.account.advanced')}</b><small>{t('simple.account.advancedDetail')}</small></span><ChevronRight size={15} /></AppLink><button className="simple-signout" type="button" onClick={() => void signOut()}>{t('common.signOut')}</button></div>}</div>}</div>
     </header>
 
     <nav className="simple-tabs" aria-label="Choose what you want to do">
