@@ -55,3 +55,62 @@ export function getMemberIdentity(user: User | null) {
 
   return { displayName, email, initials }
 }
+
+type ContinueAuth = Pick<SupabaseClient['auth'], 'signUp' | 'signInWithPassword'>
+
+export type ContinueWithEmailResult =
+  | { status: 'signed_in' | 'created' }
+  | { status: 'error'; reason: 'existing_account' | 'other'; message: string }
+
+const INVALID_CREDENTIALS = /invalid login credentials|invalid_credentials/i
+const EXISTING_ACCOUNT = /already (been )?registered|already exists|user_already_exists/i
+
+function isInvalidCredentials(error: { code?: string; message?: string }) {
+  return error.code === 'invalid_credentials' || INVALID_CREDENTIALS.test(error.message ?? '')
+}
+
+function isExistingAccount(error: { code?: string; message?: string }) {
+  return error.code === 'user_already_exists' || EXISTING_ACCOUNT.test(error.message ?? '')
+}
+
+export const EXISTING_ACCOUNT_MESSAGE = 'That email already has a yuhm account. Check your password or reset it.'
+
+/**
+ * One "Continue" action for members and newcomers alike: sign in with the
+ * email and password, and when no account matches, create one with those same
+ * credentials. Only a wrong password on an existing account needs a second try.
+ */
+export async function continueWithEmail(auth: ContinueAuth, email: string, password: string): Promise<ContinueWithEmailResult> {
+  const login = await auth.signInWithPassword({ email, password })
+  if (login.data.session) return { status: 'signed_in' }
+  if (login.error && !isInvalidCredentials(login.error)) return { status: 'error', reason: 'other', message: getAuthErrorMessage(login.error, 'login') }
+
+  const signup = await createAccountAndSession(auth, email, password)
+  if (signup.data.session) return { status: 'created' }
+  // Signup refused or the retry still failed: the email belongs to an existing
+  // account and the password did not match it.
+  if (signup.error && (isExistingAccount(signup.error) || isInvalidCredentials(signup.error))) return { status: 'error', reason: 'existing_account', message: EXISTING_ACCOUNT_MESSAGE }
+  if (signup.error) return { status: 'error', reason: 'other', message: getAuthErrorMessage(signup.error, 'signup') }
+  return { status: 'error', reason: 'other', message: 'Your account was created, but yuhm could not sign you in. Please try again.' }
+}
+
+export const DEFAULT_RETURN_PATH = '/app/?intent=food'
+
+const LEGACY_RETURN_INTENTS = new Set(['food', 'contribute', 'gather', 'request'])
+const IN_APP_PATH = /^\/app\/[^\s\\]*$/
+
+/**
+ * Where to land after signing in: the exact in-app destination the person was
+ * headed to, a legacy intent name, or the food finder. Foreign origins and
+ * protocol-relative URLs never pass through.
+ */
+export function resolveReturnPath(raw: string | null | undefined, fallback = DEFAULT_RETURN_PATH) {
+  if (!raw) return fallback
+  if (LEGACY_RETURN_INTENTS.has(raw)) return `/app/?intent=${raw}`
+  return IN_APP_PATH.test(raw) ? raw : fallback
+}
+
+/** Login-screen URL that brings the person back to `returnTo` once signed in. */
+export function signInHref(returnTo?: string) {
+  return returnTo ? `/app/?mode=login&return=${encodeURIComponent(returnTo)}` : '/app/?mode=login'
+}

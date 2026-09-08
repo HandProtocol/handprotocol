@@ -1,10 +1,10 @@
 import { useState, type ReactNode } from 'react'
-import { ArrowRight, Check, ChefHat, HandHeart, Leaf, MapPin, RefreshCw, Sprout, Truck, Users, UtensilsCrossed } from 'lucide-react'
+import { ArrowRight, Check, ChefHat, HandHeart, Leaf, RefreshCw, Sprout, Truck, Users, UtensilsCrossed } from 'lucide-react'
 import { motion } from 'motion/react'
 import { BowlMark, usePrefersReducedMotion } from '../LandingDecor'
 import { Kicker, SampleTag, type MissionProgress } from './panels'
 import { useWorldText } from './worldStrings'
-import { basePulse, circleName, personById, spotById, worldMissions, type WorldMission } from './worldData'
+import { basePulse, personById, spotById, worldMissions, type WorldMission } from './worldData'
 
 export type WorldRole = 'eat' | 'grow' | 'make' | 'move' | 'share' | 'organize'
 
@@ -29,10 +29,7 @@ type OnboardingProps = {
 export function WorldOnboarding({ onDone, onSkip }: OnboardingProps) {
   const w = useWorldText()
   const reduce = usePrefersReducedMotion()
-  const [step, setStep] = useState<'intro' | 'role' | 'privacy' | 'reveal'>('intro')
   const [role, setRole] = useState<WorldRole>('eat')
-  const [locating, setLocating] = useState(false)
-  const [position, setPosition] = useState<{ latitude: number; longitude: number } | null>(null)
 
   const roles: { id: WorldRole; icon: ReactNode; label: string; copy: string }[] = [
     { id: 'eat', icon: <UtensilsCrossed size={19} />, label: w('world.role.eat'), copy: w('world.role.eatCopy') },
@@ -43,40 +40,21 @@ export function WorldOnboarding({ onDone, onSkip }: OnboardingProps) {
     { id: 'organize', icon: <Users size={19} />, label: w('world.role.organize'), copy: w('world.role.organizeCopy') },
   ]
 
-  const useLocation = () => {
-    if (!('geolocation' in navigator)) { setStep('reveal'); return }
-    setLocating(true)
-    navigator.geolocation.getCurrentPosition(
-      (result) => {
-        setPosition({ latitude: result.coords.latitude, longitude: result.coords.longitude })
-        setLocating(false)
-        setStep('reveal')
-      },
-      () => { setLocating(false); setStep('reveal') },
-      { timeout: 8000 },
-    )
-  }
-
   const firstMission = worldMissions.find((mission) => mission.id === roleMissions[role])
 
-  const stepMotion = reduce
+  const cardMotion = reduce
     ? {}
     : { initial: { opacity: 0, y: 26, scale: 0.985 }, animate: { opacity: 1, y: 0, scale: 1 }, transition: springy }
 
+  // One screen, one decision: pick how you take part, see the invitation it
+  // unlocks, step in. Location stays off the intro; the map works at
+  // neighborhood level and never needs an address.
   return <div className="world-onboard" role="dialog" aria-modal="true" aria-label={w('world.intro.title')}>
     <div className="world-onboard-sky" aria-hidden="true" />
-    {step === 'intro' && <motion.div className="world-onboard-card" {...stepMotion}>
+    <motion.div className="world-onboard-card wide" {...cardMotion}>
       <BowlMark className="world-onboard-bowl" animate={!reduce} pulse={!reduce} />
       <Kicker>{w('world.intro.kicker')}</Kicker>
       <h1>{w('world.intro.title')}</h1>
-      <p>{w('world.intro.copy')}</p>
-      <button type="button" className="world-primary" onClick={() => setStep('role')}>{w('world.intro.start')} <ArrowRight size={16} /></button>
-      <button type="button" className="world-quiet" onClick={onSkip}>{w('world.intro.skip')}</button>
-    </motion.div>}
-
-    {step === 'role' && <motion.div className="world-onboard-card wide" {...stepMotion}>
-      <Kicker>{w('world.intro.kicker')}</Kicker>
-      <h1>{w('world.role.title')}</h1>
       <p>{w('world.role.copy')}</p>
       <div className="world-role-grid" role="radiogroup" aria-label={w('world.role.title')}>
         {roles.map((candidate) => <button
@@ -93,28 +71,14 @@ export function WorldOnboarding({ onDone, onSkip }: OnboardingProps) {
           {role === candidate.id && <span className="world-role-check"><Check size={13} /></span>}
         </button>)}
       </div>
-      <button type="button" className="world-primary" onClick={() => setStep('privacy')}>{w('world.intro.start')} <ArrowRight size={16} /></button>
-    </motion.div>}
-
-    {step === 'privacy' && <motion.div className="world-onboard-card" {...stepMotion}>
-      <Kicker>{w('world.intro.kicker')}</Kicker>
-      <h1>{w('world.privacy.title')}</h1>
-      <p>{w('world.privacy.copy')}</p>
-      <button type="button" className="world-primary" disabled={locating} onClick={useLocation}><MapPin size={16} /> {locating ? '…' : w('world.privacy.use')}</button>
-      <button type="button" className="world-secondary" onClick={() => setStep('reveal')}>{w('world.privacy.stay')}</button>
-    </motion.div>}
-
-    {step === 'reveal' && <motion.div className="world-onboard-card" {...stepMotion}>
-      <Kicker>{w('world.reveal.kicker')}</Kicker>
-      <h1 className="world-circle-name">{circleName}</h1>
-      <p>{w('world.reveal.copy')}</p>
       {firstMission && <div className="world-first-invite">
         <span className="world-first-label">{w('world.reveal.first')}<SampleTag /></span>
         <strong>{firstMission.title}</strong>
         <small>{firstMission.window} · {spotById(firstMission.spotId)?.area}</small>
       </div>}
-      <button type="button" className="world-primary" onClick={() => onDone(role, position)}>{w('world.reveal.open')} <ArrowRight size={16} /></button>
-    </motion.div>}
+      <button type="button" className="world-primary" onClick={() => onDone(role, null)}>{w('world.intro.start')} <ArrowRight size={16} /></button>
+      <button type="button" className="world-quiet" onClick={onSkip}>{w('world.intro.skip')}</button>
+    </motion.div>
   </div>
 }
 

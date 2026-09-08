@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import App from './App'
@@ -183,6 +183,32 @@ describe('yuhm entry points and interaction gates', () => {
     expect(screen.getByRole('link', { name: /Get yuhm updates/i })).toHaveAttribute('href', '/app/?mode=login&updates=1')
   })
 
+  it('opens two doors above the fold: browse as a guest or sign in', () => {
+    render(<App />)
+    expect(screen.getByRole('link', { name: /Find food near me/i })).toHaveAttribute('href', '/app/?mode=anonymous&intent=food')
+    const signInLinks = screen.getAllByRole('link', { name: /^Sign in/i })
+    expect(signInLinks.length).toBeGreaterThanOrEqual(2)
+    for (const link of signInLinks) expect(link).toHaveAttribute('href', '/app/?mode=login')
+  })
+
+  it('signs in or creates the account from one form with no mode toggle', () => {
+    window.history.replaceState({}, '', '/app/?mode=login')
+    render(<App />)
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Sign in or create your account.' })).toBeInTheDocument()
+    expect(screen.getByLabelText('Password')).toHaveAttribute('autocomplete', 'current-password')
+    expect(screen.getByRole('button', { name: /Continue/ })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /New here\? Create an account/i })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /Already have an account/i })).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Browse as a guest/i })).toHaveAttribute('href', '/app/?mode=anonymous&intent=food')
+  })
+
+  it('opens the reset screen directly from mode=reset', () => {
+    window.history.replaceState({}, '', '/app/?mode=reset')
+    render(<App />)
+    expect(screen.getByRole('heading', { level: 1, name: 'Reset your password.' })).toBeInTheDocument()
+  })
+
   it('routes each landing choice to the relevant workspace', () => {
     window.history.replaceState({}, '', '/app/?mode=anonymous&intent=contribute')
     const { unmount } = render(<App />)
@@ -239,8 +265,12 @@ describe('yuhm entry points and interaction gates', () => {
     expect(screen.getByText(/Food out, compost back/i)).toBeInTheDocument()
     expect(screen.getByText(/sealed compost pickup/i)).toBeInTheDocument()
     await userEvent.click(screen.getByRole('button', { name: /Set up Contributor profile/i }))
-    expect(screen.getByRole('dialog', { name: /Ready to deliver food and return compost/i })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: /Sign in to continue/i })).toHaveAttribute('href', '/app/?mode=login&return=contribute')
+    const sheet = screen.getByRole('dialog', { name: /Ready to deliver food and return compost/i })
+    expect(within(sheet).getByLabelText('Email address')).toBeInTheDocument()
+    expect(within(sheet).getByLabelText('Password')).toHaveAttribute('autocomplete', 'current-password')
+    expect(within(sheet).getByRole('button', { name: /Continue/ })).toBeEnabled()
+    expect(within(sheet).getByRole('link', { name: /Forgot password/i })).toHaveAttribute('href', '/app/?mode=reset')
+    expect(screen.queryByRole('link', { name: /Sign in to continue/i })).not.toBeInTheDocument()
   })
 
   it('keeps all four public intents one tap away', async () => {

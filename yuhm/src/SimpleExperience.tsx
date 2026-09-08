@@ -13,6 +13,7 @@ import { LanguageToggle, useI18n, type MessageKey } from './i18n'
 import { FoodAlertBanner } from './FoodAlertBanner'
 import { LocationPrompt } from './prompts'
 import { useAuth } from './AuthProvider'
+import { EmailContinueForm } from './AuthForm'
 
 const FoodMap = lazy(() => import('./FoodMap').then((module) => ({ default: module.FoodMap })))
 
@@ -78,7 +79,16 @@ export function SimpleExperience({ initialIntent }: { initialIntent: ConsumerInt
   const chooseIntent = (nextIntent: ConsumerIntent) => {
     navigate(`/app/?mode=anonymous&intent=${nextIntent}`)
   }
-  const openSimpleAction = (eyebrow: string, title: string, copy: string, advancedHref: string) => setActionSheet({ eyebrow, title, copy, advancedHref })
+  // Members go straight to the destination. Guests get the one sign-in step
+  // inline in the sheet, then land on that same destination.
+  const openSimpleAction = (eyebrow: string, title: string, copy: string, advancedHref: string) => {
+    if (authReady && member) { navigate(advancedHref); return }
+    setActionSheet({ eyebrow, title, copy, advancedHref })
+  }
+  const continueToAction = (advancedHref: string) => {
+    setActionSheet(null)
+    navigate(advancedHref)
+  }
   const enableAdvancedMode = () => {
     localStorage.setItem('yuhm:experience-mode', 'advanced')
   }
@@ -173,6 +183,6 @@ export function SimpleExperience({ initialIntent }: { initialIntent: ConsumerInt
 
     <footer className="simple-footer"><span>yuhm · Austin</span><AppLink href="/app/?mode=advanced" onClick={enableAdvancedMode}>{t('simple.footer.advanced')}</AppLink></footer>
     {locationPromptOpen && <LocationPrompt motion={locationDialogMotion} onLocated={useVisitorLocation} onSkip={skipVisitorLocation} />}
-    {actionSheet && <div className="simple-sheet-backdrop" role="dialog" aria-modal="true" aria-labelledby="simple-sheet-title" onClick={() => setActionSheet(null)}><div className="simple-sheet" onClick={(event) => event.stopPropagation()}><button className="simple-sheet-close" type="button" onClick={() => setActionSheet(null)} aria-label={t('common.close')}><X size={18} /></button><p className="simple-eyebrow">{actionSheet.eyebrow}</p><h2 id="simple-sheet-title">{actionSheet.title}</h2><p>{actionSheet.copy}</p>{!authReady ? <button className="simple-primary" type="button" disabled>{t('simple.sheet.checking')}</button> : member ? <AppLink className="simple-primary" href={actionSheet.advancedHref} onNavigate={() => setActionSheet(null)}>{t('simple.sheet.openNext')} <ArrowUpRight size={16} /></AppLink> : <AppLink className="simple-primary" href={`/app/?mode=login&return=${encodeURIComponent(intent)}`}>{t('simple.sheet.signInToContinue')} <ArrowUpRight size={16} /></AppLink>}<button className="simple-sheet-secondary" type="button" onClick={() => setActionSheet(null)}>{t('simple.sheet.keepBrowsing')}</button></div></div>}
+    {actionSheet && <div className="simple-sheet-backdrop" role="dialog" aria-modal="true" aria-labelledby="simple-sheet-title" onClick={() => setActionSheet(null)}><div className="simple-sheet" onClick={(event) => event.stopPropagation()}><button className="simple-sheet-close" type="button" onClick={() => setActionSheet(null)} aria-label={t('common.close')}><X size={18} /></button><p className="simple-eyebrow">{actionSheet.eyebrow}</p><h2 id="simple-sheet-title">{actionSheet.title}</h2><p>{actionSheet.copy}</p>{!authReady ? <button className="simple-primary" type="button" disabled>{t('simple.sheet.checking')}</button> : member ? <AppLink className="simple-primary" href={actionSheet.advancedHref} onNavigate={() => setActionSheet(null)}>{t('simple.sheet.openNext')} <ArrowUpRight size={16} /></AppLink> : <div className="sheet-auth"><p className="sheet-auth-copy">{t('simple.sheet.authCopy')}</p><EmailContinueForm onSuccess={() => continueToAction(actionSheet.advancedHref)} footer={<AppLink className="login-switch" href="/app/?mode=reset">{t('login.forgot')}</AppLink>} /></div>}<button className="simple-sheet-secondary" type="button" onClick={() => setActionSheet(null)}>{t('simple.sheet.keepBrowsing')}</button></div></div>}
   </div>
 }
