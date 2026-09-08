@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { ArrowUpRight, MapPin, ShieldCheck, X } from 'lucide-react'
 import type { DialogMotionControls } from './useDialogMotion'
-import { AppLink } from './router'
+import { AppLink, useRoute } from './router'
+import { signInHref } from './lib/auth'
 import { useI18n } from './i18n'
 
 export function AuthPrompt({ motion }: { motion: DialogMotionControls }) {
-  return <div className="access-backdrop" data-dialog-state={motion.state} onTransitionEnd={motion.onTransitionEnd} role="dialog" aria-modal="true" aria-labelledby="auth-prompt-title" onClick={() => motion.requestClose()}><div className="access-card" onClick={(event) => event.stopPropagation()}><button className="access-close" onClick={() => motion.requestClose()} aria-label="Close sign-in prompt"><X size={17} /></button><span className="access-heart">♥</span><p className="eyebrow">Account needed</p><h2 id="auth-prompt-title">Join the network to take action.</h2><p>Anonymous browsing is open to everyone. Create an account or log in to post rescues, reply to requests, offer help, and nominate food sources.</p><div className="access-actions"><AppLink className="access-login" href="/app/?mode=login">Log in <ArrowUpRight size={15} /></AppLink><AppLink className="access-anonymous" href="/app/?mode=login&signup=1">Create an account <ArrowUpRight size={15} /></AppLink><AppLink className="access-updates" href="/app/?mode=login&updates=1">Email me yuhm updates <ArrowUpRight size={15} /></AppLink></div><small>Updates do not create an account or unlock posting.</small></div></div>
+  const { path, params } = useRoute()
+  const herePath = `${path}${params.toString() ? `?${params.toString()}` : ''}`
+  return <div className="access-backdrop" data-dialog-state={motion.state} onTransitionEnd={motion.onTransitionEnd} role="dialog" aria-modal="true" aria-labelledby="auth-prompt-title" onClick={() => motion.requestClose()}><div className="access-card" onClick={(event) => event.stopPropagation()}><button className="access-close" onClick={() => motion.requestClose()} aria-label="Close sign-in prompt"><X size={17} /></button><span className="access-heart">♥</span><p className="eyebrow">Account needed</p><h2 id="auth-prompt-title">Join the network to take action.</h2><p>Anonymous browsing is open to everyone. One step with your email and a password signs you in or creates your account, then brings you right back here to post rescues, reply to requests, offer help, and nominate food sources.</p><div className="access-actions"><AppLink className="access-login" href={signInHref(herePath)}>Sign in or create an account <ArrowUpRight size={15} /></AppLink><AppLink className="access-updates" href="/app/?mode=login&updates=1">Email me yuhm updates <ArrowUpRight size={15} /></AppLink></div><small>Updates do not create an account or unlock posting.</small></div></div>
 }
 
 export function LocationPrompt({ motion, onLocated, onSkip }: { motion: DialogMotionControls; onLocated: (latitude: number, longitude: number) => void; onSkip: () => void }) {

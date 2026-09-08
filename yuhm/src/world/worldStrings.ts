@@ -78,6 +78,12 @@ const en = {
   'world.more.gather': 'Gather',
   'world.more.requests': 'Requests',
   'world.more.signIn': 'Sign in',
+  'world.topbar.signIn': 'Sign in',
+  'world.topbar.account': 'Your account',
+  'world.topbar.signedIn': 'Signed in as {name}',
+  'world.topbar.finder': 'Find food',
+  'world.topbar.commandCenter': 'Command center',
+  'world.topbar.signOut': 'Sign out',
   'world.more.advanced': 'Command center',
 
   // Spot card
@@ -220,6 +226,12 @@ const es: Record<WorldKey, string> = {
   'world.more.gather': 'Reunirse',
   'world.more.requests': 'Solicitudes',
   'world.more.signIn': 'Iniciar sesión',
+  'world.topbar.signIn': 'Iniciar sesión',
+  'world.topbar.account': 'Tu cuenta',
+  'world.topbar.signedIn': 'Sesión iniciada como {name}',
+  'world.topbar.finder': 'Buscar comida',
+  'world.topbar.commandCenter': 'Centro de mando',
+  'world.topbar.signOut': 'Cerrar sesión',
   'world.more.advanced': 'Centro de mando',
 
   'world.spot.offers': 'Disponible o necesario',

@@ -328,11 +328,12 @@ describe('yuhm entry points and interaction gates', () => {
     sessionStorage.setItem('yuhm:location-choice', 'complete')
     render(<App />)
 
-    await userEvent.click(screen.getByRole('button', { name: /Open account and display settings/i }))
-    expect(screen.getByText('Simple mode')).toBeInTheDocument()
-    const advancedLink = screen.getByRole('link', { name: /Turn on advanced workspace/i })
+    // Guests see one clear Sign in control in the header; the coordinator
+    // workspace stays an explicit choice from the footer.
+    expect(screen.getByRole('link', { name: /^Sign in/ })).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /Open account and display settings/i })).not.toBeInTheDocument()
+    const advancedLink = screen.getByRole('link', { name: /^Advanced workspace$/i })
     expect(advancedLink).toHaveAttribute('href', '/app/?mode=advanced')
-    expect(screen.getByText(/Coordination, routes, inventory, and reports/i)).toBeInTheDocument()
     advancedLink.addEventListener('click', (event) => event.preventDefault())
     await userEvent.click(advancedLink)
     expect(localStorage.getItem('yuhm:experience-mode')).toBe('advanced')
@@ -422,7 +423,7 @@ describe('yuhm entry points and interaction gates', () => {
     window.history.replaceState({}, '', '/app/?mode=advanced')
     render(<App />)
 
-    expect(screen.getByRole('link', { name: /Browsing openly/i })).toHaveAttribute('href', '/app/?mode=login')
+    expect(screen.getByRole('link', { name: /Browsing openly/i })).toHaveAttribute('href', '/app/?mode=login&return=%2Fapp%2F%3Fmode%3Dadvanced')
   })
 
   it('opens the mobile navigation drawer from the top bar', async () => {

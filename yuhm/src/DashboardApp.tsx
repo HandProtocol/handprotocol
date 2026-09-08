@@ -1,11 +1,11 @@
 import { lazy, Suspense, useEffect, useMemo, useState } from 'react'
 import {
   Activity, ArrowUpRight, Bell, Boxes, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3,
-  HandHeart, Leaf, MapPin, Menu, MessageCircle, MousePointerClick, Plus, Route, Settings, ShieldCheck, Users, Warehouse, X, Zap,
+  CircleUserRound, HandHeart, Leaf, MapPin, Menu, MessageCircle, MousePointerClick, Plus, Route, Settings, ShieldCheck, Users, Warehouse, X, Zap,
 } from 'lucide-react'
 import { foodDbConfigured, loadFoodDropoffs, loadFoodRequests, loadFoodSpots, foodDb, type FoodSpotRecord } from './lib/foodRepository'
 import { useEngagement } from './lib/engagement'
-import { getMemberIdentity } from './lib/auth'
+import { getMemberIdentity, signInHref } from './lib/auth'
 import { useFoodAlerts } from './lib/useFoodAlerts'
 import { AddSpotModal, AlertCenter, FoodAlertsBoard, FoodAlertsOverview, FoodHereModal } from './CommunityTools'
 import { openCommunityContact } from './CommunityContactWidget'
@@ -216,7 +216,7 @@ export function DashboardApp() {
           <NavItem active={view === 'inventory'} icon={<Boxes size={18} />} label="Inventory" onClick={() => openView('inventory')} />
           <NavItem active={view === 'dropoffs'} icon={<MapPin size={18} />} label="Drop-off log" onClick={() => openView('dropoffs')} />
         </nav>
-        <div className="sidebar-bottom"><button className="help-link" onClick={() => openCommunityContact('feedback')}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div>{!authReady ? <div className="profile profile-loading" role="status"><span className="avatar">··</span><span><strong>Checking session</strong><small>Restoring account access</small></span></div> : isAuthenticated ? <div className="account-control"><button className="profile" onClick={() => setAccountOpen((current) => !current)} aria-expanded={accountOpen} aria-controls="member-account-menu"><span className="avatar">{memberIdentity.initials}</span><span><strong>{memberIdentity.displayName}</strong><small>Community account</small></span><Settings size={16} /></button>{accountOpen && <div className="account-menu" id="member-account-menu"><p>{memberIdentity.email}</p><button type="button" onClick={() => void signOut()}>Sign out</button></div>}</div> : <AppLink className="profile" href="/app/?mode=login"><span className="avatar">WX</span><span><strong>Browsing openly</strong><small>Sign in to coordinate</small></span><ArrowUpRight size={16} /></AppLink>}<p className="build-stamp" title={`Deployed build ${__YUHM_BUILD_ID__}`}><span>Build</span><code>{__YUHM_BUILD_ID__}</code></p></div>
+        <div className="sidebar-bottom"><button className="help-link" onClick={() => openCommunityContact('feedback')}><CircleHelp size={17} /> <span>Send feedback</span></button><div className="engagement-chip" title="Your locally persisted interaction count"><MousePointerClick size={15} /><span>{clicks} community clicks</span></div>{!authReady ? <div className="profile profile-loading" role="status"><span className="avatar">··</span><span><strong>Checking session</strong><small>Restoring account access</small></span></div> : isAuthenticated ? <div className="account-control"><button className="profile" onClick={() => setAccountOpen((current) => !current)} aria-expanded={accountOpen} aria-controls="member-account-menu"><span className="avatar">{memberIdentity.initials}</span><span><strong>{memberIdentity.displayName}</strong><small>Community account</small></span><Settings size={16} /></button>{accountOpen && <div className="account-menu" id="member-account-menu"><p>{memberIdentity.email}</p><button type="button" onClick={() => void signOut()}>Sign out</button></div>}</div> : <AppLink className="profile" href={signInHref(`${window.location.pathname}${window.location.search}`)}><span className="avatar" aria-hidden="true"><CircleUserRound size={18} /></span><span><strong>Browsing openly</strong><small>Sign in to coordinate</small></span><ArrowUpRight size={16} /></AppLink>}<p className="build-stamp" title={`Deployed build ${__YUHM_BUILD_ID__}`}><span>Build</span><code>{__YUHM_BUILD_ID__}</code></p></div>
       </aside>
       {menuOpen && <button className="sidebar-scrim" onClick={() => setMenuOpen(false)} aria-label="Close navigation" />}
 

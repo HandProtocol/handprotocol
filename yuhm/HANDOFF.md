@@ -1,12 +1,26 @@
 # yuhm Handoff
 
-Last updated: 2026-08-24
+Last updated: 2026-09-08
 
 > **Renamed 2026-08-24.** This product was WXL:FOOD ("W Xtra Love") until 2026-08-24, when it became **yuhm** (the yuhm network) — yum with the om at its center, Austin's regenerative food network. The live host moved from `wxl.handprotocol.org` to `yuhm.handprotocol.org` (the old host 301-redirects). Applied Supabase migrations keep their historical `NNN_wxl_*` filenames, historical plans keep their `plans/00X-wxl-*` names, and docs dated before the rename may still say WXL.
 
 This is the working orientation document for `yuhm/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on yuhm, its current behavior, what is real, what is illustrative, and what should be built next.
 
 Public-facing product behavior and safety boundaries are maintained in `docs/LIVING-DOCS.md`. Keep it current when a feature promise or workflow changes. It is intended to become the source for a future HTML documentation page.
+
+## One theme from landing to task, 2026-09-08 (same-day follow-up)
+
+koH's desktop review: the landing looked right, but clicking Sign in dropped into a different-looking product (sage, Space Grotesk, 11px type), and on the living world at bare `/app/` the only Sign in link sat at the bottom of the docked panel (~2100px down). Fixed as one pass:
+
+- **Shared brand lockup.** `src/YuhmBrand.tsx` (bowl mark + Baloo wordmark + tagline) now heads the landing nav, the sign-in card, and the finder header. The landing keeps its scoped `.landing-brand` rules; other surfaces use the unscoped `.yuhm-lockup` rules.
+- **Brand theme on every pre-login and first post-login surface.** An override block at the end of `src/styles.css` ("One yuhm from landing to task") re-skins `.login-page`/`.login-card`, the `.simple-app` shell (header, tabs, finder, action flows, cards, `.simple-primary`), the guest `.simple-sheet` + `.sheet-auth`, and the finder's location dialog (`.simple-app .access-card`) with the world/landing tokens (oat `#fbf6ea`/`#fffdf6`, cacao `#46312a`, garden green actions `#2d6b50` with the hero-CTA 3D shadow, Baloo 2 display). Layout rules are untouched; only colors, type, radii, shadows changed. The coordinator dashboard (`mode=advanced`) deliberately keeps its tool theme. The phone food map (`MapLab` product shell) was not re-skinned.
+- **Sign in at the top, everywhere, with a way back.** World topbar: guests get a green **Sign in** pill (`signInHref('/app/?mode=world')`), members get an initials pill with a small menu (Find food, Command center, Sign out); on phones the pill keeps its label while the other topbar buttons stay icon-only, and the circle name hides under 480px so four controls fit. Finder header: guests get a **Sign in** pill carrying the current path as `return=`; the guest account menu (and the stale "WX" avatar) is gone; members keep the initials menu, which now has **Sign out**. Dashboard `AuthPrompt` and the sidebar "Browsing openly" card, the world "More ways" link, and the MapLab account link all pass `return=`. `AuthPrompt` shows one door ("Sign in or create an account") plus the updates link instead of separate Log in / Create an account.
+- **Sign-in card fits a 640px-tall laptop viewport** (tighter spacing, 31px title, two-line `login.continueCopy` EN/ES).
+- Strings: `common.signOut`, `world.topbar.*` (EN + ES). `getMemberIdentity` initials fallback is no longer `WX`.
+
+Tests 126 → 130 (`src/AuthFunnel.test.tsx` "sign in is one tap from the top of every pre-login surface": world topbar + panel links, finder header pill, member menu sign-out, dashboard prompt return). Two older assertions updated: the finder's advanced-mode gate now goes through the footer link (guests no longer have a header menu), and the dashboard guest profile link carries `return=`.
+
+Verified in headless Chromium at 1440×900, 1280×640, 430×932, 390×844. Not changed: the geolocation dialog at `intent=food` still opens as a modal (it is now on-theme); the phone MapLab shell keeps its own look.
 
 ## Onboarding funnel pass, 2026-09-08
 
@@ -198,7 +212,7 @@ After reviewing those recommendations, choose one bounded target and use `$impro
 - Posting, replying, supporting, offering help, and nominating sources require an authenticated Supabase session.
 - When an anonymous visitor attempts a write action, the app opens a clear account prompt with login and account-creation choices.
 - Write access is determined from the actual Supabase session, not from the `mode` query parameter.
-- Successful login redirects to `/app/`. It does not redirect back into anonymous mode.
+- Successful sign-in returns to the in-app `return=` path when one was given, otherwise to the food finder (`/app/?intent=food`). It never follows a foreign URL.
 - Public source information can be read without an account, but a source does not become verified through community nomination alone.
 - The future source-intelligence agent must remain human-reviewed. See `docs/FOOD-SOURCE-AGENT.md`.
 
@@ -228,8 +242,8 @@ After reviewing those recommendations, choose one bounded target and use `$impro
 | `/app/` | Always the living-map world experience, on every viewport; the dashboard is explicit only (`mode=advanced` or `workspace=`) |
 | `/app/?mode=anonymous` | Same living-map world; a valid Supabase session still determines write access on other surfaces |
 | `/app/?mode=world` | Explicit world alias (same as `/app/`) |
-| `/app/?mode=login` | Email and password login |
-| `/app/?mode=login&signup=1` | Account creation |
+| `/app/?mode=login` | One-step sign in (email + password + Continue; creates the account when none matches). `return=/app/...` brings the person back where they were |
+| `/app/?mode=login&signup=1` | Same one-step form; asks the browser for a new password and labels the button Create account |
 | `/app/?mode=reset` | Request a password-reset email |
 | `/app/?mode=recovery` | Set a new password after following the recovery link |
 | `/app/?mode=anonymous&intent=food` | Public food-finding entry; phones open the command-bar map and adaptive result sheet |

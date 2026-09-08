@@ -43,3 +43,14 @@ Mission: koH asked to cut yuhm's onboarding from "choose a path → find out mor
 ## Suggested next-session start
 
 Read this file, then `HANDOFF.md` top section. If koH reports the phone test passed, pick one follow-up above (the geolocation dialog is the highest-leverage funnel item left). If the live auth misbehaves, start in `src/lib/auth.ts` `continueWithEmail` and check the Supabase project's auth settings (Confirm email must be OFF; see HANDOFF "Important auth and database risks to verify").
+
+---
+
+## Same-day follow-up: one theme from landing to task (koH's desktop review)
+
+koH: "it shows a different style theme before you actually login ... confusing with the flow of signing in as you have to go all the way down. lets make sure to streamline our design." Done in the same session; details in `HANDOFF.md` "One theme from landing to task, 2026-09-08".
+
+- `src/YuhmBrand.tsx` shared lockup; brand-theme override block at the end of `src/styles.css`; world topbar account control in `src/world/WorldExperience.tsx` + `world.css`.
+- Sign in is now at the top of the world, the finder, and the dashboard prompt/sidebar, always with `return=` back to the same screen. Members get Sign out in the finder menu and the world menu.
+- Tests 130 (was 126). Build clean. Screens checked at 1440×900, 1280×640, 430×932, 390×844.
+- The coordinator dashboard keeps its tool theme on purpose; the phone MapLab shell was not re-skinned (candidate for a later pass if koH wants the phone map on-theme too).
