@@ -202,7 +202,8 @@ export function LandingPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...springy, delay: 0.92 }}
               >
-                <AppLink className="hero-world-cta" href="/app/">{t('landing.world.action')} <ArrowUpRight size={19} /></AppLink>
+                <AppLink className="hero-cta hero-cta-primary" href="/app/?mode=anonymous&intent=food"><MapPin size={19} /> {t('landing.hero.findFood')} <ArrowUpRight size={19} /></AppLink>
+                <AppLink className="hero-cta hero-cta-secondary" href="/app/?mode=login">{t('common.signIn')} <ArrowUpRight size={17} /></AppLink>
               </motion.div>
               <motion.div
                 className="food-entry-proof"

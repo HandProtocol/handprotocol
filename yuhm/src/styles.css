@@ -714,6 +714,16 @@ button { border: 0; cursor: pointer; }
 .simple-sheet h2 { max-width: 400px; margin: 0; padding-right: 30px; font: 700 26px/1.1 'Space Grotesk', sans-serif; letter-spacing: -.035em; }
 .simple-sheet > p:not(.simple-eyebrow) { color: var(--simple-muted); margin: 12px 0 0; font-size: 12px; line-height: 1.6; }
 .simple-sheet-secondary { width: 100%; min-height: 45px; color: var(--simple-ink); background: transparent; margin-top: 6px; font-size: 10px; font-weight: 800; }
+/* Inline sign-in inside the action sheet: guests finish the step without leaving the page. */
+.sheet-auth { margin-top: 16px; }
+.sheet-auth-copy { color: var(--simple-muted); margin: 0 0 12px; font-size: 12px; line-height: 1.6; }
+.sheet-auth label { display: block; color: #3c4a42; font-size: 11px; font-weight: 700; }
+.sheet-auth input { display: block; width: 100%; margin-top: 7px; padding: 13px 14px; border: 1.5px solid #d5e0d5; border-radius: 12px; background: #fbfcf9; color: var(--simple-ink); font-size: 14px; outline: 0; }
+.sheet-auth input:focus { border-color: var(--simple-green); box-shadow: 0 0 0 3px #246b4522; }
+.sheet-auth .login-submit { min-height: 50px; border-radius: 12px; background: var(--simple-green); font-size: 11px; font-weight: 800; }
+.sheet-auth .login-submit:hover { background: var(--simple-green-dark); }
+.sheet-auth .login-error { margin-top: 12px; }
+.sheet-auth .login-switch { font-size: 11px; }
 .entry-path-list-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .entry-path-list-three .entry-path { min-height: 380px; }
 .entry-path-list-three .entry-path-copy strong { font-size: clamp(22px, 2.5vw, 32px); }
@@ -1545,8 +1555,22 @@ button.food-alert-banner { cursor: pointer; }
 }
 
 /* Landing hero CTA into the living world (the default app at /app/). */
-.hero-cta-row { margin-top: 24px; }
-.hero-world-cta { display: inline-flex; align-items: center; gap: 9px; min-height: 54px; padding: 14px 27px; background: #2d6b50; color: #fff8e8; border-radius: 17px; font: 600 17px/1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: .01em; text-decoration: none; box-shadow: 0 4px 0 #1f4a37, 0 10px 22px #2d6b5040; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out); }
-.hero-world-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #1f4a37, 0 14px 26px #2d6b5045; }
-.hero-world-cta:active { transform: translateY(1px); box-shadow: 0 2px 0 #1f4a37; }
-@media (prefers-reduced-motion: reduce) { .hero-world-cta { transition: none; } }
+/* Hero doors: browse as a guest (primary) or sign in. The decision lives above the fold. */
+.hero-cta-row { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.hero-cta { display: inline-flex; align-items: center; gap: 9px; min-height: 54px; padding: 14px 24px; border-radius: 17px; font: 600 17px/1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: .01em; text-decoration: none; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), background .2s var(--ease-out); }
+.hero-cta-primary { background: #2d6b50; color: #fff8e8; box-shadow: 0 4px 0 #1f4a37, 0 10px 22px #2d6b5040; }
+.hero-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #1f4a37, 0 14px 26px #2d6b5045; }
+.hero-cta-primary:active { transform: translateY(1px); box-shadow: 0 2px 0 #1f4a37; }
+.hero-cta-secondary { background: #fffefa; color: #2d6b50; border: 2px solid #2d6b50; box-shadow: 0 4px 0 #c9d8c7; }
+.hero-cta-secondary:hover { transform: translateY(-2px); background: #eaf3e8; box-shadow: 0 6px 0 #c9d8c7; }
+.hero-cta-secondary:active { transform: translateY(1px); box-shadow: 0 2px 0 #c9d8c7; }
+@media (prefers-reduced-motion: reduce) { .hero-cta { transition: none; } }
+@media (max-width: 759px) { .hero-cta { width: 100%; justify-content: center; } }
+
+/* iOS zooms the page when a focused field is smaller than 16px, and because
+   navigation is client-side the zoom outlives the form: sign in, tap "Browse as
+   a guest", and the map arrives oversized. Every text field stays at 16px on
+   touch screens; desktop keeps the compact sizes. */
+@media (pointer: coarse), (max-width: 759px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea { font-size: 16px; }
+}
