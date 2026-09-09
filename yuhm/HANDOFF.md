@@ -1,12 +1,49 @@
 # yuhm Handoff
 
-Last updated: 2026-08-24
+Last updated: 2026-09-08
 
 > **Renamed 2026-08-24.** This product was WXL:FOOD ("W Xtra Love") until 2026-08-24, when it became **yuhm** (the yuhm network) — yum with the om at its center, Austin's regenerative food network. The live host moved from `wxl.handprotocol.org` to `yuhm.handprotocol.org` (the old host 301-redirects). Applied Supabase migrations keep their historical `NNN_wxl_*` filenames, historical plans keep their `plans/00X-wxl-*` names, and docs dated before the rename may still say WXL.
 
 This is the working orientation document for `yuhm/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on yuhm, its current behavior, what is real, what is illustrative, and what should be built next.
 
 Public-facing product behavior and safety boundaries are maintained in `docs/LIVING-DOCS.md`. Keep it current when a feature promise or workflow changes. It is intended to become the source for a future HTML documentation page.
+
+## One theme from landing to task, 2026-09-08 (same-day follow-up)
+
+Detailed session handoff for this pass: `_handoff-2026-09-08-one-theme.md` (status, file-by-file changes, tokens, what is still unverified, how to resume).
+
+koH's desktop review: the landing looked right, but clicking Sign in dropped into a different-looking product (sage, Space Grotesk, 11px type), and on the living world at bare `/app/` the only Sign in link sat at the bottom of the docked panel (~2100px down). Fixed as one pass:
+
+- **Shared brand lockup.** `src/YuhmBrand.tsx` (bowl mark + Baloo wordmark + tagline) now heads the landing nav, the sign-in card, and the finder header. The landing keeps its scoped `.landing-brand` rules; other surfaces use the unscoped `.yuhm-lockup` rules.
+- **Brand theme on every pre-login and first post-login surface.** An override block at the end of `src/styles.css` ("One yuhm from landing to task") re-skins `.login-page`/`.login-card`, the `.simple-app` shell (header, tabs, finder, action flows, cards, `.simple-primary`), the guest `.simple-sheet` + `.sheet-auth`, and the finder's location dialog (`.simple-app .access-card`) with the world/landing tokens (oat `#fbf6ea`/`#fffdf6`, cacao `#46312a`, garden green actions `#2d6b50` with the hero-CTA 3D shadow, Baloo 2 display). Layout rules are untouched; only colors, type, radii, shadows changed. The coordinator dashboard (`mode=advanced`) deliberately keeps its tool theme. The phone food map (`MapLab` product shell) was not re-skinned.
+- **Sign in at the top, everywhere, with a way back.** World topbar: guests get a green **Sign in** pill (`signInHref('/app/?mode=world')`), members get an initials pill with a small menu (Find food, Command center, Sign out); on phones the pill keeps its label while the other topbar buttons stay icon-only, and the circle name hides under 480px so four controls fit. Finder header: guests get a **Sign in** pill carrying the current path as `return=`; the guest account menu (and the stale "WX" avatar) is gone; members keep the initials menu, which now has **Sign out**. Dashboard `AuthPrompt` and the sidebar "Browsing openly" card, the world "More ways" link, and the MapLab account link all pass `return=`. `AuthPrompt` shows one door ("Sign in or create an account") plus the updates link instead of separate Log in / Create an account.
+- **Sign-in card fits a 640px-tall laptop viewport** (tighter spacing, 31px title, two-line `login.continueCopy` EN/ES).
+- Strings: `common.signOut`, `world.topbar.*` (EN + ES). `getMemberIdentity` initials fallback is no longer `WX`.
+
+Tests 126 → 130 (`src/AuthFunnel.test.tsx` "sign in is one tap from the top of every pre-login surface": world topbar + panel links, finder header pill, member menu sign-out, dashboard prompt return). Two older assertions updated: the finder's advanced-mode gate now goes through the footer link (guests no longer have a header menu), and the dashboard guest profile link carries `return=`.
+
+Verified in headless Chromium at 1440×900, 1280×640, 430×932, 390×844. Not changed: the geolocation dialog at `intent=food` still opens as a modal (it is now on-theme); the phone MapLab shell keeps its own look.
+
+## Onboarding funnel pass, 2026-09-08
+
+Goal: the shortest path from arriving to doing the task. Before, a guest who wanted to contribute went landing → scroll to "What brings you here today?" → pick a card → fill the form → Review → interstitial sheet → "Sign in to continue" → login page → choose log in vs sign up → submit → land on the intent tab → redo Review → sheet → "Open secure next step" → dashboard (seven screens). Bare `/app/` also ran a four-step world intro.
+
+What changed:
+
+- **Landing hero carries the decision.** Two doors above the fold: **Find food near me** (primary, guest, `/app/?mode=anonymous&intent=food`, real listings) and **Sign in** (`/app/?mode=login`). The "Enter the living map" hero CTA is gone; the world is still reachable from the banner in the paths section and from bare `/app/`. The three path cards remain as optional deep links (tests unchanged).
+- **One sign-in step, no mode toggle.** `src/AuthForm.tsx` (`EmailContinueForm`) is email + password + **Continue**. `continueWithEmail` in `src/lib/auth.ts` signs in, and when no account matches it creates one with the same credentials (confirm-email is off, so the session is immediate). A wrong password on an existing account gets an "already has a yuhm account" message rather than a duplicate. `signup=1` still flips autocomplete to `new-password` and labels the button "Create account". Email+password stays the mechanism: passwordless was removed deliberately (see "Product decisions made").
+- **Return to the exact destination.** `return=` now carries a full in-app path (`resolveReturnPath` accepts `/app/...` only, maps legacy intent names, falls back to the finder). The login screen uses `navigate(..., { replace: true })` instead of a full reload. `mode=reset` opens the reset screen directly.
+- **No interstitial for members; inline sign-in for guests.** In `SimpleExperience`, `openSimpleAction` navigates members straight to the destination. Guests see the sheet with the title/copy plus the Continue form inline; on success they land on the destination without leaving the page. `simple.sheet.signInToContinue` was retired.
+- **World intro is one screen.** `WorldOnboarding` now shows role chips with the matched first invitation previewing inline, then Step in / Skip. The privacy (location) and reveal steps were removed with their strings; `onDone` still receives `(role, null)`. Location can return later as an on-map control.
+- **Copy.** "Browse anonymously" → "Browse as a guest" / "Mirar como invitado"; new `login.title`, `login.continue`, `login.continueCopy`, `login.existingAccount`, `login.notConfigured`, `landing.hero.findFood`, `simple.sheet.authCopy` (EN + ES).
+
+**Same-day fixes from koH's phone test (Brave on iOS):**
+- *Autofilled email + password but Continue stayed disabled.* Password managers write straight into the DOM without firing React change events, so a controlled form's state-based `disabled` never cleared (the pre-existing login had the same pattern). `EmailContinueForm` is now uncontrolled: values are read from `FormData` at submit (`readField` helper), the button is disabled only while busy, and the reset / updates forms read the submitted value the same way. Regression test: "accepts browser-autofilled credentials that never fired a change event".
+- *"Browse as a guest" opened an oversized map.* iOS zooms the page when a focused field is under 16px, and because routing is client-side the zoom survives into the next screen. Almost every field was 11 to 14px. One rule at the end of `styles.css` (`@media (pointer: coarse), (max-width: 759px)`) holds all text fields, selects, and textareas at 16px on touch screens; desktop keeps the compact sizes. Verified with touch emulation that the map itself has no horizontal overflow at 390px.
+
+Tests: 126 (was 108). New `src/AuthFunnel.test.tsx` mocks the Supabase client to cover member-skips-sheet, inline sign-in, one-button account creation, existing-account error, and legacy return mapping. `src/lib/auth.test.ts` covers `continueWithEmail`, `resolveReturnPath`, `signInHref`.
+
+Not changed (candidates for a follow-up): the geolocation consent dialog at `intent=food` still opens as a modal before the map; `AuthPrompt` in the dashboard and the "Sign in" links in MapLab/world panels do not pass a `return`; the hero doors are not yet verified against the live Supabase project (log in / create account on yuhm.handprotocol.org after deploy).
 
 ## Living-map world experience, 2026-08-24 (now the default app)
 
@@ -177,7 +214,7 @@ After reviewing those recommendations, choose one bounded target and use `$impro
 - Posting, replying, supporting, offering help, and nominating sources require an authenticated Supabase session.
 - When an anonymous visitor attempts a write action, the app opens a clear account prompt with login and account-creation choices.
 - Write access is determined from the actual Supabase session, not from the `mode` query parameter.
-- Successful login redirects to `/app/`. It does not redirect back into anonymous mode.
+- Successful sign-in returns to the in-app `return=` path when one was given, otherwise to the food finder (`/app/?intent=food`). It never follows a foreign URL.
 - Public source information can be read without an account, but a source does not become verified through community nomination alone.
 - The future source-intelligence agent must remain human-reviewed. See `docs/FOOD-SOURCE-AGENT.md`.
 
@@ -207,8 +244,8 @@ After reviewing those recommendations, choose one bounded target and use `$impro
 | `/app/` | Always the living-map world experience, on every viewport; the dashboard is explicit only (`mode=advanced` or `workspace=`) |
 | `/app/?mode=anonymous` | Same living-map world; a valid Supabase session still determines write access on other surfaces |
 | `/app/?mode=world` | Explicit world alias (same as `/app/`) |
-| `/app/?mode=login` | Email and password login |
-| `/app/?mode=login&signup=1` | Account creation |
+| `/app/?mode=login` | One-step sign in (email + password + Continue; creates the account when none matches). `return=/app/...` brings the person back where they were |
+| `/app/?mode=login&signup=1` | Same one-step form; asks the browser for a new password and labels the button Create account |
 | `/app/?mode=reset` | Request a password-reset email |
 | `/app/?mode=recovery` | Set a new password after following the recovery link |
 | `/app/?mode=anonymous&intent=food` | Public food-finding entry; phones open the command-bar map and adaptive result sheet |

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { ArrowLeft, ArrowUpRight, Bike, CalendarClock, Check, HandHeart, Leaf, MapPin, Navigation, Sparkles, Users } from 'lucide-react'
 import { AppLink } from '../router'
+import { signInHref } from '../lib/auth'
 import { useWorldText } from './worldStrings'
 import {
   journeySteps, layerKinds, missionsAtSpot, personById, poolAtSpot, spotById,
@@ -177,7 +178,7 @@ export function DiscoverPanel({ progress, onOpen, poolShareTaken, layer = 'all' 
         <AppLink href="/app/?mode=anonymous&intent=contribute">{w('world.more.contribute')}</AppLink>
         <AppLink href="/app/?mode=anonymous&intent=gather">{w('world.more.gather')}</AppLink>
         <AppLink href="/app/?mode=anonymous&intent=request">{w('world.more.requests')}</AppLink>
-        <AppLink href="/app/?mode=login">{w('world.more.signIn')}</AppLink>
+        <AppLink href={signInHref('/app/?mode=world')}>{w('world.more.signIn')}</AppLink>
         <AppLink href="/app/?mode=advanced">{w('world.more.advanced')}</AppLink>
       </div>
     </section>

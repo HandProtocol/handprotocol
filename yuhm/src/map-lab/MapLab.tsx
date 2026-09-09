@@ -23,7 +23,7 @@ import {
 import { animate, motion, useDragControls, useMotionValue, useReducedMotion } from 'motion/react'
 import type { User } from '@supabase/supabase-js'
 import { foodDbConfigured, loadFoodSpots, type FoodAlertRecord } from '../lib/foodRepository'
-import { getMemberIdentity } from '../lib/auth'
+import { getMemberIdentity, signInHref } from '../lib/auth'
 import { useFoodAlerts } from '../lib/useFoodAlerts'
 import {
   distanceMiles,
@@ -581,7 +581,7 @@ function MenuContent({ member, authReady, onClose, onNavigate, product }: { memb
     <nav aria-label="Map lab preview links">
       {items.map(({ label, detail, href, icon: Icon }) => <AppLink key={label} href={href} onNavigate={onNavigate}><Icon size={19} /><span><b>{label}</b><small>{detail}</small></span><ArrowUpRight size={16} /></AppLink>)}
     </nav>
-    <div className="map-lab-account"><UserRound size={19} /><span><b>{!authReady ? t('map.checkingAccount') : identity?.displayName ?? t('map.browsingOpenly')}</b><small>{identity ? identity.email : t('map.signInWhenReady')}</small></span>{!member && authReady && <AppLink href="/app/?mode=login">{t('common.signIn')}</AppLink>}</div>
+    <div className="map-lab-account"><UserRound size={19} /><span><b>{!authReady ? t('map.checkingAccount') : identity?.displayName ?? t('map.browsingOpenly')}</b><small>{identity ? identity.email : t('map.signInWhenReady')}</small></span>{!member && authReady && <AppLink href={signInHref(`${window.location.pathname}${window.location.search}`)}>{t('common.signIn')}</AppLink>}</div>
     {product && <button className="map-lab-contact" type="button" onClick={() => {
       onClose()
       window.setTimeout(() => openCommunityContact('alerts'), 300)

@@ -14,24 +14,15 @@ describe('living-map world experience', () => {
   it('walks the whole cooperative loop: onboard, join, complete, gratitude, regenerate', { timeout: 20000 }, async () => {
     render(<App />)
 
-    // Onboarding reaches the map fast and explains the world.
+    // Onboarding is one screen: pick how to take part, and the first invitation
+    // it unlocks previews inline before stepping in.
     expect(await screen.findByRole('heading', { name: 'Find your local yuhm.' })).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: /Step in/ }))
-
-    // Choose how to participate.
-    expect(screen.getByRole('heading', { name: 'How do you want to take part?' })).toBeInTheDocument()
+    expect(screen.getByRole('radiogroup', { name: 'How do you want to take part?' })).toBeInTheDocument()
+    expect(screen.getByText('Morning pickup at Hearthside')).toBeInTheDocument()
     await userEvent.click(screen.getByRole('radio', { name: /Move/ }))
-    await userEvent.click(screen.getByRole('button', { name: /Step in/ }))
-
-    // Privacy step keeps location optional and on-device.
-    expect(screen.getByRole('heading', { name: 'Where should your circle be?' })).toBeInTheDocument()
-    expect(screen.getByText(/Your location stays on this device/)).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: 'Stay at neighborhood level' }))
-
-    // The circle reveal offers one first action matched to the chosen role.
-    expect(screen.getByRole('heading', { name: 'Eastside Circle' })).toBeInTheDocument()
     expect(screen.getByText('Carry a leg of the Saturday Yuhm Run')).toBeInTheDocument()
-    await userEvent.click(screen.getByRole('button', { name: /Open the living map/ }))
+    expect(screen.queryByRole('heading', { name: 'Where should your circle be?' })).not.toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: /Step in/ }))
 
     // The first invitation opens directly as a mission with sample labeling.
     expect(await screen.findByRole('heading', { name: 'Carry a leg of the Saturday Yuhm Run' })).toBeInTheDocument()

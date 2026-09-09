@@ -714,6 +714,16 @@ button { border: 0; cursor: pointer; }
 .simple-sheet h2 { max-width: 400px; margin: 0; padding-right: 30px; font: 700 26px/1.1 'Space Grotesk', sans-serif; letter-spacing: -.035em; }
 .simple-sheet > p:not(.simple-eyebrow) { color: var(--simple-muted); margin: 12px 0 0; font-size: 12px; line-height: 1.6; }
 .simple-sheet-secondary { width: 100%; min-height: 45px; color: var(--simple-ink); background: transparent; margin-top: 6px; font-size: 10px; font-weight: 800; }
+/* Inline sign-in inside the action sheet: guests finish the step without leaving the page. */
+.sheet-auth { margin-top: 16px; }
+.sheet-auth-copy { color: var(--simple-muted); margin: 0 0 12px; font-size: 12px; line-height: 1.6; }
+.sheet-auth label { display: block; color: #3c4a42; font-size: 11px; font-weight: 700; }
+.sheet-auth input { display: block; width: 100%; margin-top: 7px; padding: 13px 14px; border: 1.5px solid #d5e0d5; border-radius: 12px; background: #fbfcf9; color: var(--simple-ink); font-size: 14px; outline: 0; }
+.sheet-auth input:focus { border-color: var(--simple-green); box-shadow: 0 0 0 3px #246b4522; }
+.sheet-auth .login-submit { min-height: 50px; border-radius: 12px; background: var(--simple-green); font-size: 11px; font-weight: 800; }
+.sheet-auth .login-submit:hover { background: var(--simple-green-dark); }
+.sheet-auth .login-error { margin-top: 12px; }
+.sheet-auth .login-switch { font-size: 11px; }
 .entry-path-list-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .entry-path-list-three .entry-path { min-height: 380px; }
 .entry-path-list-three .entry-path-copy strong { font-size: clamp(22px, 2.5vw, 32px); }
@@ -1545,8 +1555,154 @@ button.food-alert-banner { cursor: pointer; }
 }
 
 /* Landing hero CTA into the living world (the default app at /app/). */
-.hero-cta-row { margin-top: 24px; }
-.hero-world-cta { display: inline-flex; align-items: center; gap: 9px; min-height: 54px; padding: 14px 27px; background: #2d6b50; color: #fff8e8; border-radius: 17px; font: 600 17px/1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: .01em; text-decoration: none; box-shadow: 0 4px 0 #1f4a37, 0 10px 22px #2d6b5040; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out); }
-.hero-world-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #1f4a37, 0 14px 26px #2d6b5045; }
-.hero-world-cta:active { transform: translateY(1px); box-shadow: 0 2px 0 #1f4a37; }
-@media (prefers-reduced-motion: reduce) { .hero-world-cta { transition: none; } }
+/* Hero doors: browse as a guest (primary) or sign in. The decision lives above the fold. */
+.hero-cta-row { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.hero-cta { display: inline-flex; align-items: center; gap: 9px; min-height: 54px; padding: 14px 24px; border-radius: 17px; font: 600 17px/1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: .01em; text-decoration: none; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), background .2s var(--ease-out); }
+.hero-cta-primary { background: #2d6b50; color: #fff8e8; box-shadow: 0 4px 0 #1f4a37, 0 10px 22px #2d6b5040; }
+.hero-cta-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #1f4a37, 0 14px 26px #2d6b5045; }
+.hero-cta-primary:active { transform: translateY(1px); box-shadow: 0 2px 0 #1f4a37; }
+.hero-cta-secondary { background: #fffefa; color: #2d6b50; border: 2px solid #2d6b50; box-shadow: 0 4px 0 #c9d8c7; }
+.hero-cta-secondary:hover { transform: translateY(-2px); background: #eaf3e8; box-shadow: 0 6px 0 #c9d8c7; }
+.hero-cta-secondary:active { transform: translateY(1px); box-shadow: 0 2px 0 #c9d8c7; }
+@media (prefers-reduced-motion: reduce) { .hero-cta { transition: none; } }
+@media (max-width: 759px) { .hero-cta { width: 100%; justify-content: center; } }
+
+/* iOS zooms the page when a focused field is smaller than 16px, and because
+   navigation is client-side the zoom outlives the form: sign in, tap "Browse as
+   a guest", and the map arrives oversized. Every text field stays at 16px on
+   touch screens; desktop keeps the compact sizes. */
+@media (pointer: coarse), (max-width: 759px) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea { font-size: 16px; }
+}
+
+/* ============================================================
+   One yuhm from landing to task (2026-09-08)
+   The sign-in screen, the food finder, the guest sheet, and the
+   location dialog now wear the same warm brand theme as the landing
+   and the living world (oat ground, cacao ink, Baloo 2 display,
+   garden-green actions). The coordinator dashboard keeps its tool
+   theme. Overrides only; earlier rules keep layout and behavior.
+   ============================================================ */
+
+/* Shared brand lockup (see src/YuhmBrand.tsx). The landing keeps its own
+   scoped .landing-brand rules, which win there by specificity. */
+.yuhm-lockup { display: flex; align-items: center; gap: 11px; width: max-content; color: #4a332a; text-decoration: none; }
+.yuhm-lockup:hover .yuhm-mark { transform: rotate(-7deg) scale(1.08); }
+.yuhm-lockup .yuhm-word { display: block; color: #4a332a; font: 800 22px/1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: .004em; }
+.yuhm-lockup small { display: block; color: #7d6b57; font: 500 8.5px 'DM Mono', monospace; letter-spacing: .1em; text-transform: uppercase; margin-top: 3px; }
+
+/* ---- Sign in ---- */
+.login-page { position: relative; isolation: isolate; color: #3b2a22; background: #fbf6ea; }
+.login-page::before { content: ''; position: absolute; inset: 0; z-index: -1; background: radial-gradient(circle at 76% 14%, #f9e3bd 0, #fbf6ea 42%, transparent 70%); }
+.login-card { width: min(450px, 100%); background: #fffdf6; border: 1.5px solid #e8dcc0; border-radius: 26px; padding: 22px 28px 24px; box-shadow: 0 18px 44px #4c633318; }
+.login-card-top { align-items: center; margin-bottom: 22px; }
+.login-card .eyebrow { color: #7d6b57; font: 500 9.5px 'DM Mono', monospace; letter-spacing: .12em; }
+.login-card h1 { color: #46312a; font: 700 31px/1.05 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: -.01em; margin: 0 0 8px; }
+.login-copy { color: #5d5348; font-size: 13.5px; line-height: 1.5; margin: 0 0 18px; }
+.login-card label { color: #4a332a; font-size: 13px; font-weight: 700; }
+.login-card input { border: 1.5px solid #e0d3b4; border-radius: 14px; background: #fffdf6; color: #3b2a22; padding: 12px 14px; font-size: 15px; }
+.login-card input:focus { border-color: #52734d; box-shadow: 0 0 0 3px #52734d22; }
+.login-submit, .login-anonymous { justify-content: center; gap: 8px; min-height: 50px; border-radius: 16px; font: 600 16px/1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: .01em; transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out), background .2s var(--ease-out); }
+.login-submit { color: #fff8e8; background: #2d6b50; margin-top: 16px; box-shadow: 0 4px 0 #1f4a37, 0 10px 22px #2d6b5030; }
+.login-submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 0 #1f4a37, 0 14px 26px #2d6b5040; }
+.login-submit:active:not(:disabled) { transform: translateY(1px); box-shadow: 0 2px 0 #1f4a37; }
+.login-anonymous { color: #2d6b50; background: #fffefa; border: 2px solid #2d6b50; margin-top: 10px; box-shadow: 0 4px 0 #c9d8c7; }
+.login-anonymous:hover { transform: translateY(-2px); background: #eaf3e8; box-shadow: 0 6px 0 #c9d8c7; }
+.login-switch { color: #55763f; font-size: 12.5px; padding-top: 10px; }
+.login-switch:hover { color: #3f5d2c; }
+.login-updates-switch { margin-top: 8px; padding-top: 12px; border-top: 1.5px dashed #e8dcc0; }
+.login-error { color: #a63c1e; background: #fbe6df; border-radius: 12px; padding: 10px 12px; font-size: 13px; line-height: 1.45; margin: 12px 0 0; }
+.login-success { color: #3f5d2c; background: #f2f8e8; border: 1.5px solid #c4d8ae; border-radius: 14px; font-size: 13px; }
+.login-success span { color: #5c6b49; }
+.login-privacy { color: #7d6b57; font-size: 12px; }
+@media (prefers-reduced-motion: reduce) { .login-submit, .login-anonymous, .yuhm-lockup .yuhm-mark { transition: none; } }
+
+/* ---- Food finder shell ---- */
+.simple-app {
+  --simple-ink: #3b2a22;
+  --simple-muted: #7d6b57;
+  --simple-green: #2d6b50;
+  --simple-green-dark: #1f4a37;
+  --simple-warm: #fff3dc;
+  --simple-line: #ecdfc4;
+  --simple-paper: #fffdf6;
+  background: #fbf6ea;
+}
+.simple-header { height: 68px; background: #fbf6eaf0; border-bottom: 1.5px solid #f0e4c8; backdrop-filter: blur(6px); }
+.simple-header .yuhm-lockup { justify-self: start; }
+.simple-location { color: #4a332a; background: var(--simple-warm); border: 1.5px solid #e8dcc0; font-size: 12.5px; }
+.simple-location svg:first-child { color: var(--simple-green); }
+.simple-header-tools { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.simple-signin { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 16px; border-radius: 999px; color: #fff8e8; background: var(--simple-green); font: 600 14px/1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: .01em; text-decoration: none; white-space: nowrap; box-shadow: 0 3px 0 var(--simple-green-dark); transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out); }
+.simple-signin:hover { transform: translateY(-1px); box-shadow: 0 4px 0 var(--simple-green-dark); }
+.simple-signin:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--simple-green-dark); }
+.simple-account { width: 40px; height: 40px; color: var(--simple-warm); background: #4a332a; font: 700 11px 'DM Mono', monospace; letter-spacing: .04em; }
+.simple-account-menu { background: var(--simple-paper); border: 1.5px solid #e8dcc0; border-radius: 20px; box-shadow: 0 18px 44px #49312833; }
+.simple-account-menu > strong { font: 700 19px/1.15 'Baloo 2', 'DM Sans', sans-serif; color: #46312a; letter-spacing: 0; }
+.simple-account-menu > span { color: var(--simple-muted); font-size: 12px; word-break: break-word; }
+.simple-account-menu > a, .simple-feedback-link { color: var(--simple-green); border-block-color: #f0e4c8; font-size: 12px; }
+.simple-account-menu > .simple-advanced-link { color: var(--simple-ink); background: var(--simple-warm); border-radius: 14px; }
+.simple-account-menu > .simple-advanced-link b { font-size: 11px; }
+.simple-account-menu > .simple-advanced-link small { color: var(--simple-muted); font-size: 9px; }
+.simple-signout { width: 100%; min-height: 42px; margin-top: 10px; border-radius: 12px; color: #a63c1e; background: transparent; border: 1.5px solid #f0d9cf; font-size: 12px; font-weight: 700; }
+.simple-signout:hover { background: #fbe6df; }
+.simple-tabs { background: var(--simple-paper); border: 1.5px solid #e8dcc0; box-shadow: 0 14px 38px #4c633326; }
+.simple-tabs button { color: #7d6b57; font-size: 11px; }
+.simple-tabs button.active { color: #fff8e8; background: var(--simple-green); }
+.simple-eyebrow { color: #8a6d3b; }
+.finder-copy h1, .action-hero h1 { color: #46312a; font-family: 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: -.015em; line-height: 1; }
+.shelf-heading h2, .quick-form h2, .host-card h2, .simple-sheet h2, .food-result-card strong, .compost-loop strong, .delivery-card strong, .gather-card strong, .simple-request-card h3, .food-map-tooltip strong { font-family: 'Baloo 2', 'DM Sans', sans-serif; color: #46312a; letter-spacing: -.005em; }
+.finder-search { background: var(--simple-paper); border: 1.5px solid #e8dcc0; border-radius: 16px; }
+.finder-search svg { color: #8a6d3b; }
+.finder-filters button { color: #5d5348; background: var(--simple-paper); border: 1.5px solid #e8dcc0; }
+.finder-filters button.active { color: #fff3dc; background: #52734d; border-color: #3d5a3a; }
+.finder-flow, .finder-map, .food-shelf { border-color: var(--simple-line); }
+.finder-flow { background: var(--simple-paper); }
+.finder-map-note { color: var(--simple-muted); }
+.food-result-card { background: var(--simple-paper); border: 1.5px solid var(--simple-line); border-radius: 20px; box-shadow: 0 10px 26px #4c633312; }
+.food-result-card.selected { border-color: #e0b95c; box-shadow: 0 10px 28px #cf924526; }
+.contribute-hero { background: #eef3dd; }
+.gather-hero { background: var(--simple-warm); }
+.request-hero { background: #fbe9dd; }
+.action-switch { background: #f3e9d2; }
+.action-switch button { color: #7d6b57; }
+.action-switch button.active { color: var(--simple-ink); background: var(--simple-paper); box-shadow: 0 3px 12px #49312814; }
+.quick-form, .delivery-board, .gather-list, .host-card { background: var(--simple-paper); border: 1.5px solid var(--simple-line); border-radius: 22px; }
+.simple-primary { color: #fff8e8; background: var(--simple-green); border-radius: 16px; font: 600 15px/1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: .01em; box-shadow: 0 4px 0 var(--simple-green-dark); transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out); }
+.simple-primary:hover:not(:disabled) { background: var(--simple-green); transform: translateY(-1px); box-shadow: 0 5px 0 var(--simple-green-dark); }
+.simple-primary:active:not(:disabled) { transform: translateY(1px); box-shadow: 0 2px 0 var(--simple-green-dark); }
+.simple-footer { color: var(--simple-muted); border-top: 1.5px solid #f0e4c8; }
+.simple-footer a { color: var(--simple-green); }
+
+/* Guest sheet: same sign-in step, same look */
+.simple-sheet-backdrop { background: #49312880; }
+.simple-sheet { color: var(--simple-ink); background: var(--simple-paper); border: 1.5px solid #e8dcc0; border-radius: 26px; box-shadow: 0 24px 70px #49312852; }
+.simple-sheet-close { color: #7d6b57; background: var(--simple-warm); }
+.simple-sheet > p:not(.simple-eyebrow) { color: var(--simple-muted); font-size: 13.5px; }
+.simple-sheet-secondary { color: #55763f; font-size: 13px; font-weight: 700; }
+.sheet-auth-copy { color: var(--simple-muted); font-size: 13.5px; }
+.sheet-auth label { color: #4a332a; font-size: 13px; }
+.sheet-auth input { border: 1.5px solid #e0d3b4; border-radius: 14px; background: var(--simple-paper); color: var(--simple-ink); font-size: 15px; }
+.sheet-auth input:focus { border-color: #52734d; box-shadow: 0 0 0 3px #52734d22; }
+.sheet-auth .login-submit { border-radius: 16px; background: var(--simple-green); font: 600 15px/1 'Baloo 2', 'DM Sans', sans-serif; box-shadow: 0 4px 0 var(--simple-green-dark); }
+.sheet-auth .login-submit:hover:not(:disabled) { background: var(--simple-green); }
+.sheet-auth .login-switch { font-size: 12.5px; }
+
+/* Location dialog inside the finder */
+.simple-app .access-backdrop { background: #49312899; }
+.simple-app .access-card { color: var(--simple-ink); background: var(--simple-paper); border: 1.5px solid #e8dcc0; border-radius: 26px; box-shadow: 0 24px 70px #49312852; }
+.simple-app .access-card .eyebrow { color: #8a6d3b; }
+.simple-app .access-card h2 { color: #46312a; font: 700 27px/1.1 'Baloo 2', 'DM Sans', sans-serif; letter-spacing: -.01em; }
+.simple-app .access-card > p:not(.eyebrow) { color: var(--simple-muted); font-size: 14px; }
+.simple-app .location-consent-icon { color: #3d5a3a; background: #e3edcc; }
+.simple-app .location-privacy { color: #5d5348; background: var(--simple-warm); border-color: #e8dcc0; }
+.simple-app .location-privacy svg { color: #52734d; }
+.simple-app .location-allow { color: #fff8e8; background: var(--simple-green); border-radius: 16px; font: 600 15px/1 'Baloo 2', 'DM Sans', sans-serif; box-shadow: 0 4px 0 var(--simple-green-dark); }
+.simple-app .location-allow:hover { background: var(--simple-green); }
+.simple-app .location-skip { color: #2d6b50; background: #fffefa; border: 2px solid #2d6b50; border-radius: 16px; font: 600 14px/1 'Baloo 2', 'DM Sans', sans-serif; }
+.simple-app .location-skip:hover { background: #eaf3e8; }
+
+@media (max-width: 480px) {
+  .simple-header .yuhm-lockup small, .login-card .yuhm-lockup small { display: none; }
+  .simple-signin { padding: 0 13px; font-size: 13px; }
+}

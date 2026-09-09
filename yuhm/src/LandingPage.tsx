@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform, type MotionValue, type
 import { openCommunityContact } from './CommunityContactWidget'
 import { AppLink } from './router'
 import { LanguageToggle, useI18n } from './i18n'
+import { YuhmBrand } from './YuhmBrand'
 import {
   BowlMark, CarrotSticker, CornSticker, Hills, SproutSticker, SunSticker, TomatoSticker,
   YUHM, useInViewOnce, usePrefersReducedMotion,
@@ -172,10 +173,7 @@ export function LandingPage() {
   return <div className="landing-page food-entry-page">
     <a className="landing-skip" href="#choose-a-path">{t('landing.skip')}</a>
     <header className="landing-nav">
-      <a className="landing-brand" href="/" aria-label="yuhm home">
-        <BowlMark className="yuhm-mark" />
-        <span className="yuhm-brand-copy"><span className="yuhm-word">yuhm</span><small>regenerative food network · Austin</small></span>
-      </a>
+      <YuhmBrand className="landing-brand" />
       <div className="landing-nav-actions"><LanguageToggle /><button className="landing-feedback" type="button" onClick={() => openCommunityContact('feedback')}>{t('common.feedback')}</button><AppLink href="/app/?mode=login">{t('common.signIn')}</AppLink><a className="landing-handoff" href="https://handprotocol.org" target="_blank" rel="noreferrer">HAND Protocol <ArrowUpRight size={14} /></a></div>
     </header>
     <main className="food-entry-main">
@@ -202,7 +200,8 @@ export function LandingPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...springy, delay: 0.92 }}
               >
-                <AppLink className="hero-world-cta" href="/app/">{t('landing.world.action')} <ArrowUpRight size={19} /></AppLink>
+                <AppLink className="hero-cta hero-cta-primary" href="/app/?mode=anonymous&intent=food"><MapPin size={19} /> {t('landing.hero.findFood')} <ArrowUpRight size={19} /></AppLink>
+                <AppLink className="hero-cta hero-cta-secondary" href="/app/?mode=login">{t('common.signIn')} <ArrowUpRight size={17} /></AppLink>
               </motion.div>
               <motion.div
                 className="food-entry-proof"

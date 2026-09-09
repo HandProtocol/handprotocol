@@ -1,8 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Activity, CircleUserRound } from 'lucide-react'
+import { Activity, CircleUserRound, LogIn } from 'lucide-react'
 import { BowlMark } from '../LandingDecor'
 import { LanguageToggle } from '../i18n'
 import { AppLink } from '../router'
+import { useAuth } from '../AuthProvider'
+import { foodDb } from '../lib/foodRepository'
+import { getMemberIdentity, signInHref } from '../lib/auth'
 import { WorldMap, type LatLng } from './WorldMap'
 import { WorldSheet, type SheetDetent } from './WorldSheet'
 import {
@@ -58,6 +61,8 @@ function readProgress(): MissionProgress {
 export function WorldExperience() {
   const w = useWorldText()
   const mobile = useMobileViewport()
+  const { member, authReady } = useAuth()
+  const [accountOpen, setAccountOpen] = useState(false)
   const [intro, setIntro] = useState(readIntro)
   const [panel, setPanel] = useState<WorldPanelState>({ kind: 'discover' })
   const [progress, setProgress] = useState<MissionProgress>(readProgress)
@@ -232,6 +237,20 @@ export function WorldExperience() {
         <button type="button" className={`world-top-button${panel.kind === 'profile' ? ' active' : ''}`} onClick={() => openPanel({ kind: 'profile' })} aria-label={w('world.profileButton')}>
           <CircleUserRound size={17} /><span>{w('world.profileButton')}</span>
         </button>
+        {authReady && !member && <AppLink className="world-top-button world-signin" href={signInHref('/app/?mode=world')}>
+          <LogIn size={17} /><span>{w('world.topbar.signIn')}</span>
+        </AppLink>}
+        {member && <div className="world-account">
+          <button type="button" className={`world-top-button world-account-button${accountOpen ? ' active' : ''}`} onClick={() => setAccountOpen((open) => !open)} aria-expanded={accountOpen} aria-controls="world-account-menu" aria-label={w('world.topbar.account')}>
+            <span className="world-avatar" aria-hidden="true">{getMemberIdentity(member).initials}</span><span>{getMemberIdentity(member).displayName}</span>
+          </button>
+          {accountOpen && <div className="world-account-menu" id="world-account-menu">
+            <p>{w('world.topbar.signedIn', { name: getMemberIdentity(member).email || getMemberIdentity(member).displayName })}</p>
+            <AppLink href="/app/?mode=anonymous&intent=food">{w('world.topbar.finder')}</AppLink>
+            <AppLink href="/app/?mode=advanced">{w('world.topbar.commandCenter')}</AppLink>
+            <button type="button" onClick={() => { setAccountOpen(false); void foodDb?.auth.signOut() }}>{w('world.topbar.signOut')}</button>
+          </div>}
+        </div>}
       </div>
     </header>
 
