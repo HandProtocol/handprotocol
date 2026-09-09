@@ -48,7 +48,7 @@ Read this file, then `HANDOFF.md` top section. If koH reports the phone test pas
 
 ## Same-day follow-up: one theme from landing to task (koH's desktop review)
 
-koH: "it shows a different style theme before you actually login ... confusing with the flow of signing in as you have to go all the way down. lets make sure to streamline our design." Done in the same session; details in `HANDOFF.md` "One theme from landing to task, 2026-09-08".
+koH: "it shows a different style theme before you actually login ... confusing with the flow of signing in as you have to go all the way down. lets make sure to streamline our design." Done in the same session; full handoff in `_handoff-2026-09-08-one-theme.md`, summary in `HANDOFF.md` "One theme from landing to task, 2026-09-08".
 
 - `src/YuhmBrand.tsx` shared lockup; brand-theme override block at the end of `src/styles.css`; world topbar account control in `src/world/WorldExperience.tsx` + `world.css`.
 - Sign in is now at the top of the world, the finder, and the dashboard prompt/sidebar, always with `return=` back to the same screen. Members get Sign out in the finder menu and the world menu.

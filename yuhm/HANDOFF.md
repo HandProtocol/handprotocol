@@ -10,6 +10,8 @@ Public-facing product behavior and safety boundaries are maintained in `docs/LIV
 
 ## One theme from landing to task, 2026-09-08 (same-day follow-up)
 
+Detailed session handoff for this pass: `_handoff-2026-09-08-one-theme.md` (status, file-by-file changes, tokens, what is still unverified, how to resume).
+
 koH's desktop review: the landing looked right, but clicking Sign in dropped into a different-looking product (sage, Space Grotesk, 11px type), and on the living world at bare `/app/` the only Sign in link sat at the bottom of the docked panel (~2100px down). Fixed as one pass:
 
 - **Shared brand lockup.** `src/YuhmBrand.tsx` (bowl mark + Baloo wordmark + tagline) now heads the landing nav, the sign-in card, and the finder header. The landing keeps its scoped `.landing-brand` rules; other surfaces use the unscoped `.yuhm-lockup` rules.
