@@ -1,0 +1,14 @@
+{
+  "name": "legacy-care-llc",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Owner-editable client site: server-rendered single page + magic-link admin (Netlify Functions + Supabase). Built from clients/_template.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "preview": "node scripts/render-static.mjs",
+    "placeholders": "node scripts/make-placeholders.mjs",
+    "migration": "node scripts/gen-migration.mjs",
+    "toml": "node scripts/gen-netlify-toml.mjs"
+  }
+}
