@@ -5,13 +5,36 @@ import { config } from '../netlify/functions/lib/config.mjs';
 export function renderPage({ content, media, origin = '' }) {
   const c = content;
   const views = media.map(toView);
+  const social = c.social || {};
+  const httpsUrl = (value) => {
+    try {
+      const url = new URL(value);
+      return url.protocol === 'https:' && !url.username && !url.password ? url.href : '';
+    } catch { return ''; }
+  };
+  const profiles = [
+    { href: httpsUrl(social.facebook_url), label: 'Facebook' },
+    { href: httpsUrl(social.instagram_url), label: 'Instagram' },
+  ].filter((link) => link.href);
+  const reviewUrl = httpsUrl(social.google_review_url);
+  const socialLinks = (id) => {
+    if (!profiles.length && !reviewUrl) return '';
+    const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>';
+    return `<div class="social" aria-labelledby="${id}">
+      <h3 class="social__heading" id="${id}" data-es="${B.e(social.heading_es)}">${B.e(social.heading)}</h3>
+      <ul class="social__links">
+        ${profiles.map((link) => `<li><a href="${B.e(link.href)}" target="_blank" rel="noopener noreferrer">${B.e(link.label)}${arrow}</a></li>`).join('')}
+        ${reviewUrl ? `<li><a href="${B.e(reviewUrl)}" target="_blank" rel="noopener noreferrer"><span data-es="${B.e(social.review_label_es)}">${B.e(social.review_label)}</span>${arrow}</a></li>` : ''}
+      </ul>
+    </div>`;
+  };
   const image = (name, options = {}) => {
     if (name === 'mark') return config.logo;
     const view = views.find((m) => (m.original || m.src || '').toLowerCase().endsWith('/' + name.toLowerCase() + '.webp')) || views.find((m) => (m.original || m.src || '').toLowerCase().includes('/' + name.toLowerCase() + '.'));
     return B.img(view, { sizes: '100vw', ...options });
   };
   return `<!DOCTYPE html><html lang="en"><head>${B.headTags({ content: c, featured: views.find((m) => m.featured), origin, extra: '<meta name="description" content="Legacy Care LLC provides compassionate in-home care for seniors.">' })}
-${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phone, email: c.contact.email })}</head><body>
+${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phone, email: c.contact.email, sameAs: profiles.length ? profiles.map((link) => link.href) : undefined })}</head><body>
 
 
 <a class="skip" href="#main"><span data-es="${B.e(c.brand.copy_1_es)}">${B.e(c.brand.copy_1)}</span></a>
@@ -275,6 +298,7 @@ ${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phon
               <span data-es="${B.e(c.contact.copy_6_es)}">${B.e(c.contact.copy_6)}</span>
             </div>
           </div>
+          ${socialLinks('contact-social-title')}
         </div>
         <div class="contact__photo">
           ${image('hero', { eager: true })}
@@ -294,11 +318,12 @@ ${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phon
     </div>
     <div class="foot__grid">
       <div>
-        ${image('logo')}
+        ${image('logo', { cls: 'foot__logo', sizes: '150px' })}
       </div>
       <div class="foot__contact">
         <a href="${B.e(B.telHref(c.contact.phone))}">${B.e(c.contact.phone)}</a>
         <a href="${B.e(`mailto:${c.contact.email}`)}">${B.e(c.contact.email)}</a>
+        ${socialLinks('footer-social-title')}
       </div>
       <p class="foot__legal"><span>${B.e(c.footer.copy_5)}</span><br>${B.e(c.contact.email)}</p>
     </div>

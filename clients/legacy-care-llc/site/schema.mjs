@@ -1,6 +1,55 @@
 export const CONTENT_KEY = 'site';
 export const SECTIONS = [
   {
+    "key": "social",
+    "label": "Social & reviews",
+    "help": "Use full HTTPS links. Leave a URL blank to hide it. Links appear in the contact section and footer.",
+    "fields": [
+      {
+        "key": "facebook_url",
+        "label": "Facebook page URL",
+        "type": "text",
+        "max": 500
+      },
+      {
+        "key": "instagram_url",
+        "label": "Instagram profile URL",
+        "type": "text",
+        "max": 500
+      },
+      {
+        "key": "google_review_url",
+        "label": "Google review URL",
+        "type": "text",
+        "max": 500
+      },
+      {
+        "key": "heading",
+        "label": "Social links heading (English)",
+        "type": "text",
+        "max": 100
+      },
+      {
+        "key": "heading_es",
+        "label": "Social links heading (Spanish)",
+        "type": "text",
+        "max": 100
+      },
+      {
+        "key": "review_label",
+        "label": "Google review link (English)",
+        "type": "text",
+        "max": 100
+      },
+      {
+        "key": "review_label_es",
+        "label": "Google review link (Spanish)",
+        "type": "text",
+        "max": 100
+      }
+    ]
+  },
+  {
     "key": "brand",
     "label": "Brand & navigation",
     "help": "English and Spanish are edited separately. Use {phone} in copy to show the current contact number.",
@@ -1090,6 +1139,15 @@ export const SECTIONS = [
   }
 ];
 export const DEFAULT_CONTENT = {
+  "social": {
+    "facebook_url": "https://www.facebook.com/share/1Er6RTdG3u/?mibextid=wwXIfr",
+    "instagram_url": "https://www.instagram.com/legacy_carellc/",
+    "google_review_url": "https://g.page/r/CcRDkF5piXrHEBI/review",
+    "heading": "Stay connected",
+    "heading_es": "Sigamos en contacto",
+    "review_label": "Leave a Google review",
+    "review_label_es": "Deje una reseña en Google"
+  },
   "brand": {
     "name": "Legacy Care LLC",
     "copy_1": "Skip to content",
