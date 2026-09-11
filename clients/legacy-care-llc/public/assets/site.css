@@ -356,3 +356,18 @@
     .reveal{opacity:1;transform:none;transition:none}
     .btn,.nav__links a::after{transition:none}
   }
+
+  /* Quiet secondary links, after the direct contact options. */
+  .social{padding-top:1.25rem;border-top:1px solid var(--line)}
+  .social__heading{font:700 0.95rem/1.4 var(--font-body);letter-spacing:0;color:inherit}
+  .social__links{display:flex;flex-wrap:wrap;gap:0.25rem 1.25rem;list-style:none;margin-top:0.4rem}
+  .social__links li{min-width:0}
+  .social__links a{display:inline-flex;align-items:center;gap:0.35rem;min-height:44px;padding:0.5rem 0;font-size:0.95rem;font-weight:600;line-height:1.4;text-decoration:underline;text-underline-offset:0.2em;text-decoration-thickness:1px;overflow-wrap:anywhere}
+  .social__links svg{width:1rem;height:1rem;flex:none}
+  .contact__copy .social{border-color:var(--line-navy);color:var(--on-navy-2)}
+  .contact__copy .social a{color:var(--on-navy)}
+  .contact__copy .social a:hover{color:var(--gold)}
+  .foot__contact{min-width:0}
+  .foot__contact>a{overflow-wrap:anywhere}
+  .foot__contact .social{margin-top:0.9rem}
+  @media (max-width:760px){.foot__contact .social__links{justify-content:center}}

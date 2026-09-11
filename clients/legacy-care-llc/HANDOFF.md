@@ -7,6 +7,18 @@ photos. Built from `clients/_template` with the `hand-client-site` skill on
 
 **Status:** LIVE at https://legacy-care-llc.netlify.app since 2026-09-11 (provisioned by provision.mjs).
 
+## Social links (2026-09-11)
+
+Facebook, Instagram, and the Google review link appear after the direct contact
+options and in the footer. The owner can edit or hide them under **Social &
+reviews** in the admin. Missing fields in older stored content receive the
+schema defaults; no database migration is needed. Facebook and Instagram also
+populate LocalBusiness `sameAs` metadata. The Instagram URL uses the clean
+profile address without QR tracking parameters. Asset version: `20260911c`.
+
+Validation: 32 tests pass; English and Spanish layouts checked at 360, 390,
+768, and 1440px with no horizontal overflow and at least 44px link targets.
+
 ## Start here (cold session)
 
 1. Read this file, then `README.md` (architecture, deploy, env vars).

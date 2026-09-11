@@ -7,7 +7,7 @@ export default {
     "projectRef": "vconmgerblqbworcqkvr",
     "schema": "command"
   },
-  "assetVersion": "20260911b",
+  "assetVersion": "20260911c",
   "fonts": {
     "googleCss": "https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Allura&display=swap",
     "display": "'Rubik', system-ui, sans-serif",
