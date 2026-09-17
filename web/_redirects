@@ -85,5 +85,9 @@ http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protoc
 /project/unfuckable-with /project/unfuckable-with/             301
 /unfuckable-with        /project/unfuckable-with/              301
 
+# (Sub)culture Audio: design directions, preview (web/project/subculture-audio/)
+/project/subculture-audio /project/subculture-audio/           301
+/subculture-audio       /project/subculture-audio/             301
+
 # 404 fallback — branded compass page with radial sitemap (keep last; matches anything else)
 /*                      /404.html                              404
