@@ -153,6 +153,17 @@ from = "/unfuckable-with"
 to = "/project/unfuckable-with/"
 status = 301
 
+# (Sub)culture Audio design directions, preview
+[[redirects]]
+from = "/project/subculture-audio"
+to = "/project/subculture-audio/"
+status = 301
+
+[[redirects]]
+from = "/subculture-audio"
+to = "/project/subculture-audio/"
+status = 301
+
 [[redirects]]
   from = "/foundation-campaign"
   to = "/"
@@ -419,6 +430,12 @@ status = 301
 # Unfuckable With design directions (Courtney), client preview, keep out of search.
 [[headers]]
   for = "/project/unfuckable-with/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# (Sub)culture Audio design directions, preview, keep out of search.
+[[headers]]
+  for = "/project/subculture-audio/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
