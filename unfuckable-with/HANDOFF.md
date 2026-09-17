@@ -4,21 +4,17 @@ New client. Courtney sells one offer, **The Energetic Reset** (mini-course,
 $167 USD), under the brand **Unfuckable With**. The real site will live on
 **Kajabi**. Right now the job is only to agree a design direction.
 
-**Status (2026-09-16, late): the four design directions are LIVE at
-https://handprotocol.org/project/unfuckable-with/ (short link
-https://handprotocol.org/unfuckable-with), noindex. Landed on `main` as
-`dbcbd3a42` (branch commit `2ad07c73a` on `agent/yuhm-network`), Netlify deploy
-ready, every page, asset, redirect and header verified, and the live gallery
-viewer driven in a browser with no console or CSP errors. Waiting on
-(1) Courtney's image, which did not come through with the brief, so the live
-pages show a stand-in stock portrait, and (2) her pick.**
+**Status (2026-09-17): LIVE at https://handprotocol.org/project/unfuckable-with/
+(short link https://handprotocol.org/unfuckable-with), noindex, now carrying
+**Courtney's own photo** in all four designs (the stand-in stock portrait is
+gone). Waiting on her pick, and on her Kajabi checkout URL for the buy buttons.**
 
 ## Start here (cold session)
 
 1. Open `web/project/unfuckable-with/index.html` in a browser. That is the
    pick-one gallery (same pattern as Untouchable Freedom / Three Hands Healing).
-2. Every design shows a **stand-in stock portrait**. Courtney's own image was
-   meant to be attached to the brief and never arrived. Swap it first (below).
+2. All four designs read one image, `assets/feature.jpg`: Courtney's Giza photo
+   (see "The image" below for how each design crops it).
 3. Nothing here is a production site. It is a preview for choosing a direction.
 
 ## Brief, as given by koH
@@ -59,36 +55,48 @@ site's existing `/.netlify/functions/feedback` with source
 folder is deployed on handprotocol.org; opened from disk, sending falls back to
 copying the picks to the clipboard.
 
-## Swapping in Courtney's image
+## The image
 
-1. Save her image over `web/project/unfuckable-with/assets/feature.jpg`.
-   A portrait crop near 4:5 and at least 1000px wide is ideal. All four designs
-   read that one file.
-2. Check each design. If her face is cropped, nudge `object-position` on the
-   image rule in that design's `style.css` (`.shield__photo`, `.snap__photo img`,
-   `.halo img`, `.arch__photo img`).
-3. **If the image is a logo or graphic rather than a photo**, remove the
-   filters: Noir renders it grayscale, Rosé renders it as a black-on-pink
-   duotone (`mix-blend-mode: multiply`), Gilt warms it slightly. Halo shows it
-   untouched. The circular / oval / arched crops also assume a photo.
-4. Regenerate thumbnails (needs the harness sandbox off for Chromium):
+Courtney's photo arrived 2026-09-17 (pasted in chat, 1009x1440). It is a full
+scene, not a headshot: she leans in a sandstone doorway at Giza, barefoot in a
+pale robe, the Great Sphinx framed behind her, the sun directly overhead. Saved
+at full aspect as `web/project/unfuckable-with/assets/feature.jpg` (1000x1428).
 
-   ```bash
-   S=/tmp/uw-thumbs
-   for s in noir rose halo gilt; do HIDE_PILL=1 node unfuckable-with/tools/shot.mjs $s $S; done
-   cd web/project/unfuckable-with/_shots
-   for s in noir rose halo gilt; do
-     ffmpeg -y -i $S/$s-desktop.png -vf scale=960:600 -c:v libwebp -quality 84 $s.webp
-     ffmpeg -y -i $S/$s-mobile.png  -vf scale=300:649 -c:v libwebp -quality 84 $s-m.webp
-   done
-   ```
-5. Remove the "The photo is a stand-in" line from the gallery's how-to list.
-6. Restore the image alt text in all four `index.html` files to
-   `alt="Courtney, founder of Unfuckable With"` (it currently says stand-in,
-   because claiming a stock model is Courtney on a public page would be false).
+What that changed, and why:
 
-The stand-in is Unsplash photo `1671741192004-fa887bd2e62d` (free licence).
-It must not ship anywhere public as if it were Courtney.
+- **Every crop zooms onto the doorway.** The original crops were tuned for a
+  face, which left her tiny. Each design now clips the photo in a wrapper
+  (`.shield__photo`, `.snap__photo`, `.halo__photo`, `.arch__photo`) and scales
+  the `img` inside it (`transform: scale(1.2 to 1.4)` with a `transform-origin`
+  near 52% 52%, plus `object-position`). To re-frame, change those three values.
+  Her feet sit at about 77% of the image height, the sun at about 21%; keep both.
+- **No more grayscale or duotone.** Noir used to render the photo grayscale and
+  Rosé as a black-on-pink duotone. Both threw away the golden light, which is
+  her "light gold" already, so all four now show the photo in colour with a
+  light contrast lift. The sandstone reads as part of the palette, not outside it.
+- The doorway-inside-a-frame echo is deliberate: a portal inside Noir's shield
+  rings, Halo's oval, Gilt's arch.
+
+The alt text describes the scene and does **not** name her, because nobody has
+confirmed the woman in the photo is Courtney. If koH confirms it, "Courtney at
+Giza, ..." is the better alt.
+
+To swap the image again: overwrite `assets/feature.jpg`, update the `width` /
+`height` on the four `img` tags if the aspect changes, re-check the crops, then
+regenerate thumbnails (needs the harness sandbox off for Chromium):
+
+```bash
+S=/tmp/uw-thumbs
+for s in noir rose halo gilt; do HIDE_PILL=1 node unfuckable-with/tools/shot.mjs $s $S; done
+cd web/project/unfuckable-with/_shots
+for s in noir rose halo gilt; do
+  ffmpeg -y -i $S/$s-desktop.png -vf scale=960:600 -c:v libwebp -quality 84 $s.webp
+  ffmpeg -y -i $S/$s-mobile.png  -vf scale=300:649 -c:v libwebp -quality 84 $s-m.webp
+done
+```
+
+The photo is about 1000px wide at source, so it is soft on large retina
+screens at Rosé's and Gilt's sizes. Ask for the original file if she has it.
 
 ## Copy: what was touched, and what to raise with her
 
@@ -125,8 +133,6 @@ Left exactly as she wrote them, worth a gentle mention before launch:
   commit by path on the branch, cherry-pick onto a fresh `origin/main` worktree,
   push `HEAD:main` over HTTPS as cryptokoh, then confirm the deploy is `ready`
   through `netlify api listSiteDeploys` (site `0d46269a-789a-4e42-a00e-7f30e79c5869`).
-  This handoff's status block was updated after that push, so the copy on `main`
-  still says "not deployed" until the next change lands.
 - **Sending picks is untested live.** The feedback function accepts any source
   label and the same flow works for Untouchable Freedom, but no real test pick
   was sent (it would ping koH's Telegram). Picks arrive as `command.feedback_pins`

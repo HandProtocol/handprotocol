@@ -5,16 +5,16 @@
 (() => {
   const STYLES = [
     { slug: "noir", name: "Noir", tag: "black", label: "black leads",
-      desc: "Lacquer black and light gold. Your portrait sits inside a three-layer shield of gold rings with the course's verbs orbiting it. Glamorous, protective, expensive.",
+      desc: "Lacquer black and light gold. Your Giza photo glows inside a three-layer shield of gold rings with the course's verbs orbiting it. Glamorous, protective, expensive.",
       fonts: "Bodoni Moda + Hanken Grotesk", colors: ["#140d10", "#ecd9a3", "#f2a7b5", "#f8f6f2"] },
     { slug: "rose", name: "Rosé", tag: "rose", label: "pink leads",
       desc: "The whole page is rose pink and the type does the shouting. Poster headline, black censor bars, a spinning asterisk in sh*t, outcomes stacked like strips of tape. Direct and unapologetic.",
       fonts: "Archivo, condensed to wide", colors: ["#f5a8b8", "#140d10", "#f8f6f2", "#eedba6"] },
     { slug: "halo", name: "Halo", tag: "white", label: "white leads",
-      desc: "How it feels after the reset. Warm white, an engraved roman typeface, thin gold lines, and a soft aura of rose and gold around your portrait. Calm, clear, quietly luxurious.",
+      desc: "How it feels after the reset. Warm white, an engraved roman typeface, thin gold lines, and your photo held in an oval with a soft aura of rose and gold. Calm, clear, quietly luxurious.",
       fonts: "Marcellus + Jost", colors: ["#fbf9f6", "#f2aab6", "#ead7a0", "#15100f"] },
     { slug: "gilt", name: "Gilt", tag: "gold", label: "gold leads",
-      desc: "Light gold from edge to edge. Art-deco symmetry: a ruled frame, a sunburst rising behind an arched portrait, a rose wax-seal, and a black dome for the final offer. Bold and ceremonial.",
+      desc: "Light gold from edge to edge. Art-deco symmetry: a ruled frame, your doorway photo under an arch with a sunburst rising behind it, a rose wax-seal, and a black dome for the final offer. Bold and ceremonial.",
       fonts: "Gloock + Figtree", colors: ["#ecd9a4", "#15110c", "#f3a9b6", "#fbf9f3"] },
   ];
   STYLES.forEach((s, i) => { s.index = i; s.href = `${s.slug}/`; });

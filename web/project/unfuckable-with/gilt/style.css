@@ -91,7 +91,7 @@ h1 { font: 400 clamp(3.1rem, 0.8rem + 8.6vw, 10rem) / 0.95 var(--display); lette
 /* The arch: portrait under a double-ruled arch, with a rose seal */
 .arch { position: relative; width: 100%; }
 .arch__photo { border-radius: 999px 999px 0 0; overflow: hidden; border: 1.5px solid var(--ink); border-bottom: 0; outline: 1px solid var(--ink); outline-offset: 7px; background: var(--gold-pale); }
-.arch__photo img { width: 100%; height: auto; aspect-ratio: 4 / 4.7; object-fit: cover; object-position: 50% 18%; filter: saturate(0.85) sepia(0.14) contrast(1.03); }
+.arch__photo img { width: 100%; height: auto; aspect-ratio: 4 / 4.7; object-fit: cover; object-position: 50% 48%; transform: scale(1.2); transform-origin: 52% 50%; filter: contrast(1.04); }
 .seal {
   position: absolute; right: -2.6rem; top: 24%; width: clamp(6.8rem, 5.6rem + 3vw, 9rem); aspect-ratio: 1; border-radius: 50%;
   display: grid; place-items: center; background: var(--rose); border: 1.5px solid var(--ink);
