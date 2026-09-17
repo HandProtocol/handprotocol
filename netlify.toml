@@ -142,6 +142,17 @@ from = "/untouchable-freedom"
 to = "/project/untouchable-freedom/"
 status = 301
 
+# Unfuckable With (Courtney) design directions, client preview
+[[redirects]]
+from = "/project/unfuckable-with"
+to = "/project/unfuckable-with/"
+status = 301
+
+[[redirects]]
+from = "/unfuckable-with"
+to = "/project/unfuckable-with/"
+status = 301
+
 [[redirects]]
   from = "/foundation-campaign"
   to = "/"
@@ -402,6 +413,12 @@ status = 301
 # Untouchable Freedom design portfolio (Hannah), client preview, keep out of search.
 [[headers]]
   for = "/project/untouchable-freedom/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# Unfuckable With design directions (Courtney), client preview, keep out of search.
+[[headers]]
+  for = "/project/unfuckable-with/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
