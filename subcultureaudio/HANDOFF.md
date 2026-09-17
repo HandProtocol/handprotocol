@@ -9,8 +9,11 @@ make them 3 new themes to select from ... and then public it to handprotocl
 projects". So: a pick-one portfolio, same pattern as Unfuckable With and
 Untouchable Freedom.
 
-**Status: three themes built and verified locally; see "Publishing" for whether
-it is live yet.** Nobody at (Sub)culture Audio has seen it. Who the contact is
+**Status (2026-09-17): LIVE at https://handprotocol.org/project/subculture-audio/
+(short link https://handprotocol.org/subculture-audio), noindex. Landed on
+`main` as `dc21a4f9c`; Netlify deploy `ready`; live pages re-checked in
+Chromium under the production CSP with no console errors.** Nobody at
+(Sub)culture Audio has seen it. Who the contact is
 there, and whether this is a Develop-pipeline lead, is not known to this doc:
 ask koH.
 
