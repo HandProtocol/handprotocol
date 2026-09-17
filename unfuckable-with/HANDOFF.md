@@ -4,9 +4,14 @@ New client. Courtney sells one offer, **The Energetic Reset** (mini-course,
 $167 USD), under the brand **Unfuckable With**. The real site will live on
 **Kajabi**. Right now the job is only to agree a design direction.
 
-**Status: four design directions built locally, NOT deployed, NOT committed.
-Waiting on (1) Courtney's image, which did not come through with the brief,
-and (2) her pick.**
+**Status (2026-09-16, late): the four design directions are LIVE at
+https://handprotocol.org/project/unfuckable-with/ (short link
+https://handprotocol.org/unfuckable-with), noindex. Landed on `main` as
+`dbcbd3a42` (branch commit `2ad07c73a` on `agent/yuhm-network`), Netlify deploy
+ready, every page, asset, redirect and header verified, and the live gallery
+viewer driven in a browser with no console or CSP errors. Waiting on
+(1) Courtney's image, which did not come through with the brief, so the live
+pages show a stand-in stock portrait, and (2) her pick.**
 
 ## Start here (cold session)
 
@@ -114,12 +119,18 @@ Left exactly as she wrote them, worth a gentle mention before launch:
 
 - **Buy button.** The final button in every design is `href="#checkout"` with a
   `data-checkout` attribute. Point it at her Kajabi offer checkout URL.
-- **Not deployed.** To put it at handprotocol.org/project/unfuckable-with/ it
-  needs landing on `main` (worktree + cherry-pick, as usual) plus a
-  `X-Robots-Tag: noindex` header block in `netlify.toml` like the one for
-  `/project/untouchable-freedom/*`. Every page already carries
-  `<meta name="robots" content="noindex">`. koH to decide whether a URL with
-  this brand name belongs on the nonprofit's domain, or on its own Netlify site.
+- **Deployed as a preview only.** Routing lives in `netlify.toml` (two
+  redirects + an `X-Robots-Tag: noindex, nofollow` header for
+  `/project/unfuckable-with/*`) and `web/_redirects`. To change anything live:
+  commit by path on the branch, cherry-pick onto a fresh `origin/main` worktree,
+  push `HEAD:main` over HTTPS as cryptokoh, then confirm the deploy is `ready`
+  through `netlify api listSiteDeploys` (site `0d46269a-789a-4e42-a00e-7f30e79c5869`).
+  This handoff's status block was updated after that push, so the copy on `main`
+  still says "not deployed" until the next change lands.
+- **Sending picks is untested live.** The feedback function accepts any source
+  label and the same flow works for Untouchable Freedom, but no real test pick
+  was sent (it would ping koH's Telegram). Picks arrive as `command.feedback_pins`
+  rows, source "Unfuckable With styles"; check /pins on the Command Center.
 - **Her current site** was not found by search, so nothing was scraped from it.
   Ask koH for the URL if it matters (logo, socials, existing checkout link).
 - **No socials, no testimonials, no bio** in any design, because none were
