@@ -81,5 +81,9 @@ http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protoc
 /project/legacycare     /project/legacycare/                   301
 /legacycare             /project/legacycare/                   301
 
+# Unfuckable With (Courtney): design directions, client preview (web/project/unfuckable-with/)
+/project/unfuckable-with /project/unfuckable-with/             301
+/unfuckable-with        /project/unfuckable-with/              301
+
 # 404 fallback — branded compass page with radial sitemap (keep last; matches anything else)
 /*                      /404.html                              404

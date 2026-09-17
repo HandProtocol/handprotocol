@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="Design directions for Unfuckable With: four takes on The Energetic Reset page for Courtney to compare and pick from.">
+    <meta name="theme-color" content="#faf6ee">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Gloock&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="gallery.css">
+    <title>Unfuckable With · Design directions</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#grid">Skip to the designs</a>
+
+    <header class="masthead">
+      <p class="brand"><span>Unfuckable <i>With</i></span></p>
+      <div class="masthead__title">
+        <p class="eyebrow">Design directions · for Courtney</p>
+        <h1>Four ways The Energetic Reset could look.</h1>
+        <p class="lede">Your words, your four colors, four different worlds. Each design lets a different color lead: black, rose pink, white, or light gold. Open any of them, scroll all the way down, try the phone view, and <b>heart the ones that feel like you</b>. When you're done, send your picks to koH from the bar at the bottom.</p>
+      </div>
+    </header>
+
+    <main>
+      <ul class="grid" id="grid" data-grid aria-label="Design directions"></ul>
+      <section class="howto" aria-labelledby="howto-title">
+        <h2 id="howto-title">How to look at these</h2>
+        <ol>
+          <li><b>Scroll each one all the way down.</b> The first screen is the mood; the rest is how the page actually reads and sells.</li>
+          <li><b>Try it on your phone.</b> Every card has a phone view, and most of your visitors will arrive from Instagram on a phone.</li>
+          <li><b>Pick more than one if you like.</b> A mix is normal ("the attitude of Rosé with the calm of Halo"). That tells koH what to build.</li>
+          <li><b>The words are yours.</b> Every line comes from your page copy. Only the design is being decided here.</li>
+          <li><b>The photo is a stand-in.</b> Your own image drops into the same spot in all four designs.</li>
+          <li><b>This all moves to Kajabi.</b> These previews are for choosing a direction. The buttons will point at your Kajabi checkout once you've picked.</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p>Preview only, not indexed by search engines. Palette kept strictly to light gold, black, rose pink and white. Prepared by koH for Courtney.</p>
+    </footer>
+
+    <!-- Picks tray -->
+    <div class="tray" data-tray hidden>
+      <div class="tray__inner">
+        <p class="tray__summary"><b data-tray-count>0</b> <span data-tray-label>picks</span>: <span data-tray-names></span></p>
+        <form class="tray__form" data-tray-form>
+          <label class="sr-only" for="tray-name">Your name</label>
+          <input id="tray-name" type="text" name="name" placeholder="Your name" value="Courtney" autocomplete="name">
+          <label class="sr-only" for="tray-note">A note for koH</label>
+          <input id="tray-note" type="text" name="note" placeholder="A note for koH (optional)">
+          <button type="submit" class="tray__send">Send picks to koH</button>
+          <button type="button" class="tray__clear" data-tray-clear>Clear</button>
+        </form>
+        <p class="tray__status" role="status" aria-live="polite" data-tray-status></p>
+      </div>
+    </div>
+
+    <!-- Viewer -->
+    <div class="viewer" data-viewer hidden role="dialog" aria-modal="true" aria-labelledby="viewer-title">
+      <div class="viewer__bar">
+        <button type="button" class="viewer__btn" data-viewer-close aria-label="Close">← All designs</button>
+        <div class="viewer__title"><span class="viewer__num" data-viewer-num></span><h2 id="viewer-title" data-viewer-name></h2><span class="tag" data-viewer-tag></span></div>
+        <div class="viewer__device" role="group" aria-label="Preview size">
+          <button type="button" data-device="desktop" aria-pressed="true">Desktop</button>
+          <button type="button" data-device="phone" aria-pressed="false">Phone</button>
+        </div>
+        <div class="viewer__actions">
+          <button type="button" class="viewer__btn viewer__pick" data-viewer-pick aria-pressed="false"><span class="heart" aria-hidden="true"></span><span data-viewer-pick-label>Pick this</span></button>
+          <a class="viewer__btn" data-viewer-open href="#" target="_blank" rel="noopener">Open full page ↗</a>
+          <button type="button" class="viewer__btn viewer__nav" data-viewer-prev aria-label="Previous design">‹</button>
+          <button type="button" class="viewer__btn viewer__nav" data-viewer-next aria-label="Next design">›</button>
+        </div>
+      </div>
+      <div class="viewer__stage" data-viewer-stage>
+        <div class="viewer__frame"><iframe title="Design preview" data-viewer-frame loading="lazy"></iframe></div>
+      </div>
+    </div>
+
+    <script src="gallery.js" defer></script>
+  </body>
+</html>
