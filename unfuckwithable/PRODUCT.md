@@ -1,9 +1,9 @@
-# Unfuckable With (Courtney) · PRODUCT.md
+# Courtney (project: unfuckwithable) · PRODUCT.md
 
 register: brand
 
 ## Product purpose
-A small course-sales site for Courtney's brand **Unfuckable With** (project slug: unfuckwithable). Four pages: a cover page, an about page, and one sales page per course. The site is a design preview for Courtney; the real site is built on Kajabi later, using these pages as the reference (Kajabi's checkout stays the checkout).
+A small course-sales site for **Courtney** (the brand is her name; the project slug is unfuckwithable, after her main course). Four pages: a cover page, an about page, and one sales page per course. The site is a design preview for Courtney; the real site is built on Kajabi later, using these pages as the reference (Kajabi's checkout stays the checkout).
 
 ## Offers
 - **The Energetic Reset** (mini-course, $167 USD): protect, clear and recover your energy in a few minutes a day. Seven lessons. Full copy exists (her words).
