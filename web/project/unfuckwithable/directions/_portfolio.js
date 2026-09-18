@@ -67,7 +67,7 @@
     status.textContent = "Sending…";
     const text = [
       `Style picks: ${list.join(", ")}`,
-      `Links: ${list.map((s) => `https://handprotocol.org/project/unfuckable-with/${s}/`).join(" ")}`,
+      `Links: ${list.map((s) => `https://handprotocol.org/project/unfuckwithable/directions/${s}/`).join(" ")}`,
       note.trim() ? `Note: ${note.trim()}` : null,
     ].filter(Boolean).join("\n");
     try {

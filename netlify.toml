@@ -142,15 +142,36 @@ from = "/untouchable-freedom"
 to = "/project/untouchable-freedom/"
 status = 301
 
-# Unfuckable With (Courtney) design directions, client preview
+# Unfuckwithable (Courtney) client preview site; the old "unfuckable-with" links keep working
 [[redirects]]
-from = "/project/unfuckable-with"
-to = "/project/unfuckable-with/"
+from = "/project/unfuckwithable"
+to = "/project/unfuckwithable/"
+status = 301
+
+[[redirects]]
+from = "/unfuckwithable"
+to = "/project/unfuckwithable/"
 status = 301
 
 [[redirects]]
 from = "/unfuckable-with"
-to = "/project/unfuckable-with/"
+to = "/project/unfuckwithable/"
+status = 301
+
+[[redirects]]
+from = "/project/unfuckable-with"
+to = "/project/unfuckwithable/"
+status = 301
+
+[[redirects]]
+from = "/project/unfuckable-with/"
+to = "/project/unfuckwithable/"
+status = 301
+
+# The four design directions moved under directions/
+[[redirects]]
+from = "/project/unfuckable-with/*"
+to = "/project/unfuckwithable/directions/:splat"
 status = 301
 
 # (Sub)culture Audio design directions, preview
@@ -427,9 +448,9 @@ status = 301
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
-# Unfuckable With design directions (Courtney), client preview, keep out of search.
+# Unfuckwithable (Courtney), client preview, keep out of search.
 [[headers]]
-  for = "/project/unfuckable-with/*"
+  for = "/project/unfuckwithable/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
