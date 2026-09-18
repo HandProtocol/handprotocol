@@ -1,4 +1,4 @@
-# Unfuckable With · DESIGN.md (Halo direction, chosen 2026-09-17)
+# Courtney · DESIGN.md (Halo direction, chosen 2026-09-17)
 
 Source of truth: `web/project/unfuckwithable/site.css`.
 

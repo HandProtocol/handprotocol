@@ -1,10 +1,10 @@
-# Handoff: Unfuckable With (Courtney) · updated 2026-09-17, evening
+# Handoff: Courtney (project unfuckwithable) · updated 2026-09-17, evening
 
 **For the person picking this up cold, or for koH after time away.**
 
 ## Orient in one paragraph
 
-Courtney is a HAND Develop client. Her brand is **Unfuckable With**. She sells
+Courtney is a HAND Develop client. **The brand is her name, Courtney.** She sells
 two courses: **The Energetic Reset** (a mini-course on protecting, clearing and
 recovering your energy, $167 USD, full copy in hand) and **Becoming
 Unfuckwithable** (the main course; copy, contents and price still to come).
@@ -20,9 +20,12 @@ Waiting on (1) her copy for the about page and the main-course page,
 (2) the main-course price, (3) both Kajabi checkout URLs.**
 
 The project was renamed from `unfuckable-with` to `unfuckwithable` on
-2026-09-17 (koH's ask). The brand name did **not** change: "Unfuckwithable" is
-the main course, "Unfuckable With" is the site. Old `unfuckable-with` links
-redirect.
+2026-09-17 (koH's ask), after her main course. Naming, settled the same
+evening after two corrections from koH: the site's wordmark, titles and
+copyright say **Courtney**; "Unfuckwithable" appears only as the main course's
+name (Becoming Unfuckwithable) and in links to that page; "Unfuckable With" is
+gone from the site and survives only in the archived `directions/` pages. Old
+`unfuckable-with` links redirect.
 
 ## Start here (cold session)
 
@@ -46,7 +49,8 @@ redirect.
 | 2026-09-16 | `2ad07c73a` | `dbcbd3a42` | Gallery + four design directions + thumbnails + routing. |
 | 2026-09-16 | `4c3b4210d` | `e3a0f76a5` | Handoff for the live state. |
 | 2026-09-17 | `672cf6175` | `9b7cd2b79` | Courtney's Giza photo in all four directions. |
-| 2026-09-17 | see below | see below | Halo chosen. Rename to `unfuckwithable`, four-page site on Halo, directions archived under `directions/`, redirects for the old links. |
+| 2026-09-17 | `6cb95dd2e` | `6ea115677` | Halo chosen. Rename to `unfuckwithable`, four-page site on Halo, directions archived under `directions/`, redirects for the old links. Wordmark still "Unfuckable With". |
+| 2026-09-17 | see below | see below | Brand corrected to Courtney on every site page; handoff and context files follow. |
 
 The last row's shas are filled in by the docs commit that follows the landing
 (look at `git log --oneline -3 -- web/project/unfuckwithable`).
@@ -62,13 +66,18 @@ koH's spelling of her name is "Courtney"; no last name; do not guess one.
 an about me page, and 2 separate sales pages, one for my mini course and one
 for my main course Becoming Unfuckwithable. We will add all the copy later.
 Rename the project from unfuckablewith to unfuckwithable." Then, mid-build:
-"Unfuckwithable is only one course, not the whole site." So the wordmark,
-titles and copyright stayed "Unfuckable With".
+"Unfuckwithable is only one course, not the whole site." And after the first
+landing: "Unfuckable With is not the brand, the brand is Courtney. The only
+thing that should say unfuckwithable is the one page that we made first."
+Read as: wordmark = Courtney; the course keeps its name. If koH meant that the
+Reset page (the first page built) should carry the Unfuckwithable name
+instead, that is a one-line change in the nav and the two page titles.
 
 ## The site
 
 Four pages, one stylesheet (`site.css`), no JavaScript, the same header and
-footer on all of them (wordmark, three nav links, one page-specific action).
+footer on all of them (the wordmark "Courtney", three nav links, one
+page-specific action).
 
 | Page | Path | Hero | Sections | Copy state |
 |---|---|---|---|---|
@@ -180,6 +189,13 @@ and every `todo` class before launch.
 - **2026-09-16 and 2026-09-17 (photo)** as in the previous handoff: all four
   directions and the gallery, headless Chromium at four viewports, no errors,
   no overflow, live checks after each deploy.
+- **2026-09-17, evening, first landing (`6ea115677`).** Live checks after the
+  deploy: all four pages, `site.css`, `assets/feature.jpg`, the archived
+  gallery and `directions/halo/` return 200 with the right content types;
+  `/unfuckwithable`, `/unfuckable-with`, `/project/unfuckable-with` and
+  `/project/unfuckable-with/` 301 to the new cover; `/project/unfuckable-with/halo/`
+  and an old `_shots/` asset 301 into `directions/`; `X-Robots-Tag: noindex,
+  nofollow` present.
 - **2026-09-17, evening (this build).** Headless Chromium at 1440×900,
   820×1180 and 390×844, first screen and full page, all four site pages plus
   the archived Halo page and gallery from their new location: no console
