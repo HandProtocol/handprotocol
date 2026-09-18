@@ -50,10 +50,10 @@ gone from the site and survives only in the archived `directions/` pages. Old
 | 2026-09-16 | `4c3b4210d` | `e3a0f76a5` | Handoff for the live state. |
 | 2026-09-17 | `672cf6175` | `9b7cd2b79` | Courtney's Giza photo in all four directions. |
 | 2026-09-17 | `6cb95dd2e` | `6ea115677` | Halo chosen. Rename to `unfuckwithable`, four-page site on Halo, directions archived under `directions/`, redirects for the old links. Wordmark still "Unfuckable With". |
-| 2026-09-17 | see below | see below | Brand corrected to Courtney on every site page; handoff and context files follow. |
+| 2026-09-17 | `d96c4448f` | `58a5ea3df` | Brand corrected to Courtney on every site page; handoff and context files follow. Deploy watched to `ready`; live titles and wordmark verified. |
 
-The last row's shas are filled in by the docs commit that follows the landing
-(look at `git log --oneline -3 -- web/project/unfuckwithable`).
+All rows were committed by path on `agent/yuhm-network` and cherry-picked onto
+a fresh `origin/main` worktree; the deploy for each was watched to `ready`.
 
 ## The brief, as koH gave it
 
