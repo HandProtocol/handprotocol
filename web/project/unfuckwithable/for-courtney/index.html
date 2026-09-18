@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#fbf9f6">
+    <meta name="description" content="Notes for Courtney: what is live on her site, how to look at it, and what koH needs from her to finish it.">
+    <title>Notes for Courtney · Your site, and what I need from you</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../site.css">
+    <style>
+      /* Page-specific: a note from koH, in the site's own clothes. */
+      .note-hero { max-width: 64rem; padding: clamp(1rem, 0.5rem + 2vw, 3rem) var(--gutter) clamp(3rem, 2rem + 4vw, 6rem); }
+      .note-hero h1 { font-size: clamp(2.5rem, 1.2rem + 4.8vw, 5.8rem); max-width: 14ch; }
+      .note-hero .hero__sub { max-width: 46ch; }
+      .note-hero .hero__buy { margin-top: clamp(1.6rem, 1.2rem + 1.4vw, 2.6rem); }
+
+      .pages { padding: 0 var(--gutter) var(--section); }
+      .pages h2, .ask h2, .tiny h2 { font: 400 clamp(1.8rem, 1.3rem + 2vw, 3.2rem) / 1.18 var(--display); max-width: 24ch; text-wrap: balance; }
+      .pages__list { margin-top: clamp(1.6rem, 1.2rem + 1.4vw, 2.6rem); border-top: 1px solid var(--gold-line); max-width: 64rem; }
+      .pages__list li { display: grid; grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr); gap: 0.4rem clamp(1.5rem, 1rem + 3vw, 5rem); align-items: baseline; padding: clamp(1.1rem, 0.9rem + 0.8vw, 1.6rem) 0; border-bottom: 1px solid color-mix(in oklch, var(--ink) 14%, transparent); }
+      .pages__list a { position: relative; display: inline-block; justify-self: start; font: 400 clamp(1.3rem, 1.1rem + 0.9vw, 2rem) / 1.2 var(--display); text-decoration: none; }
+      .pages__list a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -0.15em; height: 1px; background: var(--gold-line); transform-origin: left; transition: transform 0.5s var(--ease); }
+      .pages__list a:hover::after { transform: scaleX(0.35); }
+      .pages__list span { color: var(--ink-soft); }
+
+      .ask { background: var(--blush); padding: var(--section) var(--gutter); border-radius: clamp(2rem, 1rem + 5vw, 7rem) clamp(2rem, 1rem + 5vw, 7rem) 0 0; }
+      .ask__head p { margin-top: 1.2rem; max-width: 40ch; color: var(--ink-soft); }
+      .ask .learn__list { margin-top: clamp(2rem, 1.6rem + 1.6vw, 3.4rem); max-width: 56rem; }
+      .ask .learn__list li::before { background: var(--blush); box-shadow: 0 0 0 7px var(--blush); }
+      .ask .learn__list li:first-child::before { background: var(--gold); }
+
+      .tiny { padding: var(--section) var(--gutter); }
+      .tiny p { margin-top: 1.2rem; max-width: 52ch; color: var(--ink-soft); }
+      .tiny ul { margin-top: 1.8rem; max-width: 60ch; border-top: 1px solid var(--gold-line); }
+      .tiny li { padding: 1rem 0; border-bottom: 1px solid color-mix(in oklch, var(--ink) 14%, transparent); }
+      .tiny q { font-family: var(--display); font-size: 1.1em; quotes: "\201C" "\201D"; }
+
+      @media (max-width: 860px) { .pages__list li { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="top">
+      <a class="mark" href="../">Courtney</a>
+      <nav class="nav" aria-label="Site">
+        <a href="../about/">About</a>
+        <a href="../energetic-reset/">The Energetic Reset</a>
+        <a href="../becoming-unfuckwithable/">Becoming Unfuckwithable</a>
+      </nav>
+      <a class="top__cta" href="../">Open the site</a>
+    </header>
+
+    <main id="main">
+      <section class="note-hero" aria-labelledby="hero-title">
+        <div class="hero__copy">
+          <p class="eyebrow">Notes for Courtney · 18 September 2026</p>
+          <h1 id="hero-title">Your site is up. Here is what I need from you.</h1>
+          <p class="hero__sub">Four pages, built on the Halo look you picked. Anything <span class="todo">underlined like this</span> is a placeholder waiting for your words. Nothing is public yet: the pages are hidden from search, and only people with the link can find them.</p>
+          <div class="hero__buy">
+            <a class="btn" href="../">Open the site</a>
+            <a class="more" href="#ask">Skip to the list</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="pages" aria-labelledby="pages-title">
+        <h2 id="pages-title" class="reveal">What is live</h2>
+        <ol class="pages__list">
+          <li class="reveal"><a href="../">Cover</a><span>The front door: your headline, the two courses side by side, a few lines about you.</span></li>
+          <li class="reveal"><a href="../about/">About</a><span>Your story, what you believe, and how to work with you.</span></li>
+          <li class="reveal"><a href="../energetic-reset/">The Energetic Reset</a><span>Your mini-course page. Your words, exactly as you wrote them.</span></li>
+          <li class="reveal"><a href="../becoming-unfuckwithable/">Becoming Unfuckwithable</a><span>Your main-course page. The shape is there; every line on it is a placeholder.</span></li>
+        </ol>
+      </section>
+
+      <section class="learn" aria-labelledby="look-title">
+        <div class="learn__head">
+          <p class="eyebrow">First</p>
+          <h2 id="look-title">How to look at it.</h2>
+          <p>Ten minutes, on your phone.</p>
+        </div>
+        <ol class="learn__list">
+          <li class="reveal"><b>Open it on your phone.</b><span>Most people will find you from Instagram, so the phone version is the one that matters.</span></li>
+          <li class="reveal"><b>Scroll all the way down on each page.</b><span>The top is the mood. The rest is how the page reads and sells.</span></li>
+          <li class="reveal"><b>Read the underlined lines as "your words go here."</b><span>They are written in your voice to show the shape. Keep, rewrite, or throw away, they are not final.</span></li>
+          <li class="reveal"><b>Nothing on The Energetic Reset page changed.</b><span>Those are your words. There are three tiny things to consider, at the bottom of this page.</span></li>
+        </ol>
+      </section>
+
+      <section class="ask" id="ask" aria-labelledby="ask-title">
+        <div class="ask__head">
+          <p class="eyebrow reveal">Then</p>
+          <h2 id="ask-title" class="reveal">What I need from you.</h2>
+          <p class="reveal">Six things. Plain text is perfect; I will fit it to the pages.</p>
+        </div>
+        <ol class="learn__list">
+          <li class="reveal"><b>For the cover.</b><span>One line under the headline (who you help, and what changes for them), and two or three lines about you for the "About Courtney" block.</span></li>
+          <li class="reveal"><b>For the about page.</b><span>How you got here, in your words. Anything you want named: training, lineages, how long you have been doing this. And the three beliefs: keep them, rewrite them, or add a fourth.</span></li>
+          <li class="reveal"><b>For Becoming Unfuckwithable.</b><span>All of it. The promise at the top, who it is for, what people will have by the end, what is inside (modules, how long it runs, what comes with it), and the price.</span></li>
+          <li class="reveal"><b>Two checkout links from Kajabi.</b><span>One for each course. Every buy button on the site will point at them.</span></li>
+          <li class="reveal"><b>Your Giza photo, the original file.</b><span>The copy I have is small and goes soft on big screens. Any other photos you love are welcome too. And a yes that it is you in it, so I can say so in the image description.</span></li>
+          <li class="reveal"><b>Optional, but they sell.</b><span>Two or three lines from people who have done the Reset, and your Instagram handle for the footer.</span></li>
+        </ol>
+      </section>
+
+      <section class="tiny" aria-labelledby="tiny-title">
+        <p class="eyebrow reveal">Your call</p>
+        <h2 id="tiny-title" class="reveal">Three tiny things in your Reset copy.</h2>
+        <p class="reveal">I left every word as you wrote it. If you want them changed, say so and I will.</p>
+        <ul>
+          <li class="reveal"><q>Palo-santo, sage, and breathwork is not enough</q>: three things, so it would usually be "are".</li>
+          <li class="reveal"><q>everyday</q> appears three times where "every day" (two words) is meant.</li>
+          <li class="reveal"><q>Palo-santo</q> is usually written "palo santo", no hyphen.</li>
+        </ul>
+      </section>
+
+      <section class="enroll" aria-labelledby="next-title">
+        <span class="enroll__aura" aria-hidden="true"></span>
+        <div class="enroll__inner">
+          <p class="eyebrow">Next</p>
+          <h2 id="next-title">Send it however we talk.</h2>
+          <p class="enroll__lead">One message or five. I drop your words in within a day, you look again, and then it all moves into Kajabi with your checkout.</p>
+          <div class="enroll__actions">
+            <a class="btn" href="../">Open the site</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <div class="foot__row">
+        <p class="mark">Courtney</p>
+        <nav class="foot__nav" aria-label="Footer">
+          <a href="../about/">About</a>
+          <a href="../energetic-reset/">The Energetic Reset</a>
+          <a href="../becoming-unfuckwithable/">Becoming Unfuckwithable</a>
+        </nav>
+      </div>
+      <p>Prepared by koH at HAND. Private page, not indexed by search engines.</p>
+    </footer>
+  </body>
+</html>

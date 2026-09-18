@@ -1,4 +1,4 @@
-# Handoff: Courtney (project unfuckwithable) · updated 2026-09-17, evening
+# Handoff: Courtney (project unfuckwithable) · updated 2026-09-18
 
 **For the person picking this up cold, or for koH after time away.**
 
@@ -102,6 +102,7 @@ links to it.
 |---|---|
 | Site pages | `web/project/unfuckwithable/index.html`, `about/`, `energetic-reset/`, `becoming-unfuckwithable/` |
 | Site stylesheet | `web/project/unfuckwithable/site.css` (derived from `directions/halo/style.css`) |
+| Notes page for Courtney | `web/project/unfuckwithable/for-courtney/index.html`, live at https://handprotocol.org/project/unfuckwithable/for-courtney/ (unlinked, noindex): what is live, how to look, the six things HAND needs from her, the three copy nits. Send her this link. Update the date in its eyebrow when it changes materially. |
 | **The one shared image** | `web/project/unfuckwithable/assets/feature.jpg` (1000×1428, her Giza photo) |
 | Archived directions + gallery | `web/project/unfuckwithable/directions/` (`gallery.*`, `_portfolio.*`, `_shots/`, `noir/ rose/ halo/ gilt/`) |
 | Routing | `netlify.toml` and `web/_redirects`: `/unfuckwithable`, `/project/unfuckwithable` → `/project/unfuckwithable/`; `/unfuckable-with`, `/project/unfuckable-with`, `/project/unfuckable-with/` → the new cover; `/project/unfuckable-with/*` → `/project/unfuckwithable/directions/:splat`; `X-Robots-Tag: noindex, nofollow` on `/project/unfuckwithable/*` |
@@ -142,7 +143,8 @@ her words: …", "How many modules, how long it runs…").
 ## Open items
 
 1. **Her copy** for the cover subline and about teaser, the whole about page,
-   and the whole main-course page. Everything underlined in rose.
+   and the whole main-course page. Everything underlined in rose. The ask is
+   spelled out for her on the `for-courtney/` page (added 2026-09-18).
 2. **The main-course price** (`$•••` on the cover, about, and main-course pages).
 3. **Both Kajabi checkout URLs.** Every buy button is `href="#checkout"` with
    a `data-checkout` attribute.
