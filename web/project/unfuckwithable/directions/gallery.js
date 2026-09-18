@@ -22,7 +22,7 @@
   const KEY = "uw-style-picks";
   const ENDPOINT = "/.netlify/functions/feedback";
   const SOURCE = "Unfuckable With styles";
-  const BASE = "https://handprotocol.org/project/unfuckable-with/";
+  const BASE = "https://handprotocol.org/project/unfuckwithable/directions/";
   const readPicks = () => { try { return JSON.parse(localStorage.getItem(KEY) || "[]").filter((s) => STYLES.some((x) => x.slug === s)); } catch { return []; } };
   const writePicks = (list) => { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch {} };
   const isPicked = (slug) => readPicks().includes(slug);

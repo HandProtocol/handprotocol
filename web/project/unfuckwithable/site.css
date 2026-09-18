@@ -1,0 +1,255 @@
+/* Unfuckwithable · site stylesheet
+   The Halo direction, chosen 2026-09-17, extended to a four-page site.
+   Warm white leads. An engraved roman face over a light geometric sans,
+   gold hairlines, and one recurring image: an aura of rose and gold around
+   the portrait and the closing offer. Shared by every page; no JavaScript. */
+
+:root {
+  --white: oklch(0.987 0.005 80);
+  --blush: oklch(0.958 0.024 8);
+  --rose: oklch(0.83 0.085 8);
+  --rose-deep: oklch(0.7 0.15 8);
+  --gold: oklch(0.87 0.085 90);
+  --gold-line: oklch(0.76 0.095 84);
+  --ink: oklch(0.17 0.012 350);
+  --ink-soft: oklch(0.36 0.012 350);
+
+  --display: "Marcellus", "Optima", "Trajan Pro", serif;
+  --body: "Jost", "Futura", system-ui, sans-serif;
+
+  --gutter: clamp(1.25rem, 0.5rem + 4vw, 6rem);
+  --section: clamp(5rem, 3rem + 8vw, 11.5rem);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: clip; }
+body {
+  margin: 0; background: var(--white); color: var(--ink);
+  font: 400 clamp(1.06rem, 1rem + 0.32vw, 1.28rem) / 1.75 var(--body);
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+}
+img { display: block; max-width: 100%; }
+h1, h2, h3, p, ol, ul, figure { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+a { color: inherit; }
+
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; border-radius: 2px; }
+.skip { position: absolute; left: -999px; top: 0; z-index: 20; padding: 0.75rem 1rem; background: var(--ink); color: var(--white); }
+.skip:focus { left: 1rem; top: 1rem; }
+
+/* Draft copy: a dotted rose underline until Courtney's words replace it. */
+.todo { text-decoration: underline dotted; text-decoration-color: var(--rose-deep); text-decoration-thickness: 2px; text-underline-offset: 0.16em; text-decoration-skip-ink: none; }
+
+/* ---- Top ----------------------------------------------------------- */
+.top {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center;
+  gap: 0.6rem clamp(1.2rem, 1rem + 2vw, 3rem);
+  padding: clamp(1.2rem, 0.9rem + 1vw, 2.2rem) var(--gutter);
+}
+.mark { font: 400 clamp(0.9rem, 0.84rem + 0.3vw, 1.08rem) / 1 var(--display); letter-spacing: 0.34em; text-transform: uppercase; text-decoration: none; white-space: nowrap; }
+.nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.2rem clamp(1.2rem, 0.8rem + 1.6vw, 2.8rem); }
+.nav a, .top__cta {
+  position: relative; font-weight: 400; font-size: 0.78rem; letter-spacing: 0.24em; text-transform: uppercase;
+  text-decoration: none; padding: 0.45rem 0; color: var(--ink-soft); white-space: nowrap;
+}
+.nav a::after, .top__cta::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--gold-line); transform: scaleX(0); transform-origin: left; transition: transform 0.5s var(--ease); }
+.nav a:hover::after, .nav a[aria-current="page"]::after { transform: scaleX(1); }
+.nav a[aria-current="page"] { color: var(--ink); }
+.top__cta { color: var(--ink); font-weight: 500; }
+.top__cta::after { transform: scaleX(1); }
+.top__cta:hover::after { transform: scaleX(0.35); }
+
+/* ---- Hero ---------------------------------------------------------- */
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); align-items: center;
+  gap: clamp(2rem, 1rem + 5vw, 7rem);
+  min-height: calc(100svh - 5.5rem);
+  padding: clamp(1rem, 0.5rem + 2vw, 3rem) var(--gutter) clamp(4rem, 3rem + 4vw, 7rem);
+}
+.eyebrow { display: flex; align-items: center; gap: 1rem; font-weight: 400; font-size: 0.8rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--ink-soft); }
+.eyebrow::before { content: ""; flex: none; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--rose); box-shadow: 0 0 0 5px color-mix(in oklch, var(--rose) 28%, transparent); }
+h1 { margin-top: 1.6rem; font: 400 clamp(3.3rem, 1.5rem + 7.2vw, 8.6rem) / 0.98 var(--display); letter-spacing: -0.012em; text-wrap: balance; }
+.hero__sub { margin-top: clamp(1.5rem, 1.1rem + 1.4vw, 2.6rem); max-width: 31ch; font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.65rem); font-weight: 300; line-height: 1.5; text-wrap: balance; }
+.hero__buy { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem 2rem; margin-top: clamp(1.8rem, 1.4rem + 1.6vw, 3.2rem); }
+.price { font-weight: 400; font-size: 0.85rem; letter-spacing: 0.24em; color: var(--ink-soft); }
+.price b { font: 400 2.2rem / 1 var(--display); letter-spacing: 0; color: var(--ink); margin-right: 0.4rem; }
+
+.btn {
+  position: relative; display: inline-block; isolation: isolate; overflow: hidden;
+  padding: 1.2rem 2.5rem; border-radius: 99px; background: var(--ink); color: var(--white);
+  font-weight: 500; font-size: 0.84rem; letter-spacing: 0.26em; text-transform: uppercase; text-decoration: none; text-align: center;
+  transition: color 0.45s var(--ease), transform 0.45s var(--ease);
+}
+.btn::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--gold); transform: translateY(101%); transition: transform 0.5s var(--ease); }
+.btn:hover { color: var(--ink); transform: translateY(-2px); }
+.btn:hover::before { transform: translateY(0); }
+.btn:active { transform: translateY(0); }
+
+/* A quiet text link with a gold hairline that shortens on hover. */
+.more { position: relative; display: inline-block; font-weight: 500; font-size: 0.82rem; letter-spacing: 0.26em; text-transform: uppercase; text-decoration: none; padding: 0.45rem 0; white-space: nowrap; }
+.more::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--gold-line); transform-origin: left; transition: transform 0.5s var(--ease); }
+.more:hover::after { transform: scaleX(0.35); }
+
+/* The halo: an oval portrait, two gold orbits, an aura of rose and gold */
+.halo { position: relative; justify-self: center; width: min(100%, 31rem); aspect-ratio: 4 / 5; display: grid; place-items: center; }
+.halo__aura {
+  position: absolute; inset: -16%; border-radius: 50%; filter: blur(34px);
+  background:
+    radial-gradient(42% 46% at 32% 34%, var(--rose), transparent 72%),
+    radial-gradient(44% 44% at 70% 68%, var(--gold), transparent 72%),
+    radial-gradient(38% 40% at 66% 26%, color-mix(in oklch, var(--rose) 55%, var(--white)), transparent 70%);
+  opacity: 0.85;
+}
+.halo__orbit { position: absolute; border-radius: 50%; border: 1px solid var(--gold-line); }
+.halo__orbit--a { inset: -4.5% 3.5%; }
+.halo__orbit--b { inset: -1% -5%; transform: rotate(-24deg); opacity: 0.55; }
+.halo__photo { position: relative; width: 84%; height: 96%; border-radius: 50%; overflow: hidden; }
+.halo__photo img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.4); transform-origin: 52% 52%; }
+
+/* Cover: the headline runs the full width, the photo sits below it on the right. */
+.hero--stack { grid-template-columns: 1fr; align-content: center; }
+.hero--stack h1 { font-size: clamp(2.6rem, 1rem + 6.6vw, 8rem); }
+.hero__row { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); align-items: start; gap: clamp(2rem, 1rem + 5vw, 7rem); margin-top: clamp(1rem, 0.5rem + 1.5vw, 2.4rem); }
+.hero__row .halo { width: min(100%, 27rem); justify-self: end; }
+.hero__lead { padding-top: clamp(0.5rem, 0.2rem + 2vw, 3rem); }
+
+/* Main course: centered, the type first, the portrait beneath it. */
+.hero--center { grid-template-columns: 1fr; text-align: center; align-content: center; }
+.hero--center .hero__copy { max-width: 62rem; margin-inline: auto; }
+.hero--center h1 { font-size: clamp(2.6rem, 1rem + 6.6vw, 8rem); }
+.hero--center .eyebrow, .hero--center .hero__buy { justify-content: center; }
+.hero--center .hero__sub { margin-inline: auto; max-width: 36ch; }
+.hero--center .halo { width: min(100%, 26rem); margin: clamp(2rem, 1rem + 3vw, 4rem) auto 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .halo__aura { animation: aura 11s ease-in-out infinite; }
+  .halo__orbit--b { animation: tilt 26s ease-in-out infinite; }
+  .hero__copy > * { animation: rise 1.2s var(--ease) both; }
+  .hero__copy > :nth-child(2) { animation-delay: 0.1s; }
+  .hero__copy > :nth-child(3) { animation-delay: 0.22s; }
+  .hero__copy > :nth-child(4) { animation-delay: 0.34s; }
+  .halo { animation: bloom 1.8s var(--ease) 0.1s both; }
+}
+@keyframes aura { 50% { transform: scale(1.07) rotate(8deg); opacity: 1; } }
+@keyframes tilt { 50% { transform: rotate(-12deg); } }
+@keyframes rise { from { opacity: 0; transform: translateY(22px); } }
+@keyframes bloom { from { opacity: 0; transform: scale(0.94); filter: blur(12px); } }
+
+/* ---- Why ----------------------------------------------------------- */
+.why { padding: var(--section) var(--gutter); }
+.why h2 { font: 400 clamp(2.4rem, 1.3rem + 4.4vw, 5.8rem) / 1.04 var(--display); letter-spacing: -0.01em; max-width: 15ch; text-wrap: balance; }
+.why__body { columns: 2; column-gap: clamp(1.5rem, 1rem + 3vw, 5rem); margin-top: clamp(2.5rem, 2rem + 2.4vw, 5rem); padding-top: clamp(1.8rem, 1.4rem + 1.4vw, 3rem); border-top: 1px solid var(--gold-line); }
+.why__body p + p { margin-top: 1.4em; }
+.why__body p { break-inside: avoid; }
+
+/* ---- Intro (cover): a pull line and a short paragraph about Courtney -- */
+.intro { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); align-items: start; gap: clamp(2rem, 1rem + 5vw, 7rem); padding: var(--section) var(--gutter); }
+.intro__pull { margin-top: 1.4rem; font: 400 clamp(1.9rem, 1.2rem + 2.8vw, 4rem) / 1.12 var(--display); letter-spacing: -0.01em; text-wrap: balance; }
+.intro__body { padding-top: clamp(1.2rem, 1rem + 1vw, 2rem); border-top: 1px solid var(--gold-line); }
+.intro__body p + p { margin-top: 1.2em; }
+.intro__body .more { margin-top: 1.6rem; }
+
+/* ---- Gain ---------------------------------------------------------- */
+.gain { background: var(--blush); padding: var(--section) var(--gutter); border-radius: clamp(2rem, 1rem + 5vw, 7rem) clamp(2rem, 1rem + 5vw, 7rem) 0 0; }
+.gain h2, .learn h2 { font: 400 clamp(1.8rem, 1.3rem + 2vw, 3.2rem) / 1.18 var(--display); max-width: 24ch; text-wrap: balance; }
+.gain__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(2rem, 1rem + 5vw, 7rem); margin-top: clamp(2.2rem, 1.8rem + 2vw, 4.2rem); }
+.gain__list li {
+  position: relative; padding: 1.3rem 0 1.3rem 2.4rem;
+  border-top: 1px solid color-mix(in oklch, var(--ink) 14%, transparent);
+  font: 400 clamp(1.18rem, 1.06rem + 0.55vw, 1.55rem) / 1.4 var(--display);
+}
+.gain__list li::before {
+  content: ""; position: absolute; left: 0.3rem; top: 1.85rem; width: 0.6rem; height: 0.6rem; border-radius: 50%;
+  background: var(--white); box-shadow: 0 0 0 1px var(--gold-line), 0 0 0 6px color-mix(in oklch, var(--gold) 45%, transparent);
+}
+
+/* ---- Learn: numbered steps on one gold thread ---------------------- */
+.learn { display: grid; grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr); gap: clamp(2rem, 1rem + 5vw, 7rem); padding: var(--section) var(--gutter); background: var(--white); }
+.learn__head { position: sticky; top: 3rem; align-self: start; }
+.learn__head p { margin-top: 1.5rem; max-width: 30ch; color: var(--ink-soft); }
+.learn__head .eyebrow { margin-bottom: 1.4rem; }
+.learn__list { counter-reset: learn; position: relative; }
+.learn__list::before { content: ""; position: absolute; left: 1.55rem; top: 1.6rem; bottom: 1.6rem; width: 1px; background: var(--gold-line); }
+.learn__list li { counter-increment: learn; position: relative; display: grid; grid-template-columns: 3.1rem 1fr; gap: 0 clamp(1.2rem, 1rem + 1vw, 2.4rem); align-items: start; padding: clamp(1.1rem, 0.9rem + 0.8vw, 1.8rem) 0; font-size: clamp(1.1rem, 1.02rem + 0.4vw, 1.36rem); line-height: 1.55; }
+.learn__list li::before {
+  content: counter(learn); grid-row: span 2; display: grid; place-items: center; width: 3.1rem; height: 3.1rem; border-radius: 50%;
+  background: var(--white); border: 1px solid var(--gold-line); font: 400 1.25rem / 1 var(--display);
+  box-shadow: 0 0 0 7px var(--white);
+}
+.learn__list li:first-child::before { background: var(--gold); }
+.learn__list li > b { grid-column: 2; display: block; font: 400 clamp(1.3rem, 1.1rem + 0.8vw, 1.8rem) / 1.25 var(--display); }
+.learn__list li > span { grid-column: 2; display: block; margin-top: 0.45rem; }
+.hint { grid-column: 2; display: block; margin-top: 0.4rem; font-style: italic; color: var(--ink-soft); }
+
+/* ---- Doors: the two courses, side by side ------------------------- */
+.doors { background: var(--blush); padding: var(--section) var(--gutter); border-radius: clamp(2rem, 1rem + 5vw, 7rem) clamp(2rem, 1rem + 5vw, 7rem) 0 0; }
+.doors__head h2 { margin-top: 1.4rem; font: 400 clamp(2.4rem, 1.3rem + 4.4vw, 5.8rem) / 1.04 var(--display); letter-spacing: -0.01em; max-width: 15ch; text-wrap: balance; }
+.doors__grid { display: grid; grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr); gap: 0 clamp(2rem, 1rem + 5vw, 7rem); margin-top: clamp(2.4rem, 1.8rem + 2.4vw, 4.6rem); }
+.door { display: grid; align-content: start; gap: 1.1rem; padding: 1.9rem 0 2.6rem; border-top: 1px solid color-mix(in oklch, var(--ink) 14%, transparent); }
+.door--main { border-top-color: var(--gold-line); }
+.door--main .eyebrow::before { background: var(--gold); box-shadow: 0 0 0 5px color-mix(in oklch, var(--gold) 45%, transparent); }
+.door h3 { font: 400 clamp(2rem, 1.3rem + 2.6vw, 3.8rem) / 1.05 var(--display); letter-spacing: -0.01em; text-wrap: balance; }
+.door h3 a { text-decoration: none; }
+.door__text { max-width: 42ch; }
+.door__foot { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2.2rem; margin-top: 0.6rem; }
+
+/* ---- Enroll: the aura offer ---------------------------------------- */
+.enroll { position: relative; isolation: isolate; overflow: clip; text-align: center; padding: var(--section) var(--gutter); background: var(--white); }
+.enroll__aura {
+  position: absolute; z-index: -1; left: 50%; top: 50%; width: min(120vw, 70rem); aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; filter: blur(60px);
+  background:
+    radial-gradient(40% 40% at 36% 40%, var(--rose), transparent 72%),
+    radial-gradient(42% 42% at 66% 60%, var(--gold), transparent 72%);
+  opacity: 0.62;
+}
+@media (prefers-reduced-motion: no-preference) { .enroll__aura { animation: aura 13s ease-in-out infinite; } }
+.enroll__inner { max-width: 46rem; margin-inline: auto; }
+.enroll .eyebrow { justify-content: center; }
+.enroll h2 { margin-top: 1.6rem; font: 400 clamp(2.4rem, 1.4rem + 4vw, 5.4rem) / 1.04 var(--display); letter-spacing: -0.01em; text-wrap: balance; }
+.enroll__inner > p:not(.eyebrow):not(.enroll__price) { margin-top: 2rem; font-weight: 400; text-align: left; }
+.enroll__inner > p.enroll__lead { text-align: center; max-width: 34ch; margin-inline: auto; font-size: clamp(1.15rem, 1.05rem + 0.5vw, 1.5rem); font-weight: 300; line-height: 1.5; }
+.enroll__price { margin-top: 2.6rem; font-weight: 400; font-size: 0.9rem; letter-spacing: 0.24em; }
+.enroll__price b { display: block; font: 400 clamp(4rem, 3rem + 4vw, 7rem) / 1 var(--display); letter-spacing: -0.01em; }
+.enroll .btn { margin-top: 1.8rem; }
+.enroll__actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.2rem 2.4rem; margin-top: 2.4rem; }
+.enroll__actions .btn { margin-top: 0; }
+
+/* ---- Also: one line pointing at the other course ------------------- */
+.also { text-align: center; padding: clamp(2.2rem, 1.8rem + 1.6vw, 3.6rem) var(--gutter); border-top: 1px solid var(--gold-line); color: var(--ink-soft); font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem); }
+.also a { color: var(--ink); text-decoration-color: var(--gold-line); text-decoration-thickness: 1px; text-underline-offset: 0.28em; }
+.also a:hover { text-decoration-color: var(--ink); }
+
+/* ---- Foot ---------------------------------------------------------- */
+.foot { display: grid; gap: 1.2rem; padding: 2.6rem var(--gutter) 5.5rem; border-top: 1px solid var(--gold-line); font-size: 0.85rem; font-weight: 400; color: var(--ink-soft); }
+.foot__row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 1rem 2rem; }
+.foot .mark { color: var(--ink); }
+.foot__nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1.6rem; }
+.foot__nav a { font-size: 0.74rem; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; }
+.foot__nav a:hover { color: var(--ink); }
+.foot__note { font-size: 0.8rem; }
+.foot__note .todo { color: var(--ink); }
+
+/* ---- Scroll reveals (progressive) ---------------------------------- */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { animation: rise linear both; animation-timeline: view(); animation-range: entry 5% entry 40%; }
+  }
+}
+
+/* ---- Small screens ------------------------------------------------- */
+@media (max-width: 860px) {
+  .top { grid-template-columns: 1fr auto; }
+  .top .mark { grid-area: 1 / 1; }
+  .top__cta { grid-area: 1 / 2; }
+  .nav { grid-area: 2 / 1 / 3 / 3; justify-content: flex-start; padding-top: 0.6rem; border-top: 1px solid var(--gold-line); }
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .halo { width: min(74%, 21rem); margin-top: 3rem; }
+  .hero__row { grid-template-columns: 1fr; }
+  .hero__row .halo { justify-self: center; }
+  .hero--center .halo { margin-top: 3rem; }
+  .why__body { columns: 1; }
+  .intro, .gain__list, .learn, .doors__grid { grid-template-columns: 1fr; }
+  .learn__head { position: static; }
+  .door { padding-block: 1.6rem 2rem; }
+}

@@ -81,9 +81,13 @@ http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protoc
 /project/legacycare     /project/legacycare/                   301
 /legacycare             /project/legacycare/                   301
 
-# Unfuckable With (Courtney): design directions, client preview (web/project/unfuckable-with/)
-/project/unfuckable-with /project/unfuckable-with/             301
-/unfuckable-with        /project/unfuckable-with/              301
+# Unfuckwithable (Courtney): client preview site (web/project/unfuckwithable/); old unfuckable-with links keep working
+/project/unfuckwithable  /project/unfuckwithable/              301
+/unfuckwithable          /project/unfuckwithable/              301
+/unfuckable-with         /project/unfuckwithable/              301
+/project/unfuckable-with /project/unfuckwithable/              301
+/project/unfuckable-with/ /project/unfuckwithable/             301
+/project/unfuckable-with/* /project/unfuckwithable/directions/:splat 301
 
 # (Sub)culture Audio: design directions, preview (web/project/subculture-audio/)
 /project/subculture-audio /project/subculture-audio/           301
