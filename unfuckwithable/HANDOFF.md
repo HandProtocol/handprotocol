@@ -17,7 +17,9 @@ course. Placeholder copy is underlined in dotted rose until her words arrive.
 **Status: LIVE at https://handprotocol.org/project/unfuckwithable/
 (short link https://handprotocol.org/unfuckwithable), noindex.
 Waiting on (1) her copy for the about page and the main-course page,
-(2) the main-course price, (3) both Kajabi checkout URLs.**
+(2) the main-course price, (3) both Kajabi checkout URLs.
+NEXT TASK (koH, 2026-09-18, not started): prepare the site for upload to
+Kajabi. Read "Next: prepare for Kajabi" below before touching anything.**
 
 The project was renamed from `unfuckable-with` to `unfuckwithable` on
 2026-09-17 (koH's ask), after her main course. Naming, settled the same
@@ -176,7 +178,111 @@ Other Claude sessions work in this same checkout and branch, so:
    live pages. A deploy in `error` state is a real failure here; read
    `error_message`.
 
-## Moving to Kajabi
+## Next: prepare for Kajabi (asked 2026-09-18, not started)
+
+koH's words: "lets prepare this to be able to be uploaded to kajabi, is this
+too large? lets first make a handoff so we can clear tokens." This section is
+that handoff. Nothing below has been built yet.
+
+### Is it too large? No.
+
+Measured 2026-09-18 (source files under `web/project/unfuckwithable/`):
+
+| File | Bytes | Chars | Gzipped |
+|---|---|---|---|
+| `index.html` (cover) | 6,427 | 6,417 | 2,080 |
+| `about/index.html` | 6,390 | 6,380 | 2,277 |
+| `energetic-reset/index.html` | 7,649 | 7,647 | 2,667 |
+| `becoming-unfuckwithable/index.html` | 7,622 | 7,607 | 2,431 |
+| `site.css` (shared) | 17,594 | 17,593 | 4,605 |
+| `assets/feature.jpg` | 243,832 | | |
+
+The `<main>` fragment of each page, which is what a Kajabi custom-code block
+would hold, is 4,471 to 5,785 characters. The whole site is under 40 KB of
+text plus one 244 KB photo, and the fonts come from Google Fonts. Kajabi's
+help pages describe no character limit on custom-code blocks or on the
+page-level Custom CSS field (searched 2026-09-18; none found in Kajabi's
+docs or in third-party guides). If a limit exists it is far above these
+numbers. Size is not the problem. The work is scoping the CSS so it survives
+inside Kajabi's theme, and wiring links and assets to Kajabi's URLs.
+
+### How Kajabi takes custom code (from Kajabi's help center, 2026-09-18)
+
+- **Custom Code block** on any website page or landing page: Customize →
+  open a section → Add block → Custom Code. Raw HTML goes in; CSS and JS
+  inside it must be wrapped in `<style>` and `<script>` tags.
+- **Page Settings → Custom Code**: per-page Custom CSS and Custom JavaScript
+  fields; do **not** include `<style>`/`<script>` tags there.
+- **Site-wide**: Settings → Site details → Page scripts → Header Page
+  Scripts. Anything there lands in `<head>` of every page except offer
+  checkout and upsell pages. This is where the Google Fonts `<link>` and the
+  shared stylesheet go, once.
+- Kajabi also has a theme code editor (Liquid) with theme export/import. Not
+  needed for this; keep it as the fallback if custom-code blocks fight the
+  theme too much.
+
+Sources: https://help.kajabi.com/articles/website/pages/add-custom-code-to-pages
+and https://help.kajabi.com/hc/en-us/articles/12213645867803-Code-Based-Customizations.
+
+### The plan (recommended: custom-code blocks, one page each)
+
+1. **Write an exporter**, `unfuckwithable/tools/kajabi-export.mjs`, that
+   reads the four source pages and writes `unfuckwithable/kajabi/`:
+   - `header-scripts.html`: the Google Fonts `<link>` tags plus `<style>`
+     wrapping the scoped stylesheet. Pasted once into Header Page Scripts.
+   - `<page>.block.html` for cover, about, energetic-reset,
+     becoming-unfuckwithable: the page's header, `<main>` and footer wrapped
+     in `<div class="cw">…</div>`, one per Custom Code block.
+   - `README.md` with the paste steps and the checklist below.
+   Generate, never hand-edit the output: the source pages stay the truth.
+2. **Scope the CSS** in the exporter, mechanically:
+   - `:root` → `.cw`; `html` and `body` rules → `.cw` (drop `margin: 0`,
+     `overflow-x: clip`, `scroll-behavior`; keep font, color, background).
+   - Prefix every other selector with `.cw ` (including inside `@media` and
+     `@supports`; `@keyframes` names get a `cw-` prefix and the references
+     follow).
+   - Drop `.skip`. Keep `*, *::before, *::after { box-sizing }` but scoped
+     (`.cw *, …`), since Kajabi's theme may not set it.
+   - Raise specificity where Kajabi's theme CSS will win: `h1`, `h2`, `p`,
+     `a`, `ul`, `ol`, `img` inside `.cw` (margins, list-style, colors,
+     font). Expect to add `.cw h1 { margin-top … }` style resets.
+   - The hero uses `min-height: calc(100svh - 5.5rem)`; inside Kajabi's
+     page container that offset is wrong. Use `min-height: 82svh` or drop
+     the min-height for the Kajabi build.
+   - `.enroll__aura` uses `min(120vw, 70rem)` with `overflow: clip` on the
+     section; fine inside a block. Check the blush sections'
+     `border-radius` against Kajabi's section padding (Kajabi sections have
+     their own padding; set the section's padding to 0 in the builder or
+     accept the inset).
+3. **Header and footer.** Two choices, koH decides: (a) hide Kajabi's
+   header/footer on these pages and ship ours inside each block (design
+   intact, nav links become Kajabi page URLs), or (b) use Kajabi's own
+   header/footer and export only `<main>`. Recommend (a) for the landing
+   pages; Kajabi landing pages can run without the site nav.
+4. **Assets.** Upload `feature.jpg` (better: the original she still owes) to
+   Kajabi and swap the `src` for the Kajabi-hosted URL; do not leave her
+   site pulling an image from handprotocol.org. Alt text unchanged.
+5. **Links.** Nav and footer links → the four Kajabi page URLs. Every
+   `data-checkout` button → the offer checkout URL for that course (owed).
+6. **Strip preview-only bits** in the exporter: every `class="todo"` span
+   (keep the text), the footer preview note, `<meta name="robots">`.
+7. **Try one page first**, The Energetic Reset, in her Kajabi account (koH
+   needs admin access, ask Courtney to add him) or a Kajabi trial. Screenshot
+   it against the live preview at 390 and 1440 wide, fix collisions, then do
+   the other three.
+8. **Placeholder copy.** Her words for about and the main course are still
+   owed. The export can go ahead with placeholders (underlines stripped),
+   but do not publish a Kajabi page with placeholder copy on it.
+
+### Open questions for koH before building
+
+- Custom-code blocks (recommended) or a full Kajabi theme?
+- Our header/footer inside the blocks, or Kajabi's?
+- Does he have, or can he get, admin access to her Kajabi?
+- Should the `for-courtney/` notes page stay on handprotocol.org (yes; it is
+  ours, not hers).
+
+## Moving to Kajabi (general notes, written before the plan above)
 
 Four HTML files and one CSS file, no JavaScript, Google Fonts (Marcellus +
 Jost). Motion is CSS only and honours reduced motion. Each page ports into a
