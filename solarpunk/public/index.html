@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>SolarPunk Summit Driver Sign-Up</title>
+<meta name="description" content="Drivers: add your name and mark the SolarPunk Summit 2026 airport runs you can cover.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a driver's run sheet. Name card up top, then each day's runs as rows with a three-way availability toggle. */
+:root {
+  --bg: #edf2ea; --surface: #fbfdf8; --fg: #16231c; --muted: #56665b; --line: #cfd9cc;
+  --in: #2f7a4a; --in-soft: #dcebdc; --out: #b4670f; --out-soft: #f6e6cf;
+  --sky: #2c6f8f; --yes: #2f7a4a; --maybe: #9a5a00; --no: #7a7f7b; --err: #b3261e; --focus: #2c6f8f;
+  --display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1914; --surface: #16231c; --fg: #e5eee6; --muted: #9db0a2; --line: #2a3b31;
+    --in: #6cc48b; --in-soft: #1e3a29; --out: #f0a94c; --out-soft: #3b2a14;
+    --sky: #7cc0df; --yes: #6cc48b; --maybe: #f0b45c; --no: #8d948f; --err: #ff8a80; --focus: #7cc0df;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.55 var(--body); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.wrap { max-width: 880px; margin: 0 auto; padding-block: 28px 96px; padding-inline: 16px; display: grid; gap: 28px; }
+h1, h2 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.1; }
+h1 { font-size: clamp(1.9rem, 6vw, 2.8rem); font-weight: 800; letter-spacing: -0.02em; }
+h2 { font-size: 1.2rem; font-weight: 700; }
+p { margin: 0; }
+.eyebrow { font: 600 0.74rem/1 var(--body); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+button, input, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+header { display: grid; gap: 12px; }
+.facts { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.92rem; }
+.facts b { color: var(--fg); font-weight: 600; }
+.lede { max-width: 62ch; }
+
+.me { display: grid; gap: 14px; padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.me-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 12px; }
+.field { display: grid; gap: 5px; min-width: 0; }
+.field label { font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+.field input, .field textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); font-size: 16px; }
+.field textarea { min-height: 60px; resize: vertical; }
+#name { font-size: 18px; font-weight: 600; }
+.me-foot { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; justify-content: space-between; font-size: 0.88rem; }
+.save-state { font-weight: 600; }
+.save-state.ok { color: var(--yes); }
+.save-state.err { color: var(--err); }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--sky); font-weight: 600; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; font-size: 0.88rem; }
+.linkbtn.danger { color: var(--err); }
+.btn { border: 0; border-radius: 10px; padding: 11px 18px; font-weight: 600; cursor: pointer; background: var(--fg); color: var(--surface); }
+.gate { max-width: 480px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+.summary { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+.stat { display: grid; gap: 2px; }
+.stat b { font: 800 1.6rem/1 var(--display); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 0.82rem; color: var(--muted); }
+
+.notice { padding: 16px 18px; border: 1px dashed var(--line); border-radius: 12px; color: var(--muted); background: var(--surface); }
+.days { display: grid; gap: 28px; }
+.day { display: grid; gap: 10px; }
+.dayhead { display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline; justify-content: space-between; }
+.dayhead h2 span { color: var(--muted); font: 500 0.85rem var(--body); margin-left: 8px; }
+.rows { display: grid; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.slot { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr) auto; gap: 8px 16px; align-items: center; padding: 13px 16px; border-top: 1px solid var(--line); }
+.slot:first-child { border-top: 0; }
+.slot.in { box-shadow: inset 4px 0 0 var(--in); }
+.slot.out { box-shadow: inset 4px 0 0 var(--out); }
+.when { display: grid; gap: 2px; }
+.when .t { font: 700 1rem/1.2 var(--mono); }
+.when small { font-size: 0.78rem; color: var(--muted); }
+.what { display: grid; gap: 4px; min-width: 0; }
+.route { font-weight: 600; display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; }
+.tag { display: inline-flex; padding: 2px 9px; border-radius: 999px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; }
+.tag.in { background: var(--in-soft); color: var(--in); }
+.tag.out { background: var(--out-soft); color: var(--out); }
+.what p { font-size: 0.86rem; color: var(--muted); }
+.drivers { display: flex; flex-wrap: wrap; gap: 6px; font-size: 0.8rem; }
+.chip { display: inline-flex; align-items: center; gap: 5px; padding: 2px 9px; border-radius: 999px; border: 1px solid var(--line); }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--c, var(--muted)); }
+.chip.yes { --c: var(--yes); }
+.chip.maybe { --c: var(--maybe); }
+.chip.none { color: var(--maybe); border-color: currentColor; --c: var(--maybe); }
+
+.toggle { display: inline-grid; grid-template-columns: repeat(3, auto); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.toggle button { border: 0; border-left: 1px solid var(--line); background: var(--bg); padding: 9px 13px; font-size: 0.86rem; font-weight: 600; cursor: pointer; color: var(--muted); min-height: 40px; }
+.toggle button:first-child { border-left: 0; }
+.toggle button[aria-pressed="true"][data-v="yes"] { background: var(--yes); color: var(--surface); }
+.toggle button[aria-pressed="true"][data-v="maybe"] { background: var(--maybe); color: var(--surface); }
+.toggle button[aria-pressed="true"][data-v="no"] { background: var(--no); color: var(--surface); }
+
+footer { color: var(--muted); font-size: 0.88rem; display: grid; gap: 6px; }
+.toast { position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--fg); color: var(--surface); padding: 10px 16px; border-radius: 10px; font-weight: 600; max-width: calc(100% - 32px); z-index: 10; }
+
+@media (max-width: 620px) {
+  .slot { grid-template-columns: minmax(0, 1fr); }
+  .toggle { width: 100%; grid-template-columns: repeat(3, 1fr); }
+  .me-grid { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+<div id="gate" class="wrap gate" hidden>
+  <header>
+    <p class="eyebrow">SolarPunk Summit 2026 · The Love Dimension · Oct 8–12</p>
+    <h1>Driver sign-up</h1>
+    <p class="lede">This page is for the artist transport team. Enter the access code the team gave you.</p>
+  </header>
+  <form id="gate-form" class="me" novalidate>
+    <div class="field"><label for="code">Access code</label><input id="code" name="code" inputmode="numeric" autocomplete="one-time-code" placeholder="Code" required></div>
+    <p id="gate-error" class="save-state err" role="alert" hidden></p>
+    <div><button type="submit" class="btn">Continue</button></div>
+  </form>
+</div>
+<div id="app" class="wrap" hidden>
+  <header>
+    <p class="eyebrow">SolarPunk Summit 2026 · The Love Dimension · Oct 8–12</p>
+    <h1>Driver sign-up</h1>
+    <div class="facts">
+      <span><b>Camp</b> Son's Blue River Camp, 2769 Sherrill Rd, Kingsbury TX 78638</span>
+      <span><b>Airport</b> <span class="mono">AUS</span> Austin-Bergstrom, about 40 min each way</span>
+    </div>
+    <p class="lede">Add your name, then tap <b>Can drive</b>, <b>Maybe</b> or <b>Can't</b> on each run. Your answers save as you go. Each run shows the pickup time and roughly how long it keeps you busy, including the drive back.</p>
+  </header>
+
+  <section class="me" aria-labelledby="me-h">
+    <h2 id="me-h">You</h2>
+    <form id="me-form" novalidate>
+      <div class="me-grid">
+        <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" maxlength="60" placeholder="First and last name" required></div>
+        <div class="field"><label for="seats">Rider seats in your car</label><input id="seats" name="seats" type="number" inputmode="numeric" min="1" max="12" placeholder="e.g. 3"></div>
+      </div>
+      <div class="field" style="margin-top:12px"><label for="note">Anything the team should know (optional)</label><textarea id="note" name="note" maxlength="300" placeholder="Truck with room for gear, only free after 3 PM on Friday…"></textarea></div>
+      <div class="hp" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+    </form>
+    <div class="me-foot">
+      <span id="save-state" class="save-state muted" role="status">Add your name to start.</span>
+      <button type="button" id="remove" class="linkbtn danger" hidden>Remove my entry</button>
+    </div>
+  </section>
+
+  <div class="summary" aria-live="polite">
+    <div class="stat"><b id="st-total">–</b><span>runs needed</span></div>
+    <div class="stat"><b id="st-covered">–</b><span>have a driver who can</span></div>
+    <div class="stat"><b id="st-drivers">–</b><span>drivers signed up</span></div>
+    <div class="stat"><b id="st-mine">–</b><span>runs you can drive</span></div>
+  </div>
+
+  <div id="days" class="days"><p class="notice">Loading runs…</p></div>
+
+  <footer>
+    <p>Green runs go to camp. Amber runs leave camp. "Riders" counts passengers, not including the driver.</p>
+    <p>Your name and answers are visible to everyone with this link. Questions: Koh, <span class="mono">cryptokoh@gmail.com</span></p>
+  </footer>
+</div>
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script src="/app.js" defer></script>
+</body>
+</html>
