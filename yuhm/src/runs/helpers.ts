@@ -1,7 +1,7 @@
 /** Small helpers the run-sheet screens share: links inside the tool, dates as people say them, stages. */
 import type { Lang } from '../i18n'
 import { hasSplit, partsOf } from './portioning'
-import { runText } from './runStrings'
+import { runText, type RunT } from './runStrings'
 import { localDayIndex } from './time'
 import type { ContactState, DeliveryState, Household, HouseholdInput, Run, RunsState, Stop, StopInput } from './model'
 import type { ChipTone } from './ui'
@@ -40,6 +40,11 @@ export function stageFor(state: Pick<RunsState, 'items' | 'stops' | 'portions' |
   if (run.status === 'pickup') return 'pickup'
   if (run.status === 'delivering' || run.status === 'completed') return hasSplit(partsOf(state, run.id)) ? 'deliver' : 'split'
   return 'ask'
+}
+
+/** A family's name on screen. A forgotten family's stored "A family" is shown in the reader's language. */
+export function stopName(stop: Pick<Stop, 'label' | 'forgotten'>, t: RunT): string {
+  return stop.forgotten ? t('family.forgotten') : stop.label
 }
 
 const LOCALE: Record<Lang, string> = { en: 'en-US', es: 'es-US' }

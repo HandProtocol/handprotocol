@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { ArrowDown, ArrowUp, Check, MapPin, Navigation, Snowflake, TriangleAlert } from 'lucide-react'
 import { ContactAction } from '../contact'
 import { useRuns } from '../context'
-import { DELIVERY_TONE, clock } from '../helpers'
+import { DELIVERY_TONE, clock, stopName } from '../helpers'
 import { directionsLink } from '../messages'
 import type { Run, Stop } from '../model'
 import { packList, partsOf, sharingStops, type RunParts } from '../portioning'
@@ -39,7 +39,7 @@ function DeliverRow({ stop, run, parts, editable, canMoveUp, canMoveDown, onMove
     return <li className="run-drop is-delivered">
       <span className="run-drop-done" aria-hidden="true"><Check size={18} strokeWidth={3} /></span>
       <div className="run-drop-main">
-        <strong>{stop.label}</strong>
+        <strong>{stopName(stop, t)}</strong>
         <span>{t('chip.delivered')}{stop.delivered_at && <> {t('deliver.at', { time: clock(lang, stop.delivered_at) })}</>}</span>
       </div>
       {editable && <button type="button" className="run-textlink run-textlink-quiet" onClick={() => dispatch({ op: 'stop.delivery', id: stop.id, state: 'packed' })}>{t('deliver.undo')}</button>}
@@ -51,7 +51,7 @@ function DeliverRow({ stop, run, parts, editable, canMoveUp, canMoveDown, onMove
       <BagTag number={stop.bag} label={t('split.bag', { n: stop.bag ?? '?' })} size="lg" />
       <div className="run-drop-main">
         <div className="run-row-title">
-          <strong>{stop.label}</strong>
+          <strong>{stopName(stop, t)}</strong>
           <Chip tone={DELIVERY_TONE[stop.delivery_state]}>{t(`chip.${stop.delivery_state}` as RunKey)}</Chip>
         </div>
         <p className="run-row-meta">
@@ -162,7 +162,7 @@ export function DeliverStage({ run, onStage, onFinish }: { run: Run; onStage: (s
       </ul>}
 
     {passed.length > 0 && <ul className="run-passed">
-      {passed.map((stop) => <li key={stop.id}><Sticker id={stop.household_id ?? stop.id} label={stop.label} size="sm" /><span>{stop.label}</span><Chip tone="no">{t('deliver.passed')}</Chip></li>)}
+      {passed.map((stop) => <li key={stop.id}><Sticker id={stop.household_id ?? stop.id} label={stopName(stop, t)} forgotten={stop.forgotten} size="sm" /><span>{stopName(stop, t)}</span><Chip tone="no">{t('deliver.passed')}</Chip></li>)}
     </ul>}
 
     {editable && <div className="run-stage-foot">

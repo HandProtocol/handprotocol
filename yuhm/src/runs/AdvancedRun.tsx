@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 import { Pencil, RotateCcw, Trash2 } from 'lucide-react'
 import { useRoute } from '../router'
 import { useRuns } from './context'
-import { clock, dayLabel, runHref, windowLabel } from './helpers'
+import { clock, dayLabel, runHref, stopName, windowLabel } from './helpers'
 import { itemQty, type ContactState, type DeliveryState, type Run, type RunEvent } from './model'
 import { partsOf } from './portioning'
 import { RunDetailsSheet } from './RunDetails'
@@ -86,7 +86,7 @@ export function AdvancedRun({ run }: { run: Run }) {
           <thead><tr><th scope="col">{t('tabs.families')}</th><th scope="col">{t('adv.contactState')}</th><th scope="col">{t('adv.deliveryState')}</th></tr></thead>
           <tbody>
             {parts.stops.map((stop) => <tr key={stop.id}>
-              <th scope="row">{stop.label}</th>
+              <th scope="row">{stopName(stop, t)}</th>
               <td><select className="run-input" aria-label={`${t('adv.contactState')}: ${stop.label}`} value={stop.contact_state} onChange={(event) => dispatch({ op: 'stop.contact', id: stop.id, state: event.target.value as ContactState })}>
                 {CONTACT_STATES.map((value) => <option key={value} value={value}>{t(`chip.${value}` as RunKey)}</option>)}
               </select></td>
@@ -106,7 +106,7 @@ export function AdvancedRun({ run }: { run: Run }) {
         <table className="run-table run-grid">
           <thead><tr>
             <th scope="col">{t('adv.gridItem')}</th>
-            {parts.stops.map((stop) => <th scope="col" key={stop.id}>{stop.bag ?? ''} {stop.label}</th>)}
+            {parts.stops.map((stop) => <th scope="col" key={stop.id}>{stop.bag ?? ''} {stopName(stop, t)}</th>)}
             <th scope="col">{t('adv.gridHave')}</th>
             <th scope="col">{t('adv.gridLeft')}</th>
           </tr></thead>

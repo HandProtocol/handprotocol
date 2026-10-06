@@ -876,7 +876,7 @@ const es: Record<RunKey, string> = {
   'tough.cold_snap': 'Frente frío',
   'tough.long_drive': 'Trayecto largo',
   'tough.heavy_lifting': 'Carga pesada',
-  'tough.solo': 'Voy solo',
+  'tough.solo': 'Sin ayuda',
   'tough.short_notice': 'Aviso de última hora',
   'tough.no_car': 'Sin carro',
   'tough.early_window': 'Horario temprano',
