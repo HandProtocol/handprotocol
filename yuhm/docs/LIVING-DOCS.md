@@ -2,7 +2,7 @@
 title: yuhm Living Documentation
 description: Current product behavior, community workflows, safety boundaries, and development status for yuhm.
 status: living
-last_updated: 2026-08-11
+last_updated: 2026-10-06
 canonical_path: /docs/
 ---
 
@@ -44,16 +44,19 @@ Status labels used throughout this document:
 - **Needs migration:** Implemented in code, but requires the latest database migration before production use.
 - **Ready to deploy:** Implemented and connected to the production database, but the current application files still need deployment.
 - **Prototype:** Visible for evaluation, but not yet a complete persisted workflow.
+- **In progress:** Being built in code. Not deployed, and its migration is not applied.
 - **Planned:** Documented direction, not yet implemented.
 
 | Area | Status | Current behavior |
 |---|---|---|
-| Public landing page | Live | Starts with three direct paths: find food, contribute food or delivery help, and gather around a shared table. |
-| Public app shell | Live | Phones use a full-screen command-bar map as the Find food base. Its menu keeps Find food, Contribute, Gather, Requests, account state, and Advanced mode reachable. Other intents retain their focused mobile layouts while they are migrated into the shell. |
+| Public landing page | Live | Opens on two doors above the fold: **Find food near me** (no account) and **Sign in**. The find, contribute, and gather path cards remain below as optional deep links. |
+| Living world | Live | Bare `/app/` opens the living map on every viewport, with a short one-screen intro and a **Sign in** pill in its top bar for guests. |
+| Public app shell | Live | Focused intents keep their own layouts. On phones, Find food uses a full-screen command-bar map. Its menu keeps Find food, Contribute, Gather, Requests, account state, and Advanced mode reachable. Other intents retain their focused mobile layouts while they are migrated into the shell. |
 | Experience modes | Live | The public interface is the default. Advanced mode is an explicit, remembered entry to coordination, routes, inventory, and reporting, with a visible return to the public interface. |
 | Gather experience | Prototype | Shows clearly labeled sample gathering patterns and uses focused action sheets for joining or planning. It does not claim that sample gatherings are scheduled events. |
 | WaterDrop link | Live | Opens the WaterDrop river stewardship app. |
-| Email and password authentication | Live | Signup creates a session immediately, login uses email and password, reset and recovery remain email-based, and members can sign out. |
+| Email and password authentication | Live | One **Continue** form takes an email and password: it signs an existing member in, or creates the account with the same details. No email confirmation step. Reset and recovery remain email-based, and members can sign out. |
+| Account email | Live | Password-reset and other account emails are sent through Resend, branded as Yuhm Network, with a Spanish line in each. |
 | Email-only updates | Live | Visitors can submit only an email to hear about platform progress and future offerings. This does not create an account or grant write access. |
 | Member identity and profile readiness | Needs migration | The interface uses the active Supabase identity. Migration 026 backfills any missing profile rows required by food-record foreign keys. |
 | Public community requests | Live | Loads public requests from Supabase when configured. |
@@ -76,6 +79,9 @@ Status labels used throughout this document:
 | Harvest runs | Needs migration | Coordinators plan private food delivery, opt-in compost return, and compost drop-off stops, then assign one eligible Contributor. Assigned people record ordered outcomes, while safety checkpoints and incidents block unsafe completion. |
 | Inventory | Needs migration | Coordinators receive only accepted rescues, reserve and distribute quantities, record storage checks and holds, and preserve every balance in a ledger. |
 | Impact reports | Prototype | No complete auditable reporting view exists yet. |
+| Pickup runs (run sheet) | In progress | A runner's own tool for one pickup shared out to several families: ask each family, count the haul, split it fairly, deliver, finish. Works on the phone without an account as a practice or guest run. Not deployed; migration 050 is not applied. See [Pickup runs](#pickup-runs). |
+| THE MISSION | Planned | An opt-in game layer with missions, seeds, and stamps. Plan and clickable demo only. |
+| Gatherings | Planned | Food prep gatherings and classes, where each attendee builds an itemized order and money settles directly between people. Plan and demo only. |
 
 ## Access and accounts
 
@@ -85,9 +91,9 @@ Visitors who only want to follow yuhm can join the updates list with one email a
 
 The bottom-right bell keeps this signup available throughout yuhm. Its second panel accepts public product feedback without requiring an account. Feedback is sent to HAND Command Center and the HAND operations inbox. If the shared feedback service cannot be reached, the note stays in the current browser and retries after reconnection or focus.
 
-The public entry presents three starting choices: find food, contribute, or gather. On phones, Find food opens the full-screen command-bar map. Its Menu sheet keeps Find food, Contribute, Gather, Requests, account state, and Advanced mode reachable without permanently consuming map space. Contribute keeps food drafts, delivery-run previews, compost-return guidance, and Contributor setup prompts in its focused mobile layout. Gather uses the same focused pattern for shared meals. Requests has a short privacy-aware composer and a readable list of open needs. These remaining intents will move into the shared mobile shell incrementally. Drafts survive the sign-in handoff in the current browser session. Intent parameters select the public experience only and never grant write access.
+The landing page offers two doors: **Find food near me**, which opens the finder with no account, and **Sign in**. The find, contribute, and gather path cards below them remain as deep links. On phones, Find food opens the full-screen command-bar map. Its Menu sheet keeps Find food, Contribute, Gather, Requests, account state, and Advanced mode reachable without permanently consuming map space. Contribute keeps food drafts, delivery-run previews, compost-return guidance, and Contributor setup prompts in its focused mobile layout. Gather uses the same focused pattern for shared meals. Requests has a short privacy-aware composer and a readable list of open needs. These remaining intents will move into the shared mobile shell incrementally. Drafts survive the sign-in handoff in the current browser session. Intent parameters select the public experience only and never grant write access.
 
-The public interface is the default, including at `/app/`. The mobile Menu includes an explicit **Advanced mode** entry for coordination, routes, inventory, and reports. The advanced interface labels itself clearly and includes a **Use simple mode** control that clears the remembered advanced preference. Legacy links with a specific `workspace` parameter still open the requested operational tool directly.
+Bare `/app/` opens the living world. The coordinator dashboard opens only when asked for (`mode=advanced` or a `workspace` link). The mobile Menu includes an explicit **Advanced mode** entry for coordination, routes, inventory, and reports. The advanced interface labels itself clearly and includes a **Use simple mode** control that clears the remembered advanced preference. Legacy links with a specific `workspace` parameter still open the requested operational tool directly.
 
 Location sharing remains optional. On phones, yuhm asks only after the visitor presses Locate in the command bar. When allowed, yuhm centers the map and sorts matching listings by distance. The visitor's coordinates remain in browser memory for that calculation and are not written to Supabase, local storage, an account, or an engagement event. Denial, timeout, or ignoring Locate leaves the complete Austin map available.
 
@@ -109,9 +115,9 @@ An authenticated account is required to:
 
 Write access always follows the active Supabase session. A query parameter does not grant write access.
 
-New accounts do not require an email-confirmation step. A successful signup starts the member session, sends a best-effort notice through HAND's existing operations-email path, and returns to the relevant simple intent when one was provided, otherwise it opens Find food. The signup fields use standard password-manager metadata so the browser can offer to save the password locally. Whether that prompt appears is controlled by the member's browser and password-manager settings.
+Sign-in is one step. The **Continue** form takes an email and password: an existing member is signed in, and an unknown email gets a new account with the same details. There is no separate sign-up form and no email-confirmation step. Every surface shows **Sign in** at the top for guests, and sign-in returns the member to where they started. A successful signup starts the member session, sends a best-effort notice through HAND's existing operations-email path, and returns to the relevant simple intent when one was provided, otherwise it opens Find food. The signup fields use standard password-manager metadata so the browser can offer to save the password locally. Whether that prompt appears is controlled by the member's browser and password-manager settings.
 
-Password-reset emails return to `https://yuhm.handprotocol.org/app/?mode=recovery`, where the member chooses a new password. After a successful update, yuhm ends the recovery session and opens the login page so the member can sign in with the new password. The production callback must remain in the Supabase redirect allowlist.
+Account emails (password reset, and the confirmation, sign-in link, email change, and invite templates kept ready) are sent through Resend from `hand@handprotocol.org` as Yuhm Network, with a one-line Spanish version and a short footer. Password-reset emails return to `https://yuhm.handprotocol.org/app/?mode=recovery`, where the member chooses a new password. After a successful update, yuhm ends the recovery session and opens the login page so the member can sign in with the new password. The production callback must remain in the Supabase redirect allowlist.
 
 The command center waits for Supabase session restoration before deciding whether write actions are available. Authenticated members see their current account identity and can sign out from the navigation account menu. Signing out keeps public browsing open and removes write access.
 
@@ -166,6 +172,23 @@ Drop-off visibility is chosen per record:
 Every submission requires the member to confirm that the destination is a community-facing site, not a private home. Household addresses, household names, private contact details, and private delivery instructions remain prohibited even when the record is internal. Assigned delivery-run tools remain the correct place for exact household stops.
 
 The recognition board ranks Contributors by completed drop-off count. Signed-in members can view the complete internal board. Public recognition is a separate, reversible account choice and is off by default. The public board includes only Contributors who opt in. Public map records from a non-opted-in Contributor use the generic name `yuhm Contributor`.
+
+## Pickup runs
+
+> **Status: in progress.** Built in code and tested. Not deployed, and migration 050 is not applied.
+
+The run sheet, at `/app/?mode=run`, is a tool for one person who picks food up once and shares it out to several families. A run moves through four steps:
+
+1. **Ask.** Each family on the run gets a contact button that opens a prefilled message in their language (text, WhatsApp, call, or email), then a one-tap answer: Yes, Not this time, or No answer. A ten-question checklist records what each family never needs, does not want, or cannot eat.
+2. **Pick up.** The runner marks arrival, works through a short checklist, and counts what actually arrived.
+3. **Split.** Suggest a split gives every family that can take an item one before anyone gets two, with the rest following household size. Allergies, things a family never needs, and cooking limits keep items out of a bag, and each left-out item shows why. Bags can be adjusted by hand.
+4. **Deliver.** The route in order, with On my way, Delivered, and No one home, a cold-food timer, and one leftovers question before Finish run.
+
+A practice run at Oak Hill Baptist with five sample families can be tried without an account. Nothing in a practice run is sent to anyone or counts toward anything. A guest can plan a real run on their phone and save it by signing in. The phone keeps working without a signal and catches up when it reconnects.
+
+**Privacy.** Family details belong to the runner alone. Coordinators cannot read them, families never see game screens, and nothing from the run sheet appears in the food finder. Messages go to one family at a time, never as a group, so numbers are never shared. A family kept only for one run is forgotten when that run finishes and is shown afterward only as "A family".
+
+**Seeds.** Runners who opt in earn seeds for asking, picking up, delivering, finishing, and for hard runs (cold food, doing it alone, a tight window). Seeds are thanks, not money. There is no public ranking, and opting in is separate from having an account.
 
 ## `FOOD IS HERE!` alerts
 
@@ -487,6 +510,17 @@ Sample content should remain labeled until it is replaced by auditable records.
 4. Verify Resend delivery on a Netlify deploy preview.
 5. Add automated accessibility checks at desktop and 360px widths.
 
+### Finish and pilot pickup runs
+
+1. Add screen tests, including one proving the food finder shows nothing from the run sheet or the game.
+2. Link the run sheet from the Contribute tab, the member menus, and the coordinator dashboard.
+3. Apply migration 050 to production, then deploy, then run the Oak Hill Baptist pickup as the first real run.
+
+### Decide THE MISSION and gatherings
+
+1. Settle the open decisions in plans 004 and 005. Where the booking service (koord) runs comes first.
+2. Start Meta business verification early if the WhatsApp helper stays in scope.
+
 ## Documentation maintenance
 
 When product behavior changes:
@@ -500,6 +534,22 @@ When product behavior changes:
 When this document becomes HTML, preserve the headings and anchors so existing links remain stable.
 
 ## Change log
+
+### 2026-10-06
+
+- Fixed signup: the one-step Continue form works again with email confirmation off. Account email now goes through Resend and is branded Yuhm Network.
+- Simplified the sign-in page and the guest sign-in sheet.
+- Pickup runs (in progress): the first browser pass of the practice run at phone and desktop widths, in English and Spanish, with fixes to the phone header, the pickup-window reminder, and forgotten-family names.
+
+### 2026-09-08
+
+- Cut onboarding to two doors (Find food near me, Sign in) and one Continue step.
+- Gave the sign-in page, finder, and guest sheet the landing page's brand theme, with Sign in at the top of every surface.
+
+### 2026-08-24
+
+- Renamed WXL:FOOD to yuhm. The live host moved to `yuhm.handprotocol.org`, and the old host redirects.
+- Made the living world the default `/app/` experience.
 
 ### 2026-08-11
 
