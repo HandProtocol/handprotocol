@@ -12,14 +12,14 @@ Public-facing product behavior and safety boundaries are maintained in `docs/LIV
 
 Signup was failing because Confirm email had been turned on in the HAND Supabase project and auth email was capped at 2 per hour. Confirm email is off again, auth email goes through Resend, and the sign-in card and guest sheet were simplified (commit `47edb4ab6`, deployed). Details, gotchas, and three small items waiting on koH: `_handoff-2026-10-06-auth-signin.md`.
 
-## Pickup runs: in progress, handoff 2026-10-01 (database and engine done, no screens yet)
+## Pickup runs: in progress, first browser pass done 2026-10-06 (not deployed, 050 not applied)
 
 koH asked for a run-sheet tool for someone picking food up anywhere and sharing it out to several families, with Oak Hill Baptist as the test case, then added a living docs page with wireframes and explainer videos.
 
-- **Session handoff (read first when resuming):** `_handoff-2026-09-30-pickup-runs.md`. Plan and design brief: `../plans/006-yuhm-pickup-runs.md`.
-- **Done and tested locally:** `../command/supabase/migrations/050_yuhm_food_runs.sql`, `../command/supabase/tests/food_runs_acceptance.sql`, and under `src/runs/` the types, time helpers, scoring, and change engine, with a test that sends the same changes to a real Postgres and to the phone's engine and compares the results. **050 is not applied to production.**
-- **Written, not yet tested:** `src/runs/portioning.ts`, `reminders.ts`, `runStrings.ts`.
-- **Not started:** messages, the offline store, every screen, the `/app/?mode=run` route, the living docs page, the wireframes, the videos.
+- **Session handoff (read first when resuming):** `_handoff-2026-09-30-pickup-runs.md` (its top update section is current). Plan and design brief: `../plans/006-yuhm-pickup-runs.md`. Product description: the Pickup runs section of `docs/LIVING-DOCS.md`.
+- **Done and committed** (`8b011531a`, `6c8c1eee7`): migration `../command/supabase/migrations/050_yuhm_food_runs.sql` with its acceptance test, all logic and every screen under `src/runs/`, the `/app/?mode=run` route. 198 tests pass, `tsc` clean.
+- **Browser pass, 2026-10-06:** the whole practice run (ask, pick up, split, deliver, finish) plus Families, Seeds, Advanced, and Plan a run, at 390 and 1280 wide, and in Spanish. No console errors, no horizontal overflow. Five fixes landed in `6c8c1eee7`.
+- **Not done:** screen tests, entry links (Contribute tab, member menus, coordinator dashboard), the living docs page with wireframes, the videos. **050 is not applied to production and nothing is deployed.**
 
 ## Gatherings beta, coordinated by koord: plan only, 2026-09-20 (nothing built)
 

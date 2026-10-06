@@ -2,6 +2,18 @@
 
 Written 2026-10-01, at koH's request, so the work can continue after `/clear`. Branch `agent/yuhm-network`. Model in use: Fable 5.1.
 
+## Update, 2026-10-06: browser pass done (read this first)
+
+Committed and pushed: `8b011531a` (all the work) and `6c8c1eee7` (fixes). The whole practice run was walked in headless Chromium at 390 and 1280 wide and in Spanish (browser locale es-US): ask, checklist sheet, pick up, split, deliver, finish, Families, Seeds, Advanced, Plan a run. No console errors, no horizontal overflow, text fields at 16px.
+
+Fixed: phone header overflow at 390 (sync pill goes icon-only under 480px); Next up said the window was open when the runner arrived early (`reminders.ts`, with a test); forgotten families showed the stored English "A family" and "AF" initials (now `stopName()` in `helpers.ts` and an icon sticker); the step rail line painted over the done checks; Spanish "Voy solo" is now "Sin ayuda".
+
+Checked and left as is: the split honours never-needs, allergies, and microwave-only on the Oak Hill sample; Finish run works with a family still waiting (there is a waiting message); practice families stay out of the Families tab; toasts close after 6 s.
+
+The walk script is not in the repo; it lived in the session scratchpad. The local database container `yuhm-runs-pg` is gone: run `../command/supabase/tests/rebuild-local-db.sh` before the acceptance or parity tests.
+
+Next, in order: screen tests (including one proving `intent=food` shows nothing from the run sheet, and one in Spanish), entry links, then ask koH before applying 050 or deploying. Then the living docs page with wireframes, then the videos. `docs/LIVING-DOCS.md` now has a Pickup runs section.
+
 ## Update, later on 2026-10-01: read this first, it supersedes the lists below
 
 The session stopped here when the account's usage limit was reached a second time.
