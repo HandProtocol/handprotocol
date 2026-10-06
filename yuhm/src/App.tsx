@@ -10,6 +10,7 @@ import { DashboardApp } from './DashboardApp'
 
 const MapLab = lazy(() => import('./map-lab/MapLab').then((module) => ({ default: module.MapLab })))
 const WorldExperience = lazy(() => import('./world/WorldExperience').then((module) => ({ default: module.WorldExperience })))
+const RunsApp = lazy(() => import('./runs/RunsApp').then((module) => ({ default: module.RunsApp })))
 
 // Re-exported so tests and callers keep a single import point.
 export { CommunityBoard } from './CommunityBoard'
@@ -46,12 +47,15 @@ function AppRoutes() {
   const consumerIntent = intent === 'food' || intent === 'contribute' || intent === 'gather' || intent === 'request' ? intent : null
   const advancedMode = mode === 'advanced' || Boolean(workspace)
   const isMapLab = path.startsWith('/app') && mode === 'map-lab'
+  // The run sheet: a runner's own tool for one pickup shared out to several families.
+  const isRun = path.startsWith('/app') && mode === 'run'
   // The living world is the default app experience: bare /app/ and the anonymous
   // entry always open it, on every viewport. The dashboard is explicit only
   // (mode=advanced or workspace=); focused intents, auth, and map-lab keep
   // their existing routes.
   const isWorld = path.startsWith('/app')
     && !isMapLab
+    && !isRun
     && (mode === 'world' || (!authMode && !advancedMode && !consumerIntent))
   const isMobileMap = path.startsWith('/app')
     && mobileViewport
@@ -59,7 +63,9 @@ function AppRoutes() {
     && !advancedMode
     && !isWorld
     && consumerIntent === 'food'
-  const page = isWorld
+  const page = isRun
+    ? <Suspense fallback={<div className="map-lab-loading" role="status">Opening your run sheet…</div>}><RunsApp /></Suspense>
+    : isWorld
     ? <Suspense fallback={<div className="map-lab-loading" role="status">Loading the living map…</div>}><WorldExperience /></Suspense>
     : isMapLab
     ? <Suspense fallback={<div className="map-lab-loading" role="status">Loading map lab…</div>}><MapLab /></Suspense>
@@ -68,7 +74,7 @@ function AppRoutes() {
     : path.startsWith('/app')
       ? authMode ? <LoginScreen /> : advancedMode ? <DashboardApp /> : <SimpleExperience initialIntent={consumerIntent ?? 'food'} />
       : <LandingPage />
-  return <>{page}{!isMapLab && <CommunityContactWidget showLauncher={!mobileViewport} />}</>
+  return <>{page}{!isMapLab && <CommunityContactWidget showLauncher={!mobileViewport && !isRun} />}</>
 }
 
 function App() {
