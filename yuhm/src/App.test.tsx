@@ -195,7 +195,7 @@ describe('yuhm entry points and interaction gates', () => {
     window.history.replaceState({}, '', '/app/?mode=login')
     render(<App />)
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Sign in or create your account.' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 1, name: 'Welcome to yuhm.' })).toBeInTheDocument()
     expect(screen.getByLabelText('Password')).toHaveAttribute('autocomplete', 'current-password')
     expect(screen.getByRole('button', { name: /Continue/ })).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /New here\? Create an account/i })).not.toBeInTheDocument()

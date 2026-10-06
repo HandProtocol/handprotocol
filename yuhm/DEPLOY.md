@@ -38,6 +38,8 @@ The browser receives only the anon key. The service-role key stays in the HAND C
 
 In the HAND Supabase dashboard, open **Authentication > Sign In / Providers > Email** and turn off **Confirm email**. yuhm signup expects `signUp` to return a session immediately. The client then opens `/app/`; standard `username`, `new-password`, and form-submit metadata lets the member's browser offer to save the credentials locally.
 
+Auth email (password resets) is sent through Resend, set under **Authentication > Emails > SMTP Settings**: host `smtp.resend.com`, port `465`, user `resend`, and a send-only Resend key named `supabase-auth-smtp`. Without custom SMTP, Supabase caps the whole project at 2 auth emails per hour. With Confirm email on and no SMTP, signup fails with "We could not finish creating your account" and then "email rate limit exceeded" (seen 2026-10-06).
+
 In **Authentication > URL Configuration**, set:
 
 ```text
