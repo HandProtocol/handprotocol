@@ -76,7 +76,8 @@ export function nextUp(state: Pick<RunsState, 'runs' | 'items' | 'stops' | 'port
   }
 
   if (run.status === 'pickup') {
-    if (untilEnd >= 0) push('window_open', untilEnd <= 10 ? 'now' : 'soon', [], untilEnd, run.pickup_ends_at)
+    // Arriving early is fine; the window is only "open" once it has started.
+    if (untilStart <= 0 && untilEnd >= 0) push('window_open', untilEnd <= 10 ? 'now' : 'soon', [], untilEnd, run.pickup_ends_at)
     const hasCold = parts.items.some((item) => (item.temp === 'chilled' || item.temp === 'frozen') && itemQty(item) > 0)
     const needed = PICKUP_CHECKS.filter((check) => check !== 'thanked' && (check !== 'cooler' || hasCold))
     const allChecked = needed.every((check) => run.pickup_checks[check])

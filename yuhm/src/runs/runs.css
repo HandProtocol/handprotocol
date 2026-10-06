@@ -299,7 +299,7 @@ select.run-input { appearance: auto; }
 .run-stages ol { display: grid; grid-template-columns: repeat(4, 1fr); }
 .run-stages li { position: relative; }
 .run-stages li + li::before { content: ''; position: absolute; top: 21px; right: 50%; width: 100%; height: 3px; background: var(--r-line-strong); }
-.run-stages button { position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%; min-height: 64px; padding: 4px 2px; border: 0; background: none; color: var(--r-ink-2); font-weight: 600; font-size: .875rem; }
+.run-stages button { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%; min-height: 64px; padding: 4px 2px; border: 0; background: none; color: var(--r-ink-2); font-weight: 600; font-size: .875rem; }
 .run-stage-node { display: grid; place-items: center; width: 36px; height: 36px; border: 3px solid var(--r-line-strong); border-radius: 50%; background: var(--r-ground); color: var(--r-ink-2); font: 800 1rem/1 var(--r-display); transition: background .2s var(--r-ease), border-color .2s var(--r-ease), transform .2s var(--r-ease); }
 .run-stages button.is-done .run-stage-node { border-color: var(--r-green); background: var(--r-green); color: var(--r-cream); }
 .run-stages button.is-next .run-stage-node { border-color: var(--r-ink); background: var(--r-corn); color: var(--r-ink); }
@@ -617,10 +617,14 @@ select.run-input { appearance: auto; }
   .run-view { display: grid; grid-template-columns: minmax(0, 400px) minmax(0, 1fr); gap: var(--r-s7); align-items: start; }
   .run-view-side { position: sticky; top: 132px; }
 }
+@media (max-width: 480px) {
+  /* Phone header: brand, pill, language, sign-in must fit in one row. The pill keeps its words for screen readers. */
+  .run-top .yuhm-lockup small { display: none; }
+  .run-sync { min-width: 32px; justify-content: center; padding: 0 9px; }
+  .run-sync span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+}
 @media (max-width: 380px) {
   .run-field-pair { grid-template-columns: 1fr; }
-  .run-top .yuhm-lockup small { display: none; }
-  .run-sync span { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .runs-app *, .runs-app *::before, .runs-app *::after, .run-sheet, .run-sheet-backdrop, .run-toast { animation: none !important; transition: none !important; }

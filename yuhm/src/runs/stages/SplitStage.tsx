@@ -6,6 +6,7 @@
 import { useState } from 'react'
 import { Lock, Plus, RotateCcw, Scale, Snowflake, TriangleAlert } from 'lucide-react'
 import { useRuns } from '../context'
+import { stopName } from '../helpers'
 import { itemQty, type Item, type Run, type Stop } from '../model'
 import {
   blockingIssues, exclusionsFor, isAllergy, packList, partsOf, portionIssues, sharingStops, suggestSplit, unitStep,
@@ -61,7 +62,7 @@ function Bag({ stop, run, parts, editable }: { stop: Stop; run: Run; parts: RunP
     <header className="run-bag-head">
       <BagTag number={stop.bag} label={t('split.bag', { n: stop.bag ?? '?' })} />
       <div>
-        <strong>{stop.label}</strong>
+        <strong>{stopName(stop, t)}</strong>
         <span>{peopleText(lang, stop.people)}{stop.contact_state !== 'confirmed' && <> · {t('split.unconfirmed')}</>}</span>
       </div>
       {delivered ? <Chip tone="done">{t('chip.delivered')}</Chip>
@@ -180,7 +181,7 @@ export function SplitStage({ run, onStage }: { run: Run; onStage: (stage: 'picku
       {sharing.map((stop) => <Bag key={stop.id} stop={stop} run={run} parts={parts} editable={editable} />)}
     </ul>
 
-    {passed.length > 0 && <p className="run-hint">{passed.map((stop) => t('split.passed', { name: stop.label })).join(' · ')}</p>}
+    {passed.length > 0 && <p className="run-hint">{passed.map((stop) => t('split.passed', { name: stopName(stop, t) })).join(' · ')}</p>}
 
     {parts.portions.length > 0 && <div className="run-leftover">
       <h3>{t('split.left')}</h3>

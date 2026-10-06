@@ -7,7 +7,7 @@ import { ClipboardList, Plus, UserRound } from 'lucide-react'
 import { useRoute } from '../../router'
 import { ContactAction } from '../contact'
 import { useRuns } from '../context'
-import { CONTACT_TONE, openSheet, runHref } from '../helpers'
+import { CONTACT_TONE, openSheet, runHref, stopName } from '../helpers'
 import { QUESTIONS, householdSize, newId, type ContactState, type Household, type Op, type Run, type Stop } from '../model'
 import { partsOf } from '../portioning'
 import { peopleText, tagText, useRunText, type RunKey } from '../runStrings'
@@ -56,10 +56,10 @@ function AskRow({ stop, run, household, editable }: { stop: Stop; run: Run; hous
 
   return <li className={`run-row run-row-${stop.contact_state}`}>
     <div className="run-row-head">
-      <Sticker id={stop.household_id ?? stop.id} label={stop.label} />
+      <Sticker id={stop.household_id ?? stop.id} label={stopName(stop, t)} forgotten={stop.forgotten} />
       <div className="run-row-main">
         <div className="run-row-title">
-          <strong>{stop.forgotten ? t('family.forgotten') : stop.label}</strong>
+          <strong>{stopName(stop, t)}</strong>
           <Chip tone={CONTACT_TONE[stop.contact_state]}>{t(`chip.${stop.contact_state}` as RunKey)}</Chip>
         </div>
         <p className="run-row-meta">

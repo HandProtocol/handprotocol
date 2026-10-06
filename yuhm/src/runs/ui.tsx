@@ -42,14 +42,14 @@ export function Eyebrow({ children, as: Tag = 'p' }: { children: ReactNode; as?:
   return <Tag className="run-eyebrow">{children}</Tag>
 }
 
-/** A family's sticker: initials on the produce color that follows them through the run. */
-export function Sticker({ id, label, size = 'md' }: { id: string; label: string; size?: 'sm' | 'md' | 'lg' }) {
+/** A family's sticker: initials on the produce color that follows them through the run. A forgotten family gets an icon, not initials. */
+export function Sticker({ id, label, size = 'md', forgotten = false }: { id: string; label: string; size?: 'sm' | 'md' | 'lg'; forgotten?: boolean }) {
   const index = produceIndex(id)
   return <span
     className={`run-sticker run-sticker-${size}`}
     style={{ '--sticker': PRODUCE[index], '--sticker-tint': PRODUCE_TINT[index], '--tilt': `${(index % 2 ? 1 : -1) * (2 + (index % 3))}deg` } as React.CSSProperties}
     aria-hidden="true"
-  >{initialsOf(label)}</span>
+  >{forgotten ? <Users size={size === 'sm' ? 14 : 18} /> : initialsOf(label)}</span>
 }
 
 /** The numbered tag that hangs on a family's bag. */

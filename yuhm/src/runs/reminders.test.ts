@@ -55,6 +55,9 @@ describe('next up: at the pickup and on the road', () => {
   it('asks for a count at the pickup and warns as the window closes', () => {
     expect(kinds(atPickup, '2026-10-03T12:35:00Z')).toEqual(['count:now', 'window_open:soon', 'intake:soon'])
     expect(kinds(atPickup, '2026-10-03T12:55:00Z').slice(0, 2)).toEqual(['window_open:now', 'count:now'])
+    // Arrived 10 minutes before the window opens: count, but do not call the window open.
+    expect(kinds(atPickup, '2026-10-03T12:20:00Z')).not.toContain('window_open:soon')
+    expect(kinds(atPickup, '2026-10-03T12:20:00Z')[0]).toBe('count:now')
     const counted = replay(atPickup, pickup().slice(1, 4))
     expect(nextUp(counted, RUN, at('2026-10-03T12:56:00Z')).find((nudge) => nudge.kind === 'count')?.minutes).toBe(0)
   })
