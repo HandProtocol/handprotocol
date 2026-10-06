@@ -1,4 +1,4 @@
-import { useState, type FormEvent, type ReactNode } from 'react'
+import { useId, useState, type FormEvent, type ReactNode } from 'react'
 import { ArrowUpRight } from 'lucide-react'
 import { foodDb } from './lib/foodRepository'
 import { continueWithEmail } from './lib/auth'
@@ -9,7 +9,11 @@ type EmailContinueFormProps = {
   /** `signup` asks the browser for a new password and labels the button "Create account"; the logic is the same either way. */
   hint?: 'continue' | 'signup'
   onSuccess: (status: 'signed_in' | 'created') => void
-  /** Rendered inside the form after the submit button (forgot-password, updates links). */
+  /** Small action shown beside the password label (forgot-password). */
+  passwordAside?: ReactNode
+  /** One quiet line under the password field, for newcomers. */
+  note?: string
+  /** Rendered inside the form after the submit button. */
   footer?: ReactNode
   className?: string
 }
@@ -28,8 +32,9 @@ export function readField(form: HTMLFormElement, name: string) {
  * firing React change events, so the button must never depend on React state
  * to become clickable.
  */
-export function EmailContinueForm({ hint = 'continue', onSuccess, footer, className = '' }: EmailContinueFormProps) {
+export function EmailContinueForm({ hint = 'continue', onSuccess, passwordAside, note, footer, className = '' }: EmailContinueFormProps) {
   const { t } = useI18n()
+  const passwordId = useId()
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
@@ -54,7 +59,9 @@ export function EmailContinueForm({ hint = 'continue', onSuccess, footer, classN
 
   return <form className={`auth-form ${className}`} onSubmit={submit}>
     <label>{t('login.emailLabel')}<input type="email" name="email" placeholder="you@example.org" autoComplete="username" inputMode="email" required /></label>
-    <label className="login-field-spaced">{t('login.passwordLabel')}<input type="password" name="password" autoComplete={hint === 'signup' ? 'new-password' : 'current-password'} minLength={6} required /></label>
+    <div className="auth-label-row"><label htmlFor={passwordId}>{t('login.passwordLabel')}</label>{passwordAside}</div>
+    <input id={passwordId} type="password" name="password" autoComplete={hint === 'signup' ? 'new-password' : 'current-password'} minLength={6} required />
+    {note && <p className="auth-note">{note}</p>}
     {error && <p className="login-error" role="alert">{error}</p>}
     <button className="login-submit" type="submit" disabled={busy}>{busy ? t('login.wait') : hint === 'signup' ? t('login.create') : t('login.continue')} <ArrowUpRight size={15} /></button>
     {footer}

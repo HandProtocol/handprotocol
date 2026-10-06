@@ -1615,6 +1615,18 @@ button.food-alert-banner { cursor: pointer; }
 .login-success { color: #3f5d2c; background: #f2f8e8; border: 1.5px solid #c4d8ae; border-radius: 14px; font-size: 13px; }
 .login-success span { color: #5c6b49; }
 .login-privacy { color: #7d6b57; font-size: 12px; }
+/* Calmer sign-in: one heading, one line, two fields, one button. Everything else is a quiet link. */
+.auth-label-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 16px; }
+.auth-label-row .login-switch { width: auto; padding: 0; color: #7d6b57; font-size: 12.5px; text-decoration: none; }
+.auth-label-row .login-switch:hover { color: #2d6b50; text-decoration: underline; }
+.auth-note { color: #7d6b57; font-size: 12.5px; line-height: 1.4; margin: 8px 0 0; }
+.login-card h1 { margin-bottom: 4px; }
+.login-card .login-copy { margin-bottom: 22px; }
+.login-card .login-submit, .sheet-auth .login-submit { margin-top: 20px; }
+.login-alt { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 22px; margin-top: 20px; padding-top: 16px; border-top: 1.5px dashed #e8dcc0; }
+.login-alt-link { display: inline-flex; align-items: center; gap: 5px; min-height: 32px; color: #55763f; background: transparent; padding: 0; font: 600 13.5px/1.2 'DM Sans', sans-serif; text-decoration: none; }
+.login-alt-link:hover { color: #2d6b50; text-decoration: underline; text-underline-offset: 3px; }
+.login-card form + .login-anonymous { margin-top: 14px; }
 @media (prefers-reduced-motion: reduce) { .login-submit, .login-anonymous, .yuhm-lockup .yuhm-mark { transition: none; } }
 
 /* ---- Food finder shell ---- */

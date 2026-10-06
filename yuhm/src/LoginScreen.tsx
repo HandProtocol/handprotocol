@@ -90,19 +90,20 @@ export function LoginScreen() {
   const isReset = screen === 'reset'
   const isUpdates = screen === 'updates'
   return <div className="login-page"><div className="login-card"><div className="login-card-top"><YuhmBrand /><LanguageToggle /></div>
-    <p className="eyebrow">{isRecovery ? 'Choose a new password' : isReset ? 'Account recovery' : isUpdates ? 'Stay in the loop' : t('login.enterNetwork')}</p>
+    {(isRecovery || isReset || isUpdates) && <p className="eyebrow">{isRecovery ? 'Choose a new password' : isReset ? 'Account recovery' : 'Stay in the loop'}</p>}
     <h1>{isRecovery ? 'Set a new password.' : isReset ? 'Reset your password.' : isUpdates ? 'Get yuhm updates.' : signupHint ? t('login.createAccount') : t('login.title')}</h1>
     {isRecovery ? <form onSubmit={updatePassword}><p className="login-copy">Choose a new password for your yuhm account.</p><label>New password<input type="password" name="new-password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} autoComplete="new-password" minLength={6} /></label><label className="login-field-spaced">Confirm new password<input type="password" name="confirm-password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} autoComplete="new-password" minLength={6} /></label>{error && <p className="login-error">{error}</p>}{notice && <p className="login-success"><CheckCircle2 size={20} /><span>{notice}</span></p>}<button className="login-submit" type="submit" disabled={busy || !newPassword || !confirmPassword}>{busy ? 'Updating password…' : 'Update password'} <ArrowUpRight size={15} /></button></form> : isReset ? <form onSubmit={sendReset}><p className="login-copy">Enter your email and we will send a secure link to choose a new password.</p><label>{t('login.emailLabel')}<input type="email" name="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.org" autoComplete="email" required /></label>{error && <p className="login-error">{error}</p>}{notice && <p className="login-success"><CheckCircle2 size={20} /><span>{notice}</span></p>}<button className="login-submit" type="submit" disabled={busy}>{busy ? 'Sending reset link…' : 'Send reset link'} <ArrowUpRight size={15} /></button><button className="login-switch" type="button" onClick={() => switchTo('continue')}>Back to sign in</button></form> : isUpdates ? <form onSubmit={joinUpdates}><p className="login-copy">Hear about meaningful platform progress and future yuhm offerings. This only joins the email list. It does not create an account.</p><label>{t('login.emailLabel')}<input type="email" name="updates-email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.org" autoComplete="email" required /></label><div className="updates-honeypot" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div>{error && <p className="login-error" role="alert">{error}</p>}{notice && <p className="login-success" role="status"><CheckCircle2 size={20} /><span>{notice}</span></p>}<p className="login-privacy">We will only use this email for yuhm updates. Unsubscribe in any message.</p><button className="login-submit" type="submit" disabled={busy}>{busy ? 'Joining the list…' : 'Get email updates'} <ArrowUpRight size={15} /></button><button className="login-switch" type="button" onClick={() => switchTo('continue')}>Back to sign in</button></form> : <>
       <p className="login-copy">{signupHint ? t('login.signupCopy') : t('login.continueCopy')}</p>
       <EmailContinueForm
         hint={signupHint ? 'signup' : 'continue'}
         onSuccess={finishSignIn}
-        footer={<>
-          <button className="login-switch" type="button" onClick={() => switchTo('reset')}>{t('login.forgot')}</button>
-          <button className="login-switch login-updates-switch" type="button" onClick={() => switchTo('updates')}>{t('login.updatesSwitch')}</button>
-        </>}
+        passwordAside={<button className="login-switch" type="button" onClick={() => switchTo('reset')}>{t('login.forgot')}</button>}
       />
+      <div className="login-alt">
+        <AppLink className="login-alt-link" href="/app/?mode=anonymous&intent=food">{t('login.browseAnonymously')} <ArrowUpRight size={14} /></AppLink>
+        <button className="login-alt-link" type="button" onClick={() => switchTo('updates')}>{t('login.updatesSwitch')}</button>
+      </div>
     </>}
-    {!isRecovery && <AppLink className="login-anonymous" href="/app/?mode=anonymous&intent=food">{t('login.browseAnonymously')} <ArrowUpRight size={15} /></AppLink>}
+    {(isReset || isUpdates) && <AppLink className="login-anonymous" href="/app/?mode=anonymous&intent=food">{t('login.browseAnonymously')} <ArrowUpRight size={15} /></AppLink>}
   </div></div>
 }
