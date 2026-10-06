@@ -1,0 +1,396 @@
+<title>The yuhm Mission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Barlow+Condensed:wght@600;700&family=Caveat:wght@600&family=DM+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="mission.css">
+<link rel="stylesheet" href="gather.css">
+
+<div class="field">
+  <header class="mast">
+    <span class="lab">yuhm · UX demo and build plan · 19 Sep 2026 · gatherings added 20 Sep</span>
+    <div class="title-row">
+      <h1>THE <em>MISSION</em></h1>
+      <div class="mast-patch" id="mast-patch" aria-hidden="true"></div>
+    </div>
+    <p class="lede"><strong>yuhm is a free food network for Austin, Texas.</strong> Open it and you see free food near you: community fridges, pantries, shared harvests. No account needed. Neighbors who want to help use the same app to move food to where it is needed: rescuing day-old bread, sharing garden extras, cooking together, and returning scraps to the soil.</p>
+    <p class="lede">This page is a clickable demo and a build plan for two ideas. Neither is built yet. <strong>THE MISSION</strong> is for neighbors who want to help: say yes once, and yuhm offers you small, clear tasks nearby, like checking that a fridge is stocked or driving bread across town, at a weekly pace you choose. <strong>Gatherings</strong> is for cooking together: each person says what they want to make, gets an itemized grocery list, and finds their items waiting in a numbered bin. The task flow borrows what works from DoorDash and Duolingo and leaves their pressure tactics behind. Finding food never becomes a game.</p>
+    <ul class="toc">
+      <li><a href="#demo">Clickable demo</a></li>
+      <li><a href="#rules">Ground rules</a></li>
+      <li><a href="#flow">First visit</a></li>
+      <li><a href="#game">Game system</a></li>
+      <li><a href="#borrow">Borrowed and left</a></li>
+      <li><a href="#data">Data model</a></li>
+      <li><a href="#notify">Notifications</a></li>
+      <li><a href="#whatsapp">WhatsApp helper</a></li>
+      <li><a href="#gather">Gatherings beta</a></li>
+      <li><a href="#phases">Build phases</a></li>
+      <li><a href="#decisions">Decisions for koH</a></li>
+    </ul>
+  </header>
+
+  <section class="stage" id="demo" aria-label="Clickable demo">
+    <div class="device"><div class="phone" id="phone" aria-label="Phone preview of the flow"></div></div>
+    <div class="director">
+      <nav class="rail" id="stepper" aria-label="Screens"></nav>
+      <div class="notes" id="notes" aria-live="polite"></div>
+    </div>
+  </section>
+</div>
+
+  <main class="plan">
+    <section id="rules">
+      <p class="eyebrow">Ground rules</p>
+      <h2>Five lines the design does not cross</h2>
+      <ul class="rules">
+        <li><b>Finding food is never a game.</b><span>The finder, the map, and FOOD IS HERE alerts stay exactly as they are. No seeds, no prompts, no account wall. A test will assert it.</span></li>
+        <li><b>A separate yes.</b><span>An account does not enroll anyone. THE MISSION is its own opt-in, and pause and leave are one tap each.</span></li>
+        <li><b>Mechanics, not manipulation.</b><span>PRODUCT.md already lists delivery-app urgency as an anti-reference. We take accept, steps, done, and a weekly rhythm. We leave countdown panic, guilt messages, and acceptance-rate penalties.</span></li>
+        <li><b>An honest board.</b><span>Only real missions. Samples are labeled. A quiet neighborhood says it is quiet instead of inventing activity.</span></li>
+        <li><b>Private by default.</b><span>Neighborhood-level until acceptance. No public ranking of people. Shared goals belong to the circle.</span></li>
+      </ul>
+    </section>
+
+    <section id="flow">
+      <p class="eyebrow">First visit</p>
+      <h2>Landing to first mission in five screens</h2>
+      <p>Sign-up stays one step. What changes is the order: the person commits to a route and finishes something before the form appears, so the form reads as keeping what they earned.</p>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Screen</th><th>What the person does</th><th>What changes in the code</th><th>Data</th></tr></thead>
+        <tbody>
+          <tr><td>Arrive</td><td>Sees two doors. Second door reads Take part on a first visit.</td><td><code>LandingPage.tsx</code>: label and href (<code>/app/?mode=join</code>) keyed on <code>yuhm:first-visit</code>. Sign in becomes a text link.</td><td>None</td></tr>
+          <tr><td>Pick a route</td><td>Taps one of six routes.</td><td>New <code>src/mission/JoinFlow.tsx</code>. Reuses <code>WorldRole</code> and the role icons from <code>world/views.tsx</code>.</td><td>localStorage draft</td></tr>
+          <tr><td>First bite</td><td>Answers one route-shaped question. Earns 10 seeds.</td><td>Bite definitions in <code>src/mission/bites.ts</code>, EN and ES.</td><td>localStorage draft</td></tr>
+          <tr><td>Save your spot</td><td>Email, password, Continue.</td><td><code>AuthForm.tsx</code> gains an optional header slot. <code>return=/app/?mode=join&amp;step=optin</code>.</td><td>Auth user, profile, participant. Draft claimed.</td></tr>
+          <tr><td>Opt in</td><td>Chooses a rhythm and channels, or taps Not now.</td><td>New <code>src/mission/OptIn.tsx</code> calling <code>enroll_food_mission()</code>.</td><td>Enrollment, prefs, channel consent</td></tr>
+          <tr><td>Mission board</td><td>Lands on the board.</td><td><code>App.tsx</code> sends enrolled members to <code>mode=mission</code> by default. World, finder, and dashboard stay one tap away.</td><td>Reads only</td></tr>
+        </tbody>
+      </table></div>
+      <p>Members who already have accounts see one quiet card in the world profile panel and the finder member menu: “THE MISSION. See what it is.” It opens the same opt-in screen. Nothing else announces it.</p>
+    </section>
+
+    <section id="game">
+      <p class="eyebrow">Game system</p>
+      <h2>Bites, runs, seeds, and a weekly rhythm</h2>
+      <h3>Four mission sizes</h3>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Size</th><th>What it is</th><th>Time</th><th>Seeds</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><td>Bite</td><td>An in-app task generated from real gaps in the data</td><td>2 to 3 min</td><td>10 to 15</td><td>Confirm a fridge’s hours, translate a listing, nominate a source</td></tr>
+          <tr><td>Run</td><td>A real-world errand with a pickup and a drop</td><td>30 to 60 min</td><td>30 to 50</td><td>Bakery rescue to a fridge, compost return</td></tr>
+          <tr><td>Shift</td><td>A scheduled block at one spot</td><td>1 to 3 h</td><td>40 to 80</td><td>Kitchen prep, pool-table host, harvest morning</td></tr>
+          <tr><td>Pair-up</td><td>A run or shift done with a named neighbor. Also the training path.</td><td>Varies</td><td>+10 each</td><td>First run alongside an experienced courier</td></tr>
+        </tbody>
+      </table></div>
+      <div class="callout"><b>Bites solve the cold start.</b> A mission board with no missions is dead on day one. Bites are generated from the public directory (hundreds of real listings whose hours need confirming, Spanish translations that are missing, sources nobody has nominated yet), so the board has real, useful work from the first hour, before a single rescue is posted.</div>
+
+      <h3>Six routes, each with its own missions</h3>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Route</th><th>First bite (doubles as profile)</th><th>Typical missions</th><th>Built from</th></tr></thead>
+        <tbody>
+          <tr><td>Eat</td><td>How was the fridge last time?</td><td>Fridge checks, hours confirmations, passing an alert to a neighbor</td><td><code>food_locations</code>, <code>food_verifications</code>, <code>food_alerts</code></td></tr>
+          <tr><td>Grow</td><td>What do you have extra of?</td><td>Harvest shares, harvest-run stops, seed and start swaps</td><td><code>food_harvest_runs</code>, <code>food_harvest_run_stops</code></td></tr>
+          <tr><td>Make</td><td>What can your kitchen do?</td><td>Kitchen shifts, batch cooking for a gathering, portion and label</td><td><code>food_events</code>, <code>food_event_assignments</code></td></tr>
+          <tr><td>Move</td><td>What wheels do you have?</td><td>Rescue runs, deliveries to neighbors (trust tier 2 and up), compost returns</td><td><code>food_rescues</code>, <code>food_requests</code>, compost returns (037)</td></tr>
+          <tr><td>Share</td><td>What could you share this month?</td><td>Stock a fridge, log a drop-off, lend freezer space</td><td><code>food_dropoffs</code>, <code>food_inventory_lots</code></td></tr>
+          <tr><td>Organize</td><td>Where would you gather people?</td><td>Host a pool table, run the welcome table, plan a potluck</td><td><code>food_events</code>, <code>food_venues</code></td></tr>
+        </tbody>
+      </table></div>
+
+      <div class="two">
+        <div>
+          <h3>Seeds and levels</h3>
+          <p>Seeds are recognition. They have no cash value, are never required for anything, and are never taken away. They are stored as <code>recognition_points</code> in the ledger that already exists. Reliability is a separate, private signal the dispatcher uses; nobody ever sees it as a score.</p>
+          <p style="margin-top:10px">Levels: Seed 0 · Sprout 50 · Vine 150 · Bloom 400 · Harvest 900 · Perennial 2,000. Levels are thanks. Safety gates stay on <code>trust_tier</code>, which coordinators set.</p>
+        </div>
+        <div>
+          <h3>Weekly rhythm, with rest built in</h3>
+          <p>A week counts when at least one mission of any size is completed (Monday to Sunday, Austin time). The 1, 2, or 3 goal fills the ring; it never breaks the rhythm. One rest week is banked for every four active weeks (two at most) and spent automatically. Pausing freezes the rhythm. If it does end, the app says “new rhythm, week 1” and keeps the longest one on the profile. No message ever mentions losing it.</p>
+        </div>
+        <div>
+          <h3>Stamps and the circle goal</h3>
+          <p>Stamps mark firsts and milestones: First bite, First rescue, Full circle (a compost return after a rescue), Bilingual (ten translations), Four-week rhythm. The circle goal is one shared weekly target per neighborhood circle, such as pounds moved. It takes the place a leaderboard would. The existing opt-in drop-off board from migration 040 stays as it is.</p>
+        </div>
+        <div>
+          <h3>Keeping it fair</h3>
+          <p>Bites cap at five a day. An hours change needs two independent confirmations and each location has a 14-day cooldown. Seeds for runs land when the receiving side confirms or a coordinator reviews. The ledger is append-only with idempotency keys, so retries never double-pay.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="borrow">
+      <p class="eyebrow">Borrowed and left</p>
+      <h2>What we take from DoorDash and Duolingo, and what we leave</h2>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Their mechanic</th><th>The yuhm version</th><th>Left behind</th></tr></thead>
+        <tbody>
+          <tr><td>DoorDash · Dash Now</td><td>“I’m free now” switch with an end time</td><td class="no">Surge pressure, hotspots</td></tr>
+          <tr><td>DoorDash · offer card with countdown</td><td>Mission offer with a calm hold: 15 min for same-day, hours for scheduled</td><td class="no">Red timers, 40-second decisions</td></tr>
+          <tr><td>DoorDash · accept or decline</td><td>Accept or Pass. Pass is free and says so.</td><td class="no">Acceptance-rate penalties</td></tr>
+          <tr><td>DoorDash · pickup and drop-off steps</td><td>Checkpoints with light evidence from the template</td><td class="no">Mandatory photos everywhere. Photos only where food safety needs them.</td></tr>
+          <tr><td>DoorDash · scheduled dashes</td><td>Claim a slot this week</td><td class="no">Penalties for unscheduling early</td></tr>
+          <tr><td>DoorDash · earnings summary</td><td>Impact summary: pounds, neighbors, seeds, a thank-you note</td><td class="no">Money framing</td></tr>
+          <tr><td>DoorDash · customer ratings</td><td>Private reliability signal for the dispatcher</td><td class="no">Public star ratings</td></tr>
+          <tr><td>Duolingo · goal before account</td><td>Route before account</td><td></td></tr>
+          <tr><td>Duolingo · lesson before sign-up</td><td>First bite before sign-up, then “save your seeds”</td><td></td></tr>
+          <tr><td>Duolingo · daily goal and streak</td><td>Weekly rhythm with automatic rest weeks</td><td class="no">Daily streak anxiety, paid streak repair</td></tr>
+          <tr><td>Duolingo · XP and levels</td><td>Seeds and growth levels</td><td class="no">Hearts, energy, anything that blocks taking part</td></tr>
+          <tr><td>Duolingo · daily and friend quests</td><td>Bites and pair-ups</td><td></td></tr>
+          <tr><td>Duolingo · leagues</td><td>One shared circle goal</td><td class="no">Ranking people, promotion and demotion</td></tr>
+          <tr><td>Duolingo · reminders</td><td>Fewer messages when someone drifts, then silence</td><td class="no">Guilt copy, escalating pings</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="data">
+      <p class="eyebrow">Data model</p>
+      <h2>Ten new tables on top of what migrations 032 to 034 already built</h2>
+      <p>Most of the hard parts exist. The coordination migrations already created a participants table, an append-only reputation ledger with recognition points, a leased outbox queue, consent-aware contact channels with quiet hours and encrypted addresses, conversation and message tables, and agent mandates with an action log. Rescues already have claim, checkpoint, and release functions. THE MISSION adds the mission layer and wires into those.</p>
+      <div class="diagram"><pre class="mermaid">
+erDiagram
+  food_participants ||--o| food_mission_enrollments : "opts in"
+  food_mission_templates ||--o{ food_missions : shapes
+  food_missions ||--|| food_mission_private : "hides details in"
+  food_missions ||--o{ food_mission_offers : "is offered as"
+  food_missions ||--o{ food_mission_assignments : "is taken as"
+  food_participants ||--o{ food_mission_offers : receives
+  food_participants ||--o{ food_mission_assignments : does
+  food_mission_assignments ||--o{ food_mission_checkpoints : records
+  food_mission_assignments ||--o{ food_reputation_ledger : "earns seeds in"
+  food_participants ||--|| food_mission_progress : "cached totals"
+  food_participants ||--o{ food_mission_stamps : earns
+  food_participants ||--o{ food_contact_channels : "is reached by"
+  food_participants ||--o{ food_notification_prefs : chooses
+  food_outbox ||--o{ food_notification_log : "is delivered as"
+      </pre></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>New table</th><th>Job</th><th>Key columns</th></tr></thead>
+        <tbody>
+          <tr><td><code>food_mission_enrollments</code></td><td>The opt-in. One row per participant.</td><td>participant_id (unique), status active/paused/left, routes[], rhythm_goal 1–3, zone (neighborhood, never an address), capabilities jsonb, available_until, paused_until, consent_version</td></tr>
+          <tr><td><code>food_mission_templates</code></td><td>The catalog of mission kinds.</td><td>slug, route, size bite/run/shift/pair, title_en, title_es, steps jsonb (with evidence rules), base_seeds, est_minutes, min_trust_tier, requires jsonb, cooldown, ledger_event_type</td></tr>
+          <tr><td><code>food_missions</code></td><td>One concrete mission.</td><td>template_id, source_type + source_id (rescue, harvest_stop, dropoff, request, event, compost, location_check, manual), zone, window_start/end, urgency now/today/scheduled, slots_total, slots_filled, state, public_summary jsonb</td></tr>
+          <tr><td><code>food_mission_private</code></td><td>Address, contact, notes. No direct reads.</td><td>mission_id, address, contact, notes. Returned only by <code>get_food_mission_private()</code> to assignees and coordinators, like <code>get_food_rescue_private()</code> today.</td></tr>
+          <tr><td><code>food_mission_offers</code></td><td>The dispatch record.</td><td>mission_id, participant_id (unique together), channel, offered_at, expires_at, state offered/seen/accepted/passed/expired, pass_reason</td></tr>
+          <tr><td><code>food_mission_assignments</code></td><td>An accepted mission.</td><td>mission_id, participant_id (unique together), state accepted/under_way/completed/released/no_show, accepted_at, completed_at, release_reason, seeds_awarded</td></tr>
+          <tr><td><code>food_mission_checkpoints</code></td><td>Append-only step events.</td><td>assignment_id, step_key, evidence jsonb, idempotency_key (unique)</td></tr>
+          <tr><td><code>food_mission_progress</code></td><td>A rebuildable cache. The ledger is the truth.</td><td>participant_id, seeds_total, level, rhythm_weeks, longest_rhythm, rest_weeks, last_active_week, missions_completed</td></tr>
+          <tr><td><code>food_mission_stamps</code></td><td>Stamps earned.</td><td>participant_id, stamp_slug (unique together), awarded_at, evidence_id</td></tr>
+          <tr><td><code>food_notification_prefs</code></td><td>Who wants what, where.</td><td>participant_id, category, channel (unique together), enabled</td></tr>
+          <tr><td><code>food_notification_log</code></td><td>Every send and every suppression.</td><td>participant_id, category, channel, mission_id, outbox_id, provider_message_id, state, suppressed_reason (quiet_hours, cap, paused, no_consent)</td></tr>
+        </tbody>
+      </table></div>
+      <div class="two">
+        <div>
+          <h3>Reused as it is</h3>
+          <ul>
+            <li><code>food_participants</code> and <code>ensure_food_participant()</code></li>
+            <li><code>food_reputation_ledger</code> holds seeds, with <code>evidence_type = 'mission_assignment'</code></li>
+            <li><code>food_outbox</code> with <code>lease_food_outbox()</code> and <code>complete_food_outbox()</code> is the notification queue</li>
+            <li><code>food_contact_channels</code> holds consent, language, quiet hours, encrypted address</li>
+            <li><code>food_conversations</code> and <code>food_messages</code> hold the WhatsApp thread</li>
+            <li><code>food_agent_mandates</code> and <code>food_agent_actions</code> bound and audit the helper</li>
+            <li><code>claim_food_rescue()</code>, <code>record_food_rescue_checkpoint()</code>, <code>release_food_rescue()</code> stay the source of truth for rescues</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Small alterations</h3>
+          <ul>
+            <li><code>food_contact_channels.channel_type</code>: add <code>whatsapp</code> and <code>push</code></li>
+            <li><code>food_conversations.active_channel</code> and <code>food_messages.channel</code>: add <code>whatsapp</code></li>
+            <li><code>food_reputation_ledger.event_type</code>: add <code>mission_bonus</code> for stamps and rhythm milestones</li>
+          </ul>
+          <h3 style="margin-top:18px">Functions, in the repo’s naming</h3>
+          <p>For members: <code>enroll_food_mission</code>, <code>update_food_mission_enrollment</code>, <code>leave_food_mission</code>, <code>list_food_missions</code>, <code>accept_food_mission</code>, <code>pass_food_mission</code>, <code>get_food_mission_private</code>, <code>record_food_mission_checkpoint</code>, <code>release_food_mission</code>, <code>get_food_mission_progress</code>, <code>set_food_notification_prefs</code>. For workers only (<code>is_food_worker_caller()</code>): <code>dispatch_food_missions</code>, <code>expire_food_mission_offers</code>, <code>roll_food_mission_week</code>, <code>generate_food_bites</code>.</p>
+        </div>
+      </div>
+      <ul>
+        <li><b>No double-booking.</b> <code>accept_food_mission</code> locks the mission row (<code>select … for update</code>), checks the slot count and the offer’s expiry, then writes the assignment and bumps the count in one transaction.</li>
+        <li><b>Completion is one transaction:</b> assignment, ledger row, progress cache, stamps, outbox row. Either all of it lands or none of it does.</li>
+        <li><b>Row-level security.</b> People read only their own enrollment, offers, assignments, checkpoints, progress, prefs, and log. Open missions expose <code>public_summary</code> only. Every write goes through a security-definer function. Coordinators (<code>role = 'admin'</code>) manage templates and missions.</li>
+        <li><b>Migration.</b> The next free number is 049 today, but <code>koord/</code> and the client sites share the folder, so take the number at build time. Validate the whole chain in the podman Supabase image first. Migrate first, deploy second.</li>
+        <li><b>No dependency on the undeployed services.</b> The 032 to 036 tables are applied but only the Dockerized coordination API uses them. Phase 1 reaches them through new functions from the browser, the same way the first-generation workflows do.</li>
+      </ul>
+    </section>
+
+    <section id="notify">
+      <p class="eyebrow">Notifications</p>
+      <h2>One pipeline, three channels, hard caps</h2>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Channel</th><th>Reach</th><th>Cost</th><th>Setup</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>In the app</td><td>Members with yuhm open</td><td>Free</td><td>Part of the board</td><td>Always on. The source of truth.</td></tr>
+          <tr><td>Email (Resend)</td><td>Every account</td><td>Already wired</td><td>Low</td><td>Default. Scheduled offers, reminders with a calendar file, receipts, Sunday digest, check-in.</td></tr>
+          <tr><td>WhatsApp 1:1</td><td>Opt-in. Strong with Spanish-speaking neighbors.</td><td>About $0.006 per utility template in the US. Replies inside 24 h are free.</td><td>Medium to high: Meta business verification, a dedicated number, template approval</td><td>Time-sensitive offers, reminders, and conversation with the helper</td></tr>
+          <tr><td>Web push</td><td>Phones that installed the PWA (iOS needs Add to Home Screen)</td><td>Free</td><td>Medium: service worker, keys</td><td>Later phase. Good for “I’m free now” offers.</td></tr>
+          <tr><td>SMS</td><td>Everyone</td><td>Per message, plus 10DLC registration</td><td>High</td><td class="no">Not planned</td></tr>
+        </tbody>
+      </table></div>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Message</th><th>Trigger</th><th>Channels</th><th>Cap</th><th>Tone</th></tr></thead>
+        <tbody>
+          <tr><td>Offer</td><td>Dispatcher finds a match</td><td>WhatsApp first for now and today, email for scheduled</td><td>3 a day, never in quiet hours</td><td>Four facts, accept or pass</td></tr>
+          <tr><td>Reminder</td><td>24 h and 2 h before an accepted mission</td><td>The person’s channel, plus .ics</td><td>2 per mission</td><td>What to bring, how to release</td></tr>
+          <tr><td>Receipt</td><td>Completion</td><td>App and email</td><td>1 per mission</td><td>Seeds, impact, the thank-you note</td></tr>
+          <tr><td>Sunday digest</td><td>Sunday 5 pm</td><td>Email</td><td>1 a week</td><td>Your week, the circle’s week, open slots</td></tr>
+          <tr><td>Mid-week nudge</td><td>Wednesday, goal not met, not paused</td><td>App and email only</td><td>1 a week</td><td>“Two open slots near you.” Never “you are about to lose.”</td></tr>
+          <tr><td>Check-in</td><td>Three quiet weeks</td><td>Email</td><td>Once, then silence</td><td>Keep, pause, or stop. No answer means auto-pause.</td></tr>
+          <tr><td>Circle milestone</td><td>Circle goal met</td><td>App and digest</td><td>1 a week</td><td>Shared credit</td></tr>
+        </tbody>
+      </table></div>
+      <div class="diagram"><pre class="mermaid">
+flowchart LR
+  E[Mission event] --> O[food_outbox row]
+  O --> X[mission-notify function, every 5 min]
+  X --> P{Prefs, consent, quiet hours, caps}
+  P -->|allowed| A[In the app]
+  P -->|allowed| M[Email via Resend]
+  P -->|allowed| W[WhatsApp utility template]
+  P -->|held or dropped| S[Suppressed, with the reason]
+  A --> L[food_notification_log]
+  M --> L
+  W --> L
+  S --> L
+      </pre></div>
+      <ul>
+        <li>Quiet hours default to 9 pm to 8 am Austin time. The per-channel override already exists on <code>food_contact_channels</code>.</li>
+        <li>One-tap links are signed and expiring, the same pattern the booking engine uses. They call the same functions as the app, so an email Accept and an in-app Accept cannot both win the last slot.</li>
+        <li>Meta has paused marketing templates to US numbers since April 2025, so nudges and check-ins never go over WhatsApp. Only utility messages about missions the person opted into do. Confirm the current policy and rate card when we set up.</li>
+        <li>Every email carries Pause and Stop. Every WhatsApp thread honors STOP, ALTO, PAUSE, and PAUSA as plain keywords, without involving the model.</li>
+      </ul>
+    </section>
+
+    <section id="whatsapp">
+      <p class="eyebrow">WhatsApp helper</p>
+      <h2>A one-to-one helper now, group news through people</h2>
+      <div class="callout warn"><b>The group-chat idea has a hard limit.</b> On the official Cloud API, groups cap at 8 members including the business number, need an Official Business Account (the verified badge), and cannot show buttons. Libraries that pose as a phone can sit in any group, but they break WhatsApp’s terms and get numbers banned, which is not a risk to take with the network’s main line. So the helper lives in one-to-one threads, and each circle gets a human-run announcement group where a coordinator posts the weekly update the dashboard writes for them. A run crew of seven or fewer could get an official group later, if HAND earns the badge.</div>
+      <div class="diagram"><pre class="mermaid">
+sequenceDiagram
+  participant N as Neighbor on WhatsApp
+  participant C as Meta Cloud API
+  participant H as whatsapp-webhook function
+  participant G as Helper, background function
+  participant D as Supabase functions
+  N->>C: taps Accept
+  C->>H: signed webhook
+  H->>D: store the message, match the phone fingerprint to a participant
+  H-->>C: 200 OK within seconds
+  H->>G: hand off
+  G->>D: accept_food_mission under the neighbor's mandate
+  D-->>G: private pickup details
+  G->>C: reply with the details
+  C->>N: It's yours. Pickup at...
+      </pre></div>
+      <div class="two">
+        <div>
+          <h3>What the helper can do</h3>
+          <p>Each tool is one of the functions above, run under that person’s mandate: list my missions and offers, accept, pass, release, record a checkpoint (“picked up”), report my rhythm and seeds, pause and resume, change my rhythm goal, stop WhatsApp, find food near a neighborhood from the public directory, and hand off to a coordinator.</p>
+        </div>
+        <div>
+          <h3>What it must never do</h3>
+          <ul>
+            <li>Act for anyone but the number it is talking to</li>
+            <li>Share another person’s name, number, or address</li>
+            <li>Reveal an address before acceptance</li>
+            <li>Pretend to be a person. It says it is automated and offers a human at any time.</li>
+            <li>Handle safety, illness, allergy, conflict, or urgent need alone. It gives the food map link first, then flags a coordinator.</li>
+            <li>Name a specific AI model in public copy (existing HAND rule)</li>
+          </ul>
+        </div>
+      </div>
+      <ul>
+        <li><b>Where it runs.</b> A Netlify function verifies Meta’s signature, stores the message, answers 200, and triggers a background function that runs the helper and replies. Same repo, no new servers. When the coordination stack moves to OVH (plan 003, phase 3) the helper can move next to HandAI.</li>
+        <li><b>Long pole: Meta business verification.</b> It wants legal-entity documents. The Texas Certificate of Formation and the EIN should be enough, but it can take days to weeks, so start it during phase 1. Also needed: a number that has never been on WhatsApp, display-name review for “yuhm”, and five utility templates in English and Spanish (offer, reminder, receipt, released, opt-in confirmation).</li>
+        <li><b>Cost sketch.</b> 100 opted-in neighbors at about six templates a week is roughly 600 × $0.006, under $4 a week. Replies are free. Model usage for conversation is the larger line, held down by keyword shortcuts and short context.</li>
+        <li><b>Phone numbers are sensitive.</b> Stored encrypted (<code>address_ciphertext</code>), matched by keyed fingerprint, deleted on leave.</li>
+      </ul>
+    </section>
+
+    <section id="gather">
+      <p class="eyebrow">Gatherings beta</p>
+      <h2>Cook together, each from your own list</h2>
+      <p>Added 20 Sep 2026. koord, the booking and coordination layer, will sit under every HAND feature in time. The first thing it powers in yuhm is a beta for gatherings and classes, and the first worked case is a food prep gathering: each person says what they want to prepare, the app writes their itemized list, and on the day their items wait in a numbered bin. The five screens are the last group in the demo above.</p>
+      <h3>Nine steps, four deadlines</h3>
+      <div class="table-scroll"><table>
+        <thead><tr><th>Step</th><th>What happens</th><th>Who</th></tr></thead>
+        <tbody>
+          <tr><td>Create</td><td>Type, venue, capacity, a time or a koord time poll, a menu of recipe kits, the cutoff, covered spots, a money holder.</td><td>Organizer</td></tr>
+          <tr><td>Join and order</td><td>Pick dishes in batches. Kits scale into lines. Every line gets a source: bring, network, buy, or pantry.</td><td>Attendee</td></tr>
+          <tr><td>Cutoff</td><td>Orders lock, 48 hours before by default. Network lines become allocations and pickup runs, buy lines group into shop runs by store, each order gets a bin number and a share.</td><td>The app</td></tr>
+          <tr><td>Pay</td><td>People pay the money holder however they agree. The money holder ticks a checklist by hand. The app moves no money.</td><td>Money holder</td></tr>
+          <tr><td>Shop</td><td>One consolidated list in store order, a ceiling per line, real prices entered, a receipt photo.</td><td>One or several shoppers</td></tr>
+          <tr><td>Sort</td><td>A sort sheet, item by item: which bins, how much each. Numbers, not names.</td><td>A sorter</td></tr>
+          <tr><td>Arrive</td><td>“You are bin 4” and a list to check off. A missing or swapped line says why.</td><td>Attendee</td></tr>
+          <tr><td>Settle</td><td>Real prices replace estimates. Shares must equal the receipt to the cent. The difference changes hands in person and gets a second tick.</td><td>Money holder</td></tr>
+          <tr><td>After</td><td>Extra portions to a fridge or an inventory lot, scraps to compost, recognition to the ledger, real prices back into the catalog.</td><td>Everyone</td></tr>
+        </tbody>
+      </table></div>
+      <div class="two">
+        <div>
+          <h3>Choices that carry the weight</h3>
+          <ul>
+            <li><b>The source is per line, not per person.</b> Bring my own rice, network cilantro, buy the chicken.</li>
+            <li><b>Recipe kits on a small item catalog,</b> written in units a store sells. That is what lets twelve lists add up into one.</li>
+            <li><b>Pantry items are pooled.</b> Three people need cumin and the shopper buys one jar. Everything else: you pay for what was bought for you.</li>
+            <li><b>The cutoff is the commitment.</b> Cancel freely before it. After it your buy lines are owed, and you can name someone to collect your bin.</li>
+            <li><b>Covered spots stay private.</b> Only the organizer and the money holder see who asked.</li>
+            <li><b>Food safety is in the model:</b> a temperature class per item, a cooler step, a short shop window, and an allergen notice computed from the locked orders.</li>
+          </ul>
+        </div>
+        <div>
+          <h3>What is already there</h3>
+          <ul>
+            <li>Migration 033 has the gathering spine: <code>food_venues</code>, <code>food_events</code>, invites, RSVPs with a waitlist, assignments, and a <code>potluck</code> lane gate. Only the undeployed coordination API uses it today.</li>
+            <li>“Source it from our app” is live first-generation work: inventory lots, harvest runs, rescues, drop-offs.</li>
+            <li>koord brings the time poll, RSVP rules, reminders, deadline notices, and the delivery policy (quiet hours, caps, consent). Proposed: it runs as a library inside yuhm, with yuhm’s tables as the store.</li>
+            <li>A gathering creates missions: shop run, pickup, sort, setup, cleanup, host, teach. Attending never enrolls anyone.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout"><b>Money, settled by koH on 20 Sep</b>Direct settle, done by hand. The first implementation is a checklist the money holder ticks: paid, covered, shop anyway, or drop, then a second tick for settled. Every tick records who and when and can be undone. No payment handles stored, no processor, and HAND never holds the pot. Stripe on the organizer’s own account is a later phase and needs a /hand-tax pass first.</div>
+      <h3>Still open for koH</h3>
+      <ul>
+        <li>Where koord runs for yuhm. Recommendation: as a library inside yuhm.</li>
+        <li>Buffer on estimates. Recommendation: 15 percent, rounded up to the dollar, returned at settle.</li>
+        <li>No refund on bought lines after the cutoff. Recommendation: yes, with name-a-collector and release-to-the-table.</li>
+        <li>Pantry: host kitchen supplies it, or pooled and split. Recommendation: the organizer chooses, default pooled.</li>
+        <li>Sorting at the venue by bin, or bagged per person in the store. Recommendation: at the venue.</li>
+        <li>Free-text dishes in the beta. Recommendation: allowed, but they do not merge.</li>
+        <li>Who can organize. Recommendation: coordinators only during the supervised pilot.</li>
+        <li>Gatherings on the public food map. Recommendation: yes, as a plain listing, when free or with covered spots.</li>
+      </ul>
+    </section>
+
+    <section id="phases">
+      <p class="eyebrow">Build phases</p>
+      <h2>Each phase ships something people can use</h2>
+      <ol class="phases">
+        <li><div><h3>Sign off on this demo</h3><small>Settle the decisions below. Start Meta business verification in parallel, because it is slow and blocks nothing else.</small></div></li>
+        <li><div><h3>Join flow, opt-in, bites, progress</h3><small>In-app only. Migration for enrollments, templates, missions, assignments, checkpoints, progress, stamps. Bites generated from directory gaps. No dispatcher, no cold-start risk.</small><small><b>Done when:</b> a new visitor goes landing, first bite, account, opt-in, second bite, and sees their rhythm, in English and Spanish; a test proves the guest food finder shows no mission UI.</small></div></li>
+        <li><div><h3>Runs, shifts, offers, email</h3><small>Offers table, the dispatcher as a scheduled function, adapters for rescues, harvest runs, and drop-offs, a “Make this a mission” button on the coordinator boards, one-tap email links, reminders with calendar files, Sunday digest, check-in.</small><small><b>Done when:</b> a coordinator posts a rescue, a matched neighbor accepts from an email, completes it on a phone, and the ledger, rhythm, and receipt all agree.</small></div></li>
+        <li><div><h3>WhatsApp helper, one-to-one</h3><small>Webhook, templates, helper tools, keyword shortcuts, a handoff inbox in the dashboard.</small><small><b>Done when:</b> accept, pass, pause, and “talk to a person” all work in English and Spanish from a real phone, and every action appears in <code>food_agent_actions</code>.</small></div></li>
+        <li><div><h3>Circles, pair-ups, push, smarter matching</h3><small>Circle goals from real totals, pair-up missions, web push for “I’m free now”, and the OR-Tools matching worker taking over multi-stop runs.</small></div></li>
+      </ol>
+      <h3>How we will know it works</h3>
+      <p>Opt-in rate among new accounts. Share of visitors who finish the first bite before sign-up. Sign-up conversion after the first bite against today’s funnel. Missions completed per week. Offer acceptance rate. Time to fill a rescue. Four-week rhythm retention. Pause and leave rates. Unsubscribes and complaints. Share of completions that began from a notification. One counter-metric: guest use of the food finder must not drop.</p>
+    </section>
+
+    <section id="decisions">
+      <p class="eyebrow">Decisions for koH</p>
+      <h2>Nine calls to make before phase 1</h2>
+      <ul class="decisions">
+        <li><b>The words: seeds, rhythm, bites, stamps.</b><span><i>Recommendation</i>Keep them and add them to the world glossary next to Circle, Spot, Pool, Run.</span></li>
+        <li><b>Does the Eat route get missions at all?</b><span><i>Recommendation</i>Yes, bites only, and offered only after a successful food search. Never before, never as a condition.</span></li>
+        <li><b>Weekly rhythm or a daily streak?</b><span><i>Recommendation</i>Weekly. Food work runs on a weekly beat, and daily streaks are where the guilt lives.</span></li>
+        <li><b>An individual leaderboard?</b><span><i>Recommendation</i>No. Circle goals only. The existing opt-in drop-off board stays.</span></li>
+        <li><b>Do seeds ever convert into anything?</b><span><i>Recommendation</i>Not in version 1. Anything of value to volunteers raises tax and fairness questions; run it past /hand-tax before promising it.</span></li>
+        <li><b>WhatsApp scope.</b><span><i>Recommendation</i>One-to-one helper plus human-run announcement groups. Start Meta verification now.</span></li>
+        <li><b>“Take part” on the second landing door for first-time visitors.</b><span><i>Recommendation</i>Yes, with Sign in kept as a text link right under it.</span></li>
+        <li><b>Who creates missions at launch?</b><span><i>Recommendation</i>Bites generate themselves. Runs and shifts come from coordinators through one “Make this a mission” button on the rescue, harvest, and event boards.</span></li>
+        <li><b>The helper’s name and voice.</b><span><i>Recommendation</i>“The yuhm helper”, plainspoken, bilingual, always clear that it is automated.</span></li>
+      </ul>
+    </section>
+
+    <p class="foot">Everything in the phone is sample content and is labeled that way. The build plan with the SQL sketch and file-by-file notes lives in the repo at <code>plans/004-yuhm-the-mission.md</code>; the gatherings plan is <code>plans/005-yuhm-gatherings-koord.md</code>; this page’s source is <code>yuhm/prototypes/the-mission/</code>. Grocery prices in the gathering screens are invented. WhatsApp limits and prices were checked against public sources on 19 Sep 2026 and should be confirmed again at setup. In this demo the small labels use a condensed face where the app uses DM Mono; that is a proposal, and it is one token to swap back.</p>
+  </main>
+
+<script src="gather.js"></script>
+<script src="mission.js"></script>

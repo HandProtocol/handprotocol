@@ -1,12 +1,51 @@
 # yuhm Handoff
 
-Last updated: 2026-09-08
+Last updated: 2026-10-06
 
 > **Renamed 2026-08-24.** This product was WXL:FOOD ("W Xtra Love") until 2026-08-24, when it became **yuhm** (the yuhm network) — yum with the om at its center, Austin's regenerative food network. The live host moved from `wxl.handprotocol.org` to `yuhm.handprotocol.org` (the old host 301-redirects). Applied Supabase migrations keep their historical `NNN_wxl_*` filenames, historical plans keep their `plans/00X-wxl-*` names, and docs dated before the rename may still say WXL.
 
 This is the working orientation document for `yuhm/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on yuhm, its current behavior, what is real, what is illustrative, and what should be built next.
 
 Public-facing product behavior and safety boundaries are maintained in `docs/LIVING-DOCS.md`. Keep it current when a feature promise or workflow changes. It is intended to become the source for a future HTML documentation page.
+
+## Sign-in fix and calmer sign-in design: live 2026-10-06
+
+Signup was failing because Confirm email had been turned on in the HAND Supabase project and auth email was capped at 2 per hour. Confirm email is off again, auth email goes through Resend, and the sign-in card and guest sheet were simplified (commit `47edb4ab6`, deployed). Details, gotchas, and three small items waiting on koH: `_handoff-2026-10-06-auth-signin.md`.
+
+## Pickup runs: in progress, handoff 2026-10-01 (database and engine done, no screens yet)
+
+koH asked for a run-sheet tool for someone picking food up anywhere and sharing it out to several families, with Oak Hill Baptist as the test case, then added a living docs page with wireframes and explainer videos.
+
+- **Session handoff (read first when resuming):** `_handoff-2026-09-30-pickup-runs.md`. Plan and design brief: `../plans/006-yuhm-pickup-runs.md`.
+- **Done and tested locally:** `../command/supabase/migrations/050_yuhm_food_runs.sql`, `../command/supabase/tests/food_runs_acceptance.sql`, and under `src/runs/` the types, time helpers, scoring, and change engine, with a test that sends the same changes to a real Postgres and to the phone's engine and compares the results. **050 is not applied to production.**
+- **Written, not yet tested:** `src/runs/portioning.ts`, `reminders.ts`, `runStrings.ts`.
+- **Not started:** messages, the offline store, every screen, the `/app/?mode=run` route, the living docs page, the wireframes, the videos.
+
+## Gatherings beta, coordinated by koord: plan only, 2026-09-20 (nothing built)
+
+koH asked to plan the booking system (`../koord/`, renamed from `book/`) into the yuhm work, starting with a beta for gatherings and classes. First worked case: a food prep gathering where each attendee says what they want to prepare, gets an itemized order, picks a source per line (bring, network with a pickup, or buy through a shared grocery run), and finds their items in a numbered bin on arrival.
+
+- **Plan:** `../plans/005-yuhm-gatherings-koord.md` (the nine-step flow, what 033 already provides, where koord and THE MISSION fit, SQL sketch for ten new tables, functions, notifications, phases G0 to G4, nine decisions, risks).
+- **Reuse found:** migration 033 already has `food_venues`, `food_events`, items, invites, RSVPs, assignments, and the `potluck` lane gate; 034 has `plan_food_potluck()` and `release_food_event_location()`. Only the undeployed coordination API uses them today.
+- **Settled by koH, 2026-09-20:** grocery money settles directly between people, by hand. The first implementation is a paid checklist the money holder ticks (paid, covered, shop anyway, drop), then a second tick for settled. No processor, no stored payment handles, HAND holds no money (koord record 0004 ruling 4).
+- **Proposed, still open:** koord runs as a library inside yuhm (yuhm's tables are the store, Resend is koord's first real channel).
+- **Demo:** five gathering screens are the last group in THE MISSION demo (artifact version 3, same link as below): the gathering, build my order, paid checklist with a settle tab, shop run with a sort sheet, pick up my bin with the balance. Source: `prototypes/the-mission/gather.js` + `gather.css`, plugged in through `window.YUHM_DEMO_EXT` in `mission.js`. **Republishing now needs four files** in the `files` map: `mission.css`, `mission.js`, `gather.css`, `gather.js`. `preview.mjs` walks the gathering flow too and checks that the shares equal the receipt.
+- **Fixed along the way:** `.p-body > * { flex-shrink: 0 }` in `mission.css`. Tall phone screens were squashing children with `overflow: hidden` instead of scrolling. Still open in the core demo: a direct child of `.p-body` that sets `transform` (the thank-you note's tilt) loses it when the enter animation ends; use the `rotate` property instead, as `.bin-tag` does.
+- **Plain-language intro (artifact version 4):** koH found the page's first paragraph too obscure for someone who does not know yuhm. It now opens with what yuhm is (a free food network for Austin, no account to find food), then what the page is (a demo and plan for two unbuilt ideas, THE MISSION and Gatherings).
+- **Session handoff (read first when resuming):** `_handoff-2026-09-20-gatherings-koord.md` covers the settled and open decisions, the findings not to rediscover, the demo's extension hook and gotchas, what was verified, and how to republish.
+- **Next step:** koH settles the remaining eight decisions in plan 005; where koord runs comes first because it unblocks storage. Not in the demo yet: the organizer's create flow and the koord time poll.
+
+## THE MISSION: demo and plan only, 2026-09-19 (nothing in the app changed)
+
+koH asked to gamify the first-visit sign-in and add an opt-in gamified layer, "THE MISSION": missions tied to the route a person picks, offered delivery-app style, with Duolingo-style engagement, plus a plan for the database, notifications, and a WhatsApp chat with an agent. This session produced a clickable demo and a plan. No app code, no migration, no deploy.
+
+- **Demo:** https://claude.ai/artifact/FwbwZigM85r1ECY2D2PB4Q (private to koH). Source: `prototypes/the-mission/` (`index.html`, `mission.css`, `mission.js`), outside the Vite build and the Netlify publish dir. Twelve screens in a phone frame with per-screen notes (what it borrows, what it writes, what it notifies), then the plan. All phone content is labeled sample.
+- **Plan:** `../plans/004-yuhm-the-mission.md` (ground rules, first-visit flow, vocabulary, SQL sketch for ten new tables, functions, notification pipeline and caps, WhatsApp helper, phases, nine open decisions with recommendations, risks).
+- **Load-bearing choices in the proposal:** finding food never shows any of it; opt-in is separate from the account; email + password and the one-step Continue form are untouched (the route pick and a two-minute "first bite" come before the form); weekly rhythm with automatic rest weeks instead of a daily streak; circle goals instead of a leaderboard; seeds live in the existing `food_reputation_ledger`; notifications ride the existing `food_outbox` and `food_contact_channels`; the helper is bounded by `food_agent_mandates`.
+- **WhatsApp reality check (verified 2026-09-19):** the official Groups API caps groups at 8 including the business number, needs a verified-badge account, and has no buttons; marketing templates to US numbers have been paused since April 2025. So: one-to-one helper on the Cloud API with utility templates only, human-run announcement groups per circle, and nudges by email or in-app only.
+- **Design pass, 2026-09-20 (artifact version 2):** koH asked for a less generic look. The page now opens on a drenched garden-green field with poster-scale type; inside the phone, routes are produce-colored sticker tiles, stamps are embroidered patches generated in SVG, the offer is a perforated ticket, the weekly rhythm is a punch card. Small labels use Barlow Condensed in place of DM Mono as a proposal (one token, `--label`).
+- **Session handoff (read first when resuming):** `_handoff-2026-09-20-the-mission.md` covers what was verified and what was not, how to preview (`prototypes/the-mission/preview.mjs`) and republish to the same link, code gotchas, and an offered but unbuilt idea: make the nine decisions answerable on the artifact page with its shared database.
+- **Next step:** koH reviews the demo and settles the nine decisions; then phase 1 (join flow, opt-in, bites, progress; in-app only). Start Meta business verification early, it is the slow part.
 
 ## One theme from landing to task, 2026-09-08 (same-day follow-up)
 
