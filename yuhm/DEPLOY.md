@@ -40,6 +40,8 @@ In the HAND Supabase dashboard, open **Authentication > Sign In / Providers > Em
 
 Auth email (password resets) is sent through Resend, set under **Authentication > Emails > SMTP Settings**: host `smtp.resend.com`, port `465`, user `resend`, and a send-only Resend key named `supabase-auth-smtp`. Without custom SMTP, Supabase caps the whole project at 2 auth emails per hour. With Confirm email on and no SMTP, signup fails with "We could not finish creating your account" and then "email rate limit exceeded" (seen 2026-10-06).
 
+The sender name is `Yuhm Network`. The auth email templates (password reset, confirm email, sign-in link, email change, invite) are branded and kept in `docs/auth-email/`, one HTML file per template plus `subjects.json`. They are applied by hand: paste each file into **Authentication > Emails > Templates**, or PATCH `mailer_templates_<name>_content` and `mailer_subjects_<name>` on the management API. Editing a file here changes nothing until it is applied.
+
 In **Authentication > URL Configuration**, set:
 
 ```text

@@ -24,12 +24,16 @@ All through the management API (`PATCH /v1/projects/<ref>/config/auth`; access m
 | `mailer_autoconfirm` | false | **true** (dashboard: Confirm email OFF) |
 | `smtp_host` / `smtp_port` / `smtp_user` | none | `smtp.resend.com` / `465` / `resend` |
 | `smtp_pass` | none | send-only Resend key named **`supabase-auth-smtp`**, limited to `handprotocol.org` |
-| `smtp_admin_email` / `smtp_sender_name` | none | `hand@handprotocol.org` / `yuhm (HAND Protocol)` |
+| `smtp_admin_email` / `smtp_sender_name` | none | `hand@handprotocol.org` / `Yuhm Network` (koH's choice, set later the same day) |
 | `rate_limit_email_sent` | 2 per hour | 30 per hour (adjustable now) |
 
 Also: two stuck unconfirmed accounts were confirmed by hand (`update auth.users set email_confirmed_at = now()`), so the passwords those people typed now work. One account with a mistyped `gmai.com` address was left unconfirmed.
 
-Command Center shares these auth users. Its `handle_new_user()` trigger starts every signup as `pending`, so turning confirmation off grants nobody access there. Its auth emails now carry the sender name `yuhm (HAND Protocol)`.
+Command Center shares these auth users. Its `handle_new_user()` trigger starts every signup as `pending`, so turning confirmation off grants nobody access there. Its auth emails now carry the sender name `Yuhm Network` and the yuhm-branded templates below.
+
+## Branded auth emails (same day, after koH received the first reset email)
+
+koH asked for the sender to read "Yuhm Network" and for a proper email with a footer "from yuhm network by HAND". Five templates were restyled and applied to Supabase: password reset, confirm email, sign-in link, email change, invite. Each has the yuhm wordmark, one heading, one sentence, one green button, a one-line Spanish version, a "didn't ask for this?" line, and the footer "yuhm network by HAND" with links. Sources live in `docs/auth-email/` (`<name>.html`, `subjects.json`); they are applied by hand, see `DEPLOY.md`. Only the reset email is sent today. The notification and verification-code templates are still Supabase's stock ones and are not in use. A test reset email was accepted through the new template; how it renders in Gmail and Apple Mail was not checked by me.
 
 ## Sign-in design pass (commit `47edb4ab6`)
 
@@ -68,6 +72,6 @@ koH: the login "feels a little overwhelming". Both sign-in surfaces were cut dow
 
 1. **Rotate two Resend secrets** that were printed into a local session transcript on 2026-10-06: `RESEND_FULL_ACCESS_API_KEY` and `RESEND_WEBHOOK_SECRET` (both live in the `handprotocol` Netlify site's env vars). Rotate in Resend, then update Netlify.
 2. **Try one real "Forgot password?"** on the live site with a personal inbox, to confirm the email arrives and is not in spam.
-3. **Sender name.** `yuhm (HAND Protocol)` is used for every auth email on the project, Command Center included. Change `smtp_sender_name` if that reads wrong there.
+3. **Command Center auth emails** now arrive as "Yuhm Network" with yuhm branding, because the project has one sender and one template set. Fine while Command Center sends none; revisit if it starts to.
 
 Not started, only noted: the stray `gmai.com` account could be deleted; `login.enterNetwork` could be removed from the string catalog.
