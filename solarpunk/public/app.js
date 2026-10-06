@@ -170,7 +170,9 @@
   });
 
   $("#me-form").addEventListener("submit", (e) => { e.preventDefault(); queueSave(); });
-  ["name", "seats", "note"].forEach((id) => $("#" + id).addEventListener("change", () => { render(); queueSave(); }));
+  // Don't re-render the run list here: a change event fires as the user taps a run button, and
+  // rebuilding the list mid-tap swallows that tap. The seats hint catches up on the next save.
+  ["name", "seats", "note"].forEach((id) => $("#" + id).addEventListener("change", queueSave));
   $("#note").addEventListener("input", () => { if (me.id) queueSave(); });
 
   let confirmRemove = false;
