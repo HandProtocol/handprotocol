@@ -2,6 +2,7 @@ import { getStore } from "@netlify/blobs";
 import { createHash, timingSafeEqual } from "node:crypto";
 import { SLOTS } from "./lib/slots.mjs";
 import { parseEntry, nameKey, newToken, hashToken, tokenMatches, publicView } from "./lib/entry.mjs";
+import { notify } from "./lib/notify.mjs";
 
 const MAX_DRIVERS = 300;
 const MAX_BODY_BYTES = 8_000;
@@ -81,7 +82,9 @@ export default async (req) => {
 
       const rec = { name, slots, seats, note, tokenHash, createdAt: existing?.createdAt || new Date().toISOString(), updatedAt: new Date().toISOString() };
       await store.setJSON(key, rec);
-      return json(200, { ok: true, driver: publicView(key, rec), ...(token ? { token } : {}) });
+      const driver = publicView(key, rec);
+      const mail = await notify({ event: existing ? "update" : "new", driver, allDrivers: await listDrivers(store) });
+      return json(200, { ok: true, driver, emailed: mail.ok, ...(token ? { token } : {}) });
     }
 
     if (req.method === "DELETE") {
@@ -92,7 +95,8 @@ export default async (req) => {
       if (!rec) return json(200, { ok: true });
       if (!tokenMatches(body.token, rec.tokenHash)) return json(403, { error: "You can only remove your own entry, from the device you signed up on." });
       await store.delete(id);
-      return json(200, { ok: true });
+      const mail = await notify({ event: "remove", driver: publicView(id, rec), allDrivers: await listDrivers(store) });
+      return json(200, { ok: true, emailed: mail.ok });
     }
 
     return json(405, { error: "Method not allowed." });

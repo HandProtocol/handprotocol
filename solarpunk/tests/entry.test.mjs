@@ -46,3 +46,15 @@ test("publicView never exposes the token hash", () => {
   assert.equal("tokenHash" in v, false);
   assert.equal(v.id, "d-1");
 });
+
+test("notify message lists answers and open runs, never throws unconfigured", async () => {
+  const { buildMessage, notify } = await import("../netlify/functions/lib/notify.mjs");
+  const driver = { name: "Jane <Doe>", seats: 3, note: "truck", slots: { "1007-a": "yes", "1010-a": "maybe" } };
+  const m = buildMessage({ event: "new", driver, allDrivers: [driver] });
+  assert.equal(m.subject, "SPS drivers: Jane <Doe> signed up");
+  assert.match(m.text, /1:58 PM · AUS → Camp · can drive/);
+  assert.match(m.text, /1 driver signed up · 14 runs still without/);
+  assert.ok(m.html.includes("Jane &lt;Doe&gt;"));
+  delete process.env.RESEND_API_KEY;
+  assert.deepEqual(await notify({ event: "new", driver, allDrivers: [] }), { ok: false, reason: "email-unconfigured" });
+});
