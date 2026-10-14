@@ -70,3 +70,7 @@ clients/.source/
 
 # Three Hands Healing: raw client photo drops (240 MB) stay local; web-sized copies live in web/threehandshealing/assets/photos
 threehandshealing/*.zip
+
+# koordi (ex koord) lives in its own private repo (HandProtocol/koordi, records 0014, 0022); koord is a symlink to it
+koordi/
+koord

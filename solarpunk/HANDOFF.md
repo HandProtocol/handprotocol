@@ -33,4 +33,4 @@ curl -H "x-sps-code: $CODE" https://sps.handprotocol.org/api/drivers
 
 ## Next (koH's ask, 2026-10-06, message cut off mid-sentence)
 
-Turn this into a driver **portal**: a front door that asks "Driving?" / "New driver?", a per-driver shift view (your runs, when to be ready, where to meet, who to call, what to bring), a visual diagram of the week, and feed what this teaches back into **koord** (the booking/coordination platform). The plan with open questions is in `PLAN-driver-portal.md`; the koord write-up is in `koord/docs/research/2026-10-06-sps-driver-signup-lessons.md`. Nothing of the portal is built.
+Turn this into a driver **portal**: a front door that asks "Driving?" / "New driver?", a per-driver shift view (your runs, when to be ready, where to meet, who to call, what to bring), a visual diagram of the week, and feed what this teaches back into **koordi** (the booking/coordination platform). The plan with open questions is in `PLAN-driver-portal.md`; the koordi write-up is in `koordi/docs/research/2026-10-06-sps-driver-signup-lessons.md`. Nothing of the portal is built.

@@ -4,7 +4,7 @@ Drafted 2026-10-06 from koH's ask (message cut off at "some people will be…", 
 
 ## Goal
 
-sps.handprotocol.org becomes the one place a volunteer driver needs during the summit: sign up, see their own shifts with everything they need, and get told when things change. The transport team assigns runs and sees coverage at a glance. What works gets carried into koord as reusable pieces.
+sps.handprotocol.org becomes the one place a volunteer driver needs during the summit: sign up, see their own shifts with everything they need, and get told when things change. The transport team assigns runs and sees coverage at a glance. What works gets carried into koordi as reusable pieces.
 
 ## Who uses it
 
@@ -23,7 +23,7 @@ One screen, three doors, no login:
 2. **New driver** → name, phone (team-only), seats, availability (today's sign-up, shortened)
 3. **Transport team** → the code → dashboard
 
-The access code moves from "whole site" to "team door only" so drivers never need it. Drivers are identified by name + device token as now; a magic link by SMS or email can replace the device token later (koord already has an email channel).
+The access code moves from "whole site" to "team door only" so drivers never need it. Drivers are identified by name + device token as now; a magic link by SMS or email can replace the device token later (koordi already has an email channel).
 
 ## My shifts (the core screen)
 
@@ -54,11 +54,11 @@ A horizontal timeline, one row per day, each run a bar from busy-start to busy-e
 ## Notifications
 
 - Email already works (Resend). Add: assignment, time change, day-before reminder, 90-minutes-before reminder.
-- SMS is the right channel for drivers on the road; koord's research (`2026-09-30-messaging-channels-and-consent.md`) covers Twilio-style sending and consent. Decide whether SPS is the first real use.
+- SMS is the right channel for drivers on the road; koordi's research (`2026-09-30-messaging-channels-and-consent.md`) covers Twilio-style sending and consent. Decide whether SPS is the first real use.
 
 ## Data model (small)
 
-`runs` (what slots.mjs holds today, plus `meetPoint`, `passengerFirstName`, `flight`, `status`, `assignedTo`), `drivers` (name, phone, seats, note, token hash), `availability` (driver × run → yes/maybe), `events` (on-my-way / picked-up / problem, with timestamps). Keep Blobs for this event; mirror the shapes on koord's `bookings` / `slots` / `notices` so a port is a rename, not a rewrite.
+`runs` (what slots.mjs holds today, plus `meetPoint`, `passengerFirstName`, `flight`, `status`, `assignedTo`), `drivers` (name, phone, seats, note, token hash), `availability` (driver × run → yes/maybe), `events` (on-my-way / picked-up / problem, with timestamps). Keep Blobs for this event; mirror the shapes on koordi's `bookings` / `slots` / `notices` so a port is a rename, not a rewrite.
 
 ## Build order
 
@@ -66,7 +66,7 @@ A horizontal timeline, one row per day, each run a bar from busy-start to busy-e
 2. Team dashboard: assign + edit times, with the emails.
 3. Week diagram (shared component).
 4. Status taps + reminders.
-5. koord contribution: extract the busy-window math, the device-token identity, the three-way availability widget, and the "leave by" rule.
+5. koordi contribution: extract the busy-window math, the device-token identity, the three-way availability widget, and the "leave by" rule.
 
 ## Open questions for koH
 
