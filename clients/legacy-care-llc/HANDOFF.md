@@ -5,7 +5,35 @@ with an owner CMS at `/admin/` (passwordless email link) for all copy and
 photos. Built from `clients/_template` with the `hand-client-site` skill on
 2026-09-11.
 
-**Status:** LIVE at https://legacy-care-llc.netlify.app since 2026-09-11 (provisioned by provision.mjs).
+**Status:** LIVE at https://legacycare.llc since 2026-09-11 (provisioned by provision.mjs).
+
+## Babysitting & childcare (2026-10-23, built, NOT deployed)
+
+New `#babysitting` section between Senior care and About, styled from the
+owner's "Compassionate Care for Every Generation" flyer: service strip
+(Senior care / Babysitting & childcare / In-home services), brush-stroke
+script titles, pill rate rows, blue ribbons, and the flyer's watercolor heart
+(`public/img/children-heart.webp`, cropped from the flyer, decorative). Rates
+are the flyer's: 1 child $18–20, 2 children $22–25, 3 children $25–30,
+date night $20–25, weekend $20–25 per hour, 3-hour minimum. No licensing or
+age claims. All copy EN/ES and owner-editable under **Babysitting &
+childcare** (rates and reasons are lists; empty rates list hides the card).
+Nav gains a Babysitting link; nav links now hide below 1100px (was 900) so
+five links never wrap. Removed a duplicate hard-coded meta description.
+Asset version `20261023a`.
+
+**Deploy note:** the new section and nav link arrive by schema defaults, but
+the stored content document still holds the old hero eyebrow + lead,
+services eyebrow, and SEO title/description. Those four changed defaults only
+show live after the stored doc is updated (owner had not edited them; they
+matched the old defaults on 2026-10-23).
+
+## Display fixes (2026-09-11)
+
+CMS tokens now render as live values in call buttons and the footer. The page
+shows `© 2026 Legacy Care LLC.`, and the Made by HAND credit sits inside the
+footer with the owner sign-in. Service text is constrained to its grid track
+and wraps within the card on mobile. Asset version: `20260911d`.
 
 ## Social links (2026-09-11)
 
@@ -44,7 +72,7 @@ Validation: 32 tests pass; English and Spanish layouts checked at 360, 390,
 - **Storage:** public bucket `legacy-care-llc`.
 - **Netlify:** project `legacy-care-llc`, site id `5a3d778d-9067-470c-82fa-330fbefe5d15`, account **cryptokoh**.
   Env vars per README.
-- **Custom domain:** none yet.
+- **Custom domain:** `legacycare.llc`.
 
 ## Next steps
 

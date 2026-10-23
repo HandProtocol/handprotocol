@@ -137,6 +137,18 @@ export const SECTIONS = [
         "label": "Legacy Care",
         "type": "text",
         "max": 300
+      },
+      {
+        "key": "copy_8",
+        "label": "Babysitting (English)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "copy_8_es",
+        "label": "Babysitting (Spanish)",
+        "type": "text",
+        "max": 300
       }
     ]
   },
@@ -523,6 +535,263 @@ export const SECTIONS = [
         "label": "Not sure what you need yet? Call us. We'll talk about what a good (Spanish)",
         "type": "textarea",
         "max": 354
+      }
+    ]
+  },
+  {
+    "key": "children",
+    "label": "Babysitting & childcare",
+    "help": "English and Spanish are edited separately. Use {phone} in copy to show the current contact number. Leave the rates list empty to hide the rates card.",
+    "fields": [
+      {
+        "key": "pillar_1",
+        "label": "Banner: first service (English)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "pillar_1_es",
+        "label": "Banner: first service (Spanish)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "pillar_2",
+        "label": "Banner: second service (English)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "pillar_2_es",
+        "label": "Banner: second service (Spanish)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "pillar_3",
+        "label": "Banner: third service (English)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "pillar_3_es",
+        "label": "Banner: third service (Spanish)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "copy_1",
+        "label": "Eyebrow (English)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "copy_1_es",
+        "label": "Eyebrow (Spanish)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "copy_2",
+        "label": "Heading, first line (English)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "copy_2_es",
+        "label": "Heading, first line (Spanish)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "copy_3",
+        "label": "Heading, script line (English)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "copy_3_es",
+        "label": "Heading, script line (Spanish)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "copy_4",
+        "label": "Intro paragraph (English)",
+        "type": "textarea",
+        "max": 400
+      },
+      {
+        "key": "copy_4_es",
+        "label": "Intro paragraph (Spanish)",
+        "type": "textarea",
+        "max": 400
+      },
+      {
+        "key": "rates_title",
+        "label": "Rates card title (English)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "rates_title_es",
+        "label": "Rates card title (Spanish)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "rates",
+        "label": "Babysitting rates",
+        "help": "One row per rate. Price is shown as written, followed by the unit below.",
+        "type": "list",
+        "max": 8,
+        "item": [
+          {
+            "key": "label",
+            "label": "Rate name (English)",
+            "type": "text",
+            "max": 60
+          },
+          {
+            "key": "label_es",
+            "label": "Rate name (Spanish)",
+            "type": "text",
+            "max": 60
+          },
+          {
+            "key": "price",
+            "label": "Price (e.g. $18 – $20)",
+            "type": "text",
+            "max": 24
+          },
+          {
+            "key": "icon",
+            "label": "Icon",
+            "type": "select",
+            "options": [
+              {
+                "value": "one",
+                "label": "One child"
+              },
+              {
+                "value": "two",
+                "label": "Two children"
+              },
+              {
+                "value": "three",
+                "label": "Three or more children"
+              },
+              {
+                "value": "heart",
+                "label": "Heart"
+              },
+              {
+                "value": "calendar",
+                "label": "Calendar"
+              },
+              {
+                "value": "moon",
+                "label": "Moon (evenings)"
+              },
+              {
+                "value": "home",
+                "label": "Home"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "rate_unit",
+        "label": "Price unit (English)",
+        "type": "text",
+        "max": 20
+      },
+      {
+        "key": "rate_unit_es",
+        "label": "Price unit (Spanish)",
+        "type": "text",
+        "max": 20
+      },
+      {
+        "key": "rates_note",
+        "label": "Rates card ribbon (English)",
+        "type": "text",
+        "max": 120
+      },
+      {
+        "key": "rates_note_es",
+        "label": "Rates card ribbon (Spanish)",
+        "type": "text",
+        "max": 120
+      },
+      {
+        "key": "why_title",
+        "label": "Why-choose-us card title (English)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "why_title_es",
+        "label": "Why-choose-us card title (Spanish)",
+        "type": "text",
+        "max": 300
+      },
+      {
+        "key": "why",
+        "label": "Why choose us",
+        "type": "list",
+        "max": 8,
+        "item": [
+          {
+            "key": "label",
+            "label": "Reason (English)",
+            "type": "text",
+            "max": 80
+          },
+          {
+            "key": "label_es",
+            "label": "Reason (Spanish)",
+            "type": "text",
+            "max": 80
+          }
+        ]
+      },
+      {
+        "key": "why_note",
+        "label": "Why-choose-us card ribbon (English)",
+        "type": "text",
+        "max": 120
+      },
+      {
+        "key": "why_note_es",
+        "label": "Why-choose-us card ribbon (Spanish)",
+        "type": "text",
+        "max": 120
+      },
+      {
+        "key": "cta",
+        "label": "Call button (English)",
+        "type": "text",
+        "max": 120
+      },
+      {
+        "key": "cta_es",
+        "label": "Call button (Spanish)",
+        "type": "text",
+        "max": 120
+      },
+      {
+        "key": "cta_text",
+        "label": "Text button (English)",
+        "type": "text",
+        "max": 120
+      },
+      {
+        "key": "cta_text_es",
+        "label": "Text button (Spanish)",
+        "type": "text",
+        "max": 120
       }
     ]
   },
@@ -1162,7 +1431,9 @@ export const DEFAULT_CONTENT = {
     "copy_5_es": "Cómo empezar",
     "copy_6": "Contact",
     "copy_6_es": "Contacto",
-    "copy_7": "Legacy Care"
+    "copy_7": "Legacy Care",
+    "copy_8": "Babysitting",
+    "copy_8_es": "Niñeras"
   },
   "contact": {
     "phone": "817-565-0648",
@@ -1183,8 +1454,8 @@ export const DEFAULT_CONTENT = {
   },
   "services": {
     "visible": true,
-    "copy_1": "Our services",
-    "copy_1_es": "Nuestros servicios",
+    "copy_1": "Senior care",
+    "copy_1_es": "Cuidado de adultos mayores",
     "copy_2": "Help with the everyday, so home can stay home.",
     "copy_2_es": "Ayuda con lo de todos los días, para que su casa siga siendo su hogar.",
     "copy_3": "From a few hours a week to more comprehensive support. Every plan is built around the person, their routines, and their preferences.",
@@ -1231,6 +1502,90 @@ export const DEFAULT_CONTENT = {
     "copy_23_es": "Descanso para usted, con alguien de confianza a cargo.",
     "copy_24": "Not sure what you need yet? Call us. We'll talk about what a good day looks like for your loved one and figure it out together.",
     "copy_24_es": "¿No sabe qué necesita todavía? Llámenos. Platicamos de cómo es un buen día para su ser querido y lo resolvemos juntos."
+  },
+  "children": {
+    "pillar_1": "Senior care",
+    "pillar_1_es": "Cuidado de adultos mayores",
+    "pillar_2": "Babysitting & childcare",
+    "pillar_2_es": "Niñeras y cuidado infantil",
+    "pillar_3": "In-home services",
+    "pillar_3_es": "Servicios en el hogar",
+    "copy_1": "Babysitting & childcare",
+    "copy_1_es": "Niñeras y cuidado infantil",
+    "copy_2": "Compassionate care for",
+    "copy_2_es": "Cuidado compasivo para",
+    "copy_3": "every generation.",
+    "copy_3_es": "todas las generaciones.",
+    "copy_4": "The same trusted, nurturing care, now for the little ones too. We look after your children in your own home: on a regular schedule, for a date night, or for a weekend away.",
+    "copy_4_es": "El mismo cuidado cariñoso y de confianza, ahora también para los más pequeños. Cuidamos a sus hijos en su propia casa: con un horario fijo, en una noche de salida o durante un fin de semana fuera.",
+    "rates_title": "Babysitting rates",
+    "rates_title_es": "Tarifas de niñera",
+    "rates": [
+      {
+        "label": "1 child",
+        "label_es": "1 niño",
+        "price": "$18 – $20",
+        "icon": "one"
+      },
+      {
+        "label": "2 children",
+        "label_es": "2 niños",
+        "price": "$22 – $25",
+        "icon": "two"
+      },
+      {
+        "label": "3 children",
+        "label_es": "3 niños",
+        "price": "$25 – $30",
+        "icon": "three"
+      },
+      {
+        "label": "Date-night care",
+        "label_es": "Noche de salida",
+        "price": "$20 – $25",
+        "icon": "heart"
+      },
+      {
+        "label": "Weekend babysitting",
+        "label_es": "Fines de semana",
+        "price": "$20 – $25",
+        "icon": "calendar"
+      }
+    ],
+    "rate_unit": "/hr",
+    "rate_unit_es": "/hora",
+    "rates_note": "3-hour minimum booking",
+    "rates_note_es": "Mínimo de 3 horas por reserva",
+    "why_title": "Why choose us?",
+    "why_title_es": "¿Por qué elegirnos?",
+    "why": [
+      {
+        "label": "Experienced & trustworthy",
+        "label_es": "Con experiencia y de confianza"
+      },
+      {
+        "label": "Safe & reliable",
+        "label_es": "Seguro y confiable"
+      },
+      {
+        "label": "Flexible scheduling",
+        "label_es": "Horarios flexibles"
+      },
+      {
+        "label": "Care in your home",
+        "label_es": "Cuidado en su hogar"
+      },
+      {
+        "label": "Nurturing, compassionate care",
+        "label_es": "Cuidado cariñoso y compasivo"
+      }
+    ],
+    "why_note": "Peace of mind for your family",
+    "why_note_es": "Tranquilidad para su familia",
+    "cta": "Call {phone} to book",
+    "cta_es": "Llame al {phone} para reservar",
+    "cta_text": "Text us",
+    "cta_text_es": "Envíenos un mensaje"
   },
   "about": {
     "visible": true,
@@ -1292,14 +1647,14 @@ export const DEFAULT_CONTENT = {
     "copy_15_es": "Cuidar a alguien que ama es un trabajo de tiempo completo. Tome una tarde, un fin de semana o una semana sabiendo que hay alguien de confianza a cargo. Regresará con más para dar."
   },
   "hero": {
-    "copy_1": "In-home care for seniors",
-    "copy_1_es": "Cuidado en el hogar para adultos mayores",
+    "copy_1": "In-home care for every generation",
+    "copy_1_es": "Cuidado en el hogar para todas las generaciones",
     "copy_2": "Care you can",
     "copy_2_es": "Cuidado en el que puede",
     "copy_3": "count on.",
     "copy_3_es": "confiar.",
-    "copy_4": "Compassionate, reliable in-home care so your loved one can remain safe, comfortable, and independent at home.",
-    "copy_4_es": "Cuidado en el hogar, compasivo y confiable, para que su ser querido se mantenga seguro, cómodo e independiente en casa.",
+    "copy_4": "Compassionate, reliable in-home care for seniors, and trusted babysitting for the little ones, so the people you love stay safe, comfortable, and at home.",
+    "copy_4_es": "Cuidado en el hogar compasivo y confiable para adultos mayores, y cuidado de confianza para los más pequeños, para que sus seres queridos estén seguros, cómodos y en casa.",
     "copy_5": "Call {phone}",
     "copy_5_es": "Llame al {phone}",
     "copy_6": "See our services",
@@ -1335,9 +1690,9 @@ export const DEFAULT_CONTENT = {
     "copy_5": "© {year} {business}."
   },
   "seo": {
-    "title": "Legacy Care LLC · In-Home Care for Seniors · Care You Can Count On",
-    "title_es": "Legacy Care LLC · Cuidado en el hogar para adultos mayores · Cuidado en el que puede confiar",
-    "description": "Legacy Care LLC provides compassionate, reliable in-home care for seniors. Free consultation: 817-565-0648.",
-    "description_es": "Legacy Care LLC brinda cuidado en el hogar compasivo y confiable para adultos mayores. Consulta gratis: 817-565-0648."
+    "title": "Legacy Care LLC · Senior Care & Babysitting · Care You Can Count On",
+    "title_es": "Legacy Care LLC · Cuidado de adultos mayores y niños · Cuidado en el que puede confiar",
+    "description": "Legacy Care LLC provides compassionate in-home senior care and trusted babysitting. Free consultation: 817-565-0648.",
+    "description_es": "Legacy Care LLC brinda cuidado en el hogar compasivo para adultos mayores y cuidado de confianza para niños. Consulta gratis: 817-565-0648."
   }
 };

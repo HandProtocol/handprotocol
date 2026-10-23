@@ -2,8 +2,31 @@ import * as B from '../netlify/functions/lib/blocks.mjs';
 import { toView } from '../netlify/functions/lib/content.mjs';
 import { config } from '../netlify/functions/lib/config.mjs';
 
+const svg = (body, attrs = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"') => `<svg viewBox="0 0 24 24" ${attrs} aria-hidden="true">${body}</svg>`;
+const HEART_PATH = '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>';
+const HEART = svg(HEART_PATH, 'fill="currentColor"');
+const CHECK = svg('<circle cx="12" cy="12" r="10"></circle><path d="m8 12.5 2.6 2.6L16 9.6"></path>', 'fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"');
+const PHONE = svg('<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"></path>');
+// One per `children.rates[].icon` option in site/schema.mjs.
+const RATE_ICONS = {
+  one: svg('<circle cx="12" cy="7" r="4"></circle><path d="M4.5 21v-1a7.5 7.5 0 0 1 15 0v1"></path>'),
+  two: svg('<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path>'),
+  three: svg('<circle cx="12" cy="7" r="3.2"></circle><circle cx="4.8" cy="9.4" r="2.3"></circle><circle cx="19.2" cy="9.4" r="2.3"></circle><path d="M6.8 21v-1.6a5.2 5.2 0 0 1 10.4 0V21M1.5 20v-.9a3.4 3.4 0 0 1 4.3-3.3M22.5 20v-.9a3.4 3.4 0 0 0-4.3-3.3"></path>'),
+  heart: svg(HEART_PATH),
+  calendar: svg('<rect x="3" y="4.5" width="18" height="17" rx="2.5"></rect><path d="M16 2.5v4M8 2.5v4M3 10h18M8 14.5h.01M12 14.5h.01M16 14.5h.01M8 18h.01M12 18h.01"></path>'),
+  moon: svg('<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>'),
+  home: svg('<path d="m3 11 9-8 9 8"></path><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"></path><path d="M9 21v-6h6v6"></path>'),
+};
+
 export function renderPage({ content, media, origin = '' }) {
   const c = content;
+  const k = c.children || {};
+  const rates = (k.rates || []).filter((r) => r.label);
+  const why = (k.why || []).filter((w) => w.label);
+  const copy = (value) => String(value || '')
+    .replaceAll('{phone}', c.contact.phone || '')
+    .replaceAll('{year}', '2026')
+    .replaceAll('{business}', config.name);
   const views = media.map(toView);
   const social = c.social || {};
   const httpsUrl = (value) => {
@@ -33,7 +56,7 @@ export function renderPage({ content, media, origin = '' }) {
     const view = views.find((m) => (m.original || m.src || '').toLowerCase().endsWith('/' + name.toLowerCase() + '.webp')) || views.find((m) => (m.original || m.src || '').toLowerCase().includes('/' + name.toLowerCase() + '.'));
     return B.img(view, { sizes: '100vw', ...options });
   };
-  return `<!DOCTYPE html><html lang="en"><head>${B.headTags({ content: c, featured: views.find((m) => m.featured), origin, extra: '<meta name="description" content="Legacy Care LLC provides compassionate in-home care for seniors.">' })}
+  return `<!DOCTYPE html><html lang="en"><head>${B.headTags({ content: c, featured: views.find((m) => m.featured), origin })}
 ${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phone, email: c.contact.email, sameAs: profiles.length ? profiles.map((link) => link.href) : undefined })}</head><body>
 
 
@@ -50,6 +73,7 @@ ${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phon
     </a>
     <nav class="nav__links" aria-label="Primary">
       <a href="#services" data-es="${B.e(c.brand.copy_3_es)}">${B.e(c.brand.copy_3)}</a>
+      <a href="#babysitting" data-es="${B.e(c.brand.copy_8_es)}">${B.e(c.brand.copy_8)}</a>
       <a href="#about" data-es="${B.e(c.brand.copy_4_es)}">${B.e(c.brand.copy_4)}</a>
       <a href="#how" data-es="${B.e(c.brand.copy_5_es)}">${B.e(c.brand.copy_5)}</a>
       <a href="#contact" data-es="${B.e(c.brand.copy_6_es)}">${B.e(c.brand.copy_6)}</a>
@@ -92,7 +116,7 @@ ${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phon
           <div class="hero__cta reveal in" data-delay="3">
             <a class="btn btn--primary btn--lg" href="${B.e(B.telHref(c.contact.phone))}">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"></path></svg>
-              <span data-es="${B.e(c.hero.copy_5_es)}">${B.e(c.hero.copy_5)}</span>
+              <span data-es="${B.e(copy(c.hero.copy_5_es))}">${B.e(copy(c.hero.copy_5))}</span>
             </a>
             <a class="btn btn--ghost btn--lg" href="#services" data-es="${B.e(c.hero.copy_6_es)}">${B.e(c.hero.copy_6)}</a>
           </div>
@@ -197,6 +221,57 @@ ${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phon
     </div>
   </section>
 
+  <!-- ═══════════ BABYSITTING & CHILDCARE ═══════════ -->
+  <section class="kids" id="babysitting" aria-labelledby="kids-title">
+    <div class="wrap">
+      <ul class="gens reveal" aria-label="${B.e(config.name)}">
+        <li data-es="${B.e(k.pillar_1_es)}">${B.e(k.pillar_1)}</li>
+        <li data-es="${B.e(k.pillar_2_es)}">${B.e(k.pillar_2)}</li>
+        <li data-es="${B.e(k.pillar_3_es)}">${B.e(k.pillar_3)}</li>
+      </ul>
+
+      <div class="sec-head kids__head reveal">
+        <span class="eyebrow">${HEART}<span data-es="${B.e(k.copy_1_es)}">${B.e(k.copy_1)}</span></span>
+        <h2 id="kids-title">
+          <span data-es="${B.e(k.copy_2_es)}">${B.e(k.copy_2)}</span>
+          <span class="script" data-es="${B.e(k.copy_3_es)}">${B.e(k.copy_3)}</span>
+        </h2>
+        <p class="lead" data-es="${B.e(k.copy_4_es)}">${B.e(k.copy_4)}</p>
+      </div>
+
+      <div class="kids__grid">
+        ${rates.length ? `<article class="kcard reveal" aria-labelledby="rates-title">
+          <h3 class="kcard__title" id="rates-title"><span class="script" data-es="${B.e(k.rates_title_es)}">${B.e(k.rates_title)}</span></h3>
+          <ul class="rates">
+            ${rates.map((r) => `<li class="rate">
+              <span class="rate__icon" aria-hidden="true">${RATE_ICONS[r.icon] || RATE_ICONS.heart}</span>
+              <span class="rate__name" data-es="${B.e(r.label_es || r.label)}">${B.e(r.label)}</span>
+              <span class="rate__price">${B.e(r.price)}<span class="rate__unit" data-es="${B.e(k.rate_unit_es)}">${B.e(k.rate_unit)}</span></span>
+            </li>`).join('')}
+          </ul>
+          ${k.rates_note ? `<p class="ribbon">${HEART}<span data-es="${B.e(k.rates_note_es)}">${B.e(k.rates_note)}</span></p>` : ''}
+        </article>` : ''}
+
+        <figure class="kids__art reveal" data-delay="1" aria-hidden="true">
+          <img src="/img/children-heart.webp?v=${B.e(config.assetVersion)}" alt="" width="1016" height="808" loading="lazy" decoding="async">
+        </figure>
+
+        ${why.length ? `<article class="kcard reveal" data-delay="2" aria-labelledby="why-title">
+          <h3 class="kcard__title" id="why-title"><span class="script" data-es="${B.e(k.why_title_es)}">${B.e(k.why_title)}</span></h3>
+          <ul class="reasons">
+            ${why.map((w) => `<li>${CHECK}<span data-es="${B.e(w.label_es || w.label)}">${B.e(w.label)}</span></li>`).join('')}
+          </ul>
+          ${k.why_note ? `<p class="ribbon"><span data-es="${B.e(k.why_note_es)}">${B.e(k.why_note)}</span></p>` : ''}
+        </article>` : ''}
+      </div>
+
+      <div class="kids__cta reveal">
+        <a class="btn btn--primary btn--lg" href="${B.e(B.telHref(c.contact.phone))}">${PHONE}<span data-es="${B.e(copy(k.cta_es))}">${B.e(copy(k.cta))}</span></a>
+        <a class="btn btn--ghost btn--lg" href="${B.e(B.smsHref(c.contact.phone))}" data-es="${B.e(k.cta_text_es)}">${B.e(k.cta_text)}</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════ ABOUT: a note from Emma ═══════════ -->
   <section class="about" id="about" aria-labelledby="about-title">
     <div class="wrap about__grid">
@@ -241,7 +316,7 @@ ${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phon
         <li class="reveal">
           <h3 data-es="${B.e(c.process.copy_3_es)}">${B.e(c.process.copy_3)}</h3>
           <p data-es="${B.e(c.process.copy_4_es)}">${B.e(c.process.copy_4)}</p>
-          <a class="btn btn--ghost" href="${B.e(B.telHref(c.contact.phone))}" data-es="${B.e(c.process.copy_5_es)}">${B.e(c.process.copy_5)}</a>
+          <a class="btn btn--ghost" href="${B.e(B.telHref(c.contact.phone))}" data-es="${B.e(copy(c.process.copy_5_es))}">${B.e(copy(c.process.copy_5))}</a>
         </li>
         <li class="reveal" data-delay="1">
           <h3 data-es="${B.e(c.process.copy_6_es)}">${B.e(c.process.copy_6)}</h3>
@@ -325,7 +400,10 @@ ${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phon
         <a href="${B.e(`mailto:${c.contact.email}`)}">${B.e(c.contact.email)}</a>
         ${socialLinks('footer-social-title')}
       </div>
-      <p class="foot__legal"><span>${B.e(c.footer.copy_5)}</span><br>${B.e(c.contact.email)}</p>
+      <div class="foot__legal">
+        <p><span>${B.e(copy(c.footer.copy_5))}</span><br>${B.e(c.contact.email)}</p>
+        ${B.footerLinks()}
+      </div>
     </div>
   </div>
 </footer>
@@ -333,15 +411,9 @@ ${B.jsonLd(c, origin, views.find((m) => m.featured), { telephone: c.contact.phon
 <div class="callbar" aria-hidden="false">
   <a class="btn btn--primary" href="${B.e(B.telHref(c.contact.phone))}">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.8 2z"></path></svg>
-    <span data-es="${B.e(c.footer.copy_4_es)}">${B.e(c.footer.copy_4)}</span>
+    <span data-es="${B.e(copy(c.footer.copy_4_es))}">${B.e(copy(c.footer.copy_4))}</span>
   </a>
 </div>
-
-
-
-
-
-  ${B.footerLinks()}
   ${views.length ? B.mediaJson(views) + B.lightboxHtml() : ''}
 ${B.siteScript()}
 </body></html>`;
