@@ -7,7 +7,7 @@ photos. Built from `clients/_template` with the `hand-client-site` skill on
 
 **Status:** LIVE at https://legacycare.llc since 2026-09-11 (provisioned by provision.mjs).
 
-## Babysitting & childcare (2026-10-23, built, NOT deployed)
+## Babysitting & childcare (2026-10-23, LIVE)
 
 New `#babysitting` section between Senior care and About, styled from the
 owner's "Compassionate Care for Every Generation" flyer: service strip
@@ -20,13 +20,15 @@ age claims. All copy EN/ES and owner-editable under **Babysitting &
 childcare** (rates and reasons are lists; empty rates list hides the card).
 Nav gains a Babysitting link; nav links now hide below 1100px (was 900) so
 five links never wrap. Removed a duplicate hard-coded meta description.
-Asset version `20261023a`.
+Asset version `20261023b`.
 
-**Deploy note:** the new section and nav link arrive by schema defaults, but
-the stored content document still holds the old hero eyebrow + lead,
-services eyebrow, and SEO title/description. Those four changed defaults only
-show live after the stored doc is updated (owner had not edited them; they
-matched the old defaults on 2026-10-23).
+**Deployed 2026-10-23** (deploy `6adb7c76…`; rollback point = previous deploy
+`6aaa398b6aa71bbdcfd84090`). This deploy also shipped the 2026-09-16 engine
+sync that was sitting undeployed in this folder (booking code is present but
+dormant: no `config.booking`). The stored content doc was updated for the
+changed defaults (hero eyebrow + lead, services eyebrow, SEO title +
+description, EN/ES) as revision 13 under hand@handprotocol.org; the owner can
+restore revision 12 from History to undo the copy change.
 
 ## Display fixes (2026-09-11)
 
