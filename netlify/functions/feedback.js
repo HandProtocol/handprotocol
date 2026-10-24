@@ -16,6 +16,16 @@
 //   3. Send a transactional email to EMAIL_TO_OPS via Resend (best-effort;
 //      no-op until the Resend sending domain is verified — see _email.js)
 //
+// Abuse rails (2026-10-23), so a flood cannot spend the shared Resend quota.
+// Counted durably in command.rate_hits via _ratelimit.js:
+//   - per IP: FEEDBACK_IP_BURST per 10 min, FEEDBACK_IP_DAILY per day → 429
+//   - everyone: FEEDBACK_HOURLY_CAP notes per hour → 429 (IP rotation)
+//   - the same text twice within an hour → 200 "synced", no side effects
+//   - email: only the first FEEDBACK_EMAIL_DAILY_CAP notes a day send one;
+//     after that it's pin + Telegram only (and _email.js has a site-wide cap)
+// If the counter can't be reached the note is still accepted (fail open);
+// the email cap in _email.js fails closed, so the Resend quota stays safe.
+//
 // Any one failing alone does NOT fail the request — the client also
 // keeps the note in localStorage, and we want public feedback to feel
 // frictionless. We only 5xx when ALL THREE paths fail.
@@ -28,18 +38,67 @@
 //   INSPECTOR_TOPIC_ID            — message_thread_id of "🎯 Inspector"
 //   COMMAND_BASE_URL              — defaults to https://command.handprotocol.org
 //   RESEND_API_KEY / EMAIL_FROM / EMAIL_TO_OPS  — transactional email (see _email.js)
+//   FEEDBACK_IP_BURST / FEEDBACK_IP_DAILY / FEEDBACK_HOURLY_CAP /
+//   FEEDBACK_EMAIL_DAILY_CAP  — optional overrides for the rails above
 
 const { sendEmail } = require('./_email.js');
+const { take, hashKey } = require('./_ratelimit.js');
 
 const MAX_TEXT = 2000;
 const MAX_NAME = 80;
 const MAX_TAGS = 12;
 const MAX_SOURCE = 48;
 
-function json(statusCode, body) {
+const MINUTE = 60;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
+
+function envInt(name, fallback) {
+  const n = Number.parseInt(process.env[name] || '', 10);
+  return Number.isFinite(n) && n >= 0 ? n : fallback;
+}
+
+const LIMITS = {
+  ipBurst: envInt('FEEDBACK_IP_BURST', 5),          // per IP per 10 min
+  ipDaily: envInt('FEEDBACK_IP_DAILY', 20),         // per IP per day
+  hourly: envInt('FEEDBACK_HOURLY_CAP', 30),        // all callers per hour
+  emailDaily: envInt('FEEDBACK_EMAIL_DAILY_CAP', 10), // feedback emails per day
+};
+
+function clientIp(event) {
+  const headers = event.headers || {};
+  // Netlify sets x-nf-client-connection-ip itself; callers can't spoof it.
+  return String(headers['x-nf-client-connection-ip'] || headers['client-ip'] || 'unknown')
+    .split(',')[0]
+    .trim();
+}
+
+// Returns null when the note may proceed, or the 429 response to send.
+// Fail open: if the counter is unreachable the note goes through.
+async function checkLimits(ipKey) {
+  const checks = [
+    ['feedback:ip10m', ipKey, 10 * MINUTE, LIMITS.ipBurst],
+    ['feedback:ipday', ipKey, DAY, LIMITS.ipDaily],
+    ['feedback:all', 'all', HOUR, LIMITS.hourly],
+  ];
+  for (const [bucket, key, windowSeconds, limit] of checks) {
+    const r = await take(bucket, key, windowSeconds, limit);
+    if (r.ok && !r.allowed) {
+      console.warn('[feedback] rate limited', bucket);
+      return json(429, {
+        status: 'limited',
+        error: 'Lots of notes right now. Yours is saved on this device and will send in a few minutes.',
+      }, { 'Retry-After': String(10 * MINUTE) });
+    }
+  }
+  return null;
+}
+
+function json(statusCode, body, extraHeaders) {
   return {
     statusCode,
     headers: {
+      ...extraHeaders,
       'Content-Type': 'application/json',
       'Cache-Control': 'no-store',
       'Access-Control-Allow-Origin': '*',
@@ -257,12 +316,25 @@ exports.handler = async (event) => {
     ts: Number.isFinite(body.ts) ? body.ts : Date.now(),
   };
 
+  const limited = await checkLimits(hashKey(`ip:${clientIp(event)}`));
+  if (limited) return limited;
+
+  // Same text again within the hour (a double-tap, a retry, or a replay):
+  // say "synced" so the client clears its queue, but do nothing.
+  const fresh = await take('feedback:dup', hashKey(`text:${normalized.text}`), HOUR, 1);
+  if (fresh.ok && !fresh.allowed) {
+    return json(200, { status: 'synced', duplicate: true });
+  }
+
   // Insert first so the Telegram message and email can link to the pin row.
   const pinResult = await insertPin(normalized);
   const tgResult = await notifyTelegram(normalized, pinResult.pin);
-  // Third best-effort sink. No-op ('email-unconfigured') until Resend is set
-  // up; pin + telegram succeeding must still yield 200.
-  const emailResult = await notifyEmail(normalized, pinResult.pin);
+  // Third best-effort sink, capped per day: past the cap the note still lands
+  // as a pin + Telegram, it just doesn't spend a Resend email.
+  const emailBudget = await take('email:feedback', 'all', DAY, LIMITS.emailDaily);
+  const emailResult = emailBudget.ok && emailBudget.allowed
+    ? await notifyEmail(normalized, pinResult.pin)
+    : { ok: false, reason: emailBudget.ok ? 'email-feedback-cap' : emailBudget.reason };
 
   if (!pinResult.ok && !tgResult.ok && !emailResult.ok) {
     return json(502, {

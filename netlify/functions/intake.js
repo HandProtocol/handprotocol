@@ -12,6 +12,12 @@
 //                                   Defaults to "HAND Intake <hand@handprotocol.org>".
 //   RESEND_NOTIFY_TO               — Where the notification lands.
 //                                   Defaults to "hand@handprotocol.org".
+//   EMAIL_DAILY_CAP                — shared site-wide daily send cap (see _email.js);
+//                                   this function sends through Resend directly
+//                                   but still counts against it.
+
+const { take } = require('./_ratelimit.js');
+const { dailyCap, DAY_SECONDS } = require('./_email.js');
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -96,6 +102,13 @@ async function sendNotification(apiKey, payload) {
   const from = process.env.RESEND_NOTIFY_FROM || 'HAND Intake <hand@handprotocol.org>';
   const to = process.env.RESEND_NOTIFY_TO || 'hand@handprotocol.org';
   const variantLabel = VARIANT_LABELS[payload.variant] || payload.variant || 'Reciprocate';
+
+  const budget = await take('email:day', 'site', DAY_SECONDS, dailyCap());
+  if (!budget.ok || !budget.allowed) {
+    // Keep enough in the function log to reply by hand.
+    console.warn('Notification email skipped (daily cap)', { budget, name: payload.name, email: payload.email });
+    return false;
+  }
 
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',

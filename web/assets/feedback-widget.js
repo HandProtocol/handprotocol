@@ -45,6 +45,7 @@
   var LS_NAME = 'hand_fb_name_v1';
   var LS_QUEUE = 'hand_fb_queue_v1';
   var MAX_TEXT = 2000;
+  var LIMITED_RETRY_MS = 10 * 60 * 1000; // matches the server's Retry-After
 
   function pathNow() {
     var p = location.pathname || '/';
@@ -338,10 +339,18 @@
     sendEl.textContent = 'Sending…';
     setStatus('Sending…');
 
-    send(payload).then(function (ok) {
-      if (ok) {
+    send(payload).then(function (result) {
+      if (result === 'ok') {
         showDone();
         resetForm();
+      } else if (result === 'limited') {
+        // Server is rate limiting: keep the note, wait, don't hammer.
+        enqueue(payload);
+        resetForm();
+        setStatus('Lots of notes right now. Yours is saved and will send in a few minutes.', 'warn');
+        sendEl.disabled = false;
+        sendEl.textContent = 'Send';
+        scheduleFlush(LIMITED_RETRY_MS);
       } else {
         enqueue(payload);
         setStatus('Saved offline — will send when you’re back online.', 'warn');
@@ -371,6 +380,7 @@
   }
 
   // ---------- Transport ---------------------------------------------------
+  // Resolves 'ok' | 'limited' (HTTP 429) | 'fail'.
   function send(payload) {
     return fetch(ENDPOINT, {
       method: 'POST',
@@ -379,13 +389,13 @@
       keepalive: true,
     })
       .then(function (res) {
-        if (!res.ok) return false;
-        return res.json().catch(function () { return {}; });
+        if (res.status === 429) return 'limited';
+        if (!res.ok) return 'fail';
+        return res.json()
+          .catch(function () { return {}; })
+          .then(function (data) { return data && data.status === 'synced' ? 'ok' : 'fail'; });
       })
-      .then(function (data) {
-        return !!(data && data.status === 'synced');
-      })
-      .catch(function () { return false; });
+      .catch(function () { return 'fail'; });
   }
 
   // ---------- Offline retry queue ----------------------------------------
@@ -418,18 +428,22 @@
     if (!q.length) return;
     flushing = true;
     var remaining = [];
+    var limited = false;
     var chain = Promise.resolve();
     q.forEach(function (entry) {
       chain = chain.then(function () {
-        return send(entry).then(function (ok) {
-          if (!ok) remaining.push(entry);
+        // Once the server says 429, hold the rest instead of sending them too.
+        if (limited) { remaining.push(entry); return; }
+        return send(entry).then(function (result) {
+          if (result === 'limited') limited = true;
+          if (result !== 'ok') remaining.push(entry);
         });
       });
     });
     chain.then(function () {
       saveQueue(remaining);
       flushing = false;
-      if (remaining.length) scheduleFlush(20000);
+      if (remaining.length) scheduleFlush(limited ? LIMITED_RETRY_MS : 20000);
     });
   }
 
