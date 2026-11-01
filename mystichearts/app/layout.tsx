@@ -16,9 +16,9 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Mystic Hearts | 9-acre healing center",
+  title: "Mystic Hearts Healing Collective | East Austin",
   description:
-    "A cinematic preview of Mystic Hearts, a 9-acre healing center taking shape with a house, yurts, tiny homes, and practitioner-led healing modalities.",
+    "Ten acres of healing land in East Austin: a sober, interfaith home where people gather to heal, to practice, and to live more connected to the land and to each other.",
 };
 
 export default function RootLayout({
