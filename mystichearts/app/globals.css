@@ -495,8 +495,14 @@ button { font: inherit; }
   color: var(--cream);
   line-height: 1.5;
 }
-.koordi-shell koordi-booking, .koordi-shell koordi-gatherings { display: block; }
-.koordi-shell[data-status="loading"] koordi-booking, .koordi-shell[data-status="loading"] koordi-gatherings { display: none; }
+.koordi-shell koordi-booking, .koordi-shell koordi-gatherings, .koordi-shell koordi-calendar { display: block; }
+.koordi-shell[data-status="loading"] koordi-booking, .koordi-shell[data-status="loading"] koordi-gatherings, .koordi-shell[data-status="loading"] koordi-calendar { display: none; }
+/* the breathing calendar: gatherings glow gold, open days are lit in cream; the strip of coming
+   gatherings and the intro card sit on a deeper night */
+.koordi-calendar-shell { --koordi-glow: var(--gold); --koordi-open: var(--cream); --koordi-panel: rgba(18, 10, 15, 0.34); --koordi-strip: rgba(217, 165, 78, 0.09); --koordi-intro: rgba(18, 10, 15, 0.82); }
+.koordi-calendar-shell[data-status="loading"] { min-height: 27rem; }
+.calendar-aside { margin: 1.1rem 0 0; color: var(--cream-50); font-size: 0.9rem; }
+.calendar-back { margin: -0.6rem 0 0.9rem; font-size: 0.9rem; }
 
 /* --- the chapter row and the story sheet ----------------------------------------------- */
 

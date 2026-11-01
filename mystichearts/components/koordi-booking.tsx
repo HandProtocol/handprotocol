@@ -25,7 +25,9 @@ export function loadWidget(): Promise<void> {
   return scriptPromise;
 }
 
-export function KoordiBooking({ fallbackEmail }: { fallbackEmail: string }) {
+// date: a day to open on (from the calendar's visit day), passed as data-date with the visit
+// service; the element opens on it when it is offered and on the first open day otherwise.
+export function KoordiBooking({ fallbackEmail, date = null }: { fallbackEmail: string; date?: string | null }) {
   const [status, setStatus] = useState<"loading" | "ready" | "failed">("loading");
 
   useEffect(() => {
@@ -51,7 +53,7 @@ export function KoordiBooking({ fallbackEmail }: { fallbackEmail: string }) {
   return (
     <div className="koordi-shell" data-status={status}>
       {status === "loading" && <p className="door-fallback">Opening the calendar…</p>}
-      {createElement("koordi-booking", { "data-key": KOORDI_KEY, "data-api": KOORDI_URL, "data-lang": "en", "data-heading": "3" })}
+      {createElement("koordi-booking", { key: date ?? "any", "data-key": KOORDI_KEY, "data-api": KOORDI_URL, "data-lang": "en", "data-heading": "3", ...(date ? { "data-service": "visit", "data-date": date } : {}) })}
     </div>
   );
 }

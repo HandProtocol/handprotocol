@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, CalendarDays, Feather, Footprints, Sparkles } from "lucide-react";
-import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { WHATS_ON } from "./copy";
 import { KoordiBooking } from "./koordi-booking";
 import { KoordiCalendar } from "./koordi-calendar";
@@ -45,9 +45,10 @@ const HELLO_URL = process.env.NEXT_PUBLIC_HELLO_URL || "/.netlify/functions/feed
 
 type HelloState = "idle" | "sending" | "sent" | "failed";
 
-function HelloForm({ fallbackEmail }: { fallbackEmail: string }) {
+// `seed` is a first line for the note, when another door sent the visitor here with a reason.
+function HelloForm({ fallbackEmail, seed }: { fallbackEmail: string; seed?: string }) {
   const [state, setState] = useState<HelloState>("idle");
-  const [draft, setDraft] = useState({ name: "", email: "", note: "", keepPosted: true });
+  const [draft, setDraft] = useState({ name: "", email: "", note: seed ?? "", keepPosted: true });
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -136,17 +137,21 @@ export function ContactModal({
 }) {
   const current = door ?? "hello";
   const tab: Tab = current === "hello" ? "hello" : "whatson";
-  // The day chosen on the calendar, carried into the visit way; forgotten when the sheet closes.
+  // The day chosen on the calendar, carried into the visit way, and the note Say hello opens
+  // with when the calendar's host button sent the visitor; both forgotten when the sheet closes.
   const [visitDate, setVisitDate] = useState<string | null>(null);
-  useEffect(() => {
-    if (door === null) setVisitDate(null);
-  }, [door]);
+  const [helloSeed, setHelloSeed] = useState<string | undefined>(undefined);
+  const close = () => {
+    setVisitDate(null);
+    setHelloSeed(undefined);
+    onClose();
+  };
   const pickWay = (next: Door) => {
     setVisitDate(null);
     onSwitch(next);
   };
   return (
-    <Sheet open={door !== null} label="Get in touch" onClose={onClose} tabs={<SheetTabs items={TABS} current={tab} onPick={onSwitch} label="How to reach us" />}>
+    <Sheet open={door !== null} label="Get in touch" onClose={close} tabs={<SheetTabs items={TABS} current={tab} onPick={onSwitch} label="How to reach us" />}>
       <SheetPanel id={tab}>
         {tab === "hello" && (
           <>
@@ -157,7 +162,7 @@ export function ContactModal({
             <p className="modal-lede">
               Whether you are interested in visiting, joining our community, attending a gathering, or exploring residency, we would love to hear from you.
             </p>
-            <HelloForm fallbackEmail={fallbackEmail} />
+            <HelloForm fallbackEmail={fallbackEmail} seed={helloSeed} />
           </>
         )}
         {tab === "whatson" && (
@@ -172,6 +177,10 @@ export function ContactModal({
               {current === "whatson" && (
                 <KoordiCalendar
                   onHello={() => onSwitch("hello")}
+                  onHost={() => {
+                    setHelloSeed(WHATS_ON.hostNote);
+                    onSwitch("hello");
+                  }}
                   onVisit={(date) => {
                     setVisitDate(date);
                     onSwitch("visit");

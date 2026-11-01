@@ -73,3 +73,24 @@ export const GATHERINGS = {
   },
   note: "First gatherings open fall 2027. The calendar fills from bookings on the land.",
 };
+
+// The What's on tab of the get-in-touch sheet, led by koordi's breathing calendar.
+export const WHATS_ON = {
+  lede: "The calendar breathes with the land. Days that glow gold hold a gathering; softly lit days are open to walk the land. Choose one: a person confirms either by hand, and the address comes with the yes.",
+  ways: {
+    calendar: { label: "The calendar", hint: "Gatherings and open days, as they come." },
+    visit: { label: "Come out to the land", hint: "A walk and a conversation, on a day of your own." },
+  },
+  calendar: {
+    title: "Gatherings and open days",
+    intro: "Loading the Mystic Hearts Healing Collective event registry",
+    visit: "Come out to the land",
+    empty: "Nothing on the calendar yet. First gatherings open fall 2027.",
+    host: "Host a gathering here",
+  },
+  // The note the Say hello door opens with when the calendar's host button is pressed.
+  hostNote: "I would like to host a gathering on the land. ",
+  hello: "Something else in mind?",
+  helloLink: "Say hello",
+  back: "Back to the calendar",
+};
