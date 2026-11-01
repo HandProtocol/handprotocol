@@ -1,13 +1,15 @@
 "use client";
 
 import { ArrowUpRight, CalendarDays, Feather, Footprints, Sparkles } from "lucide-react";
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useEffect, useState, type FormEvent, type ReactNode } from "react";
+import { WHATS_ON } from "./copy";
 import { KoordiBooking } from "./koordi-booking";
-import { KoordiGatherings } from "./koordi-gatherings";
+import { KoordiCalendar } from "./koordi-calendar";
 import { FocusTitle, Sheet, SheetPanel, SheetTabs } from "./sheet";
 
 // Three doors, two tabs: "whatson" and "visit" are the two ways through the What's on tab
-// (the gatherings board, or a visit of your own), "hello" is its own tab.
+// (koordi's breathing calendar, or a visit of your own), "hello" is its own tab. A visit day
+// chosen on the calendar opens the visit way on that day.
 export type Door = "hello" | "whatson" | "visit";
 type Tab = "whatson" | "hello";
 
@@ -17,8 +19,8 @@ const TABS = [
 ];
 
 const WAYS: { key: Door; label: string; hint: string; icon: ReactNode }[] = [
-  { key: "whatson", label: "Join a gathering", hint: "Circles, workshops, community days on the board.", icon: <CalendarDays size={18} /> },
-  { key: "visit", label: "Come out to the land", hint: "A walk and a conversation, on a day of your own.", icon: <Footprints size={18} /> },
+  { key: "whatson", label: WHATS_ON.ways.calendar.label, hint: WHATS_ON.ways.calendar.hint, icon: <CalendarDays size={18} /> },
+  { key: "visit", label: WHATS_ON.ways.visit.label, hint: WHATS_ON.ways.visit.hint, icon: <Footprints size={18} /> },
 ];
 
 function Ways({ current, onPick }: { current: Door; onPick: (door: Door) => void }) {
@@ -37,7 +39,9 @@ function Ways({ current, onPick }: { current: Door; onPick: (door: Door) => void
   );
 }
 
-const HELLO_ENDPOINT = "/.netlify/functions/feedback";
+// HAND's feedback function. The site lives on its own domain, so production builds name
+// handprotocol.org outright (.env.production); a same-origin path is the dev fallback.
+const HELLO_URL = process.env.NEXT_PUBLIC_HELLO_URL || "/.netlify/functions/feedback";
 
 type HelloState = "idle" | "sending" | "sent" | "failed";
 
@@ -60,7 +64,7 @@ function HelloForm({ fallbackEmail }: { fallbackEmail: string }) {
       .filter((line, i) => line !== "" || i === 2)
       .join("\n");
     try {
-      const res = await fetch(`${window.location.origin}${HELLO_ENDPOINT}`, {
+      const res = await fetch(HELLO_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text, name, path: window.location.pathname, title: document.title, source: "mystichearts", website: "" }),
@@ -132,6 +136,15 @@ export function ContactModal({
 }) {
   const current = door ?? "hello";
   const tab: Tab = current === "hello" ? "hello" : "whatson";
+  // The day chosen on the calendar, carried into the visit way; forgotten when the sheet closes.
+  const [visitDate, setVisitDate] = useState<string | null>(null);
+  useEffect(() => {
+    if (door === null) setVisitDate(null);
+  }, [door]);
+  const pickWay = (next: Door) => {
+    setVisitDate(null);
+    onSwitch(next);
+  };
   return (
     <Sheet open={door !== null} label="Get in touch" onClose={onClose} tabs={<SheetTabs items={TABS} current={tab} onPick={onSwitch} label="How to reach us" />}>
       <SheetPanel id={tab}>
@@ -153,13 +166,30 @@ export function ContactModal({
             <FocusTitle>
               What is <em>unfolding.</em>
             </FocusTitle>
-            <p className="modal-lede">
-              Two ways in: take a seat at something already on the calendar, or choose a day of your own to walk the land. A person confirms either by hand, and the address comes with the yes.
-            </p>
-            <Ways current={current} onPick={onSwitch} />
+            <p className="modal-lede">{WHATS_ON.lede}</p>
+            <Ways current={current} onPick={pickWay} />
             <div className="way-panel" key={current}>
-              {current === "whatson" && <KoordiGatherings onHello={() => onSwitch("hello")} onVisit={() => onSwitch("visit")} />}
-              {current === "visit" && <KoordiBooking fallbackEmail={fallbackEmail} />}
+              {current === "whatson" && (
+                <KoordiCalendar
+                  onHello={() => onSwitch("hello")}
+                  onVisit={(date) => {
+                    setVisitDate(date);
+                    onSwitch("visit");
+                  }}
+                />
+              )}
+              {current === "visit" && (
+                <>
+                  {visitDate && (
+                    <p className="calendar-back">
+                      <button type="button" className="link-btn" onClick={() => pickWay("whatson")}>
+                        {WHATS_ON.back}
+                      </button>
+                    </p>
+                  )}
+                  <KoordiBooking fallbackEmail={fallbackEmail} date={visitDate} />
+                </>
+              )}
             </div>
           </>
         )}
