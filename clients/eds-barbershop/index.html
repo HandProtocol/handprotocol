@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ed's Barber Shop · Montopolis · Fades, Beards &amp; Color · Austin TX</title>
-<meta name="description" content="Ed's Barber Shop in Montopolis, East Austin. A barber shop and hair salon under one roof: sharp fades, beard line-ups, kids' cuts, blowouts, and bold color. 4.5 stars, 51 reviews. Walk-ins welcome.">
+<title data-es="Ed's Barber Shop · Montopolis · Fades, barbas y color · Austin TX">Ed's Barber Shop · Montopolis · Fades, Beards &amp; Color · Austin TX</title>
+<meta name="description" data-es="Ed's Barber Shop en Montopolis, al este de Austin. Barbería y salón bajo un mismo techo: fades precisos, perfilado de barba, cortes para niños, blowouts y color atrevido. 4.5 estrellas, 51 reseñas. Walk-ins bienvenidos." content="Ed's Barber Shop in Montopolis, East Austin. A barber shop and hair salon under one roof: sharp fades, beard line-ups, kids' cuts, blowouts, and bold color. 4.5 stars, 51 reviews. Walk-ins welcome.">
 <link rel="canonical" href="https://eds-barbershop.com/">
 <meta property="og:title" content="Ed's Barber Shop · Montopolis, Austin">
 <meta property="og:description" content="Barber shop precision and salon color in one neighborhood shop. Fades, beards, kids' cuts, blowouts, and bold color. Walk-ins welcome.">
@@ -92,8 +92,20 @@
     transition:transform .2s var(--ease),box-shadow .2s var(--ease);
     box-shadow:0 1px 0 oklch(1 0 0 / 0.25) inset;
   }
+  .nav__links a.nav__cta,.nav__links a.nav__cta:hover{color:var(--ink-dark)}
   .nav__cta:hover{transform:translateY(-1px);box-shadow:0 8px 22px -10px var(--gold)}
   @media(max-width:760px){.nav__links a:not(.nav__cta){display:none}}
+
+  /* language toggle */
+  .lang-toggle{display:inline-flex;align-items:center;gap:0.4rem;
+    padding:0.5rem 0.9rem;border-radius:var(--r-md);
+    border:1.5px solid var(--gold-line);background:transparent;color:var(--gold-hi);
+    font-family:var(--font-body);font-weight:700;font-size:0.82rem;letter-spacing:0.02em;
+    cursor:pointer;white-space:nowrap;
+    transition:border-color .2s var(--ease),background .2s var(--ease)}
+  .lang-toggle:hover{border-color:var(--gold);background:var(--gold-dim)}
+  .lang-toggle svg{width:16px;height:16px;flex:none}
+  @media(max-width:420px){.lang-toggle .lang-label{display:none}.lang-toggle{padding-inline:0.6rem}}
 
   /* buttons */
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:0.55rem;font-weight:700;font-size:1rem;
@@ -220,10 +232,76 @@
   .hours__note{font-size:0.82rem;color:var(--ink-3);margin-top:0.6rem}
   .visit__btns{display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:1.5rem}
   .visit__store{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--gold-line);position:relative}
-  .visit__store img{width:100%;height:100%;object-fit:cover;min-height:260px}
-  .visit__store figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.7rem 1rem 0.9rem;
-    font-size:0.86rem;font-weight:600;color:var(--gold-hi);background:linear-gradient(transparent,oklch(0.09 0.008 70 / 0.86))}
   @media(max-width:760px){.visit{grid-template-columns:1fr}}
+  /* two-shop switcher: tabs over a cross-fading photo, auto-advances until someone picks */
+  .spots{min-height:420px;background:var(--bg-panel);touch-action:pan-y}
+  .spots__slide{position:absolute;inset:0;opacity:0;transition:opacity .9s var(--ease);margin:0}
+  .spots__slide.is-on{opacity:1}
+  .spots__slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 6s linear}
+  .spots__slide.is-on img{transform:scale(1)}
+  .spots__slide::after{content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(to top, oklch(0.09 0.008 70 / 0.88) 0%, transparent 46%),
+               linear-gradient(to bottom, oklch(0.09 0.008 70 / 0.55) 0%, transparent 24%)}
+  .spots__cap{position:absolute;z-index:1;left:clamp(1.1rem,3vw,1.6rem);right:1rem;bottom:clamp(1rem,3vw,1.4rem)}
+  .spots__cap .k{display:block;font-size:0.68rem;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold-hi)}
+  .spots__cap .v{display:block;margin-top:0.3rem;font-family:var(--font-display);font-style:italic;font-weight:600;
+    font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.2;color:var(--ink);text-shadow:0 2px 14px oklch(0 0 0 / 0.6)}
+  .spots__tabs{position:absolute;z-index:2;top:0.9rem;left:0.9rem;display:flex;gap:4px;padding:4px;
+    border-radius:999px;background:oklch(0.12 0.006 75 / 0.78);border:1px solid var(--gold-line)}
+  .spots__tab{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:0.45rem;
+    font:700 0.8rem/1 var(--font-body);letter-spacing:0.02em;color:var(--ink-2);background:transparent;border:0;
+    padding:0.6rem 0.95rem;border-radius:999px;cursor:pointer;min-height:40px;
+    transition:color .2s var(--ease),background .2s var(--ease)}
+  .spots__tab:hover{color:var(--gold-hi)}
+  .spots__tab b{font-family:var(--font-display);font-style:italic;font-size:1.05rem;color:var(--gold)}
+  .spots__tab[aria-selected="true"]{background:var(--foil);color:var(--ink-dark)}
+  .spots__tab[aria-selected="true"] b{color:var(--ink-dark)}
+  /* the timer: a hairline that fills under the active tab, then the photo flips */
+  .spots__bar{position:absolute;left:14%;right:14%;bottom:5px;height:2px;border-radius:2px;
+    background:oklch(0.17 0.01 70 / 0.55);transform:scaleX(0);transform-origin:left;opacity:0}
+  .spots.auto .spots__tab[aria-selected="true"] .spots__bar{opacity:1;animation:spots-timer 5.5s linear forwards}
+  .spots.auto:hover .spots__bar,.spots.auto:focus-within .spots__bar,.spots.idle .spots__bar{animation-play-state:paused}
+  @keyframes spots-timer{to{transform:scaleX(1)}}
+  @media(max-width:760px){.spots{min-height:0;aspect-ratio:4/3}}
+  @media(prefers-reduced-motion:reduce){.spots__slide,.spots__slide img{transition:none;transform:none}}
+  /* walk-through: both shops, captions wave in over the video */
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .walk{position:relative;margin:0 0 clamp(1.4rem,3.5vw,2.6rem);aspect-ratio:16/9;background:#000;
+    border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--gold-line);
+    box-shadow:0 26px 70px -34px oklch(0 0 0 / 0.9)}
+  .walk__vid{display:block;width:100%;height:100%;object-fit:cover}
+  .walk::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:linear-gradient(to top, oklch(0.09 0.008 70 / 0.86) 0%, oklch(0.09 0.008 70 / 0.35) 32%, transparent 58%)}
+  .walk__cap{position:absolute;z-index:2;left:clamp(1rem,3.4vw,2.5rem);right:1rem;bottom:clamp(1rem,3.2vw,2.3rem);
+    display:flex;align-items:center;gap:clamp(0.7rem,1.8vw,1.2rem);pointer-events:none}
+  .walk__num{font-family:var(--font-display);font-style:italic;font-weight:700;line-height:0.8;
+    font-size:clamp(3rem,8vw,6.2rem);padding-right:0.06em;
+    opacity:0;transform:translateY(0.3em) scale(0.9)}
+  .walk__txt{position:relative;display:flex;flex-direction:column;gap:0.4rem;padding-left:clamp(0.75rem,1.8vw,1.15rem)}
+  .walk__txt::before{content:"";position:absolute;left:0;top:0.15em;bottom:0.15em;width:1px;background:var(--foil);
+    transform:scaleY(0);transform-origin:top}
+  .walk__k{font-weight:700;font-size:clamp(0.66rem,1.2vw,0.76rem);letter-spacing:0.28em;text-transform:uppercase;color:var(--gold-hi)}
+  .walk__v{font-family:var(--font-display);font-style:italic;font-weight:600;line-height:1.15;
+    font-size:clamp(1.15rem,2.7vw,2.1rem);color:var(--ink);text-shadow:0 2px 18px oklch(0 0 0 / 0.7)}
+  .walk .w{display:inline-block;white-space:nowrap}
+  .walk .ch{display:inline-block;opacity:0;transform:translateY(0.6em) rotate(5deg)}
+  /* in: letters rise one after another, like a wave rolling through */
+  .walk__cap.on .walk__num{opacity:1;transform:none;
+    transition:opacity .6s var(--ease),transform .9s var(--ease)}
+  .walk__cap.on .walk__txt::before{transform:scaleY(1);transition:transform .7s var(--ease) .12s}
+  .walk__cap.on .ch{opacity:1;transform:none;
+    transition:opacity .45s var(--ease),transform .75s var(--ease);
+    transition-delay:calc(180ms + var(--i) * 26ms)}
+  /* out: everything lifts and dissolves, quicker */
+  .walk__cap.out .walk__num{opacity:0;transform:translateY(-0.2em);transition:opacity .45s var(--ease),transform .45s var(--ease)}
+  .walk__cap.out .walk__txt::before{transform:scaleY(0);transform-origin:bottom;transition:transform .4s var(--ease)}
+  .walk__cap.out .ch{opacity:0;transform:translateY(-0.4em);
+    transition:opacity .3s ease,transform .4s var(--ease);transition-delay:calc(var(--i) * 7ms)}
+  @media(max-width:680px){.walk{aspect-ratio:4/3}}
+  @media(prefers-reduced-motion:reduce){
+    .walk__cap.on .walk__num,.walk__cap.on .walk__txt::before,.walk__cap.on .ch,
+    .walk__cap.out .walk__num,.walk__cap.out .walk__txt::before,.walk__cap.out .ch{transition:opacity .2s linear;transform:none}
+  }
 
   /* footer */
   footer{padding:clamp(2.8rem,5vw,3.8rem) 0 2.4rem;border-top:1px solid var(--gold-line);background:var(--bg)}
@@ -235,6 +313,34 @@
   .foot__hand{font-size:0.86rem;color:var(--ink-3)}
   .foot__hand a{color:var(--gold);font-weight:700;border-bottom:1px solid var(--gold-line)}
   .foot__hand a:hover{color:var(--gold-hi)}
+
+  /* addresses: one row per shop, each with its own directions + copy */
+  #visit{scroll-margin-top:64px}
+  .addr{list-style:none;margin:0.35rem 0 0;display:grid;gap:0.95rem}
+  .shop__line{display:flex;align-items:baseline;gap:0.6rem;color:var(--ink);font-weight:500;line-height:1.45}
+  .shop__line b{font-family:var(--font-display);font-style:italic;font-weight:700;font-size:1.1rem;min-width:0.8rem}
+  .shop__line em{font-style:normal;color:var(--ink-3);font-size:0.88rem}
+  .shop__acts{display:flex;flex-wrap:wrap;gap:0.45rem;margin:0.55rem 0 0 1.4rem}
+  .chip{display:inline-flex;align-items:center;gap:0.4rem;min-height:38px;padding:0.4rem 0.8rem;border-radius:999px;
+    border:1px solid var(--gold-line);background:transparent;color:var(--gold-hi);
+    font:inherit;font-size:0.84rem;font-weight:700;letter-spacing:0.01em;cursor:pointer;
+    transition:border-color .18s var(--ease),background .18s var(--ease),transform .18s var(--ease)}
+  .chip:hover{border-color:var(--gold);background:var(--gold-dim);transform:translateY(-1px)}
+  .chip svg{width:15px;height:15px;flex:none}
+  .chip--copy .c2{display:none}
+  .chip--copy.is-copied{border-color:var(--gold);background:var(--gold-dim)}
+  .chip--copy.is-copied .c1{display:none}
+  .chip--copy.is-copied .c2{display:inline}
+  @media(max-width:560px){
+    .shop__acts{display:grid;grid-template-columns:1fr 1fr auto;margin-left:0}
+    .chip{justify-content:center;padding-inline:0.45rem;font-size:0.8rem;white-space:nowrap}
+    .chip[data-map] svg{display:none}
+    .chip--copy{width:40px;padding:0}
+    .chip--copy span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .chip--copy.is-copied svg{display:none}
+    .chip--copy.is-copied::after{content:"\2713";font-size:1rem;line-height:1}
+  }
+  @media(prefers-reduced-motion:reduce){.chip{transition:none}.chip:hover{transform:none}}
 
   /* reveal */
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -254,7 +360,7 @@
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main" data-es="Saltar al contenido">Skip to content</a>
 
 <header class="nav">
   <div class="wrap nav__row">
@@ -263,10 +369,14 @@
       <span class="brand__bs">Barber Shop</span>
     </a>
     <nav class="nav__links" aria-label="Primary">
-      <a href="#services">Services</a>
-      <a href="#work">Our Work</a>
-      <a href="#visit">Visit</a>
-      <a class="nav__cta" href="tel:+17372471710">Call the shop</a>
+      <a href="#services" data-es="Servicios">Services</a>
+      <a href="#work" data-es="Nuestro trabajo">Our Work</a>
+      <a href="#visit" data-es="Visítanos">Visit</a>
+      <button class="lang-toggle" type="button" data-lang-to="es" aria-label="Ver en español" aria-pressed="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span class="lang-label">Español</span>
+      </button>
+      <a class="nav__cta" href="tel:+17372471710" data-es="Llama a la barbería">Call the shop</a>
     </nav>
   </div>
 </header>
@@ -282,13 +392,13 @@
       <img class="crest" src="img/crest.webp" width="440" height="440" fetchpriority="high"
            alt="Ed's Barber Shop crest: a crown over a barber pole framed by a laurel wreath.">
 
-      <span class="eyebrow hero__eyebrow">Est. on Montopolis · East Austin</span>
+      <span class="eyebrow hero__eyebrow" data-es="En Montopolis · Este de Austin">Est. on Montopolis · East Austin</span>
       <h1>
         <span class="hero__eds foil">Ed&rsquo;s</span>
         <span class="hero__bs">Barber Shop</span>
       </h1>
-      <p class="hero__tag">Sharp fades. Bold color. A neighborhood institution.</p>
-      <p class="hero__sub">A barber shop and a hair salon under one roof. Crisp fades and beard work, kids' cuts, blowouts, and color that turns heads. Angela and the team have you, walk-ins and all.</p>
+      <p class="hero__tag" data-es="Fades precisos. Color atrevido. Una institución del barrio.">Sharp fades. Bold color. A neighborhood institution.</p>
+      <p class="hero__sub" data-es="Una barbería y un salón bajo el mismo techo. Fades y barba bien hechos, cortes para niños, blowouts y color que voltea miradas. Angela y el equipo te atienden, walk-ins incluidos.">A barber shop and a hair salon under one roof. Crisp fades and beard work, kids' cuts, blowouts, and color that turns heads. Angela and the team have you, walk-ins and all.</p>
 
       <div class="hero__rating">
         <span class="stars" aria-hidden="true">
@@ -298,34 +408,34 @@
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5 20.4l1.4-6.8L1.3 9l6.9-.7z"/></svg>
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 17.8V2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8z"/></svg>
         </span>
-        <span><b style="color:var(--ink)">4.5</b> from 51 Google reviews</span>
+        <span data-es="<b style=&quot;color:var(--ink)&quot;>4.5</b> de 51 reseñas en Google"><b style="color:var(--ink)">4.5</b> from 51 Google reviews</span>
       </div>
 
       <div class="hero__actions">
-        <a class="btn btn--primary" href="https://www.google.com/maps/place/Ed's+Hair/@30.2245668,-97.7200372,15z/data=!4m10!1m2!2m1!1shaircut+near+1504+Coriander+Dr!3m6!1s0x8644b59952f71d77:0xfa0cdd8fa85c83d2!8m2!3d30.2267296!4d-97.7025851!16s%2Fg%2F11k381l2jp" target="_blank" rel="noopener">
+        <a class="btn btn--primary" href="#visit">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          Get directions
+          <span class="btn-txt" data-es="Cómo llegar">Get directions</span>
         </a>
         <a class="btn btn--ghost" href="tel:+17372471710">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           (737) 247-1710
         </a>
       </div>
-      <p class="hero__note"><b>Todos bienvenidos.</b> Walk-ins welcome, hablamos español.</p>
+      <p class="hero__note" data-es="<b>Todos bienvenidos.</b> Aceptamos walk-ins, hablamos español."><b>Todos bienvenidos.</b> Walk-ins welcome, hablamos español.</p>
     </div>
 
     <div class="strip">
       <figure>
         <img src="img/mens-slickback.webp" width="1002" height="857" loading="eager" fetchpriority="high" alt="A fresh slicked-back taper fade, clean and tight on the sides.">
-        <figcaption>The fade</figcaption>
+        <figcaption data-es="El fade">The fade</figcaption>
       </figure>
       <figure>
         <img src="img/color-purple-teal.webp" width="468" height="806" loading="eager" alt="Long hair colored in vivid purple melting into teal and green.">
-        <figcaption>The color</figcaption>
+        <figcaption data-es="El color">The color</figcaption>
       </figure>
       <figure>
         <img src="img/strawberry-layers.webp" width="544" height="839" loading="eager" alt="Strawberry-blonde layers with a soft, bouncy blowout.">
-        <figcaption>The blowout</figcaption>
+        <figcaption data-es="El blowout">The blowout</figcaption>
       </figure>
     </div>
   </div>
@@ -335,9 +445,9 @@
 <section class="band band--raised" id="services">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">What we do</span>
-      <h2>Two chairs, one standard: get it right.</h2>
-      <p>Most folks come in for a fade or a beard. Plenty come in for color and a blowout. We do all of it, and we take our time on every head that sits down.</p>
+      <span class="eyebrow" data-es="Lo que hacemos">What we do</span>
+      <h2 data-es="Dos sillas, un solo estándar: hacerlo bien.">Two chairs, one standard: get it right.</h2>
+      <p data-es="La mayoría viene por un fade o la barba. Muchos vienen por color y un blowout. Hacemos de todo, y nos tomamos el tiempo con cada persona que se sienta en la silla.">Most folks come in for a fade or a beard. Plenty come in for color and a blowout. We do all of it, and we take our time on every head that sits down.</p>
     </div>
     <div class="svc">
 
@@ -345,39 +455,39 @@
         <div class="fimg"><img src="img/mens-fade-beard.webp" width="474" height="751" loading="lazy" decoding="async" alt="A skin fade blended into a sharp beard line-up."></div>
         <div class="ftext">
           <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 0V3m0 12v6m12-12a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm0 0V3m0 12v6"/></svg></div>
-          <h3>Fades, tapers &amp; beard work</h3>
-          <p>The signature. Skin fades, tapers, line-ups, and a beard trim that frames the whole thing. "Best fades in town, hands down" is a real review, not our words.</p>
+          <h3 data-es="Fades, tapers y barba">Fades, tapers &amp; beard work</h3>
+          <p data-es="La especialidad de la casa. Skin fades, tapers, perfilados y un recorte de barba que enmarca todo el corte. &quot;Best fades in town, hands down&quot; es una reseña de verdad, no algo que decimos nosotros.">The signature. Skin fades, tapers, line-ups, and a beard trim that frames the whole thing. "Best fades in town, hands down" is a real review, not our words.</p>
         </div>
       </article>
 
       <article class="svc__item reveal">
         <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 0 0-7 7c0 3 2 5 2 8a5 5 0 0 0 10 0c0-3 2-5 2-8a7 7 0 0 0-7-7z"/></svg></div>
-        <h3>Kids' haircuts</h3>
-        <p>Patient with the little ones, even the squirmy ones. Parents come back because the first cut goes well.</p>
+        <h3 data-es="Cortes para niños">Kids' haircuts</h3>
+        <p data-es="Pacientes con los pequeños, hasta con los más inquietos. Los papás regresan porque el primer corte sale bien.">Patient with the little ones, even the squirmy ones. Parents come back because the first cut goes well.</p>
       </article>
 
       <article class="svc__item reveal">
         <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21l6-6m0 0l3-3m-3 3l-2-2m11-7a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M14 7l4 4"/></svg></div>
-        <h3>Freehand designs &amp; hard parts</h3>
-        <p>Want a part carved in, a star, a clean piece of line work? The clippers do more than fades here.</p>
+        <h3 data-es="Diseños a mano alzada y hard parts">Freehand designs &amp; hard parts</h3>
+        <p data-es="¿Quieres una raya marcada, una estrella, una línea bien limpia? Aquí las máquinas hacen mucho más que fades.">Want a part carved in, a star, a clean piece of line work? The clippers do more than fades here.</p>
       </article>
 
       <article class="svc__item reveal">
         <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-3 4-6 6-6 10a6 6 0 0 0 12 0c0-4-3-6-6-10z"/></svg></div>
-        <h3>Color &amp; balayage</h3>
-        <p>Soft highlights and natural balayage, or full bold fashion color: purple, teal, green, blue. Sherry and the team are not afraid of a vivid box.</p>
+        <h3 data-es="Color y balayage">Color &amp; balayage</h3>
+        <p data-es="Rayitos suaves y balayage natural, o color de fantasía bien atrevido: morado, turquesa, verde, azul. Sherry y el equipo no le temen a un color vivo.">Soft highlights and natural balayage, or full bold fashion color: purple, teal, green, blue. Sherry and the team are not afraid of a vivid box.</p>
       </article>
 
       <article class="svc__item reveal">
         <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M4 12h7M4 18h12"/><circle cx="18" cy="6" r="2.5"/><circle cx="15" cy="12" r="2.5"/></svg></div>
-        <h3>Women's cuts, layers &amp; curtain bangs</h3>
-        <p>Shapes that grow out well and layers that move. Curtain bangs done so they actually sit right.</p>
+        <h3 data-es="Cortes de dama, capas y curtain bangs">Women's cuts, layers &amp; curtain bangs</h3>
+        <p data-es="Cortes que crecen bonito y capas que se mueven. Curtain bangs hechos para que de verdad caigan bien.">Shapes that grow out well and layers that move. Curtain bangs done so they actually sit right.</p>
       </article>
 
       <article class="svc__item reveal">
         <div class="svc__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12a7 7 0 0 1 14 0M3 12h2m14 0h2M12 19v2M7.5 17.5l-1.5 1.5m12 0l-1.5-1.5"/></svg></div>
-        <h3>Blowouts &amp; styling</h3>
-        <p>Smooth, full, and finished. The kind of blowout that makes a regular out of a first-timer.</p>
+        <h3 data-es="Blowouts y peinado">Blowouts &amp; styling</h3>
+        <p data-es="Liso, con volumen y bien terminado. El tipo de blowout que vuelve cliente fijo a quien viene por primera vez.">Smooth, full, and finished. The kind of blowout that makes a regular out of a first-timer.</p>
       </article>
 
     </div>
@@ -388,9 +498,9 @@
 <section class="band" id="work">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Our work</span>
-      <h2>Walk through the chair.</h2>
-      <p>Every photo here is real work from the shop. Fades and beards on one wall, color and styling on the other.</p>
+      <span class="eyebrow" data-es="Nuestro trabajo">Our work</span>
+      <h2 data-es="Un paseo por la silla.">Walk through the chair.</h2>
+      <p data-es="Cada foto es trabajo real de la barbería. Fades y barbas de un lado, color y peinado del otro.">Every photo here is real work from the shop. Fades and beards on one wall, color and styling on the other.</p>
     </div>
     <div class="gal reveal">
       <figure data-label="Slicked-back taper"><img src="img/mens-slickback.webp" width="1002" height="857" loading="lazy" decoding="async" alt="Men's slicked-back taper fade in profile."></figure>
@@ -412,8 +522,8 @@
 <section class="band band--raised">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">From the neighborhood</span>
-      <h2>People do not switch once they find Ed's.</h2>
+      <span class="eyebrow" data-es="Desde el barrio">From the neighborhood</span>
+      <h2 data-es="Quien encuentra Ed's, ya no se cambia.">People do not switch once they find Ed's.</h2>
     </div>
     <div class="quotes">
       <blockquote class="quote quote--wide reveal">
@@ -462,13 +572,13 @@
       <img src="img/team.webp" width="731" height="810" loading="lazy" decoding="async" alt="Angela, the owner, smiling up front with her barbers behind her in the shop.">
     </div>
     <div class="reveal">
-      <span class="eyebrow">The shop</span>
-      <h2>Run by Angela, kept by the regulars.</h2>
-      <p>Ed's has been cutting Montopolis for years. <strong>Angela holds the whole place down</strong> and runs it like family, which is why folks like Miguel have been coming back for half a decade and bring their kids along.</p>
-      <p>The crew, Leo, Paul, Hector, Yoendry, Angel, and Sherry, can take you from a number-two fade to a full head of color without missing a beat. Clean shop, honest prices, no rush in the chair.</p>
+      <span class="eyebrow" data-es="La barbería">The shop</span>
+      <h2 data-es="Dirigida por Angela, sostenida por los clientes de siempre.">Run by Angela, kept by the regulars.</h2>
+      <p data-es="Ed's lleva años cortando en Montopolis. <strong>Angela sostiene todo el lugar</strong> y lo lleva como familia, por eso clientes como Miguel llevan media década regresando y traen a sus hijos.">Ed's has been cutting Montopolis for years. <strong>Angela holds the whole place down</strong> and runs it like family, which is why folks like Miguel have been coming back for half a decade and bring their kids along.</p>
+      <p data-es="El equipo, Leo, Paul, Hector, Yoendry, Angel y Sherry, te llevan de un fade número dos a una cabeza entera de color sin despeinarse. Barbería limpia, precios honestos, sin prisas en la silla.">The crew, Leo, Paul, Hector, Yoendry, Angel, and Sherry, can take you from a number-two fade to a full head of color without missing a beat. Clean shop, honest prices, no rush in the chair.</p>
       <span class="bienvenidos">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Todos bienvenidos · everyone welcome
+        <span class="t" data-es="Todos bienvenidos · aquí todos caben">Todos bienvenidos · everyone welcome</span>
       </span>
     </div>
   </div>
@@ -478,46 +588,92 @@
 <section class="band band--raised" id="visit">
   <div class="wrap">
     <div class="sec-head reveal">
-      <span class="eyebrow">Come by</span>
-      <h2>Find us on Montopolis.</h2>
-      <p>Look for the barber pole and the Ed's sign. We are in the back unit, so the photo below is your landmark.</p>
+      <span class="eyebrow" data-es="Pásate">Come by</span>
+      <h2 data-es="Encuéntranos en Montopolis.">Find us on Montopolis.</h2>
+      <p data-es="Dos barberías en un mismo lote: una sobre la calle y otra atrás. Busca los toldos de rayas y el letrero de Ed's.">Two shops on one lot: one on the street, one out back. Look for the striped awnings and the Ed's sign.</p>
     </div>
+    <figure class="walk reveal">
+      <video class="walk__vid" muted playsinline loop preload="none" poster="img/locations-poster.webp" aria-hidden="true">
+        <source src="img/locations-walk.mp4" type="video/mp4">
+      </video>
+      <div class="walk__cap" data-in="0.35" data-out="2.35" aria-hidden="true">
+        <span class="walk__num foil">1</span>
+        <span class="walk__txt">
+          <span class="walk__k" data-split data-es-split="Local 1">Location 1</span>
+          <span class="walk__v" data-split data-es-split="En Montopolis, junto al salón de uñas">On Montopolis, next to the nail salon</span>
+        </span>
+      </div>
+      <div class="walk__cap" data-in="5.93" data-out="11.35" aria-hidden="true">
+        <span class="walk__num foil">2</span>
+        <span class="walk__txt">
+          <span class="walk__k" data-split data-es-split="Local 2">Location 2</span>
+          <span class="walk__v" data-split data-es-split="Atrás, a la derecha de la llantera">Out back, right of the tire shop</span>
+        </span>
+      </div>
+      <figcaption class="sr" data-es="Un recorrido desde la calle hasta las dos barberías de Ed's. El local 1 está sobre Montopolis Drive, junto al salón de uñas. El local 2 está atrás, a la derecha de la llantera.">A walk from the street to both Ed's shops. Location 1 is on Montopolis Drive, next to the nail salon. Location 2 is out back, to the right of the tire shop.</figcaption>
+    </figure>
     <div class="visit">
       <div class="visit__card reveal">
-        <h3>Hours &amp; contact</h3>
+        <h3 data-es="Horario y contacto">Hours &amp; contact</h3>
         <div class="vrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><div class="k">Address</div><div class="v">1710 Montopolis Dr, Unit B<br>Austin, TX 78741</div></div>
+          <div><div class="k" data-es="Direcciones">Addresses</div>
+            <ul class="addr">
+              <li class="shop">
+                <div class="shop__line"><b class="foil">1</b><span>1710 Montopolis Dr, Unit B <em data-es="(sobre la calle)">(on the street)</em></span></div>
+                <div class="shop__acts" role="group" aria-label="Shop 1">
+                  <a class="chip" data-map="apple" href="https://maps.apple.com/?daddr=1710+Montopolis+Dr%2C+Austin%2C+TX+78741&amp;dirflg=d" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Apple Maps</a>
+                  <a class="chip" data-map="google" href="https://www.google.com/maps/dir/?api=1&amp;destination=1710+Montopolis+Dr%2C+Austin%2C+TX+78741" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Google Maps</a>
+                  <button class="chip chip--copy" type="button" data-copy="1710 Montopolis Dr, Unit B, Austin, TX 78741"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="c1" data-es="Copiar">Copy</span><span class="c2" data-es="¡Copiada!">Copied</span></button>
+                </div>
+              </li>
+              <li class="shop">
+                <div class="shop__line"><b class="foil">2</b><span>1708 Montopolis Dr, Unit C <em data-es="(atrás)">(out back)</em></span></div>
+                <div class="shop__acts" role="group" aria-label="Shop 2">
+                  <a class="chip" data-map="apple" href="https://maps.apple.com/?daddr=1708+Montopolis+Dr%2C+Austin%2C+TX+78741&amp;dirflg=d" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Apple Maps</a>
+                  <a class="chip" data-map="google" href="https://www.google.com/maps/dir/?api=1&amp;destination=1708+Montopolis+Dr%2C+Austin%2C+TX+78741" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Google Maps</a>
+                  <button class="chip chip--copy" type="button" data-copy="1708 Montopolis Dr, Unit C, Austin, TX 78741"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="c1" data-es="Copiar">Copy</span><span class="c2" data-es="¡Copiada!">Copied</span></button>
+                </div>
+              </li>
+            </ul>
+            <span class="sr" role="status" aria-live="polite" id="copy-status"></span>
+            </div>
         </div>
         <div class="vrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <div><div class="k">Phone</div><div class="v"><a href="tel:+17372471710">(737) 247-1710</a></div></div>
+          <div><div class="k" data-es="Teléfono">Phone</div><div class="v"><a href="tel:+17372471710">(737) 247-1710</a></div></div>
         </div>
         <div class="vrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           <div>
-            <div class="k">Hours</div>
+            <div class="k" data-es="Horario">Hours</div>
             <ul class="hours">
-              <li><span>Mon &ndash; Thu</span><b>10am &ndash; 7pm</b></li>
-              <li><span>Friday</span><b>10am &ndash; 8pm</b></li>
-              <li><span>Saturday</span><b>9am &ndash; 8pm</b></li>
-              <li><span>Sunday</span><b>Reduced</b></li>
+              <li><span data-es="Lun &ndash; Jue">Mon &ndash; Thu</span><b>10am &ndash; 7pm</b></li>
+              <li><span data-es="Viernes">Friday</span><b>10am &ndash; 8pm</b></li>
+              <li><span data-es="Sábado">Saturday</span><b>9am &ndash; 8pm</b></li>
+              <li><span data-es="Domingo">Sunday</span><b data-es="Reducido">Reduced</b></li>
             </ul>
-            <p class="hours__note">Give us a call to confirm Sunday and holiday hours.</p>
+            <p class="hours__note" data-es="Llámanos para confirmar el horario de domingo y días festivos.">Give us a call to confirm Sunday and holiday hours.</p>
           </div>
         </div>
         <div class="visit__btns">
-          <a class="btn btn--primary" href="https://www.google.com/maps/place/Ed's+Hair/@30.2245668,-97.7200372,15z/data=!4m10!1m2!2m1!1shaircut+near+1504+Coriander+Dr!3m6!1s0x8644b59952f71d77:0xfa0cdd8fa85c83d2!8m2!3d30.2267296!4d-97.7025851!16s%2Fg%2F11k381l2jp" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Get directions
-          </a>
-          <a class="btn btn--ghost" href="tel:+17372471710">Call now</a>
+          <a class="btn btn--primary" href="tel:+17372471710"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-es="Llama ahora">Call now</span></a>
         </div>
       </div>
-      <figure class="visit__store reveal">
-        <img src="img/storefront.webp" width="731" height="810" loading="lazy" decoding="async" alt="The Ed's storefront on Montopolis Drive with a striped barber pole out front.">
-        <figcaption>This is the place. Look for the barber pole.</figcaption>
-      </figure>
+      <div class="visit__store spots reveal" aria-roledescription="carousel" aria-label="Our two shops">
+        <div class="spots__tabs" role="tablist" aria-label="Choose a shop">
+          <button class="spots__tab" type="button" role="tab" id="spot-tab-1" aria-controls="spot-1" aria-selected="true"><b>1</b><span data-es="En Montopolis">On Montopolis</span><span class="spots__bar"></span></button>
+          <button class="spots__tab" type="button" role="tab" id="spot-tab-2" aria-controls="spot-2" aria-selected="false" tabindex="-1"><b>2</b><span data-es="Atrás">Out back</span><span class="spots__bar"></span></button>
+        </div>
+        <figure class="spots__slide is-on" id="spot-1" role="tabpanel" aria-labelledby="spot-tab-1">
+          <img src="img/shop-on-montopolis.webp" width="1400" height="788" loading="lazy" decoding="async" alt="Ed's on Montopolis: a black storefront under a red, white and blue striped awning with the gold Ed's sign, beside an orange taco stand.">
+          <figcaption class="spots__cap"><span class="k" data-es="Local 1">Location 1</span><span class="v" data-es="Junto al salón de uñas">Next to the nail salon</span></figcaption>
+        </figure>
+        <figure class="spots__slide" id="spot-2" role="tabpanel" aria-labelledby="spot-tab-2" hidden>
+          <img src="img/shop-out-back.webp" width="1400" height="788" loading="lazy" decoding="async" alt="Ed's out back: a black storefront under a striped awning with the gold Ed's sign and a barber pole, next to the tire shop.">
+          <figcaption class="spots__cap"><span class="k" data-es="Local 2">Location 2</span><span class="v" data-es="Atrás, a la derecha de la llantera">Out back, right of the tire shop</span></figcaption>
+        </figure>
+      </div>
     </div>
   </div>
 </section>
@@ -531,9 +687,9 @@
         <span class="foot__eds foil">Ed&rsquo;s</span>
         <span class="foot__bs">Barber Shop</span>
       </div>
-      <p>Barber shop precision and salon color, in the heart of Montopolis. Walk-ins welcome.</p>
+      <p data-es="Precisión de barbería y color de salón, en el corazón de Montopolis. Walk-ins bienvenidos.">Barber shop precision and salon color, in the heart of Montopolis. Walk-ins welcome.</p>
     </div>
-    <div class="foot__hand">
+    <div class="foot__hand" data-es="Hecho por <a href=&quot;https://handprotocol.org&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>HAND</a>.">
       Made by <a href="https://handprotocol.org" target="_blank" rel="noopener">HAND</a>.
     </div>
   </div>
@@ -549,6 +705,173 @@
       entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}});
     },{threshold:0.12,rootMargin:'0px 0px -8% 0px'});
     els.forEach(function(e){io.observe(e);});
+  })();
+
+  // Bilingual EN/ES. Spanish-set browsers get Spanish automatically; the
+  // toggle is a manual override and the choice is remembered. No build step,
+  // no dependencies: each translatable node carries its Spanish in data-es.
+  (function () {
+    var KEY = "hand-lang";
+    var nodes = [].slice.call(document.querySelectorAll("[data-es]"));
+    nodes.forEach(function (n) {
+      n.__en = (n.tagName === "META") ? n.getAttribute("content") : n.innerHTML;
+    });
+    function setToggles(es) {
+      [].forEach.call(document.querySelectorAll(".lang-toggle"), function (b) {
+        b.setAttribute("data-lang-to", es ? "en" : "es");
+        b.setAttribute("aria-pressed", es ? "true" : "false");
+        b.setAttribute("aria-label", es ? "View in English" : "Ver en español");
+        var l = b.querySelector(".lang-label");
+        if (l) l.textContent = es ? "English" : "Español";
+      });
+    }
+    function apply(lang) {
+      var es = lang === "es";
+      nodes.forEach(function (n) {
+        var v = es ? n.getAttribute("data-es") : n.__en;
+        if (v == null) return;
+        if (n.tagName === "META") n.setAttribute("content", v);
+        else n.innerHTML = v;
+      });
+      document.documentElement.lang = es ? "es" : "en";
+      setToggles(es);
+    }
+    var stored = null;
+    try { stored = localStorage.getItem(KEY); } catch (e) {}
+    var nav = (navigator.language || navigator.userLanguage || "").toLowerCase();
+    apply(stored || (nav.indexOf("es") === 0 ? "es" : "en"));
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest(".lang-toggle");
+      if (!b) return;
+      e.preventDefault();
+      var to = b.getAttribute("data-lang-to") || "es";
+      apply(to);
+      try { localStorage.setItem(KEY, to); } catch (e2) {}
+    });
+  })();
+
+  /* addresses: Apple Maps first on Apple devices; Copy puts the full address on the clipboard */
+  (function(){
+    var ua=navigator.userAgent;
+    if(/iPhone|iPad|iPod|Macintosh/.test(ua)&&!/Android/.test(ua))
+      document.querySelectorAll('.shop__acts').forEach(function(g){g.insertBefore(g.querySelector('[data-map="apple"]'),g.firstChild);});
+    else
+      document.querySelectorAll('.shop__acts').forEach(function(g){g.insertBefore(g.querySelector('[data-map="google"]'),g.firstChild);});
+    var status=document.getElementById('copy-status');
+    function fallback(text){
+      var t=document.createElement('textarea');t.value=text;t.setAttribute('readonly','');
+      t.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(t);
+      t.select();t.setSelectionRange(0,text.length);
+      var ok=false;try{ok=document.execCommand('copy');}catch(e){}
+      t.remove();return ok?Promise.resolve():Promise.reject();
+    }
+    document.querySelectorAll('[data-copy]').forEach(function(btn){
+      var timer;
+      btn.addEventListener('click',function(){
+        var text=btn.getAttribute('data-copy');
+        var p=navigator.clipboard&&window.isSecureContext?navigator.clipboard.writeText(text).catch(function(){return fallback(text);}):fallback(text);
+        p.then(function(){
+          btn.classList.add('is-copied');
+          if(status)status.textContent=(document.documentElement.lang==='es'?'Dirección copiada: ':'Address copied: ')+text;
+          clearTimeout(timer);timer=setTimeout(function(){btn.classList.remove('is-copied');},2200);
+        },function(){window.prompt(document.documentElement.lang==='es'?'Copia la dirección:':'Copy the address:',text);});
+      });
+    });
+  })();
+
+  /* two-shop switcher: the timer bar's animationend advances it; a tap or swipe takes over */
+  (function(){
+    var box=document.querySelector('.spots');if(!box)return;
+    var tabs=[].slice.call(box.querySelectorAll('[role="tab"]'));
+    var slides=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'));});
+    var cur=0;
+    slides.forEach(function(s){s.hidden=false;});
+    function show(i,focus){
+      cur=(i+slides.length)%slides.length;
+      tabs.forEach(function(t,k){var on=k===cur;
+        t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;
+        slides[k].classList.toggle('is-on',on);slides[k].setAttribute('aria-hidden',!on);});
+      if(focus)tabs[cur].focus();
+    }
+    function takeOver(i,focus){box.classList.remove('auto');show(i,focus);}
+    tabs.forEach(function(t,k){
+      t.addEventListener('click',function(){takeOver(k);});
+      t.addEventListener('keydown',function(e){
+        if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();takeOver(cur+(e.key==='ArrowRight'?1:-1),true);}
+      });
+    });
+    box.addEventListener('animationend',function(e){
+      if(e.animationName==='spots-timer'&&box.classList.contains('auto'))show(cur+1);
+    });
+    var x0=null;
+    box.addEventListener('pointerdown',function(e){x0=e.clientX;});
+    box.addEventListener('pointerup',function(e){
+      if(x0===null)return;var dx=e.clientX-x0;x0=null;
+      if(Math.abs(dx)>40)takeOver(cur+(dx<0?1:-1));
+    });
+    show(0);
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+    box.classList.add('auto');
+    if('IntersectionObserver' in window)new IntersectionObserver(function(en){
+      box.classList.toggle('idle',!en[en.length-1].isIntersecting);
+    },{threshold:0.3}).observe(box);
+  })();
+
+  /* walk-through: split captions into letters, then wave them in/out on the video's clock */
+  (function(){
+    var walk=document.querySelector('.walk');if(!walk)return;
+    var vid=walk.querySelector('video');
+    var caps=[].slice.call(walk.querySelectorAll('.walk__cap'));
+    function split(cap){
+      var es=document.documentElement.lang==='es',i=0;
+      cap.querySelectorAll('[data-split]').forEach(function(el){
+        if(el._en==null)el._en=el.textContent.trim();
+        var text=(es&&el.getAttribute('data-es-split'))||el._en;
+        var words=text.split(/\s+/);el.textContent='';
+        words.forEach(function(word,wi){
+          var w=document.createElement('span');w.className='w';
+          Array.from(word).forEach(function(c){
+            var s=document.createElement('span');s.className='ch';s.textContent=c;
+            s.style.setProperty('--i',i++);w.appendChild(s);
+          });
+          el.appendChild(w);
+          if(wi<words.length-1){el.appendChild(document.createTextNode(' '));i++;}
+        });
+      });
+    }
+    caps.forEach(function(cap){
+      split(cap);
+      cap._in=parseFloat(cap.dataset.in);cap._out=parseFloat(cap.dataset.out);cap._on=false;
+    });
+    new MutationObserver(function(){caps.forEach(split);})
+      .observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+    function sync(){
+      var t=vid.currentTime;
+      caps.forEach(function(cap){
+        var on=t>=cap._in&&t<cap._out;
+        if(on===cap._on)return;cap._on=on;
+        if(on){cap.classList.remove('out');void cap.offsetWidth;cap.classList.add('on');}
+        else{cap.classList.remove('on');cap.classList.add('out');}
+      });
+    }
+    if('requestVideoFrameCallback' in vid){
+      var onFrame=function(){sync();vid.requestVideoFrameCallback(onFrame);};
+      vid.requestVideoFrameCallback(onFrame);
+    }else{
+      var raf=null;
+      var tick=function(){sync();raf=vid.paused?null:requestAnimationFrame(tick);};
+      vid.addEventListener('play',function(){if(!raf)raf=requestAnimationFrame(tick);});
+    }
+    vid.addEventListener('seeked',sync);
+    var calm=window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ||(navigator.connection&&navigator.connection.saveData);
+    if(calm){vid.controls=true;vid.removeAttribute('aria-hidden');vid.setAttribute('aria-label','Walk-through of both Ed’s shops');
+      vid.addEventListener('timeupdate',sync);return;}
+    if(!('IntersectionObserver' in window)){vid.play().catch(function(){});return;}
+    new IntersectionObserver(function(en){
+      if(en[0].isIntersecting){var p=vid.play();if(p&&p.catch)p.catch(function(){vid.controls=true;});}
+      else vid.pause();
+    },{threshold:0.35}).observe(walk);
   })();
 </script>
 </body>
