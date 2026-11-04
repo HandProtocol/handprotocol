@@ -25,8 +25,10 @@ https://admin.mysticheartshealing.com, mail is live, and the next piece of work 
   anyone but the owner. Five seats; when full the page shows "Ask for more seats", which mails
   handprotocol@gmail.com (once a day). Raise it on the box:
   `docker exec koordi node src/cli.mjs tenant page --tenant mystichearts --seats 7`.
-  - **handprotocol@gmail.com** is on the team as "HAND support": it can sign in, it takes no
-    seat, and its request emails are off (record 0004).
+  - **handprotocol@gmail.com** and **cryptokoh@gmail.com** are on the team as "HAND support":
+    they can sign in, take no seat, and their request emails are off (record 0004). A platform
+    admin is not let into a business's console by that alone: sign-in links go only to team
+    members, so each HAND address must be on the team (added 2026-11-04 by a one-off script).
   - hand@handprotocol.org (the placeholder owner) was removed.
 - **Say hello** now posts to koordi's `POST /v1/notes` with the publishable key. The note lands in
   the admin under Messages and is mailed to everyone on the team with request emails on (Reply-To
