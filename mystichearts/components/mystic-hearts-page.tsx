@@ -11,7 +11,7 @@ import { StorySheet } from "./story-sheet";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const asset = (path: string) => `${basePath}${path}`;
 
-const CONTACT_EMAIL = "cshearer210@gmail.com";
+const CONTACT_EMAIL = "mysticheartshealing@gmail.com";
 
 const EASE = [0.2, 0.7, 0.2, 1] as const;
 const rise: Variants = {

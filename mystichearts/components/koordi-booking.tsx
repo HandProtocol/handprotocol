@@ -6,7 +6,7 @@ import { createElement, useEffect, useState } from "react";
 // once, from the koordi address in NEXT_PUBLIC_KOORDI_URL, and the business's publishable
 // key comes from NEXT_PUBLIC_KOORDI_KEY. Colours are passed down through the --koordi-*
 // custom properties the widget reads inside its shadow root.
-export const KOORDI_URL = (process.env.NEXT_PUBLIC_KOORDI_URL || "https://koordi.handprotocol.org").replace(/\/+$/, "");
+export const KOORDI_URL = (process.env.NEXT_PUBLIC_KOORDI_URL || "https://book.mysticheartshealing.com").replace(/\/+$/, "");
 export const KOORDI_KEY = process.env.NEXT_PUBLIC_KOORDI_KEY || "";
 
 let scriptPromise: Promise<void> | null = null;

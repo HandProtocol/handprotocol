@@ -12,6 +12,7 @@ set -a; . ./.env.production; set +a
 export NEXT_PUBLIC_SITE_URL="${NEXT_PUBLIC_SITE_URL:-https://mysticheartshealing.com}"
 NEXT_PUBLIC_BASE_PATH= npx next build
 if grep -rqs "localhost:4747" out; then echo "the export points at a local koordi; stop" >&2; exit 1; fi
+if grep -rqs "koordi.handprotocol.org" out; then echo "the export names koordi.handprotocol.org; customers must only see book.mysticheartshealing.com (white label); stop" >&2; exit 1; fi
 TOKEN="${NETLIFY_AUTH_TOKEN:-$(python3 -c "import json;print(json.load(open('$HOME/.config/netlify/config.json'))['users']['65ff678f80077666077c6c55']['auth']['token'])")}"
 # Deploy from a copy outside the repo: inside it the CLI reads the hand repo's netlify.toml,
 # runs that build and bundles HAND's functions and edge functions with this site.

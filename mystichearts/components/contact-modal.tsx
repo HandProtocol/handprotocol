@@ -3,7 +3,7 @@
 import { ArrowUpRight, CalendarDays, Feather, Footprints, Sparkles } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
 import { WHATS_ON } from "./copy";
-import { KoordiBooking } from "./koordi-booking";
+import { KOORDI_KEY, KOORDI_URL, KoordiBooking } from "./koordi-booking";
 import { KoordiCalendar } from "./koordi-calendar";
 import { FocusTitle, Sheet, SheetPanel, SheetTabs } from "./sheet";
 
@@ -45,9 +45,48 @@ const HELLO_URL = process.env.NEXT_PUBLIC_HELLO_URL || "/.netlify/functions/feed
 
 type HelloState = "idle" | "sending" | "sent" | "failed";
 
+// The words beside the box, sent with the signup so koordi keeps exactly what the person saw.
+const KEEP_POSTED = "Keep me posted on what is unfolding on the land.";
+const KEEP_POSTED_VERSION = "say-hello-1";
+
+// Keep me posted goes to the collective's own list in koordi: it mails a confirm link from the
+// collective, and only that link's button puts the address on the list. Best effort: the note
+// itself has already gone, so a failure here is not the visitor's to fix.
+async function askToJoin(name: string, email: string): Promise<boolean> {
+  if (!KOORDI_KEY) return false;
+  try {
+    const res = await fetch(`${KOORDI_URL}/v1/list/signups`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${KOORDI_KEY}`, "Idempotency-Key": crypto.randomUUID() },
+      body: JSON.stringify({ email, name, lang: "en", wording: { text: KEEP_POSTED, version: KEEP_POSTED_VERSION, checked: true } }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+// The note goes to the collective's own admin in koordi (Messages), which emails everyone on its
+// Team with request emails on, the reply going straight back to the sender. Without a key, or if
+// koordi does not answer, it goes the old way, to HAND's feedback function, so nothing is lost.
+async function sendToCollective(name: string, email: string, message: string): Promise<boolean> {
+  if (!KOORDI_KEY) return false;
+  try {
+    const res = await fetch(`${KOORDI_URL}/v1/notes`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${KOORDI_KEY}`, "Idempotency-Key": crypto.randomUUID() },
+      body: JSON.stringify({ name, email, message, lang: "en" }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 // `seed` is a first line for the note, when another door sent the visitor here with a reason.
 function HelloForm({ fallbackEmail, seed }: { fallbackEmail: string; seed?: string }) {
   const [state, setState] = useState<HelloState>("idle");
+  const [confirmSent, setConfirmSent] = useState(false);
   const [draft, setDraft] = useState({ name: "", email: "", note: seed ?? "", keepPosted: true });
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -65,12 +104,13 @@ function HelloForm({ fallbackEmail, seed }: { fallbackEmail: string; seed?: stri
       .filter((line, i) => line !== "" || i === 2)
       .join("\n");
     try {
-      const res = await fetch(HELLO_URL, {
+      const reached = (await sendToCollective(name, email, note)) || (await fetch(HELLO_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text, name, path: window.location.pathname, title: document.title, source: "mystichearts", website: "" }),
-      });
-      setState(res.ok ? "sent" : "failed");
+      })).ok;
+      if (reached && keepPosted) setConfirmSent(await askToJoin(name, email));
+      setState(reached ? "sent" : "failed");
     } catch {
       setState("failed");
     }
@@ -81,6 +121,7 @@ function HelloForm({ fallbackEmail, seed }: { fallbackEmail: string; seed?: stri
       <div className="door-done">
         <h3>Received, with thanks.</h3>
         <p>A person reads every note. You will hear back from us, not from a machine.</p>
+        {confirmSent && <p>One more step for the list: we sent you an email. Open it and press the button to confirm.</p>}
       </div>
     );
   }
@@ -92,7 +133,7 @@ function HelloForm({ fallbackEmail, seed }: { fallbackEmail: string; seed?: stri
       <div className="field-row">
         <label className="field">
           <span>Your name</span>
-          <input name="name" type="text" autoComplete="name" required maxLength={120} defaultValue={draft.name} />
+          <input name="name" type="text" autoComplete="name" required maxLength={80} defaultValue={draft.name} />
         </label>
         <label className="field">
           <span>Email</span>
@@ -105,7 +146,7 @@ function HelloForm({ fallbackEmail, seed }: { fallbackEmail: string; seed?: stri
       </label>
       <label className="tick">
         <input name="keepPosted" type="checkbox" defaultChecked={draft.keepPosted} />
-        <span>Keep me posted on what is unfolding on the land.</span>
+        <span>{KEEP_POSTED}</span>
       </label>
       <input className="hp" name="website" type="text" tabIndex={-1} autoComplete="off" aria-hidden="true" />
       {state === "failed" && (

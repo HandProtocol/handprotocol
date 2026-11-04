@@ -7,6 +7,8 @@
 
 ## Current state (2026-10-31): read this first
 
+**2026-11-04:** booking is at https://book.mysticheartshealing.com/ (root, old /book/mystichearts links forward), the collective's admin at https://admin.mysticheartshealing.com (owner mysticheartshealing@gmail.com, Team page with five seats, handprotocol@gmail.com as seatless HAND support), and Say hello posts to koordi's /v1/notes. Details in `HANDOFF.md` "The addresses". Deadline: whole system working by 2026-11-11.
+
 **Live at https://mysticheartshealing.com (2026-11-01)**, its own Netlify project on Netlify DNS (mhh.handprotocol.org is an alias), published with `./scripts/publish-mhh.sh`. koordi is in production mode and sends Mystic Hearts' mail through Resend from hello@mysticheartshealing.com. Read `HANDOFF.md` first: deploy rules, keys, mail and the Google Workspace step.
 
 **Rebuilt 2026-10-31 as one screen.** koH found the sectioned Raspberry Night design either underwhelming (placeholder photos) or too much, and asked for a video background, one clear message, and a luxurious get-in-touch and calendar modal run by koordi. That is what `components/mystic-hearts-page.tsx` now is:
