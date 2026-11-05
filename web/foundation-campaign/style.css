@@ -29,6 +29,8 @@
 
   --color-accent: #D97706;
   --color-accent-hover: #B45309;
+  --color-accent-action: #B45309;
+  --color-accent-action-hover: #92400E;
   --color-accent-warm: #F59E0B;
   --color-accent-light: #FEF3C7;
   --color-accent-glow: rgba(217, 119, 6, 0.15);
@@ -166,14 +168,16 @@ strong {
   white-space: nowrap;
 }
 
-.btn--primary {
-  background: var(--color-accent);
+.btn.btn--primary {
+  background: var(--color-accent-action);
   color: #fff;
+  border: none;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.btn--primary:hover {
-  background: var(--color-accent-hover);
+.btn.btn--primary:hover {
+  background: var(--color-accent-action-hover);
+  color: #fff;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px var(--color-accent-glow);
 }
@@ -2243,11 +2247,14 @@ strong {
   transition: opacity 180ms ease, transform 180ms ease, visibility 0s;
 }
 @media (max-width: 640px) {
-  /* On narrow viewports a centred tip can clip; left-anchor it instead. */
-  .qf-link__tip { left: 0; transform: translateX(0) translateY(4px); max-width: min(280px, calc(100vw - 32px)); }
+  /* On narrow viewports a centred tip can clip; left-anchor it instead.
+     While hidden, collapse it to zero width: a visibility:hidden box still
+     counts toward scrollable overflow, and a 280px tip hanging off a link
+     mid-line widened the mobile viewport and pushed the nav toggle off-screen. */
+  .qf-link__tip { left: 0; transform: translateX(0) translateY(4px); max-width: min(280px, calc(100vw - 32px)); width: 0; padding: 0; overflow: hidden; }
   .qf-link__tip::after { left: 16px; transform: none; }
   .qf-link:hover .qf-link__tip,
-  .qf-link:focus-visible .qf-link__tip { transform: translateX(0) translateY(0); }
+  .qf-link:focus-visible .qf-link__tip { transform: translateX(0) translateY(0); width: max-content; padding: 0.625rem 0.875rem; overflow: visible; }
 }
 
 /* ========================================
@@ -2656,7 +2663,10 @@ strong {
 
 .stay-close__grid {
   display: grid;
-  grid-template-columns: 1fr;
+  /* minmax(0, 1fr): a bare 1fr track floors at min-content, and the text
+     inputs' intrinsic width (~266px) would widen the page past narrow
+     viewports and push the nav toggle off-screen. */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-2xl);
   max-width: 64rem;
   margin: 0 auto;
@@ -2737,6 +2747,8 @@ strong {
 }
 
 .stay-close__input {
+  width: 100%;
+  min-width: 0;
   font-family: inherit;
   font-size: 1rem;
   line-height: 1.5;

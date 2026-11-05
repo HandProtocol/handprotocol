@@ -25,6 +25,8 @@
 
   --color-accent: #D97706;
   --color-accent-hover: #B45309;
+  --color-accent-action: #B45309;
+  --color-accent-action-hover: #92400E;
   --color-accent-warm: #F59E0B;
   --color-accent-light: #FEF3C7;
   --color-accent-glow: rgba(217, 119, 6, 0.15);
@@ -147,10 +149,12 @@
   transition: opacity 180ms ease, transform 180ms ease, visibility 0s;
 }
 @media (max-width: 640px) {
-  .qf-link__tip { left: 0; transform: translateX(0) translateY(4px); max-width: min(280px, calc(100vw - 32px)); }
+  /* Collapse the hidden tip to zero width: a visibility:hidden box still
+     counts toward scrollable overflow and widened the mobile viewport. */
+  .qf-link__tip { left: 0; transform: translateX(0) translateY(4px); max-width: min(280px, calc(100vw - 32px)); width: 0; padding: 0; overflow: hidden; }
   .qf-link__tip::after { left: 16px; transform: none; }
   .qf-link:hover .qf-link__tip,
-  .qf-link:focus-visible .qf-link__tip { transform: translateX(0) translateY(0); }
+  .qf-link:focus-visible .qf-link__tip { transform: translateX(0) translateY(0); width: max-content; padding: 0.625rem 0.875rem; overflow: visible; }
 }
 
 /* ---- Skip-link (keyboard accessibility) ---- */
@@ -269,8 +273,18 @@ p { color: var(--color-text-secondary); line-height: 1.75; margin-bottom: var(--
   text-decoration: none;
   white-space: nowrap;
 }
-.btn--primary { background: var(--color-accent); color: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-.btn--primary:hover { background: var(--color-accent-hover); transform: translateY(-1px); box-shadow: 0 6px 18px var(--color-accent-glow); }
+.btn.btn--primary {
+  background: var(--color-accent-action);
+  color: #fff;
+  border: none;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.btn.btn--primary:hover {
+  background: var(--color-accent-action-hover);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px var(--color-accent-glow);
+}
 .btn--ghost { background: transparent; color: var(--color-text); border: 1.5px solid var(--color-border-strong); }
 .btn--ghost:hover { border-color: var(--color-text); }
 .btn--dark { background: var(--color-bg-cta); color: var(--color-text-on-dark); }

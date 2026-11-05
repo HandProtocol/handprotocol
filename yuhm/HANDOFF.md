@@ -21,19 +21,19 @@ koH asked for a run-sheet tool for someone picking food up anywhere and sharing 
 - **Browser pass, 2026-10-06:** the whole practice run (ask, pick up, split, deliver, finish) plus Families, Seeds, Advanced, and Plan a run, at 390 and 1280 wide, and in Spanish. No console errors, no horizontal overflow. Five fixes landed in `6c8c1eee7`.
 - **Not done:** screen tests, entry links (Contribute tab, member menus, coordinator dashboard), the living docs page with wireframes, the videos. **050 is not applied to production and nothing is deployed.**
 
-## Gatherings beta, coordinated by koord: plan only, 2026-09-20 (nothing built)
+## Gatherings beta, coordinated by koordi: plan only, 2026-09-20 (nothing built)
 
-koH asked to plan the booking system (`../koord/`, renamed from `book/`) into the yuhm work, starting with a beta for gatherings and classes. First worked case: a food prep gathering where each attendee says what they want to prepare, gets an itemized order, picks a source per line (bring, network with a pickup, or buy through a shared grocery run), and finds their items in a numbered bin on arrival.
+koH asked to plan the booking system (`../koordi/`, renamed from `book/`) into the yuhm work, starting with a beta for gatherings and classes. First worked case: a food prep gathering where each attendee says what they want to prepare, gets an itemized order, picks a source per line (bring, network with a pickup, or buy through a shared grocery run), and finds their items in a numbered bin on arrival.
 
-- **Plan:** `../plans/005-yuhm-gatherings-koord.md` (the nine-step flow, what 033 already provides, where koord and THE MISSION fit, SQL sketch for ten new tables, functions, notifications, phases G0 to G4, nine decisions, risks).
+- **Plan:** `../plans/005-yuhm-gatherings-koord.md` (the nine-step flow, what 033 already provides, where koordi and THE MISSION fit, SQL sketch for ten new tables, functions, notifications, phases G0 to G4, nine decisions, risks).
 - **Reuse found:** migration 033 already has `food_venues`, `food_events`, items, invites, RSVPs, assignments, and the `potluck` lane gate; 034 has `plan_food_potluck()` and `release_food_event_location()`. Only the undeployed coordination API uses them today.
-- **Settled by koH, 2026-09-20:** grocery money settles directly between people, by hand. The first implementation is a paid checklist the money holder ticks (paid, covered, shop anyway, drop), then a second tick for settled. No processor, no stored payment handles, HAND holds no money (koord record 0004 ruling 4).
-- **Proposed, still open:** koord runs as a library inside yuhm (yuhm's tables are the store, Resend is koord's first real channel).
+- **Settled by koH, 2026-09-20:** grocery money settles directly between people, by hand. The first implementation is a paid checklist the money holder ticks (paid, covered, shop anyway, drop), then a second tick for settled. No processor, no stored payment handles, HAND holds no money (koordi record 0004 ruling 4).
+- **Proposed, still open:** koordi runs as a library inside yuhm (yuhm's tables are the store, Resend is koordi's first real channel).
 - **Demo:** five gathering screens are the last group in THE MISSION demo (artifact version 3, same link as below): the gathering, build my order, paid checklist with a settle tab, shop run with a sort sheet, pick up my bin with the balance. Source: `prototypes/the-mission/gather.js` + `gather.css`, plugged in through `window.YUHM_DEMO_EXT` in `mission.js`. **Republishing now needs four files** in the `files` map: `mission.css`, `mission.js`, `gather.css`, `gather.js`. `preview.mjs` walks the gathering flow too and checks that the shares equal the receipt.
 - **Fixed along the way:** `.p-body > * { flex-shrink: 0 }` in `mission.css`. Tall phone screens were squashing children with `overflow: hidden` instead of scrolling. Still open in the core demo: a direct child of `.p-body` that sets `transform` (the thank-you note's tilt) loses it when the enter animation ends; use the `rotate` property instead, as `.bin-tag` does.
 - **Plain-language intro (artifact version 4):** koH found the page's first paragraph too obscure for someone who does not know yuhm. It now opens with what yuhm is (a free food network for Austin, no account to find food), then what the page is (a demo and plan for two unbuilt ideas, THE MISSION and Gatherings).
 - **Session handoff (read first when resuming):** `_handoff-2026-09-20-gatherings-koord.md` covers the settled and open decisions, the findings not to rediscover, the demo's extension hook and gotchas, what was verified, and how to republish.
-- **Next step:** koH settles the remaining eight decisions in plan 005; where koord runs comes first because it unblocks storage. Not in the demo yet: the organizer's create flow and the koord time poll.
+- **Next step:** koH settles the remaining eight decisions in plan 005; where koordi runs comes first because it unblocks storage. Not in the demo yet: the organizer's create flow and the koordi time poll.
 
 ## THE MISSION: demo and plan only, 2026-09-19 (nothing in the app changed)
 

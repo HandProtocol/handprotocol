@@ -15,8 +15,23 @@ licensed photos, indexable); the old three-direction preview moved to
 `styles/original/`. Next layer is planned, not built: `plan-eft-and-ghl-funnel.md`
 (EFT "what to expect" page + GoHighLevel funnel). Next human step: text Maria.**
 
+## Owner-editable rebuild (2026-09-06) — `clients/three-hands-healing/`
+
+The Cathedral design now also exists as an **owner-editable site** on the
+HAND client-site engine (the ZeroBlur pattern turned into a template):
+Maria will edit every line and photo at `/admin/` with a one-time email
+link. Built with the `hand-client-site` skill; state and next steps in
+`clients/three-hands-healing/HANDOFF.md`. **LIVE since 2026-09-06 at
+https://three-hands-healing.netlify.app** (own Netlify site, shared Supabase,
+migration 044 applied). Owners who can sign in at `/admin/`:
+maria.komie@gmail.com, cryptokoh@gmail.com, hand@handprotocol.org. The public
+page at https://handprotocol.org/threehandshealing/ is unchanged; the
+cut-over to 3handshealing.com stays a separate, later step. Not committed.
+
 ## Start here (cold session)
 
+0. **Booking safety / client vetting work (2026-09-16/17):** read
+   `../docs/closed/threehandshealing/HANDOFF-booking-safety.md` instead of this file; it is self-contained.
 1. Read this file. Then `design-portfolio-brief.md` if you touch any style page.
 2. Two things are waiting on Maria: **style picks** (she hearts styles in the
    gallery → "Send picks to koH" → `command.feedback_pins` row tagged

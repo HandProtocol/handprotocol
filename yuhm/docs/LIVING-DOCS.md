@@ -518,7 +518,7 @@ Sample content should remain labeled until it is replaced by auditable records.
 
 ### Decide THE MISSION and gatherings
 
-1. Settle the open decisions in plans 004 and 005. Where the booking service (koord) runs comes first.
+1. Settle the open decisions in plans 004 and 005. Where the booking service (koordi) runs comes first.
 2. Start Meta business verification early if the WhatsApp helper stays in scope.
 
 ## Documentation maintenance

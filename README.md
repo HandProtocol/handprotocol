@@ -4,7 +4,7 @@
 
 **HAND Protocol** (Holistic Approach to Nurture and Develop) is a nonprofit foundation incorporating as a 501(c)(3) in Austin, Texas in 2026. We provide long-term branding, marketing, web/dev, and one-on-one development support for **Reciprocates**, impact entrepreneurs, community-rooted small businesses, and grassroots community organizations doing work that matters. We don't build and bounce.
 
-This monorepo holds the public web presence (foundation campaign + discovery research + legacy archive) and earlier Web3 tooling preserved as source history.
+This monorepo holds the public web presence (foundation campaign + discovery research + legacy archive), HAND's community tools and Develop client sites, and earlier Web3 tooling preserved as source history.
 
 ## Surfaces
 
@@ -15,6 +15,13 @@ This monorepo holds the public web presence (foundation campaign + discovery res
 | [`web/sovereign-reciprocates/`](web/sovereign-reciprocates/) | Sovereign Reciprocates: HAND's AI workstream as a public page. Reuses the discovery design system. | Live in source |
 | [`web/governance/`](web/governance/) | Governance package: Articles, Bylaws, all policies, board governance, theory of change, strategic plan, Form 1023 narrative. | Live in source |
 | [`web/legacy/`](web/legacy/) | Archive of HAND's earlier landing-page and crowdfunding designs. | Live in source |
+| [`web/learn/`](web/learn/) | HAND Learn: a nine-module course on building a first app with Claude Code. | Live, unlisted |
+| [`yuhm/`](yuhm/) | yuhm, Austin food coordination app ([yuhm.handprotocol.org](https://yuhm.handprotocol.org)). | Live |
+| [`waterdrop/`](waterdrop/) | WaterDrop, Central Texas paddling app ([waterdrop.handprotocol.org](https://waterdrop.handprotocol.org)). | Live |
+| [`solarpunk/`](solarpunk/) | SolarPunk Summit volunteer driver sign-up ([sps.handprotocol.org](https://sps.handprotocol.org)). | Live |
+| [`mystichearts/`](mystichearts/) | Mystic Hearts website source. | Live (landing) |
+| [`projects/waterfall/`](projects/waterfall/) | HAND as a 3D waterfall ([waterfall.handprotocol.org](https://waterfall.handprotocol.org)). | Live |
+| `clients/` | Owner-editable websites for Develop clients, each deployed to its own Netlify site and domain. | Live, not in git yet |
 | [`web/landingpage/`](web/landingpage/) | Pre-pivot Next.js Web3 starter homepage. | Preserved, not deployed |
 | [`sweetspot/`](sweetspot/) | SweetSpot dApp + Solidity contracts + subgraph indexer. | Preserved, not deployed |
 | [`projects/spin/`](projects/spin/) | Vite + React + TS sub-project. | Standalone |
@@ -66,4 +73,4 @@ Pre-incorporation. The foundation campaign is currently raising toward a $222,22
 
 ---
 
-Based in Austin, Texas. Operating since 2025.
+Based in Austin, Texas. Operating since August 2024.
