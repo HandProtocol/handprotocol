@@ -1,0 +1,84 @@
+# Files owned by the engine. `sync-engine.mjs` copies these from
+# clients/_template into a client; everything NOT listed is the site pack
+# (site.config.mjs, site/, public/assets/, public/favicon.svg, public/img/,
+# .gitignore, tests/page.test.mjs, README.md, HANDOFF.md, and public/robots.txt
+# if a pack keeps one: it then wins over netlify/functions/robots.mjs)
+# and is never touched by a sync. Paths under public/ land in the client's
+# publish dir (site.config.mjs netlify.publish, default public/).
+# Generated files (netlify.toml unless netlify.managed = false, and
+# public/img/placeholder/) are regenerated from the client's own config after a sync.
+netlify/functions/admin-page.mjs
+netlify/functions/admin.mjs
+netlify/functions/auth.mjs
+netlify/functions/booking.mjs
+netlify/functions/booking-reminders.mjs
+netlify/functions/content.mjs
+netlify/functions/page.mjs
+netlify/functions/render.mjs
+netlify/functions/review.mjs
+netlify/functions/robots.mjs
+netlify/functions/sitemap.mjs
+netlify/functions/submission-created.mjs
+netlify/functions/lib/admin-page.mjs
+netlify/functions/lib/blocks.mjs
+netlify/functions/lib/booking.mjs
+netlify/functions/lib/booking-act.mjs
+netlify/functions/lib/booking-admin.mjs
+netlify/functions/lib/booking-db.mjs
+netlify/functions/lib/booking-email.mjs
+netlify/functions/lib/booking-form.mjs
+netlify/functions/lib/booking-page.mjs
+netlify/functions/lib/booking-token.mjs
+netlify/functions/lib/checklist.mjs
+netlify/functions/lib/config.mjs
+netlify/functions/lib/content.mjs
+netlify/functions/lib/db.mjs
+netlify/functions/lib/email.mjs
+netlify/functions/lib/forms.mjs
+netlify/functions/lib/html.mjs
+netlify/functions/lib/http.mjs
+netlify/functions/lib/payments.mjs
+netlify/functions/lib/render.mjs
+netlify/functions/lib/review-core.mjs
+netlify/functions/lib/review-page.mjs
+netlify/functions/lib/sanitize.mjs
+netlify/functions/lib/secrets.mjs
+netlify/functions/lib/password.mjs
+netlify/functions/lib/session.mjs
+netlify/functions/lib/site.mjs
+netlify/functions/lib/stripe.mjs
+netlify/functions/lib/theme.mjs
+public/admin/admin.css
+public/admin/admin.js
+public/booking/booking.css
+public/booking/booking.js
+public/review/review.css
+public/review/review.js
+scripts/gen-migration.mjs
+scripts/gen-netlify-toml.mjs
+scripts/make-placeholders.mjs
+scripts/render-static.mjs
+tests/admin.test.mjs
+tests/blocks.test.mjs
+tests/booking.test.mjs
+tests/booking-api.test.mjs
+tests/booking-admin.test.mjs
+tests/booking-reminders.test.mjs
+tests/booking-email.test.mjs
+tests/config.test.mjs
+tests/content.test.mjs
+tests/db.test.mjs
+tests/forms.test.mjs
+tests/private.test.mjs
+tests/render.test.mjs
+tests/review.test.mjs
+tests/checklist.test.mjs
+tests/sitemap.test.mjs
+tests/seo.test.mjs
+tests/html.test.mjs
+tests/migration.test.mjs
+tests/sanitize.test.mjs
+tests/auth-password.test.mjs
+tests/session.test.mjs
+tests/payments.test.mjs
+ENGINE_FILES

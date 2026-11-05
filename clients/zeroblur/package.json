@@ -1,0 +1,12 @@
+{
+  "name": "zeroblur",
+  "version": "0.1.0",
+  "private": true,
+  "description": "ZeroBlur — immersive black & purple portfolio site with an owner-editable CMS (Netlify Functions + Supabase Postgres/Storage).",
+  "type": "module",
+  "scripts": {
+    "placeholders": "node scripts/make-placeholders.mjs",
+    "preview": "node scripts/render-static.mjs",
+    "test": "node --test tests/"
+  }
+}

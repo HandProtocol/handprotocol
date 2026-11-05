@@ -1,0 +1,109 @@
+{
+  "slug": "three-hands-healing",
+  "createdAt": "2026-10-01T15:41:32.504Z",
+  "facts": {},
+  "otherUrls": [
+    "https://handprotocol.org/threehandshealing/"
+  ],
+  "stages": {
+    "baseline": {
+      "status": "in-progress",
+      "at": "2026-10-01T23:18:26.755Z",
+      "score": 92
+    },
+    "google": {
+      "items": {
+        "search-console": "todo",
+        "business-profile": "todo",
+        "review-link": "todo",
+        "bing": "todo",
+        "analytics": "todo"
+      }
+    },
+    "cutover": {
+      "status": "todo"
+    }
+  },
+  "audits": [
+    {
+      "id": "20261001-154211",
+      "url": "https://three-hands-healing.netlify.app/",
+      "local": false,
+      "score": 88,
+      "band": "B",
+      "gate": false,
+      "fail": 2,
+      "warn": 9,
+      "info": 13,
+      "psi": true,
+      "lab": true
+    },
+    {
+      "id": "20261001-154810",
+      "url": "https://three-hands-healing.netlify.app/",
+      "local": true,
+      "score": 95,
+      "band": "A",
+      "gate": false,
+      "fail": 1,
+      "warn": 5,
+      "info": 13,
+      "psi": false,
+      "lab": true
+    },
+    {
+      "id": "20261001-155045",
+      "url": "https://three-hands-healing.netlify.app/",
+      "local": false,
+      "score": 96,
+      "band": "A",
+      "gate": false,
+      "fail": 1,
+      "warn": 3,
+      "info": 10,
+      "psi": true,
+      "lab": true
+    },
+    {
+      "id": "20261001-155106",
+      "url": "https://three-hands-healing.netlify.app/",
+      "local": false,
+      "score": 92,
+      "band": "A",
+      "gate": false,
+      "fail": 2,
+      "warn": 3,
+      "info": 8,
+      "psi": false,
+      "lab": false
+    },
+    {
+      "id": "20261001-231826",
+      "url": "https://three-hands-healing.netlify.app/",
+      "local": false,
+      "score": 92,
+      "band": "A",
+      "gate": false,
+      "fail": 2,
+      "warn": 3,
+      "info": 7,
+      "psi": false,
+      "lab": false
+    }
+  ],
+  "updatedAt": "2026-10-01T23:18:26.760Z",
+  "standup": {
+    "asks": [
+      "What are your session prices (or should prices stay off the site for now)?",
+      "Which hours or days do you take sessions, or is it by appointment only?"
+    ],
+    "logins": [
+      "Namecheap (for 3handshealing.com)",
+      "systeme.io (to export your email list before the domain moves)"
+    ],
+    "when": null,
+    "tz": "America/Chicago",
+    "preparedAt": "2026-10-01T15:53:27.826Z",
+    "minutes": 79
+  }
+}

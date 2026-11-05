@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <defs>
+    <filter id="b" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="72"/></filter>
+    <radialGradient id="v" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#07060b" stop-opacity="0"/><stop offset="1" stop-color="#07060b" stop-opacity="0.85"/></radialGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="#07060b"/>
+  <ellipse cx="872" cy="854" rx="485" ry="639" transform="rotate(148 872 854)" fill="#e0b8ff" opacity="0.56" filter="url(#b)"/>
+  <ellipse cx="372" cy="683" rx="407" ry="508" transform="rotate(130 372 683)" fill="#3d1a8f" opacity="0.68" filter="url(#b)"/>
+  <ellipse cx="183" cy="917" rx="568" ry="381" transform="rotate(3 183 917)" fill="#b48cff" opacity="0.36" filter="url(#b)"/>
+  <ellipse cx="397" cy="819" rx="621" ry="504" transform="rotate(97 397 819)" fill="#c04dff" opacity="0.40" filter="url(#b)"/>
+  <ellipse cx="997" cy="706" rx="407" ry="394" transform="rotate(26 997 706)" fill="#5a1fd6" opacity="0.66" filter="url(#b)"/>
+  <line x1="121" y1="1171" x2="938" y2="1314" stroke="#e0b8ff" stroke-width="2.6" opacity="0.5"/>
+  <line x1="444" y1="684" x2="835" y2="835" stroke="#e0b8ff" stroke-width="2.3" opacity="0.5"/>
+  <line x1="129" y1="770" x2="759" y2="659" stroke="#8b3dff" stroke-width="1.0" opacity="0.5"/>
+  <line x1="279" y1="972" x2="883" y2="1144" stroke="#7a2cf0" stroke-width="2.8" opacity="0.5"/>
+  <rect width="100%" height="100%" fill="url(#v)"/>
+  <text x="1135" y="1146" text-anchor="end" font-family="system-ui, sans-serif" font-weight="700" font-size="49" fill="#f4f1fb" opacity="0.22" letter-spacing="13">12</text>
+</svg>

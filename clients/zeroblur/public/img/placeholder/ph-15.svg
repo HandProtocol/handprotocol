@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" role="img" aria-label="PLACEHOLDER 15">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0812"/>
+      <stop offset="1" stop-color="#150f26"/>
+    </linearGradient>
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b48cff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#b48cff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#b48cff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur0" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="108"/></filter>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.12"/></feComponentTransfer></filter>
+  </defs>
+  <rect width="1600" height="1200" fill="url(#base)"/>
+  <g>
+    <ellipse cx="842" cy="294" rx="406" ry="541" transform="rotate(138 842 294)" fill="#b48cff" opacity="0.59" filter="url(#blur0)"/>
+    <ellipse cx="1249" cy="669" rx="416" ry="576" transform="rotate(44 1249 669)" fill="#8b3dff" opacity="0.43" filter="url(#blur1)"/>
+    <ellipse cx="622" cy="220" rx="384" ry="449" transform="rotate(22 622 220)" fill="#e0b8ff" opacity="0.57" filter="url(#blur0)"/>
+  </g>
+  <rect x="810" y="0" width="128" height="1200" fill="url(#streak)" transform="skewX(-18)"/>
+  <rect width="1600" height="1200" filter="url(#grain)" opacity="0.5"/>
+  <g fill="none" stroke="#e6d9ff" stroke-opacity="0.55" stroke-width="5">
+    <circle cx="1408" cy="1008" r="132"/>
+    <path d="M1408 912.96 L1503.04 1008 L1408 1103.04 L1312.96 1008 Z"/>
+    <circle cx="1408" cy="1008" r="29" fill="#e6d9ff" stroke="none"/>
+  </g>
+  <text x="60" y="1140" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="29" letter-spacing="9" fill="#e6d9ff" fill-opacity="0.6">PLACEHOLDER 15</text>
+</svg>

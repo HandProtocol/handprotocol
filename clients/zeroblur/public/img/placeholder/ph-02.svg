@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-label="PLACEHOLDER 02">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0812"/>
+      <stop offset="1" stop-color="#150f26"/>
+    </linearGradient>
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b48cff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#b48cff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#b48cff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur0" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="90"/></filter>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="50"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.12"/></feComponentTransfer></filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#base)"/>
+  <g>
+    <ellipse cx="886" cy="495" rx="247" ry="226" transform="rotate(49 886 495)" fill="#7a2cf0" opacity="0.43" filter="url(#blur0)"/>
+    <ellipse cx="1308" cy="296" rx="446" ry="270" transform="rotate(117 1308 296)" fill="#3d1a8f" opacity="0.74" filter="url(#blur1)"/>
+    <ellipse cx="387" cy="749" rx="241" ry="177" transform="rotate(64 387 749)" fill="#b48cff" opacity="0.66" filter="url(#blur0)"/>
+  </g>
+  <rect x="1068" y="0" width="128" height="1000" fill="url(#streak)" transform="skewX(-18)"/>
+  <rect width="1600" height="1000" filter="url(#grain)" opacity="0.5"/>
+  <g fill="none" stroke="#e6d9ff" stroke-opacity="0.55" stroke-width="4">
+    <circle cx="1440" cy="840" r="110"/>
+    <path d="M1440 760.8 L1519.2 840 L1440 919.2 L1360.8 840 Z"/>
+    <circle cx="1440" cy="840" r="24" fill="#e6d9ff" stroke="none"/>
+  </g>
+  <text x="50" y="950" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="24" letter-spacing="7" fill="#e6d9ff" fill-opacity="0.6">PLACEHOLDER 02</text>
+</svg>

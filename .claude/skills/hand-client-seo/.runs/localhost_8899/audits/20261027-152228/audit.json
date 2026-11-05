@@ -1,0 +1,901 @@
+{
+  "tool": "hand-client-seo",
+  "version": "1.0.0",
+  "target": {
+    "url": "http://localhost:8899/",
+    "label": "localhost:8899",
+    "local": false,
+    "otherUrls": []
+  },
+  "startedAt": "2026-10-27T15:22:26.807Z",
+  "finishedAt": "2026-10-27T15:22:28.768Z",
+  "options": {
+    "maxPages": 25,
+    "external": true,
+    "psi": true,
+    "lab": false
+  },
+  "facts": {},
+  "site": {
+    "start": "http://localhost:8899/",
+    "origin": "http://localhost:8899",
+    "host": "localhost:8899",
+    "scope": "/",
+    "local": false,
+    "robots": {
+      "url": "http://localhost:8899/robots.txt",
+      "status": 200,
+      "sitemaps": [],
+      "text": null
+    },
+    "sitemaps": [
+      {
+        "url": "http://localhost:8899/sitemap.xml",
+        "status": 200,
+        "kind": "urlset",
+        "urls": 2,
+        "problems": []
+      }
+    ],
+    "variants": [
+      {
+        "label": "index.html",
+        "url": "http://localhost:8899/index.html",
+        "status": 200,
+        "finalUrl": "http://localhost:8899/",
+        "hops": 1,
+        "canonical": "https://precisionfixmobile.com/"
+      }
+    ],
+    "notFound": {
+      "url": "http://localhost:8899/hand-seo-missing-mvqu3r8s",
+      "status": 404
+    },
+    "redirects": [],
+    "pagesCrawled": 3,
+    "skippedForLimit": 0,
+    "linksChecked": 7,
+    "imagesMeasured": 8,
+    "dropped": {
+      "internal": 0,
+      "external": 0,
+      "images": 0
+    }
+  },
+  "pages": [
+    {
+      "url": "http://localhost:8899/",
+      "requested": "http://localhost:8899/",
+      "status": 200,
+      "depth": 0,
+      "inSitemap": false,
+      "bytes": 58174,
+      "ms": 5,
+      "contentType": "text/html; charset=utf-8",
+      "title": "PrecisionFix – Mobile Mechanic | Austin, TX",
+      "description": "Factory-certified Mercedes-Benz mobile mechanic in Austin, TX: dealer-level diagnostics, brakes, batteries and electrical in your driveway. English & Spanish.",
+      "canonical": "https://precisionfixmobile.com/",
+      "indexable": false,
+      "whyNot": [
+        "canonical points to https://precisionfixmobile.com/"
+      ],
+      "h1": [
+        "PrecisionFix — Austin, TX · Mobile Mechanic"
+      ],
+      "words": 1030,
+      "lang": "en",
+      "ogImage": "https://precisionfixmobile.com/.netlify/images?url=%2Fimg%2Fphotos%2Fporsche-911-gt3-rs.jpg&w=1200&h=630&fit=cover&fm=jpg&q=80",
+      "jsonLdTypes": [
+        "WebSite",
+        "AutoRepair",
+        "PostalAddress",
+        "City",
+        "OpeningHoursSpecification",
+        "OfferCatalog",
+        "Offer",
+        "Service",
+        "FAQPage",
+        "Question",
+        "Answer"
+      ],
+      "images": 5,
+      "links": 16
+    },
+    {
+      "url": "http://localhost:8899/account/",
+      "requested": "http://localhost:8899/account/",
+      "status": 404,
+      "depth": 1,
+      "inSitemap": false,
+      "bytes": 9,
+      "ms": 2,
+      "contentType": ""
+    },
+    {
+      "url": "http://localhost:8899/privacy/",
+      "requested": "http://localhost:8899/privacy/",
+      "status": 200,
+      "depth": 1,
+      "inSitemap": false,
+      "bytes": 12761,
+      "ms": 5,
+      "contentType": "text/html; charset=utf-8",
+      "title": "Privacy policy · PrecisionFix",
+      "description": "How PrecisionFix handles your information: no tracking, no ads, no selling. What the booking form collects and who helps run the site.",
+      "canonical": "https://precisionfixmobile.com/privacy/",
+      "indexable": false,
+      "whyNot": [
+        "canonical points to https://precisionfixmobile.com/privacy/"
+      ],
+      "h1": [
+        "Privacy policy"
+      ],
+      "words": 705,
+      "lang": "en",
+      "ogImage": null,
+      "jsonLdTypes": [],
+      "images": 0,
+      "links": 2
+    }
+  ],
+  "findings": [
+    {
+      "id": "sitemap-urls",
+      "category": "crawlability",
+      "title": "every sitemap URL is a live, indexable, canonical page",
+      "gate": true,
+      "who": "cutover",
+      "severity": "fail",
+      "message": "the sitemap lists 2 URL(s) on another host: https://precisionfixmobile.com/, https://precisionfixmobile.com/privacy/",
+      "fix": "Every <loc> must be on localhost:8899."
+    },
+    {
+      "id": "page-status",
+      "category": "crawlability",
+      "title": "every linked page answers 200",
+      "gate": true,
+      "who": "hand",
+      "severity": "fail",
+      "message": "http://localhost:8899/account/ answers 404",
+      "url": "http://localhost:8899/account/",
+      "evidence": "linked from: http://localhost:8899/",
+      "fix": "Restore the page or remove the links to it."
+    },
+    {
+      "id": "img-broken",
+      "category": "images",
+      "title": "every image loads",
+      "gate": true,
+      "who": "hand",
+      "url": "http://localhost:8899/",
+      "severity": "fail",
+      "message": "5 image(s) do not load: /.netlify/images?url=%2Fimg%2Fphotos%2Fporsche-911-gt3-rs.j… → 404, /.netlify/images?url=%2Fimg%2Fphotos%2Fengine-rebuild.jpg&w… → 404, /.netlify/images?url=%2Fimg%2Fphotos%2Fmercedes-amg-sl63.jp… → 404 (+2 more)",
+      "fix": "Fix the path or re-upload the photo."
+    },
+    {
+      "id": "links-broken-internal",
+      "category": "links",
+      "title": "no internal link is broken",
+      "gate": true,
+      "who": "hand",
+      "url": "http://localhost:8899/",
+      "severity": "fail",
+      "message": "1 broken internal link(s): http://localhost:8899/account/ → 404",
+      "fix": "Fix the address or remove the link."
+    },
+    {
+      "id": "https-redirect",
+      "category": "security",
+      "title": "http:// sends visitors to https://",
+      "gate": true,
+      "who": "hand",
+      "severity": "fail",
+      "message": "the site is served over plain http://",
+      "fix": "Serve it over HTTPS; Netlify provisions the certificate once the domain points at the site."
+    },
+    {
+      "id": "canonical-target",
+      "category": "indexability",
+      "title": "the canonical points at this page (or a live one)",
+      "gate": false,
+      "who": "hand",
+      "url": "http://localhost:8899/privacy/",
+      "severity": "fail",
+      "message": "the canonical points at https://precisionfixmobile.com/privacy/, which answers 404",
+      "fix": "A canonical must name a page that answers 200 directly."
+    },
+    {
+      "id": "robots-txt-reachable",
+      "category": "crawlability",
+      "title": "robots.txt answers",
+      "gate": false,
+      "who": "hand",
+      "severity": "warn",
+      "message": "/robots.txt answers with an HTML page instead of a robots file",
+      "fix": "Serve a plain-text robots.txt, or a real 404."
+    },
+    {
+      "id": "canonical-target",
+      "category": "indexability",
+      "title": "the canonical points at this page (or a live one)",
+      "gate": false,
+      "who": "hand",
+      "url": "http://localhost:8899/",
+      "severity": "warn",
+      "message": "the canonical hands this page's ranking to another site: https://precisionfixmobile.com/",
+      "fix": "Right when this copy is the secondary one; wrong if this is the address people should find."
+    },
+    {
+      "id": "img-lcp",
+      "category": "performance",
+      "title": "the first big image loads with priority",
+      "gate": false,
+      "who": "hand",
+      "url": "http://localhost:8899/",
+      "severity": "warn",
+      "message": "the first large image is lazy-loaded (/.netlify/images?url=%2Fimg%2Fphotos%2Fporsche-91…): the browser waits to fetch what is probably the largest thing on screen",
+      "fix": "Remove loading=\"lazy\" from the hero image and add fetchpriority=\"high\"."
+    },
+    {
+      "id": "compression",
+      "category": "performance",
+      "title": "the page is served compressed",
+      "gate": false,
+      "who": "hand",
+      "url": "http://localhost:8899/",
+      "severity": "warn",
+      "message": "the HTML is served without gzip or brotli compression",
+      "fix": "Turn on compression at the host (Netlify does it by default)."
+    },
+    {
+      "id": "og-basics",
+      "category": "social",
+      "title": "the page has a link preview (Open Graph)",
+      "gate": false,
+      "who": "hand",
+      "url": "http://localhost:8899/privacy/",
+      "severity": "warn",
+      "message": "no Open Graph tags: a link to this page in a text or on Facebook shows no title card or photo",
+      "fix": "Add og:title, og:description, og:image (1200×630), og:url and og:type."
+    },
+    {
+      "id": "jsonld-host",
+      "category": "structured-data",
+      "title": "structured data points at this site",
+      "gate": false,
+      "who": "cutover",
+      "url": "http://localhost:8899/",
+      "severity": "warn",
+      "message": "structured data names another host (url: https://precisionfixmobile.com/, @id: https://precisionfixmobile.com/#website, url: https://precisionfixmobile.com/, @id: https://prec…)",
+      "fix": "url and @id must use this site's own address."
+    },
+    {
+      "id": "ai-crawlers",
+      "category": "crawlability",
+      "title": "AI search crawlers are not shut out by accident",
+      "gate": false,
+      "who": "hand",
+      "severity": "info",
+      "message": "no AI-crawler rules in robots.txt: every crawler is allowed by the default group"
+    },
+    {
+      "id": "bilingual-toggle",
+      "category": "i18n",
+      "title": "a second language is reachable by search engines",
+      "gate": false,
+      "who": "hand",
+      "url": "http://localhost:8899/",
+      "severity": "info",
+      "message": "Spanish copy is swapped in by the browser on the same URL (data-es): search engines index the English page only",
+      "fix": "This serves Spanish-speaking visitors who arrive, not Spanish searches. To rank in Spanish, add a real /es page with its own title and hreflang tags."
+    },
+    {
+      "id": "local-area",
+      "category": "local",
+      "title": "the page says where the business works",
+      "gate": false,
+      "who": "owner",
+      "url": "http://localhost:8899/",
+      "severity": "info",
+      "message": "the page mentions \"Menu Austin, TX\", but no city or service area is on file for this business",
+      "fix": "Confirm the service area with the owner and record it, so the title and structured data can use it."
+    },
+    {
+      "id": "local-reviews",
+      "category": "local",
+      "title": "the site connects to the business's profiles",
+      "gate": false,
+      "who": "owner",
+      "url": "http://localhost:8899/",
+      "severity": "info",
+      "message": "no link to a Google Business Profile or a review page",
+      "fix": "Once the Business Profile is verified, link to it (and to its \"leave a review\" link) from the site."
+    },
+    {
+      "id": "psi-scores",
+      "category": "performance",
+      "title": "PageSpeed Insights scores",
+      "gate": false,
+      "who": "hand",
+      "severity": "info",
+      "message": "PageSpeed (mobile) did not return a result: PageSpeed API 429: Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for co; no Chrome for local Lighthouse (set CHROME_PATH)"
+    },
+    {
+      "id": "psi-scores",
+      "category": "performance",
+      "title": "PageSpeed Insights scores",
+      "gate": false,
+      "who": "hand",
+      "severity": "info",
+      "message": "PageSpeed (desktop) did not return a result: PageSpeed API 429: Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for co; no Chrome for local Lighthouse (set CHROME_PATH)"
+    },
+    {
+      "id": "security-headers",
+      "category": "security",
+      "title": "baseline security headers are present",
+      "gate": false,
+      "who": "hand",
+      "severity": "info",
+      "message": "missing response header(s): Strict-Transport-Security, X-Content-Type-Options",
+      "fix": "Add them at the host (netlify.toml [[headers]]). Not a ranking factor; it is basic hygiene."
+    },
+    {
+      "id": "jsonld-business",
+      "category": "structured-data",
+      "title": "the LocalBusiness data is complete and true",
+      "gate": false,
+      "who": "owner",
+      "url": "http://localhost:8899/",
+      "severity": "info",
+      "message": "AutoRepair at @graph[1]: no \"sameAs\" links (Business Profile, Instagram, Facebook). Add them once the profiles exist",
+      "fix": "Confirm the fact with the owner, then add it. Never fill it with a guess."
+    },
+    {
+      "id": "jsonld-other",
+      "category": "structured-data",
+      "title": "other structured data types are well formed",
+      "gate": false,
+      "who": "hand",
+      "url": "http://localhost:8899/",
+      "severity": "info",
+      "message": "FAQPage: Google shows FAQ rich results only for well-known government and health sites; the markup is harmless and still helps other engines read the answers",
+      "fix": "Correct the structured data."
+    }
+  ],
+  "passed": [
+    {
+      "id": "robots-txt-valid",
+      "category": "crawlability",
+      "title": "robots.txt parses cleanly",
+      "gate": false
+    },
+    {
+      "id": "robots-txt-blocks-site",
+      "category": "crawlability",
+      "title": "robots.txt lets search engines in",
+      "gate": true
+    },
+    {
+      "id": "robots-txt-blocks-pages",
+      "category": "crawlability",
+      "title": "no real page is blocked by robots.txt",
+      "gate": false
+    },
+    {
+      "id": "robots-txt-blocks-assets",
+      "category": "crawlability",
+      "title": "CSS and JavaScript are crawlable",
+      "gate": false
+    },
+    {
+      "id": "robots-txt-sitemap-line",
+      "category": "crawlability",
+      "title": "robots.txt names the sitemap",
+      "gate": false
+    },
+    {
+      "id": "sitemap-exists",
+      "category": "crawlability",
+      "title": "a sitemap exists",
+      "gate": false
+    },
+    {
+      "id": "sitemap-valid",
+      "category": "crawlability",
+      "title": "the sitemap is valid",
+      "gate": false
+    },
+    {
+      "id": "sitemap-coverage",
+      "category": "crawlability",
+      "title": "the sitemap lists every indexable page",
+      "gate": false
+    },
+    {
+      "id": "sitemap-lastmod",
+      "category": "crawlability",
+      "title": "sitemap dates are present and plausible",
+      "gate": false
+    },
+    {
+      "id": "index-html-duplicate",
+      "category": "indexability",
+      "title": "/index.html is not a second copy of the home page",
+      "gate": false
+    },
+    {
+      "id": "not-found-status",
+      "category": "crawlability",
+      "title": "a missing page answers 404",
+      "gate": true
+    },
+    {
+      "id": "redirect-internal",
+      "category": "links",
+      "title": "internal links point at final URLs",
+      "gate": false
+    },
+    {
+      "id": "orphan-pages",
+      "category": "links",
+      "title": "every sitemap page is linked from the site",
+      "gate": false
+    },
+    {
+      "id": "crawl-depth",
+      "category": "links",
+      "title": "pages are within three clicks of the home page",
+      "gate": false
+    },
+    {
+      "id": "noindex",
+      "category": "indexability",
+      "title": "pages meant for search are not marked noindex",
+      "gate": true
+    },
+    {
+      "id": "snippet-limits",
+      "category": "indexability",
+      "title": "search engines may show a snippet",
+      "gate": false
+    },
+    {
+      "id": "canonical-present",
+      "category": "indexability",
+      "title": "the page names its canonical URL",
+      "gate": false
+    },
+    {
+      "id": "canonical-valid",
+      "category": "indexability",
+      "title": "the canonical tag is well formed",
+      "gate": true
+    },
+    {
+      "id": "head-broken",
+      "category": "indexability",
+      "title": "nothing ends <head> early",
+      "gate": true
+    },
+    {
+      "id": "title-present",
+      "category": "on-page",
+      "title": "the page has a title",
+      "gate": true
+    },
+    {
+      "id": "title-length",
+      "category": "on-page",
+      "title": "the title fits in a search result",
+      "gate": false
+    },
+    {
+      "id": "title-brand",
+      "category": "on-page",
+      "title": "the title carries the business name",
+      "gate": false
+    },
+    {
+      "id": "url-twins",
+      "category": "indexability",
+      "title": "each page answers at one address",
+      "gate": false
+    },
+    {
+      "id": "title-duplicate",
+      "category": "on-page",
+      "title": "titles are unique across pages",
+      "gate": false
+    },
+    {
+      "id": "description-present",
+      "category": "on-page",
+      "title": "the page has a meta description",
+      "gate": false
+    },
+    {
+      "id": "description-length",
+      "category": "on-page",
+      "title": "the description fits in a search result",
+      "gate": false
+    },
+    {
+      "id": "description-duplicate",
+      "category": "on-page",
+      "title": "descriptions are unique across pages",
+      "gate": false
+    },
+    {
+      "id": "h1",
+      "category": "on-page",
+      "title": "the page has one main heading",
+      "gate": false
+    },
+    {
+      "id": "heading-order",
+      "category": "on-page",
+      "title": "headings step down one level at a time",
+      "gate": false
+    },
+    {
+      "id": "lang",
+      "category": "on-page",
+      "title": "the page declares its language",
+      "gate": false
+    },
+    {
+      "id": "charset",
+      "category": "on-page",
+      "title": "the character set is declared",
+      "gate": false
+    },
+    {
+      "id": "viewport",
+      "category": "mobile",
+      "title": "the page is set up for phones",
+      "gate": true
+    },
+    {
+      "id": "content-thin",
+      "category": "content",
+      "title": "the page has enough to read",
+      "gate": false
+    },
+    {
+      "id": "placeholder-text",
+      "category": "content",
+      "title": "no placeholder copy is live",
+      "gate": true
+    },
+    {
+      "id": "unfinished-copy",
+      "category": "content",
+      "title": "the copy does not say the page is unfinished",
+      "gate": false
+    },
+    {
+      "id": "jsonld-parse",
+      "category": "structured-data",
+      "title": "structured data parses and holds no placeholders",
+      "gate": true
+    },
+    {
+      "id": "jsonld-present",
+      "category": "structured-data",
+      "title": "the home page describes the business in structured data",
+      "gate": false
+    },
+    {
+      "id": "jsonld-site-name",
+      "category": "structured-data",
+      "title": "the home page names the site for search results",
+      "gate": false
+    },
+    {
+      "id": "jsonld-matches-page",
+      "category": "structured-data",
+      "title": "structured data matches what the page shows",
+      "gate": false
+    },
+    {
+      "id": "og-image",
+      "category": "social",
+      "title": "the share image loads and has the right shape",
+      "gate": false
+    },
+    {
+      "id": "og-url",
+      "category": "social",
+      "title": "og:url matches the canonical",
+      "gate": false
+    },
+    {
+      "id": "og-extras",
+      "category": "social",
+      "title": "the link preview is complete",
+      "gate": false
+    },
+    {
+      "id": "favicon",
+      "category": "on-page",
+      "title": "the site has an icon search results can show",
+      "gate": false
+    },
+    {
+      "id": "links-broken-external",
+      "category": "links",
+      "title": "no outbound link is dead",
+      "gate": false
+    },
+    {
+      "id": "links-fragments",
+      "category": "links",
+      "title": "in-page links land on something",
+      "gate": false
+    },
+    {
+      "id": "links-crawlable",
+      "category": "links",
+      "title": "links are real links",
+      "gate": false
+    },
+    {
+      "id": "links-names",
+      "category": "links",
+      "title": "every link says where it goes",
+      "gate": false
+    },
+    {
+      "id": "links-contact-format",
+      "category": "links",
+      "title": "phone and email links are well formed",
+      "gate": false
+    },
+    {
+      "id": "links-attributes",
+      "category": "links",
+      "title": "link attributes do not work against the site",
+      "gate": false
+    },
+    {
+      "id": "img-alt",
+      "category": "images",
+      "title": "photos have alt text",
+      "gate": false
+    },
+    {
+      "id": "img-dimensions",
+      "category": "images",
+      "title": "images reserve their space",
+      "gate": false
+    },
+    {
+      "id": "img-weight",
+      "category": "images",
+      "title": "photos are not oversized",
+      "gate": false
+    },
+    {
+      "id": "html-size",
+      "category": "performance",
+      "title": "the HTML is a reasonable size",
+      "gate": false
+    },
+    {
+      "id": "response-time",
+      "category": "performance",
+      "title": "the server answers quickly",
+      "gate": false
+    },
+    {
+      "id": "render-blocking",
+      "category": "performance",
+      "title": "nothing in <head> holds up the first paint needlessly",
+      "gate": false
+    },
+    {
+      "id": "fonts",
+      "category": "performance",
+      "title": "web fonts load without hiding the text",
+      "gate": false
+    },
+    {
+      "id": "third-parties",
+      "category": "performance",
+      "title": "third-party scripts are kept in check",
+      "gate": false
+    },
+    {
+      "id": "mixed-content",
+      "category": "security",
+      "title": "an https page loads nothing over http",
+      "gate": true
+    },
+    {
+      "id": "web-vitals",
+      "category": "performance",
+      "title": "Core Web Vitals are in the good range",
+      "gate": false
+    },
+    {
+      "id": "local-contact-path",
+      "category": "local",
+      "title": "a visitor can reach the business",
+      "gate": true
+    },
+    {
+      "id": "local-phone",
+      "category": "local",
+      "title": "the phone number is on the page and tappable",
+      "gate": false
+    },
+    {
+      "id": "demo-leftovers",
+      "category": "content",
+      "title": "nothing from the demo or the host is left on the page",
+      "gate": true
+    },
+    {
+      "id": "copyright-year",
+      "category": "content",
+      "title": "the footer year is current",
+      "gate": false
+    },
+    {
+      "id": "hreflang",
+      "category": "i18n",
+      "title": "language alternates are valid",
+      "gate": false
+    }
+  ],
+  "skipped": [
+    {
+      "id": "host-twin",
+      "category": "indexability",
+      "title": "www and the bare domain lead to one site",
+      "reason": "not a registrable domain (a subdomain has no www twin)"
+    },
+    {
+      "id": "duplicate-hosts",
+      "category": "indexability",
+      "title": "no second indexable copy of the site on another address",
+      "reason": "no other addresses known for this site (pass --also=<url> to test one)"
+    },
+    {
+      "id": "lab-mobile",
+      "category": "mobile",
+      "title": "the page works at phone width",
+      "reason": "the browser lab was not run (add --lab)"
+    }
+  ],
+  "score": {
+    "total": 79,
+    "band": "C",
+    "byCategory": {
+      "crawlability": {
+        "score": 42,
+        "fails": 2,
+        "warns": 1,
+        "infos": 1
+      },
+      "indexability": {
+        "score": 67,
+        "fails": 1,
+        "warns": 1,
+        "infos": 0
+      },
+      "on-page": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 0
+      },
+      "structured-data": {
+        "score": 92,
+        "fails": 0,
+        "warns": 1,
+        "infos": 2
+      },
+      "social": {
+        "score": 92,
+        "fails": 0,
+        "warns": 1,
+        "infos": 0
+      },
+      "links": {
+        "score": 75,
+        "fails": 1,
+        "warns": 0,
+        "infos": 0
+      },
+      "images": {
+        "score": 75,
+        "fails": 1,
+        "warns": 0,
+        "infos": 0
+      },
+      "performance": {
+        "score": 84,
+        "fails": 0,
+        "warns": 2,
+        "infos": 2
+      },
+      "mobile": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 0
+      },
+      "security": {
+        "score": 75,
+        "fails": 1,
+        "warns": 0,
+        "infos": 1
+      },
+      "local": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 2
+      },
+      "i18n": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 1
+      },
+      "content": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 0
+      }
+    },
+    "gate": {
+      "pass": false,
+      "blocking": [
+        {
+          "id": "sitemap-urls",
+          "message": "the sitemap lists 2 URL(s) on another host: https://precisionfixmobile.com/, https://precisionfixmobile.com/privacy/",
+          "url": null,
+          "who": "cutover"
+        },
+        {
+          "id": "page-status",
+          "message": "http://localhost:8899/account/ answers 404",
+          "url": "http://localhost:8899/account/",
+          "who": "hand"
+        },
+        {
+          "id": "img-broken",
+          "message": "5 image(s) do not load: /.netlify/images?url=%2Fimg%2Fphotos%2Fporsche-911-gt3-rs.j… → 404, /.netlify/images?url=%2Fimg%2Fphotos%2Fengine-rebuild.jpg&w… → 404, /.netlify/images?url=%2Fimg%2Fphotos%2Fmercedes-amg-sl63.jp… → 404 (+2 more)",
+          "url": "http://localhost:8899/",
+          "who": "hand"
+        },
+        {
+          "id": "links-broken-internal",
+          "message": "1 broken internal link(s): http://localhost:8899/account/ → 404",
+          "url": "http://localhost:8899/",
+          "who": "hand"
+        },
+        {
+          "id": "https-redirect",
+          "message": "the site is served over plain http://",
+          "url": null,
+          "who": "hand"
+        }
+      ]
+    },
+    "skippedCount": 3
+  },
+  "psi": {
+    "mobile": {
+      "error": "PageSpeed API 429: Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for co; no Chrome for local Lighthouse (set CHROME_PATH)"
+    },
+    "desktop": {
+      "error": "PageSpeed API 429: Quota exceeded for quota metric 'Queries' and limit 'Queries per day' of service 'pagespeedonline.googleapis.com' for co; no Chrome for local Lighthouse (set CHROME_PATH)"
+    }
+  },
+  "lab": null,
+  "factSources": {}
+}

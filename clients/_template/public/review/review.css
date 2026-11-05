@@ -1,0 +1,293 @@
+/* Guest review page — PIN gate, review links, writing helper.
+
+   Shared, unmodified, between longhornwinetours (site/assets/css/) and the HAND
+   client-site engine (clients/_template/public/review/). Every colour, font and
+   corner comes from a --rv-* token the HOST page sets on .rv-body; the fallbacks
+   below only keep the page legible if a host forgets one.
+
+     --rv-bg --rv-surface --rv-fg --rv-muted --rv-line      ground + text
+     --rv-accent --rv-accent-hi --rv-on-accent              buttons, dots, focus
+     --rv-display --rv-body-font                            type
+     --rv-radius --rv-btn-case --rv-btn-track --rv-hairline button feel */
+
+.rv-body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--rv-bg, #17120e);
+  color: var(--rv-fg, #dcd8cd);
+  font-family: var(--rv-body-font, system-ui, sans-serif);
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+.rv, .rv *, .rv *::before, .rv *::after { box-sizing: border-box; }
+.rv [hidden] { display: none !important; }
+
+.rv {
+  width: min(34rem, 100%);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 3rem) clamp(1.25rem, 5vw, 2rem) 7rem;
+  display: grid;
+  gap: clamp(1.75rem, 5vw, 2.75rem);
+}
+
+.rv-brand { justify-self: center; display: block; color: var(--rv-accent, #c9973f); }
+.rv-brand img, .rv-brand svg { display: block; width: auto; height: clamp(3rem, 12vw, 4.25rem); }
+.rv-brand--text { font-family: var(--rv-display, Georgia, serif); font-size: 1.25rem; color: inherit; text-decoration: none; }
+
+.rv h1, .rv h2 {
+  font-family: var(--rv-display, Georgia, serif);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+.rv h1 { font-size: clamp(1.75rem, 1.3rem + 2.6vw, 2.5rem); }
+.rv h2 { font-size: clamp(1.35rem, 1.15rem + 1.3vw, 1.75rem); }
+.rv p { margin: 0; }
+
+.rv-eyebrow {
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rv-accent-hi, #e0b968);
+  margin-bottom: 0.7rem !important;
+}
+.rv-lede { color: var(--rv-muted, #a89e90); font-size: 1.08rem; margin-top: 0.8rem !important; }
+.rv-sub { color: var(--rv-muted, #a89e90); margin-top: 0.7rem !important; }
+
+/* ---------- Buttons ---------- */
+.rv-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.9em 1.4em;
+  border: 1px solid transparent;
+  border-radius: var(--rv-radius, 2px);
+  background: var(--rv-accent, #c9973f);
+  color: var(--rv-on-accent, #17120e);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: var(--rv-btn-track, 0.055em);
+  text-transform: var(--rv-btn-case, uppercase);
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+.rv-btn::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid currentColor;
+  border-radius: calc(var(--rv-radius, 2px) / 2);
+  opacity: var(--rv-hairline, 0);
+  pointer-events: none;
+}
+.rv-btn:hover { background: var(--rv-accent-hi, #e0b968); }
+.rv-btn:disabled { opacity: 0.55; cursor: default; }
+.rv-btn--sm { width: auto; min-height: 2.6rem; padding: 0.6em 1.2em; font-size: 0.78rem; }
+
+.rv :where(a, button, textarea, input):focus-visible {
+  outline: 2px solid var(--rv-accent-hi, #e0b968);
+  outline-offset: 3px;
+}
+
+/* ---------- Gate ---------- */
+.rv-gate { display: grid; justify-items: center; text-align: center; gap: 0.25rem; }
+.rv-gate h1 { max-width: 15ch; }
+
+.rv-dots { display: flex; gap: 0.9rem; margin: 1.75rem 0 0.5rem; }
+.rv-dots span {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid var(--rv-muted, #a89e90);
+  border-radius: var(--rv-radius, 2px);
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+.rv-dots span.is-on { background: var(--rv-accent, #c9973f); border-color: var(--rv-accent, #c9973f); transform: scale(1.12); }
+
+.rv-gate-msg { min-height: 1.6em; font-size: 0.92rem; color: var(--rv-accent-hi, #e0b968); }
+
+.rv-pad {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 5.25rem));
+  gap: 0.7rem;
+  margin-top: 0.75rem;
+  touch-action: manipulation;
+}
+.rv-pad button {
+  aspect-ratio: 1;
+  border: 1px solid var(--rv-line, rgba(220, 216, 205, 0.18));
+  border-radius: var(--rv-radius, 2px);
+  background: var(--rv-surface, #211a14);
+  color: inherit;
+  font-family: var(--rv-display, Georgia, serif);
+  font-size: 1.7rem;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.12s ease, border-color 0.12s ease, transform 0.12s ease;
+}
+.rv-pad button:hover { border-color: var(--rv-accent, #c9973f); }
+.rv-pad button:active { transform: scale(0.95); background: var(--rv-accent, #c9973f); color: var(--rv-on-accent, #17120e); }
+.rv-pad button[data-key="back"] { font-family: inherit; font-size: 1.3rem; background: transparent; border-color: transparent; color: var(--rv-muted, #a89e90); }
+.rv-gate.is-busy .rv-pad { opacity: 0.5; pointer-events: none; }
+.rv-gate.is-wrong .rv-dots { animation: rv-shake 0.4s ease; }
+
+@keyframes rv-shake {
+  20% { transform: translateX(-7px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(2px); }
+}
+
+/* ---------- Open page ---------- */
+.rv-open { display: grid; gap: clamp(2.25rem, 7vw, 3.5rem); animation: rv-rise 0.5s ease both; }
+@keyframes rv-rise { from { opacity: 0; transform: translateY(10px); } }
+
+.rv-link-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; counter-reset: rv; }
+.rv-link-list li {
+  counter-increment: rv;
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  column-gap: 0.9rem;
+  row-gap: 0.55rem;
+  align-items: start;
+}
+.rv-link-list li::before {
+  content: counter(rv);
+  grid-row: 1 / span 3;
+  font-family: var(--rv-display, Georgia, serif);
+  font-size: 2.4rem;
+  line-height: 1.15;
+  color: var(--rv-accent-hi, #e0b968);
+}
+.rv-link-list li > * { grid-column: 2; }
+.rv-how { font-size: 0.96rem; }
+.rv-note { font-size: 0.86rem; color: var(--rv-muted, #a89e90); }
+
+.rv-helper {
+  padding-top: clamp(2rem, 6vw, 3rem);
+  border-top: 1px solid var(--rv-line, rgba(220, 216, 205, 0.18));
+}
+
+.rv-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1.4rem 0 1rem; }
+.rv-chip {
+  border: 1px solid var(--rv-line, rgba(220, 216, 205, 0.18));
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+  padding: 0.45em 0.95em;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.rv-chip::before { content: '+ '; color: var(--rv-accent-hi, #e0b968); }
+.rv-chip:hover { border-color: var(--rv-accent, #c9973f); }
+
+.rv-field { display: block; }
+.rv-field > span {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rv-muted, #a89e90);
+  margin-bottom: 0.5rem;
+}
+.rv-field > span em { font-style: normal; font-weight: 400; letter-spacing: 0; text-transform: none; }
+.rv-field textarea {
+  display: block;
+  width: 100%;
+  resize: vertical;
+  border: 1px solid var(--rv-line, rgba(220, 216, 205, 0.18));
+  border-radius: var(--rv-radius, 2px);
+  background: var(--rv-surface, #211a14);
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;              /* 16px+: iOS will not zoom the page on focus */
+  line-height: 1.5;
+  padding: 0.85rem 0.95rem;
+}
+.rv-field textarea::placeholder { color: var(--rv-muted, #a89e90); opacity: 0.75; }
+.rv-field textarea:focus { outline: none; border-color: var(--rv-accent, #c9973f); }
+
+.rv-options { display: grid; gap: 1rem; margin: 1.25rem 0 1.5rem; }
+.rv-seg { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; }
+.rv-seg legend {
+  float: left;
+  width: 4.5rem;
+  padding: 0;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rv-muted, #a89e90);
+}
+.rv-seg label { position: relative; cursor: pointer; }
+.rv-seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.rv-seg label span {
+  display: block;
+  border: 1px solid var(--rv-line, rgba(220, 216, 205, 0.18));
+  border-radius: var(--rv-radius, 2px);
+  font-size: 0.86rem;
+  padding: 0.5em 0.9em;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.rv-seg input:checked + span { background: var(--rv-fg, #dcd8cd); color: var(--rv-bg, #17120e); border-color: var(--rv-fg, #dcd8cd); }
+.rv-seg input:focus-visible + span { outline: 2px solid var(--rv-accent-hi, #e0b968); outline-offset: 3px; }
+
+.rv-status { min-height: 1.6em; margin-top: 0.9rem !important; font-size: 0.92rem; color: var(--rv-muted, #a89e90); }
+.is-writing .rv-status::after { content: ''; display: inline-block; width: 0.5em; height: 1em; margin-left: 0.3em; vertical-align: -0.15em; background: var(--rv-accent, #c9973f); animation: rv-blink 0.9s steps(2) infinite; }
+@keyframes rv-blink { 50% { opacity: 0; } }
+
+.rv-draft { display: grid; gap: 0.9rem; margin-top: 1.25rem; }
+.rv-tools { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.rv-tools button {
+  border: 1px solid var(--rv-line, rgba(220, 216, 205, 0.18));
+  border-radius: var(--rv-radius, 2px);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.86rem;
+  padding: 0.55em 0.95em;
+  cursor: pointer;
+  transition: border-color 0.15s ease, opacity 0.15s ease;
+}
+.rv-tools button:hover { border-color: var(--rv-accent, #c9973f); }
+.rv-tools button:disabled { opacity: 0.5; cursor: default; }
+.rv-tools button[data-undo] { color: var(--rv-accent-hi, #e0b968); }
+
+.rv-foot { font-size: 0.82rem; color: var(--rv-muted, #a89e90); text-align: center; }
+.rv-foot a { color: inherit; }
+
+/* ---------- "Copied, now paste it" bar ---------- */
+.rv-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1rem;
+  padding: 0.85rem 1.25rem calc(0.85rem + env(safe-area-inset-bottom));
+  background: var(--rv-surface, #211a14);
+  border-top: 1px solid var(--rv-accent, #c9973f);
+  animation: rv-rise 0.3s ease both;
+}
+.rv-bar p { font-size: 0.92rem; font-weight: 600; }
+.rv-bar-links { display: flex; gap: 0.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv *, .rv-open, .rv-bar { animation: none !important; transition: none !important; }
+}

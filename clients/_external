@@ -1,0 +1,4 @@
+# External clients: sites on the engine that live in their own repo, one
+# absolute path (or ~/path) per line. sync-engine.mjs treats them like
+# clients/<slug>; scaffold/provision do not apply to them.
+~/Documents/lhwt

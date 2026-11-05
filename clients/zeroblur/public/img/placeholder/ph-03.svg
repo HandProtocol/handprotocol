@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="PLACEHOLDER 03">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0812"/>
+      <stop offset="1" stop-color="#150f26"/>
+    </linearGradient>
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b48cff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#b48cff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#b48cff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur0" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="108"/></filter>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.12"/></feComponentTransfer></filter>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#base)"/>
+  <g>
+    <ellipse cx="614" cy="195" rx="463" ry="370" transform="rotate(18 614 195)" fill="#7a2cf0" opacity="0.60" filter="url(#blur0)"/>
+    <ellipse cx="584" cy="224" rx="566" ry="588" transform="rotate(135 584 224)" fill="#c04dff" opacity="0.52" filter="url(#blur1)"/>
+    <ellipse cx="820" cy="444" rx="382" ry="265" transform="rotate(101 820 444)" fill="#5a1fd6" opacity="0.54" filter="url(#blur0)"/>
+  </g>
+  <rect x="319" y="0" width="96" height="1200" fill="url(#streak)" transform="skewX(-18)"/>
+  <rect width="1200" height="1200" filter="url(#grain)" opacity="0.5"/>
+  <g fill="none" stroke="#e6d9ff" stroke-opacity="0.55" stroke-width="5">
+    <circle cx="1008" cy="1008" r="132"/>
+    <path d="M1008 912.96 L1103.04 1008 L1008 1103.04 L912.96 1008 Z"/>
+    <circle cx="1008" cy="1008" r="29" fill="#e6d9ff" stroke="none"/>
+  </g>
+  <text x="60" y="1140" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="29" letter-spacing="9" fill="#e6d9ff" fill-opacity="0.6">PLACEHOLDER 03</text>
+</svg>
