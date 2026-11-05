@@ -1,6 +1,8 @@
 // Editing API (session cookie required; see auth.mjs).
 //
 //   PUT    /api/admin/content                  { content } → publish copy
+//   PATCH  /api/admin/content                  { set: { '<section>.<field>': value } } → publish just those fields
+//                                              (setup ticks, the Looks pick) without touching unpublished drafts
 //   GET    /api/admin/revisions                → last 30 content snapshots
 //   POST   /api/admin/revisions/:id/restore    → publish an old snapshot
 //   POST   /api/admin/media/upload-url         { name, type, size } → signed upload
@@ -13,14 +15,17 @@
 //   GET    /api/admin/editors                  (owner) list
 //   POST   /api/admin/editors                  (owner) { email, role }
 //   DELETE /api/admin/editors/:id              (owner)
+//   *      /api/admin/bookings…                 the booking calendar (lib/booking-admin.mjs)
 //
 // Every successful write purges the CDN cache for the home page.
 
 import crypto from 'node:crypto';
 import { createSignedUpload, deleteObjects, objectExists, purgeSiteCache, sb } from './lib/db.mjs';
-import { CONTENT_KEY, sanitize } from './lib/site.mjs';
+import { CONTENT_KEY, SECTIONS, sanitize } from './lib/site.mjs';
+import { applyPaths } from './lib/sanitize.mjs';
 import { loadSite, toView } from './lib/content.mjs';
 import { handleError, json, readJson, requireEditor, sameOrigin } from './lib/http.mjs';
+import { adminBookings } from './lib/booking-admin.mjs';
 
 const ALLOWED_TYPES = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/avif': 'avif', 'image/gif': 'gif' };
 const MAX_UPLOAD_BYTES = 15 * 1024 * 1024;
@@ -48,6 +53,14 @@ async function publishContent(editor, content, kind = 'content') {
     body: { editor_id: editor.id, kind, snapshot: clean },
   }).catch((err) => console.warn('revision insert failed:', err.message));
   return clean;
+}
+
+// Reads the stored document (defaults when nothing is published yet), sets
+// the given paths, and publishes the result like a full PUT would.
+async function patchContent(editor, set) {
+  const stored = await sb(`/{content}?key=eq.${CONTENT_KEY}&select=value`);
+  const base = sanitize(stored && stored[0] ? stored[0].value : undefined);
+  return publishContent(editor, applyPaths(SECTIONS, base, set));
 }
 
 async function withPurge(result) {
@@ -227,6 +240,11 @@ export default async (req) => {
       const content = await publishContent(editor, body.content);
       return json(200, await withPurge({ ok: true, content }));
     }
+    if (head === 'content' && m === 'PATCH') {
+      const body = await readJson(req, 64 * 1024);
+      const content = await patchContent(editor, body.set);
+      return json(200, await withPurge({ ok: true, content }));
+    }
     if (head === 'revisions' && !second && m === 'GET') {
       const rows = await sb(
         '/{revisions}?kind=eq.content&select=id,created_at,editor_id,editor:{editors}(email)&order=created_at.desc&limit=30'
@@ -261,6 +279,11 @@ export default async (req) => {
       if (!second && m === 'GET') return await listEditors();
       if (!second && m === 'POST') return await addEditor(req, editor);
       if (second && UUID_RE.test(second) && m === 'DELETE') return await removeEditor(second, editor);
+    }
+
+    if (head === 'bookings') {
+      const url2 = url;
+      return await adminBookings(req, editor, parts.slice(1), url2);
     }
 
     if (head === 'site' && m === 'GET') {

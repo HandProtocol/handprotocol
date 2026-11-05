@@ -60,3 +60,17 @@ test('footerLinks respects white-label', () => {
   assert.match(B.footerLinks(), /Made by HAND/);
   assert.match(B.footerLinks(), /Owner sign in/);
 });
+
+test('headTags: a runtime theme + fonts override the config palette; a valid verification code becomes a meta tag', async () => {
+  const B = await import('../netlify/functions/lib/blocks.mjs');
+  const content = { brand: { name: 'X' }, seo: { title: 'T', description: 'D', google_verification: 'abcDEF123-_xyz' } };
+  const html = B.headTags({ content, featured: null, origin: 'https://x.test', theme: { bg: '#123456', ink: '#fff', accent: '#f00' }, fonts: { googleCss: 'https://fonts.googleapis.com/css2?family=Inter', display: 'Inter', body: 'Inter' } });
+  assert.match(html, /--bg:#123456/);
+  assert.match(html, /--font-display:Inter/);
+  assert.match(html, /theme-color" content="#123456"/);
+  assert.match(html, /family=Inter/);
+  assert.match(html, /<meta name="google-site-verification" content="abcDEF123-_xyz">/);
+  const bad = B.headTags({ content: { ...content, seo: { google_verification: '<script>' } }, featured: null });
+  assert.equal(bad.includes('google-site-verification'), false);
+  assert.match(B.headTags({ content, featured: null }), new RegExp(`--bg:${B.config.theme.bg}`));
+});

@@ -10,6 +10,42 @@ export function emailConfigured() {
   return Boolean(process.env.RESEND_API_KEY && process.env.EMAIL_FROM);
 }
 
+// One Resend call. Never throws: { ok, id } or { ok:false, reason }.
+// payload: { to: [], subject, html, text, reply_to?, attachments?: [{ filename, content (base64) }] }
+export async function sendEmail(payload) {
+  if (!emailConfigured()) return { ok: false, reason: 'email-unconfigured' };
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ from: process.env.EMAIL_FROM, ...payload }),
+    });
+    if (!res.ok) {
+      const body = await res.text().catch(() => '');
+      console.warn(`[email] resend ${res.status}: ${body.slice(0, 200)}`);
+      return { ok: false, reason: `email-${res.status}` };
+    }
+    const data = await res.json().catch(() => ({}));
+    return { ok: true, id: data.id };
+  } catch (err) {
+    console.warn('[email] resend threw:', err && err.message);
+    return { ok: false, reason: 'email-network' };
+  }
+}
+
+// The themed card every site email sits in. `eyebrow` is the site name.
+export function emailShell(inner, { theme = config.theme, eyebrow = siteName() } = {}) {
+  const t = theme;
+  const bg = t.bg, card = t['bg-2'] || t.bg, ink = t.ink, accent2 = t['accent-2'] || t.accent;
+  return `
+<div style="font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;background:${bg};color:${ink};padding:32px 20px;">
+  <div style="max-width:560px;margin:0 auto;background:${card};border:1px solid ${accent2}40;border-radius:16px;padding:28px;">
+    <p style="margin:0 0 6px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:${accent2};">${escapeHtml(eyebrow)}</p>
+    ${inner}
+  </div>
+</div>`;
+}
+
 export function loginEmailHtml({ link, name }) {
   const t = config.theme;
   const bg = t.bg, card = t['bg-2'] || t.bg, ink = t.ink, muted = t['ink-3'] || t['ink-2'] || t.ink, accent = t.accent, accent2 = t['accent-2'] || t.accent, onAccent = t['on-accent'] || '#ffffff';

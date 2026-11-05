@@ -42,6 +42,12 @@ export function isDark(hex) {
   return luminance(hex) < 0.4;
 }
 
+// :root declarations for any token object (a pack uses this to inject an
+// alternate palette when the owner picks a different theme at runtime).
+export function themeVarsFor(tokens) {
+  return declarations(tokens);
+}
+
 function declarations(tokens) {
   const out = [];
   for (const [key, value] of Object.entries(tokens)) {

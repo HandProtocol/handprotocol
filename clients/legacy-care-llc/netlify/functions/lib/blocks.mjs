@@ -13,8 +13,8 @@ export { config };
 
 // --- theme -----------------------------------------------------------------
 
-import { siteThemeVars } from './theme.mjs';
-export { hexToRgb, mix, luminance } from './theme.mjs';
+import { siteThemeVars, themeVarsFor } from './theme.mjs';
+export { hexToRgb, mix, luminance, themeVarsFor } from './theme.mjs';
 
 // :root custom properties from config.theme + config.fonts. Hex colors also
 // get "<key>-rgb: r g b" so CSS can write rgb(var(--accent-rgb) / .3).
@@ -22,26 +22,40 @@ export function themeVars() {
   return siteThemeVars();
 }
 
-export function themeStyle() {
+// Pass a palette + fonts to render a runtime-selected theme instead of the
+// config's (the admin, emails and meta theme-color keep using config.theme).
+export function themeStyle(theme, fonts) {
+  if (theme) {
+    const { admin, ...palette } = theme;
+    const f = { ...config.fonts, ...(fonts || {}) };
+    return `<style id="theme">:root{${themeVarsFor({ ...palette, 'font-display': f.display, 'font-body': f.body })}}</style>`;
+  }
   return `<style id="theme">:root{${themeVars()}}</style>`;
 }
 
-export function fontLinks() {
-  if (!config.fonts.googleCss) return '';
+export function fontLinks(fonts) {
+  const f = fonts || config.fonts;
+  if (!f.googleCss) return '';
   return `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="${e(config.fonts.googleCss)}" rel="stylesheet">`;
+<link href="${e(f.googleCss)}" rel="stylesheet">`;
 }
 
 // --- head ------------------------------------------------------------------
 
 // Everything inside <head> except the renderer's own extras. `origin` is the
 // request origin (canonical + og:url); falls back to config.productionUrl.
-export function headTags({ content, featured, origin = '', title, description, extra = '' }) {
+// `theme` / `fonts` override config's for this render (runtime theme pick);
+// `content.seo.google_verification`, when the pack has that field, becomes
+// the Search Console meta tag so the owner verifies from the editor.
+export function headTags({ content, featured, origin = '', title, description, extra = '', theme, fonts }) {
   const base = origin || config.productionUrl;
   const t = title || (content.seo && content.seo.title) || (content.brand && content.brand.name) || siteName();
   const d = description || (content.seo && content.seo.description) || '';
   const ogImage = featured ? new URL(featured.full, base).href : '';
+  const gsv = String((content.seo && content.seo.google_verification) || '').trim();
+  const verification = /^[A-Za-z0-9_-]{10,120}$/.test(gsv) ? `<meta name="google-site-verification" content="${e(gsv)}">\n` : '';
+  const bg = (theme && theme.bg) || config.theme.bg;
   return `<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${e(t)}</title>
@@ -53,10 +67,10 @@ export function headTags({ content, featured, origin = '', title, description, e
 <meta property="og:url" content="${e(base)}/">
 ${ogImage ? `<meta property="og:image" content="${e(ogImage)}">` : ''}
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="${e(config.theme.bg)}">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-${fontLinks()}
-${themeStyle()}
+<meta name="theme-color" content="${e(bg)}">
+${verification}<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+${fontLinks(fonts)}
+${themeStyle(theme, fonts)}
 <link rel="stylesheet" href="/assets/site.css?v=${e(config.assetVersion)}">
 ${extra}`;
 }
@@ -170,6 +184,10 @@ export function footerLinks() {
 export function callbarHtml(cta) {
   return `<div class="callbar" id="callbar">${ctaButton(cta, '', { magnetic: false })}</div>`;
 }
+
+// The booking calendar's #book form (config.booking, request mode). Empty
+// string when the site has no calendar. See lib/booking-form.mjs.
+export { bookingBlock } from './booking-form.mjs';
 
 export function siteScript() {
   return `<script src="/assets/site.js?v=${e(config.assetVersion)}" defer></script>`;

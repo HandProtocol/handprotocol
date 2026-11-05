@@ -40,6 +40,12 @@ export function verifySession(token, now = Date.now()) {
   return editorId;
 }
 
+// A deterministic token for a payload (booking manage / act links): the
+// same secret as sessions, so a link can be re-derived for every email.
+export function signPayload(payload) {
+  return crypto.createHmac('sha256', secret()).update(String(payload)).digest('base64url');
+}
+
 export function newLoginToken() {
   return crypto.randomBytes(32).toString('base64url');
 }
