@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-audio="off" data-paused="off">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>HAND — the waterfall</title>
+  <meta name="description" content="HAND Protocol as a living waterfall: contributions fall, pool, rise and return. Governance built in the open, reciprocity, missions served, and work on the ground in Austin — drawn live in WebGL.">
+  <meta name="theme-color" content="#1b2a2e">
+  <meta property="og:title" content="HAND — the waterfall">
+  <meta property="og:description" content="A shared pool of resources, rendered as a living waterfall.">
+  <meta property="og:url" content="https://waterfall.handprotocol.org/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <canvas id="scene" aria-label="A waterfall pouring into a pool inside a shaded gorge"></canvas>
+
+  <!-- The 3D stage: DOM elements pinned to world points by waterfall.js.
+       data-anchor = "x,y,z" in scene units (pool surface is y=0, the main
+       fall lands at x=0,z≈0.9). data-xform is appended after the projection
+       translate so each element can carry its own 3D pose. -->
+  <div id="stage" aria-hidden="false">
+    <div class="emerge" data-anchor="0.6,0.0,3.9" data-anchor-portrait="0.55,0.0,4.2" data-xform="translate(-50%, -100%)">
+      <p class="emerge-sub">a shared pool of resources</p>
+      <h1 class="emerge-title">HAND</h1>
+      <div class="emerge-reflection" aria-hidden="true">
+        <span class="emerge-title">HAND</span>
+      </div>
+    </div>
+
+    <!-- The pieces: HAND stands on the brink at the source (piece--dry,
+         no water reflection); the works rise out of the pool hugging the
+         falls, in the order the water travels. Reflections + the "visit"
+         arrows are cloned/injected by the module below. In portrait the
+         whole group docks into a swipeable shelf (see .pieces in
+         style.css) instead of anchoring. -->
+    <div class="pieces">
+    <div class="piece piece--dry piece--hand" data-anchor="-2.6,6.7,0.3" data-xform="translate(-50%, -100%)" style="--d: 1400ms">
+      <div class="piece-rise">
+        <a class="piece-card" href="https://handprotocol.org/governance/" target="_blank" rel="noopener" data-panel="governance">
+          <span class="piece-kicker">the source · governance</span>
+          <span class="piece-name">Built in the open</span>
+          <span class="piece-desc">Every founding document published before incorporation.</span>
+          <span class="piece-tags"><span>articles</span><span>bylaws</span><span>form 1023</span></span>
+        </a>
+      </div>
+    </div>
+    <div class="piece" data-anchor="-2.6,0.0,1.55" data-xform="translate(-50%, -100%)" style="--d: 1800ms">
+      <div class="piece-rise">
+        <a class="piece-card" href="https://yuhm.handprotocol.org" target="_blank" rel="noopener">
+          <span class="piece-kicker">web app</span>
+          <span class="piece-name">Yuhm Network</span>
+          <span class="piece-desc">Find or contribute free food across Austin.</span>
+        </a>
+      </div>
+    </div>
+    <div class="piece" data-anchor="-3.9,0.0,2.85" data-xform="translate(-50%, -100%)" style="--d: 2050ms">
+      <div class="piece-rise">
+        <a class="piece-card" href="https://waterdrop.handprotocol.org" target="_blank" rel="noopener">
+          <span class="piece-kicker">web app</span>
+          <span class="piece-name">WaterDrop</span>
+          <span class="piece-desc">A paddling companion for Central Texas rivers.</span>
+        </a>
+      </div>
+    </div>
+    <div class="piece" data-anchor="2.2,0.0,1.45" data-xform="translate(-50%, -100%)" style="--d: 2300ms">
+      <div class="piece-rise">
+        <a class="piece-card" href="https://longhornwinetours.com" target="_blank" rel="noopener">
+          <span class="piece-kicker">small business</span>
+          <span class="piece-name">Longhorn Wine Tours</span>
+          <span class="piece-desc">Texas Hill Country wine tours.</span>
+        </a>
+      </div>
+    </div>
+    <div class="piece" data-anchor="4.0,0.0,2.4" data-xform="translate(-50%, -100%)" style="--d: 2550ms">
+      <div class="piece-rise">
+        <a class="piece-card" href="https://eds-barbershop.com" target="_blank" rel="noopener">
+          <span class="piece-kicker">small business</span>
+          <span class="piece-name">Ed&rsquo;s Barber Shop</span>
+          <span class="piece-desc">Fades, beards &amp; color in Montopolis.</span>
+        </a>
+      </div>
+    </div>
+    </div>
+
+    <!-- Lore markers: small glass pills pinned to features of the scene.
+         Each opens a story panel. Reciprocity lives in the rising mist,
+         technology in the light shafts, missions on the far rocks, the
+         ground work on a boulder. -->
+    <button class="lore" type="button" data-panel="reciprocity" aria-haspopup="dialog"
+            data-anchor="-2.2,4.8,0.8" data-anchor-portrait="-1.7,4.7,0.9"
+            data-xform="translate(-50%, -50%)" style="--d: 2950ms">
+      <span class="lore-dot" aria-hidden="true"></span>reciprocity</button>
+    <button class="lore" type="button" data-panel="technology" aria-haspopup="dialog"
+            data-anchor="2.6,5.6,0.7" data-anchor-portrait="1.9,6.0,0.8"
+            data-xform="translate(-50%, -50%)" style="--d: 3100ms">
+      <span class="lore-dot" aria-hidden="true"></span>technology</button>
+    <button class="lore" type="button" data-panel="missions" aria-haspopup="dialog"
+            data-anchor="2.8,2.6,1.2" data-anchor-portrait="-1.9,5.8,0.6"
+            data-xform="translate(-50%, -50%)" style="--d: 3250ms">
+      <span class="lore-dot" aria-hidden="true"></span>missions</button>
+    <button class="lore" type="button" data-panel="ground" aria-haspopup="dialog"
+            data-anchor="-2.6,2.0,1.4" data-anchor-portrait="2.0,2.0,2.0"
+            data-xform="translate(-50%, -50%)" style="--d: 3400ms">
+      <span class="lore-dot" aria-hidden="true"></span>on the ground</button>
+  </div>
+
+  <!-- Story panels: one glass dialog, five pages. Rises from the waterline. -->
+  <div class="panel-veil" id="panel-veil"></div>
+  <aside class="panel" id="panel" role="dialog" aria-modal="true" aria-label="About HAND" tabindex="-1">
+    <button class="panel-close" id="panel-close" type="button" aria-label="Close">&times;</button>
+    <div class="panel-scroll" id="panel-scroll">
+
+      <section class="panel-page" data-page="governance">
+        <p class="panel-kicker">the source &middot; governance</p>
+        <h2 class="panel-title">Built in the open</h2>
+        <p>HAND Protocol is becoming a nonprofit foundation in Austin, Texas &mdash; and every document it will operate by was published <em>before</em> incorporation: Articles, Bylaws, board policies, a theory of change, the Form&nbsp;1023 narrative. Working drafts anyone can read, comment on, and hold us to.</p>
+        <p>The pool is the primary mechanism. Contributors and Reciprocates match through three flows &mdash; <em>Donate, Exchange, Receive</em> &mdash; under bylaws that govern the resource pool itself (Article&nbsp;XI) and an optional, community-owned AI layer for the groups who choose it (Article&nbsp;XII).</p>
+        <p class="panel-links"><a href="https://handprotocol.org/governance/" target="_blank" rel="noopener">Read the governance library &nearr;</a></p>
+      </section>
+
+      <section class="panel-page" data-page="reciprocity">
+        <p class="panel-kicker">the cycle &middot; reciprocity</p>
+        <h2 class="panel-title">Two sides of one fabric</h2>
+        <p>Supporting HAND and being supported by HAND are the same gesture in two directions. There is no applicant lane &mdash; Contributors pour skills, tools and funds into a shared pool, and Reciprocates draw from it: web presence, branding, formation paperwork, and the long arc of staying involved.</p>
+        <p>Like this water &mdash; what falls, pools; what pools, rises; what rises, returns. No one is only giving, and no one is only receiving.</p>
+        <p class="panel-links"><a href="https://handprotocol.org/reciprocates/" target="_blank" rel="noopener">For Reciprocates &nearr;</a></p>
+      </section>
+
+      <section class="panel-page" data-page="missions">
+        <p class="panel-kicker">the pool serves &middot; missions</p>
+        <h2 class="panel-title">The people already doing the work</h2>
+        <ul>
+          <li><strong>Impact entrepreneurs &amp; social ventures</strong> &mdash; food access, climate, education, community technology.</li>
+          <li><strong>Community-rooted small businesses</strong> &mdash; restaurants, barbers, makers, trades. Several stand in this pool.</li>
+          <li><strong>Grassroots organizations</strong> &mdash; mutual aid, harm reduction, food-access projects, land stewards.</li>
+          <li><strong>A healing-arts community on Texas land</strong> &mdash; and other Reciprocates who prefer to stay unnamed.</li>
+        </ul>
+        <p>Operating for over a year: quadratic-funding rounds joined, multiple Reciprocates supported, every outcome documented and shared.</p>
+        <p class="panel-links"><a href="https://handprotocol.org/reciprocates/" target="_blank" rel="noopener">Meet the Reciprocates &nearr;</a></p>
+      </section>
+
+      <section class="panel-page" data-page="technology">
+        <p class="panel-kicker">the tools &middot; technology</p>
+        <h2 class="panel-title">Leading &amp; experimental, owned by the community</h2>
+        <p>HAND builds with leading and experimental AI &mdash; and hands the keys over. Sovereign Reciprocates are custom open-source agent systems built per community, owned by that community outright, governed by eight sovereignty principles.</p>
+        <p>The same hands build the web: handmade sites for small businesses, bilingual by default, delivered free as working demos before anyone signs anything. This waterfall is drawn live by code too &mdash; no video, no textures, only light.</p>
+        <p class="panel-links"><a href="https://handprotocol.org/sovereign-reciprocates/" target="_blank" rel="noopener">The AI workstream &nearr;</a></p>
+      </section>
+
+      <section class="panel-page" data-page="ground">
+        <p class="panel-kicker">the walk &middot; on the ground</p>
+        <h2 class="panel-title">With you, not at you</h2>
+        <p>Austin, in person. Walking into shops on the east side and building their website before asking for anything. Hand-holding through LLC paperwork. Gatherings on healing land. Long-term accompaniment &mdash; walking alongside founders and organizations as they grow, not build-and-bounce delivery.</p>
+        <p>Tell us where you are. We&rsquo;ll walk from there.</p>
+        <p class="panel-links"><a href="https://handprotocol.org/reciprocates/" target="_blank" rel="noopener">Start the conversation &nearr;</a></p>
+      </section>
+
+    </div>
+  </aside>
+
+  <nav class="rail" aria-label="Scene controls">
+    <button class="rail-btn" id="btn-audio" type="button" aria-pressed="false" title="Sound">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wave" d="M16 8.5a4.5 4.5 0 0 1 0 7M18.5 6a8 8 0 0 1 0 12"/></svg>
+      <span class="rail-label">Sound</span>
+    </button>
+    <button class="rail-btn" id="btn-motion" type="button" aria-pressed="true" title="Motion">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path class="play" d="M8 5v14l11-7z"/><path class="pause" d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>
+      <span class="rail-label">Motion</span>
+    </button>
+  </nav>
+
+  <p class="hint" id="hint">move to look around</p>
+
+  <!-- The entrance: while the scene compiles, a pouring thread; once the
+       first frame is up the veil thins and offers the way in. Entering is
+       the user gesture that lets the falls actually sound. -->
+  <div class="veil" id="veil" role="dialog" aria-label="Enter">
+    <span class="veil-pour" aria-hidden="true"></span>
+    <div class="veil-gate">
+      <p class="veil-kicker">hand protocol</p>
+      <p class="veil-line">a waterfall</p>
+      <div class="veil-actions">
+        <button class="veil-btn veil-btn--primary" id="enter-sound" type="button">enter with sound</button>
+        <button class="veil-btn" id="enter-quiet" type="button">enter quietly</button>
+      </div>
+    </div>
+  </div>
+
+  <noscript><p class="noscript">This page draws a waterfall with WebGL and needs JavaScript.</p></noscript>
+
+  <script type="module" src="waterfall.js"></script>
+  <script type="module">
+    const html = document.documentElement;
+    const audioBtn = document.getElementById('btn-audio');
+    const motionBtn = document.getElementById('btn-motion');
+    const hint = document.getElementById('hint');
+    const coarse = matchMedia('(pointer: coarse)').matches;
+    hint.textContent = coarse ? 'tilt to look around' : 'move to look around';
+
+    audioBtn.addEventListener('click', () => {
+      const on = html.dataset.audio !== 'on';
+      window.WATERFALL?.setAudio(on);
+      audioBtn.setAttribute('aria-pressed', String(on));
+    });
+    motionBtn.addEventListener('click', () => {
+      const paused = !(window.WATERFALL?.paused);
+      window.WATERFALL?.setPaused(paused);
+      motionBtn.setAttribute('aria-pressed', String(!paused));
+    });
+    // Give every piece a water reflection: a flipped, blurred clone of its card.
+    document.querySelectorAll('.piece').forEach((p) => {
+      const card = p.querySelector('.piece-card');
+      const ghost = card.cloneNode(true);
+      ghost.removeAttribute('href');
+      ghost.setAttribute('tabindex', '-1');
+      const r = document.createElement('div');
+      r.className = 'piece-reflection';
+      r.setAttribute('aria-hidden', 'true');
+      r.appendChild(ghost);
+      p.appendChild(r);
+      // the quiet "visit" affordance, revealed on hover
+      const go = document.createElement('span');
+      go.className = 'piece-go';
+      go.setAttribute('aria-hidden', 'true');
+      go.textContent = '↗';
+      card.appendChild(go);
+    });
+
+    // Story panels: lore markers + the governance card open one glass
+    // dialog; Esc, the dim veil, or × close it. Focus returns to the opener.
+    const panel = document.getElementById('panel');
+    const panelVeil = document.getElementById('panel-veil');
+    const panelClose = document.getElementById('panel-close');
+    let panelOpener = null;
+    function openPanel(key, opener) {
+      panel.querySelectorAll('.panel-page').forEach((s) => s.classList.toggle('is-current', s.dataset.page === key));
+      const title = panel.querySelector('.panel-page.is-current .panel-title');
+      panel.setAttribute('aria-label', title ? title.textContent : 'About HAND');
+      document.getElementById('panel-scroll').scrollTop = 0;
+      html.classList.add('has-panel');
+      panelOpener = opener || null;
+      setTimeout(() => panelClose.focus({ preventScroll: true }), 60);
+    }
+    function closePanel() {
+      html.classList.remove('has-panel');
+      panelOpener?.focus?.({ preventScroll: true });
+      panelOpener = null;
+    }
+    document.querySelectorAll('[data-panel]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;   // let new-tab clicks through
+        e.preventDefault();
+        openPanel(el.dataset.panel, el);
+      });
+    });
+    panelClose.addEventListener('click', closePanel);
+    panelVeil.addEventListener('click', closePanel);
+    addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && html.classList.contains('has-panel')) closePanel();
+    });
+
+    // Premium hover: the card tilts toward the pointer and a glare tracks
+    // it (CSS reads --mx/--my/--rx/--ry; short transition smooths the lag).
+    if (matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) {
+      document.querySelectorAll('.piece-rise .piece-card').forEach((card) => {
+        card.addEventListener('pointermove', (e) => {
+          const r = card.getBoundingClientRect();
+          const mx = (e.clientX - r.left) / r.width;
+          const my = (e.clientY - r.top) / r.height;
+          card.style.setProperty('--mx', mx.toFixed(3));
+          card.style.setProperty('--my', my.toFixed(3));
+          card.style.setProperty('--ry', ((mx - 0.5) * 9).toFixed(2) + 'deg');
+          card.style.setProperty('--rx', ((0.5 - my) * 7).toFixed(2) + 'deg');
+        });
+        card.addEventListener('pointerleave', () => {
+          for (const prop of ['--mx', '--my', '--rx', '--ry']) card.style.removeProperty(prop);
+        });
+      });
+    }
+
+    // The entrance. Once the first frame is on screen the veil thins and
+    // offers the way in; entering starts the emergence (and, with sound,
+    // the roar — the click is the gesture the autoplay policy wants).
+    // ?still  — skip the veil + entrance transitions (screenshots, QA)
+    const veil = document.getElementById('veil');
+    let waterTouched = false;
+    addEventListener('waterfall:touch', () => {
+      waterTouched = true;
+      if (hint.dataset.msg === 'touch') hint.classList.add('is-gone');
+    });
+
+    let entered = false;
+    function enter(withSound) {
+      if (entered) return;
+      entered = true;
+      try { sessionStorage.setItem('wf-enter', withSound ? 'sound' : 'quiet'); } catch {}
+      if (withSound) {
+        window.WATERFALL?.setAudio(true);
+        audioBtn.setAttribute('aria-pressed', 'true');
+      }
+      html.classList.add('is-entered');
+      veil.setAttribute('inert', '');
+      veil.setAttribute('aria-hidden', 'true');
+      setTimeout(() => html.classList.add('is-emerged'), 400);
+      // hints: how to look, then — if the water goes untouched — how to touch
+      const hideHint1 = () => { if (hint.dataset.msg !== 'touch') hint.classList.add('is-gone'); };
+      setTimeout(hideHint1, 7200);
+      ['pointermove', 'touchstart'].forEach((ev) => addEventListener(ev, hideHint1, { once: true, passive: true }));
+      setTimeout(() => {
+        if (waterTouched) return;
+        hint.dataset.msg = 'touch';
+        hint.textContent = coarse ? 'tap the water' : 'touch the water';
+        hint.style.transitionDelay = '0ms';
+        hint.classList.remove('is-gone');
+        setTimeout(() => hint.classList.add('is-gone'), 5600);
+      }, 11000);
+    }
+    document.getElementById('enter-sound').addEventListener('click', () => enter(true));
+    document.getElementById('enter-quiet').addEventListener('click', () => enter(false));
+
+    if (new URLSearchParams(location.search).has('still')) {
+      veil.remove();
+      html.classList.add('is-entered', 'is-emerged', 'is-still');
+      entered = true;
+    }
+    let saved = null;
+    try { saved = sessionStorage.getItem('wf-enter'); } catch {}
+    const ready = () => {
+      if (!html.classList.contains('is-ready')) return requestAnimationFrame(ready);
+      if (entered) return;
+      // a same-tab return visitor walks straight back in
+      if (saved) return enter(saved === 'sound');
+      document.getElementById('enter-sound').focus({ preventScroll: true });
+    };
+    requestAnimationFrame(ready);
+  </script>
+</body>
+</html>

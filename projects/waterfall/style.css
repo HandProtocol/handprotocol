@@ -1,0 +1,762 @@
+/* ============================================================
+   Waterfall — page chrome
+   The canvas is the page. Everything else floats over it and
+   stays out of the water's way.
+   ============================================================ */
+
+:root {
+  --ink: oklch(96% 0.012 200);
+  --ink-dim: oklch(86% 0.02 200 / 0.72);
+  --ground: oklch(24% 0.025 210);
+  --glass: oklch(30% 0.03 210 / 0.28);
+  --glass-line: oklch(90% 0.02 200 / 0.18);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --font-display: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--ground);
+  color: var(--ink);
+  overflow: hidden;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  font-family: var(--font-ui);
+}
+
+#scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+/* ---------- the 3D stage ---------- */
+
+#stage {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  perspective: 1100px;
+  perspective-origin: 50% 45%;
+  z-index: 2;
+}
+
+.emerge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-style: preserve-3d;
+  text-align: center;
+  will-change: transform;
+  /* revealed from the water line upward */
+  clip-path: inset(-40% -20% 0 -20%);
+}
+
+.emerge-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(3.6rem, 10.5vw, 8rem);
+  line-height: 0.9;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  text-shadow:
+    0 0 28px oklch(90% 0.03 200 / 0.35),
+    0 2px 18px oklch(20% 0.03 210 / 0.55);
+  transform: translateY(110%) rotateX(18deg);
+  opacity: 0;
+  transition:
+    transform 2600ms var(--ease-out),
+    opacity 1400ms var(--ease-out);
+  transform-origin: 50% 100%;
+}
+
+.emerge-sub {
+  margin: 0 0 0.9em;
+  font-size: 0.68rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  text-shadow: 0 1px 10px oklch(20% 0.03 210 / 0.7);
+  transform: translateY(40px);
+  opacity: 0;
+  transition:
+    transform 2200ms var(--ease-out) 700ms,
+    opacity 1600ms var(--ease-out) 700ms;
+}
+
+/* A reflection in the pool: flipped, softened, washed by the water. */
+.emerge-reflection {
+  position: relative;
+  height: 0.58em;
+  font-size: clamp(3.6rem, 10.5vw, 8rem);
+  overflow: hidden;
+  filter: blur(2px);
+  opacity: 0;
+  transition: opacity 2400ms var(--ease-out) 1400ms;
+  -webkit-mask-image: linear-gradient(to bottom, oklch(0% 0 0 / 0.38), transparent 90%);
+  mask-image: linear-gradient(to bottom, oklch(0% 0 0 / 0.38), transparent 90%);
+  pointer-events: none;
+}
+.emerge-reflection .emerge-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0.85em;                  /* flipped upward from here into the 0.58em window */
+  transform-origin: 50% 0;
+  transform: scaleY(-0.75);
+  opacity: 1;
+  transition: none;
+  text-shadow: none;
+  animation: ripple 3.4s ease-in-out infinite alternate;
+}
+@keyframes ripple {
+  from { transform: scaleY(-0.75) skewX(-1.5deg) scaleX(1.01); }
+  to   { transform: scaleY(-0.75) skewX(1.5deg) scaleX(0.99); }
+}
+
+.is-emerged .emerge-title { transform: translateY(0) rotateX(0deg); opacity: 1; }
+.is-emerged .emerge-sub { transform: translateY(0); opacity: 1; }
+.is-emerged .emerge-reflection { opacity: 1; }
+
+/* ---------- portfolio pieces ---------- */
+/* Each .piece is anchored to a pool-surface point and rises out of the
+   water like the title: clipped at the waterline, ease-out-quint, with a
+   flipped blurred reflection (cloned in by index.html). --d staggers the
+   procession after the title. */
+
+.piece {
+  --d: 1400ms;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  transform-style: preserve-3d;
+  will-change: transform;
+  clip-path: inset(-60% -30% 0 -30%);
+}
+
+.piece-rise {
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+  transform: translateY(118%) rotateX(16deg);
+  opacity: 0;
+  transition:
+    transform 2400ms var(--ease-out) var(--d),
+    opacity 1500ms var(--ease-out) var(--d);
+}
+.is-emerged .piece-rise { transform: translateY(0) rotateX(0deg); opacity: 1; }
+
+.piece-card {
+  position: relative;
+  display: block;
+  width: clamp(158px, 16vw, 206px);
+  padding: 13px 15px 12px;
+  border: 1px solid var(--glass-line);
+  border-radius: 14px;
+  background: var(--glass);
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  color: var(--ink);
+  text-decoration: none;
+  pointer-events: auto;
+  /* the hover pose is driven by custom props so the pointer can steer it:
+     --l lift · --z pop toward the viewer · --rx/--ry pointer tilt */
+  transform: translateY(var(--l, 0px)) translateZ(var(--z, 0px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition:
+    transform 600ms var(--ease-out),
+    background 400ms var(--ease-out),
+    border-color 400ms var(--ease-out),
+    box-shadow 500ms var(--ease-out);
+}
+.piece-card:hover,
+.piece-card:focus-visible {
+  --l: -6px;
+  --z: 18px;
+  background: oklch(34% 0.035 210 / 0.46);
+  border-color: oklch(92% 0.02 200 / 0.4);
+  box-shadow:
+    0 24px 48px oklch(15% 0.03 210 / 0.4),
+    0 2px 18px oklch(90% 0.05 200 / 0.12);
+  transition:
+    transform 150ms ease-out,
+    background 400ms var(--ease-out),
+    border-color 400ms var(--ease-out),
+    box-shadow 500ms var(--ease-out);
+}
+.piece-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* border light: a bright ring segment that follows the pointer, masked to
+   the 1px frame (two-layer mask, xor) */
+.piece-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 15px;
+  padding: 1px;
+  background: radial-gradient(
+    140px circle at calc(var(--mx, 0.5) * 100%) calc(var(--my, 0.5) * 100%),
+    oklch(95% 0.03 200 / 0.85),
+    oklch(95% 0.03 200 / 0.06) 70%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 450ms var(--ease-out);
+  pointer-events: none;
+}
+/* sheen: a soft glare pooling under the pointer, like light on wet glass */
+.piece-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    220px circle at calc(var(--mx, 0.5) * 100%) calc(var(--my, 0.5) * 100%),
+    oklch(97% 0.02 200 / 0.15),
+    transparent 62%);
+  opacity: 0;
+  transition: opacity 450ms var(--ease-out);
+  pointer-events: none;
+}
+.piece-card:hover::before, .piece-card:focus-visible::before,
+.piece-card:hover::after, .piece-card:focus-visible::after { opacity: 1; }
+
+/* the quiet "visit" affordance (injected by index.html) */
+.piece-go {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font: 400 0.82rem/1 var(--font-ui);
+  color: var(--ink-dim);
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition:
+    opacity 400ms var(--ease-out),
+    transform 400ms var(--ease-out),
+    color 400ms var(--ease-out);
+  pointer-events: none;
+}
+.piece-card:hover .piece-go,
+.piece-card:focus-visible .piece-go { opacity: 1; transform: none; color: var(--ink); }
+
+.piece-kicker {
+  display: block;
+  margin-bottom: 7px;
+  font: 500 0.56rem/1 var(--font-ui);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  transition: letter-spacing 450ms var(--ease-out), color 450ms var(--ease-out);
+}
+.piece-card:hover .piece-kicker,
+.piece-card:focus-visible .piece-kicker { letter-spacing: 0.36em; color: var(--ink); }
+.piece-name {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 1.42rem;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+  text-shadow: 0 0 16px oklch(90% 0.03 200 / 0.25), 0 1px 10px oklch(20% 0.03 210 / 0.5);
+}
+.piece-desc {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.7rem;
+  line-height: 1.45;
+  color: var(--ink-dim);
+}
+
+/* HAND's aspect chips */
+.piece-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 9px;
+}
+.piece-tags span {
+  padding: 3px 7px;
+  border: 1px solid var(--glass-line);
+  border-radius: 999px;
+  font: 500 0.5rem/1 var(--font-ui);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  transition: border-color 450ms var(--ease-out), color 450ms var(--ease-out);
+}
+.piece-card:hover .piece-tags span { border-color: oklch(92% 0.02 200 / 0.32); color: var(--ink); }
+
+/* the HAND card carries more info, so it gets a little more room */
+.piece--hand .piece-card { width: clamp(200px, 20vw, 258px); }
+
+/* the card mirrored in the pool: bottom edge meets the waterline */
+.piece-reflection {
+  position: relative;
+  height: 46px;
+  margin-top: 2px;
+  overflow: hidden;
+  filter: blur(3px) saturate(0.9);
+  opacity: 0;
+  transition:
+    opacity 2200ms var(--ease-out) calc(var(--d) + 900ms),
+    filter 600ms var(--ease-out);
+  -webkit-mask-image: linear-gradient(to bottom, oklch(0% 0 0 / 0.32), transparent 88%);
+  mask-image: linear-gradient(to bottom, oklch(0% 0 0 / 0.32), transparent 88%);
+  pointer-events: none;
+}
+.piece-reflection .piece-card {
+  transform-origin: 50% 0;
+  transform: translateY(100%) scaleY(-1);
+  transition: none;
+  animation: piece-ripple 3.8s ease-in-out infinite alternate;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+@keyframes piece-ripple {
+  from { transform: translateY(100%) scaleY(-1) skewX(-1.2deg) scaleX(1.01); }
+  to   { transform: translateY(100%) scaleY(-1) skewX(1.2deg) scaleX(0.99); }
+}
+.is-emerged .piece-reflection { opacity: 1; }
+
+/* a lifted card reads sharper in the water below it */
+.piece:hover .piece-reflection { filter: blur(2px) saturate(1); }
+
+/* the mirror carries no interactive chrome: no glare, no ring, no arrow,
+   and no pointer pose (its transform comes from the ripple animation) */
+.piece-reflection .piece-card::before,
+.piece-reflection .piece-card::after,
+.piece-reflection .piece-go { display: none; }
+
+/* pieces standing on rock (no water beneath them) */
+.piece--dry .piece-reflection { display: none; }
+
+/* In landscape the group is invisible wrapping: pieces anchor to the
+   stage as if direct children. */
+.pieces { display: contents; }
+
+/* ---------- lore markers ---------- */
+/* Small glass pills pinned to features of the scene; each opens a story
+   panel. They fade in after the cards have risen. */
+
+.lore {
+  position: absolute;
+  top: 0;
+  left: 0;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border: 1px solid oklch(90% 0.02 200 / 0.26);
+  border-radius: 999px;
+  background: oklch(28% 0.03 210 / 0.46);
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+  color: var(--ink);
+  font: 500 0.6rem/1 var(--font-ui);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0;
+  transition:
+    opacity 1600ms var(--ease-out) var(--d, 3000ms),
+    background 350ms var(--ease-out),
+    border-color 350ms var(--ease-out),
+    box-shadow 350ms var(--ease-out);
+}
+.is-emerged .lore { opacity: 1; }
+.lore:hover,
+.lore:focus-visible {
+  background: oklch(34% 0.035 210 / 0.5);
+  border-color: oklch(92% 0.02 200 / 0.4);
+  box-shadow: 0 8px 26px oklch(15% 0.03 210 / 0.35), 0 0 18px oklch(90% 0.05 200 / 0.12);
+}
+.lore:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.lore-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 8px oklch(96% 0.01 200 / 0.9);
+  animation: lore-pulse 3s ease-in-out infinite;
+}
+@keyframes lore-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.75; }
+  50%      { transform: scale(1.5); opacity: 1; }
+}
+
+/* ---------- story panels ---------- */
+/* One glass dialog, five pages. It rises from the waterline; the scene
+   keeps flowing behind a slight dim. */
+
+.panel-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 6;
+  background: oklch(14% 0.02 210 / 0.35);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 600ms var(--ease-out), visibility 0s linear 600ms;
+}
+.has-panel .panel-veil { opacity: 1; visibility: visible; transition: opacity 600ms var(--ease-out); }
+
+.panel {
+  position: fixed;
+  z-index: 7;
+  left: 50%;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  transform: translateX(-50%) translateY(36px);
+  width: min(600px, calc(100vw - 28px));
+  max-height: min(72vh, 620px);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--glass-line);
+  border-radius: 20px;
+  background: oklch(25% 0.028 210 / 0.62);
+  backdrop-filter: blur(24px) saturate(1.25);
+  -webkit-backdrop-filter: blur(24px) saturate(1.25);
+  box-shadow: 0 30px 80px oklch(10% 0.02 210 / 0.5);
+  clip-path: inset(100% 0 0 0 round 20px);
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    transform 700ms var(--ease-out),
+    clip-path 700ms var(--ease-out),
+    opacity 500ms var(--ease-out),
+    visibility 0s linear 700ms;
+}
+.has-panel .panel {
+  transform: translateX(-50%);
+  clip-path: inset(0 0 0 0 round 20px);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    transform 700ms var(--ease-out),
+    clip-path 700ms var(--ease-out),
+    opacity 500ms var(--ease-out);
+}
+
+.panel-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--glass-line);
+  border-radius: 50%;
+  background: oklch(30% 0.03 210 / 0.4);
+  color: var(--ink);
+  font: 300 1.1rem/1 var(--font-ui);
+  cursor: pointer;
+  transition: background 320ms var(--ease-out), border-color 320ms var(--ease-out);
+}
+.panel-close:hover { background: oklch(36% 0.035 210 / 0.55); border-color: oklch(92% 0.02 200 / 0.35); }
+.panel-close:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.panel-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 30px 34px 26px;
+  scrollbar-width: thin;
+}
+.panel-page { display: none; }
+.panel-page.is-current { display: block; }
+
+.panel-kicker {
+  margin: 0 0 10px;
+  font: 500 0.6rem/1 var(--font-ui);
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.panel-title {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.panel-page p {
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--ink-dim);
+}
+.panel-page em { color: var(--ink); font-style: italic; }
+.panel-page strong { color: var(--ink); font-weight: 500; }
+.panel-page ul {
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+.panel-page li {
+  position: relative;
+  margin: 0 0 9px;
+  padding-left: 18px;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  color: var(--ink-dim);
+}
+.panel-page li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.62em;
+  width: 6px;
+  height: 2px;
+  background: oklch(90% 0.02 200 / 0.5);
+}
+.panel-links { margin-top: 16px; }
+.panel-links a {
+  display: inline-block;
+  padding: 10px 16px;
+  border: 1px solid var(--glass-line);
+  border-radius: 999px;
+  color: var(--ink);
+  text-decoration: none;
+  font: 500 0.66rem/1 var(--font-ui);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: background 320ms var(--ease-out), border-color 320ms var(--ease-out);
+}
+.panel-links a:hover,
+.panel-links a:focus-visible {
+  background: oklch(34% 0.035 210 / 0.45);
+  border-color: oklch(92% 0.02 200 / 0.35);
+}
+
+/* Portrait: the waterline band is too shallow to seat six anchored
+   cards, so the pieces dock into a swipeable shelf floating over the
+   pool. waterfall.js skips anchoring them (matching aspect test). */
+@media (max-aspect-ratio: 4/5) {
+  .pieces {
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: calc(max(14px, env(safe-area-inset-bottom)) + 58px);
+    gap: 10px;
+    padding: 20px max(16px, env(safe-area-inset-left)) 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: max(16px, env(safe-area-inset-left));
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    pointer-events: auto;
+  }
+  .pieces::-webkit-scrollbar { display: none; }
+  .pieces .piece {
+    position: static;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    transform: none !important;
+    visibility: visible !important;
+  }
+  .piece--dry .piece-reflection { display: block; }
+  .piece-card, .piece--hand .piece-card { width: 172px; padding: 11px 13px 10px; }
+  .piece-name { font-size: 1.18rem; }
+  .piece-desc { display: none; }
+  .piece-tags { display: none; }
+  .piece-reflection { height: 26px; }
+}
+
+/* screenshot / QA mode: everything lands instantly */
+.is-still .emerge-title, .is-still .emerge-sub, .is-still .emerge-reflection, .is-still .hint,
+.is-still .piece-rise, .is-still .piece-reflection, .is-still .lore { transition: none !important; }
+.is-still.is-ready .hint { opacity: 1; }
+
+/* ---------- controls ---------- */
+
+.rail {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  display: flex;
+  gap: 6px;
+  z-index: 5;
+}
+
+.rail-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  min-height: 44px;
+  border: 1px solid var(--glass-line);
+  border-radius: 999px;
+  background: var(--glass);
+  color: var(--ink);
+  font: 500 0.72rem/1 var(--font-ui);
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  transition: background 320ms var(--ease-out), border-color 320ms var(--ease-out), transform 320ms var(--ease-out);
+}
+.rail-btn:hover { background: oklch(34% 0.035 210 / 0.42); border-color: oklch(92% 0.02 200 / 0.32); }
+.rail-btn:active { transform: scale(0.97); }
+.rail-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.rail-btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.rail-btn svg path:first-child { fill: currentColor; stroke: none; }
+.rail-label { display: none; }
+@media (min-width: 640px) { .rail-label { display: inline; } }
+
+/* audio on: show waves; off: hide waves */
+[data-audio="off"] #btn-audio .wave { opacity: 0.3; }
+[data-audio="on"]  #btn-audio .wave { opacity: 1; }
+/* motion: playing shows pause glyph, paused shows play */
+#btn-motion .play, #btn-motion .pause { fill: currentColor; stroke: none; }
+[data-paused="off"] #btn-motion .play  { display: none; }
+[data-paused="on"]  #btn-motion .pause { display: none; }
+
+.hint {
+  position: fixed;
+  white-space: nowrap;
+  left: 50%;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 0.68rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  opacity: 0;
+  z-index: 4;
+  pointer-events: none;
+  transition: opacity 1200ms var(--ease-out);
+}
+.is-entered .hint { opacity: 1; transition-delay: 2200ms; }
+.is-entered .hint.is-gone { opacity: 0; transition-delay: 0ms; }
+
+/* ---------- the veil: loading, then the entrance ---------- */
+/* Opaque while the scene compiles (a pouring thread of water); once the
+   first frame is up (.is-ready) it thins to frosted glass — the falls
+   shimmer behind it — and offers the way in. Entering (.is-entered)
+   lets it fall away. */
+
+.veil {
+  position: fixed;
+  inset: 0;
+  background-color: var(--ground);
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  transition:
+    opacity 1800ms var(--ease-out),
+    visibility 0s linear 1800ms,
+    background-color 1400ms var(--ease-out);
+}
+.veil > * { grid-area: 1 / 1; }
+.veil-pour {
+  width: 2px;
+  height: 64px;
+  background: linear-gradient(to bottom, transparent, var(--ink-dim), transparent);
+  animation: pour 1.4s var(--ease-out) infinite;
+  transition: opacity 700ms var(--ease-out);
+}
+@keyframes pour {
+  from { transform: translateY(-40px) scaleY(0.3); opacity: 0; }
+  40%  { opacity: 1; }
+  to   { transform: translateY(40px) scaleY(1); opacity: 0; }
+}
+.is-ready .veil { background-color: oklch(22% 0.025 210 / 0.45); }
+/* animation: none — a paused animation's keyframe opacity would override
+   the fade to 0 (animations beat transitions in the cascade) */
+.is-ready .veil-pour { opacity: 0; animation: none; }
+
+.veil-gate {
+  text-align: center;
+  padding: 0 24px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 1200ms var(--ease-out) 500ms,
+    transform 1200ms var(--ease-out) 500ms;
+  pointer-events: none;
+}
+.is-ready .veil-gate { opacity: 1; transform: none; pointer-events: auto; }
+
+.veil-kicker {
+  margin: 0 0 10px;
+  font: 500 0.62rem/1 var(--font-ui);
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.veil-line {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  line-height: 1;
+  text-shadow: 0 2px 18px oklch(20% 0.03 210 / 0.55);
+}
+.veil-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.veil-btn {
+  appearance: none;
+  padding: 13px 22px;
+  min-height: 44px;
+  border: 1px solid var(--glass-line);
+  border-radius: 999px;
+  background: var(--glass);
+  color: var(--ink);
+  font: 500 0.68rem/1 var(--font-ui);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 320ms var(--ease-out), border-color 320ms var(--ease-out), transform 320ms var(--ease-out);
+}
+.veil-btn:hover { background: oklch(34% 0.035 210 / 0.42); border-color: oklch(92% 0.02 200 / 0.32); }
+.veil-btn:active { transform: scale(0.97); }
+.veil-btn:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.veil-btn--primary {
+  background: oklch(36% 0.04 210 / 0.5);
+  border-color: oklch(92% 0.02 200 / 0.35);
+}
+
+.is-entered .veil { opacity: 0; visibility: hidden; }
+
+.noscript {
+  position: fixed;
+  inset: auto 0 40% 0;
+  text-align: center;
+  z-index: 20;
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .emerge-title, .emerge-sub, .emerge-reflection { transition-duration: 600ms; }
+  .piece-rise, .piece-reflection { transition-duration: 600ms; transition-delay: calc(var(--d) * 0.3); }
+  .emerge-reflection .emerge-title { animation: none; }
+  .piece-reflection .piece-card { animation: none; }
+  .veil-pour { animation: none; }
+  .lore-dot { animation: none; }
+  .lore { transition-duration: 600ms; }
+  .panel, .panel-veil { transition-duration: 250ms; }
+}
