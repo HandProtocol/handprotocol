@@ -1,144 +1,118 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowUpRight, CalendarDays, CircleDot, Heart, MapPin } from "lucide-react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { ArrowUpRight, CalendarDays, Sparkles } from "lucide-react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { ContactModal, type Door } from "./contact-modal";
+import { CHAPTERS, type ChapterKey } from "./copy";
+import { StorySheet } from "./story-sheet";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const asset = (path: string) => `${basePath}${path}`;
 
-const videos = {
-  hero: `${basePath}/assets/video/hero.mp4`,
-  village: `${basePath}/assets/video/product-2.mp4`,
+const CONTACT_EMAIL = "mysticheartshealing@gmail.com";
+
+const EASE = [0.2, 0.7, 0.2, 1] as const;
+const rise: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: (delay: number = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.9, delay, ease: EASE } }),
 };
 
-const CONTACT_EMAIL = "cshearer210@gmail.com";
+function HeroVideo() {
+  const ref = useRef<HTMLVideoElement>(null);
+  const still = useReducedMotion();
 
-const reveal = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
-};
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    video.muted = true;
+    if (still) {
+      video.pause();
+      return;
+    }
+    video.play().catch(() => {
+      /* autoplay refused: the poster stays */
+    });
+  }, [still]);
 
-const villageParts = ["Central house", "Yurts", "Tiny homes", "Healing modalities"];
-
-function VideoPlane({
-  src,
-  className = "",
-  poster,
-}: {
-  src: string;
-  className?: string;
-  poster?: string;
-}) {
   return (
     <video
-      className={`video-plane ${className}`}
-      src={src}
-      poster={poster}
-      autoPlay
+      ref={ref}
+      className="hero-video"
+      poster={asset("/assets/images/hero-pergola-poster.jpg")}
+      autoPlay={!still}
       muted
       loop
       playsInline
-      preload="metadata"
-    />
-  );
-}
-
-function SectionLabel({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="section-label">
-      <CircleDot size={12} />
-      <span>{children}</span>
-    </div>
+      preload="auto"
+      aria-hidden="true"
+    >
+      <source src={asset("/assets/video/hero-pergola.webm")} type="video/webm" />
+      <source src={asset("/assets/video/hero-pergola.mp4")} type="video/mp4" />
+    </video>
   );
 }
 
 export function MysticHeartsPage() {
-  const { scrollYProgress } = useScroll();
-  const heroScale = useTransform(scrollYProgress, [0, 0.6], [1, 1.12]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0.42]);
+  const [door, setDoor] = useState<Door | null>(null);
+  const [chapter, setChapter] = useState<ChapterKey | null>(null);
+  const openDoor = (next: Door) => {
+    setChapter(null);
+    setDoor(next);
+  };
 
   return (
-    <main className="min-h-screen overflow-hidden bg-linen text-ink">
-      <nav className="fixed left-0 right-0 top-0 z-50 px-5 py-4 md:px-8">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/25 bg-ink/20 px-4 py-3 text-white shadow-soft backdrop-blur-xl">
-          <a className="flex items-center gap-2 text-sm font-semibold tracking-[0.18em]" href="#top">
-            <Heart size={18} fill="currentColor" />
-            MYSTIC HEARTS
-          </a>
-          <a className="nav-cta" href={`mailto:${CONTACT_EMAIL}`}>
-            Inquire
-            <ArrowUpRight size={16} />
-          </a>
-        </div>
-      </nav>
+    <main className="stage" data-sheet={door !== null || chapter !== null ? "open" : "closed"}>
+      <HeroVideo />
+      <div className="stage-shade" aria-hidden="true" />
+      <div className="stage-grain" aria-hidden="true" />
 
-      <section id="top" className="hero-section slide">
-        <motion.div className="hero-video-wrap" style={{ scale: heroScale, opacity: heroOpacity }}>
-          <VideoPlane src={videos.hero} poster={`${basePath}/assets/images/hero-poster.jpg`} />
-        </motion.div>
-        <div className="hero-shade" />
-        <div className="hero-content">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={reveal}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mx-auto w-full max-w-6xl px-6"
-          >
-            <div className="hero-kicker">
-              <MapPin size={16} />
-              <span>Mystic Hearts</span>
-              <i>9-acre healing center</i>
-            </div>
-            <h1 className="hero-title">
-              A future village, <span>grounded in the work already beginning.</span>
-            </h1>
-            <p className="hero-copy">
-              A place where people can arrive without performing, receive care without being
-              processed, and take part in a small economy of skill, labor, attention, and
-              reciprocity.
-            </p>
-            <div className="hero-notes" aria-label="Village components">
-              {villageParts.map((part) => (
-                <span key={part}>{part}</span>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-        <div className="scroll-cue">
-          <span />
-        </div>
-      </section>
-
-      <section id="visit" className="final-cta slide">
-        <VideoPlane src={videos.village} />
-        <div className="final-cta-shade" />
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={reveal}
-          transition={{ duration: 0.75 }}
-          className="relative z-10 mx-auto max-w-3xl px-6 text-center text-white"
-        >
-          <div className="video-wordmark">Fall 2027</div>
-          <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full border border-white/25 bg-white/12 backdrop-blur-md">
-            <CalendarDays size={22} />
-          </div>
-          <SectionLabel>Opening season</SectionLabel>
-          <h2 className="story-title">Coming fall 2027.</h2>
-          <p className="story-copy">
-            Nine acres of healing land are taking shape: a central house, yurts, and tiny homes,
-            with practitioners holding breathwork, sound, energy work, and somatic practice. The
-            first gatherings will be small and in person. If you want to help build it, practice
-            here, or simply be there when it opens, reach out.
-          </p>
-          <a className="btn btn-primary mx-auto mt-8" href={`mailto:${CONTACT_EMAIL}`}>
+      <header className="stage-head">
+        <motion.a href="#" className="brand" variants={rise} initial="hidden" animate="visible" custom={0.1}>
+          <Image src={asset("/assets/images/logo-gold.png")} alt="Mystic Hearts Healing Collective" width={132} height={132} priority className="brand-mark" />
+        </motion.a>
+        <motion.div className="head-right" variants={rise} initial="hidden" animate="visible" custom={0.25}>
+          <span className="brand-place">East Austin, Texas</span>
+          <button className="btn btn-glass btn-small" type="button" onClick={() => openDoor("hello")}>
             Get in touch
-            <ArrowUpRight size={18} />
-          </a>
-          <p className="contact-line">{CONTACT_EMAIL}</p>
+            <ArrowUpRight size={16} />
+          </button>
+        </motion.div>
+      </header>
+
+      <section className="stage-center">
+        <motion.p className="kicker" variants={rise} initial="hidden" animate="visible" custom={0.35}>
+          Ten acres of healing land
+        </motion.p>
+        <motion.h1 className="headline" variants={rise} initial="hidden" animate="visible" custom={0.5}>
+          A divine dream, <em>made real</em> in East Austin.
+        </motion.h1>
+        <motion.p className="lede" variants={rise} initial="hidden" animate="visible" custom={0.7}>
+          A sober, interfaith home where people gather to heal, to practice, and to live more connected to the land and to each other.
+        </motion.p>
+        <motion.div className="doors" variants={rise} initial="hidden" animate="visible" custom={0.9}>
+          <button className="btn btn-gold" type="button" onClick={() => openDoor("whatson")}>
+            <Sparkles size={18} />
+            What&apos;s on at the land
+          </button>
+          <button className="btn btn-glass" type="button" onClick={() => openDoor("visit")}>
+            <CalendarDays size={18} />
+            Visit the land
+          </button>
         </motion.div>
       </section>
+
+      <motion.nav className="stage-foot" aria-label="About the collective" variants={rise} initial="hidden" animate="visible" custom={1.15}>
+        {CHAPTERS.map((item) => (
+          <button key={item.key} type="button" className="chapter-link" onClick={() => setChapter(item.key)}>
+            {item.label}
+          </button>
+        ))}
+      </motion.nav>
+
+      <StorySheet chapter={chapter} onClose={() => setChapter(null)} onSwitch={setChapter} onVisit={() => openDoor("visit")} onHello={() => openDoor("hello")} />
+      <ContactModal door={door} onClose={() => setDoor(null)} onSwitch={setDoor} fallbackEmail={CONTACT_EMAIL} />
     </main>
   );
 }

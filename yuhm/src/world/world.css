@@ -416,15 +416,18 @@
 .world-onboard-card {
   position: relative; width: min(440px, 100%); display: flex; flex-direction: column; gap: 14px; align-items: flex-start;
   background: var(--w-paper); border: 1.5px solid var(--w-line); border-radius: 26px;
-  padding: clamp(22px, 5vw, 34px); box-shadow: 0 24px 60px #49312833; margin: auto 0;
+  padding: clamp(20px, 5vw, 32px); box-shadow: 0 24px 60px #49312833; margin: auto 0;
 }
 .world-onboard-card.wide { width: min(560px, 100%); }
 .world-onboard-card h1 { font-size: clamp(27px, 6vw, 36px); line-height: 1.08; letter-spacing: -.01em; }
 .world-onboard-card > p { margin: 0; font-size: 14.5px; line-height: 1.6; color: #57453a; }
-.world-onboard-bowl { width: 92px; height: 77px; align-self: center; }
+.world-onboard-bowl { width: 72px; height: 60px; align-self: center; }
 .world-circle-name { color: var(--w-green-deep); }
 
 .world-role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; width: 100%; }
+.world-onboard-card .world-role { min-height: 76px; padding: 10px 12px; }
+.world-onboard-card .world-role-grid { gap: 8px; }
+@media (min-width: 520px) { .world-onboard-card .world-role-grid { grid-template-columns: repeat(3, 1fr); } }
 .world-role {
   position: relative; display: grid; gap: 3px; justify-items: start; text-align: left;
   min-height: 88px; padding: 12px 13px; background: #fff; border: 2px solid var(--w-line); border-radius: 16px;
@@ -483,4 +486,34 @@
   .pring { animation: none; opacity: .8; }
   .world-pulse-dot { animation: none; }
   .wspot-body, .world-mission-row, .world-primary, .world-role, .world-top-button, .world-layers button, .world-pool-card, .world-run-card { transition: none; }
+}
+
+/* ---------------- Account in the top bar ----------------
+   Sign in is one tap from the top of the world for guests; members
+   get their initials with a small menu (finder, command center, sign out). */
+.world-signin.world-top-button { color: var(--w-oat); background: var(--w-green); border-color: var(--w-green-deep); text-decoration: none; box-shadow: 0 3px 0 var(--w-green-deep); }
+.world-signin.world-top-button:hover { background: var(--w-green-deep); transform: translateY(-1px); }
+.world-account { position: relative; }
+.world-account-button { padding-left: 7px; }
+.world-avatar { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--w-cacao); color: var(--w-oat); font: 700 10px 'DM Mono', monospace; letter-spacing: .04em; }
+.world-account-menu { position: absolute; z-index: 40; top: calc(100% + 8px); right: 0; width: min(280px, calc(100vw - 24px)); display: grid; gap: 3px; padding: 12px; background: var(--w-paper); border: 1.5px solid var(--w-line); border-radius: 18px; box-shadow: 0 18px 44px #49312833; }
+.world-account-menu p { margin: 0 0 6px; padding: 2px 8px; color: var(--w-muted); font-size: 12px; line-height: 1.45; word-break: break-word; }
+.world-account-menu a, .world-account-menu button { display: flex; align-items: center; min-height: 42px; padding: 8px 12px; border: 0; border-radius: 12px; background: transparent; color: var(--w-green-deep); font-weight: 600; font-size: 13.5px; text-decoration: none; text-align: left; }
+.world-account-menu a:hover, .world-account-menu button:hover { background: var(--w-oat); }
+.world-account-menu button { color: #a63c1e; }
+@media (max-width: 759px) {
+  /* Icon-only pills on phones, except the two that must stay legible: the
+     Sign in label and a member's initials. */
+  .world-signin.world-top-button span, .world-top-button .world-avatar { display: inline-grid; }
+  .world-account-button > span:last-child { display: none; }
+  .world-signin.world-top-button { padding: 8px 12px; }
+  .world-signin.world-top-button span, .world-brand-copy strong { white-space: nowrap; }
+  .world-topbar { gap: 6px; padding: 6px 10px; }
+  .world-top-actions { gap: 5px; }
+  .world-brand-copy strong { font-size: 15px; }
+}
+@media (max-width: 480px) {
+  /* The circle name repeats as the panel heading right below; the bowl mark alone is the home button here. */
+  .world-brand-copy { display: none; }
+  .world-brand { padding: 4px; }
 }

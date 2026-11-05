@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#082625">
+  <title>Three Hands Healing | Three session designs for Maria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=STIX+Two+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#082625; --surface:#0D3A39; --gold:#D8C971; --text:#ECEBE3; --muted:#A6BAB6; --line:rgba(216,201,113,.36); }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:400 16px/1.7 Montserrat,Arial,sans-serif; }
+    h1,h2,h3 { font-family:'STIX Two Text',Georgia,serif; font-weight:400; line-height:1.12; margin:0; text-wrap:balance; }
+    p { margin:0; }
+    a { color:inherit; text-underline-offset:5px; }
+    a:focus-visible { outline:2px solid var(--gold); outline-offset:6px; }
+    .intro { max-width:1120px; margin:auto; padding:64px 32px 48px; }
+    .eyebrow { font-size:11px; font-weight:500; text-transform:uppercase; letter-spacing:.26em; color:var(--gold); }
+    h1 { font-size:clamp(34px,5vw,56px); margin:18px 0; }
+    .intro>p:last-of-type { max-width:650px; color:var(--muted); }
+    nav { display:flex; flex-wrap:wrap; gap:12px 28px; margin-top:24px; }
+    nav a { font-size:14px; padding:8px 0; }
+    .concept { border-top:1px solid var(--line); scroll-margin-top:20px; }
+    .caption { max-width:1120px; margin:auto; padding:28px 32px; display:flex; justify-content:space-between; gap:24px; align-items:baseline; }
+    .caption h2 { font-size:26px; }
+    .caption p { color:var(--muted); font-size:13px; max-width:490px; }
+    .number { color:var(--gold); margin-right:16px; font:12px Montserrat,Arial,sans-serif; }
+    .stage { max-width:1272px; margin:auto; padding:60px 72px 88px; min-height:640px; }
+    .heading { text-align:center; }
+    .heading h2 { font-size:clamp(32px,4vw,46px); margin:18px 0 24px; }
+    .heading>p:last-child { color:var(--muted); }
+    ol { list-style:none; margin:0; padding:0; }
+    h3 { font-size:29px; margin:0 0 16px; }
+    li p { color:var(--muted); max-width:26ch; }
+    .roman { color:var(--gold); font:400 27px 'STIX Two Text',Georgia,serif; }
+    .thread { position:relative; margin-top:70px; }
+    .thread>svg { position:absolute; width:100%; height:120px; top:0; overflow:visible; }
+    .thread ol { display:grid; grid-template-columns:repeat(3,1fr); gap:50px; position:relative; }
+    .thread li { padding-top:13px; }
+    .thread li:nth-child(2) { padding-top:49px; }
+    .thread li:nth-child(3) { padding-top:13px; }
+    .thread .roman { display:flex; justify-content:center; align-items:center; width:48px; height:48px; border:1px solid var(--gold); border-radius:50%; background:var(--bg); margin-bottom:30px; }
+    .thread h3,.thread li p { padding-left:4px; }
+    .editorial { display:grid; grid-template-columns:.9fr 1.15fr; gap:100px; align-items:center; }
+    .editorial .heading { text-align:left; }
+    .editorial .heading h2 { max-width:10ch; font-size:48px; }
+    .editorial .heading>p:last-child { max-width:25ch; }
+    .ornament { width:84px; height:32px; margin-top:32px; color:var(--gold); }
+    .chapters li { display:grid; grid-template-columns:40px 1fr; gap:24px; padding:32px 0; border-top:1px solid var(--line); }
+    .chapters li:last-child { border-bottom:1px solid var(--line); }
+    .chapters h3 { margin-bottom:10px; }
+    .chapters li p { max-width:33ch; }
+    .chapters .roman { padding-top:4px; }
+    .bloom { display:grid; grid-template-columns:repeat(3,1fr); gap:60px; text-align:center; margin-top:54px; }
+    .bloom li p { margin:auto; }
+    .seal { width:108px; height:108px; margin:0 auto 24px; color:var(--gold); }
+    .bloom h3 { margin-top:12px; }
+    .bloom .roman { font-size:18px; }
+    footer { padding:32px; border-top:1px solid var(--line); color:var(--muted); text-align:center; font-size:13px; }
+    @media(max-width:700px) {
+      .intro { padding:40px 24px; }
+      .caption { padding:24px; display:block; }
+      .caption p { margin-top:12px; }
+      .stage { padding:42px 24px 56px; min-height:0; }
+      .heading h2 { font-size:35px; }
+      .thread { margin-top:44px; }
+      .thread>svg { display:none; }
+      .thread ol { display:block; }
+      .thread li,.thread li:nth-child(2),.thread li:nth-child(3) { position:relative; padding:0 0 36px 74px; min-height:154px; }
+      .thread li:last-child { padding-bottom:0; min-height:0; }
+      .thread li:not(:last-child)::before { content:''; position:absolute; width:1px; background:var(--line); top:48px; bottom:0; left:24px; }
+      .thread .roman { position:absolute; top:0; left:0; margin:0; }
+      .thread h3 { padding:8px 0 0; }
+      .thread li p { padding:0; }
+      .editorial { display:block; }
+      .editorial .heading h2 { font-size:40px; max-width:12ch; }
+      .ornament { margin:24px 0; }
+      .chapters li { gap:16px; }
+      .bloom { grid-template-columns:1fr; gap:44px; margin-top:42px; }
+      .seal { margin-bottom:14px; }
+    }
+    @media print { .intro,nav,footer { display:none; } .concept { break-after:page; border:0; } body { print-color-adjust:exact; -webkit-print-color-adjust:exact; } .stage { min-height:0; } }
+  </style>
+</head>
+<body>
+  <header class="intro">
+    <p class="eyebrow">Three Hands Healing · For Maria</p>
+    <h1>A little more room to breathe.</h1>
+    <p>Three possibilities for the sessions section. Each keeps the Cathedral colors, typography, and words, with a different way of welcoming someone through the experience.</p>
+    <nav aria-label="Design options"><a href="#golden-thread">01 · The golden thread</a><a href="#open-book">02 · The open book</a><a href="#unfolding">03 · Unfolding</a></nav>
+  </header>
+  <main>
+    <article class="concept" id="golden-thread" aria-labelledby="option-one">
+      <header class="caption"><h2 id="option-one"><span class="number">01</span>The golden thread</h2><p>A continuous line connects three moments. Gentle, spacious, and guided.</p></header>
+      <section class="stage" aria-labelledby="session-one">
+        <header class="heading"><p class="eyebrow">Sessions</p><h2 id="session-one">What a session feels like.</h2><p>Sessions are offered online and in person.</p></header>
+        <div class="thread">
+          <svg viewBox="0 0 1128 120" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M24 37 C190 37 240 110 400 73 S620 5 784 37 S1010 102 1128 38" stroke="#D8C971" stroke-opacity=".5" stroke-width="1"/></svg>
+          <ol role="list">
+            <li><span class="roman" aria-hidden="true">I</span><h3>Arrive</h3><p>Talk about what is happening and what support you are looking for.</p></li>
+            <li><span class="roman" aria-hidden="true">II</span><h3>Experience</h3><p>Explore a practice together at a comfortable pace.</p></li>
+            <li><span class="roman" aria-hidden="true">III</span><h3>Integrate</h3><p>Talk about what came up and what might be useful afterward.</p></li>
+          </ol>
+        </div>
+      </section>
+    </article>
+    <article class="concept" id="open-book" aria-labelledby="option-two">
+      <header class="caption"><h2 id="option-two"><span class="number">02</span>The open book</h2><p>Three short chapters, with quiet gold rules. Intimate, clear, and grounded.</p></header>
+      <section class="stage editorial" aria-labelledby="session-two">
+        <header class="heading"><p class="eyebrow">Sessions</p><h2 id="session-two">What a session feels like.</h2><p>Sessions are offered online and in person.</p><svg class="ornament" viewBox="0 0 84 32" fill="none" aria-hidden="true"><path d="M0 16h30m24 0h30M42 5l11 11-11 11-11-11Z" stroke="currentColor"/></svg></header>
+        <ol class="chapters" role="list">
+          <li><span class="roman" aria-hidden="true">I</span><div><h3>Arrive</h3><p>Talk about what is happening and what support you are looking for.</p></div></li>
+          <li><span class="roman" aria-hidden="true">II</span><div><h3>Experience</h3><p>Explore a practice together at a comfortable pace.</p></div></li>
+          <li><span class="roman" aria-hidden="true">III</span><div><h3>Integrate</h3><p>Talk about what came up and what might be useful afterward.</p></div></li>
+        </ol>
+      </section>
+    </article>
+    <article class="concept" id="unfolding" aria-labelledby="option-three">
+      <header class="caption"><h2 id="option-three"><span class="number">03</span>Unfolding</h2><p>Seed, opening petals, full bloom. Warm, organic, and quietly symbolic.</p></header>
+      <section class="stage" aria-labelledby="session-three">
+        <header class="heading"><p class="eyebrow">Sessions</p><h2 id="session-three">What a session feels like.</h2><p>Sessions are offered online and in person.</p></header>
+        <ol class="bloom" role="list">
+          <li><svg class="seal" viewBox="0 0 108 108" fill="none" aria-hidden="true"><circle cx="54" cy="54" r="50" stroke="currentColor" opacity=".25"/><path d="M54 81C25 60 34 38 54 24c20 14 29 36 0 57Z" stroke="currentColor"/><path d="M54 81V45" stroke="currentColor"/><circle cx="54" cy="54" r="38" stroke="currentColor" opacity=".12"/></svg><div class="roman" aria-hidden="true">I</div><h3>Arrive</h3><p>Talk about what is happening and what support you are looking for.</p></li>
+          <li><svg class="seal" viewBox="0 0 108 108" fill="none" aria-hidden="true"><circle cx="54" cy="54" r="50" stroke="currentColor" opacity=".25"/><path d="M54 80C24 80 19 54 25 33c23 0 37 20 29 47Zm0 0c30 0 35-26 29-47-23 0-37 20-29 47Z" stroke="currentColor"/><path d="M54 78c-18-20-15-41 0-57 15 16 18 37 0 57Z" stroke="currentColor"/></svg><div class="roman" aria-hidden="true">II</div><h3>Experience</h3><p>Explore a practice together at a comfortable pace.</p></li>
+          <li><svg class="seal" viewBox="0 0 108 108" fill="none" aria-hidden="true"><circle cx="54" cy="54" r="50" stroke="currentColor" opacity=".25"/><g stroke="currentColor"><ellipse cx="54" cy="54" rx="14" ry="34"/><ellipse cx="54" cy="54" rx="14" ry="34" transform="rotate(60 54 54)"/><ellipse cx="54" cy="54" rx="14" ry="34" transform="rotate(120 54 54)"/><circle cx="54" cy="54" r="5" fill="#082625"/></g></svg><div class="roman" aria-hidden="true">III</div><h3>Integrate</h3><p>Talk about what came up and what might be useful afterward.</p></li>
+        </ol>
+      </section>
+    </article>
+  </main>
+  <footer>Prepared for Maria · Three Hands Healing · Session section design study</footer>
+</body>
+</html>

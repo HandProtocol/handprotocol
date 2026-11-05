@@ -1,12 +1,88 @@
 # yuhm Handoff
 
-Last updated: 2026-08-24
+Last updated: 2026-10-06
 
 > **Renamed 2026-08-24.** This product was WXL:FOOD ("W Xtra Love") until 2026-08-24, when it became **yuhm** (the yuhm network) — yum with the om at its center, Austin's regenerative food network. The live host moved from `wxl.handprotocol.org` to `yuhm.handprotocol.org` (the old host 301-redirects). Applied Supabase migrations keep their historical `NNN_wxl_*` filenames, historical plans keep their `plans/00X-wxl-*` names, and docs dated before the rename may still say WXL.
 
 This is the working orientation document for `yuhm/`. Read it before changing the app. The root repository handoff covers HAND Protocol as a whole. This file focuses on yuhm, its current behavior, what is real, what is illustrative, and what should be built next.
 
 Public-facing product behavior and safety boundaries are maintained in `docs/LIVING-DOCS.md`. Keep it current when a feature promise or workflow changes. It is intended to become the source for a future HTML documentation page.
+
+## Sign-in fix and calmer sign-in design: live 2026-10-06
+
+Signup was failing because Confirm email had been turned on in the HAND Supabase project and auth email was capped at 2 per hour. Confirm email is off again, auth email goes through Resend, and the sign-in card and guest sheet were simplified (commit `47edb4ab6`, deployed). Details, gotchas, and three small items waiting on koH: `_handoff-2026-10-06-auth-signin.md`.
+
+## Pickup runs: in progress, first browser pass done 2026-10-06 (not deployed, 050 not applied)
+
+koH asked for a run-sheet tool for someone picking food up anywhere and sharing it out to several families, with Oak Hill Baptist as the test case, then added a living docs page with wireframes and explainer videos.
+
+- **Session handoff (read first when resuming):** `_handoff-2026-09-30-pickup-runs.md` (its top update section is current). Plan and design brief: `../plans/006-yuhm-pickup-runs.md`. Product description: the Pickup runs section of `docs/LIVING-DOCS.md`.
+- **Done and committed** (`8b011531a`, `6c8c1eee7`): migration `../command/supabase/migrations/050_yuhm_food_runs.sql` with its acceptance test, all logic and every screen under `src/runs/`, the `/app/?mode=run` route. 198 tests pass, `tsc` clean.
+- **Browser pass, 2026-10-06:** the whole practice run (ask, pick up, split, deliver, finish) plus Families, Seeds, Advanced, and Plan a run, at 390 and 1280 wide, and in Spanish. No console errors, no horizontal overflow. Five fixes landed in `6c8c1eee7`.
+- **Not done:** screen tests, entry links (Contribute tab, member menus, coordinator dashboard), the living docs page with wireframes, the videos. **050 is not applied to production and nothing is deployed.**
+
+## Gatherings beta, coordinated by koord: plan only, 2026-09-20 (nothing built)
+
+koH asked to plan the booking system (`../koord/`, renamed from `book/`) into the yuhm work, starting with a beta for gatherings and classes. First worked case: a food prep gathering where each attendee says what they want to prepare, gets an itemized order, picks a source per line (bring, network with a pickup, or buy through a shared grocery run), and finds their items in a numbered bin on arrival.
+
+- **Plan:** `../plans/005-yuhm-gatherings-koord.md` (the nine-step flow, what 033 already provides, where koord and THE MISSION fit, SQL sketch for ten new tables, functions, notifications, phases G0 to G4, nine decisions, risks).
+- **Reuse found:** migration 033 already has `food_venues`, `food_events`, items, invites, RSVPs, assignments, and the `potluck` lane gate; 034 has `plan_food_potluck()` and `release_food_event_location()`. Only the undeployed coordination API uses them today.
+- **Settled by koH, 2026-09-20:** grocery money settles directly between people, by hand. The first implementation is a paid checklist the money holder ticks (paid, covered, shop anyway, drop), then a second tick for settled. No processor, no stored payment handles, HAND holds no money (koord record 0004 ruling 4).
+- **Proposed, still open:** koord runs as a library inside yuhm (yuhm's tables are the store, Resend is koord's first real channel).
+- **Demo:** five gathering screens are the last group in THE MISSION demo (artifact version 3, same link as below): the gathering, build my order, paid checklist with a settle tab, shop run with a sort sheet, pick up my bin with the balance. Source: `prototypes/the-mission/gather.js` + `gather.css`, plugged in through `window.YUHM_DEMO_EXT` in `mission.js`. **Republishing now needs four files** in the `files` map: `mission.css`, `mission.js`, `gather.css`, `gather.js`. `preview.mjs` walks the gathering flow too and checks that the shares equal the receipt.
+- **Fixed along the way:** `.p-body > * { flex-shrink: 0 }` in `mission.css`. Tall phone screens were squashing children with `overflow: hidden` instead of scrolling. Still open in the core demo: a direct child of `.p-body` that sets `transform` (the thank-you note's tilt) loses it when the enter animation ends; use the `rotate` property instead, as `.bin-tag` does.
+- **Plain-language intro (artifact version 4):** koH found the page's first paragraph too obscure for someone who does not know yuhm. It now opens with what yuhm is (a free food network for Austin, no account to find food), then what the page is (a demo and plan for two unbuilt ideas, THE MISSION and Gatherings).
+- **Session handoff (read first when resuming):** `_handoff-2026-09-20-gatherings-koord.md` covers the settled and open decisions, the findings not to rediscover, the demo's extension hook and gotchas, what was verified, and how to republish.
+- **Next step:** koH settles the remaining eight decisions in plan 005; where koord runs comes first because it unblocks storage. Not in the demo yet: the organizer's create flow and the koord time poll.
+
+## THE MISSION: demo and plan only, 2026-09-19 (nothing in the app changed)
+
+koH asked to gamify the first-visit sign-in and add an opt-in gamified layer, "THE MISSION": missions tied to the route a person picks, offered delivery-app style, with Duolingo-style engagement, plus a plan for the database, notifications, and a WhatsApp chat with an agent. This session produced a clickable demo and a plan. No app code, no migration, no deploy.
+
+- **Demo:** https://claude.ai/artifact/FwbwZigM85r1ECY2D2PB4Q (private to koH). Source: `prototypes/the-mission/` (`index.html`, `mission.css`, `mission.js`), outside the Vite build and the Netlify publish dir. Twelve screens in a phone frame with per-screen notes (what it borrows, what it writes, what it notifies), then the plan. All phone content is labeled sample.
+- **Plan:** `../plans/004-yuhm-the-mission.md` (ground rules, first-visit flow, vocabulary, SQL sketch for ten new tables, functions, notification pipeline and caps, WhatsApp helper, phases, nine open decisions with recommendations, risks).
+- **Load-bearing choices in the proposal:** finding food never shows any of it; opt-in is separate from the account; email + password and the one-step Continue form are untouched (the route pick and a two-minute "first bite" come before the form); weekly rhythm with automatic rest weeks instead of a daily streak; circle goals instead of a leaderboard; seeds live in the existing `food_reputation_ledger`; notifications ride the existing `food_outbox` and `food_contact_channels`; the helper is bounded by `food_agent_mandates`.
+- **WhatsApp reality check (verified 2026-09-19):** the official Groups API caps groups at 8 including the business number, needs a verified-badge account, and has no buttons; marketing templates to US numbers have been paused since April 2025. So: one-to-one helper on the Cloud API with utility templates only, human-run announcement groups per circle, and nudges by email or in-app only.
+- **Design pass, 2026-09-20 (artifact version 2):** koH asked for a less generic look. The page now opens on a drenched garden-green field with poster-scale type; inside the phone, routes are produce-colored sticker tiles, stamps are embroidered patches generated in SVG, the offer is a perforated ticket, the weekly rhythm is a punch card. Small labels use Barlow Condensed in place of DM Mono as a proposal (one token, `--label`).
+- **Session handoff (read first when resuming):** `_handoff-2026-09-20-the-mission.md` covers what was verified and what was not, how to preview (`prototypes/the-mission/preview.mjs`) and republish to the same link, code gotchas, and an offered but unbuilt idea: make the nine decisions answerable on the artifact page with its shared database.
+- **Next step:** koH reviews the demo and settles the nine decisions; then phase 1 (join flow, opt-in, bites, progress; in-app only). Start Meta business verification early, it is the slow part.
+
+## One theme from landing to task, 2026-09-08 (same-day follow-up)
+
+Detailed session handoff for this pass: `_handoff-2026-09-08-one-theme.md` (status, file-by-file changes, tokens, what is still unverified, how to resume).
+
+koH's desktop review: the landing looked right, but clicking Sign in dropped into a different-looking product (sage, Space Grotesk, 11px type), and on the living world at bare `/app/` the only Sign in link sat at the bottom of the docked panel (~2100px down). Fixed as one pass:
+
+- **Shared brand lockup.** `src/YuhmBrand.tsx` (bowl mark + Baloo wordmark + tagline) now heads the landing nav, the sign-in card, and the finder header. The landing keeps its scoped `.landing-brand` rules; other surfaces use the unscoped `.yuhm-lockup` rules.
+- **Brand theme on every pre-login and first post-login surface.** An override block at the end of `src/styles.css` ("One yuhm from landing to task") re-skins `.login-page`/`.login-card`, the `.simple-app` shell (header, tabs, finder, action flows, cards, `.simple-primary`), the guest `.simple-sheet` + `.sheet-auth`, and the finder's location dialog (`.simple-app .access-card`) with the world/landing tokens (oat `#fbf6ea`/`#fffdf6`, cacao `#46312a`, garden green actions `#2d6b50` with the hero-CTA 3D shadow, Baloo 2 display). Layout rules are untouched; only colors, type, radii, shadows changed. The coordinator dashboard (`mode=advanced`) deliberately keeps its tool theme. The phone food map (`MapLab` product shell) was not re-skinned.
+- **Sign in at the top, everywhere, with a way back.** World topbar: guests get a green **Sign in** pill (`signInHref('/app/?mode=world')`), members get an initials pill with a small menu (Find food, Command center, Sign out); on phones the pill keeps its label while the other topbar buttons stay icon-only, and the circle name hides under 480px so four controls fit. Finder header: guests get a **Sign in** pill carrying the current path as `return=`; the guest account menu (and the stale "WX" avatar) is gone; members keep the initials menu, which now has **Sign out**. Dashboard `AuthPrompt` and the sidebar "Browsing openly" card, the world "More ways" link, and the MapLab account link all pass `return=`. `AuthPrompt` shows one door ("Sign in or create an account") plus the updates link instead of separate Log in / Create an account.
+- **Sign-in card fits a 640px-tall laptop viewport** (tighter spacing, 31px title, two-line `login.continueCopy` EN/ES).
+- Strings: `common.signOut`, `world.topbar.*` (EN + ES). `getMemberIdentity` initials fallback is no longer `WX`.
+
+Tests 126 → 130 (`src/AuthFunnel.test.tsx` "sign in is one tap from the top of every pre-login surface": world topbar + panel links, finder header pill, member menu sign-out, dashboard prompt return). Two older assertions updated: the finder's advanced-mode gate now goes through the footer link (guests no longer have a header menu), and the dashboard guest profile link carries `return=`.
+
+Verified in headless Chromium at 1440×900, 1280×640, 430×932, 390×844. Not changed: the geolocation dialog at `intent=food` still opens as a modal (it is now on-theme); the phone MapLab shell keeps its own look.
+
+## Onboarding funnel pass, 2026-09-08
+
+Goal: the shortest path from arriving to doing the task. Before, a guest who wanted to contribute went landing → scroll to "What brings you here today?" → pick a card → fill the form → Review → interstitial sheet → "Sign in to continue" → login page → choose log in vs sign up → submit → land on the intent tab → redo Review → sheet → "Open secure next step" → dashboard (seven screens). Bare `/app/` also ran a four-step world intro.
+
+What changed:
+
+- **Landing hero carries the decision.** Two doors above the fold: **Find food near me** (primary, guest, `/app/?mode=anonymous&intent=food`, real listings) and **Sign in** (`/app/?mode=login`). The "Enter the living map" hero CTA is gone; the world is still reachable from the banner in the paths section and from bare `/app/`. The three path cards remain as optional deep links (tests unchanged).
+- **One sign-in step, no mode toggle.** `src/AuthForm.tsx` (`EmailContinueForm`) is email + password + **Continue**. `continueWithEmail` in `src/lib/auth.ts` signs in, and when no account matches it creates one with the same credentials (confirm-email is off, so the session is immediate). A wrong password on an existing account gets an "already has a yuhm account" message rather than a duplicate. `signup=1` still flips autocomplete to `new-password` and labels the button "Create account". Email+password stays the mechanism: passwordless was removed deliberately (see "Product decisions made").
+- **Return to the exact destination.** `return=` now carries a full in-app path (`resolveReturnPath` accepts `/app/...` only, maps legacy intent names, falls back to the finder). The login screen uses `navigate(..., { replace: true })` instead of a full reload. `mode=reset` opens the reset screen directly.
+- **No interstitial for members; inline sign-in for guests.** In `SimpleExperience`, `openSimpleAction` navigates members straight to the destination. Guests see the sheet with the title/copy plus the Continue form inline; on success they land on the destination without leaving the page. `simple.sheet.signInToContinue` was retired.
+- **World intro is one screen.** `WorldOnboarding` now shows role chips with the matched first invitation previewing inline, then Step in / Skip. The privacy (location) and reveal steps were removed with their strings; `onDone` still receives `(role, null)`. Location can return later as an on-map control.
+- **Copy.** "Browse anonymously" → "Browse as a guest" / "Mirar como invitado"; new `login.title`, `login.continue`, `login.continueCopy`, `login.existingAccount`, `login.notConfigured`, `landing.hero.findFood`, `simple.sheet.authCopy` (EN + ES).
+
+**Same-day fixes from koH's phone test (Brave on iOS):**
+- *Autofilled email + password but Continue stayed disabled.* Password managers write straight into the DOM without firing React change events, so a controlled form's state-based `disabled` never cleared (the pre-existing login had the same pattern). `EmailContinueForm` is now uncontrolled: values are read from `FormData` at submit (`readField` helper), the button is disabled only while busy, and the reset / updates forms read the submitted value the same way. Regression test: "accepts browser-autofilled credentials that never fired a change event".
+- *"Browse as a guest" opened an oversized map.* iOS zooms the page when a focused field is under 16px, and because routing is client-side the zoom survives into the next screen. Almost every field was 11 to 14px. One rule at the end of `styles.css` (`@media (pointer: coarse), (max-width: 759px)`) holds all text fields, selects, and textareas at 16px on touch screens; desktop keeps the compact sizes. Verified with touch emulation that the map itself has no horizontal overflow at 390px.
+
+Tests: 126 (was 108). New `src/AuthFunnel.test.tsx` mocks the Supabase client to cover member-skips-sheet, inline sign-in, one-button account creation, existing-account error, and legacy return mapping. `src/lib/auth.test.ts` covers `continueWithEmail`, `resolveReturnPath`, `signInHref`.
+
+Not changed (candidates for a follow-up): the geolocation consent dialog at `intent=food` still opens as a modal before the map; `AuthPrompt` in the dashboard and the "Sign in" links in MapLab/world panels do not pass a `return`; the hero doors are not yet verified against the live Supabase project (log in / create account on yuhm.handprotocol.org after deploy).
 
 ## Living-map world experience, 2026-08-24 (now the default app)
 
@@ -177,7 +253,7 @@ After reviewing those recommendations, choose one bounded target and use `$impro
 - Posting, replying, supporting, offering help, and nominating sources require an authenticated Supabase session.
 - When an anonymous visitor attempts a write action, the app opens a clear account prompt with login and account-creation choices.
 - Write access is determined from the actual Supabase session, not from the `mode` query parameter.
-- Successful login redirects to `/app/`. It does not redirect back into anonymous mode.
+- Successful sign-in returns to the in-app `return=` path when one was given, otherwise to the food finder (`/app/?intent=food`). It never follows a foreign URL.
 - Public source information can be read without an account, but a source does not become verified through community nomination alone.
 - The future source-intelligence agent must remain human-reviewed. See `docs/FOOD-SOURCE-AGENT.md`.
 
@@ -207,8 +283,8 @@ After reviewing those recommendations, choose one bounded target and use `$impro
 | `/app/` | Always the living-map world experience, on every viewport; the dashboard is explicit only (`mode=advanced` or `workspace=`) |
 | `/app/?mode=anonymous` | Same living-map world; a valid Supabase session still determines write access on other surfaces |
 | `/app/?mode=world` | Explicit world alias (same as `/app/`) |
-| `/app/?mode=login` | Email and password login |
-| `/app/?mode=login&signup=1` | Account creation |
+| `/app/?mode=login` | One-step sign in (email + password + Continue; creates the account when none matches). `return=/app/...` brings the person back where they were |
+| `/app/?mode=login&signup=1` | Same one-step form; asks the browser for a new password and labels the button Create account |
 | `/app/?mode=reset` | Request a password-reset email |
 | `/app/?mode=recovery` | Set a new password after following the recovery link |
 | `/app/?mode=anonymous&intent=food` | Public food-finding entry; phones open the command-bar map and adaptive result sheet |

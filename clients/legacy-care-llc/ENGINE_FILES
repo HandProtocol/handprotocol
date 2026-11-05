@@ -1,0 +1,41 @@
+# Files owned by the engine. `sync-engine.mjs` copies these from
+# clients/_template into a client; everything NOT listed is the site pack
+# (site.config.mjs, site/, public/assets/, public/favicon.svg,
+# public/img/, tests/page.test.mjs, README.md, HANDOFF.md) and is never
+# touched by a sync.
+# Generated files (netlify.toml, public/img/placeholder/) are regenerated
+# from the client's own config after a sync.
+netlify/functions/admin-page.mjs
+netlify/functions/admin.mjs
+netlify/functions/auth.mjs
+netlify/functions/content.mjs
+netlify/functions/render.mjs
+netlify/functions/lib/admin-page.mjs
+netlify/functions/lib/blocks.mjs
+netlify/functions/lib/config.mjs
+netlify/functions/lib/content.mjs
+netlify/functions/lib/db.mjs
+netlify/functions/lib/email.mjs
+netlify/functions/lib/html.mjs
+netlify/functions/lib/http.mjs
+netlify/functions/lib/sanitize.mjs
+netlify/functions/lib/session.mjs
+netlify/functions/lib/site.mjs
+netlify/functions/lib/theme.mjs
+public/admin/admin.css
+public/admin/admin.js
+public/robots.txt
+scripts/gen-migration.mjs
+scripts/gen-netlify-toml.mjs
+scripts/make-placeholders.mjs
+scripts/render-static.mjs
+tests/admin.test.mjs
+tests/blocks.test.mjs
+tests/config.test.mjs
+tests/db.test.mjs
+tests/html.test.mjs
+tests/migration.test.mjs
+tests/sanitize.test.mjs
+tests/session.test.mjs
+.gitignore
+ENGINE_FILES

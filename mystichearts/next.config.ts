@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   basePath,
   assetPrefix: basePath || undefined,
   outputFileTracingRoot: process.cwd(),
+  images: { unoptimized: true },
+  devIndicators: false,
 };
 
 export default nextConfig;

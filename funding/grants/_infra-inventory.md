@@ -126,7 +126,7 @@ Located at `/home/koh/Documents/kohlabsAI/nerve/`. Turbo monorepo, TypeScript, n
 
 ## 3. FlowB — communication / community systems
 
-Located at `/home/koh/Documents/flowb/`. Multi-app monorepo (web, mobile, kanban, danz, bot, miniapps, backend).
+Located at `/home/koh/Documents/flowb/`. Multi-app monorepo (web, mobile, kanban, bot, miniapps, backend). FlowB was decommissioned 2026-10-13 — reference only.
 
 ### Most relevant subprojects
 
@@ -142,11 +142,9 @@ Located at `/home/koh/Documents/flowb/`. Multi-app monorepo (web, mobile, kanban
 
 **FlowB Web** — `/home/koh/Documents/flowb/web/` — Vite static site, `auth.js`, `chat-widget.js`, `app.js`. Older vanilla-JS pattern. Skip unless we want the chat widget.
 
-**FlowB Backend** — `/home/koh/Documents/flowb/danz/backend/` — has session management notes (`SESSION-MANAGEMENT.md`). Worth a skim only if we hit a session issue.
-
 ### What NOT to borrow from FlowB
 - `/home/koh/Documents/flowb/.env` exists in working tree — **flag** but file content not inspected.
-- The repo sprawls across DANZ, FlowBond, flowb-vip, flowmobile — don't get lost. Stick to `flowb/kanban/` for the command center.
+- The repo sprawls across several legacy sub-apps — don't get lost. Stick to `flowb/kanban/` for the command center.
 - `findings.md` at root is 43KB of unresolved debugging notes — not a pattern to copy.
 
 ---
@@ -157,7 +155,6 @@ Located at `/home/koh/Documents/flowb/`. Multi-app monorepo (web, mobile, kanban
 - **`/home/koh/Documents/handprotocol/sweetspot/app/`** — already-in-repo Next.js 12-era app (different stack: vanilla `next.config.js`). Don't use as template.
 - **`/home/koh/Documents/handprotocol/web/landingpage/`** — Next.js 12 landing. Read-only inspirational, design system reference.
 - **`/home/koh/Documents/AIeGator/apps/web/`** — Next.js. Not inspected in depth; user has not flagged it.
-- **`/home/koh/Documents/DANZ/danz-web/`**, **`danz-landingpage/`** — Next.js, design-heavy. Pattern reference for marketing pages only.
 - **`/home/koh/Documents/handprotocol/netlify/functions/intake.js`** — already present, Resend-based form intake. **Active blueprint** for any new grant form intake; mirror its style.
 - **`/home/koh/Documents/handprotocol/netlify/functions/subscribe.js`** — paired mailing-list intake. Same style.
 - **`/home/koh/Documents/handprotocol/governance/`** — mission/governance markdown the grants skill already reads. Source-of-truth, not infra.

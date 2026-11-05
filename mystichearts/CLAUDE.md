@@ -1,24 +1,40 @@
 # Mystic Hearts — project context
 
 **For the next Claude session opening this folder cold.**
-*Created: 2026-05-17 · Updated: 2026-10-06 (see Current state)*
+*Created: 2026-05-17 · Updated: 2026-10-31 (see Current state)*
 
 ---
 
-## Current state (2026-10-06): read this first
+## Current state (2026-10-31): read this first
+
+**2026-11-04:** booking is at https://book.mysticheartshealing.com/ (root, old /book/mystichearts links forward), the collective's admin at https://admin.mysticheartshealing.com (owner mysticheartshealing@gmail.com, Team page with five seats, handprotocol@gmail.com as seatless HAND support), and Say hello posts to koordi's /v1/notes. Details in `HANDOFF.md` "The addresses". Deadline: whole system working by 2026-11-11.
+
+**Live at https://mysticheartshealing.com (2026-11-01)**, its own Netlify project on Netlify DNS (mhh.handprotocol.org is an alias), published with `./scripts/publish-mhh.sh`. koordi is in production mode and sends Mystic Hearts' mail through Resend from hello@mysticheartshealing.com. Read `HANDOFF.md` first: deploy rules, keys, mail and the Google Workspace step.
+
+**Rebuilt 2026-10-31 as one screen.** koH found the sectioned Raspberry Night design either underwhelming (placeholder photos) or too much, and asked for a video background, one clear message, and a luxurious get-in-touch and calendar modal run by koordi. That is what `components/mystic-hearts-page.tsx` now is:
+
+- **One stage:** the looped pergola video (`public/assets/video/hero-pergola.{webm,mp4}` plus poster), the gold logo cut-out, "A divine dream, made real in East Austin.", one line, two buttons. Reduced motion pauses the video.
+- **One sheet, two tabs** (`components/contact-modal.tsx`): **What's on** carries two ways in, side by side under its title: **Join a gathering** (koordi's `<koordi-gatherings>` board, `components/koordi-gatherings.tsx`) and **Come out to the land** (koordi's `<koordi-booking>` widget, `components/koordi-booking.tsx`, the service `visit`). The `Door` type keeps three values (`whatson`, `visit`, `hello`) so the hero's gold button opens the board and its glass button opens the visit way directly. **Say hello** posts a note to HAND's `/.netlify/functions/feedback` with `source: "mystichearts"` (falls back to a mailto on localhost). Changed 2026-10-31 late: koH wanted What's on to hold both the event board and coming out to the land.
+- **koordi wiring:** `NEXT_PUBLIC_KOORDI_URL` and `NEXT_PUBLIC_KOORDI_KEY` (publishable key). `.env.production` (committed) holds the production address and the Mystic Hearts publishable key; the key is public by design, locked on koordi's side to `https://handprotocol.org` and `https://mystichearts.handprotocol.org`. Locally, `.env.local` (gitignored) points at a local koordi (`cd ../koordi && npm run dev`, key in `../koordi/.data/demo-keys.json`, re-minted whenever `.data/` is empty); the demo tenant is a mechanic, so locally the widget says "Oil change". With no key either door shows a hand-arranged fallback.
+- **The Mystic Hearts tenant exists on production koordi (minted 2026-10-31 night):** slug `mystichearts`, America/Chicago, owner `hand@handprotocol.org`, one publishable key (label "handprotocol.org site") and one secret key (label "operator setup", for the operator only), the service `visit` ("Visit the land", request mode, two-hour windows, weekday 09:00 to 17:00 until the owner changes hours), hosted page `/book/mystichearts`, repeat guard on, texts off. The box keeps the minted keys in `/opt/koordi/mh-keys.env` (root only). koordi is still in staging mode (no real mail), so a visit request reaches the console inbox but nobody is emailed yet, and the owner cannot sign in to the console until production mode (Resend) is on. Gatherings (migration 0035 and the `<koordi-gatherings>` element) are not deployed yet, so on handprotocol.org the board shows its fallback until `ssh kohlabs-ovh /opt/koordi/app/deploy/deploy.sh` runs on a main that has them.
+- **Mail (2026-11-01):** Mystic Hearts stays on HAND's hosted koordi for good (koH: "our API or integration style", no self-host). The full scope for Resend confirmations, the newsletter and calendar updates is `../koordi/docs/plans/2026-11-01-mystic-hearts-mail.md`. Nothing reaches a real inbox until koordi's production mode is on (Resend key and from address; the box runs staging). Built so far: Reply-To on every mail to a person (it answers to the tenant's public email, `hand@handprotocol.org`). Not built: the newsletter (record 0040 C1, C2), gathering calendar invites (M3), a subscribable calendar (M5). The Say hello "keep me posted" box still only adds a line to HAND's feedback mail until C5 wires it to koordi's list.
+- **The sheet (2026-10-31 evening):** foggy glass (`backdrop-filter` on `.modal`; the stage words dim behind it via `data-sheet="open"`). The hero's gold button is What's on, its glass button is Come out to the land; Get in touch sits in the header. The gatherings board is a fallback line until the element exists on the koordi that serves `/widget.js`.
+- **koordi gatherings landed (2026-10-31 night, uncommitted in ../koordi):** G1 service/API (migration 0035, routes `GET /v1/gatherings`, `POST /v1/gatherings/:id/requests`, list/unlist as plan actions, three notices), G2 `<koordi-gatherings>` in `/widget.js` (attributes data-key/api/lang/heading/limit/empty; events `koordi-gatherings-loaded`, `koordi-gatherings-requested`), G3 console at `/console/gatherings`. Reports in `../koordi/docs/reports/2026-10-31-gatherings-g*.md`. Locally: restart koordi (`npm run dev`, applies 0035), then `KOORDI_URL=http://127.0.0.1:4747 node scripts/demo-gatherings.mjs` seeds three gatherings on the demo tenant. Production needs the migration applied and a deploy before the What's on door shows anything.
+- **koordi work for this site:** record 0041 and `../koordi/docs/plans/2026-10-31-gatherings.md` (a gathering = a listed plan with a public request door; slices G1 service, G2 widget, G3 console, G4 this site). Briefs in `../koordi/docs/briefs/2026-10-31-gatherings-g*.md`; reports land in `../koordi/docs/reports/`.
+- **Four chapters, same sheet** (`components/story-sheet.tsx`, copy in `components/copy.ts`): a quiet row at the foot of the stage opens Our vision, How we live (the nine principles), The land (the seven spaces) and Gatherings (offerings plus "Host a gathering", which opens the koordi door). Text only on purpose: no photo placeholders until real photos exist. The shared glass shell is `components/sheet.tsx`.
+- **Phone:** below 40rem the sheet is full height and the door/chapter tabs become a thumb bar along the bottom; the close button stays alone at the top (koH found the top tab bar clipped on mobile).
+- Colours and copy follow `design/HANDOFF.md` (Raspberry Night). The canvas design is kept untouched as the reference; the built page sits on its own canvas page, "Built · One screen (31 Oct 2026)". The old two-slide page is in git history before this date.
+
+## Earlier state (2026-10-06)
 
 The sections below are the May discovery notes. Since then:
 
 - **This folder is the Mystic Hearts website**: Next 16 static export, one page in `components/mystic-hearts-page.tsx`, styles in `app/globals.css`. It moved into the hand repo on 2026-10-06 from the old sibling folder `~/Documents/mystichearts/`.
 - **The page is two full-screen slides**: the hero ("A future village, grounded in the work already beginning.") and "Coming fall 2027." with a short paragraph and a get-in-touch email button. The older offerings, build timeline and gallery sections were removed; they survive in the old sibling folder.
 - **Run locally:** `npx next dev -p 3070`.
-- **Publish:** build with the demo base path, then copy the output over the password-gated demo:
-  ```bash
-  NEXT_PUBLIC_BASE_PATH=/mystichearts/demo npx next build
-  rsync -a --delete out/ ../web/mystichearts/demo/
-  ```
-  The public site deploys `web/` from `main`. The gate is `netlify/edge-functions/mystichearts-demo-auth.js`.
+- **Publish:** `./scripts/publish-demo.sh` builds with the demo base path and the production koordi env from `.env.production` (passed on the command line so `.env.local` stays out of the export), copies the output over the password-gated demo in `../web/mystichearts/demo/`, and refuses an export that points at a local koordi. Commit the demo folder; the public site deploys `web/` from `main`. The gate is `netlify/edge-functions/mystichearts-demo-auth.js`.
 - **The repo is public.** Everything committed here is world-readable.
+- **Redesign in progress (2026-10-29):** a new full site ("Raspberry Night") is being designed on a Claude Design canvas. Read `design/HANDOFF.md` first. It is local and untracked; keep it that way.
 - **Voice:** follow `funding/framing/mystic-hearts.md`. Lead with the land, the events and the people. Never call Mystic Hearts a platform or an app in anything public.
 
 ---
