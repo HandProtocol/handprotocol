@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Onboarding wireframe · HAND Protocol</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../foundation-campaign/style.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#prototype">Skip to prototype</a>
+  <header class="wirebar">
+    <a class="wirebar__brand" href="../">HAND Protocol <span>Wireframe</span></a>
+    <p>Local prototype. Nothing sent or saved beyond this browser.</p>
+    <button class="text-button" type="button" data-action="clear-draft">Clear draft</button>
+  </header>
+
+  <main id="prototype" class="studio">
+    <aside class="inspector" aria-label="Route inspector">
+      <div class="inspector__intro">
+        <span class="eyebrow">Route inspector</span>
+        <h1>Try every door.</h1>
+        <p>Choose a path or an operator state. This is the working specification for HAND’s future hosted journey.</p>
+      </div>
+      <nav class="inspector__routes" aria-label="Prototype views">
+        <button class="route-link is-active" type="button" data-view="journey" data-path="choose"><span>01</span> Start</button>
+        <button class="route-link" type="button" data-view="journey" data-path="support"><span>02</span> Receive support</button>
+        <button class="route-link" type="button" data-view="journey" data-path="contribute"><span>03</span> Contribute skills</button>
+        <button class="route-link" type="button" data-view="journey" data-path="fund"><span>04</span> Fund the work</button>
+        <button class="route-link" type="button" data-view="journey" data-path="partner"><span>05</span> Partner with HAND</button>
+        <button class="route-link" type="button" data-view="journey" data-path="choose-help"><span>06</span> Help me choose</button>
+        <button class="route-link" type="button" data-view="journey" data-path="chat"><span>07</span> Chat experience</button>
+      </nav>
+      <div class="inspector__divide"></div>
+      <nav class="inspector__routes" aria-label="Prototype states">
+        <button class="route-link" type="button" data-view="success"><span>↗</span> Success state</button>
+        <button class="route-link" type="button" data-view="builder"><span>⌘</span> Journey builder</button>
+        <button class="route-link" type="button" data-view="inbox"><span>⌂</span> Operator inbox</button>
+      </nav>
+      <div class="inspector__controls">
+        <label class="toggle"><input type="checkbox" id="mobileToggle"><span></span> 360px frame</label>
+        <p>Keyboard: Tab through choices, Space selects, and the review keeps every answer editable.</p>
+      </div>
+    </aside>
+
+    <section class="canvas" aria-label="Prototype canvas">
+      <div class="device-shell" id="deviceShell">
+        <div class="device-top"><span data-frame-label>HAND / START</span><span>v0.1 · local</span></div>
+        <div id="journeyView" class="screen" tabindex="-1"></div>
+        <section id="builderView" class="operator-screen" hidden></section>
+        <section id="inboxView" class="operator-screen" hidden></section>
+      </div>
+      <p class="canvas__note">Prototype boundary: this frame never contacts the live intake, email, or Command Center.</p>
+    </section>
+  </main>
+
+  <template id="journeyTemplate">
+    <div class="journey">
+      <div class="journey__top">
+        <a href="../" class="journey__logo">← HAND Protocol</a>
+        <span class="journey__step" id="stepLabel" aria-live="polite"></span>
+        <span class="journey__save" id="draftStatus">Draft stays on this device</span>
+      </div>
+      <div class="progress-wrap" id="progressWrap"><div class="progress" id="progress"></div></div>
+      <div class="journey__body" id="journeyBody"></div>
+      <div class="journey__footer"><a href="mailto:hand@handprotocol.org">Prefer email? Reach HAND directly.</a><span>Privacy comes before submit.</span></div>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
