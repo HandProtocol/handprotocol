@@ -15,7 +15,13 @@ const MIN_DWELL_MS = 1400;
   We keep loading.html untouched so the loader can also be opened standalone
   for QA. The handoff lives entirely on the React side.
 */
-export function LoaderSplash() {
+export function LoaderSplash({
+  handoffTo = "/dashboard",
+  title = "HAND Command Center loader",
+}: {
+  handoffTo?: string | null;
+  title?: string;
+}) {
   const router = useRouter();
   const [hidden, setHidden] = useState(false);
   const handoffFiredRef = useRef(false);
@@ -24,7 +30,7 @@ export function LoaderSplash() {
     // Kick off route prefetch immediately. Even if Next.js has already
     // prefetched it via Link discovery, this is cheap and idempotent.
     try {
-      router.prefetch("/dashboard");
+      if (handoffTo) router.prefetch(handoffTo);
     } catch {
       // Older client variants may not expose prefetch in this context.
       // Ignore. The navigation below still works.
@@ -39,8 +45,9 @@ export function LoaderSplash() {
       const wait = Math.max(0, MIN_DWELL_MS - elapsed);
       window.setTimeout(() => {
         setHidden(true);
-        // Use replace so back-button doesn't return to the loader.
-        router.replace("/dashboard");
+        // Standalone surfaces use the hand as a boot curtain only. The root
+        // loader still replaces itself with the dashboard after the reveal.
+        if (handoffTo) router.replace(handoffTo);
       }, wait);
     }
 
@@ -75,7 +82,7 @@ export function LoaderSplash() {
     >
       <iframe
         src="/loading.html"
-        title="HAND Command Center loader"
+        title={title}
         // The loader is self-contained; no scrollbars, no nav.
         style={{
           width: "100%",
