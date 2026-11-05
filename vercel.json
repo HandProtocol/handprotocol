@@ -11,6 +11,9 @@
     { "source": "/legacy", "destination": "/legacy/", "permanent": true },
     { "source": "/threehandshealing", "destination": "/threehandshealing/", "permanent": true },
     { "source": "/threehandshealing/styles", "destination": "/threehandshealing/styles/", "permanent": true },
+    { "source": "/kc-collective", "destination": "/kc-collective/", "permanent": true },
+    { "source": "/kc-collective/styles", "destination": "/kc-collective/styles/", "permanent": true },
+    { "source": "/kccollective", "destination": "/kc-collective/", "permanent": true },
     { "source": "/raise", "destination": "/#tiers", "permanent": true },
     { "source": "/crypto", "destination": "/donate-crypto/", "permanent": true },
     { "source": "/vision", "destination": "/discovery/skill-exchange-vision.html", "permanent": true },
@@ -59,6 +62,8 @@
         { "key": "Cache-Control", "value": "public, max-age=86400" }
       ]
     },
-    { "source": "/threehandshealing/styles/(.*)", "headers": [ { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" } ] }
+    { "source": "/threehandshealing/styles/(.*)", "headers": [ { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" } ] },
+    { "source": "/kc-collective/styles/(.*)", "headers": [ { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" } ] },
+    { "source": "/kc-collective/(.*)", "headers": [ { "key": "X-Robots-Tag", "value": "noindex, nofollow" } ] }
   ]
 }

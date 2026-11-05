@@ -131,6 +131,22 @@ from = "/threehandshealing/styles"
 to = "/threehandshealing/styles/"
 status = 301
 
+# KC Collective (Kimberly): client site + design directions (web/kc-collective/)
+[[redirects]]
+from = "/kc-collective"
+to = "/kc-collective/"
+status = 301
+
+[[redirects]]
+from = "/kc-collective/styles"
+to = "/kc-collective/styles/"
+status = 301
+
+[[redirects]]
+from = "/kccollective"
+to = "/kc-collective/"
+status = 301
+
 # Untouchable Freedom (Hannah) design portfolio, client preview
 [[redirects]]
 from = "/project/untouchable-freedom"
@@ -442,6 +458,12 @@ status = 301
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
+# KC Collective: whole site is a client preview until Kimberly signs off, keep out of search.
+[[headers]]
+  for = "/kc-collective/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
 # Untouchable Freedom design portfolio (Hannah), client preview, keep out of search.
 [[headers]]
   for = "/project/untouchable-freedom/*"
@@ -518,5 +540,11 @@ status = 301
 # twenty-seven styles, cached gallery.js still rendered seventeen).
 [[headers]]
   for = "/threehandshealing/styles/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Same for the KC Collective directions while they are being reviewed.
+[[headers]]
+  for = "/kc-collective/styles/*"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"

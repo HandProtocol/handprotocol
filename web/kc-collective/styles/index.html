@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KC Collective — design directions</title>
+  <meta name="description" content="Five design directions for the KC Collective website, for review.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../assets/kc-icon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root { --ink: #1c1c1c; --muted: #5f5a5e; --line: #e9e3e8; --violet: #7a3be6; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Hanken Grotesk", system-ui, sans-serif; color: var(--ink); background: #fff; line-height: 1.6; }
+    .wrap { width: min(1100px, 100% - 2 * clamp(16px, 4vw, 48px)); margin-inline: auto; }
+    header { padding: 3rem 0 2rem; }
+    h1 { font-family: "Comfortaa", sans-serif; font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.8rem); margin: 0 0 .5rem; }
+    header p { color: var(--muted); max-width: 60ch; margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; padding-bottom: 4rem; }
+    .dir { display: grid; gap: .6rem; text-decoration: none; color: inherit; }
+    .shot { aspect-ratio: 4 / 3; overflow: hidden; background: #f2eef3; border: 1px solid var(--line); }
+    .shot img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; transition: transform .4s ease; }
+    .dir:hover .shot img { transform: scale(1.02); }
+    .dir h2 { font-family: "Comfortaa", sans-serif; font-size: 1.2rem; margin: .4rem 0 0; }
+    .dir p { margin: 0; color: var(--muted); font-size: .9375rem; }
+    .tag { font-size: .75rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--violet); }
+    .group { font-family: "Comfortaa", sans-serif; font-size: 1rem; letter-spacing: .04em; margin: 1rem 0 1.25rem; color: var(--muted); }
+    .grid--one { grid-template-columns: minmax(0, 1fr); padding-bottom: 2.5rem; }
+    .dir--lead { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 1rem 2rem; align-items: center; }
+    .dir--lead .shot { grid-row: span 3; aspect-ratio: 4 / 3; }
+    .dir--lead h2 { font-size: 1.6rem; }
+    @media (max-width: 760px) { .dir--lead { grid-template-columns: 1fr; } .dir--lead .shot { grid-row: auto; } }
+    footer { border-top: 1px solid var(--line); padding: 1.5rem 0 3rem; font-size: .875rem; color: var(--muted); }
+    footer a { color: inherit; }
+    @media (prefers-reduced-motion: reduce) { .shot img { transition: none; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>KC Collective: the directions</h1>
+      <p>Same words, same photographs, different rooms. Two refined directions sit at the top: Nightbloom from the first review (night sky, stars, lunar energy, pastels as light) and Moonflower from the second (the thirteen cards, stars and flowers together, purple first, the moon, a little metallic shine). The explorations below are kept for reference. Open each one full-screen, on a phone as well as a laptop.</p>
+    </header>
+
+    <h2 class="group">Refined after review (newest first)</h2>
+    <div class="grid grid--one">
+      <a class="dir dir--lead" href="moonflower/">
+        <div class="shot"><img src="_shots/moonflower.webp" alt="" loading="lazy"></div>
+        <span class="tag">Cards, stars, flowers, moon</span>
+        <h2>Moonflower</h2>
+        <p>Purple night with the add-your-star sky, a moon that is a floral photograph inside a silver ring, Oracle's thirteen holographic cards with the rainbow kept to a thin iridescent edge, and silver and champagne for the glyphs, lines and sparkle.</p>
+      </a>
+      <a class="dir dir--lead" href="nightbloom/">
+        <div class="shot"><img src="_shots/nightbloom.webp" alt="" loading="lazy"></div>
+        <span class="tag">Night sky, stars, lunar</span>
+        <h2>Nightbloom</h2>
+        <p>Nocturne's bones, Constellation's add-your-star sky, Lunar's thirteen phases, and the pastel florals as aurora light and photographs. Cormorant Garamond with champagne gold; pale lilac paper for the reading sections so it stays grounded.</p>
+      </a>
+    </div>
+
+    <h2 class="group">Explorations</h2>
+    <div class="grid">
+      <a class="dir" href="../">
+        <div class="shot"><img src="_shots/original.webp" alt="" loading="lazy"></div>
+        <span class="tag">The copy</span>
+        <h2>Original</h2>
+        <p>Faithful to the current Squarespace mood board: white rooms, iridescent florals, black boxed buttons, rounded type, the violet footer band.</p>
+      </a>
+      <a class="dir" href="nocturne/">
+        <div class="shot"><img src="_shots/nocturne.webp" alt="" loading="lazy"></div>
+        <span class="tag">Under the same sky</span>
+        <h2>Nocturne</h2>
+        <p>Night garden. Aurora light, candle warmth, Cormorant italics. Gatherings strung along a line of light.</p>
+      </a>
+      <a class="dir" href="petal/">
+        <div class="shot"><img src="_shots/petal.webp" alt="" loading="lazy"></div>
+        <span class="tag">Editorial</span>
+        <h2>Petal</h2>
+        <p>Blush paper and arch-cropped photographs. Magazine pacing, an events table instead of cards, Fraunces for the voice.</p>
+      </a>
+      <a class="dir" href="lunar/">
+        <div class="shot"><img src="_shots/lunar.webp" alt="" loading="lazy"></div>
+        <span class="tag">Thirteen moons</span>
+        <h2>Lunar</h2>
+        <p>Cream, plum and a thread of gold. A full-moon hero, a strip of thirteen phases, the four movements of the cycle in a ring.</p>
+      </a>
+      <a class="dir" href="garden/">
+        <div class="shot"><img src="_shots/garden.webp" alt="" loading="lazy"></div>
+        <span class="tag">Plant one</span>
+        <h2>Garden</h2>
+        <p>Tap the meadow and a flower grows where you touched; it stays for you. Seed-packet offerings, a planting calendar, pressed-flower journal.</p>
+      </a>
+      <a class="dir" href="oracle/">
+        <div class="shot"><img src="_shots/oracle.webp" alt="" loading="lazy"></div>
+        <span class="tag">Draw a card</span>
+        <h2>Oracle</h2>
+        <p>Thirteen holographic cards fanned on lavender twilight. Draw one and it rises and flips to a line from the manifesto and a next step.</p>
+      </a>
+      <a class="dir" href="ripple/">
+        <div class="shot"><img src="_shots/ripple.webp" alt="" loading="lazy"></div>
+        <span class="tag">Breathe first</span>
+        <h2>Ripple</h2>
+        <p>Tap the water and a word floats up. A gooey blob breathes four-four-six with you. Wave-cut sections, a tide table of gatherings.</p>
+      </a>
+      <a class="dir" href="scrapbook/">
+        <div class="shot"><img src="_shots/scrapbook.webp" alt="" loading="lazy"></div>
+        <span class="tag">Move things around</span>
+        <h2>Scrapbook</h2>
+        <p>A corkboard of polaroids, torn notes and peel-off stickers you can drag anywhere. Index cards, a to-do list, ticket stubs.</p>
+      </a>
+      <a class="dir" href="constellation/">
+        <div class="shot"><img src="_shots/constellation.webp" alt="" loading="lazy"></div>
+        <span class="tag">Add your star</span>
+        <h2>Constellation</h2>
+        <p>Thirteen named stars over a dusk sky. Type your name and your star joins the line, drawn in gold to the one before you.</p>
+      </a>
+    </div>
+
+    <footer>
+      <p>Sticker was set aside after review (too playful for the brief); its files remain in <code>styles/sticker/</code>. Garden, Oracle, Ripple, Scrapbook, Constellation, Nightbloom and Moonflower use small React islands (built with esbuild from <code>kc-collective/src/</code>; see HANDOFF.md). Photographs are Unsplash placeholders chosen to match the mood board; they will be replaced with the collective’s own photos. Credits are in <a href="../assets/README.md">assets/README.md</a>.</p>
+    </footer>
+  </div>
+</body>
+</html>

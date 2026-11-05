@@ -13,6 +13,9 @@ http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protoc
 /legacy                 /legacy/                   301
 /threehandshealing      /threehandshealing/         301
 /threehandshealing/styles /threehandshealing/styles/  301
+/kc-collective           /kc-collective/            301
+/kc-collective/styles    /kc-collective/styles/     301
+/kccollective            /kc-collective/            301
 /project/untouchable-freedom /project/untouchable-freedom/  301
 /untouchable-freedom    /project/untouchable-freedom/  301
 /foundation-campaign    /                          301
