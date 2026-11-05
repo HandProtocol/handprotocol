@@ -40,7 +40,9 @@ The palette is **restrained**: tinted neutrals plus one signature accent. Additi
 | Token | Value | Role |
 |---|---|---|
 | `--color-accent` | `#D97706` | Signature amber. The HAND color. Used on links, CTAs, eyebrows, accent rules. Coverage ~5–10% of any surface. |
-| `--color-accent-hover` | `#B45309` | Hover state of accent buttons |
+| `--color-accent-hover` | `#B45309` | Darker accent for link and inline-control hover states. |
+| `--color-accent-action` | `#B45309` | Accessible solid-button amber. White text reaches 5.02:1 contrast. |
+| `--color-accent-action-hover` | `#92400E` | Accessible solid-button hover. White text reaches 7.09:1 contrast. |
 | `--color-accent-light` | `#FEF3C7` | Tinted accent backgrounds (callout fill, route-card gradient) |
 | `--color-accent-glow` | `rgba(217, 119, 6, 0.15)` | Hero gradient ambient glow |
 | `--color-teal` | `#0D9488` | Secondary accent, used for the "Models" doc accent stripe, teal callout variants |
@@ -152,7 +154,7 @@ The component vocabulary, named and stable across surfaces.
 ### Buttons
 
 - **`.btn`** base, pill-shaped (`--radius-full`), `font-weight: 600`.
-- **`.btn--primary`**, solid `--color-accent` background, white text, subtle hover lift.
+- **`.btn--primary`**, solid `--color-accent-action` background, white text, subtle hover lift.
 - **`.btn--ghost`**, transparent with 1.5px border, used as secondary CTA.
 - **`.btn--dark`**, dark background `--color-bg-cta`, white text. Used inside CTA sections.
 - Size modifiers: `.btn--sm` (compact nav CTAs), `.btn--lg` (hero/primary actions).

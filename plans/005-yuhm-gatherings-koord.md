@@ -1,14 +1,14 @@
-# Plan 005: yuhm gatherings (beta), coordinated by koord
+# Plan 005: yuhm gatherings (beta), coordinated by koordi
 
 Status: PROPOSED (nothing built in the app; demo screens exist; decision 1 settled)
 Date: 2026-09-20
 Demo: the "Gatherings beta" group (five screens) in https://claude.ai/artifact/FwbwZigM85r1ECY2D2PB4Q, version 3. Source: `yuhm/prototypes/the-mission/gather.js` and `gather.css`, loaded through a small extension hook in `mission.js`.
-Scope: `yuhm/` app, one new migration in `command/supabase/migrations/`, new Netlify functions in `yuhm/netlify/functions/`, a host adapter that lets yuhm use `koord/` as a library
+Scope: `yuhm/` app, one new migration in `command/supabase/migrations/`, new Netlify functions in `yuhm/netlify/functions/`, a host adapter that lets yuhm use `koordi/` as a library
 Companion: plan 004 (THE MISSION). The two share one notification pipeline and the mission templates. Neither blocks the other.
 
 ## Why
 
-koH, 2026-09-20: plan the booking system (`book/`, renamed `koord/` the same day) into the yuhm work. koord will coordinate every HAND feature in time, but the first thing to present is a beta for **gatherings and classes**. The first worked case is a **food prep gathering**:
+koH, 2026-09-20: plan the booking system (`book/`, renamed `koordi/` the same day) into the yuhm work. koordi will coordinate every HAND feature in time, but the first thing to present is a beta for **gatherings and classes**. The first worked case is a **food prep gathering**:
 
 - Each attendee says exactly what they want to prepare.
 - That generates their order as an itemized list.
@@ -25,7 +25,7 @@ koH, 2026-09-20: plan the booking system (`book/`, renamed `koord/` the same day
 | "Source it from our app": inventory lots and allocations (031), harvest runs (030), rescues (028), drop-offs (040) | first-generation, browser to RPC | Live. |
 | `food_payment_orders` and Stripe tables | 033, 035 | Shaped for the marketplace lane: needs a `commitment_id` and carries a HAND fee (5 percent, capped at $3). Not a fit for pooled groceries as it stands, and plan 003 lists a reconciliation defect to fix before Stripe goes live. |
 | Notification queue, consent, quiet hours: `food_outbox`, `food_contact_channels` | 032 | Applied. Plan 004 builds the `mission-notify` function on them. |
-| koord: plan and RSVP, time poll, reminders, notices, groups, invite codes, delivery policy, ladder, quiet hours, event aggregation | `koord/src` | Pure tested modules. No storage, no channel plugin, no API, nothing deployed, nothing committed. |
+| koordi: plan and RSVP, time poll, reminders, notices, groups, invite codes, delivery policy, ladder, quiet hours, event aggregation | `koordi/src` | Pure tested modules. No storage, no channel plugin, no API, nothing deployed, nothing committed. |
 
 What is missing for food prep: recipes, per-attendee orders with a source per line, shop runs with a consolidated list, receipts and settle-up, bins and pick lists.
 
@@ -33,7 +33,7 @@ What is missing for food prep: recipes, per-attendee orders with a source per li
 
 Four named deadlines drive everything: **cutoff** (default 48 hours before start), **shop window** (ends at most 90 minutes before start when the list has chilled or frozen lines), **start**, and **settle by** (default 3 days after).
 
-1. **Create.** An organizer sets the type (`prep`), venue, capacity, and either a time or a koord time poll (three proposed times, approval voting, a deadline). They attach a **menu** of recipe kits, or leave the menu open. They set the cutoff, the stores, and how many covered spots exist.
+1. **Create.** An organizer sets the type (`prep`), venue, capacity, and either a time or a koordi time poll (three proposed times, approval voting, a deadline). They attach a **menu** of recipe kits, or leave the menu open. They set the cutoff, the stores, and how many covered spots exist.
 2. **Join and order.** An attendee answers yes, picks dishes and servings. The app scales each recipe and writes **order lines**. Every line has a **source**: `bring`, `network`, `buy`, or `pantry`. The attendee sets a default and can override any line (bring my own rice, network tomatoes, buy chicken). Each `buy` line carries a substitution choice: fine, ask me, or skip it.
 3. **Cutoff.** Orders lock. The app turns `network` lines into allocations against real lots plus pickup runs, groups `buy` lines into **shop runs** by store, assigns each order a **bin number**, and computes each person's share.
 4. **Pay.** Each buyer sees "your share": estimate plus a buffer. They pay the gathering's **money holder** (the organizer unless they name someone else) however the two of them agree: cash, Venmo, Cash App, Zelle. The money holder keeps a **paid checklist** and ticks each person by hand. The app moves no money and checks no payment (decision 1, settled 2026-09-20). Only ticked orders, covered orders, and orders the organizer chooses to keep go onto the shop list.
@@ -55,11 +55,11 @@ A **class** is the same model with a teacher, one fixed kit for everyone, and an
 6. **Food safety is in the model.** Catalog items carry `temperature_class` (the same values as `food_supplies`). A run with chilled or frozen lines gets a cooler step and a short window. The gathering page shows the allergen set computed from the locked orders ("this kitchen will handle peanuts, shellfish"). A private home keeps 033's rules: verified venue, address released on a timer to confirmed people only.
 7. **Ground rule 1 from plan 004 holds.** A gathering may appear on the food map as a plain listing ("community cook, Saturday, covered spots"). No seeds, no prompts, no account wall to read it.
 
-## Where koord fits
+## Where koordi fits
 
-koord is the engine; yuhm is its first host with real storage.
+koordi is the engine; yuhm is its first host with real storage.
 
-| Need | koord module | yuhm side |
+| Need | koordi module | yuhm side |
 | --- | --- | --- |
 | Pick the date | `coordination/poll.mjs` | poll rows on the event |
 | RSVP rules, share link, invite codes | `coordination/plan.mjs`, `codes.mjs` | `food_event_rsvps`, `food_event_invites` |
@@ -68,7 +68,7 @@ koord is the engine; yuhm is its first host with real storage.
 | Quiet hours, caps, consent, dedup, channel order | `delivery/policy.mjs`, `ladder.mjs`, `quiet-hours.mjs` | `food_contact_channels`, `food_notification_prefs`, `food_notification_log` (plan 004) |
 | Outside classes and events people can go to together | `events/` (Luma, Resident Advisor, a pasted link) | phase G4 |
 
-This leans on koord's first open decision (where the layer runs). Recommended answer for yuhm: **koord runs as a library inside the host.** yuhm's Netlify functions import the pure modules; yuhm's tables are the store; yuhm's existing Resend wiring becomes koord's first real channel behind `defineChannel()`. A central service stays possible later because the modules do not know where they run. That also gives koord's missing contact model a concrete first shape: `food_participants` plus `food_contact_channels`.
+This leans on koordi's first open decision (where the layer runs). Recommended answer for yuhm: **koordi runs as a library inside the host.** yuhm's Netlify functions import the pure modules; yuhm's tables are the store; yuhm's existing Resend wiring becomes koordi's first real channel behind `defineChannel()`. A central service stays possible later because the modules do not know where they run. That also gives koordi's missing contact model a concrete first shape: `food_participants` plus `food_contact_channels`.
 
 Record 0004 stays intact. A notice carries a type and a key, not order contents. Nothing about a gathering is mirrored into a HAND-run channel. Ruling 4 (money runs through the owner's own accounts, HAND does not hold it) drives decision 1.
 
@@ -187,7 +187,7 @@ Functions (repo naming): `create_food_gathering`, `set_food_gathering_menu`, `up
 
 Migration: take the number at build time (plan 004 notes 049 was next free on 2026-09-19 and the folder is shared). `NNN_yuhm_gatherings.sql`. Validate the chain in the podman Supabase image; migrate first, deploy second.
 
-## Notifications (through koord's policy, into plan 004's pipeline)
+## Notifications (through koordi's policy, into plan 004's pipeline)
 
 | Message | Trigger | Channels |
 | --- | --- | --- |
@@ -203,18 +203,18 @@ Add one category, `gathering`, to `food_notification_prefs` so people can mute i
 
 ## Phases
 
-- **G0. Sign-off.** koH settles the decisions below (decision 1 is settled). The demo has five gathering screens: the gathering, build my order, the paid checklist with its settle tab, the shop run with the sort sheet, pick up my bin with the balance. Not in the demo: the organizer's create flow and the koord time poll.
-- **G1. Beta, no money processing.** Public gathering page, RSVP, menu of kits, build my order with a source per line, cutoff lock, the money holder's paid checklist (ticked by hand, with covered, shop anyway, and drop), shop runs with the consolidated list and receipt, sort sheet, bins, pick list, balances with a hand-ticked settled box, email notices through koord. EN and ES. Seed data: about 60 catalog items and 8 kits written with koH or a cook. Done when twelve test orders lock into one list whose shares sum to a test receipt to the cent, and a phone walks shop to pick to balance.
+- **G0. Sign-off.** koH settles the decisions below (decision 1 is settled). The demo has five gathering screens: the gathering, build my order, the paid checklist with its settle tab, the shop run with the sort sheet, pick up my bin with the balance. Not in the demo: the organizer's create flow and the koordi time poll.
+- **G1. Beta, no money processing.** Public gathering page, RSVP, menu of kits, build my order with a source per line, cutoff lock, the money holder's paid checklist (ticked by hand, with covered, shop anyway, and drop), shop runs with the consolidated list and receipt, sort sheet, bins, pick list, balances with a hand-ticked settled box, email notices through koordi. EN and ES. Seed data: about 60 catalog items and 8 kits written with koH or a cook. Done when twelve test orders lock into one list whose shares sum to a test receipt to the cent, and a phone walks shop to pick to balance.
 - **G2. Network sourcing and missions.** `network` lines allocate against inventory lots and harvest stops; pickups and shop runs become missions with seeds (needs plan 004 phase 1 for the board, phase 2 for offers).
 - **G3. Money on rails, classes with a fee, recurring gatherings.** Decision 1, option B. Covered spots from a subsidy campaign. Needs plan 003's Stripe reconciliation fix and a `/hand-tax` pass.
-- **G4. Outside events and the helper.** koord's event aggregation in the gather tab; helper tools ("what is on my list", "add cilantro", "I am running late").
+- **G4. Outside events and the helper.** koordi's event aggregation in the gather tab; helper tools ("what is on my list", "add cilantro", "I am running late").
 
 G1 does not wait on plan 004. Whichever ships first builds the shared outbox to notify function once.
 
 ## Decisions for koH (recommendation in brackets)
 
 1. **How grocery money moves. SETTLED by koH, 2026-09-20: option A, done by hand.** koH: "yes direct settle works. for first implementation, we can have a check list of users who have paid where we do it manually." So the first implementation is a paid checklist the money holder ticks; no "sent" button, no payment handles stored, no processor. Options as they were put: (A) Settle directly: the app computes shares, people pay each other outside the app (Venmo, Cash App, Zelle, cash at the door), balances settle the same way. HAND touches no money. (B) Stripe Connect on the organizer's or host kitchen's own account, which matches record 0004 ruling 4. A neighbor doing one grocery run should not have to pass Stripe identity checks, so the connected account is the organizer, who pays or reimburses the shopper. (C) HAND collects and pays out. [A for the beta, B in G3, never C without counsel: holding other people's grocery money raises custody, licensing, and restricted-fund questions that `/hand-tax` and `/fiscal` have not looked at.]
-2. **Where koord runs for yuhm.** [As a library inside yuhm; yuhm's tables are the store. Record it as a koord decision.]
+2. **Where koordi runs for yuhm.** [As a library inside yuhm; yuhm's tables are the store. Record it as a koordi decision.]
 3. **Buffer on estimates.** [15 percent, rounded up to the dollar, refunded at settle.]
 4. **After the cutoff, no refund on bought lines.** [Yes, with name-a-collector and release-to-the-table.]
 5. **Pantry items: host kitchen supplies them, or pooled and split?** [Organizer chooses per gathering; default pooled.]
@@ -229,6 +229,6 @@ G1 does not wait on plan 004. Whichever ships first builds the shared outbox to 
 - **A shopper out of pocket.** Unpaid lines drop at pay-by; per-line ceilings cap overspend; the organizer sees an unclaimed run 36 hours out.
 - **Cold chain and allergens** in a shared kitchen. Temperature class, the cooler step, the short window, and the computed allergen notice are part of G1, not polish.
 - **Private homes.** Keep 033's venue verification and timed address release. Start the pilot in a public or partner kitchen.
-- **Two RSVP models** (koord's plan attendees, yuhm's `food_event_rsvps`). yuhm's table is the store; koord's functions are the rules. An order needs an account; reading a gathering does not.
+- **Two RSVP models** (koordi's plan attendees, yuhm's `food_event_rsvps`). yuhm's table is the store; koordi's functions are the rules. An order needs an account; reading a gathering does not.
 - **A hand-kept checklist can be wrong.** One money holder per gathering, every tick stamped with who and when, an audit row per change, and an undo. The attendee sees their own state ("marked paid" or "not marked yet"), so a missed tick gets noticed before the shop run, not at the door.
 - **Scope.** Nine tables is a real build. G1 can ship without `network` sourcing and without classes; the order, the list, the bins, and the balance are the beta.

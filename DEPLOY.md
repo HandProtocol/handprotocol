@@ -1,13 +1,13 @@
 # Deploy walkthrough
 
-The HAND Protocol public surfaces are static HTML/CSS/JS, no build step. The site is **live on Netlify at `handprotocol.netlify.app`** as of 2026-05-12. Pushes to `main` of `HandProtocol/handprotocol` auto-deploy. Config for Vercel and Cloudflare Pages is also kept in the repo for host portability.
+The HAND Protocol public surfaces are static HTML/CSS/JS, no build step. The site is **live on Netlify at [handprotocol.org](https://handprotocol.org)** (since 2026-05-12, Netlify DNS). Pushes to `main` of `HandProtocol/handprotocol` auto-deploy. Config for Vercel and Cloudflare Pages is also kept in the repo for host portability.
 
 ## Pre-flight checklist
 
 - [x] GitHub repo public at `github.com/HandProtocol/handprotocol`
 - [x] Netlify connected, auto-deploy on `main` enabled
-- [ ] Custom domain (`handprotocol.org` or alternative) pointed at Netlify
-- [ ] OG / sitemap meta tags reference the canonical live domain (currently `https://handprotocol.org`, change in HTML if the canonical domain differs)
+- [x] Custom domain `handprotocol.org` pointed at Netlify
+- [x] OG / sitemap meta tags reference the canonical live domain `https://handprotocol.org`
 - [ ] Email `hand@handprotocol.org` exists and forwards somewhere readable
 
 ## Option 1: Netlify (current, live)
@@ -25,6 +25,38 @@ The site is deployed here. `netlify.toml` at the repo root configures everything
    - Security headers (X-Frame-Options, Referrer-Policy, Permissions-Policy)
    - Cache control (long for assets, short for HTML)
 4. **Custom domain:** Site Settings → Domain Management → Add custom domain → `handprotocol.org`. Let's Encrypt SSL auto-provisions within ~10 min after DNS propagation.
+
+## Other Netlify sites HAND runs
+
+Only handprotocol.org deploys from this repo's `main`. The rest deploy as listed, which matters because a push to `main` does NOT update them:
+
+| Site | Source | How it deploys |
+|---|---|---|
+| handprotocol.org | `web/` + `netlify/` | Push to `main` |
+| command.handprotocol.org (Command Center) | `command/` | Push to `main` (its own Netlify site) |
+| waterdrop.handprotocol.org | `waterdrop/` | Push to `main` (base dir `waterdrop`) |
+| yuhm.handprotocol.org | `yuhm/` | Netlify CLI by hand |
+| waterfall.handprotocol.org | `projects/waterfall/` | Netlify CLI by hand; its own `netlify.toml` overrides the root CSP |
+| sps.handprotocol.org | `solarpunk/` | Netlify CLI by hand |
+| Client sites (`clients/<slug>/`) | per client | Netlify CLI by hand, except PrecisionFix, which deploys from its own public repo on the owner's account. See each client's `HANDOFF.md`. |
+
+New Netlify sites start with the "Powered by Netlify" badge on and Netlify Forms detection off; turn the badge off and, if the site uses forms, detection on. The Free plan cannot build private organization repos.
+
+## Function limits (handprotocol.org)
+
+Resend's free plan stops at 100 emails a day for the whole account, which yuhm's auth mail and some client sites share. The public functions are limited so that one flooded form cannot use it up. Counts live in the database (`command.rate_hits`, `command.rate_take`, migration 057), because function instances do not share memory.
+
+| Limit | Default | Env var to change it |
+|---|---|---|
+| Feedback notes per visitor per 10 minutes | 5 | `FEEDBACK_IP_BURST` |
+| Feedback notes per visitor per day | 20 | `FEEDBACK_IP_DAILY` |
+| Feedback notes from everyone per hour | 30 | `FEEDBACK_HOURLY_CAP` |
+| Feedback notes that also send an email, per day | 10 (later notes still reach `/pins` and Telegram) | `FEEDBACK_EMAIL_DAILY_CAP` |
+| All email sent by this site's functions per 24 hours | 50 | `EMAIL_DAILY_CAP` |
+
+Visitors over a limit get HTTP 429 and the widget retries ten minutes later. The same note sent twice within an hour is accepted once. If the counter cannot be reached, feedback is still accepted but email is skipped. Any new function that sends email should use `sendEmail` from `netlify/functions/_email.js` so it counts against the daily cap.
+
+Database changes go first: apply a migration through the Supabase management API and record it in `supabase_migrations.schema_migrations` before deploying code that needs it.
 
 ## Option 2: Vercel (former, ad-hoc / archived)
 
@@ -77,7 +109,7 @@ After the site is live at your custom domain:
 
 ## Updating the site
 
-Any commit pushed to `main` on the GitHub repo triggers an auto-deploy on the active host (currently Vercel). No manual deploy step needed.
+Any commit pushed to `main` on the GitHub repo triggers an auto-deploy on Netlify. No manual deploy step needed.
 
 When making any change that affects deploy behavior (redirects, headers, routing), **update both `vercel.json` and `netlify.toml`** in the same commit. They mirror each other so the eventual Netlify switch is zero-rework.
 

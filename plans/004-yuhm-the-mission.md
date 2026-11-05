@@ -4,7 +4,7 @@ Status: PROPOSED (demo built, nothing in the app changed)
 Date: 2026-09-19
 Scope: `yuhm/` app, one new migration in `command/supabase/migrations/`, new Netlify functions in `yuhm/netlify/functions/`
 Demo: https://claude.ai/artifact/FwbwZigM85r1ECY2D2PB4Q (private to koH; source in `yuhm/prototypes/the-mission/`, outside the Vite build and the publish dir)
-Companion: plan 005 (`005-yuhm-gatherings-koord.md`), gatherings and classes coordinated by koord. It shares this plan's notification pipeline, adds a `gathering` notification category, a `shop_run` mission source type, and seven gathering mission templates. Neither plan blocks the other.
+Companion: plan 005 (`005-yuhm-gatherings-koord.md`), gatherings and classes coordinated by koordi. It shares this plan's notification pipeline, adds a `gathering` notification category, a `shop_run` mission source type, and seven gathering mission templates. Neither plan blocks the other.
 
 ## Why
 
@@ -190,7 +190,7 @@ Rules:
 
 ### Migration notes
 
-Next free number is 049 as of 2026-09-19, but `koord/` and the client sites share the folder: take the number at build time. Name it `NNN_yuhm_missions.sql` (applied `wxl` filenames stay as they are). Validate the full chain in the podman Supabase image, then apply through the management API. Migrate first, deploy second.
+Next free number is 049 as of 2026-09-19, but `koordi/` and the client sites share the folder: take the number at build time. Name it `NNN_yuhm_missions.sql` (applied `wxl` filenames stay as they are). Validate the full chain in the podman Supabase image, then apply through the management API. Migrate first, deploy second.
 
 ## Notifications
 
