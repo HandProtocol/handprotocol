@@ -217,53 +217,73 @@
   .bienvenidos svg{width:20px;height:20px}
 
   /* visit */
-  .visit{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,3.5vw,2.6rem);align-items:stretch}
   .visit__card{background:var(--bg-panel);border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:clamp(1.6rem,3.5vw,2.4rem)}
   .visit__card h3{font-size:1.5rem;font-weight:700;margin-bottom:1.3rem}
-  .vrow{display:flex;gap:0.95rem;padding:0.9rem 0;border-top:1px solid var(--line-soft)}
-  .vrow:first-of-type{border-top:none;padding-top:0}
+  .vrow{display:flex;gap:0.95rem}
   .vrow svg{width:21px;height:21px;color:var(--gold);flex:none;margin-top:2px}
   .vrow .k{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--ink-3);font-weight:700}
   .vrow .v{color:var(--ink);font-weight:500;line-height:1.5}
-  .vrow .v a{color:var(--gold-hi);font-weight:700}
+  .vrow .v a{color:var(--gold-hi);font-weight:700;font-size:1.2rem}
   .hours{margin:0.2rem 0 0;list-style:none}
   .hours li{display:flex;justify-content:space-between;gap:1rem;padding:0.26rem 0;color:var(--ink-2);font-size:0.96rem;max-width:18rem}
   .hours li b{color:var(--ink);font-weight:600}
   .hours__note{font-size:0.82rem;color:var(--ink-3);margin-top:0.6rem}
-  .visit__btns{display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:1.5rem}
-  .visit__store{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--gold-line);position:relative}
-  @media(max-width:760px){.visit{grid-template-columns:1fr}}
-  /* two-shop switcher: tabs over a cross-fading photo, auto-advances until someone picks */
-  .spots{min-height:420px;background:var(--bg-panel);touch-action:pan-y}
-  .spots__slide{position:absolute;inset:0;opacity:0;transition:opacity .9s var(--ease);margin:0}
-  .spots__slide.is-on{opacity:1}
-  .spots__slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.05);transition:transform 6s linear}
-  .spots__slide.is-on img{transform:scale(1)}
-  .spots__slide::after{content:"";position:absolute;inset:0;pointer-events:none;
-    background:linear-gradient(to top, oklch(0.09 0.008 70 / 0.88) 0%, transparent 46%),
-               linear-gradient(to bottom, oklch(0.09 0.008 70 / 0.55) 0%, transparent 24%)}
-  .spots__cap{position:absolute;z-index:1;left:clamp(1.1rem,3vw,1.6rem);right:1rem;bottom:clamp(1rem,3vw,1.4rem)}
-  .spots__cap .k{display:block;font-size:0.68rem;font-weight:700;letter-spacing:0.26em;text-transform:uppercase;color:var(--gold-hi)}
-  .spots__cap .v{display:block;margin-top:0.3rem;font-family:var(--font-display);font-style:italic;font-weight:600;
-    font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.2;color:var(--ink);text-shadow:0 2px 14px oklch(0 0 0 / 0.6)}
-  .spots__tabs{position:absolute;z-index:2;top:0.9rem;left:0.9rem;display:flex;gap:4px;padding:4px;
-    border-radius:999px;background:oklch(0.12 0.006 75 / 0.78);border:1px solid var(--gold-line)}
-  .spots__tab{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:0.45rem;
-    font:700 0.8rem/1 var(--font-body);letter-spacing:0.02em;color:var(--ink-2);background:transparent;border:0;
-    padding:0.6rem 0.95rem;border-radius:999px;cursor:pointer;min-height:40px;
-    transition:color .2s var(--ease),background .2s var(--ease)}
-  .spots__tab:hover{color:var(--gold-hi)}
-  .spots__tab b{font-family:var(--font-display);font-style:italic;font-size:1.05rem;color:var(--gold)}
-  .spots__tab[aria-selected="true"]{background:var(--foil);color:var(--ink-dark)}
-  .spots__tab[aria-selected="true"] b{color:var(--ink-dark)}
-  /* the timer: a hairline that fills under the active tab, then the photo flips */
-  .spots__bar{position:absolute;left:14%;right:14%;bottom:5px;height:2px;border-radius:2px;
-    background:oklch(0.17 0.01 70 / 0.55);transform:scaleX(0);transform-origin:left;opacity:0}
-  .spots.auto .spots__tab[aria-selected="true"] .spots__bar{opacity:1;animation:spots-timer 5.5s linear forwards}
-  .spots.auto:hover .spots__bar,.spots.auto:focus-within .spots__bar,.spots.idle .spots__bar{animation-play-state:paused}
-  @keyframes spots-timer{to{transform:scaleX(1)}}
-  @media(max-width:760px){.spots{min-height:0;aspect-ratio:4/3}}
-  @media(prefers-reduced-motion:reduce){.spots__slide,.spots__slide img{transition:none;transform:none}}
+  .visit__btns{display:flex;flex-wrap:wrap;gap:0.7rem;margin-top:1.4rem}
+  /* hours + contact: one card, two columns on wide screens */
+  .contact{display:grid;grid-template-columns:1.1fr 1fr;gap:1.4rem clamp(1.4rem,4vw,3rem)}
+  .contact h3{grid-column:1/-1;margin-bottom:0}
+  .contact__call{border-left:1px solid var(--line-soft);padding-left:clamp(1.4rem,4vw,3rem)}
+  @media(max-width:720px){.contact{grid-template-columns:1fr}
+    .contact__call{border-left:0;padding-left:0;border-top:1px solid var(--line-soft);padding-top:1.3rem}}
+
+  /* the two shops: one card each, photo + name + landmark + address + directions together */
+  .shops{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1rem,2.4vw,1.6rem);margin-bottom:clamp(1.4rem,3.5vw,2.2rem)}
+  @media(max-width:720px){.shops{grid-template-columns:1fr}}
+  #shops{scroll-margin-top:84px}
+  .shop{display:flex;flex-direction:column;background:var(--bg-panel);border:1px solid var(--line-soft);
+    border-radius:var(--r-lg);overflow:hidden;transition:border-color .25s var(--ease)}
+  .shop:hover{border-color:var(--gold-line)}
+  .shop__photo{position:relative;margin:0;aspect-ratio:16/9;overflow:hidden;border-bottom:1px solid var(--gold-line)}
+  .shop__photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+  .shop:hover .shop__photo img{transform:scale(1.03)}
+  .shop__num{position:absolute;left:0.85rem;top:0.85rem;width:54px;height:54px;border-radius:50%;
+    display:grid;place-items:center;background:oklch(0.12 0.006 75 / 0.84);border:1px solid var(--gold-line);
+    backdrop-filter:blur(6px);box-shadow:0 8px 22px -10px oklch(0 0 0 / 0.8)}
+  .shop__num span{font-family:var(--font-display);font-style:italic;font-weight:700;font-size:2rem;line-height:1;padding-right:0.08em}
+  .shop__body{display:flex;flex-direction:column;flex:1;padding:clamp(1.2rem,3vw,1.6rem)}
+  .shop__k{font-size:0.7rem;font-weight:700;letter-spacing:0.24em;text-transform:uppercase;color:var(--gold)}
+  .shop__name{font-size:clamp(1.5rem,3vw,1.85rem);margin-top:0.35rem}
+  .shop__where{display:flex;align-items:center;gap:0.45rem;color:var(--ink-2);margin-top:0.3rem;font-size:0.98rem}
+  .shop__where svg{width:16px;height:16px;color:var(--gold);flex:none}
+  /* tap the address to copy it */
+  .shop__addr{display:flex;align-items:center;justify-content:space-between;gap:0.8rem;width:100%;margin-top:1.1rem;
+    padding:0.75rem 0.95rem;border-radius:var(--r-md);border:1px solid var(--line-soft);background:var(--bg-raised);
+    color:var(--ink);font:inherit;text-align:left;cursor:pointer;
+    transition:border-color .18s var(--ease),background .18s var(--ease)}
+  .shop__addr:hover{border-color:var(--gold-line)}
+  .shop__addr b{display:block;font-weight:600;font-size:1rem;line-height:1.35}
+  .shop__addr small{display:block;color:var(--ink-3);font-size:0.84rem;line-height:1.35}
+  .shop__copy{display:inline-flex;align-items:center;gap:0.35rem;flex:none;color:var(--gold);
+    font-size:0.72rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase}
+  .shop__copy svg{width:16px;height:16px}
+  .shop__addr .c2,.shop__addr.is-copied .c1{display:none}
+  .shop__addr.is-copied .c2{display:inline-flex}
+  .shop__addr.is-copied{border-color:var(--gold);background:var(--gold-dim)}
+  .shop__go{width:100%;margin-top:0.8rem;justify-content:flex-start}
+  .shop__go .app{margin-left:auto;font-weight:600;font-size:0.86rem;opacity:0.72;display:inline-flex;align-items:center;gap:0.3rem}
+  .shop__go .app svg{width:14px;height:14px}
+  .shop__alt{display:flex;flex-wrap:wrap;align-items:center;gap:0 1.1rem;margin-top:0.5rem;font-size:0.9rem;color:var(--ink-3)}
+  .shop__alt a{display:inline-flex;align-items:center;min-height:40px;color:var(--gold-hi);font-weight:700;
+    text-decoration:underline;text-decoration-color:var(--gold-line);text-underline-offset:4px;transition:text-decoration-color .18s var(--ease)}
+  .shop__alt a:hover{text-decoration-color:var(--gold)}
+  .shop__go{white-space:nowrap;padding-inline:1.15rem}
+  @media(max-width:480px){
+    .shop__copy > span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    .shop__copy svg{width:19px;height:19px}
+    .shop__go .app{font-size:0.8rem}
+  }
+  @media(max-width:380px){.shop__go .app svg{display:none}}
+  @media(prefers-reduced-motion:reduce){.shop__photo img,.shop__addr{transition:none}.shop:hover .shop__photo img{transform:none}}
   /* walk-through: both shops, captions wave in over the video */
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
   .walk{position:relative;margin:0 0 clamp(1.4rem,3.5vw,2.6rem);aspect-ratio:16/9;background:#000;
@@ -313,34 +333,6 @@
   .foot__hand{font-size:0.86rem;color:var(--ink-3)}
   .foot__hand a{color:var(--gold);font-weight:700;border-bottom:1px solid var(--gold-line)}
   .foot__hand a:hover{color:var(--gold-hi)}
-
-  /* addresses: one row per shop, each with its own directions + copy */
-  #visit{scroll-margin-top:64px}
-  .addr{list-style:none;margin:0.35rem 0 0;display:grid;gap:0.95rem}
-  .shop__line{display:flex;align-items:baseline;gap:0.6rem;color:var(--ink);font-weight:500;line-height:1.45}
-  .shop__line b{font-family:var(--font-display);font-style:italic;font-weight:700;font-size:1.1rem;min-width:0.8rem}
-  .shop__line em{font-style:normal;color:var(--ink-3);font-size:0.88rem}
-  .shop__acts{display:flex;flex-wrap:wrap;gap:0.45rem;margin:0.55rem 0 0 1.4rem}
-  .chip{display:inline-flex;align-items:center;gap:0.4rem;min-height:38px;padding:0.4rem 0.8rem;border-radius:999px;
-    border:1px solid var(--gold-line);background:transparent;color:var(--gold-hi);
-    font:inherit;font-size:0.84rem;font-weight:700;letter-spacing:0.01em;cursor:pointer;
-    transition:border-color .18s var(--ease),background .18s var(--ease),transform .18s var(--ease)}
-  .chip:hover{border-color:var(--gold);background:var(--gold-dim);transform:translateY(-1px)}
-  .chip svg{width:15px;height:15px;flex:none}
-  .chip--copy .c2{display:none}
-  .chip--copy.is-copied{border-color:var(--gold);background:var(--gold-dim)}
-  .chip--copy.is-copied .c1{display:none}
-  .chip--copy.is-copied .c2{display:inline}
-  @media(max-width:560px){
-    .shop__acts{display:grid;grid-template-columns:1fr 1fr auto;margin-left:0}
-    .chip{justify-content:center;padding-inline:0.45rem;font-size:0.8rem;white-space:nowrap}
-    .chip[data-map] svg{display:none}
-    .chip--copy{width:40px;padding:0}
-    .chip--copy span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-    .chip--copy.is-copied svg{display:none}
-    .chip--copy.is-copied::after{content:"\2713";font-size:1rem;line-height:1}
-  }
-  @media(prefers-reduced-motion:reduce){.chip{transition:none}.chip:hover{transform:none}}
 
   /* reveal */
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
@@ -412,7 +404,7 @@
       </div>
 
       <div class="hero__actions">
-        <a class="btn btn--primary" href="#visit">
+        <a class="btn btn--primary" href="#shops">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           <span class="btn-txt" data-es="Cómo llegar">Get directions</span>
         </a>
@@ -612,67 +604,72 @@
       </div>
       <figcaption class="sr" data-es="Un recorrido desde la calle hasta las dos barberías de Ed's. El local 1 está sobre Montopolis Drive, junto al salón de uñas. El local 2 está atrás, a la derecha de la llantera.">A walk from the street to both Ed's shops. Location 1 is on Montopolis Drive, next to the nail salon. Location 2 is out back, to the right of the tire shop.</figcaption>
     </figure>
-    <div class="visit">
-      <div class="visit__card reveal">
-        <h3 data-es="Horario y contacto">Hours &amp; contact</h3>
-        <div class="vrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <div><div class="k" data-es="Direcciones">Addresses</div>
-            <ul class="addr">
-              <li class="shop">
-                <div class="shop__line"><b class="foil">1</b><span>1710 Montopolis Dr, Unit B <em data-es="(sobre la calle)">(on the street)</em></span></div>
-                <div class="shop__acts" role="group" aria-label="Shop 1">
-                  <a class="chip" data-map="apple" href="https://maps.apple.com/?daddr=1710+Montopolis+Dr%2C+Austin%2C+TX+78741&amp;dirflg=d" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Apple Maps</a>
-                  <a class="chip" data-map="google" href="https://www.google.com/maps/dir/?api=1&amp;destination=1710+Montopolis+Dr%2C+Austin%2C+TX+78741" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Google Maps</a>
-                  <button class="chip chip--copy" type="button" data-copy="1710 Montopolis Dr, Unit B, Austin, TX 78741"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="c1" data-es="Copiar">Copy</span><span class="c2" data-es="¡Copiada!">Copied</span></button>
-                </div>
-              </li>
-              <li class="shop">
-                <div class="shop__line"><b class="foil">2</b><span>1708 Montopolis Dr, Unit C <em data-es="(atrás)">(out back)</em></span></div>
-                <div class="shop__acts" role="group" aria-label="Shop 2">
-                  <a class="chip" data-map="apple" href="https://maps.apple.com/?daddr=1708+Montopolis+Dr%2C+Austin%2C+TX+78741&amp;dirflg=d" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Apple Maps</a>
-                  <a class="chip" data-map="google" href="https://www.google.com/maps/dir/?api=1&amp;destination=1708+Montopolis+Dr%2C+Austin%2C+TX+78741" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Google Maps</a>
-                  <button class="chip chip--copy" type="button" data-copy="1708 Montopolis Dr, Unit C, Austin, TX 78741"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span class="c1" data-es="Copiar">Copy</span><span class="c2" data-es="¡Copiada!">Copied</span></button>
-                </div>
-              </li>
-            </ul>
-            <span class="sr" role="status" aria-live="polite" id="copy-status"></span>
-            </div>
+    <div class="shops" id="shops">
+      <article class="shop reveal" aria-labelledby="shop-1-name">
+        <figure class="shop__photo">
+          <img src="img/shop-on-montopolis.webp" width="1400" height="788" loading="lazy" decoding="async" alt="Ed's on Montopolis: a black storefront under a red, white and blue striped awning with the gold Ed's sign, beside an orange taco stand.">
+          <span class="shop__num" aria-hidden="true"><span class="foil">1</span></span>
+        </figure>
+        <div class="shop__body">
+          <span class="shop__k" data-es="Local 1">Location 1</span>
+          <h3 class="shop__name" id="shop-1-name" data-es="Sobre la calle">On the street</h3>
+          <p class="shop__where"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-es="Junto al salón de uñas">Next to the nail salon</span></p>
+          <button class="shop__addr" type="button" data-copy="1710 Montopolis Dr, Unit B, Austin, TX 78741">
+            <span><b>1710 Montopolis Dr, <span style="white-space:nowrap">Unit B</span></b><small>Austin, TX 78741</small></span>
+            <span class="shop__copy c1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span data-es="Copiar">Copy</span></span>
+            <span class="shop__copy c2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-es="Copiada">Copied</span></span>
+          </button>
+          <a class="btn btn--primary shop__go" data-map="google" href="https://www.google.com/maps/dir/?api=1&amp;destination=1710+Montopolis+Dr%2C+Austin%2C+TX+78741" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg><span data-es="Cómo llegar">Get directions</span><span class="app"><span class="app__name">Google Maps</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></a>
+          <p class="shop__alt"><span data-es="o abre en">or open in</span>
+            <a data-map="apple" href="https://maps.apple.com/?daddr=1710+Montopolis+Dr%2C+Austin%2C+TX+78741&amp;dirflg=d" target="_blank" rel="noopener">Apple Maps</a>
+            <a data-map="waze" href="https://waze.com/ul?q=1710%20Montopolis%20Dr%2C%20Austin%2C%20TX%2078741&amp;navigate=yes" target="_blank" rel="noopener">Waze</a>
+          </p>
         </div>
+      </article>
+      <article class="shop reveal" aria-labelledby="shop-2-name">
+        <figure class="shop__photo">
+          <img src="img/shop-out-back.webp" width="1400" height="788" loading="lazy" decoding="async" alt="Ed's out back: a black storefront under a striped awning with the gold Ed's sign and a barber pole, next to the tire shop.">
+          <span class="shop__num" aria-hidden="true"><span class="foil">2</span></span>
+        </figure>
+        <div class="shop__body">
+          <span class="shop__k" data-es="Local 2">Location 2</span>
+          <h3 class="shop__name" id="shop-2-name" data-es="Atrás">Out back</h3>
+          <p class="shop__where"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span data-es="A la derecha de la llantera">Right of the tire shop</span></p>
+          <button class="shop__addr" type="button" data-copy="1708 Montopolis Dr, Unit C, Austin, TX 78741">
+            <span><b>1708 Montopolis Dr, <span style="white-space:nowrap">Unit C</span></b><small>Austin, TX 78741</small></span>
+            <span class="shop__copy c1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span data-es="Copiar">Copy</span></span>
+            <span class="shop__copy c2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span data-es="Copiada">Copied</span></span>
+          </button>
+          <a class="btn btn--primary shop__go" data-map="google" href="https://www.google.com/maps/dir/?api=1&amp;destination=1708+Montopolis+Dr%2C+Austin%2C+TX+78741" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg><span data-es="Cómo llegar">Get directions</span><span class="app"><span class="app__name">Google Maps</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></span></a>
+          <p class="shop__alt"><span data-es="o abre en">or open in</span>
+            <a data-map="apple" href="https://maps.apple.com/?daddr=1708+Montopolis+Dr%2C+Austin%2C+TX+78741&amp;dirflg=d" target="_blank" rel="noopener">Apple Maps</a>
+            <a data-map="waze" href="https://waze.com/ul?q=1708%20Montopolis%20Dr%2C%20Austin%2C%20TX%2078741&amp;navigate=yes" target="_blank" rel="noopener">Waze</a>
+          </p>
+        </div>
+      </article>
+    </div>
+    <span class="sr" role="status" aria-live="polite" id="copy-status"></span>
+    <div class="visit__card contact reveal">
+      <h3 data-es="Horario y contacto">Hours &amp; contact</h3>
+      <div class="vrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div>
+          <div class="k" data-es="Horario · ambos locales">Hours · both shops</div>
+          <ul class="hours">
+            <li><span data-es="Lun &ndash; Sáb">Mon &ndash; Sat</span><b>10am &ndash; 7pm</b></li>
+            <li><span data-es="Domingo">Sunday</span><b>10am &ndash; 5pm</b></li>
+          </ul>
+          <p class="hours__note" data-es="En días festivos, llámanos antes de venir.">On holidays, give us a call before you come by.</p>
+        </div>
+      </div>
+      <div class="contact__call">
         <div class="vrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           <div><div class="k" data-es="Teléfono">Phone</div><div class="v"><a href="tel:+17372471710">(737) 247-1710</a></div></div>
-        </div>
-        <div class="vrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-          <div>
-            <div class="k" data-es="Horario">Hours</div>
-            <ul class="hours">
-              <li><span data-es="Lun &ndash; Jue">Mon &ndash; Thu</span><b>10am &ndash; 7pm</b></li>
-              <li><span data-es="Viernes">Friday</span><b>10am &ndash; 8pm</b></li>
-              <li><span data-es="Sábado">Saturday</span><b>9am &ndash; 8pm</b></li>
-              <li><span data-es="Domingo">Sunday</span><b data-es="Reducido">Reduced</b></li>
-            </ul>
-            <p class="hours__note" data-es="Llámanos para confirmar el horario de domingo y días festivos.">Give us a call to confirm Sunday and holiday hours.</p>
-          </div>
         </div>
         <div class="visit__btns">
           <a class="btn btn--primary" href="tel:+17372471710"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-es="Llama ahora">Call now</span></a>
         </div>
-      </div>
-      <div class="visit__store spots reveal" aria-roledescription="carousel" aria-label="Our two shops">
-        <div class="spots__tabs" role="tablist" aria-label="Choose a shop">
-          <button class="spots__tab" type="button" role="tab" id="spot-tab-1" aria-controls="spot-1" aria-selected="true"><b>1</b><span data-es="En Montopolis">On Montopolis</span><span class="spots__bar"></span></button>
-          <button class="spots__tab" type="button" role="tab" id="spot-tab-2" aria-controls="spot-2" aria-selected="false" tabindex="-1"><b>2</b><span data-es="Atrás">Out back</span><span class="spots__bar"></span></button>
-        </div>
-        <figure class="spots__slide is-on" id="spot-1" role="tabpanel" aria-labelledby="spot-tab-1">
-          <img src="img/shop-on-montopolis.webp" width="1400" height="788" loading="lazy" decoding="async" alt="Ed's on Montopolis: a black storefront under a red, white and blue striped awning with the gold Ed's sign, beside an orange taco stand.">
-          <figcaption class="spots__cap"><span class="k" data-es="Local 1">Location 1</span><span class="v" data-es="Junto al salón de uñas">Next to the nail salon</span></figcaption>
-        </figure>
-        <figure class="spots__slide" id="spot-2" role="tabpanel" aria-labelledby="spot-tab-2" hidden>
-          <img src="img/shop-out-back.webp" width="1400" height="788" loading="lazy" decoding="async" alt="Ed's out back: a black storefront under a striped awning with the gold Ed's sign and a barber pole, next to the tire shop.">
-          <figcaption class="spots__cap"><span class="k" data-es="Local 2">Location 2</span><span class="v" data-es="Atrás, a la derecha de la llantera">Out back, right of the tire shop</span></figcaption>
-        </figure>
       </div>
     </div>
   </div>
@@ -750,13 +747,17 @@
     });
   })();
 
-  /* addresses: Apple Maps first on Apple devices; Copy puts the full address on the clipboard */
+  /* shop cards: Apple devices get Apple Maps as the main button (Google drops to the "or open in" links);
+     tapping an address copies it */
   (function(){
     var ua=navigator.userAgent;
     if(/iPhone|iPad|iPod|Macintosh/.test(ua)&&!/Android/.test(ua))
-      document.querySelectorAll('.shop__acts').forEach(function(g){g.insertBefore(g.querySelector('[data-map="apple"]'),g.firstChild);});
-    else
-      document.querySelectorAll('.shop__acts').forEach(function(g){g.insertBefore(g.querySelector('[data-map="google"]'),g.firstChild);});
+      document.querySelectorAll('.shop').forEach(function(shop){
+        var go=shop.querySelector('.shop__go'),name=go.querySelector('.app__name'),alt=shop.querySelector('.shop__alt [data-map="apple"]');
+        var href=go.href;go.href=alt.href;alt.href=href;
+        name.textContent='Apple Maps';alt.textContent='Google Maps';
+        go.setAttribute('data-map','apple');alt.setAttribute('data-map','google');
+      });
     var status=document.getElementById('copy-status');
     function fallback(text){
       var t=document.createElement('textarea');t.value=text;t.setAttribute('readonly','');
@@ -777,44 +778,6 @@
         },function(){window.prompt(document.documentElement.lang==='es'?'Copia la dirección:':'Copy the address:',text);});
       });
     });
-  })();
-
-  /* two-shop switcher: the timer bar's animationend advances it; a tap or swipe takes over */
-  (function(){
-    var box=document.querySelector('.spots');if(!box)return;
-    var tabs=[].slice.call(box.querySelectorAll('[role="tab"]'));
-    var slides=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'));});
-    var cur=0;
-    slides.forEach(function(s){s.hidden=false;});
-    function show(i,focus){
-      cur=(i+slides.length)%slides.length;
-      tabs.forEach(function(t,k){var on=k===cur;
-        t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;
-        slides[k].classList.toggle('is-on',on);slides[k].setAttribute('aria-hidden',!on);});
-      if(focus)tabs[cur].focus();
-    }
-    function takeOver(i,focus){box.classList.remove('auto');show(i,focus);}
-    tabs.forEach(function(t,k){
-      t.addEventListener('click',function(){takeOver(k);});
-      t.addEventListener('keydown',function(e){
-        if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();takeOver(cur+(e.key==='ArrowRight'?1:-1),true);}
-      });
-    });
-    box.addEventListener('animationend',function(e){
-      if(e.animationName==='spots-timer'&&box.classList.contains('auto'))show(cur+1);
-    });
-    var x0=null;
-    box.addEventListener('pointerdown',function(e){x0=e.clientX;});
-    box.addEventListener('pointerup',function(e){
-      if(x0===null)return;var dx=e.clientX-x0;x0=null;
-      if(Math.abs(dx)>40)takeOver(cur+(dx<0?1:-1));
-    });
-    show(0);
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    box.classList.add('auto');
-    if('IntersectionObserver' in window)new IntersectionObserver(function(en){
-      box.classList.toggle('idle',!en[en.length-1].isIntersecting);
-    },{threshold:0.3}).observe(box);
   })();
 
   /* walk-through: split captions into letters, then wave them in/out on the video's clock */
