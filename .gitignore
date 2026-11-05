@@ -81,3 +81,22 @@ akosi/
 # Other repos checked out inside this folder: never part of handprotocol
 koordi-wl/
 viz3d/
+
+# PrecisionFix is self-hosted on the owner's own accounts since 2026-11-02 (his Supabase, his Netlify).
+# Its code lives in HandProtocol/precisionfix-mobile; the local copy and HAND-DB migrations stay out of this repo.
+clients/precisionfix/
+command/supabase/migrations/*precisionfix*
+
+# Large media and design work kept local (the repo is public)
+mystichearts/design/
+mystichearts/*.mp4
+mystichearts/*.jpeg
+threehandshealing/*.jpeg
+kc-collective/*.mp4
+kc-collective/*.zip
+kc-collective/*.pdf
+kc-collective/scroll-vid/
+kc-collective/KC_Collective_Visual_Reference_Frames/
+omnione/
+world3d-assets/
+*.tsbuildinfo
