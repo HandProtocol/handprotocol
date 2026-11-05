@@ -11,6 +11,7 @@ import {
   Mail,
   MapPin,
   Radio,
+  PhoneCall,
   Settings,
   UsersRound,
 } from "lucide-react";
@@ -36,6 +37,7 @@ export const navItems: NavItem[] = [
   { label: "Funders", href: "/funders", icon: Users, meta: "Network" },
   { label: "Inbox", href: "/inbox", icon: Inbox, meta: "Capture" },
   { label: "Projects", href: "/projects", icon: Building2, meta: "Work" },
+  { label: "Call desk", href: "/calls", icon: PhoneCall, meta: "Voice" },
   { label: "Reciprocates", href: "/reciprocates", icon: UsersRound, meta: "Groups" },
   { label: "Feedback", href: "/feedback", icon: MapPin, meta: "Triage" },
   { label: "Site activity", href: "/public", icon: Radio, meta: "Signals" },
