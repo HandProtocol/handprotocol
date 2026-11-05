@@ -1,0 +1,11 @@
+{
+  "name": "kc-stars",
+  "version": "0.1.0",
+  "private": true,
+  "description": "KC Collective star guestbook: leave a message, get a star on the shared sky (optionally designed by Claude). Netlify Functions + Supabase + Resend.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "dev": "node scripts/dev.mjs"
+  }
+}
