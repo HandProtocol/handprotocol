@@ -74,3 +74,10 @@ threehandshealing/*.zip
 # koordi (ex koord) lives in its own private repo (HandProtocol/koordi, records 0014, 0022); koord is a symlink to it
 koordi/
 koord
+
+# Akosi spec pack (partner names, event details): private, lives in HandProtocol/koordi
+akosi/
+
+# Other repos checked out inside this folder: never part of handprotocol
+koordi-wl/
+viz3d/
