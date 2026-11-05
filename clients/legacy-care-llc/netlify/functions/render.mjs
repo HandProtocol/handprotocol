@@ -11,7 +11,8 @@ export default async (req) => {
   const origin = `${url.protocol}//${url.host}`;
   try {
     const { content, media } = await loadSite();
-    const html = renderPage({ content, media, origin });
+    // `url` lets a pack honour ?theme=<id> previews; the CDN varies on it.
+    const html = renderPage({ content, media, origin, url });
     return new Response(html, {
       status: 200,
       headers: {
@@ -19,6 +20,7 @@ export default async (req) => {
         'Cache-Control': 'public, max-age=0, must-revalidate',
         'Netlify-CDN-Cache-Control': 'public, s-maxage=600, stale-while-revalidate=86400, durable',
         'Netlify-Cache-Tag': site.cacheTag,
+        'Netlify-Vary': 'query=theme',
       },
     });
   } catch (err) {

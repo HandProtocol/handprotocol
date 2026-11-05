@@ -39,3 +39,10 @@ test('mix + isDark behave', () => {
   assert.equal(isDark('#082625'), true);
   assert.equal(isDark('#f4f5f0'), false);
 });
+
+test('the looks template and preview overlay render exactly when the config has themes', () => {
+  const html = renderAdminPage();
+  assert.equal(html.includes('id="looks-tpl"'), Boolean(config.themes));
+  assert.equal(html.includes('id="preview"'), Boolean(config.themes));
+  assert.equal(html.includes('tap <strong>Publish</strong> to save your progress'), false);
+});
