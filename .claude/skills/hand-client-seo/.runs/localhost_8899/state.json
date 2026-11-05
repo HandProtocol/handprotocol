@@ -1,0 +1,65 @@
+{
+  "slug": null,
+  "createdAt": "2026-10-27T15:21:52.991Z",
+  "facts": {},
+  "otherUrls": [],
+  "stages": {
+    "baseline": {
+      "status": "todo"
+    },
+    "google": {
+      "items": {
+        "search-console": "todo",
+        "business-profile": "todo",
+        "review-link": "todo",
+        "bing": "todo",
+        "analytics": "todo"
+      }
+    },
+    "cutover": {
+      "status": "todo"
+    }
+  },
+  "audits": [
+    {
+      "id": "20261027-152159",
+      "url": "http://localhost:8899/",
+      "local": false,
+      "score": 79,
+      "band": "C",
+      "gate": false,
+      "fail": 6,
+      "warn": 8,
+      "info": 11,
+      "psi": true,
+      "lab": true
+    },
+    {
+      "id": "20261027-152223",
+      "url": "http://localhost:8899/",
+      "local": false,
+      "score": 79,
+      "band": "C",
+      "gate": false,
+      "fail": 6,
+      "warn": 6,
+      "info": 9,
+      "psi": true,
+      "lab": false
+    },
+    {
+      "id": "20261027-152228",
+      "url": "http://localhost:8899/",
+      "local": false,
+      "score": 79,
+      "band": "C",
+      "gate": false,
+      "fail": 6,
+      "warn": 6,
+      "info": 9,
+      "psi": true,
+      "lab": false
+    }
+  ],
+  "updatedAt": "2026-10-27T15:22:28.771Z"
+}

@@ -1,0 +1,18 @@
+--- a/web/threehandshealing/index.html
++++ b/web/threehandshealing/index.html
+@@ -6,13 +6,13 @@
+   <title>Three Hands Healing — EFT, energy healing &amp; bodywork with Maria · Texas</title>
+   <meta name="description" content="Three Hands Healing — EFT, energy healing, bodywork, Qi Gong and Family Constellations with Maria. Online or in person in Texas.">
+   <meta name="theme-color" content="#082625">
+-  <link rel="canonical" href="https://handprotocol.org/threehandshealing/">
++  <link rel="canonical" href="https://three-hands-healing.netlify.app/">
+   <link rel="icon" href="assets/brand/thh-icon-gold.svg" type="image/svg+xml">
+   <meta property="og:type" content="website">
+   <meta property="og:site_name" content="Three Hands Healing">
+   <meta property="og:title" content="Three Hands Healing — Feel good in your body, at peace in your mind, aligned in your life.">
+   <meta property="og:description" content="EFT/Tapping, Candace Silvers Energy Healing, bodywork, Qi Gong and Systemic Family Constellations with Maria. Online or in person in Texas.">
+-  <meta property="og:url" content="https://handprotocol.org/threehandshealing/">
++  <meta property="og:url" content="https://three-hands-healing.netlify.app/">
+   <meta property="og:image" content="https://handprotocol.org/threehandshealing/assets/photos/maria-arch-laughing.jpg">
+   <meta property="og:image:alt" content="Maria laughing beneath a limestone archway">
+   <meta name="twitter:card" content="summary_large_image">

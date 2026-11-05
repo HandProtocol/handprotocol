@@ -1,0 +1,30 @@
+/* Booking calendar widget. Sits inside the site's own .form / .field /
+   .choice / .btn styles; everything here is the calendar grid, the time
+   pills and the service cards, on the site's CSS variables. */
+.booking__choices{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.5rem}
+.booking__choice{justify-content:flex-start;text-align:left}
+.booking__choice input{flex:none}
+.booking__step[data-step=day]{position:relative}
+.cal__head{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.6rem}
+.cal__title{font-family:var(--font-display);font-size:1.1rem}
+.cal__nav{width:38px;height:38px;display:inline-grid;place-items:center;border:1px solid var(--line-2,var(--line));border-radius:var(--r,8px);background:transparent;color:var(--ink);font:inherit;font-size:1.3rem;line-height:1;cursor:pointer}
+.cal__nav[disabled]{opacity:.3;cursor:default}
+.cal__grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:.3rem}
+.cal__wd{text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3,var(--ink));padding:.2rem 0}
+.cal__day{aspect-ratio:1;min-height:40px;display:grid;place-items:center;border:1px solid transparent;border-radius:var(--r,8px);background:transparent;color:var(--ink-3,var(--ink));font:inherit;font-weight:600;font-size:.95rem;cursor:default;position:relative;transition:background .2s,border-color .2s,color .2s}
+.cal__day.is-open{color:var(--ink);background:var(--bg,transparent);border-color:var(--line-2,var(--line));cursor:pointer}
+.cal__day.is-open:hover{border-color:var(--accent)}
+.cal__day.is-selected,.cal__day.is-selected:hover{background:var(--accent);color:var(--on-accent,#fff);border-color:var(--accent)}
+.cal__day.is-today::after{content:'';position:absolute;bottom:5px;left:50%;width:4px;height:4px;border-radius:50%;background:currentColor;transform:translateX(-50%)}
+.cal__day.is-loading{opacity:.5}
+.booking__times{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:.5rem}
+.booking__times:empty{display:none}
+.booking__time{padding:.85rem .9rem;border:1px solid var(--line-2,var(--line));border-radius:var(--r,8px);background:var(--bg,transparent);color:var(--ink);font:inherit;font-weight:600;font-size:.95rem;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.booking__time:hover{border-color:var(--accent)}
+.booking__time.is-selected{background:var(--accent);color:var(--on-accent,#fff);border-color:var(--accent)}
+.booking__hint{font-size:.9rem;color:var(--ink-3,var(--ink));font-weight:600}
+.booking__intake{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.booking .field--wide{grid-column:1/-1}
+.booking__summary{font-weight:600}
+.booking__manage{text-decoration:underline;text-underline-offset:3px}
+@media (max-width:600px){.cal__grid{gap:.2rem}.cal__day{min-height:36px;font-size:.9rem}.booking__times{grid-template-columns:repeat(2,minmax(0,1fr))}}

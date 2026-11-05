@@ -1,0 +1,824 @@
+{
+  "tool": "hand-client-seo",
+  "version": "1.0.0",
+  "target": {
+    "url": "https://three-hands-healing.netlify.app/",
+    "label": "three-hands-healing",
+    "local": false,
+    "otherUrls": [
+      "https://handprotocol.org/threehandshealing/"
+    ]
+  },
+  "startedAt": "2026-10-01T23:18:21.935Z",
+  "finishedAt": "2026-10-01T23:18:26.755Z",
+  "options": {
+    "maxPages": 25,
+    "external": true,
+    "psi": false,
+    "lab": false
+  },
+  "facts": {
+    "name": "Three Hands Healing",
+    "areaServed": [
+      "Texas"
+    ]
+  },
+  "site": {
+    "start": "https://three-hands-healing.netlify.app/",
+    "origin": "https://three-hands-healing.netlify.app",
+    "host": "three-hands-healing.netlify.app",
+    "scope": "/",
+    "local": false,
+    "robots": {
+      "url": "https://three-hands-healing.netlify.app/robots.txt",
+      "status": 200,
+      "sitemaps": [
+        "https://three-hands-healing.netlify.app/sitemap.xml"
+      ],
+      "text": "User-agent: *\nAllow: /\nDisallow: /admin/\nDisallow: /api/\n\nSitemap: https://three-hands-healing.netlify.app/sitemap.xml\n"
+    },
+    "sitemaps": [
+      {
+        "url": "https://three-hands-healing.netlify.app/sitemap.xml",
+        "status": 200,
+        "kind": "urlset",
+        "urls": 1,
+        "problems": []
+      }
+    ],
+    "variants": [
+      {
+        "label": "http",
+        "url": "http://three-hands-healing.netlify.app/",
+        "status": 200,
+        "finalUrl": "https://three-hands-healing.netlify.app/",
+        "hops": 1,
+        "canonical": "https://three-hands-healing.netlify.app/"
+      },
+      {
+        "label": "index.html",
+        "url": "https://three-hands-healing.netlify.app/index.html",
+        "status": 200,
+        "finalUrl": "https://three-hands-healing.netlify.app/",
+        "hops": 1,
+        "canonical": "https://three-hands-healing.netlify.app/"
+      }
+    ],
+    "notFound": {
+      "url": "https://three-hands-healing.netlify.app/hand-seo-missing-muq5np2z",
+      "status": 404
+    },
+    "redirects": [],
+    "pagesCrawled": 1,
+    "skippedForLimit": 0,
+    "linksChecked": 3,
+    "imagesMeasured": 7,
+    "dropped": {
+      "internal": 0,
+      "external": 0,
+      "images": 0
+    }
+  },
+  "pages": [
+    {
+      "url": "https://three-hands-healing.netlify.app/",
+      "requested": "https://three-hands-healing.netlify.app/",
+      "status": 200,
+      "depth": 0,
+      "inSitemap": true,
+      "bytes": 24456,
+      "ms": 140,
+      "contentType": "text/html; charset=utf-8",
+      "title": "EFT / Tapping and Energy Healing in Texas | Three Hands Healing",
+      "description": "EFT / Tapping sessions, energy healing, bodywork, Qi Gong and Family Constellations with Maria at Three Hands Healing. Online or in person in Texas.",
+      "canonical": "https://three-hands-healing.netlify.app/",
+      "indexable": true,
+      "whyNot": [],
+      "h1": [
+        "Feel good in your body, at peace in your mind, aligned in your life."
+      ],
+      "words": 704,
+      "lang": "en",
+      "ogImage": "https://three-hands-healing.netlify.app/.netlify/images?url=%2Fimg%2Fphotos%2Fmaria-arch-laughing.jpg&w=1200&h=630&fit=cover&fm=jpg&q=80",
+      "jsonLdTypes": [
+        "WebSite",
+        "HealthAndBeautyBusiness",
+        "Place"
+      ],
+      "images": 4,
+      "links": 12
+    }
+  ],
+  "findings": [
+    {
+      "id": "duplicate-hosts",
+      "category": "indexability",
+      "title": "no second indexable copy of the site on another address",
+      "gate": true,
+      "who": "hand",
+      "severity": "fail",
+      "message": "handprotocol.org/threehandshealing/ is a second, indexable copy of this site (canonical: https://handprotocol.org/threehandshealing/)",
+      "url": "https://handprotocol.org/threehandshealing/",
+      "fix": "Point its canonical at https://three-hands-healing.netlify.app/, or 301 it here."
+    },
+    {
+      "id": "local-contact-path",
+      "category": "local",
+      "title": "a visitor can reach the business",
+      "gate": true,
+      "who": "owner",
+      "url": "https://three-hands-healing.netlify.app/",
+      "severity": "fail",
+      "message": "there is no way to contact or book: no phone link, email link, form or booking link anywhere on the site (the \"Book a session\" button only scrolls the page)",
+      "fix": "Get one real contact route from the owner (a booking link, a phone number, or an email) and wire the main button to it."
+    },
+    {
+      "id": "unfinished-copy",
+      "category": "content",
+      "title": "the copy does not say the page is unfinished",
+      "gate": false,
+      "who": "owner",
+      "url": "https://three-hands-healing.netlify.app/",
+      "severity": "warn",
+      "message": "the page tells visitors it is not finished: \"…· Sessions in Texas Booking and contact details will be added at launch getting healthier and happier Three Hands…\"",
+      "fix": "Get the missing detail from the owner (booking link, phone, prices) and replace the line."
+    },
+    {
+      "id": "local-phone",
+      "category": "local",
+      "title": "the phone number is on the page and tappable",
+      "gate": false,
+      "who": "owner",
+      "url": "https://three-hands-healing.netlify.app/",
+      "severity": "warn",
+      "message": "no phone number on the site",
+      "fix": "Ask the owner whether they take calls or texts. If yes, add the number as a tel: link; if no, leave it out on purpose."
+    },
+    {
+      "id": "jsonld-business",
+      "category": "structured-data",
+      "title": "the LocalBusiness data is complete and true",
+      "gate": false,
+      "who": "owner",
+      "url": "https://three-hands-healing.netlify.app/",
+      "severity": "warn",
+      "message": "HealthAndBeautyBusiness at @graph[1]: \"telephone\" is missing",
+      "fix": "Confirm the fact with the owner, then add it. Never fill it with a guess."
+    },
+    {
+      "id": "ai-crawlers",
+      "category": "crawlability",
+      "title": "AI search crawlers are not shut out by accident",
+      "gate": false,
+      "who": "hand",
+      "severity": "info",
+      "message": "no AI-crawler rules in robots.txt: every crawler is allowed by the default group"
+    },
+    {
+      "id": "local-reviews",
+      "category": "local",
+      "title": "the site connects to the business's profiles",
+      "gate": false,
+      "who": "owner",
+      "url": "https://three-hands-healing.netlify.app/",
+      "severity": "info",
+      "message": "no link to a Google Business Profile or a review page",
+      "fix": "Once the Business Profile is verified, link to it (and to its \"leave a review\" link) from the site."
+    },
+    {
+      "id": "title-length",
+      "category": "on-page",
+      "title": "the title fits in a search result",
+      "gate": false,
+      "who": "hand",
+      "url": "https://three-hands-healing.netlify.app/",
+      "severity": "info",
+      "message": "the title is 63 characters and may be cut off in results (\"EFT / Tapping and Energy Healing in Texas | Three Hands Healing\")",
+      "fix": "Trim toward 60 characters if the cut would hide something important."
+    },
+    {
+      "id": "jsonld-business",
+      "category": "structured-data",
+      "title": "the LocalBusiness data is complete and true",
+      "gate": false,
+      "who": "owner",
+      "url": "https://three-hands-healing.netlify.app/",
+      "severity": "info",
+      "message": "HealthAndBeautyBusiness at @graph[1]: no \"address\". Fine for a service-area business that hides its address; add at least addressLocality + addressRegion + addressCountry once the owner confirms the city",
+      "fix": "Confirm the fact with the owner, then add it. Never fill it with a guess."
+    },
+    {
+      "id": "jsonld-business",
+      "category": "structured-data",
+      "title": "the LocalBusiness data is complete and true",
+      "gate": false,
+      "who": "owner",
+      "url": "https://three-hands-healing.netlify.app/",
+      "severity": "info",
+      "message": "HealthAndBeautyBusiness at @graph[1]: no opening hours (openingHoursSpecification). Add them once the owner confirms hours; by-appointment businesses can skip this",
+      "fix": "Confirm the fact with the owner, then add it. Never fill it with a guess."
+    },
+    {
+      "id": "jsonld-business",
+      "category": "structured-data",
+      "title": "the LocalBusiness data is complete and true",
+      "gate": false,
+      "who": "owner",
+      "url": "https://three-hands-healing.netlify.app/",
+      "severity": "info",
+      "message": "HealthAndBeautyBusiness at @graph[1]: no \"priceRange\"",
+      "fix": "Confirm the fact with the owner, then add it. Never fill it with a guess."
+    },
+    {
+      "id": "jsonld-business",
+      "category": "structured-data",
+      "title": "the LocalBusiness data is complete and true",
+      "gate": false,
+      "who": "owner",
+      "url": "https://three-hands-healing.netlify.app/",
+      "severity": "info",
+      "message": "HealthAndBeautyBusiness at @graph[1]: no \"sameAs\" links (Business Profile, Instagram, Facebook). Add them once the profiles exist",
+      "fix": "Confirm the fact with the owner, then add it. Never fill it with a guess."
+    }
+  ],
+  "passed": [
+    {
+      "id": "robots-txt-reachable",
+      "category": "crawlability",
+      "title": "robots.txt answers",
+      "gate": false
+    },
+    {
+      "id": "robots-txt-valid",
+      "category": "crawlability",
+      "title": "robots.txt parses cleanly",
+      "gate": false
+    },
+    {
+      "id": "robots-txt-blocks-site",
+      "category": "crawlability",
+      "title": "robots.txt lets search engines in",
+      "gate": true
+    },
+    {
+      "id": "robots-txt-blocks-pages",
+      "category": "crawlability",
+      "title": "no real page is blocked by robots.txt",
+      "gate": false
+    },
+    {
+      "id": "robots-txt-blocks-assets",
+      "category": "crawlability",
+      "title": "CSS and JavaScript are crawlable",
+      "gate": false
+    },
+    {
+      "id": "robots-txt-sitemap-line",
+      "category": "crawlability",
+      "title": "robots.txt names the sitemap",
+      "gate": false
+    },
+    {
+      "id": "sitemap-exists",
+      "category": "crawlability",
+      "title": "a sitemap exists",
+      "gate": false
+    },
+    {
+      "id": "sitemap-valid",
+      "category": "crawlability",
+      "title": "the sitemap is valid",
+      "gate": false
+    },
+    {
+      "id": "sitemap-urls",
+      "category": "crawlability",
+      "title": "every sitemap URL is a live, indexable, canonical page",
+      "gate": true
+    },
+    {
+      "id": "sitemap-coverage",
+      "category": "crawlability",
+      "title": "the sitemap lists every indexable page",
+      "gate": false
+    },
+    {
+      "id": "sitemap-lastmod",
+      "category": "crawlability",
+      "title": "sitemap dates are present and plausible",
+      "gate": false
+    },
+    {
+      "id": "https-redirect",
+      "category": "security",
+      "title": "http:// sends visitors to https://",
+      "gate": true
+    },
+    {
+      "id": "index-html-duplicate",
+      "category": "indexability",
+      "title": "/index.html is not a second copy of the home page",
+      "gate": false
+    },
+    {
+      "id": "not-found-status",
+      "category": "crawlability",
+      "title": "a missing page answers 404",
+      "gate": true
+    },
+    {
+      "id": "page-status",
+      "category": "crawlability",
+      "title": "every linked page answers 200",
+      "gate": true
+    },
+    {
+      "id": "redirect-internal",
+      "category": "links",
+      "title": "internal links point at final URLs",
+      "gate": false
+    },
+    {
+      "id": "orphan-pages",
+      "category": "links",
+      "title": "every sitemap page is linked from the site",
+      "gate": false
+    },
+    {
+      "id": "crawl-depth",
+      "category": "links",
+      "title": "pages are within three clicks of the home page",
+      "gate": false
+    },
+    {
+      "id": "noindex",
+      "category": "indexability",
+      "title": "pages meant for search are not marked noindex",
+      "gate": true
+    },
+    {
+      "id": "snippet-limits",
+      "category": "indexability",
+      "title": "search engines may show a snippet",
+      "gate": false
+    },
+    {
+      "id": "canonical-present",
+      "category": "indexability",
+      "title": "the page names its canonical URL",
+      "gate": false
+    },
+    {
+      "id": "canonical-valid",
+      "category": "indexability",
+      "title": "the canonical tag is well formed",
+      "gate": true
+    },
+    {
+      "id": "canonical-target",
+      "category": "indexability",
+      "title": "the canonical points at this page (or a live one)",
+      "gate": false
+    },
+    {
+      "id": "head-broken",
+      "category": "indexability",
+      "title": "nothing ends <head> early",
+      "gate": true
+    },
+    {
+      "id": "title-present",
+      "category": "on-page",
+      "title": "the page has a title",
+      "gate": true
+    },
+    {
+      "id": "title-brand",
+      "category": "on-page",
+      "title": "the title carries the business name",
+      "gate": false
+    },
+    {
+      "id": "url-twins",
+      "category": "indexability",
+      "title": "each page answers at one address",
+      "gate": false
+    },
+    {
+      "id": "title-duplicate",
+      "category": "on-page",
+      "title": "titles are unique across pages",
+      "gate": false
+    },
+    {
+      "id": "description-present",
+      "category": "on-page",
+      "title": "the page has a meta description",
+      "gate": false
+    },
+    {
+      "id": "description-length",
+      "category": "on-page",
+      "title": "the description fits in a search result",
+      "gate": false
+    },
+    {
+      "id": "description-duplicate",
+      "category": "on-page",
+      "title": "descriptions are unique across pages",
+      "gate": false
+    },
+    {
+      "id": "h1",
+      "category": "on-page",
+      "title": "the page has one main heading",
+      "gate": false
+    },
+    {
+      "id": "heading-order",
+      "category": "on-page",
+      "title": "headings step down one level at a time",
+      "gate": false
+    },
+    {
+      "id": "lang",
+      "category": "on-page",
+      "title": "the page declares its language",
+      "gate": false
+    },
+    {
+      "id": "charset",
+      "category": "on-page",
+      "title": "the character set is declared",
+      "gate": false
+    },
+    {
+      "id": "viewport",
+      "category": "mobile",
+      "title": "the page is set up for phones",
+      "gate": true
+    },
+    {
+      "id": "content-thin",
+      "category": "content",
+      "title": "the page has enough to read",
+      "gate": false
+    },
+    {
+      "id": "placeholder-text",
+      "category": "content",
+      "title": "no placeholder copy is live",
+      "gate": true
+    },
+    {
+      "id": "jsonld-parse",
+      "category": "structured-data",
+      "title": "structured data parses and holds no placeholders",
+      "gate": true
+    },
+    {
+      "id": "jsonld-present",
+      "category": "structured-data",
+      "title": "the home page describes the business in structured data",
+      "gate": false
+    },
+    {
+      "id": "jsonld-other",
+      "category": "structured-data",
+      "title": "other structured data types are well formed",
+      "gate": false
+    },
+    {
+      "id": "jsonld-site-name",
+      "category": "structured-data",
+      "title": "the home page names the site for search results",
+      "gate": false
+    },
+    {
+      "id": "jsonld-host",
+      "category": "structured-data",
+      "title": "structured data points at this site",
+      "gate": false
+    },
+    {
+      "id": "jsonld-matches-page",
+      "category": "structured-data",
+      "title": "structured data matches what the page shows",
+      "gate": false
+    },
+    {
+      "id": "og-basics",
+      "category": "social",
+      "title": "the page has a link preview (Open Graph)",
+      "gate": false
+    },
+    {
+      "id": "og-image",
+      "category": "social",
+      "title": "the share image loads and has the right shape",
+      "gate": false
+    },
+    {
+      "id": "og-url",
+      "category": "social",
+      "title": "og:url matches the canonical",
+      "gate": false
+    },
+    {
+      "id": "og-extras",
+      "category": "social",
+      "title": "the link preview is complete",
+      "gate": false
+    },
+    {
+      "id": "favicon",
+      "category": "on-page",
+      "title": "the site has an icon search results can show",
+      "gate": false
+    },
+    {
+      "id": "links-broken-internal",
+      "category": "links",
+      "title": "no internal link is broken",
+      "gate": true
+    },
+    {
+      "id": "links-broken-external",
+      "category": "links",
+      "title": "no outbound link is dead",
+      "gate": false
+    },
+    {
+      "id": "links-fragments",
+      "category": "links",
+      "title": "in-page links land on something",
+      "gate": false
+    },
+    {
+      "id": "links-crawlable",
+      "category": "links",
+      "title": "links are real links",
+      "gate": false
+    },
+    {
+      "id": "links-names",
+      "category": "links",
+      "title": "every link says where it goes",
+      "gate": false
+    },
+    {
+      "id": "links-contact-format",
+      "category": "links",
+      "title": "phone and email links are well formed",
+      "gate": false
+    },
+    {
+      "id": "links-attributes",
+      "category": "links",
+      "title": "link attributes do not work against the site",
+      "gate": false
+    },
+    {
+      "id": "img-alt",
+      "category": "images",
+      "title": "photos have alt text",
+      "gate": false
+    },
+    {
+      "id": "img-dimensions",
+      "category": "images",
+      "title": "images reserve their space",
+      "gate": false
+    },
+    {
+      "id": "img-broken",
+      "category": "images",
+      "title": "every image loads",
+      "gate": true
+    },
+    {
+      "id": "img-weight",
+      "category": "images",
+      "title": "photos are not oversized",
+      "gate": false
+    },
+    {
+      "id": "img-lcp",
+      "category": "performance",
+      "title": "the first big image loads with priority",
+      "gate": false
+    },
+    {
+      "id": "html-size",
+      "category": "performance",
+      "title": "the HTML is a reasonable size",
+      "gate": false
+    },
+    {
+      "id": "compression",
+      "category": "performance",
+      "title": "the page is served compressed",
+      "gate": false
+    },
+    {
+      "id": "response-time",
+      "category": "performance",
+      "title": "the server answers quickly",
+      "gate": false
+    },
+    {
+      "id": "render-blocking",
+      "category": "performance",
+      "title": "nothing in <head> holds up the first paint needlessly",
+      "gate": false
+    },
+    {
+      "id": "fonts",
+      "category": "performance",
+      "title": "web fonts load without hiding the text",
+      "gate": false
+    },
+    {
+      "id": "third-parties",
+      "category": "performance",
+      "title": "third-party scripts are kept in check",
+      "gate": false
+    },
+    {
+      "id": "mixed-content",
+      "category": "security",
+      "title": "an https page loads nothing over http",
+      "gate": true
+    },
+    {
+      "id": "security-headers",
+      "category": "security",
+      "title": "baseline security headers are present",
+      "gate": false
+    },
+    {
+      "id": "local-area",
+      "category": "local",
+      "title": "the page says where the business works",
+      "gate": false
+    },
+    {
+      "id": "demo-leftovers",
+      "category": "content",
+      "title": "nothing from the demo or the host is left on the page",
+      "gate": true
+    },
+    {
+      "id": "copyright-year",
+      "category": "content",
+      "title": "the footer year is current",
+      "gate": false
+    },
+    {
+      "id": "hreflang",
+      "category": "i18n",
+      "title": "language alternates are valid",
+      "gate": false
+    },
+    {
+      "id": "bilingual-toggle",
+      "category": "i18n",
+      "title": "a second language is reachable by search engines",
+      "gate": false
+    }
+  ],
+  "skipped": [
+    {
+      "id": "host-twin",
+      "category": "indexability",
+      "title": "www and the bare domain lead to one site",
+      "reason": "not a registrable domain (a subdomain has no www twin)"
+    },
+    {
+      "id": "psi-scores",
+      "category": "performance",
+      "title": "PageSpeed Insights scores",
+      "reason": "PageSpeed was not run (add --psi)"
+    },
+    {
+      "id": "web-vitals",
+      "category": "performance",
+      "title": "Core Web Vitals are in the good range",
+      "reason": "PageSpeed was not run (add --psi)"
+    },
+    {
+      "id": "lab-mobile",
+      "category": "mobile",
+      "title": "the page works at phone width",
+      "reason": "the browser lab was not run (add --lab)"
+    }
+  ],
+  "score": {
+    "total": 92,
+    "band": "A",
+    "byCategory": {
+      "crawlability": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 1
+      },
+      "indexability": {
+        "score": 75,
+        "fails": 1,
+        "warns": 0,
+        "infos": 0
+      },
+      "on-page": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 1
+      },
+      "structured-data": {
+        "score": 92,
+        "fails": 0,
+        "warns": 1,
+        "infos": 4
+      },
+      "social": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 0
+      },
+      "links": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 0
+      },
+      "images": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 0
+      },
+      "performance": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 0
+      },
+      "mobile": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 0
+      },
+      "security": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 0
+      },
+      "local": {
+        "score": 67,
+        "fails": 1,
+        "warns": 1,
+        "infos": 1
+      },
+      "i18n": {
+        "score": 100,
+        "fails": 0,
+        "warns": 0,
+        "infos": 0
+      },
+      "content": {
+        "score": 92,
+        "fails": 0,
+        "warns": 1,
+        "infos": 0
+      }
+    },
+    "gate": {
+      "pass": false,
+      "blocking": [
+        {
+          "id": "duplicate-hosts",
+          "message": "handprotocol.org/threehandshealing/ is a second, indexable copy of this site (canonical: https://handprotocol.org/threehandshealing/)",
+          "url": "https://handprotocol.org/threehandshealing/",
+          "who": "hand"
+        },
+        {
+          "id": "local-contact-path",
+          "message": "there is no way to contact or book: no phone link, email link, form or booking link anywhere on the site (the \"Book a session\" button only scrolls the page)",
+          "url": "https://three-hands-healing.netlify.app/",
+          "who": "owner"
+        }
+      ]
+    },
+    "skippedCount": 4
+  },
+  "psi": null,
+  "lab": null,
+  "factSources": {
+    "name": "config",
+    "areaServed": "config"
+  }
+}

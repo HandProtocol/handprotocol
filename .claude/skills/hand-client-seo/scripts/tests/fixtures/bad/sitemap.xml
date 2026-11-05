@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://bad.test/</loc></url>
+<url><loc>https://bad.test/gone</loc></url>
+<url><loc>https://elsewhere.test/page</loc></url>
+</urlset>

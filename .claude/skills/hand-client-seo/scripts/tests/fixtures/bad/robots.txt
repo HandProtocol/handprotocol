@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /about
+Crawl-delay: 10
+Nonsense line here

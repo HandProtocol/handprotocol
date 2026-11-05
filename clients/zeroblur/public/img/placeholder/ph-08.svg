@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200" role="img" aria-label="PLACEHOLDER 08">
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0812"/>
+      <stop offset="1" stop-color="#150f26"/>
+    </linearGradient>
+    <linearGradient id="streak" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b48cff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#b48cff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#b48cff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="blur0" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="108"/></filter>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="60"/></filter>
+    <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.12"/></feComponentTransfer></filter>
+  </defs>
+  <rect width="1200" height="1200" fill="url(#base)"/>
+  <g>
+    <ellipse cx="548" cy="240" rx="498" ry="475" transform="rotate(18 548 240)" fill="#b48cff" opacity="0.50" filter="url(#blur0)"/>
+    <ellipse cx="947" cy="689" rx="612" ry="762" transform="rotate(13 947 689)" fill="#b48cff" opacity="0.73" filter="url(#blur1)"/>
+    <ellipse cx="662" cy="265" rx="334" ry="239" transform="rotate(167 662 265)" fill="#5a1fd6" opacity="0.53" filter="url(#blur0)"/>
+    <ellipse cx="476" cy="715" rx="489" ry="599" transform="rotate(46 476 715)" fill="#7a2cf0" opacity="0.42" filter="url(#blur1)"/>
+  </g>
+  <rect x="772" y="0" width="96" height="1200" fill="url(#streak)" transform="skewX(-18)"/>
+  <rect width="1200" height="1200" filter="url(#grain)" opacity="0.5"/>
+  <g fill="none" stroke="#e6d9ff" stroke-opacity="0.55" stroke-width="5">
+    <circle cx="1008" cy="1008" r="132"/>
+    <path d="M1008 912.96 L1103.04 1008 L1008 1103.04 L912.96 1008 Z"/>
+    <circle cx="1008" cy="1008" r="29" fill="#e6d9ff" stroke="none"/>
+  </g>
+  <text x="60" y="1140" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="29" letter-spacing="9" fill="#e6d9ff" fill-opacity="0.6">PLACEHOLDER 08</text>
+</svg>
