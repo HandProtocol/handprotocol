@@ -1,4 +1,4 @@
-// Forwards mail sent to chosen @handprotocol.org addresses to a real inbox.
+// Forwards mail sent to chosen @handprotocol.org and @kohsi.net addresses to a real inbox.
 //
 // handprotocol.org receives mail through Resend (MX → Resend inbound). For each received email
 // Resend calls this function (webhook event `email.received`, signed with Svix). The function
@@ -17,7 +17,9 @@
 
 const crypto = require('crypto');
 
-const SOURCE_DOMAIN = 'handprotocol.org';
+// Domains whose mail reaches this function (MX → Resend inbound, receiving on in HAND's Resend).
+const SOURCE_DOMAINS = ['handprotocol.org', 'kohsi.net'];
+const isOurs = (address) => SOURCE_DOMAINS.some((d) => address.endsWith('@' + d));
 const DEFAULT_FORWARD_FROM = 'HAND Protocol <reachout@handprotocol.org>';
 const SIGNATURE_TOLERANCE_SECONDS = 5 * 60;
 const MAX_RAW_BYTES = 30 * 1024 * 1024;
@@ -65,15 +67,15 @@ function normalizeAddress(address) {
 }
 
 // "a@handprotocol.org=x@y.com,z@w.com; b@handprotocol.org=q@r.com" → Map(a → [x, z], b → [q]).
-// Entries that are not a handprotocol.org address with at least one valid destination are dropped.
+// Entries that are not an address on one of SOURCE_DOMAINS with at least one valid destination are dropped.
 function parseRoutes(text) {
   const routes = new Map();
   for (const entry of String(text || '').split(/[;\n]/)) {
     const [left, right] = entry.split('=');
     if (!left || !right) continue;
     const source = normalizeAddress(left);
-    if (!source.endsWith('@' + SOURCE_DOMAIN)) continue;
-    const targets = right.split(',').map(normalizeAddress).filter((a) => EMAIL_RE.test(a) && !a.endsWith('@' + SOURCE_DOMAIN));
+    if (!isOurs(source)) continue;
+    const targets = right.split(',').map(normalizeAddress).filter((a) => EMAIL_RE.test(a) && !isOurs(a));
     if (targets.length) routes.set(source, [...new Set([...(routes.get(source) || []), ...targets])]);
   }
   return routes;
