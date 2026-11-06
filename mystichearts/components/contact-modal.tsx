@@ -3,12 +3,12 @@
 import { ArrowUpRight, CalendarDays, Feather, Footprints, Sparkles } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
 import { WHATS_ON } from "./copy";
-import { KOORDI_KEY, KOORDI_URL, KoordiBooking } from "./koordi-booking";
-import { KoordiCalendar } from "./koordi-calendar";
+import { KOHSI_KEY, KOHSI_URL, KohsiBooking } from "./kohsi-booking";
+import { KohsiCalendar } from "./kohsi-calendar";
 import { FocusTitle, Sheet, SheetPanel, SheetTabs } from "./sheet";
 
 // Three doors, two tabs: "whatson" and "visit" are the two ways through the What's on tab
-// (koordi's breathing calendar, or a visit of your own), "hello" is its own tab. A visit day
+// (Kohsi's breathing calendar, or a visit of your own), "hello" is its own tab. A visit day
 // chosen on the calendar opens the visit way on that day.
 export type Door = "hello" | "whatson" | "visit";
 type Tab = "whatson" | "hello";
@@ -45,19 +45,19 @@ const HELLO_URL = process.env.NEXT_PUBLIC_HELLO_URL || "/.netlify/functions/feed
 
 type HelloState = "idle" | "sending" | "sent" | "failed";
 
-// The words beside the box, sent with the signup so koordi keeps exactly what the person saw.
+// The words beside the box, sent with the signup so Kohsi keeps exactly what the person saw.
 const KEEP_POSTED = "Keep me posted on what is unfolding on the land.";
 const KEEP_POSTED_VERSION = "say-hello-1";
 
-// Keep me posted goes to the collective's own list in koordi: it mails a confirm link from the
+// Keep me posted goes to the collective's own list in Kohsi: it mails a confirm link from the
 // collective, and only that link's button puts the address on the list. Best effort: the note
 // itself has already gone, so a failure here is not the visitor's to fix.
 async function askToJoin(name: string, email: string): Promise<boolean> {
-  if (!KOORDI_KEY) return false;
+  if (!KOHSI_KEY) return false;
   try {
-    const res = await fetch(`${KOORDI_URL}/v1/list/signups`, {
+    const res = await fetch(`${KOHSI_URL}/v1/list/signups`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${KOORDI_KEY}`, "Idempotency-Key": crypto.randomUUID() },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${KOHSI_KEY}`, "Idempotency-Key": crypto.randomUUID() },
       body: JSON.stringify({ email, name, lang: "en", wording: { text: KEEP_POSTED, version: KEEP_POSTED_VERSION, checked: true } }),
     });
     return res.ok;
@@ -66,15 +66,15 @@ async function askToJoin(name: string, email: string): Promise<boolean> {
   }
 }
 
-// The note goes to the collective's own admin in koordi (Messages), which emails everyone on its
+// The note goes to the collective's own admin in Kohsi (Messages), which emails everyone on its
 // Team with request emails on, the reply going straight back to the sender. Without a key, or if
-// koordi does not answer, it goes the old way, to HAND's feedback function, so nothing is lost.
+// Kohsi does not answer, it goes the old way, to HAND's feedback function, so nothing is lost.
 async function sendToCollective(name: string, email: string, message: string): Promise<boolean> {
-  if (!KOORDI_KEY) return false;
+  if (!KOHSI_KEY) return false;
   try {
-    const res = await fetch(`${KOORDI_URL}/v1/notes`, {
+    const res = await fetch(`${KOHSI_URL}/v1/notes`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${KOORDI_KEY}`, "Idempotency-Key": crypto.randomUUID() },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${KOHSI_KEY}`, "Idempotency-Key": crypto.randomUUID() },
       body: JSON.stringify({ name, email, message, lang: "en" }),
     });
     return res.ok;
@@ -216,7 +216,7 @@ export function ContactModal({
             <Ways current={current} onPick={pickWay} />
             <div className="way-panel" key={current}>
               {current === "whatson" && (
-                <KoordiCalendar
+                <KohsiCalendar
                   onHello={() => onSwitch("hello")}
                   onHost={() => {
                     setHelloSeed(WHATS_ON.hostNote);
@@ -237,7 +237,7 @@ export function ContactModal({
                       </button>
                     </p>
                   )}
-                  <KoordiBooking fallbackEmail={fallbackEmail} date={visitDate} />
+                  <KohsiBooking fallbackEmail={fallbackEmail} date={visitDate} />
                 </>
               )}
             </div>

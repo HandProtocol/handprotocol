@@ -74,7 +74,7 @@ export const GATHERINGS = {
   note: "First gatherings open fall 2027. The calendar fills from bookings on the land.",
 };
 
-// The What's on tab of the get-in-touch sheet, led by koordi's breathing calendar.
+// The What's on tab of the get-in-touch sheet, led by Kohsi's breathing calendar.
 export const WHATS_ON = {
   lede: "The calendar breathes with the land. Days that glow gold hold a gathering; softly lit days are open to walk the land. Choose one: a person confirms either by hand, and the address comes with the yes.",
   ways: {

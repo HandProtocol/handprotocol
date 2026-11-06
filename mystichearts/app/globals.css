@@ -483,24 +483,24 @@ button { font: inherit; }
 .door-fallback { margin: 0; color: var(--cream-70); line-height: 1.6; }
 .door-fallback a { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
 
-/* the koordi widget, dressed in the collective's colours */
-.koordi-shell {
-  --koordi-accent: var(--gold);
-  --koordi-accent-ink: var(--night);
-  --koordi-line: rgba(246, 236, 223, 0.18);
-  --koordi-panel: rgba(18, 10, 15, 0.3);
-  --koordi-tint: rgba(217, 165, 78, 0.1);
-  --koordi-radius: 14px;
-  --koordi-error: #f0b6a4;
+/* the Kohsi widget, dressed in the collective's colours */
+.kohsi-shell {
+  --kohsi-accent: var(--gold);
+  --kohsi-accent-ink: var(--night);
+  --kohsi-line: rgba(246, 236, 223, 0.18);
+  --kohsi-panel: rgba(18, 10, 15, 0.3);
+  --kohsi-tint: rgba(217, 165, 78, 0.1);
+  --kohsi-radius: 14px;
+  --kohsi-error: #f0b6a4;
   color: var(--cream);
   line-height: 1.5;
 }
-.koordi-shell koordi-booking, .koordi-shell koordi-gatherings, .koordi-shell koordi-calendar { display: block; }
-.koordi-shell[data-status="loading"] koordi-booking, .koordi-shell[data-status="loading"] koordi-gatherings, .koordi-shell[data-status="loading"] koordi-calendar { display: none; }
+.kohsi-shell kohsi-booking, .kohsi-shell kohsi-gatherings, .kohsi-shell kohsi-calendar { display: block; }
+.kohsi-shell[data-status="loading"] kohsi-booking, .kohsi-shell[data-status="loading"] kohsi-gatherings, .kohsi-shell[data-status="loading"] kohsi-calendar { display: none; }
 /* the breathing calendar: gatherings glow gold, open days are lit in cream; the strip of coming
    gatherings and the intro card sit on a deeper night */
-.koordi-calendar-shell { --koordi-glow: var(--gold); --koordi-open: var(--cream); --koordi-panel: rgba(18, 10, 15, 0.34); --koordi-strip: rgba(217, 165, 78, 0.09); --koordi-intro: rgba(18, 10, 15, 0.82); }
-.koordi-calendar-shell[data-status="loading"] { min-height: 27rem; }
+.kohsi-calendar-shell { --kohsi-glow: var(--gold); --kohsi-open: var(--cream); --kohsi-panel: rgba(18, 10, 15, 0.34); --kohsi-strip: rgba(217, 165, 78, 0.09); --kohsi-intro: rgba(18, 10, 15, 0.82); }
+.kohsi-calendar-shell[data-status="loading"] { min-height: 27rem; }
 .calendar-aside { margin: 1.1rem 0 0; color: var(--cream-50); font-size: 0.9rem; }
 .calendar-back { margin: -0.6rem 0 0.9rem; font-size: 0.9rem; }
 

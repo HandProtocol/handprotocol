@@ -1,18 +1,18 @@
 "use client";
 
 import { createElement, useEffect, useState } from "react";
-import { KOORDI_KEY, KOORDI_URL, loadWidget } from "./koordi-booking";
+import { KOHSI_KEY, KOHSI_URL, loadWidget } from "./kohsi-booking";
 
-// koordi's <koordi-gatherings> element: the tenant's listed gatherings with "Request a spot"
-// (koordi record 0041, docs/plans/2026-10-31-gatherings.md). Same script as the booking
+// Kohsi's <kohsi-gatherings> element: the tenant's listed gatherings with "Request a spot"
+// (Kohsi record 0041, docs/plans/2026-10-31-gatherings.md). Same script as the booking
 // widget; the element registers itself when the service that serves /widget.js has it.
-export function KoordiGatherings({ onHello, onVisit }: { onHello: () => void; onVisit: () => void }) {
+export function KohsiGatherings({ onHello, onVisit }: { onHello: () => void; onVisit: () => void }) {
   const [status, setStatus] = useState<"loading" | "ready" | "missing" | "failed">("loading");
 
   useEffect(() => {
     let alive = true;
     loadWidget().then(
-      () => alive && setStatus(customElements.get("koordi-gatherings") ? "ready" : "missing"),
+      () => alive && setStatus(customElements.get("kohsi-gatherings") ? "ready" : "missing"),
       () => alive && setStatus("failed"),
     );
     return () => {
@@ -20,7 +20,7 @@ export function KoordiGatherings({ onHello, onVisit }: { onHello: () => void; on
     };
   }, []);
 
-  if (!KOORDI_KEY || status === "failed" || status === "missing") {
+  if (!KOHSI_KEY || status === "failed" || status === "missing") {
     return (
       <div className="door-done">
         <h3>The calendar is being set.</h3>
@@ -40,9 +40,9 @@ export function KoordiGatherings({ onHello, onVisit }: { onHello: () => void; on
   }
 
   return (
-    <div className="koordi-shell" data-status={status}>
+    <div className="kohsi-shell" data-status={status}>
       {status === "loading" && <p className="door-fallback">Opening the calendar…</p>}
-      {createElement("koordi-gatherings", { "data-key": KOORDI_KEY, "data-api": KOORDI_URL, "data-lang": "en", "data-heading": "3", "data-limit": "12", "data-empty": "Nothing on the calendar yet. First gatherings open fall 2027." })}
+      {createElement("kohsi-gatherings", { "data-key": KOHSI_KEY, "data-api": KOHSI_URL, "data-lang": "en", "data-heading": "3", "data-limit": "12", "data-empty": "Nothing on the calendar yet. First gatherings open fall 2027." })}
     </div>
   );
 }
