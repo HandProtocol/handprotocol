@@ -25,7 +25,7 @@ A working list of what's next for the public website. Items added at the bottom;
 - [ ] PrecisionFix: the owner connects Stripe on the Payments screen; turn on reply-by-email for customer questions once Resend receiving is set up on the shop's domain; delete the old interim Netlify site when koH says; lift the booking email polish into `clients/_template`.
 - [ ] Sync the engine's password sign-in (2026-10-23) to Three Hands Healing and Legacy Care: apply `gen-migration.mjs --passwords` on each live site first, then sync.
 - [ ] SolarPunk driver portal (plan and seven open questions in `solarpunk/PLAN-driver-portal.md`).
-- [ ] koordi before a real tenant: database logins, production mode with its own send-only email key, heartbeat alert (`koordi/docs/ops/vps-deployment.md`).
+- [x] Kohsi (ex koordi) before a real tenant: database logins, production mode with its own send-only email key, heartbeat alert (done by 2026-11-04) (`kohsi/docs/ops/vps-deployment.md`).
 - [ ] yuhm THE MISSION and gatherings: koH's open decisions at the end of `plans/004` and `plans/005`.
 - [ ] Set up `hand@handprotocol.org` email forwarding (ImprovMX / ForwardEmail / registrar forwarding).
 - [ ] Install privacy-respecting analytics (Plausible Community Edition or Fathom), covered in `DEPLOY.md`.
@@ -39,8 +39,8 @@ A working list of what's next for the public website. Items added at the bottom;
 - **Form abuse limits built** (2026-10-23): durable counter (migration 057, applied), per-visitor and site-wide limits on feedback, daily caps on feedback emails and on all site email. Code waiting on its push (see Now).
 - **Legacy Care: babysitting and childcare live** (2026-10-23) at legacycare.llc.
 - **PrecisionFix**: moved to the owner's own Netlify, domain and auto-deploying public repo (2026-10-14); admin portal and Payments screen (2026-10-15, migration 054); shop-domain email, customer questions (migration 056) and editor passwords (migration 055) (2026-10-23).
-- **FlowB switched off** (2026-10-13); koordi replaces it.
-- **koordi running in staging** at koordi.handprotocol.org (2026-10-13).
+- **FlowB switched off** (2026-10-13); Kohsi (then koordi) replaces it.
+- **Kohsi (then koordi) running in staging** at koordi.handprotocol.org (2026-10-13); now kohsi.net.
 - **Three Hands Healing live at 3handshealing.com** (2026-10-06).
 - **yuhm sign-in fixed; auth email through Resend** (2026-10-06).
 - **SolarPunk Summit driver sign-up live** at sps.handprotocol.org (2026-10-06).

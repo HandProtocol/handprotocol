@@ -20,7 +20,7 @@ or in any client folder. Everything is inside `.claude/skills/hand-client-seo/`.
 - **No multi-agent Workflow runs.** koH's saved preference; on 2026-09-30 one
   9-agent research run hit the usage limit in about 15 minutes. Build directly
   in-session. A single subagent for a sweep is fine.
-- Another Claude session shares this checkout (`omnione/`, `koordi/`, `yuhm/`,
+- Another Claude session shares this checkout (`omnione/`, `kohsi/`, `yuhm/`,
   `command/`). Touch nothing there. Never `git add -A`. **Do not commit** unless
   koH asks; `clients/` and both skills are untracked.
 - Never invent a phone, address, city, hours, price or review link. THH's are

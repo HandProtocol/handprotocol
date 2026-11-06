@@ -2,7 +2,7 @@
 
 import { createElement, useEffect, useState } from "react";
 
-// koordi's <koordi-booking> element (see ../koordi/docs/connect.md). The script is loaded
+// koordi's <koordi-booking> element (see ../kohsi/docs/connect.md). The script is loaded
 // once, from the koordi address in NEXT_PUBLIC_KOORDI_URL, and the business's publishable
 // key comes from NEXT_PUBLIC_KOORDI_KEY. Colours are passed down through the --koordi-*
 // custom properties the widget reads inside its shadow root.

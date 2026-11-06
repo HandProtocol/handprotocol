@@ -785,7 +785,7 @@ served on a host that is not `*.netlify.app`).
 
 ### 7.6 Operating rules for this checkout
 
-- Another Claude session works in the same checkout (today: `omnione/`, `koordi/`, `yuhm/`, `command/`). Stage
+- Another Claude session works in the same checkout (today: `omnione/`, `kohsi/`, `yuhm/`, `command/`). Stage
   by explicit path, never `git add -A`; before reverting any file run `git status --short <file>` and never
   `git checkout --` a file with changes you did not make; read `git reflog` on anomalies.
 - Commit only when koH asks. "Momentum over questions" for small asks; plan + one confirm for big ones.

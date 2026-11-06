@@ -190,7 +190,7 @@ So `/admin/` is one portal now (`lib/admin-page.mjs`, `public/admin/admin.js|css
 - Tests: `tests/payments.test.mjs` (the flow tests skip without
   `config.payments`).
 - What koordi must carry at cutover:
-  `koordi/docs/research/2026-10-15-engine-admin-portal-and-stripe-connect.md`.
+  `kohsi/docs/research/2026-10-15-engine-admin-portal-and-stripe-connect.md`.
 
 ## Ask before booking: customer accounts (PrecisionFix only, since 2026-10-23)
 
@@ -244,7 +244,7 @@ koH chose this layout 2026-10-23 over a single form whose button changed.
   answer, fresh vs stale sessions, other devices signed out, a link lifting
   the lock).
 - koordi's console carries the same rules at cutover: record in
-  `koordi/docs/decisions/` (passwords next to the link).
+  `kohsi/docs/decisions/` (passwords next to the link).
 
 ## Phase 4 — Provision (creates prod resources: confirm with the operator first)
 

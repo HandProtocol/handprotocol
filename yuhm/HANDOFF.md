@@ -23,7 +23,7 @@ koH asked for a run-sheet tool for someone picking food up anywhere and sharing 
 
 ## Gatherings beta, coordinated by koordi: plan only, 2026-09-20 (nothing built)
 
-koH asked to plan the booking system (`../koordi/`, renamed from `book/`) into the yuhm work, starting with a beta for gatherings and classes. First worked case: a food prep gathering where each attendee says what they want to prepare, gets an itemized order, picks a source per line (bring, network with a pickup, or buy through a shared grocery run), and finds their items in a numbered bin on arrival.
+koH asked to plan the booking system (`../kohsi/`, renamed from `book/`) into the yuhm work, starting with a beta for gatherings and classes. First worked case: a food prep gathering where each attendee says what they want to prepare, gets an itemized order, picks a source per line (bring, network with a pickup, or buy through a shared grocery run), and finds their items in a numbered bin on arrival.
 
 - **Plan:** `../plans/005-yuhm-gatherings-koord.md` (the nine-step flow, what 033 already provides, where koordi and THE MISSION fit, SQL sketch for ten new tables, functions, notifications, phases G0 to G4, nine decisions, risks).
 - **Reuse found:** migration 033 already has `food_venues`, `food_events`, items, invites, RSVPs, assignments, and the `potluck` lane gate; 034 has `plan_food_potluck()` and `release_food_event_location()`. Only the undeployed coordination API uses them today.

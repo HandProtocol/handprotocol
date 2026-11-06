@@ -71,15 +71,18 @@ clients/.source/
 # Three Hands Healing: raw client photo drops (240 MB) stay local; web-sized copies live in web/threehandshealing/assets/photos
 threehandshealing/*.zip
 
-# koordi (ex koord) lives in its own private repo (HandProtocol/koordi, records 0014, 0022); koord is a symlink to it
+# Kohsi (ex Akosi, ex koordi, ex koord) lives in its own PRIVATE repo HandProtocol/kohsi (records 0014, 0022, 0084, 0089).
+# The folder is kohsi/; koordi and koord are symlinks to it, akosi is a symlink to the archived drop folder.
+kohsi/
 koordi/
+koordi
 koord
-
-# Akosi spec pack (partner names, event details): private, lives in HandProtocol/koordi
 akosi/
+akosi
 
 # Other repos checked out inside this folder: never part of handprotocol
 koordi-wl/
+koordi-wt/
 viz3d/
 
 # PrecisionFix is self-hosted on the owner's own accounts since 2026-11-02 (his Supabase, his Netlify).

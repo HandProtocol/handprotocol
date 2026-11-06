@@ -26,7 +26,7 @@ koH's goal: "a much cleaner path for clients with booking to manage their bookin
 - PrecisionFix's `productionUrl` still says precisionfix-austin.netlify.app. The webhook uses the owner's origin, so this does not matter here, but canonical / sitemap / email links may.
 - Spanish strings for the portal and Payments: none yet, the admin is English-only as before.
 - Legacy Care and Three Hands Healing were NOT synced (no booking, unrelated local edits in Legacy Care's git status).
-- koordi note for the cutover: `koordi/docs/research/2026-10-15-engine-admin-portal-and-stripe-connect.md`.
+- koordi note for the cutover: `kohsi/docs/research/2026-10-15-engine-admin-portal-and-stripe-connect.md`.
 
 ## 2026-09-21: guest review page added to the engine (template only, no client synced)
 
@@ -463,4 +463,4 @@ calls, onboarding wireframe, plans); leave them out of a client-site commit.
 
 ## 2026-10-13: fixes-only booking session (engine + PrecisionFix live)
 
-Nine review findings fixed in the engine with tests first (template: 140 pass, 9 skipped) and carried into PrecisionFix (125 pass, deployed `6ace81c5088367cc2266663c`). Report: `koordi/docs/reports/2026-10-13-engine-fixes.md`. Three Hands Healing, Legacy Care, and lhwt are now behind by these files too; nothing synced there. Left for a later session (need a migration): per-editor feed tokens (finding 13), stored manage tokens (14), the data-model limits (17). The engine stays fixes-only; customer reschedule and the busy feed are built once in koordi.
+Nine review findings fixed in the engine with tests first (template: 140 pass, 9 skipped) and carried into PrecisionFix (125 pass, deployed `6ace81c5088367cc2266663c`). Report: `kohsi/docs/reports/2026-10-13-engine-fixes.md`. Three Hands Healing, Legacy Care, and lhwt are now behind by these files too; nothing synced there. Left for a later session (need a migration): per-editor feed tokens (finding 13), stored manage tokens (14), the data-model limits (17). The engine stays fixes-only; customer reschedule and the busy feed are built once in koordi.
