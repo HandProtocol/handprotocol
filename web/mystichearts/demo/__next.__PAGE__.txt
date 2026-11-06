@@ -1,6 +1,0 @@
-1:"$Sreact.fragment"
-2:I[19873,["/mystichearts/demo/_next/static/chunks/1d4h-sglyo8ft.js","/mystichearts/demo/_next/static/chunks/14mumt5_n0xhi.js","/mystichearts/demo/_next/static/chunks/28xk_f13smd0m.js"],"MysticHeartsPage"]
-3:I[97367,["/mystichearts/demo/_next/static/chunks/1d4h-sglyo8ft.js","/mystichearts/demo/_next/static/chunks/14mumt5_n0xhi.js"],"OutletBoundary"]
-4:"$Sreact.suspense"
-0:{"rsc":["$","$1","c",{"children":[["$","$L2",null,{}],[["$","script","script-0",{"src":"/mystichearts/demo/_next/static/chunks/28xk_f13smd0m.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"C5OCFGpdAm0y76Hzc7huT"}
-5:null

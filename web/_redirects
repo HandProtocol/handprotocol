@@ -60,8 +60,11 @@ http://gofundme.handprotocol.org/*   https://www.gofundme.com/f/help-hand-protoc
 /mystichearts           /mystichearts/brief/                   301
 /brief                  /mystichearts/brief/                   301
 
-# Mystic Hearts immersive demo (password-protected via edge function)
-/mystichearts/demo      /mystichearts/demo/                    301
+# Mystic Hearts site copies retired 2026-11-06: the site is mysticheartshealing.com
+/mystichearts/demo/*      https://mysticheartshealing.com/   301!
+/mystichearts/demo        https://mysticheartshealing.com/   301!
+/mystichearts/wireframe/* https://mysticheartshealing.com/   301!
+/mystichearts/wireframe   https://mysticheartshealing.com/   301!
 
 # Kitty Express game
 /kitties                /kitties/game/                         301

@@ -56,8 +56,8 @@ https://admin.mysticheartshealing.com, mail is live, and the next piece of work 
   - Never deploy from inside the repo. There the CLI reads the hand repo's `netlify.toml`,
     rebuilds handprotocol.org and bundles HAND's functions into this site.
   - Use the cryptokoh token. The CLI's active user on this machine is a client's account.
-- The gated demo at handprotocol.org/mystichearts/demo still exists (`./scripts/publish-demo.sh`)
-  and can retire.
+- The handprotocol.org copies (`/mystichearts/demo/`, `/mystichearts/wireframe/`) were retired on
+  2026-11-06 and now 301 to mysticheartshealing.com; `scripts/publish-demo.sh` is gone.
 
 ## Mail (live since 2026-11-01 evening)
 
