@@ -4,8 +4,10 @@
 
 **State in one line:** the site works on https://mysticheartshealing.com, booking is at
 https://book.mysticheartshealing.com/, the collective's admin is at
-https://admin.mysticheartshealing.com, mail is live, and the next piece of work is the funnel in
-`FUNNEL.md` (design only, nothing built). Deadline koH set: the whole system working by 2026-11-11.
+https://admin.mysticheartshealing.com, mail is live, and the next piece of work is the complete
+booking and the funnel: plan `../kohsi/docs/plans/2026-11-05-mystic-hearts-complete-booking.md`
+(2026-11-05, slices A to F, nothing built), design in `FUNNEL.md` revision 5. Deadline koH set:
+the whole system working by 2026-11-11.
 
 ## The addresses (2026-11-04, koordi record 0083)
 
@@ -116,7 +118,7 @@ https://admin.mysticheartshealing.com, mail is live, and the next piece of work 
   changed.
 - **Not built yet:** the newsletter (record 0040 C1 and C2), gathering calendar invites (M3)
   and the subscribable calendar (M5). Full scope:
-  `../koordi/docs/plans/2026-11-01-mystic-hearts-mail.md`.
+  `../kohsi/docs/plans/2026-11-01-mystic-hearts-mail.md`.
 - **Commits.**
   - `4758d4661` (the move to its own domain) is pushed on `agent/yuhm-network`.
   - `afe3e1ca8` (the What's on breathing calendar, by another session) is committed and already
@@ -128,7 +130,14 @@ https://admin.mysticheartshealing.com, mail is live, and the next piece of work 
   or declined by a button" fails since the calendar reached November (date-dependent, not caused
   by this work).
 
-## Next: the funnel
+## Next: the complete booking and the funnel (2026-11-05)
+
+**RESUME HERE.** Read `../kohsi/docs/plans/2026-11-05-mystic-hearts-complete-booking.md`: slice A
+(the tenant profile with services `visit`, `host`, `stay` and their questions) first, then B to E in
+Akosi with reviewers, then S1 here (`components/book.tsx` replaces `story-sheet.tsx` and
+`contact-modal.tsx`), then F. The two inventories behind it are in `../kohsi/docs/reports/`
+(`2026-11-05-booking-inventory-akosi.md`, `-engine.md`). The shared Akosi slices (mail that prepares, one-tap owner, request card, the nudge ladder) are sequenced in `../kohsi/docs/plans/2026-11-05-booking-experience-spec.md`. Earlier design notes follow.
+
 
 koH (2026-11-01): any of the four chapters should lead people to the calendar, then suggest coming
 out to the land and signing up, in as few steps as possible. The design flow is in `FUNNEL.md`

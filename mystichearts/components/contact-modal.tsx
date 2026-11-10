@@ -1,22 +1,18 @@
 "use client";
 
-import { ArrowUpRight, CalendarDays, Feather, Footprints, Sparkles } from "lucide-react";
+import { ArrowUpRight, CalendarDays, Footprints } from "lucide-react";
 import { useState, type FormEvent, type ReactNode } from "react";
-import { WHATS_ON } from "./copy";
+import { WHATS_ON, type ChapterKey } from "./copy";
 import { KOHSI_KEY, KOHSI_URL, KohsiBooking } from "./kohsi-booking";
 import { KohsiCalendar } from "./kohsi-calendar";
-import { FocusTitle, Sheet, SheetPanel, SheetTabs } from "./sheet";
+import { FocusTitle, Sheet, SheetPanel } from "./sheet";
+import { SiteNav } from "./site-nav";
 
 // Three doors, two tabs: "whatson" and "visit" are the two ways through the What's on tab
 // (Kohsi's breathing calendar, or a visit of your own), "hello" is its own tab. A visit day
 // chosen on the calendar opens the visit way on that day.
 export type Door = "hello" | "whatson" | "visit";
 type Tab = "whatson" | "hello";
-
-const TABS = [
-  { key: "whatson" as const, label: "What's on", icon: <Sparkles size={15} /> },
-  { key: "hello" as const, label: "Say hello", icon: <Feather size={15} /> },
-];
 
 const WAYS: { key: Door; label: string; hint: string; icon: ReactNode }[] = [
   { key: "whatson", label: WHATS_ON.ways.calendar.label, hint: WHATS_ON.ways.calendar.hint, icon: <CalendarDays size={18} /> },
@@ -169,11 +165,13 @@ export function ContactModal({
   door,
   onClose,
   onSwitch,
+  onChapter,
   fallbackEmail,
 }: {
   door: Door | null;
   onClose: () => void;
   onSwitch: (door: Door) => void;
+  onChapter: (key: ChapterKey) => void;
   fallbackEmail: string;
 }) {
   const current = door ?? "hello";
@@ -192,7 +190,7 @@ export function ContactModal({
     onSwitch(next);
   };
   return (
-    <Sheet open={door !== null} label="Get in touch" onClose={close} tabs={<SheetTabs items={TABS} current={tab} onPick={onSwitch} label="How to reach us" />}>
+    <Sheet open={door !== null} label="Get in touch" onClose={close} tabs={<SiteNav chapter={null} door={current} onChapter={onChapter} onDoor={pickWay} />}>
       <SheetPanel id={tab}>
         {tab === "hello" && (
           <>

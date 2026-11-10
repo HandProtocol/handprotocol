@@ -73,29 +73,6 @@ export function Sheet({
   );
 }
 
-export function SheetTabs<T extends string>({
-  items,
-  current,
-  onPick,
-  label,
-}: {
-  items: { key: T; label: string; icon?: ReactNode }[];
-  current: T;
-  onPick: (key: T) => void;
-  label: string;
-}) {
-  return (
-    <div className="modal-doors" role="tablist" aria-label={label}>
-      {items.map((item) => (
-        <button key={item.key} role="tab" aria-selected={current === item.key} className="door-tab" onClick={() => onPick(item.key)} type="button">
-          {item.icon}
-          <span>{item.label}</span>
-        </button>
-      ))}
-    </div>
-  );
-}
-
 // A panel that slides in when the tab changes; the heading takes focus for screen readers.
 export function SheetPanel({ id, children, dir = 1 }: { id: string; children: ReactNode; dir?: 1 | -1 }) {
   return (

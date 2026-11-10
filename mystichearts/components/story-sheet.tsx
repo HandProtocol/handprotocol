@@ -1,8 +1,10 @@
 "use client";
 
 import { ArrowUpRight, CalendarDays } from "lucide-react";
-import { CHAPTERS, GATHERINGS, LAND, PRINCIPLES, VISION, type ChapterKey } from "./copy";
-import { FocusTitle, Sheet, SheetPanel, SheetTabs } from "./sheet";
+import type { Door } from "./contact-modal";
+import { GATHERINGS, LAND, PRINCIPLES, VISION, type ChapterKey } from "./copy";
+import { FocusTitle, Sheet, SheetPanel } from "./sheet";
+import { SiteNav } from "./site-nav";
 
 function Vision() {
   return (
@@ -103,18 +105,18 @@ export function StorySheet({
   chapter,
   onClose,
   onSwitch,
-  onVisit,
-  onHello,
+  onDoor,
 }: {
   chapter: ChapterKey | null;
   onClose: () => void;
   onSwitch: (key: ChapterKey) => void;
-  onVisit: () => void;
-  onHello: () => void;
+  onDoor: (door: Door) => void;
 }) {
+  const onVisit = () => onDoor("visit");
+  const onHello = () => onDoor("hello");
   const current = chapter ?? "vision";
   return (
-    <Sheet open={chapter !== null} label="About Mystic Hearts" onClose={onClose} tabs={<SheetTabs items={CHAPTERS} current={current} onPick={onSwitch} label="Chapters" />}>
+    <Sheet open={chapter !== null} label="About Mystic Hearts" onClose={onClose} tabs={<SiteNav chapter={current} door={null} onChapter={onSwitch} onDoor={onDoor} />}>
       <SheetPanel id={current}>
         {current === "vision" && <Vision />}
         {current === "principles" && <Principles />}

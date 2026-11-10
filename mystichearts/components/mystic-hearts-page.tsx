@@ -3,8 +3,9 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowUpRight, CalendarDays, Sparkles } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { ContactModal, type Door } from "./contact-modal";
+import { HappeningSoon } from "./happening-soon";
 import { CHAPTERS, type ChapterKey } from "./copy";
 import { StorySheet } from "./story-sheet";
 
@@ -61,6 +62,10 @@ export function MysticHeartsPage() {
     setChapter(null);
     setDoor(next);
   };
+  const openChapter = (next: ChapterKey) => {
+    setDoor(null);
+    setChapter(next);
+  };
 
   return (
     <main className="stage" data-sheet={door !== null || chapter !== null ? "open" : "closed"}>
@@ -72,6 +77,13 @@ export function MysticHeartsPage() {
         <motion.a href="#" className="brand" variants={rise} initial="hidden" animate="visible" custom={0.1}>
           <Image src={asset("/assets/images/logo-gold.png")} alt="Mystic Hearts Healing Collective" width={132} height={132} priority className="brand-mark" />
         </motion.a>
+        <motion.nav className="head-nav" aria-label="About the collective" variants={rise} initial="hidden" animate="visible" custom={0.2}>
+          {CHAPTERS.map((item) => (
+            <button key={item.key} type="button" className="head-link" onClick={() => openChapter(item.key)}>
+              {item.label}
+            </button>
+          ))}
+        </motion.nav>
         <motion.div className="head-right" variants={rise} initial="hidden" animate="visible" custom={0.25}>
           <span className="brand-place">East Austin, Texas</span>
           <button className="btn btn-glass btn-small" type="button" onClick={() => openDoor("hello")}>
@@ -101,18 +113,26 @@ export function MysticHeartsPage() {
             Visit the land
           </button>
         </motion.div>
+        <HappeningSoon onOpen={() => openDoor("whatson")} />
       </section>
 
       <motion.nav className="stage-foot" aria-label="About the collective" variants={rise} initial="hidden" animate="visible" custom={1.15}>
-        {CHAPTERS.map((item) => (
-          <button key={item.key} type="button" className="chapter-link" onClick={() => setChapter(item.key)}>
-            {item.label}
+        {CHAPTERS.map((item, index) => (
+          <button key={item.key} type="button" className="chapter-link" onClick={() => openChapter(item.key)} style={{ "--i": index } as CSSProperties}>
+            <span className="chapter-label">
+              {item.label}
+              <span className="firefly" aria-hidden="true">
+                <span className="firefly-y">
+                  <i />
+                </span>
+              </span>
+            </span>
           </button>
         ))}
       </motion.nav>
 
-      <StorySheet chapter={chapter} onClose={() => setChapter(null)} onSwitch={setChapter} onVisit={() => openDoor("visit")} onHello={() => openDoor("hello")} />
-      <ContactModal door={door} onClose={() => setDoor(null)} onSwitch={setDoor} fallbackEmail={CONTACT_EMAIL} />
+      <StorySheet chapter={chapter} onClose={() => setChapter(null)} onSwitch={setChapter} onDoor={openDoor} />
+      <ContactModal door={door} onClose={() => setDoor(null)} onSwitch={setDoor} onChapter={openChapter} fallbackEmail={CONTACT_EMAIL} />
     </main>
   );
 }

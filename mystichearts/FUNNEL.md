@@ -8,6 +8,19 @@ calendar (what is unfolding), then suggest coming out to the land and signing up
 number of steps to the best action small, and give the chapters a direct way to the calendar and
 to signup or get in touch.
 
+## Revision 5 (2026-11-05): one door asks what brings you, every intent is an Akosi service
+
+koH, 2026-11-05: the funnels must "properly guide someone to fill out the right info to get to the
+best get in touch form", with "the complete booking". The first slip now asks what brings the
+visitor and opens one slip per answer: Come out to the land (`visit`), Join a gathering, Host a
+gathering (new service `host`: the space, the part of the day, how many, what kind), Stay on the
+land (new service `stay`: arrival day, nights, people), Join the community or residency (Say hello
+with a topic and four short questions), A session with a practitioner (opens later; Keep me
+posted), Something else. Each slip collects only what the collective needs to say yes, and every
+answer lands in the admin's Requests or Messages. The plan, slices and koH's eight decisions:
+`../kohsi/docs/plans/2026-11-05-mystic-hearts-complete-booking.md` (record 0087). The pages, the
+dissolve, the slips and Keep reading stay as revisions 2 to 4 settled them.
+
 ## The shape: read, see, come
 
 1. **Read.** The stage and the four chapters (Our vision, How we live, The land, Gatherings).
@@ -69,9 +82,9 @@ import to koordi."
   coming and the spots left, with Add to my calendar and Share. A full event offers the waitlist
   (the sound bath in the sample). The strip tags each event open to all or ask to join.
 - **koordi**: open door and the welcome line are being built now (feature 0062 and 0063, brief
-  `../koordi/docs/briefs/2026-11-02-open-door-and-who-is-welcome.md`; local only, no deploy).
+  `../kohsi/docs/briefs/2026-11-02-open-door-and-who-is-welcome.md`; local only, no deploy).
   Every Partiful and Eventbrite feature is a koordi feature entry (0062 to 0078), with the table
-  and the build order in `../koordi/docs/plans/2026-11-01-open-houses-and-the-calendar.md`.
+  and the build order in `../kohsi/docs/plans/2026-11-01-open-houses-and-the-calendar.md`.
 
 ## Revision 3 (2026-11-01 night): the slips work, and a real calendar
 
@@ -95,7 +108,7 @@ mock send of one second):
   words and changes its button: Come out to the land (choose two hours), Ask to join (a person
   says yes), or Come to the open house (a count, no wait, Add to my calendar). Months turn with
   the dissolve. "As it is today" shows the honest empty state.
-- **koordi side:** `../koordi/docs/plans/2026-11-01-open-houses-and-the-calendar.md` (open
+- **koordi side:** `../kohsi/docs/plans/2026-11-01-open-houses-and-the-calendar.md` (open
   admission, repeating gatherings, the calendar options, the followable feed, newsletter topics,
   the monthly letter, the after-open-house note). Five decisions there for koH.
 
