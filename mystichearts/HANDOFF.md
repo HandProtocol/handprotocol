@@ -9,6 +9,21 @@ booking and the funnel: plan `../kohsi/docs/plans/2026-11-05-mystic-hearts-compl
 (2026-11-05, slices A to F, nothing built), design in `FUNNEL.md` revision 5. Deadline koH set:
 the whole system working by 2026-11-11.
 
+## 2026-11-10: Fairy Ball page, waiver, calendar popup
+
+- `/fairy-ball/`: the event page for The 1111 Immaculate Fairy Ball (Nov 11). Ticket button goes to
+  Partiful (`NEXT_PUBLIC_FAIRY_BALL_PARTIFUL_URL` in `.env.production`); poster at
+  `public/assets/images/fairy-ball-poster.jpg` (a drawn card stands in until it exists). Gatherings
+  named in `components/events.ts` open their page from the calendar and Happening soon.
+- `/waiver/`: frames the collective's GoHighLevel waiver (`NEXT_PUBLIC_WAIVER_EMBED_URL`). koH chose
+  the embed for now (2026-11-10). The Kohsi-backed waiver is parked: texts in `waivers/forms.mjs`
+  (six documents, Texas express-negligence and conspicuousness rules, not lawyer-reviewed), the
+  site flow in `components/waiver/waiver-page.tsx`, the API on Kohsi branch `feat/waivers`
+  (`b5a8a90`, migration 0061, which clashes with the Arva session's unpushed 0061 to 0068).
+- Calendar: `components/kohsi-calendar.tsx` adds a stylesheet to Kohsi's element: compact month,
+  and a chosen day rises as a padded card over the whole sheet. Belongs in Kohsi as an option.
+- Production Kohsi has no Fairy Ball listed yet (needs the real start and end time).
+
 ## The addresses (2026-11-04, koordi record 0083)
 
 - **Booking:** https://book.mysticheartshealing.com/ is the hosted page at the root, with

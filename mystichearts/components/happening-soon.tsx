@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useEffect, useState, type CSSProperties } from "react";
+import { eventPageFor } from "./events";
 import { KOHSI_KEY, KOHSI_URL } from "./kohsi-booking";
 
 // "Happening soon" on the stage: the next gatherings Kohsi has listed for the collective
@@ -65,6 +66,12 @@ export function HappeningSoon({ onOpen }: { onOpen: () => void }) {
   const list = useSoon();
   const shown = list.slice(0, SHOWN);
   const more = list.length > SHOWN;
+  // A gathering with its own page here opens it; any other opens the calendar.
+  const open = (g: Gathering) => {
+    const href = eventPageFor(g.title);
+    if (href) window.location.assign(href);
+    else onOpen();
+  };
 
   return (
     <AnimatePresence>
@@ -90,7 +97,7 @@ export function HappeningSoon({ onOpen }: { onOpen: () => void }) {
               const p = parts(g);
               return (
                 <li key={g.id}>
-                  <button type="button" className="soon-item" onClick={onOpen}>
+                  <button type="button" className="soon-item" onClick={() => open(g)}>
                     <span className="soon-date" aria-hidden="true">
                       <span className="soon-month">{p.month}</span>
                       <span className="soon-day">{p.day}</span>

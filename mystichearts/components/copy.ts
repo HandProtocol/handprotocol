@@ -76,7 +76,7 @@ export const GATHERINGS = {
 
 // The What's on tab of the get-in-touch sheet, led by Kohsi's breathing calendar.
 export const WHATS_ON = {
-  lede: "The calendar breathes with the land. Days that glow gold hold a gathering; softly lit days are open to walk the land. Choose one: a person confirms either by hand, and the address comes with the yes.",
+  lede: "Days that glow gold hold a gathering; softly lit days are open to walk the land. Tap one to see it.",
   ways: {
     calendar: { label: "The calendar", hint: "Gatherings and open days, as they come." },
     visit: { label: "Come out to the land", hint: "A walk and a conversation, on a day of your own." },
