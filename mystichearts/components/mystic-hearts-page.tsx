@@ -77,13 +77,6 @@ export function MysticHeartsPage() {
         <motion.a href="#" className="brand" variants={rise} initial="hidden" animate="visible" custom={0.1}>
           <Image src={asset("/assets/images/logo-gold.png")} alt="Mystic Hearts Healing Collective" width={132} height={132} priority className="brand-mark" />
         </motion.a>
-        <motion.nav className="head-nav" aria-label="About the collective" variants={rise} initial="hidden" animate="visible" custom={0.2}>
-          {CHAPTERS.map((item) => (
-            <button key={item.key} type="button" className="head-link" onClick={() => openChapter(item.key)}>
-              {item.label}
-            </button>
-          ))}
-        </motion.nav>
         <motion.div className="head-right" variants={rise} initial="hidden" animate="visible" custom={0.25}>
           <span className="brand-place">East Austin, Texas</span>
           <button className="btn btn-glass btn-small" type="button" onClick={() => openDoor("hello")}>
@@ -106,7 +99,9 @@ export function MysticHeartsPage() {
         <motion.div className="doors" variants={rise} initial="hidden" animate="visible" custom={0.9}>
           <button className="btn btn-gold" type="button" onClick={() => openDoor("whatson")}>
             <Sparkles size={18} />
-            What&apos;s on at the land
+            <span>
+              What&apos;s on<span className="long-only"> at the land</span>
+            </span>
           </button>
           <button className="btn btn-glass" type="button" onClick={() => openDoor("visit")}>
             <CalendarDays size={18} />

@@ -2,13 +2,15 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { useEffect, useState, type CSSProperties } from "react";
-import { eventPageFor } from "./events";
+import { useEffect, useState, useSyncExternalStore, type CSSProperties } from "react";
+import { FAIRY_BALL, EVENT_PAGES, eventPageFor } from "./events";
 import { KOHSI_KEY, KOHSI_URL } from "./kohsi-booking";
 
 // "Happening soon" on the stage: the next gatherings Kohsi has listed for the collective
-// (GET /v1/gatherings, the same list the What's on board shows). Nothing listed, no key, or
-// Kohsi out of reach: the card is simply not there. A tap opens the What's on sheet.
+// (GET /v1/gatherings, the same list the What's on board shows), led by any gathering with its
+// own page here (the Fairy Ball) until its night is over, even when Kohsi does not list it.
+// Nothing at all to show: the card is simply not there. A tap opens the gathering's page, or the
+// What's on sheet.
 
 type Gathering = {
   id: string;
@@ -20,6 +22,24 @@ type Gathering = {
 };
 
 const SHOWN = 2;
+const noSubscribe = () => () => {};
+
+// One line on the card, from Kohsi or from the site itself.
+type SoonItem = { id: string; title: string; month: string; day: string; weekday: string; meta: string; href: string | null };
+
+function fromKohsi(g: Gathering): SoonItem {
+  const p = parts(g);
+  return { id: g.id, title: g.title, month: p.month, day: p.day, weekday: p.weekday, meta: [p.weekday, p.time, g.place].filter(Boolean).join(" · "), href: eventPageFor(g.title) };
+}
+
+// The site's own gathering still to come (the Fairy Ball, while FAIRY_BALL.showUntil is ahead),
+// unless Kohsi already lists it.
+function pinned(listed: Gathering[]): SoonItem[] {
+  const href = EVENT_PAGES.find((page) => page.slug === FAIRY_BALL.slug)?.href ?? null;
+  if (listed.some((g) => eventPageFor(g.title) === href)) return [];
+  const d = FAIRY_BALL.shortDate;
+  return [{ id: FAIRY_BALL.slug, title: FAIRY_BALL.title, month: d.month, day: d.day, weekday: d.weekday, meta: `${d.weekday} · Tickets and waiver`, href }];
+}
 
 // Where the sparkles sit around the card (x, y as % of the card), their size and their beat.
 const SPARKLES = [
@@ -63,13 +83,16 @@ function useSoon(): Gathering[] {
 }
 
 export function HappeningSoon({ onOpen }: { onOpen: () => void }) {
-  const list = useSoon();
+  const listed = useSoon();
+  // Whether the ball is still ahead: false in the exported HTML and on hydration, read from the
+  // visitor's clock after, so the pinned line never goes stale.
+  const ballAhead = useSyncExternalStore(noSubscribe, () => Date.now() < Date.parse(FAIRY_BALL.showUntil), () => false);
+  const list = [...(ballAhead ? pinned(listed) : []), ...listed.map(fromKohsi)];
   const shown = list.slice(0, SHOWN);
   const more = list.length > SHOWN;
   // A gathering with its own page here opens it; any other opens the calendar.
-  const open = (g: Gathering) => {
-    const href = eventPageFor(g.title);
-    if (href) window.location.assign(href);
+  const open = (item: SoonItem) => {
+    if (item.href) window.location.assign(item.href);
     else onOpen();
   };
 
@@ -93,28 +116,24 @@ export function HappeningSoon({ onOpen }: { onOpen: () => void }) {
             Happening soon
           </p>
           <ul className="soon-list">
-            {shown.map((g) => {
-              const p = parts(g);
-              return (
-                <li key={g.id}>
-                  <button type="button" className="soon-item" onClick={() => open(g)}>
-                    <span className="soon-date" aria-hidden="true">
-                      <span className="soon-month">{p.month}</span>
-                      <span className="soon-day">{p.day}</span>
+            {shown.map((item) => (
+              <li key={item.id}>
+                <button type="button" className="soon-item" onClick={() => open(item)}>
+                  <span className="soon-date" aria-hidden="true">
+                    <span className="soon-month">{item.month}</span>
+                    <span className="soon-day">{item.day}</span>
+                  </span>
+                  <span className="soon-text">
+                    <span className="soon-title">{item.title}</span>
+                    <span className="soon-meta">
+                      <span className="sr-only">{`${item.month} ${item.day}, `}</span>
+                      {item.meta}
                     </span>
-                    <span className="soon-text">
-                      <span className="soon-title">{g.title}</span>
-                      <span className="soon-meta">
-                        <span className="sr-only">{`${p.month} ${p.day}, `}</span>
-                        {p.weekday} · {p.time}
-                        {g.place ? ` · ${g.place}` : ""}
-                      </span>
-                    </span>
-                    <ArrowUpRight className="soon-arrow" size={16} aria-hidden="true" />
-                  </button>
-                </li>
-              );
-            })}
+                  </span>
+                  <ArrowUpRight className="soon-arrow" size={16} aria-hidden="true" />
+                </button>
+              </li>
+            ))}
           </ul>
           {more && (
             <button type="button" className="soon-more" onClick={onOpen}>

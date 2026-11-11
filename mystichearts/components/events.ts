@@ -15,6 +15,7 @@ export const FAIRY_BALL = {
   slug: "fairy-ball",
   title: "The 1111 Immaculate Fairy Ball",
   dateLine: "Wednesday, November 11, 2026",
+  timeLine: "Doors open at 7 pm. The last shuttle leaves at 12:15 am",
   shortDate: { month: "Nov", day: "11", weekday: "Wed" },
   tagline: "A high vibe bass-ecstatic dance party with Yawéi & Friends.",
   motto: "Where bass meets cosplay.",
@@ -22,8 +23,13 @@ export const FAIRY_BALL = {
   presenters: "A Basstatic event series by Yawéi, with Star Seed Family Foundation and Mystic Hearts Healing Collective.",
   // The Partiful event page. Empty until the host shares it: the ticket button then says so.
   partifulUrl: process.env.NEXT_PUBLIC_FAIRY_BALL_PARTIFUL_URL || "",
-  poster: `${basePath}/assets/images/fairy-ball-poster.jpg`,
+  // The poster, once the host sends it: put it at public/assets/images/fairy-ball-poster.jpg and
+  // set this to `${basePath}/assets/images/fairy-ball-poster.jpg`. Empty: the drawn card shows.
+  poster: "",
   waiverHref: `${basePath}/waiver/`,
+  // Happening soon shows the ball from the site itself until this moment (2am Austin time, the
+  // night after), whether or not Kohsi lists it, so the homepage always leads to its page.
+  showUntil: "2026-11-12T08:00:00Z",
 } as const;
 
 export const EVENT_PAGES: readonly EventPage[] = [{ slug: FAIRY_BALL.slug, href: `${basePath}/fairy-ball/`, match: /fairy\s*ball/i }];

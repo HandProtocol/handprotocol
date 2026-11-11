@@ -13,6 +13,13 @@ import Script from "next/script";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const EMBED_URL = process.env.NEXT_PUBLIC_WAIVER_EMBED_URL || "";
 const CONTACT = "mysticheartshealing@gmail.com";
+// GoHighLevel's form_embed.js sizes the frame to the form by the frame's id and data-* attributes
+// (its INLINE layout), so the whole waiver shows with no inner scroll. Its form id is the last
+// part of the link; the script is served from the same white-label domain as the form.
+const FORM_ID = EMBED_URL.split(/[/?#]/).filter(Boolean).at(-1) ?? "";
+const FORM_ORIGIN = EMBED_URL ? new URL(EMBED_URL).origin : "";
+const FORM_NAME = "Mystic Hearts Healing Collective: Liability Waiver + Participation Agreement";
+const FORM_HEIGHT = "2565";
 
 export function WaiverEmbed() {
   return (
@@ -36,8 +43,26 @@ export function WaiverEmbed() {
 
         {EMBED_URL ? (
           <div className="wv-embed">
-            <iframe src={EMBED_URL} title="Mystic Hearts waiver" className="wv-embed-frame" loading="eager" allow="clipboard-write" />
-            <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
+            <iframe
+              src={EMBED_URL}
+              title={FORM_NAME}
+              className="wv-embed-frame"
+              loading="eager"
+              allow="clipboard-write"
+              id={`inline-${FORM_ID}`}
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name={FORM_NAME}
+              data-height={FORM_HEIGHT}
+              data-layout-iframe-id={`inline-${FORM_ID}`}
+              data-form-id={FORM_ID}
+            />
+            <Script src={`${FORM_ORIGIN}/js/form_embed.js`} strategy="afterInteractive" />
           </div>
         ) : (
           <div className="wv-quiet">

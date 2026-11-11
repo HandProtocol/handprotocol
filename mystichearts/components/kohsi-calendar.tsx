@@ -69,17 +69,28 @@ export function KohsiCalendar({ onHello, onVisit, onHost }: KohsiCalendarProps) 
     return adoptSheet(root, DAY_OVERLAY_CSS);
   }, [status]);
 
-  // A gathering with its own page here (the Fairy Ball): its button opens that page, which
-  // carries the tickets, instead of Kohsi's request form. Capture runs before the element's own
-  // click handler inside the shadow root.
+  // Which days carry a gathering with its own page here (the Fairy Ball): date → page.
+  const pageDays = useRef<Map<string, string>>(new Map());
+  useEffect(() => {
+    if (status !== "ready") return;
+    const abort = new AbortController();
+    eventPageDays(abort.signal).then((days) => {
+      pageDays.current = days;
+    });
+    return () => abort.abort();
+  }, [status]);
+
+  // A gathering with its own page here (the Fairy Ball) goes straight to that page, which
+  // carries the tickets: from its gold day, its entry in the strip, or its "Ask to join" button.
+  // No day card and no Kohsi request form first (koH, 2026-11-10). Capture runs before the
+  // element's own click handler inside the shadow root.
   useEffect(() => {
     const node = element.current;
     if (status !== "ready" || !node) return;
     const onClick = (event: Event) => {
-      const target = event.composedPath().find((each): each is HTMLElement => each instanceof HTMLElement && each.dataset?.act === "ask");
+      const target = event.composedPath().find((each): each is HTMLElement => each instanceof HTMLElement && Boolean(each.dataset?.act));
       if (!target) return;
-      const title = target.closest(".kg-item")?.querySelector(".kg-title")?.textContent;
-      const href = eventPageFor(title);
+      const href = pageFor(target, pageDays.current);
       if (!href) return;
       event.preventDefault();
       event.stopPropagation();
@@ -120,6 +131,41 @@ export function KohsiCalendar({ onHello, onVisit, onHost }: KohsiCalendarProps) 
       </p>
     </div>
   );
+}
+
+// The page a clicked control leads to, when it belongs to a gathering with its own page here.
+// "ask": the request button on a day card; "go": an entry in the strip of coming gatherings;
+// "day": a day in the month.
+function pageFor(target: HTMLElement, days: ReadonlyMap<string, string>): string | null {
+  const act = target.dataset.act;
+  if (act === "ask") return eventPageFor(target.closest(".kg-item")?.querySelector(".kg-title")?.textContent);
+  if (act === "go") return eventPageFor(target.querySelector(".kc-mq-title")?.textContent) ?? days.get(target.dataset.value ?? "") ?? null;
+  if (act === "day") return days.get(target.dataset.value ?? "") ?? null;
+  return null;
+}
+
+type ListedGathering = { title?: unknown; startsAt?: unknown; timezone?: unknown };
+
+// The listed gatherings that have a page here, by their day (YYYY-MM-DD in the gathering's own
+// zone, the same day the calendar lights). Kohsi out of reach: an empty map, and every click
+// falls through to the element as before.
+async function eventPageDays(signal: AbortSignal): Promise<Map<string, string>> {
+  const days = new Map<string, string>();
+  try {
+    const res = await fetch(`${KOHSI_URL}/v1/gatherings?limit=50`, { headers: { authorization: `Bearer ${KOHSI_KEY}` }, signal });
+    const body = res.ok ? await res.json() : null;
+    const list: ListedGathering[] = Array.isArray(body?.data) ? body.data : [];
+    for (const g of list) {
+      const href = eventPageFor(typeof g.title === "string" ? g.title : null);
+      if (!href || typeof g.startsAt !== "string") continue;
+      const zone = typeof g.timezone === "string" ? g.timezone : "America/Chicago";
+      const day = new Intl.DateTimeFormat("en-CA", { timeZone: zone, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(g.startsAt));
+      days.set(day, href);
+    }
+  } catch {
+    /* out of reach or aborted: no shortcuts */
+  }
+  return days;
 }
 
 // Adds a stylesheet to a shadow root; returns the undo.

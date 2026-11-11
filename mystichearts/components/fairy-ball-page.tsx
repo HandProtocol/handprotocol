@@ -23,8 +23,9 @@ const STARS = [
 
 export function FairyBallPage() {
   // The poster shows once it has loaded; until then (or if it is not there) a drawn card stands in.
-  const [poster, setPoster] = useState<"loading" | "ready" | "missing">("loading");
+  const [poster, setPoster] = useState<"loading" | "ready" | "missing">(FAIRY_BALL.poster ? "loading" : "missing");
   useEffect(() => {
+    if (!FAIRY_BALL.poster) return;
     const probe = new window.Image();
     probe.onload = () => setPoster("ready");
     probe.onerror = () => setPoster("missing");
@@ -91,7 +92,9 @@ export function FairyBallPage() {
               <dt>
                 <CalendarDays size={16} aria-hidden="true" /> When
               </dt>
-              <dd>{FAIRY_BALL.dateLine}. Doors and times on the ticket page.</dd>
+              <dd>
+                {FAIRY_BALL.dateLine}. {FAIRY_BALL.timeLine}.
+              </dd>
             </div>
             <div>
               <dt>

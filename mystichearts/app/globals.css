@@ -1348,3 +1348,109 @@ button { font: inherit; }
 }
 .wv-embed { margin-top: 0.6rem; border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 0 0 1px rgba(217, 165, 78, 0.35), 0 20px 50px rgba(0, 0, 0, 0.35); }
 .wv-embed-frame { display: block; width: 100%; min-height: 80vh; border: 0; }
+
+/* --- one screen, every size (2026-11-10, koH: the four chapters and the Fairy Ball must all be
+   in view without scrolling) ------------------------------------------------------------------ */
+/* the four chapters live in the foot row only; the header is the mark and Get in touch */
+.stage-head { grid-template-columns: 1fr auto; }
+.head-right .btn, .brand-place { white-space: nowrap; }
+
+@media (max-width: 40rem) {
+  .stage { height: 100svh; min-height: 34rem; }
+  .stage-head { padding: 0.9rem 1rem 0.2rem; }
+  .brand-mark { width: 64px; }
+  .stage-center {
+    align-content: center;
+    padding: 0.4rem 1.1rem 0.6rem;
+    min-height: 0;
+  }
+  .kicker { margin-bottom: 0.7rem; font-size: 0.66rem; letter-spacing: 0.22em; white-space: nowrap; }
+  .kicker::before, .kicker::after { width: 1.2rem; }
+  .headline { font-size: clamp(2.05rem, min(10.4vw, 5.6svh), 3.1rem); line-height: 1; }
+  .lede { margin-top: 0.8rem; font-size: 0.92rem; line-height: 1.55; max-width: 34ch; }
+  /* the two doors side by side, one thumb each */
+  .doors { margin-top: 1.1rem; width: 100%; flex-wrap: nowrap; gap: 0.55rem; }
+  .doors .btn { flex: 1 1 0; justify-content: center; min-width: 0; padding-inline: 0.7rem; font-size: 0.92rem; white-space: nowrap; }
+  .long-only { display: none; }
+  /* Happening soon: one slim ticket */
+  .soon { margin-top: 0.9rem; width: 100%; padding: 0.55rem 0.6rem 0.45rem; border-radius: 18px; }
+  .soon-kicker { margin-bottom: 0.25rem; font-size: 0.6rem; }
+  .soon-item { padding-block: 0.3rem; }
+  .soon-date { width: 2.6rem; padding-block: 0.25rem; }
+  .soon-day { font-size: 1.2rem; margin-top: 0.05rem; }
+  .soon-title { font-size: 1.02rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* the four chapters: a 2 by 2 set of glass pills along the bottom */
+  .stage-foot {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+    padding: 0.3rem 1rem calc(0.8rem + env(safe-area-inset-bottom, 0px));
+  }
+  .chapter-link {
+    min-height: 2.6rem;
+    padding: 0.45rem 0.6rem;
+    border: 1px solid rgba(246, 236, 223, 0.14);
+    background: rgba(18, 10, 15, 0.32);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+  }
+  .chapter-link + .chapter-link::before { content: none; }
+}
+/* short phones (an iPhone SE): the line under the headline gives way first */
+@media (max-width: 40rem) and (max-height: 44rem) {
+  .lede { display: none; }
+  .kicker { margin-bottom: 0.5rem; }
+}
+.btn svg { flex-shrink: 0; }
+@media (min-width: 40rem) {
+  /* the four chapters as one glass bar, so they read as the way in, not a footnote */
+  .stage-foot { padding-top: 0.4rem; }
+  .stage-foot {
+    justify-self: center;
+    width: max-content;
+    max-width: calc(100% - 2.5rem);
+    margin-bottom: clamp(1rem, 2.6vh, 1.8rem);
+    padding: 0.3rem;
+    gap: 0.2rem;
+    border: 1px solid rgba(246, 236, 223, 0.14);
+    border-radius: 999px;
+    background: rgba(18, 10, 15, 0.3);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+  }
+  .chapter-link { padding: 0.55rem 1.15rem; color: var(--cream); }
+  .chapter-link + .chapter-link::before { content: none; }
+}
+/* laptops and most desktops up to 960px tall: the same tightening as short screens */
+@media (min-width: 40rem) and (max-height: 60rem) {
+  .stage-head { padding-top: 1rem; padding-bottom: 0.4rem; }
+  .kicker { margin-bottom: 0.8rem; }
+  .lede { margin-top: 1rem; }
+  .doors { margin-top: 1.4rem; }
+  .soon { margin-top: 1.2rem; }
+}
+/* portrait tablets: the words centred in the height, the headline a size up */
+@media (min-width: 40rem) and (orientation: portrait) and (min-height: 60rem) {
+  .stage-center { align-content: center; }
+  .headline { font-size: clamp(3.4rem, 9.5vw, 6.4rem); }
+}
+/* koH 2026-11-10: the doors and Happening soon sit a little lower, under the words */
+.doors { margin-top: 2.9rem; }
+.soon { margin-top: 2rem; }
+@media (min-width: 40rem) and (max-height: 60rem) {
+  .doors { margin-top: 2.2rem; }
+  .soon { margin-top: 1.7rem; }
+}
+@media (max-width: 40rem) {
+  .doors { margin-top: 1.9rem; }
+  .soon { margin-top: 1.3rem; }
+}
+@media (max-width: 40rem) and (max-height: 44rem) {
+  .doors { margin-top: 1.5rem; }
+  .soon { margin-top: 1.1rem; }
+}
+@media (min-width: 40rem) and (min-height: 60rem) { .soon { margin-top: clamp(2rem, 4vh, 2.8rem); } }
+@media (max-width: 40rem) { .stage-center { padding-top: 4rem; } }
+@media (max-width: 40rem) and (max-height: 44rem) { .stage-center { padding-top: 2.2rem; } }
