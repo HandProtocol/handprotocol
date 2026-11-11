@@ -45,7 +45,7 @@ button { font: inherit; }
   background: var(--night);
 }
 
-.hero-video {
+.hero-video, .hero-poster {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -54,13 +54,21 @@ button { font: inherit; }
   z-index: 0;
   filter: saturate(1.05) contrast(1.02);
   animation: breathe 24s ease-in-out infinite alternate;
+  pointer-events: none;
 }
+.hero-poster { background: var(--night) center / cover no-repeat; }
+/* invisible until it really plays, so a refused autoplay never shows the phone's own play button */
+.hero-video { opacity: 0; transition: opacity 0.8s ease; }
+.hero-video[data-playing="true"] { opacity: 1; }
+.hero-video::-webkit-media-controls,
+.hero-video::-webkit-media-controls-start-playback-button,
+.hero-video::-webkit-media-controls-overlay-play-button { display: none !important; -webkit-appearance: none; }
 @keyframes breathe {
   from { transform: scale(1); }
   to { transform: scale(1.06); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-video { animation: none; }
+  .hero-video, .hero-poster { animation: none; }
 }
 
 .stage-shade {

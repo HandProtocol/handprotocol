@@ -20,9 +20,14 @@ const rise: Variants = {
   visible: (delay: number = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.9, delay, ease: EASE } }),
 };
 
+// The pergola loop. Phones in Low Power Mode (and some data savers) refuse muted autoplay and
+// draw their own play button over the video, a button that does nothing here because the stage
+// sits on top of it. So the video stays invisible until it is really playing; until then the
+// poster shows as a plain picture underneath, and the first touch anywhere tries once more.
 function HeroVideo() {
   const ref = useRef<HTMLVideoElement>(null);
   const still = useReducedMotion();
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     const video = ref.current;
@@ -30,28 +35,58 @@ function HeroVideo() {
     video.muted = true;
     if (still) {
       video.pause();
+      setPlaying(false);
       return;
     }
-    video.play().catch(() => {
-      /* autoplay refused: the poster stays */
-    });
+    const tryPlay = () => {
+      video.play().catch(() => {
+        /* refused: the poster stays */
+      });
+    };
+    const onPlaying = () => setPlaying(true);
+    const onPause = () => setPlaying(false);
+    video.addEventListener("playing", onPlaying);
+    video.addEventListener("timeupdate", onPlaying);
+    video.addEventListener("pause", onPause);
+    // autoplay may have started before this ran, so its "playing" event is already gone
+    if (!video.paused && video.currentTime > 0) setPlaying(true);
+    tryPlay();
+    const retry = () => {
+      if (video.paused) tryPlay();
+    };
+    window.addEventListener("pointerdown", retry, { once: true, passive: true });
+    window.addEventListener("touchstart", retry, { once: true, passive: true });
+    return () => {
+      video.removeEventListener("playing", onPlaying);
+      video.removeEventListener("timeupdate", onPlaying);
+      video.removeEventListener("pause", onPause);
+      window.removeEventListener("pointerdown", retry);
+      window.removeEventListener("touchstart", retry);
+    };
   }, [still]);
 
+  const poster = asset("/assets/images/hero-pergola-poster.jpg");
   return (
-    <video
-      ref={ref}
-      className="hero-video"
-      poster={asset("/assets/images/hero-pergola-poster.jpg")}
-      autoPlay={!still}
-      muted
-      loop
-      playsInline
-      preload="auto"
-      aria-hidden="true"
-    >
-      <source src={asset("/assets/video/hero-pergola.webm")} type="video/webm" />
-      <source src={asset("/assets/video/hero-pergola.mp4")} type="video/mp4" />
-    </video>
+    <>
+      <div className="hero-poster" style={{ backgroundImage: `url(${poster})` }} aria-hidden="true" />
+      <video
+        ref={ref}
+        className="hero-video"
+        data-playing={playing ? "true" : "false"}
+        autoPlay={!still}
+        muted
+        loop
+        playsInline
+        disablePictureInPicture
+        controls={false}
+        preload="auto"
+        tabIndex={-1}
+        aria-hidden="true"
+      >
+        <source src={asset("/assets/video/hero-pergola.webm")} type="video/webm" />
+        <source src={asset("/assets/video/hero-pergola.mp4")} type="video/mp4" />
+      </video>
+    </>
   );
 }
 
