@@ -19,17 +19,22 @@ type Gathering = {
   place: string | null;
   startsAt: string;
   timezone: string;
+  // Kohsi record 0148: the collective at somebody else's event; link is the organiser's page.
+  appearance?: boolean;
+  link?: string | null;
 };
 
 const SHOWN = 2;
 const noSubscribe = () => () => {};
 
 // One line on the card, from Kohsi or from the site itself.
-type SoonItem = { id: string; title: string; month: string; day: string; weekday: string; meta: string; href: string | null };
+type SoonItem = { id: string; title: string; month: string; day: string; weekday: string; meta: string; href: string | null; away?: boolean };
 
 function fromKohsi(g: Gathering): SoonItem {
   const p = parts(g);
-  return { id: g.id, title: g.title, month: p.month, day: p.day, weekday: p.weekday, meta: [p.weekday, p.time, g.place].filter(Boolean).join(" · "), href: eventPageFor(g.title) };
+  // An appearance opens the organiser's own page, in a new tab: their event, their tickets.
+  const away = g.appearance === true && typeof g.link === "string" && g.link.startsWith("https://");
+  return { id: g.id, title: g.title, month: p.month, day: p.day, weekday: p.weekday, meta: [away ? "Find us there" : p.weekday, p.time, g.place].filter(Boolean).join(" · "), href: away ? (g.link as string) : eventPageFor(g.title), away };
 }
 
 // The site's own gathering still to come (the Fairy Ball, while FAIRY_BALL.showUntil is ahead),
@@ -92,7 +97,8 @@ export function HappeningSoon({ onOpen }: { onOpen: () => void }) {
   const more = list.length > SHOWN;
   // A gathering with its own page here opens it; any other opens the calendar.
   const open = (item: SoonItem) => {
-    if (item.href) window.location.assign(item.href);
+    if (item.away && item.href) window.open(item.href, "_blank", "noopener,noreferrer");
+    else if (item.href) window.location.assign(item.href);
     else onOpen();
   };
 

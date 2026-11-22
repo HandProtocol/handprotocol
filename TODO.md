@@ -4,6 +4,7 @@ A working list of what's next for the public website. Items added at the bottom;
 
 ## Now
 
+- [ ] **Today (2026-11-22): register Google Postmaster Tools** for `kohsi.net` and `arvamobility.com` (postmaster.google.com, verify each by a DNS TXT record: kohsi.net and arvamobility.com DNS are in Netlify, cryptokoh). It shows our sending reputation at Gmail before we send directly from our own mail server. Blocklists checked 2026-11-22: clean on Spamhaus, SpamCop, Barracuda, SORBS, PSBL, Mailspike; only UCEPROTECT L2/L3 (OVH's whole range, rarely used); reverse DNS is mail.kohsi.net. kohsi.net mail relays through Resend again since 2026-11-22 (it had been going out direct and unsigned). The plan is Resend now, our own server for person-to-person mail as it proves itself, SES later (`kohsi/deploy/mail/arvamobility-koh.md`).
 - [x] **Push the form abuse limits to `main`** (landed 26c87d484, 2026-10-24) (feedback, intake, `_email.js`, `_ratelimit.js`, the feedback widget at `?v=2`). Migration 057 is already applied. After the deploy, send one real note from a page with the widget and confirm it lands on `/pins`.
 - [ ] **Decide the auth email limit.** Supabase sends yuhm auth mail through Resend at up to 30 per hour, enough to use up Resend's 100-a-day quota on its own. Lowering it protects the quota but can slow real sign-ups.
 - [ ] **Act on the internal findings from the docs program** (`docs/closed/HANDOFF.md`, kept out of git on purpose).
