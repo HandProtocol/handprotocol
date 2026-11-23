@@ -633,6 +633,21 @@ html.is-booking { overflow: hidden; }
   .booksheet__bar { padding-top: calc(.9rem + env(safe-area-inset-top)); }
 }
 @keyframes booksheet-up { from { transform: translateY(100%); } }
+.booksheet__leave {
+  position: absolute; inset: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: center; padding: 1.25rem;
+  background: rgb(var(--soot-rgb) / .72);
+}
+.booksheet__leave[hidden] { display: none; }
+.booksheet__leave-card {
+  width: min(24rem, 100%); padding: 1.75rem 1.5rem 1.5rem;
+  background: var(--smoke); border: 1px solid var(--gold-35);
+  box-shadow: 0 1.5rem 3rem rgb(0 0 0 / .45);
+}
+.booksheet__leave-title { font-family: var(--display); font-size: 1.5rem; color: var(--bone); margin: 0 0 .5rem; }
+.booksheet__leave-body { color: var(--bone-2); margin: 0 0 1.4rem; }
+.booksheet__leave-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+.booksheet__leave-actions .btn { flex: 1 1 auto; justify-content: center; }
 
 @media (prefers-reduced-motion: reduce) {
   .booksheet[open] { animation: none; }

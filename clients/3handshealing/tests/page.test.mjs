@@ -241,6 +241,7 @@ test('booking sheet: no booking link opens a new tab; every page carries the she
     assert.match(html, /<dialog[^>]*data-key="kohsi_pk_live_[A-Za-z0-9_-]+"[^>]*data-api="https:\/\/book\.3handshealing\.com"/, route);
     assert.match(html, /aria-labelledby="booksheet-title"/);
     assert.match(html, /<button class="booksheet__close" type="button" data-booksheet-close aria-label="Close booking">/, `${route} close button`);
+    assert.match(html, /<div class="booksheet__leave" data-booksheet-leave role="alertdialog"[^>]*hidden>[\s\S]*data-booksheet-stay>Keep booking<[\s\S]*data-booksheet-go>Leave</, `${route} asks before leaving a booking under way`);
     assert.equal(html.includes('kohsi_sk_'), false, 'never a secret key');
     assert.equal(/<script[^>]*widget\.js/.test(html), false, `${route}: widget.js is not on first paint`);
     assert.match(html, /<dialog[\s\S]*<\/dialog>\s*<script src="\/assets\/site\.js/, `${route}: the sheet sits before site.js`);

@@ -62,6 +62,16 @@ function bookSheet(c) {
     <div class="booksheet__body" data-booksheet-body>
       <p class="booksheet__wait" data-booksheet-wait>Opening the calendar…</p>
     </div>
+    <div class="booksheet__leave" data-booksheet-leave role="alertdialog" aria-modal="true" aria-labelledby="booksheet-leave-title" aria-describedby="booksheet-leave-body" hidden>
+      <div class="booksheet__leave-card">
+        <p class="booksheet__leave-title" id="booksheet-leave-title">Leave your booking?</p>
+        <p class="booksheet__leave-body" id="booksheet-leave-body">You have not sent it yet.</p>
+        <div class="booksheet__leave-actions">
+          <button class="btn btn--gold btn--sm" type="button" data-booksheet-stay>Keep booking</button>
+          <button class="btn btn--sm" type="button" data-booksheet-go>Leave</button>
+        </div>
+      </div>
+    </div>
   </dialog>`;
 }
 

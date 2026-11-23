@@ -76,20 +76,59 @@
   };
 
   sheet.addEventListener('close', () => {
+    leave.hidden = true;
     document.documentElement.classList.remove('is-booking');
     if (pushed) { pushed = false; history.back(); }
     if (opener && opener.isConnected) opener.focus({ preventScroll: true });
     opener = null;
   });
-  // Phone Back closes the sheet instead of leaving the page.
-  window.addEventListener('popstate', () => { if (sheet.open) { pushed = false; close(); } });
-  sheet.querySelector('[data-booksheet-close]').addEventListener('click', close);
-  // Esc and a click on the dimmed page around it do not close the sheet: one
-  // stray key or tap would throw away a half-filled booking (koH, 2026-11-23).
-  // The close button and phone Back do. The keydown guard also covers
-  // browsers whose second Esc would force the dialog shut.
+  // Leaving a booking that is under way asks first (koH, 2026-11-23: "esc
+  // shouldnt close it"). Esc, the close button and phone Back all ask the same
+  // question once a day is picked or anything is typed; before that, or once
+  // the request is sent, they simply close. A click on the dimmed page around
+  // the sheet never closes it: a stray tap is not a choice to leave.
+  const leave = sheet.querySelector('[data-booksheet-leave]');
+  const inProgress = () => {
+    const st = body.querySelector('kohsi-booking')?.kohsi?.state;
+    if (!st || ['requested', 'loading', 'error', 'offline', 'remembered'].includes(st.step)) return false;
+    if (st.step === 'sending' || st.dayPicked || st.timeId) return true;
+    return Object.values(st.values || {}).some((v) => v === true || (typeof v === 'string' && v.trim() !== ''));
+  };
+  const askToLeave = () => {
+    if (!inProgress()) return close();
+    leave.hidden = false;
+    leave.querySelector('[data-booksheet-stay]').focus({ preventScroll: true });
+  };
+  const stay = () => {
+    leave.hidden = true;
+    sheet.querySelector('[data-booksheet-close]').focus({ preventScroll: true });
+  };
+  leave.querySelector('[data-booksheet-stay]').addEventListener('click', stay);
+  leave.querySelector('[data-booksheet-go]').addEventListener('click', close);
+  // Phone Back: the sheet's history entry is already gone, so put it back
+  // while the question is open; Leave then steps back past it as usual.
+  window.addEventListener('popstate', () => {
+    if (!sheet.open) return;
+    pushed = false;
+    if (!leave.hidden) return stay();
+    if (!inProgress()) return close();
+    try { history.pushState({ booksheet: true }, ''); pushed = true; } catch { pushed = false; }
+    askToLeave();
+  });
+  sheet.querySelector('[data-booksheet-close]').addEventListener('click', askToLeave);
+  // The dialog never closes itself on Esc (the guard on keydown also covers
+  // browsers whose second Esc would force it shut). Esc inside one of the
+  // widget's own pop-ups only closes that pop-up; with the question open, Esc
+  // means stay.
   sheet.addEventListener('cancel', (e) => e.preventDefault());
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && sheet.open) e.preventDefault(); }, true);
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape' || !sheet.open) return;
+    e.preventDefault();
+    if (!leave.hidden) return stay();
+    const root = body.querySelector('kohsi-booking')?.shadowRoot;
+    if (root && root.querySelector('.ui-popover.is-open')) return;
+    askToLeave();
+  }, true);
 
   const open = (a) => {
     const service = a.dataset.kohsi || '';
