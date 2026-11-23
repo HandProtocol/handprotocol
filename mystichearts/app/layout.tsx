@@ -1,18 +1,33 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Alegreya_Sans, Alegreya_Sans_SC, Marcellus } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+// The body face: Alegreya Sans, the humanist partner to the display face. It has no 600, so
+// semibold text renders at 700.
+const sans = Alegreya_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  weight: ["400", "500", "700"],
+  style: ["normal", "italic"],
 });
 
-const cormorant = Cormorant_Garamond({
+// The almanac sheet's small capitals (kickers, labels, the ribbons and the doors).
+const smallCaps = Alegreya_Sans_SC({
+  subsets: ["latin"],
+  variable: "--font-sc",
+  display: "swap",
+  weight: ["500", "700"],
+});
+
+// The display face, for every heading on every page: Marcellus, a clean Roman inscriptional
+// face. It has one weight and no italic, so globals.css turns font synthesis off and headings
+// render in the true regular. Swap the face here; everything reads --font-display.
+const display = Marcellus({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: "400",
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://mysticheartshealing.com";
@@ -34,7 +49,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${cormorant.variable}`}>{children}</body>
+      <body className={`${sans.variable} ${display.variable} ${smallCaps.variable}`}>{children}</body>
     </html>
   );
 }

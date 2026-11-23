@@ -4,10 +4,10 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowUpRight, CalendarDays, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { ContactModal, type Door } from "./contact-modal";
+import { AlmanacSheet } from "./almanac-sheet";
+import type { Door } from "./contact-modal";
 import { HappeningSoon } from "./happening-soon";
 import { CHAPTERS, type ChapterKey } from "./copy";
-import { StorySheet } from "./story-sheet";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const asset = (path: string) => `${basePath}${path}`;
@@ -90,6 +90,46 @@ function HeroVideo() {
   );
 }
 
+// Star points around the headline: position in the headline's box, size, and when each wakes.
+const TWINKLES = [
+  { x: "-4%", y: "8%", s: "14px", d: "0.4s" },
+  { x: "97%", y: "22%", s: "11px", d: "2.1s" },
+  { x: "88%", y: "96%", s: "15px", d: "3.6s" },
+  { x: "6%", y: "78%", s: "9px", d: "5.2s" },
+  { x: "52%", y: "-6%", s: "8px", d: "6.4s" },
+] as const;
+
+// Fireflies drifting over the stage itself, not just the chapter row. They sit under the words
+// and the buttons (z-index 1, before the content in paint order) and in the band between the
+// header and the doors, so they never cover a control. Each one wanders on its own clock.
+const FLIES = [
+  { x: "12%", y: "30%", dx: "9vw", dy: "-6vh", tx: "7.5s", ty: "9.2s", b: "4.1s", d: "-1s" },
+  { x: "82%", y: "22%", dx: "-11vw", dy: "7vh", tx: "8.8s", ty: "7.1s", b: "5.3s", d: "-3s" },
+  { x: "70%", y: "54%", dx: "-8vw", dy: "-9vh", tx: "10.2s", ty: "8.4s", b: "3.7s", d: "-6s" },
+  { x: "24%", y: "62%", dx: "12vw", dy: "-5vh", tx: "9.4s", ty: "11s", b: "4.6s", d: "-2s" },
+  { x: "48%", y: "16%", dx: "-7vw", dy: "8vh", tx: "11.6s", ty: "9.8s", b: "5.9s", d: "-4.5s" },
+  { x: "90%", y: "44%", dx: "-10vw", dy: "-6vh", tx: "8.1s", ty: "10.6s", b: "4.4s", d: "-7s" },
+  { x: "6%", y: "48%", dx: "8vw", dy: "9vh", tx: "12.4s", ty: "8.9s", b: "6.2s", d: "-5s" },
+] as const;
+
+function HeroFireflies() {
+  return (
+    <div className="hero-flies" aria-hidden="true">
+      {FLIES.map((f, index) => (
+        <span
+          key={index}
+          className="hero-fly"
+          style={{ "--x": f.x, "--y": f.y, "--dx": f.dx, "--dy": f.dy, "--tx": f.tx, "--ty": f.ty, "--b": f.b, "--d": f.d } as CSSProperties}
+        >
+          <span>
+            <i />
+          </span>
+        </span>
+      ))}
+    </div>
+  );
+}
+
 export function MysticHeartsPage() {
   const [door, setDoor] = useState<Door | null>(null);
   const [chapter, setChapter] = useState<ChapterKey | null>(null);
@@ -107,6 +147,7 @@ export function MysticHeartsPage() {
       <HeroVideo />
       <div className="stage-shade" aria-hidden="true" />
       <div className="stage-grain" aria-hidden="true" />
+      <HeroFireflies />
 
       <header className="stage-head">
         <motion.a href="#" className="brand" variants={rise} initial="hidden" animate="visible" custom={0.1}>
@@ -126,7 +167,18 @@ export function MysticHeartsPage() {
           Ten acres of healing land
         </motion.p>
         <motion.h1 className="headline" variants={rise} initial="hidden" animate="visible" custom={0.5}>
-          A divine dream, <em>made real</em> in East Austin.
+          <span className="headline-text">
+            A divine dream, <em>made real</em> in East Austin.
+          </span>
+          {/* the same words again, stacked exactly on top, carrying only the travelling glint */}
+          <span className="headline-glint" aria-hidden="true">
+            A divine dream, <em>made real</em> in East Austin.
+          </span>
+          <span className="headline-twinkles" aria-hidden="true">
+            {TWINKLES.map((t, index) => (
+              <i key={index} style={{ "--x": t.x, "--y": t.y, "--s": t.s, "--d": t.d } as CSSProperties} />
+            ))}
+          </span>
         </motion.h1>
         <motion.p className="lede" variants={rise} initial="hidden" animate="visible" custom={0.7}>
           A sober, interfaith home where people gather to heal, to practice, and to live more connected to the land and to each other.
@@ -161,8 +213,17 @@ export function MysticHeartsPage() {
         ))}
       </motion.nav>
 
-      <StorySheet chapter={chapter} onClose={() => setChapter(null)} onSwitch={setChapter} onDoor={openDoor} />
-      <ContactModal door={door} onClose={() => setDoor(null)} onSwitch={setDoor} onChapter={openChapter} fallbackEmail={CONTACT_EMAIL} />
+      <AlmanacSheet
+        chapter={chapter}
+        door={door}
+        onChapter={openChapter}
+        onDoor={openDoor}
+        onClose={() => {
+          setChapter(null);
+          setDoor(null);
+        }}
+        fallbackEmail={CONTACT_EMAIL}
+      />
     </main>
   );
 }

@@ -53,7 +53,7 @@ export function KohsiBooking({ fallbackEmail, date = null }: { fallbackEmail: st
   return (
     <div className="kohsi-shell" data-status={status}>
       {status === "loading" && <p className="door-fallback">Opening the calendar…</p>}
-      {createElement("kohsi-booking", { key: date ?? "any", "data-key": KOHSI_KEY, "data-api": KOHSI_URL, "data-lang": "en", "data-heading": "3", ...(date ? { "data-service": "visit", "data-date": date } : {}) })}
+      {createElement("kohsi-booking", { key: date ?? "any", "data-key": KOHSI_KEY, "data-api": KOHSI_URL, "data-lang": "en", "data-heading": "3", "data-email": fallbackEmail, ...(date ? { "data-service": "visit", "data-date": date } : {}) })}
     </div>
   );
 }

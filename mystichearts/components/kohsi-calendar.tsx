@@ -24,6 +24,9 @@ interface KohsiCalendarProps {
   onHost: () => void;
 }
 
+// The collective's public address, as the hero and the waiver show it.
+const CONTACT_EMAIL = "mysticheartshealing@gmail.com";
+
 export function KohsiCalendar({ onHello, onVisit, onHost }: KohsiCalendarProps) {
   const [status, setStatus] = useState<"loading" | "ready" | "missing" | "failed">("loading");
   const element = useRef<HTMLElement | null>(null);
@@ -121,6 +124,8 @@ export function KohsiCalendar({ onHello, onVisit, onHost }: KohsiCalendarProps) 
         "data-host-label": WHATS_ON.calendar.host,
         "data-visit-label": WHATS_ON.calendar.visit,
         "data-empty": WHATS_ON.calendar.empty,
+        // Named on Kohsi's own limit and failure notices (and on the visit form it opens inside a day).
+        "data-email": CONTACT_EMAIL,
       })}
       <p className="calendar-aside">
         {WHATS_ON.hello}{" "}
@@ -182,26 +187,23 @@ const DAY_OVERLAY_CSS = `
 /* the sheet already says what this is: the element's own heading stays for screen readers only */
 .kc-h { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .kc-day { aspect-ratio: auto; height: clamp(2.4em, 5.4vh, 3.3em); max-height: none; }
-/* fixed: the sheet's backdrop-filter makes the sheet its containing block, so the day rises
-   over the whole sheet with a margin of padding all round, wherever the sheet is scrolled */
+/* The day rises over the calendar itself (.kc is position: relative) as a card of paper, as tall
+   as it needs, and the page scrolls to read the rest. Not fixed to the book: the page it sits on
+   wears a fade mask (the scroll cues), and a mask clips every descendant, fixed ones too, so a
+   book-wide card lost its left half (the day and its buttons) behind the page edge (2026-11-22). */
 .kc-panel {
-  position: fixed;
-  inset: clamp(0.75rem, 2.2vw, 1.4rem);
+  position: absolute;
+  inset: 0 0 auto;
   z-index: 20;
   margin: 0;
-  overflow: auto;
-  overscroll-behavior: contain;
-  padding: clamp(1.1em, 3vw, 1.8em);
-  border: 1px solid rgba(217, 165, 78, 0.38);
-  border-radius: 22px;
-  background:
-    radial-gradient(120% 80% at 10% 0%, rgba(217, 165, 78, 0.12), transparent 60%),
-    rgba(26, 13, 21, 0.94);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 0 0 100vmax rgba(14, 7, 11, 0.55);
+  padding: clamp(1.3em, 3.2vw, 2em);
+  color: #2b1621;
+  border: 3px double rgba(168, 117, 38, 0.85);
+  border-radius: 2px;
+  background: radial-gradient(120% 90% at 50% 30%, #f7eedd 50%, #e8d6b4 100%);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 0 100vmax rgba(43, 22, 33, 0.42);
   opacity: 1;
   animation: none;
 }
-.kc-day-h { font-size: 1.35em; }
+.kc-day-h { font-size: 1.45em; font-family: var(--font-display), Georgia, serif; font-weight: 400; }
 `;
