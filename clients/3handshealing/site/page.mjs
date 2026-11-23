@@ -54,7 +54,7 @@ function bookSheet(c) {
   const phone = String(c.contact.phone || '').trim();
   return `<dialog class="booksheet" id="booksheet" aria-labelledby="booksheet-title" data-key="${e(k.key)}" data-api="${e(k.api)}"${mail ? ` data-email="${e(mail)}"` : ''}${phone ? ` data-phone="${e(phone)}"` : ''}>
     <div class="booksheet__bar">
-      <p class="eyebrow booksheet__title" id="booksheet-title">Book with Maria</p>
+      <p class="eyebrow booksheet__title" id="booksheet-title">${e(c.brand.name)}</p>
       <button class="booksheet__close" type="button" data-booksheet-close aria-label="Close booking">
         <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3 3 15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg>
       </button>
@@ -114,6 +114,11 @@ const KOHSI_SERVICES = Object.freeze({
   'emotional release exercises': 'emotional-release',
   'spiritual counseling & practice': 'spiritual-counseling',
   'distance healing session for your pet': 'pet-distance',
+});
+// A session she offers at more than one length in Kohsi gets one Book button
+// per length, so the visitor never lands on the wrong one (2026-11-23).
+const KOHSI_LENGTHS = Object.freeze({
+  'integrated bodywork': [['bodywork', '60 min'], ['bodywork-90', '90 min']],
 });
 const INTRO_SERVICE = 'intro-call';
 
@@ -183,6 +188,19 @@ function sessionHref(s, cta, c) {
   if (isUrl(s.book_url)) return { href: s.book_url.trim(), external: true, kohsi: c ? kohsiOf(c, s.book_url.trim()) : null };
   const kohsi = c ? kohsiLink(c, serviceFor(s)) : '';
   return kohsi ? { href: kohsi, external: true, kohsi: kohsiOf(c, kohsi) } : cta;
+}
+
+// The lengths a session books at, each with its own way in, or null when it
+// books one way (its own link, or a single Kohsi service).
+function sessionLengths(s, c) {
+  if (!c || isUrl(s.book_url)) return null;
+  const lengths = KOHSI_LENGTHS[String(s.name || '').trim().toLowerCase()];
+  if (!lengths) return null;
+  const out = lengths.map(([key, label]) => {
+    const href = kohsiLink(c, key);
+    return href ? { label, href, external: true, kohsi: kohsiOf(c, href) } : null;
+  });
+  return out.every(Boolean) ? out : null;
 }
 
 function tags(text) {
@@ -487,6 +505,7 @@ ${head({ c, featured, origin, route: '/' })}
 
 function offer(s, i, cta, c, pre = '') {
   const go = sessionHref(s, cta, c);
+  const lengths = sessionLengths(s, c);
   const chips = [s.length, s.where].filter(Boolean);
   const id = `${pre}${i}`;
   return `<article class="offer" aria-labelledby="o-${id}">
@@ -501,7 +520,11 @@ function offer(s, i, cta, c, pre = '') {
             }
             <div class="offer__foot">
               ${s.price ? `<span class="price">${e(s.price)}</span>` : '<span></span>'}
-              ${link(go.href, 'btn btn--gold btn--sm', 'Book now', go.kohsi)}
+              ${
+                lengths
+                  ? `<span class="offer__books">${lengths.map((l) => link(l.href, 'btn btn--gold btn--sm', `Book ${e(l.label)}`, l.kohsi)).join('')}</span>`
+                  : link(go.href, 'btn btn--gold btn--sm', 'Book now', go.kohsi)
+              }
             </div>
           </article>`;
 }
@@ -649,6 +672,12 @@ ${head({ c, featured: photo || featured, origin, route, title: p.seo_title || `$
             <ul class="menu" role="list">
               ${sessions
                 .map((s) => {
+                  const lengths = sessionLengths(s, c);
+                  if (lengths) {
+                    return lengths
+                      .map((l) => `<li>${link(l.href, '', `<span>${e(s.name)}</span><span class="menu__meta">${e([s.price, l.label].filter(Boolean).join(' · '))}</span>`, l.kohsi)}</li>`)
+                      .join('\n              ');
+                  }
                   const go = sessionHref(s, cta, c);
                   const meta = [s.price, s.length].filter(Boolean).join(' · ');
                   return `<li>${link(go.href, '', `<span>${e(s.name)}</span>${meta ? `<span class="menu__meta">${e(meta)}</span>` : '<span class="menu__meta" aria-hidden="true">→</span>'}`, go.kohsi)}</li>`;

@@ -640,3 +640,4 @@ html.is-booking { overflow: hidden; }
   .arch-frame--hero .glow { animation: none; }
   *, *::before, *::after { transition: none !important; }
 }
+.offer__books { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .6rem; }

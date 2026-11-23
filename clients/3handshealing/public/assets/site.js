@@ -84,8 +84,12 @@
   // Phone Back closes the sheet instead of leaving the page.
   window.addEventListener('popstate', () => { if (sheet.open) { pushed = false; close(); } });
   sheet.querySelector('[data-booksheet-close]').addEventListener('click', close);
-  // A click on the dimmed page around the sheet closes it.
-  sheet.addEventListener('click', (e) => { if (e.target === sheet) close(); });
+  // Esc and a click on the dimmed page around it do not close the sheet: one
+  // stray key or tap would throw away a half-filled booking (koH, 2026-11-23).
+  // The close button and phone Back do. The keydown guard also covers
+  // browsers whose second Esc would force the dialog shut.
+  sheet.addEventListener('cancel', (e) => e.preventDefault());
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && sheet.open) e.preventDefault(); }, true);
 
   const open = (a) => {
     const service = a.dataset.kohsi || '';

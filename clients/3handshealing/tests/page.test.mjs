@@ -217,6 +217,9 @@ test('Kohsi: every Book button opens her booking page on the right session', () 
     assert.equal(html.includes('Online booking is coming soon'), false, route);
     assert.match(html, /Secure booking and payment/, `${route} padlock`);
   }
+  const body = render('/body');
+  assert.match(body, /href="https:\/\/book\.3handshealing\.com\/\?service=bodywork" data-kohsi="bodywork">Book 60 min</, 'bodywork 60');
+  assert.match(body, /href="https:\/\/book\.3handshealing\.com\/\?service=bodywork-90" data-kohsi="bodywork-90">Book 90 min</, 'bodywork 90');
   const renamed = sanitize(DEFAULT_CONTENT);
   renamed.page_pets.sessions[0].name = 'Something new';
   assert.match(renderPage({ content: renamed, media: seedMedia(), route: '/pets' }), /href="https:\/\/book\.3handshealing\.com\/" data-kohsi="">Book now/, 'an unknown session opens the page without a preselection');
@@ -232,7 +235,7 @@ test('booking sheet: no booking link opens a new tab; every page carries the she
     assert.ok(book.length > 0, `${route} has Book links`);
     for (const a of book) {
       assert.equal(a.includes('target='), false, `${route}: ${a}`);
-      assert.match(a, /data-kohsi="[a-z-]*"/, `${route}: ${a}`);
+      assert.match(a, /data-kohsi="[a-z0-9-]*"/, `${route}: ${a}`);
     }
     assert.equal((html.match(/<dialog class="booksheet" id="booksheet"/g) || []).length, 1, `${route} one sheet`);
     assert.match(html, /<dialog[^>]*data-key="kohsi_pk_live_[A-Za-z0-9_-]+"[^>]*data-api="https:\/\/book\.3handshealing\.com"/, route);

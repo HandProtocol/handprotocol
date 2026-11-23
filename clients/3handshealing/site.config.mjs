@@ -17,7 +17,7 @@ export default {
 
   supabase: { projectRef: 'vconmgerblqbworcqkvr', schema: 'command' },
 
-  assetVersion: '20261122a',
+  assetVersion: '20261123a',
 
   fonts: {
     googleCss:
