@@ -1,0 +1,142 @@
+/* The team list: Raspberry Night tokens from app/globals.css, calm and dense enough to work in. */
+
+.page {
+  min-height: 100svh;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 16px 96px;
+  background: var(--night);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.title {
+  margin: 0;
+  font-family: var(--font-display), serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 6vw, 2.8rem);
+  line-height: 1.1;
+}
+.lead { margin: 14px 0 20px; color: var(--cream-70); font-size: 1.1rem; line-height: 1.5; }
+.quiet { margin: 6px 0 0; color: var(--cream-50); font-size: 0.95rem; }
+.error { margin: 16px 0; padding: 10px 14px; border-radius: 12px; background: rgba(161, 36, 80, 0.25); border: 1px solid var(--raspberry); }
+.srOnly { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* sign in */
+.signin { max-width: 440px; margin: 12vh auto 0; }
+.signinForm { display: grid; gap: 12px; }
+
+.input, .textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--gold-line);
+  background: rgba(18, 10, 15, 0.7);
+  color: var(--cream);
+  font-size: 1rem;
+}
+.textarea { resize: vertical; line-height: 1.45; }
+.input:focus, .textarea:focus, .addInput:focus { outline: 2px solid var(--gold-soft); outline-offset: 1px; }
+select.input { appearance: auto; }
+input[type="date"].input { color-scheme: dark; }
+
+.primary {
+  padding: 13px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--night-deep);
+  font-weight: 700;
+  cursor: pointer;
+}
+.primary:disabled { opacity: 0.6; cursor: default; }
+.link { border: 0; background: none; color: var(--gold); cursor: pointer; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px; }
+.danger { border: 1px solid rgba(161, 36, 80, 0.7); background: none; color: var(--cream-70); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.danger:hover { background: rgba(161, 36, 80, 0.3); color: var(--cream); }
+
+/* board */
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
+.me { display: flex; gap: 14px; align-items: center; color: var(--cream-70); }
+
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 8px; }
+.chip, .chipOn {
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--gold-line);
+  background: none;
+  color: var(--cream-70);
+  cursor: pointer;
+}
+.chipOn { background: var(--gold); border-color: var(--gold); color: var(--night-deep); font-weight: 700; }
+.toggle { margin-left: auto; display: flex; gap: 8px; align-items: center; color: var(--cream-70); cursor: pointer; }
+.toggle input { accent-color: var(--gold); width: 18px; height: 18px; }
+
+.area { margin-top: 34px; }
+.areaHead { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-bottom: 8px; border-bottom: 1px solid var(--gold-line); }
+.areaHead h2 { margin: 0; font-family: var(--font-display), serif; font-weight: 400; font-size: 1.45rem; }
+.areaHead p { margin: 0; color: var(--cream-50); font-size: 0.95rem; }
+
+.list { list-style: none; margin: 0; padding: 0; }
+.task, .taskDone { border-bottom: 1px solid rgba(217, 165, 78, 0.12); }
+.taskDone .taskTitle { color: var(--cream-50); text-decoration: line-through; text-decoration-color: var(--gold-soft); }
+.taskLine { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; }
+.check { flex: none; width: 20px; height: 20px; margin-top: 3px; accent-color: var(--gold); cursor: pointer; }
+.taskTitle {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: none;
+  color: var(--cream);
+  text-align: left;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  padding: 0;
+  cursor: pointer;
+}
+.taskTitle:hover { color: #fff; }
+.hasNotes { color: var(--gold); font-weight: 700; }
+.meta { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; flex: none; max-width: 45%; }
+.owner, .due, .overdue, .doing {
+  font-size: 0.82rem;
+  padding: 2px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.owner { background: rgba(217, 165, 78, 0.16); color: var(--gold); }
+.due { border: 1px solid var(--gold-line); color: var(--cream-70); }
+.overdue { background: rgba(161, 36, 80, 0.4); color: var(--cream); }
+.doing { background: rgba(161, 36, 80, 0.25); color: var(--cream); }
+
+.editor { display: grid; gap: 12px; padding: 4px 0 18px 32px; }
+.field { display: grid; gap: 4px; flex: 1 1 140px; }
+.field > span { font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--cream-50); }
+.fieldRow { display: flex; flex-wrap: wrap; gap: 12px; }
+.editorFoot { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.add { display: flex; gap: 8px; padding: 8px 0 0 32px; }
+.addInput {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px dashed var(--gold-line);
+  background: none;
+  color: var(--cream);
+  font-size: 1rem;
+}
+.addInput::placeholder { color: var(--cream-50); }
+.addButton { border: 0; border-radius: 999px; padding: 6px 16px; background: var(--gold); color: var(--night-deep); font-weight: 700; cursor: pointer; }
+
+@media (max-width: 560px) {
+  .page { padding-top: 28px; }
+  .taskLine { flex-wrap: wrap; }
+  .meta { max-width: none; width: 100%; justify-content: flex-start; padding-left: 32px; }
+  .editor, .add { padding-left: 0; }
+  .toggle { margin-left: 0; }
+}

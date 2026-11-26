@@ -18,4 +18,6 @@ TOKEN="${NETLIFY_AUTH_TOKEN:-$(python3 -c "import json;print(json.load(open('$HO
 # runs that build and bundles HAND's functions and edge functions with this site.
 STAGE="$(mktemp -d)"; trap 'rm -rf "$STAGE"' EXIT
 cp -a out "$STAGE/site"
-(cd "$STAGE" && NETLIFY_AUTH_TOKEN="$TOKEN" timeout 600 netlify deploy --prod --no-build --dir site --site "$SITE_ID" --message "${1:-publish}")
+# The team list's API (/api/todo, netlify/functions/todo.mjs): zero dependencies, so a plain copy bundles.
+cp -a netlify/functions "$STAGE/functions"
+(cd "$STAGE" && NETLIFY_AUTH_TOKEN="$TOKEN" timeout 600 netlify deploy --prod --no-build --dir site --functions functions --site "$SITE_ID" --message "${1:-publish}")

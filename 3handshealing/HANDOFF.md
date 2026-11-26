@@ -1,0 +1,505 @@
+# Handoff — Three Hands Healing (Maria) · 2026-09-04
+
+Client website for Maria's healing practice (EFT/Tapping, Candace Silvers
+Energy Healing, bodywork, Qi Gong, Systemic Family Constellations, intuitive
+emotional release). **Status (2026-09-01): design preview LIVE; a 17-style
+design portfolio is LIVE at https://handprotocol.org/3handshealing/styles/
+(noindex) waiting for Maria's picks; copy phase blocked on her answers to a
+16-question info sheet. A second batch of ten "bedazzled" styles is
+**LIVE in the same gallery since 2026-09-04** (27 cards, Bedazzled filter),
+reviewed + live-QA'd — see "Bedazzled batch". **2026-09-04 (late): Maria's
+licensed photos + brand kit arrived; Cathedral rebuilt on the kit** — see
+"Brand kit + licensed photos". **2026-09-05: Cathedral IS the main site** —
+`web/3handshealing/index.html` is now the Cathedral build (brand kit,
+licensed photos, indexable); the old three-direction preview moved to
+`styles/original/`. Next layer is planned, not built: `plan-eft-and-ghl-funnel.md`
+(EFT "what to expect" page + GoHighLevel funnel). Next human step: text Maria.**
+
+## Owner-editable rebuild (2026-09-06) — `clients/3handshealing/`
+
+The Cathedral design now also exists as an **owner-editable site** on the
+HAND client-site engine (the ZeroBlur pattern turned into a template):
+Maria will edit every line and photo at `/admin/` with a one-time email
+link. Built with the `hand-client-site` skill; state and next steps in
+`clients/3handshealing/HANDOFF.md`. **LIVE since 2026-09-06 at
+https://3handshealing.netlify.app** (own Netlify site, shared Supabase,
+migration 044 applied). Owners who can sign in at `/admin/`:
+maria.komie@gmail.com, cryptokoh@gmail.com, hand@handprotocol.org. The public
+page at https://handprotocol.org/3handshealing/ is unchanged; the
+cut-over to 3handshealing.com stays a separate, later step. Not committed.
+
+## RESUME HERE (2026-11-05): booking moves to Akosi
+
+**Update, later on 2026-11-05: the booking looks like her site.** `kohsi/deploy/tenants/3handshealing.json` exists (eleven services, funnel words, square dark theme with STIX Two Text + Montserrat and the favicon mark) and renders locally as a flat teal panel with gold hairlines, square day and time chips, and a gold REQUEST THIS TIME button. Theme engine gained `shape: "square"` and the two fonts. Nothing applied to production yet; the box steps are the spec's "W0a status" row in `kohsi/docs/plans/2026-11-05-booking-experience-spec.md`. Nothing committed.
+
+koH, 2026-11-05: Three Hands Healing is the practitioner build; custom booking first, better than
+Calendly, mobile app soon, safe word later. Plan: `../kohsi/docs/plans/2026-11-05-three-hands-healing-practitioner-booking.md`
+(P1 tenant profile, P2 book.3handshealing.com, P5 the site's Book buttons open Akosi instead of
+Calendly; then P3 pay to hold, P4 first-session mail, P6 her phone, P7 first-visit rules, P8 later
+phase). Nothing built. **Build order and the experience standard: `../kohsi/docs/plans/2026-11-05-booking-experience-spec.md` (waves 0 to 3; wave 0 by hand, wave 1 = four agents).** The Calendly fields below are history once P5 lands.
+
+## Start here (cold session)
+
+0. **Booking safety / client vetting work (2026-09-16/17):** read
+   `../docs/closed/3handshealing/HANDOFF-booking-safety.md` instead of this file; it is self-contained.
+1. Read this file. Then `design-portfolio-brief.md` if you touch any style page.
+2. Two things are waiting on Maria: **style picks** (she hearts styles in the
+   gallery → "Send picks to koH" → `command.feedback_pins` row tagged
+   🧭 picks · 🎨 style + Telegram 🎯 Inspector) and the **16-question info
+   sheet** answers. Check /pins before doing anything else.
+3. The root is now the real design (Cathedral) but still HAND-hosted with
+   placeholder booking/contact — not yet a production client site. The other
+   26 styles stay in the gallery until koH says to prune them.
+4. **Bedazzled batch is done and live** (2026-09-04, `main` `8eed885e7`). koH
+   asked that day to stop using the multi-agent `Workflow` ("ultracode") runs
+   — review directly with the tools in `tools/`. Two structural Talavera
+   minors remain open in `bedazzled-status.json`; nothing else is pending on
+   our side.
+
+## Orient in one paragraph
+
+A three-direction design preview was built 2026-08-11 and is live at
+https://handprotocol.org/3handshealing/ (single page, anchor nav, on-page
+design switcher: Gateway / Meadow / Forest). On 2026-08-16 Maria sent four
+copy blocks (hero/intro, "How we work together", About teaser, validation
+paragraph). This session mapped that copy against the built page, found it
+covers the narrative half of the site but none of the factual/trust half, and
+produced (a) an internal copy deck and (b) a Maria-facing fillable info sheet
+published as a private artifact. Nothing on the live page has changed yet.
+
+## Where things are
+
+| What | Path / URL | State |
+|---|---|---|
+| **Main site (Cathedral)** | `web/3handshealing/` (index.html, style.css, script.js, assets/) | Since 2026-09-05 — copy of `styles/cathedral/` with root-relative asset paths, no portfolio pill, no noindex, canonical + OG + favicon. Live URL https://handprotocol.org/3handshealing/ · in `web/sitemap.xml` (prio 0.8, lastmod 2026-09-05) |
+| Original 3-direction preview | `web/3handshealing/styles/original/` (index.html, style.css, script.js, studio.css, studio.js, vendor/) | Moved here 2026-09-05 (was the root); asset paths rewritten to `../../assets/`; noindex meta + the `styles/*` header; gallery "Originals" cards point at `original/?design=…` |
+| EFT page + funnel plan | `3handshealing/plan-eft-and-ghl-funnel.md` | Proposal 2026-09-05, awaiting koH confirm + Maria's Q6–Q9 answers. **§0 holds the live-domain findings — read it first** |
+| **Production domain** | `3handshealing.com` (live now: a systeme.io "coming soon" page with her email list — not ours, not touched) | Confirmed by koH 2026-09-05; target for the graduation step |
+| **Style portfolio (gallery)** | `web/3handshealing/styles/` → https://handprotocol.org/3handshealing/styles/ | On `main` (`a45ec8426`, landed 2026-09-01, Netlify deploy `6a96f993…` ready) · noindex meta + `X-Robots-Tag` · not in sitemap |
+| 14 style pages | `web/3handshealing/styles/<slug>/` → `…/styles/<slug>/` | same commit; each standalone (html+css+js, ≤40 KB) |
+| Portfolio brief | `3handshealing/design-portfolio-brief.md` | on `main` (`99d26cb8f`) — source of truth for copy rules + hard requirements |
+| Review tools | `3handshealing/tools/` (`validate.mjs`, `shot.mjs`, `thumbs.mjs`, README) | on `main` |
+| Design studio (preview-only) | `web/3handshealing/studio.css` + `studio.js` | on `main` (same commit) — delete at launch |
+| Routing | `netlify.toml` L125, `web/_redirects` L14, `vercel.json` L12 — all just `/3handshealing` → `/3handshealing/` 301 | committed |
+| Maria's copy (verbatim) | `3handshealing/copy-from-maria-2026-08-16.md` | untracked (this session) |
+| Internal copy deck / gap map | `3handshealing/copy-deck.md` | untracked (this session) |
+| Maria-facing info sheet (source) | `3handshealing/maria-info-sheet.html` (fonts inlined, ~170 KB) | untracked (this session) |
+| Info sheet — published artifact | https://claude.ai/code/artifact/0db9eac8-2b14-477a-9845-8032a0377b95 | private; koH shares with Maria |
+| Media notes | `web/3handshealing/assets/README.md` | photos = **watermarked Aneta Hayne proofs**, not licensed finals |
+
+`3handshealing/` (repo root) is the project workspace: docs, copy, client
+comms. `web/3handshealing/` is the deployed surface. Keep that split.
+
+## What the built page has vs. what copy exists
+
+Built page sections (in order): header/nav · hero (EFT video loop) · "What do
+you need today?" three paths (Release=EFT / Restore=Energy / Reconnect=
+Supportive conversation) · EFT section + tapping diagram · session steps
+(Arrive/Experience/Integrate) · practitioner/About · energy healing · connection
+· testimonials · booking panel · breath pause · footer.
+
+Maria's four blocks cover: hero/intro (Option 1, needs splitting — 80 words is
+too long for a hero), validation (ships as-is), "How we work together" (Option
+2 → practices + session-steps intro), About blockquote (Option 3).
+
+Still literal placeholders on the live page: `[Practitioner name]`, Training,
+Experience, Scope, FAQ, testimonials filler text, booking ("60 minute session
+· Online or in person · Calendar connection will be added before launch"),
+contact (none anywhere), meta/SEO, EFT diagram point placement
+("needs practitioner review" in the figcaption). Full map: `copy-deck.md`.
+
+## Decisions taken this session (reversible, pending Maria)
+
+1. **Keep three visitor-facing paths, remap to Maria's two pillars.**
+   Release → EFT, Family Constellations, emotional release · Restore →
+   bodywork, Candace Silvers Energy Healing, Qi Gong · Reconnect → intuitive
+   guidance / supportive conversation. What is *bookable* is her call (Q6).
+2. **Three copy edits proposed to Maria, not applied:** single "I'm Maria"
+   opening (Option 1 leads, Option 3 starts at sentence two); "address bodily
+   pain, structural issues, and systemic illness" → support-language ("support
+   for people living with pain, tension, or illness") to stay consistent with
+   the footer disclaimer and Texas scope; "channeling gifts" lives in About,
+   not the hero. Sheet Q14–16.
+3. **Texas bodywork/licensing question asked directly** (Q4) — in TX,
+   hands-on soft-tissue work is licensed massage therapy (TDLR). Wording of
+   "bodywork" on the site depends on her answer.
+4. Info sheet signs off "Prepared by koH for Maria" and carries **no reply
+   address** — koH to add one (or just tell Maria where to send answers).
+
+## Design studio on the preview (added 2026-08-23, uncommitted)
+
+`web/3handshealing/studio.css` + `studio.js` (plus two tagged lines in
+index.html) add preview-only client-decision tooling on top of the design
+switcher. **Delete all three at launch** — the base site never references them.
+
+- **✦ Studio button** in the switcher pill opens a card: three **type packs**
+  (Editorial = current DM faces · Ember = Fraunces/Outfit · Quiet = Cormorant
+  Garamond/Nunito Sans; fonts lazy-load on first pick) and four **energy-flare
+  toggles** (Aura veil, Light motes, Cursor glow, Golden thread), each a
+  `html[data-flare~=…]` layer, all frozen by the existing reduced-motion rule.
+- **Copy-suggestion mode**: every heading/paragraph becomes contenteditable
+  (leaf-most only, `data-copy-key` per element); was→now diffs collect in a
+  bottom tray, autosaved to `localStorage["thh-copy-edits-v1"]`. **Send to
+  koH** POSTs to `/.netlify/functions/feedback` (source "Three Hands Healing
+  preview") → `command.feedback_pins` (Postgres) + Telegram 🎯 Inspector +
+  /pins kanban. Messages chunk under the fn's 2000-char cap; clipboard
+  fallback via "Copy as text".
+- Every send includes the **picks line** (design · type · flare), and the card
+  has **Send my picks** on its own — this is how Maria answers the
+  design-direction question the info sheet never asked (step 3 below).
+- **Copy preview link** puts a URL with `?design=&type=&flare=` on the
+  clipboard, so koH can text Maria one exact combination.
+- Verified headless (desktop 1440 + mobile 390): card, tray with 2 edits,
+  Forest+Quiet+thread/aura combo. Pre-existing quirk noticed, not fixed:
+  `style.css` line 8 `.path>*{position:relative}` overrides the path-card
+  number's absolute positioning, so "01/02/03" sit inline above the h3.
+
+## Design-style portfolio (shipped 2026-09-01)
+
+Maria asked (via koH) to see many more directions before choosing. Built as a
+gallery of **17 styles** — the 3 originals + **14 new standalone one-page
+sites** — at `web/3handshealing/styles/`, **LIVE** at
+https://handprotocol.org/3handshealing/styles/ (noindex meta +
+`X-Robots-Tag: noindex, nofollow` header verified live; not in the sitemap).
+Deep link per style: `…/styles/#cathedral` opens the viewer; `…/styles/cathedral/`
+is the standalone page. `/styles` and `/styles/<slug>` without a slash 301
+correctly.
+
+| Path | What |
+|---|---|
+| `styles/index.html` + `gallery.css` + `gallery.js` | The gallery: cards with desktop + phone thumbnails, filters (Stunning 7 · Wild 7 · Originals 3), "Surprise me", a lightbox viewer with Desktop/Phone toggle + ‹ › keys, ♡ picks, and a bottom tray that **sends picks to koH** through `/.netlify/functions/feedback` (source "Three Hands Healing styles" → `command.feedback_pins` + Telegram 🎯 Inspector). Deep links: `styles/#cathedral`. |
+| `styles/<slug>/index.html` (+ `style.css`, `script.js`) | One finished site per style. Same copy (Maria's four blocks + the drafted modality lines), same proofs, different world. Every page carries `../_portfolio.js`, which injects the "← All styles · ♡ Pick this" pill (hidden inside the gallery iframe). Picks live in `localStorage["thh-style-picks"]`, shared by gallery + pill. |
+| `styles/_shots/<slug>.webp`, `<slug>-m.webp` | Card thumbnails (960×600 desktop, 300×649 phone). Regenerate with `tools/thumbs.mjs` after any style edit. |
+| `3handshealing/design-portfolio-brief.md` | The brief every builder worked from: hard requirements, verbatim copy, photo table, craft bar. **Edit this, not the pages, if the copy rules change.** |
+| `3handshealing/tools/` | `validate.mjs` (static checks vs the brief: ids, noindex, pill include, verbatim copy, ≤5 photos, no invented contact/prices), `shot.mjs <slug>` (desktop + mobile PNGs, console errors, overflow), `thumbs.mjs <slug…>` (gallery webp thumbnails). All drive Playwright from gstack's install with `--no-sandbox`; Bash calls need `dangerouslyDisableSandbox: true` (see memory `machine-headless-chromium-sandbox`). |
+
+The 14 — **stunning:** Linen (Cormorant/Karla, moss thread) · Cathedral (Bodoni/Jost, arch masks on soot + gold) · Bloom (Fraunces soft/Nunito, self-drawing florals) · Terra (Fraunces 900/Work Sans, rising sun on a horizon rule) · Meridian (IBM Plex, EFT point diagram on a 12-col grid) · Halo (Sora/Manrope, rotating aura behind the portrait) · Ink (Noto Serif Display/Zen Kaku, brush ensō + duotone) — **wild:** Prism (Unbounded/Space Grotesk, cursor-reactive aura) · Stellar (Marcellus/Inter, family constellation + moon-phase steps) · Pulse (Archivo Black/Space Mono, playable tap-along panel) · Tide (Newsreader/Albert Sans, 4-4-6 breathing waves) · Retro (Shrikhand/Josefin, sun rays + arches) · Zine (Anton/Caveat/Special Elite, taped polaroids) · Monolith (Bricolage Grotesque/Inter Tight, scroll-snapped film chapters with the EFT video).
+
+Copy decisions baked into all 14 (reversible in the brief): H1 = "Feel good in your body, at peace in your mind, aligned in your life."; pillar 1 uses the support-language edit ("Support for people living with pain, tension, or illness…"); "channeling" is not on the pages; six one-line modality blurbs are **our drafts** (Maria to correct); no testimonials, prices, contact, or credentials anywhere; Book is a placeholder CTA with "Booking and contact details will be added at launch".
+
+Also in this pass: `web/3handshealing/index.html` switcher gained a "+ 14 more styles" link (styled in `studio.css`, preview-only); `netlify.toml` / `web/_redirects` / `vercel.json` got the `/3handshealing/styles` trailing-slash rule; `netlify.toml` got the `X-Robots-Tag: noindex` header for `styles/*`. The shared `_portfolio.js` had one bug (stylesheet path) fixed mid-build.
+
+**Shipped:** `main` `62a5aa9ce → 99d26cb8f` (two commits: `a45ec8426` site + routing, `99d26cb8f` workspace docs), Netlify production deploy `6a96f99369df4e00095da9b9` state `ready`; live checks: gallery 200 + noindex header, style page 200 + noindex, `_portfolio.css` + `_shots/*.webp` 200, both trailing-slash redirects 301. **Live QA:** see "Live QA results" below. **Next:** text Maria the gallery link; her picks arrive on the /pins kanban tagged 🧭 picks · 🎨 style (one row from the automated ship check is labelled "koH QA test — ignore").
+
+**Next after picks:** fold the chosen direction(s) into the real build (the copy-slotting steps below still apply), delete the other 13 + the gallery, and drop `_portfolio.js` from the survivor.
+
+## Bedazzled batch — ten more styles (2026-09-02→04, LIVE 2026-09-04)
+
+koH asked for "10 more designs, creative, with extra CSS elements based off the
+current copy so they are bedazzled and beautiful." Built the opposite pole of
+the first fourteen: ornate, every ornament a literal CSS/SVG visualization of a
+phrase in Maria's copy (each tagged `<!-- ornament: "phrase" — … -->` in the
+HTML). Rules live in **`design-portfolio-brief-bedazzled.md`** (addendum to the
+brief — read both). Concept cards (world, fonts, palette, hero, signature,
+ornaments, motion, photos, risks) are in **`bedazzled-cards/<slug>.json`**;
+per-style build/review state incl. open minor issues is in
+**`bedazzled-status.json`**.
+
+| Slug | World · fonts | Signature | State (2026-09-04) |
+|---|---|---|---|
+| nouveau | Mucha poster on flat plum · Gilda Display + Alegreya Sans + Pinyon Script | gold whiplash cartouche draws itself round the H1, ends in enamel irises | **reviewed ✓** 09-04 |
+| talavera | Puebla tile wall · Yeseva One + Mulish | the wall paints itself outward from one seed tile | **reviewed ✓** (4/6 minors applied 09-04; 2 structural left) |
+| vellum | illuminated manuscript · Uncial Antiqua + Gentium Book Plus | gilded versals as the table of contents, lapis title page, manicules | **reviewed ✓** 09-04 |
+| enamel | cloisonné jewel box · Bellefair + Outfit | enamel "fires" from milk to glass over guilloché | **reviewed ✓** 09-04 (EFT cell carries our nine point names — flag for Maria) |
+| curtain | opera house · Cinzel + Lora | velvet curtains part on load; curtain call at #book | **reviewed ✓** 09-04 (hero card + #book card verified in a live viewport; full-page stitch drops them) |
+| loom | textile loom · Anybody + Lexend | H1 woven over-under through the warp | **reviewed ✓** (6 minors applied 09-04) |
+| lenticular | holographic print proof · Schibsted Grotesk + Instrument Sans + Martian Mono | one `--tilt` from scroll drives every light-catching surface | **reviewed ✓** (4 minors applied 09-04) |
+| meander | Hill Country river map · Sorts Mill Goudy + Spectral SC + Barlow | one river path is the page's spine (oxbow portrait, stepping-stone steps, still pool at Book) | **reviewed ✓** 09-04 |
+| popup | pop-up paper theatre · Zilla Slab + Atkinson Hyperlegible | every section rises on visible hinges as it enters | **reviewed ✓** (6 minors applied 09-04) |
+| nightgarden | walled garden at moonrise · Ovo + Hanken Grotesk | moonflowers unfurl section by section, full bloom at Book | **reviewed ✓** 09-04 |
+
+All ten: `tools/validate.mjs` ✓ (54–68 KB, 4 photos each), `tools/shot.mjs`
+errors `[]` at 1440 + 390. Gallery thumbnails regenerated 2026-09-04 for the
+seven pages touched that day (curtain, enamel, lenticular, loom, meander,
+popup, talavera). Review method for the final six + the minors check: the
+four full-page PNGs per page sliced into viewport crops and read section by
+section against the brief + addendum checklist; Curtain additionally probed in
+a live viewport (hero card present, nav → #book lands on the reopened
+curtain-call card, CTA visible at every scroll position of the runway) and
+Nouveau re-shot at 6 s to see the finished cartouche + irises.
+
+**Cache rule (learned 2026-09-04):** `styles/index.html` references
+`gallery.js?v=YYYYMMDD` and `gallery.css?v=YYYYMMDD` — **bump the `?v=` whenever
+you edit either file.** The site's global `*.js`/`*.css` header is a 24-hour
+browser cache, so after the batch landed, browsers that had seen the gallery
+before kept the 17-entry `gallery.js` while the fresh HTML said twenty-seven.
+`netlify.toml` (+ `vercel.json` mirror) now also sends
+`Cache-Control: public, max-age=0, must-revalidate` for `/3handshealing/styles/*`.
+
+**Gallery + preview (committed with the batch):** `styles/gallery.js` has
+the ten entries (tag `bedazzled`, after Monolith; desc/fonts/palette from the
+builders' reports); `styles/index.html` has a **Bedazzled** filter + copy now
+says twenty-seven; `styles/gallery.css` has `--bedaz` + `.tag--bedazzled`;
+preview root switcher link reads "+ 24 more styles". `tools/gallery-e2e.mjs`
+passes locally (27 cards · Bedazzled = 10 · viewer/pill/picks/tray OK · 0
+errors · 0 broken thumbs). `tools/validate.mjs` now ignores SVG path data in
+the phone-number check (false positive on Popup).
+
+**How it was built:** concept workflow (3 proposers → judge → 2 critics → judge
+revise, 24 proposals → 10 cards), then `tools/workflows/bedazzled-build.js`
+(builder → independent reviewer → fixer → re-review, ≤2 rounds). The build
+workflow hit the account's session-usage limit three times (2026-09-02
+18:30, 2026-09-03 00:20 and 20:50 CT), leaving six pages with unreviewed
+fixes. On 2026-09-04 a `bedazzled-review.js` run was started (it applied the
+loom/lenticular/popup minors and touched curtain/enamel/meander) and then
+stopped when koH asked not to use ultracode; the remaining reviews were done
+directly in-session with the tools. **The two workflow scripts stay in
+`tools/workflows/` for reference only — do not launch them for this client.**
+
+### Landing checklist (2026-09-04)
+
+- [x] All ten reviewed; `validate.mjs` ✓ ×24; `gallery-e2e.mjs` green (27
+      cards · Bedazzled 10 · viewer/pill/picks/tray OK · 0 errors · 0 broken thumbs).
+- [x] Committed on `agent/yuhm-network` (`d94d1d0c7` batch + `558f7c3cf`
+      review/minors).
+- [x] Landed on `main` as `3e3e1e5b3` + `8eed885e7` (worktree + cherry-pick +
+      HTTPS push; `origin/main == 8eed885e7` asserted).
+- [x] Netlify production deploy `6a9b099bece7730008d7e9ad` state `ready` for
+      `8eed885e7` (API).
+- [x] Live probes (real headers, 1440 + 390): gallery + all ten new pages 200,
+      `X-Robots-Tag: noindex, nofollow` + meta noindex, 0 console/page errors,
+      0 failed requests, no horizontal overflow, pill + six anchors present,
+      all fonts loaded; `_shots/nouveau.webp` 200 (+ noindex header);
+      `/styles/meander` → 301 to the slash form.
+- [x] Live gallery e2e: 27 cards · Bedazzled 10 · viewer Nouveau (nouveau/index.html, pill hidden=True) · → Talavera · pick→tray 'Talavera' · broken thumbs [] · errors [].
+- [ ] Text Maria the gallery link again ("ten new ones under Bedazzled").
+- [x] Memory `hand-client-three-hands-healing` updated.
+
+## Brand kit + licensed photos (2026-09-04, evening)
+
+koH dropped two client files into `3handshealing/`: **`THH Logo Draft 1.pdf`**
+(Illustrator brand kit, 9 pages) and **`clientDownloads-8Z3NsBxP4.zip`** (ten
+licensed, unwatermarked finals from Aneta Hayne, 241 MB). Instruction: use the
+kit to make the **Cathedral** style the right colors/logos; keep unused photos
+for future pages (funnel etc.).
+
+**Where things landed**
+
+| What | Path |
+|---|---|
+| Brand PDF (source of truth) | `3handshealing/brand/THH-Logo-Draft-1.pdf` (committed) |
+| Vector logos, extracted | `web/3handshealing/assets/brand/thh-{icon,wordmark,horizontal,stacked,badge,badge2}{,-gold,-teal}.svg` |
+| Web photos (1600 px) + `-700` variants | `web/3handshealing/assets/photos/maria-*.jpg` — table in `assets/README.md` |
+| Raw zip | stays local, untracked (`3handshealing/*.zip` gitignored); re-derive with ffmpeg if needed |
+| Brief addendum | `design-portfolio-brief.md` → "Addendum 2026-09-04" |
+
+**Brand facts (from the PDF, exact):** main gold `#D8C971` + teal `#169999`;
+secondary `#15B7B3`, `#2BE2D8`, deep `#117575`. Fonts embedded: Montserrat
+(wordmark/labels) + STIX Two Text (taglines, semibold lowercase). Two tagline
+drafts: "embrace transformative evolution" and "getting healthier and happier".
+Mark = two hands cupping a flame inside a circle; Badge 1 (open arc + ring text)
+and Badge 2 (double ring); pattern page = icon half-dropped on teal.
+
+**Cathedral rebuild** (`web/3handshealing/styles/cathedral/`): same
+structure and arch motif, re-keyed to the kit — ground `#082625` (brand deep
+teal taken down to candlelight), cards `#0D3A39`, Book block `#117575` with the
+icon pattern at 8 %, gold hairlines/eyebrows/buttons `#D8C971`, focus ring aqua;
+STIX Two Text display + Montserrat body; header = horizontal lockup (inline icon
++ vector wordmark), footer = Badge 1 in gold + "getting healthier and happier";
+hero eyebrow = "embrace transformative evolution" (replaces "Body · Mind ·
+Spirit"; the brief's "Support for a happier, healthier life." footer line is
+replaced by the kit tagline — both reversible). Photos: hero = laughing under
+the arch (DQ6A6168), about = standing in the red door (DQ6A6144), book = open
+hand (DQ6A6119); `srcset` 700/1066 w. Contrast checked: body ≥ 11:1 on the
+ground, ≥ 5:1 on the deep-teal block (eyebrow there is near-white, h2 gold at
+3.3:1 large-text). `validate.mjs` ✓ (40 KB, 3 photos), `shot.mjs` errors `[]`
+at 1440 + 390, thumbs regenerated, `gallery.js` card updated + `?v=20260905`.
+
+**Not done / decide later:** the other 26 styles + the preview root still use
+the watermarked proofs and the old three-leaf mark — re-skin only the style(s)
+Maria picks. `assets/README.md` maps proofs → finals.
+
+## Live QA results (2026-09-01, post-deploy)
+
+Workflow: 16 live probes (14 styles + gallery + preview root) under real headers
++ a gallery end-to-end run + one independent refuter per flagged issue (22
+agents, 0 errors). Probe script: `tools/`-style Playwright (`liveqa.mjs`, in the
+session scratchpad — not kept; `tools/shot.mjs` covers the same ground locally).
+
+- **All 14 styles + gallery: 0 blockers.** Every page: 200, `X-Robots-Tag:
+  noindex, nofollow` + meta noindex, CSP header present, zero console/page
+  errors, zero failed requests, zero CSP violations, all Google Fonts families
+  loaded, all images loaded, pill present, all six anchors present, no
+  horizontal overflow at 390/1440. Live screenshots pixel-identical to the
+  pre-deploy shots except sub-visible animation-phase deltas (Cathedral glow,
+  Bloom blob morph).
+- **Gallery e2e (live):** 17 cards · filter Wild=7 · viewer opens Cathedral in
+  an iframe (`cathedral/index.html`, pill hidden inside) · Phone mode = 390px
+  frame · ♡ pick → tray → `localStorage` → the standalone Tide page's pill shows
+  "Picked" + "Send my 2 picks" · deep link `#zine` opens the viewer · **tray
+  send → feedback fn 200 → "Sent ✓"** (row on /pins named "koH QA test", note
+  "TEST — automated ship check, ignore" — delete or ignore it).
+- **Fixed after QA (second commit, see session log):** (1) preview root on
+  mobile — the switcher, now carrying Studio + the "+ 14 more styles" link,
+  wrapped into a 6-row capsule over the hero CTAs → single scrollable row
+  (`studio.css`); (2) preview root desktop — "Body · Emotion · Energy" caption
+  overlapped the lede's last line (pre-existing since 8/11) → caption moved to
+  the empty right side at ≥761px (`style.css`); (3) Retro — Shrikhand H1 wrapped
+  5 vs 7 lines nondeterministically because `max-width` was in `ch` measured
+  before the font landed → `8.8em` (6/6 cold loads = 5 lines); (4) Pulse's
+  `* {border-radius:0 !important}` squared the shared pill → `_portfolio.css`
+  hardens the pill radius with `!important`.
+- **Left as designed:** fine print / eyebrows at 12–14.7px on Linen, Bloom,
+  Terra, Meridian, Prism, Stellar, Pulse, gallery footer, preview root (the
+  probe's ≥15px rule is stricter than the styles' own choices; body copy is
+  ≥16px everywhere). Photo watermarks (proofs). The bottom pill covers ~40px
+  of content on phones — inherent to a fixed pill; content scrolls beneath it.
+
+## Blocked on Maria — the 16 questions (sheet Q-numbers)
+
+You (1–5): display name · business name/tagline · training & certs by
+practice · TX massage license? · one honest sentence about her own journey.
+Sessions (6–9): what's bookable + lengths + prices · online/in-person/city ·
+how to book + what happens after + cancellation line · contact details.
+Practices (10a–f): one line each on the six modalities (incl. "is Candace
+Silvers Energy Healing the correct lineage name?").
+FAQ (11) · testimonials with permission (12) · licensed photos + preferred
+portrait + EFT diagram check (13) · the three confirmations (14–16).
+
+The sheet autosaves answers in `localStorage["thh-info-sheet-v1"]` on her
+device; "Copy my answers" assembles one numbered plain-text message.
+
+## Next steps, in order, once answers arrive
+
+1. Slot the four blocks + answers into `web/3handshealing/index.html`
+   (replace every `data-owner-field`, `[bracketed]` text, and the
+   testimonials/booking placeholder strings; `script.js` L214–239 hold the
+   booking/breath status strings).
+2. Rewrite the three path cards + six modality blurbs (draft, send back for OK).
+3. Maria picks a design direction (Gateway / Meadow / Forest) — **not on the
+   info sheet**; ask her directly, then delete the `.design-switcher` and the
+   two unused `data-design-*` image variants.
+4. Swap watermarked proofs for licensed finals; alt text with her name.
+5. Booking: wire the real mechanism (calendar link / Square / email) into
+   `[data-booking-demo]`; drop the "1 of 3" stepper if it's just a link.
+6. Meta title/description; contact block in footer; disclaimer sign-off.
+7. Production path (assumed, confirm with koH): graduate to
+   `clients/3handshealing/` on its own Netlify site + domain, per the
+   Cafe Nena'i / Ed's / Emilia pattern — DNS zone first so nameserver
+   propagation overlaps the build. Until then it stays a HAND-hosted preview.
+
+## Open flags (not fixed — decide, then act)
+
+- **Indexing:** the preview is in `web/sitemap.xml` at priority 0.8 with no
+  `noindex`, while showing watermarked photographer proofs and placeholder
+  copy. Recommend `X-Robots-Tag: noindex` (netlify.toml headers) or a meta
+  robots tag + remove from sitemap until launch. Photographer licensing is
+  the sharper concern.
+- **Design direction** not asked on the sheet (see step 3).
+- **Bilingual EN/ES** not asked. Demo/client sites normally auto-detect
+  Spanish (see memory `hand-biz-bilingual-i18n`); unknown whether Maria's
+  clientele needs it.
+- **No `biz/` lead file** exists for Three Hands Healing — this client did not
+  come through the scraper pipeline; if it should show on the Develop board,
+  register it.
+
+## Repo hygiene
+
+- The bedazzled batch is on `main` (`3e3e1e5b3` + `8eed885e7`, 2026-09-04)
+  and on `agent/yuhm-network` as `d94d1d0c7` + `558f7c3cf`, so a later merge of
+  that branch is clean.
+- Everything else for this client is on `main` (`a45ec8426` + `99d26cb8f`).
+  The same two commits also sit on the checkout's current branch
+  (`agent/yuhm-network`, as `ebed74125` + `095b2b331`) so a later merge of
+  that branch is clean. Land further changes on `main` via the
+  worktree + cherry-pick + HTTPS-push recipe (memory
+  `machine-git-push-via-gh-https`), staging by explicit path only.
+- Another Claude session may share this checkout — stage by path.
+- The info-sheet artifact redeploys from the same file path in the
+  originating conversation; from any other session pass the artifact URL as
+  `url` or you'll fork a second artifact.
+
+## Cathedral promoted to the main site (2026-09-05)
+
+koH: "Cathedral is looking like the right design. Let's make it our main site."
+Done in one pass, verified, landed on `main`:
+
+- `git mv` of the old root (index.html, style.css, script.js, studio.css,
+  studio.js, vendor/) → `styles/original/`; `"assets/` → `"../../assets/` in the
+  HTML + CSS, the "+ 24 more styles" link → `../`, noindex meta added, title
+  "Original preview (Gateway / Meadow / Forest)". The gallery's three
+  "Originals" cards now use `href: "original/?design=<slug>"`; `gallery.js`
+  viewer/public-URL logic no longer keys off a `../` prefix (that broke the
+  `#gateway` deep link in the viewer — `frame.src` was `gateway/index.html`);
+  `?v=20260905b` bumped on gallery.js/css.
+- Root = `styles/cathedral/{index.html,style.css,script.js}` with
+  `../../assets/` → `assets/`, the `_portfolio.js` include and the noindex meta
+  removed, a real `<title>`, canonical, favicon (`assets/brand/thh-icon-gold.svg`),
+  Open Graph + twitter card (og:image = the hero photo). `styles/cathedral/`
+  itself is unchanged and still in the gallery.
+- Checks: `tools/shot.mjs` on the root and on `original` → errors `[]` at
+  1440 + 390, no horizontal overflow; `gallery-e2e.mjs` green (27 cards ·
+  Bedazzled 10 · viewer · pick → tray · 0 errors); a request-failure probe on
+  root / `original/?design=meadow` / `styles/#gateway` → 0 failed requests,
+  0 broken images, viewer frame `original/index.html?design=gateway`.
+- Still placeholder on the main site: Book CTA (`href="#book"`, fine print
+  "Booking and contact details will be added at launch"), no contact, no
+  prices, our six modality blurbs. These are the info-sheet answers + the
+  GHL calendar (see the plan).
+
+## Production domain — 3handshealing.com
+
+koH confirmed 2026-09-05: **the production domain is `3handshealing.com`**
+(numeral 3). Copy still spells the brand out as **"Three Hands Healing"**; the
+numeral is the domain only. This is the target for the graduation step
+(`clients/3handshealing/` on its own Netlify site).
+
+Parked, deliberately not pursued (koH: "don't worry about DNS or systeme.io"):
+the domain currently serves a **systeme.io "coming soon" page carrying an email
+opt-in**, so **she has a list there — export it before repointing, do not
+orphan it.** Registrar is Namecheap and the apex is CNAME'd (no mailbox on the
+domain today); that is a cutover-day detail, not a now problem. The logo on
+that page is the same mark as the brand kit, which confirms our
+`assets/brand/thh-*.svg`.
+
+## Session log
+
+- 2026-09-05 (later) — koH answered the open "her domain" question:
+  **`3handshealing.com`**, for the production site. Recorded as plan §0. A
+  detour into its DNS and the systeme.io page it currently serves was parked at
+  koH's direction; the one carried-forward fact is that **her email list lives
+  on that page and must be exported before cutover**. **GoHighLevel remains the
+  funnel plan.** Docs only; nothing built.
+- 2026-09-05 — **Cathedral promoted to the main site**; old preview →
+  `styles/original/`; gallery originals repointed + viewer bug fixed;
+  `plan-eft-and-ghl-funnel.md` written (EFT "what to expect" page structure,
+  funnel stages as GHL objects, Option A = static site + GHL embeds, wording
+  flag "EFT / Tapping sessions" not "therapy", 6 asks for Maria, build order).
+
+- 2026-09-04 (evening) — **Brand kit + licensed photos received; Cathedral
+  rebuilt on the kit** (palette, Montserrat + STIX Two Text, real mark/badge,
+  taglines, three licensed photos). Assets filed under `assets/brand/` and
+  `assets/photos/`, PDF under `3handshealing/brand/`, README + brief
+  addendum written. See "Brand kit + licensed photos".
+- 2026-08-11 — design preview built + shipped (`d27db55cd`), 3 directions,
+  EFT hero video, Aneta Hayne proofs, all owner fields placeholdered.
+- 2026-08-16 — Maria's four copy blocks received. Copy audit against the
+  built page → `copy-deck.md`. Verbatim copy saved to
+  `copy-from-maria-2026-08-16.md`.
+- 2026-08-16/17 — Maria-facing info sheet written, set in the site's own
+  faces (DM Sans / DM Serif Display inlined as data URIs, site palette, light
+  + dark, print), verified in headless Chrome at 900px/390px, published as a
+  private artifact (v1-sixteen-questions).
+- 2026-09-04 (afternoon) — **Bedazzled batch reviewed, no ultracode**: the six
+  pending pages (Nouveau, Vellum, Enamel, Curtain, Meander, Nightgarden)
+  reviewed directly from viewport crops of the full-page shots — all pass, no
+  fixes needed; Curtain's desktop hero/Book cards confirmed in a live viewport
+  (full-page stitch artefact only). Minors from the 09-03 reviews confirmed
+  applied on Loom (6), Lenticular (4), Popup (6) with no regressions; 4 of
+  Talavera's 6 applied (2 structural left open in `bedazzled-status.json`).
+  Thumbs regenerated for the seven touched pages; validate ×24 ✓; gallery e2e
+  green. **Landed on `main` (`3e3e1e5b3` + `8eed885e7`), Netlify deploy
+  `6a9b099b…` ready, 22/22 live probes clean, live gallery e2e green** — see
+  "Landing checklist".
+- 2026-09-02→04 — **Bedazzled batch**: ten more styles (Nouveau, Talavera,
+  Vellum, Enamel, Curtain, Loom, Lenticular, Meander, Popup, Nightgarden)
+  built from `design-portfolio-brief-bedazzled.md` + `bedazzled-cards/`; gallery
+  registered (Bedazzled filter, 27 cards), thumbs generated, local e2e green;
+  4 of 10 independently reviewed, 6 pending (session-limit walls); nothing
+  committed or deployed. Resume via `tools/workflows/bedazzled-review.js`.
+- 2026-09-01 — Design-style portfolio: 14 new standalone styles + gallery at `web/3handshealing/styles/` (14 parallel builders from `design-portfolio-brief.md`, each screenshot-verified; all pass `tools/validate.mjs`), picks→feedback fn, routing + noindex header, switcher bridge link. **Shipped to `main` + verified live**; post-deploy QA workflow over all 17 URLs (results in "Live QA results"); four fixes landed in a follow-up commit (preview switcher mobile, preview caption overlap, Retro H1 wrap, Pulse pill radius).
+- 2026-08-23 — Design studio built on the preview (studio.css/studio.js,
+  uncommitted): type packs, energy-flare toggles, copy-suggestion mode wired
+  to command.feedback_pins via the existing feedback fn, shareable
+  picks-encoded URLs. Verified headless desktop + mobile. Not yet deployed —
+  needs a main-branch commit of web/3handshealing/ only.

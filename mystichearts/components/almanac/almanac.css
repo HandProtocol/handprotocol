@@ -1,0 +1,971 @@
+/* The almanac sheet (design/sheet-styles/b3-almanac-nav.html, nav style 1, 2026-11-15).
+   A framed leaf of paper over the night, ribbons and a band of doors below it. Everything is
+   scoped to .al-veil / .almanac so the rest of the site keeps Raspberry Night as it is. */
+
+.al-veil {
+  --al-paper: #f3e8d3;
+  --al-paper-edge: #e3cfab;
+  --al-vellum: #2a1424;
+  --al-ink: #2b1621;
+  --al-ink-soft: #5b4049;
+  --al-rubric: #9c1f4b;
+  --al-gilt: #a87526;
+  --al-serif: var(--font-display), "Marcellus", Georgia, serif;
+  --al-sans: var(--font-sans), "Alegreya Sans", system-ui, sans-serif;
+  --al-sc: var(--font-sc), var(--font-sans), system-ui, sans-serif;
+  --al-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --al-noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .36  0 0 0 0 .22  0 0 0 0 .12  0 0 0 .075 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: center;
+  background:
+    radial-gradient(1px 1px at 12% 18%, rgba(246, 236, 223, 0.55), transparent 60%),
+    radial-gradient(1px 1px at 78% 9%, rgba(246, 236, 223, 0.45), transparent 60%),
+    radial-gradient(1.4px 1.4px at 88% 32%, rgba(217, 165, 78, 0.6), transparent 60%),
+    radial-gradient(1px 1px at 6% 58%, rgba(246, 236, 223, 0.4), transparent 60%),
+    radial-gradient(1.2px 1.2px at 94% 71%, rgba(246, 236, 223, 0.45), transparent 60%),
+    radial-gradient(1px 1px at 22% 88%, rgba(217, 165, 78, 0.5), transparent 60%),
+    radial-gradient(70% 50% at 50% 0%, rgba(44, 20, 36, 0.9) 0%, transparent 70%),
+    rgba(18, 10, 15, 0.9);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  font: 400 18px/1.55 var(--al-sans);
+  word-spacing: 0.06em;
+  /* the site body enlarges Alegreya's small x-height; the almanac is set at its true sizes */
+  font-size-adjust: none;
+  color: var(--cream);
+}
+.al-veil * { box-sizing: border-box; }
+.al-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.almanac {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1240px;
+  height: 100%;
+  padding: 10px 10px 0;
+}
+
+/* --- the book: paper, page edges, and the window the leaves scroll in -------------------- */
+.al-book {
+  --frame: rgba(168, 117, 38, 0.85);
+  --frame-faint: rgba(168, 117, 38, 0.45);
+  --cp: 243, 232, 211;
+  --f1: 10px; --f2: 15px; --co: 5px;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-height: 0;
+  /* a containing block for the calendar's raised day card, so it rises over the leaf */
+  transform: translateZ(0);
+  color: var(--al-ink);
+  background: var(--al-noise), radial-gradient(120% 90% at 50% 40%, var(--al-paper) 55%, var(--al-paper-edge) 100%);
+  box-shadow: 2px 2px 0 -0.5px #d9c7a4, 4px 4px 0 -1px #bea783, 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+.al-book:has(.al-turn[data-state="in"] .al-leaf[data-tone="vellum"]) {
+  --frame: rgba(217, 165, 78, 0.8);
+  --frame-faint: rgba(217, 165, 78, 0.38);
+  --cp: 42, 20, 36;
+  color: var(--cream);
+  background: var(--al-noise), radial-gradient(120% 90% at 50% 35%, #36192d 0%, var(--al-vellum) 50%, #1c0c17 100%);
+  box-shadow: 2px 2px 0 -0.5px #3d1d33, 4px 4px 0 -1px #2a1222, 0 24px 60px rgba(0, 0, 0, 0.55);
+}
+/* The window the words live in: inside the inner rule, so nothing written ever slips over the
+   frame or into the margin. Each leaf is a turning page inside it. */
+.al-leaves { position: absolute; inset: var(--f2); }
+.al-turn { position: absolute; inset: 0; }
+/* no layer of its own at rest, so the calendar's raised day card still rises over the frame;
+   while a page turns, the leaf beneath keeps its cues to itself */
+.al-leaves:has(.al-turn[data-state="out"]) .al-turn[data-state="in"] :is(.al-catch, .al-thread) { visibility: hidden; }
+.al-turn[data-state="out"] { z-index: 2; pointer-events: none; }
+.al-leaf { position: relative; height: 100%; }
+.al-leaf { --cp: 243, 232, 211; }
+.al-leaf[data-tone="vellum"] { --cp: 42, 20, 36; color: var(--cream); }
+
+/* on a phone the two pages melt into one scrolling page; each part's order says where it falls */
+.al-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  padding: 36px 12px 34px;
+  scrollbar-width: none;
+  position: relative; /* the offset parent the ink measures against */
+}
+.al-scroll::-webkit-scrollbar, .al-page::-webkit-scrollbar { display: none; }
+.al-page { display: contents; }
+.al-page > * { order: 5; min-width: 0; }
+
+/* --- the frame: double hairline, drawn corners, paper caps the words slip under ------------ */
+.al-frame { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.al-frame--recto { display: none; }
+.al-rule { position: absolute; }
+.al-rule--outer { inset: var(--f1); border: 1px solid var(--frame); }
+.al-rule--inner { inset: var(--f2); border: 1px solid var(--frame-faint); }
+.al-cap { display: none; } /* the window clips the words now; the fades below replace the caps */
+.al-corner { position: absolute; width: 34px; height: 34px; color: var(--frame); }
+.al-corner.tl { top: var(--co); left: var(--co); }
+.al-corner.tr { top: var(--co); right: var(--co); transform: scaleX(-1); }
+.al-corner.bl { bottom: var(--co); left: var(--co); transform: scaleY(-1); }
+.al-corner.br { bottom: var(--co); right: var(--co); transform: scale(-1, -1); }
+
+/* --- Close: a small framed square laid over the top-right corner -------------------------- */
+.al-close {
+  position: absolute;
+  z-index: 5;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(217, 165, 78, 0.8);
+  border-radius: 0;
+  background: var(--al-noise), #1d0f17;
+  box-shadow: inset 0 0 0 3px #1d0f17, inset 0 0 0 4px rgba(217, 165, 78, 0.32), 0 3px 10px rgba(0, 0, 0, 0.35);
+  color: var(--gold);
+  cursor: pointer;
+}
+.al-close svg { width: 16px; height: 16px; transition: transform 0.35s var(--al-ease); }
+.al-close:hover svg { transform: rotate(90deg); }
+.al-close:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+/* --- the wide screen: an open book, two pages, each scrolling on its own ------------------ */
+@media (min-width: 960px) {
+  .almanac { padding: 22px 28px 0; }
+  .al-book {
+    --f1: 14px; --f2: 19px; --co: 9px;
+    box-shadow:
+      -2px 2px 0 -0.5px #dccaa8, -4px 4px 0 -1px #c2ab86, -6px 6px 0 -1.5px #d6c3a0,
+      2px 2px 0 -0.5px #dccaa8, 4px 4px 0 -1px #c2ab86, 6px 6px 0 -1.5px #d6c3a0,
+      0 34px 70px rgba(0, 0, 0, 0.6);
+  }
+  .al-book:has(.al-turn[data-state="in"] .al-leaf[data-tone="vellum"]) {
+    box-shadow:
+      -2px 2px 0 -0.5px #3f1f35, -4px 4px 0 -1px #2b1323, -6px 6px 0 -1.5px #371a2e,
+      2px 2px 0 -0.5px #3f1f35, 4px 4px 0 -1px #2b1323, 6px 6px 0 -1.5px #371a2e,
+      0 34px 70px rgba(0, 0, 0, 0.6);
+  }
+  /* the gutter: the paper darkens where the two pages meet the spine */
+  .al-book::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(90deg, transparent calc(50% - 44px), rgba(60, 28, 18, 0.2) calc(50% - 2px), rgba(40, 18, 12, 0.32) 50%, rgba(60, 28, 18, 0.2) calc(50% + 2px), transparent calc(50% + 44px));
+  }
+  .al-book:has(.al-turn[data-state="in"] .al-leaf[data-tone="vellum"])::after {
+    background: linear-gradient(90deg, transparent calc(50% - 40px), rgba(0, 0, 0, 0.3) 50%, transparent calc(50% + 40px));
+  }
+  .al-scroll { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; padding: 0; }
+  .al-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 40px 64px 30px 45px;
+    scrollbar-width: none;
+    position: relative;
+  }
+  .al-page--recto { padding: 40px 45px 30px 64px; }
+  .al-page > * { order: 0 !important; }
+  .al-frame--verso { right: 50%; }
+  .al-frame--recto { display: block; left: 50%; }
+  .al-close { top: 14px; right: 14px; }
+}
+
+/* --- running heads and folios ------------------------------------------------------------- */
+.al-rh {
+  order: 0 !important;
+  margin: 0 0 22px;
+  text-align: center;
+  font: 500 13px/1 var(--al-sc);
+  letter-spacing: 0.18em;
+  color: var(--al-ink-soft);
+}
+.al-page--recto .al-rh, .al-page--verso .al-foot { display: none; }
+[data-tone="vellum"] .al-rh { color: rgba(217, 165, 78, 0.85); }
+@media (max-width: 959px) {
+  .al-rh { padding: 0 36px; } /* clear of Close */
+}
+@media (min-width: 960px) {
+  .al-page--recto .al-rh { display: block; }
+  .al-page--verso .al-foot { display: flex; }
+  .al-page--verso .al-rh { text-align: left; }
+  .al-page--recto .al-rh { text-align: right; padding-right: 30px; } /* clear of Close */
+}
+
+/* --- type ----------------------------------------------------------------------------------- */
+:where(.almanac) p { margin: 0; }
+.al-kicker {
+  margin: 0 0 10px !important;
+  font: 700 14px/1.2 var(--al-sc);
+  letter-spacing: 0.16em;
+  color: var(--al-rubric);
+}
+[data-tone="vellum"] .al-kicker { color: var(--gold); }
+.al-title {
+  margin: 0 0 20px;
+  font: 400 clamp(31px, 8.2vw, 46px)/1.08 var(--al-serif);
+  letter-spacing: 0.005em;
+  color: inherit;
+  text-wrap: balance;
+}
+.al-title:focus { outline: none; }
+.al-title em { font-style: normal; color: var(--al-rubric); }
+[data-tone="vellum"] .al-title em { color: var(--gold); }
+.al-h3 { margin: 0; font: 400 24px/1.2 var(--al-serif); color: inherit; }
+.al-lede { font-size: 18.5px; line-height: 1.6; color: var(--al-ink-soft); }
+.al-fig { font-family: var(--al-sans); font-weight: 500; font-size: 1.04em; letter-spacing: 0; }
+
+.al-rubric-cap {
+  float: left;
+  font: 400 70px/0.82 var(--al-serif);
+  color: var(--al-rubric);
+  margin: 6px 6px 0 -2px;
+}
+
+/* buttons: a stamped rubric block and a ruled outline; square shoulders, no pills, no glass */
+.al-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.al-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 13px 22px;
+  border: 0;
+  border-radius: 2px;
+  font: 400 15px/1.1 var(--al-serif);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.25s var(--al-ease), color 0.25s var(--al-ease);
+}
+.al-btn svg { width: 18px; height: 18px; flex: none; }
+.al-btn--rubric {
+  color: var(--cream);
+  background: var(--raspberry-band);
+  box-shadow: inset 0 0 0 3px var(--raspberry-band), inset 0 0 0 4px rgba(217, 165, 78, 0.75), 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+.al-btn--rubric svg { color: var(--gold); }
+.al-btn--rubric:hover { background: #821a43; box-shadow: inset 0 0 0 3px #821a43, inset 0 0 0 4px rgba(217, 165, 78, 0.9); }
+.al-btn--rubric:disabled { opacity: 0.65; cursor: default; }
+.al-btn--ruled { color: var(--al-ink); background: transparent; box-shadow: inset 0 0 0 1px rgba(43, 22, 33, 0.55); }
+.al-btn--ruled:hover { background: rgba(156, 31, 75, 0.07); }
+.al-btn:focus-visible { outline: 2px solid var(--al-rubric); outline-offset: 3px; }
+
+.al-legend-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 8px;
+  border-bottom: 3px double rgba(168, 117, 38, 0.8);
+  font: 700 14px/1 var(--al-sc);
+  letter-spacing: 0.18em;
+  color: var(--al-rubric);
+}
+.al-legend-head svg { width: 40px; height: 18px; color: var(--al-gilt); }
+
+/* ======================================================================================== */
+/* I. OUR VISION: a dedication leaf on purple vellum                                          */
+/* ======================================================================================== */
+[data-tone="vellum"] .al-title-block { text-align: center; }
+[data-tone="vellum"] .al-title { color: var(--cream); font-size: clamp(34px, 9.4vw, 50px); margin: 0; }
+.al-subtitle {
+  display: block;
+  margin-top: 14px;
+  font: 400 clamp(21px, 5.4vw, 27px)/1.2 var(--al-serif);
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+.al-subtitle::before { content: ""; display: block; width: 48px; height: 1px; margin: 0 auto 14px; background: var(--gold); opacity: 0.7; }
+.al-frontis { margin: 28px auto 0; width: min(100%, 300px); }
+.al-apex { display: block; width: 22px; height: 24px; margin: 0 auto 10px; color: var(--gold); }
+.al-arch { position: relative; padding: 6px; border: 1px solid rgba(217, 165, 78, 0.75); border-radius: 999px 999px 3px 3px; }
+.al-arch::after { content: ""; position: absolute; inset: -6px; border: 1px solid rgba(217, 165, 78, 0.35); border-radius: 999px 999px 3px 3px; pointer-events: none; }
+.al-arch img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 34% 50%;
+  border-radius: 999px 999px 2px 2px;
+  filter: saturate(0.92) contrast(1.04);
+}
+.al-frontis figcaption { margin-top: 12px; text-align: center; font: 500 13px/1.3 var(--al-sc); letter-spacing: 0.14em; color: rgba(217, 165, 78, 0.85); }
+.al-body { margin-top: 30px; color: rgba(246, 236, 223, 0.76); font-size: 18.5px; }
+.al-body p + p { margin-top: 14px; }
+.al-body p:first-child { color: var(--cream); }
+.al-illum {
+  float: left;
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  margin: 6px 16px 4px 0;
+  position: relative;
+  font: 400 50px/1 var(--al-serif);
+  color: var(--al-vellum);
+  background: var(--gold);
+  box-shadow: inset 0 0 0 3px var(--gold), inset 0 0 0 4px rgba(42, 20, 36, 0.7);
+}
+.al-illum::after { content: ""; position: absolute; inset: -5px; border: 1px solid rgba(217, 165, 78, 0.5); }
+.al-quote { margin: 30px 0 0; text-align: center; font: 400 clamp(22px, 6vw, 27px)/1.35 var(--al-serif); color: var(--gold); }
+.al-vows { list-style: none; margin: 34px 0 0; padding: 0; text-align: center; }
+.al-vows li { padding: 18px 0; }
+.al-vows li + li { border-top: 1px solid rgba(217, 165, 78, 0.3); }
+.al-vows svg { display: block; width: 34px; height: 34px; margin: 0 auto 10px; color: var(--gold); }
+.al-vows span { display: block; font: 400 clamp(25px, 7vw, 32px)/1.15 var(--al-serif); letter-spacing: 0.03em; color: var(--cream); }
+.al-colophon {
+  margin-top: 28px !important;
+  padding-top: 18px;
+  border-top: 1px solid rgba(217, 165, 78, 0.3);
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgba(246, 236, 223, 0.74);
+}
+.al-colophon svg { display: block; width: 16px; height: 18px; margin: 0 auto 10px; color: var(--raspberry); }
+.al-colophon--ink { color: var(--al-ink-soft); border-top-color: rgba(168, 117, 38, 0.45); }
+.al-colophon--ink svg { color: var(--al-rubric); }
+@media (min-width: 960px) {
+  [data-tone="vellum"] .al-page--verso { align-items: center; }
+  .al-frontis { margin-top: 0; width: 250px; }
+  .al-arch img { aspect-ratio: 1 / 1.12; }
+  .al-vows { margin-top: 26px; width: 100%; max-width: 420px; }
+  .al-vows li { padding: 16px 0; }
+  [data-tone="vellum"] .al-title-block { text-align: left; margin-top: 18px; }
+  .al-subtitle::before { margin-left: 0; }
+  .al-quote { text-align: left; padding-left: 22px; border-left: 1px solid rgba(217, 165, 78, 0.5); }
+  .al-colophon { text-align: left; margin-top: auto !important; }
+  .al-colophon svg { margin-left: 0; }
+}
+
+/* ======================================================================================== */
+/* II. HOW WE LIVE: a covenant, ruled like a ledger, numerals in rubric                       */
+/* ======================================================================================== */
+.al-wheel-wrap { margin: 28px auto 0; text-align: center; }
+.al-wheel { display: block; width: min(100%, 270px); margin: 0 auto 6px; }
+.al-wheel-num text { font: 400 17px var(--al-serif); fill: var(--al-ink); }
+.al-wheel-note { font: 500 13px/1.3 var(--al-sc); letter-spacing: 0.14em; color: var(--al-ink-soft); text-align: center; }
+.al-covenant {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  border-top: 3px double rgba(168, 117, 38, 0.8);
+  border-bottom: 3px double rgba(168, 117, 38, 0.8);
+}
+.al-covenant li { position: relative; display: grid; grid-template-columns: 58px 1fr; column-gap: 16px; padding: 14px 0 15px; }
+.al-covenant li + li { border-top: 1px solid rgba(168, 117, 38, 0.4); }
+.al-covenant li::before, .al-covenant li::after { content: ""; position: absolute; top: 0; bottom: 0; width: 1px; background: rgba(156, 31, 75, 0.35); }
+.al-covenant li::before { left: 62px; }
+.al-covenant li::after { left: 65px; }
+.al-num { grid-row: span 2; padding: 2px 6px 0 0; text-align: right; font: 400 30px/1 var(--al-serif); color: var(--al-rubric); letter-spacing: 0.02em; }
+.al-covenant .al-name { padding-left: 6px; font: 400 21px/1.2 var(--al-serif); color: var(--al-ink); }
+.al-covenant .al-meaning { padding-left: 6px; margin-top: 4px; font-size: 17px; line-height: 1.5; color: var(--al-ink-soft); }
+@media (min-width: 960px) {
+  .al-wheel-wrap { margin-top: auto; padding-top: 36px; margin-bottom: auto; }
+  .al-wheel { width: 330px; }
+  .al-covenant { margin-top: 0; }
+  .al-covenant li { grid-template-columns: 70px 1fr; padding: 13px 0 14px; }
+  .al-covenant li::before { left: 74px; }
+  .al-covenant li::after { left: 77px; }
+  .al-num { font-size: 34px; }
+}
+
+/* ======================================================================================== */
+/* III. THE LAND: a compass rose and the legend of the spaces                                 */
+/* ======================================================================================== */
+.al-rose { margin: 30px auto 0; text-align: center; }
+.al-compass { display: block; width: min(100%, 190px); margin: 0 auto 12px; }
+.al-legend { margin-top: 28px; }
+.al-legend ul { list-style: none; margin: 0; padding: 0; }
+.al-legend li { display: grid; grid-template-columns: 34px 1fr; gap: 0 12px; align-items: start; padding: 11px 0; border-bottom: 1px solid rgba(168, 117, 38, 0.35); }
+.al-glyph { width: 30px; height: 30px; margin-top: 1px; color: var(--al-ink); grid-row: span 2; }
+.al-legend .al-name { font: 400 19px/1.25 var(--al-serif); }
+.al-legend .al-use { margin-top: 2px; font-size: 16px; line-height: 1.45; color: var(--al-ink-soft); }
+.al-legend + .al-actions { margin-top: 28px; }
+@media (min-width: 960px) {
+  .al-rose { margin-top: auto; margin-bottom: auto; padding-top: 30px; }
+  .al-compass { width: 230px; }
+  .al-legend { margin-top: 0; }
+}
+
+/* ======================================================================================== */
+/* IV. GATHERINGS: moons across the head, a wheel of seasons, the offerings                   */
+/* ======================================================================================== */
+.al-moonband {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 26px;
+  padding: 10px 2px;
+  border-top: 1px solid rgba(168, 117, 38, 0.6);
+  border-bottom: 1px solid rgba(168, 117, 38, 0.6);
+  color: var(--al-ink);
+}
+.al-moonband-item { display: contents; }
+.al-moonband svg { width: 24px; height: 24px; flex: none; }
+.al-moonband .al-dot { width: 6px; height: 6px; color: var(--al-gilt); }
+.al-seasons { display: grid; justify-items: center; gap: 14px; margin-top: 30px; text-align: center; }
+.al-seasons-wheel { width: min(100%, 240px); height: auto; }
+.al-season { font: 600 10.5px var(--al-sc); letter-spacing: 0.06em; fill: var(--al-ink); }
+.al-season.lit { fill: var(--al-rubric); }
+.al-note-big { font: 400 23px/1.3 var(--al-serif); color: var(--al-ink); }
+.al-note-big em { font-style: normal; color: var(--al-rubric); }
+.al-note-small { margin-top: 6px !important; font-size: 16px; color: var(--al-ink-soft); }
+.al-offerings { margin-top: 34px; }
+.al-offerings ol { list-style: none; margin: 0; padding: 0; }
+.al-offerings li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(168, 117, 38, 0.35);
+  font: 400 20px/1.25 var(--al-serif);
+}
+.al-offerings li svg { width: 12px; height: 12px; flex: none; color: var(--al-rubric); transform: translateY(-1px); }
+.al-calendar-door { display: grid; gap: 6px; margin-top: 30px; }
+.al-calendar-door .al-h3 { font-size: 25px; }
+.al-hint { color: var(--al-ink-soft); font-size: 17px; }
+.al-calendar-door .al-btn { margin-top: 12px; justify-self: start; }
+.al-host { position: relative; margin-top: 34px; padding: 22px 0 4px; border-top: 1px solid rgba(156, 31, 75, 0.5); }
+.al-host::before { content: ""; position: absolute; left: 0; right: 0; top: 3px; height: 1px; background: rgba(156, 31, 75, 0.5); }
+.al-host p { margin: 10px 0 18px; color: var(--al-ink-soft); font-size: 17px; }
+@media (min-width: 960px) {
+  .al-seasons { grid-template-columns: 220px 1fr; justify-items: start; align-items: center; gap: 26px; margin-top: auto; padding-top: 30px; text-align: left; }
+  .al-seasons-wheel { width: 220px; }
+  .al-offerings { margin-top: 0; }
+  .al-offerings ol { columns: 2; column-gap: 34px; }
+  .al-offerings li { break-inside: avoid; }
+}
+
+/* ======================================================================================== */
+/* The doors: the calendar, a visit, a note                                                    */
+/* ======================================================================================== */
+.al-ways { display: grid; margin-top: 24px; border-top: 3px double rgba(168, 117, 38, 0.8); border-bottom: 3px double rgba(168, 117, 38, 0.8); }
+.al-way {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 14px 10px 14px 14px;
+  border: 0;
+  background: none;
+  color: var(--al-ink);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+.al-way + .al-way { border-top: 1px solid rgba(168, 117, 38, 0.4); }
+.al-way:hover { background: rgba(156, 31, 75, 0.05); }
+.al-way:focus-visible { outline: 2px solid var(--al-rubric); outline-offset: -2px; }
+.al-way[aria-selected="true"] { background: rgba(156, 31, 75, 0.08); box-shadow: inset 3px 0 0 var(--al-rubric); }
+.al-way-mark { width: 26px; height: 26px; flex: none; color: var(--al-gilt); }
+.al-way[aria-selected="true"] .al-way-mark { color: var(--al-rubric); }
+.al-way-words { display: grid; gap: 2px; min-width: 0; }
+.al-way-words strong { font: 400 20px/1.2 var(--al-serif); }
+.al-way-words small { font-size: 15.5px; line-height: 1.4; color: var(--al-ink-soft); }
+.al-way-panel, .al-form { margin-top: 30px; }
+@media (min-width: 960px) { .al-way-panel, .al-form { margin-top: 0; } }
+
+/* the widgets and the hello form, set on paper */
+.almanac .kohsi-shell {
+  --kohsi-accent: var(--raspberry-band);
+  --kohsi-accent-ink: var(--cream);
+  --kohsi-line: rgba(168, 117, 38, 0.5);
+  --kohsi-panel: rgba(255, 251, 242, 0.45);
+  --kohsi-tint: rgba(156, 31, 75, 0.08);
+  --kohsi-radius: 2px;
+  --kohsi-error: var(--al-rubric);
+  --kohsi-heading-font: var(--al-serif);
+  --kohsi-heading-weight: 400;
+  color: var(--al-ink);
+}
+.almanac .kohsi-calendar-shell {
+  --kohsi-glow: var(--al-gilt);
+  --kohsi-open: var(--al-rubric);
+  --kohsi-panel: rgba(255, 251, 242, 0.4);
+  --kohsi-strip: rgba(168, 117, 38, 0.12);
+  --kohsi-intro: rgba(243, 232, 211, 0.96);
+}
+.almanac .door-fallback { color: var(--al-ink-soft); }
+.almanac .door-fallback a, .almanac .link-btn { color: var(--al-rubric); }
+.almanac .calendar-aside { color: var(--al-ink-soft); font-size: 15.5px; }
+.almanac .calendar-back { margin: 0 0 14px; font-size: 15.5px; }
+.almanac .door-done h3 { margin: 0 0 10px; font: 400 26px/1.2 var(--al-serif); color: var(--al-ink); }
+.almanac .door-done p { margin: 0 0 8px; color: var(--al-ink-soft); line-height: 1.6; }
+
+.almanac .hello-form { gap: 16px; }
+.almanac .field span { font: 700 13px/1.2 var(--al-sc); letter-spacing: 0.14em; text-transform: none; color: var(--al-rubric); }
+.almanac .field input,
+.almanac .field textarea {
+  border-radius: 2px;
+  border: 1px solid rgba(43, 22, 33, 0.3);
+  background: rgba(255, 251, 242, 0.6);
+  color: var(--al-ink);
+  font-size: 17px;
+  box-shadow: inset 0 1px 2px rgba(60, 28, 18, 0.08);
+}
+.almanac .field input::placeholder,
+.almanac .field textarea::placeholder { color: rgba(43, 22, 33, 0.42); }
+.almanac .field input:focus,
+.almanac .field textarea:focus { border-color: var(--al-rubric); box-shadow: 0 0 0 3px rgba(156, 31, 75, 0.14); }
+.almanac .tick { color: var(--al-ink-soft); font-size: 16px; }
+.almanac .tick input { accent-color: var(--al-rubric); }
+.almanac .door-fine { color: var(--al-ink-soft); font-size: 14.5px; }
+.almanac .door-error { color: var(--al-rubric); }
+
+/* ======================================================================================== */
+/* The nav, style 1: ribbon bookmarks + a band of doors                                        */
+/* ======================================================================================== */
+.al-nav {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+}
+.al-nav ol, .al-nav ul { list-style: none; margin: 0; padding: 0; }
+
+.al-ribbons {
+  order: -1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  height: 66px;
+  padding: 0 14px !important;
+  overflow: hidden; /* the ribbons slip out from under the leaf */
+}
+.al-ribbons li { display: flex; justify-content: center; }
+.al-ribbon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  max-width: 86px;
+  height: 66px;
+  padding: 17px 0 0;
+  border: 0;
+  text-align: center;
+  color: var(--al-ink);
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 246, 220, 0.1) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, #a87526 0%, #d6a752 26%, #e6bd6d 52%, #c4923f 100%);
+  box-shadow: inset 0 12px 10px -10px rgba(20, 8, 14, 0.75), inset 2px 0 0 rgba(255, 240, 205, 0.28), inset -2px 0 0 rgba(90, 50, 10, 0.32);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 10px), 0 100%);
+  transform: translateY(-12px);
+  transition: transform 0.45s var(--al-ease);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.al-ribbon:hover { transform: translateY(-8px); }
+.al-ribbon[aria-current="page"] {
+  transform: none;
+  color: var(--cream);
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 230, 240, 0.08) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, #6e1438 0%, #9c2150 32%, #ad2d5c 52%, #7d1a44 100%);
+}
+.al-ribbon:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--night), inset 0 0 0 3px var(--cream); }
+.al-ribbon-n { font: 400 15px/1 var(--al-serif); }
+.al-ribbon-t { font: 700 12px/1.06 var(--al-sc); letter-spacing: 0.01em; word-spacing: 0.12em; white-space: nowrap; }
+
+.al-acts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 2px !important;
+  padding: 4px !important;
+  background: var(--al-noise), linear-gradient(180deg, #2f1628, #221020);
+  border: 1px solid rgba(217, 165, 78, 0.72);
+  box-shadow: inset 0 0 0 3px #261121, inset 0 0 0 4px rgba(217, 165, 78, 0.26), 0 12px 26px rgba(0, 0, 0, 0.45);
+}
+.al-acts li { display: flex; }
+.al-acts li + li { border-left: 1px solid rgba(217, 165, 78, 0.34); }
+.al-act {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  min-height: 50px;
+  padding: 0 2px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--cream);
+  font: 500 13.5px/1.1 var(--al-sc);
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.25s;
+  -webkit-tap-highlight-color: transparent;
+}
+.al-act:hover { background-color: rgba(217, 165, 78, 0.08); }
+.al-act:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.al-act-mark { width: 19px; height: 19px; flex: none; color: var(--gold); }
+.al-act--primary, .al-act--primary:hover {
+  background: var(--raspberry-band);
+  box-shadow: inset 0 0 0 2px var(--raspberry-band), inset 0 0 0 3px rgba(217, 165, 78, 0.8);
+}
+/* the open door: a gold rule along its foot */
+.al-act[aria-current="true"] { color: var(--gold); box-shadow: inset 0 -3px 0 var(--gold); }
+.al-act--primary[aria-current="true"] { color: var(--cream); box-shadow: inset 0 0 0 2px var(--raspberry-band), inset 0 0 0 3px rgba(217, 165, 78, 0.8), inset 0 -5px 0 var(--gold); }
+
+@media (min-width: 960px) {
+  .al-nav { display: grid; grid-template-columns: 1fr 1fr; align-items: start; }
+  .al-acts { grid-column: 1; grid-row: 1; margin: 10px 56px 0 !important; }
+  .al-act { flex-direction: row; gap: 9px; min-height: 48px; font-size: 15px; }
+  .al-ribbons { grid-column: 2; grid-row: 1; display: flex; justify-content: flex-end; gap: 14px; height: 74px; padding: 0 52px 0 0 !important; }
+  .al-ribbon { width: 116px; max-width: none; height: 74px; padding-top: 21px; gap: 4px; }
+  .al-ribbon-n { font-size: 16px; }
+  .al-ribbon-t { font-size: 13.5px; white-space: nowrap; }
+}
+@media (max-width: 380px) {
+  .al-ribbons { gap: 6px; padding: 0 8px !important; }
+  .al-ribbon-t { font-size: 10.5px; }
+  .al-act { font-size: 12.5px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .al-ribbon, .al-close svg, .al-btn, .al-way { transition: none; }
+}
+
+/* ======================================================================================== */
+/* Reading the page: fades, the catchword, the gilt thread, the foot (2026-11-17)             */
+/* ======================================================================================== */
+@property --al-ft { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --al-fb { syntax: "<length>"; inherits: false; initial-value: 0px; }
+
+/* where a page goes on past its window, the words fade into the paper instead of being cut */
+.al-scroll[data-cue], .al-page[data-cue] {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--al-ft), #000 calc(100% - var(--al-fb)), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 var(--al-ft), #000 calc(100% - var(--al-fb)), transparent 100%);
+  transition: --al-ft 0.3s var(--al-ease), --al-fb 0.3s var(--al-ease);
+}
+[data-cue="top"] { --al-fb: 64px; }
+/* a turning page is its own sheet of paper: no fade into whatever lies beneath it */
+.al-turn[data-state="out"] [data-cue] { -webkit-mask-image: none; mask-image: none; }
+[data-cue="mid"] { --al-ft: 40px; --al-fb: 64px; }
+[data-cue="end"] { --al-ft: 40px; }
+
+/* "Read on", in rubric at the foot of a page that has more below */
+.al-catch {
+  position: absolute;
+  z-index: 4;
+  bottom: 6px;
+  left: 50%;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 26px;
+  border: 0;
+  background: radial-gradient(closest-side, rgb(var(--cp)) 62%, rgba(var(--cp), 0));
+  font: 700 12.5px/1 var(--al-sc);
+  letter-spacing: 0.2em;
+  color: var(--al-rubric);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 4px);
+  transition: opacity 0.3s var(--al-ease), transform 0.3s var(--al-ease);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.al-catch svg { width: 10px; height: 14px; animation: al-nudge 2.6s ease-in-out infinite; }
+[data-tone="vellum"] .al-catch { color: var(--gold); }
+@keyframes al-nudge { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
+.al-catch--leaf { display: inline-flex; }
+.al-leaf:is([data-cue-leaf="top"], [data-cue-leaf="mid"]) .al-catch--leaf,
+.al-leaf:is([data-cue-verso="top"], [data-cue-verso="mid"]) .al-catch--verso,
+.al-leaf:is([data-cue-recto="top"], [data-cue-recto="mid"]) .al-catch--recto { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); }
+
+/* the gilt thread between the two rules, its bead telling how far down the page you are */
+.al-thread {
+  --al-band: calc((var(--f2) - var(--f1)) / 2);
+  position: absolute;
+  z-index: 4;
+  top: 36px;
+  bottom: 28px;
+  width: 1px;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.35s var(--al-ease);
+  pointer-events: none;
+}
+.al-thread::after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  top: calc(var(--al-p) * (100% - 7px));
+  width: 7px;
+  height: 7px;
+  background: var(--al-gilt);
+  transform: rotate(45deg);
+  box-shadow: 0 0 0 2px rgb(var(--cp));
+  transition: top 0.12s linear;
+}
+[data-tone="vellum"] .al-thread::after { background: var(--gold); }
+.al-thread--leaf { display: block; right: calc(var(--al-band) * -1 - 0.5px); --al-p: var(--al-p-leaf, 0); }
+.al-thread--verso { left: calc(var(--al-band) * -1 - 0.5px); --al-p: var(--al-p-verso, 0); }
+.al-thread--recto { right: calc(var(--al-band) * -1 - 0.5px); --al-p: var(--al-p-recto, 0); }
+.al-leaf:not([data-cue-leaf="none"]) .al-thread--leaf,
+.al-leaf:not([data-cue-verso="none"]) .al-thread--verso,
+.al-leaf:not([data-cue-recto="none"]) .al-thread--recto { opacity: 1; }
+
+@media (min-width: 960px) {
+  .al-catch--leaf, .al-thread--leaf { display: none; }
+  .al-catch--verso, .al-catch--recto { display: inline-flex; }
+  .al-catch--verso { left: 25%; }
+  .al-catch--recto { left: 75%; }
+  .al-thread--verso, .al-thread--recto { display: block; top: 44px; }
+}
+
+/* the foot: the folio, and the way on (and back) through the book */
+.al-foot {
+  order: 99 !important;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 18px;
+  margin-top: auto;
+  padding-top: 34px;
+}
+.al-folio { font: 400 15px/1 var(--al-serif); letter-spacing: 0.1em; color: var(--al-gilt); }
+[data-tone="vellum"] .al-folio { color: var(--gold); }
+.al-turnline {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: var(--al-ink-soft);
+  font: 500 13px/1.15 var(--al-sc);
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.al-turnline svg { width: 22px; height: 10px; flex: none; transition: transform 0.3s var(--al-ease); }
+.al-turnline--prev:hover svg { transform: translateX(-4px); }
+.al-turnline--next:hover svg { transform: translateX(4px); }
+.al-turnline:focus-visible { outline: 2px solid var(--al-rubric); outline-offset: 2px; }
+.al-turnline--next { flex-direction: column; align-items: center; gap: 4px; color: var(--al-rubric); }
+.al-turnline-k { font: 500 11px/1 var(--al-sc); letter-spacing: 0.24em; color: var(--al-ink-soft); }
+.al-turnline-t { display: inline-flex; align-items: center; gap: 10px; font: 400 21px/1.15 var(--al-serif); letter-spacing: 0.02em; }
+[data-tone="vellum"] .al-turnline { color: rgba(246, 236, 223, 0.7); }
+[data-tone="vellum"] .al-turnline--next { color: var(--gold); }
+[data-tone="vellum"] .al-turnline-k { color: rgba(217, 165, 78, 0.8); }
+@media (max-width: 959px) {
+  /* one page: the way on first, as the end of the reading; back and the folio beneath it */
+  .al-page--recto .al-foot { border-top: 1px solid rgba(168, 117, 38, 0.4); margin-top: 34px; padding-top: 18px; }
+  .al-turnline--next { order: -1; flex-basis: 100%; padding: 6px 0 10px; }
+}
+@media (min-width: 960px) {
+  .al-page--recto .al-turnline--prev { display: none; }
+  .al-page--verso .al-foot { justify-content: flex-end; flex-direction: row-reverse; } /* folio at the outer edge, then the way back */
+  .al-page--recto .al-foot { justify-content: flex-end; }
+  .al-turnline--next { align-items: flex-end; }
+}
+
+/* the curled corners: bottom right turns on, bottom left turns back */
+.al-curl {
+  position: absolute;
+  z-index: 4;
+  bottom: 0;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  --beneath: #d8c29a;
+  --flap-a: #e7d6b4;
+  --flap-b: #fbf5e7;
+}
+.al-curl--next { right: 0; }
+.al-curl--prev { left: 0; }
+.al-curl i {
+  position: absolute;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  filter: drop-shadow(-1px -2px 2px rgba(60, 28, 18, 0.28));
+  transition: width 0.4s var(--al-ease), height 0.4s var(--al-ease);
+}
+.al-curl--next i {
+  right: 0;
+  background:
+    linear-gradient(to top left, transparent 50%, var(--flap-a) 50%, var(--flap-b) 100%),
+    linear-gradient(to top left, var(--beneath) 50%, transparent 50%);
+}
+.al-curl--prev i {
+  left: 0;
+  filter: drop-shadow(1px -2px 2px rgba(60, 28, 18, 0.28));
+  background:
+    linear-gradient(to top right, transparent 50%, var(--flap-a) 50%, var(--flap-b) 100%),
+    linear-gradient(to top right, var(--beneath) 50%, transparent 50%);
+}
+.al-curl:hover i, .al-curl:focus-visible i { width: 44px; height: 44px; }
+.al-curl:focus-visible { outline: 2px solid var(--al-rubric); outline-offset: -4px; }
+.al-book:has(.al-turn[data-state="in"] .al-leaf[data-tone="vellum"]) .al-curl {
+  --beneath: #170a13;
+  --flap-a: #3a1c31;
+  --flap-b: #5a3050;
+}
+@media (min-width: 960px) {
+  .al-curl { width: 60px; height: 60px; }
+  .al-curl i { width: 36px; height: 36px; }
+  .al-curl:hover i, .al-curl:focus-visible i { width: 54px; height: 54px; }
+}
+
+/* ======================================================================================== */
+/* The page turn                                                                               */
+/* ======================================================================================== */
+.al-veil { --al-leaf-bg: var(--al-noise), #f1e5cf; }
+.al-leaf[data-tone="vellum"] { --al-leaf-bg: var(--al-noise), #2b1525; }
+
+
+/* one page (a phone): forward, the page lifts from its left edge and swings away;
+   back, the page before swings in over it */
+@media (max-width: 959px) {
+  .al-turn[data-state="out"] .al-leaf { background: var(--al-leaf-bg); }
+  .al-leaves[data-dir="fwd"] .al-turn[data-state="out"] .al-leaf {
+    transform-origin: 0 50%;
+    animation: al-swing-away 0.62s cubic-bezier(0.45, 0.05, 0.6, 0.95) forwards;
+  }
+  .al-leaves[data-dir="back"]:has(.al-turn[data-state="out"]) .al-turn[data-state="in"] { z-index: 3; }
+  .al-leaves[data-dir="back"] .al-turn[data-state="in"] .al-leaf {
+    background: var(--al-leaf-bg);
+    transform-origin: 0 50%;
+    animation: al-swing-in 0.95s cubic-bezier(0.25, 0.7, 0.2, 1) both;
+  }
+}
+@keyframes al-swing-away {
+  0% { transform: perspective(1500px) rotateY(0); filter: brightness(1); }
+  100% { transform: perspective(1500px) rotateY(-96deg); filter: brightness(0.7); }
+}
+@keyframes al-swing-in {
+  0% { transform: perspective(1500px) rotateY(-96deg); filter: brightness(0.7); }
+  100% { transform: perspective(1500px) rotateY(0); filter: brightness(1); }
+}
+
+/* the open book: forward, the right page lifts over the spine and the next left page lands;
+   back, the left page lifts the other way and the earlier right page lands */
+@media (min-width: 960px) {
+  .al-turn[data-state="out"] .al-page { background: var(--al-leaf-bg); }
+  .al-leaves[data-dir="fwd"] .al-turn[data-state="out"] .al-page--recto {
+    transform-origin: 0 50%;
+    animation: al-lift-r 0.43s cubic-bezier(0.5, 0, 0.75, 0.45) forwards;
+  }
+  .al-leaves[data-dir="fwd"] .al-turn[data-state="out"] .al-page--verso,
+  .al-leaves[data-dir="back"] .al-turn[data-state="out"] .al-page--recto { animation: al-hold 0.86s linear forwards; }
+  .al-leaves[data-dir="fwd"] .al-turn[data-state="in"] .al-page--verso {
+    transform-origin: 100% 50%;
+    animation: al-land-l 1.2s linear both;
+  }
+  .al-leaves[data-dir="back"] .al-turn[data-state="out"] .al-page--verso {
+    transform-origin: 100% 50%;
+    animation: al-lift-l 0.43s cubic-bezier(0.5, 0, 0.75, 0.45) forwards;
+  }
+  .al-leaves[data-dir="back"] .al-turn[data-state="in"] .al-page--recto {
+    transform-origin: 0 50%;
+    animation: al-land-r 1.2s linear both;
+  }
+}
+@keyframes al-lift-r {
+  0% { transform: perspective(2600px) rotateY(0); filter: brightness(1); }
+  100% { transform: perspective(2600px) rotateY(-90deg); filter: brightness(0.72); }
+}
+@keyframes al-lift-l {
+  0% { transform: perspective(2600px) rotateY(0); filter: brightness(1); }
+  100% { transform: perspective(2600px) rotateY(90deg); filter: brightness(0.72); }
+}
+/* the landing waits out the lift (0.43s of the 1.2s), then comes down on a long soft tail:
+   most of the way quickly, the last few degrees slowly, so the page settles rather than lands */
+@keyframes al-land-l {
+  0%, 36% { transform: perspective(2600px) rotateY(90deg); filter: brightness(0.72); animation-timing-function: cubic-bezier(0.25, 0.7, 0.2, 1); }
+  100% { transform: perspective(2600px) rotateY(0); filter: brightness(1); }
+}
+@keyframes al-land-r {
+  0%, 36% { transform: perspective(2600px) rotateY(-90deg); filter: brightness(0.72); animation-timing-function: cubic-bezier(0.25, 0.7, 0.2, 1); }
+  100% { transform: perspective(2600px) rotateY(0); filter: brightness(1); }
+}
+@keyframes al-hold { 0%, 49.9% { visibility: visible; } 50%, 100% { visibility: hidden; } }
+
+/* ======================================================================================== */
+/* Laying a leaf down in ink (components/almanac/ink.ts; B3's reveal)                          */
+/* ======================================================================================== */
+/* hidden only while the script is running and only until each part's turn comes */
+.al-leaf[data-ink] .rv:not(.in):is([data-rv="ink"], [data-rv="stamp"], [data-rv="gild"], [data-rv="photo"], [data-rv="write"]) { opacity: 0; }
+.al-leaf[data-ink] [data-rv="draw"] .al-ln { stroke-dasharray: 1; }
+.al-leaf[data-ink] [data-rv="draw"]:not(.in) .al-ln { stroke-dashoffset: 1; }
+.al-leaf[data-ink] [data-rv="draw"]:not(.in) .al-fl { opacity: 0; }
+.al-leaf[data-ink] [data-rv="moons"]:not(.in) > * { opacity: 0; }
+
+/* once laid down, a part drops its animation and rests in its plain style (fill: backwards) */
+.rv.in[data-rv="ink"] { animation: al-inked 0.75s var(--al-ease) var(--d, 0s) backwards; }
+.rv.in[data-rv="stamp"] { animation: al-stamp 0.5s cubic-bezier(0.3, 0.6, 0.3, 1) var(--d, 0s) backwards; }
+.rv.in[data-rv="write"] { animation: al-write 1.1s cubic-bezier(0.5, 0.1, 0.3, 1) var(--d, 0s) backwards; }
+.rv.in[data-rv="gild"] { animation: al-gild 0.55s var(--al-ease) var(--d, 0s) backwards; }
+.rv.in[data-rv="photo"] { animation: al-photo 1.2s var(--al-ease) var(--d, 0s) backwards; }
+.rv.in[data-rv="draw"] .al-ln { animation: al-draw 1.15s cubic-bezier(0.45, 0.1, 0.3, 1) var(--d, 0s) backwards; }
+.rv.in[data-rv="draw"] .al-fl { animation: al-appear 0.55s linear calc(var(--d, 0s) + 0.6s + var(--j, 0s)) backwards; }
+.rv.in[data-rv="moons"] > * { animation: al-stamp 0.45s cubic-bezier(0.3, 0.6, 0.3, 1) calc(var(--d, 0s) + var(--i, 0) * 70ms) backwards; }
+
+/* the illuminated capital catches the light once, as it is gilded */
+.al-illum.rv {
+  background-image: linear-gradient(100deg, rgba(255, 250, 230, 0) 38%, rgba(255, 250, 230, 0.7) 50%, rgba(255, 250, 230, 0) 62%);
+  background-size: 300% 100%;
+  background-position: 120% 0;
+  background-repeat: no-repeat;
+}
+.al-illum.rv.in { animation: al-gild 0.55s var(--al-ease) var(--d, 0s) backwards, al-sheen 1s cubic-bezier(0.4, 0.1, 0.3, 1) calc(var(--d, 0s) + 0.45s) both; }
+
+@keyframes al-inked {
+  from { opacity: 0; filter: blur(3px); transform: translateY(4px); }
+  55% { opacity: 0.85; filter: blur(0.7px); }
+  to { opacity: 1; filter: blur(0); transform: none; }
+}
+@keyframes al-stamp {
+  0% { opacity: 0; transform: scale(1.35); filter: blur(1.5px); }
+  55% { opacity: 1; transform: scale(0.96); filter: blur(0); }
+  100% { opacity: 1; transform: none; filter: blur(0); }
+}
+@keyframes al-write {
+  from { clip-path: inset(-0.3em 100% -0.4em -0.1em); opacity: 0.25; filter: blur(2px); }
+  70% { opacity: 1; filter: blur(0.3px); }
+  to { clip-path: inset(-0.3em -0.2em -0.4em -0.1em); opacity: 1; filter: blur(0); }
+}
+@keyframes al-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes al-appear { from { opacity: 0; } to { opacity: 1; } }
+@keyframes al-gild { from { opacity: 0; transform: scale(0.86); } to { opacity: 1; transform: none; } }
+@keyframes al-sheen { from { background-position: 120% 0; } to { background-position: -20% 0; } }
+@keyframes al-photo {
+  from { opacity: 0; filter: blur(8px) saturate(0.2) brightness(0.7); }
+  to { opacity: 1; filter: blur(0) saturate(1) brightness(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv, .rv * { animation: none !important; }
+  .al-leaves .al-turn .al-leaf, .al-leaves .al-turn .al-page { animation: none !important; }
+  .al-turn[data-state="out"] { animation: al-fade 0.24s linear forwards; }
+  .al-catch svg { animation: none; }
+  .al-curl i, .al-turnline svg, .al-catch { transition: none; }
+}
+@keyframes al-fade { to { opacity: 0; } }
